@@ -1,0 +1,10 @@
+// _utils.scss
+.text-direction {
+    &-rtl {
+      direction: rtl;
+    }
+    
+    &-ltr {
+      direction: ltr;
+    }
+   }

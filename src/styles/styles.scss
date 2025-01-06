@@ -1,0 +1,17 @@
+// styles.scss
+@import 'variables';
+@import 'mixins';
+@import 'layouts';
+@import 'components';
+@import 'utils';
+
+// Global styles
+html, body {
+ font-family: "Cairo", sans-serif;
+}
+
+// Override scrollbar for RTL
+[dir='rtl'] {
+ scrollbar-width: thin;
+ scrollbar-color: map-get($colors, accent, base) transparent;
+}

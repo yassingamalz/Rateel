@@ -1,0 +1,9 @@
+// _layouts.scss
+.main-container {
+    direction: rtl;
+    background: linear-gradient(to bottom right, 
+      map-get($colors, primary, base),
+      map-get($colors, primary, dark)
+    );
+    min-height: 100vh;
+   }
