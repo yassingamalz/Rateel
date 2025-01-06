@@ -1,0 +1,25 @@
+// main-layout.component.scss
+@import 'variables';
+@import 'mixins';
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    map-get($colors, primary, base),
+    map-get($colors, primary, dark)
+  );
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-x: hidden;
+  transition: transform 0.3s ease;
+  
+  @include card-shadow;
+  @include rtl-support {
+    margin-right: auto;
+  }
+}
