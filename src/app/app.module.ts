@@ -12,13 +12,12 @@ import { UnitHeaderComponent } from './features/units/components/unit-header/uni
 import { LessonStepComponent } from './features/lessons/components/lesson-step/lesson-step.component';
 import { LessonProgressComponent } from './features/lessons/components/lesson-progress/lesson-progress.component';
 import { LessonHeaderComponent } from './features/lessons/components/lesson-header/lesson-header.component';
+import { CommonModule } from '@angular/common';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainLayoutComponent,
-    SidebarComponent,
-    MainContentComponent,
     UnitCardComponent,
     UnitListComponent,
     UnitHeaderComponent,
@@ -28,7 +27,9 @@ import { LessonHeaderComponent } from './features/lessons/components/lesson-head
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    CommonModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
