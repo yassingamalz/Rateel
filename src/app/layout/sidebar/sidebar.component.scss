@@ -1,0 +1,36 @@
+
+// sidebar.component.scss
+@import 'variables';
+@import 'mixins';
+
+.sidebar {
+  width: 280px;
+  background: rgba(0, 0, 0, 0.15);
+  height: 100vh;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  
+  &.collapsed {
+    width: 80px;
+  }
+  
+  @include rtl-support {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: map-get($colors, text, light);
+  cursor: pointer;
+  padding: 0.5rem;
+  
+  @include rtl-support {
+    right: auto;
+    left: 1rem;
+  }
+}

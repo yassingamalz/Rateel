@@ -1,1 +1,17 @@
-<p>sidebar works!</p>
+<!--sidebar.component.html-->
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <button class="sidebar-toggle" (click)="toggleSidebar()">
+    <i class="icon-menu"></i>
+  </button>
+  
+  <nav class="nav-menu">
+    <a *ngFor="let item of menuItems"
+       [routerLink]="item.path"
+       routerLinkActive="active"
+       class="nav-item">
+      <i [class]="item.icon"></i>
+      <span class="label">{{item.label}}</span>
+      <span class="badge" *ngIf="item.count">{{item.count}}</span>
+    </a>
+  </nav>
+</aside>
