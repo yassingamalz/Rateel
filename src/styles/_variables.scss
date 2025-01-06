@@ -1,18 +1,51 @@
 // _variables.scss
 $colors: (
- primary: (
-   base: #1B4332,
-   light: #2D6A4F,
-   dark: #081C15
- ),
- accent: (
-   base: #DAA520,
-   light: #FFD700,
-   dark: #B8860B
- ),
- text: (
-   light: #FFFFFF,
-   dark: #081C15,
-   muted: #95D5B2
- )
+  primary: (
+    base: #1B4332,
+    light: #2D6A4F,
+    dark: #081C15,
+    gradient: linear-gradient(180deg, #1B4332 0%, #081C15 100%)
+  ),
+  accent: (
+    base: #DAA520,
+    light: #FFD700,
+    dark: #B8860B
+  ),
+  text: (
+    light: #FFFFFF,
+    dark: #081C15,
+    muted: #95D5B2
+  ),
+  background: (
+    card: #2D6A4F,
+    overlay: rgba(27, 67, 50, 0.2)  // Based on primary base color
+  )
+);
+
+$spacing: (
+  xs: 0.25rem,   // 4px
+  sm: 0.5rem,    // 8px
+  md: 1rem,      // 16px
+  lg: 1.5rem,    // 24px
+  xl: 2rem       // 32px
+);
+
+$border-radius: (
+  sm: 0.5rem,    // 8px
+  md: 1rem,      // 16px
+  lg: 1.25rem,   // 20px
+  full: 9999px
+);
+
+$transitions: (
+  base: all 0.3s ease,
+  transform: transform 0.2s ease,
+  opacity: opacity 0.2s ease
+);
+
+// Shadow with the primary color
+$box-shadow: (
+  sm: 0 2px 4px rgba(27, 67, 50, 0.1),
+  md: 0 4px 6px rgba(27, 67, 50, 0.1),
+  lg: 0 10px 15px rgba(27, 67, 50, 0.1)
 );

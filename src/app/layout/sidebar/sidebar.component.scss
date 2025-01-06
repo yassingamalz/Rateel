@@ -1,36 +1,176 @@
-
 // sidebar.component.scss
 @import 'variables';
 @import 'mixins';
 
 .sidebar {
-  width: 280px;
-  background: rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  right: 0;
   height: 100vh;
-  transition: width 0.3s ease;
-  overflow-x: hidden;
-  
-  &.collapsed {
-    width: 80px;
+  width: 320px;
+  background: linear-gradient(
+    to bottom,
+    map-get($colors, primary, base),
+    map-get($colors, primary, dark)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+
+  // Ensure background stays during transition
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      map-get($colors, primary, base),
+      map-get($colors, primary, dark)
+    );
+    z-index: -1;
   }
-  
-  @include rtl-support {
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+
+  &--collapsed {
+    width: 80px;
+
+    .sidebar__menu-item {
+      justify-content: center;
+      padding: 1rem 0;
+      
+      .sidebar__menu-item-label {
+        display: none;
+      }
+      
+      .sidebar__menu-item-icon {
+        margin: 0;
+      }
+
+      &:hover {
+        transform: none;
+        .sidebar__menu-item-icon {
+          transform: scale(1.1);
+          box-shadow: 0 0 20px rgba(map-get($colors, accent, base), 0.3);
+        }
+      }
+    }
+  }
+
+  &__header {
+    height: map-get($spacing, xl) * 4;
+    display: flex;
+    align-items: center;
+    padding: 0 map-get($spacing, lg);
+    justify-content: flex-end;
+    border-bottom: 1px solid rgba(map-get($colors, accent, base), 0.1);
+  }
+
+  &__toggle {
+    @include icon-wrapper;
+    background: transparent;
+    border: none;
+    color: map-get($colors, text, light);
+    cursor: pointer;
+    
+    &:hover {
+      background: rgba(map-get($colors, accent, base), 0.2);
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacing, sm);
+    padding: map-get($spacing, md);
+    margin-top: map-get($spacing, lg);
+    overflow-y: auto;
+  }
+
+  &__menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: map-get($spacing, sm) map-get($spacing, md);
+    color: map-get($colors, text, light);
+    text-decoration: none;
+    border-radius: map-get($border-radius, lg);
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background: rgba(map-get($colors, accent, base), 0.1);
+      transform: translateX(map-get($spacing, xs) * -2);
+      
+      .sidebar__menu-item-icon {
+        background: rgba(map-get($colors, accent, base), 0.2);
+        box-shadow: 0 0 15px rgba(map-get($colors, accent, base), 0.3);
+      }
+    }
+
+    &--active {
+      background: rgba(map-get($colors, accent, base), 0.15);
+      border: 1px solid rgba(map-get($colors, accent, base), 0.3);
+      
+      .sidebar__menu-item-icon {
+        background: map-get($colors, accent, base);
+        color: map-get($colors, text, dark);
+        box-shadow: 0 0 20px rgba(map-get($colors, accent, base), 0.4);
+      }
+    }
+  }
+
+  &__menu-item-label {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: map-get($colors, text, light);
+    flex: 1;
+  }
+
+  &__menu-item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: map-get($border-radius, md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: map-get($colors, text, light);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.25rem;
+    position: relative;
+  }
+
+  &__menu-item-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: map-get($colors, accent, base);
+    color: map-get($colors, text, dark);
+    padding: map-get($spacing, xs) map-get($spacing, sm);
+    border-radius: map-get($border-radius, full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(map-get($colors, accent, base), 0.3);
   }
 }
 
-.sidebar-toggle {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  color: map-get($colors, text, light);
-  cursor: pointer;
-  padding: 0.5rem;
-  
-  @include rtl-support {
-    right: auto;
-    left: 1rem;
+// Ensure smooth RTL transitions
+[dir='rtl'], [dir='ltr'] {
+  .sidebar {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

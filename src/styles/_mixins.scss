@@ -1,11 +1,44 @@
 // _mixins.scss
+@mixin card-shadow {
+  box-shadow: 0 4px 6px rgba(8, 28, 21, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@mixin glass-effect {
+  background: rgba(27, 67, 50, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin hover-scale {
+  transition: map-get($transitions, transform);
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@mixin course-card {
+  background: map-get($colors, primary, gradient);
+  border-radius: map-get($border-radius, lg);
+  padding: map-get($spacing, lg);
+  @include card-shadow;
+}
+
+@mixin icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: map-get($border-radius, sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 106, 79, 0.2);
+  transition: map-get($transitions, base);
+}
+
 @mixin rtl-support {
-    [dir='rtl'] & {
-      @content;
-    }
-   }
-   
-   @mixin card-shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-   }
+  [dir='rtl'] & {
+    @content;
+  }
+}
