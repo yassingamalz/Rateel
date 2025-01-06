@@ -35,7 +35,6 @@ import { CoursesModule } from './features/courses/courses.module';
     CommonModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    CoursesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

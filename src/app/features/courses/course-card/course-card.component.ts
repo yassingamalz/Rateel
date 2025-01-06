@@ -5,25 +5,25 @@ import { Course } from '../../../shared/interfaces/course';
 
 @Component({
   selector: 'app-course-card',
-  standalone:false,
+  standalone: false,
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.scss'],
   animations: [
-    trigger('fadeInOut', [
+    trigger('cardAnimation', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms ease-in', style({ opacity: 1 }))
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
   ]
 })
 export class CourseCardComponent {
   @Input() course!: Course;
-  @Output() courseClick = new EventEmitter<Course>();
+  @Output() courseSelected = new EventEmitter<Course>();
 
   onCardClick(): void {
     if (!this.course.isLocked) {
-      this.courseClick.emit(this.course);
+      this.courseSelected.emit(this.course);
     }
   }
 }

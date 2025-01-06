@@ -8,6 +8,8 @@ import { Course } from '../../../shared/interfaces/course';
 
 @Component({
   selector: 'app-courses-list',
+  standalone:false,
+  
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss']
 })
