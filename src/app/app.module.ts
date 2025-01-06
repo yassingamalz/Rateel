@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutModule } from './layout/layout.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoursesModule } from './features/courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LayoutModule,
     CommonModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CoursesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

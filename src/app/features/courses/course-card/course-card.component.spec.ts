@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LevelCardComponent } from './level-card.component';
+import { CourseCardComponent } from './course-card.component';
 
-describe('LevelCardComponent', () => {
-  let component: LevelCardComponent;
-  let fixture: ComponentFixture<LevelCardComponent>;
+describe('CourseCardComponent', () => {
+  let component: CourseCardComponent;
+  let fixture: ComponentFixture<CourseCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LevelCardComponent]
+      declarations: [CourseCardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LevelCardComponent);
+    fixture = TestBed.createComponent(CourseCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
