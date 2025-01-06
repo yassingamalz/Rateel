@@ -1,1 +1,35 @@
-<p>course-card works!</p>
+<!-- course-card.component.html -->
+<div class="course-card" 
+     [class.course-card--locked]="course.isLocked"
+     (click)="onCardClick()"
+     [@fadeInOut]>
+  <div class="course-card__content">
+    <h3 class="course-card__title">{{ course.title }}</h3>
+    <p class="course-card__description">{{ course.description }}</p>
+    
+    <div class="course-card__footer">
+      <div class="course-card__progress" *ngIf="!course.isLocked">
+        <div class="progress-bar">
+          <div class="progress-bar__fill" 
+               [style.width.%]="course.progress">
+          </div>
+        </div>
+        <span class="progress-text">{{ course.progress }}%</span>
+      </div>
+      
+      <div class="course-card__status">
+        <ng-container *ngIf="course.isLocked">
+          <i class="fas fa-lock"></i>
+        </ng-container>
+        <ng-container *ngIf="course.badge">
+          <div class="badge" 
+               [class.badge--achievement]="course.badge.type === 'achievement'"
+               [class.badge--progress]="course.badge.type === 'progress'">
+            <i class="fas fa-award" *ngIf="course.badge.type === 'achievement'"></i>
+            <span>{{ course.badge.value }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+// courses-list.component.scss
+@import 'variables';
+@import 'mixins';
+
+.courses-section {
+  padding: map-get($spacing, lg);
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    map-get($colors, primary, base),
+    map-get($colors, primary, dark)
+  );
+}
+
+.courses-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: map-get($spacing, lg) 0;
+}
+
+.swiper-container {
+  padding: map-get($spacing, lg) map-get($spacing, md);
+  overflow: visible;
+}
+
+// Swiper overrides for RTL support
+[dir='rtl'] {
+  .swiper-container {
+    direction: rtl;
+  }
+  
+  .swiper-button-next {
+    right: auto;
+    left: 10px;
+  }
+  
+  .swiper-button-prev {
+    left: auto;
+    right: 10px;
+  }
+}
