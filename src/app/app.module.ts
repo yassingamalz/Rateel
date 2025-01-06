@@ -14,6 +14,7 @@ import { LessonProgressComponent } from './features/lessons/components/lesson-pr
 import { LessonHeaderComponent } from './features/lessons/components/lesson-header/lesson-header.component';
 import { CommonModule } from '@angular/common';
 import { LayoutModule } from './layout/layout.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LayoutModule } from './layout/layout.module';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    CommonModule 
+    CommonModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
