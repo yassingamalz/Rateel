@@ -1,4 +1,4 @@
-// src/app/features/units/unit-details/lesson-card/lesson-card.component.ts
+// lesson-card.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Lesson } from '../../../shared/interfaces/lesson';
@@ -22,23 +22,21 @@ export class LessonCardComponent {
   @Input() isActive = false;
   @Output() lessonClick = new EventEmitter<Lesson>();
 
+  getBackgroundClass(): string {
+    if (this.lesson.isLocked) return 'lesson-card--locked';
+    if (this.lesson.isCompleted) return 'lesson-card--completed';
+    if (this.isActive) return 'lesson-card--active';
+    return '';
+  }
+
+  getProgressIndicator(): string {
+    if (this.lesson.isCompleted) return '✓';
+    return `${this.lesson.stepNumber}/${this.lesson.totalSteps}`;
+  }
+
   onCardClick(): void {
     if (!this.lesson.isLocked) {
       this.lessonClick.emit(this.lesson);
     }
   }
-
-  getLessonIcon(): string {
-    switch (this.lesson.type) {
-      case 'video':
-        return 'fa-play-circle';
-      case 'practice':
-        return 'fa-pencil-alt';
-      case 'test':
-        return 'fa-check-circle';
-      default:
-        return 'fa-book';
-    }
-  }
 }
-

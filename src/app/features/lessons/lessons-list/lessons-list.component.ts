@@ -33,74 +33,160 @@ export class LessonsListComponent implements OnInit {
   unitId!: string;
   currentLessonIndex = new BehaviorSubject<number>(0);
   isDragging = false;
+  dragStarted = false;
   startX = 0;
   scrollLeft = 0;
+  dragThreshold = 5;
+  dragStartTime = Date.now();
+  mouseInitialX = 0;
+  dragSpeedMultiplier = 2.5;
+  inertiaMultiplier = 200;
+  activeLessonId: string | null = null;
 
   constructor(
     private lessonsService: LessonsService,
     private unitsService: UnitsService,
     public route: ActivatedRoute,
     public router: Router
-  ) { }
+  ) {}
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.courseId = this.route.snapshot.paramMap.get('courseId')!;
+    this.unitId = this.route.snapshot.paramMap.get('unitId')!;
+    this.lessonsService.setCurrentUnit(this.unitId);
+    this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
+      tap(lessons => {
+        const lessonId = this.route.snapshot.paramMap.get('lessonId');
+        if (lessonId) {
+          this.activeLessonId = lessonId;
+        } else if (lessons.length > 0) {
+          const nextIncomplete = lessons.find(l => !l.isCompleted && !l.isLocked);
+          if (nextIncomplete) {
+            this.onLessonSelected(nextIncomplete);
+          } else {
+            this.onLessonSelected(lessons[0]);
+          }
+        }
+      })
+    );
   }
-
-
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {
-      console.log('Navigating to lesson:', {
-        courseId: this.courseId,
-        unitId: this.unitId,
-        lessonId: lesson.id
-      });
-
-      this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', lesson.id])
-        .then(success => console.log('Lesson navigation success:', success))
-        .catch(error => console.error('Lesson navigation error:', error));
+      this.activeLessonId = lesson.id;
+      this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', lesson.id]);
     }
   }
 
-
-  // Mouse event handlers for dragging
   onMouseDown(event: MouseEvent): void {
-    this.isDragging = true;
-    this.startX = event.pageX - this.lessonsContainer.nativeElement.offsetLeft;
-    this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
+    if ((event.target as HTMLElement).closest('.lesson-item')) {
+      this.dragStarted = true;
+      this.mouseInitialX = event.pageX;
+      this.startX = event.pageX;
+      this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
+      this.dragStartTime = Date.now();
+    }
   }
 
   onMouseMove(event: MouseEvent): void {
-    if (!this.isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - this.lessonsContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
+    if (dragDistance > this.dragThreshold) {
+      this.isDragging = true;
+    }
+
+    const walk = (event.pageX - this.startX) * this.dragSpeedMultiplier;
     this.lessonsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
   }
 
-  onMouseUp(): void {
+  onMouseUp(event: MouseEvent): void {
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
+    const dragDuration = Date.now() - this.dragStartTime;
+
+    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+      const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
+      if (lessonElement) {
+        const lessonId = lessonElement.getAttribute('data-lesson-id');
+        const lessons = (this.lessons$ as any).value;
+        const lesson = lessons?.find((l: Lesson) => l.id === lessonId);
+        if (lesson && !lesson.isLocked) {
+          this.onLessonSelected(lesson);
+        }
+      }
+    } else if (dragDistance > this.dragThreshold) {
+      const speed = dragDistance / dragDuration;
+      const inertiaDistance = speed * this.inertiaMultiplier;
+
+      this.lessonsContainer.nativeElement.scrollBy({
+        left: -inertiaDistance,
+        behavior: 'smooth'
+      });
+    }
+
     this.isDragging = false;
+    this.dragStarted = false;
   }
 
   onMouseLeave(): void {
-    this.isDragging = false;
+    if (this.dragStarted) {
+      this.isDragging = false;
+      this.dragStarted = false;
+    }
   }
 
-  // Touch event handlers for mobile
   onTouchStart(event: TouchEvent): void {
-    this.isDragging = true;
-    this.startX = event.touches[0].pageX - this.lessonsContainer.nativeElement.offsetLeft;
-    this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
+    if ((event.target as HTMLElement).closest('.lesson-item')) {
+      this.dragStarted = true;
+      this.mouseInitialX = event.touches[0].pageX;
+      this.startX = event.touches[0].pageX;
+      this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
+      this.dragStartTime = Date.now();
+    }
   }
 
   onTouchMove(event: TouchEvent): void {
-    if (!this.isDragging) return;
-    const x = event.touches[0].pageX - this.lessonsContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
+    if (dragDistance > this.dragThreshold) {
+      this.isDragging = true;
+    }
+
+    const walk = (event.touches[0].pageX - this.startX) * this.dragSpeedMultiplier;
     this.lessonsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
   }
 
-  onTouchEnd(): void {
+  onTouchEnd(event: TouchEvent): void {
+    if (!this.dragStarted) return;
+
+    const touch = event.changedTouches[0];
+    const dragDistance = Math.abs(touch.pageX - this.mouseInitialX);
+    const dragDuration = Date.now() - this.dragStartTime;
+
+    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+      const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
+      if (lessonElement) {
+        const lessonId = lessonElement.getAttribute('data-lesson-id');
+        const lessons = (this.lessons$ as any).value;
+        const lesson = lessons?.find((l: Lesson) => l.id === lessonId);
+        if (lesson && !lesson.isLocked) {
+          this.onLessonSelected(lesson);
+        }
+      }
+    } else if (dragDistance > this.dragThreshold) {
+      const speed = dragDistance / dragDuration;
+      const inertiaDistance = speed * this.inertiaMultiplier;
+
+      this.lessonsContainer.nativeElement.scrollBy({
+        left: -inertiaDistance,
+        behavior: 'smooth'
+      });
+    }
+
     this.isDragging = false;
+    this.dragStarted = false;
   }
 }
