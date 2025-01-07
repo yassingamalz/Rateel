@@ -1,27 +1,14 @@
-// src/app/features/units/units-list/units-list.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UnitsService } from '../units.service';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { Unit } from '../../../shared/interfaces/unit';
 
 @Component({
   selector: 'app-units-list',
   standalone: false,
   templateUrl: './units-list.component.html',
-  styleUrls: ['./units-list.component.scss'],
-  animations: [
-    trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('300ms ease-out', style({ transform: 'translateX(0)' }))
-      ]),
-      transition(':leave', [
-        animate('300ms ease-out', style({ transform: 'translateX(-100%)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./units-list.component.scss']
 })
 export class UnitsListComponent implements OnInit {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef;
@@ -45,16 +32,27 @@ export class UnitsListComponent implements OnInit {
     this.units$ = this.unitsService.getUnitsByCourseId(this.courseId);
   }
 
+  getUnitTypeIcon(type: string): string {
+    return this.unitsService.getUnitIcon(type);
+  }
+
+  getProgressCircleValue(progress: number): string {
+    const circumference = 2 * Math.PI * 46; // r = 46 from SVG
+    const offset = circumference - (progress / 100) * circumference;
+    return `${offset}, ${circumference}`;
+  }
+
+  getConnectorProgress(currentUnit: Unit, nextUnit: Unit): number {
+    if (currentUnit.isCompleted) return 100;
+    if (nextUnit.isLocked) return 0;
+    return (currentUnit.progress || 0) / 2;
+  }
+
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      console.log('Navigating to unit lessons:', { courseId: this.courseId, unitId: unit.id });
       this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons'])
-        .then(success => {
-          console.log('Navigation to lessons successful:', success);
-        })
-        .catch(err => {
-          console.error('Navigation to lessons error:', err);
-        });
+        .then(success => console.log('Navigation successful:', success))
+        .catch(error => console.error('Navigation error:', error));
     }
   }
 

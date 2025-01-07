@@ -1,4 +1,4 @@
-<!--src/app/features/units/units-list/units-list.component.html -->
+<!-- units-list.component.html -->
 <div class="units-page" dir="rtl">
   <header class="units-header">
     <div class="header-content">
@@ -22,38 +22,51 @@
        (touchend)="onTouchEnd()">
     <div class="units-wrapper">
       <ng-container *ngFor="let unit of units$ | async; let i = index">
-        <div class="unit-circle"
-             [class.unit-circle--completed]="unit.isCompleted"
-             [class.unit-circle--locked]="unit.isLocked"
-             (click)="onUnitSelected(unit)">
-          <!-- Progress Number -->
-          <div class="unit-progress">{{ unit.progress }}%</div>
-          
-          <!-- Content Circle -->
-          <div class="circle-content">
-            <div class="icon-wrapper">
-              <i class="fas" [ngClass]="unit.lessons[0].icon || 'fa-book'"></i>
-            </div>
-            <ng-container *ngIf="unit.isLocked">
-              <div class="lock-overlay">
+        <div class="unit-circle-wrapper">
+          <div class="unit-circle"
+               [class.unit-circle--locked]="unit.isLocked"
+               [class.unit-circle--completed]="unit.isCompleted"
+               (click)="onUnitSelected(unit)">
+            
+            <!-- Circular Progress Ring -->
+            <svg class="progress-ring" viewBox="0 0 100 100">
+              <!-- Background circle -->
+              <circle class="progress-ring__circle--bg"
+                      cx="50" cy="50" r="46"
+                      stroke-width="4"/>
+              <!-- Progress circle -->
+              <circle class="progress-ring__circle--progress"
+                      cx="50" cy="50" r="46"
+                      stroke-width="4"
+                      *ngIf="unit.progress! > 0"
+                      [style.strokeDasharray]="getProgressCircleValue(unit.progress || 0)"/>
+            </svg>
+            
+            <!-- Main Content -->
+            <div class="unit-circle__content">
+              <!-- Type Icon -->
+              <div class="unit-circle__icon">
+                <i class="fas" [ngClass]="getUnitTypeIcon(unit.type)"></i>
+              </div>
+
+              <!-- Lock Overlay -->
+              <div class="unit-circle__lock" *ngIf="unit.isLocked">
                 <i class="fas fa-lock"></i>
               </div>
-            </ng-container>
+
+              <!-- Title -->
+              <h3 class="unit-circle__title">{{ unit.title }}</h3>
+            </div>
           </div>
 
-          <!-- Title -->
-          <h3 class="unit-title">{{ unit.title }}</h3>
-          
-          <!-- Progress indicator for completed units -->
-          <div class="progress-indicator" *ngIf="unit.isCompleted">
-            <i class="fas fa-check"></i>
+          <!-- Connector Line -->
+          <div class="connector-line" *ngIf="i < (units$ | async)!.length - 1">
+            <div class="connector-line__progress" 
+                 [style.width.%]="getConnectorProgress(unit, (units$ | async)![i + 1])">
+            </div>
           </div>
         </div>
-
-        <!-- Connector line between circles -->
-        <div class="connector-line" *ngIf="i < (units$ | async)!.length - 1"></div>
       </ng-container>
     </div>
   </div>
 </div>
-
