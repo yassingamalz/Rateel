@@ -1,17 +1,30 @@
 <!-- unit-card.component.html -->
-<div class="unit-circle" 
-     [class.unit-circle--locked]="unit.isLocked"
-     [class.unit-circle--completed]="unit.isCompleted"
+<div class="unit-card" 
+     [class.unit-card--locked]="unit.isLocked"
+     [class.unit-card--completed]="unit.isCompleted"
+     [class.unit-card--not-started]="!unit.progress"
+     [class.unit-card--active]="isActive"
      (click)="onUnitClick()"
-     [@circleAnimation]>
-     
-  <!-- Circular Progress Ring -->
+     [@cardState]="animationState"
+     (mouseenter)="animationState = 'hovered'"
+     (mouseleave)="animationState = 'default'">
+  
+  <!-- Glowing Background Effect -->
+  <div class="unit-card__glow"></div>
+  
+  <!-- Progress Ring -->
   <svg class="progress-ring" viewBox="0 0 100 100">
-    <!-- Background circle -->
+    <!-- Backdrop Circle -->
+    <circle class="progress-ring__circle--backdrop"
+            cx="50" cy="50" r="46"
+            stroke-width="2"/>
+            
+    <!-- Background Circle -->
     <circle class="progress-ring__circle--bg"
             cx="50" cy="50" r="46"
             stroke-width="4"/>
-    <!-- Progress circle -->
+            
+    <!-- Progress Circle -->
     <circle class="progress-ring__circle--progress"
             cx="50" cy="50" r="46"
             stroke-width="4"
@@ -19,30 +32,38 @@
   </svg>
 
   <!-- Main Content -->
-  <div class="unit-circle__content">
-    <!-- Icon with Type Indicator -->
-    <div class="unit-circle__icon-container">
-      <div class="unit-circle__icon" [class.unit-circle__icon--completed]="unit.isCompleted">
+  <div class="unit-card__content">
+    <!-- Icon Container with Ripple Effect -->
+    <div class="unit-card__icon-container">
+      <div class="unit-card__icon-ripple"></div>
+      <div class="unit-card__icon" 
+           [class.unit-card__icon--completed]="unit.isCompleted"
+           [class.unit-card__icon--not-started]="!unit.progress">
         <i class="fas" [ngClass]="getTypeIcon()"></i>
       </div>
       
-      <!-- Lock Overlay -->
-      <div class="unit-circle__lock" *ngIf="unit.isLocked">
+      <!-- Lock Overlay with Blur Effect -->
+      <div class="unit-card__lock" *ngIf="unit.isLocked" [@lockState]>
+        <div class="unit-card__lock-blur"></div>
         <i class="fas fa-lock"></i>
       </div>
       
-      <!-- Completion Check -->
-      <div class="unit-circle__check" *ngIf="unit.isCompleted">
+      <!-- Completion Check with Pulse -->
+      <div class="unit-card__check" *ngIf="unit.isCompleted" [@checkState]>
+        <div class="unit-card__check-pulse"></div>
         <i class="fas fa-check"></i>
       </div>
     </div>
 
-    <!-- Title -->
-    <h3 class="unit-circle__title">{{ unit.title }}</h3>
+    <!-- Title with Gradient -->
+    <h3 class="unit-card__title">
+      <span class="unit-card__title">{{ unit.title }}</span>
+    </h3>
 
-    <!-- Progress Badge -->
-    <div class="unit-circle__progress" *ngIf="!unit.isLocked">
-      {{ unit.progress || 0 }}%
+    <!-- Progress Badge with Shine -->
+    <div class="unit-card__progress" *ngIf="!unit.isLocked && unit.progress">
+      <div class="unit-card__progress-shine"></div>
+      {{ unit.progress }}%
     </div>
   </div>
 </div>

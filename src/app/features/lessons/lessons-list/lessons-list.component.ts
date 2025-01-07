@@ -42,53 +42,11 @@ export class LessonsListComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router
   ) { }
-
   ngOnInit(): void {
-    // Access the route parameters using the parent routes
-    this.route.params.subscribe(params => {
-      console.log('Direct route params:', params);
-    });
-
-    this.route.parent?.params.subscribe(params => {
-      console.log('Parent route params:', params);
-    });
-
-    combineLatest([
-      this.route.parent?.parent?.params || this.route.params,
-      this.route.parent?.params || this.route.params
-    ]).pipe(
-      tap(([parentParams, currentParams]) => {
-        console.log('Combined route params:', { parentParams, currentParams });
-      }),
-      map(([parentParams, currentParams]) => {
-        return {
-          courseId: parentParams['courseId'] || currentParams['courseId'],
-          unitId: parentParams['unitId'] || currentParams['unitId']
-        };
-      }),
-      filter(params => !!params.courseId && !!params.unitId)
-    ).subscribe(({ courseId, unitId }) => {
-      this.courseId = courseId;
-      this.unitId = unitId;
-      console.log('Loading lessons for:', { courseId, unitId });
-
-      // Try getting lessons from UnitsService first
-      this.unitsService.getLessonsByUnitId(courseId, unitId).pipe(
-        tap(lessonsFromUnits => {
-          console.log('Lessons from UnitsService:', lessonsFromUnits);
-          if (lessonsFromUnits.length === 0) {
-            // If no lessons from UnitsService, try LessonsService
-            this.lessonsService.getLessonsByUnitId(courseId, unitId).subscribe(lessonsFromLessons => {
-              console.log('Lessons from LessonsService:', lessonsFromLessons);
-              this.lessons$ = of(lessonsFromLessons);
-            });
-          } else {
-            this.lessons$ = of(lessonsFromUnits);
-          }
-        })
-      ).subscribe();
-    });
+    throw new Error('Method not implemented.');
   }
+
+
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {

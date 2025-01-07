@@ -14,14 +14,13 @@
 
 .units-header {
   margin-bottom: map-get($spacing, xl);
-  
+    
   .header-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 map-get($spacing, lg);
   }
   
   .page-title {
@@ -62,6 +61,10 @@
   &.dragging {
     cursor: grabbing;
     user-select: none;
+    
+    .units-wrapper {
+      pointer-events: none;
+    }
   }
   
   &::-webkit-scrollbar {
@@ -81,138 +84,9 @@
   padding-left: calc(50vw - 100px);
 }
 
-.unit-circle-wrapper {
+.unit-item {
   display: flex;
   align-items: center;
-}
-
-.unit-circle {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &:hover:not(&--locked) {
-    transform: scale(1.05);
-    
-    .unit-circle__icon {
-      transform: scale(1.1);
-      background: rgba(map-get($colors, accent, base), 0.2);
-    }
-    
-    .progress-ring__circle--bg {
-      stroke: rgba(255, 255, 255, 0.15);
-    }
-    
-    .progress-ring__circle--progress {
-      stroke: map-get($colors, accent, light);
-    }
-  }
-  
-  &--locked {
-    opacity: 0.7;
-    cursor: not-allowed;
-    
-    .progress-ring__circle--bg {
-      stroke: rgba(255, 255, 255, 0.05);
-    }
-    
-    .unit-circle__icon {
-      background: rgba(255, 255, 255, 0.1);
-    }
-  }
-  
-  &--completed {
-    .progress-ring__circle--bg {
-      stroke: rgba(map-get($colors, accent, base), 0.2);
-    }
-    
-    .progress-ring__circle--progress {
-      stroke: map-get($colors, accent, base);
-    }
-    
-    .unit-circle__icon {
-      background: map-get($colors, accent, base);
-      color: map-get($colors, text, dark);
-    }
-  }
-}
-
-.progress-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  
-  &__circle {
-    &--bg {
-      stroke: rgba(255, 255, 255, 0.1);
-      fill: none;
-      transition: stroke 0.3s ease;
-    }
-    
-    &--progress {
-      stroke: map-get($colors, accent, base);
-      fill: none;
-      transition: stroke-dasharray 0.3s ease;
-    }
-  }
-}
-
-.unit-circle__content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: map-get($spacing, md);
-}
-
-.unit-circle__icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  margin-bottom: map-get($spacing, sm);
-  
-  i {
-    font-size: 2rem;
-    color: map-get($colors, text, light);
-  }
-}
-
-.unit-circle__lock {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  i {
-    font-size: 1.5rem;
-    color: map-get($colors, text, muted);
-  }
-}
-
-.unit-circle__title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: map-get($colors, text, light);
-  text-align: center;
-  margin-top: map-get($spacing, sm);
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .connector-line {
@@ -250,12 +124,8 @@
 }
 
 @keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 // Responsive Styles
@@ -265,26 +135,12 @@
     padding-left: map-get($spacing, lg);
   }
 
-  .unit-circle {
-    width: 140px;
-    height: 140px;
-  }
-
-  .unit-circle__icon {
-    width: 60px;
-    height: 60px;
-    
-    i {
-      font-size: 1.5rem;
-    }
-  }
-
   .connector-line {
     width: 60px;
   }
 }
 
-// RTL Specific Adjustments
+// RTL Support
 [dir="rtl"] {
   .units-wrapper {
     direction: rtl;

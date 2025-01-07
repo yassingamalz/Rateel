@@ -1,3 +1,4 @@
+// units-list.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -15,7 +16,7 @@ export class UnitsListComponent implements OnInit {
 
   units$!: Observable<Unit[]>;
   courseId!: string;
-  currentUnitIndex = new BehaviorSubject<number>(0);
+  activeUnitId: string | null = null;
   isDragging = false;
   startX = 0;
   scrollLeft = 0;
@@ -30,30 +31,38 @@ export class UnitsListComponent implements OnInit {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitsService.setCurrentCourse(this.courseId);
     this.units$ = this.unitsService.getUnitsByCourseId(this.courseId);
+
+    const unitId = this.route.snapshot.paramMap.get('unitId');
+    if (unitId) {
+      this.activeUnitId = unitId;
+    }
   }
 
-  getUnitTypeIcon(type: string): string {
-    return this.unitsService.getUnitIcon(type);
-  }
-
-  getProgressCircleValue(progress: number): string {
-    const circumference = 2 * Math.PI * 46; // r = 46 from SVG
-    const offset = circumference - (progress / 100) * circumference;
-    return `${offset}, ${circumference}`;
+  onUnitSelected(unit: Unit): void {
+    if (!unit.isLocked) {
+      console.log("hey")
+      this.activeUnitId = unit.id;
+      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons'])
+        .then(() => {
+          // Scroll selected unit into view
+          setTimeout(() => {
+            const element = document.getElementById(`unit-${unit.id}`);
+            if (element) {
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+              });
+            }
+          }, 100);
+        });
+    }
   }
 
   getConnectorProgress(currentUnit: Unit, nextUnit: Unit): number {
     if (currentUnit.isCompleted) return 100;
     if (nextUnit.isLocked) return 0;
     return (currentUnit.progress || 0) / 2;
-  }
-
-  onUnitSelected(unit: Unit): void {
-    if (!unit.isLocked) {
-      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons'])
-        .then(success => console.log('Navigation successful:', success))
-        .catch(error => console.error('Navigation error:', error));
-    }
   }
 
   // Mouse event handlers for dragging

@@ -15,7 +15,7 @@ export class UnitsService {
     'noon-meem-mushaddad': [
       {
         id: 'intro-noon-meem-unit',
-        title: 'تعريف النون والميم المشددتين',
+        title: 'تعريف النون والميم ',
         description: 'الدرس الأول: التعريف والأمثلة',
         courseId: 'noon-meem-mushaddad',
         type: 'video',
