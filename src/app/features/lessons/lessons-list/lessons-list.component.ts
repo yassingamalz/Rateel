@@ -1,10 +1,11 @@
 // src/app/features/lessons/lessons-list/lessons-list.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, of } from 'rxjs';
+import { tap, map, filter } from 'rxjs/operators';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LessonsService } from '../lessons.service';
+import { UnitsService } from '../../units/units.service';
 import { Lesson } from '../../../shared/interfaces/lesson';
 
 @Component({
@@ -37,36 +38,72 @@ export class LessonsListComponent implements OnInit {
 
   constructor(
     private lessonsService: LessonsService,
+    private unitsService: UnitsService,
     public route: ActivatedRoute,
     public router: Router
   ) { }
 
   ngOnInit(): void {
-    // Get parent route parameters
-    this.route.parent?.parent?.paramMap.subscribe(params => {
-      this.courseId = params.get('courseId')!;
-      this.unitId = params.get('unitId')!;
+    // Access the route parameters using the parent routes
+    this.route.params.subscribe(params => {
+      console.log('Direct route params:', params);
+    });
 
-      console.log('CourseId:', this.courseId);
-      console.log('UnitId:', this.unitId);
+    this.route.parent?.params.subscribe(params => {
+      console.log('Parent route params:', params);
+    });
 
-      this.lessonsService.setCurrentUnit(this.unitId);
-      this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId)
-        .pipe(
-          tap(lessons => {
-            console.log('Fetched lessons:', lessons);
-          })
-        );
+    combineLatest([
+      this.route.parent?.parent?.params || this.route.params,
+      this.route.parent?.params || this.route.params
+    ]).pipe(
+      tap(([parentParams, currentParams]) => {
+        console.log('Combined route params:', { parentParams, currentParams });
+      }),
+      map(([parentParams, currentParams]) => {
+        return {
+          courseId: parentParams['courseId'] || currentParams['courseId'],
+          unitId: parentParams['unitId'] || currentParams['unitId']
+        };
+      }),
+      filter(params => !!params.courseId && !!params.unitId)
+    ).subscribe(({ courseId, unitId }) => {
+      this.courseId = courseId;
+      this.unitId = unitId;
+      console.log('Loading lessons for:', { courseId, unitId });
+
+      // Try getting lessons from UnitsService first
+      this.unitsService.getLessonsByUnitId(courseId, unitId).pipe(
+        tap(lessonsFromUnits => {
+          console.log('Lessons from UnitsService:', lessonsFromUnits);
+          if (lessonsFromUnits.length === 0) {
+            // If no lessons from UnitsService, try LessonsService
+            this.lessonsService.getLessonsByUnitId(courseId, unitId).subscribe(lessonsFromLessons => {
+              console.log('Lessons from LessonsService:', lessonsFromLessons);
+              this.lessons$ = of(lessonsFromLessons);
+            });
+          } else {
+            this.lessons$ = of(lessonsFromUnits);
+          }
+        })
+      ).subscribe();
     });
   }
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {
-      this.router.navigate(['lesson', lesson.id], {
-        relativeTo: this.route
+      console.log('Navigating to lesson:', {
+        courseId: this.courseId,
+        unitId: this.unitId,
+        lessonId: lesson.id
       });
+
+      this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', lesson.id])
+        .then(success => console.log('Lesson navigation success:', success))
+        .catch(error => console.error('Lesson navigation error:', error));
     }
   }
+
 
   // Mouse event handlers for dragging
   onMouseDown(event: MouseEvent): void {
