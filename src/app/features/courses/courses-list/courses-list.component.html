@@ -6,7 +6,7 @@
           <div class="swiper-slide" *ngFor="let course of courses$ | async">
             <app-course-card
               [course]="course"
-              (courseClick)="onCourseSelected($event)">
+              (courseSelected)="onCourseSelected($event)">
             </app-course-card>
           </div>
         </div>

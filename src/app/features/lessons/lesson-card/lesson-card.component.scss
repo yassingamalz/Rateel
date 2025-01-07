@@ -1,0 +1,126 @@
+// src/app/features/lessons/lesson-card/lesson-card.component.scss
+@import 'variables';
+@import 'mixins';
+
+.lesson-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: map-get($border-radius, lg);
+  padding: map-get($spacing, md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  direction: rtl;
+  
+  @include glass-effect;
+  
+  &:hover:not(&--locked) {
+    transform: translateX(-5px);
+    border-color: rgba(map-get($colors, accent, base), 0.3);
+  }
+  
+  &--locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+    
+    .lesson-card__circle {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  &--completed {
+    border-color: map-get($colors, accent, base);
+    
+    .lesson-card__circle {
+      background: map-get($colors, accent, base);
+      color: map-get($colors, text, dark);
+    }
+  }
+  
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, md);
+  }
+  
+  &__circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    position: relative;
+    flex-shrink: 0;
+    
+    i {
+      font-size: 1.5rem;
+      color: map-get($colors, text, light);
+    }
+  }
+  
+  &__lock-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      font-size: 1.25rem;
+      color: map-get($colors, text, muted);
+    }
+  }
+  
+  &__info {
+    flex: 1;
+  }
+  
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: map-get($colors, text, light);
+    margin-bottom: map-get($spacing, xs);
+  }
+  
+  &__description {
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+  }
+  
+  &__duration {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, xs);
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+    margin-top: map-get($spacing, xs);
+    
+    i {
+      font-size: 1rem;
+    }
+  }
+  
+  &__action {
+    width: 40px;
+    height: 40px;
+    border-radius: map-get($border-radius, full);
+    background: rgba(map-get($colors, accent, base), 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, accent, base);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: map-get($colors, accent, base);
+      color: map-get($colors, text, dark);
+    }
+    
+    i {
+      font-size: 1rem;
+    }
+  }
+}

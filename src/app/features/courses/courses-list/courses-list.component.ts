@@ -5,11 +5,12 @@ import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from '
 import type { SwiperOptions } from 'swiper/types';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Course } from '../../../shared/interfaces/course';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list',
-  standalone:false,
-  
+  standalone: false,
+
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss']
 })
@@ -18,11 +19,13 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   courses$: Observable<Course[]>;
   swiper?: Swiper;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService,
+    private router: Router
+  ) {
     this.courses$ = this.coursesService.getCourses();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.initSwiper();
@@ -67,6 +70,13 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   }
 
   onCourseSelected(course: Course): void {
-    console.log('Selected course:', course.title);
+    console.log('Navigating to lessons for course:', course.id);
+    this.router.navigate(['/lessons', course.id])
+      .then(success => {
+        console.log('Navigation successful:', success);
+      })
+      .catch(err => {
+        console.error('Navigation error:', err);
+      });
   }
 }
