@@ -3,115 +3,293 @@
 @import 'mixins';
 
 .courses-page {
-  min-height: 100vh;
-  background: linear-gradient(
-    to bottom right,
-    map-get($colors, primary, base),
-    map-get($colors, primary, dark)
-  );
-  padding: map-get($spacing, lg);
-  overflow-x: hidden;
+    min-height: 100vh;
+    padding: map-get($spacing, lg);
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+    direction: rtl;
+
+    &::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg,
+            #{map-get($colors, primary, dark)} 0%,
+            #{map-get($colors, primary, base)} 100%);
+        z-index: -3;
+    }
 }
 
-.courses-header {
-  margin-bottom: map-get($spacing, xl);
-  
-  .page-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: map-get($colors, text, light);
-    margin-bottom: map-get($spacing, md);
-  }
+// Dynamic Flowing Background
+.background-flow {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: 0.6;
+    overflow: hidden;
+
+    .flow-path {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        &--1 {
+            transform: rotate(-10deg) scale(1.5);
+            opacity: 0.4;
+            animation: flowMove1 25s infinite alternate ease-in-out;
+
+            path {
+                fill: #{rgba(map-get($colors, secondary, teal), 0.15)};
+            }
+        }
+
+        &--2 {
+            transform: rotate(15deg) scale(1.2);
+            opacity: 0.3;
+            animation: flowMove2 20s infinite alternate-reverse ease-in-out;
+
+            path {
+                fill: #{rgba(map-get($colors, accent, base), 0.1)};
+            }
+        }
+
+        &--3 {
+            transform: rotate(-5deg) scale(1.3);
+            opacity: 0.2;
+            animation: flowMove3 30s infinite alternate ease-in-out;
+
+            path {
+                fill: #{rgba(map-get($colors, primary, light), 0.1)};
+            }
+        }
+    }
 }
 
+.pattern-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%23DAA520' d='M40 0L80 40L40 80L0 40L40 0zM40 10L70 40L40 70L10 40L40 10zM40 20L60 40L40 60L20 40L40 20z'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+    pointer-events: none;
+}
+
+.floating-icons {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;   
+
+    .icon {
+        position: absolute;
+        opacity: 0.1;
+        color: #{map-get($colors, accent, base)};
+        font-size: 5rem;
+        
+        &--1 {
+            top: 15%;
+            right: 10%;
+            animation: floatIcon 20s infinite ease-in-out;
+        }
+
+        &--2 {
+            top: 45%;
+            left: 15%;
+            animation: floatIcon 25s infinite ease-in-out reverse;
+        }
+
+        &--3 {
+            bottom: 20%;
+            right: 25%;
+            animation: floatIcon 22s infinite ease-in-out;
+        }
+    }
+}
+
+// Content Styles
 .courses-layout {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: map-get($spacing, xl);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacing, xl);
+    z-index: 1;
 }
 
 .path-info {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  color: map-get($colors, text, light);
-  
-  .path-title {
-    font-size: 1.5rem;
-    font-weight: 500;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: map-get($colors, text, light);
+    position: relative;
+    padding: map-get($spacing, xl) map-get($spacing, lg);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle at center,
+            #{rgba(map-get($colors, accent, base), 0.1)} 0%,
+            transparent 70%);
+        transform: translate(-50%, -50%);
+        filter: blur(40px);
+        z-index: -1;
+    }
+}
+
+.path-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: map-get($spacing, sm);
+    color: map-get($colors, text, light);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.path-subtitle {
+    font-size: 1.25rem;
+    color: map-get($colors, text, muted);
     margin-bottom: map-get($spacing, lg);
-  }
-  
-  .path-options {
+}
+
+.path-options {
     display: flex;
     justify-content: center;
     gap: map-get($spacing, lg);
-  }
-  
-  .path-option {
+    margin-top: map-get($spacing, xl);
+}
+
+.path-option {
     display: flex;
     align-items: center;
     gap: map-get($spacing, sm);
-    padding: map-get($spacing, sm) map-get($spacing, lg);
-    background: rgba(255, 255, 255, 0.1);
+    padding: map-get($spacing, md) map-get($spacing, lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #{rgba(map-get($colors, accent, base), 0.2)};
     border-radius: map-get($border-radius, full);
-    font-size: 0.875rem;
-    
-    i {
-      color: map-get($colors, accent, base);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+        transform: translateY(-2px);
+        background: #{rgba(map-get($colors, accent, base), 0.1)};
+        border-color: #{rgba(map-get($colors, accent, base), 0.4)};
+
+        i {
+            transform: scale(1.1);
+        }
     }
-  }
+
+    i {
+        color: map-get($colors, accent, base);
+        font-size: map-get($font-size, base);
+        ;
+        transition: transform 0.3s ease;
+        margin-left: map-get($spacing, sm);
+    }
 }
 
 .courses-container {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: map-get($spacing, xl) map-get($spacing, lg);
-  cursor: grab;
-  
-  &.dragging {
-    cursor: grabbing;
-    user-select: none;
-  }
-  
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  
-  // Custom scrollbar for Firefox
-  scrollbar-width: none;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: map-get($spacing, xl) 0;
+    cursor: grab;
+
+    &.dragging {
+        cursor: grabbing;
+        user-select: none;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
 }
 
 .courses-wrapper {
-  display: flex;
-  gap: map-get($spacing, xl);
-  padding: map-get($spacing, xl) map-get($spacing, lg);
-  margin: 0 auto;
-  max-width: fit-content;
-  
-  // Center the cards and allow for partial visibility
-  padding-right: calc(50vw - 200px);
-  padding-left: calc(50vw - 200px);
+    display: flex;
+    gap: map-get($spacing, xl);
+    padding: map-get($spacing, xl) map-get($spacing, lg);
+    margin: 0 auto;
+    max-width: fit-content;
+    padding-right: calc(50vw - 200px);
+    padding-left: calc(50vw - 200px);
 }
 
 .course-item {
-  flex: 0 0 400px; // Fixed width for cards
-  max-width: 400px;
-  opacity: 0.7;
-  transform: scale(0.9);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    opacity: 1;
-    transform: scale(1);
-  }
+    flex: 0 0 400px;
+    max-width: 400px;
+    opacity: 0.7;
+    transform: scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: saturate(0.8);
+
+    &:hover {
+        opacity: 1;
+        transform: scale(1);
+        filter: saturate(1);
+    }
+
+    &:nth-child(1) {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 2;
+        filter: saturate(1);
+    }
 }
 
-// Center card emphasis
-.course-item:nth-child(2) {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
+@keyframes flowMove1 {
+    0% {
+        transform: translate(0, 0) rotate(-10deg) scale(1.5);
+    }
+
+    100% {
+        transform: translate(50px, 30px) rotate(-5deg) scale(1.6);
+    }
+}
+
+@keyframes flowMove2 {
+    0% {
+        transform: translate(0, 0) rotate(15deg) scale(1.2);
+    }
+
+    100% {
+        transform: translate(-30px, -20px) rotate(20deg) scale(1.3);
+    }
+}
+
+@keyframes flowMove3 {
+    0% {
+        transform: translate(0, 0) rotate(-5deg) scale(1.3);
+    }
+
+    100% {
+        transform: translate(20px, -40px) rotate(-8deg) scale(1.4);
+    }
+}
+
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(15px, -15px) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(0, -30px) rotate(0deg);
+    }
+
+    75% {
+        transform: translate(-15px, -15px) rotate(-5deg);
+    }
 }
