@@ -1,51 +1,120 @@
 // _variables.scss
+
+// Primary colors inspired by traditional Islamic architecture
 $colors: (
   primary: (
-    base: #1B4332,
-    light: #2D6A4F,
-    dark: #081C15,
-    gradient: linear-gradient(180deg, #1B4332 0%, #081C15 100%)
+    base: #1F4037,      // Deep emerald green
+    light: #2D6A4F,     // Forest green
+    dark: #0B1C17,      // Dark forest
+    gradient: linear-gradient(180deg, #1F4037 0%, #0B1C17 100%)
   ),
+  
+  // Gold accents inspired by mosque decorations
   accent: (
-    base: #DAA520,
-    light: #FFD700,
-    dark: #B8860B
+    base: #DAA520,      // Golden rod
+    light: #FFD700,     // Pure gold
+    bright: #FCC200,    // Bright gold
+    glow: #FFE355,      // Glowing gold
+    dark: #B8860B,      // Dark golden rod
+    muted: #D4AF37      // Old gold
   ),
+  
+  // Secondary palette inspired by Islamic art
+  secondary: (
+    teal: #206A5D,      // Traditional teal
+    blue: #1B4F72,      // Deep blue
+    purple: #5B2C6F,    // Royal purple
+    brown: #6E2C00      // Rich brown
+  ),
+  
+  // Accent colors for special elements
+  special: (
+    copper: #B87333,    // Metallic copper
+    bronze: #CD7F32,    // Rich bronze
+    emerald: #2ECC71,   // Bright emerald
+    ruby: #C0392B       // Deep ruby
+  ),
+  
+  // Text colors
   text: (
-    light: #FFFFFF,
-    dark: #081C15,
-    muted: #95D5B2
+    light: #FFFFFF,     // Pure white
+    dark: #0B1C17,      // Near black
+    muted: #95D5B2,     // Soft green
+    gold: #DFC298       // Light gold for emphasis
   ),
+  
+  // Background variations
   background: (
     card: #2D6A4F,
-    overlay: rgba(27, 67, 50, 0.2)  // Based on primary base color
+    overlay: rgba(31, 64, 55, 0.2),
+    pattern: rgba(197, 165, 114, 0.1),  // Subtle geometric patterns
+    glass: rgba(255, 255, 255, 0.05)    // Glass effect
+  ),
+  
+  // Status colors
+  status: (
+    success: #27AE60,   // Traditional green
+    warning: #F39C12,   // Golden yellow
+    error: #C0392B,     // Deep red
+    info: #2980B9       // Rich blue
   )
 );
 
+// Maintain existing spacing scale
 $spacing: (
   xs: 0.25rem,   // 4px
   sm: 0.5rem,    // 8px
   md: 1rem,      // 16px
   lg: 1.5rem,    // 24px
-  xl: 2rem       // 32px
+  xl: 2rem,      // 32px
+  xxl: 3rem      // 48px
 );
 
+// Enhanced border radius scale
 $border-radius: (
   sm: 0.5rem,    // 8px
   md: 1rem,      // 16px
   lg: 1.25rem,   // 20px
+  xl: 1.5rem,    // 24px
   full: 9999px
 );
 
+// Refined transitions
 $transitions: (
-  base: all 0.3s ease,
-  transform: transform 0.2s ease,
-  opacity: opacity 0.2s ease
+  base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  transform: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+  opacity: opacity 0.2s ease,
+  color: color 0.2s ease,
+  background: background-color 0.3s ease
 );
 
-// Shadow with the primary color
+// Enhanced shadow system with colored variations
 $box-shadow: (
-  sm: 0 2px 4px rgba(27, 67, 50, 0.1),
-  md: 0 4px 6px rgba(27, 67, 50, 0.1),
-  lg: 0 10px 15px rgba(27, 67, 50, 0.1)
+  sm: 0 2px 4px rgba(11, 28, 23, 0.1),
+  md: 0 4px 6px rgba(11, 28, 23, 0.1),
+  lg: 0 10px 15px rgba(11, 28, 23, 0.1),
+  gold: 0 4px 12px rgba(197, 165, 114, 0.2),
+  inner: inset 0 2px 4px rgba(11, 28, 23, 0.05)
+);
+
+// Z-index scale
+$z-index: (
+  below: -1,
+  base: 0,
+  above: 1,
+  header: 10,
+  modal: 20,
+  tooltip: 30,
+  highest: 999
+);
+
+// Typography scale
+$font-size: (
+  xs: 0.75rem,    // 12px
+  sm: 0.875rem,   // 14px
+  base: 1rem,     // 16px
+  lg: 1.125rem,   // 18px
+  xl: 1.25rem,    // 20px
+  xxl: 1.5rem,    // 24px
+  title: 2rem     // 32px
 );

@@ -19,7 +19,7 @@
     
     .course-card__play {
       transform: scale(1.1);
-      background: rgba(map-get($colors, accent, base), 0.3);
+      background: rgba(map-get($colors, accent, muted), 0.3);
     }
   }
   
