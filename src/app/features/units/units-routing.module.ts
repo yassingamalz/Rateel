@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UnitsListComponent } from './units-list/units-list.component';
-import { UnitDetailsComponent } from './unit-details/unit-details.component';
 
 const routes: Routes = [
   {
@@ -11,10 +10,6 @@ const routes: Routes = [
       {
         path: '',
         component: UnitsListComponent
-      },
-      {
-        path: ':unitId',
-        component: UnitDetailsComponent
       }
     ]
   }

@@ -1,0 +1,139 @@
+// src/app/features/units/unit-details/lesson-card/lesson-card.component.scss
+@import 'variables';
+@import 'mixins';
+
+.lesson-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  padding: map-get($spacing, md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(&--locked) {
+    transform: translateY(-4px);
+    
+    .lesson-card__circle {
+      box-shadow: 0 8px 16px rgba(map-get($colors, primary, dark), 0.2);
+    }
+  }
+  
+  &--locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  &--completed {
+    .lesson-card__circle {
+      background: rgba(map-get($colors, accent, base), 0.2);
+      border-color: map-get($colors, accent, base);
+    }
+    
+    .lesson-card__icon {
+      color: map-get($colors, accent, base);
+    }
+  }
+  
+  &--active {
+    .lesson-card__circle {
+      background: map-get($colors, accent, base);
+      border-color: map-get($colors, accent, light);
+      
+      .lesson-card__icon {
+        color: map-get($colors, text, dark);
+      }
+    }
+  }
+  
+  &__step {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: map-get($colors, accent, base);
+    color: map-get($colors, text, dark);
+    padding: map-get($spacing, xs) map-get($spacing, sm);
+    border-radius: map-get($border-radius, full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 1;
+  }
+  
+  &__circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-bottom: map-get($spacing, sm);
+    
+    @include glass-effect;
+  }
+  
+  &__icon {
+    font-size: 2rem;
+    color: map-get($colors, text, light);
+    transition: all 0.3s ease;
+  }
+  
+  &__lock {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      color: map-get($colors, text, muted);
+      font-size: 1.5rem;
+    }
+  }
+  
+  &__check {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: map-get($colors, accent, base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, text, dark);
+    font-size: 0.75rem;
+  }
+  
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: map-get($colors, text, light);
+    text-align: center;
+    margin: map-get($spacing, xs) 0;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  &__duration {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, xs);
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+    
+    i {
+      font-size: 0.875rem;
+    }
+  }
+}

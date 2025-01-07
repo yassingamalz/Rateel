@@ -1,0 +1,179 @@
+// src/app/features/units/unit-details/lessons/lessons-list.component.scss
+@import 'variables';
+@import 'mixins';
+
+.lessons-page {
+  padding: map-get($spacing, lg);
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    map-get($colors, primary, base),
+    map-get($colors, primary, dark)
+  );
+}
+
+.lessons-header {
+  margin-bottom: map-get($spacing, xl);
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, md);
+  }
+  
+  .back-button {
+    @include glass-effect;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: map-get($colors, text, light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: map-get($colors, text, light);
+  }
+}
+
+.lessons-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: map-get($spacing, xl) map-get($spacing, lg);
+  cursor: grab;
+  
+  &.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.lessons-wrapper {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+  padding: map-get($spacing, lg) 0;
+}
+
+.lesson-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  @include glass-effect;
+  
+  &:hover:not(&--locked) {
+    transform: scale(1.05);
+  }
+  
+  &--completed {
+    background: rgba(map-get($colors, accent, base), 0.2);
+    border: 2px solid map-get($colors, accent, base);
+    
+    .icon-wrapper {
+      background: map-get($colors, accent, base);
+      color: map-get($colors, text, dark);
+    }
+  }
+  
+  &--locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.lesson-progress {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: map-get($colors, accent, base);
+  color: map-get($colors, text, dark);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.circle-content {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.icon-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: map-get($colors, text, light);
+  transition: all 0.3s ease;
+}
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: map-get($colors, text, muted);
+}
+
+.lesson-title {
+  font-size: 0.875rem;
+  color: map-get($colors, text, light);
+  text-align: center;
+  margin-top: map-get($spacing, sm);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.connector-line {
+  width: 60px;
+  height: 2px;
+  background: rgba(map-get($colors, accent, base), 0.3);
+  margin: 0 map-get($spacing, sm);
+}
+
+.progress-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: map-get($colors, accent, base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: map-get($colors, text, dark);
+  font-size: 0.75rem;
+}

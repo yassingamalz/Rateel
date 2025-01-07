@@ -13,6 +13,11 @@ const routes: Routes = [
       .then(m => m.UnitsModule)
   },
   {
+    path: 'lessons',
+    loadChildren: () => import('./features/lessons/lessons.module')
+      .then(m => m.LessonsModule)
+  },
+  {
     path: '',
     redirectTo: 'courses',
     pathMatch: 'full'

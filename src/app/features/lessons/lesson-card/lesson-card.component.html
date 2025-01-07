@@ -1,0 +1,39 @@
+<!-- src/app/features/units/unit-details/lesson-card/lesson-card.component.html -->
+<div class="lesson-card"
+     [class.lesson-card--locked]="lesson.isLocked"
+     [class.lesson-card--completed]="lesson.isCompleted"
+     [class.lesson-card--active]="isActive"
+     (click)="onCardClick()"
+     [@cardAnimation]>
+     
+  <!-- Step Number -->
+  <div class="lesson-card__step">
+    {{ lesson.stepNumber }}/{{ lesson.totalSteps }}
+  </div>
+  
+  <!-- Main Circle -->
+  <div class="lesson-card__circle">
+    <div class="lesson-card__icon">
+      <i class="fas" [ngClass]="getLessonIcon()"></i>
+    </div>
+    
+    <!-- Lock Overlay -->
+    <div class="lesson-card__lock" *ngIf="lesson.isLocked">
+      <i class="fas fa-lock"></i>
+    </div>
+    
+    <!-- Check Mark for Completed -->
+    <div class="lesson-card__check" *ngIf="lesson.isCompleted">
+      <i class="fas fa-check"></i>
+    </div>
+  </div>
+  
+  <!-- Title -->
+  <h3 class="lesson-card__title">{{ lesson.title }}</h3>
+
+  <!-- Duration Badge -->
+  <div class="lesson-card__duration" *ngIf="lesson.duration">
+    <i class="fas fa-clock"></i>
+    {{ lesson.duration }} دقيقة
+  </div>
+</div>

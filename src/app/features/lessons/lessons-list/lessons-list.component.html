@@ -1,0 +1,58 @@
+<!--src/app/features/units/unit-details/lessons/lessons-list.component.html -->
+<div class="lessons-page" dir="rtl">
+  <header class="lessons-header">
+    <div class="header-content">
+      <button class="back-button" (click)="router.navigate(['../../'], { relativeTo: route })">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      <h1 class="page-title">{{ (lessons$ | async)?.[0]?.title }}</h1>
+    </div>
+  </header>
+
+  <div class="lessons-container"
+       #lessonsContainer
+       [class.dragging]="isDragging"
+       (mousedown)="onMouseDown($event)"
+       (mousemove)="onMouseMove($event)"
+       (mouseup)="onMouseUp()"
+       (mouseleave)="onMouseLeave()"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+    <div class="lessons-wrapper">
+      <ng-container *ngFor="let lesson of lessons$ | async; let i = index">
+        <div class="lesson-circle"
+             [class.lesson-circle--completed]="lesson.isCompleted"
+             [class.lesson-circle--locked]="lesson.isLocked"
+             (click)="onLessonSelected(lesson)">
+          <!-- Progress Number -->
+          <div class="lesson-progress">{{ lesson.stepNumber }}/{{ lesson.totalSteps }}</div>
+          
+          <!-- Content Circle -->
+          <div class="circle-content">
+            <div class="icon-wrapper">
+              <i class="fas" [ngClass]="lesson.icon"></i>
+            </div>
+            <ng-container *ngIf="lesson.isLocked">
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Title -->
+          <h3 class="lesson-title">{{ lesson.title }}</h3>
+          
+          <!-- Progress indicator for completed lessons -->
+          <div class="progress-indicator" *ngIf="lesson.isCompleted">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+
+        <!-- Connector line between circles -->
+        <div class="connector-line" *ngIf="i < (lessons$ | async)!.length - 1"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

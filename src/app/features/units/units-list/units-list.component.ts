@@ -47,9 +47,7 @@ export class UnitsListComponent implements OnInit {
 
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      this.router.navigate(['units', unit.id, 'lessons'], {
-        relativeTo: this.route
-      });
+      this.router.navigate(['lessons', unit.id]);
     }
   }
 

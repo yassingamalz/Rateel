@@ -11,7 +11,6 @@ import { Unit } from '../../shared/interfaces/unit';
 export class UnitsService {
   private currentCourseIdSubject = new BehaviorSubject<string | null>(null);
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
-
   private mockUnits: { [key: string]: Unit[] } = {
     'noon-meem-mushaddad': [
       {
@@ -27,7 +26,7 @@ export class UnitsService {
           {
             id: 'intro-noon-meem',
             title: 'مقدمة في النون والميم',
-            description: 'تعريف وشرح مبسط',
+            description: 'تعريف وشرح مبسط للنون والميم المشددتين',
             type: 'video',
             icon: 'fa-play-circle',
             duration: 5,
@@ -42,7 +41,7 @@ export class UnitsService {
           {
             id: 'basic-examples',
             title: 'أمثلة أساسية',
-            description: 'أمثلة تطبيقية أولية',
+            description: 'أمثلة تطبيقية أولية من القرآن الكريم',
             type: 'practice',
             icon: 'fa-book-reader',
             duration: 10,
@@ -82,24 +81,154 @@ export class UnitsService {
         progress: 0,
         lessons: [
           {
-            id: 'practice-examples',
-            title: 'تدريبات متنوعة',
-            description: 'مجموعة من التدريبات التطبيقية',
-            type: 'practice',
-            icon: 'fa-microphone',
-            duration: 15,
+            id: 'practice-rules',
+            title: 'قواعد التطبيق',
+            description: 'شرح مفصل لقواعد تطبيق النون والميم المشددتين',
+            type: 'video',
+            icon: 'fa-play-circle',
+            duration: 8,
             order: 1,
             unitId: 'practical-noon-meem-unit',
             courseId: 'noon-meem-mushaddad',
             isCompleted: false,
             isLocked: false,
             stepNumber: 1,
-            totalSteps: 3
+            totalSteps: 4
+          },
+          {
+            id: 'interactive-examples',
+            title: 'أمثلة تفاعلية',
+            description: 'تدريبات تفاعلية مع التصحيح الفوري',
+            type: 'practice',
+            icon: 'fa-laptop',
+            duration: 15,
+            order: 2,
+            unitId: 'practical-noon-meem-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 2,
+            totalSteps: 4
+          },
+          {
+            id: 'recording-practice',
+            title: 'تسجيل صوتي',
+            description: 'تدريب على النطق الصحيح مع التسجيل',
+            type: 'practice',
+            icon: 'fa-microphone',
+            duration: 10,
+            order: 3,
+            unitId: 'practical-noon-meem-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 3,
+            totalSteps: 4
+          },
+          {
+            id: 'final-assessment',
+            title: 'التقييم النهائي',
+            description: 'اختبار شامل للوحدة',
+            type: 'test',
+            icon: 'fa-star',
+            duration: 20,
+            order: 4,
+            unitId: 'practical-noon-meem-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 4,
+            totalSteps: 4
           }
-          // Add more lessons...
+        ]
+      },
+      {
+        id: 'advanced-applications-unit',
+        title: 'التطبيقات المتقدمة',
+        description: 'الدرس الثالث: حالات خاصة وتطبيقات متقدمة',
+        courseId: 'noon-meem-mushaddad',
+        order: 3,
+        isLocked: true,
+        isCompleted: false,
+        progress: 0,
+        lessons: [
+          {
+            id: 'special-cases',
+            title: 'الحالات الخاصة',
+            description: 'شرح الحالات الاستثنائية والخاصة',
+            type: 'video',
+            icon: 'fa-play-circle',
+            duration: 12,
+            order: 1,
+            unitId: 'advanced-applications-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: false,
+            stepNumber: 1,
+            totalSteps: 5
+          },
+          {
+            id: 'quran-examples',
+            title: 'أمثلة من القرآن',
+            description: 'دراسة أمثلة متنوعة من القرآن الكريم',
+            type: 'video',
+            icon: 'fa-book-open',
+            duration: 15,
+            order: 2,
+            unitId: 'advanced-applications-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 2,
+            totalSteps: 5
+          },
+          {
+            id: 'advanced-practice',
+            title: 'تدريبات متقدمة',
+            description: 'تطبيقات متقدمة على الحالات الخاصة',
+            type: 'practice',
+            icon: 'fa-tasks',
+            duration: 20,
+            order: 3,
+            unitId: 'advanced-applications-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 3,
+            totalSteps: 5
+          },
+          {
+            id: 'peer-review',
+            title: 'مراجعة الأقران',
+            description: 'تدريب جماعي وتقييم الأقران',
+            type: 'practice',
+            icon: 'fa-users',
+            duration: 25,
+            order: 4,
+            unitId: 'advanced-applications-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 4,
+            totalSteps: 5
+          },
+          {
+            id: 'certification-test',
+            title: 'اختبار الشهادة',
+            description: 'الاختبار النهائي للحصول على الشهادة',
+            type: 'test',
+            icon: 'fa-certificate',
+            duration: 30,
+            order: 5,
+            unitId: 'advanced-applications-unit',
+            courseId: 'noon-meem-mushaddad',
+            isCompleted: false,
+            isLocked: true,
+            stepNumber: 5,
+            totalSteps: 5
+          }
         ]
       }
-      // Add more units...
     ]
   };
 
