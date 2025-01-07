@@ -1,0 +1,46 @@
+<!-- src/app/features/units/unit-card/unit-card.component.html -->
+<div class="unit-card" 
+     [class.unit-card--locked]="unit.isLocked"
+     [class.unit-card--completed]="unit.isCompleted"
+     (click)="onCardClick()"
+     [@cardAnimation]>
+  
+  <div class="unit-card__content">
+    <!-- Progress Badge -->
+    <div class="unit-card__progress-badge" *ngIf="unit.progress !== undefined">
+      {{ unit.progress }}%
+    </div>
+
+    <!-- Circle with Icon -->
+    <div class="unit-card__circle">
+      <div class="unit-card__icon">
+        <i class="fas" [ngClass]="getUnitIcon()"></i>
+      </div>
+      <ng-container *ngIf="unit.isLocked">
+        <div class="unit-card__lock-overlay">
+          <i class="fas fa-lock"></i>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="unit-card__info">
+      <h3 class="unit-card__title">{{ unit.title }}</h3>
+      <p class="unit-card__description">{{ unit.description }}</p>
+      
+      <!-- Lessons count -->
+      <div class="unit-card__stats">
+        <div class="unit-card__stat">
+          <i class="fas fa-book"></i>
+          <span>{{ unit.lessons.length }} دروس</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion Check -->
+    <div class="unit-card__completion" *ngIf="unit.isCompleted">
+      <div class="unit-card__check">
+        <i class="fas fa-check"></i>
+      </div>
+    </div>
+  </div>
+</div>

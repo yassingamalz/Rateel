@@ -8,9 +8,9 @@ const routes: Routes = [
       .then(m => m.CoursesModule)
   },
   {
-    path: 'lessons',
-    loadChildren: () => import('./features/lessons/lessons.module')
-      .then(m => m.LessonsModule)
+    path: 'units',
+    loadChildren: () => import('./features/units/units.module')
+      .then(m => m.UnitsModule)
   },
   {
     path: '',

@@ -1,0 +1,59 @@
+<!--src/app/features/units/units-list/units-list.component.html -->
+<div class="units-page" dir="rtl">
+  <header class="units-header">
+    <div class="header-content">
+      <h1 class="page-title">وحدات المقرر</h1>
+      <button class="change-course-btn" routerLink="/courses">
+        <i class="fas fa-exchange-alt"></i>
+        تغيير المقرر
+      </button>
+    </div>
+  </header>
+
+  <div class="units-container"
+       #unitsContainer
+       [class.dragging]="isDragging"
+       (mousedown)="onMouseDown($event)"
+       (mousemove)="onMouseMove($event)"
+       (mouseup)="onMouseUp()"
+       (mouseleave)="onMouseLeave()"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+    <div class="units-wrapper">
+      <ng-container *ngFor="let unit of units$ | async; let i = index">
+        <div class="unit-circle"
+             [class.unit-circle--completed]="unit.isCompleted"
+             [class.unit-circle--locked]="unit.isLocked"
+             (click)="onUnitSelected(unit)">
+          <!-- Progress Number -->
+          <div class="unit-progress">{{ unit.progress }}%</div>
+          
+          <!-- Content Circle -->
+          <div class="circle-content">
+            <div class="icon-wrapper">
+              <i class="fas" [ngClass]="unit.lessons[0].icon || 'fa-book'"></i>
+            </div>
+            <ng-container *ngIf="unit.isLocked">
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Title -->
+          <h3 class="unit-title">{{ unit.title }}</h3>
+          
+          <!-- Progress indicator for completed units -->
+          <div class="progress-indicator" *ngIf="unit.isCompleted">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+
+        <!-- Connector line between circles -->
+        <div class="connector-line" *ngIf="i < (units$ | async)!.length - 1"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

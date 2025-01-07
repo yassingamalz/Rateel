@@ -1,0 +1,145 @@
+
+// src/app/features/units/unit-card/unit-card.component.scss
+@import 'variables';
+@import 'mixins';
+
+.unit-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: map-get($border-radius, lg);
+  padding: map-get($spacing, md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  direction: rtl;
+  position: relative;
+  
+  @include glass-effect;
+  
+  &:hover:not(&--locked) {
+    transform: translateX(-5px);
+    border-color: rgba(map-get($colors, accent, base), 0.3);
+  }
+  
+  &--locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+    
+    .unit-card__circle {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  &--completed {
+    border-color: map-get($colors, accent, base);
+    
+    .unit-card__circle {
+      background: map-get($colors, accent, base);
+      color: map-get($colors, text, dark);
+    }
+  }
+  
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, md);
+  }
+  
+  &__circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    position: relative;
+    flex-shrink: 0;
+    
+    i {
+      font-size: 1.5rem;
+      color: map-get($colors, text, light);
+    }
+  }
+  
+  &__lock-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      font-size: 1.25rem;
+      color: map-get($colors, text, muted);
+    }
+  }
+  
+  &__info {
+    flex: 1;
+  }
+  
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: map-get($colors, text, light);
+    margin-bottom: map-get($spacing, xs);
+  }
+  
+  &__description {
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+    margin-bottom: map-get($spacing, xs);
+  }
+  
+  &__stats {
+    display: flex;
+    gap: map-get($spacing, md);
+  }
+  
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, xs);
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+    
+    i {
+      font-size: 1rem;
+    }
+  }
+  
+  &__progress-badge {
+    position: absolute;
+    top: map-get($spacing, sm);
+    left: map-get($spacing, sm);
+    background: map-get($colors, accent, base);
+    color: map-get($colors, text, dark);
+    padding: map-get($spacing, xs) map-get($spacing, sm);
+    border-radius: map-get($border-radius, full);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  &__completion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__check {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: map-get($colors, accent, base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, text, dark);
+    
+    i {
+      font-size: 0.875rem;
+    }
+  }
+}

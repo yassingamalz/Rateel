@@ -1,7 +1,6 @@
 // src/app/features/lessons/lesson-card/lesson-card.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Lesson } from '../../../shared/interfaces/lesson';
 
 @Component({
   selector: 'app-lesson-card',
@@ -19,14 +18,4 @@ import { Lesson } from '../../../shared/interfaces/lesson';
   ]
 })
 export class LessonCardComponent {
-  @Input() lesson!: Lesson;
-  @Output() lessonSelected = new EventEmitter<Lesson>();
-
-  onCardClick(): void {
-    if (!this.lesson.isLocked) {
-      this.lessonSelected.emit(this.lesson);
-    }
-  }
 }
-
-

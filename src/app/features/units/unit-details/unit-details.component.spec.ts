@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitHeaderComponent } from './unit-header.component';
+import { UnitDetailsComponent } from './unit-details.component';
 
-describe('UnitHeaderComponent', () => {
-  let component: UnitHeaderComponent;
-  let fixture: ComponentFixture<UnitHeaderComponent>;
+describe('UnitDetailsComponent', () => {
+  let component: UnitDetailsComponent;
+  let fixture: ComponentFixture<UnitDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UnitHeaderComponent]
+      declarations: [UnitDetailsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UnitHeaderComponent);
+    fixture = TestBed.createComponent(UnitDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
