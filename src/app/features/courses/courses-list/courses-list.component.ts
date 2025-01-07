@@ -14,6 +14,7 @@ import { CoursesService } from '../../../core/services/courses.service';
 export class CoursesListComponent implements OnInit, AfterViewInit {
   @ViewChild('coursesContainer') coursesContainer!: ElementRef;
   courses$: Observable<Course[]>;
+  currentCourseIndex = 0;
   isDragging = false;
   startX = 0;
   scrollLeft = 0;
@@ -29,6 +30,11 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Initialize any scroll behaviors if needed
+  }
+
+
+  isCourseCompleted(index: number): boolean {
+    return index <= this.currentCourseIndex;
   }
 
   onCourseSelected(course: Course): void {

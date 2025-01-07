@@ -2,66 +2,61 @@
 <div class="courses-page">
     <!-- Dynamic flowing background -->
     <div class="background-flow">
-      <svg class="flow-path flow-path--1" viewBox="0 0 2000 1000">
-        <path d="M0,100 C300,300 900,50 1400,250 L1400,1000 L0,1000 Z" />
-      </svg>
-      <svg class="flow-path flow-path--2" viewBox="0 0 2000 1000">
-        <path d="M300,0 C1000,200 1500,100 2000,300 L2000,1000 L300,1000 Z" />
-      </svg>
-      <svg class="flow-path flow-path--3" viewBox="0 0 2000 1000">
-        <path d="M0,300 C500,100 1300,400 2000,100 L2000,1000 L0,1000 Z" />
-      </svg>
+        <svg class="flow-path flow-path--1" viewBox="0 0 2000 1000">
+            <path d="M0,100 C300,300 900,50 1400,250 L1400,1000 L0,1000 Z" />
+        </svg>
+        <svg class="flow-path flow-path--2" viewBox="0 0 2000 1000">
+            <path d="M300,0 C1000,200 1500,100 2000,300 L2000,1000 L300,1000 Z" />
+        </svg>
+        <svg class="flow-path flow-path--3" viewBox="0 0 2000 1000">
+            <path d="M0,300 C500,100 1300,400 2000,100 L2000,1000 L0,1000 Z" />
+        </svg>
     </div>
-  
+
     <!-- Islamic pattern overlay -->
     <div class="pattern-overlay"></div>
-  
+
     <!-- Floating Islamic icons -->
     <div class="floating-icons">
-      <i class="icon icon--1 fas fa-star-and-crescent"></i>
-      <i class="icon icon--2 fas fa-mosque"></i>
-      <i class="icon icon--3 fas fa-book-quran"></i>
+        <i class="icon icon--1 fas fa-star-and-crescent"></i>
+        <i class="icon icon--2 fas fa-mosque"></i>
+        <i class="icon icon--3 fas fa-book-quran"></i>
     </div>
-  
+
     <!-- Main Content -->
     <div class="courses-layout">
-      <div class="path-info">
-        <h1 class="path-title">المسارات التعليمية</h1>
-        <h2 class="path-subtitle">ما هو المسار المناسب لك؟</h2>
-        
-        <div class="path-options">
-          <div class="path-option">
-            <i class="fas fa-mosque"></i>
-            <span>المبتدئ</span>
-          </div>
-          <div class="path-option">
-            <i class="fas fa-quran"></i>
-            <span>المتوسط</span>
-          </div>
-          <div class="path-option">
-            <i class="fas fa-star-and-crescent"></i>
-            <span>المتقدم</span>
-          </div>
+        <div class="path-info">
+            <h1 class="path-title">المسارات التعليمية</h1>
+            <h2 class="path-subtitle">ما هو المسار المناسب لك؟</h2>
+
+            <div class="path-options">
+                <div class="path-option">
+                    <i class="fas fa-mosque"></i>
+                    <span>المبتدئ</span>
+                </div>
+                <div class="path-option">
+                    <i class="fas fa-quran"></i>
+                    <span>المتوسط</span>
+                </div>
+                <div class="path-option">
+                    <i class="fas fa-star-and-crescent"></i>
+                    <span>المتقدم</span>
+                </div>
+            </div>
         </div>
-      </div>
-  
-      <div class="courses-container" 
-           #coursesContainer
-           [class.dragging]="isDragging"
-           (mousedown)="onMouseDown($event)"
-           (mousemove)="onMouseMove($event)"
-           (mouseup)="onMouseUp()"
-           (mouseleave)="onMouseLeave()">
-        
-        <div class="courses-wrapper">
-          <ng-container *ngFor="let course of courses$ | async">
-            <app-course-card
-              [course]="course"
-              (courseSelected)="onCourseSelected($event)"
-              class="course-item">
-            </app-course-card>
-          </ng-container>
+
+        <div class="courses-container" #coursesContainer [class.dragging]="isDragging" (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()" (mouseleave)="onMouseLeave()">
+
+            <div class="courses-wrapper">
+                <ng-container *ngFor="let course of courses$ | async; let i = index">
+                    <app-course-card [course]="course" (courseSelected)="onCourseSelected($event)" class="course-item"
+                        [class.course-item--completed]="isCourseCompleted(i)"
+                        [class.course-item--active]="i === currentCourseIndex">
+                        <div class="connector-line"></div>
+                    </app-course-card>
+                </ng-container>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

@@ -15,7 +15,7 @@ export class CoursesService {
       icon: 'book-quran',
       progress: 0,
       isLocked: false,
-      badge: { type: 'achievement', value: 'gold' }
+      badge: { type: 'achievement', value: 'مكتمل' }
     },
     {
       id: 'noon-tanween',
