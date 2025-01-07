@@ -54,22 +54,26 @@ export class LessonsListComponent implements OnInit {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
+    
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
       tap(lessons => {
         const lessonId = this.route.snapshot.paramMap.get('lessonId');
+        
         if (lessonId) {
           this.activeLessonId = lessonId;
-        } else if (lessons.length > 0) {
-          const nextIncomplete = lessons.find(l => !l.isCompleted && !l.isLocked);
-          if (nextIncomplete) {
-            this.onLessonSelected(nextIncomplete);
+        } else {
+          // Find first unlocked incomplete lesson
+          const nextLesson = lessons.find(l => !l.isCompleted && !l.isLocked);
+          if (nextLesson) {
+            this.activeLessonId = nextLesson.id;
           } else {
-            this.onLessonSelected(lessons[0]);
+            // If all complete, show first lesson
+            this.activeLessonId = lessons[0]?.id;
           }
         }
       })
     );
-  }
+   }
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {

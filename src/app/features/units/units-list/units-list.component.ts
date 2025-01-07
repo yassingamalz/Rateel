@@ -156,7 +156,6 @@ export class UnitsListComponent implements OnInit {
 
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      this.activeUnitId = unit.id;
       this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons']);
     }
   }
