@@ -10,33 +10,38 @@
     </div>
   </header>
 
-  <div class="units-container"
-       #unitsContainer
-       [class.dragging]="isDragging"
-       (mousedown)="onMouseDown($event)"
-       (mousemove)="onMouseMove($event)"
-       (mouseup)="onMouseUp()"
-       (mouseleave)="onMouseLeave()"
-       (touchstart)="onTouchStart($event)"
-       (touchmove)="onTouchMove($event)"
-       (touchend)="onTouchEnd()">
-    <div class="units-wrapper">
-      <ng-container *ngFor="let unit of units$ | async; let i = index">
-        <div class="unit-item">
-          <app-unit-card
-            [unit]="unit"
-            [isActive]="activeUnitId === unit.id"
-            (unitSelected)="onUnitSelected($event)">
-          </app-unit-card>
+  <div class="units-outer-container">
+    <div class="units-container"
+         #unitsContainer
+         [class.dragging]="isDragging"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event)"
+         (mouseup)="onMouseUp($event)"
+         (mouseleave)="onMouseLeave()"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd($event)">
+      <div class="units-wrapper">
+        <ng-container *ngFor="let unit of units$ | async; let i = index">
+          <div class="unit-item" 
+               [class.unit-item--active]="activeUnitId === unit.id">
+            <!-- Unit Card -->
+            <app-unit-card
+              [unit]="unit"
+              [isActive]="activeUnitId === unit.id"
+              [attr.data-unit-id]="unit.id"
+              (unitSelected)="onUnitSelected($event)">
+            </app-unit-card>
 
-          <!-- Connector Line -->
-          <div class="connector-line" *ngIf="i < (units$ | async)!.length - 1">
-            <div class="connector-line__progress" 
-                 [style.width.%]="getConnectorProgress(unit, (units$ | async)![i + 1])">
+            <!-- Connector Line -->
+            <div class="connector-line" *ngIf="i < (units$ | async)!.length - 1">
+              <div class="connector-line__progress" 
+                   [style.width.%]="getConnectorProgress(unit, (units$ | async)![i + 1])">
+              </div>
             </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,3 @@
-// units-list.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -13,13 +12,18 @@ import { Unit } from '../../../shared/interfaces/unit';
 })
 export class UnitsListComponent implements OnInit {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef;
-
   units$!: Observable<Unit[]>;
   courseId!: string;
   activeUnitId: string | null = null;
   isDragging = false;
+  dragStarted = false;
   startX = 0;
   scrollLeft = 0;
+  dragThreshold = 5;
+  dragStartTime = Date.now();
+  mouseInitialX = 0;
+  dragSpeedMultiplier = 2.5; // Increase for faster dragging
+  inertiaMultiplier = 200;   // Increase for more momentum after release
 
   constructor(
     private unitsService: UnitsService,
@@ -38,24 +42,122 @@ export class UnitsListComponent implements OnInit {
     }
   }
 
+  onMouseDown(event: MouseEvent): void {
+    if ((event.target as HTMLElement).closest('.unit-item')) {
+      this.dragStarted = true;
+      this.mouseInitialX = event.pageX;
+      this.startX = event.pageX;
+      this.scrollLeft = this.unitsContainer.nativeElement.scrollLeft;
+      this.dragStartTime = Date.now();
+    }
+  }
+
+  onMouseMove(event: MouseEvent): void {
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
+    if (dragDistance > this.dragThreshold) {
+      this.isDragging = true;
+    }
+
+    const walk = (event.pageX - this.startX) * this.dragSpeedMultiplier;
+    this.unitsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+
+  onMouseUp(event: MouseEvent): void {
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
+    const dragDuration = Date.now() - this.dragStartTime;
+
+    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+      const unitElement = (event.target as HTMLElement).closest('[data-unit-id]');
+      if (unitElement) {
+        const unitId = unitElement.getAttribute('data-unit-id');
+        const units = (this.units$ as any).value;
+        const unit = units?.find((u: Unit) => u.id === unitId);
+        if (unit && !unit.isLocked) {
+          this.onUnitSelected(unit);
+        }
+      }
+    } else if (dragDistance > this.dragThreshold) {
+      const speed = dragDistance / dragDuration;
+      const inertiaDistance = speed * this.inertiaMultiplier;
+
+      this.unitsContainer.nativeElement.scrollBy({
+        left: -inertiaDistance,
+        behavior: 'smooth'
+      });
+    }
+
+    this.isDragging = false;
+    this.dragStarted = false;
+  }
+
+  onMouseLeave(): void {
+    if (this.dragStarted) {
+      this.isDragging = false;
+      this.dragStarted = false;
+    }
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    if ((event.target as HTMLElement).closest('.unit-item')) {
+      this.dragStarted = true;
+      this.mouseInitialX = event.touches[0].pageX;
+      this.startX = event.touches[0].pageX;
+      this.scrollLeft = this.unitsContainer.nativeElement.scrollLeft;
+      this.dragStartTime = Date.now();
+    }
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
+    if (dragDistance > this.dragThreshold) {
+      this.isDragging = true;
+    }
+
+    const walk = (event.touches[0].pageX - this.startX) * this.dragSpeedMultiplier;
+    this.unitsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    if (!this.dragStarted) return;
+
+    const touch = event.changedTouches[0];
+    const dragDistance = Math.abs(touch.pageX - this.mouseInitialX);
+    const dragDuration = Date.now() - this.dragStartTime;
+
+    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+      const unitElement = (event.target as HTMLElement).closest('[data-unit-id]');
+      if (unitElement) {
+        const unitId = unitElement.getAttribute('data-unit-id');
+        const units = (this.units$ as any).value;
+        const unit = units?.find((u: Unit) => u.id === unitId);
+        if (unit && !unit.isLocked) {
+          this.onUnitSelected(unit);
+        }
+      }
+    } else if (dragDistance > this.dragThreshold) {
+      const speed = dragDistance / dragDuration;
+      const inertiaDistance = speed * 100;
+
+      this.unitsContainer.nativeElement.scrollBy({
+        left: -inertiaDistance,
+        behavior: 'smooth'
+      });
+    }
+
+    this.isDragging = false;
+    this.dragStarted = false;
+  }
+
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      console.log("hey")
       this.activeUnitId = unit.id;
-      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons'])
-        .then(() => {
-          // Scroll selected unit into view
-          setTimeout(() => {
-            const element = document.getElementById(`unit-${unit.id}`);
-            if (element) {
-              element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
-              });
-            }
-          }, 100);
-        });
+      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons']);
     }
   }
 
@@ -63,46 +165,5 @@ export class UnitsListComponent implements OnInit {
     if (currentUnit.isCompleted) return 100;
     if (nextUnit.isLocked) return 0;
     return (currentUnit.progress || 0) / 2;
-  }
-
-  // Mouse event handlers for dragging
-  onMouseDown(event: MouseEvent): void {
-    this.isDragging = true;
-    this.startX = event.pageX - this.unitsContainer.nativeElement.offsetLeft;
-    this.scrollLeft = this.unitsContainer.nativeElement.scrollLeft;
-  }
-
-  onMouseMove(event: MouseEvent): void {
-    if (!this.isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - this.unitsContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
-    this.unitsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
-  }
-
-  onMouseUp(): void {
-    this.isDragging = false;
-  }
-
-  onMouseLeave(): void {
-    this.isDragging = false;
-  }
-
-  // Touch event handlers for mobile
-  onTouchStart(event: TouchEvent): void {
-    this.isDragging = true;
-    this.startX = event.touches[0].pageX - this.unitsContainer.nativeElement.offsetLeft;
-    this.scrollLeft = this.unitsContainer.nativeElement.scrollLeft;
-  }
-
-  onTouchMove(event: TouchEvent): void {
-    if (!this.isDragging) return;
-    const x = event.touches[0].pageX - this.unitsContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
-    this.unitsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
-  }
-
-  onTouchEnd(): void {
-    this.isDragging = false;
   }
 }
