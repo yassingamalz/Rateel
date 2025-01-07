@@ -1,9 +1,9 @@
-// styles.scss
-@import 'variables';
-@import 'mixins';
-@import 'layouts';
-@import 'components';
-@import 'utils';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+@use 'layouts';
+@use 'components';
+@use 'utils';
 
 // Global styles
 html, body {
@@ -14,5 +14,5 @@ html, body {
 // Override scrollbar for RTL
 [dir='rtl'] {
  scrollbar-width: thin;
- scrollbar-color: map-get($colors, accent, base) transparent;
+ scrollbar-color: map.get(vars.$colors, 'accent', 'base') transparent;
 }

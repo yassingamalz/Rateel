@@ -1,4 +1,6 @@
-// _mixins.scss
+@use "sass:map";
+@use 'variables' as vars;
+
 @mixin card-shadow {
   box-shadow: 0 4px 6px rgba(8, 28, 21, 0.15);
   backdrop-filter: blur(10px);
@@ -13,28 +15,28 @@
 }
 
 @mixin hover-scale {
-  transition: map-get($transitions, transform);
+  transition: map.get(vars.$transitions, 'transform');
   &:hover {
     transform: scale(1.05);
   }
 }
 
 @mixin course-card {
-  background: map-get($colors, primary, gradient);
-  border-radius: map-get($border-radius, lg);
-  padding: map-get($spacing, lg);
+  background: map.get(vars.$colors, 'primary', 'gradient');
+  border-radius: map.get(vars.$border-radius, 'lg');
+  padding: map.get(vars.$spacing, 'lg');
   @include card-shadow;
 }
 
 @mixin icon-wrapper {
   width: 40px;
   height: 40px;
-  border-radius: map-get($border-radius, sm);
+  border-radius: map.get(vars.$border-radius, 'sm');
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(45, 106, 79, 0.2);
-  transition: map-get($transitions, base);
+  transition: map.get(vars.$transitions, 'base');
 }
 
 @mixin rtl-support {

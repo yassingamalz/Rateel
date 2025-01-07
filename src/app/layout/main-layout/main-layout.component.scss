@@ -1,14 +1,14 @@
-// main-layout.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 .main-layout {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
-    map-get($colors, primary, base),
-    map-get($colors, primary, dark)
+    map.get(vars.$colors, 'primary', 'base'),
+    map.get(vars.$colors, 'primary', 'dark')
   );
 }
 
@@ -18,8 +18,8 @@
   overflow-x: hidden;
   transition: transform 0.3s ease;
   
-  @include card-shadow;
-  @include rtl-support {
+  @include mix.card-shadow;
+  @include mix.rtl-support {
     margin-right: 3rem;
   }
 }

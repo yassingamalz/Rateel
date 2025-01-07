@@ -1,10 +1,10 @@
-// courses-list.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins';
 
 .courses-page {
     min-height: 100vh;
-    padding: map-get($spacing, lg);
+    padding: map.get(vars.$spacing, 'lg');
     overflow-x: hidden;
     position: relative;
     isolation: isolate;
@@ -15,8 +15,8 @@
         position: fixed;
         inset: 0;
         background: linear-gradient(135deg,
-            #{map-get($colors, primary, dark)} 0%,
-            #{map-get($colors, primary, base)} 100%);
+            #{map.get(vars.$colors, 'primary', 'dark')} 0%,
+            #{map.get(vars.$colors, 'primary', 'base')} 100%);
         z-index: -3;
     }
 }
@@ -40,7 +40,7 @@
             animation: flowMove1 25s infinite alternate ease-in-out;
 
             path {
-                fill: #{rgba(map-get($colors, secondary, teal), 0.15)};
+                fill: rgba(map.get(vars.$colors, 'primary', 'base'), 0.15);
             }
         }
 
@@ -50,7 +50,7 @@
             animation: flowMove2 20s infinite alternate-reverse ease-in-out;
 
             path {
-                fill: #{rgba(map-get($colors, accent, base), 0.1)};
+                fill: #{rgba(map.get(vars.$colors, 'accent', 'base'), 0.1)};
             }
         }
 
@@ -60,7 +60,7 @@
             animation: flowMove3 30s infinite alternate ease-in-out;
 
             path {
-                fill: #{rgba(map-get($colors, primary, light), 0.1)};
+                fill: #{rgba(map.get(vars.$colors, 'primary', 'light'), 0.1)};
             }
         }
     }
@@ -85,7 +85,7 @@
     .icon {
         position: absolute;
         opacity: 0.1;
-        color: #{map-get($colors, accent, base)};
+        color: #{map.get(vars.$colors, 'accent', 'base')};
         font-size: 5rem;
         
         &--1 {
@@ -113,7 +113,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: map-get($spacing, xl);
+    gap: map.get(vars.$spacing, 'xl');
     z-index: 1;
 }
 
@@ -121,9 +121,9 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     position: relative;
-    padding: map-get($spacing, xl) map-get($spacing, lg);
+    padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
 
     &::before {
         content: '';
@@ -133,7 +133,7 @@
         width: 300px;
         height: 300px;
         background: radial-gradient(circle at center,
-            #{rgba(map-get($colors, accent, base), 0.1)} 0%,
+            #{rgba(map.get(vars.$colors, 'accent', 'base'), 0.1)} 0%,
             transparent 70%);
         transform: translate(-50%, -50%);
         filter: blur(40px);
@@ -144,40 +144,40 @@
 .path-title {
     font-size: 2.5rem;
     font-weight: 600;
-    margin-bottom: map-get($spacing, sm);
-    color: map-get($colors, text, light);
+    margin-bottom: map.get(vars.$spacing, 'sm');
+    color: map.get(vars.$colors, 'text', 'light');
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .path-subtitle {
     font-size: 1.25rem;
-    color: map-get($colors, text, muted);
-    margin-bottom: map-get($spacing, lg);
+    color: map.get(vars.$colors, 'text', 'muted');
+    margin-bottom: map.get(vars.$spacing, 'lg');
 }
 
 .path-options {
     display: flex;
     justify-content: center;
-    gap: map-get($spacing, lg);
-    margin-top: map-get($spacing, xl);
+    gap: map.get(vars.$spacing, 'lg');
+    margin-top: map.get(vars.$spacing, 'xl');
 }
 
 .path-option {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, sm);
-    padding: map-get($spacing, md) map-get($spacing, lg);
+    gap: map.get(vars.$spacing, 'sm');
+    padding: map.get(vars.$spacing, 'md') map.get(vars.$spacing, 'lg');
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #{rgba(map-get($colors, accent, base), 0.2)};
-    border-radius: map-get($border-radius, full);
+    border: 1px solid #{rgba(map.get(vars.$colors, 'accent', 'base'), 0.2)};
+    border-radius: map.get(vars.$border-radius, 'full');
     font-size: 1rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 
     &:hover {
         transform: translateY(-2px);
-        background: #{rgba(map-get($colors, accent, base), 0.1)};
-        border-color: #{rgba(map-get($colors, accent, base), 0.4)};
+        background: #{rgba(map.get(vars.$colors, 'accent', 'base'), 0.1)};
+        border-color: #{rgba(map.get(vars.$colors, 'accent', 'base'), 0.4)};
 
         i {
             transform: scale(1.1);
@@ -185,11 +185,10 @@
     }
 
     i {
-        color: map-get($colors, accent, base);
-        font-size: map-get($font-size, base);
-        ;
+        color: map.get(vars.$colors, 'accent', 'base');
+        font-size: map.get(vars.$font-size, 'base');
         transition: transform 0.3s ease;
-        margin-left: map-get($spacing, sm);
+        margin-left: map.get(vars.$spacing, 'sm');
     }
 }
 
@@ -197,7 +196,7 @@
     position: relative;
     overflow-x: auto;
     overflow-y: visible;
-    padding: map-get($spacing, xl) 0;
+    padding: map.get(vars.$spacing, 'xl') 0;
     cursor: grab;
 
     &.dragging {
@@ -214,8 +213,8 @@
 
 .courses-wrapper {
     display: flex;
-    gap: map-get($spacing,xxl );
-    padding: map-get($spacing, xl) map-get($spacing, lg);
+    gap: map.get(vars.$spacing, 'xxl');
+    padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
     margin: 0 auto;
     max-width: fit-content;
     padding-right: calc(50vw - 200px);
@@ -225,10 +224,10 @@
         content: '';
         position: absolute;
         top: 50%;
-        left: map-get($spacing, xl);
-        right: map-get($spacing, xl);
+        left: map.get(vars.$spacing, 'xl');
+        right: map.get(vars.$spacing, 'xl');
         height: 4px;
-        background: rgba(map-get($colors, accent, base), 0.1);
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
         transform: translateY(-50%);
         z-index: 0;
       }
@@ -252,7 +251,7 @@
       right: -8px;
       width: 16px;
       height: 16px;
-      background: rgba(map-get($colors, accent, base), 0.2);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
       border-radius: 50%;
       transform: translateY(-50%);
       z-index: 2;
@@ -267,7 +266,7 @@
       left: -8px;
       width: 16px;
       height: 16px;
-      background: rgba(map-get($colors, accent, base), 0.2);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
       border-radius: 50%;
       transform: translateY(-50%);
       z-index: 2;
@@ -278,10 +277,10 @@
     .connector-line {
       position: absolute;
       top: 50%;
-      right: -#{map-get($spacing, xl)};
-      width: map-get($spacing, xl);
+      right: -#{map.get(vars.$spacing, 'xl')};
+      width: map.get(vars.$spacing, 'xl');
       height: 3px;
-      background: rgba(map-get($colors, accent, base), 0.1);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
       transform: translateY(-50%);
       z-index: 1;
     }
@@ -295,13 +294,13 @@
     &--completed {
       &::before,
       &::after {
-        background: map-get($colors, accent, base);
-        box-shadow: 0 0 10px rgba(map-get($colors, accent, base), 0.4);
+        background: map.get(vars.$colors, 'accent', 'base');
+        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
       }
   
       .connector-line {
-        background: map-get($colors, accent, base);
-        box-shadow: 0 0 10px rgba(map-get($colors, accent, base), 0.3);
+        background: map.get(vars.$colors, 'accent', 'base');
+        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
       }
     }
   
@@ -313,7 +312,7 @@
   
       &::before,
       &::after {
-        background: map-get($colors, accent, light);
+        background: map.get(vars.$colors, 'accent', 'light');
         transform: translateY(-50%) scale(1.2);
       }
     }
@@ -356,7 +355,6 @@
 }
 
 @keyframes floatIcon {
-
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg);

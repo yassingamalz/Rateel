@@ -1,9 +1,11 @@
-// _layouts.scss
+@use "sass:map";
+@use 'variables' as vars;
+
 .main-container {
     direction: rtl;
     background: linear-gradient(to bottom right, 
-      map-get($colors, primary, base),
-      map-get($colors, primary, dark)
+      map.get(vars.$colors, 'primary', 'base'),
+      map.get(vars.$colors, 'primary', 'dark')
     );
     min-height: 100vh;
-   }
+}

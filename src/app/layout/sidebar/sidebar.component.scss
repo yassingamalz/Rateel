@@ -1,6 +1,6 @@
-// sidebar.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 .sidebar {
   position: fixed;
@@ -10,8 +10,8 @@
   width: 320px;
   background: linear-gradient(
     to bottom,
-    map-get($colors, primary, base),
-    map-get($colors, primary, dark)
+    map.get(vars.$colors, 'primary', 'base'),
+    map.get(vars.$colors, 'primary', 'dark')
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -32,8 +32,8 @@
     bottom: 0;
     background: linear-gradient(
       to bottom,
-      map-get($colors, primary, base),
-      map-get($colors, primary, dark)
+      map.get(vars.$colors, 'primary', 'base'),
+      map.get(vars.$colors, 'primary', 'dark')
     );
     z-index: -1;
   }
@@ -57,39 +57,39 @@
         transform: none;
         .sidebar__menu-item-icon {
           transform: scale(1.1);
-          box-shadow: 0 0 20px rgba(map-get($colors, accent, base), 0.3);
+          box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
         }
       }
     }
   }
 
   &__header {
-    height: map-get($spacing, xl) * 4;
+    height: map.get(vars.$spacing, 'xl') * 4;
     display: flex;
     align-items: center;
-    padding: 0 map-get($spacing, lg);
+    padding: 0 map.get(vars.$spacing, 'lg');
     justify-content: flex-end;
-    border-bottom: 1px solid rgba(map-get($colors, accent, base), 0.1);
+    border-bottom: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
   }
 
   &__toggle {
-    @include icon-wrapper;
+    @include mix.icon-wrapper;
     background: transparent;
     border: none;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     cursor: pointer;
     
     &:hover {
-      background: rgba(map-get($colors, accent, base), 0.2);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
     }
   }
 
   &__menu {
     display: flex;
     flex-direction: column;
-    gap: map-get($spacing, sm);
-    padding: map-get($spacing, md);
-    margin-top: map-get($spacing, lg);
+    gap: map.get(vars.$spacing, 'sm');
+    padding: map.get(vars.$spacing, 'md');
+    margin-top: map.get(vars.$spacing, 'lg');
     overflow-y: auto;
   }
 
@@ -98,31 +98,31 @@
     align-items: center;
     justify-content: space-between;
     min-height: 64px;
-    padding: map-get($spacing, sm) map-get($spacing, md);
-    color: map-get($colors, text, light);
+    padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
+    color: map.get(vars.$colors, 'text', 'light');
     text-decoration: none;
-    border-radius: map-get($border-radius, lg);
+    border-radius: map.get(vars.$border-radius, 'lg');
     background: rgba(255, 255, 255, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
-      background: rgba(map-get($colors, accent, base), 0.1);
-      transform: translateX(map-get($spacing, xs) * -2);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+      transform: translateX(map.get(vars.$spacing, 'xs') * -2);
       
       .sidebar__menu-item-icon {
-        background: rgba(map-get($colors, accent, base), 0.2);
-        box-shadow: 0 0 15px rgba(map-get($colors, accent, base), 0.3);
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        box-shadow: 0 0 15px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
       }
     }
 
     &--active {
-      background: rgba(map-get($colors, accent, base), 0.15);
-      border: 1px solid rgba(map-get($colors, accent, base), 0.3);
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.15);
+      border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
       
       .sidebar__menu-item-icon {
-        background: map-get($colors, accent, base);
-        color: map-get($colors, text, dark);
-        box-shadow: 0 0 20px rgba(map-get($colors, accent, base), 0.4);
+        background: map.get(vars.$colors, 'accent', 'base');
+        color: map.get(vars.$colors, 'text', 'dark');
+        box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
       }
     }
   }
@@ -131,19 +131,19 @@
     font-family: 'Cairo', sans-serif;
     font-size: 1.125rem;
     font-weight: 500;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     flex: 1;
   }
 
   &__menu-item-icon {
     width: 40px;
     height: 40px;
-    border-radius: map-get($border-radius, md);
+    border-radius: map.get(vars.$border-radius, 'md');
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 1.25rem;
     position: relative;
@@ -158,13 +158,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: map-get($colors, accent, base);
-    color: map-get($colors, text, dark);
-    padding: map-get($spacing, xs) map-get($spacing, sm);
-    border-radius: map-get($border-radius, full);
+    background: map.get(vars.$colors, 'accent', 'base');
+    color: map.get(vars.$colors, 'text', 'dark');
+    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+    border-radius: map.get(vars.$border-radius, 'full');
     font-size: 0.875rem;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(map-get($colors, accent, base), 0.3);
+    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
   }
 }
 

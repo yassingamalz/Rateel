@@ -1,33 +1,33 @@
-// src/app/features/units/unit-details/lessons/lessons-list.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 .lessons-page {
-  padding: map-get($spacing, lg);
+  padding: map.get(vars.$spacing, 'lg');
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
-    map-get($colors, primary, base),
-    map-get($colors, primary, dark)
+    map.get(vars.$colors, 'primary', 'base'),
+    map.get(vars.$colors, 'primary', 'dark')
   );
 }
 
 .lessons-header {
-  margin-bottom: map-get($spacing, xl);
+  margin-bottom: map.get(vars.$spacing, 'xl');
   
   .header-content {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, md);
+    gap: map.get(vars.$spacing, 'md');
   }
   
   .back-button {
-    @include glass-effect;
+    @include mix.glass-effect;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: none;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -41,14 +41,14 @@
   .page-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
   }
 }
 
 .lessons-container {
   overflow-x: auto;
   overflow-y: hidden;
-  padding: map-get($spacing, xl) map-get($spacing, lg);
+  padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
   cursor: grab;
   
   &.dragging {
@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   min-width: max-content;
-  padding: map-get($spacing, lg) 0;
+  padding: map.get(vars.$spacing, 'lg') 0;
 }
 
 .lesson-circle {
@@ -80,19 +80,19 @@
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  @include glass-effect;
+  @include mix.glass-effect;
   
   &:hover:not(&--locked) {
     transform: scale(1.05);
   }
   
   &--completed {
-    background: rgba(map-get($colors, accent, base), 0.2);
-    border: 2px solid map-get($colors, accent, base);
+    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+    border: 2px solid map.get(vars.$colors, 'accent', 'base');
     
     .icon-wrapper {
-      background: map-get($colors, accent, base);
-      color: map-get($colors, text, dark);
+      background: map.get(vars.$colors, 'accent', 'base');
+      color: map.get(vars.$colors, 'text', 'dark');
     }
   }
   
@@ -107,8 +107,8 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: map-get($colors, accent, base);
-  color: map-get($colors, text, dark);
+  background: map.get(vars.$colors, 'accent', 'base');
+  color: map.get(vars.$colors, 'text', 'dark');
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -130,7 +130,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: map-get($colors, text, light);
+  color: map.get(vars.$colors, 'text', 'light');
   transition: all 0.3s ease;
 }
 
@@ -142,14 +142,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: map-get($colors, text, muted);
+  color: map.get(vars.$colors, 'text', 'muted');
 }
 
 .lesson-title {
   font-size: 0.875rem;
-  color: map-get($colors, text, light);
+  color: map.get(vars.$colors, 'text', 'light');
   text-align: center;
-  margin-top: map-get($spacing, sm);
+  margin-top: map.get(vars.$spacing, 'sm');
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -159,8 +159,8 @@
 .connector-line {
   width: 60px;
   height: 2px;
-  background: rgba(map-get($colors, accent, base), 0.3);
-  margin: 0 map-get($spacing, sm);
+  background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+  margin: 0 map.get(vars.$spacing, 'sm');
 }
 
 .progress-indicator {
@@ -170,10 +170,10 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: map-get($colors, accent, base);
+  background: map.get(vars.$colors, 'accent', 'base');
   display: flex;
   align-items: center;
   justify-content: center;
-  color: map-get($colors, text, dark);
+  color: map.get(vars.$colors, 'text', 'dark');
   font-size: 0.75rem;
 }

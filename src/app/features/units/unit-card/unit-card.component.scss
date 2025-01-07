@@ -1,6 +1,6 @@
-// unit-card.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 .unit-card {
   position: relative;
@@ -14,7 +14,7 @@
     position: absolute;
     inset: -20px;
     background: radial-gradient(circle at center,
-        rgba(map-get($colors, accent, glow), 0.1) 0%,
+        rgba(map.get(vars.$colors, 'accent', 'glow'), 0.1) 0%,
         transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -31,17 +31,17 @@
     &__circle {
       &--backdrop {
         stroke: rgba(255, 255, 255, 0.03);
-        fill: rgba(map-get($colors, primary, dark), 0.3);
+        fill: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.3);
       }
 
       &--bg {
-        stroke: rgba(map-get($colors, accent, base), 0.1);
+        stroke: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
         fill: none;
-        filter: drop-shadow(0 0 2px rgba(map-get($colors, accent, base), 0.2));
+        filter: drop-shadow(0 0 2px rgba(map.get(vars.$colors, 'accent', 'base'), 0.2));
       }
 
       &--progress {
-        stroke: map-get($colors, accent, base);
+        stroke: map.get(vars.$colors, 'accent', 'base');
         fill: none;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         stroke-linecap: round;
@@ -57,7 +57,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: map-get($spacing, md);
+    padding: map.get(vars.$spacing, 'md');
   }
 
   // Icon Styles
@@ -71,7 +71,7 @@
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    border: 2px solid rgba(map-get($colors, accent, base), 0.2);
+    border: 2px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s ease;
@@ -103,15 +103,15 @@
 
     i {
       font-size: 2.5rem;
-      color: map-get($colors, text, light);
+      color: map.get(vars.$colors, 'text', 'light');
       transition: all 0.3s ease;
     }
 
     &--completed {
-      background: map-get($colors, accent, base);
+      background: map.get(vars.$colors, 'accent', 'base');
 
       i {
-        color: map-get($colors, text, dark);
+        color: map.get(vars.$colors, 'text', 'dark');
       }
     }
 
@@ -136,7 +136,7 @@
 
     i {
       font-size: 1.5rem;
-      color: map-get($colors, text, muted);
+      color: map.get(vars.$colors, 'text', 'muted');
     }
   }
 
@@ -144,8 +144,8 @@
   &__title {
     font-size: 1rem;
     font-weight: 500;
-    color: map-get($colors, text, light);
-    margin-top: map-get($spacing, sm);
+    color: map.get(vars.$colors, 'text', 'light');
+    margin-top: map.get(vars.$spacing, 'sm');
     max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -158,13 +158,13 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: map-get($colors, accent, base);
-    color: map-get($colors, text, dark);
-    padding: map-get($spacing, xs) map-get($spacing, sm);
-    border-radius: map-get($border-radius, full);
+    background: map.get(vars.$colors, 'accent', 'base');
+    color: map.get(vars.$colors, 'text', 'dark');
+    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+    border-radius: map.get(vars.$border-radius, 'full');
     font-size: 0.875rem;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(map-get($colors, accent, base), 0.3);
+    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
   }
 
   // Completion Check
@@ -175,18 +175,18 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: map-get($colors, accent, base);
+    background: map.get(vars.$colors, 'accent', 'base');
     display: flex;
     align-items: center;
     justify-content: center;
-    color: map-get($colors, text, dark);
-    box-shadow: 0 2px 8px rgba(map-get($colors, accent, base), 0.3);
+    color: map.get(vars.$colors, 'text', 'dark');
+    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
 
     &-pulse {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      border: 2px solid map-get($colors, accent, base);
+      border: 2px solid map.get(vars.$colors, 'accent', 'base');
       animation: pulse 2s infinite;
     }
 
@@ -201,16 +201,16 @@
     font-size: 1.125rem;
     font-weight: 500;
     text-align: center;
-    margin-top: map-get($spacing, sm);
+    margin-top: map.get(vars.$spacing, 'sm');
 
     &-gradient {
       background: linear-gradient(to right,
-          map-get($colors, text, light),
-          map-get($colors, text, muted));
+          map.get(vars.$colors, 'text', 'light'),
+          map.get(vars.$colors, 'text', 'muted'));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      padding: 0 map-get($spacing, xs);
+      padding: 0 map.get(vars.$spacing, 'xs');
       max-width: 140px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -225,13 +225,13 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: map-get($colors, accent, base);
-    color: map-get($colors, text, dark);
-    padding: map-get($spacing, xs) map-get($spacing, sm);
-    border-radius: map-get($border-radius, full);
+    background: map.get(vars.$colors, 'accent', 'base');
+    color: map.get(vars.$colors, 'text', 'dark');
+    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+    border-radius: map.get(vars.$border-radius, 'full');
     font-size: 0.875rem;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(map-get($colors, accent, base), 0.3);
+    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
     overflow: hidden;
 
     &-shine {
@@ -277,8 +277,8 @@
 
     &:not(.unit-card--not-started) {
       .progress-ring__circle--progress {
-        stroke: map-get($colors, accent, light);
-        filter: drop-shadow(0 0 4px rgba(map-get($colors, accent, base), 0.4));
+        stroke: map.get(vars.$colors, 'accent', 'light');
+        filter: drop-shadow(0 0 4px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4));
       }
     }
   }
@@ -294,21 +294,21 @@
 
   &--active:not(.unit-card--not-started) {
     .progress-ring__circle--progress {
-      stroke: map-get($colors, accent, bright);
-      filter: drop-shadow(0 0 6px rgba(map-get($colors, accent, base), 0.5));
+      stroke: map.get(vars.$colors, 'accent', 'bright');
+      filter: drop-shadow(0 0 6px rgba(map.get(vars.$colors, 'accent', 'base'), 0.5));
     }
   }
 
   &--completed {
     .progress-ring__circle--progress {
-      stroke: map-get($colors, accent, base);
+      stroke: map.get(vars.$colors, 'accent', 'base');
     }
 
     .unit-card__icon {
-      background: map-get($colors, accent, base);
+      background: map.get(vars.$colors, 'accent', 'base');
 
       i {
-        color: map-get($colors, text, dark);
+        color: map.get(vars.$colors, 'text', 'dark');
       }
     }
   }
@@ -366,11 +366,6 @@
     &__check {
       right: auto;
       left: -8px;
-    }
-
-    &__title {
-      background: map-get($colors, text, light),
-
     }
   }
 }

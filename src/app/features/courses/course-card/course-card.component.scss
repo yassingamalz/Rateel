@@ -1,11 +1,11 @@
-// course-card.component.scss
-@import 'variables';
-@import 'mixins';
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins';
 
 .course-card {
   position: relative;
   height: 280px;
-  border-radius: map-get($border-radius, lg);
+  border-radius: map.get(vars.$border-radius, 'lg');
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -14,12 +14,12 @@
     transform: translateY(-5px);
     
     .course-card__overlay {
-      background-color: rgba(map-get($colors, primary, dark), 0.8);
+      background-color: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.8);
     }
     
     .course-card__play {
       transform: scale(1.1);
-      background: rgba(map-get($colors, accent, muted), 0.3);
+      background: rgba(map.get(vars.$colors, 'accent', 'muted'), 0.3);
     }
   }
   
@@ -48,7 +48,7 @@
   &__abstract-bg {
     position: absolute;
     inset: 0;
-    background: rgba(map-get($colors, primary, base), 0.2);
+    background: rgba(map.get(vars.$colors, 'primary', 'base'), 0.2);
     backdrop-filter: blur(10px);
   }
 
@@ -77,8 +77,8 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(map-get($colors, primary, dark), 0.5),
-      rgba(map-get($colors, primary, base), 0.8)
+      rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5),
+      rgba(map.get(vars.$colors, 'primary', 'base'), 0.8)
     );
     transition: background-color 0.3s ease;
   }
@@ -87,7 +87,7 @@
   &__content {
     position: relative;
     height: 85%;
-    padding: map-get($spacing, lg);
+    padding: map.get(vars.$spacing, 'lg');
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -97,12 +97,12 @@
     font-family: 'Cairo', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    color: map-get($colors, text, light);
-    margin-bottom: map-get($spacing, sm);
+    color: map.get(vars.$colors, 'text', 'light');
+    margin-bottom: map.get(vars.$spacing, 'sm');
   }
 
   &__description {
-    color: map-get($colors, text, muted);
+    color: map.get(vars.$colors, 'text', 'muted');
     font-size: 1rem;
     line-height: 1.5;
     display: -webkit-box;
@@ -115,15 +115,15 @@
   // Achievement Badge
   &__achievement {
     position: absolute;
-    top: map-get($spacing, md);
-    left: map-get($spacing, md);
+    top: map.get(vars.$spacing, 'md');
+    left: map.get(vars.$spacing, 'md');
     display: flex;
     align-items: center;
-    gap: map-get($spacing, xs);
-    padding: map-get($spacing, xs) map-get($spacing, sm);
-    background: rgba(map-get($colors, accent, base), 0.2);
-    border-radius: map-get($border-radius, full);
-    color: map-get($colors, accent, light);
+    gap: map.get(vars.$spacing, 'xs');
+    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+    border-radius: map.get(vars.$border-radius, 'full');
+    color: map.get(vars.$colors, 'accent', 'light');
     font-size: 0.875rem;
     
     i {
@@ -134,8 +134,8 @@
   // Lock Badge
   &__lock-badge {
     position: absolute;
-    top: map-get($spacing, md);
-    right: map-get($spacing, md);
+    top: map.get(vars.$spacing, 'md');
+    right: map.get(vars.$spacing, 'md');
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -143,7 +143,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: map-get($colors, text, muted);
+    color: map.get(vars.$colors, 'text', 'muted');
   }
 
   // Footer Elements
@@ -161,20 +161,20 @@
   .progress-bar {
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: map-get($border-radius, full);
+    border-radius: map.get(vars.$border-radius, 'full');
     overflow: hidden;
-    margin-bottom: map-get($spacing, xs);
+    margin-bottom: map.get(vars.$spacing, 'xs');
     
     &__fill {
       height: 100%;
-      background: map-get($colors, accent, base);
+      background: map.get(vars.$colors, 'accent', 'base');
       border-radius: inherit;
       transition: width 0.3s ease;
     }
     
     &__text {
       font-size: 0.875rem;
-      color: map-get($colors, text, muted);
+      color: map.get(vars.$colors, 'text', 'muted');
     }
   }
 
@@ -186,7 +186,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: map-get($colors, text, light);
+    color: map.get(vars.$colors, 'text', 'light');
     transition: all 0.3s ease;
     
     i {
