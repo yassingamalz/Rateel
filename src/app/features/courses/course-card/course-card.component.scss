@@ -9,14 +9,17 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  direction: rtl;
   
-  @include glass-effect;
-  
-  &:hover {
+  &:hover:not(&--locked) {
     transform: translateY(-5px);
+    
     .course-card__overlay {
-      background-color: rgba(map-get($colors, primary, dark), 0.7);
+      background-color: rgba(map-get($colors, primary, dark), 0.8);
+    }
+    
+    .course-card__play {
+      transform: scale(1.1);
+      background: rgba(map-get($colors, accent, base), 0.3);
     }
   }
   
@@ -28,10 +31,12 @@
       transform: none;
     }
   }
-  
+
+  // Background Styles
   &__background {
     position: absolute;
     inset: 0;
+    overflow: hidden;
     
     img {
       width: 100%;
@@ -39,7 +44,34 @@
       object-fit: cover;
     }
   }
-  
+
+  &__abstract-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(map-get($colors, primary, base), 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  &__abstract-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    
+    &--1 {
+      width: 16rem;
+      height: 16rem;
+      top: -4rem;
+      right: -4rem;
+    }
+    
+    &--2 {
+      width: 12rem;
+      height: 12rem;
+      bottom: -2rem;
+      left: -2rem;
+    }
+  }
+
   &__overlay {
     position: absolute;
     inset: 0;
@@ -50,20 +82,17 @@
     );
     transition: background-color 0.3s ease;
   }
-  
+
+  // Content Styles
   &__content {
     position: relative;
-    height: 100%;
+    height: 85%;
     padding: map-get($spacing, lg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  
-  &__header {
-    flex: 1;
-  }
-  
+
   &__title {
     font-family: 'Cairo', sans-serif;
     font-size: 1.5rem;
@@ -71,69 +100,97 @@
     color: map-get($colors, text, light);
     margin-bottom: map-get($spacing, sm);
   }
-  
+
   &__description {
     color: map-get($colors, text, muted);
     font-size: 1rem;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  
+
+  // Achievement Badge
+  &__achievement {
+    position: absolute;
+    top: map-get($spacing, md);
+    left: map-get($spacing, md);
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, xs);
+    padding: map-get($spacing, xs) map-get($spacing, sm);
+    background: rgba(map-get($colors, accent, base), 0.2);
+    border-radius: map-get($border-radius, full);
+    color: map-get($colors, accent, light);
+    font-size: 0.875rem;
+    
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  // Lock Badge
+  &__lock-badge {
+    position: absolute;
+    top: map-get($spacing, md);
+    right: map-get($spacing, md);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, text, muted);
+  }
+
+  // Footer Elements
   &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
-  &__status {
+
+  &__progress {
     flex: 1;
+    max-width: 200px;
   }
-  
-  &__lock {
-    display: flex;
-    align-items: center;
-    gap: map-get($spacing, xs);
-    color: map-get($colors, text, muted);
+
+  .progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: map-get($border-radius, full);
+    overflow: hidden;
+    margin-bottom: map-get($spacing, xs);
     
-    i {
-      font-size: 1.25rem;
+    &__fill {
+      height: 100%;
+      background: map-get($colors, accent, base);
+      border-radius: inherit;
+      transition: width 0.3s ease;
+    }
+    
+    &__text {
+      font-size: 0.875rem;
+      color: map-get($colors, text, muted);
     }
   }
-}
 
-.progress-bar {
-  width: 100%;
-  max-width: 200px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: map-get($border-radius, full);
-  overflow: hidden;
-  margin-bottom: map-get($spacing, xs);
-  
-  &__fill {
-    height: 100%;
-    background: map-get($colors, accent, base);
-    border-radius: inherit;
-    transition: width 0.3s ease;
-  }
-  
-  &__text {
-    font-size: 0.875rem;
-    color: map-get($colors, text, muted);
-  }
-}
-
-.course-card__badge {
-  display: flex;
-  align-items: center;
-  gap: map-get($spacing, xs);
-  padding: map-get($spacing, xs) map-get($spacing, sm);
-  background: rgba(map-get($colors, accent, base), 0.2);
-  border-radius: map-get($border-radius, full);
-  color: map-get($colors, accent, light);
-  font-size: 0.875rem;
-  font-weight: 500;
-  
-  i {
-    font-size: 1rem;
+  &__play {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, text, light);
+    transition: all 0.3s ease;
+    
+    i {
+      font-size: 1rem;
+    }
   }
 }

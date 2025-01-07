@@ -2,40 +2,116 @@
 @import 'variables';
 @import 'mixins';
 
-.courses-section {
-  padding: map-get($spacing, lg);
+.courses-page {
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
     map-get($colors, primary, base),
     map-get($colors, primary, dark)
   );
+  padding: map-get($spacing, lg);
+  overflow-x: hidden;
+}
+
+.courses-header {
+  margin-bottom: map-get($spacing, xl);
+  
+  .page-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: map-get($colors, text, light);
+    margin-bottom: map-get($spacing, md);
+  }
+}
+
+.courses-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: map-get($spacing, xl);
+}
+
+.path-info {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: map-get($colors, text, light);
+  
+  .path-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: map-get($spacing, lg);
+  }
+  
+  .path-options {
+    display: flex;
+    justify-content: center;
+    gap: map-get($spacing, lg);
+  }
+  
+  .path-option {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, sm);
+    padding: map-get($spacing, sm) map-get($spacing, lg);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: map-get($border-radius, full);
+    font-size: 0.875rem;
+    
+    i {
+      color: map-get($colors, accent, base);
+    }
+  }
 }
 
 .courses-container {
-  max-width: 1200px;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: map-get($spacing, xl) map-get($spacing, lg);
+  cursor: grab;
+  
+  &.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Custom scrollbar for Firefox
+  scrollbar-width: none;
+}
+
+.courses-wrapper {
+  display: flex;
+  gap: map-get($spacing, xl);
+  padding: map-get($spacing, xl) map-get($spacing, lg);
   margin: 0 auto;
-  padding: map-get($spacing, lg) 0;
+  max-width: fit-content;
+  
+  // Center the cards and allow for partial visibility
+  padding-right: calc(50vw - 200px);
+  padding-left: calc(50vw - 200px);
 }
 
-.swiper-container {
-  padding: map-get($spacing, lg) map-get($spacing, md);
-  overflow: visible;
+.course-item {
+  flex: 0 0 400px; // Fixed width for cards
+  max-width: 400px;
+  opacity: 0.7;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-// Swiper overrides for RTL support
-[dir='rtl'] {
-  .swiper-container {
-    direction: rtl;
-  }
-  
-  .swiper-button-next {
-    right: auto;
-    left: 10px;
-  }
-  
-  .swiper-button-prev {
-    left: auto;
-    right: 10px;
-  }
+// Center card emphasis
+.course-item:nth-child(2) {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
 }

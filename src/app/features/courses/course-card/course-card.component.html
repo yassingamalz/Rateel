@@ -3,48 +3,61 @@
      [class.course-card--locked]="course.isLocked"
      [class.course-card--completed]="course.progress === 100"
      (click)="onCardClick()"
-     [@cardAnimation]>
+     [@cardAnimation]
+     dir="rtl">
      
-  <!-- Background Image with Overlay -->
+  <!-- Abstract Background when no image -->
   <div class="course-card__background">
-    <img [src]="course.imageSrc || 'assets/default-course.jpg'" [alt]="course.title">
+    <ng-container *ngIf="!course.imageSrc">
+      <div class="course-card__abstract-bg"></div>
+      <div class="course-card__abstract-circle course-card__abstract-circle--1"></div>
+      <div class="course-card__abstract-circle course-card__abstract-circle--2"></div>
+    </ng-container>
+    
+    <ng-container *ngIf="course.imageSrc">
+      <img [src]="course.imageSrc" [alt]="course.title">
+    </ng-container>
+    
     <div class="course-card__overlay"></div>
   </div>
 
   <!-- Content -->
   <div class="course-card__content">
+    <!-- Header -->
     <div class="course-card__header">
       <h3 class="course-card__title">{{ course.title }}</h3>
       <p class="course-card__description">{{ course.description }}</p>
     </div>
 
-    <div class="course-card__footer">
-      <div class="course-card__status">
-        <ng-container *ngIf="course.isLocked">
-          <div class="course-card__lock">
-            <i class="fas fa-lock"></i>
-            <span>Locked</span>
-          </div>
-        </ng-container>
+    <!-- Lock Badge -->
+    <div class="course-card__lock-badge" *ngIf="course.isLocked">
+      <i class="fas fa-lock"></i>
+    </div>
 
-        <ng-container *ngIf="!course.isLocked && course.progress !== undefined">
-          <div class="course-card__progress">
-            <div class="progress-bar">
-              <div class="progress-bar__fill" 
-                   [style.width.%]="course.progress">
-              </div>
-            </div>
-            <span class="progress-bar__text">{{ course.progress }}%</span>
+    <!-- Achievement Badge -->
+    <div class="course-card__achievement" *ngIf="course.badge">
+      <i class="fas" 
+         [class.fa-star]="course.badge.type === 'achievement'"
+         [class.fa-medal]="course.badge.type === 'progress'">
+      </i>
+      <span>{{ course.badge.value }}</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="course-card__footer">
+      <!-- Progress Section -->
+      <div class="course-card__progress" *ngIf="!course.isLocked && course.progress !== undefined">
+        <div class="progress-bar">
+          <div class="progress-bar__fill" 
+               [style.width.%]="course.progress">
           </div>
-        </ng-container>
+        </div>
+        <span class="progress-bar__text">{{ course.progress }}%</span>
       </div>
 
-      <div class="course-card__badge" *ngIf="course.badge">
-        <i class="fas" 
-           [class.fa-star]="course.badge.type === 'achievement'"
-           [class.fa-medal]="course.badge.type === 'progress'">
-        </i>
-        <span>{{ course.badge.value }}</span>
+      <!-- Play Button -->
+      <div class="course-card__play" *ngIf="!course.isLocked">
+        <i class="fas fa-play"></i>
       </div>
     </div>
   </div>

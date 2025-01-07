@@ -1,16 +1,40 @@
 <!-- courses-list.component.html -->
-<section class="courses-section" dir="rtl">
-    <div class="courses-container">
-      <div class="swiper-container" #swiperContainer>
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" *ngFor="let course of courses$ | async">
-            <app-course-card
-              [course]="course"
-              (courseSelected)="onCourseSelected($event)">
-            </app-course-card>
+<div class="courses-page" dir="rtl">
+    <div class="courses-header">
+      <h1 class="page-title">المسارات التعليمية</h1>
+    </div>
+  
+    <div class="courses-layout">
+      <!-- Path Info Section -->
+      <div class="path-info">
+        <h2 class="path-title">ما هو المسار المناسب لك؟</h2>
+        <div class="path-options">
+          <div class="path-option" *ngFor="let option of ['المبتدئ', 'المتوسط', 'المتقدم']">
+            <i class="fas fa-check-circle"></i>
+            <span>{{ option }}</span>
           </div>
         </div>
-        <div class="swiper-pagination"></div>
+      </div>
+  
+      <!-- Main Courses List -->
+      <div class="courses-container" 
+           #coursesContainer
+           [class.dragging]="isDragging"
+           (mousedown)="onMouseDown($event)"
+           (mousemove)="onMouseMove($event)"
+           (mouseup)="onMouseUp()"
+           (mouseleave)="onMouseLeave()">
+        
+        <div class="courses-wrapper">
+          <ng-container *ngFor="let course of courses$ | async">
+            <app-course-card
+              [course]="course"
+              (courseSelected)="onCourseSelected($event)"
+              class="course-item">
+            </app-course-card>
+          </ng-container>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+  

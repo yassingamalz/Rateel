@@ -26,4 +26,12 @@ export class CourseCardComponent {
       this.courseSelected.emit(this.course);
     }
   }
+
+  getBackgroundStyle(): string {
+    if (this.course.imageSrc) {
+      return `url(${this.course.imageSrc})`;
+    }
+
+    return 'none';
+  }
 }
