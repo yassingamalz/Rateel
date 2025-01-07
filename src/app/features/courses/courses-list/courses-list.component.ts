@@ -70,8 +70,8 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   }
 
   onCourseSelected(course: Course): void {
-    console.log('Navigating to lessons for course:', course.id);
-    this.router.navigate(['/units', course.id])
+    console.log('Navigating to units for course:', course.id);
+    this.router.navigate(['/courses', course.id, 'units'])
       .then(success => {
         console.log('Navigation successful:', success);
       })

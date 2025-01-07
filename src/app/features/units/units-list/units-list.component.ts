@@ -47,7 +47,13 @@ export class UnitsListComponent implements OnInit {
 
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      this.router.navigate(['lessons', unit.id]);
+      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons'])
+        .then(success => {
+          console.log('Navigation to lessons successful:', success);
+        })
+        .catch(err => {
+          console.error('Navigation to lessons error:', err);
+        });
     }
   }
 

@@ -1,3 +1,4 @@
+// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,12 +9,12 @@ const routes: Routes = [
       .then(m => m.CoursesModule)
   },
   {
-    path: 'units',
+    path: 'courses/:courseId/units',
     loadChildren: () => import('./features/units/units.module')
       .then(m => m.UnitsModule)
   },
   {
-    path: 'lessons',
+    path: 'courses/:courseId/units/:unitId/lessons',
     loadChildren: () => import('./features/lessons/lessons.module')
       .then(m => m.LessonsModule)
   },
