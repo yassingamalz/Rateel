@@ -1,9 +1,21 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
-const config: CapacitorConfig = {
+const config = {
   appId: 'com.novavista.tajweed',
   appName: 'tajweed-app',
-  webDir: 'dist/tajweed-app/browser'
-};
+  webDir: 'dist/tajweed-app/browser',
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 3000,
+      launchAutoHide: true,
+      backgroundColor: '#1B4332',
+      androidSplashResourceName: 'splash',
+      androidScaleType: 'CENTER_CROP'
+    },
+    ScreenOrientation: {
+      defaultOrientation: 'landscape'
+    }
+  }
+} as CapacitorConfig;
 
 export default config;

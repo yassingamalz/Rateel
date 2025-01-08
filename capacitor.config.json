@@ -11,7 +11,10 @@
         "launchAutoHide": true,
         "backgroundColor": "#1B4332",
         "androidSplashResourceName": "splash",
-        "androidScaleType": "CENTER_CROP"
+        "androidScaleType": "CENTER_CROP",
+        "ScreenOrientation": {
+            "defaultOrientation": "landscape"
+          }      
       }
     }
   }
