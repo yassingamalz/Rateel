@@ -14,6 +14,10 @@ const config = {
     },
     ScreenOrientation: {
       defaultOrientation: 'landscape'
+    },
+    StatusBar: {
+      style: 'DARK',
+      backgroundColor: '#1B4332'
     }
   }
 } as CapacitorConfig;
