@@ -26,7 +26,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class MainLayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('mainContainer') mainContainer!: ElementRef;
   
-  isSidebarCollapsed = false;
+  isSidebarCollapsed = true;
   isMobile = window.innerWidth <= 768;
 
   constructor(private router: Router) {

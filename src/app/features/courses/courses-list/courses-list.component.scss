@@ -4,7 +4,6 @@
 
 .courses-page {
     min-height: 100vh;
-    padding: map.get(vars.$spacing, 'lg');
     overflow-x: hidden;
     position: relative;
     isolation: isolate;
