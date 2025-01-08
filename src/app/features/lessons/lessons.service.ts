@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Lesson } from '../../shared/interfaces/lesson';
 import { StorageService } from '../../core/services/storage.service';
+import { UnitsService } from '../units/units.service';
 
 @Injectable({
   providedIn: 'root'
@@ -184,19 +185,14 @@ export class LessonsService {
     }
   };
 
-  constructor(private storageService: StorageService) {
+
+  constructor(
+    private storageService: StorageService,
+    private unitsService: UnitsService
+  ) {
     this.initializeFromStorage();
   }
-  
-  getLessonsByUnitId(courseId: string, unitId: string): Observable<Lesson[]> {
-    return of(this.mockLessons[courseId]?.[unitId] || []);
-  }
- 
-  getLessonById(courseId: string, unitId: string, lessonId: string): Observable<Lesson | undefined> {
-    const lessons = this.mockLessons[courseId]?.[unitId] || [];
-    return of(lessons.find(l => l.id === lessonId));
-  }
- 
+
   markLessonAsCompleted(courseId: string, unitId: string, lessonId: string): Observable<void> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
     const lesson = lessons.find(l => l.id === lessonId);
@@ -210,16 +206,32 @@ export class LessonsService {
         isCompleted: true
       });
       
-      // Unlock next lesson based on completion
+      // Unlock next lesson
       const nextLesson = lessons.find(l => l.order === lesson.order + 1);
       if (nextLesson) {
         nextLesson.isLocked = false;
+      }
+
+      // Check if all lessons are completed
+      const allLessonsCompleted = lessons.every(l => l.isCompleted);
+      if (allLessonsCompleted) {
+        // Mark unit as completed and unlock next unit
+        this.unitsService.markUnitAsCompleted(courseId, unitId).subscribe();
       }
     }
     
     return of(void 0);
   }
-
+  
+  getLessonsByUnitId(courseId: string, unitId: string): Observable<Lesson[]> {
+    return of(this.mockLessons[courseId]?.[unitId] || []);
+  }
+ 
+  getLessonById(courseId: string, unitId: string, lessonId: string): Observable<Lesson | undefined> {
+    const lessons = this.mockLessons[courseId]?.[unitId] || [];
+    return of(lessons.find(l => l.id === lessonId));
+  }
+ 
   private initializeFromStorage(): void {
     Object.keys(this.mockLessons).forEach(courseId => {
       Object.keys(this.mockLessons[courseId]).forEach(unitId => {
