@@ -1,6 +1,5 @@
-<!-- courses-list.component.html -->
 <div class="courses-page">
-    <!-- Dynamic flowing background -->
+    <!-- Fixed Background Elements -->
     <div class="background-flow">
         <svg class="flow-path flow-path--1" viewBox="0 0 2000 1000">
             <path d="M0,100 C300,300 900,50 1400,250 L1400,1000 L0,1000 Z" />
@@ -13,10 +12,7 @@
         </svg>
     </div>
 
-    <!-- Islamic pattern overlay -->
     <div class="pattern-overlay"></div>
-
-    <!-- Floating Islamic icons -->
     <div class="floating-icons">
         <i class="icon icon--1 fas fa-star-and-crescent"></i>
         <i class="icon icon--2 fas fa-mosque"></i>
@@ -25,6 +21,7 @@
 
     <!-- Main Content -->
     <div class="courses-layout">
+        <!-- Static Title Section -->
         <div class="path-info">
             <h1 class="path-title">المسارات التعليمية</h1>
             <h2 class="path-subtitle">ما هو المسار المناسب لك؟</h2>
@@ -45,12 +42,22 @@
             </div>
         </div>
 
-        <div class="courses-container" #coursesContainer [class.dragging]="isDragging" (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()" (mouseleave)="onMouseLeave()">
+        <!-- Animated Cards Container -->
+        <div class="courses-container" 
+             #coursesContainer
+             [class.dragging]="isDragging"
+             (mousedown)="onMouseDown($event)"
+             (mousemove)="onMouseMove($event)"
+             (mouseup)="onMouseUp()"
+             (mouseleave)="onMouseLeave()"
+             (scroll)="onScroll($event)">
 
-            <div class="courses-wrapper">
-                <ng-container *ngFor="let course of courses$ | async; let i = index">
-                    <app-course-card [course]="course" (courseSelected)="onCourseSelected($event)" class="course-item"
+            <div class="courses-wrapper" *ngIf="courses$ | async as courses" @cardsAnimation>
+                <ng-container *ngFor="let course of courses; let i = index">
+                    <app-course-card 
+                        [course]="course"
+                        (courseSelected)="onCourseSelected($event)"
+                        class="course-item"
                         [class.course-item--completed]="isCourseCompleted(i)"
                         [class.course-item--active]="i === currentCourseIndex">
                         <div class="connector-line"></div>
