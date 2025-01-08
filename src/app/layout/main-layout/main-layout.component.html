@@ -1,7 +1,9 @@
-<!--main-layout.component.html -->
-<div class="main-layout" dir="rtl">
-    <app-sidebar></app-sidebar>
-    <main class="main-content">
+<!-- main-layout.component.html -->
+<div class="main-layout" dir="rtl" #mainContainer>
+    <app-sidebar [class.sidebar-hidden]="isSidebarHidden"></app-sidebar>
+    <main class="main-content" [class.full-width]="isSidebarHidden">
+      <div class="content-wrapper">
         <router-outlet></router-outlet>
+      </div>
     </main>
-</div>
+  </div>
