@@ -105,6 +105,6 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   }
 
   onNavigateBack(): void {
-    this.router.navigate(['../../'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
