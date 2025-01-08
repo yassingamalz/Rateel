@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Lesson } from '../../shared/interfaces/lesson';
+import { StorageService } from '../../core/services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -183,30 +184,33 @@ export class LessonsService {
     }
   };
 
-  constructor() {}
-
-  setCurrentUnit(unitId: string) {
-    this.currentUnitIdSubject.next(unitId);
+  constructor(private storageService: StorageService) {
+    this.initializeFromStorage();
   }
-
+  
   getLessonsByUnitId(courseId: string, unitId: string): Observable<Lesson[]> {
     return of(this.mockLessons[courseId]?.[unitId] || []);
   }
-
+ 
   getLessonById(courseId: string, unitId: string, lessonId: string): Observable<Lesson | undefined> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
-    const lesson = lessons.find(l => l.id === lessonId);
-    return of(lesson);
+    return of(lessons.find(l => l.id === lessonId));
   }
-
+ 
   markLessonAsCompleted(courseId: string, unitId: string, lessonId: string): Observable<void> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
     const lesson = lessons.find(l => l.id === lessonId);
     
     if (lesson) {
       lesson.isCompleted = true;
+      lesson.isLocked = false;
       
-      // Unlock next lesson if available
+      this.storageService.saveProgress('lesson', `${courseId}_${unitId}_${lessonId}`, {
+        progress: 100,
+        isCompleted: true
+      });
+      
+      // Unlock next lesson based on completion
       const nextLesson = lessons.find(l => l.order === lesson.order + 1);
       if (nextLesson) {
         nextLesson.isLocked = false;
@@ -216,23 +220,44 @@ export class LessonsService {
     return of(void 0);
   }
 
-  // Additional helper methods
+  private initializeFromStorage(): void {
+    Object.keys(this.mockLessons).forEach(courseId => {
+      Object.keys(this.mockLessons[courseId]).forEach(unitId => {
+        this.mockLessons[courseId][unitId] = this.mockLessons[courseId][unitId].map(lesson => {
+          const data = this.storageService.getProgress('lesson', `${courseId}_${unitId}_${lesson.id}`);
+          if (!data) return lesson;
+
+          const previousLesson = lesson.order > 1 ? 
+            this.mockLessons[courseId][unitId][lesson.order - 2] : null;
+
+          return {
+            ...lesson,
+            isCompleted: data.isCompleted,
+            isLocked: !(lesson.order === 1 || (previousLesson?.isCompleted))
+          };
+        });
+      });
+    });
+  }
+ 
   getProgress(courseId: string, unitId: string): Observable<number> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
     const totalLessons = lessons.length;
     const completedLessons = lessons.filter(l => l.isCompleted).length;
-    
     return of(totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0);
   }
-
+ 
   isUnitCompleted(courseId: string, unitId: string): Observable<boolean> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
     return of(lessons.length > 0 && lessons.every(l => l.isCompleted));
   }
-
+ 
   getNextIncompleteLesson(courseId: string, unitId: string): Observable<Lesson | undefined> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
-    const nextLesson = lessons.find(l => !l.isCompleted && !l.isLocked);
-    return of(nextLesson);
+    return of(lessons.find(l => !l.isCompleted && !l.isLocked));
   }
-}
+ 
+  setCurrentUnit(unitId: string): void {
+    this.currentUnitIdSubject.next(unitId);
+  }
+ }
