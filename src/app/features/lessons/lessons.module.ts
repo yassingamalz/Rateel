@@ -8,7 +8,6 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
 import { InteractiveLessonComponent } from './interactive-lesson/interactive-lesson.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReadingLessonComponent } from './reading-lesson/reading-lesson.component';
-import { DefaultLessonComponent } from './default-lesson/default-lesson.component';
 import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { LessonDetailsComponent } from './lesson-details/lesson-details.componen
     InteractiveLessonComponent,
     AudioPlayerComponent,
     ReadingLessonComponent,
-    DefaultLessonComponent
   ],
   imports: [
     CommonModule,

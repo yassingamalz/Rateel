@@ -20,13 +20,14 @@
         </app-video-player>
   
         <app-interactive-lesson
-          *ngSwitchCase="'practice'"
-          [content]="lesson?.practiceContent"
-          [isCompleted]="lesson?.isCompleted"
-          (onProgress)="updateProgress($event)"
-          (onComplete)="markAsCompleted()">
-        </app-interactive-lesson>
-  
+        *ngSwitchCase="'practice'"
+        [questions]="practiceQuestions"
+        [isCompleted]="lesson?.isCompleted"
+        [onProgress]="updateProgress"
+        [onComplete]="markAsCompleted"
+        [onAnswer]="handleAnswer">
+      </app-interactive-lesson>
+      
         <app-audio-player
           *ngSwitchCase="'listen'"
           [audioUrl]="lesson?.audioUrl"
@@ -42,14 +43,6 @@
           (onProgress)="updateProgress($event)"
           (onComplete)="markAsCompleted()">
         </app-reading-lesson>
-  
-        <app-default-lesson
-          *ngSwitchDefault
-          [content]="lesson?.defaultContent"
-          [isCompleted]="lesson?.isCompleted"
-          (onProgress)="updateProgress($event)"
-          (onComplete)="markAsCompleted()">
-        </app-default-lesson>
       </div>
   
       <!-- Footer -->

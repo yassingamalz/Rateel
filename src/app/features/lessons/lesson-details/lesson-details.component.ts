@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LessonsService } from '../lessons.service';
 import { Lesson, LessonType } from '../../../shared/interfaces/lesson';
 import { Subscription } from 'rxjs';
+import { InteractiveQuestion } from '../interactive-lesson/interactive-lesson.types';
 
 @Component({
   selector: 'app-lesson-details',
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class LessonDetailsComponent implements OnInit, OnDestroy {
   lesson: Lesson | undefined;
+  practiceQuestions: InteractiveQuestion[] = [];
   currentProgress: number = 0;
   private subscriptions: Subscription[] = [];
 
@@ -94,6 +96,12 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
       this.subscriptions.push(completeSub);
     }
+  }
+
+  // New method to handle answer tracking
+  handleAnswer(questionId: string, answer: string | boolean): void {
+    console.log(`Question ${questionId} answered: ${answer}`);
+    // Implement any additional logic for tracking answers
   }
 
   onNavigateBack(): void {
