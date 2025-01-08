@@ -1,0 +1,322 @@
+// reading-lesson.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.reading-lesson {
+  min-height: 100vh;
+  background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5);
+  @include mix.glass-effect;
+  
+  .lesson-header {
+    padding: map.get(vars.$spacing, 'xl');
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .lesson-title {
+      font-size: map.get(vars.$font-size, 'title');
+      color: map.get(vars.$colors, 'text', 'light');
+      margin-bottom: map.get(vars.$spacing, 'sm');
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .lesson-description {
+      color: map.get(vars.$colors, 'text', 'muted');
+      font-size: map.get(vars.$font-size, 'base');
+    }
+  }
+
+  .reading-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    padding: map.get(vars.$spacing, 'lg');
+  }
+
+  .reading-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: map.get(vars.$spacing, 'md');
+    
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: map.get(vars.$spacing, 'sm');
+      
+      .font-size {
+        color: map.get(vars.$colors, 'text', 'light');
+        min-width: 60px;
+        text-align: center;
+      }
+    }
+    
+    .rules-toggle {
+      @include mix.glass-effect;
+      display: flex;
+      align-items: center;
+      gap: map.get(vars.$spacing, 'sm');
+      padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
+      border-radius: map.get(vars.$border-radius, 'full');
+      border: none;
+      color: map.get(vars.$colors, 'text', 'light');
+      cursor: pointer;
+      transition: map.get(vars.$transitions, 'base');
+      
+      &.active {
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        color: map.get(vars.$colors, 'accent', 'base');
+      }
+      
+      &:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .content-area {
+    display: flex;
+    gap: map.get(vars.$spacing, 'xl');
+    flex: 1;
+    overflow: hidden;
+
+    &.with-rules {
+      .verse-container {
+        width: 65%;
+      }
+    }
+  }
+
+  .verse-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: map.get(vars.$spacing, 'lg');
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: map.get(vars.$border-radius, 'lg');
+    transition: width 0.3s ease;
+
+    .verse {
+      margin-bottom: map.get(vars.$spacing, 'xl');
+      padding: map.get(vars.$spacing, 'lg');
+      border-radius: map.get(vars.$border-radius, 'md');
+      background: rgba(255, 255, 255, 0.05);
+      transition: background 0.3s ease;
+      
+      &.active {
+        background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.2);
+      }
+
+      .verse-text {
+        font-family: 'Uthmanic', 'Cairo', sans-serif;
+        line-height: 2;
+        color: map.get(vars.$colors, 'text', 'light');
+        text-align: center;
+        position: relative;
+        
+        &::before {
+          content: attr(data-verse);
+          position: absolute;
+          right: -40px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: map.get(vars.$colors, 'accent', 'base');
+          color: map.get(vars.$colors, 'text', 'dark');
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: map.get(vars.$font-size, 'sm');
+          font-family: 'Cairo', sans-serif;
+        }
+        
+        .tajweed-mark {
+          cursor: pointer;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            filter: brightness(1.2);
+          }
+        }
+      }
+
+      .verse-translation {
+        margin-top: map.get(vars.$spacing, 'md');
+        color: map.get(vars.$colors, 'text', 'muted');
+        font-size: 0.9em;
+        text-align: center;
+        font-style: italic;
+      }
+    }
+  }
+
+  .tajweed-panel {
+    width: 35%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: map.get(vars.$border-radius, 'lg');
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    .panel-header {
+      padding: map.get(vars.$spacing, 'md');
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+      h3 {
+        color: map.get(vars.$colors, 'text', 'light');
+        font-size: map.get(vars.$font-size, 'lg');
+      }
+      
+      .close-panel {
+        @include mix.glass-effect;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        color: map.get(vars.$colors, 'text', 'light');
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .rules-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: map.get(vars.$spacing, 'md');
+      
+      .rule-item {
+        display: flex;
+        align-items: center;
+        gap: map.get(vars.$spacing, 'md');
+        padding: map.get(vars.$spacing, 'md');
+        border-radius: map.get(vars.$border-radius, 'md');
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        
+        &.active {
+          background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+        }
+        
+        .rule-color {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        
+        .rule-content {
+          h4 {
+            color: map.get(vars.$colors, 'text', 'light');
+            margin-bottom: map.get(vars.$spacing, 'xs');
+          }
+          
+          p {
+            color: map.get(vars.$colors, 'text', 'muted');
+            font-size: map.get(vars.$font-size, 'sm');
+          }
+        }
+      }
+    }
+  }
+
+  .navigation-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: map.get(vars.$spacing, 'lg');
+    
+    .nav-button {
+      @include mix.glass-effect;
+      display: flex;
+      align-items: center;
+      gap: map.get(vars.$spacing, 'sm');
+      padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
+      border-radius: map.get(vars.$border-radius, 'full');
+      border: none;
+      color: map.get(vars.$colors, 'text', 'light');
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .progress-indicator {
+      display: flex;
+      align-items: center;
+      gap: map.get(vars.$spacing, 'md');
+      
+      .progress-bar {
+        width: 200px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: map.get(vars.$border-radius, 'full');
+        overflow: hidden;
+        
+        &__fill {
+          height: 100%;
+          background: map.get(vars.$colors, 'accent', 'base');
+          transition: width 0.3s ease;
+        }
+      }
+      
+      .progress-text {
+        color: map.get(vars.$colors, 'text', 'muted');
+        font-size: map.get(vars.$font-size, 'sm');
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .reading-lesson {
+    .content-area {
+      flex-direction: column;
+      
+      &.with-rules {
+        .verse-container {
+          width: 100%;
+        }
+      }
+    }
+    
+    .tajweed-panel {
+      width: 100%;
+      height: 300px;
+    }
+    
+    .navigation-controls {
+      flex-direction: column;
+      gap: map.get(vars.$spacing, 'md');
+      
+      .progress-indicator {
+        order: -1;
+        width: 100%;
+        
+        .progress-bar {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

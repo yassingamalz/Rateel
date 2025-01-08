@@ -1,1 +1,101 @@
-<p>reading-lesson works!</p>
+<!-- reading-lesson.component.html -->
+<div class="reading-lesson" dir="rtl">
+    <ng-container *ngIf="parsedContent; else noContent">
+        <!-- Header -->
+        <div class="lesson-header">
+            <h2 class="lesson-title">{{ parsedContent.title }}</h2>
+            <p class="lesson-description" *ngIf="parsedContent.description">
+                {{ parsedContent.description }}
+            </p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="reading-container">
+            <!-- Reading Controls -->
+            <div class="reading-controls">
+                <div class="font-controls">
+                    <button class="control-button" (click)="decreaseFontSize()">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="font-size">{{ state.fontSize }}px</span>
+                    <button class="control-button" (click)="increaseFontSize()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <button class="rules-toggle" [class.active]="state.showRules" (click)="toggleRules()">
+                    <i class="fas fa-info-circle"></i>
+                    <span>قواعد التجويد</span>
+                </button>
+            </div>
+
+            <!-- Content Area with Tajweed Rules Panel -->
+            <div class="content-area" [class.with-rules]="state.showRules">
+                <!-- Verse Display -->
+                <div class="verse-container" [style.fontSize.px]="state.fontSize" (scroll)="onVerseScroll($event)">
+                    <div class="verse" *ngFor="let verse of parsedContent.verses; let i = index"
+                        [class.active]="i === currentVerseIndex">
+                        <div class="verse-text" [innerHTML]="getFormattedVerse(i)" [attr.data-verse]="i + 1">
+                        </div>
+                        <div class="verse-translation" *ngIf="verse.translation">
+                            {{ verse.translation }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tajweed Rules Panel -->
+                <div class="tajweed-panel" *ngIf="state.showRules" [@slideInOut]>
+                    <div class="panel-header">
+                        <h3>قواعد التجويد</h3>
+                        <button class="close-panel" (click)="toggleRules()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="rules-list">
+                        <div *ngFor="let rule of tajweedRules" class="rule-item"
+                            [class.active]="state.selectedRule?.id === rule.id" (click)="onRuleClick(rule.id)">
+                            <div class="rule-color" [style.backgroundColor]="rule.color"></div>
+                            <div class="rule-content">
+                                <h4>{{ rule.name }}</h4>
+                                <p>{{ rule.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="navigation-controls">
+                <button class="nav-button" [disabled]="currentVerseIndex === 0" (click)="previousVerse()">
+                    <i class="fas fa-chevron-right"></i>
+                    الآية السابقة
+                </button>
+
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" [style.width.%]="state.progress">
+                        </div>
+                    </div>
+                    <span class="progress-text">
+                        {{ currentVerseIndex + 1 }} / {{ parsedContent.verses.length }}
+                    </span>
+                </div>
+
+                <button class="nav-button" [disabled]="currentVerseIndex === parsedContent.verses.length - 1"
+                    (click)="nextVerse()">
+                    الآية التالية
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- No Content Template -->
+    <ng-template #noContent>
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>عذراً، لا يمكن تحميل المحتوى</span>
+        </div>
+    </ng-template>
+</div>
