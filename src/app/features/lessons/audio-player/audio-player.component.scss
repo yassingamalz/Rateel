@@ -1,0 +1,246 @@
+// audio-player.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.audio-player {
+  width: 100%;
+  background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5);
+  border-radius: map.get(vars.$border-radius, 'lg');
+  overflow: hidden;
+  @include mix.glass-effect;
+}
+
+.player-container {
+  padding: map.get(vars.$spacing, 'lg');
+
+  &.recording-active {
+    .control-panel {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: map.get(vars.$spacing, 'md');
+}
+
+.main-controls {
+  display: flex;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'md');
+}
+
+.control-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: map.get(vars.$colors, 'text', 'light');
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+    transform: scale(1.1);
+  }
+
+  &.playing {
+    background: map.get(vars.$colors, 'accent', 'base');
+    color: map.get(vars.$colors, 'text', 'dark');
+  }
+
+  i {
+    font-size: map.get(vars.$font-size, 'lg');
+  }
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'sm');
+  color: map.get(vars.$colors, 'text', 'light');
+  margin-left: map.get(vars.$spacing, 'md');
+
+  input[type="range"] {
+    width: 100px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: map.get(vars.$border-radius, 'full');
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: map.get(vars.$colors, 'accent', 'base');
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'md');
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: map.get(vars.$border-radius, 'full');
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    height: 6px;
+  }
+
+  &__fill {
+    height: 100%;
+    background: map.get(vars.$colors, 'accent', 'base');
+    transition: width 0.3s ease;
+
+    &.completed {
+      background: map.get(vars.$colors, 'accent', 'light');
+    }
+  }
+}
+
+.time-display {
+  font-size: map.get(vars.$font-size, 'sm');
+  color: map.get(vars.$colors, 'text', 'light');
+  min-width: 45px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.recording-section {
+  margin-top: map.get(vars.$spacing, 'lg');
+  padding-top: map.get(vars.$spacing, 'lg');
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: map.get(vars.$spacing, 'lg');
+  align-items: center;
+}
+
+.record-button {
+  display: flex;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'sm');
+  padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
+  border-radius: map.get(vars.$border-radius, 'full');
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: map.get(vars.$colors, 'text', 'light');
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.recording {
+    background: map.get(vars.$colors, 'status', 'error');
+    animation: pulse 1.5s infinite;
+  }
+
+  &:hover:not(.recording) {
+    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+    transform: translateY(-2px);
+  }
+
+  i {
+    font-size: map.get(vars.$font-size, 'lg');
+  }
+}
+
+.recorded-audio {
+  width: 100%;
+  padding: map.get(vars.$spacing, 'md');
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: map.get(vars.$border-radius, 'lg');
+
+  .recorded-player {
+    width: 100%;
+    height: 40px;
+  }
+}
+
+.error-message {
+  padding: map.get(vars.$spacing, 'xl');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'md');
+  color: map.get(vars.$colors, 'text', 'muted');
+  text-align: center;
+
+  i {
+    font-size: map.get(vars.$font-size, 'title');
+    color: map.get(vars.$colors, 'status', 'error');
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// RTL Specific Adjustments
+[dir="rtl"] {
+  .volume-control {
+    margin-left: 0;
+    margin-right: map.get(vars.$spacing, 'md');
+  }
+
+  .progress-container {
+    direction: ltr; // Keep time display in LTR
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .player-container {
+    padding: map.get(vars.$spacing, 'md');
+  }
+
+  .volume-control {
+    input[type="range"] {
+      width: 60px;
+    }
+  }
+
+  .control-button {
+    width: 36px;
+    height: 36px;
+
+    i {
+      font-size: map.get(vars.$font-size, 'base');
+    }
+  }
+}

@@ -1,1 +1,91 @@
-<p>audio-player works!</p>
+<!-- audio-player.component.html -->
+<div class="audio-player" dir="rtl">
+    <div class="player-container" [class.recording-active]="state.isRecording">
+      <!-- Main Audio Element -->
+      <audio #audioElement
+        [src]="audioUrl"
+        (timeupdate)="onTimeUpdate($event)"
+        (ended)="onAudioEnded()">
+      </audio>
+  
+      <!-- Control Panel -->
+      <div class="control-panel">
+        <!-- Main Controls -->
+        <div class="main-controls">
+          <button 
+            class="control-button"
+            [class.playing]="state.isPlaying"
+            (click)="togglePlay()">
+            <i class="fas" [class.fa-play]="!state.isPlaying" [class.fa-pause]="state.isPlaying"></i>
+          </button>
+  
+          <button 
+            class="control-button"
+            (click)="restartAudio()">
+            <i class="fas fa-redo"></i>
+          </button>
+  
+          <!-- Volume Control -->
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input 
+              type="range" 
+              min="0" 
+              max="100" 
+              [value]="state.volume * 100"
+              (input)="onVolumeChange($event)">
+          </div>
+        </div>
+  
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="time-display">
+            {{ formatTime(state.currentTime || 0) }}
+          </div>
+  
+          <div 
+            class="progress-bar"
+            (click)="seekTo($event)">
+            <div 
+              class="progress-bar__fill"
+              [style.width.%]="state.progress"
+              [class.completed]="state.isCompleted">
+            </div>
+          </div>
+  
+          <div class="time-display">
+            {{ formatTime(state.duration || 0) }}
+          </div>
+        </div>
+      </div>
+  
+      <!-- Recording Section -->
+      <div class="recording-section" *ngIf="showRecorder">
+        <button 
+          class="record-button"
+          [class.recording]="state.isRecording"
+          (click)="toggleRecording()">
+          <i class="fas" 
+             [class.fa-microphone]="!state.isRecording" 
+             [class.fa-stop]="state.isRecording">
+          </i>
+          <span>{{ state.isRecording ? 'إيقاف التسجيل' : 'ابدأ التسجيل' }}</span>
+        </button>
+  
+        <!-- Recorded Audio Player -->
+        <div class="recorded-audio" *ngIf="recordedAudioUrl">
+          <audio 
+            [src]="recordedAudioUrl" 
+            controls 
+            class="recorded-player">
+          </audio>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Error State -->
+    <div class="error-message" *ngIf="!audioUrl && !recordedAudioUrl">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>عذراً، لا يمكن تحميل الملف الصوتي</span>
+    </div>
+  </div>

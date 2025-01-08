@@ -19,6 +19,39 @@
           (onComplete)="markAsCompleted()">
         </app-video-player>
   
+        <app-interactive-lesson
+          *ngSwitchCase="'practice'"
+          [content]="lesson?.practiceContent"
+          [isCompleted]="lesson?.isCompleted"
+          (onProgress)="updateProgress($event)"
+          (onComplete)="markAsCompleted()">
+        </app-interactive-lesson>
+  
+        <app-audio-player
+          *ngSwitchCase="'listen'"
+          [audioUrl]="lesson?.audioUrl"
+          [isCompleted]="lesson?.isCompleted"
+          (onProgress)="updateProgress($event)"
+          (onComplete)="markAsCompleted()">
+        </app-audio-player>
+  
+        <app-reading-lesson
+          *ngSwitchCase="'read'"
+          [content]="lesson?.readingContent"
+          [isCompleted]="lesson?.isCompleted"
+          (onProgress)="updateProgress($event)"
+          (onComplete)="markAsCompleted()">
+        </app-reading-lesson>
+  
+        <app-default-lesson
+          *ngSwitchDefault
+          [content]="lesson?.defaultContent"
+          [isCompleted]="lesson?.isCompleted"
+          (onProgress)="updateProgress($event)"
+          (onComplete)="markAsCompleted()">
+        </app-default-lesson>
+      </div>
+  
       <!-- Footer -->
       <footer class="lesson-footer">
         <div class="lesson-info">
