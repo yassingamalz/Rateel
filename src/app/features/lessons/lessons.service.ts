@@ -27,7 +27,8 @@ export class LessonsService {
           isCompleted: false,
           isLocked: false,
           stepNumber: 1,
-          totalSteps: 5
+          totalSteps: 5,
+          videoUrl:"https://www.youtube.com/watch?v=XfDdA9UgOVQ&list=PLhSrwfCNArc69Wixtzt9v4dLth6k7DrWh&index=1&pp=iAQB"
         },
         {
           id: 'pronunciation-basics',
