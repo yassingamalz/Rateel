@@ -1,0 +1,139 @@
+// splash-screen.component.scss
+@import 'variables';
+@import 'mixins';
+
+.splash-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: map-get($spacing, lg);
+}
+
+.splash-content {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: map-get($spacing, xl);
+
+  .app-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto map-get($spacing, lg);
+    border-radius: 30%;
+    background: rgba(map-get($colors, accent, base), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, accent, base);
+    font-size: 3rem;
+    @include glass-effect;
+
+    i {
+      filter: drop-shadow(0 4px 8px rgba(map-get($colors, accent, base), 0.3));
+    }
+  }
+
+  .app-title {
+    font-size: 2rem;
+    color: map-get($colors, text, light);
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.progress-section {
+  .progress-container {
+    margin-bottom: map-get($spacing, md);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: map-get($border-radius, full);
+    overflow: hidden;
+    margin-bottom: map-get($spacing, sm);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: map-get($colors, accent, base);
+    transition: width 0.3s ease;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  .progress-text {
+    font-size: 0.875rem;
+    color: map-get($colors, text, light);
+  }
+
+  .task-text {
+    color: map-get($colors, text, muted);
+    font-size: 0.875rem;
+  }
+}
+
+.error-section {
+  .error-icon {
+    font-size: 3rem;
+    color: map-get($colors, status, error);
+    margin-bottom: map-get($spacing, md);
+  }
+
+  .error-message {
+    color: map-get($colors, text, light);
+    margin-bottom: map-get($spacing, lg);
+  }
+
+  .retry-button {
+    @include glass-effect;
+    display: inline-flex;
+    align-items: center;
+    gap: map-get($spacing, sm);
+    padding: map-get($spacing, sm) map-get($spacing, lg);
+    border-radius: map-get($border-radius, full);
+    border: none;
+    color: map-get($colors, text, light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

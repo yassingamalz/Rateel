@@ -1,0 +1,10 @@
+<!-- initialization.component.html -->
+<div class="initialization-container">
+    <app-splash-screen
+      [progress]="(progress$ | async) ?? 0"
+      [currentTask]="(currentTask$ | async) ?? ''"
+      [isError]="isError"
+      [errorMessage]="errorMessage"
+      (retry)="retry()">
+    </app-splash-screen>
+  </div>

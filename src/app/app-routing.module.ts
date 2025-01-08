@@ -1,10 +1,17 @@
 // app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InitializationComponent } from './core/initialization/initialization.component';
+import { InitializationGuard } from './core/guards/initialization.guard';
 
 const routes: Routes = [
   {
+    path: 'initialization',
+    component: InitializationComponent
+  },
+  {
     path: 'courses',
+    // canActivate: [InitializationGuard],
     children: [
       {
         path: '',
@@ -25,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'courses',
+    redirectTo: 'initialization',
     pathMatch: 'full'
   }
 ];

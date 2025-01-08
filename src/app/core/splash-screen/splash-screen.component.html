@@ -1,0 +1,35 @@
+<!-- splash-screen.component.html -->
+<div class="splash-screen" dir="rtl">
+    <div class="splash-content">
+      <!-- Logo -->
+      <div class="logo-container">
+        <div class="app-logo">
+          <i class="fas fa-book-quran"></i>
+        </div>
+        <h1 class="app-title">تجويد القرآن</h1>
+      </div>
+  
+      <!-- Progress Section -->
+      <div class="progress-section" *ngIf="!isError">
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="progress"></div>
+          </div>
+          <span class="progress-text">{{ progress }}%</span>
+        </div>
+        <p class="task-text">{{ currentTask }}</p>
+      </div>
+  
+      <!-- Error State -->
+      <div class="error-section" *ngIf="isError">
+        <div class="error-icon">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <p class="error-message">{{ errorMessage }}</p>
+        <button class="retry-button" (click)="retry.emit()">
+          <i class="fas fa-redo"></i>
+          إعادة المحاولة
+        </button>
+      </div>
+    </div>
+  </div>
