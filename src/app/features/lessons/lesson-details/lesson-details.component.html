@@ -1,1 +1,45 @@
-<p>lesson-details works!</p>
+<!-- lesson-details.component.html -->
+<div class="lesson-details-page" dir="rtl">
+    <div class="lesson-details-card">
+      <!-- Header -->
+      <header class="lesson-header">
+        <button class="back-button" (click)="onNavigateBack()">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <h1 class="lesson-title">{{ lesson?.title }}</h1>
+      </header>
+  
+      <!-- Content Area with Dynamic Component Loading -->
+      <div class="lesson-content" [ngSwitch]="lesson?.type">
+        <app-video-player 
+          *ngSwitchCase="'video'"
+          [videoUrl]="lesson?.videoUrl"
+          [isCompleted]="lesson?.isCompleted"
+          (onProgress)="updateProgress($event)"
+          (onComplete)="markAsCompleted()">
+        </app-video-player>
+  
+      <!-- Footer -->
+      <footer class="lesson-footer">
+        <div class="lesson-info">
+          <div class="lesson-type">
+            <i class="fas" [ngClass]="getLessonTypeIcon()"></i>
+            <span>{{ lessonTypeText }}</span>
+          </div>
+          <div class="lesson-duration" *ngIf="lesson?.duration">
+            <i class="fas fa-clock"></i>
+            <span>{{ lesson!.duration }} دقيقة</span>
+          </div>
+        </div>
+        
+        <button 
+          class="mark-complete-button"
+          [class.completed]="lesson?.isCompleted"
+          (click)="markAsCompleted()"
+          [disabled]="lesson?.isCompleted">
+          <i class="fas fa-check"></i>
+          <span>{{ lesson?.isCompleted ? 'تم الإنجاز' : 'إنهاء الدرس' }}</span>
+        </button>
+      </footer>
+    </div>
+  </div>
