@@ -1,0 +1,228 @@
+// video-player.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.video-player {
+  width: 100%;
+  background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5);
+  border-radius: map.get(vars.$border-radius, 'lg');
+  overflow: hidden;
+  @include mix.glass-effect;
+}
+
+.youtube-container,
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, 0.2);
+
+  iframe,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: map.get(vars.$spacing, 'md');
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:hover,
+  &.playing {
+    opacity: 1;
+  }
+
+  .main-controls {
+    display: flex;
+    gap: map.get(vars.$spacing, 'md');
+    margin-bottom: map.get(vars.$spacing, 'sm');
+  }
+
+  .control-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: map.get(vars.$colors, 'text', 'light');
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+      transform: scale(1.1);
+    }
+
+    i {
+      font-size: map.get(vars.$font-size, 'lg');
+    }
+  }
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: map.get(vars.$spacing, 'md');
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: map.get(vars.$border-radius, 'full');
+  overflow: hidden;
+  cursor: pointer;
+
+  &__fill {
+    height: 100%;
+    background: map.get(vars.$colors, 'accent', 'base');
+    transition: width 0.3s ease;
+
+    &.completed {
+      background: map.get(vars.$colors, 'accent', 'light');
+    }
+  }
+}
+
+.time-display {
+  font-size: map.get(vars.$font-size, 'sm');
+  color: map.get(vars.$colors, 'text', 'light');
+  min-width: 100px;
+  text-align: end;
+
+  .time-separator {
+    margin: 0 map.get(vars.$spacing, 'xs');
+    opacity: 0.7;
+  }
+}
+
+.error-message {
+    padding: map.get(vars.$spacing, 'xl');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: map.get(vars.$spacing, 'md');
+    color: map.get(vars.$colors, 'text', 'muted');
+    text-align: center;
+  
+    i {
+      font-size: map.get(vars.$font-size, 'title');
+      color: map.get(vars.$colors, 'status', 'error');
+    }
+  }
+  
+  // Responsive Adjustments
+  @media (max-width: 768px) {
+    .video-controls {
+      padding: map.get(vars.$spacing, 'sm');
+      
+      .control-button {
+        width: 32px;
+        height: 32px;
+  
+        i {
+          font-size: map.get(vars.$font-size, 'base');
+        }
+      }
+    }
+  
+    .time-display {
+      min-width: 80px;
+      font-size: map.get(vars.$font-size, 'xs');
+    }
+  }
+  
+  // RTL specific adjustments
+  [dir="rtl"] {
+    .video-controls {
+      direction: ltr; // Keep video controls LTR for better UX
+    }
+  
+    .time-display {
+      direction: ltr;
+    }
+  }
+  
+  // Loading state
+  .video-container.loading {
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 1.5s infinite;
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+  
+  // Hover states and interactions
+  .video-container {
+    &:hover {
+      .video-controls {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .progress-bar {
+    position: relative;
+  
+    &:hover {
+      height: 6px;
+      
+      .progress-bar__fill {
+        background: map.get(vars.$colors, 'accent', 'light');
+      }
+    }
+  
+    // Preview tooltip on hover
+    &::after {
+      content: attr(data-time);
+      position: absolute;
+      bottom: 100%;
+      left: var(--mouse-x);
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+  
+    &:hover::after {
+      opacity: 1;
+    }
+  }
