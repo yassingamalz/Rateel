@@ -170,10 +170,10 @@
   // Completion Check
   &__check {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 32px;
-    height: 32px;
+    bottom: -5%;
+    right: 40%;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: map.get(vars.$colors, 'accent', 'base');
     display: flex;
@@ -191,7 +191,7 @@
     }
 
     i {
-      font-size: 1rem;
+      font-size: 1.125rem;
       animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
