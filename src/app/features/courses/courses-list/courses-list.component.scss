@@ -9,15 +9,18 @@
     position: relative;
     isolation: isolate;
     direction: rtl;
-
+    background: #1F4037;  // Immediate solid fallback
+    
     &::before {
         content: '';
         position: fixed;
         inset: 0;
-        background: linear-gradient(135deg,
-            #{map.get(vars.$colors, 'primary', 'dark')} 0%,
-            #{map.get(vars.$colors, 'primary', 'base')} 100%);
+        background: #1F4037;  // Solid color first
+        background: linear-gradient(135deg, #1F4037 0%, #0B1C17 100%);
         z-index: -3;
+        will-change: background;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
