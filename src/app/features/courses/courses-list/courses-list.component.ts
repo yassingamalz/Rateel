@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+// courses-list.component.ts
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Course } from '../../../shared/interfaces/course';
@@ -17,13 +18,13 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
         query('.course-item', [
           style({
             opacity: 0,
-            transform: 'translateY(30px)'
+            transform: 'translateY(30px) scale(0.95)'
           }),
           stagger(80, [
             animate('400ms cubic-bezier(0.35, 0, 0.25, 1)',
               style({
                 opacity: 1,
-                transform: 'translateY(0)'
+                transform: 'translateY(0) scale(1)'
               })
             )
           ])
@@ -32,7 +33,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
     ])
   ]
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent implements OnInit, AfterViewInit {
   @ViewChild('coursesContainer') coursesContainer!: ElementRef;
   courses$: Observable<Course[]>;
   currentCourseIndex = 0;
@@ -42,6 +43,7 @@ export class CoursesListComponent implements OnInit {
 
   private readonly DRAG_THRESHOLD = 5;
   private dragDistance = 0;
+  private observer: IntersectionObserver | null = null;
 
   constructor(
     private coursesService: CoursesService,
@@ -50,31 +52,47 @@ export class CoursesListComponent implements OnInit {
     this.courses$ = this.coursesService.getCourses();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
     this.setupScrollBehavior();
+    this.setupIntersectionObserver();
   }
 
   private setupScrollBehavior(): void {
-    setTimeout(() => {
-      if (!this.coursesContainer?.nativeElement) return;
+    if (!this.coursesContainer?.nativeElement) return;
 
-      const container = this.coursesContainer.nativeElement;
-      container.style.scrollSnapType = 'x mandatory';
+    const container = this.coursesContainer.nativeElement;
+    container.style.scrollSnapType = 'x mandatory';
 
-      const cards = container.querySelectorAll('.course-item');
-      cards.forEach((card: HTMLElement) => {
-        card.style.scrollSnapAlign = 'center';
-      });
+    const cards = container.querySelectorAll('.course-item');
+    cards.forEach((card: HTMLElement) => {
+      card.style.scrollSnapAlign = 'center';
     });
   }
 
-  isCourseCompleted(index: number): boolean {
-    return index <= this.currentCourseIndex;
-  }
+  private setupIntersectionObserver(): void {
+    const options = {
+      root: this.coursesContainer.nativeElement,
+      threshold: 0.7
+    };
 
-  onCourseSelected(course: Course): void {
-    if (this.isDragging) return;
-    this.router.navigate(['/courses', course.id, 'units']);
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const courseIndex = parseInt(entry.target.getAttribute('data-index') || '0');
+          if (courseIndex !== this.currentCourseIndex) {
+            this.currentCourseIndex = courseIndex;
+          }
+        }
+      });
+    }, options);
+
+    // Observe all course items
+    const cards = this.coursesContainer.nativeElement.querySelectorAll('.course-item');
+    cards.forEach((card: HTMLElement) => {
+      this.observer?.observe(card);
+    });
   }
 
   onMouseDown(event: MouseEvent): void {
@@ -121,6 +139,22 @@ export class CoursesListComponent implements OnInit {
     const newIndex = Math.round(scrollPosition / cardWidth);
     if (newIndex !== this.currentCourseIndex) {
       this.currentCourseIndex = newIndex;
+    }
+  }
+
+  isCourseCompleted(index: number): boolean {
+    return index <= this.currentCourseIndex;
+  }
+
+  onCourseSelected(course: Course): void {
+    if (!this.isDragging) {
+      this.router.navigate(['/courses', course.id, 'units']);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
     }
   }
 }
