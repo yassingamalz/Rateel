@@ -1,7 +1,14 @@
 <!-- main-layout.component.html -->
 <div class="main-layout" dir="rtl" #mainContainer>
-    <app-sidebar [class.sidebar-hidden]="isSidebarHidden"></app-sidebar>
-    <main class="main-content" [class.full-width]="isSidebarHidden">
+    <app-sidebar 
+      [isMobile]="isMobile"
+      [isCollapsed]="isSidebarCollapsed"
+      (collapse)="onSidebarCollapse($event)">
+    </app-sidebar>
+    
+    <main class="main-content" 
+      [@contentState]="isSidebarCollapsed ? 'collapsed' : 'expanded'"
+      [class.mobile]="isMobile">
       <div class="content-wrapper">
         <router-outlet></router-outlet>
       </div>

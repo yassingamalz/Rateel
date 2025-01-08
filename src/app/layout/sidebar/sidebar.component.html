@@ -5,23 +5,36 @@
        dir="rtl">
   
   <div class="sidebar__header">
-    <button class="sidebar__toggle" (click)="toggleSidebar()">
-      <i class="fas" [class.fa-bars]="isCollapsed" [class.fa-times]="!isCollapsed"></i>
+    <button class="sidebar__toggle" 
+            (click)="toggleSidebar()"
+            [attr.aria-label]="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+      <i class="fas" 
+         [class.fa-bars]="isCollapsed" 
+         [class.fa-times]="!isCollapsed">
+      </i>
     </button>
   </div>
 
   <nav class="sidebar__menu">
-    <a *ngFor="let item of menuItems" 
+    <a *ngFor="let item of menuItems; trackBy: trackByFn" 
        [routerLink]="item.path"
        routerLinkActive="sidebar__menu-item--active"
-       class="sidebar__menu-item">
-      <span class="sidebar__menu-item-label" [@contentFade]="isCollapsed ? 'hidden' : 'visible'">
+       class="sidebar__menu-item"
+       [attr.aria-label]="item.label">
+       
+      <span class="sidebar__menu-item-label" 
+            [@contentFade]="isCollapsed ? 'hidden' : 'visible'">
         {{item.label}}
       </span>
-      <span class="sidebar__menu-item-icon">
+      
+      <div class="sidebar__menu-item-icon">
         <i class="fas fa-{{item.icon}}"></i>
-        <span class="sidebar__menu-item-badge" *ngIf="item.count">{{item.count}}</span>
-      </span>
+        <span class="sidebar__menu-item-badge" 
+              *ngIf="item.count"
+              [@contentFade]="isCollapsed ? 'hidden' : 'visible'">
+          {{item.count}}
+        </span>
+      </div>
     </a>
   </nav>
 </aside>

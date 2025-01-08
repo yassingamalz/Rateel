@@ -24,6 +24,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  will-change: transform;
 }
 
 .main-content {
@@ -31,12 +32,12 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  margin-right: 320px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: margin-right, transform;
   
-  &.full-width {
-    margin-right: 80px;
+  &.mobile {
+    margin-right: 0 !important;
   }
 }
 
@@ -46,6 +47,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  transform: translateZ(0);
   
   &::-webkit-scrollbar {
     display: none;
@@ -55,25 +57,28 @@
   scrollbar-width: none;
 }
 
-@media (max-width: 768px) {
-  .main-content {
-    margin-right: 0;
-    padding: 0;
-  }
-
-  .content-wrapper {
-    padding: map-get(vars.$spacing, md);
-  }
-}
-
 [dir="rtl"] {
   .main-content {
     margin-right: 320px;
     margin-left: 0;
     
-    &.full-width {
-      margin-right: 80px;
-      margin-left: 0;
+    &.mobile {
+      margin-right: 0;
     }
   }
+}
+
+// Performance optimizations
+.main-layout, 
+.main-content, 
+.content-wrapper {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+// GPU acceleration for animations
+.main-content {
+  transform: translate3d(0, 0, 0);
 }

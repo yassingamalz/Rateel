@@ -1,5 +1,5 @@
 // sidebar.component.ts
-import { Component, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationService } from '../../core/services/navigation.service';
 import { MenuItem } from '../../shared/interfaces/menu-item';
@@ -13,12 +13,10 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
   animations: [
     trigger('sidebarState', [
       state('expanded', style({
-        width: '320px',
-        background: 'linear-gradient(to bottom, #1B4332, #081C15)'
+        width: '320px'
       })),
       state('collapsed', style({
-        width: '80px',
-        background: 'linear-gradient(to bottom, #1B4332, #081C15)'
+        width: '80px'
       })),
       transition('expanded <=> collapsed', [
         animate('300ms cubic-bezier(0.4, 0, 0.2, 1)')
@@ -40,27 +38,29 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
     ])
   ]
 })
-
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  @Input() isCollapsed = false;
+  @Input() isMobile = false;
   @Output() collapse = new EventEmitter<boolean>();
-  isCollapsed = true; 
-  isMobile = window.innerWidth <= 768;
+  
   menuItems: MenuItem[];
 
   constructor(private navigationService: NavigationService) {
     this.menuItems = this.navigationService.menuItems;
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.isMobile = window.innerWidth <= 768;
+  ngOnInit() {
+    // Initialize with mobile state if needed
     if (this.isMobile && !this.isCollapsed) {
       this.toggleSidebar();
     }
   }
 
   toggleSidebar(): void {
-    this.isCollapsed = !this.isCollapsed;
-    this.collapse.emit(this.isCollapsed);
+    this.collapse.emit(!this.isCollapsed);
+  }
+
+  trackByFn(index: number, item: MenuItem): string {
+    return item.path;
   }
 }
