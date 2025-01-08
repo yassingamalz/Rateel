@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Course } from '../../../shared/interfaces/course';
-import { CoursesService } from '../../../core/services/courses.service';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-courses-list',

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Course } from '../../shared/interfaces/course';
+import { StorageService } from '../../core/services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -74,27 +75,71 @@ export class CoursesService {
       isLocked: true
     }
   ];
-
   private coursesSubject = new BehaviorSubject<Course[]>(this.tajweedCourses);
   courses$ = this.coursesSubject.asObservable();
-
-  constructor() {}
-
-  getCourses(): Observable<Course[]> {
-    return this.courses$;
+ 
+  constructor(private storageService: StorageService) {
+    this.initializeFromStorage();
   }
-
-  updateCourseProgress(courseId: string, progress: number): void {
-    const updatedCourses = this.tajweedCourses.map(course => 
-      course.id === courseId ? { ...course, progress } : course
-    );
+ 
+  private initializeFromStorage(): void {
+    this.tajweedCourses = this.tajweedCourses.map(course => {
+      const data = this.storageService.getProgress('course', course.id);
+      if (!data) return course;
+ 
+      let nextCourse = this.tajweedCourses.find(c => 
+        c.isLocked && c.id !== course.id
+      );
+      
+      if (data.isCompleted && nextCourse) {
+        nextCourse.isLocked = false;
+        this.storageService.saveProgress('course', nextCourse.id, {
+          progress: 0,
+          isCompleted: false
+        });
+      }
+ 
+      return {
+        ...course,
+        progress: data.progress,
+        isCompleted: data.isCompleted,
+        isLocked: course.isLocked && !data.isCompleted
+      };
+    });
+    
+    this.coursesSubject.next(this.tajweedCourses);
+  }
+ 
+  updateCourseProgress(courseId: string, progress: number, isCompleted: boolean = false): void {
+    this.storageService.saveProgress('course', courseId, { progress, isCompleted });
+    
+    const updatedCourses = this.tajweedCourses.map(course => {
+      if (course.id === courseId) {
+        return { ...course, progress, isCompleted };
+      }
+      if (isCompleted && course.isLocked) {
+        return { ...course, isLocked: false };
+      }
+      return course;
+    });
+ 
+    this.tajweedCourses = updatedCourses;
     this.coursesSubject.next(updatedCourses);
   }
-
+ 
   unlockCourse(courseId: string): void {
     const updatedCourses = this.tajweedCourses.map(course =>
       course.id === courseId ? { ...course, isLocked: false } : course
     );
+    this.tajweedCourses = updatedCourses;
     this.coursesSubject.next(updatedCourses);
   }
-}
+ 
+  getCourses(): Observable<Course[]> {
+    return this.courses$;
+  }
+ 
+  getCourseById(courseId: string): Course | undefined {
+    return this.tajweedCourses.find(course => course.id === courseId);
+  }
+ }
