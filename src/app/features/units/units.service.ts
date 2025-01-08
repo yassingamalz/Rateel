@@ -1,10 +1,9 @@
-// src/app/features/units/units.service.ts
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { Unit } from '../../shared/interfaces/unit';
-import { StorageService } from '../../core/services/storage.service';
-import { CoursesService } from '../courses/courses.service';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { StorageService } from "../../core/services/storage.service";
+import { Unit } from "../../shared/interfaces/unit";
+import { CoursesService } from "../courses/courses.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +11,7 @@ import { CoursesService } from '../courses/courses.service';
 export class UnitsService {
   private currentCourseIdSubject = new BehaviorSubject<string | null>(null);
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
+
 
   private mockUnits: { [key: string]: Unit[] } = {
     'noon-meem-mushaddad': [
@@ -86,6 +86,31 @@ export class UnitsService {
     this.initializeFromStorage();
   }
 
+  private initializeFromStorage(): void {
+    Object.keys(this.mockUnits).forEach(courseId => {
+      const cachedCourseProgress = this.storageService.getProgress('course', courseId);
+      
+      this.mockUnits[courseId] = this.mockUnits[courseId].map((unit, index) => {
+        const cachedUnitProgress = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
+        
+        if (cachedUnitProgress) {
+          const previousUnit = index > 0 ? this.mockUnits[courseId][index - 1] : null;
+          
+          return {
+            ...unit,
+            progress: cachedUnitProgress.progress,
+            isCompleted: cachedUnitProgress.isCompleted,
+            isLocked: !(unit.order === 1 || 
+                        (previousUnit?.isCompleted) || 
+                        (cachedCourseProgress && cachedCourseProgress.isCompleted))
+          };
+        }
+ 
+        return unit;
+      });
+    });
+  }
+
   markUnitAsCompleted(courseId: string, unitId: string): Observable<void> {
     const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
     if (unit) {
@@ -139,32 +164,15 @@ export class UnitsService {
     return of(void 0);
   }
 
- 
-  private initializeFromStorage(): void {
-    Object.keys(this.mockUnits).forEach(courseId => {
-      this.mockUnits[courseId] = this.mockUnits[courseId].map(unit => {
-        const data = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
-        if (!data) return unit;
- 
-        const previousUnit = unit.order > 1 ?
-          this.mockUnits[courseId][unit.order - 2] : null;
- 
-        return {
-          ...unit,
-          progress: data.progress,
-          isCompleted: data.isCompleted,
-          isLocked: !(unit.order === 1 || (previousUnit?.isCompleted))
-        };
-      });
-    });
-  }
- 
-
-  setCurrentCourse(courseId: string) {
+  setCurrentCourse(courseId: string): void {
     this.currentCourseIdSubject.next(courseId);
   }
 
   getUnitsByCourseId(courseId: string): Observable<Unit[]> {
+    // First, update units based on storage
+    this.initializeFromStorage();
+    
+    // Return units for the specific course
     return of(this.mockUnits[courseId] || []);
   }
 
@@ -187,5 +195,4 @@ export class UnitsService {
         return 'fa-circle';
     }
   }
-
 }

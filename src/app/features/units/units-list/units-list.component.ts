@@ -1,7 +1,28 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, shareReplay, distinctUntilChanged, tap } from 'rxjs/operators';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  NgZone,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
+import {
+  Observable,
+  Subject
+} from 'rxjs';
+import {
+  takeUntil,
+  shareReplay,
+  distinctUntilChanged,
+  catchError
+} from 'rxjs/operators';
+
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
 
@@ -9,11 +30,11 @@ import { Unit } from '../../../shared/interfaces/unit';
   selector: 'app-units-list',
   standalone: false,
   templateUrl: './units-list.component.html',
-  styleUrls: ['./units-list.component.scss'],  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./units-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UnitsListComponent implements OnInit, OnDestroy {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef<HTMLElement>;
-  isLoading = true;
 
   units$!: Observable<Unit[]>;
   courseId!: string;
@@ -50,7 +71,10 @@ export class UnitsListComponent implements OnInit, OnDestroy {
       distinctUntilChanged(),
       shareReplay(1),
       takeUntil(this.destroy$),
-      tap(() => this.isLoading = false)
+      catchError(error => {
+        console.error('Error fetching units:', error);
+        return [];
+      })
     );
 
     const unitId = this.route.snapshot.paramMap.get('unitId');
@@ -69,7 +93,7 @@ export class UnitsListComponent implements OnInit, OnDestroy {
   trackByUnitId(_: number, unit: Unit): string {
     return unit.id;
   }
-  
+
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.unit-item')) {
       event.preventDefault();
