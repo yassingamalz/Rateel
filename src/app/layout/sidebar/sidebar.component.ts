@@ -7,7 +7,6 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
 @Component({
   selector: 'app-sidebar',
   standalone: false,
-
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   animations: [
@@ -33,7 +32,18 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
         display: 'none'
       })),
       transition('visible <=> hidden', [
-        animate('200ms ease-in-out')
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)')
+      ])
+    ]),
+    trigger('iconFloat', [
+      state('expanded', style({
+        transform: 'scale(1)'
+      })),
+      state('collapsed', style({
+        transform: 'scale(1.2)'
+      })),
+      transition('expanded <=> collapsed', [
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)')
       ])
     ])
   ]
@@ -42,7 +52,7 @@ export class SidebarComponent implements OnInit {
   @Input() isCollapsed = false;
   @Input() isMobile = false;
   @Output() collapse = new EventEmitter<boolean>();
-  
+
   menuItems: MenuItem[];
 
   constructor(private navigationService: NavigationService) {
@@ -64,3 +74,4 @@ export class SidebarComponent implements OnInit {
     return item.path;
   }
 }
+

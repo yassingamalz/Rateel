@@ -1,9 +1,10 @@
 <!-- sidebar.component.html -->
 <aside class="sidebar" 
        [@sidebarState]="isCollapsed ? 'collapsed' : 'expanded'"
-       [class.sidebar--mobile]="isMobile"
+       [class.sidebar--collapsed]="isCollapsed"
        dir="rtl">
   
+  <!-- Header -->
   <div class="sidebar__header">
     <button class="sidebar__toggle" 
             (click)="toggleSidebar()"
@@ -15,26 +16,27 @@
     </button>
   </div>
 
+  <!-- Navigation Menu -->
   <nav class="sidebar__menu">
     <a *ngFor="let item of menuItems; trackBy: trackByFn" 
        [routerLink]="item.path"
        routerLinkActive="sidebar__menu-item--active"
-       class="sidebar__menu-item"
-       [attr.aria-label]="item.label">
-       
+       class="sidebar__menu-item">
+      
+      <!-- Icon Container -->
+      <div class="sidebar__menu-item-icon">
+        <i class="fas fa-{{item.icon}}"></i>
+        <!-- Badge -->
+        <span class="sidebar__menu-item-badge" *ngIf="item.count">
+          {{item.count}}
+        </span>
+      </div>
+      
+      <!-- Label -->
       <span class="sidebar__menu-item-label" 
             [@contentFade]="isCollapsed ? 'hidden' : 'visible'">
         {{item.label}}
       </span>
-      
-      <div class="sidebar__menu-item-icon">
-        <i class="fas fa-{{item.icon}}"></i>
-        <span class="sidebar__menu-item-badge" 
-              *ngIf="item.count"
-              [@contentFade]="isCollapsed ? 'hidden' : 'visible'">
-          {{item.count}}
-        </span>
-      </div>
     </a>
   </nav>
 </aside>

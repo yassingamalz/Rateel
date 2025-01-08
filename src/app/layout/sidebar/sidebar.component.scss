@@ -1,3 +1,4 @@
+// sidebar.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 @use 'mixins' as mix;
@@ -13,109 +14,74 @@
     map.get(vars.$colors, 'primary', 'base'),
     map.get(vars.$colors, 'primary', 'dark')
   );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   z-index: 1000;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
 
-  // Ensure background stays during transition
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      map.get(vars.$colors, 'primary', 'base'),
-      map.get(vars.$colors, 'primary', 'dark')
-    );
-    z-index: -1;
-  }
-
-  &--collapsed {
-    width: 80px;
-
-    .sidebar__menu-item {
-      justify-content: center;
-      padding: 1rem 0;
-      
-      .sidebar__menu-item-label {
-        display: none;
-      }
-      
-      .sidebar__menu-item-icon {
-        margin: 0;
-      }
-
-      &:hover {
-        transform: none;
-        .sidebar__menu-item-icon {
-          transform: scale(1.1);
-          box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-        }
-      }
-    }
-  }
-
+  // Header Section
   &__header {
-    height: map.get(vars.$spacing, 'xl') * 4;
+    height: 80px;
     display: flex;
     align-items: center;
     padding: 0 map.get(vars.$spacing, 'lg');
     justify-content: flex-end;
-    border-bottom: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+    border-bottom: 1px solid rgba(map.get(vars.$colors, 'primary', 'light'), 0.1);
   }
 
+  // Toggle Button
   &__toggle {
-    @include mix.icon-wrapper;
-    background: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.2);
     border: none;
     color: map.get(vars.$colors, 'text', 'light');
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
     
     &:hover {
-      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+      background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.3);
+    }
+
+    i {
+      font-size: 1.25rem;
     }
   }
 
+  // Menu Container
   &__menu {
     display: flex;
     flex-direction: column;
-    gap: map.get(vars.$spacing, 'sm');
-    padding: map.get(vars.$spacing, 'md');
-    margin-top: map.get(vars.$spacing, 'lg');
+    gap: map.get(vars.$spacing, 'md');
+    padding: map.get(vars.$spacing, 'lg');
+    margin-top: map.get(vars.$spacing, 'md');
     overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
+  // Menu Item
   &__menu-item {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-height: 64px;
-    padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
+    height: 72px;
+    padding: map.get(vars.$spacing, 'md') map.get(vars.$spacing, 'lg');
     color: map.get(vars.$colors, 'text', 'light');
     text-decoration: none;
-    border-radius: map.get(vars.$border-radius, 'lg');
-    background: rgba(255, 255, 255, 0.08);
+    border-radius: 36px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: map.get(vars.$spacing, 'md');
 
-    &:hover {
-      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
-      transform: translateX(map.get(vars.$spacing, 'xs') * -2);
-      
-      .sidebar__menu-item-icon {
-        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-        box-shadow: 0 0 15px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-      }
-    }
-
-    &--active {
+    &:hover, &--active {
       background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.15);
       border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
       
@@ -125,52 +91,84 @@
         box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
       }
     }
+
+    // Icon Container
+    &-icon {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      i {
+        font-size: 1.25rem;
+        color: map.get(vars.$colors, 'text', 'ligh');
+      }
+    }
+
+    // Label
+    &-label {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: map.get(vars.$colors, 'text', 'light');
+    }
+
+    // Badge
+    &-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      right:350%;
+      transform: translateY(-50%);
+      min-width: 28px;
+      height: 28px;
+      background: map.get(vars.$colors, 'accent', 'base');
+      color: map.get(vars.$colors, 'text', 'dark');
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+    }
   }
 
-  &__menu-item-label {
-    font-family: 'Cairo', sans-serif;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: map.get(vars.$colors, 'text', 'light');
-    flex: 1;
-  }
+  // Collapsed State
+  &--collapsed {
+    width: 80px;
 
-  &__menu-item-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: map.get(vars.$border-radius, 'md');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    color: map.get(vars.$colors, 'text', 'light');
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 1.25rem;
-    position: relative;
-  }
+    .sidebar__menu {
+      padding: map.get(vars.$spacing, 'sm');
+    }
 
-  &__menu-item-badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    min-width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: map.get(vars.$colors, 'accent', 'base');
-    color: map.get(vars.$colors, 'text', 'dark');
-    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
-    border-radius: map.get(vars.$border-radius, 'full');
-    font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-  }
-}
+    .sidebar__menu-item {
+      height: 64px;
+      padding: map.get(vars.$spacing, 'sm');
+      border-radius: 32px;
+      justify-content: center;
+      margin: map.get(vars.$spacing, 'sm') auto;
 
-// Ensure smooth RTL transitions
-[dir='rtl'], [dir='ltr'] {
-  .sidebar {
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      &-label {
+        display: none;
+      }
+
+      &-badge {
+        left: auto;
+        right: 20px;
+        top: -6px;
+        transform: none;
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+      }
+
+      &-icon {
+        margin: 0;
+      }
+    }
   }
 }
