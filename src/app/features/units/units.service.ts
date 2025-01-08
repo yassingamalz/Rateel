@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Unit } from '../../shared/interfaces/unit';
 import { StorageService } from '../../core/services/storage.service';
+import { CoursesService } from '../courses/courses.service';
 
 @Injectable({
   providedIn: 'root'
@@ -79,30 +80,12 @@ export class UnitsService {
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private coursesService: CoursesService
   ) {
     this.initializeFromStorage();
   }
- 
-  private initializeFromStorage(): void {
-    Object.keys(this.mockUnits).forEach(courseId => {
-      this.mockUnits[courseId] = this.mockUnits[courseId].map(unit => {
-        const data = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
-        if (!data) return unit;
- 
-        const previousUnit = unit.order > 1 ?
-          this.mockUnits[courseId][unit.order - 2] : null;
- 
-        return {
-          ...unit,
-          progress: data.progress,
-          isCompleted: data.isCompleted,
-          isLocked: !(unit.order === 1 || (previousUnit?.isCompleted))
-        };
-      });
-    });
-  }
- 
+
   markUnitAsCompleted(courseId: string, unitId: string): Observable<void> {
     const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
     if (unit) {
@@ -117,6 +100,12 @@ export class UnitsService {
       const nextUnit = this.mockUnits[courseId]?.find(u => u.order === unit.order + 1);
       if (nextUnit) {
         nextUnit.isLocked = false;
+      }
+
+      // Check if all units are completed
+      const allUnitsCompleted = this.mockUnits[courseId]?.every(u => u.isCompleted);
+      if (allUnitsCompleted) {
+        this.coursesService.markCourseAsCompleted(courseId).subscribe();
       }
     }
     return of(void 0);
@@ -139,10 +128,37 @@ export class UnitsService {
         if (nextUnit) {
           nextUnit.isLocked = false;
         }
+
+        // Check for course completion when unit is completed via progress update
+        const allUnitsCompleted = this.mockUnits[courseId]?.every(u => u.isCompleted);
+        if (allUnitsCompleted) {
+          this.coursesService.markCourseAsCompleted(courseId).subscribe();
+        }
       }
     }
     return of(void 0);
   }
+
+ 
+  private initializeFromStorage(): void {
+    Object.keys(this.mockUnits).forEach(courseId => {
+      this.mockUnits[courseId] = this.mockUnits[courseId].map(unit => {
+        const data = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
+        if (!data) return unit;
+ 
+        const previousUnit = unit.order > 1 ?
+          this.mockUnits[courseId][unit.order - 2] : null;
+ 
+        return {
+          ...unit,
+          progress: data.progress,
+          isCompleted: data.isCompleted,
+          isLocked: !(unit.order === 1 || (previousUnit?.isCompleted))
+        };
+      });
+    });
+  }
+ 
 
   setCurrentCourse(courseId: string) {
     this.currentCourseIdSubject.next(courseId);

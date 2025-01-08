@@ -1,6 +1,6 @@
 // courses.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Course } from '../../shared/interfaces/course';
 import { StorageService } from '../../core/services/storage.service';
 
@@ -141,5 +141,19 @@ export class CoursesService {
  
   getCourseById(courseId: string): Course | undefined {
     return this.tajweedCourses.find(course => course.id === courseId);
+  }
+  
+  markCourseAsCompleted(courseId: string): Observable<void> {
+    this.updateCourseProgress(courseId, 100, true);
+    
+    const nextCourse = this.tajweedCourses.find(course => 
+      course.isLocked && course.id !== courseId
+    );
+    
+    if (nextCourse) {
+      this.unlockCourse(nextCourse.id);
+    }
+  
+    return of(void 0);
   }
  }
