@@ -1,110 +1,248 @@
 // lesson-details.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonsService } from '../lessons.service';
-import { Lesson, LessonType } from '../../../shared/interfaces/lesson';
-import { Subscription } from 'rxjs';
+import { LessonState, ProgressData, StorageService } from '../../../core/services/storage.service';
+import { Lesson } from '../../../shared/interfaces/lesson';
 import { InteractiveQuestion } from '../interactive-lesson/interactive-lesson.types';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-lesson-details',
   standalone: false,
   templateUrl: './lesson-details.component.html',
-  styleUrls: ['./lesson-details.component.scss']
+  styleUrls: ['./lesson-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LessonDetailsComponent implements OnInit, OnDestroy {
   lesson: Lesson | undefined;
   practiceQuestions: InteractiveQuestion[] = [];
-  currentProgress: number = 0;
+
+  // State management
+  currentProgress$ = new BehaviorSubject<number>(0);
+  lessonState$ = new BehaviorSubject<LessonState>({
+    currentPosition: 0,
+    isFullscreen: false,
+    lastUpdated: Date.now()
+  });
+
+  isMenuOpen = false;
+
+  private courseId: string;
+  private unitId: string;
+  private lessonId: string;
+  private autoSaveInterval: any;
   private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private lessonsService: LessonsService
-  ) { }
+    private lessonsService: LessonsService,
+    private storageService: StorageService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.courseId = this.route.snapshot.paramMap.get('courseId') || '';
+    this.unitId = this.route.snapshot.paramMap.get('unitId') || '';
+    this.lessonId = this.route.snapshot.paramMap.get('lessonId') || '';
+  }
 
   ngOnInit(): void {
-    const courseId = this.route.snapshot.paramMap.get('courseId')!;
-    const unitId = this.route.snapshot.paramMap.get('unitId')!;
-    const lessonId = this.route.snapshot.paramMap.get('lessonId')!;
+    this.initializeLesson();
+    this.setupAutoSave();
+  }
 
-    const lessonSub = this.lessonsService.getLessonById(courseId, unitId, lessonId)
-      .subscribe(lesson => {
-        this.lesson = lesson;
+  ngOnDestroy(): void {
+    this.clearAutoSave();
+    this.saveCurrentState();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  // Getters for template
+  get currentProgress(): number {
+    return this.currentProgress$.value;
+  }
+
+  get isPlaying(): boolean {
+    return this.getPlayerState()?.isPlaying || false;
+  }
+
+  private initializeLesson(): void {
+    // Load lesson data
+    const lessonSub = this.lessonsService
+      .getLessonById(this.courseId, this.unitId, this.lessonId)
+      .subscribe({
+        next: (lesson) => {
+          this.lesson = lesson;
+
+          // Restore previous state
+          const savedProgress = this.storageService.getProgress('lesson', this.lessonId);
+          if (savedProgress) {
+            this.restoreState(savedProgress);
+          }
+
+          this.cdr.markForCheck();
+        },
+        error: (error) => {
+          console.error('Error loading lesson:', error);
+        }
       });
 
     this.subscriptions.push(lessonSub);
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+  private restoreState(savedProgress: ProgressData): void {
+    this.currentProgress$.next(savedProgress.progress);
+
+    this.lessonState$.next({
+      currentPosition: savedProgress.currentPosition || 0,
+      volume: savedProgress.volume || 1,
+      isMuted: savedProgress.isMuted || false,
+      isFullscreen: savedProgress.isFullscreen || false,
+      lastUpdated: Date.now()
+    });
   }
 
-  get lessonTypeText(): string {
-    switch (this.lesson?.type) {
-      case 'video':
-        return 'درس مرئي';
-      case 'practice':
-        return 'تدريب عملي';
-      case 'listen':
-        return 'درس صوتي';
-      case 'read':
-        return 'درس قراءة';
-      case 'test':
-        return 'اختبار';
-      default:
-        return 'درس';
-    }
+  // Playback Controls
+  togglePlayback(): void {
+    const currentState = this.lessonState$.value;
+    const newState = {
+      ...currentState,
+      isPlaying: !this.isPlaying,
+      lastUpdated: Date.now()
+    };
+
+    this.lessonState$.next(newState);
+    this.saveCurrentState();
+    this.cdr.markForCheck();
   }
 
-  getLessonTypeIcon(): string {
-    switch (this.lesson?.type) {
-      case 'video':
-        return 'fa-play-circle';
-      case 'practice':
-        return 'fa-pen-to-square';
-      case 'listen':
-        return 'fa-headphones';
-      case 'read':
-        return 'fa-book';
-      case 'test':
-        return 'fa-check-circle';
-      default:
-        return 'fa-book-open';
-    }
+  toggleMute(): void {
+    const currentState = this.lessonState$.value;
+    const newState = {
+      ...currentState,
+      isMuted: !currentState.isMuted,
+      lastUpdated: Date.now()
+    };
+
+    this.lessonState$.next(newState);
+    this.saveCurrentState();
+    this.cdr.markForCheck();
   }
 
+  setVolume(value: number): void {
+    const currentState = this.lessonState$.value;
+    const newState = {
+      ...currentState,
+      volume: Math.max(0, Math.min(1, value)),
+      lastUpdated: Date.now()
+    };
+
+    this.lessonState$.next(newState);
+    this.saveCurrentState();
+    this.cdr.markForCheck();
+  }
+
+  restart(): void {
+    const currentState = this.lessonState$.value;
+    const newState = {
+      ...currentState,
+      currentPosition: 0,
+      lastUpdated: Date.now()
+    };
+
+    this.lessonState$.next(newState);
+    this.saveCurrentState();
+    this.cdr.markForCheck();
+  }
+
+  // Progress Management
   updateProgress(progress: number): void {
-    this.currentProgress = progress;
-    if (progress === 100) {
+    this.currentProgress$.next(progress);
+    this.saveCurrentState();
+
+    if (progress >= 100 && !this.lesson?.isCompleted) {
       this.markAsCompleted();
     }
+
+    this.cdr.markForCheck();
   }
 
-  markAsCompleted(): void {
-    if (this.lesson && !this.lesson.isCompleted) {
-      const courseId = this.route.snapshot.paramMap.get('courseId')!;
-      const unitId = this.route.snapshot.paramMap.get('unitId')!;
+  private saveCurrentState(): void {
+    const currentState = this.lessonState$.value;
+    const progress = this.currentProgress$.value;
 
-      const completeSub = this.lessonsService.markLessonAsCompleted(courseId, unitId, this.lesson.id)
-        .subscribe(() => {
-          if (this.lesson) {
-            this.lesson.isCompleted = true;
-          }
-        });
+    this.storageService.saveProgress('lesson', this.lessonId, {
+      progress,
+      currentPosition: currentState.currentPosition,
+      volume: currentState.volume,
+      isMuted: currentState.isMuted,
+      isFullscreen: currentState.isFullscreen,
+      lastUpdated: Date.now()
+    });
+  }
 
-      this.subscriptions.push(completeSub);
+  private setupAutoSave(): void {
+    this.autoSaveInterval = setInterval(() => {
+      this.saveCurrentState();
+    }, 30000); // Save every 30 seconds
+  }
+
+  private clearAutoSave(): void {
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval);
     }
   }
 
-  // New method to handle answer tracking
-  handleAnswer(questionId: string, answer: string | boolean): void {
-    console.log(`Question ${questionId} answered: ${answer}`);
-    // Implement any additional logic for tracking answers
+  // Menu Controls
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+    this.cdr.markForCheck();
   }
 
+  // Navigation
   onNavigateBack(): void {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.saveCurrentState();
+    this.router.navigate(['../../'], {
+      relativeTo: this.route,
+      queryParams: { returnTo: 'lessons' }
+    });
+  }
+
+  // Completion
+  markAsCompleted(): void {
+    if (this.lesson?.isCompleted) return;
+
+    const completeSub = this.lessonsService
+      .markLessonAsCompleted(this.courseId, this.unitId, this.lessonId)
+      .subscribe({
+        next: () => {
+          if (this.lesson) {
+            this.lesson.isCompleted = true;
+            this.updateProgress(100);
+          }
+        },
+        error: (error) => {
+          console.error('Error marking lesson as completed:', error);
+        }
+      });
+
+    this.subscriptions.push(completeSub);
+  }
+
+  // Handle practice answers
+  handleAnswer(event: { questionId: string; answer: any; isCorrect: boolean }): void {
+    this.storageService.saveAnswer(
+      this.lessonId,
+      event.questionId,
+      event.answer,
+      event.isCorrect
+    );
+  }
+
+  private getPlayerState() {
+    return {
+      isPlaying: false, // This should be managed by video/audio player component
+      ...this.lessonState$.value
+    };
   }
 }

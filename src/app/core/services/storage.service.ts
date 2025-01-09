@@ -7,6 +7,38 @@ export interface ProgressData {
   lastAccessedLesson?: string;
   version?: string;
   syncStatus?: 'pending' | 'synced' | 'error';
+  // New fields for lesson tracking
+  currentPosition?: number;    // Current playback position for video/audio
+  volume?: number;            // Volume level (0-1)
+  isMuted?: boolean;         // Mute state
+  isFullscreen?: boolean;    // Fullscreen state
+  lastUpdated?: number;      // Last time progress was updated
+  answers?: {                // Store practice lesson answers
+    [questionId: string]: {
+      answer: any;
+      isCorrect: boolean;
+      timestamp: number;
+    }
+  };
+  bookmarks?: {             // Store lesson bookmarks
+    position: number;
+    label: string;
+    timestamp: number;
+  }[];
+  notes?: {                 // Store user notes
+    position: number;
+    text: string;
+    timestamp: number;
+  }[];
+}
+
+// src/app/core/interfaces/lesson-state.interface.ts
+export interface LessonState {
+  currentPosition: number;
+  volume?: number;
+  isMuted?: boolean;
+  isFullscreen: boolean;
+  lastUpdated: number;
 }
 
 // src/app/core/services/storage.service.ts
@@ -53,40 +85,6 @@ export class StorageService {
         }
       }
     });
-  }
-
-  saveProgress(type: StorageType, id: string, data: Partial<ProgressData>): void {
-    const key = this.PREFIX[type] + id;
-    const existingData = this.getProgress(type, id);
-
-    const newData: ProgressData = {
-      progress: data.progress ?? existingData?.progress ?? 0,
-      timestamp: Date.now(),
-      expiresAt: Date.now() + this.TWO_YEARS,
-      isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
-      lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
-      version: this.VERSION,
-      syncStatus: 'pending'
-    };
-
-    try {
-      localStorage.setItem(key, JSON.stringify(newData));
-      this.changes$.next({ type, id, data: newData });
-
-      if (type === 'lesson') {
-        this.updateParentProgress('unit', id.split('_')[0]);
-      } else if (type === 'unit') {
-        this.updateParentProgress('course', id.split('_')[0]);
-      }
-    } catch (error) {
-      console.error('Error saving progress:', error);
-      // Handle storage quota exceeded
-      if (error instanceof Error && error.name === 'QuotaExceededError') {
-        this.clearExpiredData();
-        // Retry save
-        localStorage.setItem(key, JSON.stringify(newData));
-      }
-    }
   }
 
   getProgress(type: StorageType, id: string): ProgressData | null {
@@ -193,10 +191,124 @@ export class StorageService {
     return null;
   }
 
+  saveProgress(type: StorageType, id: string, data: Partial<ProgressData>): void {
+    const key = this.PREFIX[type] + id;
+    const existingData = this.getProgress(type, id);
+
+    const newData: ProgressData = {
+      progress: data.progress ?? existingData?.progress ?? 0,
+      timestamp: Date.now(),
+      expiresAt: Date.now() + this.TWO_YEARS,
+      isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
+      lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
+      version: this.VERSION,
+      syncStatus: 'pending',
+      currentPosition: data.currentPosition ?? existingData?.currentPosition ?? 0,
+      volume: data.volume ?? existingData?.volume ?? 1,
+      isMuted: data.isMuted ?? existingData?.isMuted ?? false,
+      isFullscreen: data.isFullscreen ?? existingData?.isFullscreen ?? false,
+      lastUpdated: Date.now(),
+      // Preserve existing data
+      answers: data.answers ?? existingData?.answers ?? {},
+      bookmarks: data.bookmarks ?? existingData?.bookmarks ?? [],
+      notes: data.notes ?? existingData?.notes ?? []
+    };
+
+    try {
+      localStorage.setItem(key, JSON.stringify(newData));
+      this.changes$.next({ type, id, data: newData });
+
+      if (type === 'lesson') {
+        this.updateParentProgress('unit', id.split('_')[0]);
+      } else if (type === 'unit') {
+        this.updateParentProgress('course', id.split('_')[0]);
+      }
+    } catch (error) {
+      console.error('Error saving progress:', error);
+      if (error instanceof Error && error.name === 'QuotaExceededError') {
+        this.clearExpiredData();
+        localStorage.setItem(key, JSON.stringify(newData));
+      }
+    }
+  }
+
+  // New method to save lesson state
+  saveLessonState(lessonId: string, state: Partial<LessonState>): void {
+    const existingData = this.getProgress('lesson', lessonId);
+    
+    this.saveProgress('lesson', lessonId, {
+      ...existingData,
+      currentPosition: state.currentPosition,
+      volume: state.volume,
+      isMuted: state.isMuted,
+      isFullscreen: state.isFullscreen,
+      lastUpdated: Date.now()
+    });
+  }
+
+  // New method to add bookmark
+  addBookmark(lessonId: string, position: number, label: string): void {
+    const existingData = this.getProgress('lesson', lessonId);
+    const bookmarks = existingData?.bookmarks ?? [];
+    
+    bookmarks.push({
+      position,
+      label,
+      timestamp: Date.now()
+    });
+
+    this.saveProgress('lesson', lessonId, {
+      ...existingData,
+      bookmarks
+    });
+  }
+
+  // New method to add note
+  addNote(lessonId: string, position: number, text: string): void {
+    const existingData = this.getProgress('lesson', lessonId);
+    const notes = existingData?.notes ?? [];
+    
+    notes.push({
+      position,
+      text,
+      timestamp: Date.now()
+    });
+
+    this.saveProgress('lesson', lessonId, {
+      ...existingData,
+      notes
+    });
+  }
+
+  // New method to save answer
+  saveAnswer(lessonId: string, questionId: string, answer: any, isCorrect: boolean): void {
+    const existingData = this.getProgress('lesson', lessonId);
+    const answers = existingData?.answers ?? {};
+    
+    answers[questionId] = {
+      answer,
+      isCorrect,
+      timestamp: Date.now()
+    };
+
+    this.saveProgress('lesson', lessonId, {
+      ...existingData,
+      answers
+    });
+  }
+
   private migrateData(data: ProgressData): ProgressData {
     // Implement version migration logic here
     return {
       ...data,
+      currentPosition: data.currentPosition ?? 0,
+      volume: data.volume ?? 1,
+      isMuted: data.isMuted ?? false,
+      isFullscreen: data.isFullscreen ?? false,
+      lastUpdated: data.lastUpdated ?? Date.now(),
+      answers: data.answers ?? {},
+      bookmarks: data.bookmarks ?? [],
+      notes: data.notes ?? [],
       version: this.VERSION
     };
   }

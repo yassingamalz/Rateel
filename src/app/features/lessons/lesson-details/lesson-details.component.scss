@@ -3,169 +3,207 @@
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-.lesson-details-page {
-  width: 90vw;
-  height: 100vh-20vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'xl') 0;
-}
-
-.lesson-details-card {
-  width: 90%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: map.get(vars.$border-radius, 'lg');
+.lesson-details {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
+  background: map.get(vars.$colors, 'primary', 'dark');
 
-.lesson-header {
-  display: flex;
-  align-items: center;
-  gap: map.get(vars.$spacing, 'md');
-  padding: map.get(vars.$spacing, 'lg');
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  // Top Progress Bar
+  .progress-bar-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
 
-  .back-button {
-    @include mix.glass-effect;
-    width: 40px;
-    height: 40px;
+    .progress-fill {
+      height: 100%;
+      background: map.get(vars.$colors, 'accent', 'base');
+      transition: width 0.3s ease;
+    }
+  }
+
+  // Main Content Area
+  .content-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .lesson-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: map.get(vars.$spacing, 'xl');
+
+      .video-container,
+      .recitation-area,
+      .audio-controls,
+      .reading-container {
+        width: 100%;
+        margin-bottom: map.get(vars.$spacing, 'lg');
+      }
+
+      .video-container {
+        aspect-ratio: 16 / 9;
+        border-radius: map.get(vars.$border-radius, 'lg');
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .recitation-area,
+      .reading-container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: map.get(vars.$border-radius, 'lg');
+        padding: map.get(vars.$spacing, 'xl');
+        @include mix.glass-effect;
+      }
+    }
+  }
+
+  // Control Button
+  .control-button {
+    position: absolute;
+    top: map.get(vars.$spacing, 'lg');
+    right: map.get(vars.$spacing, 'lg');
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     color: map.get(vars.$colors, 'text', 'light');
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: map.get(vars.$transitions, 'base');
+    transition: all 0.3s ease;
+    z-index: 20;
 
     &:hover {
       background: rgba(255, 255, 255, 0.2);
-      transform: translateX(-2px);
-    }
-  }
-
-  .lesson-title {
-    font-size: map.get(vars.$font-size, 'xl');
-    font-weight: 600;
-    color: map.get(vars.$colors, 'text', 'light');
-    font-family: 'Cairo', sans-serif;
-  }
-}
-
-.lesson-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: map.get(vars.$spacing, 'xl');
-
-  .video-container,
-  .recitation-area,
-  .audio-controls,
-  .reading-container {
-    width: 100%;
-    margin-bottom: map.get(vars.$spacing, 'lg');
-  }
-
-  .video-container {
-    aspect-ratio: 16 / 9;
-    border-radius: map.get(vars.$border-radius, 'lg');
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .recitation-area,
-  .reading-container {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: map.get(vars.$border-radius, 'lg');
-    padding: map.get(vars.$spacing, 'xl');
-    @include mix.glass-effect;
-  }
-
-  .audio-controls {
-    display: flex;
-    align-items: center;
-    gap: map.get(vars.$spacing, 'md');
-    padding: map.get(vars.$spacing, 'md');
-    border-radius: map.get(vars.$border-radius, 'lg');
-    @include mix.glass-effect;
-  }
-}
-
-.lesson-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: map.get(vars.$spacing, 'lg');
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-  .lesson-info {
-    display: flex;
-    align-items: center;
-    gap: map.get(vars.$spacing, 'lg');
-
-    .lesson-type {
-      display: flex;
-      align-items: center;
-      gap: map.get(vars.$spacing, 'sm');
-      color: map.get(vars.$colors, 'accent', 'base');
-      font-weight: 500;
-
-      i {
-        font-size: map.get(vars.$font-size, 'xl');
-      }
-    }
-
-    .lesson-duration {
-      display: flex;
-      align-items: center;
-      gap: map.get(vars.$spacing, 'xs');
-      color: map.get(vars.$colors, 'text', 'muted');
-
-      i {
-        font-size: map.get(vars.$font-size, 'base');
-      }
-    }
-  }
-
-  .mark-complete-button {
-    @include mix.glass-effect;
-    display: flex;
-    align-items: center;
-    gap: map.get(vars.$spacing, 'sm');
-    padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
-    border-radius: map.get(vars.$border-radius, 'full');
-    border: none;
-    color: map.get(vars.$colors, 'text', 'light');
-    cursor: pointer;
-    transition: map.get(vars.$transitions, 'base');
-
-    &.completed {
-      background: map.get(vars.$colors, 'accent', 'base');
-      color: map.get(vars.$colors, 'text', 'dark');
-      box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
-    }
-
-    &:hover:not(.completed) {
-      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-      transform: translateY(-2px);
+      transform: scale(1.05);
     }
 
     i {
       font-size: map.get(vars.$font-size, 'lg');
     }
   }
+
+  // Side Menu
+  .side-menu {
+    position: absolute;
+    top: 50%;
+    right: -100%; // Changed from 0
+    transform: translateY(-50%); // Center vertically
+    height: auto; // Changed from 100%
+    background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.95);
+    backdrop-filter: blur(10px);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 30;
+    border-radius: map.get(vars.$border-radius, 'lg') 0 0 map.get(vars.$border-radius, 'lg');
+
+    &.active {
+      right: 0; // Slide in from right
+    }
+
+    .menu-header {
+      padding: map.get(vars.$spacing, 'md');
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h2 {
+        font-size: map.get(vars.$font-size, 'lg');
+      }
+    }
+
+    .menu-content {
+      padding: map.get(vars.$spacing, 'md');
+      display: flex;
+      flex-direction: row; // Changed to row
+      align-items: center;
+      gap: map.get(vars.$spacing, 'md');
+
+      .menu-item {
+        padding: map.get(vars.$spacing, 'sm');
+        border-radius: map.get(vars.$border-radius, 'full');
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: map.get(vars.$colors, 'text', 'light');
+        display: flex;
+        align-items: center;
+        gap: map.get(vars.$spacing, 'sm');
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap; // Prevent text wrapping
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        i {
+          font-size: map.get(vars.$font-size, 'lg');
+        }
+      }
+
+      .progress-section {
+        padding: 0 map.get(vars.$spacing, 'md');
+        min-width: 200px; // Give some minimum width
+
+        .progress-header {
+          display: flex;
+          justify-content: space-between;
+          color: map.get(vars.$colors, 'text', 'muted');
+          margin-bottom: map.get(vars.$spacing, 'xs');
+        }
+
+        .progress-bar {
+          height: 4px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: map.get(vars.$border-radius, 'full');
+          overflow: hidden;
+
+          .progress-fill {
+            height: 100%;
+            background: map.get(vars.$colors, 'accent', 'base');
+            transition: width 0.3s ease;
+          }
+        }
+      }
+    }
+  }
 }
 
-// Animation keyframes
+// RTL Adjustments
+[dir="rtl"] {
+  .lesson-details {
+    .control-button {
+      right: auto;
+      left: map.get(vars.$spacing, 'lg');
+    }
+
+    .side-menu {
+      right: auto;
+      left: 0;
+      transform: translateX(-100%);
+
+      &.active {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+// Animation Keyframes
 @keyframes pulse {
   0% {
     opacity: 1;
@@ -180,62 +218,5 @@
   100% {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-// RTL specific adjustments
-[dir="rtl"] {
-  .back-button {
-    transform: rotate(180deg);
-
-    &:hover {
-      transform: rotate(180deg) translateX(-2px);
-    }
-  }
-
-  .lesson-info {
-    direction: rtl;
-  }
-
-  .audio-controls {
-    direction: ltr; // Keep audio controls LTR for better UX
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-  .lesson-details-page {
-    padding: map.get(vars.$spacing, 'md');
-  }
-
-  .lesson-content {
-    padding: map.get(vars.$spacing, 'lg');
-  }
-
-  .audio-controls {
-    flex-wrap: wrap;
-
-    .progress-bar {
-      order: 3;
-      width: 100%;
-      margin-top: map.get(vars.$spacing, 'md');
-    }
-  }
-
-  .lesson-footer {
-    flex-direction: column;
-    gap: map.get(vars.$spacing, 'md');
-
-    .mark-complete-button {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  .recitation-area,
-  .reading-container {
-    .arabic-text {
-      font-size: map.get(vars.$font-size, 'xl');
-    }
   }
 }
