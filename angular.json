@@ -38,13 +38,7 @@
             ],
             "styles": [
               {
-                "input": "src/styles/critical.scss",
-                "bundleName": "critical",
-                "inject": true
-              },
-              {
                 "input": "src/styles/styles.scss",
-                "bundleName": "non-critical",
                 "inject": true
               },
               {
@@ -124,13 +118,7 @@
             ],
             "styles": [
               {
-                "input": "src/styles/critical.scss",
-                "bundleName": "critical",
-                "inject": true
-              },
-              {
                 "input": "src/styles/styles.scss",
-                "bundleName": "non-critical",
                 "inject": true
               },
               {
