@@ -39,7 +39,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private lessonsService: LessonsService,
     private storageService: StorageService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.courseId = this.route.snapshot.paramMap.get('courseId') || '';
     this.unitId = this.route.snapshot.paramMap.get('unitId') || '';

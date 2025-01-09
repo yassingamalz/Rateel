@@ -1,12 +1,17 @@
+<!-- main-layout.component.html -->
 <div class="main-layout" dir="rtl" #mainContainer>
-  <app-sidebar 
-    [isMobile]="isMobile"
-    [isCollapsed]="isSidebarCollapsed"
-    (collapse)="onSidebarCollapse($event)">
-  </app-sidebar>
+  <!-- Only create sidebar DOM element if not hidden -->
+  <ng-container *ngIf="(shouldShowSidebar$ | async)">
+    <app-sidebar 
+      [isMobile]="isMobile"
+      [isCollapsed]="isSidebarCollapsed"
+      [class.sidebar--collapsed]="isSidebarCollapsed"
+      (collapse)="onSidebarCollapse($event)">
+    </app-sidebar>
+  </ng-container>
   
   <main class="main-content" 
-    [@contentState]="isSidebarCollapsed ? 'collapsed' : 'expanded'"
+    [class.no-sidebar]="!(shouldShowSidebar$ | async)"
     [class.mobile]="isMobile">
     <div class="content-wrapper">
       <router-outlet></router-outlet>

@@ -1,78 +1,48 @@
 <!-- lesson-details.component.html -->
-<div class="lesson-details" dir="rtl">
+<div class="lesson-details">
   <!-- Progress Bar -->
-  <div class="progress-bar-top">
+  <div class="progress-bar">
     <div class="progress-fill" [style.width.%]="currentProgress"></div>
   </div>
 
-  <!-- Main Content Area -->
-  <div class="content-area">
-    <div class="lesson-content" [ngSwitch]="lesson?.type">
-      <app-video-player *ngSwitchCase="'video'" [videoUrl]="lesson?.videoUrl" [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
-      </app-video-player>
+  <!-- Progress Text -->
+  <div class="progress-text">{{currentProgress}}/1</div>
 
-      <!--       <app-interactive-lesson
-        *ngSwitchCase="'practice'"
-        [questions]="practiceQuestions"
-        [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)"
-        (onComplete)="markAsCompleted()"
-        (onAnswer)="handleAnswer($event)">
-      </app-interactive-lesson>
-      
-      <app-audio-player
-        *ngSwitchCase="'listen'"
-        [audioUrl]="lesson?.audioUrl"
-        [isCompleted]="lesson?.isCompleted"
-        [currentPosition]="lessonState$.value.currentPosition"
-        [volume]="lessonState$.value.volume"
-        [isMuted]="lessonState$.value.isMuted"
-        (onProgress)="updateProgress($event)"
-        (onComplete)="markAsCompleted()"
-        (onPositionChange)="saveCurrentState()">
-      </app-audio-player> -->
-
-      <app-reading-lesson *ngSwitchCase="'read'" [content]="lesson?.readingContent" [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
-      </app-reading-lesson>
-    </div>
-
-    <!-- Control Button -->
+  <!-- Control Button / Menu -->
+  <div class="controls-area" [class.menu-open]="isMenuOpen">
     <button class="control-button" (click)="toggleMenu()">
-      <i class="fas" [class.fa-pause]="isPlaying" [class.fa-play]="!isPlaying"></i>
+      <i class="fas" [class.fa-pause]="!isMenuOpen" [class.fa-play]="isMenuOpen"></i>
     </button>
 
-    <!-- Side Menu -->
-    <div class="side-menu" [class.active]="isMenuOpen">
-      <div class="menu-content">
-        <button class="menu-item" (click)="togglePlayback()">
-          <i class="fas" [class.fa-pause]="isPlaying" [class.fa-play]="!isPlaying"></i>
-          <span>{{ isPlaying ? 'إيقاف' : 'تشغيل' }}</span>
-        </button>
+    <div class="menu-items" [class.active]="isMenuOpen">
+      <button class="menu-item" (click)="onNavigateBack()">
+        <i class="fas fa-arrow-right"></i>
+      </button>
 
-        <button class="menu-item" (click)="restart()">
-          <i class="fas fa-redo"></i>
-          <span>إعادة</span>
-        </button>
+      <button class="menu-item" (click)="restart()">
+        <i class="fas fa-redo"></i>
+      </button>
+    </div>
+  </div>
 
-        <!-- Progress Section -->
-        <div class="progress-section">
-          <div class="progress-header">
-            <span>التقدم</span>
-            <span>{{ currentProgress }}%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" [style.width.%]="currentProgress"></div>
-          </div>
-        </div>
+  <!-- Main Content -->
+  <div class="content-area">
+    <div class="lesson-content" [ngSwitch]="lesson?.type">
+      <app-video-player 
+        *ngSwitchCase="'video'" 
+        [videoUrl]="lesson?.videoUrl" 
+        [isCompleted]="lesson?.isCompleted"
+        (onProgress)="updateProgress($event)" 
+        (onComplete)="markAsCompleted()">
+      </app-video-player>
 
-        <!-- Back Button -->
-        <button class="menu-item" (click)="onNavigateBack()">
-          <i class="fas fa-arrow-right"></i>
-          <span>رجوع للدروس</span>
-        </button>
-      </div>
+      <app-reading-lesson 
+        *ngSwitchCase="'read'" 
+        [content]="lesson?.readingContent" 
+        [isCompleted]="lesson?.isCompleted"
+        (onProgress)="updateProgress($event)" 
+        (onComplete)="markAsCompleted()">
+      </app-reading-lesson>
     </div>
   </div>
 </div>

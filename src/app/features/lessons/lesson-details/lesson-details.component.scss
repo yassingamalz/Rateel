@@ -10,15 +10,15 @@
   overflow: hidden;
   background: map.get(vars.$colors, 'primary', 'dark');
 
-  // Top Progress Bar
-  .progress-bar-top {
-    position: absolute;
+  // Progress Bar
+  .progress-bar {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 10;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    height: 4px; 
+    z-index: 50;
 
     .progress-fill {
       height: 100%;
@@ -27,196 +27,133 @@
     }
   }
 
+  // Progress Text
+  .progress-text {
+    position: fixed;
+    top: 10px;
+    left: 16px; // Left side for RTL layout
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 51;
+    padding: 2px 100px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  // Controls Area
+  .controls-area {
+    position: fixed;
+    top: 10px;
+    right: 30px; 
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    // Main Control Button
+    .control-button {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 102;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+      }
+
+      i {
+        font-size: 30px;
+      }
+    }
+
+    // Menu Items
+    .menu-items {
+      display: flex;
+      gap: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(20px); // Slide from right for RTL
+      transition: all 0.3s ease;
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+      }
+
+      .menu-item {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: scale(1.05);
+        }
+
+        i {
+          font-size: 30px;
+
+          &.fa-arrow-right {
+            transform: scaleX(-1); // Flip arrow for RTL
+          }
+        }
+
+        &.active {
+          background: map.get(vars.$colors, 'accent', 'base');
+        }
+      }
+    }
+  }
+
   // Main Content Area
   .content-area {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    padding-top: 40px;
 
     .lesson-content {
-      flex: 1;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: map.get(vars.$spacing, 'xl');
-
-      .video-container,
-      .recitation-area,
-      .audio-controls,
-      .reading-container {
-        width: 100%;
-        margin-bottom: map.get(vars.$spacing, 'lg');
-      }
+      padding: map.get(vars.$spacing, 'lg');
 
       .video-container {
+        width: 100%;
+        max-width: 1200px;
         aspect-ratio: 16 / 9;
-        border-radius: map.get(vars.$border-radius, 'lg');
+        border-radius: 8px;
         overflow: hidden;
         background: rgba(0, 0, 0, 0.2);
       }
 
-      .recitation-area,
       .reading-container {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: map.get(vars.$border-radius, 'lg');
-        padding: map.get(vars.$spacing, 'xl');
-        @include mix.glass-effect;
+        width: 100%;
+        height: 100%;
+        padding: map.get(vars.$spacing, 'lg');
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
       }
     }
-  }
-
-  // Control Button
-  .control-button {
-    position: absolute;
-    top: map.get(vars.$spacing, 'lg');
-    right: map.get(vars.$spacing, 'lg');
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: map.get(vars.$colors, 'text', 'light');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 20;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
-    }
-
-    i {
-      font-size: map.get(vars.$font-size, 'lg');
-    }
-  }
-
-  // Side Menu
-  .side-menu {
-    position: absolute;
-    top: 50%;
-    right: -100%; // Changed from 0
-    transform: translateY(-50%); // Center vertically
-    height: auto; // Changed from 100%
-    background: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.95);
-    backdrop-filter: blur(10px);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 30;
-    border-radius: map.get(vars.$border-radius, 'lg') 0 0 map.get(vars.$border-radius, 'lg');
-
-    &.active {
-      right: 0; // Slide in from right
-    }
-
-    .menu-header {
-      padding: map.get(vars.$spacing, 'md');
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      h2 {
-        font-size: map.get(vars.$font-size, 'lg');
-      }
-    }
-
-    .menu-content {
-      padding: map.get(vars.$spacing, 'md');
-      display: flex;
-      flex-direction: row; // Changed to row
-      align-items: center;
-      gap: map.get(vars.$spacing, 'md');
-
-      .menu-item {
-        padding: map.get(vars.$spacing, 'sm');
-        border-radius: map.get(vars.$border-radius, 'full');
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        color: map.get(vars.$colors, 'text', 'light');
-        display: flex;
-        align-items: center;
-        gap: map.get(vars.$spacing, 'sm');
-        cursor: pointer;
-        transition: all 0.3s ease;
-        white-space: nowrap; // Prevent text wrapping
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-2px);
-        }
-
-        i {
-          font-size: map.get(vars.$font-size, 'lg');
-        }
-      }
-
-      .progress-section {
-        padding: 0 map.get(vars.$spacing, 'md');
-        min-width: 200px; // Give some minimum width
-
-        .progress-header {
-          display: flex;
-          justify-content: space-between;
-          color: map.get(vars.$colors, 'text', 'muted');
-          margin-bottom: map.get(vars.$spacing, 'xs');
-        }
-
-        .progress-bar {
-          height: 4px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: map.get(vars.$border-radius, 'full');
-          overflow: hidden;
-
-          .progress-fill {
-            height: 100%;
-            background: map.get(vars.$colors, 'accent', 'base');
-            transition: width 0.3s ease;
-          }
-        }
-      }
-    }
-  }
-}
-
-// RTL Adjustments
-[dir="rtl"] {
-  .lesson-details {
-    .control-button {
-      right: auto;
-      left: map.get(vars.$spacing, 'lg');
-    }
-
-    .side-menu {
-      right: auto;
-      left: 0;
-      transform: translateX(-100%);
-
-      &.active {
-        transform: translateX(0);
-      }
-    }
-  }
-}
-
-// Animation Keyframes
-@keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
   }
 }

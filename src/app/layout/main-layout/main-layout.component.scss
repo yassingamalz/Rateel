@@ -24,7 +24,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  will-change: transform;
+  contain: layout size;
 }
 
 .main-content {
@@ -32,9 +32,20 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: margin-right, transform;
-  contain: content;
+  contain: layout;
+  will-change: margin-right;
+  
+  app-sidebar:not(.sidebar--collapsed) ~ & {
+    margin-right: 320px;
+  }
+
+  app-sidebar.sidebar--collapsed ~ & {
+    margin-right: 80px;
+  }
+  
+  &.no-sidebar {
+    margin-right: 0 !important;
+  }
 
   &.mobile {
     margin-right: 0 !important;
@@ -44,7 +55,7 @@
 .content-wrapper {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
   transform: translateZ(0);
@@ -53,20 +64,9 @@
   &::-webkit-scrollbar {
     display: none;
   }
-
+  
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-[dir="rtl"] {
-  .main-content {
-    margin-right: 320px;
-    margin-left: 0;
-
-    &.mobile {
-      margin-right: 0;
-    }
-  }
 }
 
 // Performance optimizations
@@ -76,10 +76,31 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
-  perspective: 1000px;
+  perspective: 1000;
+  contain: layout paint style;
 }
 
-// GPU acceleration for animations
-.main-content {
-  transform: translate3d(0, 0, 0);
+// RTL specific styles
+[dir="rtl"] {
+  .main-content {
+    margin-left: 0;
+
+    app-sidebar:not(.sidebar--collapsed) ~ & {
+      margin-right: 320px;
+      margin-left: 0;
+    }
+
+    app-sidebar.sidebar--collapsed ~ & {
+      margin-right: 80px;
+      margin-left: 0;
+    }
+
+    &.no-sidebar {
+      margin-right: 0 !important;
+    }
+
+    &.mobile {
+      margin-right: 0 !important;
+    }
+  }
 }
