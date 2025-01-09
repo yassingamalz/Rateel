@@ -250,96 +250,92 @@
     max-width: 400px;
     opacity: 0.7;
     transform: scale(0.9);
-    transition: 
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     filter: saturate(0.8);
     position: relative;
     z-index: 1;
     scroll-snap-align: center;
     will-change: transform, opacity;
-
+  
     // Start circle (right in RTL) - only for non-first cards
     &:not(:first-child)::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: -8px;
-        width: 16px;
-        height: 16px;
-        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-        border-radius: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        transition: all 0.3s ease;
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      transition: all 0.3s ease;
     }
-
+  
     // End circle (left in RTL)
     &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+  
+    // Connecting line
+    &:not(:last-child) {
+      &::before {
         content: '';
         position: absolute;
         top: 50%;
-        left: -8px;
-        width: 16px;
-        height: 16px;
-        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-        border-radius: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        transition: all 0.3s ease;
-    }
-
-    // Connecting line
-    .connector-line {
-        position: absolute;
-        top: 50%;
-        right: -#{map.get(vars.$spacing, 'xl')};
+        left: (-(map.get(vars.$spacing, 'xl')));
         width: map.get(vars.$spacing, 'xl');
         height: 3px;
         background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
         transform: translateY(-50%);
         z-index: 1;
+      }
     }
-
-    &:last-child {
-        .connector-line {
-            display: none;
-        }
-    }
-
+  
     &--completed {
-        &::before,
-        &::after {
-            background: map.get(vars.$colors, 'accent', 'base');
-            box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
-        }
-
-        .connector-line {
-            background: map.get(vars.$colors, 'accent', 'base');
-            box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-        }
+      &::before,
+      &::after {
+        background: map.get(vars.$colors, 'accent', 'base');
+        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
+      }
+  
+      &::before {
+        background: map.get(vars.$colors, 'accent', 'base');
+        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+      }
     }
-
+  
     &--active {
-        opacity: 1;
-        transform: scale(1);
-        filter: saturate(1);
-        z-index: 2;
-
-        &::before,
-        &::after {
-            background: map.get(vars.$colors, 'accent', 'light');
-            transform: translateY(-50%) scale(1.2);
-        }
+      opacity: 1;
+      transform: scale(1);
+      filter: saturate(1);
+      z-index: 2;
+  
+      &::before,
+      &::after {
+        background: map.get(vars.$colors, 'accent', 'light');
+        transform: translateY(-50%) scale(1.2);
+      }
     }
-
+  
     &:hover:not(.dragging) {
-        opacity: 1;
-        transform: scale(1);
-        filter: saturate(1);
+      opacity: 1;
+      transform: scale(1);
+      filter: saturate(1);
     }
-}
+  }
 
 // Animation Keyframes
 @keyframes flowMove1 {
