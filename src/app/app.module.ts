@@ -8,6 +8,9 @@ import { LayoutModule } from './layout/layout.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingComponent } from './shared/components/loading/loading.component';
+import { SharedModule } from './shared/shared.module';
+import { LessonsModule } from './features/lessons/lessons.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    SharedModule,
+    LessonsModule,
     CommonModule,
     FontAwesomeModule,
     BrowserAnimationsModule,

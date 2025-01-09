@@ -9,6 +9,7 @@ import { InteractiveLessonComponent } from './interactive-lesson/interactive-les
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReadingLessonComponent } from './reading-lesson/reading-lesson.component';
 import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LessonDetailsComponent } from './lesson-details/lesson-details.componen
   ],
   imports: [
     CommonModule,
+    SharedModule,
     LessonsRoutingModule,
   ]
 })

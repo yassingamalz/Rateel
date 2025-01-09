@@ -1,4 +1,4 @@
-<!--src/app/features/units/unit-details/lessons/lessons-list.component.html -->
+<!-- src/app/features/lessons/lessons-list.component.html -->
 <div class="lessons-page" dir="rtl">
   <header class="lessons-header">
     <div class="header-content">
@@ -9,28 +9,34 @@
     </div>
   </header>
 
-  <div class="lessons-container"
-       #lessonsContainer
-       [class.dragging]="isDragging"
-       (mousedown)="onMouseDown($event)"
-       (mousemove)="onMouseMove($event)"
-       (mouseup)="onMouseUp($event)"
-       (mouseleave)="onMouseLeave()"
-       (touchstart)="onTouchStart($event)"
-       (touchmove)="onTouchMove($event)"
-       (touchend)="onTouchEnd($event)">
-       <div class="lessons-wrapper" *ngIf="lessons$ | async as lessons" @lessonsAnimation>
-        <ng-container *ngFor="let lesson of lessons$ | async; let i = index">
-        <app-lesson-card
-          [lesson]="lesson"
-          [isActive]="lesson.id === activeLessonId"
-          (lessonClick)="onLessonSelected(lesson)"
-          class="lesson-item"
-          [attr.data-lesson-id]="lesson.id">
-        </app-lesson-card>
+  <ng-container *ngIf="(lessons$ | async) as lessons; else loading">
+    <div class="lessons-container"
+         #lessonsContainer
+         [class.dragging]="isDragging"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event)"
+         (mouseup)="onMouseUp($event)"
+         (mouseleave)="onMouseLeave()"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd($event)">
+      <div class="lessons-wrapper" @lessonsAnimation>
+        <ng-container *ngFor="let lesson of lessons; let i = index">
+          <app-lesson-card
+            [lesson]="lesson"
+            [isActive]="lesson.id === activeLessonId"
+            (lessonClick)="onLessonSelected(lesson)"
+            class="lesson-item"
+            [attr.data-lesson-id]="lesson.id">
+          </app-lesson-card>
 
-        <div class="connector-line" *ngIf="i < (lessons$ | async)!.length - 1"></div>
-      </ng-container>
+          <div class="connector-line" *ngIf="i < lessons.length - 1"></div>
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
 </div>
