@@ -28,29 +28,19 @@ export class MainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isSidebarCollapsed = true;
   isMobile = window.innerWidth <= 768;
-  isContentLoaded = false;
+  isContentLoaded = true; // Set this to true by default
 
-  // Store the bound method to use in addEventListener and removeEventListener
   private resizeHandler: () => void;
 
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {
-    // Bind the resize handler method
     this.resizeHandler = this.onWindowResize.bind(this);
     this.checkMobileView();
   }
 
   ngOnInit() {
-    // Pre-load critical assets
-    Promise.all([
-      
-    ]).then(() => {
-      this.isContentLoaded = true;
-      this.cdr.detectChanges();
-    });
-
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -66,7 +56,6 @@ export class MainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // Use the bound method
     window.addEventListener('resize', this.resizeHandler);
   }
 

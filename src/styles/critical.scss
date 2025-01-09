@@ -1,0 +1,57 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+// Only critical variables
+:root {
+  --app-bg: #{map.get(vars.$colors, 'primary', 'base')};
+  --accent-color: #{map.get(vars.$colors, 'accent', 'base')};
+  --text-light: #{map.get(vars.$colors, 'text', 'light')};
+  --text-dark: #{map.get(vars.$colors, 'text', 'dark')};
+  --primary-gradient: #{map.get(vars.$colors, 'primary', 'gradient')};
+}
+
+// Critical base styles
+html, body {
+  font-family: "Cairo", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--app-bg);
+}
+
+// Critical layout styles
+.main-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--primary-gradient);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.main-container {
+  direction: rtl;
+  background: var(--primary-gradient);
+  min-height: 100vh;
+}
+
+// Critical RTL styles
+[dir='rtl'] {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+
+// Critical animations/transitions
+.content-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  transform: translateZ(0);
+}

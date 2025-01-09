@@ -1,25 +1,15 @@
-<!-- main-layout.component.html -->
-<div class="main-layout" dir="rtl" #mainContainer [class.loaded]="isContentLoaded">
-  <!-- Add loading placeholder while styles load -->
-  <div class="loading-placeholder" *ngIf="!isContentLoaded">
-    <div class="placeholder-sidebar"></div>
-    <div class="placeholder-content"></div>
-  </div>
-
-  <!-- Actual content -->
-  <ng-container *ngIf="isContentLoaded">
-    <app-sidebar 
-      [isMobile]="isMobile"
-      [isCollapsed]="isSidebarCollapsed"
-      (collapse)="onSidebarCollapse($event)">
-    </app-sidebar>
-    
-    <main class="main-content" 
-      [@contentState]="isSidebarCollapsed ? 'collapsed' : 'expanded'"
-      [class.mobile]="isMobile">
-      <div class="content-wrapper">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
-  </ng-container>
+<div class="main-layout" dir="rtl" #mainContainer>
+  <app-sidebar 
+    [isMobile]="isMobile"
+    [isCollapsed]="isSidebarCollapsed"
+    (collapse)="onSidebarCollapse($event)">
+  </app-sidebar>
+  
+  <main class="main-content" 
+    [@contentState]="isSidebarCollapsed ? 'collapsed' : 'expanded'"
+    [class.mobile]="isMobile">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 </div>

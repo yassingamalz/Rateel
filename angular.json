@@ -38,19 +38,24 @@
             ],
             "styles": [
               {
+                "input": "src/styles/critical.scss",
+                "bundleName": "critical",
+                "inject": true
+              },
+              {
                 "input": "src/styles/styles.scss",
-                "bundleName": "styles",
+                "bundleName": "non-critical",
                 "inject": true
               },
               {
                 "input": "node_modules/@fortawesome/fontawesome-free/css/all.css",
                 "bundleName": "vendor",
-                "inject": true
+                "inject": false
               },
               {
                 "input": "node_modules/swiper/swiper-bundle.css",
                 "bundleName": "vendor",
-                "inject": true
+                "inject": false
               }
             ],
             "stylePreprocessorOptions": {
@@ -58,7 +63,6 @@
             },
             "optimization": {
               "styles": {
-                "inlineCritical": true,
                 "minify": true
               }
             }
@@ -82,7 +86,6 @@
             "development": {
               "optimization": {
                 "styles": {
-                  "inlineCritical": true,
                   "minify": false
                 }
               },
@@ -121,19 +124,24 @@
             ],
             "styles": [
               {
+                "input": "src/styles/critical.scss",
+                "bundleName": "critical",
+                "inject": true
+              },
+              {
                 "input": "src/styles/styles.scss",
-                "bundleName": "styles",
+                "bundleName": "non-critical",
                 "inject": true
               },
               {
                 "input": "node_modules/@fortawesome/fontawesome-free/css/all.css",
                 "bundleName": "vendor",
-                "inject": true
+                "inject": false
               },
               {
                 "input": "node_modules/swiper/swiper-bundle.css",
                 "bundleName": "vendor",
-                "inject": true
+                "inject": false
               }
             ],
             "scripts": [],

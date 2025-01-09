@@ -25,30 +25,6 @@
   bottom: 0;
   left: 0;
   will-change: transform;
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-
-  &.loaded {
-    opacity: 1;
-  }
-}
-
-// Loading placeholder styles
-.loading-placeholder {
-  display: flex;
-  width: 100%;
-  height: 100%;
-
-  .placeholder-sidebar {
-    width: 320px;
-    height: 100%;
-    background: rgba(map-get(vars.$colors, primary, light), 0.1);
-  }
-
-  .placeholder-content {
-    flex: 1;
-    background: rgba(map-get(vars.$colors, primary, base), 0.05);
-  }
 }
 
 .main-content {

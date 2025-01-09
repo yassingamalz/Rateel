@@ -7,12 +7,10 @@ import { ContentCacheService } from './services/content-cache.service';
 import { OfflineStorageService } from './services/offline-storage.service';
 import { SyncManagerService } from './services/sync-manager.service';
 
-
-
 @NgModule({
   declarations: [
     InitializationComponent,
-    SplashScreenComponent,
+    SplashScreenComponent
   ],
   imports: [
     CommonModule
