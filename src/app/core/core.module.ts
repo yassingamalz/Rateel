@@ -22,6 +22,7 @@ import { SyncManagerService } from './services/sync-manager.service';
     OfflineStorageService,
     AssetPreloaderService,
     SyncManagerService
-  ]
+  ],
+  exports: [SplashScreenComponent]
 })
 export class CoreModule { }

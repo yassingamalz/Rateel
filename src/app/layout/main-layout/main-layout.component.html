@@ -1,5 +1,13 @@
 <!-- main-layout.component.html -->
-<div class="main-layout" dir="rtl" #mainContainer>
+<div class="main-layout" dir="rtl" #mainContainer [class.loaded]="isContentLoaded">
+  <!-- Add loading placeholder while styles load -->
+  <div class="loading-placeholder" *ngIf="!isContentLoaded">
+    <div class="placeholder-sidebar"></div>
+    <div class="placeholder-content"></div>
+  </div>
+
+  <!-- Actual content -->
+  <ng-container *ngIf="isContentLoaded">
     <app-sidebar 
       [isMobile]="isMobile"
       [isCollapsed]="isSidebarCollapsed"
@@ -13,4 +21,5 @@
         <router-outlet></router-outlet>
       </div>
     </main>
-  </div>
+  </ng-container>
+</div>

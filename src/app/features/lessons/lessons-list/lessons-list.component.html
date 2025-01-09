@@ -19,8 +19,8 @@
        (touchstart)="onTouchStart($event)"
        (touchmove)="onTouchMove($event)"
        (touchend)="onTouchEnd($event)">
-    <div class="lessons-wrapper">
-      <ng-container *ngFor="let lesson of lessons$ | async; let i = index">
+       <div class="lessons-wrapper" *ngIf="lessons$ | async as lessons" @lessonsAnimation>
+        <ng-container *ngFor="let lesson of lessons$ | async; let i = index">
         <app-lesson-card
           [lesson]="lesson"
           [isActive]="lesson.id === activeLessonId"

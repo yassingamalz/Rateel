@@ -48,17 +48,17 @@ export class LessonsListComponent implements OnInit {
     private unitsService: UnitsService,
     public route: ActivatedRoute,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
-    
+
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
       tap(lessons => {
         const lessonId = this.route.snapshot.paramMap.get('lessonId');
-        
+
         if (lessonId) {
           this.activeLessonId = lessonId;
         } else {
@@ -73,7 +73,7 @@ export class LessonsListComponent implements OnInit {
         }
       })
     );
-   }
+  }
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {

@@ -1,5 +1,4 @@
-// main-layout.component.ts
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -9,6 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   standalone: false,
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('contentState', [
       state('expanded', style({
@@ -23,17 +23,34 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class MainLayoutComponent implements OnInit, AfterViewInit {
+export class MainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('mainContainer') mainContainer!: ElementRef;
-  
+
   isSidebarCollapsed = true;
   isMobile = window.innerWidth <= 768;
+  isContentLoaded = false;
 
-  constructor(private router: Router) {
+  // Store the bound method to use in addEventListener and removeEventListener
+  private resizeHandler: () => void;
+
+  constructor(
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
+    // Bind the resize handler method
+    this.resizeHandler = this.onWindowResize.bind(this);
     this.checkMobileView();
   }
 
   ngOnInit() {
+    // Pre-load critical assets
+    Promise.all([
+      
+    ]).then(() => {
+      this.isContentLoaded = true;
+      this.cdr.detectChanges();
+    });
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -43,14 +60,14 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
           contentWrapper.scrollTop = 0;
         }
       }
-      
-      // Auto-collapse sidebar on mobile navigation
+
       if (this.isMobile && !this.isSidebarCollapsed) {
         this.onSidebarCollapse(true);
       }
     });
 
-    window.addEventListener('resize', this.onWindowResize.bind(this));
+    // Use the bound method
+    window.addEventListener('resize', this.resizeHandler);
   }
 
   ngAfterViewInit() {
@@ -59,18 +76,19 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() {
     document.body.style.overflow = '';
-    window.removeEventListener('resize', this.onWindowResize.bind(this));
+    // Remove the event listener using the bound method
+    window.removeEventListener('resize', this.resizeHandler);
   }
 
-  private onWindowResize() {
+  private onWindowResize(): void {
     this.checkMobileView();
+    this.cdr.detectChanges();
   }
 
   private checkMobileView() {
     const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= 768;
-    
-    // Auto-collapse on mobile transition
+
     if (!wasMobile && this.isMobile && !this.isSidebarCollapsed) {
       this.onSidebarCollapse(true);
     }
@@ -78,5 +96,6 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
 
   onSidebarCollapse(isCollapsed: boolean) {
     this.isSidebarCollapsed = isCollapsed;
+    this.cdr.detectChanges();
   }
 }

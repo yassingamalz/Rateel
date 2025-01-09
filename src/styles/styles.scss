@@ -1,3 +1,4 @@
+// src/styles/styles.scss
 @use "sass:map";
 @use 'variables' as vars;
 @use 'mixins' as mix;
@@ -5,14 +6,24 @@
 @use 'components';
 @use 'utils';
 
-// Global styles
+// After all @use statements, define variables
+:root {
+  --app-bg: #{map.get(vars.$colors, 'primary', 'base')};
+  --accent-color: #{map.get(vars.$colors, 'accent', 'base')};
+}
+
+// Then global styles
 html, body {
  font-family: "Cairo", sans-serif;
  margin: 0 !important;
+ height: 100vh;
+ width: 100vw;
+ overflow: hidden;
+ background: var(--app-bg);
 }
 
-// Override scrollbar for RTL
+// Then RTL styles
 [dir='rtl'] {
  scrollbar-width: thin;
- scrollbar-color: map.get(vars.$colors, 'accent', 'base') transparent;
+ scrollbar-color: var(--accent-color) transparent;
 }

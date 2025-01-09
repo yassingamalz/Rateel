@@ -8,13 +8,14 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  contain: content;
 }
 
 .main-layout {
   display: flex;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; // Ensure no scrolling
+  overflow: hidden;
   background: linear-gradient(to bottom right,
       map-get(vars.$colors, primary, base),
       map-get(vars.$colors, primary, dark));
@@ -24,15 +25,40 @@
   bottom: 0;
   left: 0;
   will-change: transform;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+// Loading placeholder styles
+.loading-placeholder {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  .placeholder-sidebar {
+    width: 320px;
+    height: 100%;
+    background: rgba(map-get(vars.$colors, primary, light), 0.1);
+  }
+
+  .placeholder-content {
+    flex: 1;
+    background: rgba(map-get(vars.$colors, primary, base), 0.05);
+  }
 }
 
 .main-content {
   flex: 1;
   height: 100vh;
-  overflow: hidden; // Prevent vertical and horizontal scrolling
+  overflow: hidden;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: margin-right, transform;
+  contain: content;
 
   &.mobile {
     margin-right: 0 !important;
@@ -42,10 +68,11 @@
 .content-wrapper {
   height: 100%;
   width: 100%;
-  overflow: hidden; // Prevent scrolling within the content wrapper
-  -webkit-overflow-scrolling: touch; // Ensure smooth touch behavior
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
   position: relative;
   transform: translateZ(0);
+  contain: content;
 
   &::-webkit-scrollbar {
     display: none;

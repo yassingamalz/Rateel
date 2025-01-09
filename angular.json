@@ -1,126 +1,151 @@
-  {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
-      "tajweed-app": {
-        "projectType": "application",
-        "schematics": {
-          "@schematics/angular:component": {
-            "style": "scss",
-            "standalone": false
-          },
-          "@schematics/angular:directive": {
-            "standalone": false
-          },
-          "@schematics/angular:pipe": {
-            "standalone": false
-          }
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "tajweed-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": false
         },
-        "root": "",
-        "sourceRoot": "src",
-        "prefix": "app",
-        "architect": {
-          "build": {
-            "builder": "@angular-devkit/build-angular:application",
-            "options": {
-              "outputPath": "dist/tajweed-app",
-              "index": "src/index.html",
-              "browser": "src/main.ts",
-              "polyfills": [
-                "zone.js"
-              ],
-              "tsConfig": "tsconfig.app.json",
-              "inlineStyleLanguage": "scss",
-              "assets": [
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/tajweed-app",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              {
+                "input": "src/styles/styles.scss",
+                "bundleName": "styles",
+                "inject": true
+              },
+              {
+                "input": "node_modules/@fortawesome/fontawesome-free/css/all.css",
+                "bundleName": "vendor",
+                "inject": true
+              },
+              {
+                "input": "node_modules/swiper/swiper-bundle.css",
+                "bundleName": "vendor",
+                "inject": true
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
+            "optimization": {
+              "styles": {
+                "inlineCritical": true,
+                "minify": true
+              }
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
                 {
-                  "glob": "**/*",
-                  "input": "public"
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
-              "styles": [
-                "node_modules/@fortawesome/fontawesome-free/css/all.css",
-                "node_modules/swiper/swiper-bundle.css",
-                "src/styles/styles.scss"
-              ],
-              "scripts": [],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles"
-                ]
-              }
+              "outputHashing": "all"
             },
-            "configurations": {
-              "production": {
-                "budgets": [
-                  {
-                    "type": "initial",
-                    "maximumWarning": "500kB",
-                    "maximumError": "1MB"
-                  },
-                  {
-                    "type": "anyComponentStyle",
-                    "maximumWarning": "4kB",
-                    "maximumError": "8kB"
-                  }
-                ],
-                "outputHashing": "all"
-              },
-              "development": {
-                "optimization": false,
-                "extractLicenses": false,
-                "sourceMap": true
-              }
-            },
-            "defaultConfiguration": "production"
-          },
-          "serve": {
-            "builder": "@angular-devkit/build-angular:dev-server",
-            "configurations": {
-              "production": {
-                "buildTarget": "tajweed-app:build:production"
-              },
-              "development": {
-                "buildTarget": "tajweed-app:build:development"
-              }
-            },
-            "defaultConfiguration": "development"
-          },
-          "extract-i18n": {
-            "builder": "@angular-devkit/build-angular:extract-i18n"
-          },
-          "test": {
-            "builder": "@angular-devkit/build-angular:karma",
-            "options": {
-              "polyfills": [
-                "zone.js",
-                "zone.js/testing"
-              ],
-              "tsConfig": "tsconfig.spec.json",
-              "inlineStyleLanguage": "scss",
-              "assets": [
-                {
-                  "glob": "**/*",
-                  "input": "public"
+            "development": {
+              "optimization": {
+                "styles": {
+                  "inlineCritical": true,
+                  "minify": false
                 }
-              ],
-              "styles": [
-                "node_modules/@fortawesome/fontawesome-free/css/all.css",
-                "node_modules/swiper/swiper-bundle.css",
-                "src/styles/styles.scss"
-              ],
-              "scripts": [],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles"
-                ]
+              },
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "tajweed-app:build:production"
+            },
+            "development": {
+              "buildTarget": "tajweed-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
               }
+            ],
+            "styles": [
+              {
+                "input": "src/styles/styles.scss",
+                "bundleName": "styles",
+                "inject": true
+              },
+              {
+                "input": "node_modules/@fortawesome/fontawesome-free/css/all.css",
+                "bundleName": "vendor",
+                "inject": true
+              },
+              {
+                "input": "node_modules/swiper/swiper-bundle.css",
+                "bundleName": "vendor",
+                "inject": true
+              }
+            ],
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
             }
           }
         }
       }
-    },
-    "cli": {
-      "analytics": false
     }
+  },
+  "cli": {
+    "analytics": false
   }
+}
