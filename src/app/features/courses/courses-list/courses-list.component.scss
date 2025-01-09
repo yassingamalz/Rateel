@@ -207,12 +207,12 @@
     padding: map.get(vars.$spacing, 'xl') 0;
     cursor: grab;
     scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     
     &.dragging {
         cursor: grabbing;
         user-select: none;
-        scroll-behavior: auto;
     }
 
     &::-webkit-scrollbar {
