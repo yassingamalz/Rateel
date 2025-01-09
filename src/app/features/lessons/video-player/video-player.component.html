@@ -1,64 +1,25 @@
 <!-- video-player.component.html -->
 <div class="video-player" dir="rtl">
-    <!-- YouTube Video -->
-    <ng-container *ngIf="isYouTubeVideo && safeVideoUrl">
-      <div class="youtube-container">
-        <iframe 
-          [src]="safeVideoUrl"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </ng-container>
-  
-    <!-- Direct Video -->
-    <ng-container *ngIf="!isYouTubeVideo && videoUrl">
-      <div class="video-container">
-        <video #videoElement
-          [src]="videoUrl"
-          (timeupdate)="onTimeUpdate($event)"
-          (ended)="onVideoEnded()"
-          class="video-element">
-        </video>
-  
-        <!-- Custom Controls -->
-        <div class="video-controls" [class.playing]="state.isPlaying">
-          <!-- Main Controls -->
-          <div class="main-controls">
-            <button class="control-button" (click)="togglePlay()">
-              <i class="fas" [class.fa-play]="!state.isPlaying" [class.fa-pause]="state.isPlaying"></i>
-            </button>
-  
-            <button class="control-button" (click)="restartVideo()">
-              <i class="fas fa-redo"></i>
-            </button>
-          </div>
-  
-          <!-- Progress Bar -->
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div 
-                class="progress-bar__fill"
-                [style.width.%]="state.progress"
-                [class.completed]="state.isCompleted">
-              </div>
-            </div>
-  
-            <!-- Time Display -->
-            <div class="time-display">
-              <span>{{ formatTime(state.currentTime) }}</span>
-              <span class="time-separator">/</span>
-              <span>{{ formatTime(state.duration) }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  
-    <!-- Error State -->
-    <div class="error-message" *ngIf="!videoUrl">
-      <i class="fas fa-exclamation-circle"></i>
-      <span>عذراً، لا يمكن تحميل الفيديو</span>
-    </div>
+  <div class="video-container" [class.loading]="!videoUrl">
+    <video #videoElement
+      [src]="videoUrl"
+      (timeupdate)="onTimeUpdate($event)"
+      (ended)="onVideoEnded()"
+      class="video-element">
+    </video>
+
+    <button 
+      class="skip-button" 
+      (click)="handleSkip()"
+      *ngIf="!state.isCompleted">
+      <span class="skip-text">تخطي</span>
+      <i class="fas fa-forward"></i>
+    </button>
   </div>
+
+  <div class="error-message" *ngIf="!videoUrl">
+    <i class="fas fa-exclamation-circle"></i>
+    <span>عذراً، لا يمكن تحميل الفيديو</span>
+  </div>
+</div>
+

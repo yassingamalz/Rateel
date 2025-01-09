@@ -1,4 +1,4 @@
-// src/app/features/lessons/video-player/video-player.component.ts
+// video-player.component.ts
 import {
   Component,
   Input,
@@ -18,7 +18,7 @@ import { VideoPlayerProps, VideoState } from './video-player.types';
   standalone: false,
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss'],
-  providers: [VideoPlayerService] // Scoped to this component
+  providers: [VideoPlayerService]
 })
 export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy {
   @Input() videoUrl?: string;
@@ -28,8 +28,6 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
 
   @ViewChild('videoElement') videoElement?: ElementRef<HTMLVideoElement>;
 
-  isYouTubeVideo = false;
-  safeVideoUrl?: any;
   state!: VideoState;
 
   private subscriptions: Subscription[] = [];
@@ -37,21 +35,13 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   constructor(private videoService: VideoPlayerService) { }
 
   ngOnInit(): void {
-    if (this.videoUrl) {
-      this.isYouTubeVideo = this.videoService.isYouTubeUrl(this.videoUrl);
-      if (this.isYouTubeVideo) {
-        this.safeVideoUrl = this.videoService.getYouTubeEmbedUrl(this.videoUrl);
-      }
-    }
-
-    // Subscribe to video state changes
     this.subscriptions.push(
       this.videoService.getState().subscribe(state => {
         this.state = state;
         this.onProgress.emit(state.progress);
 
         if (state.isCompleted && !this.isCompleted) {
-          this.onComplete.emit();
+          this.handleCompletion();
         }
       })
     );
@@ -76,32 +66,27 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   }
 
   onVideoEnded(): void {
+    this.videoService.updateProgress({
+      currentTime: this.videoElement?.nativeElement.duration || 0,
+      duration: this.videoElement?.nativeElement.duration || 0,
+      progress: 100
+    });
+
+    this.handleCompletion();
+  }
+
+  handleSkip(): void {
+    this.videoService.updateProgress({
+      currentTime: this.videoElement?.nativeElement.duration || 0,
+      duration: this.videoElement?.nativeElement.duration || 0,
+      progress: 100
+    });
+
+    this.handleCompletion();
+  }
+
+  private handleCompletion(): void {
     this.videoService.markAsCompleted();
-  }
-
-  togglePlay(): void {
-    const video = this.videoElement?.nativeElement;
-    if (!video) return;
-
-    if (video.paused) {
-      video.play();
-      this.videoService.setPlaying(true);
-    } else {
-      video.pause();
-      this.videoService.setPlaying(false);
-    }
-  }
-
-  restartVideo(): void {
-    const video = this.videoElement?.nativeElement;
-    if (!video) return;
-
-    video.currentTime = 0;
-    video.play();
-    this.videoService.setPlaying(true);
-  }
-
-  formatTime(seconds: number): string {
-    return this.videoService.formatTime(seconds);
+    this.onComplete.emit();
   }
 }

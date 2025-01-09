@@ -1,6 +1,7 @@
 // lesson-details.component.ts
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LessonsService } from '../lessons.service';
 import { LessonState, ProgressData, StorageService } from '../../../core/services/storage.service';
 import { Lesson } from '../../../shared/interfaces/lesson';
@@ -12,11 +13,27 @@ import { Subscription, BehaviorSubject } from 'rxjs';
   standalone: false,
   templateUrl: './lesson-details.component.html',
   styleUrls: ['./lesson-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideDown', [
+      state('void', style({
+        transform: 'translateY(-100%)'
+      })),
+      state('*', style({
+        transform: 'translateY(0)'
+      })),
+      state('exit', style({
+        transform: 'translateX(100%)' // Changed to slide right for PowerPoint style
+      })),
+      transition('* => exit', animate('500ms ease-in')),
+      transition('void => *', animate('500ms ease-out'))
+    ])
+  ]
 })
 export class LessonDetailsComponent implements OnInit, OnDestroy {
   lesson: Lesson | undefined;
   practiceQuestions: InteractiveQuestion[] = [];
+  animationState: string = '*';
 
   // State management
   currentProgress$ = new BehaviorSubject<number>(0);
@@ -67,19 +84,15 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   }
 
   private initializeLesson(): void {
-    // Load lesson data
     const lessonSub = this.lessonsService
       .getLessonById(this.courseId, this.unitId, this.lessonId)
       .subscribe({
         next: (lesson) => {
           this.lesson = lesson;
-
-          // Restore previous state
           const savedProgress = this.storageService.getProgress('lesson', this.lessonId);
           if (savedProgress) {
             this.restoreState(savedProgress);
           }
-
           this.cdr.markForCheck();
         },
         error: (error) => {
@@ -184,7 +197,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   private setupAutoSave(): void {
     this.autoSaveInterval = setInterval(() => {
       this.saveCurrentState();
-    }, 30000); // Save every 30 seconds
+    }, 30000); // Auto save every 30 seconds
   }
 
   private clearAutoSave(): void {
@@ -201,11 +214,16 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Navigation
   onNavigateBack(): void {
+    this.animationState = 'exit';
     this.saveCurrentState();
-    this.router.navigate(['../../'], {
-      relativeTo: this.route,
-      queryParams: { returnTo: 'lessons' }
-    });
+    
+    setTimeout(() => {
+      // Navigate to the lessons list by removing the lesson ID from the path
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParams: { returnTo: 'lessons' }
+      });
+    }, 500); // Match animation duration
   }
 
   // Completion
@@ -219,6 +237,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           if (this.lesson) {
             this.lesson.isCompleted = true;
             this.updateProgress(100);
+            this.handleCompletion();
           }
         },
         error: (error) => {
@@ -227,6 +246,24 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       });
 
     this.subscriptions.push(completeSub);
+  }
+
+  // Handle completion animation and navigation with PowerPoint-style exit
+  private handleCompletion(): void {
+    // Ensure progress is at 100%
+    this.currentProgress$.next(100);
+    this.saveCurrentState();
+    
+    // Trigger exit animation - slide to right
+    this.animationState = 'exit';
+    
+    // Wait for animation to complete before navigation
+    setTimeout(() => {
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParams: { returnTo: 'lessons' }
+      });
+    }, 500); // Match animation duration
   }
 
   // Handle practice answers
@@ -241,7 +278,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   private getPlayerState() {
     return {
-      isPlaying: false, // This should be managed by video/audio player component
+      isPlaying: false,
       ...this.lessonState$.value
     };
   }

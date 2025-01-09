@@ -4,48 +4,76 @@
 @use 'mixins' as mix;
 
 .lesson-details {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
   background: map.get(vars.$colors, 'primary', 'dark');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  // Progress Bar
+  .progress-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: map.get(vars.$z-index, 'header');
+    display: flex;
+    flex-direction: column;
+    gap: map.get(vars.$spacing, 'xs');
+  }
+
   .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.3);
-    height: 4px; 
-    z-index: 50;
+    width: 200px;
+    height: 24px;
+    position: relative;
+    background: map.get(vars.$colors, 'background', 'overlay');
+    border-radius: map.get(vars.$border-radius, 'full');
+    overflow: hidden;
 
     .progress-fill {
       height: 100%;
-      background: map.get(vars.$colors, 'accent', 'base');
-      transition: width 0.3s ease;
+      background: linear-gradient(to left,
+          map.get(vars.$colors, 'accent', 'dark'),
+          map.get(vars.$colors, 'accent', 'glow'));
+      background-size: 200% 200%;
+      animation: progress-glow 2s ease infinite;
+      border-radius: map.get(vars.$border-radius, 'full');
     }
   }
 
-  // Progress Text
   .progress-text {
-    position: fixed;
-    top: 10px;
-    left: 16px; // Left side for RTL layout
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
+    color: map.get(vars.$colors, 'text', 'light');
+    font-size: map.get(vars.$font-size, 'sm');
     font-weight: 500;
-    z-index: 51;
-    padding: 2px 100px;
-    border-radius: 15px;
-    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 8px rgba(map.get(vars.$colors, 'accent', 'glow'), 0.5);
+    z-index: map.get(vars.$z-index, 'above');
+  }
+
+  @keyframes progress-glow {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   // Controls Area
   .controls-area {
     position: fixed;
-    top: 10px;
-    right: 30px; 
+    top: 20px;
+    right: 30px;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -82,7 +110,7 @@
       gap: 12px;
       opacity: 0;
       visibility: hidden;
-      transform: translateX(20px); // Slide from right for RTL
+      transform: translateX(20px);
       transition: all 0.3s ease;
 
       &.active {
@@ -129,9 +157,13 @@
     width: 100%;
     height: 100%;
     padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .lesson-content {
       width: 100%;
+      max-width: 1200px;
       height: 100%;
       display: flex;
       align-items: center;
@@ -140,7 +172,6 @@
 
       .video-container {
         width: 100%;
-        max-width: 1200px;
         aspect-ratio: 16 / 9;
         border-radius: 8px;
         overflow: hidden;

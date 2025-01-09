@@ -1,12 +1,14 @@
 <!-- lesson-details.component.html -->
-<div class="lesson-details">
-  <!-- Progress Bar -->
-  <div class="progress-bar">
-    <div class="progress-fill" [style.width.%]="currentProgress"></div>
+<div class="lesson-details" [@slideDown]="animationState">
+  <!-- Progress Container -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" 
+           [style.width.%]="currentProgress"
+           [style.transition]="'width 300ms ease-out'"></div>
+    </div>
+    <div class="progress-text">{{currentProgress}}/100</div>
   </div>
-
-  <!-- Progress Text -->
-  <div class="progress-text">{{currentProgress}}/1</div>
 
   <!-- Control Button / Menu -->
   <div class="controls-area" [class.menu-open]="isMenuOpen">
@@ -16,7 +18,7 @@
 
     <div class="menu-items" [class.active]="isMenuOpen">
       <button class="menu-item" (click)="onNavigateBack()">
-        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-arrow-left"></i>
       </button>
 
       <button class="menu-item" (click)="restart()">
@@ -33,7 +35,8 @@
         [videoUrl]="lesson?.videoUrl" 
         [isCompleted]="lesson?.isCompleted"
         (onProgress)="updateProgress($event)" 
-        (onComplete)="markAsCompleted()">
+        (onComplete)="markAsCompleted()"
+        dir="rtl">
       </app-video-player>
 
       <app-reading-lesson 
