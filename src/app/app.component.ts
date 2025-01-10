@@ -24,6 +24,9 @@ export class AppComponent implements OnInit {
     try {
       // Set full screen and handle safe areas
       if (Capacitor.getPlatform() === 'android') {
+        // Explicitly hide status bar
+        await StatusBar.hide();
+
         App.addListener('backButton', () => {
           // Handle back button if needed
         });
@@ -34,7 +37,7 @@ export class AppComponent implements OnInit {
         orientation: 'landscape'
       });
 
-      // Set status bar with full screen
+      // Additional status bar configuration
       await StatusBar.setOverlaysWebView({ overlay: true });
       await StatusBar.setStyle({ style: Style.Dark });
       await StatusBar.setBackgroundColor({ color: '#1B4332' });
