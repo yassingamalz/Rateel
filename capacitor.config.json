@@ -1,20 +1,24 @@
 {
-    "appId": "com.novavista.tajweed",
-    "appName": "tajweed-app",
-    "bundledWebApp": {
-      "htmlDir": "dist/tajweed-app",
-      "jsDir": "dist/tajweed-app/browser"
-    },
-    "plugins": {
-      "SplashScreen": {
-        "launchShowDuration": 3000,
-        "launchAutoHide": true,
-        "backgroundColor": "#1B4332",
-        "androidSplashResourceName": "splash",
-        "androidScaleType": "CENTER_CROP",
-        "ScreenOrientation": {
-            "defaultOrientation": "landscape"
-          }      
+  "appId": "com.novavista.tajweed",
+  "appName": "tajweed-app",
+  "bundledWebApp": {
+    "htmlDir": "dist/tajweed-app",
+    "jsDir": "dist/tajweed-app/browser"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "backgroundColor": "#1B4332",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "ScreenOrientation": {
+          "defaultOrientation": "landscape"
       }
+    },
+    "VoiceRecorder": {
+      "quality": "max",
+      "webAudioMimeType": "audio/wav"
     }
   }
+}

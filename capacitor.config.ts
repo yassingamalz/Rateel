@@ -33,6 +33,10 @@ const config: CapacitorConfig = {
         mixedContent: true,
         setLayoutInDisplayCutoutMode: true
       }
+    },
+    VoiceRecorder: {
+      quality: 'max',
+      webAudioMimeType: 'audio/wav'
     }
   },
   android: {

@@ -4,6 +4,7 @@ import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { App } from '@capacitor/app';
+import { PlatformService } from './core/services/platform.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { App } from '@capacitor/app';
 export class AppComponent implements OnInit {
   title = 'tajweed-app';
 
+  constructor(private platformService: PlatformService) {}
+
   async ngOnInit() {
     if (Capacitor.isNativePlatform()) {
       await this.setupMobileEnvironment();
@@ -22,9 +25,11 @@ export class AppComponent implements OnInit {
 
   async setupMobileEnvironment() {
     try {
+      // Initialize platform capabilities
+      await this.platformService.initializeMicrophone();
+
       // Set full screen and handle safe areas
       if (Capacitor.getPlatform() === 'android') {
-        // Explicitly hide status bar
         await StatusBar.hide();
 
         App.addListener('backButton', () => {
