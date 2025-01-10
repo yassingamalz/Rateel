@@ -193,8 +193,99 @@
   }
 }
 
-@media (max-width: 1000px) and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-height: 600px) {
   .course-card {
-    height: 220px;
+    height: 200px;
+    background: rgba(31, 64, 55, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &__content {
+      padding: map.get(vars.$spacing, 'md');
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: map.get(vars.$spacing, 'sm');
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: map.get(vars.$spacing, 'xs');
+    }
+
+    &__description {
+      font-size: 0.875rem;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.8);
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    &__overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(31, 64, 55, 0.5) 0%,
+        rgba(31, 64, 55, 0.85) 100%
+      );
+    }
+
+    // Achievement Badge - moved up and slightly left
+    &__achievement {
+      top: map.get(vars.$spacing, 'xs'); // Move up
+      left: map.get(vars.$spacing, 'sm'); // Move left
+      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+      color: map.get(vars.$colors, 'accent', 'light');
+      padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+      
+      i {
+        color: map.get(vars.$colors, 'accent', 'light');
+      }
+    }
+
+    // Progress bar styling preserved
+    .progress-bar {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: map.get(vars.$border-radius, 'full');
+      overflow: hidden;
+      margin-bottom: map.get(vars.$spacing, 'xs');
+      
+      &__fill {
+        background: map.get(vars.$colors, 'accent', 'base');
+      }
+
+      &__text {
+        font-size: 0.875rem;
+        color: map.get(vars.$colors, 'text', 'muted');
+      }
+    }
+
+    // Footer and play button adjustments
+    &__footer {
+      padding-bottom: map.get(vars.$spacing, 'sm');
+      margin-top: -#{map.get(vars.$spacing, 'md')}; // Pull up the footer
+    }
+
+    // Play button - moved up
+    &__play {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: map.get(vars.$colors, 'text', 'light');
+      transform: translateY(-#{map.get(vars.$spacing, 'md')}); // Move up
+
+      &:hover {
+        transform: translateY(-#{map.get(vars.$spacing, 'md')}) scale(1.1);
+        background: rgba(map.get(vars.$colors, 'accent', 'muted'), 0.3);
+      }
+    }
+
+    // Lock badge preserved
+    &__lock-badge {
+      background: rgba(0, 0, 0, 0.3);
+      color: map.get(vars.$colors, 'text', 'muted');
+    }
   }
 }
