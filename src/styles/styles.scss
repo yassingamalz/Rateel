@@ -11,7 +11,12 @@
   --text-light: #{map.get(vars.$colors, 'text', 'light')};
   --text-dark: #{map.get(vars.$colors, 'text', 'dark')};
   --primary-gradient: #{map.get(vars.$colors, 'primary', 'gradient')};
+  --ion-safe-area-top: 0px;
+  --ion-safe-area-bottom: 0px;
+  --ion-safe-area-left: 0px;
+  --ion-safe-area-right: 0px;
 }
+
 
 // Prevent text selection and enhance touch experience
 * {
@@ -21,14 +26,15 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  
+
   &:focus {
     outline: none !important;
   }
 }
 
 // Base styles with native optimizations
-html, body {
+html,
+body {
   font-family: "Cairo", sans-serif;
   margin: 0;
   padding: 0;
@@ -40,6 +46,37 @@ html, body {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ion-app {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  contain: layout size style;
+}
+
+.app-root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 // Layout styles with touch optimizations
@@ -78,7 +115,7 @@ html, body {
   transform: translateZ(0);
   -webkit-overflow-scrolling: touch;
   transition: margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -89,7 +126,7 @@ html, body {
   @include mix.course-card;
   cursor: pointer;
   transition: transform 0.2s ease;
-  
+
   &:active {
     transform: scale(0.97);
   }
@@ -114,12 +151,12 @@ img {
 }
 
 // Better touch feedback for buttons
-button, 
+button,
 .button,
 [role="button"] {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  
+
   &:active {
     opacity: 0.7;
     transform: scale(0.98);
@@ -131,7 +168,7 @@ button,
   .main-layout {
     flex-direction: column;
   }
-  
+
   .content-wrapper {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;

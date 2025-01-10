@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="utf-8">
-    <title>TajweedApp</title>
-    <base href="/">
-    
-    <!-- Viewport and mobile optimizations -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="format-detection" content="telephone=no">
-    
-    <!-- Prevent text sizing -->
-    <meta name="text-size-adjust" content="none">
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="styles/styles.scss">
-    
-    <!-- Touch icon -->
-    <link rel="apple-touch-icon" href="assets/icon.png">
+  <meta charset="utf-8">
+  <title>TajweedApp</title>
+  <base href="/">
+
+  <!-- Viewport and mobile optimizations -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Prevent text sizing -->
+  <meta name="text-size-adjust" content="none">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="styles/styles.scss">
+
+  <!-- Touch icon -->
+  <link rel="apple-touch-icon" href="assets/icon.png">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    :root {
+      --ion-safe-area-left: 0px;
+      --ion-safe-area-right: 0px;
+    }
+  </style>
 </head>
+
 <body>
-    <app-root></app-root>
+  <app-root></app-root>
 </body>
+
 </html>
