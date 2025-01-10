@@ -9,24 +9,24 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   &:hover:not(&--locked) {
     transform: translateY(-5px);
-    
+
     .course-card__overlay {
       background-color: rgba(map.get(vars.$colors, 'primary', 'dark'), 0.8);
     }
-    
+
     .course-card__play {
       transform: scale(1.1);
       background: rgba(map.get(vars.$colors, 'accent', 'muted'), 0.3);
     }
   }
-  
+
   &--locked {
     opacity: 0.8;
     cursor: not-allowed;
-    
+
     &:hover {
       transform: none;
     }
@@ -37,7 +37,7 @@
     position: absolute;
     inset: 0;
     overflow: hidden;
-    
+
     img {
       width: 100%;
       height: 100%;
@@ -56,14 +56,14 @@
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
-    
+
     &--1 {
       width: 16rem;
       height: 16rem;
       top: -4rem;
       right: -4rem;
     }
-    
+
     &--2 {
       width: 12rem;
       height: 12rem;
@@ -75,11 +75,9 @@
   &__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5),
-      rgba(map.get(vars.$colors, 'primary', 'base'), 0.8)
-    );
+    background: linear-gradient(to bottom,
+        rgba(map.get(vars.$colors, 'primary', 'dark'), 0.5),
+        rgba(map.get(vars.$colors, 'primary', 'base'), 0.8));
     transition: background-color 0.3s ease;
   }
 
@@ -125,7 +123,7 @@
     border-radius: map.get(vars.$border-radius, 'full');
     color: map.get(vars.$colors, 'accent', 'light');
     font-size: 0.875rem;
-    
+
     i {
       font-size: 1rem;
     }
@@ -164,14 +162,14 @@
     border-radius: map.get(vars.$border-radius, 'full');
     overflow: hidden;
     margin-bottom: map.get(vars.$spacing, 'xs');
-    
+
     &__fill {
       height: 100%;
       background: map.get(vars.$colors, 'accent', 'base');
       border-radius: inherit;
       transition: width 0.3s ease;
     }
-    
+
     &__text {
       font-size: 0.875rem;
       color: map.get(vars.$colors, 'text', 'muted');
@@ -188,9 +186,15 @@
     justify-content: center;
     color: map.get(vars.$colors, 'text', 'light');
     transition: all 0.3s ease;
-    
+
     i {
       font-size: 1rem;
     }
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  .course-card {
+    height: 220px;
   }
 }

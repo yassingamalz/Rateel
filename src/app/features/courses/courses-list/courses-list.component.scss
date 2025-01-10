@@ -3,19 +3,19 @@
 @use 'mixins';
 
 .courses-page {
-    min-height: -webkit-fill-available; 
+    min-height: -webkit-fill-available;
     height: 100%;
     overflow-x: hidden;
     position: relative;
     isolation: isolate;
     direction: rtl;
-    background: #1F4037;  
-    
+    background: #1F4037;
+
     &::before {
         content: '';
         position: fixed;
         inset: 0;
-        background: #1F4037;  // Solid color first
+        background: #1F4037; // Solid color first
         background: linear-gradient(135deg, #1F4037 0%, #0B1C17 100%);
         z-index: -3;
         will-change: transform;
@@ -85,7 +85,7 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    pointer-events: none;   
+    pointer-events: none;
 
     .icon {
         position: absolute;
@@ -93,7 +93,7 @@
         color: #{map.get(vars.$colors, 'accent', 'base')};
         font-size: 5rem;
         will-change: transform;
-        
+
         &--1 {
             top: 15%;
             right: 10%;
@@ -210,7 +210,7 @@
     scroll-behavior: smooth;
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
-    
+
     &.dragging {
         cursor: grabbing;
         user-select: none;
@@ -252,97 +252,99 @@
     opacity: 0.7;
     transform: scale(0.9);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     filter: saturate(0.8);
     position: relative;
     z-index: 1;
     scroll-snap-align: center;
     will-change: transform, opacity;
-  
+
     // Start circle (right in RTL) - only for non-first cards
     &:not(:first-child)::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: -8px;
-      width: 16px;
-      height: 16px;
-      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-      border-radius: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      transition: all 0.3s ease;
-    }
-  
-    // End circle (left in RTL)
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -8px;
-      width: 16px;
-      height: 16px;
-      background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-      border-radius: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      transition: all 0.3s ease;
-    }
-  
-    // Connecting line
-    &:not(:last-child) {
-      &::before {
         content: '';
         position: absolute;
         top: 50%;
-        left: (-(map.get(vars.$spacing, 'xl')));
-        width: map.get(vars.$spacing, 'xl');
-        height: 3px;
-        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+        right: -8px;
+        width: 16px;
+        height: 16px;
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        border-radius: 50%;
         transform: translateY(-50%);
-        z-index: 1;
-      }
+        z-index: 2;
+        transition: all 0.3s ease;
     }
-  
+
+    // End circle (left in RTL)
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -8px;
+        width: 16px;
+        height: 16px;
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        border-radius: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    // Connecting line
+    &:not(:last-child) {
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: (-(map.get(vars.$spacing, 'xl')));
+            width: map.get(vars.$spacing, 'xl');
+            height: 3px;
+            background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+    }
+
     &--completed {
-      &::before,
-      &::after {
-        background: map.get(vars.$colors, 'accent', 'base');
-        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
-      }
-  
-      &::before {
-        background: map.get(vars.$colors, 'accent', 'base');
-        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-      }
+
+        &::before,
+        &::after {
+            background: map.get(vars.$colors, 'accent', 'base');
+            box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
+        }
+
+        &::before {
+            background: map.get(vars.$colors, 'accent', 'base');
+            box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+        }
     }
-  
+
     &--active {
-      opacity: 1;
-      transform: scale(1);
-      filter: saturate(1);
-      z-index: 2;
-  
-      &::before,
-      &::after {
-        background: map.get(vars.$colors, 'accent', 'light');
-        transform: translateY(-50%) scale(1.2);
-      }
+        opacity: 1;
+        transform: scale(1);
+        filter: saturate(1);
+        z-index: 2;
+
+        &::before,
+        &::after {
+            background: map.get(vars.$colors, 'accent', 'light');
+            transform: translateY(-50%) scale(1.2);
+        }
     }
-  
+
     &:hover:not(.dragging) {
-      opacity: 1;
-      transform: scale(1);
-      filter: saturate(1);
+        opacity: 1;
+        transform: scale(1);
+        filter: saturate(1);
     }
-  }
+}
 
 // Animation Keyframes
 @keyframes flowMove1 {
     0% {
         transform: translate(0, 0) rotate(-10deg) scale(1.5);
     }
+
     100% {
         transform: translate(50px, 30px) rotate(-5deg) scale(1.6);
     }
@@ -352,6 +354,7 @@
     0% {
         transform: translate(0, 0) rotate(15deg) scale(1.2);
     }
+
     100% {
         transform: translate(-30px, -20px) rotate(20deg) scale(1.3);
     }
@@ -361,22 +364,54 @@
     0% {
         transform: translate(0, 0) rotate(-5deg) scale(1.3);
     }
+
     100% {
         transform: translate(20px, -40px) rotate(-8deg) scale(1.4);
     }
 }
 
 @keyframes floatIcon {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, 0) rotate(0deg);
     }
+
     25% {
         transform: translate(15px, -15px) rotate(5deg);
     }
+
     50% {
         transform: translate(0, -30px) rotate(0deg);
     }
+
     75% {
         transform: translate(-15px, -15px) rotate(-5deg);
+    }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+
+    .path-options,
+    .path-subtitle {
+        display: none;
+    }
+
+    .courses-container,
+    .courses-wrapper {
+        padding: 0;
+        height: 220px;
+    }
+
+    .courses-layout {
+        gap: 0;
+    }
+
+    .path-info {
+        padding: 0 var(--spacing-lg) var(--spacing-md);
+    }
+
+    .path-title {
+        margin-top: 1rem;
     }
 }
