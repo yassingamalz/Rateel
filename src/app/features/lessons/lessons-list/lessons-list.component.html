@@ -23,12 +23,12 @@
       <div class="lessons-wrapper" @lessonsAnimation>
         <ng-container *ngFor="let lesson of lessons; let i = index">
           <app-lesson-card
-            [lesson]="lesson"
-            [isActive]="lesson.id === activeLessonId"
-            (lessonClick)="onLessonSelected(lesson)"
-            class="lesson-item"
-            [attr.data-lesson-id]="lesson.id">
-          </app-lesson-card>
+          [lesson]="lesson"
+          [isActive]="lesson.id === activeLessonId"
+          [isCompleting]="lesson.id === completingLessonId"
+          (lessonClick)="onLessonSelected(lesson)"
+          class="lesson-item">
+        </app-lesson-card>
 
           <div class="connector-line" *ngIf="i < lessons.length - 1"></div>
         </ng-container>

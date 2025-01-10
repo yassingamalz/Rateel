@@ -1,9 +1,14 @@
 
 <div class="lesson-card" 
-     [class]="getBackgroundClass()"
-     (click)="onCardClick()"
-     [@cardAnimation]
-     dir="rtl">
+      [class.completed]="lesson.isCompleted"
+      [class.active]="isActive"
+      borderFillEffect
+      [triggerEffect]="isCompleting"
+      [attr.data-lesson-id]="lesson.id"
+      [class]="getBackgroundClass()"
+      (click)="onCardClick()"
+      [@cardAnimation]
+      dir="rtl">
   
   <div class="lesson-card__progress">
     {{ getProgressIndicator() }}

@@ -302,22 +302,30 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(completeSub);
   }
 
-  // Handle completion animation and navigation with PowerPoint-style exit
   private handleCompletion(): void {
-    // Ensure progress is at 100%
+    // Update progress bar
     this.currentProgress$.next(100);
     this.saveCurrentState();
-    
-    // Trigger exit animation - slide to right
-    this.animationState = 'exit';
-    
-    // Wait for animation to complete before navigation
-    setTimeout(() => {
-      this.router.navigate(['../'], {
-        relativeTo: this.route,
-        queryParams: { returnTo: 'lessons' }
-      });
-    }, 500); // Match animation duration
+  
+    // Mark lesson as completed in service
+    this.lessonsService.markLessonAsCompleted(
+      this.courseId,
+      this.unitId,
+      this.lessonId
+    ).subscribe(() => {
+      // Trigger exit animation
+      this.animationState = 'exit';
+      
+      // Navigate back after animation
+      setTimeout(() => {
+        this.router.navigate(['../'], { 
+          relativeTo: this.route,
+          queryParams: { 
+            completedLessonId: this.lessonId 
+          }
+        });
+      }, 500);
+    });
   }
 
   // Handle practice answers

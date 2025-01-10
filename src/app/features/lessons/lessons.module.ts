@@ -10,6 +10,7 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReadingLessonComponent } from './reading-lesson/reading-lesson.component';
 import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
 import { SharedModule } from '../../shared/shared.module';
+import { BorderFillDirective } from '../../shared/directives/border-fill.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    BorderFillDirective,
     LessonsRoutingModule,
   ]
 })

@@ -2,6 +2,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Lesson } from '../../../shared/interfaces/lesson';
+import { BorderFillDirective } from '../../../shared/directives/border-fill.directive';
 
 @Component({
   selector: 'app-lesson-card',
@@ -15,11 +16,12 @@ import { Lesson } from '../../../shared/interfaces/lesson';
         animate('200ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ])
-  ]
+  ],
 })
 export class LessonCardComponent {
   @Input() lesson!: Lesson;
   @Input() isActive = false;
+  @Input() isCompleting = false;
   @Output() lessonClick = new EventEmitter<Lesson>();
 
   getBackgroundClass(): string {

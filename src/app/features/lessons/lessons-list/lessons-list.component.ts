@@ -27,6 +27,7 @@ import { Lesson } from '../../../shared/interfaces/lesson';
 })
 export class LessonsListComponent implements OnInit {
   @ViewChild('lessonsContainer') lessonsContainer!: ElementRef;
+  completingLessonId: string | null = null;
 
   lessons$!: Observable<Lesson[]>;
   courseId!: string;
@@ -49,6 +50,21 @@ export class LessonsListComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router
   ) { }
+
+
+  handleLessonCompletion(lessonId: string) {
+    this.completingLessonId = lessonId;
+    // After animation, move to next lesson
+    setTimeout(() => {
+      this.completingLessonId = null;
+      const lessons = (this.lessons$ as any).value;
+      const currentIndex = lessons.findIndex((l: Lesson) => l.id === lessonId);
+      const nextLesson = lessons[currentIndex + 1];
+      if (nextLesson && !nextLesson.isLocked) {
+        this.onLessonSelected(nextLesson);
+      }
+    }, 1500);
+  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
@@ -73,6 +89,13 @@ export class LessonsListComponent implements OnInit {
         }
       })
     );
+
+    this.route.queryParams.subscribe(params => {
+      const completedLessonId = params['completedLessonId'];
+      if (completedLessonId) {
+        this.handleLessonCompletion(completedLessonId);
+      }
+    });
   }
 
   onLessonSelected(lesson: Lesson): void {
