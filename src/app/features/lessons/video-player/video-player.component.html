@@ -1,25 +1,47 @@
-<!-- video-player.component.html -->
 <div class="video-player" dir="rtl">
-  <div class="video-container" [class.loading]="!videoUrl">
-    <video #videoElement
-      [src]="videoUrl"
-      (timeupdate)="onTimeUpdate($event)"
-      (ended)="onVideoEnded()"
-      class="video-element">
-    </video>
+  <!-- YouTube Video -->
+  <ng-container *ngIf="isYoutubeVideo; else regularVideo">
+    <div class="video-container">
+      <iframe 
+        [src]="safeYoutubeUrl"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
 
-    <button 
-      class="skip-button" 
-      (click)="handleSkip()"
-      *ngIf="!state.isCompleted">
-      <span class="skip-text">تخطي</span>
-      <i class="fas fa-forward"></i>
-    </button>
-  </div>
+      <button 
+        class="skip-button" 
+        (click)="handleSkip()"
+        *ngIf="!state.isCompleted">
+        <span class="skip-text">تخطي</span>
+        <i class="fas fa-forward"></i>
+      </button>
+    </div>
+  </ng-container>
 
+  <!-- Regular Video -->
+  <ng-template #regularVideo>
+    <div class="video-container" [class.loading]="!videoUrl">
+      <video #videoElement
+        [src]="videoUrl"
+        (timeupdate)="onTimeUpdate($event)"
+        (ended)="onVideoEnded()"
+        class="video-element">
+      </video>
+
+      <button 
+        class="skip-button" 
+        (click)="handleSkip()"
+        *ngIf="!state.isCompleted">
+        <span class="skip-text">تخطي</span>
+        <i class="fas fa-forward"></i>
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Error State -->
   <div class="error-message" *ngIf="!videoUrl">
     <i class="fas fa-exclamation-circle"></i>
     <span>عذراً، لا يمكن تحميل الفيديو</span>
   </div>
 </div>
-

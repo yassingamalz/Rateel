@@ -9,6 +9,7 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { VideoPlayerService } from './video-player.service';
 import { VideoPlayerProps, VideoState } from './video-player.types';
@@ -29,12 +30,25 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   @ViewChild('videoElement') videoElement?: ElementRef<HTMLVideoElement>;
 
   state!: VideoState;
+  isYoutubeVideo = false;
+  safeYoutubeUrl?: SafeResourceUrl;
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private videoService: VideoPlayerService) { }
+  constructor(
+    private videoService: VideoPlayerService,
+  ) { }
 
   ngOnInit(): void {
+    // Check if it's a YouTube video and prepare URL
+    if (this.videoUrl) {
+      this.isYoutubeVideo = this.videoService.isYouTubeUrl(this.videoUrl);
+      if (this.isYoutubeVideo) {
+        this.safeYoutubeUrl = this.videoService.getYouTubeEmbedUrl(this.videoUrl);
+      }
+    }
+
+    // Subscribe to video state changes
     this.subscriptions.push(
       this.videoService.getState().subscribe(state => {
         this.state = state;
