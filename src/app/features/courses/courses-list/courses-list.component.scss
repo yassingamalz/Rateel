@@ -3,12 +3,13 @@
 @use 'mixins';
 
 .courses-page {
-    min-height: 100vh;
+    min-height: -webkit-fill-available; 
+    height: 100%;
     overflow-x: hidden;
     position: relative;
     isolation: isolate;
     direction: rtl;
-    background: #1F4037;  // Immediate solid fallback
+    background: #1F4037;  
     
     &::before {
         content: '';

@@ -13,7 +13,21 @@
   --primary-gradient: #{map.get(vars.$colors, 'primary', 'gradient')};
 }
 
-// Base styles
+// Prevent text selection and enhance touch experience
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  
+  &:focus {
+    outline: none !important;
+  }
+}
+
+// Base styles with native optimizations
 html, body {
   font-family: "Cairo", sans-serif;
   margin: 0;
@@ -22,9 +36,13 @@ html, body {
   width: 100vw;
   overflow: hidden;
   background: var(--app-bg);
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// Layout styles
+// Layout styles with touch optimizations
 .main-layout {
   display: flex;
   height: 100vh;
@@ -36,6 +54,7 @@ html, body {
   right: 0;
   bottom: 0;
   left: 0;
+  will-change: transform;
 }
 
 .main-container {
@@ -50,25 +69,64 @@ html, body {
   scrollbar-color: var(--accent-color) transparent;
 }
 
-// Content layout
+// Content layout with performance optimizations
 .content-wrapper {
   height: 100%;
   width: 100%;
   overflow: hidden;
   position: relative;
   transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+  transition: margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-// Component styles
+// Enhanced interactive elements
 .circular-step {
   @include mix.course-card;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.97);
+  }
 }
 
 .progress-indicator {
   @include mix.icon-wrapper;
 }
 
-// Responsive adjustments
+// Prevent image dragging
+img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+// Allow text selection in specific elements
+.allow-select {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+// Better touch feedback for buttons
+button, 
+.button,
+[role="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+}
+
+// Responsive adjustments with touch optimizations
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
@@ -77,13 +135,9 @@ html, body {
   .content-wrapper {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
 }
 
-// Animations and transitions
-.content-wrapper {
-  transition: margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-// Font Awesome import should be last since it's a regular import
+// Import Font Awesome last
 @import "@fortawesome/fontawesome-free/css/all.css";
