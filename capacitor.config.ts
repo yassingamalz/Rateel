@@ -18,6 +18,7 @@ const config: CapacitorConfig = {
       androidScaleType: 'CENTER_CROP',
       showSpinner: false
     },
+    // ScreenOrientation at plugins level
     ScreenOrientation: {
       defaultOrientation: 'landscape'
     },

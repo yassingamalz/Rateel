@@ -15,7 +15,7 @@ import { PlatformService } from './core/services/platform.service';
 export class AppComponent implements OnInit {
   title = 'tajweed-app';
 
-  constructor(private platformService: PlatformService) {}
+  constructor(private platformService: PlatformService) { }
 
   async ngOnInit() {
     if (Capacitor.isNativePlatform()) {
@@ -25,8 +25,10 @@ export class AppComponent implements OnInit {
 
   async setupMobileEnvironment() {
     try {
-      // Initialize platform capabilities
-      await this.platformService.initializeMicrophone();
+      // Lock to landscape first to prevent flashing
+      await ScreenOrientation.lock({
+        orientation: 'landscape'
+      });
 
       // Set full screen and handle safe areas
       if (Capacitor.getPlatform() === 'android') {
@@ -37,15 +39,13 @@ export class AppComponent implements OnInit {
         });
       }
 
-      // Lock to landscape
-      await ScreenOrientation.lock({
-        orientation: 'landscape'
-      });
-
       // Additional status bar configuration
       await StatusBar.setOverlaysWebView({ overlay: true });
       await StatusBar.setStyle({ style: Style.Dark });
       await StatusBar.setBackgroundColor({ color: '#1B4332' });
+
+      // Initialize platform capabilities
+      await this.platformService.initializeMicrophone();
 
       // Hide splash screen after setup
       await SplashScreen.hide({
