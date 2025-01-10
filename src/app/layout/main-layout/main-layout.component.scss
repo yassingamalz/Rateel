@@ -55,11 +55,13 @@
 .content-wrapper {
   height: 100%;
   width: 100%;
-  overflow: hidden auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
   transform: translateZ(0);
   contain: content;
+  overscroll-behavior: none;
 
   &::-webkit-scrollbar {
     display: none;
