@@ -73,3 +73,51 @@
   background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
   margin: 0 map.get(vars.$spacing, 'sm');
 }
+
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  .lessons-page {
+    padding: map.get(vars.$spacing, 'md') 0; // Reduced padding
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lessons-header {
+    margin-bottom: map.get(vars.$spacing, 'md'); // Reduced margin
+    padding: 0 map.get(vars.$spacing, 'md'); // Add side padding
+    
+    .header-content {
+      gap: map.get(vars.$spacing, 'sm');
+    }
+    
+    .page-title {
+      font-size: 1.25rem; // Slightly smaller for mobile
+    }
+  }
+
+  .back-button {
+    width: 36px; // Slightly smaller
+    height: 36px;
+  }
+
+  .lessons-container {
+    flex: 1; // Take remaining space
+    padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
+    display: flex;
+    align-items: center; // Center vertically
+    margin-top: -#{map.get(vars.$spacing, 'xxl')}; // Pull up a bit
+  }
+
+  .lessons-wrapper {
+    padding: 0; // Remove vertical padding
+    margin: 0 auto; // Center horizontally
+    width: max-content;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .connector-line {
+    width: 40px; // Slightly shorter lines
+    margin: 0 map.get(vars.$spacing, 'xs');
+  }
+}
