@@ -123,23 +123,6 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onTouchStart(event: TouchEvent): void {
-    if ((event.target as HTMLElement).closest('.unit-item')) {
-      event.preventDefault();
-      this.startDrag(event.touches[0].pageX);
-      this.lastDragEvent = event.touches[0];
-      this.lastTimestamp = Date.now();
-    }
-  }
-
-  onTouchMove(event: TouchEvent): void {
-    if (!this.dragStarted) return;
-
-    event.preventDefault();
-    this.handleDragMove(event.touches[0].pageX);
-    this.lastDragEvent = event.touches[0];
-  }
-
   onTouchEnd(event: TouchEvent): void {
     if (!this.dragStarted) return;
 
@@ -154,6 +137,63 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     this.dragStartTime = Date.now();
     this.velocity = 0;
   }
+
+
+onTouchStart(event: TouchEvent): void {
+  if ((event.target as HTMLElement).closest('.unit-item')) {
+    // Don't prevent default here to allow click events
+    this.startDrag(event.touches[0].pageX);
+    this.lastDragEvent = event.touches[0];
+    this.lastTimestamp = Date.now();
+  }
+}
+
+onTouchMove(event: TouchEvent): void {
+  if (!this.dragStarted) return;
+  
+  const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
+  
+  // Only prevent default if we're actually dragging
+  if (dragDistance > this.dragThreshold) {
+    event.preventDefault();
+    this.handleDragMove(event.touches[0].pageX);
+    this.lastDragEvent = event.touches[0];
+  }
+}
+
+private handleDragEnd(pageX: number): void {
+  const dragDistance = Math.abs(pageX - this.mouseInitialX);
+  const dragDuration = Date.now() - this.dragStartTime;
+
+  // Check for tap/click (short duration and minimal movement)
+  if (dragDistance < this.dragThreshold && dragDuration < 200) {
+    const unitElement = (this.lastDragEvent?.target as HTMLElement)?.closest('[data-unit-id]');
+    if (unitElement) {
+      const unitId = unitElement.getAttribute('data-unit-id');
+      if (unitId) {
+        this.handleUnitClick(unitId);
+      }
+    }
+  } else if (dragDistance > this.dragThreshold) {
+    this.applyInertia();
+  }
+
+  this.cleanupDrag();
+}
+
+private cleanupDrag(): void {
+  // Add a small delay before removing the dragging class
+  setTimeout(() => {
+    this.isDragging = false;
+    this.dragStarted = false;
+    this.lastDragEvent = null;
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+    this.cdr.detectChanges();
+  }, 50); // Small delay to ensure click events can fire
+}
 
   private handleDragMove(pageX: number): void {
     if (this.animationFrame) {
@@ -185,25 +225,6 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  private handleDragEnd(pageX: number): void {
-    const dragDistance = Math.abs(pageX - this.mouseInitialX);
-    const dragDuration = Date.now() - this.dragStartTime;
-
-    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
-      const unitElement = (this.lastDragEvent?.target as HTMLElement)?.closest('[data-unit-id]');
-      if (unitElement) {
-        const unitId = unitElement.getAttribute('data-unit-id');
-        if (unitId) {
-          this.handleUnitClick(unitId);
-        }
-      }
-    } else if (dragDistance > this.dragThreshold) {
-      this.applyInertia();
-    }
-
-    this.cleanupDrag();
-  }
-
   private applyInertia(): void {
     const speed = Math.abs(this.velocity) * this.inertiaMultiplier;
     const direction = this.velocity > 0 ? -1 : 1;
@@ -224,16 +245,6 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     requestAnimationFrame(animateInertia);
   }
 
-  private cleanupDrag(): void {
-    this.isDragging = false;
-    this.dragStarted = false;
-    this.lastDragEvent = null;
-    if (this.animationFrame) {
-      cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
-    }
-    this.cdr.detectChanges();
-  }
 
   private handleUnitClick(unitId: string): void {
     const units = (this.units$ as any).value;

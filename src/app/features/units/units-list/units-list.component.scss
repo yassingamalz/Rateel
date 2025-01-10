@@ -67,7 +67,7 @@
   &.dragging {
     cursor: grabbing;
     .unit-item {
-      pointer-events: none;
+      // pointer-events: none;
     }
   }
   

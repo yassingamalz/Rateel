@@ -3,7 +3,7 @@
 @use 'mixins' as mix;
 
 .lessons-page {
-  padding: map.get(vars.$spacing, 'xxl') map.get(vars.$spacing, 'xxl')  map.get(vars.$spacing, 'xxl') 0;
+  padding: map.get(vars.$spacing, 'xxl') 0  map.get(vars.$spacing, 'xxl') 0;
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
