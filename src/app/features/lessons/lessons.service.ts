@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Lesson } from '../../shared/interfaces/lesson';
 import { StorageService } from '../../core/services/storage.service';
 import { UnitsService } from '../units/units.service';
+import { TajweedVerse } from './interactive-lesson/interactive-lesson.types';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,85 @@ import { UnitsService } from '../units/units.service';
 export class LessonsService {
   private currentUnitIdSubject = new BehaviorSubject<string | null>(null);
   currentUnitId$ = this.currentUnitIdSubject.asObservable();
+
+  mockVerses: TajweedVerse[] = [
+    {
+      id: 'verse1',
+      text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+      translation: 'In the name of Allah, the Most Gracious, the Most Merciful',
+      highlights: [
+        {
+          start: 10,
+          end: 15,
+          rule: 'noon-mushaddad',
+          color: '#DAA520' // Golden color for highlighting
+        },
+        {
+          start: 25,
+          end: 30,
+          rule: 'meem-mushaddad',
+          color: '#90EE90' // Light green for highlighting
+        }
+      ],
+      audioUrl: 'path/to/audio/verse1.mp3'
+    },
+    {
+      id: 'verse2',
+      text: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+      translation: 'Praise be to Allah, Lord of the worlds',
+      highlights: [
+        {
+          start: 5,
+          end: 10,
+          rule: 'noon-sakinah',
+          color: '#FF6347' // Tomato red for highlighting
+        }
+      ],
+      audioUrl: 'path/to/audio/verse2.mp3'
+    },
+    {
+      id: 'verse3',
+      text: 'الرَّحْمَٰنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ',
+      translation: 'The Most Gracious, the Most Merciful. Master of the Day of Judgment',
+      highlights: [
+        {
+          start: 15,
+          end: 20,
+          rule: 'meem-mushaddad',
+          color: '#87CEEB' // Sky blue for highlighting
+        }
+      ],
+      audioUrl: 'path/to/audio/verse3.mp3'
+    },
+    {
+      id: 'verse4',
+      text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+      translation: 'You alone we worship, and You alone we ask for help',
+      highlights: [
+        {
+          start: 0,
+          end: 5,
+          rule: 'noon-mushaddad',
+          color: '#32CD32' // Lime green for highlighting
+        }
+      ],
+      audioUrl: 'path/to/audio/verse4.mp3'
+    },
+    {
+      id: 'verse5',
+      text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+      translation: 'Guide us to the straight path',
+      highlights: [
+        {
+          start: 10,
+          end: 15,
+          rule: 'meem-mushaddad',
+          color: '#FF4500' // Orange red for highlighting
+        }
+      ],
+      audioUrl: 'path/to/audio/verse5.mp3'
+    }
+  ];
 
   private mockLessons: { [key: string]: { [key: string]: Lesson[] } } = {
     'noon-meem-mushaddad': {
@@ -28,7 +108,7 @@ export class LessonsService {
           isLocked: false,
           stepNumber: 1,
           totalSteps: 5,
-          videoUrl:"https://www.youtube.com/watch?v=XfDdA9UgOVQ&list=PLhSrwfCNArc69Wixtzt9v4dLth6k7DrWh&index=1&pp=iAQB"
+          videoUrl: "https://www.youtube.com/watch?v=XfDdA9UgOVQ&list=PLhSrwfCNArc69Wixtzt9v4dLth6k7DrWh&index=1&pp=iAQB"
         },
         {
           id: 'pronunciation-basics',
@@ -105,7 +185,8 @@ export class LessonsService {
           isCompleted: false,
           isLocked: false,
           stepNumber: 1,
-          totalSteps: 3
+          totalSteps: 3,
+          verses: this.mockVerses
         }
       ],
       'listening-practice-unit': [
@@ -161,6 +242,8 @@ export class LessonsService {
       ]
     }
   };
+
+
 
 
   constructor(

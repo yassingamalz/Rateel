@@ -5,8 +5,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { LessonsService } from '../lessons.service';
 import { LessonState, ProgressData, StorageService } from '../../../core/services/storage.service';
 import { Lesson } from '../../../shared/interfaces/lesson';
-import { InteractiveQuestion } from '../interactive-lesson/interactive-lesson.types';
 import { Subscription, BehaviorSubject } from 'rxjs';
+import { TajweedVerse } from '../interactive-lesson/interactive-lesson.types';
 
 @Component({
   selector: 'app-lesson-details',
@@ -32,7 +32,6 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 })
 export class LessonDetailsComponent implements OnInit, OnDestroy {
   lesson: Lesson | undefined;
-  practiceQuestions: InteractiveQuestion[] = [];
   animationState: string = '*';
 
   // State management
@@ -83,16 +82,36 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     return this.getPlayerState()?.isPlaying || false;
   }
 
+
   private initializeLesson(): void {
     const lessonSub = this.lessonsService
       .getLessonById(this.courseId, this.unitId, this.lessonId)
       .subscribe({
         next: (lesson) => {
+          console.log('Loaded lesson:', lesson);
           this.lesson = lesson;
+          
+          // Add this check to ensure verses are available for practice lessons
+          if (lesson?.type === 'practice' && !lesson.verses) {
+            console.warn('Practice lesson has no verses, attempting to load from service');
+            // Try to get verses from service if not included in lesson
+            this.lesson = {
+              ...lesson,
+              verses: this.lessonsService.mockVerses
+            };
+          }
+
           const savedProgress = this.storageService.getProgress('lesson', this.lessonId);
           if (savedProgress) {
             this.restoreState(savedProgress);
           }
+
+          // Initialize practice-specific state if needed
+          if (this.lesson?.type === 'practice' && this.lesson.verses) {
+            console.log('Initializing practice state with verses:', this.lesson.verses);
+            this.initializePracticeState(this.lesson.verses);
+          }
+
           this.cdr.markForCheck();
         },
         error: (error) => {
@@ -103,6 +122,21 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(lessonSub);
   }
 
+  // Update the practice state initialization
+  private initializePracticeState(verses: TajweedVerse[]): void {
+    if (!verses || verses.length === 0) {
+      console.warn('No verses provided for practice state initialization');
+      return;
+    }
+
+    const currentState = this.lessonState$.value;
+    this.lessonState$.next({
+      ...currentState,
+      currentVerseIndex: currentState.currentVerseIndex || 0,
+      scrollPosition: currentState.scrollPosition || 0,
+    });
+  }
+
   private restoreState(savedProgress: ProgressData): void {
     this.currentProgress$.next(savedProgress.progress);
 
@@ -111,8 +145,54 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       volume: savedProgress.volume || 1,
       isMuted: savedProgress.isMuted || false,
       isFullscreen: savedProgress.isFullscreen || false,
-      lastUpdated: Date.now()
+      lastUpdated: Date.now(),
+      // Restore practice-specific state
+      currentVerseIndex: savedProgress.currentVerseIndex,
+      scrollPosition: savedProgress.scrollPosition
     });
+  }
+
+  private saveCurrentState(): void {
+    const currentState = this.lessonState$.value;
+    const progress = this.currentProgress$.value;
+
+    const stateToSave: ProgressData = {
+      progress,
+      timestamp: Date.now(),
+      expiresAt: Date.now() + (2 * 365 * 24 * 60 * 60 * 1000), // 2 years from now
+      isCompleted: progress >= 100,
+      currentPosition: currentState.currentPosition,
+      volume: currentState.volume,
+      isMuted: currentState.isMuted,
+      isFullscreen: currentState.isFullscreen,
+      lastUpdated: Date.now(),
+      version: '1.0.0', // Add version if required
+      syncStatus: 'pending' // Add sync status
+    };
+
+    // Add practice-specific state if it's a practice lesson
+    if (this.lesson?.type === 'practice') {
+      stateToSave.currentVerseIndex = currentState.currentVerseIndex;
+      stateToSave.scrollPosition = currentState.scrollPosition;
+    }
+
+    this.storageService.saveProgress('lesson', this.lessonId, stateToSave);
+  }
+
+  // Update restart to handle practice lessons
+  restart(): void {
+    const currentState = this.lessonState$.value;
+    const newState = {
+      ...currentState,
+      currentPosition: 0,
+      currentVerseIndex: 0,
+      scrollPosition: 0,
+      lastUpdated: Date.now()
+    };
+
+    this.lessonState$.next(newState);
+    this.saveCurrentState();
+    this.cdr.markForCheck();
   }
 
   // Playback Controls
@@ -155,18 +235,6 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  restart(): void {
-    const currentState = this.lessonState$.value;
-    const newState = {
-      ...currentState,
-      currentPosition: 0,
-      lastUpdated: Date.now()
-    };
-
-    this.lessonState$.next(newState);
-    this.saveCurrentState();
-    this.cdr.markForCheck();
-  }
 
   // Progress Management
   updateProgress(progress: number): void {
@@ -178,20 +246,6 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.cdr.markForCheck();
-  }
-
-  private saveCurrentState(): void {
-    const currentState = this.lessonState$.value;
-    const progress = this.currentProgress$.value;
-
-    this.storageService.saveProgress('lesson', this.lessonId, {
-      progress,
-      currentPosition: currentState.currentPosition,
-      volume: currentState.volume,
-      isMuted: currentState.isMuted,
-      isFullscreen: currentState.isFullscreen,
-      lastUpdated: Date.now()
-    });
   }
 
   private setupAutoSave(): void {

@@ -1,3 +1,5 @@
+import { TajweedVerse } from "../../features/lessons/interactive-lesson/interactive-lesson.types";
+
   // src/app/shared/interfaces/lesson.ts
   export type LessonType = 'video' | 'practice' | 'listen' | 'read' | 'test';
 
@@ -18,6 +20,7 @@
     videoUrl?: string;
     practiceContent?: string;
     audioUrl?: string;
+    verses?: TajweedVerse[];
     readingContent?: string;
     defaultContent?: string;
   }

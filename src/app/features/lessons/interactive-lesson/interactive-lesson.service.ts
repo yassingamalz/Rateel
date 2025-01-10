@@ -1,61 +1,62 @@
-// src/app/features/lessons/interactive-lesson/interactive-lesson.service.ts
+// interactive-lesson.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { InteractionState, InteractiveQuestion, InteractionResult } from './interactive-lesson.types';
+import { InteractionState, TajweedVerse } from './interactive-lesson.types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InteractiveLessonService {
+  private readonly VERSE_WIDTH = 500; // Match with SCSS card width
+  private readonly FEEDBACK_DELAY = 1000; // Time to show feedback before moving
+  
   private state = new BehaviorSubject<InteractionState>({
-    currentQuestionIndex: 0,
+    currentVerseIndex: 0,
     answers: new Map(),
     score: 0,
     isCompleted: false,
-    progress: 0
+    progress: 0,
+    scrollPosition: 0,
+    feedback: undefined,
+    isRecording: false,
+    currentAudio: undefined
   });
 
   private mediaRecorder?: MediaRecorder;
   private audioChunks: Blob[] = [];
 
-  constructor() {}
-
   getState(): Observable<InteractionState> {
     return this.state.asObservable();
   }
 
-  submitAnswer(question: InteractiveQuestion, answer: string | boolean): InteractionResult {
-    const currentState = this.state.value;
-    const isCorrect = answer === question.correctAnswer;
+  updateScrollPosition(position: number, containerWidth: number, totalContentWidth: number): void {
+    // Flip the min/max for RTL
+    const minScroll = 0;
+    const maxScroll = totalContentWidth - containerWidth;
     
-    // Update answers map
-    currentState.answers.set(question.id, answer);
-
-    // Calculate new score and progress
-    const totalQuestions = currentState.answers.size;
-    const correctAnswers = Array.from(currentState.answers.entries())
-      .filter(([id, ans]) => {
-        const q = question; // In real app, you'd find the question by id
-        return ans === q.correctAnswer;
-      }).length;
-
-    const newState = {
-      ...currentState,
-      score: (correctAnswers / totalQuestions) * 100,
-      progress: (totalQuestions / currentState.answers.size) * 100,
-      feedback: isCorrect ? 'أحسنت!' : 'حاول مرة أخرى'
-    };
-
-    this.state.next(newState);
-
-    return {
-      questionId: question.id,
-      userAnswer: answer,
-      isCorrect,
-      explanation: question.explanation
-    };
+    const boundedPosition = Math.min(maxScroll, Math.max(minScroll, position));
+    const nearestVerseIndex = Math.round(boundedPosition / this.VERSE_WIDTH);
+    
+    this.state.next({
+      ...this.state.value,
+      scrollPosition: boundedPosition,
+      currentVerseIndex: nearestVerseIndex,
+      feedback: undefined
+    });
   }
-
+  
+  snapToVerse(verseIndex: number): void {
+    // Update position calculation for RTL
+    const newPosition = verseIndex * this.VERSE_WIDTH;
+    
+    this.state.next({
+      ...this.state.value,
+      scrollPosition: newPosition,
+      currentVerseIndex: verseIndex,
+      feedback: undefined
+    });
+  }
+  // Recording Functions
   async startRecording(): Promise<void> {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -69,10 +70,11 @@ export class InteractiveLessonService {
       this.mediaRecorder.start();
       this.state.next({
         ...this.state.value,
-        isRecording: true
+        isRecording: true,
+        feedback: undefined
       });
     } catch (error) {
-      console.error('Error starting recording:', error);
+      this.showFeedback('عذراً، لا يمكن بدء التسجيل');
       throw error;
     }
   }
@@ -102,58 +104,73 @@ export class InteractiveLessonService {
     });
   }
 
-  nextQuestion(): void {
+  // Verse management with auto-scrolling
+  async completeCurrentVerse(totalVerses: number): Promise<void> {
     const currentState = this.state.value;
+    const currentVerse = currentState.currentVerseIndex;
     
-    // Clear any existing audio
-    if (currentState.currentAudio) {
-      URL.revokeObjectURL(currentState.currentAudio);
-    }
+    // Update answers and calculate progress
+    const newAnswers = new Map(currentState.answers);
+    newAnswers.set(currentVerse.toString(), true);
+    const progress = (newAnswers.size / totalVerses) * 100;
 
+    // Show success feedback
     this.state.next({
       ...currentState,
-      currentQuestionIndex: currentState.currentQuestionIndex + 1,
-      currentAudio: undefined,
-      feedback: undefined
+      answers: newAnswers,
+      progress,
+      feedback: 'أحسنت!'
     });
-  }
 
-  previousQuestion(): void {
-    const currentState = this.state.value;
-    
-    if (currentState.currentAudio) {
-      URL.revokeObjectURL(currentState.currentAudio);
+    // Wait for feedback animation
+    await new Promise(resolve => setTimeout(resolve, this.FEEDBACK_DELAY));
+
+    // Move to next verse if available
+    if (currentVerse < totalVerses - 1) {
+      const nextVerseIndex = currentVerse + 1;
+      this.snapToVerse(nextVerseIndex);
+    } else {
+      // Complete the lesson
+      this.state.next({
+        ...this.state.value,
+        isCompleted: true,
+        feedback: 'أحسنت! أكملت الدرس'
+      });
     }
-
-    this.state.next({
-      ...currentState,
-      currentQuestionIndex: Math.max(0, currentState.currentQuestionIndex - 1),
-      currentAudio: undefined,
-      feedback: undefined
-    });
   }
 
-  completeLesson(): void {
+  showFeedback(message: string): void {
     this.state.next({
       ...this.state.value,
-      isCompleted: true,
-      progress: 100
+      feedback: message
     });
+
+    // Auto-clear feedback after delay
+    setTimeout(() => {
+      if (this.state.value.feedback === message) {
+        this.state.next({
+          ...this.state.value,
+          feedback: undefined
+        });
+      }
+    }, this.FEEDBACK_DELAY);
   }
 
   resetState(): void {
-    // Clean up any existing audio URLs
-    const currentState = this.state.value;
-    if (currentState.currentAudio) {
-      URL.revokeObjectURL(currentState.currentAudio);
+    if (this.state.value.currentAudio) {
+      URL.revokeObjectURL(this.state.value.currentAudio);
     }
 
     this.state.next({
-      currentQuestionIndex: 0,
+      currentVerseIndex: 0,
       answers: new Map(),
       score: 0,
       isCompleted: false,
-      progress: 0
+      progress: 0,
+      scrollPosition: 0,
+      feedback: undefined,
+      isRecording: false,
+      currentAudio: undefined
     });
   }
 }

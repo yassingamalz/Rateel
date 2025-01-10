@@ -1,124 +1,72 @@
 <!-- interactive-lesson.component.html -->
-<div class="interactive-lesson" dir="rtl">
-    <div class="lesson-container">
-      <!-- Progress Bar -->
-      <div class="progress-bar">
-        <div 
-          class="progress-bar__fill"
-          [style.width.%]="getProgress()"
-          [class.completed]="state.isCompleted">
-        </div>
-      </div>
-  
-      <!-- Question Section -->
-      <div class="question-section" *ngIf="currentQuestion">
-        <h2 class="question-text">{{ currentQuestion.text }}</h2>
-  
-        <!-- Multiple Choice Questions -->
-        <div class="options-container" *ngIf="currentQuestion.type === 'multiple-choice'">
-          <button
-            *ngFor="let option of currentQuestion.options"
-            class="option-button"
-            [class.disabled]="isAnswered()"
-            [ngClass]="getAnswerClass(option)"
-            (click)="submitAnswer(option)">
-            {{ option }}
-          </button>
-        </div>
-  
-        <!-- True/False Questions -->
-        <div class="options-container" *ngIf="currentQuestion.type === 'true-false'">
-          <button
-            class="option-button"
-            [class.disabled]="isAnswered()"
-            [ngClass]="getAnswerClass(true)"
-            (click)="submitAnswer(true)">
-            صحيح
-          </button>
-          <button
-            class="option-button"
-            [class.disabled]="isAnswered()"
-            [ngClass]="getAnswerClass(false)"
-            (click)="submitAnswer(false)">
-            خطأ
-          </button>
-        </div>
-  
-        <!-- Pronunciation Questions -->
-        <div class="pronunciation-container" *ngIf="currentQuestion.type === 'pronunciation'">
-          <!-- Original Audio -->
-          <div class="audio-player" *ngIf="currentQuestion.audioUrl">
-            <audio controls [src]="currentQuestion.audioUrl"></audio>
-          </div>
-  
-          <!-- Recording Controls -->
-          <div class="recording-controls">
-            <button 
-              class="record-button"
-              [class.recording]="state.isRecording"
-              (click)="toggleRecording()">
-              <i class="fas" 
-                 [class.fa-microphone]="!state.isRecording" 
-                 [class.fa-stop]="state.isRecording">
-              </i>
-              <span>{{ state.isRecording ? 'إيقاف التسجيل' : 'ابدأ التسجيل' }}</span>
-            </button>
-  
-            <!-- User Recording -->
-            <div class="recorded-audio" *ngIf="state.currentAudio">
-              <audio controls [src]="state.currentAudio"></audio>
-              <button 
-                class="submit-button"
-                (click)="submitAnswer('recorded')"
-                [disabled]="isAnswered()">
-                تقديم التسجيل
-              </button>
+<div class="practice-container">
+  <!-- Verses Container with Horizontal Scroll -->
+  <div class="verses-container" 
+       #versesContainer
+       [class.dragging]="isDragging"
+       (mousedown)="onMouseDown($event)"
+       (mousemove)="onMouseMove($event)"
+       (mouseup)="onMouseUp()"
+       (mouseleave)="onMouseLeave()"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+
+    <div class="verses-wrapper"
+         [style.transform]="'translateX(' + state.scrollPosition + 'px)'"
+         #versesWrapper>
+      <ng-container *ngFor="let verse of verses; let i = index">
+        <div class="verse-card"
+             [class.active]="i === state.currentVerseIndex"
+             [class.completed]="isVerseCompleted(i)">
+          <!-- Verse Content -->
+          <div class="verse-frame">
+            <!-- Verse Number -->
+            <div class="verse-number">{{i + 1}}</div>
+
+            <!-- Verse Text with Tajweed Highlights -->
+            <div class="verse-text" [innerHTML]="getHighlightedText(verse)"></div>
+
+            <!-- Progress Dots -->
+            <div class="verse-progress" *ngIf="isVerseActive(i)">
+              <div class="progress-dots">
+                <span class="dot">
+                </span>
+              </div>
             </div>
           </div>
         </div>
-  
-        <!-- Feedback Section -->
-        <div class="feedback-section" *ngIf="state.feedback">
-          <div class="feedback-message" 
-               [class.correct]="state.answers.get(currentQuestion.id || '') === currentQuestion.correctAnswer">
-            {{ state.feedback }}
-          </div>
-          <div class="explanation" *ngIf="currentQuestion?.explanation && isAnswered()">
-            {{ currentQuestion.explanation }}
-          </div>
+
+        <!-- Connector Line -->
+        <div class="connector-line" *ngIf="i < verses.length - 1"
+             [class.completed]="isVerseCompleted(i)">
         </div>
-      </div>
-  
-      <!-- Navigation Controls -->
-      <div class="navigation-controls">
-        <button 
-          class="nav-button"
-          [disabled]="state.currentQuestionIndex === 0"
-          (click)="previousQuestion()">
-          <i class="fas fa-chevron-right"></i>
-          السؤال السابق
-        </button>
-  
-        <div class="question-counter">
-          السؤال {{ state.currentQuestionIndex + 1 }} من {{ questions.length }}
-        </div>
-  
-        <button 
-          class="nav-button"
-          [disabled]="state.currentQuestionIndex === questions.length - 1 || !isAnswered()"
-          (click)="nextQuestion()">
-          السؤال التالي
-          <i class="fas fa-chevron-left"></i>
-        </button>
-      </div>
-    </div>
-  
-    <!-- Completion Message -->
-    <div class="completion-message" *ngIf="state.isCompleted">
-      <div class="message-content">
-        <i class="fas fa-check-circle"></i>
-        <h3>أحسنت! لقد أكملت الدرس</h3>
-        <p>النتيجة: {{ state.score }}%</p>
-      </div>
+      </ng-container>
     </div>
   </div>
+
+  <!-- Recording Button -->
+  <div class="recording-controls">
+    <button class="record-button"
+            [class.recording]="state.isRecording"
+            [disabled]="state.isCompleted"
+            (click)="toggleRecording()">
+      <i class="fas" 
+         [class.fa-microphone]="!state.isRecording"
+         [class.fa-stop]="state.isRecording">
+      </i>
+      <div class="record-ripple" *ngIf="state.isRecording"></div>
+    </button>
+  </div>
+
+  <!-- Feedback Dialog -->
+  <div class="feedback-dialog" *ngIf="state.feedback" [@feedbackAnimation]>
+    <div class="feedback-content" [class.success]="state.feedback === 'أحسنت!'">
+      <i class="fas" 
+         [class.fa-check-circle]="state.feedback === 'أحسنت!'"
+         [class.fa-times-circle]="state.feedback !== 'أحسنت!'">
+      </i>
+      <span>{{state.feedback}}</span>
+    </div>
+  </div>
+</div>

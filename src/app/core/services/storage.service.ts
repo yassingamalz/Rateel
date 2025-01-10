@@ -4,6 +4,8 @@ export interface ProgressData {
   timestamp: number;
   expiresAt: number;
   isCompleted: boolean;
+  currentVerseIndex?: number;
+  scrollPosition?: number;
   lastAccessedLesson?: string;
   version?: string;
   syncStatus?: 'pending' | 'synced' | 'error';
@@ -39,6 +41,8 @@ export interface LessonState {
   isMuted?: boolean;
   isFullscreen: boolean;
   lastUpdated: number;
+  currentVerseIndex?: number; 
+  scrollPosition?: number;
 }
 
 // src/app/core/services/storage.service.ts

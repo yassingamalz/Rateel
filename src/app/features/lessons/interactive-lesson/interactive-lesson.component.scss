@@ -3,247 +3,289 @@
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-.interactive-lesson {
-  min-height: 100vh;
-  padding: map.get(vars.$spacing, 'lg');
-  background: linear-gradient(
-    to bottom right,
-    map.get(vars.$colors, 'primary', 'base'),
-    map.get(vars.$colors, 'primary', 'dark')
-  );
+.practice-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: darken(map.get(vars.$colors, primary, dark), 15%);
 
-  .lesson-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .progress-bar {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: map.get(vars.$border-radius, 'full');
-    margin-bottom: map.get(vars.$spacing, 'xl');
+  // Verses Container
+  .verses-container {
+    width: 100%;
     overflow: hidden;
+    cursor: grab;
 
-    &__fill {
-      height: 100%;
-      background: map.get(vars.$colors, 'accent', 'base');
-      transition: width 0.3s ease;
+    &.dragging {
+      cursor: grabbing;
+      user-select: none;
 
-      &.completed {
-        background: map.get(vars.$colors, 'accent', 'light');
+      .verses-wrapper {
+        pointer-events: none;
       }
     }
   }
 
-  .question-section {
-    @include mix.glass-effect;
-    padding: map.get(vars.$spacing, 'xl');
-    border-radius: map.get(vars.$border-radius, 'lg');
-    margin-bottom: map.get(vars.$spacing, 'lg');
-
-    .question-text {
-      color: map.get(vars.$colors, 'text', 'light');
-      font-size: 1.5rem;
-      margin-bottom: map.get(vars.$spacing, 'xl');
-      text-align: center;
-    }
-  }
-
-  .options-container {
-    display: grid;
-    gap: map.get(vars.$spacing, 'md');
-    margin: map.get(vars.$spacing, 'xl') 0;
-
-    .option-button {
-      @include mix.glass-effect;
-      padding: map.get(vars.$spacing, 'lg');
-      border: none;
-      border-radius: map.get(vars.$border-radius, 'md');
-      color: map.get(vars.$colors, 'text', 'light');
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover:not(.disabled) {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.15);
-      }
-
-      &.correct {
-        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-        border: 2px solid map.get(vars.$colors, 'accent', 'base');
-      }
-
-      &.incorrect {
-        background: rgba(map.get(vars.$colors, 'status', 'error'), 0.3);
-        border: 2px solid map.get(vars.$colors, 'status', 'error');
-      }
-
-      &.disabled {
-        cursor: not-allowed;
-        opacity: 0.7;
-      }
-    }
-  }
-
-  .pronunciation-container {
-    .audio-player {
-      margin-bottom: map.get(vars.$spacing, 'lg');
-      
-      audio {
-        width: 100%;
-        border-radius: map.get(vars.$border-radius, 'md');
-      }
-    }
-
-    .recording-controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: map.get(vars.$spacing, 'md');
-
-      .record-button {
-        @include mix.glass-effect;
-        display: flex;
-        align-items: center;
-        gap: map.get(vars.$spacing, 'sm');
-        padding: map.get(vars.$spacing, 'md') map.get(vars.$spacing, 'xl');
-        border: none;
-        border-radius: map.get(vars.$border-radius, 'full');
-        color: map.get(vars.$colors, 'text', 'light');
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &.recording {
-          background: rgba(map.get(vars.$colors, 'status', 'error'), 0.3);
-          animation: pulse 1.5s infinite;
-        }
-
-        i {
-          font-size: 1.2rem;
-        }
-      }
-
-      .recorded-audio {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: map.get(vars.$spacing, 'md');
-
-        .submit-button {
-          @include mix.glass-effect;
-          padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
-          border: none;
-          border-radius: map.get(vars.$border-radius, 'full');
-          color: map.get(vars.$colors, 'text', 'light');
-          cursor: pointer;
-
-          &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-          }
-        }
-      }
-    }
-  }
-
-  .feedback-section {
-    margin-top: map.get(vars.$spacing, 'xl');
-    text-align: center;
-
-    .feedback-message {
-      font-size: 1.2rem;
-      color: map.get(vars.$colors, 'status', 'error');
-      margin-bottom: map.get(vars.$spacing, 'md');
-
-      &.correct {
-        color: map.get(vars.$colors, 'accent', 'base');
-      }
-    }
-
-    .explanation {
-      color: map.get(vars.$colors, 'text', 'muted');
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-  }
-
-  .navigation-controls {
-    display: flex;
-    justify-content: space-between;
+  .verses-wrapper {
+    display: inline-flex;
     align-items: center;
-    margin-top: map.get(vars.$spacing, 'xl');
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    padding: 0 40%;
+    min-height: 400px;
+    transform-origin: center;
+  }
 
-    .nav-button {
-      @include mix.glass-effect;
-      display: flex;
-      align-items: center;
-      gap: map.get(vars.$spacing, 'sm');
-      padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'lg');
-      border: none;
-      border-radius: map.get(vars.$border-radius, 'full');
-      color: map.get(vars.$colors, 'text', 'light');
-      cursor: pointer;
+  // Verse Card
+  .verse-card {
+    flex: 0 0 auto;
+    width: 500px;
+    margin: 0 map.get(vars.$spacing, lg);
+    transition: all 0.3s ease;
+    transform-origin: center; 
+
+    .verse-frame {
+      padding: map.get(vars.$spacing, xl);
+      border-radius: map.get(vars.$border-radius, lg);
+      position: relative;
+      border: 1px solid rgba(map.get(vars.$colors, accent, base), 0.1);
       transition: all 0.3s ease;
 
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
+      // Mushaf-like paper texture
+      background: linear-gradient(to right,
+          rgba(map.get(vars.$colors, primary, dark), 0.95),
+          rgba(map.get(vars.$colors, primary, dark), 0.98));
+    }
+
+    &.active {
+      .verse-frame {
+        border-color: rgba(map.get(vars.$colors, accent, base), 0.3);
+        box-shadow: 0 0 30px rgba(map.get(vars.$colors, accent, base), 0.1);
       }
 
-      &:hover:not(:disabled) {
-        background: rgba(255, 255, 255, 0.15);
+      .verse-text {
+        color: rgba(map.get(vars.$colors, text, light), 0.9);
+        text-shadow: 0 0 15px rgba(map.get(vars.$colors, accent, base), 0.3);
       }
     }
 
-    .question-counter {
-      color: map.get(vars.$colors, 'text', 'muted');
+    &.completed {
+      .verse-frame {
+        border-color: rgba(map.get(vars.$colors, accent, base), 0.4);
+      }
+
+      .verse-text {
+        color: map.get(vars.$colors, accent, light);
+        text-shadow: 0 0 20px rgba(map.get(vars.$colors, accent, base), 0.4);
+      }
     }
   }
 
-  .completion-message {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+  // Verse Text
+  .verse-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.5rem;
+    line-height: 2;
+    color: rgba(map.get(vars.$colors, text, light), 0.5);
+    text-align: center;
+    direction: rtl;
+    transition: all 0.3s ease;
+
+    .highlight {
+      display: inline-block;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: map.get(vars.$colors, accent, light);
+        text-shadow: 0 0 15px rgba(map.get(vars.$colors, accent, base), 0.5);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Verse Number
+  .verse-number {
+    position: absolute;
+    top: map.get(vars.$spacing, md);
+    right: map.get(vars.$spacing, md);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(map.get(vars.$colors, accent, base), 0.1);
+    color: rgba(map.get(vars.$colors, text, light), 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    font-size: 0.875rem;
+    border: 1px solid rgba(map.get(vars.$colors, accent, base), 0.2);
+  }
 
-    .message-content {
-      @include mix.glass-effect;
-      padding: map.get(vars.$spacing, 'xl');
-      border-radius: map.get(vars.$border-radius, 'lg');
-      text-align: center;
-      color: map.get(vars.$colors, 'text', 'light');
+  // Progress Dots
+  .verse-progress {
+    position: absolute;
+    bottom: map.get(vars.$spacing, md);
+    left: 50%;
+    transform: translateX(-50%);
+
+    .progress-dots {
+      display: flex;
+      gap: map.get(vars.$spacing, sm);
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(map.get(vars.$colors, text, light), 0.2);
+        transition: all 0.3s ease;
+
+        &.completed {
+          background: map.get(vars.$colors, accent, base);
+          box-shadow: 0 0 10px rgba(map.get(vars.$colors, accent, base), 0.4);
+        }
+      }
+    }
+  }
+
+  // Connector Line
+  .connector-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(map.get(vars.$colors, accent, base), 0.1);
+    margin: 0 map.get(vars.$spacing, sm);
+    align-self: center;
+    transition: all 0.3s ease;
+
+    &.completed {
+      background: rgba(map.get(vars.$colors, accent, base), 0.4);
+      box-shadow: 0 0 10px rgba(map.get(vars.$colors, accent, base), 0.2);
+    }
+  }
+
+  // Recording Button
+  .recording-controls {
+    position: fixed;
+    bottom: map.get(vars.$spacing, xl);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .record-button {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(map.get(vars.$colors, accent, base), 0.9);
+    color: map.get(vars.$colors, text, dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+
+    i {
+      font-size: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover:not(.recording):not(:disabled) {
+      transform: scale(1.1);
+      background: map.get(vars.$colors, accent, base);
+      box-shadow: 0 0 20px rgba(map.get(vars.$colors, accent, base), 0.4);
+    }
+
+    &.recording {
+      background: map.get(vars.$colors, status, error);
+
+      .record-ripple {
+        position: absolute;
+        inset: -4px;
+        border: 2px solid map.get(vars.$colors, status, error);
+        border-radius: 50%;
+        animation: ripple 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border: 2px solid map.get(vars.$colors, status, error);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: ripple 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // Feedback Dialog
+  .feedback-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+
+    .feedback-content {
+      padding: map.get(vars.$spacing, lg) map.get(vars.$spacing, xl);
+      border-radius: map.get(vars.$border-radius, lg);
+      display: flex;
+      align-items: center;
+      gap: map.get(vars.$spacing, md);
+      background: rgba(map.get(vars.$colors, primary, dark), 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(map.get(vars.$colors, accent, base), 0.2);
+
+      &.success {
+        border-color: rgba(map.get(vars.$colors, accent, base), 0.4);
+
+        i {
+          color: map.get(vars.$colors, accent, base);
+        }
+      }
 
       i {
-        font-size: 3rem;
-        color: map.get(vars.$colors, 'accent', 'base');
-        margin-bottom: map.get(vars.$spacing, 'lg');
-      }
-
-      h3 {
         font-size: 1.5rem;
-        margin-bottom: map.get(vars.$spacing, 'md');
+        color: map.get(vars.$colors, status, error);
       }
 
-      p {
-        font-size: 1.2rem;
-        color: map.get(vars.$colors, 'accent', 'base');
+      span {
+        color: map.get(vars.$colors, text, light);
+        font-size: 1.25rem;
+        font-weight: 500;
       }
     }
   }
 }
 
-@keyframes pulse {
+// Animations
+@keyframes ripple {
   0% {
+    transform: scale(1);
     opacity: 1;
   }
-  50% {
-    opacity: 0.6;
-  }
+
   100% {
-    opacity: 1;
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .practice-container {
+    .verse-card {
+      width: 90vw;
+
+      .verse-text {
+        font-size: 2rem;
+      }
+    }
+
+    .connector-line {
+      width: 40px;
+    }
   }
 }
