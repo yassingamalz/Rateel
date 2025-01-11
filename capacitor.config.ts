@@ -31,12 +31,15 @@ const config: CapacitorConfig = {
       webViewSettings: {
         androidScheme: 'https',
         allowFileAccess: true,
-        mixedContent: true
+        mixedContent: 'always'
       }
     },
     VoiceRecorder: {
       quality: 'max',
       webAudioMimeType: 'audio/wav'
+    },
+    Browser: {
+      prefersFullscreen: 'always'
     }
   },
   android: {

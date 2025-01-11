@@ -31,8 +31,12 @@
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  touch-action: pan-x;
+  touch-action: manipulation; // Changed from pan-x to manipulation
   overscroll-behavior: none;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   &:focus {
     outline: none !important;
