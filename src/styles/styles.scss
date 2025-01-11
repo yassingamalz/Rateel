@@ -17,8 +17,15 @@
   --ion-safe-area-right: 0px;
 }
 
-// Prevent text selection and enhance touch experience
+// Enhanced rendering and performance optimizations
 * {
+  // Hardware acceleration and rendering hints
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transform;
+
+  // Prevent text selection and enhance touch experience
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -32,7 +39,7 @@
   }
 }
 
-// Base styles with native optimizations
+// Base styles with native and performance optimizations
 html {
   font-family: "Cairo", sans-serif;
   margin: 0;
@@ -42,11 +49,19 @@ html {
   width: 100vw;
   overflow: hidden;
   background: var(--app-bg);
-  overscroll-behavior: none;
+  
+  // Enhanced rendering properties
+  text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  // Performance and rendering optimization
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
   touch-action: pan-x;
+  overscroll-behavior: none;
 }
 
 body {
@@ -57,12 +72,20 @@ body {
   height: -webkit-fill-available;
   overflow: hidden;
   position: fixed;
+  
+  // Enhanced touch and rendering properties
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: pan-x;
   overscroll-behavior: none;
+  
+  // Performance optimizations
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  transform-style: preserve-3d;
 }
 
 .ion-app {
@@ -75,6 +98,11 @@ body {
   height: 100%;
   contain: layout size style;
   overflow: hidden;
+  
+  // Performance layer
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .app-root {
@@ -82,9 +110,13 @@ body {
   height: 100%;
   overflow: hidden;
   position: relative;
+  
+  // Performance optimization
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-// Layout styles with touch optimizations
+// Layout styles with enhanced performance
 .main-layout {
   display: flex;
   height: 100vh;
@@ -96,9 +128,13 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
+  
+  // Performance and rendering optimizations
   will-change: transform;
   touch-action: pan-x;
   overscroll-behavior: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .main-container {
@@ -106,6 +142,10 @@ body {
   background: var(--primary-gradient);
   height: 100vh;
   overflow: hidden;
+  
+  // Performance layer
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 // RTL specific styles
@@ -118,15 +158,22 @@ body {
   }
 }
 
-// Content layout with performance optimizations
+// Content layout with advanced performance optimizations
 .content-wrapper {
   height: 100%;
   width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
   position: relative;
+  
+  // Enhanced rendering and performance
   transform: translateZ(0);
+  will-change: scroll-position, transform;
   -webkit-overflow-scrolling: touch;
+  backface-visibility: hidden;
+  perspective: 1000;
+  
+  // Existing optimizations
   transition: margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1);
   overscroll-behavior: none;
   touch-action: pan-x;
@@ -136,11 +183,15 @@ body {
   }
 }
 
-// Enhanced interactive elements
+// Performance-optimized interactive elements
 .circular-step {
   @include mix.course-card;
   cursor: pointer;
   transition: transform 0.2s ease;
+  
+  // Performance layer
+  transform: translateZ(0);
+  will-change: transform;
 
   &:active {
     transform: scale(0.97);
@@ -149,12 +200,16 @@ body {
 
 .progress-indicator {
   @include mix.icon-wrapper;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 // Prevent image dragging
 img {
   -webkit-user-drag: none;
   pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 // Allow text selection in specific elements
@@ -165,12 +220,16 @@ img {
   user-select: text;
 }
 
-// Better touch feedback for buttons
+// Better touch feedback for buttons with performance
 button,
 .button,
 [role="button"] {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  
+  // Performance optimizations
+  transform: translateZ(0);
+  will-change: transform;
 
   &:active {
     opacity: 0.7;
@@ -178,10 +237,15 @@ button,
   }
 }
 
-// Responsive adjustments with touch optimizations
+// Responsive adjustments with performance optimization
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
+    
+    // Mobile-specific performance optimization
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   .content-wrapper {
@@ -190,6 +254,10 @@ button,
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
     touch-action: pan-x;
+    
+    // Mobile performance layer
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 
