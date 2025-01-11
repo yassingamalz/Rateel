@@ -390,121 +390,150 @@
     }
 }
 
-// Mobile landscape styles
-@media screen and (orientation: landscape) and (max-height: 600px) {
+// Mobile landscape styles - corrected targeting for mobile only
+@media only screen 
+    and (orientation: landscape)
+    and (max-device-width: 926px),  /* iPhone 14 Pro Max */
+    only screen 
+    and (orientation: landscape)
+    and (max-device-height: 926px) /* Handle both dimensions for different mobile browsers */
+    and (hover: none) 
+    and (pointer: coarse) { /* These indicate touch screens */
+    
     .courses-page {
-      height: 100vh;
-      overflow: hidden;
-      
-      // Improved background flow
-      .background-flow {
-        position: fixed;
-        inset: -50% -25%;
-        width: 150%;
-        height: 200%;
+        height: 100vh;
+        height: -webkit-fill-available;
+        overflow: hidden;
         
-        .flow-path {
-          &--1 {
-            transform: rotate(-10deg) scale(2);
-            opacity: 0.4;
-          }
-          
-          &--2 {
-            transform: rotate(15deg) scale(1.8);
-            opacity: 0.3;
-          }
-          
-          &--3 {
-            transform: rotate(-5deg) scale(1.9);
-            opacity: 0.2;
-          }
+        // Improved background flow
+        .background-flow {
+            position: fixed;
+            inset: -50% -25%;
+            width: 150%;
+            height: 200%;
+            
+            .flow-path {
+                &--1 {
+                    transform: rotate(-10deg) scale(2);
+                    opacity: 0.4;
+                }
+                
+                &--2 {
+                    transform: rotate(15deg) scale(1.8);
+                    opacity: 0.3;
+                }
+                
+                &--3 {
+                    transform: rotate(-5deg) scale(1.9);
+                    opacity: 0.2;
+                }
+            }
         }
-      }
     }
-  
+
     // Hide path selection on mobile landscape
     .path-info {
-      
-      .path-subtitle,
-      .path-options {
-        display: none;
-      }
-      
-      .path-title {
-        font-size: 2.75rem;
-        margin-bottom: 0;
-        line-height: 1.2;
-        margin: map.get(vars.$spacing, 's') 0;
-      }
+        .path-subtitle,
+        .path-options {
+            display: none;
+        }
+        
+        .path-title {
+            font-size: 2.75rem;
+            margin-bottom: 0;
+            line-height: 1.2;
+            margin: map.get(vars.$spacing, 'sm') 0;
+        }
     }
-  
+
     // Adjust courses container for mobile landscape
     .courses-container {
-      padding: map.get(vars.$spacing, 'sm') 0;
-      height: calc(100vh - 80px);
+        padding: map.get(vars.$spacing, 'sm') 0;
+        height: calc(100vh - 80px);
+        height: calc(-webkit-fill-available - 80px);
     }
-  
+
     .courses-wrapper {
-      padding: map.get(vars.$spacing, 'md') map.get(vars.$spacing, 'md');
-      gap: map.get(vars.$spacing, 'xl');
-      
-      &::before {
-        height: 3px;
-        top: 45%;
-      }
+        padding: 0 map.get(vars.$spacing, 'md');
+        gap: map.get(vars.$spacing, 'xl');
+        
+        &::before {
+            height: 3px;
+            top: 45%;
+        }
     }
-  
+
     // Adjust course items for mobile landscape
     .course-item {
-      flex: 0 0 300px;
-      max-width: 300px;
-      
-      &::before,
-      &::after {
-        width: 12px;
-        height: 12px;
-        top: 45%;
-      }
-      
-      &:not(:last-child)::before {
-        top: 45%;
-        height: 2px;
-      }
+        flex: 0 0 300px;
+        max-width: 300px;
+        
+        &::before,
+        &::after {
+            width: 12px;
+            height: 12px;
+            top: 45%;
+        }
+        
+        &:not(:last-child)::before {
+            top: 45%;
+            height: 2px;
+        }
     }
-  
+
     // Layout adjustments
     .courses-layout {
-      gap: map.get(vars.$spacing, 'md');
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
+        gap: map.get(vars.$spacing, 'md');
+        height: 100vh;
+        height: -webkit-fill-available;
+        display: flex;
+        flex-direction: column;
     }
-  
+
     // Floating icons adjustments
     .floating-icons {
-      .icon {
-        font-size: 3rem;
-        
-        &--1 { top: 10%; }
-        &--2 { top: 40%; }
-        &--3 { bottom: 15%; }
-      }
+        .icon {
+            font-size: 3rem;
+            
+            &--1 { top: 10%; }
+            &--2 { top: 40%; }
+            &--3 { bottom: 15%; }
+        }
     }
-  }
-  
-  // Very short height adjustments
-  @media screen and (max-height: 450px) and (orientation: landscape) {
+}
+
+// Very short height mobile landscape adjustments
+@media only screen 
+    and (orientation: landscape)
+    and (max-height: 450px)
+    and (hover: none) 
+    and (pointer: coarse) {
     .course-card {
-      height: 200px;
-      
-      &__title {
-        font-size: 1.25rem;
-      }
-      
-      &__description {
-        font-size: 0.875rem;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-      }
+        height: 200px;
+        
+        &__title {
+            font-size: 1.25rem;
+        }
+        
+        &__description {
+            font-size: 0.875rem;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+        }
     }
-  }
+}
+
+// Extra safety for older Android devices
+@supports (-webkit-touch-callout: none) and (display: flex) {
+    @media screen 
+        and (orientation: landscape)
+        and (max-device-width: 1180px)  /* Cover most tablets too */
+        and (pointer: coarse) {
+        .courses-page {
+            height: -webkit-fill-available;
+            .courses-container {
+                height: calc(-webkit-fill-available - 200px);
+            }
+        }
+    }
+}

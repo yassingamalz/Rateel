@@ -149,47 +149,19 @@
 }
 
 // Responsive Styles
-// Mobile responsive styles
-@media (max-width: 768px) {
-  .units-page {
-    padding: map.get(vars.$spacing, 'md');
-    min-height: calc(100vh - map.get(vars.$spacing, 'xl'));
-  }
-
-  .units-header {
-    margin-bottom: map.get(vars.$spacing, 'lg');
-    
-    .header-content {
-      padding: 0 map.get(vars.$spacing, 'md');
-    }
-  }
-
-  .units-wrapper {
-    padding-right: map.get(vars.$spacing, 'lg');
-    padding-left: map.get(vars.$spacing, 'lg');
-    padding-top: 0; // Reduce top padding on mobile
-  }
-
-  .units-container {
-    padding-top: map.get(vars.$spacing, 'lg'); // Reduce top padding
-    margin-top: -#{map.get(vars.$spacing, 'xl')}; // Move content up
-  }
-
-  .connector-line {
-    width: 60px;
-  }
+// Corrected mobile landscape query
+@media only screen 
+    and (orientation: landscape)
+    and (max-device-width: 926px)
+    and (hover: none) 
+    and (pointer: coarse),
+  only screen 
+    and (orientation: landscape)
+    and (max-device-height: 926px)
+    and (hover: none)
+    and (pointer: coarse) {
   
-  .unit-item {
-    transform: scale(0.9);
-    
-    &--active {
-      transform: scale(0.95);
-    }
-  }
-}
-
-// Landscape mode adjustments
-@media screen and (orientation: landscape) and (max-height: 600px) {
+  // Existing styles remain exactly the same
   .units-page {
     min-height: 100%;
     padding-top: map.get(vars.$spacing, 'sm');

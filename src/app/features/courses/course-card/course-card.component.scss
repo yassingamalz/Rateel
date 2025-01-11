@@ -193,7 +193,20 @@
   }
 }
 
-@media screen and (orientation: landscape) and (max-height: 600px) {
+
+// Mobile landscape styles - corrected targeting
+@media only screen 
+    and (orientation: landscape)
+    and (max-device-width: 926px) /* iPhone 14 Pro Max width */
+    and (hover: none) 
+    and (pointer: coarse),
+  /* OR */
+  only screen 
+    and (orientation: landscape)
+    and (max-device-height: 926px) /* For browsers that report differently */
+    and (hover: none)
+    and (pointer: coarse) {
+    
   .course-card {
     height: 200px;
     background: rgba(31, 64, 55, 0.4);
@@ -218,7 +231,6 @@
     &__description {
       font-size: 0.875rem;
       line-height: 1.4;
-      color: rgba(255, 255, 255, 0.8);
       -webkit-line-clamp: 2;
       line-clamp: 2;
     }
@@ -231,10 +243,9 @@
       );
     }
 
-    // Achievement Badge - moved up and slightly left
     &__achievement {
-      top: map.get(vars.$spacing, 'xs'); // Move up
-      left: map.get(vars.$spacing, 'sm'); // Move left
+      top: map.get(vars.$spacing, 'xs');
+      left: map.get(vars.$spacing, 'sm');
       background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
       color: map.get(vars.$colors, 'accent', 'light');
       padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
@@ -244,7 +255,6 @@
       }
     }
 
-    // Progress bar styling preserved
     .progress-bar {
       height: 4px;
       background: rgba(255, 255, 255, 0.1);
@@ -262,19 +272,17 @@
       }
     }
 
-    // Footer and play button adjustments
     &__footer {
       padding-bottom: map.get(vars.$spacing, 'sm');
-      margin-top: -#{map.get(vars.$spacing, 'md')}; // Pull up the footer
+      margin-top: -#{map.get(vars.$spacing, 'md')};
     }
 
-    // Play button - moved up
     &__play {
       width: 2.5rem;
       height: 2.5rem;
       background: rgba(255, 255, 255, 0.1);
       color: map.get(vars.$colors, 'text', 'light');
-      transform: translateY(-#{map.get(vars.$spacing, 'md')}); // Move up
+      transform: translateY(-#{map.get(vars.$spacing, 'md')});
 
       &:hover {
         transform: translateY(-#{map.get(vars.$spacing, 'md')}) scale(1.1);
@@ -282,10 +290,24 @@
       }
     }
 
-    // Lock badge preserved
     &__lock-badge {
       background: rgba(0, 0, 0, 0.3);
       color: map.get(vars.$colors, 'text', 'muted');
+    }
+  }
+}
+
+// Extra safety for older Android devices
+@supports (-webkit-touch-callout: none) {
+  @media screen 
+      and (orientation: landscape)
+      and (max-device-width: 926px)
+      and (pointer: coarse) {
+    .course-card {
+      // Ensure proper height on older Android devices
+      height: 200px;
+      max-height: calc(100vh - 120px);
+      max-height: calc(-webkit-fill-available - 120px);
     }
   }
 }

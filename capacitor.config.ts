@@ -24,14 +24,14 @@ const config: CapacitorConfig = {
     StatusBar: {
       style: 'DARK',
       backgroundColor: '#1B4332',
-      overlaysWebView: true
+      overlaysWebView: true,
+      hide: true 
     },
     App: {
       webViewSettings: {
         androidScheme: 'https',
         allowFileAccess: true,
-        mixedContent: true,
-        setLayoutInDisplayCutoutMode: true
+        mixedContent: true
       }
     },
     VoiceRecorder: {
