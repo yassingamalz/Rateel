@@ -1,4 +1,3 @@
-// sidebar.component.ts
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationService } from '../../core/services/navigation.service';
@@ -12,13 +11,13 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
   animations: [
     trigger('sidebarState', [
       state('expanded', style({
-        width: '320px'
+        width: '320px' // Keep explicit width, CSS will override for mobile
       })),
       state('collapsed', style({
         width: '80px'
       })),
       transition('expanded <=> collapsed', [
-        animate('300ms cubic-bezier(0.4, 0, 0.2, 1)')
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)') // Reduced animation time
       ])
     ]),
     trigger('contentFade', [
@@ -28,11 +27,10 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
       })),
       state('hidden', style({
         opacity: 0,
-        transform: 'translateX(-20px)',
-        display: 'none'
+        transform: 'translateX(-20px)'
       })),
       transition('visible <=> hidden', [
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)')
+        animate('150ms cubic-bezier(0.4, 0, 0.2, 1)') // Slightly faster fade
       ])
     ]),
     trigger('iconFloat', [
@@ -40,10 +38,10 @@ import { MenuItem } from '../../shared/interfaces/menu-item';
         transform: 'scale(1)'
       })),
       state('collapsed', style({
-        transform: 'scale(1.2)'
+        transform: 'scale(1.1)'
       })),
       transition('expanded <=> collapsed', [
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)')
+        animate('150ms cubic-bezier(0.4, 0, 0.2, 1)') // Match other animations
       ])
     ])
   ]
@@ -60,18 +58,17 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Initialize with mobile state if needed
     if (this.isMobile && !this.isCollapsed) {
       this.toggleSidebar();
     }
   }
 
   toggleSidebar(): void {
-    this.collapse.emit(!this.isCollapsed);
+    this.isCollapsed = !this.isCollapsed;
+    this.collapse.emit(this.isCollapsed);
   }
 
   trackByFn(index: number, item: MenuItem): string {
     return item.path;
   }
 }
-

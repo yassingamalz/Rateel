@@ -172,3 +172,85 @@
     }
   }
 }
+
+
+// Add these media queries at the end of your existing sidebar.component.scss
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 250px; // Set fixed width for mobile
+
+    &__header {
+      height: 60px;
+      padding: 0 map.get(vars.$spacing, 'md');
+    }
+
+    &__toggle {
+      width: 36px;
+      height: 36px;
+    }
+
+    &__menu {
+      padding: map.get(vars.$spacing, 'md');
+      margin-top: map.get(vars.$spacing, 'sm');
+      gap: map.get(vars.$spacing, 'sm');
+      height: calc(100vh - 60px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__menu-item {
+      height: 60px;
+      padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
+      width: 100%;
+      
+      &-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      &-label {
+        font-size: 1rem;
+      }
+    }
+
+    &:not(&--collapsed) {
+      .sidebar__menu-item {
+        height: 90px;
+        margin-bottom: map.get(vars.$spacing, 'xs');
+      }
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  .sidebar {
+    &__header {
+      height: 50px;
+    }
+
+    &__menu {
+      padding: map.get(vars.$spacing, 'sm');
+      margin-top: 0;
+      gap: map.get(vars.$spacing, 'xs');
+    }
+
+    &__menu-item {
+      height: 50px;
+      padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
+      
+      &-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      &-badge {
+        right:550%;
+        min-width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+      }
+    }
+  }
+} 
