@@ -16,6 +16,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { InteractiveLessonService } from './interactive-lesson.service';
 import { TajweedVerse, InteractionState } from './interactive-lesson.types';
 import { Subscription } from 'rxjs';
+import { Capacitor } from '@capacitor/core';
+import { PlatformService } from '../../../core/services/platform.service';
 
 @Component({
   selector: 'app-interactive-lesson',
@@ -65,10 +67,21 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
   constructor(
     private interactiveService: InteractiveLessonService,
+    private platformService: PlatformService,
     private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    // Initialize microphone permissions
+    if (Capacitor.isNativePlatform()) {
+      const hasPermission = await this.platformService.initializeMicrophone();
+      if (!hasPermission) {
+        this.interactiveService.showFeedback('تحتاج إلى السماح باستخدام الميكروفون');
+        return;
+      }
+    }
+
+    // Rest of your existing ngOnInit code
     this.subscriptions.push(
       this.interactiveService.getState().subscribe(state => {
         this.state = state;
@@ -117,12 +130,12 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
   onMouseMove(event: MouseEvent): void {
     if (!this.isDragging) return;
-  
+
     event.preventDefault();
     // Flip the delta calculation for RTL
     const deltaX = event.pageX - this.startX;
     const newPosition = this.startScrollPosition + deltaX;
-  
+
     this.interactiveService.updateScrollPosition(
       newPosition,
       this.containerWidth,
@@ -150,14 +163,14 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     this.startX = event.touches[0].pageX;
     this.startScrollPosition = this.state.scrollPosition;
   }
- 
+
   onTouchMove(event: TouchEvent): void {
     if (!this.isDragging) return;
-  
+
     // Flip the delta calculation for RTL
     const deltaX = event.touches[0].pageX - this.startX;
     const newPosition = this.startScrollPosition + deltaX;
-  
+
     this.interactiveService.updateScrollPosition(
       newPosition,
       this.containerWidth,
@@ -177,27 +190,42 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     if (this.state.isRecording) {
       try {
         await this.interactiveService.stopRecording();
+        await this.platformService.vibrateSuccess();
         await this.handleRecordingComplete();
       } catch (error) {
         console.error('Error stopping recording:', error);
+        await this.platformService.vibrateError();
+        this.interactiveService.showFeedback('عذراً، حدث خطأ في التسجيل');
       }
     } else {
       try {
+        // Check permission before starting
+        if (Capacitor.isNativePlatform()) {
+          const hasPermission = await this.platformService.initializeMicrophone();
+          if (!hasPermission) {
+            await this.platformService.vibrateError();
+            this.interactiveService.showFeedback('تحتاج إلى السماح باستخدام الميكروفون');
+            return;
+          }
+        }
         await this.interactiveService.startRecording();
+        await this.platformService.vibrateSuccess();
       } catch (error) {
         console.error('Error starting recording:', error);
+        await this.platformService.vibrateError();
+        this.interactiveService.showFeedback('عذراً، لا يمكن بدء التسجيل');
       }
     }
   }
 
-  private async handleRecordingComplete(): Promise<void> {
-    // Here you would implement actual verification logic
-    // For now, using a simple simulation
+  async handleRecordingComplete(): Promise<void> {
     const isCorrect = Math.random() > 0.3;
 
     if (isCorrect) {
+      await this.platformService.vibrateSuccess();
       await this.interactiveService.completeCurrentVerse(this.verses.length);
     } else {
+      await this.platformService.vibrateError();
       this.interactiveService.showFeedback('حاول مرة أخرى');
     }
   }

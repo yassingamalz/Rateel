@@ -32,6 +32,12 @@ const config: CapacitorConfig = {
       webAudioMimeType: 'audio/wav',
       includeBase64: true
     },
+    Permissions: {
+      permissions: [
+        'android.permission.RECORD_AUDIO',
+        'android.permission.MODIFY_AUDIO_SETTINGS'
+      ]
+    },
     App: {
       webViewSettings: {
         androidScheme: 'https',

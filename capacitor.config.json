@@ -13,12 +13,19 @@
       "androidSplashResourceName": "splash",
       "androidScaleType": "CENTER_CROP",
       "ScreenOrientation": {
-          "defaultOrientation": "landscape"
+        "defaultOrientation": "landscape"
       }
     },
     "VoiceRecorder": {
       "quality": "max",
-      "webAudioMimeType": "audio/wav"
+      "webAudioMimeType": "audio/wav",
+      "includeBase64": true
+    },
+    "Permissions": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     }
   }
 }
