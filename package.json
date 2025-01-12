@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:mobile": "ng build --configuration production",
-    "capacitor:sync": "npx cap sync",
-    "capacitor:run:android": "npx cap run android",
+    "build:android": "ng build --configuration production && npx @capacitor/assets generate android --iconBackgroundColor transparent && node fix-icons.js && npx cap sync android",
     "capacitor:run:ios": "npx cap run ios"
   },
   "private": true,
@@ -24,6 +23,7 @@
     "@angular/router": "^19.0.0",
     "@capacitor/android": "^6.2.0",
     "@capacitor/app": "^6.0.2",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^6.2.0",
     "@capacitor/core": "^6.2.0",
     "@capacitor/dialog": "^6.0.2",

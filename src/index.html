@@ -2,8 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <title>TajweedApp</title>
+  <title>Rattil - رَتِّلِ</title>
   <base href="/">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="assets/icons/site.webmanifest">
+  <link rel="shortcut icon" href="assets/icons/favicon.ico">
 
   <!-- Consolidated Viewport Meta Tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, height=device-height">
@@ -12,24 +19,39 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Rattil">
+  
+  <!-- SEO and Application Meta Tags -->
+  <meta name="application-name" content="Rattil">
+  <meta name="theme-color" content="#1B4332">
+  <meta name="description" content="Learn Tajweed rules and improve your Quran recitation">
   
   <!-- Disable Automatic Formatting -->
   <meta name="format-detection" content="telephone=no">
   <meta name="text-size-adjust" content="none">
 
+  <!-- iOS Specific -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Rattil">
+
+  <!-- MS Application -->
+  <meta name="msapplication-TileColor" content="#1B4332">
+  <meta name="msapplication-config" content="assets/icons/browserconfig.xml">
+
   <!-- Performance Optimizations -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="styles/styles.scss">
 
-  <!-- Touch and App Icons -->
-  <link rel="apple-touch-icon" href="assets/icon.png">
-  <link rel="icon" type="image/png" href="assets/icon.png">
-
+  <!-- Critical CSS -->
   <style>
     :root {
       --ion-safe-area-left: 0px;
       --ion-safe-area-right: 0px;
       --viewport-height: 100vh;
+      --primary-color: #1B4332;
+      --primary-dark: #081C15;
+      --accent-color: #DAA520;
     }
 
     html, body {
@@ -41,15 +63,49 @@
       overflow: hidden;
       overscroll-behavior: none;
       touch-action: none;
+      background: var(--primary-dark);
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
     }
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Initial loading state */
+    app-root:empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, var(--primary-color), var(--primary-dark));
+    }
+
+    app-root:empty::before {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--accent-color);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </body>
 </html>

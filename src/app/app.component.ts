@@ -13,7 +13,7 @@ import { PlatformService } from './core/services/platform.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'tajweed-app';
+  title = 'Rattil - رَتِّلِ';
 
   constructor(private platformService: PlatformService) { }
 

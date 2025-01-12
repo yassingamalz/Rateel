@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.novavista.tajweed',
-  appName: 'tajweed-app',
+  appId: 'com.novavista.rattil',
+  appName: 'Rattil',
   webDir: 'dist/tajweed-app/browser',
   server: {
     androidScheme: 'https',
@@ -16,7 +16,7 @@ const config: CapacitorConfig = {
       backgroundColor: '#1B4332',
       androidSplashResourceName: 'splash',
       androidScaleType: 'CENTER_CROP',
-      showSpinner: false
+      showSpinner: false,
     },
     ScreenOrientation: {
       defaultOrientation: 'landscape'
@@ -54,7 +54,8 @@ const config: CapacitorConfig = {
     allowMixedContent: true,
     captureInput: true,
     initialFocus: true,
-    useLegacyBridge: false
+    useLegacyBridge: false,
+    backgroundColor: '#1B4332'
   }
 };
 
