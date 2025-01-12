@@ -3,12 +3,9 @@
   <header class="units-header">
     <div class="header-content">
       <h1 class="page-title">وحدات المقرر</h1>
-      <button 
-        class="change-course-btn" 
-        routerLink="/courses"
-        aria-label="تغيير المقرر">
-        <i class="fas fa-exchange-alt" aria-hidden="true"></i>
-        <span>تغيير المقرر</span>
+      <button class="change-course-btn" routerLink="/courses">
+        <i class="fas fa-exchange-alt"></i>
+        تغيير المقرر
       </button>
     </div>
   </header>
@@ -19,8 +16,6 @@
            class="units-container"
            #unitsContainer
            [class.dragging]="isDragging"
-           [attr.aria-label]="'قائمة وحدات المقرر'"
-           role="region"
            (mousedown)="onMouseDown($event)"
            (mousemove)="onMouseMove($event)"
            (mouseup)="onMouseUp($event)"
@@ -28,33 +23,20 @@
            (touchstart)="onTouchStart($event)"
            (touchmove)="onTouchMove($event)"
            (touchend)="onTouchEnd($event)">
-        
-        <div class="units-wrapper" 
-             role="list"
-             [attr.aria-label]="'وحدات المقرر'">
+        <div class="units-wrapper">
           <ng-container *ngFor="let unit of units; let i = index; trackBy: trackByUnitId">
             <div class="unit-item" 
-                 role="listitem"
                  [class.unit-item--active]="activeUnitId === unit.id"
-                 [attr.data-unit-id]="unit.id"
-                 [attr.aria-current]="activeUnitId === unit.id ? 'true' : 'false'"
-                 [attr.aria-label]="'وحدة ' + (i + 1)">
-              
-              <!-- Unit Card Component -->
+                 [attr.data-unit-id]="unit.id">
               <app-unit-card
                 [unit]="unit"
                 [isActive]="activeUnitId === unit.id"
-                (unitSelected)="onUnitSelected($event)"
-                [attr.tabindex]="activeUnitId === unit.id || i === 0 ? 0 : -1">
+                (unitSelected)="onUnitSelected($event)">
               </app-unit-card>
 
-              <!-- Connector Line -->
-              <div class="connector-line" 
-                   *ngIf="i < units.length - 1"
-                   aria-hidden="true">
+              <div class="connector-line" *ngIf="i < units.length - 1">
                 <div class="connector-line__progress" 
-                     [style.width.%]="getConnectorProgress(unit, units[i + 1])"
-                     [attr.aria-label]="'نسبة التقدم ' + getConnectorProgress(unit, units[i + 1]) + '%'">
+                     [style.width.%]="getConnectorProgress(unit, units[i + 1])">
                 </div>
               </div>
             </div>
@@ -62,28 +44,12 @@
         </div>
       </div>
 
-      <!-- Empty State -->
-      <div *ngIf="units.length === 0" 
-           class="units-empty-state"
-           role="alert"
-           aria-live="polite">
-        <i class="fas fa-book-open" aria-hidden="true"></i>
+      <div *ngIf="units.length === 0" class="units-empty-state">
+        <i class="fas fa-book-open"></i>
         <p>لم يتم العثور على وحدات في هذا المقرر</p>
-        <button class="btn-return-courses" 
-                routerLink="/courses"
-                aria-label="العودة لصفحة المقررات">
+        <button class="btn-return-courses" routerLink="/courses">
           العودة للمقررات
         </button>
-      </div>
-    </ng-container>
-
-    <!-- Loading State (Optional) -->
-    <ng-container *ngIf="!(units$ | async)">
-      <div class="units-loading"
-           role="status"
-           aria-live="polite">
-        <i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i>
-        <span>جاري تحميل الوحدات...</span>
       </div>
     </ng-container>
   </div>
