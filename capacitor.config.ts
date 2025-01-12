@@ -25,7 +25,12 @@ const config: CapacitorConfig = {
       style: 'DARK',
       backgroundColor: '#1B4332',
       overlaysWebView: true,
-      hide: true 
+      hide: true
+    },
+    VoiceRecorder: {
+      quality: 'max',
+      webAudioMimeType: 'audio/wav',
+      includeBase64: true
     },
     App: {
       webViewSettings: {
@@ -33,10 +38,6 @@ const config: CapacitorConfig = {
         allowFileAccess: true,
         mixedContent: 'always'
       }
-    },
-    VoiceRecorder: {
-      quality: 'max',
-      webAudioMimeType: 'audio/wav'
     },
     Browser: {
       prefersFullscreen: 'always'

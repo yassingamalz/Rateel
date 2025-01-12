@@ -1,54 +1,82 @@
 import { Injectable } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { VoiceRecorder } from 'capacitor-voice-recorder';
+import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
-
-// Define the interface based on what the plugin actually returns
-interface RecordingResult {
-  value: string;
-  duration: number;
-  type: string;
-}
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlatformService {
   private recorderInitialized = false;
-  private hapticsInitialized = false;
+  private permissionStatus = new BehaviorSubject<boolean>(false);
 
   get isNative(): boolean {
     return Capacitor.isNativePlatform();
   }
 
-  async initializeMicrophone(): Promise<void> {
-    if (this.isNative && !this.recorderInitialized) {
-      const permissionStatus = await VoiceRecorder.hasAudioRecordingPermission();
-      if (!permissionStatus.value) {
-        await VoiceRecorder.requestAudioRecordingPermission();
+  async initializeMicrophone(): Promise<boolean> {
+    if (!this.isNative) {
+      return true;
+    }
+
+    try {
+      const hasPermission = await VoiceRecorder.hasAudioRecordingPermission();
+      
+      if (hasPermission.value) {
+        this.permissionStatus.next(true);
+        this.recorderInitialized = true;
+        return true;
       }
-      this.recorderInitialized = true;
+
+      const permission = await VoiceRecorder.requestAudioRecordingPermission();
+      this.permissionStatus.next(permission.value);
+      this.recorderInitialized = permission.value;
+      
+      return permission.value;
+    } catch (error) {
+      console.error('Error initializing microphone:', error);
+      return false;
     }
   }
 
   async startRecording(): Promise<void> {
-    if (this.isNative) {
+    if (!this.isNative) return;
+
+    const hasPermission = await VoiceRecorder.hasAudioRecordingPermission();
+    if (!hasPermission.value) {
+      const granted = await this.initializeMicrophone();
+      if (!granted) {
+        throw new Error('Microphone permission denied');
+      }
+    }
+
+    try {
       await VoiceRecorder.startRecording();
-    } else {
-      // Web recording will be handled by the service
-      return;
+    } catch (error) {
+      console.error('Error starting recording:', error);
+      throw error;
     }
   }
 
-  async stopRecording(): Promise<{ value: string }> {
-    if (this.isNative) {
-      const recording = await VoiceRecorder.stopRecording();
-      // Let's log the actual structure to see what we get
-      console.log('Recording result:', recording);
-      return { value: JSON.stringify(recording) };
+  async stopRecording(): Promise<RecordingData> {
+    if (!this.isNative) {
+      return {
+        value: {
+          recordDataBase64: '',
+          msDuration: 0,
+          mimeType: 'audio/wav'
+        }
+      };
     }
-    // Web recording will be handled by the service
-    return { value: '' };
+
+    try {
+      const recording = await VoiceRecorder.stopRecording();
+      return recording;
+    } catch (error) {
+      console.error('Error stopping recording:', error);
+      throw error;
+    }
   }
 
   async vibrateSuccess(): Promise<void> {
