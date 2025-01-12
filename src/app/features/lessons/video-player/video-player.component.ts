@@ -95,7 +95,8 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
       duration: this.videoElement?.nativeElement.duration || 0,
       progress: 100
     });
-
+    
+    // Always emit completion regardless of previous state
     this.handleCompletion();
   }
 

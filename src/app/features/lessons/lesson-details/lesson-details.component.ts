@@ -90,7 +90,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
         next: (lesson) => {
           console.log('Loaded lesson:', lesson);
           this.lesson = lesson;
-          
+
           // Add this check to ensure verses are available for practice lessons
           if (lesson?.type === 'practice' && !lesson.verses) {
             console.warn('Practice lesson has no verses, attempting to load from service');
@@ -270,7 +270,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   onNavigateBack(): void {
     this.animationState = 'exit';
     this.saveCurrentState();
-    
+
     setTimeout(() => {
       // Navigate to the lessons list by removing the lesson ID from the path
       this.router.navigate(['../'], {
@@ -282,8 +282,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Completion
   markAsCompleted(): void {
-    if (this.lesson?.isCompleted) return;
-
+    // Remove the early return check to allow multiple completions
     const completeSub = this.lessonsService
       .markLessonAsCompleted(this.courseId, this.unitId, this.lessonId)
       .subscribe({
@@ -303,31 +302,23 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   }
 
   private handleCompletion(): void {
-    // Update progress bar
+    // Update progress bar but keep it at 100
     this.currentProgress$.next(100);
     this.saveCurrentState();
-  
-    // Mark lesson as completed in service
-    this.lessonsService.markLessonAsCompleted(
-      this.courseId,
-      this.unitId,
-      this.lessonId
-    ).subscribe(() => {
-      // Trigger exit animation
-      this.animationState = 'exit';
-      
-      // Navigate back after animation
-      setTimeout(() => {
-        this.router.navigate(['../'], { 
-          relativeTo: this.route,
-          queryParams: { 
-            completedLessonId: this.lessonId 
-          }
-        });
-      }, 500);
-    });
-  }
 
+    // Always trigger exit animation and navigation
+    this.animationState = 'exit';
+
+    setTimeout(() => {
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParams: {
+          completedLessonId: this.lessonId,
+          returnTo: 'lessons'
+        }
+      });
+    }, 500);
+  }
   // Handle practice answers
   handleAnswer(event: { questionId: string; answer: any; isCorrect: boolean }): void {
     this.storageService.saveAnswer(
