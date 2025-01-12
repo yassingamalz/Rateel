@@ -1,4 +1,4 @@
-<!-- src/app/features/lessons/lessons-list/lessons-list.component.html -->
+<!-- src/app/features/lessons/lessons-list.component.html -->
 <div class="lessons-page" dir="rtl">
   <header class="lessons-header">
     <div class="header-content">
@@ -15,23 +15,21 @@
          [class.dragging]="isDragging"
          (mousedown)="onMouseDown($event)"
          (mousemove)="onMouseMove($event)"
-         (mouseup)="onMouseUp()"
+         (mouseup)="onMouseUp($event)"
          (mouseleave)="onMouseLeave()"
          (touchstart)="onTouchStart($event)"
          (touchmove)="onTouchMove($event)"
-         (touchend)="onTouchEnd()">
+         (touchend)="onTouchEnd($event)">
       <div class="lessons-wrapper" @lessonsAnimation>
         <ng-container *ngFor="let lesson of lessons; let i = index">
           <app-lesson-card
-            [lesson]="lesson"
-            [isActive]="lesson.id === activeLessonId"
-            [isCompleting]="lesson.id === completingLessonId"
-            (lessonClick)="onLessonSelected(lesson)"
-            class="lesson-item"
-            [attr.data-index]="i"
-            [attr.data-lesson-id]="lesson.id">
-          </app-lesson-card>
-          
+          [lesson]="lesson"
+          [isActive]="lesson.id === activeLessonId"
+          [isCompleting]="lesson.id === completingLessonId"
+          (lessonClick)="onLessonSelected(lesson)"
+          class="lesson-item">
+        </app-lesson-card>
+
           <div class="connector-line" *ngIf="i < lessons.length - 1"></div>
         </ng-container>
       </div>
