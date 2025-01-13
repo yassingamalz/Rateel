@@ -87,13 +87,15 @@ export class PlatformService {
     try {
       console.log('Checking microphone permissions...');
       const hasPermission = await VoiceRecorder.hasAudioRecordingPermission();
-      
+
       if (hasPermission.value) {
         console.log('Microphone permission already granted');
         this.updatePermissionStatus(true);
         return true;
       }
 
+      // Only show dialog and request permission if we don't already have it
+      console.log('Microphone permission not granted, requesting...');
       const userConfirmed = await this.showPermissionDialog();
       if (!userConfirmed) {
         this.updatePermissionStatus(false);
@@ -102,7 +104,7 @@ export class PlatformService {
 
       const permission = await VoiceRecorder.requestAudioRecordingPermission();
       this.updatePermissionStatus(permission.value);
-      
+
       if (!permission.value) {
         await this.showPermissionDeniedDialog();
       }
@@ -202,10 +204,11 @@ export class PlatformService {
   // Helper Methods
   private async checkAndRequestPermission(): Promise<boolean> {
     const hasPermission = await VoiceRecorder.hasAudioRecordingPermission();
-    if (!hasPermission.value) {
-      return await this.initializeMicrophone();
+    if (hasPermission.value) {
+      return true;
     }
-    return true;
+    // Only initialize microphone if we don't have permission
+    return await this.initializeMicrophone();
   }
 
   private updatePermissionStatus(status: boolean): void {
@@ -254,11 +257,11 @@ export class PlatformService {
       if (this.orientationLocked) {
         await ScreenOrientation.unlock();
       }
-      
+
       if (this.isRecording.value) {
         await this.stopRecording();
       }
-      
+
       // Remove any listeners or perform other cleanup
       App.removeAllListeners();
     } catch (error) {
