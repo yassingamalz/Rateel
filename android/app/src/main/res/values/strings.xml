@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">tajweed-app</string>
-    <string name="title_activity_main">tajweed-app</string>
-    <string name="package_name">com.novavista.tajweed</string>
-    <string name="custom_url_scheme">com.novavista.tajweed</string>
+    <string name="app_name">Rattil</string>
+    <string name="title_activity_main">Rattil</string>
+    <string name="package_name">com.novavista.rattil</string>
+    <string name="custom_url_scheme">com.novavista.rattil</string>
 </resources>

@@ -7,7 +7,7 @@ const adaptiveIconContent = `<?xml version="1.0" encoding="utf-8"?>
         <color android:color="@android:color/transparent"/>
     </background>
     <foreground>
-        <inset android:drawable="@mipmap/ic_launcher_foreground" android:inset="16.7%" />
+        <inset android:drawable="@mipmap/ic_launcher_foreground" android:inset="0%" />
     </foreground>
 </adaptive-icon>`;
 

@@ -1,4 +1,4 @@
-package com.novavista.tajweed;
+package com.novavista.rattil;
 
 import com.getcapacitor.BridgeActivity;
 
