@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.novavista.rattil',
   appName: 'Rattil',
-  webDir: 'dist/tajweed-app/browser',
+  webDir: 'dist/rattil/browser',
   server: {
     androidScheme: 'https',
     cleartext: true,

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tajweed-app": {
+    "rattil": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tajweed-app",
+            "outputPath": "dist/rattil",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -98,10 +98,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tajweed-app:build:production"
+              "buildTarget": "rattil:build:production"
             },
             "development": {
-              "buildTarget": "tajweed-app:build:development"
+              "buildTarget": "rattil:build:development"
             }
           },
           "defaultConfiguration": "development"

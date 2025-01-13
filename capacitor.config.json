@@ -2,8 +2,8 @@
   "appId": "com.novavista.rattil",
   "appName": "Rattil",
   "bundledWebApp": {
-    "htmlDir": "dist/tajweed-app",
-    "jsDir": "dist/tajweed-app/browser"
+    "htmlDir": "dist/rattil",
+    "jsDir": "dist/rattil/browser"
   },
   "plugins": {
     "SplashScreen": {
