@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject, combineLatest, of } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
+import { tap, map, filter, take } from 'rxjs/operators';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
@@ -52,44 +52,49 @@ export class LessonsListComponent implements OnInit {
   ) { }
 
 
+
   handleLessonCompletion(lessonId: string) {
     this.completingLessonId = lessonId;
-    // After animation, move to next lesson
-    setTimeout(() => {
-      this.completingLessonId = null;
-      const lessons = (this.lessons$ as any).value;
-      const currentIndex = lessons.findIndex((l: Lesson) => l.id === lessonId);
-      const nextLesson = lessons[currentIndex + 1];
-      if (nextLesson && !nextLesson.isLocked) {
-        this.onLessonSelected(nextLesson);
-      }
-    }, 1500);
+    
+    // Get current lessons array
+    this.lessons$.pipe(take(1)).subscribe(lessons => {
+      const currentIndex = lessons.findIndex(l => l.id === lessonId);
+      const isLastLesson = lessons.every((lesson, index) => 
+        index === currentIndex || lesson.isCompleted
+      );
+
+      // After animation delay
+      setTimeout(() => {
+        this.completingLessonId = null;
+
+        if (isLastLesson) {
+          // If this was the last lesson, navigate to units list
+          this.router.navigate(['/courses', this.courseId, 'units'], {
+            queryParams: { 
+              completedUnitId: this.unitId,
+              lastCompletedLesson: lessonId
+            }
+          });
+        } else {
+          // Otherwise, find and navigate to next incomplete lesson
+          const nextLesson = lessons[currentIndex + 1];
+          if (nextLesson && !nextLesson.isLocked) {
+            this.onLessonSelected(nextLesson);
+          }
+        }
+      }, 2500); // Match your animation duration
+    });
   }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
+    
+    // Initialize lessons observable
+    this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId);
 
-    this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
-      tap(lessons => {
-        const lessonId = this.route.snapshot.paramMap.get('lessonId');
-
-        if (lessonId) {
-          this.activeLessonId = lessonId;
-        } else {
-          // Find first unlocked incomplete lesson
-          const nextLesson = lessons.find(l => !l.isCompleted && !l.isLocked);
-          if (nextLesson) {
-            this.activeLessonId = nextLesson.id;
-          } else {
-            // If all complete, show first lesson
-            this.activeLessonId = lessons[0]?.id;
-          }
-        }
-      })
-    );
-
+    // Subscribe to query params for completion handling
     this.route.queryParams.subscribe(params => {
       const completedLessonId = params['completedLessonId'];
       if (completedLessonId) {
