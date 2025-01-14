@@ -3,19 +3,27 @@
 @use 'mixins' as mix;
 
 .units-page {
+  position: relative;
+  width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom right,
-    map.get(vars.$colors, 'primary', 'base'),
-    map.get(vars.$colors, 'primary', 'dark')
-  );
   overflow-x: hidden;
-  padding: map.get(vars.$spacing, 'lg');
+  background: linear-gradient(to bottom right,
+      map.get(vars.$colors, 'primary', 'base'),
+      map.get(vars.$colors, 'primary', 'dark'));
+
+  // Ensure the container remains stable during animation
+  &.ng-enter,
+  &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transition: all 500ms ease;
+  }
 }
 
 .units-header {
   margin-bottom: map.get(vars.$spacing, 'xl');
-    
+
   .header-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -24,7 +32,7 @@
     align-items: center;
     padding: 0 map.get(vars.$spacing, 'lg');
   }
-  
+
   .page-title {
     font-size: 2rem;
     font-weight: 600;
@@ -43,7 +51,7 @@
   color: map.get(vars.$colors, 'text', 'light');
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
     background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
@@ -63,15 +71,15 @@
   cursor: grab;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  
+
   &.dragging {
     cursor: grabbing;
   }
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
-  
+
   scrollbar-width: none;
 }
 
@@ -92,17 +100,17 @@
 
   &--active {
     transform: scale(1.05);
-    
+
     app-unit-card {
       opacity: 1;
     }
   }
-  
+
   app-unit-card {
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-    
+
     &:hover {
       opacity: 1;
     }
@@ -116,7 +124,7 @@
   margin: 0 map.get(vars.$spacing, 'md');
   position: relative;
   overflow: hidden;
-  
+
   &__progress {
     position: absolute;
     top: 0;
@@ -125,7 +133,7 @@
     background: map.get(vars.$colors, 'accent', 'base');
     transition: width 0.3s ease;
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -133,34 +141,29 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(map.get(vars.$colors, 'accent', 'base'), 0.2),
-      transparent
-    );
+    background: linear-gradient(to right,
+        transparent,
+        rgba(map.get(vars.$colors, 'accent', 'base'), 0.2),
+        transparent);
     animation: shimmer 2s infinite;
   }
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 // Responsive Styles
 // Corrected mobile landscape query
-@media only screen 
-    and (orientation: landscape)
-    and (max-device-width: 926px)
-    and (hover: none) 
-    and (pointer: coarse),
-  only screen 
-    and (orientation: landscape)
-    and (max-device-height: 926px)
-    and (hover: none)
-    and (pointer: coarse) {
-  
+@media only screen and (orientation: landscape) and (max-device-width: 926px) and (hover: none) and (pointer: coarse),
+only screen and (orientation: landscape) and (max-device-height: 926px) and (hover: none) and (pointer: coarse) {
+
   // Existing styles remain exactly the same
   .units-page {
     min-height: 100%;
@@ -191,7 +194,7 @@
     right: auto;
     left: 0;
   }
-  
+
   .change-course-btn i {
     transform: scaleX(-1);
   }

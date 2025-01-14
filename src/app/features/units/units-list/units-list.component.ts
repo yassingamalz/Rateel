@@ -25,16 +25,33 @@ import {
 
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-units-list',
   standalone: false,
   templateUrl: './units-list.component.html',
   styleUrls: ['./units-list.component.scss'],
+  animations: [
+    trigger('pageTransition', [
+      state('void', style({
+        transform: 'translateX(-100%)'
+      })),
+      state('*', style({
+        transform: 'translateX(0)'
+      })),
+      state('exit', style({
+        transform: 'translateX(100%)'
+      })),
+      transition('void => *', animate('500ms ease-out')),
+      transition('* => exit', animate('500ms ease-in'))
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UnitsListComponent implements OnInit, OnDestroy {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef<HTMLElement>;
+  animationState: string = '*';
 
   units$!: Observable<Unit[]>;
   courseId!: string;
@@ -82,7 +99,33 @@ export class UnitsListComponent implements OnInit, OnDestroy {
       this.activeUnitId = unitId;
       this.scrollToActiveUnit();
     }
+
+    this.route.queryParams.subscribe(params => {
+      if (params['completedUnitId']) {
+        this.handleUnitCompletion(params['completedUnitId']);
+      }
+      if (params['returnTo'] === 'units') {
+        this.animationState = '*';
+      }
+    });
   }
+
+  private handleUnitCompletion(unitId: string): void {
+    // Find the completed unit element
+    const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
+    if (completedUnit) {
+      completedUnit.classList.add('unit-completed');
+      // Scroll to unit after animation
+      setTimeout(() => {
+        completedUnit.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }, 500); // Match animation duration
+    }
+  }
+
 
   ngOnDestroy(): void {
     this.cleanupDrag();
@@ -139,61 +182,61 @@ export class UnitsListComponent implements OnInit, OnDestroy {
   }
 
 
-onTouchStart(event: TouchEvent): void {
-  if ((event.target as HTMLElement).closest('.unit-item')) {
-    // Don't prevent default here to allow click events
-    this.startDrag(event.touches[0].pageX);
-    this.lastDragEvent = event.touches[0];
-    this.lastTimestamp = Date.now();
+  onTouchStart(event: TouchEvent): void {
+    if ((event.target as HTMLElement).closest('.unit-item')) {
+      // Don't prevent default here to allow click events
+      this.startDrag(event.touches[0].pageX);
+      this.lastDragEvent = event.touches[0];
+      this.lastTimestamp = Date.now();
+    }
   }
-}
 
-onTouchMove(event: TouchEvent): void {
-  if (!this.dragStarted) return;
-  
-  const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
-  
-  // Only prevent default if we're actually dragging
-  if (dragDistance > this.dragThreshold) {
-    event.preventDefault();
-    this.handleDragMove(event.touches[0].pageX);
-    this.lastDragEvent = event.touches[0];
+  onTouchMove(event: TouchEvent): void {
+    if (!this.dragStarted) return;
+
+    const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
+
+    // Only prevent default if we're actually dragging
+    if (dragDistance > this.dragThreshold) {
+      event.preventDefault();
+      this.handleDragMove(event.touches[0].pageX);
+      this.lastDragEvent = event.touches[0];
+    }
   }
-}
 
-private handleDragEnd(pageX: number): void {
-  const dragDistance = Math.abs(pageX - this.mouseInitialX);
-  const dragDuration = Date.now() - this.dragStartTime;
+  private handleDragEnd(pageX: number): void {
+    const dragDistance = Math.abs(pageX - this.mouseInitialX);
+    const dragDuration = Date.now() - this.dragStartTime;
 
-  // Check for tap/click (short duration and minimal movement)
-  if (dragDistance < this.dragThreshold && dragDuration < 200) {
-    const unitElement = (this.lastDragEvent?.target as HTMLElement)?.closest('[data-unit-id]');
-    if (unitElement) {
-      const unitId = unitElement.getAttribute('data-unit-id');
-      if (unitId) {
-        this.handleUnitClick(unitId);
+    // Check for tap/click (short duration and minimal movement)
+    if (dragDistance < this.dragThreshold && dragDuration < 200) {
+      const unitElement = (this.lastDragEvent?.target as HTMLElement)?.closest('[data-unit-id]');
+      if (unitElement) {
+        const unitId = unitElement.getAttribute('data-unit-id');
+        if (unitId) {
+          this.handleUnitClick(unitId);
+        }
       }
+    } else if (dragDistance > this.dragThreshold) {
+      this.applyInertia();
     }
-  } else if (dragDistance > this.dragThreshold) {
-    this.applyInertia();
+
+    this.cleanupDrag();
   }
 
-  this.cleanupDrag();
-}
-
-private cleanupDrag(): void {
-  // Add a small delay before removing the dragging class
-  setTimeout(() => {
-    this.isDragging = false;
-    this.dragStarted = false;
-    this.lastDragEvent = null;
-    if (this.animationFrame) {
-      cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
-    }
-    this.cdr.detectChanges();
-  }, 50); // Small delay to ensure click events can fire
-}
+  private cleanupDrag(): void {
+    // Add a small delay before removing the dragging class
+    setTimeout(() => {
+      this.isDragging = false;
+      this.dragStarted = false;
+      this.lastDragEvent = null;
+      if (this.animationFrame) {
+        cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+      }
+      this.cdr.detectChanges();
+    }, 50); // Small delay to ensure click events can fire
+  }
 
   private handleDragMove(pageX: number): void {
     if (this.animationFrame) {
@@ -254,9 +297,13 @@ private cleanupDrag(): void {
     }
   }
 
+
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
-      this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons']);
+      this.animationState = 'exit';
+      setTimeout(() => {
+        this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons']);
+      }, 500); // Match animation duration
     }
   }
 
