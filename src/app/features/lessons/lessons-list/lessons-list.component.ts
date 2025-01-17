@@ -6,6 +6,7 @@ import { tap, map, filter, take } from 'rxjs/operators';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
+import { StorageService } from '../../../core/services/storage.service';
 import { Lesson } from '../../../shared/interfaces/lesson';
 
 @Component({
@@ -47,50 +48,16 @@ export class LessonsListComponent implements OnInit {
   constructor(
     private lessonsService: LessonsService,
     private unitsService: UnitsService,
+    private storageService: StorageService,
     public route: ActivatedRoute,
     public router: Router
   ) { }
-
-
-
-  handleLessonCompletion(lessonId: string) {
-    this.completingLessonId = lessonId;
-    
-    // Get current lessons array
-    this.lessons$.pipe(take(1)).subscribe(lessons => {
-      const currentIndex = lessons.findIndex(l => l.id === lessonId);
-      const isLastLesson = lessons.every((lesson, index) => 
-        index === currentIndex || lesson.isCompleted
-      );
-
-      // After animation delay
-      setTimeout(() => {
-        this.completingLessonId = null;
-
-        if (isLastLesson) {
-          // If this was the last lesson, navigate to units list
-          this.router.navigate(['/courses', this.courseId, 'units'], {
-            queryParams: { 
-              completedUnitId: this.unitId,
-              lastCompletedLesson: lessonId
-            }
-          });
-        } else {
-          // Otherwise, find and navigate to next incomplete lesson
-          const nextLesson = lessons[currentIndex + 1];
-          if (nextLesson && !nextLesson.isLocked) {
-            this.onLessonSelected(nextLesson);
-          }
-        }
-      }, 2500); // Match your animation duration
-    });
-  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
-    
+
     // Initialize lessons observable
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId);
 
@@ -98,9 +65,65 @@ export class LessonsListComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const completedLessonId = params['completedLessonId'];
       if (completedLessonId) {
-        this.handleLessonCompletion(completedLessonId);
+        this.checkAndHandleLessonCompletion(completedLessonId);
       }
     });
+  }
+
+  private checkAndHandleLessonCompletion(lessonId: string) {
+    const storageKey = `${this.courseId}_${this.unitId}_${lessonId}`;
+    const progressData = this.storageService.getProgress('lesson', storageKey);
+
+    // Check if this is the first time completing this lesson
+    if (!progressData?.answers?.['completion_effect_shown']) {
+      // Set the completion effect flag
+      this.storageService.saveAnswer(
+        storageKey,
+        'completion_effect_shown',
+        true,
+        true
+      );
+
+      // Trigger the completion effect
+      this.completingLessonId = lessonId;
+      this.handleLessonCompletion(lessonId);
+    } else {
+      // Skip animation and handle navigation directly
+      this.handleLessonNavigation(lessonId);
+    }
+  }
+
+  private handleLessonNavigation(lessonId: string): void {
+    setTimeout(() => {
+      this.lessons$.pipe(take(1)).subscribe(lessons => {
+        const currentIndex = lessons.findIndex(l => l.id === lessonId);
+        const isLastLesson = lessons.every((lesson, index) =>
+          index === currentIndex || lesson.isCompleted
+        );
+
+        if (isLastLesson) {
+          this.router.navigate(['/courses', this.courseId, 'units'], {
+            queryParams: {
+              completedUnitId: this.unitId,
+              lastCompletedLesson: lessonId
+            }
+          });
+        } else {
+          const nextLesson = lessons[currentIndex + 1];
+          if (nextLesson && !nextLesson.isLocked) {
+            this.onLessonSelected(nextLesson);
+          }
+        }
+      });
+    }, 1500); // Same delay as completion animation
+  }
+
+  handleLessonCompletion(lessonId: string): void {
+    // Wait for animation to complete
+    setTimeout(() => {
+      this.completingLessonId = null;
+      this.handleLessonNavigation(lessonId);
+    }, 2500); // Match your animation duration
   }
 
   onLessonSelected(lesson: Lesson): void {
@@ -110,6 +133,7 @@ export class LessonsListComponent implements OnInit {
     }
   }
 
+  // Mouse Event Handlers
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.lesson-item')) {
       this.dragStarted = true;
@@ -142,11 +166,12 @@ export class LessonsListComponent implements OnInit {
       const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
       if (lessonElement) {
         const lessonId = lessonElement.getAttribute('data-lesson-id');
-        const lessons = (this.lessons$ as any).value;
-        const lesson = lessons?.find((l: Lesson) => l.id === lessonId);
-        if (lesson && !lesson.isLocked) {
-          this.onLessonSelected(lesson);
-        }
+        this.lessons$.pipe(take(1)).subscribe(lessons => {
+          const lesson = lessons.find(l => l.id === lessonId);
+          if (lesson && !lesson.isLocked) {
+            this.onLessonSelected(lesson);
+          }
+        });
       }
     } else if (dragDistance > this.dragThreshold) {
       const speed = dragDistance / dragDuration;
@@ -169,6 +194,7 @@ export class LessonsListComponent implements OnInit {
     }
   }
 
+  // Touch Event Handlers
   onTouchStart(event: TouchEvent): void {
     if ((event.target as HTMLElement).closest('.lesson-item')) {
       this.dragStarted = true;
@@ -202,11 +228,12 @@ export class LessonsListComponent implements OnInit {
       const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
       if (lessonElement) {
         const lessonId = lessonElement.getAttribute('data-lesson-id');
-        const lessons = (this.lessons$ as any).value;
-        const lesson = lessons?.find((l: Lesson) => l.id === lessonId);
-        if (lesson && !lesson.isLocked) {
-          this.onLessonSelected(lesson);
-        }
+        this.lessons$.pipe(take(1)).subscribe(lessons => {
+          const lesson = lessons.find(l => l.id === lessonId);
+          if (lesson && !lesson.isLocked) {
+            this.onLessonSelected(lesson);
+          }
+        });
       }
     } else if (dragDistance > this.dragThreshold) {
       const speed = dragDistance / dragDuration;
