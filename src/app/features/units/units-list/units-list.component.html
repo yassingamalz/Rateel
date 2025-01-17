@@ -30,6 +30,7 @@
                  [attr.data-unit-id]="unit.id">
               <app-unit-card
                 [unit]="unit"
+                [isCompleting]="unit.id === completedUnitId"
                 [isActive]="activeUnitId === unit.id"
                 (unitSelected)="onUnitSelected($event)">
               </app-unit-card>

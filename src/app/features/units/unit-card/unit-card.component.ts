@@ -36,6 +36,7 @@ import { Unit } from '../../../shared/interfaces/unit';
 export class UnitCardComponent {
   @Input() unit!: Unit;
   @Input() isActive = false;
+  @Input() isCompleting = false; 
   @Output() unitSelected = new EventEmitter<Unit>();
 
   animationState: 'default' | 'hovered' = 'default';

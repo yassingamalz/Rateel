@@ -2,6 +2,7 @@
 @use "sass:map";
 @use 'variables' as vars;
 @use 'mixins' as mix;
+
 .lesson-card {
   position: relative;
   width: 280px;
@@ -13,34 +14,34 @@
   overflow: hidden;
   margin: 0 map.get(vars.$spacing, 'md');
   border: 1px solid rgba(255, 255, 255, 0.1);
-  
+
   &:hover:not(&--locked) {
     transform: translateY(-4px);
     border-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.5);
     background: rgba(27, 67, 50, 0.5);
-   
+
     .lesson-card__title {
       color: map.get(vars.$colors, 'accent', 'base');
     }
-   
+
     .lesson-card__description {
       color: rgba(map.get(vars.$colors, 'accent', 'base'), 1);
     }
-   }
-  
+  }
+
   &--locked {
     opacity: 0.7;
     cursor: not-allowed;
     background: rgba(0, 0, 0, 0.3);
   }
-  
+
   &--active {
     background: map.get(vars.$colors, 'accent', 'base');
     border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
+    box-shadow:
       0 0 0 2px map.get(vars.$colors, 'accent', 'base'),
       0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.4);
-    
+
     .lesson-card__title,
     .lesson-card__description {
       color: map.get(vars.$colors, 'text', 'dark');
@@ -112,7 +113,7 @@
     gap: map.get(vars.$spacing, 'xs');
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.875rem;
-    
+
     &::before {
       content: '⏱';
       font-size: 1rem;
@@ -133,5 +134,49 @@
   &__lock {
     font-size: 2rem;
     opacity: 0.8;
+  }
+
+  &.border-fill-animation-active {
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      border-radius: inherit;
+      animation: rectangularBorderFill 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+  }
+}
+
+
+@keyframes rectangularBorderFill {
+  0% {
+    border-top-color: map.get(vars.$colors, 'accent', 'base');
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    filter: drop-shadow(0 0 6px map.get(vars.$colors, 'accent', 'glow'));
+  }
+  25% {
+    border-top-color: map.get(vars.$colors, 'accent', 'base');
+    border-right-color: map.get(vars.$colors, 'accent', 'base');
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  50% {
+    border-top-color: map.get(vars.$colors, 'accent', 'base');
+    border-right-color: map.get(vars.$colors, 'accent', 'base');
+    border-bottom-color: map.get(vars.$colors, 'accent', 'base');
+    border-left-color: transparent;
+  }
+  75% {
+    border-top-color: map.get(vars.$colors, 'accent', 'base');
+    border-right-color: map.get(vars.$colors, 'accent', 'base');
+    border-bottom-color: map.get(vars.$colors, 'accent', 'base');
+    border-left-color: map.get(vars.$colors, 'accent', 'base');
+  }
+  100% {
+    opacity: 0;
   }
 }

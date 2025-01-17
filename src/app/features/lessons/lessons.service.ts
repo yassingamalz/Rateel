@@ -140,36 +140,7 @@ export class LessonsService {
           stepNumber: 3,
           totalSteps: 5
         },
-        {
-          id: 'quran-examples',
-          title: 'أمثلة قرآنية',
-          description: 'دراسة أمثلة من القرآن الكريم',
-          type: 'listen',
-          icon: 'fa-book-open',
-          duration: 12,
-          order: 4,
-          unitId: 'intro-noon-meem-unit',
-          courseId: 'noon-meem-mushaddad',
-          isCompleted: false,
-          isLocked: true,
-          stepNumber: 4,
-          totalSteps: 5
-        },
-        {
-          id: 'unit-assessment',
-          title: 'التقييم النهائي',
-          description: 'اختبار شامل للوحدة',
-          type: 'test',
-          icon: 'fa-check-circle',
-          duration: 20,
-          order: 5,
-          unitId: 'intro-noon-meem-unit',
-          courseId: 'noon-meem-mushaddad',
-          isCompleted: false,
-          isLocked: true,
-          stepNumber: 5,
-          totalSteps: 5
-        }
+    
       ],
       'practical-noon-meem-unit': [
         {

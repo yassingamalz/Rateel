@@ -27,6 +27,7 @@
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
+    pointer-events: none; // Prevent interference
 
     &__circle {
       &--backdrop {
@@ -43,8 +44,10 @@
       &--progress {
         stroke: map.get(vars.$colors, 'accent', 'base');
         fill: none;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         stroke-linecap: round;
+        stroke-width: 4;
+        stroke-dasharray: 0, 289; // Initial state
+        transition: stroke 0.3s ease;
       }
     }
   }
@@ -312,6 +315,27 @@
       }
     }
   }
+
+  &.border-fill-animation-active {
+
+    // Remove any existing border animations
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    .progress-ring__circle--progress {
+      animation: circularBorderFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      stroke: map.get(vars.$colors, 'accent', 'bright');
+      filter: drop-shadow(0 0 6px map.get(vars.$colors, 'accent', 'glow'));
+    }
+
+    // Ensure no background interference
+    .progress-ring__circle--bg {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
 }
 
 // Animations
@@ -357,6 +381,16 @@
 
   100% {
     left: 100%;
+  }
+}
+
+@keyframes circularBorderFill {
+  0% {
+    stroke-dasharray: 0, 289; // 2 * π * 46 ≈ 289
+  }
+
+  100% {
+    stroke-dasharray: 289, 289;
   }
 }
 

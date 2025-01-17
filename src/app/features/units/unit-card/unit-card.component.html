@@ -1,22 +1,19 @@
 <!-- unit-card.component.html -->
 <div class="unit-card" [class.unit-card--locked]="unit.isLocked" [class.unit-card--completed]="unit.isCompleted"
-  [class.unit-card--not-started]="!unit.progress" [class.unit-card--active]="isActive" (click)="onUnitClick()"
-  [@cardState]="animationState" (mouseenter)="animationState = 'hovered'" (mouseleave)="animationState = 'default'">
+  [class.unit-card--not-started]="!unit.progress" [class.unit-card--active]="isActive" borderFillEffect
+  [triggerEffect]="isCompleting" [attr.data-unit-id]="unit.id" (click)="onUnitClick()" [@cardState]="animationState"
+  (mouseenter)="animationState = 'hovered'" (mouseleave)="animationState = 'default'">
 
   <!-- Glowing Background Effect -->
   <div class="unit-card__glow"></div>
 
   <!-- Progress Ring -->
-  <svg class="progress-ring" viewBox="0 0 100 100">
-    <!-- Backdrop Circle -->
+  <svg class="progress-ring" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
     <circle class="progress-ring__circle--backdrop" cx="50" cy="50" r="46" stroke-width="2" />
 
-    <!-- Background Circle -->
     <circle class="progress-ring__circle--bg" cx="50" cy="50" r="46" stroke-width="4" />
 
-    <!-- Progress Circle -->
-    <circle class="progress-ring__circle--progress" cx="50" cy="50" r="46" stroke-width="4"
-      [style.strokeDasharray]="getProgressCircleValue()" />
+    <circle class="progress-ring__circle--progress" cx="50" cy="50" r="46" stroke-width="4" />
   </svg>
 
   <!-- Main Content -->

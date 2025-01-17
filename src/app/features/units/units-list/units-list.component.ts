@@ -26,6 +26,7 @@ import {
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { StorageService } from '../../../core/services/storage.service';
 
 @Component({
   selector: 'app-units-list',
@@ -56,6 +57,7 @@ export class UnitsListComponent implements OnInit, OnDestroy {
   units$!: Observable<Unit[]>;
   courseId!: string;
   activeUnitId: string | null = null;
+  completedUnitId: string | null = null;
   isDragging = false;
 
   private dragStarted = false;
@@ -77,13 +79,14 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitsService.setCurrentCourse(this.courseId);
-
+  
     this.units$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
       distinctUntilChanged(),
       shareReplay(1),
@@ -93,39 +96,90 @@ export class UnitsListComponent implements OnInit, OnDestroy {
         return [];
       })
     );
-
+  
     const unitId = this.route.snapshot.paramMap.get('unitId');
     if (unitId) {
       this.activeUnitId = unitId;
       this.scrollToActiveUnit();
     }
-
-    this.route.queryParams.subscribe(params => {
-      if (params['completedUnitId']) {
-        this.handleUnitCompletion(params['completedUnitId']);
+  
+    // Handle query params for unit completion
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      const completedUnitId = params['completedUnitId'];
+      if (completedUnitId) {
+        const progressData = this.storageService.getProgress('unit', `${this.courseId}_${completedUnitId}`);
+        const currentTime = Date.now();
+        
+        // Check if this completion is recent (within last 2 seconds) or hasn't been shown yet
+        if (!progressData?.lastUpdated || (currentTime - progressData.lastUpdated) > 2000) {
+          this.handleUnitCompletion(completedUnitId);
+          
+          // Update storage with completion data
+          this.storageService.saveProgress('unit', `${this.courseId}_${completedUnitId}`, {
+            isCompleted: true,
+            progress: 100,
+            lastUpdated: currentTime,
+          });
+        }
       }
+  
       if (params['returnTo'] === 'units') {
         this.animationState = '*';
       }
     });
+  
+    // Subscribe to storage changes to update UI
+    this.storageService.getProgressChanges()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (change?.type === 'unit' && change.data.isCompleted) {
+          const unitId = change.id.split('_')[1]; // Extract unit ID from storage key
+          if (unitId !== this.completedUnitId) {
+            this.cdr.detectChanges();
+          }
+        }
+      });
   }
-
+  
   private handleUnitCompletion(unitId: string): void {
-    // Find the completed unit element
-    const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
-    if (completedUnit) {
-      completedUnit.classList.add('unit-completed');
-      // Scroll to unit after animation
-      setTimeout(() => {
-        completedUnit.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
+    this.ngZone.run(() => {
+      this.completedUnitId = unitId;
+      this.cdr.detectChanges();
+  
+      const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
+      if (completedUnit) {
+        completedUnit.classList.add('unit-completed');
+  
+        // Schedule animation cleanup
+        setTimeout(() => {
+          this.ngZone.run(() => {
+            this.completedUnitId = null;
+            this.cdr.detectChanges();
+  
+            // Update scroll position after animations
+            requestAnimationFrame(() => {
+              completedUnit.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+              });
+            });
+          });
+        }, 1500); // Match border fill animation duration
+  
+        // Update storage with completion timestamp
+        this.storageService.saveProgress('unit', `${this.courseId}_${unitId}`, {
+          isCompleted: true,
+          progress: 100,
+          lastUpdated: Date.now(),
+          timestamp: Date.now(),
+          expiresAt: Date.now() + (2 * 365 * 24 * 60 * 60 * 1000) // 2 years expiration
         });
-      }, 500); // Match animation duration
-    }
+      }
+    });
   }
-
 
   ngOnDestroy(): void {
     this.cleanupDrag();
