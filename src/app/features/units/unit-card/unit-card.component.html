@@ -39,9 +39,9 @@
     </h3>
 
     <!-- Progress Badge with Shine -->
-    <div class="unit-card__progress" *ngIf="!unit.isLocked && unit.progress">
+    <div class="unit-card__progress" *ngIf="!unit.isLocked && unit.progress !== undefined">
       <div class="unit-card__progress-shine"></div>
-      {{ unit.progress }}%
+      {{ formattedProgress }}%
     </div>
   </div>
 

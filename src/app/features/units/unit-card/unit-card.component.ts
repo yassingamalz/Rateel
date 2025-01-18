@@ -36,7 +36,7 @@ import { Unit } from '../../../shared/interfaces/unit';
 export class UnitCardComponent {
   @Input() unit!: Unit;
   @Input() isActive = false;
-  @Input() isCompleting = false; 
+  @Input() isCompleting = false;
   @Output() unitSelected = new EventEmitter<Unit>();
 
   animationState: 'default' | 'hovered' = 'default';
@@ -44,7 +44,7 @@ export class UnitCardComponent {
   onUnitClick(): void {
     console.log("hey - clicked");
     console.log("Unit locked status:", this.unit.isLocked);
-    
+
     if (!this.unit.isLocked) {
       this.unitSelected.emit(this.unit);
       console.log("Unit selected:", this.unit);
@@ -65,7 +65,12 @@ export class UnitCardComponent {
 
   getProgressCircleValue(): string {
     const circumference = 2 * Math.PI * 46;
-    const offset = circumference - ((this.unit.progress || 0) / 100) * circumference;
-    return `${offset}, ${circumference}`;
+    const progress = this.unit.progress || 0;
+    const dashArray = (progress / 100) * circumference;
+    return `${dashArray}, ${circumference}`;
+  }
+
+  get formattedProgress(): number {
+    return Math.round(this.unit.progress || 0);
   }
 }

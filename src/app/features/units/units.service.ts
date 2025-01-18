@@ -89,23 +89,23 @@ export class UnitsService {
   private initializeFromStorage(): void {
     Object.keys(this.mockUnits).forEach(courseId => {
       const cachedCourseProgress = this.storageService.getProgress('course', courseId);
-      
+
       this.mockUnits[courseId] = this.mockUnits[courseId].map((unit, index) => {
         const cachedUnitProgress = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
-        
+
         if (cachedUnitProgress) {
           const previousUnit = index > 0 ? this.mockUnits[courseId][index - 1] : null;
-          
+
           return {
             ...unit,
             progress: cachedUnitProgress.progress,
             isCompleted: cachedUnitProgress.isCompleted,
-            isLocked: !(unit.order === 1 || 
-                        (previousUnit?.isCompleted) || 
-                        (cachedCourseProgress && cachedCourseProgress.isCompleted))
+            isLocked: !(unit.order === 1 ||
+              (previousUnit?.isCompleted) ||
+              (cachedCourseProgress && cachedCourseProgress.isCompleted))
           };
         }
- 
+
         return unit;
       });
     });
@@ -116,12 +116,12 @@ export class UnitsService {
     if (unit) {
       unit.isCompleted = true;
       unit.progress = 100;
- 
+
       this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
         progress: 100,
         isCompleted: true
       });
- 
+
       const nextUnit = this.mockUnits[courseId]?.find(u => u.order === unit.order + 1);
       if (nextUnit) {
         nextUnit.isLocked = false;
@@ -135,29 +135,26 @@ export class UnitsService {
     }
     return of(void 0);
   }
- 
+
   updateUnitProgress(courseId: string, unitId: string, progress: number): Observable<void> {
     const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
     if (unit) {
-      unit.progress = Math.min(100, Math.max(0, progress));
-      const isCompleted = progress === 100;
-      
+      // Ensure progress is between 0 and 100 and rounded to whole numbers
+      const normalizedProgress = Math.round(Math.min(100, Math.max(0, progress)));
+      unit.progress = normalizedProgress;
+
+      const isCompleted = normalizedProgress === 100;
+
       this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
-        progress: unit.progress,
+        progress: normalizedProgress,
         isCompleted
       });
- 
+
       if (isCompleted) {
         unit.isCompleted = true;
         const nextUnit = this.mockUnits[courseId]?.find(u => u.order === unit.order + 1);
         if (nextUnit) {
           nextUnit.isLocked = false;
-        }
-
-        // Check for course completion when unit is completed via progress update
-        const allUnitsCompleted = this.mockUnits[courseId]?.every(u => u.isCompleted);
-        if (allUnitsCompleted) {
-          this.coursesService.markCourseAsCompleted(courseId).subscribe();
         }
       }
     }
@@ -171,7 +168,7 @@ export class UnitsService {
   getUnitsByCourseId(courseId: string): Observable<Unit[]> {
     // First, update units based on storage
     this.initializeFromStorage();
-    
+
     // Return units for the specific course
     return of(this.mockUnits[courseId] || []);
   }
