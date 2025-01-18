@@ -140,7 +140,36 @@ export class LessonsService {
           stepNumber: 3,
           totalSteps: 5
         },
-    
+        {
+          id: 'quran-examples',
+          title: 'أمثلة قرآنية',
+          description: 'دراسة أمثلة من القرآن الكريم',
+          type: 'listen',
+          icon: 'fa-book-open',
+          duration: 12,
+          order: 4,
+          unitId: 'intro-noon-meem-unit',
+          courseId: 'noon-meem-mushaddad',
+          isCompleted: false,
+          isLocked: true,
+          stepNumber: 4,
+          totalSteps: 5
+        },
+        {
+          id: 'unit-assessment',
+          title: 'التقييم النهائي',
+          description: 'اختبار شامل للوحدة',
+          type: 'test',
+          icon: 'fa-check-circle',
+          duration: 20,
+          order: 5,
+          unitId: 'intro-noon-meem-unit',
+          courseId: 'noon-meem-mushaddad',
+          isCompleted: false,
+          isLocked: true,
+          stepNumber: 5,
+          totalSteps: 5
+        }
       ],
       'practical-noon-meem-unit': [
         {
@@ -229,24 +258,35 @@ export class LessonsService {
     const lesson = lessons.find(l => l.id === lessonId);
 
     if (lesson) {
+      // Mark lesson as completed
       lesson.isCompleted = true;
-      lesson.isLocked = false;
 
+      // Save lesson completion state
       this.storageService.saveProgress('lesson', `${courseId}_${unitId}_${lessonId}`, {
         progress: 100,
-        isCompleted: true
+        isCompleted: true,
+        lastUpdated: Date.now()
       });
 
-      // Unlock next lesson
+      // Calculate unit progress based on completed lessons
+      const completedLessons = lessons.filter(l => l.isCompleted).length;
+      const unitProgress = Math.round((completedLessons * 100) / lessons.length);
+
+      // Update unit progress
+      this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
+        progress: unitProgress,
+        isCompleted: unitProgress === 100,
+        lastUpdated: Date.now()
+      });
+
+      // Unlock next lesson if exists
       const nextLesson = lessons.find(l => l.order === lesson.order + 1);
       if (nextLesson) {
         nextLesson.isLocked = false;
       }
 
-      // Check if all lessons are completed
-      const allLessonsCompleted = lessons.every(l => l.isCompleted);
-      if (allLessonsCompleted) {
-        // Mark unit as completed and unlock next unit
+      // Check if unit is completed
+      if (completedLessons === lessons.length) {
         this.unitsService.markUnitAsCompleted(courseId, unitId).subscribe();
       }
     }
@@ -266,18 +306,28 @@ export class LessonsService {
   private initializeFromStorage(): void {
     Object.keys(this.mockLessons).forEach(courseId => {
       Object.keys(this.mockLessons[courseId]).forEach(unitId => {
+        // Get all lessons for this unit
+        let previousLessonCompleted = true; // First lesson should be unlocked
+
         this.mockLessons[courseId][unitId] = this.mockLessons[courseId][unitId].map(lesson => {
-          const data = this.storageService.getProgress('lesson', `${courseId}_${unitId}_${lesson.id}`);
-          if (!data) return lesson;
+          // Get stored progress for this lesson
+          const storageKey = `${courseId}_${unitId}_${lesson.id}`;
+          const progressData = this.storageService.getProgress('lesson', storageKey);
 
-          const previousLesson = lesson.order > 1 ?
-            this.mockLessons[courseId][unitId][lesson.order - 2] : null;
+          // Determine if lesson should be locked
+          const shouldBeLocked = lesson.order !== 1 && !previousLessonCompleted;
 
-          return {
+          // Update lesson state
+          const updatedLesson = {
             ...lesson,
-            isCompleted: data.isCompleted,
-            isLocked: !(lesson.order === 1 || (previousLesson?.isCompleted))
+            isCompleted: progressData?.isCompleted || false,
+            isLocked: shouldBeLocked
           };
+
+          // Update for next iteration
+          previousLessonCompleted = updatedLesson.isCompleted;
+
+          return updatedLesson;
         });
       });
     });
@@ -286,8 +336,27 @@ export class LessonsService {
   getProgress(courseId: string, unitId: string): Observable<number> {
     const lessons = this.mockLessons[courseId]?.[unitId] || [];
     const totalLessons = lessons.length;
-    const completedLessons = lessons.filter(l => l.isCompleted).length;
-    return of(totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0);
+
+    // Get completed lessons and their individual progress
+    const lessonProgresses = lessons.map(lesson => {
+      const savedProgress = this.storageService.getProgress(
+        'lesson',
+        `${courseId}_${unitId}_${lesson.id}`
+      );
+      return savedProgress?.progress || (lesson.isCompleted ? 100 : 0);
+    });
+
+    // Calculate average progress
+    const totalProgress = lessonProgresses.reduce((sum, progress) => sum + progress, 0);
+    const unitProgress = totalLessons > 0 ? Math.round(totalProgress / totalLessons) : 0;
+
+    // Update unit progress in storage
+    this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
+      progress: unitProgress,
+      isCompleted: unitProgress === 100
+    });
+
+    return of(unitProgress);
   }
 
   isUnitCompleted(courseId: string, unitId: string): Observable<boolean> {

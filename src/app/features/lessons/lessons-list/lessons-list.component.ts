@@ -1,8 +1,8 @@
 // src/app/features/lessons/lessons-list/lessons-list.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, BehaviorSubject, combineLatest, of } from 'rxjs';
-import { tap, map, filter, take } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, of, Subject } from 'rxjs';
+import { tap, map, filter, take, catchError, shareReplay, takeUntil } from 'rxjs/operators';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
@@ -28,6 +28,8 @@ import { Lesson } from '../../../shared/interfaces/lesson';
 })
 export class LessonsListComponent implements OnInit {
   @ViewChild('lessonsContainer') lessonsContainer!: ElementRef;
+  private destroy$ = new Subject<void>();
+
   completingLessonId: string | null = null;
 
   lessons$!: Observable<Lesson[]>;
@@ -53,16 +55,66 @@ export class LessonsListComponent implements OnInit {
     public router: Router
   ) { }
 
+
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
 
-    // Initialize lessons observable
-    this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId);
+    // Initialize lessons with proper state management
+    this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
+      map(lessons => {
+        let previousLessonCompleted = true; // First lesson should be unlocked
 
-    // Subscribe to query params for completion handling
-    this.route.queryParams.subscribe(params => {
+        // Calculate how many lessons are completed
+        const completedLessons = lessons.filter(lesson => {
+          const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
+          const progressData = this.storageService.getProgress('lesson', storageKey);
+          return progressData?.isCompleted;
+        }).length;
+
+        // Calculate unit progress percentage
+        const unitProgress = Math.round((completedLessons * 100) / lessons.length);
+
+        // Save unit progress
+        this.storageService.saveProgress('unit', `${this.courseId}_${this.unitId}`, {
+          progress: unitProgress,
+          isCompleted: unitProgress === 100,
+          timestamp: Date.now()
+        });
+
+        return lessons.map(lesson => {
+          const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
+          const progressData = this.storageService.getProgress('lesson', storageKey);
+
+          // Determine locked state based on previous lesson completion
+          const isLocked = lesson.order !== 1 && !previousLessonCompleted;
+          const isCompleted = progressData?.isCompleted || false;
+
+          // Update for next iteration
+          previousLessonCompleted = isCompleted;
+
+          return {
+            ...lesson,
+            isCompleted,
+            isLocked
+          };
+        });
+      }),
+      tap(lessons => {
+        // Handle query params
+        const params = this.route.snapshot.queryParams;
+        if (params['completedLessonId']) {
+          this.checkAndHandleLessonCompletion(params['completedLessonId']);
+        }
+      }),
+      shareReplay(1)
+    );
+
+    // Subscribe to query params and storage changes
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
       const completedLessonId = params['completedLessonId'];
       if (completedLessonId) {
         this.checkAndHandleLessonCompletion(completedLessonId);
@@ -247,5 +299,12 @@ export class LessonsListComponent implements OnInit {
 
     this.isDragging = false;
     this.dragStarted = false;
+  }
+
+  ngOnDestroy(): void {
+    if (this.destroy$) {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
   }
 }
