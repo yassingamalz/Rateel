@@ -10,9 +10,11 @@ import {
 } from '@angular/core';
 import {
   ActivatedRoute,
+  NavigationEnd,
   Router
 } from '@angular/router';
 import {
+  BehaviorSubject,
   Observable,
   Subject
 } from 'rxjs';
@@ -20,7 +22,11 @@ import {
   takeUntil,
   shareReplay,
   distinctUntilChanged,
-  catchError
+  catchError,
+  tap,
+  filter,
+  delay,
+  take
 } from 'rxjs/operators';
 
 import { UnitsService } from '../units.service';
@@ -46,13 +52,27 @@ import { StorageService } from '../../../core/services/storage.service';
       })),
       transition('void => *', animate('500ms ease-out')),
       transition('* => exit', animate('500ms ease-in'))
+
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-out', style({ opacity: 0 }))
+      ])
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UnitsListComponent implements OnInit, OnDestroy {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef<HTMLElement>;
+  initialLoad = true;
   animationState: string = '*';
+  loading$ = new BehaviorSubject<boolean>(true);
+  transitionComplete = false;
+  contentReady = false;
 
   units$!: Observable<Unit[]>;
   courseId!: string;
@@ -81,28 +101,53 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private storageService: StorageService
-  ) { }
+  ) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.initialLoad = false;
+    });
+  }
 
   ngOnInit(): void {
+    this.loading$.next(true);
+    this.contentReady = false;
+
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitsService.setCurrentCourse(this.courseId);
-  
-    this.units$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
+
+    // Create a combined observable for initialization
+    const initializeContent$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
       distinctUntilChanged(),
+      // Delay the emission on initial load
+      delay(300), // Adjust timing if needed
+      tap(() => {
+        this.ngZone.run(() => {
+          this.contentReady = true;
+          this.loading$.next(false);
+          this.cdr.detectChanges();
+        });
+      }),
       shareReplay(1),
-      takeUntil(this.destroy$),
-      catchError(error => {
-        console.error('Error fetching units:', error);
-        return [];
-      })
+      takeUntil(this.destroy$)
     );
-  
+
+    // Subscribe to handle units data
+    this.units$ = initializeContent$;
+
+    // Handle unit ID from route
     const unitId = this.route.snapshot.paramMap.get('unitId');
     if (unitId) {
       this.activeUnitId = unitId;
-      this.scrollToActiveUnit();
+      // Wait for content to be ready before scrolling
+      this.units$.pipe(
+        filter(units => units.length > 0),
+        take(1)
+      ).subscribe(() => {
+        setTimeout(() => this.scrollToActiveUnit(), 100);
+      });
     }
-  
+
     // Handle query params for unit completion
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
@@ -111,12 +156,9 @@ export class UnitsListComponent implements OnInit, OnDestroy {
       if (completedUnitId) {
         const progressData = this.storageService.getProgress('unit', `${this.courseId}_${completedUnitId}`);
         const currentTime = Date.now();
-        
-        // Check if this completion is recent (within last 2 seconds) or hasn't been shown yet
+
         if (!progressData?.lastUpdated || (currentTime - progressData.lastUpdated) > 2000) {
           this.handleUnitCompletion(completedUnitId);
-          
-          // Update storage with completion data
           this.storageService.saveProgress('unit', `${this.courseId}_${completedUnitId}`, {
             isCompleted: true,
             progress: 100,
@@ -124,40 +166,43 @@ export class UnitsListComponent implements OnInit, OnDestroy {
           });
         }
       }
-  
+
       if (params['returnTo'] === 'units') {
         this.animationState = '*';
       }
     });
-  
-    // Subscribe to storage changes to update UI
+
+    // Handle storage changes
     this.storageService.getProgressChanges()
       .pipe(takeUntil(this.destroy$))
       .subscribe(change => {
         if (change?.type === 'unit' && change.data.isCompleted) {
-          const unitId = change.id.split('_')[1]; // Extract unit ID from storage key
+          const unitId = change.id.split('_')[1];
           if (unitId !== this.completedUnitId) {
             this.cdr.detectChanges();
           }
         }
       });
   }
-  
+  onAnimationComplete(): void {
+    this.transitionComplete = true;
+  }
+
   private handleUnitCompletion(unitId: string): void {
     this.ngZone.run(() => {
       this.completedUnitId = unitId;
       this.cdr.detectChanges();
-  
+
       const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
       if (completedUnit) {
         completedUnit.classList.add('unit-completed');
-  
+
         // Schedule animation cleanup
         setTimeout(() => {
           this.ngZone.run(() => {
             this.completedUnitId = null;
             this.cdr.detectChanges();
-  
+
             // Update scroll position after animations
             requestAnimationFrame(() => {
               completedUnit.scrollIntoView({
@@ -168,7 +213,7 @@ export class UnitsListComponent implements OnInit, OnDestroy {
             });
           });
         }, 1500); // Match border fill animation duration
-  
+
         // Update storage with completion timestamp
         this.storageService.saveProgress('unit', `${this.courseId}_${unitId}`, {
           isCompleted: true,

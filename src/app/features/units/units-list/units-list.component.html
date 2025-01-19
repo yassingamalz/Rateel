@@ -11,11 +11,19 @@
   </header>
 
   <div class="units-outer-container">
+    <!-- Loading State -->
+    <div class="units-loading" *ngIf="loading$ | async">
+      <div class="units-loading-spinner">
+        <i class="fas fa-spinner fa-pulse"></i>
+      </div>
+    </div>
+
+    <!-- Main Content -->
     <ng-container *ngIf="(units$ | async) as units">
-      <div *ngIf="units.length > 0" 
-           class="units-container"
-           #unitsContainer
+      <div class="units-container"
+           [class.units-container--ready]="contentReady"
            [class.dragging]="isDragging"
+           #unitsContainer
            (mousedown)="onMouseDown($event)"
            (mousemove)="onMouseMove($event)"
            (mouseup)="onMouseUp($event)"
@@ -25,7 +33,7 @@
            (touchend)="onTouchEnd($event)">
         <div class="units-wrapper">
           <ng-container *ngFor="let unit of units; let i = index; trackBy: trackByUnitId">
-            <div class="unit-item" 
+            <div class="unit-item"
                  [class.unit-item--active]="activeUnitId === unit.id"
                  [attr.data-unit-id]="unit.id">
               <app-unit-card
@@ -36,21 +44,13 @@
               </app-unit-card>
 
               <div class="connector-line" *ngIf="i < units.length - 1">
-                <div class="connector-line__progress" 
+                <div class="connector-line__progress"
                      [style.width.%]="getConnectorProgress(unit, units[i + 1])">
                 </div>
               </div>
             </div>
           </ng-container>
         </div>
-      </div>
-
-      <div *ngIf="units.length === 0" class="units-empty-state">
-        <i class="fas fa-book-open"></i>
-        <p>لم يتم العثور على وحدات في هذا المقرر</p>
-        <button class="btn-return-courses" routerLink="/courses">
-          العودة للمقررات
-        </button>
       </div>
     </ng-container>
   </div>

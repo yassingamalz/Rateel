@@ -7,9 +7,11 @@
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  background: linear-gradient(to bottom right,
-      map.get(vars.$colors, 'primary', 'base'),
-      map.get(vars.$colors, 'primary', 'dark'));
+  background: linear-gradient(
+    to bottom right,
+    map.get(vars.$colors, 'primary', 'base'),
+    map.get(vars.$colors, 'primary', 'dark')
+  );
 
   // Ensure the container remains stable during animation
   &.ng-enter,
@@ -60,6 +62,7 @@
 
 .units-outer-container {
   overflow: hidden;
+  min-height: 400px; // Adjust based on your needs
   margin: 0 -#{map.get(vars.$spacing, 'lg')};
 }
 
@@ -71,6 +74,8 @@
   cursor: grab;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  transition: opacity 0.3s ease-in-out;
+
 
   &.dragging {
     cursor: grabbing;
@@ -81,6 +86,14 @@
   }
 
   scrollbar-width: none;
+}
+
+.units-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 .units-wrapper {
@@ -141,10 +154,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right,
-        transparent,
-        rgba(map.get(vars.$colors, 'accent', 'base'), 0.2),
-        transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(map.get(vars.$colors, 'accent', 'base'), 0.2),
+      transparent
+    );
     animation: shimmer 2s infinite;
   }
 }
@@ -162,8 +177,7 @@
 // Responsive Styles
 // Corrected mobile landscape query
 @media only screen and (orientation: landscape) and (max-device-width: 926px) and (hover: none) and (pointer: coarse),
-only screen and (orientation: landscape) and (max-device-height: 926px) and (hover: none) and (pointer: coarse) {
-
+  only screen and (orientation: landscape) and (max-device-height: 926px) and (hover: none) and (pointer: coarse) {
   // Existing styles remain exactly the same
   .units-page {
     min-height: 100%;
