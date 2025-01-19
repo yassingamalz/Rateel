@@ -25,7 +25,7 @@ import { LessonsModule } from './features/lessons/lessons.module';
     CommonModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

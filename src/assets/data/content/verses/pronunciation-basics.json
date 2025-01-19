@@ -1,0 +1,82 @@
+{
+    "version": "1.0.0",
+    "lessonId": "practical-lesson-1",
+    "verses": [
+        {
+            "id": "verse1",
+            "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+            "translation": "In the name of Allah, the Most Gracious, the Most Merciful",
+            "highlights": [
+                {
+                    "start": 10,
+                    "end": 15,
+                    "rule": "noon-mushaddad",
+                    "color": "#DAA520"
+                },
+                {
+                    "start": 25,
+                    "end": 30,
+                    "rule": "meem-mushaddad",
+                    "color": "#90EE90"
+                }
+            ],
+            "audioUrl": "assets/audio/fatiha/verse1.mp3"
+        },
+        {
+            "id": "verse2",
+            "text": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+            "translation": "Praise be to Allah, Lord of the worlds",
+            "highlights": [
+                {
+                    "start": 5,
+                    "end": 10,
+                    "rule": "noon-sakinah",
+                    "color": "#FF6347"
+                }
+            ],
+            "audioUrl": "assets/audio/fatiha/verse2.mp3"
+        },
+        {
+            "id": "verse3",
+            "text": "الرَّحْمَٰنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ",
+            "translation": "The Most Gracious, the Most Merciful. Master of the Day of Judgment",
+            "highlights": [
+                {
+                    "start": 15,
+                    "end": 20,
+                    "rule": "meem-mushaddad",
+                    "color": "#87CEEB"
+                }
+            ],
+            "audioUrl": "assets/audio/fatiha/verse3.mp3"
+        },
+        {
+            "id": "verse4",
+            "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+            "translation": "You alone we worship, and You alone we ask for help",
+            "highlights": [
+                {
+                    "start": 0,
+                    "end": 5,
+                    "rule": "noon-mushaddad",
+                    "color": "#32CD32"
+                }
+            ],
+            "audioUrl": "assets/audio/fatiha/verse4.mp3"
+        },
+        {
+            "id": "verse5",
+            "text": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+            "translation": "Guide us to the straight path",
+            "highlights": [
+                {
+                    "start": 10,
+                    "end": 15,
+                    "rule": "meem-mushaddad",
+                    "color": "#FF4500"
+                }
+            ],
+            "audioUrl": "assets/audio/fatiha/verse5.mp3"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0",
+    "unitId": "practical-noon-meem-unit",
+    "courseId": "noon-meem-mushaddad",
+    "lessons": [
+        {
+            "id": "practical-lesson-1",
+            "title": "تطبيقات عملية",
+            "description": "تمارين تطبيقية على النون والميم المشددتين",
+            "type": "practice",
+            "icon": "fa-pen-to-square",
+            "duration": 15,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 3,
+            "contentPath": "/content/verses/practical-lesson-1.json"
+        }
+    ]
+}

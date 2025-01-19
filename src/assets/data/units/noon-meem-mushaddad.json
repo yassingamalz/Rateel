@@ -1,0 +1,51 @@
+{
+    "version": "1.0.0",
+    "courseId": "noon-meem-mushaddad",
+    "units": [
+        {
+            "id": "intro-noon-meem-unit",
+            "title": "تعريف النون والميم",
+            "description": "الدرس الأول: التعريف والأمثلة",
+            "courseId": "noon-meem-mushaddad",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "practical-noon-meem-unit",
+            "title": "التطبيق العملي",
+            "description": "الدرس الثاني: تطبيقات وتدريبات",
+            "courseId": "noon-meem-mushaddad",
+            "type": "exercise",
+            "icon": "fa-pen-to-square",
+            "order": 2
+        },
+        {
+            "id": "listening-practice-unit",
+            "title": "تدريبات الاستماع",
+            "description": "الدرس الثالث: الاستماع والتكرار",
+            "courseId": "noon-meem-mushaddad",
+            "type": "listening",
+            "icon": "fa-headphones",
+            "order": 3
+        },
+        {
+            "id": "reading-applications-unit",
+            "title": "تطبيقات القراءة",
+            "description": "الدرس الرابع: القراءة والتطبيق",
+            "courseId": "noon-meem-mushaddad",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "advanced-applications-unit",
+            "title": "التطبيقات المتقدمة",
+            "description": "الدرس الخامس: حالات خاصة وتطبيقات متقدمة",
+            "courseId": "noon-meem-mushaddad",
+            "type": "exercise",
+            "icon": "fa-graduation-cap",
+            "order": 5
+        }
+    ]
+}

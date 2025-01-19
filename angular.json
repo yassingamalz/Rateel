@@ -27,7 +27,9 @@
             "outputPath": "dist/rattil",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -35,6 +37,36 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/data",
+                "output": "/assets/data"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/courses",
+                "output": "/assets/data/courses"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/units",
+                "output": "/assets/data/units"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/lessons",
+                "output": "/assets/data/lessons"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/content",
+                "output": "/assets/data/content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/audio",
+                "output": "/assets/audio"
               },
               {
                 "glob": "**/*",
@@ -58,7 +90,9 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             },
             "optimization": {
               "styles": {
@@ -112,7 +146,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -120,6 +157,36 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/data",
+                "output": "/assets/data"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/courses",
+                "output": "/assets/data/courses"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/units",
+                "output": "/assets/data/units"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/lessons",
+                "output": "/assets/data/lessons"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "src/assets/data/content",
+                "output": "/assets/data/content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/audio",
+                "output": "/assets/audio"
               },
               {
                 "glob": "**/*",
@@ -144,7 +211,9 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             }
           }
         }

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of } from "rxjs";
 import { StorageService } from "../../core/services/storage.service";
 import { Unit } from "../../shared/interfaces/unit";
 import { CoursesService } from "../courses/courses.service";
@@ -11,108 +11,73 @@ import { CoursesService } from "../courses/courses.service";
 export class UnitsService {
   private currentCourseIdSubject = new BehaviorSubject<string | null>(null);
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
-
-
-  private mockUnits: { [key: string]: Unit[] } = {
-    'noon-meem-mushaddad': [
-      {
-        id: 'intro-noon-meem-unit',
-        title: 'تعريف النون والميم ',
-        description: 'الدرس الأول: التعريف والأمثلة',
-        courseId: 'noon-meem-mushaddad',
-        type: 'video',
-        icon: 'fa-play-circle',
-        order: 1,
-        isLocked: false,
-        isCompleted: false,
-        progress: 0,
-      },
-      {
-        id: 'practical-noon-meem-unit',
-        title: 'التطبيق العملي',
-        description: 'الدرس الثاني: تطبيقات وتدريبات',
-        courseId: 'noon-meem-mushaddad',
-        type: 'exercise',
-        icon: 'fa-pen-to-square',
-        order: 2,
-        isLocked: true,
-        isCompleted: false,
-        progress: 0,
-      },
-      {
-        id: 'listening-practice-unit',
-        title: 'تدريبات الاستماع',
-        description: 'الدرس الثالث: الاستماع والتكرار',
-        courseId: 'noon-meem-mushaddad',
-        type: 'listening',
-        icon: 'fa-headphones',
-        order: 3,
-        isLocked: true,
-        isCompleted: false,
-        progress: 0,
-      },
-      {
-        id: 'reading-applications-unit',
-        title: 'تطبيقات القراءة',
-        description: 'الدرس الرابع: القراءة والتطبيق',
-        courseId: 'noon-meem-mushaddad',
-        type: 'reading',
-        icon: 'fa-book-open',
-        order: 4,
-        isLocked: true,
-        isCompleted: false,
-        progress: 0,
-      },
-      {
-        id: 'advanced-applications-unit',
-        title: 'التطبيقات المتقدمة',
-        description: 'الدرس الخامس: حالات خاصة وتطبيقات متقدمة',
-        courseId: 'noon-meem-mushaddad',
-        type: 'exercise',
-        icon: 'fa-graduation-cap',
-        order: 5,
-        isLocked: true,
-        isCompleted: false,
-        progress: 0,
-      }
-    ]
-  };
+  private unitsSubject = new BehaviorSubject<{ [key: string]: Unit[] }>({});
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService,
     private coursesService: CoursesService
-  ) {
-    this.initializeFromStorage();
+  ) { }
+
+  private loadUnitsData(courseId: string): Observable<Unit[]> {
+    return this.http.get<{ version: string, courseId: string, units: Unit[] }>
+      (`assets/data/units/${courseId}.json`).pipe(
+        map(response => response.units),
+        catchError(error => {
+          console.error('Error loading units:', error);
+          return of([]);
+        })
+      );
   }
 
-  private initializeFromStorage(): void {
-    Object.keys(this.mockUnits).forEach(courseId => {
-      const cachedCourseProgress = this.storageService.getProgress('course', courseId);
-
-      this.mockUnits[courseId] = this.mockUnits[courseId].map((unit, index) => {
-        const cachedUnitProgress = this.storageService.getProgress('unit', `${courseId}_${unit.id}`);
-
-        if (cachedUnitProgress) {
-          const previousUnit = index > 0 ? this.mockUnits[courseId][index - 1] : null;
-
-          return {
-            ...unit,
-            progress: cachedUnitProgress.progress,
-            isCompleted: cachedUnitProgress.isCompleted,
-            isLocked: !(unit.order === 1 ||
-              (previousUnit?.isCompleted) ||
-              (cachedCourseProgress && cachedCourseProgress.isCompleted))
-          };
-        }
-
-        return unit;
+  private initializeUnitsForCourse(courseId: string): void {
+    this.loadUnitsData(courseId).pipe(
+      map(units => this.initializeWithProgress(courseId, units))
+    ).subscribe(units => {
+      const currentUnits = this.unitsSubject.getValue();
+      this.unitsSubject.next({
+        ...currentUnits,
+        [courseId]: units
       });
     });
   }
 
+  private initializeWithProgress(courseId: string, units: Unit[]): Unit[] {
+    const cachedCourseProgress = this.storageService.getProgress('course', courseId);
+
+    return units.map((unit, index) => {
+      const cachedUnitProgress = this.storageService.getProgress(
+        'unit',
+        `${courseId}_${unit.id}`
+      );
+
+      if (cachedUnitProgress) {
+        const previousUnit = index > 0 ? units[index - 1] : null;
+
+        return {
+          ...unit,
+          progress: cachedUnitProgress.progress,
+          isCompleted: cachedUnitProgress.isCompleted,
+          isLocked: !(unit.order === 1 ||
+            (previousUnit?.isCompleted) ||
+            (cachedCourseProgress && cachedCourseProgress.isCompleted))
+        };
+      }
+
+      return {
+        ...unit,
+        isLocked: index !== 0,
+        isCompleted: false,
+        progress: 0
+      };
+    });
+  }
+
   markUnitAsCompleted(courseId: string, unitId: string): Observable<void> {
-    const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
+    const currentUnits = this.unitsSubject.getValue();
+    const units = currentUnits[courseId] || [];
+    const unit = units.find(u => u.id === unitId);
+
     if (unit) {
       unit.isCompleted = true;
       unit.progress = 100;
@@ -122,27 +87,34 @@ export class UnitsService {
         isCompleted: true
       });
 
-      const nextUnit = this.mockUnits[courseId]?.find(u => u.order === unit.order + 1);
+      const nextUnit = units.find(u => u.order === unit.order + 1);
       if (nextUnit) {
         nextUnit.isLocked = false;
       }
 
       // Check if all units are completed
-      const allUnitsCompleted = this.mockUnits[courseId]?.every(u => u.isCompleted);
+      const allUnitsCompleted = units.every(u => u.isCompleted);
       if (allUnitsCompleted) {
         this.coursesService.markCourseAsCompleted(courseId).subscribe();
       }
+
+      // Update the subject
+      this.unitsSubject.next({
+        ...currentUnits,
+        [courseId]: units
+      });
     }
     return of(void 0);
   }
 
   updateUnitProgress(courseId: string, unitId: string, progress: number): Observable<void> {
-    const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
+    const currentUnits = this.unitsSubject.getValue();
+    const units = currentUnits[courseId] || [];
+    const unit = units.find(u => u.id === unitId);
+
     if (unit) {
-      // Ensure progress is between 0 and 100 and rounded to whole numbers
       const normalizedProgress = Math.round(Math.min(100, Math.max(0, progress)));
       unit.progress = normalizedProgress;
-
       const isCompleted = normalizedProgress === 100;
 
       this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
@@ -152,30 +124,43 @@ export class UnitsService {
 
       if (isCompleted) {
         unit.isCompleted = true;
-        const nextUnit = this.mockUnits[courseId]?.find(u => u.order === unit.order + 1);
+        const nextUnit = units.find(u => u.order === unit.order + 1);
         if (nextUnit) {
           nextUnit.isLocked = false;
         }
       }
+
+      this.unitsSubject.next({
+        ...currentUnits,
+        [courseId]: units
+      });
     }
     return of(void 0);
   }
 
   setCurrentCourse(courseId: string): void {
     this.currentCourseIdSubject.next(courseId);
+    // Load units data if not already loaded
+    if (!this.unitsSubject.getValue()[courseId]) {
+      this.initializeUnitsForCourse(courseId);
+    }
   }
 
   getUnitsByCourseId(courseId: string): Observable<Unit[]> {
-    // First, update units based on storage
-    this.initializeFromStorage();
-
-    // Return units for the specific course
-    return of(this.mockUnits[courseId] || []);
+    const currentUnits = this.unitsSubject.getValue()[courseId];
+    if (!currentUnits) {
+      // Load and initialize if not already loaded
+      this.initializeUnitsForCourse(courseId);
+    }
+    return this.unitsSubject.pipe(
+      map(units => units[courseId] || [])
+    );
   }
 
   getUnitById(courseId: string, unitId: string): Observable<Unit | undefined> {
-    const unit = this.mockUnits[courseId]?.find(u => u.id === unitId);
-    return of(unit);
+    return this.getUnitsByCourseId(courseId).pipe(
+      map(units => units.find(u => u.id === unitId))
+    );
   }
 
   getUnitIcon(type: string): string {

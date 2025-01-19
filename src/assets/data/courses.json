@@ -1,0 +1,65 @@
+{
+    "version": "1.0.0",
+    "courses": [
+        {
+            "id": "noon-meem-mushaddad",
+            "title": "النون والميم المشددتان",
+            "description": "تعلم أحكام النون والميم المشددتين في القرآن الكريم",
+            "icon": "book-quran",
+            "isLocked": false,
+            "badge": {
+                "type": "achievement",
+                "value": "مكتمل"
+            }
+        },
+        {
+            "id": "noon-tanween",
+            "title": "النون الساكنه والتنوين",
+            "description": "دراسة أحكام النون الساكنة والتنوين",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "meem-sakinah",
+            "title": "الميم الساكنة",
+            "description": "تعرف على أحكام الميم الساكنة",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "natural-madd",
+            "title": "المد الطبيعي",
+            "description": "أساسيات المد الطبيعي وتطبيقاته",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "derived-madd",
+            "title": "المد الفرعي",
+            "description": "دراسة أنواع المد الفرعي",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "madd-badal",
+            "title": "مد البدل",
+            "description": "فهم وتطبيق مد البدل",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "madd-arid",
+            "title": "المد العارض للسكون",
+            "description": "تعلم أحكام المد العارض للسكون",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "madd-lazim",
+            "title": "المد اللازم",
+            "description": "دراسة المد اللازم وأنواعه",
+            "icon": "book-quran",
+            "isLocked": true
+        }
+    ]
+}

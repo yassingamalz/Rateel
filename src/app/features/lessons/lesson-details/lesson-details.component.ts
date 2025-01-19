@@ -88,28 +88,60 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       .getLessonById(this.courseId, this.unitId, this.lessonId)
       .subscribe({
         next: (lesson) => {
-          console.log('Loaded lesson:', lesson);
-          this.lesson = lesson;
-
-          // Add this check to ensure verses are available for practice lessons
-          if (lesson?.type === 'practice' && !lesson.verses) {
-            console.warn('Practice lesson has no verses, attempting to load from service');
-            // Try to get verses from service if not included in lesson
-            this.lesson = {
-              ...lesson,
-              verses: this.lessonsService.mockVerses
-            };
+          if (!lesson) {
+            console.error('Lesson not found');
+            return;
           }
 
-          const savedProgress = this.storageService.getProgress('lesson', this.lessonId);
+          console.log('Loaded lesson:', lesson);
+
+          // If it's a practice lesson and verses are not loaded
+          if (lesson.type === 'practice' && (!lesson.verses || lesson.verses.length === 0)) {
+            console.warn('Practice lesson has no verses, attempting to load from service');
+
+            // Construct the correct content path
+            const contentPath = `/content/verses/${this.lessonId}.json`;
+
+            this.lessonsService.getVerseContent(contentPath).subscribe({
+              next: (verseContent) => {
+                if (verseContent.verses && verseContent.verses.length > 0) {
+                  // Create a new object that matches the Lesson interface exactly
+                  const updatedLesson: Lesson = {
+                    ...lesson,
+                    verses: verseContent.verses
+                  };
+
+                  this.lesson = updatedLesson;
+
+                  // Initialize practice state with loaded verses
+                  this.initializePracticeState(verseContent.verses);
+                  this.cdr.markForCheck();
+                } else {
+                  console.warn('No verses found for lesson');
+                  this.lesson = lesson;
+                }
+              },
+              error: (error) => {
+                console.error('Error loading verses:', error);
+                this.lesson = lesson;
+              }
+            });
+          } else {
+            // If verses are already loaded or it's not a practice lesson
+            this.lesson = lesson;
+
+            if (lesson.type === 'practice' && lesson.verses) {
+              this.initializePracticeState(lesson.verses);
+            }
+          }
+
+          const savedProgress = this.storageService.getProgress(
+            'lesson',
+            `${this.courseId}_${this.unitId}_${this.lessonId}`
+          );
+
           if (savedProgress) {
             this.restoreState(savedProgress);
-          }
-
-          // Initialize practice-specific state if needed
-          if (this.lesson?.type === 'practice' && this.lesson.verses) {
-            console.log('Initializing practice state with verses:', this.lesson.verses);
-            this.initializePracticeState(this.lesson.verses);
           }
 
           this.cdr.markForCheck();
