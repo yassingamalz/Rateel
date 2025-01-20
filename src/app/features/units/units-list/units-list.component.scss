@@ -4,16 +4,14 @@
 
 .units-page {
   position: relative;
-  width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  padding: map.get(vars.$spacing, 'xxl') 0;
   background: linear-gradient(
     to bottom right,
     map.get(vars.$colors, 'primary', 'base'),
     map.get(vars.$colors, 'primary', 'dark')
   );
 
-  // Ensure the container remains stable during animation
   &.ng-enter,
   &.ng-leave {
     position: absolute;
@@ -24,6 +22,9 @@
 }
 
 .units-header {
+  position: relative;
+  z-index: 10;
+  padding: 0 map.get(vars.$spacing, 'lg');
   margin-bottom: map.get(vars.$spacing, 'xl');
 
   .header-content {
@@ -32,7 +33,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 map.get(vars.$spacing, 'lg');
   }
 
   .page-title {
@@ -61,31 +61,10 @@
 }
 
 .units-outer-container {
-  overflow: hidden;
-  min-height: 400px; // Adjust based on your needs
-  margin: 0 -#{map.get(vars.$spacing, 'lg')};
-}
-
-.units-container {
   position: relative;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: map.get(vars.$spacing, 'xl') 0;
-  cursor: grab;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  transition: opacity 0.3s ease-in-out;
-
-
-  &.dragging {
-    cursor: grabbing;
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  scrollbar-width: none;
+  overflow: hidden;
+  min-height: calc(100vh - 200px);
+  padding-top: map.get(vars.$spacing, 'xl');
 }
 
 .units-loading {
@@ -96,36 +75,76 @@
   z-index: 10;
 }
 
+.units-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 0 map.get(vars.$spacing, 'lg');
+  cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  transition: opacity 0.3s ease-in-out;
+  scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
+  &.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+
+    * {
+      cursor: grabbing;
+      pointer-events: none;
+    }
+  }
+}
+
 .units-wrapper {
   display: flex;
   align-items: center;
-  padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
+  padding: map.get(vars.$spacing, 'lg') 0;
   margin: 0 auto;
-  max-width: fit-content;
-  padding-right: calc(50vw - 100px);
-  padding-left: calc(50vw - 100px);
+  width: max-content;
+  padding-right: calc(50vw - 200px);
+  padding-left: calc(50vw - 200px);
 }
 
 .unit-item {
   display: flex;
   align-items: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &--active {
     transform: scale(1.05);
+    z-index: 2;
 
     app-unit-card {
       opacity: 1;
+      transform: translateY(-8px);
+    }
+
+    .connector-line {
+      opacity: 1;
+      transform: scaleX(1.05);
     }
   }
 
   app-unit-card {
     cursor: pointer;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    &:hover {
+    &:hover:not(.dragging) {
       opacity: 1;
+      transform: translateY(-4px);
     }
   }
 }
@@ -137,6 +156,7 @@
   margin: 0 map.get(vars.$spacing, 'md');
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 
   &__progress {
     position: absolute;
@@ -144,7 +164,7 @@
     right: 0;
     height: 100%;
     background: map.get(vars.$colors, 'accent', 'base');
-    transition: width 0.3s ease;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &::after {
@@ -162,39 +182,87 @@
     );
     animation: shimmer 2s infinite;
   }
+
+  &--completed {
+    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+    .connector-line__progress {
+      background: map.get(vars.$colors, 'accent', 'base');
+    }
+  }
+
+  &--active {
+    transform-origin: left;
+    .connector-line__progress {
+      background: map.get(vars.$colors, 'accent', 'light');
+    }
+  }
+}
+
+.connector-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: map.get(vars.$colors, 'accent', 'base');
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &--start { left: -4px; }
+  &--end { right: -4px; }
 }
 
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
   }
-
   100% {
     transform: translateX(100%);
   }
 }
 
-// Responsive Styles
-// Corrected mobile landscape query
-@media only screen and (orientation: landscape) and (max-device-width: 926px) and (hover: none) and (pointer: coarse),
-  only screen and (orientation: landscape) and (max-device-height: 926px) and (hover: none) and (pointer: coarse) {
-  // Existing styles remain exactly the same
+// Mobile landscape styles
+@media only screen 
+    and (orientation: landscape)
+    and (max-device-width: 926px)
+    and (hover: none) 
+    and (pointer: coarse),
+  only screen 
+    and (orientation: landscape)
+    and (max-device-height: 926px)
+    and (hover: none) 
+    and (pointer: coarse) {
+  
   .units-page {
-    min-height: 100%;
-    padding-top: map.get(vars.$spacing, 'sm');
+    padding: map.get(vars.$spacing, 'lg') 0;
   }
 
   .units-header {
-    margin-bottom: map.get(vars.$spacing, 'md');
+    padding: 0 map.get(vars.$spacing, 'md');
+    margin-bottom: map.get(vars.$spacing, 'lg');
+
+    .page-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  .units-outer-container {
+    min-height: calc(100vh - 120px);
+    padding-top: map.get(vars.$spacing, 'lg');
   }
 
   .units-container {
-    padding-top: 0;
-    margin-top: 0;
+    padding: 0 map.get(vars.$spacing, 'md');
   }
 
   .units-wrapper {
-    padding-top: map.get(vars.$spacing, 'md');
+    padding: map.get(vars.$spacing, 'md') 0;
+    padding-right: calc(50vw - 150px);
+    padding-left: calc(50vw - 150px);
+  }
+
+  .connector-line {
+    width: 60px;
+    margin: 0 map.get(vars.$spacing, 'sm');
   }
 }
 

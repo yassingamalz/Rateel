@@ -1,19 +1,29 @@
-// src/app/features/lessons/lessons-list/lessons-list.component.ts
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  NgZone,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, BehaviorSubject, combineLatest, of, Subject } from 'rxjs';
-import { tap, map, filter, take, catchError, shareReplay, takeUntil } from 'rxjs/operators';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { Observable, Subject } from 'rxjs';
+import { tap, map, takeUntil, take, shareReplay } from 'rxjs/operators';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { Lesson } from '../../../shared/interfaces/lesson';
+import { trigger, transition, style, animate, state } from '@angular/animations';
+import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scroll.base';
 
 @Component({
   selector: 'app-lessons-list',
   standalone: false,
   templateUrl: './lessons-list.component.html',
   styleUrls: ['./lessons-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
@@ -23,38 +33,38 @@ import { Lesson } from '../../../shared/interfaces/lesson';
       transition(':leave', [
         animate('300ms ease-out', style({ transform: 'translateX(-100%)' }))
       ])
+    ]),
+    trigger('lessonItem', [
+      state('completing', style({
+        transform: 'scale(1.1)',
+        filter: 'brightness(1.2)'
+      })),
+      transition('* => completing', animate('500ms ease-out')),
+      transition('completing => *', animate('300ms ease-in'))
     ])
   ]
 })
-export class LessonsListComponent implements OnInit {
+export class LessonsListComponent extends DragScrollBase implements OnInit, OnDestroy {
   @ViewChild('lessonsContainer') lessonsContainer!: ElementRef;
-  private destroy$ = new Subject<void>();
-
-  completingLessonId: string | null = null;
 
   lessons$!: Observable<Lesson[]>;
   courseId!: string;
   unitId!: string;
-  currentLessonIndex = new BehaviorSubject<number>(0);
-  isDragging = false;
-  dragStarted = false;
-  startX = 0;
-  scrollLeft = 0;
-  dragThreshold = 5;
-  dragStartTime = Date.now();
-  mouseInitialX = 0;
-  dragSpeedMultiplier = 2.5;
-  inertiaMultiplier = 200;
   activeLessonId: string | null = null;
+  completingLessonId: string | null = null;
 
   constructor(
+    elementRef: ElementRef,
+    ngZone: NgZone,
+    protected override storageService: StorageService,
     private lessonsService: LessonsService,
     private unitsService: UnitsService,
-    private storageService: StorageService,
     public route: ActivatedRoute,
-    public router: Router
-  ) { }
-
+    public router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
+    super(elementRef, ngZone, storageService);
+  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
@@ -63,46 +73,8 @@ export class LessonsListComponent implements OnInit {
 
     // Initialize lessons with proper state management
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
-      map(lessons => {
-        let previousLessonCompleted = true; // First lesson should be unlocked
-
-        // Calculate how many lessons are completed
-        const completedLessons = lessons.filter(lesson => {
-          const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
-          const progressData = this.storageService.getProgress('lesson', storageKey);
-          return progressData?.isCompleted;
-        }).length;
-
-        // Calculate unit progress percentage
-        const unitProgress = Math.round((completedLessons * 100) / lessons.length);
-
-        // Save unit progress
-        this.storageService.saveProgress('unit', `${this.courseId}_${this.unitId}`, {
-          progress: unitProgress,
-          isCompleted: unitProgress === 100,
-          timestamp: Date.now()
-        });
-
-        return lessons.map(lesson => {
-          const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
-          const progressData = this.storageService.getProgress('lesson', storageKey);
-
-          // Determine locked state based on previous lesson completion
-          const isLocked = lesson.order !== 1 && !previousLessonCompleted;
-          const isCompleted = progressData?.isCompleted || false;
-
-          // Update for next iteration
-          previousLessonCompleted = isCompleted;
-
-          return {
-            ...lesson,
-            isCompleted,
-            isLocked
-          };
-        });
-      }),
-      tap(lessons => {
-        // Handle query params
+      map(lessons => this.updateLessonsProgress(lessons)),
+      tap(() => {
         const params = this.route.snapshot.queryParams;
         if (params['completedLessonId']) {
           this.checkAndHandleLessonCompletion(params['completedLessonId']);
@@ -111,14 +83,45 @@ export class LessonsListComponent implements OnInit {
       shareReplay(1)
     );
 
-    // Subscribe to query params and storage changes
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
-      const completedLessonId = params['completedLessonId'];
-      if (completedLessonId) {
-        this.checkAndHandleLessonCompletion(completedLessonId);
+      if (params['completedLessonId']) {
+        this.checkAndHandleLessonCompletion(params['completedLessonId']);
       }
+    });
+
+    this.storageService.getProgressChanges()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (change?.type === 'lesson' && change.id.startsWith(`${this.courseId}_${this.unitId}`)) {
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  private updateLessonsProgress(lessons: Lesson[]): Lesson[] {
+    let previousLessonCompleted = true;
+    const completedLessons = lessons.filter(lesson => {
+      const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
+      const progressData = this.storageService.getProgress('lesson', storageKey);
+      return progressData?.isCompleted;
+    }).length;
+
+    const unitProgress = Math.round((completedLessons * 100) / lessons.length);
+    this.storageService.saveProgress('unit', `${this.courseId}_${this.unitId}`, {
+      progress: unitProgress,
+      isCompleted: unitProgress === 100,
+      timestamp: Date.now()
+    });
+
+    return lessons.map(lesson => {
+      const storageKey = `${this.courseId}_${this.unitId}_${lesson.id}`;
+      const progressData = this.storageService.getProgress('lesson', storageKey);
+      const isLocked = lesson.order !== 1 && !previousLessonCompleted;
+      const isCompleted = progressData?.isCompleted || false;
+      previousLessonCompleted = isCompleted;
+      return { ...lesson, isCompleted, isLocked };
     });
   }
 
@@ -145,6 +148,15 @@ export class LessonsListComponent implements OnInit {
     }
   }
 
+  private handleLessonCompletion(lessonId: string): void {
+    // Wait for animation to complete
+    setTimeout(() => {
+      this.completingLessonId = null;
+      this.cdr.detectChanges();
+      this.handleLessonNavigation(lessonId);
+    }, 2500); // Match original animation duration
+  }
+
   private handleLessonNavigation(lessonId: string): void {
     setTimeout(() => {
       this.lessons$.pipe(take(1)).subscribe(lessons => {
@@ -167,15 +179,7 @@ export class LessonsListComponent implements OnInit {
           }
         }
       });
-    }, 1500); // Same delay as completion animation
-  }
-
-  handleLessonCompletion(lessonId: string): void {
-    // Wait for animation to complete
-    setTimeout(() => {
-      this.completingLessonId = null;
-      this.handleLessonNavigation(lessonId);
-    }, 2500); // Match your animation duration
+    }, 1500); // Original delay for navigation
   }
 
   onLessonSelected(lesson: Lesson): void {
@@ -185,36 +189,23 @@ export class LessonsListComponent implements OnInit {
     }
   }
 
-  // Mouse Event Handlers
+  getLessonState(lesson: Lesson): string {
+    return lesson.id === this.completingLessonId ? 'completing' : 'default';
+  }
+
+  // Mouse event handlers using super class methods
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.lesson-item')) {
-      this.dragStarted = true;
-      this.mouseInitialX = event.pageX;
-      this.startX = event.pageX;
-      this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
-      this.dragStartTime = Date.now();
+      super.startDrag(event.pageX);
     }
   }
 
   onMouseMove(event: MouseEvent): void {
-    if (!this.dragStarted) return;
-
-    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
-    if (dragDistance > this.dragThreshold) {
-      this.isDragging = true;
-    }
-
-    const walk = (event.pageX - this.startX) * this.dragSpeedMultiplier;
-    this.lessonsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+    super.handleDragMove(event.pageX);
   }
 
   onMouseUp(event: MouseEvent): void {
-    if (!this.dragStarted) return;
-
-    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
-    const dragDuration = Date.now() - this.dragStartTime;
-
-    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+    if (!this.isDragging) {
       const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
       if (lessonElement) {
         const lessonId = lessonElement.getAttribute('data-lesson-id');
@@ -225,58 +216,22 @@ export class LessonsListComponent implements OnInit {
           }
         });
       }
-    } else if (dragDistance > this.dragThreshold) {
-      const speed = dragDistance / dragDuration;
-      const inertiaDistance = speed * this.inertiaMultiplier;
-
-      this.lessonsContainer.nativeElement.scrollBy({
-        left: -inertiaDistance,
-        behavior: 'smooth'
-      });
     }
-
-    this.isDragging = false;
-    this.dragStarted = false;
+    super.handleDragEnd(event.pageX);
   }
 
-  onMouseLeave(): void {
-    if (this.dragStarted) {
-      this.isDragging = false;
-      this.dragStarted = false;
-    }
-  }
-
-  // Touch Event Handlers
   onTouchStart(event: TouchEvent): void {
     if ((event.target as HTMLElement).closest('.lesson-item')) {
-      this.dragStarted = true;
-      this.mouseInitialX = event.touches[0].pageX;
-      this.startX = event.touches[0].pageX;
-      this.scrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
-      this.dragStartTime = Date.now();
+      super.startDrag(event.touches[0].pageX);
     }
   }
 
   onTouchMove(event: TouchEvent): void {
-    if (!this.dragStarted) return;
-
-    const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
-    if (dragDistance > this.dragThreshold) {
-      this.isDragging = true;
-    }
-
-    const walk = (event.touches[0].pageX - this.startX) * this.dragSpeedMultiplier;
-    this.lessonsContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+    super.handleDragMove(event.touches[0].pageX);
   }
 
   onTouchEnd(event: TouchEvent): void {
-    if (!this.dragStarted) return;
-
-    const touch = event.changedTouches[0];
-    const dragDistance = Math.abs(touch.pageX - this.mouseInitialX);
-    const dragDuration = Date.now() - this.dragStartTime;
-
-    if (!this.isDragging && dragDistance < this.dragThreshold && dragDuration < 200) {
+    if (!this.isDragging) {
       const lessonElement = (event.target as HTMLElement).closest('[data-lesson-id]');
       if (lessonElement) {
         const lessonId = lessonElement.getAttribute('data-lesson-id');
@@ -287,24 +242,15 @@ export class LessonsListComponent implements OnInit {
           }
         });
       }
-    } else if (dragDistance > this.dragThreshold) {
-      const speed = dragDistance / dragDuration;
-      const inertiaDistance = speed * this.inertiaMultiplier;
-
-      this.lessonsContainer.nativeElement.scrollBy({
-        left: -inertiaDistance,
-        behavior: 'smooth'
-      });
     }
-
-    this.isDragging = false;
-    this.dragStarted = false;
+    super.handleDragEnd(event.changedTouches[0].pageX);
   }
 
-  ngOnDestroy(): void {
-    if (this.destroy$) {
-      this.destroy$.next();
-      this.destroy$.complete();
-    }
+  onMouseLeave(): void {
+    super.cleanup();
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

@@ -5,6 +5,7 @@ import { UnitsRoutingModule } from './units-routing.module';
 import { UnitCardComponent } from './unit-card/unit-card.component';
 import { UnitsListComponent } from './units-list/units-list.component';
 import { BorderFillDirective } from '../../shared/directives/border-fill.directive';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { BorderFillDirective } from '../../shared/directives/border-fill.directi
   ],
   imports: [
     CommonModule,
+    SharedModule,
     BorderFillDirective,
     UnitsRoutingModule
   ]

@@ -1,3 +1,4 @@
+// src/app/features/units/units-list/units-list.component.ts
 import {
   Component,
   OnInit,
@@ -14,31 +15,25 @@ import {
   Router
 } from '@angular/router';
 import {
-  BehaviorSubject,
   Observable,
-  Subject
-} from 'rxjs';
-import {
-  takeUntil,
-  shareReplay,
-  distinctUntilChanged,
-  catchError,
-  tap,
+  BehaviorSubject,
   filter,
-  delay,
-  take
-} from 'rxjs/operators';
-
+  takeUntil,
+  tap,
+  finalize
+} from 'rxjs';
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { StorageService } from '../../../core/services/storage.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scroll.base';
 
 @Component({
   selector: 'app-units-list',
   standalone: false,
   templateUrl: './units-list.component.html',
   styleUrls: ['./units-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('pageTransition', [
       state('void', style({
@@ -52,7 +47,6 @@ import { StorageService } from '../../../core/services/storage.service';
       })),
       transition('void => *', animate('500ms ease-out')),
       transition('* => exit', animate('500ms ease-in'))
-
     ]),
     trigger('fadeInOut', [
       transition(':enter', [
@@ -63,11 +57,11 @@ import { StorageService } from '../../../core/services/storage.service';
         animate('200ms ease-out', style({ opacity: 0 }))
       ])
     ])
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
-export class UnitsListComponent implements OnInit, OnDestroy {
+export class UnitsListComponent extends DragScrollBase implements OnInit, OnDestroy {
   @ViewChild('unitsContainer') unitsContainer!: ElementRef<HTMLElement>;
+
   initialLoad = true;
   animationState: string = '*';
   loading$ = new BehaviorSubject<boolean>(true);
@@ -78,30 +72,23 @@ export class UnitsListComponent implements OnInit, OnDestroy {
   courseId!: string;
   activeUnitId: string | null = null;
   completedUnitId: string | null = null;
-  isDragging = false;
-
-  private dragStarted = false;
-  private startX = 0;
-  private scrollLeft = 0;
-  private readonly dragThreshold = 5;
-  private dragStartTime = 0;
-  private mouseInitialX = 0;
-  private readonly dragSpeedMultiplier = 2.5;
-  private readonly inertiaMultiplier = 150;
-  private animationFrame: number | null = null;
-  private readonly destroy$ = new Subject<void>();
-  private lastDragEvent: MouseEvent | Touch | null = null;
-  private velocity = 0;
-  private lastTimestamp = 0;
 
   constructor(
+    elementRef: ElementRef,
+    ngZone: NgZone,
+    storageService: StorageService,
     private unitsService: UnitsService,
     private route: ActivatedRoute,
     private router: Router,
-    private ngZone: NgZone,
-    private cdr: ChangeDetectorRef,
-    private storageService: StorageService
+    private cdr: ChangeDetectorRef
   ) {
+    super(elementRef, ngZone, storageService);
+
+    // Configure drag behavior for units
+    this.dragThreshold = 5;
+    this.inertiaMultiplier = 150;
+
+    // Handle initial load state
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -116,11 +103,8 @@ export class UnitsListComponent implements OnInit, OnDestroy {
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitsService.setCurrentCourse(this.courseId);
 
-    // Create a combined observable for initialization
-    const initializeContent$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
-      distinctUntilChanged(),
-      // Delay the emission on initial load
-      delay(300), // Adjust timing if needed
+    // Initialize units with progress tracking
+    this.units$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
       tap(() => {
         this.ngZone.run(() => {
           this.contentReady = true;
@@ -128,43 +112,22 @@ export class UnitsListComponent implements OnInit, OnDestroy {
           this.cdr.detectChanges();
         });
       }),
-      shareReplay(1),
-      takeUntil(this.destroy$)
+      finalize(() => this.loading$.next(false))
     );
-
-    // Subscribe to handle units data
-    this.units$ = initializeContent$;
 
     // Handle unit ID from route
     const unitId = this.route.snapshot.paramMap.get('unitId');
     if (unitId) {
       this.activeUnitId = unitId;
-      // Wait for content to be ready before scrolling
-      this.units$.pipe(
-        filter(units => units.length > 0),
-        take(1)
-      ).subscribe(() => {
-        setTimeout(() => this.scrollToActiveUnit(), 100);
-      });
+      this.scrollToActiveUnit();
     }
 
-    // Handle query params for unit completion
+    // Handle unit completion
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
-      const completedUnitId = params['completedUnitId'];
-      if (completedUnitId) {
-        const progressData = this.storageService.getProgress('unit', `${this.courseId}_${completedUnitId}`);
-        const currentTime = Date.now();
-
-        if (!progressData?.lastUpdated || (currentTime - progressData.lastUpdated) > 2000) {
-          this.handleUnitCompletion(completedUnitId);
-          this.storageService.saveProgress('unit', `${this.courseId}_${completedUnitId}`, {
-            isCompleted: true,
-            progress: 100,
-            lastUpdated: currentTime,
-          });
-        }
+      if (params['completedUnitId']) {
+        this.handleUnitCompletion(params['completedUnitId']);
       }
 
       if (params['returnTo'] === 'units') {
@@ -184,225 +147,106 @@ export class UnitsListComponent implements OnInit, OnDestroy {
         }
       });
   }
-  onAnimationComplete(): void {
-    this.transitionComplete = true;
-  }
 
   private handleUnitCompletion(unitId: string): void {
-    this.ngZone.run(() => {
-      this.completedUnitId = unitId;
-      this.cdr.detectChanges();
+    const progress = this.storageService.getProgress('unit', `${this.courseId}_${unitId}`);
+    const currentTime = Date.now();
 
-      const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
-      if (completedUnit) {
-        completedUnit.classList.add('unit-completed');
+    if (!progress?.lastUpdated || (currentTime - progress.lastUpdated) > 2000) {
+      this.ngZone.run(() => {
+        this.completedUnitId = unitId;
+        this.cdr.detectChanges();
 
-        // Schedule animation cleanup
-        setTimeout(() => {
-          this.ngZone.run(() => {
-            this.completedUnitId = null;
-            this.cdr.detectChanges();
+        const completedUnit = document.querySelector(`[data-unit-id="${unitId}"]`);
+        if (completedUnit) {
+          completedUnit.classList.add('unit-completed');
 
-            // Update scroll position after animations
-            requestAnimationFrame(() => {
-              completedUnit.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
+          setTimeout(() => {
+            this.ngZone.run(() => {
+              this.completedUnitId = null;
+              this.cdr.detectChanges();
+
+              requestAnimationFrame(() => {
+                completedUnit.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'nearest',
+                  inline: 'center'
+                });
               });
             });
+          }, 1500);
+
+          // Update storage
+          this.storageService.saveProgress('unit', `${this.courseId}_${unitId}`, {
+            isCompleted: true,
+            progress: 100,
+            lastUpdated: currentTime,
+            timestamp: currentTime
           });
-        }, 1500); // Match border fill animation duration
-
-        // Update storage with completion timestamp
-        this.storageService.saveProgress('unit', `${this.courseId}_${unitId}`, {
-          isCompleted: true,
-          progress: 100,
-          lastUpdated: Date.now(),
-          timestamp: Date.now(),
-          expiresAt: Date.now() + (2 * 365 * 24 * 60 * 60 * 1000) // 2 years expiration
-        });
-      }
-    });
+        }
+      });
+    }
   }
 
-  ngOnDestroy(): void {
-    this.cleanupDrag();
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  trackByUnitId(_: number, unit: Unit): string {
-    return unit.id;
-  }
-
+  // Event handlers
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.unit-item')) {
-      event.preventDefault();
-      this.startDrag(event.pageX);
-      this.lastDragEvent = event;
-      this.lastTimestamp = Date.now();
+      super.startDrag(event.pageX, 'course', this.courseId);
     }
   }
 
   onMouseMove(event: MouseEvent): void {
-    if (!this.dragStarted) return;
-
-    event.preventDefault();
-    this.handleDragMove(event.pageX);
-    this.lastDragEvent = event;
+    super.handleDragMove(event.pageX);
   }
 
   onMouseUp(event: MouseEvent): void {
-    if (!this.dragStarted) return;
+    const dragDistance = Math.abs(event.pageX - this.mouseInitialX);
 
-    this.handleDragEnd(event.pageX);
-  }
-
-  onMouseLeave(): void {
-    if (this.dragStarted) {
-      this.cleanupDrag();
-    }
-  }
-
-  onTouchEnd(event: TouchEvent): void {
-    if (!this.dragStarted) return;
-
-    this.handleDragEnd(event.changedTouches[0].pageX);
-  }
-
-  private startDrag(pageX: number): void {
-    this.dragStarted = true;
-    this.mouseInitialX = pageX;
-    this.startX = pageX;
-    this.scrollLeft = this.unitsContainer.nativeElement.scrollLeft;
-    this.dragStartTime = Date.now();
-    this.velocity = 0;
-  }
-
-
-  onTouchStart(event: TouchEvent): void {
-    if ((event.target as HTMLElement).closest('.unit-item')) {
-      // Don't prevent default here to allow click events
-      this.startDrag(event.touches[0].pageX);
-      this.lastDragEvent = event.touches[0];
-      this.lastTimestamp = Date.now();
-    }
-  }
-
-  onTouchMove(event: TouchEvent): void {
-    if (!this.dragStarted) return;
-
-    const dragDistance = Math.abs(event.touches[0].pageX - this.mouseInitialX);
-
-    // Only prevent default if we're actually dragging
-    if (dragDistance > this.dragThreshold) {
-      event.preventDefault();
-      this.handleDragMove(event.touches[0].pageX);
-      this.lastDragEvent = event.touches[0];
-    }
-  }
-
-  private handleDragEnd(pageX: number): void {
-    const dragDistance = Math.abs(pageX - this.mouseInitialX);
-    const dragDuration = Date.now() - this.dragStartTime;
-
-    // Check for tap/click (short duration and minimal movement)
-    if (dragDistance < this.dragThreshold && dragDuration < 200) {
-      const unitElement = (this.lastDragEvent?.target as HTMLElement)?.closest('[data-unit-id]');
+    if (!this.isDragging && dragDistance < this.dragThreshold) {
+      const unitElement = (event.target as HTMLElement).closest('[data-unit-id]');
       if (unitElement) {
         const unitId = unitElement.getAttribute('data-unit-id');
         if (unitId) {
           this.handleUnitClick(unitId);
         }
       }
-    } else if (dragDistance > this.dragThreshold) {
-      this.applyInertia();
     }
 
-    this.cleanupDrag();
+    super.handleDragEnd(event.pageX, 'course', this.courseId);
   }
 
-  private cleanupDrag(): void {
-    // Add a small delay before removing the dragging class
-    setTimeout(() => {
-      this.isDragging = false;
-      this.dragStarted = false;
-      this.lastDragEvent = null;
-      if (this.animationFrame) {
-        cancelAnimationFrame(this.animationFrame);
-        this.animationFrame = null;
-      }
-      this.cdr.detectChanges();
-    }, 50); // Small delay to ensure click events can fire
-  }
-
-  private handleDragMove(pageX: number): void {
-    if (this.animationFrame) {
-      cancelAnimationFrame(this.animationFrame);
+  // Touch event handlers
+  onTouchStart(event: TouchEvent): void {
+    if ((event.target as HTMLElement).closest('.unit-item')) {
+      super.startDrag(event.touches[0].pageX, 'course', this.courseId);
     }
-
-    this.ngZone.runOutsideAngular(() => {
-      this.animationFrame = requestAnimationFrame(() => {
-        const currentTime = Date.now();
-        const deltaTime = currentTime - this.lastTimestamp;
-        const dragDistance = Math.abs(pageX - this.mouseInitialX);
-
-        if (dragDistance > this.dragThreshold) {
-          this.isDragging = true;
-          this.cdr.detectChanges();
-        }
-
-        const walk = (pageX - this.startX) * this.dragSpeedMultiplier;
-        const newScrollLeft = this.scrollLeft - walk;
-
-        if (deltaTime > 0) {
-          const oldScroll = this.unitsContainer.nativeElement.scrollLeft;
-          this.velocity = (oldScroll - newScrollLeft) / deltaTime;
-        }
-
-        this.unitsContainer.nativeElement.scrollLeft = newScrollLeft;
-        this.lastTimestamp = currentTime;
-      });
-    });
   }
 
-  private applyInertia(): void {
-    const speed = Math.abs(this.velocity) * this.inertiaMultiplier;
-    const direction = this.velocity > 0 ? -1 : 1;
-    let startTimestamp: number;
-
-    const animateInertia = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = (timestamp - startTimestamp) / 1000;
-      const easing = Math.exp(-4 * progress);
-      const distance = speed * easing * direction;
-
-      if (easing > 0.01) {
-        this.unitsContainer.nativeElement.scrollBy(distance, 0);
-        requestAnimationFrame(animateInertia);
-      }
-    };
-
-    requestAnimationFrame(animateInertia);
+  onTouchMove(event: TouchEvent): void {
+    super.handleDragMove(event.touches[0].pageX);
   }
 
+  onTouchEnd(event: TouchEvent): void {
+    super.handleDragEnd(event.changedTouches[0].pageX, 'course', this.courseId);
+  }
 
   private handleUnitClick(unitId: string): void {
-    const units = (this.units$ as any).value;
-    const unit = units?.find((u: Unit) => u.id === unitId);
-    if (unit && !unit.isLocked) {
-      this.onUnitSelected(unit);
-    }
+    this.units$.pipe(
+      tap(units => {
+        const unit = units.find(u => u.id === unitId);
+        if (unit && !unit.isLocked) {
+          this.onUnitSelected(unit);
+        }
+      })
+    ).subscribe();
   }
-
 
   onUnitSelected(unit: Unit): void {
     if (!unit.isLocked) {
       this.animationState = 'exit';
       setTimeout(() => {
         this.router.navigate(['/courses', this.courseId, 'units', unit.id, 'lessons']);
-      }, 500); // Match animation duration
+      }, 500);
     }
   }
 
@@ -423,5 +267,17 @@ export class UnitsListComponent implements OnInit, OnDestroy {
         });
       }
     }, 100);
+  }
+
+  trackByUnitId(_: number, unit: Unit): string {
+    return unit.id;
+  }
+
+  onAnimationComplete(): void {
+    this.transitionComplete = true;
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

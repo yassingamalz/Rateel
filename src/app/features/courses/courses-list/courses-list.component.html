@@ -1,5 +1,6 @@
+<!--src/app/features/courses/courses-list/courses-list.component.html -->
 <div class="courses-page">
-    <!-- Fixed Background Elements -->
+    <!-- Background Elements -->
     <div class="background-flow">
         <svg class="flow-path flow-path--1" viewBox="0 0 2000 1000">
             <path d="M0,100 C300,300 900,50 1400,250 L1400,1000 L0,1000 Z" />
@@ -42,25 +43,17 @@
             </div>
         </div>
 
-        <!-- Animated Cards Container -->
-        <div class="courses-container" 
-             #coursesContainer
-             [class.dragging]="isDragging"
-             (mousedown)="onMouseDown($event)"
-             (mousemove)="onMouseMove($event)"
-             (mouseup)="onMouseUp()"
-             (mouseleave)="onMouseLeave()"
-             (scroll)="onScroll($event)">
+        <!-- Courses Container -->
+        <div class="courses-container" #coursesContainer [class.dragging]="isDragging" (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)" (mouseleave)="cleanup()"
+            (scroll)="onScroll($event)">
 
             <div class="courses-wrapper" *ngIf="courses$ | async as courses" @cardsAnimation>
                 <ng-container *ngFor="let course of courses; let i = index">
-                    <app-course-card 
-                        [course]="course"
-                        (courseSelected)="onCourseSelected($event)"
-                        class="course-item"
-                        [class.course-item--completed]="isCourseCompleted(i)"
+                    <app-course-card [course]="course" [attr.data-course-id]="course.id" [attr.data-index]="i"
+                        class="course-item" [class.course-item--completed]="isCourseCompleted(i)"
                         [class.course-item--active]="i === currentCourseIndex">
-                        <div class="connector-line"></div>
+                        <div class="connector-line" *ngIf="i < courses.length - 1"></div>
                     </app-course-card>
                 </ng-container>
             </div>

@@ -1,10 +1,22 @@
-// courses-list.component.ts
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, AfterViewInit, NgZone } from '@angular/core';
+// src/app/features/courses/courses-list/courses-list.component.ts
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ChangeDetectionStrategy,
+  AfterViewInit,
+  NgZone,
+  ChangeDetectorRef
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Course } from '../../../shared/interfaces/course';
 import { CoursesService } from '../courses.service';
+import { StorageService } from '../../../core/services/storage.service';
+import { takeUntil } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scroll.base';
 
 @Component({
   selector: 'app-courses-list',
@@ -33,36 +45,40 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
     ])
   ]
 })
-export class CoursesListComponent implements OnInit, AfterViewInit {
+export class CoursesListComponent extends DragScrollBase implements OnInit, AfterViewInit {
   @ViewChild('coursesContainer') coursesContainer!: ElementRef;
+
   courses$: Observable<Course[]>;
   currentCourseIndex = 0;
-  isDragging = false;
-  
-  // Smooth scrolling properties
-  private startX = 0;
-  private startScrollLeft = 0;
-  private isPointerDown = false;
-  private rafId: number | null = null;
-  private velocity = 0;
-  private lastPosition = 0;
-  private momentumId: number | null = null;
-
-  private readonly DRAG_THRESHOLD = 5;
-  private readonly FRICTION = 0.95;
-  private readonly MINIMUM_VELOCITY = 0.5;
-
   private observer: IntersectionObserver | null = null;
 
   constructor(
+    elementRef: ElementRef,
+    ngZone: NgZone,
+    storageService: StorageService,
     private coursesService: CoursesService,
     private router: Router,
-    private ngZone: NgZone
+    private cdr: ChangeDetectorRef
   ) {
+    super(elementRef, ngZone, storageService);
     this.courses$ = this.coursesService.getCourses();
+
+    // Configure drag behavior for courses
+    this.dragThreshold = 10;
+    this.inertiaMultiplier = 200;
+    this.dragSpeedMultiplier = 2;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Subscribe to storage changes for course progress updates
+    this.storageService.getProgressChanges()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (change?.type === 'course') {
+          this.cdr.detectChanges();
+        }
+      });
+  }
 
   ngAfterViewInit(): void {
     this.setupScrollBehavior();
@@ -93,7 +109,10 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
         if (entry.isIntersecting) {
           const courseIndex = parseInt(entry.target.getAttribute('data-index') || '0');
           if (courseIndex !== this.currentCourseIndex) {
-            this.currentCourseIndex = courseIndex;
+            this.ngZone.run(() => {
+              this.currentCourseIndex = courseIndex;
+              this.cdr.detectChanges();
+            });
           }
         }
       });
@@ -107,85 +126,31 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   }
 
   onMouseDown(event: MouseEvent): void {
-    // Stop any ongoing momentum scroll
-    if (this.momentumId) {
-      cancelAnimationFrame(this.momentumId);
-      this.momentumId = null;
+    if ((event.target as HTMLElement).closest('.course-item')) {
+      super.startDrag(event.pageX);
     }
-
-    // Cancel any previous RAF
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
-
-    this.isPointerDown = true;
-    this.startX = event.pageX - this.coursesContainer.nativeElement.offsetLeft;
-    this.startScrollLeft = this.coursesContainer.nativeElement.scrollLeft;
-    this.velocity = 0;
-    this.lastPosition = this.startX;
-
-    // Add dragging class
-    this.coursesContainer.nativeElement.classList.add('dragging');
   }
 
   onMouseMove(event: MouseEvent): void {
-    if (!this.isPointerDown) return;
-
-    event.preventDefault();
-    const x = event.pageX - this.coursesContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2; // Increased multiplier for smoother feel
-
-    // Calculate velocity
-    this.velocity = x - this.lastPosition;
-    this.lastPosition = x;
-
-    this.rafId = requestAnimationFrame(() => {
-      if (this.coursesContainer?.nativeElement) {
-        this.coursesContainer.nativeElement.scrollLeft = this.startScrollLeft - walk;
-      }
-    });
+    super.handleDragMove(event.pageX);
   }
 
-  onMouseUp(): void {
-    // Remove dragging class
-    this.coursesContainer.nativeElement.classList.remove('dragging');
+  onMouseUp(event: MouseEvent): void {
+    const dragThreshold = 10;
+    const isDraggingFar = Math.abs(this.velocity) > dragThreshold;
 
-    // If not dragged far enough, apply momentum scroll
-    this.isPointerDown = false;
-    this.startX = 0;
-
-    // Start momentum scroll
-    this.ngZone.runOutsideAngular(() => {
-      this.momentumScroll();
-    });
-  }
-
-  private momentumScroll(): void {
-    // Apply momentum with deceleration
-    if (Math.abs(this.velocity) > this.MINIMUM_VELOCITY) {
-      this.velocity *= this.FRICTION;
-
-      if (this.coursesContainer?.nativeElement) {
-        this.coursesContainer.nativeElement.scrollLeft += this.velocity;
-      }
-
-      // Continue momentum scroll
-      this.momentumId = requestAnimationFrame(() => this.momentumScroll());
-    } else {
-      // Stop momentum
-      if (this.momentumId) {
-        cancelAnimationFrame(this.momentumId);
-        this.momentumId = null;
+    if (!isDraggingFar && !this.isDragging) {
+      // Handle as click if not dragged significantly
+      const courseElement = (event.target as HTMLElement).closest('[data-course-id]');
+      if (courseElement) {
+        const courseId = courseElement.getAttribute('data-course-id');
+        if (courseId) {
+          this.handleCourseClick(courseId);
+        }
       }
     }
-  }
 
-  onMouseLeave(): void {
-    if (this.isPointerDown) {
-      this.onMouseUp();
-    }
-    this.coursesContainer.nativeElement.classList.remove('dragging');
+    super.handleDragEnd(event.pageX);
   }
 
   onScroll(event: Event): void {
@@ -195,36 +160,30 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
 
     const newIndex = Math.round(scrollPosition / cardWidth);
     if (newIndex !== this.currentCourseIndex) {
-      this.currentCourseIndex = newIndex;
+      this.ngZone.run(() => {
+        this.currentCourseIndex = newIndex;
+        this.cdr.detectChanges();
+      });
     }
+  }
+
+  private handleCourseClick(courseId: string): void {
+    this.courses$.subscribe(courses => {
+      const course = courses.find(c => c.id === courseId);
+      if (course && !course.isLocked) {
+        this.router.navigate(['/courses', courseId, 'units']);
+      }
+    });
   }
 
   isCourseCompleted(index: number): boolean {
     return index <= this.currentCourseIndex;
   }
 
-  onCourseSelected(course: Course): void {
-    // Prevent navigation if dragging
-    const dragThreshold = 10;
-    const isDraggingFar = Math.abs(this.velocity) > dragThreshold;
-    
-    if (!isDraggingFar) {
-      this.router.navigate(['/courses', course.id, 'units']);
-    }
-  }
-
-  ngOnDestroy(): void {
-    // Clean up observers and animations
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
     if (this.observer) {
       this.observer.disconnect();
-    }
-
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-    }
-
-    if (this.momentumId) {
-      cancelAnimationFrame(this.momentumId);
     }
   }
 }
