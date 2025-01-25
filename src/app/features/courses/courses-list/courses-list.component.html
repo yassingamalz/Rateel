@@ -47,8 +47,7 @@
         <div class="courses-container" #coursesContainer [class.dragging]="isDragging" (mousedown)="onMouseDown($event)"
             (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)" (mouseleave)="cleanup()"
             (scroll)="onScroll($event)">
-
-            <div class="courses-wrapper" *ngIf="courses$ | async as courses" @cardsAnimation>
+            <div class="courses-wrapper" *ngIf="courses$ | async as courses" [@cardsAnimation]="courses.length">
                 <ng-container *ngFor="let course of courses; let i = index">
                     <app-course-card [course]="course" [attr.data-course-id]="course.id" [attr.data-index]="i"
                         class="course-item" [class.course-item--completed]="isCourseCompleted(i)"

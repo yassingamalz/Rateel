@@ -28,17 +28,9 @@ import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scro
     trigger('cardsAnimation', [
       transition(':enter', [
         query('.course-item', [
-          style({
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.95)'
-          }),
+          style({ opacity: 0, transform: 'translateY(30px) scale(0.95)' }),
           stagger(80, [
-            animate('400ms cubic-bezier(0.35, 0, 0.25, 1)',
-              style({
-                opacity: 1,
-                transform: 'translateY(0) scale(1)'
-              })
-            )
+            animate('400ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'translateY(0) scale(1)' }))
           ])
         ], { optional: true })
       ])
