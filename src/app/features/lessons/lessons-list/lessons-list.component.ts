@@ -47,6 +47,7 @@ import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scro
 export class LessonsListComponent extends DragScrollBase implements OnInit, OnDestroy {
   @ViewChild('lessonsContainer') lessonsContainer!: ElementRef;
 
+  completedLessonAnimating = false;
   lessons$!: Observable<Lesson[]>;
   courseId!: string;
   unitId!: string;
@@ -129,23 +130,58 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     const storageKey = `${this.courseId}_${this.unitId}_${lessonId}`;
     const progressData = this.storageService.getProgress('lesson', storageKey);
 
-    // Check if this is the first time completing this lesson
+    // Trigger the completion animation before updating storage
     if (!progressData?.answers?.['completion_effect_shown']) {
-      // Set the completion effect flag
-      this.storageService.saveAnswer(
-        storageKey,
-        'completion_effect_shown',
-        true,
-        true
-      );
-
-      // Trigger the completion effect
+      this.completedLessonAnimating = true;
       this.completingLessonId = lessonId;
-      this.handleLessonCompletion(lessonId);
+      this.cdr.detectChanges();
+
+      // Let the animation complete before continuing
+      setTimeout(() => {
+        this.storageService.saveAnswer(
+          storageKey,
+          'completion_effect_shown',
+          true,
+          true
+        );
+        
+        // Keep animation active for full duration
+        setTimeout(() => {
+          this.completingLessonId = null;
+          this.completedLessonAnimating = false;
+          this.cdr.detectChanges();
+          this.handleLessonNavigation(lessonId);
+        }, 1500); // Match fill animation duration
+      }, 100);
     } else {
-      // Skip animation and handle navigation directly
       this.handleLessonNavigation(lessonId);
     }
+  }
+
+  // Update handleLessonNavigation to respect animation state
+  private handleLessonNavigation(lessonId: string): void {
+    if (this.completedLessonAnimating) return;
+    
+    this.lessons$.pipe(take(1)).subscribe(lessons => {
+      const currentIndex = lessons.findIndex(l => l.id === lessonId);
+      const isLastLesson = lessons.every((lesson, index) =>
+        index === currentIndex || lesson.isCompleted
+      );
+
+      if (isLastLesson) {
+        this.router.navigate(['/courses', this.courseId, 'units'], {
+          queryParams: {
+            completedUnitId: this.unitId,
+            lastCompletedLesson: lessonId
+          }
+        });
+      } else {
+        const nextLesson = lessons[currentIndex + 1];
+        if (nextLesson && !nextLesson.isLocked) {
+          this.onLessonSelected(nextLesson);
+        }
+      }
+    });
   }
 
   private handleLessonCompletion(lessonId: string): void {
@@ -157,30 +193,6 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     }, 2500); // Match original animation duration
   }
 
-  private handleLessonNavigation(lessonId: string): void {
-    setTimeout(() => {
-      this.lessons$.pipe(take(1)).subscribe(lessons => {
-        const currentIndex = lessons.findIndex(l => l.id === lessonId);
-        const isLastLesson = lessons.every((lesson, index) =>
-          index === currentIndex || lesson.isCompleted
-        );
-
-        if (isLastLesson) {
-          this.router.navigate(['/courses', this.courseId, 'units'], {
-            queryParams: {
-              completedUnitId: this.unitId,
-              lastCompletedLesson: lessonId
-            }
-          });
-        } else {
-          const nextLesson = lessons[currentIndex + 1];
-          if (nextLesson && !nextLesson.isLocked) {
-            this.onLessonSelected(nextLesson);
-          }
-        }
-      });
-    }, 1500); // Original delay for navigation
-  }
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {

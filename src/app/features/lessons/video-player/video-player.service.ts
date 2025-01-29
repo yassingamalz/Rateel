@@ -18,7 +18,7 @@ export class VideoPlayerService {
     isCompleted: false
   });
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 
   getState(): Observable<VideoState> {
     return this.state.asObservable();
@@ -32,7 +32,7 @@ export class VideoPlayerService {
   getYouTubeEmbedUrl(url: string): SafeResourceUrl {
     const match = url.match(this.YOUTUBE_REGEX);
     const videoId = match && match[2].length === 11 ? match[2] : null;
-    
+
     if (!videoId) {
       throw new Error('Invalid YouTube URL');
     }
@@ -60,11 +60,14 @@ export class VideoPlayerService {
   }
 
   markAsCompleted(): void {
-    this.state.next({
-      ...this.state.value,
-      isCompleted: true,
-      progress: 100
-    });
+    // Only update if not already completed
+    if (!this.state.value.isCompleted) {
+      this.state.next({
+        ...this.state.value,
+        isCompleted: true,
+        progress: 100
+      });
+    }
   }
 
   resetState(): void {

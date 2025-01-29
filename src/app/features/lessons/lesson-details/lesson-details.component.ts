@@ -49,6 +49,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   private lessonId: string;
   private autoSaveInterval: any;
   private subscriptions: Subscription[] = [];
+  completingLessonId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,11 +94,8 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
             return;
           }
 
-          console.log('Loaded lesson:', lesson);
-
           // If it's a practice lesson and verses are not loaded
           if (lesson.type === 'practice' && (!lesson.verses || lesson.verses.length === 0)) {
-            console.warn('Practice lesson has no verses, attempting to load from service');
 
             // Construct the correct content path
             const contentPath = `/content/verses/${this.lessonId}.json`;
@@ -314,7 +312,8 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Completion
   markAsCompleted(): void {
-    // Remove the early return check to allow multiple completions
+    if (this.lesson?.isCompleted) return;
+
     const completeSub = this.lessonsService
       .markLessonAsCompleted(this.courseId, this.unitId, this.lessonId)
       .subscribe({
@@ -322,7 +321,10 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           if (this.lesson) {
             this.lesson.isCompleted = true;
             this.updateProgress(100);
-            this.handleCompletion();
+            // Let progress bar update before triggering completion
+            setTimeout(() => {
+              this.handleCompletion();
+            }, 100);
           }
         },
         error: (error) => {
@@ -333,24 +335,29 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(completeSub);
   }
 
+
   private handleCompletion(): void {
-    // Update progress bar but keep it at 100
+    // Update progress
     this.currentProgress$.next(100);
     this.saveCurrentState();
-
-    // Always trigger exit animation and navigation
-    this.animationState = 'exit';
-
+    
+    // Exit with proper timing
     setTimeout(() => {
-      this.router.navigate(['../'], {
-        relativeTo: this.route,
-        queryParams: {
-          completedLessonId: this.lessonId,
-          returnTo: 'lessons'
-        }
-      });
-    }, 500);
+      this.animationState = 'exit';
+      
+      // Navigate after animations complete
+      setTimeout(() => {
+        this.router.navigate(['../'], {
+          relativeTo: this.route,
+          queryParams: {
+            completedLessonId: this.lessonId,
+            returnTo: 'lessons'
+          }
+        });
+      }, 500); // Exit animation duration
+    }, 100); // Small delay for state update
   }
+
   // Handle practice answers
   handleAnswer(event: { questionId: string; answer: any; isCorrect: boolean }): void {
     this.storageService.saveAnswer(

@@ -34,6 +34,7 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   safeYoutubeUrl?: SafeResourceUrl;
 
   private subscriptions: Subscription[] = [];
+  private isCompleting = false;
 
   constructor(
     private videoService: VideoPlayerService,
@@ -89,19 +90,31 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
     this.handleCompletion();
   }
 
+
+  private handleCompletion(): void {
+    if (this.isCompleting) return;
+    this.isCompleting = true;
+
+    // Update video state
+    this.videoService.markAsCompleted();
+
+    // Increase delay to allow border fill animation
+    setTimeout(() => {
+      this.onComplete.emit();
+      this.isCompleting = false;
+    }, 1500); // Match border fill animation duration
+  }
+
   handleSkip(): void {
+    if (this.isCompleting) return;
+
     this.videoService.updateProgress({
       currentTime: this.videoElement?.nativeElement.duration || 0,
       duration: this.videoElement?.nativeElement.duration || 0,
       progress: 100
     });
-    
-    // Always emit completion regardless of previous state
+
     this.handleCompletion();
   }
 
-  private handleCompletion(): void {
-    this.videoService.markAsCompleted();
-    this.onComplete.emit();
-  }
 }
