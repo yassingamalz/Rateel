@@ -4,6 +4,7 @@ export interface ProgressData {
   timestamp: number;
   expiresAt: number;
   isCompleted: boolean;
+  isLocked?: boolean;
   currentVerseIndex?: number;
   scrollPosition?: number;
   lastAccessedLesson?: string;
@@ -41,7 +42,7 @@ export interface LessonState {
   isMuted?: boolean;
   isFullscreen: boolean;
   lastUpdated: number;
-  currentVerseIndex?: number; 
+  currentVerseIndex?: number;
   scrollPosition?: number;
 }
 
@@ -64,7 +65,7 @@ export class StorageService {
   private readonly TWO_YEARS = 2 * 365 * 24 * 60 * 60 * 1000;
   private readonly VERSION = '1.0.0';
 
-  private changes$ = new BehaviorSubject<{type: StorageType; id: string; data: ProgressData} | null>(null);
+  private changes$ = new BehaviorSubject<{ type: StorageType; id: string; data: ProgressData } | null>(null);
 
   constructor() {
     this.initializeStorage();
@@ -73,7 +74,7 @@ export class StorageService {
   private initializeStorage(): void {
     // Clear expired data on initialization
     this.clearExpiredData();
-    
+
     // Setup storage event listener for cross-tab sync
     window.addEventListener('storage', (event) => {
       if (event.key && Object.values(this.PREFIX).some(prefix => event.key!.startsWith(prefix))) {
@@ -98,7 +99,7 @@ export class StorageService {
       if (!data) return null;
 
       const parsed: ProgressData = JSON.parse(data);
-      
+
       // Handle data expiration
       if (Date.now() > parsed.expiresAt) {
         localStorage.removeItem(key);
@@ -118,7 +119,7 @@ export class StorageService {
     }
   }
 
-  getProgressChanges(): Observable<{type: StorageType; id: string; data: ProgressData} | null> {
+  getProgressChanges(): Observable<{ type: StorageType; id: string; data: ProgressData } | null> {
     return this.changes$.asObservable();
   }
 
@@ -204,6 +205,7 @@ export class StorageService {
       timestamp: Date.now(),
       expiresAt: Date.now() + this.TWO_YEARS,
       isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
+      isLocked: data.isLocked ?? existingData?.isLocked ?? true, // Add this, default to locked
       lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
       version: this.VERSION,
       syncStatus: 'pending',
@@ -239,7 +241,7 @@ export class StorageService {
   // New method to save lesson state
   saveLessonState(lessonId: string, state: Partial<LessonState>): void {
     const existingData = this.getProgress('lesson', lessonId);
-    
+
     this.saveProgress('lesson', lessonId, {
       ...existingData,
       currentPosition: state.currentPosition,
@@ -254,7 +256,7 @@ export class StorageService {
   addBookmark(lessonId: string, position: number, label: string): void {
     const existingData = this.getProgress('lesson', lessonId);
     const bookmarks = existingData?.bookmarks ?? [];
-    
+
     bookmarks.push({
       position,
       label,
@@ -271,7 +273,7 @@ export class StorageService {
   addNote(lessonId: string, position: number, text: string): void {
     const existingData = this.getProgress('lesson', lessonId);
     const notes = existingData?.notes ?? [];
-    
+
     notes.push({
       position,
       text,
@@ -288,7 +290,7 @@ export class StorageService {
   saveAnswer(lessonId: string, questionId: string, answer: any, isCorrect: boolean): void {
     const existingData = this.getProgress('lesson', lessonId);
     const answers = existingData?.answers ?? {};
-    
+
     answers[questionId] = {
       answer,
       isCorrect,
@@ -302,9 +304,9 @@ export class StorageService {
   }
 
   private migrateData(data: ProgressData): ProgressData {
-    // Implement version migration logic here
     return {
       ...data,
+      isLocked: data.isLocked ?? true, // Add this with default
       currentPosition: data.currentPosition ?? 0,
       volume: data.volume ?? 1,
       isMuted: data.isMuted ?? false,

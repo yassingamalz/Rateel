@@ -8,9 +8,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { tap, map, takeUntil, take, shareReplay } from 'rxjs/operators';
+import { tap, map, takeUntil, take, shareReplay, filter } from 'rxjs/operators';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -53,6 +53,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   unitId!: string;
   activeLessonId: string | null = null;
   completingLessonId: string | null = null;
+  private isNavigating = false;
 
   constructor(
     elementRef: ElementRef,
@@ -65,6 +66,13 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     private cdr: ChangeDetectorRef
   ) {
     super(elementRef, ngZone, storageService);
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.completingLessonId = null;
+    });
   }
 
   ngOnInit(): void {
@@ -126,62 +134,100 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     });
   }
 
+
   private checkAndHandleLessonCompletion(lessonId: string) {
+    console.log('[LessonsList] Starting lesson completion check for:', lessonId);
+    console.log('[LessonsList] Current navigating state:', this.isNavigating);
+
+    if (this.isNavigating) {
+      console.log('[LessonsList] Navigation already in progress, skipping');
+      return;
+    }
+
     const storageKey = `${this.courseId}_${this.unitId}_${lessonId}`;
     const progressData = this.storageService.getProgress('lesson', storageKey);
+    const isFirstCompletion = !progressData?.answers?.['completion_effect_shown'];
 
-    // Trigger the completion animation before updating storage
-    if (!progressData?.answers?.['completion_effect_shown']) {
-      this.completedLessonAnimating = true;
-      this.completingLessonId = lessonId;
-      this.cdr.detectChanges();
+    console.log('[LessonsList] First completion:', isFirstCompletion);
+    console.log('[LessonsList] Current completing lessonId:', this.completingLessonId);
 
-      // Let the animation complete before continuing
-      setTimeout(() => {
+    // Skip if already handling completion
+    if (this.completingLessonId === lessonId) {
+      console.log('[LessonsList] Already handling completion for this lesson');
+      return;
+    }
+
+    this.isNavigating = true;
+    this.completingLessonId = lessonId;
+    this.cdr.detectChanges();
+
+    // Show completion animation
+    setTimeout(() => {
+      console.log('[LessonsList] Completion animation started');
+
+      if (isFirstCompletion) {
         this.storageService.saveAnswer(
           storageKey,
           'completion_effect_shown',
           true,
           true
         );
-        
-        // Keep animation active for full duration
-        setTimeout(() => {
-          this.completingLessonId = null;
-          this.completedLessonAnimating = false;
-          this.cdr.detectChanges();
-          this.handleLessonNavigation(lessonId);
-        }, 1500); // Match fill animation duration
-      }, 100);
-    } else {
-      this.handleLessonNavigation(lessonId);
-    }
+      }
+
+      // Wait for animation then navigate
+      setTimeout(() => {
+        console.log('[LessonsList] Completion animation finished, preparing navigation');
+        this.completingLessonId = null;
+        this.cdr.detectChanges();
+        this.handleLessonNavigation(lessonId);
+      }, 1500); // Match animation duration
+    }, 100);
   }
 
-  // Update handleLessonNavigation to respect animation state
   private handleLessonNavigation(lessonId: string): void {
-    if (this.completedLessonAnimating) return;
-    
+    console.log('[LessonsList] Handling lesson navigation for:', lessonId);
+
     this.lessons$.pipe(take(1)).subscribe(lessons => {
       const currentIndex = lessons.findIndex(l => l.id === lessonId);
-      const isLastLesson = lessons.every((lesson, index) =>
-        index === currentIndex || lesson.isCompleted
-      );
+      const isLastLesson = currentIndex === lessons.length - 1;
+      const nextLesson = lessons[currentIndex + 1];
+
+      console.log('[LessonsList] Current lesson index:', currentIndex);
+      console.log('[LessonsList] Is last lesson:', isLastLesson);
+      console.log('[LessonsList] Next lesson:', nextLesson);
 
       if (isLastLesson) {
+        console.log('[LessonsList] Navigating to units list with completion');
+        // Last lesson - navigate to units with completion param
         this.router.navigate(['/courses', this.courseId, 'units'], {
-          queryParams: {
-            completedUnitId: this.unitId,
-            lastCompletedLesson: lessonId
-          }
+          queryParams: { completedUnitId: this.unitId },
+          replaceUrl: true
+        }).then(() => {
+          console.log('[LessonsList] Navigation to units list complete');
+          setTimeout(() => {
+            this.isNavigating = false;
+          }, 500);
         });
-      } else {
-        const nextLesson = lessons[currentIndex + 1];
-        if (nextLesson && !nextLesson.isLocked) {
-          this.onLessonSelected(nextLesson);
-        }
+      } else if (nextLesson && !nextLesson.isLocked) {
+        console.log('[LessonsList] Navigating to next lesson:', nextLesson.id);
+        // Navigate to next lesson directly
+        this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', nextLesson.id], {
+          replaceUrl: true
+        }).then(() => {
+          console.log('[LessonsList] Navigation to next lesson complete');
+          setTimeout(() => {
+            this.isNavigating = false;
+          }, 500);
+        });
       }
     });
+  }
+
+  // Clean up method
+  override ngOnDestroy(): void {
+    console.log('[LessonsList] Component destroying, cleaning up');
+    this.isNavigating = false;
+    super.ngOnDestroy();
   }
 
   private handleLessonCompletion(lessonId: string): void {
@@ -262,7 +308,4 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     super.cleanup();
   }
 
-  override ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
 }

@@ -44,6 +44,7 @@ export class UnitsService {
 
   private initializeWithProgress(courseId: string, units: Unit[]): Unit[] {
     const cachedCourseProgress = this.storageService.getProgress('course', courseId);
+    let previousUnitCompleted = true; // First unit is always unlocked
 
     return units.map((unit, index) => {
       const cachedUnitProgress = this.storageService.getProgress(
@@ -51,24 +52,28 @@ export class UnitsService {
         `${courseId}_${unit.id}`
       );
 
-      if (cachedUnitProgress) {
-        const previousUnit = index > 0 ? units[index - 1] : null;
+      // Previous unit completion or course completion unlocks next unit
+      const isUnlocked = unit.order === 1 || 
+                        previousUnitCompleted || 
+                        cachedCourseProgress?.isCompleted;
 
+      if (cachedUnitProgress) {
+        previousUnitCompleted = cachedUnitProgress.isCompleted;
         return {
           ...unit,
-          progress: cachedUnitProgress.progress,
-          isCompleted: cachedUnitProgress.isCompleted,
-          isLocked: !(unit.order === 1 ||
-            (previousUnit?.isCompleted) ||
-            (cachedCourseProgress && cachedCourseProgress.isCompleted))
+          progress: cachedUnitProgress.progress || 0,
+          isCompleted: cachedUnitProgress.isCompleted || false,
+          isLocked: !isUnlocked // Use calculated unlock state
         };
       }
 
+      // For units with no saved progress
+      previousUnitCompleted = false;
       return {
         ...unit,
-        isLocked: index !== 0,
+        progress: 0,
         isCompleted: false,
-        progress: 0
+        isLocked: !isUnlocked
       };
     });
   }
@@ -82,14 +87,24 @@ export class UnitsService {
       unit.isCompleted = true;
       unit.progress = 100;
 
+      // Save unit progress
       this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
         progress: 100,
-        isCompleted: true
+        isCompleted: true,
+        lastUpdated: Date.now()
       });
 
+      // Unlock next unit and save its state
       const nextUnit = units.find(u => u.order === unit.order + 1);
       if (nextUnit) {
         nextUnit.isLocked = false;
+        // Save unlocked state for next unit
+        this.storageService.saveProgress('unit', `${courseId}_${nextUnit.id}`, {
+          progress: 0,
+          isCompleted: false,
+          isLocked: false,
+          lastUpdated: Date.now()
+        });
       }
 
       // Check if all units are completed
@@ -98,12 +113,13 @@ export class UnitsService {
         this.coursesService.markCourseAsCompleted(courseId).subscribe();
       }
 
-      // Update the subject
+      // Update subject
       this.unitsSubject.next({
         ...currentUnits,
         [courseId]: units
       });
     }
+
     return of(void 0);
   }
 

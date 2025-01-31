@@ -1,0 +1,63 @@
+{
+    "version": "1.0.0",
+    "unitId": "intro-noon-meem-unit",
+    "courseId": "noon-meem-mushaddad",
+    "lessons": [
+        {
+            "id": "intro-lesson",
+            "title": "مقدمة في النون والميم",
+            "description": "تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "duration": 5,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 5,
+            "videoUrl": "https://www.youtube.com/watch?v=XfDdA9UgOVQ"
+        },
+        {
+            "id": "pronunciation-basics",
+            "title": "أساسيات النطق",
+            "description": "تدريب على النطق الصحيح للنون والميم المشددتين",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "duration": 10,
+            "order": 2,
+            "stepNumber": 2,
+            "totalSteps": 5
+        },
+        {
+            "id": "interactive-drill",
+            "title": "تدريب تفاعلي",
+            "description": "تمارين تفاعلية مع التصحيح الفوري",
+            "type": "read",
+            "icon": "fa-laptop",
+            "duration": 15,
+            "order": 3,
+            "stepNumber": 3,
+            "totalSteps": 5
+        },
+        {
+            "id": "quran-examples",
+            "title": "أمثلة قرآنية",
+            "description": "دراسة أمثلة من القرآن الكريم",
+            "type": "listen",
+            "icon": "fa-book-open",
+            "duration": 12,
+            "order": 4,
+            "stepNumber": 4,
+            "totalSteps": 5
+        },
+        {
+            "id": "unit-assessment",
+            "title": "التقييم النهائي",
+            "description": "اختبار شامل للوحدة",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "duration": 20,
+            "order": 5,
+            "stepNumber": 5,
+            "totalSteps": 5
+        }
+    ]
+}
