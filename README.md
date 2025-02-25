@@ -1,59 +1,176 @@
-# TajweedApp
+# 📖 Rateel (رَتِّلِ) - Interactive Tajweed Learning App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
+<div align="center">
+  <img src="src/assets/icons/android-chrome-192x192.png" alt="Rateel Logo" width="120"/>
+  <h3>Learn Tajweed Rules with an Immersive Experience</h3>
+</div>
 
-## Development server
+## 📋 Overview
 
-To start a local development server, run:
+**Rateel** is a comprehensive Tajweed learning application focused on teaching Quranic recitation rules through interactive lessons, practice exercises, and audio/video content. Built with Angular and transformed to mobile platforms via Capacitor, Rateel offers a consistent learning experience across devices.
 
-```bash
-ng serve
+The name "Rateel" (رَتِّلِ) comes from the Quranic command meaning "recite [the Quran] with measured rhythmic recitation," emphasizing the app's focus on proper Quranic recitation.
+
+## 🌟 Key Features
+
+- **📚 Structured Learning Path**: Progressive courses from beginner to advanced
+- **🎯 Interactive Lessons**: Various lesson types (video, reading, practice, listening)
+- **🎤 Recitation Practice**: Audio recording and playback for self-assessment
+- **🔍 Tajweed Highlighting**: Visual highlighting of specific recitation rules
+- **📱 Cross-Platform**: Works on web and mobile (Android/iOS) via Capacitor
+- **🌙 Islamic-Inspired UI**: Beautiful interface with Islamic design elements
+- **🔄 Offline Support**: Full functionality without requiring constant internet
+- **📊 Progress Tracking**: Comprehensive tracking of user achievements
+- **🌐 Right-to-Left (RTL) Support**: Fully compatible with Arabic text direction
+
+## 🏗️ Technical Architecture
+
+The app is built using a modular architecture with the following components:
+
+### Core Technologies
+- **Angular 19**: Primary frontend framework
+- **Capacitor 6**: Framework to convert web app to native mobile
+- **SCSS**: Enhanced styling with variables and mixins
+- **RxJS**: Reactive state management
+
+### Project Structure
+```
+src/
+├── app/
+│   ├── core/             # Core services and utilities
+│   ├── features/         # Feature modules (courses, lessons, units)
+│   ├── layout/           # Main layout components
+│   └── shared/           # Shared components, directives, interfaces
+├── assets/               # Static assets
+│   ├── data/             # JSON data files (courses, lessons, etc.)
+│   ├── audio/            # Audio files for pronunciation
+│   └── icons/            # App icons
+└── styles/               # Global styles
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Key Modules
+- **Courses Module**: Browse and select learning courses
+- **Units Module**: Units within each course 
+- **Lessons Module**: Individual interactive lessons
+- **Core Module**: Shared services for storage, platform, etc.
 
-## Code scaffolding
+## 🔄 Angular to Mobile Transformation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Rateel uses Capacitor to transform the Angular web app into mobile applications:
 
-```bash
-ng generate component component-name
-```
+1. **Web-First Development**: Core functionality built with Angular
+2. **Capacitor Integration**: Native capabilities (audio recording, haptics)
+3. **Platform-Specific Adjustments**: UI adaptations for mobile devices
+4. **Optimized Performance**: Enhanced for mobile with smooth animations
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Mobile-Specific Features
+- **Voice Recording**: Native audio capabilities for pronunciation practice
+- **Haptic Feedback**: Tactile response during interactions
+- **Orientation Control**: Landscape mode for optimal content viewing
+- **Mobile Gestures**: Swipe, tap, and drag interactions
 
-```bash
-ng generate --help
-```
+## 🛠️ Getting Started
 
-## Building
+### Prerequisites
+- Node.js 18+
+- npm 9+
+- Angular CLI 19
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Installation
 
 ```bash
-ng e2e
+# Clone the repository
+git clone https://github.com/yourusername/rateel.git
+cd rateel
+
+# Install dependencies
+npm install
+
+# Serve web application
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Building for Mobile
 
-## Additional Resources
+```bash
+# Build for production
+npm run build:mobile
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Prepare Android build
+npm run build:android
+
+# Run on iOS
+npm run capacitor:run:ios
+```
+
+## 📱 Mobile Development
+
+Capacitor is used to wrap the Angular application for deployment to mobile platforms:
+
+```bash
+# Add platforms
+npx cap add android
+npx cap add ios
+
+# Sync changes after building
+npx cap sync
+
+# Open native projects
+npx cap open android
+npx cap open ios
+```
+
+## 🧩 App Features Detail
+
+### Course System
+- Structured courses with progressive difficulty
+- Units with themed content
+- Varied lesson types for engaging learning
+
+### Lesson Types
+- **Video Lessons**: Instructional videos on Tajweed concepts
+- **Reading Lessons**: Text-based explanations with highlighted rules
+- **Interactive Practice**: Practice pronunciation with feedback
+- **Audio Lessons**: Listen to expert recitation examples
+
+### Tajweed Rules Coverage
+- Noon and Meem Mushaddad (النون والميم المشددتان)
+- Noon Sakinah and Tanween (النون الساكنة والتنوين)
+- Meem Sakinah (الميم الساكنة)
+- Various types of Madd (المد)
+
+## 🎨 Design Elements
+
+Rateel features an Islamic-inspired design with:
+- Emerald green primary color scheme
+- Gold accents inspired by mosque decorations
+- Glass-effect UI elements
+- Traditional Islamic patterns and motifs
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm test
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- Special thanks to all contributors
+- Inspiration from traditional Tajweed learning materials
+- Font Awesome for icons
+- Angular and Capacitor teams for excellent frameworks
