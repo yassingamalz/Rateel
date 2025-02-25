@@ -50,6 +50,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   private autoSaveInterval: any;
   private subscriptions: Subscription[] = [];
   completingLessonId: string | null = null;
+  private isCompletionHandled = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -191,6 +192,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       timestamp: Date.now(),
       expiresAt: Date.now() + (2 * 365 * 24 * 60 * 60 * 1000), // 2 years from now
       isCompleted: progress >= 100,
+      isLocked: false,
       currentPosition: currentState.currentPosition,
       volume: currentState.volume,
       isMuted: currentState.isMuted,
@@ -206,10 +208,14 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       stateToSave.scrollPosition = currentState.scrollPosition;
     }
 
-    this.storageService.saveProgress('lesson', this.lessonId, stateToSave);
+    this.storageService.saveProgress('lesson', this.getLessonStorageKey(), stateToSave);
   }
 
-  // Update restart to handle practice lessons
+  private getLessonStorageKey(): string {
+    return `${this.courseId}_${this.unitId}_${this.lessonId}`;
+  }
+
+  // Also update restart to handle practice lessons
   restart(): void {
     const currentState = this.lessonState$.value;
     const newState = {
@@ -312,7 +318,9 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Completion
   markAsCompleted(): void {
-    if (this.lesson?.isCompleted) return;
+    // Prevent multiple completions
+    if (this.isCompletionHandled) return;
+    this.isCompletionHandled = true;
 
     const completeSub = this.lessonsService
       .markLessonAsCompleted(this.courseId, this.unitId, this.lessonId)
@@ -329,6 +337,8 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error('Error marking lesson as completed:', error);
+          // Reset completion state on error
+          this.isCompletionHandled = false;
         }
       });
 
@@ -337,7 +347,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
 
   private handleCompletion(): void {
-    // Update progress
+    // Update progress to 100%
     this.currentProgress$.next(100);
     this.saveCurrentState();
     
@@ -351,17 +361,19 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           relativeTo: this.route,
           queryParams: {
             completedLessonId: this.lessonId,
-            returnTo: 'lessons'
+            returnTo: 'lessons',
+            // Add timestamp to prevent caching
+            t: Date.now()
           }
         });
-      }, 500); // Exit animation duration
+      }, 300); // Exit animation duration
     }, 100); // Small delay for state update
   }
 
   // Handle practice answers
   handleAnswer(event: { questionId: string; answer: any; isCorrect: boolean }): void {
     this.storageService.saveAnswer(
-      this.lessonId,
+      this.getLessonStorageKey(),
       event.questionId,
       event.answer,
       event.isCorrect

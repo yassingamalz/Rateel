@@ -12,9 +12,9 @@
       <button 
         class="skip-button" 
         (click)="handleSkip()"
-        *ngIf="!state.isCompleted">
-        <span class="skip-text">تخطي</span>
-        <i class="fas fa-forward"></i>
+        [class.skip-button--completed]="isCompleted">
+        <span class="skip-text">{{ isCompleted ? 'إكمال' : 'تخطي' }}</span>
+        <i class="fas" [class.fa-forward]="!isCompleted" [class.fa-check]="isCompleted"></i>
       </button>
     </div>
   </ng-container>
@@ -32,8 +32,8 @@
       <button 
         class="skip-button" 
         (click)="handleSkip()"
-        *ngIf="!state.isCompleted">
-        <span class="skip-text">تخطي</span>
+        [class.skip-button--completed]="isCompleted">
+        <span class="skip-text">{{ isCompleted ? 'إكمال' : 'تخطي' }}</span>
         <i class="fas fa-forward"></i>
       </button>
     </div>

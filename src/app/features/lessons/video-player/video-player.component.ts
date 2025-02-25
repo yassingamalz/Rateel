@@ -7,12 +7,14 @@ import {
   ViewChild,
   ElementRef,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { VideoPlayerService } from './video-player.service';
 import { VideoPlayerProps, VideoState } from './video-player.types';
+import { PlatformService } from '../../../core/services/platform.service';
 
 @Component({
   selector: 'app-video-player',
@@ -34,10 +36,14 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   safeYoutubeUrl?: SafeResourceUrl;
 
   private subscriptions: Subscription[] = [];
+  private skipRequested = false;
   private isCompleting = false;
 
   constructor(
     private videoService: VideoPlayerService,
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef,
+    private platformService: PlatformService
   ) { }
 
   ngOnInit(): void {
@@ -49,15 +55,30 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
       }
     }
 
+    // Initialize state with completed status if lesson was already completed
+    if (this.isCompleted) {
+      this.videoService.updateProgress({
+        currentTime: 100,
+        duration: 100,
+        progress: 100
+      });
+    }
+
     // Subscribe to video state changes
     this.subscriptions.push(
       this.videoService.getState().subscribe(state => {
+        // Update local state
         this.state = state;
+        
+        // Emit progress updates
         this.onProgress.emit(state.progress);
 
-        if (state.isCompleted && !this.isCompleted) {
+        // Handle completion
+        if (state.isCompleted && !this.isCompleted && !this.isCompleting) {
           this.handleCompletion();
         }
+        
+        this.cdr.detectChanges();
       })
     );
   }
@@ -68,6 +89,8 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   }
 
   onTimeUpdate(event: Event): void {
+    if (this.skipRequested || this.isCompleted) return;
+    
     const video = event.target as HTMLVideoElement;
     const currentTime = video.currentTime;
     const duration = video.duration;
@@ -81,6 +104,8 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
   }
 
   onVideoEnded(): void {
+    if (this.skipRequested || this.isCompleted) return;
+    
     this.videoService.updateProgress({
       currentTime: this.videoElement?.nativeElement.duration || 0,
       duration: this.videoElement?.nativeElement.duration || 0,
@@ -90,31 +115,46 @@ export class VideoPlayerComponent implements VideoPlayerProps, OnInit, OnDestroy
     this.handleCompletion();
   }
 
-
-  private handleCompletion(): void {
+  private async handleCompletion(): Promise<void> {
     if (this.isCompleting) return;
     this.isCompleting = true;
 
     // Update video state
     this.videoService.markAsCompleted();
 
-    // Increase delay to allow border fill animation
+    // Provide haptic feedback on mobile
+    try {
+      await this.platformService.vibrateSuccess();
+    } catch (error) {
+      console.warn('Haptic feedback not available', error);
+    }
+
+    // Emit completion event after a delay for animation
     setTimeout(() => {
       this.onComplete.emit();
       this.isCompleting = false;
+      this.skipRequested = false;
     }, 1500); // Match border fill animation duration
   }
 
   handleSkip(): void {
-    if (this.isCompleting) return;
-
-    this.videoService.updateProgress({
-      currentTime: this.videoElement?.nativeElement.duration || 0,
-      duration: this.videoElement?.nativeElement.duration || 0,
-      progress: 100
+    console.log("Skip button clicked, isCompleted:", this.isCompleted);
+    
+    // Always emit completion event immediately for any click
+    this.onComplete.emit();
+    
+    // Add haptic feedback
+    this.platformService.vibrateSuccess().catch(() => {
+      // Ignore errors if vibration is not available
     });
-
-    this.handleCompletion();
+    
+    // If not already completed, also mark as completed
+    if (!this.isCompleted) {
+      this.videoService.updateProgress({
+        currentTime: this.videoElement?.nativeElement?.duration || 100,
+        duration: this.videoElement?.nativeElement?.duration || 100,
+        progress: 100
+      });
+    }
   }
-
 }

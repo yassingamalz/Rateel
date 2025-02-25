@@ -37,18 +37,28 @@ export class VideoPlayerService {
       throw new Error('Invalid YouTube URL');
     }
 
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&modestbranding=1`;
+    // Add parameters:
+    // - enablejsapi=1: Enables the JavaScript API
+    // - rel=0: Don't show related videos at the end
+    // - modestbranding=1: Minimal YouTube branding
+    // - playsinline=1: Play inline on mobile devices
+    // - controls=1: Show video controls
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=1`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }
 
   updateProgress(progress: VideoProgress): void {
     const { currentTime, duration, progress: progressPercent } = progress;
+    
+    // Calculate completion status
+    const isCompleted = progressPercent >= 100;
+    
     this.state.next({
       ...this.state.value,
       currentTime,
       duration,
       progress: progressPercent,
-      isCompleted: progressPercent >= 100
+      isCompleted
     });
   }
 
