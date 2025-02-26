@@ -4,18 +4,18 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
+  NgZone,
   ChangeDetectionStrategy,
   AfterViewInit,
-  NgZone,
   ChangeDetectorRef
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Course } from '../../../shared/interfaces/course';
 import { CoursesService } from '../courses.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { takeUntil } from 'rxjs/operators';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { trigger, transition, query, stagger, style, animate } from '@angular/animations';
 import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scroll.base';
 
 @Component({
@@ -42,6 +42,7 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
 
   courses$: Observable<Course[]>;
   currentCourseIndex = 0;
+  override destroy$ = new Subject<void>();
   private observer: IntersectionObserver | null = null;
 
   constructor(
@@ -62,11 +63,12 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   }
 
   ngOnInit(): void {
-    // Subscribe to storage changes for course progress updates
+    // Subscribe to storage progress changes
     this.storageService.getProgressChanges()
       .pipe(takeUntil(this.destroy$))
       .subscribe(change => {
         if (change?.type === 'course') {
+          // Trigger change detection to update course progress
           this.cdr.detectChanges();
         }
       });
@@ -173,9 +175,13 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   }
 
   override ngOnDestroy(): void {
-    super.ngOnDestroy();
+    this.destroy$.next();
+    this.destroy$.complete();
+    
     if (this.observer) {
       this.observer.disconnect();
     }
+
+    super.ngOnDestroy();
   }
 }
