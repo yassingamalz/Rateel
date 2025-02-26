@@ -68,7 +68,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
   loading$ = new BehaviorSubject<boolean>(true);
   transitionComplete = false;
   contentReady = false;
-  private completionInProgress = false;
+  private navigationInProgress = false;
   private completionHandled = new Set<string>();
 
   units$!: Observable<Unit[]>;
@@ -94,8 +94,6 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     ).subscribe(() => {
       this.completedUnitId = null;
       this.animationState = '*';
-      this.completionInProgress = false; // Reset completion state on navigation
-      this.completionHandled.clear();
     });
 
     // Configure drag behavior for units
@@ -108,105 +106,6 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     ).subscribe(() => {
       this.initialLoad = false;
     });
-  }
-
-  private handleUnitCompletion(unitId: string): void {
-    console.log('[UnitsList] Starting unit completion handler for:', unitId);
-    
-    // Prevent multiple simultaneous completion handling
-    if (this.completionInProgress) {
-      console.log('[UnitsList] Completion already in progress, skipping');
-      return;
-    }
-    
-    // Prevent handling the same completion multiple times
-    if (this.completionHandled.has(unitId)) {
-      console.log('[UnitsList] Already handled this completion, skipping');
-      return;
-    }
-    
-    this.completionInProgress = true;
-    this.completionHandled.add(unitId);
-    
-    const storageKey = `${this.courseId}_${unitId}`;
-    // Use a more specific key that's unique for units vs lessons
-    const completionShownKey = `unit_completion_shown_${unitId}`;
-    const progressData = this.storageService.getProgress('unit', storageKey);
-    const isFirstCompletion = !progressData?.answers?.[completionShownKey];
-
-    console.log('[UnitsList] First completion:', isFirstCompletion);
-
-    // Save progress and mark unit as completed
-    this.storageService.saveProgress('unit', storageKey, {
-      isCompleted: true,
-      progress: 100,
-      lastUpdated: Date.now(),
-      timestamp: Date.now(),
-      isLocked: false
-    });
-
-    const navigateToNextUnit = () => {
-      this.units$.pipe(take(1)).subscribe(units => {
-        const currentIndex = units.findIndex(u => u.id === unitId);
-        const nextUnit = units[currentIndex + 1];
-        const isLastUnit = currentIndex === units.length - 1;
-        
-        console.log('[UnitsList] Current unit index:', currentIndex);
-        console.log('[UnitsList] Next unit:', nextUnit);
-        console.log('[UnitsList] Is last unit:', isLastUnit);
-  
-        if (isLastUnit || !nextUnit || nextUnit.isLocked) {
-          console.log('[UnitsList] Last unit or next unit locked, navigating to courses page');
-          // Last unit or next unit is locked, navigate to courses
-          this.router.navigate(['/courses'], {
-            queryParams: { completedCourseId: this.courseId },
-            replaceUrl: true
-          }).then(() => {
-            this.resetCompletionState();
-          });
-        } else {
-          console.log('[UnitsList] Navigating to next unit lessons');
-          
-          // Navigate to the first lesson of the next unit
-          this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons']).then(() => {
-            console.log('[UnitsList] Navigation to next unit lessons complete');
-            this.resetCompletionState();
-          });
-        }
-      });
-    };
-
-    // Show animation only for first completion
-    if (isFirstCompletion) {
-      console.log('[UnitsList] Starting first completion animation');
-      
-      // Mark that we've shown the completion animation with the more specific key
-      this.storageService.saveAnswer(storageKey, completionShownKey, true, true);
-      
-      // Set the completedUnitId to trigger animation
-      this.completedUnitId = unitId;
-      this.cdr.detectChanges();
-
-      // Wait for animation then navigate
-      setTimeout(() => {
-        console.log('[UnitsList] Completion animation finished');
-        this.completedUnitId = null;
-        this.cdr.detectChanges();
-        
-        navigateToNextUnit();
-      }, 1500); // Animation duration
-    } else {
-      // Skip animation for subsequent completions
-      console.log('[UnitsList] Subsequent completion, skipping animation');
-      setTimeout(navigateToNextUnit, 500); // Shorter delay without animation
-    }
-  }
-
-  private resetCompletionState(): void {
-    console.log('[UnitsList] Resetting completion state');
-    setTimeout(() => {
-      this.completionInProgress = false;
-    }, 500); // Small buffer before allowing new completions
   }
 
   ngOnInit(): void {
@@ -237,11 +136,11 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       this.scrollToActiveUnit();
     }
 
-    // Handle unit completion (from query params)
+    // Handle unit completion
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
-      if (params['completedUnitId'] && !this.completionInProgress) {
+      if (params['completedUnitId']) {
         this.handleUnitCompletion(params['completedUnitId']);
       }
 
@@ -261,6 +160,95 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           }
         }
       });
+  }
+
+  private handleUnitCompletion(unitId: string): void {
+    console.log('[UnitsList] Starting unit completion handler for:', unitId);
+    console.log('[UnitsList] Navigation in progress:', this.navigationInProgress);
+    console.log('[UnitsList] Already handled completions:', Array.from(this.completionHandled));
+    
+    if (this.navigationInProgress || this.completionHandled.has(unitId)) {
+      console.log('[UnitsList] Skipping - navigation in progress or already handled');
+      return;
+    }
+    
+    this.navigationInProgress = true;
+    this.completionHandled.add(unitId);
+    
+    const storageKey = `${this.courseId}_${unitId}`;
+    const progressData = this.storageService.getProgress('unit', storageKey);
+    const isFirstCompletion = !progressData?.answers?.['completion_effect_shown'];
+
+    console.log('[UnitsList] First completion:', isFirstCompletion);
+
+    // Save completion shown status to avoid repeating animation
+    this.storageService.saveAnswer(storageKey, 'completion_effect_shown', true, true);
+
+    // Only show animation for first completion
+    if (isFirstCompletion) {
+      console.log('[UnitsList] Starting first completion animation');
+      this.completedUnitId = unitId;
+      this.cdr.detectChanges();
+
+      // Wait for animation
+      setTimeout(() => {
+        console.log('[UnitsList] Completion animation finished');
+        this.completedUnitId = null;
+        this.cdr.detectChanges();
+        this.navigateAfterCompletion(unitId);
+      }, 1500); // Match animation duration
+    } else {
+      console.log('[UnitsList] Handling subsequent completion without animation');
+      // Navigate directly without animation
+      this.navigateAfterCompletion(unitId);
+    }
+  }
+
+  private navigateAfterCompletion(unitId: string): void {
+    this.units$.pipe(take(1)).subscribe(units => {
+      const currentIndex = units.findIndex(u => u.id === unitId);
+      const nextUnit = units[currentIndex + 1];
+      
+      console.log('[UnitsList] Current unit index:', currentIndex);
+      console.log('[UnitsList] Next unit:', nextUnit);
+      console.log('[UnitsList] Is last unit:', !nextUnit);
+
+      if (nextUnit) {
+        // Save next unit's unlocked state
+        this.storageService.saveProgress('unit', `${this.courseId}_${nextUnit.id}`, {
+          isLocked: false,
+          progress: 0,
+          isCompleted: false,
+          lastUpdated: Date.now(),
+          timestamp: Date.now()
+        });
+
+        // Navigate to next unit's lessons
+        console.log('[UnitsList] Navigating to next unit lessons');
+        this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons'], {
+          replaceUrl: true
+        }).then(() => {
+          console.log('[UnitsList] Navigation to next unit lessons complete');
+          setTimeout(() => {
+            this.navigationInProgress = false;
+            console.log('[UnitsList] Navigation lock released');
+          }, 500);
+        });
+      } else {
+        console.log('[UnitsList] No next unit, navigating to courses');
+        // No next unit, navigate back to courses
+        this.router.navigate(['/courses'], {
+          queryParams: { completedCourseId: this.courseId },
+          replaceUrl: true
+        }).then(() => {
+          console.log('[UnitsList] Navigation to courses complete');
+          setTimeout(() => {
+            this.navigationInProgress = false;
+            console.log('[UnitsList] Navigation lock released');
+          }, 500);
+        });
+      }
+    });
   }
 
   // Event handlers
@@ -352,9 +340,10 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     this.transitionComplete = true;
   }
 
+  // Cleanup
   override ngOnDestroy(): void {
     console.log('[UnitsList] Component destroying');
-    this.completionInProgress = false;
+    this.navigationInProgress = false;
     this.completionHandled.clear();
     super.ngOnDestroy();
   }
