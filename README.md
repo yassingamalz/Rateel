@@ -139,6 +139,31 @@ npx cap open ios
 - Meem Sakinah (الميم الساكنة)
 - Various types of Madd (المد)
 
+# Navigation Flow
+
+## Lesson Completion Flow
+1. User completes a lesson (via progress or skip button)
+2. **First-time completion**: Show completion animation on lesson card (1.5s)
+3. **Subsequent completions**: Skip animation, use shorter delay (0.5s)
+4. Automatically navigate:
+   - If more lessons in unit → Next lesson
+   - If last lesson → Unit list page with completion parameter
+
+## Unit Completion Flow
+1. Unit list receives completion parameter
+2. **First-time completion**: Show unit card completion animation (1.5s)
+3. **Subsequent completions**: Skip animation, use shorter delay (0.5s)
+4. Automatically navigate:
+   - If more units in course → First lesson of next unit
+   - If last unit → Course list page
+
+## Key Requirements
+- Animations ONLY on first-time completions
+- Consistent delays (1.5s with animation, 0.5s without)
+- Automatic navigation after delay
+- Proper state tracking to prevent duplicate animations
+- Navigation should follow proper unit/lesson order
+
 ## 🎨 Design Elements
 
 Rateel features an Islamic-inspired design with:
