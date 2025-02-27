@@ -163,7 +163,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     const storageKey = `${this.courseId}_${this.unitId}_${lessonId}`;
     const progressData = this.storageService.getProgress('lesson', storageKey);
     const isFirstCompletion = !progressData?.answers?.['completion_effect_shown'];
-
+  
     console.log('[LessonsList] First completion:', isFirstCompletion);
     
     // Save completion shown status regardless of animation
@@ -194,7 +194,9 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
       } else {
         // Subsequent completion - skip animation
         console.log('[LessonsList] Subsequent completion, skipping animation');
-        this.navigateAfterCompletion(lessonId, isLastLesson, nextLesson);
+        setTimeout(() => {
+          this.navigateAfterCompletion(lessonId, isLastLesson, nextLesson);
+        }, 500); // Shorter delay for better experience
       }
     });
   }

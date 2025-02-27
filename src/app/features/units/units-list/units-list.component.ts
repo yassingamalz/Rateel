@@ -178,18 +178,18 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     const storageKey = `${this.courseId}_${unitId}`;
     const progressData = this.storageService.getProgress('unit', storageKey);
     const isFirstCompletion = !progressData?.answers?.['completion_effect_shown'];
-
+  
     console.log('[UnitsList] First completion:', isFirstCompletion);
-
+  
     // Save completion shown status to avoid repeating animation
     this.storageService.saveAnswer(storageKey, 'completion_effect_shown', true, true);
-
+  
     // Only show animation for first completion
     if (isFirstCompletion) {
       console.log('[UnitsList] Starting first completion animation');
       this.completedUnitId = unitId;
       this.cdr.detectChanges();
-
+  
       // Wait for animation
       setTimeout(() => {
         console.log('[UnitsList] Completion animation finished');
@@ -199,11 +199,13 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       }, 1500); // Match animation duration
     } else {
       console.log('[UnitsList] Handling subsequent completion without animation');
-      // Navigate directly without animation
-      this.navigateAfterCompletion(unitId);
+      // Navigate directly without animation but with a short delay for consistency
+      setTimeout(() => {
+        this.navigateAfterCompletion(unitId);
+      }, 500); // Shorter delay for better experience
     }
   }
-
+  
   private navigateAfterCompletion(unitId: string): void {
     this.units$.pipe(take(1)).subscribe(units => {
       const currentIndex = units.findIndex(u => u.id === unitId);
@@ -212,7 +214,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       console.log('[UnitsList] Current unit index:', currentIndex);
       console.log('[UnitsList] Next unit:', nextUnit);
       console.log('[UnitsList] Is last unit:', !nextUnit);
-
+  
       if (nextUnit) {
         // Save next unit's unlocked state
         this.storageService.saveProgress('unit', `${this.courseId}_${nextUnit.id}`, {
@@ -222,7 +224,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           lastUpdated: Date.now(),
           timestamp: Date.now()
         });
-
+  
         // Navigate to next unit's lessons
         console.log('[UnitsList] Navigating to next unit lessons');
         this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons'], {
@@ -250,7 +252,6 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       }
     });
   }
-
   // Event handlers
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.unit-item')) {
