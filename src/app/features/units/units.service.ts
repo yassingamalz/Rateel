@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, catchError, map, Observable, of, takeUntil } from "rxjs";
 import { StorageService } from "../../core/services/storage.service";
 import { Unit } from "../../shared/interfaces/unit";
@@ -10,22 +10,22 @@ interface UnitsResponse {
   courseId: string;
   units: Unit[];
 }
+
 @Injectable({
   providedIn: 'root'
 })
-export class UnitsService {
+export class UnitsService implements OnDestroy {
   private currentCourseIdSubject = new BehaviorSubject<string | null>(null);
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
   private unitsSubject = new BehaviorSubject<{ [key: string]: Unit[] }>({});
   private destroy$ = new BehaviorSubject<boolean>(false);
-
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService,
     private coursesService: CoursesService
   ) {
-    // Subscribe to storage changes to update units reactively
+    // Subscribe to storage changes for real-time progress updates
     this.storageService.getProgressChanges()
       .pipe(takeUntil(this.destroy$))
       .subscribe(change => {
@@ -40,10 +40,10 @@ export class UnitsService {
             const courseUnits = currentUnits[courseId];
 
             if (courseUnits) {
-              // Create new array with updated unit
+              // Create new array with updated unit objects to trigger change detection
               const updatedUnits = courseUnits.map(unit => {
                 if (unit.id === unitId) {
-                  // Create new unit object with updated progress
+                  // Create a new object to ensure reference change
                   return {
                     ...unit,
                     progress: change.data.progress,
@@ -54,11 +54,13 @@ export class UnitsService {
                 return unit;
               });
 
-              // Update subject with new reference
+              // Update subject with new references
               this.unitsSubject.next({
                 ...currentUnits,
                 [courseId]: updatedUnits
               });
+              
+              console.debug(`[UnitsService] Updated unit ${unitId} progress to ${change.data.progress}%`);
             }
           }
         }
@@ -66,22 +68,21 @@ export class UnitsService {
   }
 
   public refreshUnitProgress(courseId: string, unitId: string): void {
+    // Force-refresh a specific unit's progress
     const currentUnits = this.unitsSubject.getValue();
     const units = currentUnits[courseId] || [];
 
-    // Only attempt refresh if we already have the units loaded
     if (units.length > 0) {
-      // Get latest progress data
       const progressData = this.storageService.getProgress('unit', `${courseId}_${unitId}`);
 
       if (progressData) {
-        // Create a new array with updated unit objects to ensure reference changes
+        // Create a new array with updated unit objects
         const updatedUnits = units.map(unit => {
           if (unit.id === unitId) {
             return {
               ...unit,
-              progress: progressData.progress || unit.progress,
-              isCompleted: progressData.isCompleted || unit.isCompleted
+              progress: progressData.progress,
+              isCompleted: progressData.isCompleted
             };
           }
           return unit;
@@ -92,6 +93,8 @@ export class UnitsService {
           ...currentUnits,
           [courseId]: updatedUnits
         });
+        
+        console.debug(`[UnitsService] Force-refreshed unit ${unitId} progress to ${progressData.progress}%`);
       }
     }
   }

@@ -1,4 +1,9 @@
-// src/app/core/interfaces/progress.interface.ts
+// src/app/core/services/storage.service.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export type StorageType = 'course' | 'unit' | 'lesson';
+
 export interface ProgressData {
   progress: number;
   timestamp: number;
@@ -35,7 +40,6 @@ export interface ProgressData {
   }[];
 }
 
-// src/app/core/interfaces/lesson-state.interface.ts
 export interface LessonState {
   currentPosition: number;
   volume?: number;
@@ -45,12 +49,6 @@ export interface LessonState {
   currentVerseIndex?: number;
   scrollPosition?: number;
 }
-
-// src/app/core/services/storage.service.ts
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-export type StorageType = 'course' | 'unit' | 'lesson';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +121,60 @@ export class StorageService {
     return this.changes$.asObservable();
   }
 
+  saveProgress(type: StorageType, id: string, data: Partial<ProgressData>): void {
+    const key = this.PREFIX[type] + id;
+    const existingData = this.getProgress(type, id);
+  
+    const newData: ProgressData = {
+      progress: data.progress ?? existingData?.progress ?? 0,
+      timestamp: Date.now(),
+      expiresAt: Date.now() + this.TWO_YEARS,
+      isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
+      isLocked: data.isLocked ?? existingData?.isLocked ?? true,
+      lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
+      version: this.VERSION,
+      syncStatus: 'pending',
+      currentPosition: data.currentPosition ?? existingData?.currentPosition ?? 0,
+      volume: data.volume ?? existingData?.volume ?? 1,
+      isMuted: data.isMuted ?? existingData?.isMuted ?? false,
+      isFullscreen: data.isFullscreen ?? existingData?.isFullscreen ?? false,
+      lastUpdated: Date.now(),
+      // Preserve existing data with proper immutable updates
+      answers: {...(existingData?.answers ?? {}), ...(data.answers ?? {})},
+      bookmarks: data.bookmarks ?? existingData?.bookmarks ?? [],
+      notes: data.notes ?? existingData?.notes ?? []
+    };
+  
+    try {
+      localStorage.setItem(key, JSON.stringify(newData));
+  
+      // Always emit changes to ensure consistent state updates
+      console.debug(`[StorageService] Emitting change for ${type} ${id}: progress=${newData.progress}, completed=${newData.isCompleted}`);
+      
+      // Create a deep clone to ensure reference changes
+      const clonedData = JSON.parse(JSON.stringify(newData));
+      
+      // Emit changes immediately
+      this.changes$.next({
+        type,
+        id,
+        data: clonedData
+      });
+  
+      if (type === 'lesson') {
+        this.updateParentProgress('unit', id.split('_')[0]);
+      } else if (type === 'unit') {
+        this.updateParentProgress('course', id.split('_')[0]);
+      }
+    } catch (error) {
+      console.error('Error saving progress:', error);
+      if (error instanceof Error && error.name === 'QuotaExceededError') {
+        this.clearExpiredData();
+        localStorage.setItem(key, JSON.stringify(newData));
+      }
+    }
+  }
+
   private updateParentProgress(type: 'course' | 'unit', parentId: string): void {
     const prefix = type === 'course' ? this.PREFIX.unit : this.PREFIX.lesson;
     const pattern = new RegExp(`^${prefix}${parentId}_`);
@@ -149,13 +201,30 @@ export class StorageService {
 
       if (totalItems > 0) {
         this.saveProgress(type, parentId, {
-          progress: totalProgress / totalItems,
+          progress: Math.round(totalProgress / totalItems),
           isCompleted: allCompleted
         });
       }
     } catch (error) {
       console.error('Error updating parent progress:', error);
     }
+  }
+
+  // Save answer with proper immutability
+  saveAnswer(lessonId: string, questionId: string, answer: any, isCorrect: boolean): void {
+    const existingData = this.getProgress('lesson', lessonId);
+    const answers = {...(existingData?.answers ?? {})};
+
+    answers[questionId] = {
+      answer,
+      isCorrect,
+      timestamp: Date.now()
+    };
+
+    this.saveProgress('lesson', lessonId, {
+      ...existingData,
+      answers
+    });
   }
 
   clearExpiredData(): void {
@@ -196,140 +265,10 @@ export class StorageService {
     return null;
   }
 
-  saveProgress(type: StorageType, id: string, data: Partial<ProgressData>): void {
-    const key = this.PREFIX[type] + id;
-    const existingData = this.getProgress(type, id);
-  
-    const newData: ProgressData = {
-      progress: data.progress ?? existingData?.progress ?? 0,
-      timestamp: Date.now(),
-      expiresAt: Date.now() + this.TWO_YEARS,
-      isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
-      isLocked: data.isLocked ?? existingData?.isLocked ?? true,
-      lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
-      version: this.VERSION,
-      syncStatus: 'pending',
-      currentPosition: data.currentPosition ?? existingData?.currentPosition ?? 0,
-      volume: data.volume ?? existingData?.volume ?? 1,
-      isMuted: data.isMuted ?? existingData?.isMuted ?? false,
-      isFullscreen: data.isFullscreen ?? existingData?.isFullscreen ?? false,
-      lastUpdated: Date.now(),
-      // Preserve existing data
-      answers: data.answers ?? existingData?.answers ?? {},
-      bookmarks: data.bookmarks ?? existingData?.bookmarks ?? [],
-      notes: data.notes ?? existingData?.notes ?? []
-    };
-  
-    try {
-      localStorage.setItem(key, JSON.stringify(newData));
-  
-      // Check if important values have changed
-      const hasImportantChanges = 
-        !existingData || 
-        existingData.progress !== newData.progress || 
-        existingData.isCompleted !== newData.isCompleted ||
-        existingData.isLocked !== newData.isLocked;
-  
-      // Only emit changes when important properties change
-      if (hasImportantChanges) {
-        console.debug(`[StorageService] Emitting change for ${type} ${id}: progress=${newData.progress}, completed=${newData.isCompleted}`);
-        
-        // Create a deep clone to ensure reference changes
-        const clonedData = JSON.parse(JSON.stringify(newData));
-        
-        // Emit with a slight delay to ensure UI updates properly
-        setTimeout(() => {
-          this.changes$.next({
-            type,
-            id,
-            data: clonedData
-          });
-        }, 0);
-      }
-  
-      if (type === 'lesson') {
-        this.updateParentProgress('unit', id.split('_')[0]);
-      } else if (type === 'unit') {
-        this.updateParentProgress('course', id.split('_')[0]);
-      }
-    } catch (error) {
-      console.error('Error saving progress:', error);
-      if (error instanceof Error && error.name === 'QuotaExceededError') {
-        this.clearExpiredData();
-        localStorage.setItem(key, JSON.stringify(newData));
-      }
-    }
-  }
-  
-  // New method to save lesson state
-  saveLessonState(lessonId: string, state: Partial<LessonState>): void {
-    const existingData = this.getProgress('lesson', lessonId);
-
-    this.saveProgress('lesson', lessonId, {
-      ...existingData,
-      currentPosition: state.currentPosition,
-      volume: state.volume,
-      isMuted: state.isMuted,
-      isFullscreen: state.isFullscreen,
-      lastUpdated: Date.now()
-    });
-  }
-
-  // New method to add bookmark
-  addBookmark(lessonId: string, position: number, label: string): void {
-    const existingData = this.getProgress('lesson', lessonId);
-    const bookmarks = existingData?.bookmarks ?? [];
-
-    bookmarks.push({
-      position,
-      label,
-      timestamp: Date.now()
-    });
-
-    this.saveProgress('lesson', lessonId, {
-      ...existingData,
-      bookmarks
-    });
-  }
-
-  // New method to add note
-  addNote(lessonId: string, position: number, text: string): void {
-    const existingData = this.getProgress('lesson', lessonId);
-    const notes = existingData?.notes ?? [];
-
-    notes.push({
-      position,
-      text,
-      timestamp: Date.now()
-    });
-
-    this.saveProgress('lesson', lessonId, {
-      ...existingData,
-      notes
-    });
-  }
-
-  // New method to save answer
-  saveAnswer(lessonId: string, questionId: string, answer: any, isCorrect: boolean): void {
-    const existingData = this.getProgress('lesson', lessonId);
-    const answers = existingData?.answers ?? {};
-
-    answers[questionId] = {
-      answer,
-      isCorrect,
-      timestamp: Date.now()
-    };
-
-    this.saveProgress('lesson', lessonId, {
-      ...existingData,
-      answers
-    });
-  }
-
   private migrateData(data: ProgressData): ProgressData {
     return {
       ...data,
-      isLocked: data.isLocked ?? true, // Add this with default
+      isLocked: data.isLocked ?? true,
       currentPosition: data.currentPosition ?? 0,
       volume: data.volume ?? 1,
       isMuted: data.isMuted ?? false,

@@ -45,18 +45,20 @@ export class UnitCardComponent implements OnChanges, DoCheck {
   private oldProgress: number = 0;
   private prevUnitId: string = '';
   private prevCompletedState: boolean = false;
+  private prevLockedState: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['unit']) {
+    if (changes['unit'] && this.unit) {
       this.updateProgressCircle();
       this.prevUnitId = this.unit.id;
       this.oldProgress = this.unit.progress || 0;
       this.prevCompletedState = this.unit.isCompleted || false;
+      this.prevLockedState = this.unit.isLocked || false;
     }
 
-    if (changes['isCompleting']) {
+    if (changes['isCompleting'] || changes['isActive']) {
       this.cdr.markForCheck();
     }
   }
@@ -66,19 +68,29 @@ export class UnitCardComponent implements OnChanges, DoCheck {
     if (this.unit && this.unit.id === this.prevUnitId) {
       const currentProgress = this.unit.progress || 0;
       const isCompleted = this.unit.isCompleted || false;
+      const isLocked = this.unit.isLocked || false;
 
-      // Check both progress and completion status
-      if (currentProgress !== this.oldProgress || isCompleted !== this.prevCompletedState) {
-        console.debug(`[UnitCard:${this.unit.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.prevCompletedState} → ${isCompleted}`);
+      // Check for any state changes that should trigger updates
+      if (currentProgress !== this.oldProgress || 
+          isCompleted !== this.prevCompletedState ||
+          isLocked !== this.prevLockedState) {
+        
+        console.debug(`[UnitCard:${this.unit.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.prevCompletedState} → ${isCompleted}, locked: ${this.prevLockedState} → ${isLocked}`);
+        
         this.updateProgressCircle();
         this.oldProgress = currentProgress;
         this.prevCompletedState = isCompleted;
-        this.cdr.detectChanges(); // Force immediate update
+        this.prevLockedState = isLocked;
+        
+        // Force update the view
+        this.cdr.detectChanges();
       }
     }
   }
 
   private updateProgressCircle(): void {
+    if (!this.unit) return;
+    
     const circumference = 2 * Math.PI * 46;
     const progress = this.unit.progress || 0;
     const dashArray = (progress / 100) * circumference;

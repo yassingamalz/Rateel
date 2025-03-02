@@ -17,6 +17,7 @@ export class CourseCardComponent implements OnChanges, DoCheck {
   private oldProgress: number = 0;
   private oldCourseId: string = '';
   private oldCompletedState: boolean = false;
+  private oldLockedState: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
@@ -26,6 +27,7 @@ export class CourseCardComponent implements OnChanges, DoCheck {
       this.oldProgress = this.progressValue;
       this.oldCourseId = this.course.id || '';
       this.oldCompletedState = this.course.isCompleted || false;
+      this.oldLockedState = this.course.isLocked || false;
     }
   }
 
@@ -33,13 +35,22 @@ export class CourseCardComponent implements OnChanges, DoCheck {
     if (this.course && this.course.id === this.oldCourseId) {
       const currentProgress = this.course.progress || 0;
       const isCompleted = this.course.isCompleted || false;
+      const isLocked = this.course.isLocked || false;
 
-      if (currentProgress !== this.oldProgress || isCompleted !== this.oldCompletedState) {
-        console.debug(`[CourseCard:${this.course.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.oldCompletedState} → ${isCompleted}`);
+      // Check for any state changes that would require UI updates
+      if (currentProgress !== this.oldProgress || 
+          isCompleted !== this.oldCompletedState ||
+          isLocked !== this.oldLockedState) {
+        
+        console.debug(`[CourseCard:${this.course.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.oldCompletedState} → ${isCompleted}, locked: ${this.oldLockedState} → ${isLocked}`);
+        
         this.progressValue = currentProgress;
         this.oldProgress = currentProgress;
         this.oldCompletedState = isCompleted;
-        this.cdr.detectChanges(); // Force immediate update
+        this.oldLockedState = isLocked;
+        
+        // Force update the view
+        this.cdr.detectChanges();
       }
     }
   }
