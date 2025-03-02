@@ -81,45 +81,54 @@ export class UnitsService {
   markUnitAsCompleted(courseId: string, unitId: string): Observable<void> {
     const currentUnits = this.unitsSubject.getValue();
     const units = currentUnits[courseId] || [];
-    const unit = units.find(u => u.id === unitId);
-
-    if (unit) {
-      unit.isCompleted = true;
-      unit.progress = 100;
-
-      // Save unit progress
-      this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
-        progress: 100,
-        isCompleted: true,
-        lastUpdated: Date.now()
-      });
-
-      // Unlock next unit and save its state
-      const nextUnit = units.find(u => u.order === unit.order + 1);
+    
+    // Find completed unit first to avoid type errors
+    const completedUnit = units.find(u => u.id === unitId);
+    const nextUnitOrder = completedUnit?.order ? completedUnit.order + 1 : -1;
+    
+    // Create new array with new unit objects to trigger change detection
+    const updatedUnits = units.map(unit => {
+      if (unit.id === unitId) {
+        // Create a new object instead of modifying in place
+        return {
+          ...unit,
+          isCompleted: true,
+          progress: 100
+        };
+      } else if (completedUnit && unit.order === nextUnitOrder) {
+        // Create a new object for the next unit to unlock it
+        return {
+          ...unit,
+          isLocked: false
+        };
+      }
+      return unit;
+    });
+  
+    // Save unit progress
+    this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
+      progress: 100,
+      isCompleted: true,
+      lastUpdated: Date.now()
+    });
+  
+    // Update next unit's unlocked state if it exists
+    if (completedUnit) {
+      const nextUnit = units.find(u => u.order === completedUnit.order + 1);
       if (nextUnit) {
-        nextUnit.isLocked = false;
-        // Save unlocked state for next unit
         this.storageService.saveProgress('unit', `${courseId}_${nextUnit.id}`, {
-          progress: 0,
-          isCompleted: false,
           isLocked: false,
           lastUpdated: Date.now()
         });
       }
-
-      // Check if all units are completed
-      const allUnitsCompleted = units.every(u => u.isCompleted);
-      if (allUnitsCompleted) {
-        this.coursesService.markCourseAsCompleted(courseId).subscribe();
-      }
-
-      // Update subject
-      this.unitsSubject.next({
-        ...currentUnits,
-        [courseId]: units
-      });
     }
-
+  
+    // Update subject with new array reference to trigger change detection
+    this.unitsSubject.next({
+      ...currentUnits,
+      [courseId]: updatedUnits
+    });
+  
     return of(void 0);
   }
 

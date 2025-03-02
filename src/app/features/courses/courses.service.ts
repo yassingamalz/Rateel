@@ -83,33 +83,33 @@ export class CoursesService {
   updateCourseProgress(courseId: string, progress: number, isCompleted: boolean = false): void {
     // Ensure progress is between 0 and 100
     const normalizedProgress = Math.max(0, Math.min(100, progress));
-
+  
     // Save progress
     this.storageService.saveProgress('course', courseId, { 
       progress: normalizedProgress, 
       isCompleted 
     });
-
-    // Update local state
+  
+    // Update local state with new object references to trigger change detection
     const currentCourses = this.coursesSubject.getValue();
     const updatedCourses = currentCourses.map(course => {
       if (course.id === courseId) {
         return { 
-          ...course, 
+          ...course, // Create a new object with updated values
           progress: normalizedProgress, 
           isCompleted 
         };
       }
       return course;
     });
-
-    this.coursesSubject.next(updatedCourses);
+  
+    this.coursesSubject.next(updatedCourses); // New array triggers change detection
   }
-
+  
   markCourseAsCompleted(courseId: string): Observable<void> {
     // Update progress to 100%
     this.updateCourseProgress(courseId, 100, true);
-
+  
     // Find and potentially unlock next course
     const courses = this.coursesSubject.getValue();
     const currentIndex = courses.findIndex(c => c.id === courseId);
@@ -121,8 +121,18 @@ export class CoursesService {
       this.storageService.saveProgress('course', nextCourse.id, {
         isLocked: false
       });
+      
+      // Update courses array with new object references
+      const updatedCourses = courses.map((course, index) => {
+        if (index === currentIndex + 1) {
+          return { ...course, isLocked: false };
+        }
+        return course;
+      });
+      
+      this.coursesSubject.next(updatedCourses);
     }
-
+  
     return of(void 0);
   }
 

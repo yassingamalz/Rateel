@@ -1,5 +1,5 @@
 // unit-card.component.ts
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Unit } from '../../../shared/interfaces/unit';
 
@@ -8,6 +8,7 @@ import { Unit } from '../../../shared/interfaces/unit';
   standalone: false,
   templateUrl: './unit-card.component.html',
   styleUrls: ['./unit-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('cardState', [
       state('default', style({
@@ -33,23 +34,31 @@ import { Unit } from '../../../shared/interfaces/unit';
     ])
   ]
 })
-export class UnitCardComponent {
+export class UnitCardComponent implements OnChanges {
   @Input() unit!: Unit;
   @Input() isActive = false;
   @Input() isCompleting = false;
   @Output() unitSelected = new EventEmitter<Unit>();
 
   animationState: 'default' | 'hovered' = 'default';
+  progressCircleValue: string = '0';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['unit']) {
+      this.updateProgressCircle();
+    }
+  }
+
+  private updateProgressCircle(): void {
+    const circumference = 2 * Math.PI * 46;
+    const progress = this.unit.progress || 0;
+    const dashArray = (progress / 100) * circumference;
+    this.progressCircleValue = `${dashArray}, ${circumference}`;
+  }
 
   onUnitClick(): void {
-    console.log("hey - clicked");
-    console.log("Unit locked status:", this.unit.isLocked);
-
     if (!this.unit.isLocked) {
       this.unitSelected.emit(this.unit);
-      console.log("Unit selected:", this.unit);
-    } else {
-      console.log("Unit is locked, cannot select");
     }
   }
 
@@ -61,13 +70,6 @@ export class UnitCardComponent {
       case 'exercise': return 'fa-pen-to-square';
       default: return 'fa-circle';
     }
-  }
-
-  getProgressCircleValue(): string {
-    const circumference = 2 * Math.PI * 46;
-    const progress = this.unit.progress || 0;
-    const dashArray = (progress / 100) * circumference;
-    return `${dashArray}, ${circumference}`;
   }
 
   get formattedProgress(): number {

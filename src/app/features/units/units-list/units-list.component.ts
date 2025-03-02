@@ -111,7 +111,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
 
   ngOnInit(): void {
     console.log('[UnitsList] Component initializing');
-    
+
     this.loading$.next(true);
     this.contentReady = false;
 
@@ -154,10 +154,16 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     this.storageService.getProgressChanges()
       .pipe(takeUntil(this.destroy$))
       .subscribe(change => {
-        if (change?.type === 'unit' && change.data.isCompleted) {
-          const unitId = change.id.split('_')[1];
-          if (unitId !== this.completedUnitId) {
-            this.cdr.detectChanges();
+        if (change?.type === 'unit') {
+          // For any unit progress change affecting this course
+          if (change.id.startsWith(`${this.courseId}_`)) {
+            // Force refresh of units data
+            this.unitsService.getUnitsByCourseId(this.courseId)
+              .pipe(take(1))
+              .subscribe(() => {
+                // Mark for change detection
+                this.cdr.markForCheck();
+              });
           }
         }
       });
@@ -165,33 +171,33 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
 
   private handleUnitCompletion(unitId: string): void {
     console.log('[UnitsList] Starting unit completion handler for:', unitId);
-    
+
     if (this.navigationInProgress || this.completionHandled.has(unitId)) {
       console.log('[UnitsList] Skipping - navigation in progress or already handled');
       return;
     }
-    
+
     this.navigationInProgress = true;
     this.completionHandled.add(unitId);
-    
+
     // Use a specific key for the unit's animation flag
     const storageKey = `${this.courseId}_${unitId}`;
     const unitAnimationKey = `unit_animation_${storageKey}`;
-    
+
     // Check if this unit has had its animation shown before
     const animationShown = localStorage.getItem(unitAnimationKey) === 'true';
-    
+
     console.log('[UnitsList] First completion:', !animationShown);
-    
+
     // Immediately mark the animation as shown for future reference
     localStorage.setItem(unitAnimationKey, 'true');
-    
+
     if (!animationShown) {
       // First time showing this animation
       console.log('[UnitsList] Starting first completion animation');
       this.completedUnitId = unitId;
       this.cdr.detectChanges();
-      
+
       // Wait for animation
       setTimeout(() => {
         console.log('[UnitsList] Completion animation finished');
@@ -207,16 +213,16 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       }, 1000); // Shorter delay
     }
   }
-  
+
   private navigateAfterCompletion(unitId: string): void {
     this.units$.pipe(take(1)).subscribe(units => {
       const currentIndex = units.findIndex(u => u.id === unitId);
       const nextUnit = units[currentIndex + 1];
-      
+
       console.log('[UnitsList] Current unit index:', currentIndex);
       console.log('[UnitsList] Next unit:', nextUnit);
       console.log('[UnitsList] Is last unit:', !nextUnit);
-      
+
       if (nextUnit && !nextUnit.isLocked) {
         // Save next unit's unlocked state
         this.storageService.saveProgress('unit', `${this.courseId}_${nextUnit.id}`, {
@@ -226,7 +232,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           lastUpdated: Date.now(),
           timestamp: Date.now()
         });
-        
+
         // Navigate to next unit's lessons
         console.log('[UnitsList] Navigating to next unit lessons');
         this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons'], {

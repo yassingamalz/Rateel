@@ -205,7 +205,7 @@ export class StorageService {
       timestamp: Date.now(),
       expiresAt: Date.now() + this.TWO_YEARS,
       isCompleted: data.isCompleted ?? existingData?.isCompleted ?? false,
-      isLocked: data.isLocked ?? existingData?.isLocked ?? true, // Add this, default to locked
+      isLocked: data.isLocked ?? existingData?.isLocked ?? true,
       lastAccessedLesson: data.lastAccessedLesson ?? existingData?.lastAccessedLesson,
       version: this.VERSION,
       syncStatus: 'pending',
@@ -222,7 +222,13 @@ export class StorageService {
 
     try {
       localStorage.setItem(key, JSON.stringify(newData));
-      this.changes$.next({ type, id, data: newData });
+
+      // Create a deep copy for the change event to ensure reference changes
+      this.changes$.next({
+        type,
+        id,
+        data: JSON.parse(JSON.stringify(newData))
+      });
 
       if (type === 'lesson') {
         this.updateParentProgress('unit', id.split('_')[0]);

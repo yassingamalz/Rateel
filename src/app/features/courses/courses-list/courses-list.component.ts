@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { Course } from '../../../shared/interfaces/course';
 import { CoursesService } from '../courses.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -65,13 +65,18 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   ngOnInit(): void {
     // Subscribe to storage progress changes
     this.storageService.getProgressChanges()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(change => {
-        if (change?.type === 'course') {
-          // Trigger change detection to update course progress
-          this.cdr.detectChanges();
-        }
-      });
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(change => {
+      if (change?.type === 'course') {
+        // Force refresh of data
+        this.coursesService.getCourses()
+          .pipe(take(1))
+          .subscribe(() => {
+            // Trigger change detection cycle
+            this.cdr.markForCheck();
+          });
+      }
+    });
   }
 
   ngAfterViewInit(): void {
