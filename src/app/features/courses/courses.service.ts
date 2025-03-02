@@ -1,8 +1,7 @@
 // src/app/features/courses/courses.service.ts
-// src/app/features/courses/courses.service.ts
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, takeUntil } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Course } from '../../shared/interfaces/course';
 import { StorageService } from '../../core/services/storage.service';
@@ -10,15 +9,45 @@ import { StorageService } from '../../core/services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesService {
+export class CoursesService implements OnDestroy {
   private coursesSubject = new BehaviorSubject<Course[]>([]);
   courses$ = this.coursesSubject.asObservable();
+  private destroy$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService
   ) {
     this.initializeCourses();
+
+    // Subscribe to storage changes to update courses reactively
+    this.storageService.getProgressChanges()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (!change) return;
+
+        if (change.type === 'course') {
+          const courseId = change.id;
+          const currentCourses = this.coursesSubject.getValue();
+          
+          // Create new array with updated course objects
+          const updatedCourses = currentCourses.map(course => {
+            if (course.id === courseId) {
+              // Create a new course object with updated values
+              return {
+                ...course,
+                progress: change.data.progress,
+                isCompleted: change.data.isCompleted,
+                isLocked: change.data.isLocked ?? course.isLocked
+              };
+            }
+            return course;
+          });
+
+          // Update subject with new references
+          this.coursesSubject.next(updatedCourses);
+        }
+      });
   }
 
   private initializeCourses(): void {
@@ -150,5 +179,10 @@ export class CoursesService {
     });
 
     this.coursesSubject.next(updatedCourses);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

@@ -21,7 +21,8 @@ import {
   takeUntil,
   tap,
   finalize,
-  take
+  take,
+  distinctUntilChanged
 } from 'rxjs';
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
@@ -130,6 +131,9 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       finalize(() => this.loading$.next(false))
     );
 
+    // Set up enhanced progress tracking
+    this.setupProgressTracking();
+
     // Handle unit ID from route
     const unitId = this.route.snapshot.paramMap.get('unitId');
     if (unitId) {
@@ -167,6 +171,44 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           }
         }
       });
+  }
+
+  private setupProgressTracking(): void {
+    // Track both direct storage changes and service-level changes
+    this.storageService.getProgressChanges()
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(change => change?.type === 'unit' && change.id.startsWith(`${this.courseId}_`))
+      )
+      .subscribe(change => {
+        // Just mark for checking - the service will handle updating objects
+        this.cdr.markForCheck();
+
+        // Log for debugging
+        if (change) {
+          console.log(`[UnitsListComponent] Progress update for unit: ${change.id.split('_')[1]}, progress: ${change.data.progress}%`);
+        }
+      });
+
+    // Also track the units observable directly for any changes
+    this.units$.pipe(
+      takeUntil(this.destroy$),
+      distinctUntilChanged((prev, curr) => {
+        // Check if any unit's progress has changed
+        if (prev.length !== curr.length) return false;
+        for (let i = 0; i < prev.length; i++) {
+          if (prev[i].progress !== curr[i].progress ||
+            prev[i].isCompleted !== curr[i].isCompleted ||
+            prev[i].isLocked !== curr[i].isLocked) {
+            return false;
+          }
+        }
+        return true;
+      })
+    ).subscribe(units => {
+      console.log('[UnitsListComponent] Units updated, re-rendering');
+      this.cdr.markForCheck();
+    });
   }
 
   private handleUnitCompletion(unitId: string): void {

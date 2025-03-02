@@ -6,6 +6,7 @@ export interface Course {
     icon?: string;
     progress?: number;
     isLocked?: boolean;
+    isCompleted?: boolean; 
     imageSrc?: string;
     badge?: {
       type: 'achievement' | 'progress';

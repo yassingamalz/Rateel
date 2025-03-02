@@ -1,10 +1,15 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, map, Observable, of } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, takeUntil } from "rxjs";
 import { StorageService } from "../../core/services/storage.service";
 import { Unit } from "../../shared/interfaces/unit";
 import { CoursesService } from "../courses/courses.service";
+import { HttpClient } from "@angular/common/http";
 
+interface UnitsResponse {
+  version: string;
+  courseId: string;
+  units: Unit[];
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -12,22 +17,62 @@ export class UnitsService {
   private currentCourseIdSubject = new BehaviorSubject<string | null>(null);
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
   private unitsSubject = new BehaviorSubject<{ [key: string]: Unit[] }>({});
+  private destroy$ = new BehaviorSubject<boolean>(false);
+
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService,
     private coursesService: CoursesService
-  ) { }
+  ) {
+    // Subscribe to storage changes to update units reactively
+    this.storageService.getProgressChanges()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (!change) return;
+
+        if (change.type === 'unit') {
+          // Extract courseId and unitId from the composite key
+          const [courseId, unitId] = change.id.split('_');
+          if (courseId && unitId) {
+            // Get current units state
+            const currentUnits = this.unitsSubject.getValue();
+            const courseUnits = currentUnits[courseId];
+
+            if (courseUnits) {
+              // Create new array with updated unit
+              const updatedUnits = courseUnits.map(unit => {
+                if (unit.id === unitId) {
+                  // Create new unit object with updated progress
+                  return {
+                    ...unit,
+                    progress: change.data.progress,
+                    isCompleted: change.data.isCompleted,
+                    isLocked: change.data.isLocked ?? unit.isLocked
+                  };
+                }
+                return unit;
+              });
+
+              // Update subject with new reference
+              this.unitsSubject.next({
+                ...currentUnits,
+                [courseId]: updatedUnits
+              });
+            }
+          }
+        }
+      });
+  }
 
   private loadUnitsData(courseId: string): Observable<Unit[]> {
-    return this.http.get<{ version: string, courseId: string, units: Unit[] }>
-      (`assets/data/units/${courseId}.json`).pipe(
-        map(response => response.units),
-        catchError(error => {
-          console.error('Error loading units:', error);
-          return of([]);
-        })
-      );
+    return this.http.get<UnitsResponse>(`assets/data/units/${courseId}.json`).pipe(
+      map(response => response.units),
+      catchError(error => {
+        console.error('Error loading units:', error);
+        return of([]);
+      })
+    );
   }
 
   private initializeUnitsForCourse(courseId: string): void {
@@ -53,9 +98,9 @@ export class UnitsService {
       );
 
       // Previous unit completion or course completion unlocks next unit
-      const isUnlocked = unit.order === 1 || 
-                        previousUnitCompleted || 
-                        cachedCourseProgress?.isCompleted;
+      const isUnlocked = unit.order === 1 ||
+        previousUnitCompleted ||
+        cachedCourseProgress?.isCompleted;
 
       if (cachedUnitProgress) {
         previousUnitCompleted = cachedUnitProgress.isCompleted;
@@ -81,11 +126,11 @@ export class UnitsService {
   markUnitAsCompleted(courseId: string, unitId: string): Observable<void> {
     const currentUnits = this.unitsSubject.getValue();
     const units = currentUnits[courseId] || [];
-    
+
     // Find completed unit first to avoid type errors
     const completedUnit = units.find(u => u.id === unitId);
     const nextUnitOrder = completedUnit?.order ? completedUnit.order + 1 : -1;
-    
+
     // Create new array with new unit objects to trigger change detection
     const updatedUnits = units.map(unit => {
       if (unit.id === unitId) {
@@ -104,14 +149,14 @@ export class UnitsService {
       }
       return unit;
     });
-  
+
     // Save unit progress
     this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
       progress: 100,
       isCompleted: true,
       lastUpdated: Date.now()
     });
-  
+
     // Update next unit's unlocked state if it exists
     if (completedUnit) {
       const nextUnit = units.find(u => u.order === completedUnit.order + 1);
@@ -122,44 +167,48 @@ export class UnitsService {
         });
       }
     }
-  
+
     // Update subject with new array reference to trigger change detection
     this.unitsSubject.next({
       ...currentUnits,
       [courseId]: updatedUnits
     });
-  
+
     return of(void 0);
   }
 
   updateUnitProgress(courseId: string, unitId: string, progress: number): Observable<void> {
     const currentUnits = this.unitsSubject.getValue();
     const units = currentUnits[courseId] || [];
-    const unit = units.find(u => u.id === unitId);
 
-    if (unit) {
-      const normalizedProgress = Math.round(Math.min(100, Math.max(0, progress)));
-      unit.progress = normalizedProgress;
-      const isCompleted = normalizedProgress === 100;
+    // Create a new array with updated units to ensure change detection
+    const updatedUnits = units.map(unit => {
+      if (unit.id === unitId) {
+        const normalizedProgress = Math.round(Math.min(100, Math.max(0, progress)));
+        const isCompleted = normalizedProgress === 100;
 
-      this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
-        progress: normalizedProgress,
-        isCompleted
-      });
-
-      if (isCompleted) {
-        unit.isCompleted = true;
-        const nextUnit = units.find(u => u.order === unit.order + 1);
-        if (nextUnit) {
-          nextUnit.isLocked = false;
-        }
+        // Create a new unit object reference
+        return {
+          ...unit,
+          progress: normalizedProgress,
+          isCompleted: isCompleted || unit.isCompleted
+        };
       }
+      return unit;
+    });
 
-      this.unitsSubject.next({
-        ...currentUnits,
-        [courseId]: units
-      });
-    }
+    // Save progress to storage
+    this.storageService.saveProgress('unit', `${courseId}_${unitId}`, {
+      progress: Math.round(Math.min(100, Math.max(0, progress))),
+      isCompleted: progress === 100
+    });
+
+    // Update subject with new object references
+    this.unitsSubject.next({
+      ...currentUnits,
+      [courseId]: updatedUnits
+    });
+
     return of(void 0);
   }
 
@@ -201,5 +250,11 @@ export class UnitsService {
       default:
         return 'fa-circle';
     }
+  }
+
+  // Cleanup on service destruction
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

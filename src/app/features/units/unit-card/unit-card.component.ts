@@ -1,5 +1,5 @@
 // unit-card.component.ts
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Unit } from '../../../shared/interfaces/unit';
 
@@ -34,7 +34,7 @@ import { Unit } from '../../../shared/interfaces/unit';
     ])
   ]
 })
-export class UnitCardComponent implements OnChanges {
+export class UnitCardComponent implements OnChanges, DoCheck {
   @Input() unit!: Unit;
   @Input() isActive = false;
   @Input() isCompleting = false;
@@ -42,10 +42,34 @@ export class UnitCardComponent implements OnChanges {
 
   animationState: 'default' | 'hovered' = 'default';
   progressCircleValue: string = '0';
+  private oldProgress: number = 0;
+  private prevUnitId: string = '';
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['unit']) {
       this.updateProgressCircle();
+      this.prevUnitId = this.unit.id;
+      this.oldProgress = this.unit.progress || 0;
+    }
+    
+    // Always check for completion state changes
+    if (changes['isCompleting']) {
+      this.cdr.markForCheck();
+    }
+  }
+
+  ngDoCheck(): void {
+    // Detect object property changes without reference changes
+    if (this.unit.id === this.prevUnitId) {
+      const currentProgress = this.unit.progress || 0;
+      if (currentProgress !== this.oldProgress) {
+        // Update progress circle when progress changes
+        this.updateProgressCircle();
+        this.oldProgress = currentProgress;
+        this.cdr.markForCheck();
+      }
     }
   }
 

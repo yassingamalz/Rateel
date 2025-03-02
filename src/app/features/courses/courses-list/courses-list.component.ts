@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, take, takeUntil } from 'rxjs/operators';
 import { Course } from '../../../shared/interfaces/course';
 import { CoursesService } from '../courses.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -65,23 +65,62 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   ngOnInit(): void {
     // Subscribe to storage progress changes
     this.storageService.getProgressChanges()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(change => {
-      if (change?.type === 'course') {
-        // Force refresh of data
-        this.coursesService.getCourses()
-          .pipe(take(1))
-          .subscribe(() => {
-            // Trigger change detection cycle
-            this.cdr.markForCheck();
-          });
-      }
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(change => {
+        if (change?.type === 'course') {
+          // Force refresh of data
+          this.coursesService.getCourses()
+            .pipe(take(1))
+            .subscribe(() => {
+              // Trigger change detection cycle
+              this.cdr.markForCheck();
+            });
+        }
+      });
+
+    // Set up enhanced progress tracking
+    this.setupProgressTracking();
   }
 
   ngAfterViewInit(): void {
     this.setupScrollBehavior();
     this.setupIntersectionObserver();
+  }
+
+  private setupProgressTracking(): void {
+    // Track direct storage changes for course progress
+    this.storageService.getProgressChanges()
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(change => change?.type === 'course')
+      )
+      .subscribe(change => {
+        if (change) {
+          console.log(`[CoursesListComponent] Progress update for course: ${change.id}, progress: ${change.data.progress}%`);
+          // Force refresh view
+          this.cdr.markForCheck();
+        }
+      });
+
+    // Also track the courses observable directly for any changes
+    this.courses$.pipe(
+      takeUntil(this.destroy$),
+      distinctUntilChanged((prev, curr) => {
+        // Check if any course's progress has changed
+        if (prev.length !== curr.length) return false;
+        for (let i = 0; i < prev.length; i++) {
+          if (prev[i].progress !== curr[i].progress ||
+            prev[i].isCompleted !== curr[i].isCompleted ||
+            prev[i].isLocked !== curr[i].isLocked) {
+            return false;
+          }
+        }
+        return true;
+      })
+    ).subscribe(courses => {
+      console.log('[CoursesListComponent] Courses updated, re-rendering');
+      this.cdr.markForCheck();
+    });
   }
 
   private setupScrollBehavior(): void {
@@ -182,7 +221,7 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   override ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    
+
     if (this.observer) {
       this.observer.disconnect();
     }

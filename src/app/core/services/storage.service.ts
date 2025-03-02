@@ -199,7 +199,7 @@ export class StorageService {
   saveProgress(type: StorageType, id: string, data: Partial<ProgressData>): void {
     const key = this.PREFIX[type] + id;
     const existingData = this.getProgress(type, id);
-
+  
     const newData: ProgressData = {
       progress: data.progress ?? existingData?.progress ?? 0,
       timestamp: Date.now(),
@@ -219,17 +219,29 @@ export class StorageService {
       bookmarks: data.bookmarks ?? existingData?.bookmarks ?? [],
       notes: data.notes ?? existingData?.notes ?? []
     };
-
+  
     try {
       localStorage.setItem(key, JSON.stringify(newData));
-
-      // Create a deep copy for the change event to ensure reference changes
-      this.changes$.next({
-        type,
-        id,
-        data: JSON.parse(JSON.stringify(newData))
-      });
-
+  
+      // Check if important values have changed
+      const hasImportantChanges = 
+        !existingData || 
+        existingData.progress !== newData.progress || 
+        existingData.isCompleted !== newData.isCompleted ||
+        existingData.isLocked !== newData.isLocked;
+  
+      // Only emit changes when important properties change
+      if (hasImportantChanges) {
+        console.log(`[StorageService] Emitting change for ${type} ${id}: progress=${newData.progress}, completed=${newData.isCompleted}`);
+        
+        // Create a deep copy for the change event to ensure reference changes
+        this.changes$.next({
+          type,
+          id,
+          data: JSON.parse(JSON.stringify(newData))
+        });
+      }
+  
       if (type === 'lesson') {
         this.updateParentProgress('unit', id.split('_')[0]);
       } else if (type === 'unit') {
