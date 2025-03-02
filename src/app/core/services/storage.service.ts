@@ -232,14 +232,19 @@ export class StorageService {
   
       // Only emit changes when important properties change
       if (hasImportantChanges) {
-        console.log(`[StorageService] Emitting change for ${type} ${id}: progress=${newData.progress}, completed=${newData.isCompleted}`);
+        console.debug(`[StorageService] Emitting change for ${type} ${id}: progress=${newData.progress}, completed=${newData.isCompleted}`);
         
-        // Create a deep copy for the change event to ensure reference changes
-        this.changes$.next({
-          type,
-          id,
-          data: JSON.parse(JSON.stringify(newData))
-        });
+        // Create a deep clone to ensure reference changes
+        const clonedData = JSON.parse(JSON.stringify(newData));
+        
+        // Emit with a slight delay to ensure UI updates properly
+        setTimeout(() => {
+          this.changes$.next({
+            type,
+            id,
+            data: clonedData
+          });
+        }, 0);
       }
   
       if (type === 'lesson') {
@@ -255,7 +260,7 @@ export class StorageService {
       }
     }
   }
-
+  
   // New method to save lesson state
   saveLessonState(lessonId: string, state: Partial<LessonState>): void {
     const existingData = this.getProgress('lesson', lessonId);

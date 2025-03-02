@@ -65,6 +65,37 @@ export class UnitsService {
       });
   }
 
+  public refreshUnitProgress(courseId: string, unitId: string): void {
+    const currentUnits = this.unitsSubject.getValue();
+    const units = currentUnits[courseId] || [];
+
+    // Only attempt refresh if we already have the units loaded
+    if (units.length > 0) {
+      // Get latest progress data
+      const progressData = this.storageService.getProgress('unit', `${courseId}_${unitId}`);
+
+      if (progressData) {
+        // Create a new array with updated unit objects to ensure reference changes
+        const updatedUnits = units.map(unit => {
+          if (unit.id === unitId) {
+            return {
+              ...unit,
+              progress: progressData.progress || unit.progress,
+              isCompleted: progressData.isCompleted || unit.isCompleted
+            };
+          }
+          return unit;
+        });
+
+        // Update the subject with new references
+        this.unitsSubject.next({
+          ...currentUnits,
+          [courseId]: updatedUnits
+        });
+      }
+    }
+  }
+
   private loadUnitsData(courseId: string): Observable<Unit[]> {
     return this.http.get<UnitsResponse>(`assets/data/units/${courseId}.json`).pipe(
       map(response => response.units),

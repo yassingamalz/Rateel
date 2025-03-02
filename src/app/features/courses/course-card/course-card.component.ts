@@ -12,31 +12,34 @@ import { Course } from '../../../shared/interfaces/course';
 export class CourseCardComponent implements OnChanges, DoCheck {
   @Input() course!: Course;
   @Output() courseSelected = new EventEmitter<Course>();
-  
-  // Track progress for change detection
+
   progressValue: number = 0;
   private oldProgress: number = 0;
   private oldCourseId: string = '';
-  
-  constructor(private cdr: ChangeDetectorRef) {}
-  
+  private oldCompletedState: boolean = false;
+
+  constructor(private cdr: ChangeDetectorRef) { }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['course']) {
-      // Update local progress value to help change detection
-      this.progressValue = this.course?.progress || 0;
+    if (changes['course'] && this.course) {
+      this.progressValue = this.course.progress || 0;
       this.oldProgress = this.progressValue;
-      this.oldCourseId = this.course?.id || '';
+      this.oldCourseId = this.course.id || '';
+      this.oldCompletedState = this.course.isCompleted || false;
     }
   }
-  
+
   ngDoCheck(): void {
-    // Detect object property changes even without reference changes
     if (this.course && this.course.id === this.oldCourseId) {
       const currentProgress = this.course.progress || 0;
-      if (currentProgress !== this.oldProgress) {
+      const isCompleted = this.course.isCompleted || false;
+
+      if (currentProgress !== this.oldProgress || isCompleted !== this.oldCompletedState) {
+        console.debug(`[CourseCard:${this.course.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.oldCompletedState} → ${isCompleted}`);
         this.progressValue = currentProgress;
         this.oldProgress = currentProgress;
-        this.cdr.markForCheck();
+        this.oldCompletedState = isCompleted;
+        this.cdr.detectChanges(); // Force immediate update
       }
     }
   }

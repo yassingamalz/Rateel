@@ -44,31 +44,36 @@ export class UnitCardComponent implements OnChanges, DoCheck {
   progressCircleValue: string = '0';
   private oldProgress: number = 0;
   private prevUnitId: string = '';
+  private prevCompletedState: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['unit']) {
       this.updateProgressCircle();
       this.prevUnitId = this.unit.id;
       this.oldProgress = this.unit.progress || 0;
+      this.prevCompletedState = this.unit.isCompleted || false;
     }
-    
-    // Always check for completion state changes
+
     if (changes['isCompleting']) {
       this.cdr.markForCheck();
     }
   }
 
   ngDoCheck(): void {
-    // Detect object property changes without reference changes
-    if (this.unit.id === this.prevUnitId) {
+    // Enhanced deep state checking
+    if (this.unit && this.unit.id === this.prevUnitId) {
       const currentProgress = this.unit.progress || 0;
-      if (currentProgress !== this.oldProgress) {
-        // Update progress circle when progress changes
+      const isCompleted = this.unit.isCompleted || false;
+
+      // Check both progress and completion status
+      if (currentProgress !== this.oldProgress || isCompleted !== this.prevCompletedState) {
+        console.debug(`[UnitCard:${this.unit.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.prevCompletedState} → ${isCompleted}`);
         this.updateProgressCircle();
         this.oldProgress = currentProgress;
-        this.cdr.markForCheck();
+        this.prevCompletedState = isCompleted;
+        this.cdr.detectChanges(); // Force immediate update
       }
     }
   }
