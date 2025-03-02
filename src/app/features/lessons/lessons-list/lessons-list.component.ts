@@ -10,7 +10,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { tap, map, takeUntil, take, shareReplay, filter } from 'rxjs/operators';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
@@ -62,9 +62,10 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   completingLessonId: string | null = null;
   private isNavigating = false;
   private completionHandled = new Set<string>();
+  private currentQueryParams: any = {};
 
   constructor(
-    elementRef: ElementRef,
+    elementRef: ElementRef, 
     ngZone: NgZone,
     protected override storageService: StorageService,
     private lessonsService: LessonsService,
@@ -79,7 +80,10 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
       filter(event => event instanceof NavigationEnd),
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.completingLessonId = null;
+      if (this.completingLessonId) {
+        this.completingLessonId = null;
+        this.cdr.detectChanges();
+      }
       this.isNavigating = false;
     });
   }
@@ -92,20 +96,21 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     // Initialize lessons with proper state management
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
       map(lessons => this.updateLessonsProgress(lessons)),
-      tap(() => {
-        const params = this.route.snapshot.queryParams;
-        if (params['completedLessonId']) {
-          this.checkAndHandleLessonCompletion(params['completedLessonId']);
-        }
-      }),
       shareReplay(1)
     );
 
+    // Store current query params to avoid reprocessing the same params
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
-      if (params['completedLessonId']) {
-        this.checkAndHandleLessonCompletion(params['completedLessonId']);
+      // Only process if params are different from previously handled ones
+      const completedLessonId = params['completedLessonId'];
+      if (completedLessonId && 
+          completedLessonId !== this.currentQueryParams['completedLessonId'] &&
+          !this.isNavigating) {
+        console.log(`[LessonsList] Processing completion for lesson: ${completedLessonId}`);
+        this.currentQueryParams = {...params};
+        this.checkAndHandleLessonCompletion(completedLessonId);
       }
     });
 
@@ -204,18 +209,29 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   private navigateAfterCompletion(lessonId: string, isLastLesson: boolean, nextLesson?: Lesson): void {
     if (isLastLesson) {
       console.log('[LessonsList] Last lesson completed, navigating to unit completion');
-      // Last lesson - navigate to units with completion param
+      
+      // When this is the last lesson in a unit, we need to navigate back to units list
+      // with a completion parameter to trigger unit animation
       this.router.navigate(['/courses', this.courseId, 'units'], {
-        queryParams: { completedUnitId: this.unitId },
+        queryParams: { 
+          completedUnitId: this.unitId,
+          t: Date.now() // Prevent caching
+        },
         replaceUrl: true
       }).then(() => {
+        console.log('[LessonsList] Navigation to units with completion successful');
         setTimeout(() => {
           this.isNavigating = false;
           this.resetCompletionState();
-        }, 500);
+        }, 100);
+      }).catch(err => {
+        console.error('[LessonsList] Navigation failed:', err);
+        this.isNavigating = false;
+        this.resetCompletionState();
       });
     } else if (nextLesson && !nextLesson.isLocked) {
       console.log('[LessonsList] Navigating to next lesson:', nextLesson.id);
+      
       // Navigate to next lesson directly
       this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', nextLesson.id], {
         replaceUrl: true
@@ -223,7 +239,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
         setTimeout(() => {
           this.isNavigating = false;
           this.resetCompletionState();
-        }, 500);
+        }, 100);
       });
     } else {
       this.isNavigating = false;
