@@ -1,5 +1,6 @@
+// src/app/features/units/units.service.ts
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, catchError, map, Observable, of, takeUntil } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, takeUntil, tap, distinctUntilChanged, filter } from "rxjs";
 import { StorageService } from "../../core/services/storage.service";
 import { Unit } from "../../shared/interfaces/unit";
 import { CoursesService } from "../courses/courses.service";
@@ -19,13 +20,14 @@ export class UnitsService implements OnDestroy {
   currentCourseId$ = this.currentCourseIdSubject.asObservable();
   private unitsSubject = new BehaviorSubject<{ [key: string]: Unit[] }>({});
   private destroy$ = new BehaviorSubject<boolean>(false);
+  private refreshTrigger = new BehaviorSubject<string | null>(null);
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService,
     private coursesService: CoursesService
   ) {
-    // Subscribe to storage changes for real-time progress updates
+    // Enhanced storage change subscription with immediate refresh
     this.storageService.getProgressChanges()
       .pipe(takeUntil(this.destroy$))
       .subscribe(change => {
@@ -35,36 +37,74 @@ export class UnitsService implements OnDestroy {
           // Extract courseId and unitId from the composite key
           const [courseId, unitId] = change.id.split('_');
           if (courseId && unitId) {
-            // Get current units state
-            const currentUnits = this.unitsSubject.getValue();
-            const courseUnits = currentUnits[courseId];
-
-            if (courseUnits) {
-              // Create new array with updated unit objects to trigger change detection
-              const updatedUnits = courseUnits.map(unit => {
-                if (unit.id === unitId) {
-                  // Create a new object to ensure reference change
-                  return {
-                    ...unit,
-                    progress: change.data.progress,
-                    isCompleted: change.data.isCompleted,
-                    isLocked: change.data.isLocked ?? unit.isLocked
-                  };
-                }
-                return unit;
-              });
-
-              // Update subject with new references
-              this.unitsSubject.next({
-                ...currentUnits,
-                [courseId]: updatedUnits
-              });
-              
-              console.debug(`[UnitsService] Updated unit ${unitId} progress to ${change.data.progress}%`);
-            }
+            console.log(`[UnitsService] Storage change detected for unit ${unitId} in course ${courseId}, progress: ${change.data.progress}%`);
+            
+            // Immediately reload all units for this course to ensure freshness
+            this.refreshUnitsByCourse(courseId);
+            
+            // Also trigger a refresh on the specific unit (belt and suspenders approach)
+            this.refreshTrigger.next(`${courseId}_${unitId}`);
           }
         }
       });
+
+    // Subscribe to refresh trigger to update specific units
+    this.refreshTrigger
+      .pipe(
+        takeUntil(this.destroy$),
+        distinctUntilChanged(),
+        filter(key => !!key)
+      )
+      .subscribe(key => {
+        if (!key) return;
+        
+        const [courseId, unitId] = key.split('_');
+        if (courseId && unitId) {
+          this.refreshUnitProgress(courseId, unitId);
+        }
+      });
+  }
+
+  /**
+   * New method to force refresh all units for a course
+   */
+  public refreshUnitsByCourse(courseId: string): void {
+    console.log(`[UnitsService] Refreshing all units for course ${courseId}`);
+    
+    // Get current units
+    const currentUnits = this.unitsSubject.getValue();
+    const units = currentUnits[courseId] || [];
+    
+    if (units.length === 0) {
+      // If no units loaded yet, load them from scratch
+      this.initializeUnitsForCourse(courseId);
+      return;
+    }
+    
+    // Otherwise, refresh each unit's progress from storage
+    const updatedUnits = units.map(unit => {
+      const storageKey = `${courseId}_${unit.id}`;
+      const progressData = this.storageService.getProgress('unit', storageKey);
+      
+      if (progressData) {
+        // Create a new object to ensure reference changes for change detection
+        return {
+          ...unit,
+          progress: progressData.progress || 0,
+          isCompleted: progressData.isCompleted || false,
+          isLocked: progressData.isLocked ?? unit.isLocked
+        };
+      }
+      return unit;
+    });
+    
+    // Update the subject with new reference to trigger change detection
+    this.unitsSubject.next({
+      ...currentUnits,
+      [courseId]: updatedUnits
+    });
+    
+    console.log(`[UnitsService] Refreshed ${updatedUnits.length} units for course ${courseId}`);
   }
 
   public refreshUnitProgress(courseId: string, unitId: string): void {
@@ -76,25 +116,26 @@ export class UnitsService implements OnDestroy {
       const progressData = this.storageService.getProgress('unit', `${courseId}_${unitId}`);
 
       if (progressData) {
-        // Create a new array with updated unit objects
+        // Create a new array with updated unit objects to ensure reference changes
         const updatedUnits = units.map(unit => {
           if (unit.id === unitId) {
             return {
               ...unit,
-              progress: progressData.progress,
-              isCompleted: progressData.isCompleted
+              progress: progressData.progress || 0,
+              isCompleted: progressData.isCompleted || false,
+              isLocked: progressData.isLocked ?? unit.isLocked
             };
           }
           return unit;
         });
 
-        // Update the subject with new references
+        // Update the subject with new references to trigger change detection
         this.unitsSubject.next({
           ...currentUnits,
           [courseId]: updatedUnits
         });
         
-        console.debug(`[UnitsService] Force-refreshed unit ${unitId} progress to ${progressData.progress}%`);
+        console.log(`[UnitsService] Force-refreshed unit ${unitId} progress to ${progressData.progress}%`);
       }
     }
   }
@@ -118,6 +159,8 @@ export class UnitsService implements OnDestroy {
         ...currentUnits,
         [courseId]: units
       });
+      
+      console.log(`[UnitsService] Initialized ${units.length} units for course ${courseId}`);
     });
   }
 
@@ -251,6 +294,9 @@ export class UnitsService implements OnDestroy {
     // Load units data if not already loaded
     if (!this.unitsSubject.getValue()[courseId]) {
       this.initializeUnitsForCourse(courseId);
+    } else {
+      // If already loaded, refresh to ensure latest data
+      this.refreshUnitsByCourse(courseId);
     }
   }
 
@@ -259,7 +305,11 @@ export class UnitsService implements OnDestroy {
     if (!currentUnits) {
       // Load and initialize if not already loaded
       this.initializeUnitsForCourse(courseId);
+    } else {
+      // If already loaded, silently refresh to ensure latest data
+      setTimeout(() => this.refreshUnitsByCourse(courseId), 0);
     }
+    
     return this.unitsSubject.pipe(
       map(units => units[courseId] || [])
     );

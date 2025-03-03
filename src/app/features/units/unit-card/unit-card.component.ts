@@ -1,4 +1,4 @@
-// unit-card.component.ts
+// Updated UnitCardComponent
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Unit } from '../../../shared/interfaces/unit';
@@ -42,29 +42,35 @@ export class UnitCardComponent implements OnChanges, DoCheck {
 
   animationState: 'default' | 'hovered' = 'default';
   progressCircleValue: string = '0';
-  private oldProgress: number = 0;
+  private oldProgress: number = -1; // Changed from 0 to -1 to ensure first update
   private prevUnitId: string = '';
   private prevCompletedState: boolean = false;
   private prevLockedState: boolean = false;
+  private changeCount = 0;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['unit'] && this.unit) {
+      // Always update progress circle on explicit input changes
       this.updateProgressCircle();
       this.prevUnitId = this.unit.id;
       this.oldProgress = this.unit.progress || 0;
       this.prevCompletedState = this.unit.isCompleted || false;
       this.prevLockedState = this.unit.isLocked || false;
+      
+      // Log for debugging
+      console.log(`[UnitCard:${this.unit.id}] Input changed: progress=${this.unit.progress}, completed=${this.unit.isCompleted}, locked=${this.unit.isLocked}`);
     }
 
     if (changes['isCompleting'] || changes['isActive']) {
+      // Force update for animation state changes
       this.cdr.markForCheck();
     }
   }
 
   ngDoCheck(): void {
-    // Enhanced deep state checking
+    // Enhanced deep state checking that's more sensitive to changes
     if (this.unit && this.unit.id === this.prevUnitId) {
       const currentProgress = this.unit.progress || 0;
       const isCompleted = this.unit.isCompleted || false;
@@ -75,16 +81,29 @@ export class UnitCardComponent implements OnChanges, DoCheck {
           isCompleted !== this.prevCompletedState ||
           isLocked !== this.prevLockedState) {
         
-        console.debug(`[UnitCard:${this.unit.id}] State changed - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.prevCompletedState} → ${isCompleted}, locked: ${this.prevLockedState} → ${isLocked}`);
+        this.changeCount++;
+        console.log(`[UnitCard:${this.unit.id}] State changed (${this.changeCount}) - progress: ${this.oldProgress} → ${currentProgress}, completed: ${this.prevCompletedState} → ${isCompleted}, locked: ${this.prevLockedState} → ${isLocked}`);
         
+        // Update values
         this.updateProgressCircle();
         this.oldProgress = currentProgress;
         this.prevCompletedState = isCompleted;
         this.prevLockedState = isLocked;
         
-        // Force update the view
+        // Force immediate change detection
         this.cdr.detectChanges();
       }
+    } else if (this.unit && this.unit.id !== this.prevUnitId) {
+      // Handle unit object replacement (reference changes but still same ID)
+      console.log(`[UnitCard] Unit ID changed from ${this.prevUnitId} to ${this.unit.id}`);
+      this.prevUnitId = this.unit.id;
+      this.updateProgressCircle();
+      this.oldProgress = this.unit.progress || 0;
+      this.prevCompletedState = this.unit.isCompleted || false;
+      this.prevLockedState = this.unit.isLocked || false;
+      
+      // Force immediate change detection
+      this.cdr.detectChanges();
     }
   }
 
@@ -95,6 +114,9 @@ export class UnitCardComponent implements OnChanges, DoCheck {
     const progress = this.unit.progress || 0;
     const dashArray = (progress / 100) * circumference;
     this.progressCircleValue = `${dashArray}, ${circumference}`;
+    
+    // Log progress updates
+    console.log(`[UnitCard:${this.unit.id}] Updating progress circle to ${progress}% (dashArray: ${dashArray})`);
   }
 
   onUnitClick(): void {

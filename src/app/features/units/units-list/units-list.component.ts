@@ -1,4 +1,4 @@
-// src/app/features/units/units-list/units-list.component.ts
+// Updated UnitsListComponent
 import {
   Component,
   OnInit,
@@ -7,7 +7,8 @@ import {
   ElementRef,
   NgZone,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ApplicationRef
 } from '@angular/core';
 import {
   ActivatedRoute,
@@ -22,7 +23,9 @@ import {
   tap,
   finalize,
   take,
-  distinctUntilChanged
+  distinctUntilChanged,
+  fromEvent,
+  timer
 } from 'rxjs';
 import { UnitsService } from '../units.service';
 import { Unit } from '../../../shared/interfaces/unit';
@@ -71,6 +74,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
   contentReady = false;
   private navigationInProgress = false;
   private completionHandled = new Set<string>();
+  private progressUpdateCount = 0;
 
   units$!: Observable<Unit[]>;
   courseId!: string;
@@ -84,7 +88,8 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     private unitsService: UnitsService,
     private route: ActivatedRoute,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private appRef: ApplicationRef
   ) {
     super(elementRef, ngZone, storageService);
 
@@ -119,13 +124,21 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitsService.setCurrentCourse(this.courseId);
 
-    // Initialize units with progress tracking
+    // Initialize units with progress tracking and better change detection
     this.units$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
-      tap(() => {
+      tap(units => {
+        console.log(`[UnitsList] Received ${units.length} units with data:`, 
+          units.map(u => ({ id: u.id, progress: u.progress, completed: u.isCompleted })));
+          
         this.ngZone.run(() => {
           this.contentReady = true;
           this.loading$.next(false);
+          // Force immediate change detection
           this.cdr.detectChanges();
+          
+          // Schedule another change detection after a short delay to ensure UI is updated
+          // This helps with timing issues in complex component trees
+          setTimeout(() => this.cdr.detectChanges(), 100);
         });
       }),
       finalize(() => this.loading$.next(false))
@@ -154,60 +167,78 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       }
     });
 
-    // Handle storage changes
-    this.storageService.getProgressChanges()
+    // Setup visibility change listener to refresh data when tab becomes visible
+    fromEvent(document, 'visibilitychange')
       .pipe(takeUntil(this.destroy$))
-      .subscribe(change => {
-        if (change?.type === 'unit') {
-          // For any unit progress change affecting this course
-          if (change.id.startsWith(`${this.courseId}_`)) {
-            // Force refresh of units data
-            this.unitsService.getUnitsByCourseId(this.courseId)
-              .pipe(take(1))
-              .subscribe(() => {
-                // Mark for change detection
-                this.cdr.markForCheck();
-              });
-          }
+      .subscribe(() => {
+        if (document.visibilityState === 'visible' && this.courseId) {
+          console.log('[UnitsList] Tab became visible, refreshing units data');
+          this.unitsService.refreshUnitsByCourse(this.courseId);
+          this.cdr.detectChanges();
         }
       });
   }
 
   private setupProgressTracking(): void {
-    // Track both direct storage changes and service-level changes
+    // Enhanced direct storage change tracking with immediate UI updates
     this.storageService.getProgressChanges()
       .pipe(
         takeUntil(this.destroy$),
-        filter(change => change?.type === 'unit' && change.id.startsWith(`${this.courseId}_`))
+        filter(change => !!change && change.type === 'unit' && change.id.startsWith(`${this.courseId}_`))
       )
       .subscribe(change => {
-        // Just mark for checking - the service will handle updating objects
-        this.cdr.markForCheck();
-
-        // Log for debugging
-        if (change) {
-          console.log(`[UnitsListComponent] Progress update for unit: ${change.id.split('_')[1]}, progress: ${change.data.progress}%`);
-        }
+        if (!change) return;
+        
+        const unitId = change.id.split('_')[1];
+        console.log(`[UnitsList] Storage change detected for unit ${unitId}, progress: ${change.data.progress}%`);
+        
+        // Track update count for debugging
+        this.progressUpdateCount++;
+        
+        // Force immediate change detection to update the UI
+        this.cdr.detectChanges();
+        
+        // Schedule another update after a short delay to ensure UI is updated
+        timer(50).subscribe(() => {
+          this.cdr.detectChanges();
+          console.log(`[UnitsList] Forced change detection after update #${this.progressUpdateCount}`);
+        });
       });
 
-    // Also track the units observable directly for any changes
+    // Also track the units observable for structural changes
     this.units$.pipe(
       takeUntil(this.destroy$),
       distinctUntilChanged((prev, curr) => {
-        // Check if any unit's progress has changed
+        // Only skip update if arrays are identical by value
         if (prev.length !== curr.length) return false;
+        
         for (let i = 0; i < prev.length; i++) {
-          if (prev[i].progress !== curr[i].progress ||
-            prev[i].isCompleted !== curr[i].isCompleted ||
-            prev[i].isLocked !== curr[i].isLocked) {
+          const prevUnit = prev[i];
+          const currUnit = curr[i];
+          
+          if (
+            prevUnit.id !== currUnit.id ||
+            prevUnit.progress !== currUnit.progress ||
+            prevUnit.isCompleted !== currUnit.isCompleted ||
+            prevUnit.isLocked !== currUnit.isLocked
+          ) {
+            console.log(`[UnitsList] Detected change in unit ${currUnit.id}:`, 
+              { 
+                prevProgress: prevUnit.progress, 
+                newProgress: currUnit.progress,
+                prevCompleted: prevUnit.isCompleted,
+                newCompleted: currUnit.isCompleted
+              }
+            );
             return false;
           }
         }
         return true;
       })
     ).subscribe(units => {
-      console.log('[UnitsListComponent] Units updated, re-rendering');
-      this.cdr.markForCheck();
+      console.log(`[UnitsList] Units updated (${units.length}), forcing re-render`);
+      // Force immediate change detection
+      this.cdr.detectChanges();
     });
   }
 
@@ -233,6 +264,12 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
 
     // Immediately mark the animation as shown for future reference
     localStorage.setItem(unitAnimationKey, 'true');
+
+    // Force refresh the unit data from localStorage
+    this.unitsService.refreshUnitProgress(this.courseId, unitId);
+    
+    // Force immediate change detection
+    this.cdr.detectChanges();
 
     if (!animationShown) {
       // First time showing this animation
@@ -303,6 +340,26 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     });
   }
 
+  // Check progress in console for debugging
+  logCurrentProgress(): void {
+    this.units$.pipe(take(1)).subscribe(units => {
+      console.table(units.map(u => ({ 
+        id: u.id, 
+        title: u.title,
+        progress: u.progress || 0,
+        completed: u.isCompleted || false,
+        locked: u.isLocked || false
+      })));
+    });
+  }
+
+  // Force manual refresh of unit data (can be triggered from UI if needed)
+  forceRefreshUnits(): void {
+    console.log('[UnitsList] Manually forcing refresh of all units');
+    this.unitsService.refreshUnitsByCourse(this.courseId);
+    this.cdr.detectChanges();
+  }
+
   // Event handlers
   onMouseDown(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('.unit-item')) {
@@ -347,6 +404,7 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
 
   private handleUnitClick(unitId: string): void {
     this.units$.pipe(
+      take(1),
       tap(units => {
         const unit = units.find(u => u.id === unitId);
         if (unit && !unit.isLocked) {
