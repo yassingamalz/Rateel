@@ -1,0 +1,60 @@
+{
+    "version": "1.0.0",
+    "courseId": "derived-madd",
+    "units": [
+        {
+            "id": "intro-derived-madd",
+            "title": "مقدمة في المد الفرعي",
+            "description": "التعريف بأنواع المد الفرعي وأهميته",
+            "courseId": "derived-madd",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "connected-madd",
+            "title": "المد المتصل",
+            "description": "دراسة قواعد المد المتصل وتطبيقاته",
+            "courseId": "derived-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "disconnected-madd",
+            "title": "المد المنفصل",
+            "description": "دراسة قواعد المد المنفصل وتطبيقاته",
+            "courseId": "derived-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "conditional-madd",
+            "title": "المد الشرطي",
+            "description": "دراسة المد الشرطي وحالاته المختلفة",
+            "courseId": "derived-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "derived-madd-practice",
+            "title": "تطبيقات عملية",
+            "description": "تمارين وتدريبات على أنواع المد الفرعي",
+            "courseId": "derived-madd",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 5
+        },
+        {
+            "id": "derived-madd-assessment",
+            "title": "تقييم المد الفرعي",
+            "description": "اختبار شامل لفهم وتطبيق قواعد المد الفرعي",
+            "courseId": "derived-madd",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 6
+        }
+    ]
+}

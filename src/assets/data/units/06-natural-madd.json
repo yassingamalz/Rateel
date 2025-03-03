@@ -1,0 +1,69 @@
+{
+    "version": "1.0.0",
+    "courseId": "natural-madd",
+    "units": [
+        {
+            "id": "intro-natural-madd",
+            "title": "مقدمة في المد الطبيعي",
+            "description": "التعريف بالمد الطبيعي وأساسياته",
+            "courseId": "natural-madd",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "basic-madd-rules",
+            "title": "القواعد الأساسية للمد",
+            "description": "دراسة القواعد الأساسية للمد الطبيعي",
+            "courseId": "natural-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "alif-madd",
+            "title": "المد بالألف",
+            "description": "دراسة المد الطبيعي مع حرف الألف",
+            "courseId": "natural-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "waw-madd",
+            "title": "المد بالواو",
+            "description": "دراسة المد الطبيعي مع حرف الواو",
+            "courseId": "natural-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "ya-madd",
+            "title": "المد بالياء",
+            "description": "دراسة المد الطبيعي مع حرف الياء",
+            "courseId": "natural-madd",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 5
+        },
+        {
+            "id": "natural-madd-practice",
+            "title": "تطبيقات عملية",
+            "description": "تمارين وتدريبات على المد الطبيعي",
+            "courseId": "natural-madd",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 6
+        },
+        {
+            "id": "natural-madd-assessment",
+            "title": "تقييم المد الطبيعي",
+            "description": "اختبار شامل لفهم وتطبيق قواعد المد الطبيعي",
+            "courseId": "natural-madd",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 7
+        }
+    ]
+}

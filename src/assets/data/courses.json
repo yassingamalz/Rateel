@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "courses": [
         {
-            "id": "tajweed-fundamentals",
+            "id": "01-tajweed-fundamentals",
             "title": "أساسيات التجويد",
             "description": "المبادئ الأساسية للتجويد وقواعد التلاوة الصحيحة للمبتدئين",
             "icon": "book-quran",
@@ -13,49 +13,49 @@
             }
         },
         {
-            "id": "noon-meem-mushaddad",
+            "id": "02-noon-meem-mushaddad",
             "title": "النون والميم المشددتان",
             "description": "دراسة متعمقة لأحكام النون والميم المشددتين في التلاوة القرآنية",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "makharij-huruf",
+            "id": "03-makharij-huruf",
             "title": "مخارج الحروف",
             "description": "دورة متخصصة في مخارج الحروف العربية وصفاتها",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "noon-sakinah",
+            "id": "04-noon-sakinah",
             "title": "النون الساكنة والتنوين",
             "description": "دراسة شاملة لأحكام النون الساكنة والتنوين",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "meem-sakinah",
+            "id": "05-meem-sakinah",
             "title": "الميم الساكنة",
             "description": "تعمق في أحكام الميم الساكنة وتطبيقاتها",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "natural-madd",
+            "id": "06-natural-madd",
             "title": "المد الطبيعي",
             "description": "أساسيات المد الطبيعي وقواعده الأساسية",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "derived-madd",
+            "id": "07-derived-madd",
             "title": "المد الفرعي",
             "description": "دراسة أنواع المد الفرعي وتطبيقاته",
             "icon": "book-quran",
             "isLocked": true
         },
         {
-            "id": "madd-badal",
+            "id": "08-madd-badal",
             "title": "مد البدل",
             "description": "فهم وتطبيق أحكام مد البدل في التلاوة",
             "icon": "book-quran",
@@ -83,7 +83,7 @@
             "isLocked": true
         },
         {
-            "id": "advanced-tajweed",
+            "id": "12-advanced-tajweed",
             "title": "تجويد متقدم",
             "description": "موضوعات متقدمة في علم التجويد والتلاوة المتميزة",
             "icon": "book-quran",

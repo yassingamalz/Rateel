@@ -1,0 +1,51 @@
+{
+    "version": "1.0.0",
+    "courseId": "noon-meem-mushaddad",
+    "units": [
+        {
+            "id": "intro-noon-meem",
+            "title": "مقدمة في النون والميم المشددتين",
+            "description": "التعريف بأحكام النون والميم المشددتين",
+            "courseId": "noon-meem-mushaddad",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "noon-mushaddad-theory",
+            "title": "النون المشددة - النظرية",
+            "description": "دراسة نظرية معمقة لأحكام النون المشددة",
+            "courseId": "noon-meem-mushaddad",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "meem-mushaddad-theory",
+            "title": "الميم المشددة - النظرية",
+            "description": "دراسة نظرية معمقة لأحكام الميم المشددة",
+            "courseId": "noon-meem-mushaddad",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "noon-meem-practical",
+            "title": "تطبيقات عملية",
+            "description": "تمارين وتدريبات على النون والميم المشددتين",
+            "courseId": "noon-meem-mushaddad",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 4
+        },
+        {
+            "id": "noon-meem-assessment",
+            "title": "تقييم النون والميم المشددتين",
+            "description": "اختبار شامل لفهم وتطبيق أحكام النون والميم المشددتين",
+            "courseId": "noon-meem-mushaddad",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 5
+        }
+    ]
+}

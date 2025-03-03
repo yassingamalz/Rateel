@@ -1,0 +1,60 @@
+{
+    "version": "1.0.0",
+    "courseId": "makharij-huruf",
+    "units": [
+        {
+            "id": "intro-makharij",
+            "title": "مقدمة في مخارج الحروف",
+            "description": "التعريف بمخارج الحروف العربية وأهميتها في التلاوة",
+            "courseId": "makharij-huruf",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "throat-letters",
+            "title": "مخارج الحروف الحلقية",
+            "description": "دراسة الحروف المنبعثة من الحلق وكيفية نطقها",
+            "courseId": "makharij-huruf",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "oral-letters",
+            "title": "مخارج الحروف الفموية",
+            "description": "دراسة الحروف المنبعثة من الفم وآلية إخراجها",
+            "courseId": "makharij-huruf",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "nasal-letters",
+            "title": "الحروف الأنفية",
+            "description": "التعرف على الحروف ذات الصلة بالأنف وكيفية نطقها",
+            "courseId": "makharij-huruf",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "pronunciation-practice",
+            "title": "تدريبات النطق المتقدمة",
+            "description": "تمارين عملية لإتقان مخارج الحروف",
+            "courseId": "makharij-huruf",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 5
+        },
+        {
+            "id": "makharij-assessment",
+            "title": "تقييم مخارج الحروف",
+            "description": "اختبار شامل لفهم وإتقان مخارج الحروف العربية",
+            "courseId": "makharij-huruf",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 6
+        }
+    ]
+}

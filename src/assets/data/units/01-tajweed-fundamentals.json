@@ -1,0 +1,51 @@
+{
+    "version": "1.0.0",
+    "courseId": "tajweed-fundamentals",
+    "units": [
+        {
+            "id": "intro-tajweed",
+            "title": "مقدمة في التجويد",
+            "description": "التعريف بعلم التجويد وأهميته في تلاوة القرآن الكريم",
+            "courseId": "tajweed-fundamentals",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "quran-recitation-basics",
+            "title": "أساسيات التلاوة",
+            "description": "القواعد الأساسية للتلاوة الصحيحة وآداب تلاوة القرآن",
+            "courseId": "tajweed-fundamentals",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "pronunciation-practice",
+            "title": "تدريبات النطق",
+            "description": "تمارين عملية لتحسين النطق وإخراج الحروف",
+            "courseId": "tajweed-fundamentals",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 3
+        },
+        {
+            "id": "tajweed-rules-overview",
+            "title": "لمحة عن قواعد التجويد",
+            "description": "نظرة شاملة على أهم قواعد التجويد الأساسية",
+            "courseId": "tajweed-fundamentals",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "assessment-fundamentals",
+            "title": "تقييم أساسيات التجويد",
+            "description": "اختبار شامل للمهارات المكتسبة في أساسيات التجويد",
+            "courseId": "tajweed-fundamentals",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 5
+        }
+    ]
+}

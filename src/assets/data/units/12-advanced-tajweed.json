@@ -1,0 +1,60 @@
+{
+    "version": "1.0.0",
+    "courseId": "advanced-tajweed",
+    "units": [
+        {
+            "id": "intro-advanced-tajweed",
+            "title": "مقدمة في التجويد المتقدم",
+            "description": "نظرة شاملة على موضوعات التجويد المتقدمة",
+            "courseId": "advanced-tajweed",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "complex-tajweed-rules",
+            "title": "القواعد المعقدة في التجويد",
+            "description": "دراسة القواعد المتقدمة والمعقدة في التجويد",
+            "courseId": "advanced-tajweed",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "rare-recitation-styles",
+            "title": "أنماط التلاوة النادرة",
+            "description": "التعرف على أنماط التلاوة المتخصصة والنادرة",
+            "courseId": "advanced-tajweed",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "tajweed-variations",
+            "title": "اختلافات التجويد",
+            "description": "دراسة الاختلافات في القراءات والأداء التجويدي",
+            "courseId": "advanced-tajweed",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "advanced-tajweed-practice",
+            "title": "تطبيقات متقدمة",
+            "description": "تمارين وتدريبات متقدمة على التجويد",
+            "courseId": "advanced-tajweed",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 5
+        },
+        {
+            "id": "advanced-tajweed-assessment",
+            "title": "التقييم النهائي",
+            "description": "اختبار شامل للمهارات المتقدمة في التجويد",
+            "courseId": "advanced-tajweed",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 6
+        }
+    ]
+}

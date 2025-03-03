@@ -1,0 +1,31 @@
+{
+    "version": "1.0.0",
+    "unitId": "intro-tajweed",
+    "courseId": "tajweed-fundamentals",
+    "lessons": [
+        {
+            "id": "intro-lesson",
+            "title": "مقدمة في النون والميم",
+            "description": "تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "duration": 5,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 2,
+            "videoUrl": "https://www.youtube.com/watch?v=XfDdA9UgOVQ"
+        },
+        {
+            "id": "intro-lesson-2",
+            "title": "مقدمة في النون والميم",
+            "description": "تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "duration": 5,
+            "order": 2,
+            "stepNumber": 2,
+            "totalSteps": 2,
+            "videoUrl": "https://www.youtube.com/watch?v=XfDdA9UgOVQ"
+        }
+    ]
+}

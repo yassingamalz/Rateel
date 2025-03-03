@@ -1,0 +1,60 @@
+{
+    "version": "1.0.0",
+    "courseId": "meem-sakinah",
+    "units": [
+        {
+            "id": "intro-meem-sakinah",
+            "title": "مقدمة في الميم الساكنة",
+            "description": "التعريف بأحكام الميم الساكنة في التلاوة",
+            "courseId": "meem-sakinah",
+            "type": "video",
+            "icon": "fa-play-circle",
+            "order": 1
+        },
+        {
+            "id": "ikhfa-shafawi",
+            "title": "الإخفاء الشفوي",
+            "description": "دراسة أحكام الإخفاء الشفوي للميم الساكنة",
+            "courseId": "meem-sakinah",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 2
+        },
+        {
+            "id": "idgham-shafawi",
+            "title": "الإدغام الشفوي",
+            "description": "دراسة تفصيلية لقواعد الإدغام الشفوي",
+            "courseId": "meem-sakinah",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 3
+        },
+        {
+            "id": "izhar-shafawi",
+            "title": "الإظهار الشفوي",
+            "description": "التعمق في أحكام الإظهار للميم الساكنة",
+            "courseId": "meem-sakinah",
+            "type": "reading",
+            "icon": "fa-book-open",
+            "order": 4
+        },
+        {
+            "id": "meem-sakinah-practice",
+            "title": "تطبيقات عملية",
+            "description": "تمارين وتدريبات على أحكام الميم الساكنة",
+            "courseId": "meem-sakinah",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "order": 5
+        },
+        {
+            "id": "meem-sakinah-assessment",
+            "title": "تقييم الميم الساكنة",
+            "description": "اختبار شامل لفهم وتطبيق أحكام الميم الساكنة",
+            "courseId": "meem-sakinah",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "order": 6
+        }
+    ]
+}
