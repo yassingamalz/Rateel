@@ -8,6 +8,21 @@
   height: 200px;
   cursor: pointer;
   isolation: isolate;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s step-end;
+
+  &:hover:not(&--locked),
+  &--active,
+  &.border-fill-animation-active {
+    z-index: 1000; // Very high z-index to ensure it stays above everything
+  }
+
+  // Apply the same z-index to the transformed states
+  &:hover:not(&--locked) .unit-card__glow,
+  &--active .unit-card__glow,
+  &.border-fill-animation-active .unit-card__glow {
+    z-index: 999;
+  }
 
   // Glowing Background Effect
   &__glow {
