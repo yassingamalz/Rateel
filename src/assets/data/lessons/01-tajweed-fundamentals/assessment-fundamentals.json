@@ -1,0 +1,31 @@
+{
+    "version": "1.0.0",
+    "unitId": "assessment-fundamentals",
+    "courseId": "tajweed-fundamentals",
+    "lessons": [
+        {
+            "id": "assessment-lesson-1",
+            "title": "اختبار المعرفة النظرية",
+            "description": "اختبار شامل للمفاهيم النظرية في التجويد",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "duration": 20,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 2,
+            "contentPath": "/content/test/assessment-1.json"
+        },
+        {
+            "id": "assessment-lesson-2",
+            "title": "تقييم مهارات التلاوة",
+            "description": "اختبار عملي لتقييم مهارات التلاوة والنطق",
+            "type": "test",
+            "icon": "fa-check-circle",
+            "duration": 25,
+            "order": 2,
+            "stepNumber": 2,
+            "totalSteps": 2,
+            "contentPath": "/content/test/assessment-2.json"
+        }
+    ]
+}

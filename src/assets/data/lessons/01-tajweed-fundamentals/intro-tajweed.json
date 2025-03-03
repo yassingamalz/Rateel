@@ -4,28 +4,40 @@
     "courseId": "tajweed-fundamentals",
     "lessons": [
         {
-            "id": "intro-lesson",
-            "title": "مقدمة في النون والميم",
-            "description": "تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية",
+            "id": "intro-lesson-1",
+            "title": "مقدمة في علم التجويد",
+            "description": "التعريف بعلم التجويد وأهميته في تلاوة القرآن الكريم",
             "type": "video",
             "icon": "fa-play-circle",
-            "duration": 5,
+            "duration": 6,
             "order": 1,
             "stepNumber": 1,
-            "totalSteps": 2,
-            "videoUrl": "https://www.youtube.com/watch?v=XfDdA9UgOVQ"
+            "totalSteps": 3,
+            "videoUrl": "https://www.youtube.com/watch?v=Fqn_I3KtZtM"
         },
         {
             "id": "intro-lesson-2",
-            "title": "مقدمة في النون والميم",
-            "description": "تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية",
-            "type": "video",
+            "title": "أهمية إتقان التجويد",
+            "description": "الحكمة من تعلم التجويد وأثره في تلاوة القرآن",
+            "type": "video", 
             "icon": "fa-play-circle",
             "duration": 5,
             "order": 2,
             "stepNumber": 2,
-            "totalSteps": 2,
-            "videoUrl": "https://www.youtube.com/watch?v=XfDdA9UgOVQ"
+            "totalSteps": 3,
+            "videoUrl": "https://www.youtube.com/watch?v=c9N4j8IF8mM"
+        },
+        {
+            "id": "intro-lesson-3",
+            "title": "مراتب أداء التجويد",
+            "description": "شرح مراتب أداء التجويد والتلاوة الصحيحة",
+            "type": "video",
+            "icon": "fa-play-circle", 
+            "duration": 7,
+            "order": 3,
+            "stepNumber": 3,
+            "totalSteps": 3,
+            "videoUrl": "https://www.youtube.com/watch?v=_nMiT7QFpIc"
         }
     ]
 }

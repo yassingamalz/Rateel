@@ -1,0 +1,64 @@
+{
+    "version": "1.0.0",
+    "unitId": "pronunciation-practice",
+    "courseId": "tajweed-fundamentals",
+    "lessons": [
+        {
+            "id": "pronunciation-lesson-1",
+            "title": "مخارج الحروف العربية",
+            "description": "التعريف بمخارج الحروف وكيفية إخراجها بشكل صحيح",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "duration": 15,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 3,
+            "contentPath": "/content/practice/pronunciation-1.json",
+            "verses": [
+                {
+                    "id": "pronunciation-verse-1",
+                    "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                    "audioUrl": "/assets/audio/pronunciation/verse1.mp3"
+                }
+            ]
+        },
+        {
+            "id": "pronunciation-lesson-2",
+            "title": "التدريب على النطق الدقيق",
+            "description": "تمارين عملية لتحسين النطق وإخراج الحروف بدقة",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "duration": 20,
+            "order": 2,
+            "stepNumber": 2,
+            "totalSteps": 3,
+            "contentPath": "/content/practice/pronunciation-2.json",
+            "verses": [
+                {
+                    "id": "pronunciation-verse-2",
+                    "text": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+                    "audioUrl": "/assets/audio/pronunciation/verse2.mp3"
+                }
+            ]
+        },
+        {
+            "id": "pronunciation-lesson-3",
+            "title": "التصحيح الصوتي",
+            "description": "التركيز على تصحيح الأخطاء الشائعة في النطق",
+            "type": "practice",
+            "icon": "fa-microphone",
+            "duration": 15,
+            "order": 3,
+            "stepNumber": 3,
+            "totalSteps": 3,
+            "contentPath": "/content/practice/pronunciation-3.json",
+            "verses": [
+                {
+                    "id": "pronunciation-verse-3",
+                    "text": "مَالِكِ يَوْمِ الدِّينِ",
+                    "audioUrl": "/assets/audio/pronunciation/verse3.mp3"
+                }
+            ]
+        }
+    ]
+}
