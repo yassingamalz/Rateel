@@ -1,6 +1,15 @@
 <!-- reading-lesson.component.html -->
 <div class="reading-lesson" dir="rtl">
     <ng-container *ngIf="parsedContent; else noContent">
+        <!-- Skip Button -->
+        <button 
+            class="skip-button" 
+            (click)="handleSkip()"
+            [class.skip-button--completed]="isCompleted">
+            <span class="skip-text">{{ isCompleted ? 'إكمال' : 'تخطي' }}</span>
+            <i class="fas" [class.fa-forward]="!isCompleted" [class.fa-check]="isCompleted"></i>
+        </button>
+
         <!-- Header -->
         <div class="lesson-header">
             <h2 class="lesson-title">{{ parsedContent.title }}</h2>

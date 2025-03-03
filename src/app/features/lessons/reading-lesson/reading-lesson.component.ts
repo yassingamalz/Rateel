@@ -5,18 +5,22 @@ import {
   Output,
   EventEmitter,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { ReadingLessonService } from './reading-lesson.service';
 import { ReadingContent, ReadingState, TajweedRule } from './reading-lesson.types';
 import { Subscription } from 'rxjs';
+import { PlatformService } from '../../../core/services/platform.service';
 
 @Component({
   selector: 'app-reading-lesson',
   standalone: false,
   templateUrl: './reading-lesson.component.html',
   styleUrls: ['./reading-lesson.component.scss'],
-  providers: [ReadingLessonService] // Scoped to this component
+  providers: [ReadingLessonService], // Scoped to this component
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReadingLessonComponent implements OnInit, OnDestroy {
   @Input() content?: string;
@@ -28,10 +32,14 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
   state!: ReadingState;
   tajweedRules: TajweedRule[] = [];
   currentVerseIndex = 0;
-
   private subscriptions: Subscription[] = [];
+  private isCompleting = false;
 
-  constructor(private readingService: ReadingLessonService) { }
+  constructor(
+    private readingService: ReadingLessonService,
+    private platformService: PlatformService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     if (this.content) {
@@ -46,9 +54,11 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
         this.state = state;
         this.onProgress.emit(state.progress);
 
-        if (state.isCompleted && !this.isCompleted) {
-          this.onComplete.emit();
+        if (state.isCompleted && !this.isCompleted && !this.isCompleting) {
+          this.handleCompletion();
         }
+        
+        this.cdr.markForCheck();
       })
     );
   }
@@ -56,6 +66,44 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.readingService.resetState();
+  }
+
+  private async handleCompletion(): Promise<void> {
+    if (this.isCompleting) return;
+    this.isCompleting = true;
+
+    // Provide haptic feedback on mobile
+    try {
+      await this.platformService.vibrateSuccess();
+    } catch (error) {
+      console.warn('Haptic feedback not available', error);
+    }
+
+    // Emit completion event after a delay for animation
+    setTimeout(() => {
+      this.onComplete.emit();
+      this.isCompleting = false;
+    }, 1500); // Match border fill animation duration
+  }
+
+  handleSkip(): void {
+    console.log("Skip button clicked, isCompleted:", this.isCompleted);
+    
+    // Always emit completion event immediately for any click
+    this.onComplete.emit();
+    
+    // Add haptic feedback
+    this.platformService.vibrateSuccess().catch(() => {
+      // Ignore errors if vibration is not available
+    });
+    
+    // If not already completed, also mark as completed
+    if (!this.isCompleted) {
+      this.readingService.updateProgress(
+        this.parsedContent!.verses.length - 1,
+        this.parsedContent!.verses.length
+      );
+    }
   }
 
   getFormattedVerse(verseIndex: number): string {
