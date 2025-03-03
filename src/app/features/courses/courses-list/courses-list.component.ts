@@ -68,7 +68,7 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   ngOnInit(): void {
     // Force refresh all courses data at startup
     setTimeout(() => this.coursesService.refreshAllCourses(), 0);
-    
+
     // Subscribe to storage progress changes
     this.storageService.getProgressChanges()
       .pipe(
@@ -80,10 +80,10 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
           // Track update count for debugging
           this.progressUpdateCount++;
           console.log(`[CoursesListComponent] Course progress update #${this.progressUpdateCount} - ${change.id}: ${change.data.progress}%`);
-          
+
           // Force immediate change detection
           this.cdr.detectChanges();
-          
+
           // Schedule another update after a delay to ensure UI is updated
           timer(50).subscribe(() => {
             this.cdr.detectChanges();
@@ -98,20 +98,20 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
       distinctUntilChanged((prev, curr) => {
         // Skip update only if arrays are identical by value
         if (prev.length !== curr.length) return false;
-        
+
         for (let i = 0; i < prev.length; i++) {
           const prevCourse = prev[i];
           const currCourse = curr[i];
-          
+
           if (
             prevCourse.id !== currCourse.id ||
             prevCourse.progress !== currCourse.progress ||
             prevCourse.isCompleted !== currCourse.isCompleted ||
             prevCourse.isLocked !== currCourse.isLocked
           ) {
-            console.log(`[CoursesListComponent] Detected change in course ${currCourse.id}:`, 
-              { 
-                prevProgress: prevCourse.progress, 
+            console.log(`[CoursesListComponent] Detected change in course ${currCourse.id}:`,
+              {
+                prevProgress: prevCourse.progress,
                 newProgress: currCourse.progress,
                 prevCompleted: prevCourse.isCompleted,
                 newCompleted: currCourse.isCompleted
@@ -161,37 +161,49 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   private setupIntersectionObserver(): void {
     const options = {
       root: this.coursesContainer.nativeElement,
-      threshold: 0.7
+      // Use more threshold points for better detection
+      threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     };
 
     this.observer = new IntersectionObserver((entries) => {
+      // Find the most visible card (highest intersection ratio)
+      let maxRatio = 0;
+      let mostVisibleCardIndex = -1;
+
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const courseIndex = parseInt(entry.target.getAttribute('data-index') || '0');
-          if (courseIndex !== this.currentCourseIndex) {
-            this.ngZone.run(() => {
-              this.currentCourseIndex = courseIndex;
-              this.cdr.detectChanges();
-            });
+          // Store the entry with highest visibility ratio
+          if (entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            mostVisibleCardIndex = parseInt(entry.target.getAttribute('data-index') || '0');
           }
         }
       });
+
+      // Only update if we found a visible card and it's different from current
+      if (mostVisibleCardIndex >= 0 && mostVisibleCardIndex !== this.currentCourseIndex) {
+        this.ngZone.run(() => {
+          console.log(`[CoursesListComponent] Updating current course from ${this.currentCourseIndex} to ${mostVisibleCardIndex} (intersection ratio: ${maxRatio.toFixed(2)})`);
+          this.currentCourseIndex = mostVisibleCardIndex;
+          this.cdr.detectChanges();
+        });
+      }
     }, options);
 
-    // Observe all course items
+    // Observe all course items with a slight delay to ensure DOM is ready
     setTimeout(() => {
       const cards = this.coursesContainer.nativeElement.querySelectorAll('.course-item');
       cards.forEach((card: HTMLElement) => {
         this.observer?.observe(card);
       });
-    }, 100);
+    }, 150);
   }
 
   // Debugging helper - manually check progress
   logCurrentProgress(): void {
     this.courses$.pipe(take(1)).subscribe(courses => {
-      console.table(courses.map(c => ({ 
-        id: c.id, 
+      console.table(courses.map(c => ({
+        id: c.id,
         title: c.title,
         progress: c.progress || 0,
         completed: c.isCompleted || false,
@@ -238,12 +250,35 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   onScroll(event: Event): void {
     const container = event.target as HTMLElement;
     const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
+    const containerWidth = container.clientWidth;
 
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex !== this.currentCourseIndex) {
+    // Get all course items
+    const cards = container.querySelectorAll('.course-item');
+
+    // Find the most visible card
+    let bestVisibility = 0;
+    let bestIndex = this.currentCourseIndex;
+
+    cards.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Calculate how much of the card is visible in the container
+      const leftVisible = Math.max(rect.left, containerRect.left);
+      const rightVisible = Math.min(rect.right, containerRect.right);
+      const visibleWidth = Math.max(0, rightVisible - leftVisible);
+      const visibility = visibleWidth / rect.width;
+
+      if (visibility > bestVisibility) {
+        bestVisibility = visibility;
+        bestIndex = index;
+      }
+    });
+
+    // Update current index if the best visible card is different
+    if (bestIndex !== this.currentCourseIndex) {
       this.ngZone.run(() => {
-        this.currentCourseIndex = newIndex;
+        this.currentCourseIndex = bestIndex;
         this.cdr.detectChanges();
       });
     }
