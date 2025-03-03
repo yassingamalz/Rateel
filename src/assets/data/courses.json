@@ -2,62 +2,90 @@
     "version": "1.0.0",
     "courses": [
         {
-            "id": "noon-meem-mushaddad",
-            "title": "النون والميم المشددتان",
-            "description": "تعلم أحكام النون والميم المشددتين في القرآن الكريم",
+            "id": "tajweed-fundamentals",
+            "title": "أساسيات التجويد",
+            "description": "المبادئ الأساسية للتجويد وقواعد التلاوة الصحيحة للمبتدئين",
             "icon": "book-quran",
             "isLocked": false,
             "badge": {
                 "type": "achievement",
-                "value": "مكتمل"
+                "value": "مستوى مبتدئ"
             }
         },
         {
-            "id": "noon-tanween",
-            "title": "النون الساكنه والتنوين",
-            "description": "دراسة أحكام النون الساكنة والتنوين",
+            "id": "noon-meem-mushaddad",
+            "title": "النون والميم المشددتان",
+            "description": "دراسة متعمقة لأحكام النون والميم المشددتين في التلاوة القرآنية",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "makharij-huruf",
+            "title": "مخارج الحروف",
+            "description": "دورة متخصصة في مخارج الحروف العربية وصفاتها",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "noon-sakinah",
+            "title": "النون الساكنة والتنوين",
+            "description": "دراسة شاملة لأحكام النون الساكنة والتنوين",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "meem-sakinah",
             "title": "الميم الساكنة",
-            "description": "تعرف على أحكام الميم الساكنة",
+            "description": "تعمق في أحكام الميم الساكنة وتطبيقاتها",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "natural-madd",
             "title": "المد الطبيعي",
-            "description": "أساسيات المد الطبيعي وتطبيقاته",
+            "description": "أساسيات المد الطبيعي وقواعده الأساسية",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "derived-madd",
             "title": "المد الفرعي",
-            "description": "دراسة أنواع المد الفرعي",
+            "description": "دراسة أنواع المد الفرعي وتطبيقاته",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "madd-badal",
             "title": "مد البدل",
-            "description": "فهم وتطبيق مد البدل",
+            "description": "فهم وتطبيق أحكام مد البدل في التلاوة",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "madd-arid",
             "title": "المد العارض للسكون",
-            "description": "تعلم أحكام المد العارض للسكون",
+            "description": "دراسة المد العارض للسكون وأحكامه",
             "icon": "book-quran",
             "isLocked": true
         },
         {
             "id": "madd-lazim",
             "title": "المد اللازم",
-            "description": "دراسة المد اللازم وأنواعه",
+            "description": "تعمق في دراسة أنواع المد اللازم",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "qalqalah",
+            "title": "القلقلة",
+            "description": "دراسة أحكام القلقلة وتطبيقاتها في التلاوة",
+            "icon": "book-quran",
+            "isLocked": true
+        },
+        {
+            "id": "advanced-tajweed",
+            "title": "تجويد متقدم",
+            "description": "موضوعات متقدمة في علم التجويد والتلاوة المتميزة",
             "icon": "book-quran",
             "isLocked": true
         }
