@@ -7,11 +7,12 @@ import {
   NgZone,
   ChangeDetectionStrategy,
   AfterViewInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnDestroy,
+  ApplicationRef
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, take, takeUntil } from 'rxjs/operators';
+import { Observable, Subject, takeUntil, filter, distinctUntilChanged, fromEvent, take, timer } from 'rxjs';
 import { Course } from '../../../shared/interfaces/course';
 import { CoursesService } from '../courses.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -37,11 +38,12 @@ import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scro
     ])
   ]
 })
-export class CoursesListComponent extends DragScrollBase implements OnInit, AfterViewInit {
+export class CoursesListComponent extends DragScrollBase implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('coursesContainer') coursesContainer!: ElementRef;
 
   courses$: Observable<Course[]>;
   currentCourseIndex = 0;
+  private progressUpdateCount = 0;
   override destroy$ = new Subject<void>();
   private observer: IntersectionObserver | null = null;
 
@@ -51,7 +53,8 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
     storageService: StorageService,
     private coursesService: CoursesService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private appRef: ApplicationRef
   ) {
     super(elementRef, ngZone, storageService);
     this.courses$ = this.coursesService.getCourses();
@@ -63,32 +66,10 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   }
 
   ngOnInit(): void {
+    // Force refresh all courses data at startup
+    setTimeout(() => this.coursesService.refreshAllCourses(), 0);
+    
     // Subscribe to storage progress changes
-    this.storageService.getProgressChanges()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(change => {
-        if (change?.type === 'course') {
-          // Force refresh of data
-          this.coursesService.getCourses()
-            .pipe(take(1))
-            .subscribe(() => {
-              // Trigger change detection cycle
-              this.cdr.markForCheck();
-            });
-        }
-      });
-
-    // Set up enhanced progress tracking
-    this.setupProgressTracking();
-  }
-
-  ngAfterViewInit(): void {
-    this.setupScrollBehavior();
-    this.setupIntersectionObserver();
-  }
-
-  private setupProgressTracking(): void {
-    // Track direct storage changes for course progress
     this.storageService.getProgressChanges()
       .pipe(
         takeUntil(this.destroy$),
@@ -96,31 +77,72 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
       )
       .subscribe(change => {
         if (change) {
-          console.log(`[CoursesListComponent] Progress update for course: ${change.id}, progress: ${change.data.progress}%`);
-          // Force refresh view
-          this.cdr.markForCheck();
+          // Track update count for debugging
+          this.progressUpdateCount++;
+          console.log(`[CoursesListComponent] Course progress update #${this.progressUpdateCount} - ${change.id}: ${change.data.progress}%`);
+          
+          // Force immediate change detection
+          this.cdr.detectChanges();
+          
+          // Schedule another update after a delay to ensure UI is updated
+          timer(50).subscribe(() => {
+            this.cdr.detectChanges();
+            console.log(`[CoursesListComponent] Forced change detection after update #${this.progressUpdateCount}`);
+          });
         }
       });
 
-    // Also track the courses observable directly for any changes
+    // Also track the courses observable for structural changes
     this.courses$.pipe(
       takeUntil(this.destroy$),
       distinctUntilChanged((prev, curr) => {
-        // Check if any course's progress has changed
+        // Skip update only if arrays are identical by value
         if (prev.length !== curr.length) return false;
+        
         for (let i = 0; i < prev.length; i++) {
-          if (prev[i].progress !== curr[i].progress ||
-            prev[i].isCompleted !== curr[i].isCompleted ||
-            prev[i].isLocked !== curr[i].isLocked) {
+          const prevCourse = prev[i];
+          const currCourse = curr[i];
+          
+          if (
+            prevCourse.id !== currCourse.id ||
+            prevCourse.progress !== currCourse.progress ||
+            prevCourse.isCompleted !== currCourse.isCompleted ||
+            prevCourse.isLocked !== currCourse.isLocked
+          ) {
+            console.log(`[CoursesListComponent] Detected change in course ${currCourse.id}:`, 
+              { 
+                prevProgress: prevCourse.progress, 
+                newProgress: currCourse.progress,
+                prevCompleted: prevCourse.isCompleted,
+                newCompleted: currCourse.isCompleted
+              }
+            );
             return false;
           }
         }
         return true;
       })
     ).subscribe(courses => {
-      console.log('[CoursesListComponent] Courses updated, re-rendering');
-      this.cdr.markForCheck();
+      console.log(`[CoursesListComponent] Courses updated (${courses.length}), forcing re-render`);
+      // Force immediate change detection
+      this.cdr.detectChanges();
     });
+
+    // Setup visibility change listener to refresh data when tab becomes visible
+    fromEvent(document, 'visibilitychange')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (document.visibilityState === 'visible') {
+          console.log('[CoursesListComponent] Tab became visible, refreshing courses data');
+          this.coursesService.refreshAllCourses();
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  ngAfterViewInit(): void {
+    this.setupScrollBehavior();
+    this.setupIntersectionObserver();
   }
 
   private setupScrollBehavior(): void {
@@ -157,10 +179,32 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
     }, options);
 
     // Observe all course items
-    const cards = this.coursesContainer.nativeElement.querySelectorAll('.course-item');
-    cards.forEach((card: HTMLElement) => {
-      this.observer?.observe(card);
+    setTimeout(() => {
+      const cards = this.coursesContainer.nativeElement.querySelectorAll('.course-item');
+      cards.forEach((card: HTMLElement) => {
+        this.observer?.observe(card);
+      });
+    }, 100);
+  }
+
+  // Debugging helper - manually check progress
+  logCurrentProgress(): void {
+    this.courses$.pipe(take(1)).subscribe(courses => {
+      console.table(courses.map(c => ({ 
+        id: c.id, 
+        title: c.title,
+        progress: c.progress || 0,
+        completed: c.isCompleted || false,
+        locked: c.isLocked || false
+      })));
     });
+  }
+
+  // Force refresh manually if needed
+  forceRefreshCourses(): void {
+    console.log('[CoursesListComponent] Manually forcing refresh of all courses');
+    this.coursesService.refreshAllCourses();
+    this.cdr.detectChanges();
   }
 
   onMouseDown(event: MouseEvent): void {
@@ -206,7 +250,7 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
   }
 
   private handleCourseClick(courseId: string): void {
-    this.courses$.subscribe(courses => {
+    this.courses$.pipe(take(1)).subscribe(courses => {
       const course = courses.find(c => c.id === courseId);
       if (course && !course.isLocked) {
         this.router.navigate(['/courses', courseId, 'units']);

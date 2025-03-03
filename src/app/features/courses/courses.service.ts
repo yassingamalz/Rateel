@@ -1,8 +1,7 @@
-// src/app/features/courses/courses.service.ts
+//src\app\features\courses\courses.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, takeUntil, filter } from 'rxjs';
-import { map, catchError, distinctUntilChanged } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, takeUntil, filter, map, catchError, distinctUntilChanged } from 'rxjs';
 import { Course } from '../../shared/interfaces/course';
 import { StorageService } from '../../core/services/storage.service';
 
@@ -11,8 +10,8 @@ import { StorageService } from '../../core/services/storage.service';
 })
 export class CoursesService implements OnDestroy {
   private coursesSubject = new BehaviorSubject<Course[]>([]);
-  courses$ = this.coursesSubject.asObservable();
   private destroy$ = new BehaviorSubject<boolean>(false);
+  private refreshTrigger = new BehaviorSubject<string | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -30,27 +29,79 @@ export class CoursesService implements OnDestroy {
         if (!change) return;
 
         const courseId = change.id;
-        const currentCourses = this.coursesSubject.getValue();
+        console.log(`[CoursesService] Storage change detected for course ${courseId}, progress: ${change.data.progress}%`);
         
-        // Create new array with updated course objects to trigger change detection
-        const updatedCourses = currentCourses.map(course => {
-          if (course.id === courseId) {
-            // Create a new course object with updated values
-            const updatedCourse = {
-              ...course,
-              progress: change.data.progress,
-              isCompleted: change.data.isCompleted,
-              isLocked: change.data.isLocked ?? course.isLocked
-            };
-            console.debug(`[CoursesService] Updated course ${courseId} progress to ${change.data.progress}%`);
-            return updatedCourse;
-          }
-          return course;
-        });
-
-        // Update subject with new references to trigger change detection
-        this.coursesSubject.next(updatedCourses);
+        // Force refresh the course data
+        this.refreshCourse(courseId);
       });
+      
+    // Listen to refresh trigger
+    this.refreshTrigger
+      .pipe(
+        takeUntil(this.destroy$),
+        distinctUntilChanged(),
+        filter(id => !!id)
+      )
+      .subscribe(courseId => {
+        if (courseId) {
+          this.refreshCourse(courseId);
+        }
+      });
+  }
+
+  /**
+   * Force refresh a specific course's data
+   */
+  public refreshCourse(courseId: string): void {
+    const currentCourses = this.coursesSubject.getValue();
+    const courseIndex = currentCourses.findIndex(c => c.id === courseId);
+    
+    if (courseIndex === -1) {
+      console.warn(`[CoursesService] Cannot refresh course ${courseId}: not found in current courses`);
+      return;
+    }
+    
+    // Get fresh data from storage
+    const progressData = this.storageService.getProgress('course', courseId);
+    if (!progressData) {
+      console.warn(`[CoursesService] No progress data found for course ${courseId}`);
+      return;
+    }
+    
+    // Create a new array with updated objects for change detection
+    const updatedCourses = [...currentCourses];
+    updatedCourses[courseIndex] = {
+      ...currentCourses[courseIndex],
+      progress: progressData.progress || 0,
+      isCompleted: progressData.isCompleted || false,
+      isLocked: progressData.isLocked || false
+    };
+    
+    // Update the courses array with the new reference
+    this.coursesSubject.next(updatedCourses);
+    console.log(`[CoursesService] Refreshed course ${courseId}, progress: ${progressData.progress}%`);
+  }
+  
+  /**
+   * Force refresh all courses
+   */
+  public refreshAllCourses(): void {
+    const currentCourses = this.coursesSubject.getValue();
+    const updatedCourses = currentCourses.map(course => {
+      const progressData = this.storageService.getProgress('course', course.id);
+      if (progressData) {
+        return {
+          ...course,
+          progress: progressData.progress || 0,
+          isCompleted: progressData.isCompleted || false,
+          isLocked: progressData.isLocked || false
+        };
+      }
+      return course;
+    });
+    
+    this.coursesSubject.next(updatedCourses);
+    console.log(`[CoursesService] Refreshed all courses`);
   }
 
   private initializeCourses(): void {
@@ -103,16 +154,14 @@ export class CoursesService implements OnDestroy {
   }
 
   getCourses(): Observable<Course[]> {
-    return this.courses$.pipe(
-      // Use distinctUntilChanged to avoid redundant emissions
-      distinctUntilChanged((prev, curr) => 
-        JSON.stringify(prev) === JSON.stringify(curr)
-      )
-    );
+    return this.coursesSubject.asObservable();
   }
 
   getCourseById(courseId: string): Observable<Course | undefined> {
-    return this.courses$.pipe(
+    // Force refresh when requesting a specific course
+    setTimeout(() => this.refreshTrigger.next(courseId), 0);
+    
+    return this.coursesSubject.pipe(
       map(courses => courses.find(course => course.id === courseId))
     );
   }
@@ -127,8 +176,8 @@ export class CoursesService implements OnDestroy {
       isCompleted 
     });
   
-    // Update local state is handled by the storage change subscription
-    console.debug(`[CoursesService] Set course ${courseId} progress to ${normalizedProgress}%`);
+    // Force refresh to ensure UI updates
+    setTimeout(() => this.refreshCourse(courseId), 10);
   }
   
   markCourseAsCompleted(courseId: string): Observable<void> {
@@ -146,6 +195,9 @@ export class CoursesService implements OnDestroy {
       this.storageService.saveProgress('course', nextCourse.id, {
         isLocked: false
       });
+      
+      // Force refresh the next course too
+      setTimeout(() => this.refreshCourse(nextCourse.id), 20);
     }
   
     return of(void 0);
@@ -157,7 +209,8 @@ export class CoursesService implements OnDestroy {
       isLocked: false
     });
     
-    // Local state update is handled by the storage change subscription
+    // Force refresh
+    setTimeout(() => this.refreshCourse(courseId), 10);
   }
 
   ngOnDestroy(): void {
