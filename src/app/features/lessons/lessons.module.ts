@@ -11,6 +11,7 @@ import { ReadingLessonComponent } from './reading-lesson/reading-lesson.componen
 import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
 import { SharedModule } from '../../shared/shared.module';
 import { BorderFillDirective } from '../../shared/directives/border-fill.directive';
+import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BorderFillDirective } from '../../shared/directives/border-fill.directi
     InteractiveLessonComponent,
     AudioPlayerComponent,
     ReadingLessonComponent,
+    AssessmentLessonComponent,
   ],
   imports: [
     CommonModule,

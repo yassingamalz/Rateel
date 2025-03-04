@@ -1,0 +1,240 @@
+<!-- assessment-lesson.component.html -->
+<div class="assessment-lesson" dir="rtl">
+    <ng-container *ngIf="parsedContent; else noContent">
+        <!-- Skip Button -->
+        <button class="skip-button" (click)="handleSkip()" [class.skip-button--completed]="isCompleted">
+            <span class="skip-text">{{ isCompleted ? 'إكمال' : 'تخطي' }}</span>
+            <i class="fas" [class.fa-forward]="!isCompleted" [class.fa-check]="isCompleted"></i>
+        </button>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="state.progress"></div>
+            </div>
+            <div class="progress-stats">
+                <span class="question-counter">{{ state.currentQuestionIndex + 1 }}/{{ parsedContent.questions.length
+                    }}</span>
+                <span class="progress-percentage">{{ state.progress | number:'1.0-0' }}%</span>
+            </div>
+        </div>
+
+        <!-- Assessment Header -->
+        <div class="assessment-header">
+            <h2 class="assessment-title">{{ parsedContent.title }}</h2>
+            <p class="assessment-description" *ngIf="parsedContent.description">
+                {{ parsedContent.description }}
+            </p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="assessment-container">
+            <div class="question-container" #questionContainer>
+                <ng-container *ngIf="state.mode === 'assessment' && currentQuestion">
+                    <!-- Current Question -->
+                    <div class="question-card" [@fadeInOut]>
+                        <div class="question-number">السؤال {{ state.currentQuestionIndex + 1 }}</div>
+                        <div class="question-text">{{ currentQuestion.text }}</div>
+
+                        <!-- Question Media (Image or Audio) -->
+                        <div class="question-media" *ngIf="currentQuestion.imageUrl || currentQuestion.audioUrl">
+                            <img *ngIf="currentQuestion.imageUrl" [src]="currentQuestion.imageUrl" alt="Question Image"
+                                class="question-image">
+                            <audio *ngIf="currentQuestion.audioUrl" controls class="question-audio">
+                                <source [src]="currentQuestion.audioUrl" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <!-- Answer Options based on question type -->
+                        <div class="options-container">
+                            <!-- Single choice -->
+                            <ng-container *ngIf="currentQuestion.type === QuestionType.SINGLE_CHOICE">
+                                <div class="option-list">
+                                    <div *ngFor="let option of currentQuestion.options" class="option-item"
+                                        [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
+                                        (click)="onOptionSelected(currentQuestion.id, option.id)">
+                                        <div class="option-marker">
+                                            <div class="radio-circle"></div>
+                                        </div>
+                                        <div class="option-text">{{ option.text }}</div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- Multiple choice -->
+                            <ng-container *ngIf="currentQuestion.type === QuestionType.MULTIPLE_CHOICE">
+                                <div class="option-list">
+                                    <div *ngFor="let option of currentQuestion.options"
+                                        class="option-item option-item--checkbox"
+                                        [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
+                                        (click)="onMultipleOptionSelected(currentQuestion.id, option.id, !isOptionSelected(currentQuestion.id, option.id))">
+                                        <div class="option-marker">
+                                            <div class="checkbox"></div>
+                                        </div>
+                                        <div class="option-text">{{ option.text }}</div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- True/False -->
+                            <ng-container *ngIf="currentQuestion.type === QuestionType.TRUE_FALSE">
+                                <div class="true-false-buttons">
+                                    <button class="true-button"
+                                        [class.selected]="state.selectedOptions.get(currentQuestion.id)?.[0] === 'true'"
+                                        (click)="onTrueFalseSelected(currentQuestion.id, true)">
+                                        <i class="fas fa-check"></i>
+                                        <span>صحيح</span>
+                                    </button>
+                                    <button class="false-button"
+                                        [class.selected]="state.selectedOptions.get(currentQuestion.id)?.[0] === 'false'"
+                                        (click)="onTrueFalseSelected(currentQuestion.id, false)">
+                                        <i class="fas fa-times"></i>
+                                        <span>خطأ</span>
+                                    </button>
+                                </div>
+                            </ng-container>
+
+                            <!-- Text Input -->
+                            <ng-container *ngIf="currentQuestion.type === QuestionType.TEXT_INPUT">
+
+                            </ng-container>
+                        </div>
+
+                        <!-- Hint Section -->
+                        <div class="hint-section" *ngIf="currentQuestion.hint">
+                            <div class="hint-title">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>تلميح:</span>
+                            </div>
+                            <div class="hint-content">{{ currentQuestion.hint }}</div>
+                        </div>
+
+                        <!-- Answer Submission -->
+                        <div class="question-actions">
+                            <button class="submit-button"
+                                [disabled]="!state.selectedOptions.get(currentQuestion.id)?.length && !state.answers.has(currentQuestion.id)"
+                                (click)="submitAnswer()">
+                                <span>تأكيد الإجابة</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Answer Feedback and Explanation -->
+                    <div class="answer-feedback" *ngIf="isAnswered(currentQuestion.id)" [@slideInOut]>
+                        <div class="feedback-header"
+                            [class.feedback-correct]="getQuestionResult(currentQuestion.id) === 'correct'"
+                            [class.feedback-incorrect]="getQuestionResult(currentQuestion.id) === 'incorrect'">
+                            <i class="fas" [class.fa-check-circle]="getQuestionResult(currentQuestion.id) === 'correct'"
+                                [class.fa-times-circle]="getQuestionResult(currentQuestion.id) === 'incorrect'"></i>
+                            <span>{{ getQuestionResult(currentQuestion.id) === 'correct' ? 'إجابة صحيحة!' : 'إجابة
+                                خاطئة' }}</span>
+                        </div>
+
+                        <div class="explanation-content" *ngIf="currentQuestion.explanation && state.showExplanation">
+                            <div class="explanation-title">الشرح:</div>
+                            <div class="explanation-text">{{ currentQuestion.explanation }}</div>
+                        </div>
+
+                        <div class="feedback-actions">
+                            <button class="explanation-toggle" *ngIf="currentQuestion.explanation"
+                                (click)="state.showExplanation ? hideExplanation() : showExplanation()">
+                                <i class="fas" [class.fa-chevron-down]="!state.showExplanation"
+                                    [class.fa-chevron-up]="state.showExplanation"></i>
+                                <span>{{ state.showExplanation ? 'إخفاء الشرح' : 'عرض الشرح' }}</span>
+                            </button>
+
+                            <button class="next-button"
+                                *ngIf="state.currentQuestionIndex < parsedContent.questions.length - 1"
+                                (click)="nextQuestion()">
+                                <span>السؤال التالي</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+
+                            <button class="finish-button"
+                                *ngIf="state.currentQuestionIndex === parsedContent.questions.length - 1"
+                                (click)="finishAssessment()">
+                                <span>إنهاء الاختبار</span>
+                                <i class="fas fa-flag-checkered"></i>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <!-- Results Mode -->
+                <ng-container *ngIf="state.mode === 'review'">
+                    <div class="assessment-results" [@fadeInOut]>
+                        <div class="results-header">
+                            <h3 class="results-title">نتائج الاختبار</h3>
+                            <div class="results-score"
+                                [class.score-passed]="calculateScore() >= (parsedContent.passingScore || 60)"
+                                [class.score-failed]="calculateScore() < (parsedContent.passingScore || 60)">
+                                {{ calculateScore() }}%
+                            </div>
+                            <div class="results-message">
+                                <ng-container *ngIf="calculateScore() >= (parsedContent.passingScore || 60)">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>أحسنت! لقد اجتزت الاختبار بنجاح.</span>
+                                </ng-container>
+                                <ng-container *ngIf="calculateScore() < (parsedContent.passingScore || 60)">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>لم تتمكن من اجتياز الاختبار. يمكنك المحاولة مرة أخرى.</span>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="results-breakdown">
+                            <h4 class="breakdown-title">تفاصيل الإجابات</h4>
+
+                            <div class="questions-summary">
+                                <div *ngFor="let question of parsedContent.questions; let i = index"
+                                    class="question-result-item"
+                                    [class.result-correct]="getQuestionResult(question.id) === 'correct'"
+                                    [class.result-incorrect]="getQuestionResult(question.id) === 'incorrect'">
+                                    <div class="question-result-number">{{ i + 1 }}</div>
+                                    <div class="question-result-text">{{ question.text | slice:0:60 }}{{
+                                        question.text.length > 60 ? '...' : '' }}</div>
+                                    <div class="question-result-icon">
+                                        <i class="fas" [class.fa-check]="getQuestionResult(question.id) === 'correct'"
+                                            [class.fa-times]="getQuestionResult(question.id) === 'incorrect'"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-actions">
+                            <button class="restart-button" (click)="restartAssessment()">
+                                <i class="fas fa-redo"></i>
+                                <span>إعادة الاختبار</span>
+                            </button>
+
+                            <button class="complete-button" (click)="handleSkip()">
+                                <i class="fas fa-check"></i>
+                                <span>إنهاء الدرس</span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Navigation (when in assessment mode) -->
+            <div class="navigation-dots" *ngIf="state.mode === 'assessment'">
+                <div *ngFor="let question of parsedContent.questions; let i = index" class="nav-dot"
+                    [class.active]="state.currentQuestionIndex === i" [class.completed]="isAnswered(question.id)"
+                    [class.correct]="getQuestionResult(question.id) === 'correct'"
+                    [class.incorrect]="getQuestionResult(question.id) === 'incorrect'"
+                    (click)="assessmentService.goToQuestion(i)">
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- No Content Template -->
+    <ng-template #noContent>
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>عذراً، لا يمكن تحميل محتوى الاختبار</span>
+        </div>
+    </ng-template>
+</div>
