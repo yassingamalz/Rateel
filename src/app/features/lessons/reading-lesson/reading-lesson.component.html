@@ -20,15 +20,34 @@
 
         <!-- Main Content Area -->
         <div class="reading-container">
-            <!-- Reading Controls -->
+            <!-- Toolbar with Controls -->
             <div class="reading-controls">
-                <div class="font-controls">
-                    <button class="control-button" (click)="decreaseFontSize()">
-                        <i class="fas fa-minus"></i>
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <span class="progress-text">
+                        {{ currentVerseIndex + 1 }} / {{ parsedContent.verses.length }}
+                    </span>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="navigation-group">
+                    <button class="control-button" [disabled]="currentVerseIndex === 0" (click)="previousVerse()">
+                        <i class="fas fa-chevron-right"></i>
                     </button>
-                    <span class="font-size">{{ state.fontSize }}px</span>
+                    
+                    <button class="control-button" [disabled]="currentVerseIndex === parsedContent.verses.length - 1" (click)="nextVerse()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                
+                <!-- Font Size Controls -->
+                <div class="font-controls">
                     <button class="control-button" (click)="increaseFontSize()">
                         <i class="fas fa-plus"></i>
+                    </button>
+                    <span class="font-size">{{ state.fontSize }}px</span>
+                    <button class="control-button" (click)="decreaseFontSize()">
+                        <i class="fas fa-minus"></i>
                     </button>
                 </div>
 
@@ -72,30 +91,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Navigation Controls -->
-            <div class="navigation-controls">
-                <button class="nav-button" [disabled]="currentVerseIndex === 0" (click)="previousVerse()">
-                    <i class="fas fa-chevron-right"></i>
-                    الآية السابقة
-                </button>
-
-                <div class="progress-indicator">
-                    <div class="progress-bar">
-                        <div class="progress-bar__fill" [style.width.%]="state.progress">
-                        </div>
-                    </div>
-                    <span class="progress-text">
-                        {{ currentVerseIndex + 1 }} / {{ parsedContent.verses.length }}
-                    </span>
-                </div>
-
-                <button class="nav-button" [disabled]="currentVerseIndex === parsedContent.verses.length - 1"
-                    (click)="nextVerse()">
-                    الآية التالية
-                    <i class="fas fa-chevron-left"></i>
-                </button>
             </div>
         </div>
     </ng-container>
