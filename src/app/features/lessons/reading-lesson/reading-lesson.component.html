@@ -20,49 +20,52 @@
 
         <!-- Main Content Area -->
         <div class="reading-container">
-            <!-- Toolbar with Controls -->
+            <!-- Enhanced Toolbar with Controls -->
             <div class="reading-controls">
-                <!-- Progress Indicator -->
-                <div class="progress-indicator">
-                    <span class="progress-text">
-                        {{ currentVerseIndex + 1 }} / {{ parsedContent.verses.length }}
-                    </span>
-                </div>
-
-                <!-- Navigation Controls -->
-                <div class="navigation-group">
-                    <button class="control-button" [disabled]="currentVerseIndex === 0" (click)="previousVerse()">
+                <!-- Left Group: Navigation Controls -->
+                <div class="controls-group navigation-group">
+                    <button class="control-button" [disabled]="currentVerseIndex === 0" (click)="previousVerse()" title="السابق">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     
-                    <button class="control-button" [disabled]="currentVerseIndex === parsedContent.verses.length - 1" (click)="nextVerse()">
+                    <div class="progress-indicator">
+                        <span class="progress-text">
+                            {{ currentVerseIndex + 1 }} / {{ parsedContent.verses.length }}
+                        </span>
+                    </div>
+                    
+                    <button class="control-button" [disabled]="currentVerseIndex === parsedContent.verses.length - 1" (click)="nextVerse()" title="التالي">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
-                
-                <!-- Font Size Controls -->
-                <div class="font-controls">
-                    <button class="control-button" (click)="increaseFontSize()">
-                        <i class="fas fa-plus"></i>
+
+                <!-- Center Group: Font Controls -->
+                <div class="controls-group font-controls">
+                    <button class="control-button" (click)="decreaseFontSize()" title="تصغير الخط">
+                        <i class="fas fa-minus"></i>
                     </button>
                     <span class="font-size">{{ state.fontSize }}px</span>
-                    <button class="control-button" (click)="decreaseFontSize()">
-                        <i class="fas fa-minus"></i>
+                    <button class="control-button" (click)="increaseFontSize()" title="تكبير الخط">
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
 
-                <button class="rules-toggle" [class.active]="state.showRules" (click)="toggleRules()">
-                    <i class="fas fa-info-circle"></i>
-                    <span>قواعد التجويد</span>
-                </button>
+                <!-- Right Group: Toggle Rules Panel -->
+                <div class="controls-group">
+                    <button class="rules-toggle" [class.active]="state.showRules" (click)="toggleRules()" title="إظهار/إخفاء قواعد التجويد">
+                        <i class="fas fa-info-circle"></i>
+                        <span>قواعد التجويد</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Content Area with Tajweed Rules Panel -->
             <div class="content-area" [class.with-rules]="state.showRules">
                 <!-- Verse Display -->
-                <div class="verse-container" [style.fontSize.px]="state.fontSize" (scroll)="onVerseScroll($event)">
+                <div class="verse-container" #verseContainer [style.fontSize.px]="state.fontSize" (scroll)="onVerseScroll($event)">
                     <div class="verse" *ngFor="let verse of parsedContent.verses; let i = index"
-                        [class.active]="i === currentVerseIndex">
+                        [class.active]="i === currentVerseIndex"
+                        [id]="'verse-' + i">
                         <div class="verse-text" [innerHTML]="getFormattedVerse(i)" [attr.data-verse]="i + 1">
                         </div>
                         <div class="verse-translation" *ngIf="verse.translation">

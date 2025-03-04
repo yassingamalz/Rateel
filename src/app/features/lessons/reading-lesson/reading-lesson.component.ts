@@ -7,7 +7,10 @@ import {
   OnInit,
   OnDestroy,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
 } from '@angular/core';
 import { ReadingLessonService } from './reading-lesson.service';
 import { ReadingContent, ReadingState, TajweedRule } from './reading-lesson.types';
@@ -34,7 +37,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class ReadingLessonComponent implements OnInit, OnDestroy {
+export class ReadingLessonComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('verseContainer') verseContainer!: ElementRef<HTMLElement>;
+  
   @Input() content?: string;
   @Input() isCompleted?: boolean;
   @Output() onProgress = new EventEmitter<number>();
@@ -85,9 +90,43 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
     );
   }
 
+  ngAfterViewInit(): void {
+    // Initial scroll to the current verse if needed
+    setTimeout(() => {
+      this.scrollToCurrentVerse();
+    }, 100);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.readingService.resetState();
+  }
+
+  /**
+   * Scroll to the currently selected verse
+   */
+  private scrollToCurrentVerse(): void {
+    if (!this.verseContainer) return;
+    
+    const verseElement = this.verseContainer.nativeElement.querySelector(`#verse-${this.currentVerseIndex}`) as HTMLElement;
+    
+    if (verseElement) {
+      const containerRect = this.verseContainer.nativeElement.getBoundingClientRect();
+      const verseRect = verseElement.getBoundingClientRect();
+      
+      // Calculate the scroll position with some offset to center the verse
+      const scrollPosition = 
+        verseElement.offsetTop - 
+        this.verseContainer.nativeElement.offsetTop - 
+        (containerRect.height / 2) + 
+        (verseRect.height / 2);
+      
+      // Scroll smoothly to the verse
+      this.verseContainer.nativeElement.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
   }
 
   private async handleCompletion(): Promise<void> {
@@ -142,6 +181,11 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
     if (this.parsedContent && this.currentVerseIndex < this.parsedContent.verses.length - 1) {
       this.currentVerseIndex++;
       this.updateProgress();
+      
+      // Scroll to the new current verse
+      setTimeout(() => {
+        this.scrollToCurrentVerse();
+      }, 50);
     }
   }
 
@@ -149,6 +193,11 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
     if (this.currentVerseIndex > 0) {
       this.currentVerseIndex--;
       this.updateProgress();
+      
+      // Scroll to the new current verse
+      setTimeout(() => {
+        this.scrollToCurrentVerse();
+      }, 50);
     }
   }
 
