@@ -17,7 +17,8 @@ import {
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { InteractiveLessonService } from './interactive-lesson.service';
 import { TajweedVerse, InteractionState } from './interactive-lesson.types';
-import { Subscription, fromEvent, debounceTime, takeUntil, timer } from 'rxjs';
+import { Subscription, fromEvent, timer } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Capacitor } from '@capacitor/core';
 import { PlatformService } from '../../../core/services/platform.service';
 
@@ -35,16 +36,6 @@ import { PlatformService } from '../../../core/services/platform.service';
       ]),
       transition(':leave', [
         animate('250ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0, transform: 'translateY(-30px)' }))
-      ])
-    ]),
-    trigger('audioWave', [
-      transition(':enter', [
-        query('.wave-bar', [
-          style({ transform: 'scaleY(0)' }),
-          stagger(50, [
-            animate('300ms ease-out', style({ transform: 'scaleY(1)' }))
-          ])
-        ], { optional: true })
       ])
     ])
   ]
@@ -83,7 +74,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     recognizedWords: new Set<number>()
   };
 
-  // Enhanced UI state variables
+  // UI state variables
   isDragging = false;
   isSnapScrolling = false;
   startX = 0;
@@ -101,12 +92,11 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   
   // Animation timers
   private readonly SNAP_ANIMATION_DURATION = 500; // ms
-  private readonly FEEDBACK_DURATION = 2000; // ms
   private readonly DEBOUNCE_TIME = 150; // ms for resize and other events
   
-  // Physical constants for inertia
-  private readonly INERTIA_FACTOR = 0.92; // Damping factor
-  private readonly MIN_DRAG_VELOCITY = 0.5; // Minimum velocity to trigger inertia
+  // Constants for inertia
+  private readonly INERTIA_FACTOR = 0.92;
+  private readonly MIN_DRAG_VELOCITY = 0.5; 
   private readonly MAX_INERTIA_DURATION = 1000; // ms
   
   // Helpers for mobile detection
@@ -116,7 +106,6 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   private subscriptions: Subscription[] = [];
   private destroy$ = new Subscription();
   private VERSE_WIDTH = 500; // Base width of verse card
-  private readonly WORD_WIDTH = 500; // Width of each verse card
   private readonly AUTO_SCROLL_THRESHOLD = 0.8; // 80% of words recognized triggers scroll
 
   constructor(
@@ -447,8 +436,14 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
       boundedPosition = maxScroll + (overDrag / 3);
     }
     
-    // Update scroll position in service state
-    this.interactiveService.updateScrollPosition(boundedPosition, this.containerWidth, this.totalContentWidth);
+    // Update scroll position in local state only
+    this.state = {
+      ...this.state,
+      scrollPosition: boundedPosition
+    };
+    
+    // Update the UI without changing the current verse
+    this.cdr.detectChanges();
   }
 
   // Snap to nearest verse with animation
@@ -479,7 +474,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     // Calculate target position based on verse width
     const targetPosition = -(index * this.VERSE_WIDTH);
     
-    // Update state with new position and verse index
+    // Update service with new verse index
     this.interactiveService.snapToVerse(index);
     
     // Disable snap scrolling after animation
@@ -494,14 +489,6 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     const currentIndex = this.state.currentVerseIndex;
     if (currentIndex < this.verses.length - 1) {
       this.snapToVerse(currentIndex + 1);
-    }
-  }
-  
-  // Scroll to the previous verse
-  scrollToPreviousVerse(): void {
-    const currentIndex = this.state.currentVerseIndex;
-    if (currentIndex > 0) {
-      this.snapToVerse(currentIndex - 1);
     }
   }
   

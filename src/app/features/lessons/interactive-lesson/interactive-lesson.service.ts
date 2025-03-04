@@ -1,4 +1,4 @@
-// src/app/features/lessons/interactive-lesson/interactive-lesson.service.ts
+// interactive-lesson.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InteractionState, TajweedVerse } from './interactive-lesson.types';
@@ -45,7 +45,6 @@ export class InteractiveLessonService {
    * Sets the verses for the interactive lesson and initializes state
    */
   setVerses(verses: TajweedVerse[]): void {
-    console.log('[InteractiveLessonService] Setting verses:', verses.length);
     this.verses = verses;
     this.totalWordCount = this.calculateTotalWordCount();
     
@@ -70,6 +69,7 @@ export class InteractiveLessonService {
 
   /**
    * Updates the scroll position with bounds checking
+   * Note: This should only affect the visual position, not change the current verse
    */
   updateScrollPosition(position: number, containerWidth: number, totalContentWidth: number): void {
     // Calculate the bounds with RTL orientation
@@ -79,32 +79,40 @@ export class InteractiveLessonService {
     // Bound position within valid range
     const boundedPosition = Math.max(minScroll, Math.min(maxScroll, position));
     
-    // Calculate the nearest verse index based on scroll position
-    const nearestVerseIndex = Math.round(Math.abs(boundedPosition) / this.VERSE_WIDTH);
-    const validVerseIndex = Math.min(Math.max(0, nearestVerseIndex), this.verses.length - 1);
-    
-    // Update state with new position and verse index
+    // Update scroll position without changing the active verse
     this.state.next({
       ...this.state.value,
-      scrollPosition: boundedPosition,
-      currentVerseIndex: validVerseIndex
+      scrollPosition: boundedPosition
     });
+    
+    // Log the position updates in debug mode
+    // console.log(`Scroll position updated: ${boundedPosition}, currentVerse: ${this.state.value.currentVerseIndex}`);
   }
 
   /**
-   * Snaps the view to a specific verse
+   * Snaps the view to a specific verse and updates current verse index
+   * This should not navigate to a new lesson, just change the verse within the current lesson
    */
   snapToVerse(verseIndex: number): void {
-    // Calculate scroll position based on verse index (for RTL)
-    const newPosition = -(verseIndex * this.VERSE_WIDTH);
+    // Validate the verse index is within bounds
+    if (verseIndex < 0 || verseIndex >= this.verses.length) {
+      console.warn(`[InteractiveLessonService] Invalid verse index: ${verseIndex}. Verses length: ${this.verses.length}`);
+      return;
+    }
     
-    // Update state with new position and verse index
+    // Calculate scroll position based on verse index
+    const scrollPosition = -(verseIndex * this.VERSE_WIDTH);
+    
+    // Update state - make sure this doesn't trigger page navigation
     this.state.next({
       ...this.state.value,
-      scrollPosition: newPosition,
+      scrollPosition: scrollPosition,
       currentVerseIndex: verseIndex,
-      // When changing verses, reset the current word index
-      currentWordIndex: this.getGlobalWordIndex(verseIndex, 0)
+      feedback: undefined,
+      // Reset word recognition for the new verse
+      currentWordIndex: this.getGlobalWordIndex(verseIndex, 0),
+      // Keep the recording state and other properties unchanged
+      isRecording: this.state.value.isRecording
     });
   }
 
