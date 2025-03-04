@@ -113,7 +113,8 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   private destroy$ = new Subscription();
   private VERSE_WIDTH = 500; // Base width of verse card
   private readonly AUTO_SCROLL_THRESHOLD = 0.8; // 80% of words recognized triggers scroll
-
+  private readonly INITIAL_PADDING = 0.15;
+  
   constructor(
     private interactiveService: InteractiveLessonService,
     private platformService: PlatformService,
@@ -480,37 +481,27 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
   // Snap to a specific verse within the current lesson
   private snapToVerse(index: number): void {
-    if (this.isSnapScrolling || !this.versesContainer || index >= this.verses.length) return;
-
-    console.log(`[InteractiveLessonComponent] Snapping to verse ${index} within current lesson`);
-
-    // Enable snap scrolling animation flag
-    this.isSnapScrolling = true;
-
-    // Calculate target position based on verse width
-    const targetPosition = -(index * this.VERSE_WIDTH);
-
-    // Update local scroll position
-    this.state = {
-      ...this.state,
-      scrollPosition: targetPosition
-    };
-
-    // Update service with new verse index (but stay within the same lesson)
-    this.interactiveService.snapToVerse(index);
-
-    // Disable snap scrolling after animation
-    setTimeout(() => {
-      this.isSnapScrolling = false;
-      this.cdr.detectChanges();
-    }, this.SNAP_ANIMATION_DURATION);
+    const containerWidth = this.versesContainer.nativeElement.clientWidth;
+    const padding = containerWidth * this.INITIAL_PADDING;
+  
+    // For RTL, use negative position to move right
+    const position = -(index * this.VERSE_WIDTH) + padding;
+  
+    this.updateScrollPosition(position);
   }
 
   // Scroll to the next verse
   scrollToNextVerse(): void {
-    const currentIndex = this.state.currentVerseIndex;
-    if (currentIndex < this.verses.length - 1) {
-      this.snapToVerse(currentIndex + 1);
+    if (this.state.currentVerseIndex < this.verses.length - 1) {
+      const nextIndex = this.state.currentVerseIndex + 1;
+      this.snapToVerse(nextIndex);
+    }
+  }
+
+  scrollToPreviousVerse(): void {
+    if (this.state.currentVerseIndex > 0) {
+      const prevIndex = this.state.currentVerseIndex - 1;
+      this.snapToVerse(prevIndex);
     }
   }
 

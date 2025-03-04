@@ -1,5 +1,6 @@
 <!--src\app\features\lessons\interactive-lesson\interactive-lesson.component.html -->
-<div class="interactive-lesson mushaf-style" [class.is-recording]="state.isRecording" [class.lesson-completed]="state.isCompleted">
+<div class="interactive-lesson mushaf-style" [class.is-recording]="state.isRecording"
+  [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
     <div class="pattern-overlay"></div>
@@ -14,25 +15,17 @@
   </div>
 
   <!-- Verses Container with Enhanced Horizontal Scroll -->
-  <div class="verses-container" #versesContainer 
-       [class.dragging]="isDragging" 
-       [class.snap-scrolling]="isSnapScrolling"
-       (mousedown)="onMouseDown($event)"
-       (mousemove)="onMouseMove($event)"
-       (mouseup)="onMouseUp()"
-       (mouseleave)="onMouseLeave()"
-       (touchstart)="onTouchStart($event)"
-       (touchmove)="onTouchMove($event)"
-       (touchend)="onTouchEnd()">
+  <div class="verses-container" #versesContainer [class.dragging]="isDragging" [class.snap-scrolling]="isSnapScrolling"
+    (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()"
+    (mouseleave)="onMouseLeave()" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()">
 
     <div class="verses-track" [style.transform]="'translateX(' + state.scrollPosition + 'px)'">
       <ng-container *ngFor="let verse of verses; let i = index">
         <!-- Enhanced Verse Card with Mushaf Style -->
-        <div class="verse-card" 
-             [class.active]="isVerseActive(i)" 
-             [class.completed]="isVerseCompleted(i)"
-             [attr.data-verse-index]="i">
-          
+        <div class="verse-card" [class.active]="isVerseActive(i)" [class.completed]="isVerseCompleted(i)"
+          [attr.data-verse-index]="i">
+
           <!-- Verse Frame -->
           <div class="verse-frame">
             <!-- Decorative Corner Elements -->
@@ -40,7 +33,7 @@
             <div class="frame-corner frame-corner--tr"></div>
             <div class="frame-corner frame-corner--bl"></div>
             <div class="frame-corner frame-corner--br"></div>
-            
+
             <!-- Verse Number Badge -->
             <div class="verse-number">
               <span>{{i + 1}}</span>
@@ -49,11 +42,9 @@
             <!-- Verse Text with Enhanced Word-Level Highlighting -->
             <div class="verse-text">
               <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
-                <span class="word" 
-                      [class.highlight]="hasHighlight(verse, word, wordIndex)"
-                      [class.spoken]="isWordSpoken(i, wordIndex)" 
-                      [class.current-word]="isCurrentWord(i, wordIndex)"
-                      [style.color]="getWordColor(verse, word, wordIndex)">
+                <span class="word" [class.highlight]="hasHighlight(verse, word, wordIndex)"
+                  [class.spoken]="isWordSpoken(i, wordIndex)" [class.current-word]="isCurrentWord(i, wordIndex)"
+                  [style.color]="getWordColor(verse, word, wordIndex)">
                   {{word}}
                 </span>
               </ng-container>
@@ -62,10 +53,8 @@
             <!-- Word Progress Indicator -->
             <div class="word-progress" *ngIf="isVerseActive(i)">
               <div class="word-dots">
-                <span class="dot" 
-                      *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index"
-                      [class.completed]="isWordSpoken(i, wordIndex)" 
-                      [class.current]="isCurrentWord(i, wordIndex)">
+                <span class="dot" *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index"
+                  [class.completed]="isWordSpoken(i, wordIndex)" [class.current]="isCurrentWord(i, wordIndex)">
                 </span>
               </div>
             </div>
@@ -84,20 +73,21 @@
         </div>
 
         <!-- Enhanced Connector Line -->
-        <div class="connector-line" *ngIf="i < verses.length - 1" 
-             [class.completed]="isVerseCompleted(i)"
-             [class.active]="isVerseActive(i)">
+        <div class="connector-line" *ngIf="i < verses.length - 1" [class.completed]="isVerseCompleted(i)"
+          [class.active]="isVerseActive(i)">
           <div class="connector-progress" [style.width.%]="getConnectorProgress(i)"></div>
         </div>
       </ng-container>
     </div>
-    
+
     <!-- Scroll Indicators -->
     <div class="scroll-indicators" *ngIf="verses.length > 1">
-      <div class="scroll-indicator scroll-left" [class.visible]="canScrollLeft()">
+      <!-- Right arrow (for previous in RTL) -->
+      <div class="scroll-indicator scroll-right" [class.visible]="canScrollLeft()">
         <i class="fas fa-chevron-right"></i>
       </div>
-      <div class="scroll-indicator scroll-right" [class.visible]="canScrollRight()">
+      <!-- Left arrow (for next in RTL) -->
+      <div class="scroll-indicator scroll-left" [class.visible]="canScrollRight()">
         <i class="fas fa-chevron-left"></i>
       </div>
     </div>
@@ -112,11 +102,8 @@
       </div>
     </div>
 
-    <button class="record-button" 
-            [class.recording]="state.isRecording" 
-            [disabled]="state.isCompleted"
-            (click)="toggleRecording($event)"
-            (touchstart)="toggleRecording($event)">
+    <button class="record-button" [class.recording]="state.isRecording" [disabled]="state.isCompleted"
+      (click)="toggleRecording($event)" (touchstart)="toggleRecording($event)">
       <div class="button-content">
         <i class="fas" [class.fa-microphone]="!state.isRecording" [class.fa-stop]="state.isRecording"></i>
         <span class="button-text">{{ state.isRecording ? 'إيقاف' : 'ابدأ القراءة' }}</span>
@@ -130,7 +117,7 @@
     <div class="feedback-dialog" [class.success]="isSuccessFeedback(state.feedback)">
       <div class="feedback-icon">
         <i class="fas" [class.fa-check-circle]="isSuccessFeedback(state.feedback)"
-           [class.fa-exclamation-circle]="!isSuccessFeedback(state.feedback)"></i>
+          [class.fa-exclamation-circle]="!isSuccessFeedback(state.feedback)"></i>
       </div>
       <div class="feedback-message">{{state.feedback}}</div>
     </div>
