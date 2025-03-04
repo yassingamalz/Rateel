@@ -79,40 +79,34 @@ export class InteractiveLessonService {
     // Bound position within valid range
     const boundedPosition = Math.max(minScroll, Math.min(maxScroll, position));
     
-    // Update scroll position without changing the active verse
+    // Update state with new position only, not changing verse index
     this.state.next({
       ...this.state.value,
       scrollPosition: boundedPosition
     });
-    
-    // Log the position updates in debug mode
-    // console.log(`Scroll position updated: ${boundedPosition}, currentVerse: ${this.state.value.currentVerseIndex}`);
   }
 
   /**
    * Snaps the view to a specific verse and updates current verse index
-   * This should not navigate to a new lesson, just change the verse within the current lesson
+   * This should NOT trigger navigation to a new lesson, only update the internal state
    */
   snapToVerse(verseIndex: number): void {
-    // Validate the verse index is within bounds
+    // Make sure verseIndex is within bounds of available verses
     if (verseIndex < 0 || verseIndex >= this.verses.length) {
-      console.warn(`[InteractiveLessonService] Invalid verse index: ${verseIndex}. Verses length: ${this.verses.length}`);
+      console.warn(`[InteractiveLessonService] Attempted to snap to invalid verse index: ${verseIndex}`);
       return;
     }
     
     // Calculate scroll position based on verse index
     const scrollPosition = -(verseIndex * this.VERSE_WIDTH);
     
-    // Update state - make sure this doesn't trigger page navigation
+    // Update state with new position and verse index
     this.state.next({
       ...this.state.value,
       scrollPosition: scrollPosition,
       currentVerseIndex: verseIndex,
       feedback: undefined,
-      // Reset word recognition for the new verse
-      currentWordIndex: this.getGlobalWordIndex(verseIndex, 0),
-      // Keep the recording state and other properties unchanged
-      isRecording: this.state.value.isRecording
+      currentWordIndex: this.getGlobalWordIndex(verseIndex, 0)
     });
   }
 

@@ -86,9 +86,13 @@ export class LessonsService implements OnDestroy {
   }
 
   private loadVerses(lessonId: string): Observable<TajweedVerse[]> {
+    console.log(`Loading verses for lesson ${lessonId}`);
     return this.http.get<{ version: string, lessonId: string, verses: TajweedVerse[] }>
       (`assets/data/content/verses/${lessonId}.json`).pipe(
-        map(response => response.verses),
+        map(response => {
+          console.log('Loaded verses:', response.verses);
+          return response.verses; // This should be an array!
+        }),
         catchError(error => {
           console.error(`Error loading verses for lesson ${lessonId}:`, error);
           return of([]);
@@ -223,14 +227,32 @@ export class LessonsService implements OnDestroy {
       switchMap(lesson => {
         if (!lesson) return of(undefined);
 
-        // For practice lessons, load verses content
-        if (lesson.type === 'practice' && !lesson.verses) {
-          return this.loadVerses(lesson.id).pipe(
-            map(verses => verses && verses.length > 0 ? { ...lesson, verses } : lesson)
+        // For practice lessons, ALWAYS load verses from external file
+        if (lesson.type === 'practice') {
+          // Use a consistent path pattern for verses
+          const versesPath = `/content/verses/${lesson.id}.json`;
+          console.log(`[LessonsService] Loading verses from: assets/data${versesPath}`);
+
+          return this.getVerseContent(versesPath).pipe(
+            map(content => {
+              console.log(`[LessonsService] Loaded verses for ${lesson.id}:`, content.verses);
+
+              // Create new lesson with loaded verses, regardless of any inline verses
+              return {
+                ...lesson,
+                // Replace any existing verses with the loaded ones
+                verses: content.verses && content.verses.length > 0 ? content.verses : []
+              };
+            }),
+            catchError(error => {
+              console.error(`[LessonsService] Error loading verses for ${lesson.id}:`, error);
+              // Fall back to inline verses if they exist
+              return of(lesson);
+            })
           );
         }
 
-        // For reading lessons, load reading content based on lesson ID (not contentPath)
+        // For reading lessons, load reading content based on lesson ID
         if (lesson.type === 'read' && !lesson.readingContent) {
           return this.loadReadingContent(lesson.id).pipe(
             map(content => {
@@ -287,10 +309,26 @@ export class LessonsService implements OnDestroy {
   }
 
   getVerseContent(contentPath: string): Observable<{ verses: TajweedVerse[] }> {
-    return this.http.get<{
-      version: string,
-      verses: TajweedVerse[]
-    }>(`assets/data${contentPath}`).pipe(
+    console.log(`Loading verse content from path: assets/data${contentPath}`);
+
+    return this.http.get<any>(`assets/data${contentPath}`).pipe(
+      map(response => {
+        console.log('Raw verse content response:', response);
+
+        // Handle various response formats
+        if (response.verses && Array.isArray(response.verses)) {
+          console.log('Found verses array in response:', response.verses);
+          return { verses: response.verses };
+        }
+        else if (Array.isArray(response)) {
+          console.log('Response is already an array:', response);
+          return { verses: response };
+        }
+        else {
+          console.warn('Unexpected verses response format:', response);
+          return { verses: [] };
+        }
+      }),
       catchError(error => {
         console.error(`Error loading verse content from ${contentPath}:`, error);
         return of({ verses: [] });

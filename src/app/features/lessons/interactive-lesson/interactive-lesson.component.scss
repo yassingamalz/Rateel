@@ -583,6 +583,9 @@ $tajweed-rules: (
     box-shadow: 0 4px 15px rgba(map-get($mushaf-colors, shadow), 0.3),
                 inset 0 0 0 1px rgba(map-get($mushaf-colors, border), 0.2);
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent; // Remove mobile tap highlight
+    touch-action: manipulation; // Improve touch behavior
+    user-select: none; // Prevent text selection
     
     &:hover:not(:disabled) {
       transform: translateY(-2px);

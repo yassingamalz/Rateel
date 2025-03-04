@@ -106,24 +106,25 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
             // Construct the correct content path
             const contentPath = `/content/verses/${this.lessonId}.json`;
             console.log(`[LessonDetails] Loading verses from: ${contentPath}`);
-
             this.lessonsService.getVerseContent(contentPath).subscribe({
               next: (verseContent) => {
-                if (verseContent.verses && verseContent.verses.length > 0) {
+                console.log('Verse content received:', verseContent);
+                // Ensure verses is an array
+                if (verseContent.verses && Array.isArray(verseContent.verses) && verseContent.verses.length > 0) {
                   // Create a new object that matches the Lesson interface exactly
                   const updatedLesson: Lesson = {
                     ...lesson,
-                    verses: verseContent.verses
+                    verses: verseContent.verses // This must be an array!
                   };
 
+                  console.log('Updated lesson with verses array:', updatedLesson.verses);
                   this.lesson = updatedLesson;
-                  console.log('[LessonDetails] Verses content loaded:', updatedLesson.verses?.length);
 
                   // Initialize practice state with loaded verses
                   this.initializePracticeState(verseContent.verses);
                   this.cdr.markForCheck();
                 } else {
-                  console.warn('[LessonDetails] No verses found for lesson');
+                  console.warn('No verses array found in verse content:', verseContent);
                   this.lesson = lesson;
                   this.cdr.markForCheck();
                 }
@@ -379,11 +380,11 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     // Update progress to 100%
     this.currentProgress$.next(100);
     this.saveCurrentState();
-    
+
     // Exit with proper timing
     setTimeout(() => {
       this.animationState = 'exit';
-      
+
       // Navigate after animations complete
       setTimeout(() => {
         this.router.navigate(['../'], {

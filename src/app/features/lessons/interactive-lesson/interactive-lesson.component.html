@@ -1,4 +1,4 @@
-<!-- src\app\features\lessons\interactive-lesson\interactive-lesson.component.html -->
+<!--src\app\features\lessons\interactive-lesson\interactive-lesson.component.html -->
 <div class="interactive-lesson mushaf-style" [class.is-recording]="state.isRecording" [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
@@ -115,7 +115,8 @@
     <button class="record-button" 
             [class.recording]="state.isRecording" 
             [disabled]="state.isCompleted"
-            (click)="toggleRecording()">
+            (click)="toggleRecording($event)"
+            (touchstart)="toggleRecording($event)">
       <div class="button-content">
         <i class="fas" [class.fa-microphone]="!state.isRecording" [class.fa-stop]="state.isRecording"></i>
         <span class="button-text">{{ state.isRecording ? 'إيقاف' : 'ابدأ القراءة' }}</span>
