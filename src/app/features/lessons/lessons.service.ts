@@ -1,3 +1,4 @@
+// src/app/features/lessons/lessons.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, catchError, map, switchMap, takeUntil, filter } from 'rxjs';
 import { Lesson } from '../../shared/interfaces/lesson';
@@ -93,6 +94,15 @@ export class LessonsService implements OnDestroy {
           return of([]);
         })
       );
+  }
+
+  private loadReadingContent(contentPath: string): Observable<any> {
+    return this.http.get<any>(`assets/data${contentPath}`).pipe(
+      catchError(error => {
+        console.error(`Error loading reading content from ${contentPath}:`, error);
+        return of(null);
+      })
+    );
   }
 
   private initializeLessonsForUnit(courseId: string, unitId: string): void {
@@ -208,12 +218,22 @@ export class LessonsService implements OnDestroy {
     return this.getLessonsByUnitId(courseId, unitId).pipe(
       map(lessons => lessons.find(l => l.id === lessonId)),
       switchMap(lesson => {
-        if (lesson?.type === 'practice' && !lesson.verses) {
-          // Load verses for practice lessons
+        if (!lesson) return of(undefined);
+        
+        // For practice lessons, load verses content
+        if (lesson.type === 'practice' && !lesson.verses) {
           return this.loadVerses(lesson.id).pipe(
-            map(verses => verses ? { ...lesson, verses } : lesson)
+            map(verses => verses && verses.length > 0 ? { ...lesson, verses } : lesson)
           );
         }
+        
+        // For reading lessons, load reading content
+        if (lesson.type === 'read' && !lesson.readingContent && lesson.contentPath) {
+          return this.loadReadingContent(lesson.contentPath).pipe(
+            map(content => content ? { ...lesson, readingContent: JSON.stringify(content) } : lesson)
+          );
+        }
+        
         return of(lesson);
       })
     );

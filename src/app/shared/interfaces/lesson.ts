@@ -23,4 +23,5 @@ import { TajweedVerse } from "../../features/lessons/interactive-lesson/interact
     verses?: TajweedVerse[];
     readingContent?: string;
     defaultContent?: string;
+    contentPath?: string;
   }
