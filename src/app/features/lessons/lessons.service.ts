@@ -96,10 +96,13 @@ export class LessonsService implements OnDestroy {
       );
   }
 
-  private loadReadingContent(contentPath: string): Observable<any> {
+  private loadReadingContent(lessonId: string): Observable<any> {
+    const contentPath = `/content/reading/${lessonId}.json`;
+    console.log(`[LessonsService] Loading reading content for ${lessonId} from path: assets/data${contentPath}`);
+    
     return this.http.get<any>(`assets/data${contentPath}`).pipe(
       catchError(error => {
-        console.error(`Error loading reading content from ${contentPath}:`, error);
+        console.error(`Error loading reading content for ${lessonId}:`, error);
         return of(null);
       })
     );
@@ -227,10 +230,13 @@ export class LessonsService implements OnDestroy {
           );
         }
         
-        // For reading lessons, load reading content
-        if (lesson.type === 'read' && !lesson.readingContent && lesson.contentPath) {
-          return this.loadReadingContent(lesson.contentPath).pipe(
-            map(content => content ? { ...lesson, readingContent: JSON.stringify(content) } : lesson)
+        // For reading lessons, load reading content based on lesson ID (not contentPath)
+        if (lesson.type === 'read' && !lesson.readingContent) {
+          return this.loadReadingContent(lesson.id).pipe(
+            map(content => {
+              console.log(`[LessonsService] Loaded content for lesson ${lesson.id}:`, content);
+              return content ? { ...lesson, readingContent: JSON.stringify(content) } : lesson;
+            })
           );
         }
         

@@ -65,6 +65,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(`[LessonDetails] Initializing lesson: courseId=${this.courseId}, unitId=${this.unitId}, lessonId=${this.lessonId}`);
     this.initializeLesson();
     this.setupAutoSave();
   }
@@ -86,20 +87,25 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
 
   private initializeLesson(): void {
+    console.log(`[LessonDetails] Loading lesson: ${this.lessonId}`);
     const lessonSub = this.lessonsService
       .getLessonById(this.courseId, this.unitId, this.lessonId)
       .subscribe({
         next: (lesson) => {
           if (!lesson) {
-            console.error('Lesson not found');
+            console.error('[LessonDetails] Lesson not found');
             return;
           }
 
+          console.log(`[LessonDetails] Lesson loaded: type=${lesson.type}`);
+
           // If it's a practice lesson and verses are not loaded
           if (lesson.type === 'practice' && (!lesson.verses || lesson.verses.length === 0)) {
+            console.log('[LessonDetails] Practice lesson needs verses content');
 
             // Construct the correct content path
             const contentPath = `/content/verses/${this.lessonId}.json`;
+            console.log(`[LessonDetails] Loading verses from: ${contentPath}`);
 
             this.lessonsService.getVerseContent(contentPath).subscribe({
               next: (verseContent) => {
@@ -111,27 +117,48 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
                   };
 
                   this.lesson = updatedLesson;
+                  console.log('[LessonDetails] Verses content loaded:', updatedLesson.verses?.length);
 
                   // Initialize practice state with loaded verses
                   this.initializePracticeState(verseContent.verses);
                   this.cdr.markForCheck();
                 } else {
-                  console.warn('No verses found for lesson');
+                  console.warn('[LessonDetails] No verses found for lesson');
                   this.lesson = lesson;
+                  this.cdr.markForCheck();
                 }
               },
               error: (error) => {
-                console.error('Error loading verses:', error);
+                console.error('[LessonDetails] Error loading verses:', error);
                 this.lesson = lesson;
+                this.cdr.markForCheck();
               }
             });
+          } else if (lesson.type === 'read') {
+            // For reading lessons, add diagnostic logging
+            console.log('[LessonDetails] Reading lesson detected');
+            if (lesson.readingContent) {
+              console.log('[LessonDetails] Reading content is available, length:', lesson.readingContent.length);
+              try {
+                const parsed = JSON.parse(lesson.readingContent);
+                console.log('[LessonDetails] Content parsed successfully, title:', parsed.title);
+              } catch (e) {
+                console.error('[LessonDetails] Failed to parse content:', e);
+              }
+            } else {
+              console.warn('[LessonDetails] No reading content available');
+            }
+            this.lesson = lesson;
+            this.cdr.markForCheck();
           } else {
             // If verses are already loaded or it's not a practice lesson
+            console.log('[LessonDetails] Setting lesson without additional content loading');
             this.lesson = lesson;
 
             if (lesson.type === 'practice' && lesson.verses) {
               this.initializePracticeState(lesson.verses);
             }
+            this.cdr.markForCheck();
           }
 
           const savedProgress = this.storageService.getProgress(
@@ -142,11 +169,9 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           if (savedProgress) {
             this.restoreState(savedProgress);
           }
-
-          this.cdr.markForCheck();
         },
         error: (error) => {
-          console.error('Error loading lesson:', error);
+          console.error('[LessonDetails] Error loading lesson:', error);
         }
       });
 
@@ -156,7 +181,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   // Update the practice state initialization
   private initializePracticeState(verses: TajweedVerse[]): void {
     if (!verses || verses.length === 0) {
-      console.warn('No verses provided for practice state initialization');
+      console.warn('[LessonDetails] No verses provided for practice state initialization');
       return;
     }
 
@@ -169,6 +194,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   }
 
   private restoreState(savedProgress: ProgressData): void {
+    console.log('[LessonDetails] Restoring state from saved progress:', savedProgress);
     this.currentProgress$.next(savedProgress.progress);
 
     this.lessonState$.next({
@@ -274,6 +300,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Progress Management
   updateProgress(progress: number): void {
+    console.log(`[LessonDetails] Progress update: ${progress}%`);
     this.currentProgress$.next(progress);
     this.saveCurrentState();
 
@@ -322,6 +349,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
     if (this.isCompletionHandled) return;
     this.isCompletionHandled = true;
 
+    console.log('[LessonDetails] Marking lesson as completed');
     const completeSub = this.lessonsService
       .markLessonAsCompleted(this.courseId, this.unitId, this.lessonId)
       .subscribe({
@@ -336,7 +364,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           }
         },
         error: (error) => {
-          console.error('Error marking lesson as completed:', error);
+          console.error('[LessonDetails] Error marking lesson as completed:', error);
           // Reset completion state on error
           this.isCompletionHandled = false;
         }
@@ -347,6 +375,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
 
   private handleCompletion(): void {
+    console.log('[LessonDetails] Handling lesson completion');
     // Update progress to 100%
     this.currentProgress$.next(100);
     this.saveCurrentState();

@@ -30,7 +30,25 @@ export class ReadingLessonService {
       color: '#3357FF',
       description: 'اضطراب الصوت عند النطق بالحرف الساكن حتى يسمع له نبرة قوية'
     },
-    // Add more rules as needed
+    {
+      id: 'adab-general',
+      name: 'آداب عامة',
+      color: '#1F4037',
+      description: 'الآداب العامة المتعلقة بتلاوة القرآن الكريم'
+    },
+    {
+      id: 'adab-title',
+      name: 'عنوان',
+      color: '#DAA520',
+      description: 'عناوين الآداب والأقسام'
+    },
+    {
+      id: 'quran-verse',
+      name: 'آية قرآنية',
+      color: '#B87333',
+      description: 'آية من القرآن الكريم'
+    }
+    // Additional rules will be loaded from content
   ];
 
   private state = new BehaviorSubject<ReadingState>({
@@ -104,17 +122,37 @@ export class ReadingLessonService {
 
   parseContent(content: string): ReadingContent {
     try {
-      // Assuming content is a JSON string with the correct structure
-      const parsedContent: ReadingContent = JSON.parse(content);
+      console.log('[ReadingLessonService] Parsing content...');
+      // Parse the content JSON string to object
+      const parsedContent: ReadingContent = typeof content === 'string' 
+        ? JSON.parse(content) 
+        : content;
       
       // Validate the content structure
       if (!Array.isArray(parsedContent.verses)) {
-        throw new Error('Invalid content structure: verses array missing');
+        console.error('[ReadingLessonService] Invalid content structure: verses array missing');
+        return {
+          verses: [],
+          title: 'Error loading content'
+        };
+      }
+
+      // If the content includes custom tajweed rules, add them to our collection
+      if (Array.isArray(parsedContent.rules) && parsedContent.rules.length > 0) {
+        // Merge the custom rules with the default ones, avoiding duplicates
+        const existingRuleIds = new Set(this.tajweedRules.map(r => r.id));
+        
+        for (const rule of parsedContent.rules) {
+          if (!existingRuleIds.has(rule.id)) {
+            this.tajweedRules.push(rule);
+            existingRuleIds.add(rule.id);
+          }
+        }
       }
 
       return parsedContent;
     } catch (error) {
-      console.error('Error parsing reading content:', error);
+      console.error('[ReadingLessonService] Error parsing reading content:', error);
       return {
         verses: [],
         title: 'Error loading content'
@@ -133,6 +171,12 @@ export class ReadingLessonService {
 
   formatTajweedText(text: string, marks: TajweedMark[]): string {
     let result = text;
+    
+    // If no marks, return the text as is
+    if (!marks || marks.length === 0) {
+      return result;
+    }
+    
     // Sort marks by start index in descending order to avoid index shifting
     const sortedMarks = [...marks].sort((a, b) => b.startIndex - a.startIndex);
 

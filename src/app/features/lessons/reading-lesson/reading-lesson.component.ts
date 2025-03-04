@@ -13,6 +13,7 @@ import { ReadingLessonService } from './reading-lesson.service';
 import { ReadingContent, ReadingState, TajweedRule } from './reading-lesson.types';
 import { Subscription } from 'rxjs';
 import { PlatformService } from '../../../core/services/platform.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-reading-lesson',
@@ -20,7 +21,18 @@ import { PlatformService } from '../../../core/services/platform.service';
   templateUrl: './reading-lesson.component.html',
   styleUrls: ['./reading-lesson.component.scss'],
   providers: [ReadingLessonService], // Scoped to this component
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('300ms ease-out', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-out', style({ transform: 'translateX(-100%)' }))
+      ])
+    ])
+  ]
 })
 export class ReadingLessonComponent implements OnInit, OnDestroy {
   @Input() content?: string;
@@ -42,8 +54,18 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    console.log('[ReadingLessonComponent] Initializing with content:', this.content ? 'provided' : 'missing');
+    
     if (this.content) {
-      this.parsedContent = this.readingService.parseContent(this.content);
+      try {
+        // Parse the content if it's a string
+        this.parsedContent = this.readingService.parseContent(this.content);
+        console.log('[ReadingLessonComponent] Parsed content:', this.parsedContent);
+      } catch (error) {
+        console.error('[ReadingLessonComponent] Error parsing content:', error);
+      }
+    } else {
+      console.warn('[ReadingLessonComponent] No content provided');
     }
 
     this.tajweedRules = this.readingService.getTajweedRules();
@@ -87,7 +109,7 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
   }
 
   handleSkip(): void {
-    console.log("Skip button clicked, isCompleted:", this.isCompleted);
+    console.log("[ReadingLessonComponent] Skip button clicked, isCompleted:", this.isCompleted);
     
     // Always emit completion event immediately for any click
     this.onComplete.emit();
@@ -98,10 +120,10 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
     });
     
     // If not already completed, also mark as completed
-    if (!this.isCompleted) {
+    if (!this.isCompleted && this.parsedContent) {
       this.readingService.updateProgress(
-        this.parsedContent!.verses.length - 1,
-        this.parsedContent!.verses.length
+        this.parsedContent.verses.length - 1,
+        this.parsedContent.verses.length
       );
     }
   }
@@ -109,7 +131,7 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
   getFormattedVerse(verseIndex: number): string {
     if (!this.parsedContent?.verses[verseIndex]) return '';
     const verse = this.parsedContent.verses[verseIndex];
-    return this.readingService.formatTajweedText(verse.text, verse.marks);
+    return this.readingService.formatTajweedText(verse.text, verse.marks || []);
   }
 
   onRuleClick(ruleId: string): void {
@@ -155,10 +177,10 @@ export class ReadingLessonComponent implements OnInit, OnDestroy {
     const element = event.target as HTMLElement;
     const scrollPercentage = (element.scrollTop / (element.scrollHeight - element.clientHeight)) * 100;
 
-    if (scrollPercentage > 90 && !this.state.isCompleted) {
+    if (scrollPercentage > 90 && !this.state.isCompleted && this.parsedContent) {
       this.readingService.updateProgress(
-        this.parsedContent!.verses.length - 1,
-        this.parsedContent!.verses.length
+        this.parsedContent.verses.length - 1,
+        this.parsedContent.verses.length
       );
     }
   }

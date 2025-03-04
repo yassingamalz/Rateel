@@ -34,4 +34,5 @@ export interface TajweedRule {
     verses: VerseSection[];
     title: string;
     description?: string;
+    rules?: TajweedRule[];
   }

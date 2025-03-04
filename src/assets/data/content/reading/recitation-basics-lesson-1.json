@@ -1,0 +1,240 @@
+{
+    "version": "1.0.0",
+    "lessonId": "recitation-basics-lesson-1",
+    "unitId": "quran-recitation-basics",
+    "courseId": "tajweed-fundamentals",
+    "title": "آداب تلاوة القرآن الكريم",
+    "description": "الآداب والسلوكيات الإسلامية عند تلاوة القرآن",
+    "verses": [
+        {
+            "id": "adab-verse-1",
+            "text": "ينبغي للقارئ أن يستحضر عظمة كلام الله تعالى",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 38,
+                    "text": "ينبغي للقارئ أن يستحضر عظمة كلام الله تعالى",
+                    "ruleId": "adab-general"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-2",
+            "text": "من آداب التلاوة الطهارة واستقبال القبلة والجلوس بخشوع وتدبر",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 10,
+                    "text": "من آداب التلاوة",
+                    "ruleId": "adab-title"
+                },
+                {
+                    "startIndex": 11,
+                    "endIndex": 19,
+                    "text": "الطهارة",
+                    "ruleId": "adab-taharah"
+                },
+                {
+                    "startIndex": 20,
+                    "endIndex": 35,
+                    "text": "واستقبال القبلة",
+                    "ruleId": "adab-qiblah"
+                },
+                {
+                    "startIndex": 36,
+                    "endIndex": 56,
+                    "text": "والجلوس بخشوع وتدبر",
+                    "ruleId": "adab-khushoo"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-3",
+            "text": "البدء بالاستعاذة والبسملة: أعوذ بالله من الشيطان الرجيم، بسم الله الرحمن الرحيم",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 26,
+                    "text": "البدء بالاستعاذة والبسملة:",
+                    "ruleId": "adab-title"
+                },
+                {
+                    "startIndex": 27,
+                    "endIndex": 56,
+                    "text": "أعوذ بالله من الشيطان الرجيم،",
+                    "ruleId": "adab-isteaathah"
+                },
+                {
+                    "startIndex": 57,
+                    "endIndex": 83,
+                    "text": "بسم الله الرحمن الرحيم",
+                    "ruleId": "adab-basmalah"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-4",
+            "text": "التلاوة بصوت حسن مع مراعاة أحكام التجويد",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 16,
+                    "text": "التلاوة بصوت حسن",
+                    "ruleId": "adab-voice"
+                },
+                {
+                    "startIndex": 17,
+                    "endIndex": 42,
+                    "text": "مع مراعاة أحكام التجويد",
+                    "ruleId": "adab-tajweed"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-5",
+            "text": "الاستماع والإنصات عند قراءة القرآن: وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ وَأَنصِتُوا لَعَلَّكُمْ تُرْحَمُونَ",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 35,
+                    "text": "الاستماع والإنصات عند قراءة القرآن:",
+                    "ruleId": "adab-title"
+                },
+                {
+                    "startIndex": 36,
+                    "endIndex": 102,
+                    "text": "وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ وَأَنصِتُوا لَعَلَّكُمْ تُرْحَمُونَ",
+                    "ruleId": "quran-verse"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-6",
+            "text": "مكان التلاوة: يستحب أن يكون في مكان طاهر كالمسجد أو البيت",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 12,
+                    "text": "مكان التلاوة:",
+                    "ruleId": "adab-title"
+                },
+                {
+                    "startIndex": 13,
+                    "endIndex": 56,
+                    "text": "يستحب أن يكون في مكان طاهر كالمسجد أو البيت",
+                    "ruleId": "adab-place"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-7",
+            "text": "زمان التلاوة: تستحب القراءة في كل وقت وخاصة في الليل أو بعد الفجر",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 12,
+                    "text": "زمان التلاوة:",
+                    "ruleId": "adab-title"
+                },
+                {
+                    "startIndex": 13,
+                    "endIndex": 64,
+                    "text": "تستحب القراءة في كل وقت وخاصة في الليل أو بعد الفجر",
+                    "ruleId": "adab-time"
+                }
+            ]
+        },
+        {
+            "id": "adab-verse-8",
+            "text": "السجود عند قراءة آيات السجدة التي وردت في القرآن الكريم",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 54,
+                    "text": "السجود عند قراءة آيات السجدة التي وردت في القرآن الكريم",
+                    "ruleId": "adab-sujood"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "adab-general",
+            "name": "آداب عامة",
+            "color": "#1F4037",
+            "description": "الآداب العامة المتعلقة بتلاوة القرآن الكريم"
+        },
+        {
+            "id": "adab-title",
+            "name": "عنوان",
+            "color": "#DAA520",
+            "description": "عناوين الآداب والأقسام"
+        },
+        {
+            "id": "adab-taharah",
+            "name": "الطهارة",
+            "color": "#2D6A4F",
+            "description": "ينبغي للقارئ أن يكون على طهارة"
+        },
+        {
+            "id": "adab-qiblah",
+            "name": "استقبال القبلة",
+            "color": "#2D6A4F",
+            "description": "يستحب للقارئ أن يستقبل القبلة عند التلاوة"
+        },
+        {
+            "id": "adab-khushoo",
+            "name": "الخشوع والتدبر",
+            "color": "#2D6A4F",
+            "description": "ينبغي أن تكون القراءة بخشوع وتدبر لمعاني الآيات"
+        },
+        {
+            "id": "adab-isteaathah",
+            "name": "الاستعاذة",
+            "color": "#FF5733",
+            "description": "البدء بالاستعاذة قبل القراءة: أعوذ بالله من الشيطان الرجيم"
+        },
+        {
+            "id": "adab-basmalah",
+            "name": "البسملة",
+            "color": "#FF5733",
+            "description": "قراءة البسملة عند بدء السورة: بسم الله الرحمن الرحيم"
+        },
+        {
+            "id": "adab-voice",
+            "name": "الصوت الحسن",
+            "color": "#206A5D",
+            "description": "تحسين الصوت عند تلاوة القرآن الكريم"
+        },
+        {
+            "id": "adab-tajweed",
+            "name": "مراعاة التجويد",
+            "color": "#206A5D",
+            "description": "الالتزام بأحكام التجويد والقراءة الصحيحة"
+        },
+        {
+            "id": "quran-verse",
+            "name": "آية قرآنية",
+            "color": "#B87333",
+            "description": "آية من القرآن الكريم"
+        },
+        {
+            "id": "adab-place",
+            "name": "مكان التلاوة",
+            "color": "#5B2C6F",
+            "description": "المكان المناسب لتلاوة القرآن الكريم"
+        },
+        {
+            "id": "adab-time",
+            "name": "وقت التلاوة",
+            "color": "#5B2C6F",
+            "description": "الأوقات المستحبة لقراءة القرآن الكريم"
+        },
+        {
+            "id": "adab-sujood",
+            "name": "سجود التلاوة",
+            "color": "#C0392B",
+            "description": "السجود عند قراءة آيات السجدة في القرآن الكريم"
+        }
+    ]
+}

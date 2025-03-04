@@ -7,37 +7,34 @@
             "id": "recitation-basics-lesson-1",
             "title": "آداب تلاوة القرآن الكريم",
             "description": "الآداب والسلوكيات الإسلامية عند تلاوة القرآن",
-            "type": "reading",
+            "type": "read",
             "icon": "fa-book-open",
             "duration": 10,
             "order": 1,
             "stepNumber": 1,
-            "totalSteps": 3,
-            "contentPath": "/content/reading/recitation-basics-1.json"
+            "totalSteps": 3
         },
         {
             "id": "recitation-basics-lesson-2",
             "title": "القواعد الأساسية للتلاوة الصحيحة",
             "description": "الأسس والقواعد العامة للتلاوة المجودة",
-            "type": "reading",
-            "icon": "fa-book-open", 
+            "type": "read",
+            "icon": "fa-book-open",
             "duration": 12,
             "order": 2,
             "stepNumber": 2,
-            "totalSteps": 3,
-            "contentPath": "/content/reading/recitation-basics-2.json"
+            "totalSteps": 3
         },
         {
             "id": "recitation-basics-lesson-3",
             "title": "الإعداد النفسي للتلاوة",
             "description": "كيفية التحضير النفسي والروحي قبل تلاوة القرآن",
-            "type": "reading",
+            "type": "read",
             "icon": "fa-book-open",
             "duration": 8,
             "order": 3,
             "stepNumber": 3,
-            "totalSteps": 3,
-            "contentPath": "/content/reading/recitation-basics-3.json"
+            "totalSteps": 3
         }
     ]
 }
