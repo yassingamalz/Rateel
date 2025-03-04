@@ -114,7 +114,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   private VERSE_WIDTH = 500; // Base width of verse card
   private readonly AUTO_SCROLL_THRESHOLD = 0.8; // 80% of words recognized triggers scroll
   private readonly INITIAL_PADDING = 0.15;
-  
+
   constructor(
     private interactiveService: InteractiveLessonService,
     private platformService: PlatformService,
@@ -483,10 +483,10 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   private snapToVerse(index: number): void {
     const containerWidth = this.versesContainer.nativeElement.clientWidth;
     const padding = containerWidth * this.INITIAL_PADDING;
-  
-    // For RTL, use negative position to move right
-    const position = -(index * this.VERSE_WIDTH) + padding;
-  
+
+    // For RTL, move content right as index increases
+    const position = (index * this.VERSE_WIDTH) - padding;
+
     this.updateScrollPosition(position);
   }
 
