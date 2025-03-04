@@ -1,8 +1,7 @@
-<!-- Enhanced Interactive Lesson Component HTML -->
-<div class="interactive-lesson" [class.is-recording]="state.isRecording" [class.lesson-completed]="state.isCompleted">
+<!-- src\app\features\lessons\interactive-lesson\interactive-lesson.component.html -->
+<div class="interactive-lesson mushaf-style" [class.is-recording]="state.isRecording" [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
-    <div class="ambient-glow"></div>
     <div class="pattern-overlay"></div>
   </div>
 
@@ -28,17 +27,19 @@
 
     <div class="verses-track" [style.transform]="'translateX(' + state.scrollPosition + 'px)'">
       <ng-container *ngFor="let verse of verses; let i = index">
-        <!-- Enhanced Verse Card -->
+        <!-- Enhanced Verse Card with Mushaf Style -->
         <div class="verse-card" 
              [class.active]="isVerseActive(i)" 
              [class.completed]="isVerseCompleted(i)"
-             [class.inactive]="!isVerseActive(i) && !isVerseCompleted(i)"
              [attr.data-verse-index]="i">
           
           <!-- Verse Frame -->
           <div class="verse-frame">
-            <!-- Light Bulb Effect -->
-            <div class="verse-glow"></div>
+            <!-- Decorative Corner Elements -->
+            <div class="frame-corner frame-corner--tl"></div>
+            <div class="frame-corner frame-corner--tr"></div>
+            <div class="frame-corner frame-corner--bl"></div>
+            <div class="frame-corner frame-corner--br"></div>
             
             <!-- Verse Number Badge -->
             <div class="verse-number">
@@ -46,21 +47,19 @@
             </div>
 
             <!-- Verse Text with Enhanced Word-Level Highlighting -->
-            <div class="verse-text-container">
-              <div class="verse-text">
-                <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
-                  <span class="word" 
-                        [class.highlight]="hasHighlight(verse, word, wordIndex)"
-                        [class.spoken]="isWordSpoken(i, wordIndex)" 
-                        [class.current-word]="isCurrentWord(i, wordIndex)"
-                        [style.color]="getWordColor(verse, word, wordIndex)">
-                    {{word}}
-                  </span>
-                </ng-container>
-              </div>
+            <div class="verse-text">
+              <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
+                <span class="word" 
+                      [class.highlight]="hasHighlight(verse, word, wordIndex)"
+                      [class.spoken]="isWordSpoken(i, wordIndex)" 
+                      [class.current-word]="isCurrentWord(i, wordIndex)"
+                      [style.color]="getWordColor(verse, word, wordIndex)">
+                  {{word}}
+                </span>
+              </ng-container>
             </div>
 
-            <!-- Enhanced Word Progress Indicator -->
+            <!-- Word Progress Indicator -->
             <div class="word-progress" *ngIf="isVerseActive(i)">
               <div class="word-dots">
                 <span class="dot" 
@@ -71,7 +70,7 @@
               </div>
             </div>
 
-            <!-- Tajweed Rules Legend with Enhanced Styling -->
+            <!-- Tajweed Rules Legend -->
             <div class="tajweed-legend" *ngIf="isVerseActive(i) && verse.highlights?.length">
               <div class="legend-title">قواعد التجويد:</div>
               <div class="legend-items">
