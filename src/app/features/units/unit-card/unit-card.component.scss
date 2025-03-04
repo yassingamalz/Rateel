@@ -341,7 +341,8 @@
 
     .progress-ring__circle--progress {
       animation: circularBorderFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      stroke: map.get(vars.$colors, 'accent', 'bright');
+      stroke: map-get(vars.$colors, 'accent', 'glow');
+      filter: drop-shadow(0 0 6px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5));
 
       // Instead of filter, use these properties for emphasis
       stroke-width: 4.5px;
@@ -363,15 +364,18 @@
     0% {
       stroke-dasharray: 0, 289;
       stroke-opacity: 0.7;
+      transform: rotate(-90deg);
     }
 
     50% {
       stroke-opacity: 1;
+      transform: rotate(0deg);
     }
 
     100% {
       stroke-dasharray: 289, 289;
       stroke-opacity: 0.9;
+      transform: rotate(90deg);
     }
   }
 }
