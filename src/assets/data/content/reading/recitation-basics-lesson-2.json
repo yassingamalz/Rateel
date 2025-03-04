@@ -1,0 +1,114 @@
+{
+    "version": "1.0.0",
+    "lessonId": "recitation-basics-lesson-2",
+    "unitId": "quran-recitation-basics",
+    "courseId": "tajweed-fundamentals",
+    "title": "القواعد الأساسية للتلاوة الصحيحة",
+    "description": "الأسس والقواعد العامة للتلاوة المجودة",
+    "verses": [
+        {
+            "id": "rules-verse-1",
+            "text": "إخراج الحروف من مخارجها الصحيحة هو أساس التلاوة السليمة",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 25,
+                    "text": "إخراج الحروف من مخارجها الصحيحة",
+                    "ruleId": "makharij-huruf"
+                },
+                {
+                    "startIndex": 26,
+                    "endIndex": 48,
+                    "text": "أساس التلاوة السليمة",
+                    "ruleId": "adab-general"
+                }
+            ]
+        },
+        {
+            "id": "rules-verse-2",
+            "text": "مراعاة صفات الحروف بين الجهر والهمس، والشدة والرخاوة",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 25,
+                    "text": "مراعاة صفات الحروف",
+                    "ruleId": "sifat-huruf"
+                },
+                {
+                    "startIndex": 26,
+                    "endIndex": 48,
+                    "text": "الجهر والهمس، والشدة والرخاوة",
+                    "ruleId": "tajweed-rules"
+                }
+            ]
+        },
+        {
+            "id": "rules-verse-3",
+            "text": "الوقوف والابتداء الصحيح يساهم في فهم معاني القرآن الكريم",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 23,
+                    "text": "الوقوف والابتداء الصحيح",
+                    "ruleId": "waqf-ibtida"
+                },
+                {
+                    "startIndex": 24,
+                    "endIndex": 51,
+                    "text": "يساهم في فهم معاني القرآن الكريم",
+                    "ruleId": "tadabbur"
+                }
+            ]
+        },
+        {
+            "id": "rules-verse-4",
+            "text": "الحذر من اللحن والتكلف، والتزام البساطة والخشوع في التلاوة",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 25,
+                    "text": "الحذر من اللحن والتكلف",
+                    "ruleId": "adab-voice"
+                },
+                {
+                    "startIndex": 26,
+                    "endIndex": 55,
+                    "text": "التزام البساطة والخشوع في التلاوة",
+                    "ruleId": "adab-khushoo"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "makharij-huruf",
+            "name": "مخارج الحروف",
+            "color": "#2D6A4F",
+            "description": "إخراج كل حرف من مكانه الطبيعي مع مراعاة أحكام النطق الصحيح"
+        },
+        {
+            "id": "sifat-huruf",
+            "name": "صفات الحروف",
+            "color": "#1F4037",
+            "description": "معرفة الصفات الصوتية للحروف من حيث الجهر والهمس، والشدة والرخاوة"
+        },
+        {
+            "id": "waqf-ibtida",
+            "name": "الوقف والابتداء",
+            "color": "#B87333",
+            "description": "معرفة الأماكن الصحيحة للوقوف والابتداء لفهم المعنى بشكل أفضل"
+        },
+        {
+            "id": "tadabbur",
+            "name": "التدبر",
+            "color": "#DAA520",
+            "description": "التفكر والتأمل في معاني الآيات القرآنية أثناء التلاوة"
+        },
+        {
+            "id": "tajweed-rules",
+            "name": "قواعد التجويد",
+            "color": "#5B2C6F",
+            "description": "القواعد الأساسية لتحسين النطق وإتقان القراءة"
+        }
+    ]
+}
