@@ -7,25 +7,23 @@
             "id": "rules-overview-lesson-1",
             "title": "قواعد النطق الأساسية",
             "description": "نظرة شاملة على القواعد الأساسية للنطق الصحيح",
-            "type": "reading",
+            "type": "read",
             "icon": "fa-book-open",
             "duration": 12,
             "order": 1,
             "stepNumber": 1,
-            "totalSteps": 2,
-            "contentPath": "/content/reading/rules-overview-1.json"
+            "totalSteps": 2
         },
         {
             "id": "rules-overview-lesson-2",
             "title": "أحكام التجويد الرئيسية",
             "description": "دراسة أهم أحكام التجويد في التلاوة القرآنية",
-            "type": "reading",
+            "type": "read",
             "icon": "fa-book-open",
             "duration": 15,
             "order": 2,
             "stepNumber": 2,
-            "totalSteps": 2,
-            "contentPath": "/content/reading/rules-overview-2.json"
+            "totalSteps": 2
         }
     ]
 }
