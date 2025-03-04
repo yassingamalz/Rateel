@@ -40,11 +40,11 @@ export class LessonsService implements OnDestroy {
           const courseId = parts[0];
           const unitId = parts[1];
           const lessonId = parts[2];
-          
+
           // Check if we have these lessons loaded
           const currentLessons = this.lessonsSubject.getValue();
           const unitLessons = currentLessons[courseId]?.[unitId];
-          
+
           if (unitLessons) {
             // Create a new array with updated lesson objects
             const updatedLessons = unitLessons.map(lesson => {
@@ -58,7 +58,7 @@ export class LessonsService implements OnDestroy {
               }
               return lesson;
             });
-            
+
             // Update with new references to trigger change detection
             this.lessonsSubject.next({
               ...currentLessons,
@@ -67,7 +67,7 @@ export class LessonsService implements OnDestroy {
                 [unitId]: updatedLessons
               }
             });
-            
+
             console.debug(`[LessonsService] Updated lesson ${lessonId} progress to ${change.data.progress}%`);
           }
         }
@@ -99,7 +99,7 @@ export class LessonsService implements OnDestroy {
   private loadReadingContent(lessonId: string): Observable<any> {
     const contentPath = `/content/reading/${lessonId}.json`;
     console.log(`[LessonsService] Loading reading content for ${lessonId} from path: assets/data${contentPath}`);
-    
+
     return this.http.get<any>(`assets/data${contentPath}`).pipe(
       catchError(error => {
         console.error(`Error loading reading content for ${lessonId}:`, error);
@@ -145,14 +145,14 @@ export class LessonsService implements OnDestroy {
   markLessonAsCompleted(courseId: string, unitId: string, lessonId: string): Observable<void> {
     const currentLessons = this.lessonsSubject.getValue();
     const lessons = currentLessons[courseId]?.[unitId] || [];
-    
+
     // Find the lesson to complete
     const lessonIndex = lessons.findIndex(l => l.id === lessonId);
     if (lessonIndex === -1) {
       console.warn(`Lesson ${lessonId} not found in unit ${unitId}`);
       return of(void 0);
     }
-    
+
     // Create a new array with updated lesson objects
     const updatedLessons = lessons.map((lesson, index) => {
       if (lesson.id === lessonId) {
@@ -203,7 +203,7 @@ export class LessonsService implements OnDestroy {
         [unitId]: updatedLessons
       }
     });
-    
+
     return of(void 0);
   }
 
@@ -222,14 +222,14 @@ export class LessonsService implements OnDestroy {
       map(lessons => lessons.find(l => l.id === lessonId)),
       switchMap(lesson => {
         if (!lesson) return of(undefined);
-        
+
         // For practice lessons, load verses content
         if (lesson.type === 'practice' && !lesson.verses) {
           return this.loadVerses(lesson.id).pipe(
             map(verses => verses && verses.length > 0 ? { ...lesson, verses } : lesson)
           );
         }
-        
+
         // For reading lessons, load reading content based on lesson ID (not contentPath)
         if (lesson.type === 'read' && !lesson.readingContent) {
           return this.loadReadingContent(lesson.id).pipe(
@@ -239,7 +239,16 @@ export class LessonsService implements OnDestroy {
             })
           );
         }
-        
+
+        if (lesson.type === 'assessment' && !lesson.assessmentContent) {
+          return this.loadAssessmentContent(lesson.id).pipe(
+            map(content => {
+              console.log(`[LessonsService] Loaded assessment content for lesson ${lesson.id}:`, content);
+              return content ? { ...lesson, assessmentContent: JSON.stringify(content) } : lesson;
+            })
+          );
+        }
+
         return of(lesson);
       })
     );
@@ -289,10 +298,22 @@ export class LessonsService implements OnDestroy {
     );
   }
 
+  private loadAssessmentContent(lessonId: string): Observable<any> {
+    const contentPath = `/content/assessments/${lessonId}.json`;
+    console.log(`[LessonsService] Loading assessment content for ${lessonId} from path: assets/data${contentPath}`);
+
+    return this.http.get<any>(`assets/data${contentPath}`).pipe(
+      catchError(error => {
+        console.error(`Error loading assessment content for ${lessonId}:`, error);
+        return of(null);
+      })
+    );
+  }
+
   setCurrentUnit(unitId: string): void {
     this.currentUnitIdSubject.next(unitId);
   }
-  
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();

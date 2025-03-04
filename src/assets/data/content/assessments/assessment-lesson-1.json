@@ -1,0 +1,269 @@
+{
+  "version": "1.0.0",
+  "lessonId": "assessment-fundamentals-1",
+  "unitId": "assessment-fundamentals",
+  "courseId": "tajweed-fundamentals",
+  "title": "اختبار أساسيات التجويد",
+  "description": "اختبار شامل لقياس مستوى فهم أساسيات علم التجويد",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "ما هو تعريف علم التجويد؟",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "q1-a",
+          "text": "علم يعنى بدراسة معاني القرآن الكريم",
+          "isCorrect": false
+        },
+        {
+          "id": "q1-b",
+          "text": "علم يعنى بتحسين تلاوة القرآن الكريم وإخراج كل حرف من مخرجه",
+          "isCorrect": true
+        },
+        {
+          "id": "q1-c",
+          "text": "علم يعنى بتشكيل الحروف العربية",
+          "isCorrect": false
+        },
+        {
+          "id": "q1-d",
+          "text": "علم يعنى بتفسير الآيات القرآنية",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "q1-b",
+      "explanation": "علم التجويد هو علم يعنى بقراءة القرآن الكريم قراءة صحيحة كما أنزل، وذلك بإخراج كل حرف من مخرجه مع إعطائه حقه ومستحقه من الصفات."
+    },
+    {
+      "id": "q2",
+      "text": "ما هو حكم التجويد عند قراءة القرآن الكريم؟",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "q2-a",
+          "text": "واجب على كل مسلم ومسلمة",
+          "isCorrect": true
+        },
+        {
+          "id": "q2-b",
+          "text": "مستحب",
+          "isCorrect": false
+        },
+        {
+          "id": "q2-c",
+          "text": "واجب على الرجال فقط",
+          "isCorrect": false
+        },
+        {
+          "id": "q2-d",
+          "text": "مستحب للقراء المحترفين فقط",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "q2-a",
+      "explanation": "حكم التجويد واجب على كل مسلم ومسلمة، فهو وسيلة لحفظ اللسان عن اللحن في القرآن، وبه تتحقق صيانة كلام الله تعالى."
+    },
+    {
+      "id": "q3",
+      "text": "ما هي حروف القلقلة؟",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "q3-a",
+          "text": "ب",
+          "isCorrect": true
+        },
+        {
+          "id": "q3-b",
+          "text": "ج",
+          "isCorrect": true
+        },
+        {
+          "id": "q3-c",
+          "text": "ح",
+          "isCorrect": false
+        },
+        {
+          "id": "q3-d",
+          "text": "د",
+          "isCorrect": true
+        },
+        {
+          "id": "q3-e",
+          "text": "ط",
+          "isCorrect": true
+        },
+        {
+          "id": "q3-f",
+          "text": "ق",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": ["q3-a", "q3-b", "q3-d", "q3-e", "q3-f"],
+      "explanation": "حروف القلقلة هي خمسة وهي مجموعة في عبارة (قطب جد)، وهي: القاف، الطاء، الباء، الجيم، الدال.",
+      "hint": "يمكنك تذكرها بعبارة 'قطب جد'"
+    },
+    {
+      "id": "q4",
+      "text": "ما هي أنواع المد الأصلي؟",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "q4-a",
+          "text": "مد الألف",
+          "isCorrect": true
+        },
+        {
+          "id": "q4-b",
+          "text": "مد الواو",
+          "isCorrect": true
+        },
+        {
+          "id": "q4-c",
+          "text": "مد الياء",
+          "isCorrect": true
+        },
+        {
+          "id": "q4-d",
+          "text": "مد العارض للسكون",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": ["q4-a", "q4-b", "q4-c"],
+      "explanation": "المد الأصلي (الطبيعي) يكون بحروف المد الثلاثة: الألف الساكنة المفتوح ما قبلها، والواو الساكنة المضموم ما قبلها، والياء الساكنة المكسور ما قبلها."
+    },
+    {
+      "id": "q5",
+      "text": "حدد الآية التي تحتوي على إخفاء:",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "q5-a",
+          "text": "الرَّحْمَٰنِ الرَّحِيمِ",
+          "isCorrect": false
+        },
+        {
+          "id": "q5-b",
+          "text": "مَالِكِ يَوْمِ الدِّينِ",
+          "isCorrect": false
+        },
+        {
+          "id": "q5-c",
+          "text": "مِنْ شَرِّ مَا خَلَقَ",
+          "isCorrect": true
+        },
+        {
+          "id": "q5-d",
+          "text": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "q5-c",
+      "explanation": "في كلمة (مِنْ شَرِّ)، النون الساكنة تليها حرف الشين وهو من حروف الإخفاء."
+    },
+    {
+      "id": "q6",
+      "text": "اذكر مثالاً على حرف يُقرأ بالإدغام:",
+      "type": "textInput",
+      "correctAnswer": ["من يعمل", "من نعمة", "من ربهم", "عن نفس"],
+      "explanation": "الإدغام يكون عند التقاء النون الساكنة أو التنوين بأحد حروف الإدغام وهي (ي، ر، م، ل، و، ن) المجموعة في كلمة (يرملون)."
+    },
+    {
+      "id": "q7",
+      "text": "النون والميم المشددتان دائماً يُطبق فيهما حكم:",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "q7-a",
+          "text": "الإظهار",
+          "isCorrect": false
+        },
+        {
+          "id": "q7-b",
+          "text": "الإدغام",
+          "isCorrect": false
+        },
+        {
+          "id": "q7-c",
+          "text": "الإخفاء",
+          "isCorrect": false
+        },
+        {
+          "id": "q7-d",
+          "text": "الغنة",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "q7-d",
+      "explanation": "النون والميم المشددتان يجب فيهما الغنة دائماً، والغنة هي صوت له رنين يخرج من الخيشوم، ومقدارها حركتان."
+    },
+    {
+      "id": "q8",
+      "text": "هل الجملة التالية صحيحة أم خاطئة: 'يجب على القارئ الاستعاذة قبل البدء بتلاوة القرآن في كل مرة'؟",
+      "type": "trueFalse",
+      "correctAnswer": "true",
+      "explanation": "نعم، الجملة صحيحة. يجب على القارئ أن يستعيذ بالله من الشيطان الرجيم قبل البدء بتلاوة القرآن الكريم، لقوله تعالى: 'فَإِذَا قَرَأْتَ الْقُرْآنَ فَاسْتَعِذْ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ'."
+    },
+    {
+      "id": "q9",
+      "text": "ما مقدار المد الطبيعي؟",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "q9-a",
+          "text": "حركتان",
+          "isCorrect": true
+        },
+        {
+          "id": "q9-b",
+          "text": "4 حركات",
+          "isCorrect": false
+        },
+        {
+          "id": "q9-c",
+          "text": "5 حركات",
+          "isCorrect": false
+        },
+        {
+          "id": "q9-d",
+          "text": "6 حركات",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "q9-a",
+      "explanation": "مقدار المد الطبيعي حركتان، أي ما يعادل حركة الإصبع ذهاباً وإياباً مرتين."
+    },
+    {
+      "id": "q10",
+      "text": "ما هي شروط الاستعاذة عند قراءة القرآن؟",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "q10-a",
+          "text": "الإخلاص",
+          "isCorrect": true
+        },
+        {
+          "id": "q10-b",
+          "text": "الاستعانة",
+          "isCorrect": true
+        },
+        {
+          "id": "q10-c",
+          "text": "الالتجاء",
+          "isCorrect": true
+        },
+        {
+          "id": "q10-d",
+          "text": "قراءتها بصوت مرتفع",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": ["q10-a", "q10-b", "q10-c"],
+      "explanation": "شروط الاستعاذة هي: الإخلاص لله تعالى، والاستعانة به، والالتجاء إليه من الشيطان الرجيم.",
+      "hint": "الشروط تتعلق بالنية والقصد، وليس بالصوت"
+    }
+  ]
+}

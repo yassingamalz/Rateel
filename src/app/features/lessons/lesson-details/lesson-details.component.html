@@ -55,6 +55,13 @@
         (onComplete)="markAsCompleted()">
       </app-interactive-lesson>
 
+      <app-assessment-lesson
+        *ngSwitchCase="'assessment'"
+        [content]="lesson?.assessmentContent" 
+        [isCompleted]="lesson?.isCompleted"
+        (onProgress)="updateProgress($event)"
+        (onComplete)="markAsCompleted()">
+      </app-assessment-lesson>
     </div>
   </div>
 </div>
