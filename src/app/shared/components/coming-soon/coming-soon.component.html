@@ -1,0 +1,72 @@
+<!-- coming-soon.component.html -->
+<div class="coming-soon" dir="rtl">
+    <!-- Ornamental Background -->
+    <div class="ornamental-background">
+        <div class="ornament ornament--top-left" [@ornamentAnimation]>
+            <i class="fas fa-mosque"></i>
+        </div>
+        <div class="ornament ornament--bottom-right" [@ornamentAnimation]>
+            <i class="fas fa-book-quran"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="coming-soon__container">
+        <!-- Header Section -->
+        <div class="coming-soon__header">
+            <div class="header-icon">
+                <i class="fas fa-magic"></i>
+            </div>
+            <h1 class="header-title">{{ title }}</h1>
+            <p class="header-description">{{ mainDescription }}</p>
+        </div>
+
+        <!-- Upcoming Features -->
+        <div class="coming-soon__features">
+            <div class="features-grid">
+                <div *ngFor="let feature of upcomingFeatures" class="feature-card" [@featureAnimation]>
+                    <div class="feature-icon">
+                        <i class="fas {{ feature.icon }}"></i>
+                    </div>
+                    <h3 class="feature-title">{{ feature.title }}</h3>
+                    <p class="feature-description">{{ feature.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Notification Section -->
+        <div class="coming-soon__notification">
+            <ng-container *ngIf="!isEmailSubmitted; else successMessage">
+                <h2>كن على اطلاع</h2>
+                <p>أرسل بريدك الإلكتروني لتلقي أحدث التحديثات</p>
+
+                <div class="notification-form">
+                    <input type="email" placeholder="أدخل بريدك الإلكتروني" class="notification-input">
+                    <button class="notification-button" (click)="submitEmail()">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال
+                    </button>
+                </div>
+            </ng-container>
+
+            <ng-template #successMessage>
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>شكراً لاهتمامك!</h3>
+                    <p>سنبلغك بمجرد إطلاق الميزات الجديدة</p>
+                    <button class="reset-button" (click)="resetEmailSubmission()">
+                        إضافة بريد آخر
+                    </button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+    <!-- Inspirational Quote -->
+    <div class="coming-soon__quote">
+        <blockquote>
+            <p>«طلب العلم فريضة على كل مسلم»</p>
+            <cite>- الحديث النبوي الشريف</cite>
+        </blockquote>
+    </div>
+</div>

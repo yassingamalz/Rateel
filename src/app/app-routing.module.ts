@@ -1,4 +1,3 @@
-// app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InitializationComponent } from './core/initialization/initialization.component';
@@ -29,6 +28,26 @@ const routes: Routes = [
           .then(m => m.UnitsModule)
       }
     ]
+  },
+  {
+    path: 'coming-soon',
+    loadChildren: () => import('./shared/shared.module')
+      .then(m => m.SharedModule)
+  },
+  {
+    path: 'quran',
+    loadChildren: () => import('./shared/shared.module')
+      .then(m => m.SharedModule)
+  },
+  {
+    path: 'practice',
+    loadChildren: () => import('./shared/shared.module')
+      .then(m => m.SharedModule)
+  },
+  {
+    path: 'certificates',
+    loadChildren: () => import('./shared/shared.module')
+      .then(m => m.SharedModule)
   },
   {
     path: '',

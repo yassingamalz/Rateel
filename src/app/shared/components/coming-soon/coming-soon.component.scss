@@ -1,0 +1,327 @@
+// coming-soon.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.coming-soon {
+    min-height: 100vh;
+    background: linear-gradient(135deg,
+            map.get(vars.$colors, 'primary', 'dark') 0%,
+            map.get(vars.$colors, 'primary', 'base') 100%);
+    color: map.get(vars.$colors, 'text', 'light');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
+
+    // Ornamental Background
+    .ornamental-background {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        opacity: 0.1;
+
+        .ornament {
+            position: absolute;
+            color: map.get(vars.$colors, 'accent', 'base');
+            font-size: 15rem;
+            z-index: 1;
+
+            &--top-left {
+                top: -10%;
+                left: -10%;
+                transform: rotate(-15deg);
+            }
+
+            &--bottom-right {
+                bottom: -10%;
+                right: -10%;
+                transform: rotate(15deg);
+            }
+        }
+    }
+
+    // Container
+    &__container {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    // Header Section
+    &__header {
+        margin-bottom: map.get(vars.$spacing, 'xxl');
+
+        .header-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto map.get(vars.$spacing, 'lg');
+
+            i {
+                font-size: 4rem;
+                color: map.get(vars.$colors, 'accent', 'base');
+            }
+        }
+
+        .header-title {
+            font-size: map.get(vars.$font-size, 'title');
+            color: map.get(vars.$colors, 'accent', 'light');
+            margin-bottom: map.get(vars.$spacing, 'md');
+        }
+
+        .header-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: map.get(vars.$colors, 'text', 'muted');
+            line-height: 1.6;
+        }
+    }
+
+    // Features Section
+    &__features {
+        width: 100%;
+        margin-bottom: map.get(vars.$spacing, 'xxl');
+
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            gap: map.get(vars.$spacing, 'lg');
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.2);
+            border-radius: map.get(vars.$border-radius, 'lg');
+            padding: map.get(vars.$spacing, 'lg');
+            width: 300px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .feature-icon {
+                width: 80px;
+                height: 80px;
+                background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto map.get(vars.$spacing, 'md');
+
+                i {
+                    font-size: 2.5rem;
+                    color: map.get(vars.$colors, 'accent', 'base');
+                }
+            }
+
+            .feature-title {
+                color: map.get(vars.$colors, 'accent', 'light');
+                margin-bottom: map.get(vars.$spacing, 'sm');
+            }
+
+            .feature-description {
+                color: map.get(vars.$colors, 'text', 'muted');
+                line-height: 1.6;
+            }
+        }
+    }
+
+    // Notification Section
+    &__notification {
+        background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.3);
+        border-radius: map.get(vars.$border-radius, 'lg');
+        padding: map.get(vars.$spacing, 'xl');
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+
+        h2 {
+            color: map.get(vars.$colors, 'accent', 'light');
+            margin-bottom: map.get(vars.$spacing, 'md');
+        }
+
+        .notification-form {
+            display: flex;
+            gap: map.get(vars.$spacing, 'sm');
+            margin-top: map.get(vars.$spacing, 'lg');
+
+            .notification-input {
+                flex: 1;
+                padding: map.get(vars.$spacing, 'md');
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+                border-radius: map.get(vars.$border-radius, 'full');
+                color: map.get(vars.$colors, 'text', 'light');
+
+                &::placeholder {
+                    color: map.get(vars.$colors, 'text', 'muted');
+                }
+            }
+
+            .notification-button {
+                padding: map.get(vars.$spacing, 'md');
+                background: map.get(vars.$colors, 'accent', 'base');
+                color: map.get(vars.$colors, 'text', 'dark');
+                border: none;
+                border-radius: map.get(vars.$border-radius, 'full');
+                display: flex;
+                align-items: center;
+                gap: map.get(vars.$spacing, 'sm');
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+                }
+            }
+        }
+
+        .success-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .fa-check-circle {
+                font-size: 4rem;
+                color: map.get(vars.$colors, 'status', 'success');
+                margin-bottom: map.get(vars.$spacing, 'md');
+            }
+
+            h3 {
+                color: map.get(vars.$colors, 'accent', 'light');
+                margin-bottom: map.get(vars.$spacing, 'sm');
+            }
+
+            .reset-button {
+                margin-top: map.get(vars.$spacing, 'lg');
+                padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
+                background: transparent;
+                border: 1px solid map.get(vars.$colors, 'accent', 'base');
+                color: map.get(vars.$colors, 'accent', 'base');
+                border-radius: map.get(vars.$border-radius, 'full');
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: map.get(vars.$colors, 'accent', 'base');
+                    color: map.get(vars.$colors, 'text', 'dark');
+                }
+            }
+        }
+    }
+
+    &__quote {
+        margin-top: map.get(vars.$spacing, 'xl');
+        max-width: 700px;
+        text-align: center;
+        direction: rtl;
+
+        blockquote {
+            font-style: italic;
+            color: map.get(vars.$colors, 'text', 'muted');
+            font-size: map.get(vars.$font-size, 'lg');
+            line-height: 1.6;
+            position: relative;
+            padding: 0 map.get(vars.$spacing, 'lg');
+
+            &::before,
+            &::after {
+                content: '"';
+                color: map.get(vars.$colors, 'accent', 'base');
+                font-size: 3rem;
+                position: absolute;
+                opacity: 0.5;
+            }
+
+            &::before {
+                left: 0;
+                top: -10px;
+            }
+
+            &::after {
+                right: 0;
+                bottom: -20px;
+            }
+        }
+
+        cite {
+            display: block;
+            margin-top: map.get(vars.$spacing, 'md');
+            color: map.get(vars.$colors, 'text', 'light');
+            font-weight: 600;
+        }
+    }
+
+    // Responsive Adjustments
+    @media (max-width: 768px) {
+        &__container {
+            padding: 0 map.get(vars.$spacing, 'md');
+        }
+
+        &__header {
+            .header-title {
+                font-size: map.get(vars.$font-size, 'xxl');
+            }
+        }
+
+        &__features {
+            .features-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+        &__notification {
+            padding: map.get(vars.$spacing, 'lg');
+
+            .notification-form {
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+// Islamic-inspired Animations
+@keyframes islamic-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(218, 165, 32, 0.6);
+    }
+}
+
+@keyframes subtle-hover {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
