@@ -327,6 +327,15 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   // Menu Controls
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    // Add or remove 'menu-open' class to the main container
+    const container = document.querySelector('.lesson-details');
+    if (container) {
+      if (this.isMenuOpen) {
+        container.classList.add('menu-open');
+      } else {
+        container.classList.remove('menu-open');
+      }
+    }
     this.cdr.markForCheck();
   }
 

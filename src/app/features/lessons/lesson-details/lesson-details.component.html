@@ -3,16 +3,14 @@
   <!-- Progress Container -->
   <div class="progress-container">
     <div class="progress-bar">
-      <div class="progress-fill" 
-           [style.width.%]="currentProgress"
-           [style.transition]="'width 300ms ease-out'"></div>
+      <div class="progress-fill" [style.width.%]="currentProgress" [style.transition]="'width 300ms ease-out'"></div>
     </div>
     <div class="progress-text">{{currentProgress}}/100</div>
   </div>
 
   <!-- Control Button / Menu -->
   <div class="controls-area" [class.menu-open]="isMenuOpen">
-    <button class="control-button" (click)="toggleMenu()">
+    <button class="control-button" [class.menu-active]="isMenuOpen" (click)="toggleMenu()">
       <i class="fas" [class.fa-pause]="!isMenuOpen" [class.fa-play]="isMenuOpen"></i>
     </button>
 
@@ -30,37 +28,20 @@
   <!-- Main Content -->
   <div class="content-area">
     <div class="lesson-content" [ngSwitch]="lesson?.type">
-      <app-video-player 
-        *ngSwitchCase="'video'" 
-        [videoUrl]="lesson?.videoUrl" 
-        [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)" 
-        (onComplete)="markAsCompleted()"
-        dir="rtl">
+      <app-video-player *ngSwitchCase="'video'" [videoUrl]="lesson?.videoUrl" [isCompleted]="lesson?.isCompleted"
+        (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()" dir="rtl">
       </app-video-player>
 
-      <app-reading-lesson 
-        *ngSwitchCase="'read'" 
-        [content]="lesson?.readingContent" 
-        [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)" 
-        (onComplete)="markAsCompleted()">
+      <app-reading-lesson *ngSwitchCase="'read'" [content]="lesson?.readingContent" [isCompleted]="lesson?.isCompleted"
+        (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-reading-lesson>
 
-      <app-interactive-lesson
-        *ngSwitchCase="'practice'"
-        [verses]="lesson?.verses || []"
-        [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)"
-        (onComplete)="markAsCompleted()">
+      <app-interactive-lesson *ngSwitchCase="'practice'" [verses]="lesson?.verses || []"
+        [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-interactive-lesson>
 
-      <app-assessment-lesson
-        *ngSwitchCase="'assessment'"
-        [content]="lesson?.assessmentContent" 
-        [isCompleted]="lesson?.isCompleted"
-        (onProgress)="updateProgress($event)"
-        (onComplete)="markAsCompleted()">
+      <app-assessment-lesson *ngSwitchCase="'assessment'" [content]="lesson?.assessmentContent"
+        [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-assessment-lesson>
     </div>
   </div>
