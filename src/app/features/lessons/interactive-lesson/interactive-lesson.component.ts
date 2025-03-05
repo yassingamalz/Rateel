@@ -98,7 +98,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   isNavigating = false;
   resizeObserver: ResizeObserver | null = null;
   private verseElements: HTMLElement[] = [];
-  
+
   // Theme property
   currentTheme: 'light' | 'dark' = 'light';
 
@@ -217,6 +217,13 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     if (this.isNavigating) return;
 
     this.isNavigating = true;
+
+    // Stop recording if active before completing the lesson
+    if (this.state.isRecording) {
+      this.interactiveService.stopRecording().catch(error => {
+        console.error('[InteractiveLessonComponent] Error stopping recording during completion:', error);
+      });
+    }
 
     // Emit completion event
     this.onComplete.emit();
@@ -724,8 +731,15 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.destroy$.unsubscribe();
 
-    // Reset service state
-    this.interactiveService.resetState();
+    // First make sure recording is stopped if active
+    if (this.state.isRecording) {
+      this.interactiveService.stopRecording().catch(error => {
+        console.error('[InteractiveLessonComponent] Error stopping recording during destroy:', error);
+      });
+    }
+
+    // Call destroy instead of just resetState to properly clean up resources
+    this.interactiveService.destroy();
 
     // Disconnect resize observer
     if (this.resizeObserver) {
