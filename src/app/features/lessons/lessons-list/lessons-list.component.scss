@@ -132,3 +132,29 @@
     margin: 0 map.get(vars.$spacing, 'xs');
   }
 }
+
+:host ::ng-deep .focus-highlight {
+  animation: highlight-pulse 1.5s ease;
+  z-index: 10;
+  position: relative;
+}
+
+@keyframes highlight-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(map.get(vars.$colors, 'accent', 'base'), 0);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.7);
+  }
+}
+
+// Ensure smooth scrolling on container
+.lessons-container {
+  scroll-behavior: smooth;
+  
+  &:focus {
+    outline: none;
+  }
+}
