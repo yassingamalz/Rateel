@@ -1,0 +1,891 @@
+// _interactive-lesson-dark.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+// Custom variables for the interactive lesson with the existing palette
+$lesson-colors: (
+  primary-dark: map-get(vars.$colors, primary, dark),
+  primary-base: map-get(vars.$colors, primary, base),
+  primary-light: map-get(vars.$colors, primary, light),
+  accent-base: map-get(vars.$colors, accent, base),
+  accent-light: map-get(vars.$colors, accent, light),
+  accent-glow: map-get(vars.$colors, accent, glow),
+  text-light: map-get(vars.$colors, text, light),
+  text-muted: map-get(vars.$colors, text, muted)
+);
+
+// Tajweed Rule Colors
+$tajweed-rules: (
+  ghunnah: #FF7F7F,
+  ikhfa: #FF9F40,
+  idgham: #98D8D6,
+  iqlab: #FF80FF,
+  qalqalah: #DD99FF,
+  ikhfa-shafawi: #FFB380
+);
+
+// Dark theme specific styles
+.theme-dark {
+  // Main container
+  &.interactive-lesson {
+    background: linear-gradient(to bottom right,
+        map-get($lesson-colors, primary-base),
+        map-get($lesson-colors, primary-dark));
+
+    // Theme toggle button styling
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1);
+      }
+    }
+
+    &.is-recording {
+      .verse-card.active {
+        box-shadow: 0 0 30px rgba(map-get($lesson-colors, accent-glow), 0.3);
+
+        .verse-glow {
+          opacity: 0.8;
+          animation: pulse 1.5s infinite;
+        }
+      }
+    }
+
+    &.lesson-completed {
+      .verse-card {
+        transition: transform 0.5s ease;
+
+        &.completed {
+          transform: translateY(-5px);
+        }
+      }
+    }
+  }
+
+  // Ambient background effects
+  .ambient-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+
+    .ambient-glow {
+      position: absolute;
+      top: 30%;
+      right: 30%;
+      width: 60vh;
+      height: 60vh;
+      border-radius: 50%;
+      background: radial-gradient(circle at center,
+          rgba(map-get($lesson-colors, accent-glow), 0.1) 0%,
+          rgba(map-get($lesson-colors, accent-base), 0.05) 30%,
+          transparent 70%);
+      filter: blur(40px);
+      opacity: 0.6;
+      transform: translateZ(0);
+      will-change: transform;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .pattern-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%23DAA520' d='M40 0L80 40L40 80L0 40L40 0zM40 10L70 40L40 70L10 40L40 10zM40 20L60 40L40 60L20 40L40 20z'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+    }
+  }
+
+  // Enhanced Progress Bar
+  .progress-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+
+    .progress-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(to right,
+            map-get($lesson-colors, accent-base),
+            map-get($lesson-colors, accent-light));
+        border-radius: 4px;
+        transition: width 0.3s ease-out;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(90deg,
+              transparent,
+              rgba(255, 255, 255, 0.3),
+              transparent);
+          animation: shimmer 2s infinite;
+        }
+      }
+
+      .progress-text {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+        .percent {
+          font-size: 0.7rem;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  // Enhanced Verses Container
+  .verses-container {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    cursor: grab;
+    margin-bottom: 30px;
+
+    &.dragging {
+      cursor: grabbing;
+
+      .verses-track {
+        transition: none;
+      }
+    }
+
+    &.snap-scrolling .verses-track {
+      transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .verses-track {
+      display: flex;
+      align-items: center;
+      padding: 0 15%;
+      transition: transform 0.3s ease;
+      will-change: transform;
+
+      @media (orientation: landscape) {
+        padding: 0 10%;
+      }
+    }
+
+    // Scroll indicators
+    .scroll-indicators {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+
+      .scroll-indicator {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        &.visible {
+          opacity: 0.7;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.scroll-left {
+          left: 20px;
+        }
+
+        &.scroll-right {
+          right: 20px;
+        }
+
+        i {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  // Enhanced Verse Card
+  .verse-card {
+    flex: 0 0 auto;
+    width: min(80vw, 700px);
+    margin: 0 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+
+    &.active {
+      z-index: 2;
+      transform: scale(1.05);
+
+      .verse-frame {
+        background: rgba(map-get($lesson-colors, primary-light), 0.2);
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.2),
+          0 0 20px rgba(map-get($lesson-colors, accent-base), 0.2);
+        border: 1px solid rgba(map-get($lesson-colors, accent-base), 0.3);
+      }
+
+      .verse-glow {
+        opacity: 0.6;
+      }
+
+      .verse-text {
+        color: white;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    &.completed {
+      .verse-frame {
+        background: rgba(map-get($lesson-colors, accent-base), 0.15);
+        border: 1px solid rgba(map-get($lesson-colors, accent-base), 0.2);
+      }
+
+      .verse-number {
+        background: map-get($lesson-colors, accent-base);
+        color: map-get($lesson-colors, primary-dark);
+      }
+
+      .verse-glow {
+        opacity: 0.4;
+        background: radial-gradient(circle at center,
+            rgba(map-get($lesson-colors, accent-glow), 0.5),
+            rgba(map-get($lesson-colors, accent-base), 0.2),
+            transparent 70%);
+      }
+    }
+
+    &.inactive {
+      filter: brightness(0.7) saturate(0.8);
+
+      .verse-frame {
+        background: rgba(map-get($lesson-colors, primary-base), 0.2);
+      }
+
+      .verse-text {
+        opacity: 0.7;
+      }
+    }
+
+    // Enhanced Verse Frame
+    .verse-frame {
+      position: relative;
+      padding: 40px 30px;
+      border-radius: 20px;
+      background: rgba(map-get($lesson-colors, primary-base), 0.3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+
+      // Light bulb effect (verse glow)
+      .verse-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center,
+            rgba(map-get($lesson-colors, accent-glow), 0.3),
+            rgba(map-get($lesson-colors, accent-base), 0.1),
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        filter: blur(20px);
+        z-index: -1;
+      }
+    }
+
+    // Verse Number Badge
+    .verse-number {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    // Enhanced Verse Text Container
+    .verse-text-container {
+      width: 100%;
+      text-align: center;
+    }
+
+    // Enhanced Verse Text
+    .verse-text {
+      font-family: 'UthmanicHafs', 'me_quran', serif;
+      font-size: 2.5rem;
+      line-height: 2;
+      color: map-get($lesson-colors, text-light);
+      text-align: center;
+      transition: color 0.3s ease;
+      direction: rtl;
+
+      // Word highlighting
+      .word {
+        display: inline-block;
+        margin: 0 0.12em;
+        transition: all 0.3s ease;
+        position: relative;
+
+        &.current-word {
+          color: map-get($lesson-colors, accent-light);
+          transform: scale(1.1);
+          text-shadow: 0 0 10px rgba(map-get($lesson-colors, accent-base), 0.5);
+        }
+
+        &.spoken {
+          color: rgba(white, 0.7);
+        }
+
+        &.highlight {
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+
+    // Word Progress Dots
+    .word-progress {
+      margin-top: 20px;
+      width: 100%;
+
+      .word-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        padding: 0 10px;
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+
+          &.completed {
+            background: map-get($lesson-colors, accent-base);
+          }
+
+          &.current {
+            transform: scale(1.3);
+            background: map-get($lesson-colors, accent-light);
+            box-shadow: 0 0 8px rgba(map-get($lesson-colors, accent-base), 0.5);
+          }
+        }
+      }
+    }
+
+    // Tajweed Rules Legend
+    .tajweed-legend {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      width: 100%;
+
+      .legend-title {
+        font-size: 0.9rem;
+        color: map-get($lesson-colors, text-muted);
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .legend-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 4px 10px;
+          border-radius: 20px;
+
+          .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
+
+          .rule-name {
+            font-size: 0.85rem;
+            color: map-get($lesson-colors, text-light);
+          }
+        }
+      }
+    }
+  }
+
+  // Enhanced Connector Line
+  .connector-line {
+    height: 4px;
+    width: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin: 0 5px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    &.active {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    &.completed {
+      background: rgba(map-get($lesson-colors, accent-base), 0.3);
+    }
+
+    .connector-progress {
+      position: absolute;
+      top: 0;
+      right: 0; // RTL direction
+      height: 100%;
+      background: map-get($lesson-colors, accent-base);
+      transition: width 0.3s ease-out;
+    }
+  }
+
+  // Enhanced Controls Container
+  .controls-container {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+
+    &.is-recording {
+      .record-button {
+        background: darken(#FF4444, 10%);
+        box-shadow: 0 0 20px rgba(#FF4444, 0.4);
+        transform: scale(1.05);
+
+        .button-content {
+          transform: scale(0.95);
+        }
+      }
+    }
+
+    // Enhanced Audio Visualization
+    .audio-visualization {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      .wave-bars {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        height: 100%;
+
+        .wave-bar {
+          width: 4px;
+          height: 10px;
+          background: map-get($lesson-colors, accent-base);
+          border-radius: 2px;
+          animation: waveAnimation 0.8s ease-in-out infinite;
+
+          @for $i from 1 through 7 {
+            &:nth-child(#{$i}) {
+              animation-delay: $i * 0.1s;
+              height: 10px + random(20) + px;
+            }
+          }
+        }
+      }
+    }
+
+    // Enhanced Record Button
+    .record-button {
+      position: relative;
+      padding: 16px 30px;
+      background: map-get($lesson-colors, primary-light);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        background: lighten(map-get($lesson-colors, primary-light), 5%);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &.recording {
+        background: #FF4444;
+        padding: 16px 24px;
+
+        .button-text {
+          opacity: 1;
+        }
+
+        .record-ripple {
+          position: absolute;
+          inset: -5px;
+          border: 2px solid rgba(#FF4444, 0.5);
+          border-radius: inherit;
+          animation: ripple 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+      }
+
+      .button-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.2s ease;
+
+        i {
+          font-size: 1.2rem;
+        }
+
+        .button-text {
+          font-weight: 500;
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
+  // Enhanced Feedback Overlay
+  .feedback-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+
+    .feedback-dialog {
+      background: rgba(map-get($lesson-colors, primary-light), 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      max-width: 90%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      &.success {
+        background: rgba(darken(#4CAF50, 10%), 0.9);
+
+        .feedback-icon {
+          background: #4CAF50;
+        }
+      }
+
+      .feedback-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #F44336;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+        i {
+          font-size: 2rem;
+          color: white;
+        }
+      }
+
+      .feedback-message {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+      }
+    }
+  }
+
+  // Enhanced Help Tips
+  .help-tips {
+    position: fixed;
+    bottom: 130px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 20px;
+    z-index: 5;
+    pointer-events: none;
+
+    .tip-card {
+      background: rgba(map-get($lesson-colors, primary-light), 0.5);
+      backdrop-filter: blur(10px);
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      max-width: 300px;
+
+      .tip-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(map-get($lesson-colors, accent-base), 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          color: map-get($lesson-colors, accent-base);
+          font-size: 1.2rem;
+        }
+      }
+
+      .tip-text {
+        color: white;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // Completion Animation
+  .completion-animation {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease-out;
+
+    .completion-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: map-get($lesson-colors, accent-base);
+        box-shadow: 0 0 10px map-get($lesson-colors, accent-glow);
+        animation: particle 2s ease-out infinite;
+      }
+
+      @for $i from 1 through 20 {
+        &::before {
+          left: random(100) * 1%;
+          top: random(100) * 1%;
+          animation-delay: random(10) * 0.1s;
+        }
+
+        &::after {
+          left: random(100) * 1%;
+          top: random(100) * 1%;
+          animation-delay: random(10) * 0.1s;
+        }
+      }
+    }
+
+    .completion-message {
+      background: rgba(map-get($lesson-colors, primary-light), 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(map-get($lesson-colors, accent-base), 0.3);
+
+      i {
+        font-size: 4rem;
+        color: map-get($lesson-colors, accent-base);
+        animation: pulse 2s infinite;
+      }
+
+      span {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+      }
+    }
+  }
+
+  // Media queries
+  @media (max-width: 768px) {
+    .verse-card {
+      width: 90vw;
+
+      .verse-text {
+        font-size: 2rem;
+      }
+
+      .verse-frame {
+        padding: 30px 20px;
+      }
+    }
+
+    .connector-line {
+      width: 60px;
+    }
+
+    .controls-container {
+      bottom: 30px;
+    }
+
+    .help-tips {
+      bottom: 110px;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  // Mobile landscape optimizations
+  @media (orientation: landscape) and (max-height: 600px) {
+    .verse-card {
+      width: 70vw;
+
+      .verse-frame {
+        padding: 25px 20px;
+      }
+
+      .verse-text {
+        font-size: 1.75rem;
+        line-height: 1.8;
+      }
+
+      .word-progress {
+        margin-top: 10px;
+      }
+
+      .tajweed-legend {
+        margin-top: 10px;
+      }
+    }
+
+    .progress-container {
+      top: 10px;
+    }
+
+    .controls-container {
+      bottom: 20px;
+
+      .audio-visualization {
+        height: 30px;
+      }
+
+      .record-button {
+        padding: 12px 25px;
+      }
+    }
+
+    .help-tips {
+      bottom: 80px;
+
+      .tip-card {
+        padding: 8px 15px;
+
+        .tip-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}

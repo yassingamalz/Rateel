@@ -12,7 +12,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   NgZone,
-  HostListener
+  HostListener,
+  ViewEncapsulation
 } from '@angular/core';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { InteractiveLessonService } from './interactive-lesson.service';
@@ -21,6 +22,7 @@ import { Subscription, fromEvent, timer } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Capacitor } from '@capacitor/core';
 import { PlatformService } from '../../../core/services/platform.service';
+import { ThemeService } from '../../../shared/services/theme.service';
 
 @Component({
   selector: 'app-interactive-lesson',
@@ -28,6 +30,7 @@ import { PlatformService } from '../../../core/services/platform.service';
   templateUrl: './interactive-lesson.component.html',
   styleUrls: ['./interactive-lesson.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('feedbackAnimation', [
       transition(':enter', [
@@ -95,6 +98,9 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   isNavigating = false;
   resizeObserver: ResizeObserver | null = null;
   private verseElements: HTMLElement[] = [];
+  
+  // Theme property
+  currentTheme: 'light' | 'dark' = 'light';
 
   // Animation timers
   private readonly SNAP_ANIMATION_DURATION = 500; // ms
@@ -119,7 +125,8 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     private interactiveService: InteractiveLessonService,
     private platformService: PlatformService,
     private cdr: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private themeService: ThemeService
   ) { }
 
   @HostListener('window:resize')
@@ -136,6 +143,14 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   async ngOnInit() {
     // Initialize UI state based on device
     this.updateDeviceState();
+
+    // Subscribe to theme changes
+    this.subscriptions.push(
+      this.themeService.theme$.subscribe(theme => {
+        this.currentTheme = theme;
+        this.cdr.markForCheck();
+      })
+    );
 
     if (this.verses.length > 0) {
       // Set verses in service
@@ -185,6 +200,17 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     setTimeout(() => {
       this.snapToVerse(this.state.currentVerseIndex || 0);
     }, 100);
+  }
+
+  // Used to toggle theme without affecting the global theme
+  toggleTheme(): void {
+    const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+    this.themeService.setTheme(newTheme);
+  }
+
+  // Theme class getter for conditional styling
+  get themeClass(): string {
+    return `theme-${this.currentTheme}`;
   }
 
   private handleCompletion(): void {

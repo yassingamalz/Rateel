@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InitializationComponent } from './core/initialization/initialization.component';
-import { InitializationGuard } from './core/guards/initialization.guard';
+import { ComingSoonComponent } from './shared/components/coming-soon/coming-soon.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,6 @@ const routes: Routes = [
   },
   {
     path: 'courses',
-    // canActivate: [InitializationGuard],
     children: [
       {
         path: '',
@@ -30,24 +29,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'coming-soon',
-    loadChildren: () => import('./shared/shared.module')
-      .then(m => m.SharedModule)
-  },
-  {
     path: 'quran',
-    loadChildren: () => import('./shared/shared.module')
-      .then(m => m.SharedModule)
+    component: ComingSoonComponent
   },
   {
     path: 'practice',
-    loadChildren: () => import('./shared/shared.module')
-      .then(m => m.SharedModule)
+    component: ComingSoonComponent
   },
   {
     path: 'certificates',
-    loadChildren: () => import('./shared/shared.module')
-      .then(m => m.SharedModule)
+    component: ComingSoonComponent
   },
   {
     path: '',

@@ -1,9 +1,10 @@
-<!--src\app\features\lessons\interactive-lesson\interactive-lesson.component.html -->
-<div class="interactive-lesson mushaf-style" [class.is-recording]="state.isRecording"
+<!-- interactive-lesson.component.html -->
+<div class="interactive-lesson" [ngClass]="[themeClass, 'theme-wrapper']" [class.is-recording]="state.isRecording"
   [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
     <div class="pattern-overlay"></div>
+    <div class="ambient-glow"></div>
   </div>
 
   <!-- Progress Bar -->
@@ -12,6 +13,13 @@
       <div class="progress-fill" [style.width.%]="state.progress"></div>
       <span class="progress-text">{{state.progress | number:'1.0-0'}}<span class="percent">%</span></span>
     </div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle-wrapper">
+    <button class="theme-toggle-btn" (click)="toggleTheme()">
+      <i class="fas" [class.fa-sun]="currentTheme === 'dark'" [class.fa-moon]="currentTheme === 'light'"></i>
+    </button>
   </div>
 
   <!-- Verses Container with Enhanced Horizontal Scroll -->
@@ -24,6 +32,7 @@
       <ng-container *ngFor="let verse of verses; let i = index">
         <!-- Enhanced Verse Card with Mushaf Style -->
         <div class="verse-card" [class.active]="isVerseActive(i)" [class.completed]="isVerseCompleted(i)"
+          [class.inactive]="!isVerseActive(i) && !isVerseCompleted(i)" 
           [attr.data-verse-index]="i">
 
           <!-- Verse Frame -->
@@ -34,20 +43,25 @@
             <div class="frame-corner frame-corner--bl"></div>
             <div class="frame-corner frame-corner--br"></div>
 
+            <!-- Light Bulb/Verse Glow Effect -->
+            <div class="verse-glow"></div>
+
             <!-- Verse Number Badge -->
             <div class="verse-number">
               <span>{{i + 1}}</span>
             </div>
 
             <!-- Verse Text with Enhanced Word-Level Highlighting -->
-            <div class="verse-text">
-              <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
-                <span class="word" [class.highlight]="hasHighlight(verse, word, wordIndex)"
-                  [class.spoken]="isWordSpoken(i, wordIndex)" [class.current-word]="isCurrentWord(i, wordIndex)"
-                  [style.color]="getWordColor(verse, word, wordIndex)">
-                  {{word}}
-                </span>
-              </ng-container>
+            <div class="verse-text-container">
+              <div class="verse-text">
+                <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
+                  <span class="word" [class.highlight]="hasHighlight(verse, word, wordIndex)"
+                    [class.spoken]="isWordSpoken(i, wordIndex)" [class.current-word]="isCurrentWord(i, wordIndex)"
+                    [style.color]="getWordColor(verse, word, wordIndex)">
+                    {{word}}
+                  </span>
+                </ng-container>
+              </div>
             </div>
 
             <!-- Word Progress Indicator -->
