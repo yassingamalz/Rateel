@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoadingComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    ThemeToggleComponent
   ],
   imports: [
     CommonModule,
