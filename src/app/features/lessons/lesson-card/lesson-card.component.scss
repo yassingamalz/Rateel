@@ -6,7 +6,7 @@
 .lesson-card {
   position: relative;
   width: 280px;
-  height: 200px;
+  height: 200px; // Fixed height for all cards
   border-radius: map.get(vars.$border-radius, 'lg');
   background: rgba(27, 67, 50, 0.3);
   cursor: pointer;
@@ -81,6 +81,11 @@
     z-index: 1;
   }
 
+  &__header {
+    margin-bottom: map.get(vars.$spacing, 'sm');
+    flex: 1; // Allow header to take available space
+  }
+
   &__title {
     font-family: 'Cairo', sans-serif;
     font-size: 1.25rem;
@@ -89,6 +94,12 @@
     margin-bottom: map.get(vars.$spacing, 'sm');
     line-height: 1.4;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 2.8em; // Maximum height for 2 lines
   }
 
   &__description {
@@ -100,11 +111,16 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin: 0;
   }
 
   &__footer {
-    margin-top: auto;
+    margin-top: auto; // Push footer to bottom
     padding-top: map.get(vars.$spacing, 'md');
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 24px; // Consistent height for footer
   }
 
   &__duration {
@@ -148,7 +164,6 @@
     }
   }
 }
-
 
 @keyframes rectangularBorderFill {
   0% {
