@@ -4,8 +4,8 @@
 
 .unit-card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   cursor: pointer;
   isolation: isolate;
   z-index: 1;
@@ -69,7 +69,7 @@
 
   // Content Container
   &__content {
-    position: absolute;
+    position: absolute; // Restored this property to maintain layout
     inset: 0;
     display: flex;
     flex-direction: column;
@@ -160,67 +160,25 @@
 
   // Title
   &__title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: map.get(vars.$colors, 'text', 'light');
-    margin-top: map.get(vars.$spacing, 'sm');
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  // Progress Badge
-  &__progress {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: map.get(vars.$colors, 'accent', 'base');
-    color: map.get(vars.$colors, 'text', 'dark');
-    padding: map.get(vars.$spacing, 'xs') map.get(vars.$spacing, 'sm');
-    border-radius: map.get(vars.$border-radius, 'full');
-    font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-  }
-
-  // Completion Check
-  &__check {
-    position: absolute;
-    bottom: -5%;
-    right: 40%;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: map.get(vars.$colors, 'accent', 'base');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: map.get(vars.$colors, 'text', 'dark');
-    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-
-    &-pulse {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px solid map.get(vars.$colors, 'accent', 'base');
-      animation: pulse 2s infinite;
-    }
-
-    i {
-      font-size: 1.125rem;
-      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-  }
-
-  // Title Styles
-  &__title {
     font-size: 1.125rem;
     font-weight: 500;
     text-align: center;
-    margin-top: map.get(vars.$spacing, 'sm');
+    margin: 0.3rem 0.5rem 0.8rem;
+    height: 2.8em;
+    width: 65%;
+    color: map.get(vars.$colors, 'text', 'light');
 
+    // Multi-line overflow handling
+    display: -webkit-box;
+    -webkit-line-clamp: 2; // Show max 2 lines
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    word-wrap: break-word;
+
+    // For gradient titles if needed
     &-gradient {
       background: linear-gradient(to right,
           map.get(vars.$colors, 'text', 'light'),
@@ -229,11 +187,17 @@
       background-clip: text;
       color: transparent;
       padding: 0 map.get(vars.$spacing, 'xs');
-      max-width: 140px;
+      width: 100%;
+      display: block;
+
+      // Inherit multi-line properties
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
-      display: block;
     }
   }
 
@@ -263,6 +227,35 @@
           rgba(255, 255, 255, 0.2),
           transparent);
       animation: shine 3s infinite;
+    }
+  }
+
+  // Completion Check
+  &__check {
+    position: absolute;
+    bottom: -5%;
+    right: 40%;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: map.get(vars.$colors, 'accent', 'base');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map.get(vars.$colors, 'text', 'dark');
+    box-shadow: 0 2px 8px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+
+    &-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid map.get(vars.$colors, 'accent', 'base');
+      animation: pulse 2s infinite;
+    }
+
+    i {
+      font-size: 1.125rem;
+      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
 
@@ -463,6 +456,7 @@
 
     &__title {
       font-size: 1rem;
+      line-height: 1.4;
     }
   }
 }
