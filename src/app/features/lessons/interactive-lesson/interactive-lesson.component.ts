@@ -45,18 +45,19 @@ import { ThemeService } from '../../../shared/services/theme.service';
 })
 export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('versesContainer') versesContainer!: ElementRef<HTMLElement>;
+  @ViewChild('versesTrack') versesTrack?: ElementRef<HTMLElement>;
 
   @Input() set verses(value: TajweedVerse[]) {
-    console.log('Verses received in component:', value);
+    console.log('[InteractiveLessonComponent] Verses received in component:', value);
     // Ensure value is an array
     if (value && Array.isArray(value) && value.length > 0) {
       this._verses = value;
       if (this.interactiveService) {
-        console.log('Setting verses in service:', value);
+        console.log('[InteractiveLessonComponent] Setting verses in service:', value);
         this.interactiveService.setVerses(value);
       }
     } else {
-      console.warn('Invalid verses input, must be an array:', value);
+      console.warn('[InteractiveLessonComponent] Invalid verses input, must be an array:', value);
     }
   }
 
@@ -131,6 +132,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
   @HostListener('window:resize')
   onResize() {
+    console.log('[InteractiveLessonComponent] Window resize detected');
     this.ngZone.runOutsideAngular(() => {
       timer(this.DEBOUNCE_TIME).subscribe(() => {
         this.initializeContainerDimensions();
@@ -141,6 +143,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   }
 
   async ngOnInit() {
+    console.log('[InteractiveLessonComponent] Initializing component');
     // Initialize UI state based on device
     this.updateDeviceState();
 
@@ -148,6 +151,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     this.subscriptions.push(
       this.themeService.theme$.subscribe(theme => {
         this.currentTheme = theme;
+        console.log(`[InteractiveLessonComponent] Theme updated to: ${theme}`);
         this.cdr.markForCheck();
       })
     );
@@ -160,13 +164,37 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
       this.subscriptions.push(
         this.interactiveService.getState().subscribe({
           next: (state) => {
+            // Track previous verse index to detect changes
+            const prevVerseIndex = this.state.currentVerseIndex;
+
+            // Log significant state changes
+            if (state.currentVerseIndex !== prevVerseIndex) {
+              console.log(`[InteractiveLessonComponent] Verse index changed: ${state.currentVerseIndex}`);
+            }
+
+            if (state.progress !== this.state.progress) {
+              console.log(`[InteractiveLessonComponent] Progress updated: ${state.progress}%`);
+            }
+
+            if (state.isRecording !== this.state.isRecording) {
+              console.log(`[InteractiveLessonComponent] Recording state changed: ${state.isRecording}`);
+            }
+
+            // Update state first
             this.state = { ...state };
+
+            // After state update, snap to new verse if index changed
+            if (state.currentVerseIndex !== prevVerseIndex) {
+              console.log(`[InteractiveLessonComponent] Snapping to updated verse: ${state.currentVerseIndex}`);
+              this.snapToVerse(state.currentVerseIndex);
+            }
 
             // Update progress
             this.onProgress.emit(state.progress);
 
             // Check for completion
             if (state.isCompleted && !this.isCompleted) {
+              console.log('[InteractiveLessonComponent] Lesson completed, triggering completion handler');
               this.handleCompletion();
             }
 
@@ -177,13 +205,14 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
               const progress = (state.currentWordIndex % verseWords.length) / verseWords.length;
 
               if (progress > this.AUTO_SCROLL_THRESHOLD) {
+                console.log('[InteractiveLessonComponent] Auto-scrolling to next verse based on word progress');
                 this.scrollToNextVerse();
               }
             }
 
             this.cdr.markForCheck();
           },
-          error: (error) => console.error('State subscription error:', error)
+          error: (error) => console.error('[InteractiveLessonComponent] State subscription error:', error)
         })
       );
     }
@@ -193,18 +222,28 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit(): void {
+    // Initialize dimensions immediately to avoid flicker
     this.initializeContainerDimensions();
     this.cacheVerseElements();
 
-    // Initialize scroll position
+    // Initialize scroll position with a slight delay to ensure DOM is fully rendered
     setTimeout(() => {
-      this.snapToVerse(this.state.currentVerseIndex || 0);
-    }, 100);
+      console.log('[InteractiveLessonComponent] Initializing verse position...');
+      // Ensure we have valid container dimensions
+      this.initializeContainerDimensions();
+      // Snap to initial verse
+      const initialVerseIndex = this.state.currentVerseIndex || 0;
+      this.snapToVerse(initialVerseIndex);
+
+      // Force change detection
+      this.cdr.detectChanges();
+    }, 300);
   }
 
   // Used to toggle theme without affecting the global theme
   toggleTheme(): void {
     const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+    console.log(`[InteractiveLessonComponent] Toggling theme to: ${newTheme}`);
     this.themeService.setTheme(newTheme);
   }
 
@@ -216,10 +255,12 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   private handleCompletion(): void {
     if (this.isNavigating) return;
 
+    console.log('[InteractiveLessonComponent] Handling lesson completion');
     this.isNavigating = true;
 
     // Stop recording if active before completing the lesson
     if (this.state.isRecording) {
+      console.log('[InteractiveLessonComponent] Stopping recording during completion');
       this.interactiveService.stopRecording().catch(error => {
         console.error('[InteractiveLessonComponent] Error stopping recording during completion:', error);
       });
@@ -240,12 +281,14 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
       this.verseElements = Array.from(
         this.versesContainer.nativeElement.querySelectorAll('.verse-card')
       );
+      console.log(`[InteractiveLessonComponent] Cached ${this.verseElements.length} verse elements`);
     }
   }
 
   private updateDeviceState(): void {
     this.isMobilePortrait = window.innerWidth < 768;
     this.isMobileLandscape = window.innerHeight < 500;
+    console.log(`[InteractiveLessonComponent] Device state updated - Mobile Portrait: ${this.isMobilePortrait}, Mobile Landscape: ${this.isMobileLandscape}`);
   }
 
   private setupResizeObserver(): void {
@@ -257,6 +300,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     // Create new observer
     this.resizeObserver = new ResizeObserver(() => {
       this.ngZone.run(() => {
+        console.log('[InteractiveLessonComponent] Resize observer triggered');
         this.updateDeviceState();
         this.initializeContainerDimensions();
         this.cacheVerseElements();
@@ -270,6 +314,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     // Observe the container
     if (this.versesContainer) {
       this.resizeObserver.observe(this.versesContainer.nativeElement);
+      console.log('[InteractiveLessonComponent] Resize observer attached to verses container');
     }
   }
 
@@ -279,31 +324,18 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     const container = this.versesContainer.nativeElement;
     this.containerWidth = container.clientWidth;
 
-    // Recalculate verse width based on viewport
-    const verseElements = container.querySelectorAll('.verse-card');
-    if (verseElements.length > 0) {
-      // Get actual verse width from DOM
-      const firstVerseElement = verseElements[0] as HTMLElement;
-      const computedStyle = window.getComputedStyle(firstVerseElement);
-      const totalMargin = parseFloat(computedStyle.marginLeft) +
-        parseFloat(computedStyle.marginRight);
+    // Calculate total content width directly from DOM
+    this.totalContentWidth = this.calculateTotalContentWidth();
 
-      // Calculate total width with margins
-      const verseWidth = firstVerseElement.offsetWidth + totalMargin;
-
-      // Update verse width constant
-      this.VERSE_WIDTH = verseWidth;
-
-      // Calculate total content width
-      this.totalContentWidth = (this.verses.length * verseWidth) +
-        (this.verses.length - 1) * 100; // connector lines
-    }
+    console.log(`[InteractiveLessonComponent] Container width: ${this.containerWidth}px`);
+    console.log(`[InteractiveLessonComponent] Total content width: ${this.totalContentWidth}px for ${this.verses.length} verses`);
   }
 
   // Mouse Event Handlers (Enhanced)
   onMouseDown(event: MouseEvent): void {
     if (this.isSnapScrolling || this.isNavigating) return;
 
+    console.log(`[InteractiveLessonComponent] Mouse down at X: ${event.pageX}`);
     this.isDragging = true;
     this.startX = event.pageX;
     this.startScrollPosition = this.state.scrollPosition;
@@ -317,34 +349,25 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
     event.preventDefault();
 
-    // Calculate movement and timing
-    const currentTime = Date.now();
-    const deltaTime = currentTime - this.lastDragTimestamp;
+    // Calculate movement
     const deltaX = event.pageX - this.startX;
 
-    // Calculate drag velocity for inertia
-    if (deltaTime > 0) {
-      const instantVelocity = deltaX / deltaTime;
-      // Smooth velocity with weighted average
-      this.dragVelocity = (this.dragVelocity * 0.7) + (instantVelocity * 0.3);
-
-      // Update last direction for inertia
-      this.lastDragDirection = Math.sign(deltaX);
-    }
-
-    // Update timestamps
-    this.lastDragTimestamp = currentTime;
-
-    // Calculate new position (accounting for RTL direction)
+    // Use positive transform values with positive deltaX
     const newPosition = this.startScrollPosition + deltaX;
 
-    // Update scroll position with bounds checking
+    // Log significant movements
+    if (Math.abs(deltaX) > 20) {
+      console.log(`[InteractiveLessonComponent] Drag: delta=${deltaX}px, newPos=${newPosition.toFixed(1)}`);
+    }
+
+    // Update scroll position
     this.updateScrollPosition(newPosition);
   }
 
   onMouseUp(): void {
     if (!this.isDragging) return;
 
+    console.log(`[InteractiveLessonComponent] Mouse up, drag velocity: ${this.dragVelocity}`);
     this.isDragging = false;
 
     // Apply inertia if drag velocity is significant
@@ -364,6 +387,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   onTouchStart(event: TouchEvent): void {
     if (this.isSnapScrolling || this.isNavigating) return;
 
+    console.log(`[InteractiveLessonComponent] Touch start at X: ${event.touches[0].pageX}`);
     this.isDragging = true;
     this.startX = event.touches[0].pageX;
     this.startScrollPosition = this.state.scrollPosition;
@@ -375,34 +399,25 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   onTouchMove(event: TouchEvent): void {
     if (!this.isDragging) return;
 
-    // Calculate movement and timing
-    const currentTime = Date.now();
-    const deltaTime = currentTime - this.lastDragTimestamp;
+    // Calculate movement
     const deltaX = event.touches[0].pageX - this.startX;
 
-    // Calculate drag velocity for inertia
-    if (deltaTime > 0) {
-      const instantVelocity = deltaX / deltaTime;
-      // Smooth velocity with weighted average
-      this.dragVelocity = (this.dragVelocity * 0.7) + (instantVelocity * 0.3);
-
-      // Update last direction for inertia
-      this.lastDragDirection = Math.sign(deltaX);
-    }
-
-    // Update timestamps
-    this.lastDragTimestamp = currentTime;
-
-    // Calculate new position (accounting for RTL direction)
+    // Use positive transform values with positive deltaX
     const newPosition = this.startScrollPosition + deltaX;
 
-    // Update scroll position with bounds checking
+    // Log significant movements
+    if (Math.abs(deltaX) > 20) {
+      console.log(`[InteractiveLessonComponent] Touch: delta=${deltaX}px, newPos=${newPosition.toFixed(1)}`);
+    }
+
+    // Update scroll position
     this.updateScrollPosition(newPosition);
   }
 
   onTouchEnd(): void {
     if (!this.isDragging) return;
 
+    console.log(`[InteractiveLessonComponent] Touch end, drag velocity: ${this.dragVelocity}`);
     this.isDragging = false;
 
     // Apply inertia if drag velocity is significant
@@ -414,6 +429,75 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
+  private updateScrollPosition(position: number): void {
+    if (!this.versesContainer || !this.containerWidth) return;
+
+    // Get container dimensions
+    const containerWidth = this.versesContainer.nativeElement.clientWidth;
+
+    // Get track element
+    const trackElement = this.versesContainer.nativeElement.querySelector('.verses-track');
+    if (!trackElement) return;
+
+    // Calculate maximum scroll based on actual content width
+    const maxScroll = Math.max(0, trackElement.scrollWidth - containerWidth);
+
+    // Bound the position within valid range
+    let boundedPosition = Math.max(0, Math.min(maxScroll, position));
+
+    // Add resistance when dragging past bounds
+    if (position < 0) {
+      boundedPosition = position / 3; // Resistance when pulling past start
+    } else if (position > maxScroll) {
+      boundedPosition = maxScroll + (position - maxScroll) / 3; // Resistance when pulling past end
+    }
+
+    // Update state
+    this.state = {
+      ...this.state,
+      scrollPosition: boundedPosition
+    };
+
+    // Apply transformation directly to DOM
+    if (trackElement instanceof HTMLElement) {
+      // For RTL layout, we use positive translateX values
+      trackElement.style.transform = `translateX(${boundedPosition}px)`;
+    }
+
+    // Update UI
+    this.cdr.detectChanges();
+  }
+
+  // Helper function to properly calculate total content width
+  private calculateTotalContentWidth(): number {
+    if (!this.versesContainer) return 0;
+
+    const verseElements = this.versesContainer.nativeElement.querySelectorAll('.verse-card');
+    const connectorElements = this.versesContainer.nativeElement.querySelectorAll('.connector-line');
+
+    let totalWidth = 0;
+
+    // Calculate width from verse elements with margins
+    Array.from(verseElements).forEach((element) => {
+      const htmlElement = element as HTMLElement;
+      totalWidth += htmlElement.offsetWidth;
+      const style = window.getComputedStyle(htmlElement);
+      totalWidth += parseFloat(style.marginLeft) || 0;
+      totalWidth += parseFloat(style.marginRight) || 0;
+    });
+
+    // Add connector widths with margins
+    Array.from(connectorElements).forEach((element) => {
+      const htmlElement = element as HTMLElement;
+      totalWidth += htmlElement.offsetWidth;
+      const style = window.getComputedStyle(htmlElement);
+      totalWidth += parseFloat(style.marginLeft) || 0;
+      totalWidth += parseFloat(style.marginRight) || 0;
+    });
+
+    return totalWidth;
+  }
+
   // Apply inertia effect after dragging
   private applyInertia(): void {
     const initialVelocity = this.dragVelocity;
@@ -423,6 +507,8 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
 
     // Use requestAnimationFrame for smooth inertia
     const animateInertia = () => {
+      if (this.isSnapScrolling) return; // Don't continue if snap animation started
+
       const now = Date.now();
       const elapsedTime = now - startTime;
 
@@ -442,9 +528,10 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
       }
 
       // Calculate new position
-      const deltaTime = now - lastTimestamp;
-      const deltaPosition = dampedVelocity * deltaTime;
-      const newPosition = startPosition + (elapsedTime * dampedVelocity / 5);
+      const movementFactor = elapsedTime * dampedVelocity / 5;
+      const newPosition = startPosition + movementFactor;
+
+      console.log(`[InteractiveLessonComponent] Inertia: pos=${newPosition.toFixed(1)}, vel=${dampedVelocity.toFixed(3)}`);
 
       // Update position
       this.updateScrollPosition(newPosition);
@@ -455,86 +542,210 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
     };
 
     // Start animation
-    requestAnimationFrame(animateInertia);
-  }
-
-  // Update scroll position with bounds checking
-  private updateScrollPosition(position: number): void {
-    // Calculate min and max scroll positions
-    const minScroll = -(this.totalContentWidth - this.containerWidth);
-    const maxScroll = 0;
-
-    // Bound the position
-    let boundedPosition = Math.max(minScroll, Math.min(maxScroll, position));
-
-    // Add resistance when dragging past bounds
-    if (position < minScroll) {
-      const overDrag = minScroll - position;
-      boundedPosition = minScroll - (overDrag / 3);
-    } else if (position > maxScroll) {
-      const overDrag = position - maxScroll;
-      boundedPosition = maxScroll + (overDrag / 3);
-    }
-
-    // Update scroll position in local state only - NOT changing verse
-    this.state = {
-      ...this.state,
-      scrollPosition: boundedPosition
-    };
-
-    // Apply the transformation to DOM directly for smoother scrolling
-    if (this.versesContainer && this.versesContainer.nativeElement) {
-      const trackElement = this.versesContainer.nativeElement.querySelector('.verses-track');
-      if (trackElement instanceof HTMLElement) {
-        trackElement.style.transform = `translateX(${boundedPosition}px)`;
-      }
-    }
-
-    // Update the UI without changing the current verse
-    this.cdr.detectChanges();
+    this.ngZone.runOutsideAngular(() => {
+      requestAnimationFrame(animateInertia);
+    });
   }
 
   // Snap to nearest verse with animation
   private snapToNearestVerse(): void {
     if (!this.versesContainer || this.verses.length === 0) return;
 
-    // Calculate verse width with spacing
-    const verseWidth = this.VERSE_WIDTH;
+    const containerWidth = this.versesContainer.nativeElement.clientWidth;
+    const containerCenter = containerWidth / 2;
+    const currentScrollPos = this.state.scrollPosition;
 
-    // Calculate the nearest verse index
-    const scrollRatio = Math.abs(this.state.scrollPosition) / verseWidth;
-    let nearestVerseIndex = Math.round(scrollRatio);
+    // Get all verse elements
+    const verseElements = this.versesContainer.nativeElement.querySelectorAll('.verse-card');
 
-    // Ensure index is within bounds
-    nearestVerseIndex = Math.max(0, Math.min(nearestVerseIndex, this.verses.length - 1));
+    // Find the verse whose center is closest to the container center
+    let nearestIndex = 0;
+    let minDistance = Number.MAX_VALUE;
 
-    // Snap to the verse
-    this.snapToVerse(nearestVerseIndex);
+    for (let i = 0; i < verseElements.length; i++) {
+      const verse = verseElements[i] as HTMLElement;
+      if (!verse) continue;
+
+      // Calculate verse center position
+      let versePosition = 0;
+
+      // Sum up positions of all verses before this one
+      for (let j = 0; j < i; j++) {
+        const prevVerse = verseElements[j] as HTMLElement;
+        if (prevVerse) {
+          versePosition += prevVerse.offsetWidth;
+          const style = window.getComputedStyle(prevVerse);
+          versePosition += parseFloat(style.marginRight) || 0;
+
+          const connector = prevVerse.nextElementSibling;
+          if (connector && connector.classList.contains('connector-line')) {
+            versePosition += connector.clientWidth;
+            const connectorStyle = window.getComputedStyle(connector);
+            versePosition += parseFloat(connectorStyle.marginRight) || 0;
+            versePosition += parseFloat(connectorStyle.marginLeft) || 0;
+          }
+        }
+      }
+
+      // Add left margin of current verse
+      const currentStyle = window.getComputedStyle(verse);
+      versePosition += parseFloat(currentStyle.marginLeft) || 0;
+
+      // Add half verse width to get to center
+      versePosition += verse.offsetWidth / 2;
+
+      // Calculate distance from verse center to where it should be
+      const verseCenter = versePosition;
+      const targetCenter = currentScrollPos + containerCenter;
+      const distance = Math.abs(verseCenter - targetCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestIndex = i;
+      }
+    }
+
+    // Snap to nearest verse
+    console.log(`[InteractiveLessonComponent] Snapping to nearest verse: ${nearestIndex}`);
+    this.snapToVerse(nearestIndex);
   }
 
   // Snap to a specific verse within the current lesson
   private snapToVerse(index: number): void {
+    if (!this.versesContainer || index < 0 || index >= this.verses.length) return;
+  
+    this.isSnapScrolling = true;
+    
+    // Get all verse elements 
+    const verseElements = this.versesContainer.nativeElement.querySelectorAll('.verse-card');
+    if (!verseElements.length) {
+      this.isSnapScrolling = false;
+      return;
+    }
+  
+    // Get container dimensions
     const containerWidth = this.versesContainer.nativeElement.clientWidth;
-    const padding = containerWidth * this.INITIAL_PADDING;
-
-    // For RTL, move content right as index increases
-    const position = (index * this.VERSE_WIDTH) - padding;
-
-    this.updateScrollPosition(position);
+    const containerCenter = containerWidth / 2 ;
+    
+    // Calculate the position to center the current verse
+    let scrollPosition = 0;
+    
+    // Calculate position by measuring actual element positions
+    for (let i = 0; i < index; i++) {
+      const element = verseElements[i] as HTMLElement;
+      if (element) {
+        // For each verse before our target, add its width + any connector
+        scrollPosition += element.offsetWidth;
+        
+        // Add any margins/padding between verses (including connectors)
+        const style = window.getComputedStyle(element);
+        scrollPosition += parseFloat(style.marginRight) || 0;
+        
+        // If there's a connector after this verse, include its width
+        const connector = element.nextElementSibling;
+        if (connector && connector.classList.contains('connector-line')) {
+          scrollPosition += connector.clientWidth;
+          
+          // Also add any margins on the connector
+          const connectorStyle = window.getComputedStyle(connector);
+          scrollPosition += parseFloat(connectorStyle.marginRight) || 0;
+          scrollPosition += parseFloat(connectorStyle.marginLeft) || 0;
+        }
+      }
+    }
+    
+    // Get the current verse element
+    const currentVerse = verseElements[index] as HTMLElement;
+    if (currentVerse) {
+      // Add left margin of current verse
+      const currentStyle = window.getComputedStyle(currentVerse);
+      scrollPosition += parseFloat(currentStyle.marginLeft) || 0;
+      
+      // *** CENTERING ADJUSTMENT AREA - MODIFY HERE TO TEST CENTERING ***
+      const centeringAdjustment = 100; // Change this value to adjust verse position (positive = more right, negative = more left)
+      
+      // Center adjustment: subtract half container width, add half verse width
+      scrollPosition -= containerCenter; 
+      scrollPosition += currentVerse.offsetWidth / 2;
+      
+      // Apply custom centering adjustment
+      scrollPosition += centeringAdjustment;
+    }
+    
+    // Ensure position is not negative
+    scrollPosition = Math.max(0, scrollPosition);
+    
+    // Calculate max scroll position to prevent overscroll
+    let maxScroll = 0;
+    const trackElement = this.versesContainer.nativeElement.querySelector('.verses-track');
+    if (trackElement) {
+      maxScroll = Math.max(0, trackElement.scrollWidth - containerWidth);
+      // Bound the position
+      scrollPosition = Math.min(scrollPosition, maxScroll);
+    }
+    
+    console.log(`[InteractiveLessonComponent] Snapping to verse ${index} with transform: translateX(${scrollPosition}px)`);
+    
+    // Update state
+    this.state = {
+      ...this.state,
+      scrollPosition: scrollPosition,
+      currentVerseIndex: index
+    };
+  
+    // Apply transform to DOM (with RTL adjustment)
+    if (trackElement instanceof HTMLElement) {
+      // For RTL layout, we use positive translateX values
+      trackElement.style.transform = `translateX(${scrollPosition}px)`;
+      console.log(`[InteractiveLessonComponent] Applied transform: ${trackElement.style.transform}`);
+    }
+  
+    // Update service state if needed
+    if (this.state.currentVerseIndex !== index) {
+      this.interactiveService.snapToVerse(index);
+    }
+    
+    // Reset snap scrolling flag after animation
+    setTimeout(() => {
+      this.isSnapScrolling = false;
+    }, this.SNAP_ANIMATION_DURATION);
   }
+  
 
   // Scroll to the next verse
   scrollToNextVerse(): void {
+    if (this.isSnapScrolling || this.isNavigating) return;
+
+    // In RTL, "next" verse is actually higher index (scrolling left in the UI)
     if (this.state.currentVerseIndex < this.verses.length - 1) {
+      this.isSnapScrolling = true;
       const nextIndex = this.state.currentVerseIndex + 1;
+
+      console.log(`[InteractiveLessonComponent] Scrolling to next verse: ${nextIndex}`);
       this.snapToVerse(nextIndex);
+
+      // Reset snap scrolling flag after animation completes
+      setTimeout(() => {
+        this.isSnapScrolling = false;
+      }, this.SNAP_ANIMATION_DURATION);
     }
   }
 
   scrollToPreviousVerse(): void {
+    if (this.isSnapScrolling || this.isNavigating) return;
+
+    // In RTL, "previous" verse is actually lower index (scrolling right in the UI)
     if (this.state.currentVerseIndex > 0) {
+      this.isSnapScrolling = true;
       const prevIndex = this.state.currentVerseIndex - 1;
+
+      console.log(`[InteractiveLessonComponent] Scrolling to previous verse: ${prevIndex}`);
       this.snapToVerse(prevIndex);
+
+      // Reset snap scrolling flag after animation completes
+      setTimeout(() => {
+        this.isSnapScrolling = false;
+      }, this.SNAP_ANIMATION_DURATION);
     }
   }
 
@@ -727,6 +938,7 @@ export class InteractiveLessonComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnDestroy(): void {
+    console.log('[InteractiveLessonComponent] Component destroying');
     // Clean up all subscriptions
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.destroy$.unsubscribe();

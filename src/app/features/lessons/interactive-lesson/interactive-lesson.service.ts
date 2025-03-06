@@ -39,14 +39,18 @@ export class InteractiveLessonService {
   private totalWordCount = 0;
   private destroyInProgress = false;
 
-  constructor(private platformService: PlatformService) { }
+  constructor(private platformService: PlatformService) {
+    console.log('[InteractiveLessonService] Service initialized');
+  }
 
   /**
    * Sets the verses for the interactive lesson and initializes state
    */
   setVerses(verses: TajweedVerse[]): void {
+    console.log('[InteractiveLessonService] Setting verses:', verses);
     this.verses = verses;
     this.totalWordCount = this.calculateTotalWordCount();
+    console.log(`[InteractiveLessonService] Total word count: ${this.totalWordCount}`);
 
     // Reset state when new verses are set
     this.resetState();
@@ -56,8 +60,11 @@ export class InteractiveLessonService {
    * Calculates the total number of words across all verses
    */
   private calculateTotalWordCount(): number {
-    return this.verses.reduce((total, verse) =>
-      total + this.splitVerseIntoWords(verse.text).length, 0);
+    return this.verses.reduce((total, verse) => {
+      const wordCount = this.splitVerseIntoWords(verse.text).length;
+      console.log(`[InteractiveLessonService] Verse has ${wordCount} words: "${verse.text.substring(0, 30)}..."`);
+      return total + wordCount;
+    }, 0);
   }
 
   /**
@@ -68,40 +75,20 @@ export class InteractiveLessonService {
   }
 
   /**
-   * Updates the scroll position with bounds checking
-   * Note: This should only affect the visual position, not change the current verse
-   */
-  updateScrollPosition(position: number, containerWidth: number, totalContentWidth: number): void {
-    // Calculate the bounds with RTL orientation
-    const minScroll = -(totalContentWidth - containerWidth);
-    const maxScroll = 0;
-
-    // Bound position within valid range
-    const boundedPosition = Math.max(minScroll, Math.min(maxScroll, position));
-
-    // Update state with new position only, not changing verse index
-    this.state.next({
-      ...this.state.value,
-      scrollPosition: boundedPosition
-    });
-  }
-
-  /**
    * Snaps the view to a specific verse and updates current verse index
    * This should NOT trigger navigation to a new lesson, only update the internal state
    */
   snapToVerse(verseIndex: number): void {
-    // For RTL, we need to use negative values to move content right
-    const newPosition = -(verseIndex * this.VERSE_WIDTH);
-
+    // Update the internal state with the new verse index
+    // But don't try to calculate scroll position here - let the component handle it
+    console.log(`[InteractiveLessonService] Updating to verse index: ${verseIndex}`);
+    
     this.state.next({
       ...this.state.value,
-      scrollPosition: newPosition,
       currentVerseIndex: verseIndex,
       feedback: undefined
     });
   }
-
 
   /**
    * Completes the current verse and advances to the next if available
@@ -109,6 +96,8 @@ export class InteractiveLessonService {
   async completeCurrentVerse(): Promise<void> {
     const currentState = this.state.value;
     const currentVerseIndex = currentState.currentVerseIndex;
+
+    console.log(`[InteractiveLessonService] Completing verse ${currentVerseIndex}`);
 
     // Mark the current verse as completed in answers map
     const newAnswers = new Map(currentState.answers);
@@ -139,18 +128,34 @@ export class InteractiveLessonService {
     // Move to next verse if not already completed
     if (!isLessonComplete && currentVerseIndex < this.verses.length - 1) {
       const nextVerseIndex = currentVerseIndex + 1;
+      console.log(`[InteractiveLessonService] Moving to next verse ${nextVerseIndex}`);
 
       // Allow feedback to display before changing verse
       setTimeout(() => {
         if (!this.destroyInProgress) {
+          // Update the verse index - let component handle scroll
           this.snapToVerse(nextVerseIndex);
+
+          // Reset recognized words for the new verse
+          // This ensures a clean state for the next verse
+          const newRecognizedWords = new Set(currentState.recognizedWords);
+          
+          // Update state with reset for new verse
+          this.state.next({
+            ...this.state.value,
+            currentWordIndex: this.getGlobalWordIndex(nextVerseIndex, 0),
+            recognizedWords: newRecognizedWords
+          });
 
           // If still recording, continue word recognition on the new verse
           if (this.state.value.isRecording) {
+            console.log(`[InteractiveLessonService] Starting word recognition for verse ${nextVerseIndex}`);
             this.startWordRecognition(nextVerseIndex);
           }
         }
       }, this.FEEDBACK_DURATION);
+    } else if (isLessonComplete) {
+      console.log('[InteractiveLessonService] Lesson completed!');
     }
   }
 
@@ -158,6 +163,7 @@ export class InteractiveLessonService {
    * Shows feedback message for a specified duration
    */
   async showFeedback(message: string): Promise<void> {
+    console.log(`[InteractiveLessonService] Showing feedback: "${message}"`);
     // Update state with feedback message
     this.state.next({
       ...this.state.value,
@@ -168,6 +174,7 @@ export class InteractiveLessonService {
     setTimeout(() => {
       // Only clear if this is still the current feedback message
       if (this.state.value.feedback === message && !this.destroyInProgress) {
+        console.log('[InteractiveLessonService] Clearing feedback');
         this.state.next({
           ...this.state.value,
           feedback: undefined
@@ -191,9 +198,13 @@ export class InteractiveLessonService {
     }
 
     const verse = this.verses[verseIndex];
-    if (!verse) return;
+    if (!verse) {
+      console.error(`[InteractiveLessonService] No verse found at index ${verseIndex}`);
+      return;
+    }
 
     const words = this.splitVerseIntoWords(verse.text);
+    console.log(`[InteractiveLessonService] Starting word recognition for verse ${verseIndex} with ${words.length} words`);
 
     // Start with first word in verse if not already set
     const startWordIndex = 0;
@@ -213,23 +224,34 @@ export class InteractiveLessonService {
    * Recursively recognizes words in the current verse
    */
   private recognizeNextWord(verseIndex: number, localWordIndex: number): void {
-    if (!this.state.value.isRecording || this.destroyInProgress) return;
+    if (!this.state.value.isRecording || this.destroyInProgress) {
+      console.log('[InteractiveLessonService] Recognition stopped: No longer recording or being destroyed');
+      return;
+    }
 
     const verse = this.verses[verseIndex];
-    if (!verse) return;
+    if (!verse) {
+      console.error(`[InteractiveLessonService] No verse found at index ${verseIndex}`);
+      return;
+    }
 
     const words = this.splitVerseIntoWords(verse.text);
 
     // Check if we've processed all words in this verse
     if (localWordIndex >= words.length) {
+      console.log(`[InteractiveLessonService] All words processed in verse ${verseIndex}`);
+      
       // Complete verse if we've recognized enough words
       const recognizedCount = this.countRecognizedWordsInVerse(verseIndex);
       const completionPercentage = recognizedCount / words.length;
+      console.log(`[InteractiveLessonService] Verse completion: ${completionPercentage.toFixed(2)} (${recognizedCount}/${words.length} words)`);
 
       if (completionPercentage >= this.VERSE_COMPLETION_THRESHOLD) {
+        console.log(`[InteractiveLessonService] Verse ${verseIndex} recognition threshold met, completing verse`);
         this.completeCurrentVerse();
       } else {
         // Not enough words recognized, show feedback
+        console.log(`[InteractiveLessonService] Not enough words recognized, retry verse ${verseIndex}`);
         this.showFeedback('حاول نطق الكلمات بوضوح أكثر');
 
         // Reset to start of verse and try again
@@ -244,6 +266,7 @@ export class InteractiveLessonService {
 
     // Calculate global word index
     const globalWordIndex = this.getGlobalWordIndex(verseIndex, localWordIndex);
+    console.log(`[InteractiveLessonService] Processing word ${localWordIndex} (global: ${globalWordIndex}): "${words[localWordIndex]}"`);
 
     // Update current word index
     this.state.next({
@@ -259,6 +282,7 @@ export class InteractiveLessonService {
       if (!this.state.value.isRecording || this.destroyInProgress) return;
 
       if (isRecognized) {
+        console.log(`[InteractiveLessonService] Word "${words[localWordIndex]}" recognized`);
         // Mark word as recognized
         const newRecognizedWords = new Set(this.state.value.recognizedWords);
         newRecognizedWords.add(globalWordIndex);
@@ -279,6 +303,7 @@ export class InteractiveLessonService {
         // Process next word
         this.recognizeNextWord(verseIndex, localWordIndex + 1);
       } else {
+        console.log(`[InteractiveLessonService] Word "${words[localWordIndex]}" not recognized, retry`);
         // Failed recognition, show feedback
         this.showFeedback('حاول مرة أخرى');
 
@@ -321,6 +346,7 @@ export class InteractiveLessonService {
         clearTimeout(this.recognitionTimer);
       }
 
+      console.log('[InteractiveLessonService] Starting recording');
       // Start device recording
       if (Capacitor.isNativePlatform()) {
         await this.platformService.startRecording();
@@ -335,6 +361,7 @@ export class InteractiveLessonService {
         });
 
         this.mediaRecorder.start();
+        console.log('[InteractiveLessonService] Web MediaRecorder started');
       }
 
       // Update recording state
@@ -359,6 +386,7 @@ export class InteractiveLessonService {
    */
   async stopRecording(): Promise<string> {
     try {
+      console.log('[InteractiveLessonService] Stopping recording');
       // Clear any ongoing recognition
       if (this.recognitionTimer) {
         clearTimeout(this.recognitionTimer);
@@ -371,6 +399,7 @@ export class InteractiveLessonService {
       if (Capacitor.isNativePlatform()) {
         const recording = await this.platformService.stopRecording();
         audioUrl = `data:${recording.value.mimeType};base64,${recording.value.recordDataBase64}`;
+        console.log('[InteractiveLessonService] Native recording stopped');
       } else {
         // Web implementation
         if (!this.mediaRecorder) {
@@ -386,6 +415,7 @@ export class InteractiveLessonService {
           this.mediaRecorder!.stop();
           this.mediaRecorder!.stream.getTracks().forEach(track => track.stop());
         });
+        console.log('[InteractiveLessonService] Web recording stopped');
       }
 
       // Update state with recording stopped
@@ -432,6 +462,7 @@ export class InteractiveLessonService {
    * Resets the state to initial values
    */
   resetState(): void {
+    console.log('[InteractiveLessonService] Resetting state');
     // Clear ongoing recognitions
     if (this.recognitionTimer) {
       clearTimeout(this.recognitionTimer);
@@ -463,6 +494,7 @@ export class InteractiveLessonService {
    * Clean up resources when service is destroyed
    */
   destroy(): void {
+    console.log('[InteractiveLessonService] Destroying service');
     this.destroyInProgress = true;
 
     // Clear any ongoing processes
@@ -480,6 +512,7 @@ export class InteractiveLessonService {
       } else if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
         this.mediaRecorder.stop();
         this.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+        console.log('[InteractiveLessonService] Web recording stopped during destroy');
       }
     }
 

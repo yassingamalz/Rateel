@@ -28,7 +28,7 @@
     (mouseleave)="onMouseLeave()" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
     (touchend)="onTouchEnd()">
 
-    <div class="verses-track" [style.transform]="'translateX(' + state.scrollPosition + 'px)'">
+    <div class="verses-track" #versesTrack>
       <ng-container *ngFor="let verse of verses; let i = index">
         <!-- Enhanced Verse Card with Mushaf Style -->
         <div class="verse-card" [class.active]="isVerseActive(i)" [class.completed]="isVerseCompleted(i)"
@@ -97,11 +97,11 @@
     <!-- Scroll Indicators -->
     <div class="scroll-indicators" *ngIf="verses.length > 1">
       <!-- Right arrow (for previous in RTL) -->
-      <div class="scroll-indicator scroll-right" [class.visible]="canScrollLeft()">
+      <div class="scroll-indicator scroll-right" [class.visible]="canScrollLeft()" (click)="scrollToPreviousVerse()">
         <i class="fas fa-chevron-right"></i>
       </div>
       <!-- Left arrow (for next in RTL) -->
-      <div class="scroll-indicator scroll-left" [class.visible]="canScrollRight()">
+      <div class="scroll-indicator scroll-left" [class.visible]="canScrollRight()" (click)="scrollToNextVerse()">
         <i class="fas fa-chevron-left"></i>
       </div>
     </div>
