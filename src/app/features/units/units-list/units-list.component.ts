@@ -127,15 +127,15 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     // Initialize units with progress tracking and better change detection
     this.units$ = this.unitsService.getUnitsByCourseId(this.courseId).pipe(
       tap(units => {
-        console.log(`[UnitsList] Received ${units.length} units with data:`, 
+        console.log(`[UnitsList] Received ${units.length} units with data:`,
           units.map(u => ({ id: u.id, progress: u.progress, completed: u.isCompleted })));
-          
+
         this.ngZone.run(() => {
           this.contentReady = true;
           this.loading$.next(false);
           // Force immediate change detection
           this.cdr.detectChanges();
-          
+
           // Schedule another change detection after a short delay to ensure UI is updated
           // This helps with timing issues in complex component trees
           setTimeout(() => this.cdr.detectChanges(), 100);
@@ -188,16 +188,16 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       )
       .subscribe(change => {
         if (!change) return;
-        
+
         const unitId = change.id.split('_')[1];
         console.log(`[UnitsList] Storage change detected for unit ${unitId}, progress: ${change.data.progress}%`);
-        
+
         // Track update count for debugging
         this.progressUpdateCount++;
-        
+
         // Force immediate change detection to update the UI
         this.cdr.detectChanges();
-        
+
         // Schedule another update after a short delay to ensure UI is updated
         timer(50).subscribe(() => {
           this.cdr.detectChanges();
@@ -211,20 +211,20 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       distinctUntilChanged((prev, curr) => {
         // Only skip update if arrays are identical by value
         if (prev.length !== curr.length) return false;
-        
+
         for (let i = 0; i < prev.length; i++) {
           const prevUnit = prev[i];
           const currUnit = curr[i];
-          
+
           if (
             prevUnit.id !== currUnit.id ||
             prevUnit.progress !== currUnit.progress ||
             prevUnit.isCompleted !== currUnit.isCompleted ||
             prevUnit.isLocked !== currUnit.isLocked
           ) {
-            console.log(`[UnitsList] Detected change in unit ${currUnit.id}:`, 
-              { 
-                prevProgress: prevUnit.progress, 
+            console.log(`[UnitsList] Detected change in unit ${currUnit.id}:`,
+              {
+                prevProgress: prevUnit.progress,
                 newProgress: currUnit.progress,
                 prevCompleted: prevUnit.isCompleted,
                 newCompleted: currUnit.isCompleted
@@ -267,9 +267,12 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
 
     // Force refresh the unit data from localStorage
     this.unitsService.refreshUnitProgress(this.courseId, unitId);
-    
+
     // Force immediate change detection
     this.cdr.detectChanges();
+
+    // Direct DOM manipulation for scrolling
+    this.directScrollToUnit(unitId);
 
     if (!animationShown) {
       // First time showing this animation
@@ -293,6 +296,49 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
     }
   }
 
+  private directScrollToUnit(unitId: string): void {
+    setTimeout(() => {
+      // Find the unit element
+      const unitElement = document.querySelector(`.unit-item[data-unit-id="${unitId}"]`);
+      if (!unitElement) {
+        console.error('[UnitsList] Could not find unit element with ID:', unitId);
+        return;
+      }
+
+      // Find the container
+      const container = document.querySelector('.units-container');
+      if (!container) {
+        console.error('[UnitsList] Could not find units container');
+        return;
+      }
+
+      // Simple centered scrolling - use scrollIntoView with nearest option
+      unitElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      });
+
+      // Force highlight after a small delay to ensure scrolling is complete
+      setTimeout(() => {
+        // Make sure we explicitly add it to both the unit-item and the unit-card
+        unitElement.classList.add('unit-highlight-effect');
+        const unitCard = unitElement.querySelector('.unit-card');
+        if (unitCard) {
+          unitCard.classList.add('unit-card-highlight');
+        }
+
+        // Remove highlight class after animation completes
+        setTimeout(() => {
+          unitElement.classList.remove('unit-highlight-effect');
+          if (unitCard) {
+            unitCard.classList.remove('unit-card-highlight');
+          }
+        }, 1500);
+      }, 200);
+    }, 100);
+  }
+
   private navigateAfterCompletion(unitId: string): void {
     this.units$.pipe(take(1)).subscribe(units => {
       const currentIndex = units.findIndex(u => u.id === unitId);
@@ -303,6 +349,9 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
       console.log('[UnitsList] Is last unit:', !nextUnit);
 
       if (nextUnit && !nextUnit.isLocked) {
+        // Direct scroll to next unit
+        this.directScrollToUnit(nextUnit.id);
+
         // Save next unit's unlocked state
         this.storageService.saveProgress('unit', `${this.courseId}_${nextUnit.id}`, {
           isLocked: false,
@@ -312,19 +361,18 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           timestamp: Date.now()
         });
 
-        // Navigate to next unit's lessons
-        console.log('[UnitsList] Navigating to next unit lessons');
-        this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons'], {
-          replaceUrl: true
-        }).then(() => {
-          console.log('[UnitsList] Navigation to next unit lessons complete');
-          setTimeout(() => {
-            this.navigationInProgress = false;
-            console.log('[UnitsList] Navigation lock released');
-          }, 500);
-        });
+        // Navigate to next unit's lessons after scroll completes
+        setTimeout(() => {
+          this.router.navigate(['/courses', this.courseId, 'units', nextUnit.id, 'lessons'], {
+            replaceUrl: true
+          }).then(() => {
+            console.log('[UnitsList] Navigation to next unit lessons complete');
+            setTimeout(() => {
+              this.navigationInProgress = false;
+            }, 500);
+          });
+        }, 800);
       } else {
-        console.log('[UnitsList] No next unit, navigating to courses');
         // No next unit, navigate back to courses
         this.router.navigate(['/courses'], {
           queryParams: { completedCourseId: this.courseId },
@@ -333,7 +381,6 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
           console.log('[UnitsList] Navigation to courses complete');
           setTimeout(() => {
             this.navigationInProgress = false;
-            console.log('[UnitsList] Navigation lock released');
           }, 500);
         });
       }
@@ -343,8 +390,8 @@ export class UnitsListComponent extends DragScrollBase implements OnInit, OnDest
   // Check progress in console for debugging
   logCurrentProgress(): void {
     this.units$.pipe(take(1)).subscribe(units => {
-      console.table(units.map(u => ({ 
-        id: u.id, 
+      console.table(units.map(u => ({
+        id: u.id,
         title: u.title,
         progress: u.progress || 0,
         completed: u.isCompleted || false,
