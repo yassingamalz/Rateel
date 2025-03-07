@@ -3,24 +3,93 @@
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
+// Define theme colors for light and dark modes
+$theme-colors: (
+  light: (
+    background: linear-gradient(to bottom, rgba(11, 28, 23, 0.9), rgba(27, 67, 50, 0.8)),
+    verse-bg: rgba(31, 64, 55, 0.7),
+    verse-active-bg: rgba(map.get(vars.$colors, 'primary', 'light'), 0.7),
+    text: map.get(vars.$colors, 'text', 'light'),
+    text-muted: map.get(vars.$colors, 'text', 'muted'),
+    border: rgba(255, 255, 255, 0.1),
+    card-bg: rgba(0, 0, 0, 0.2),
+    control-bg: rgba(255, 255, 255, 0.1),
+    dropdown-bg: rgba(45, 106, 79, 0.95)
+  ),
+  dark: (
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(8, 20, 17, 0.9)),
+    verse-bg: rgba(16, 32, 28, 0.85),
+    verse-active-bg: rgba(23, 46, 40, 0.9),
+    text: #FFFFFF,
+    text-muted: #95D5B2,
+    border: rgba(255, 255, 255, 0.05),
+    card-bg: rgba(0, 0, 0, 0.4),
+    control-bg: rgba(255, 255, 255, 0.08),
+    dropdown-bg: rgba(16, 32, 28, 0.98)
+  )
+);
+
 .reading-lesson {
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, rgba(11, 28, 23, 0.9), rgba(27, 67, 50, 0.8));
+  background: map-get($theme-colors, light, background);
   overflow: hidden;
   position: relative;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  // Dark mode styles
+  &.dark-mode {
+    background: map-get($theme-colors, dark, background);
+
+    .verse {
+      background: map-get($theme-colors, dark, verse-bg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      
+      &.active {
+        background: map-get($theme-colors, dark, verse-active-bg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    .reading-controls {
+      background: rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      
+      .control-button, .rules-toggle {
+        background: rgba(255, 255, 255, 0.08);
+        
+        &:hover:not(:disabled) {
+          background: rgba(255, 255, 255, 0.12);
+        }
+      }
+    }
+
+    .verse-container {
+      scrollbar-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.5);
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .typography-dropdown {
+      background: map-get($theme-colors, dark, dropdown-bg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
 
   // Skip Button Styling
   .skip-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 32px;
+    right: 32px;
+    left: auto;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 24px;
     background: rgba(255, 255, 255, 0.15);
     border: none;
@@ -34,6 +103,7 @@
     &:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     }
     
     &--completed {
@@ -46,20 +116,21 @@
     }
   }
   
+  // Enhanced Lesson Header
   .lesson-header {
-    padding: 10px 20px;
+    padding: 15px 20px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
     position: relative;
+    margin-bottom: 10px;
     
     .lesson-title {
       font-size: 1.75rem;
       color: map.get(vars.$colors, 'accent', 'base');
-      margin-bottom: 0;
+      margin-bottom: 5px;
       margin-top: 0;
       font-family: 'Cairo', sans-serif;
       font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     .lesson-description {
@@ -70,24 +141,30 @@
     }
   }
 
+  // Enhanced Reading Container
   .reading-container {
     display: flex;
     flex-direction: column;
     flex: 1;
     padding: 0 20px 10px;
     overflow: hidden;
+    position: relative;
   }
 
-  // Enhanced Reading Controls
+  // Enhanced Modern Reading Controls
   .reading-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    padding: 10px 15px;
+    padding: 12px 15px;
     background: rgba(27, 67, 50, 0.3);
     border-radius: 12px;
     @include mix.glass-effect;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 10; // Ensure controls are above other elements
     
     .controls-group {
       display: flex;
@@ -107,15 +184,127 @@
       }
     }
     
-    .font-controls {
-      .font-size {
-        color: map.get(vars.$colors, 'text', 'light');
-        min-width: 60px;
-        text-align: center;
+    .typography-controls {
+      position: relative;
+      
+      .typography-dropdown-container {
+        position: relative;
+      }
+      
+      .typography-button {
+        width: 40px;
+        height: 40px;
         background: rgba(255, 255, 255, 0.1);
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-weight: 500;
+        border: none;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+          transform: scale(1.05);
+        }
+      }
+      
+      .typography-dropdown {
+        position: absolute;
+        top: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        background: map-get($theme-colors, light, dropdown-bg);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1000; // Very high z-index to ensure it appears above everything
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        
+        // Fix for landscape mode - ensure the dropdown doesn't get cut off
+        @media (orientation: landscape) and (max-height: 450px) {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          max-height: 80vh;
+          overflow-y: auto;
+        }
+        
+        .dropdown-title {
+          font-size: 0.9rem;
+          color: map.get(vars.$colors, 'text', 'light');
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+        
+        .dropdown-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          margin: 12px 0;
+        }
+        
+        .font-options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 10px;
+          
+          button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            
+            &:hover {
+              background: rgba(255, 255, 255, 0.2);
+            }
+            
+            &.active {
+              background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+              border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.5);
+            }
+          }
+        }
+        
+        .font-size-controls, .line-height-controls {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          
+          button {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            
+            &:hover {
+              background: rgba(255, 255, 255, 0.2);
+            }
+          }
+          
+          .font-size, .line-height {
+            font-size: 0.9rem;
+            color: white;
+            width: 60px;
+            text-align: center;
+          }
+        }
       }
     }
 
@@ -132,7 +321,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       
-      &:hover {
+      &:hover:not(:disabled) {
         background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
         transform: scale(1.05);
       }
@@ -171,6 +360,7 @@
     }
   }
 
+  // Enhanced Content Area
   .content-area {
     display: flex;
     gap: 20px;
@@ -187,6 +377,7 @@
     }
   }
 
+  // Enhanced Verse Container with Improved Typography
   .verse-container {
     flex: 1;
     overflow-y: auto;
@@ -215,77 +406,183 @@
     max-height: 100%;
     transition: width 0.3s ease;
 
+    // Enhanced Verse Styling
     .verse {
-      margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 12px;
       background: rgba(31, 64, 55, 0.7);
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 4px;
+        background: transparent;
+        transition: background 0.3s ease;
+      }
       
       &.active {
         background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.7);
-        border-right: 4px solid map.get(vars.$colors, 'accent', 'base');
-        transform: translateX(-2px);
-      }
-
-      .verse-text {
-        font-family: 'Uthmanic', 'Cairo', sans-serif;
-        line-height: 2;
-        color: map.get(vars.$colors, 'text', 'light');
-        text-align: center;
-        position: relative;
-        padding-right: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px) scale(1.01);
         
         &::before {
-          content: attr(data-verse);
-          position: absolute;
-          right: -15px;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
           background: map.get(vars.$colors, 'accent', 'base');
-          color: map.get(vars.$colors, 'text', 'dark');
+        }
+      }
+      
+      &.completed {
+        &::after {
+          content: '✓';
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          width: 24px;
+          height: 24px;
+          background: map.get(vars.$colors, 'accent', 'base');
+          color: white;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.9rem;
-          font-family: 'Cairo', sans-serif;
+          font-size: 14px;
+          font-weight: bold;
         }
+      }
+
+      // Verse Number Badge
+      .verse-number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        z-index: 2;
+      }
+
+      // Enhanced Verse Text
+      .verse-text {
+        font-family: 'Uthmanic', 'me_quran', 'Cairo', sans-serif;
+        line-height: 2;
+        color: map.get(vars.$colors, 'text', 'light');
+        text-align: right;
+        position: relative;
+        padding: 15px 0 5px;
+        margin-top: 20px;
+        letter-spacing: 0;
         
-        .tajweed-mark {
-          cursor: pointer;
-          transition: all 0.2s ease;
-          
-          &:hover {
-            filter: brightness(1.2);
+        ::ng-deep {
+          .tajweed-mark {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            
+            &::after {
+              content: attr(data-rule);
+              position: absolute;
+              bottom: 100%;
+              left: 50%;
+              transform: translateX(-50%) translateY(10px);
+              background: rgba(0, 0, 0, 0.8);
+              color: white;
+              padding: 5px 10px;
+              border-radius: 6px;
+              font-size: 0.8rem;
+              white-space: nowrap;
+              opacity: 0;
+              visibility: hidden;
+              transition: all 0.3s ease;
+              pointer-events: none;
+              z-index: 10;
+            }
+            
+            &:hover {
+              filter: brightness(1.3);
+              text-shadow: 0 0 5px currentColor;
+              
+              &::after {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+              }
+            }
           }
         }
       }
 
+      // Verse Translation
       .verse-translation {
-        margin-top: 10px;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
         color: map.get(vars.$colors, 'text', 'muted');
-        font-size: 0.9rem;
-        text-align: center;
-        font-style: italic;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      
+      // Verse Explanation
+      .verse-explanation {
+        margin-top: 15px;
+        
+        .explanation-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 10px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: 0.85rem;
+          color: map.get(vars.$colors, 'text', 'muted');
+          transition: all 0.3s ease;
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+          }
+        }
+        
+        .explanation-content {
+          margin-top: 10px;
+          padding: 15px;
+          background: rgba(0, 0, 0, 0.15);
+          border-radius: 8px;
+          color: map.get(vars.$colors, 'text', 'muted');
+          font-size: 0.9rem;
+          line-height: 1.6;
+        }
       }
     }
   }
 
+  // Enhanced Tajweed Panel
   .tajweed-panel {
     width: 35%;
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     
     .panel-header {
-      padding: 12px 15px;
+      padding: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -316,13 +613,58 @@
       }
     }
 
+    // Search Box
+    .search-box {
+      padding: 15px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      
+      i {
+        position: absolute;
+        left: 25px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      
+      input {
+        width: 100%;
+        padding: 10px 15px 10px 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 20px;
+        color: white;
+        font-size: 0.9rem;
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+        
+        &:focus {
+          outline: none;
+          background: rgba(255, 255, 255, 0.15);
+        }
+      }
+      
+      .clear-search {
+        position: absolute;
+        right: 25px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    // Rules List
     .rules-list {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2) rgba(0, 0, 0, 0.1);
+      padding: 0 15px 15px;
       
       &::-webkit-scrollbar {
         width: 6px;
@@ -340,20 +682,23 @@
       
       .rule-item {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 12px;
-        padding: 10px;
-        border-radius: 6px;
+        padding: 15px;
+        border-radius: 10px;
         cursor: pointer;
         transition: all 0.2s ease;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.05);
         
         &:hover {
           background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
         }
         
         &.active {
           background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.15);
+          border-left: 3px solid map.get(vars.$colors, 'accent', 'base');
         }
         
         .rule-color {
@@ -361,94 +706,239 @@
           height: 20px;
           border-radius: 50%;
           flex-shrink: 0;
+          margin-top: 5px;
         }
         
         .rule-content {
+          flex: 1;
+          
           h4 {
             color: map.get(vars.$colors, 'text', 'light');
-            margin: 0 0 4px 0;
+            margin: 0 0 8px 0;
             font-size: 1rem;
+            position: relative;
+            display: inline-block;
           }
           
           p {
             color: map.get(vars.$colors, 'text', 'muted');
             font-size: 0.85rem;
-            margin: 0;
-            line-height: 1.4;
+            margin: 0 0 8px 0;
+            line-height: 1.5;
+          }
+          
+          .rule-example {
+            font-size: 0.85rem;
+            
+            .example-label {
+              color: rgba(255, 255, 255, 0.7);
+              margin-right: 5px;
+            }
+            
+            .example-text {
+              font-family: 'Uthmanic', 'me_quran', 'Cairo', sans-serif;
+              font-size: 1rem;
+            }
           }
         }
       }
+      
+      .no-results {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        color: rgba(255, 255, 255, 0.5);
+        
+        i {
+          font-size: 2rem;
+          margin-bottom: 10px;
+        }
+        
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  // Verse Navigation
+  .verse-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0 5px;
+    flex-wrap: wrap;
+    max-width: 100%;
+    
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(1.2);
+      }
+      
+      &.active {
+        background: map.get(vars.$colors, 'accent', 'base');
+        transform: scale(1.2);
+      }
+      
+      &.completed {
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.5);
+      }
     }
   }
 
-  // Landscape optimizations
-  @media (orientation: landscape) {
+  // Error message styling
+  .error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: map.get(vars.$colors, 'text', 'light');
+    z-index: 3;
+
+    i {
+      font-size: 5rem;
+      color: map.get(vars.$colors, 'status', 'error');
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .error-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  // Media queries for responsive design
+  @media (max-width: 768px) {
     .lesson-header {
-      padding: 8px 15px;
+      padding: 10px;
       
       .lesson-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
     }
     
-    .reading-container {
-      padding: 0 15px;
-    }
-    
-    .content-area {
-      max-height: calc(100vh - 150px);
-    }
-    
-    .verse-container {
-      .verse {
-        margin-bottom: 12px;
-        padding: 12px;
-      }
-    }
-  }
-
-  // Tablet adjustments
-  @media (min-width: 768px) and (max-width: 1200px) {
-    .content-area {
-      &.with-rules {
-        .verse-container {
-          width: 60%;
-        }
-      }
-    }
-    
-    .tajweed-panel {
-      width: 40%;
-    }
-  }
-
-  // Mobile adjustments
-  @media (max-width: 767px) {
     .reading-controls {
+      padding: 10px;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center;
       
       .controls-group {
-        margin: 0 5px;
+        gap: 5px;
+      }
+      
+      .control-button, .typography-button {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .rules-toggle span {
+        display: none;
       }
     }
     
-    .content-area {
+    .content-area.with-rules {
       flex-direction: column;
-      gap: 10px;
       
-      &.with-rules {
-        .verse-container {
-          width: 100%;
-          height: 60%;
-        }
+      .verse-container, .tajweed-panel {
+        width: 100%;
+      }
+      
+      .verse-container {
+        max-height: 60vh;
+      }
+      
+      .tajweed-panel {
+        max-height: 40vh;
+      }
+    }
+  }
+
+  // Landscape mode optimizations for mobile
+  @media (orientation: landscape) and (max-height: 600px) {
+    .lesson-header {
+      padding: 5px 10px;
+      
+      .lesson-title {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+      }
+      
+      .lesson-description {
+        display: none;
+      }
+    }
+    
+    .reading-controls {
+      margin: 5px 0;
+      padding: 8px 10px;
+    }
+    
+    .content-area {
+      max-height: calc(100vh - 120px);
+    }
+    
+    .verse {
+      padding: 15px;
+      margin-bottom: 10px;
+      
+      .verse-text {
+        padding: 10px 0 0;
+        margin-top: 15px;
+      }
+      
+      .verse-number {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+      
+      .verse-translation {
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 0.85rem;
       }
     }
     
     .tajweed-panel {
-      width: 100%;
-      height: 40%;
+      .panel-header {
+        padding: 10px;
+      }
+      
+      .search-box {
+        padding: 10px;
+      }
+      
+      .rules-list .rule-item {
+        padding: 10px;
+      }
     }
+    
+    .verse-navigation {
+      margin: 10px 0;
+    }
+  
+  }
+}
+
+// Animations
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }

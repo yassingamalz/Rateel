@@ -12,6 +12,7 @@ import { LessonDetailsComponent } from './lesson-details/lesson-details.componen
 import { SharedModule } from '../../shared/shared.module';
 import { BorderFillDirective } from '../../shared/directives/border-fill.directive';
 import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     BorderFillDirective,
     LessonsRoutingModule,
   ]

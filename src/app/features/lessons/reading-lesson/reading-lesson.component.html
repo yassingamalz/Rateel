@@ -1,5 +1,5 @@
 <!-- reading-lesson.component.html -->
-<div class="reading-lesson" dir="rtl">
+<div class="reading-lesson" dir="rtl" [class.dark-mode]="isDarkMode">
     <ng-container *ngIf="parsedContent; else noContent">
         <!-- Skip Button -->
         <button 
@@ -10,7 +10,7 @@
             <i class="fas" [class.fa-forward]="!isCompleted" [class.fa-check]="isCompleted"></i>
         </button>
 
-        <!-- Header -->
+        <!-- Header - Progress bar removed as it's handled by lesson details -->
         <div class="lesson-header">
             <h2 class="lesson-title">{{ parsedContent.title }}</h2>
             <p class="lesson-description" *ngIf="parsedContent.description">
@@ -20,7 +20,7 @@
 
         <!-- Main Content Area -->
         <div class="reading-container">
-            <!-- Enhanced Toolbar with Controls -->
+            <!-- Enhanced Toolbar with Modern Controls -->
             <div class="reading-controls">
                 <!-- Left Group: Navigation Controls -->
                 <div class="controls-group navigation-group">
@@ -39,14 +39,49 @@
                     </button>
                 </div>
 
-                <!-- Center Group: Font Controls -->
-                <div class="controls-group font-controls">
-                    <button class="control-button" (click)="decreaseFontSize()" title="تصغير الخط">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <span class="font-size">{{ state.fontSize }}px</span>
-                    <button class="control-button" (click)="increaseFontSize()" title="تكبير الخط">
-                        <i class="fas fa-plus"></i>
+                <!-- Center Group: Typography Controls -->
+                <div class="controls-group typography-controls">
+                    <div class="typography-dropdown-container">
+                        <button class="typography-button" (click)="toggleFontMenu()" title="تغيير الخط">
+                            <i class="fas fa-font"></i>
+                        </button>
+                        <div class="typography-dropdown" *ngIf="showFontMenu" [@slideDown]>
+                            <div class="dropdown-title">خط النص</div>
+                            <div class="font-options">
+                                <button 
+                                    *ngFor="let font of availableFonts" 
+                                    [class.active]="selectedFont === font.value"
+                                    (click)="selectFont(font.value)">
+                                    <span [style.fontFamily]="font.value">{{ font.name }}</span>
+                                </button>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-title">حجم الخط</div>
+                            <div class="font-size-controls">
+                                <button class="font-size-button" (click)="decreaseFontSize()" title="تصغير الخط">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="font-size">{{ state.fontSize }}px</span>
+                                <button class="font-size-button" (click)="increaseFontSize()" title="تكبير الخط">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-title">تباعد السطور</div>
+                            <div class="line-height-controls">
+                                <button class="line-height-button" (click)="decreaseLineHeight()" title="تقليل المسافة">
+                                    <i class="fas fa-compress-alt"></i>
+                                </button>
+                                <span class="line-height">{{ lineHeight }}x</span>
+                                <button class="line-height-button" (click)="increaseLineHeight()" title="زيادة المسافة">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="control-button" (click)="toggleDarkMode()" title="تبديل الوضع المظلم">
+                        <i class="fas" [class.fa-moon]="!isDarkMode" [class.fa-sun]="isDarkMode"></i>
                     </button>
                 </div>
 
@@ -61,20 +96,37 @@
 
             <!-- Content Area with Tajweed Rules Panel -->
             <div class="content-area" [class.with-rules]="state.showRules">
-                <!-- Verse Display -->
-                <div class="verse-container" #verseContainer [style.fontSize.px]="state.fontSize" (scroll)="onVerseScroll($event)">
+                <!-- Verse Display with Enhanced Typography -->
+                <div class="verse-container" #verseContainer 
+                     [style.fontSize.px]="state.fontSize"
+                     [style.lineHeight]="lineHeight"
+                     [style.fontFamily]="selectedFont"
+                     [style.letterSpacing.px]="letterSpacing"
+                     (scroll)="onVerseScroll($event)">
                     <div class="verse" *ngFor="let verse of parsedContent.verses; let i = index"
                         [class.active]="i === currentVerseIndex"
-                        [id]="'verse-' + i">
+                        [class.completed]="isVerseCompleted(i)"
+                        [id]="'verse-' + i"
+                        [@verseAnimation]="getVerseAnimationState(i)">
+                        <div class="verse-number">{{ i + 1 }}</div>
                         <div class="verse-text" [innerHTML]="getFormattedVerse(i)" [attr.data-verse]="i + 1">
                         </div>
                         <div class="verse-translation" *ngIf="verse.translation">
                             {{ verse.translation }}
                         </div>
+                        <div class="verse-explanation" *ngIf="verse.explanation">
+                            <div class="explanation-toggle" (click)="toggleExplanation(i)">
+                                <i class="fas" [class.fa-chevron-down]="!expandedExplanations[i]" [class.fa-chevron-up]="expandedExplanations[i]"></i>
+                                <span>شرح</span>
+                            </div>
+                            <div class="explanation-content" *ngIf="expandedExplanations[i]" [@slideDown]>
+                                {{ verse.explanation }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tajweed Rules Panel -->
+                <!-- Enhanced Tajweed Rules Panel -->
                 <div class="tajweed-panel" *ngIf="state.showRules" [@slideInOut]>
                     <div class="panel-header">
                         <h3>قواعد التجويد</h3>
@@ -83,17 +135,44 @@
                         </button>
                     </div>
 
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="ابحث عن قاعدة..." [(ngModel)]="searchTerm" (input)="filterRules()">
+                        <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
                     <div class="rules-list">
-                        <div *ngFor="let rule of tajweedRules" class="rule-item"
-                            [class.active]="state.selectedRule?.id === rule.id" (click)="onRuleClick(rule.id)">
+                        <div *ngFor="let rule of filteredRules" class="rule-item"
+                            [class.active]="state.selectedRule?.id === rule.id" 
+                            (click)="onRuleClick(rule.id)">
                             <div class="rule-color" [style.backgroundColor]="rule.color"></div>
                             <div class="rule-content">
                                 <h4>{{ rule.name }}</h4>
                                 <p>{{ rule.description }}</p>
+                                <div class="rule-example" *ngIf="rule.example">
+                                    <span class="example-label">مثال:</span>
+                                    <span class="example-text" [style.color]="rule.color">{{ rule.example }}</span>
+                                </div>
                             </div>
+                        </div>
+
+                        <div *ngIf="filteredRules.length === 0" class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>لا توجد نتائج للبحث</p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Verse Navigation Dots -->
+            <div class="verse-navigation">
+                <div *ngFor="let verse of parsedContent.verses; let i = index" 
+                     class="nav-dot" 
+                     [class.active]="i === currentVerseIndex"
+                     [class.completed]="isVerseCompleted(i)"
+                     (click)="goToVerse(i)"></div>
             </div>
         </div>
     </ng-container>
