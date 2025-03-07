@@ -1,5 +1,5 @@
 // coming-soon.component.ts
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
 
 interface Feature {
@@ -33,8 +33,8 @@ interface Feature {
       transition('* => *', [
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(30px)' }),
-          stagger('200ms', [
-            animate('600ms cubic-bezier(0.35, 0.1, 0.25, 1)', 
+          stagger('150ms', [
+            animate('500ms cubic-bezier(0.35, 0.1, 0.25, 1)', 
               style({ opacity: 1, transform: 'translateY(0)' }))
           ])
         ], { optional: true })
@@ -50,7 +50,7 @@ interface Feature {
     trigger('fadeInUp', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(40px)' }),
-        animate('800ms 300ms ease-out', 
+        animate('600ms 200ms ease-out', 
           style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ]),
@@ -68,29 +68,26 @@ interface Feature {
   ]
 })
 export class ComingSoonComponent implements OnInit {
-  @Input() title: string = 'مستقبل التعلم قريباً';
-  @Input() mainDescription: string = 'نحن نعمل بجد لتقديم تجربة تعليمية مميزة تجمع بين الإتقان والروحانية';
-
   upcomingFeatures: Feature[] = [
     {
-      icon: 'fa-book-quran',
-      title: 'دروس متقدمة',
-      description: 'مناهج متخصصة في التجويد والقراءات'
+      icon: 'fa-headphones',
+      title: 'دروس صوتية',
+      description: 'استمع إلى تلاوات نموذجية مع شرح مفصل للقواعد'
     },
     {
-      icon: 'fa-mosque',
-      title: 'مسار روحاني',
-      description: 'رحلة تعليمية تربط العلم بالعبادة'
-    },
-    {
-      icon: 'fa-graduation-cap',
-      title: 'شهادات معتمدة',
-      description: 'برامج إجازة معتمدة من علماء متخصصين'
+      icon: 'fa-microphone-alt',
+      title: 'تدريب النطق',
+      description: 'تسجيل صوتي وتحليل أدائك في قراءة القرآن'
     },
     {
       icon: 'fa-users',
-      title: 'مجتمع المتعلمين',
-      description: 'انضم إلى مجتمع من المتعلمين في رحلة تحسين التلاوة'
+      title: 'جلسات جماعية',
+      description: 'تعلم وتدرب مع مجموعات أخرى من المتعلمين'
+    },
+    {
+      icon: 'fa-certificate',
+      title: 'شهادات إتمام',
+      description: 'احصل على شهادة معتمدة بعد إكمال كل مستوى'
     }
   ];
 
@@ -101,8 +98,15 @@ export class ComingSoonComponent implements OnInit {
   subscribers: number = 512;
   showSubscriberCount: boolean = false;
   days: number = Math.floor(Math.random() * 30) + 20;
+  isLandscapeMobile: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkOrientation();
+  }
 
   ngOnInit() {
+    this.checkOrientation();
     this.startAnimations();
     setTimeout(() => {
       this.showSubscriberCount = true;
@@ -110,24 +114,35 @@ export class ComingSoonComponent implements OnInit {
   }
 
   startAnimations() {
-    // Start floating animation
+    // Start floating animation with reduced frequency on mobile
     setInterval(() => {
       this.floatState = this.floatState === 'start' ? 'end' : 'start';
-    }, 3000);
+    }, this.isLandscapeMobile ? 6000 : 3000);
 
     // Start shimmer animation
     setInterval(() => {
       this.shimmerState = this.shimmerState === 'start' ? 'end' : 'start';
     }, 2000);
   }
+  
+  checkOrientation() {
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const isSmallHeight = window.innerHeight <= 600;
+    
+    this.isLandscapeMobile = isLandscape && isSmallHeight;
+    
+    if (this.isLandscapeMobile) {
+      document.body.classList.add('landscape-mobile');
+    } else {
+      document.body.classList.remove('landscape-mobile');
+    }
+  }
 
   submitEmail() {
     if (this.validateEmail(this.emailAddress)) {
-      // Simulate email submission
       this.isEmailSubmitted = true;
-      this.subscribers++; // Increment subscriber count for visual feedback
+      this.subscribers++;
     } else {
-      // Show error or validation message
       alert('الرجاء إدخال بريد إلكتروني صحيح');
     }
   }
@@ -142,9 +157,12 @@ export class ComingSoonComponent implements OnInit {
     this.emailAddress = '';
   }
 
-  // Touch-friendly parallax effect
+  // Touch-friendly parallax effect with mobile optimization
   onMouseMove(event: MouseEvent) {
-    // Use requestAnimationFrame for performance
+    if (this.isLandscapeMobile) {
+      return; // Disable parallax on mobile landscape
+    }
+    
     requestAnimationFrame(() => {
       const container = document.querySelector('.coming-soon') as HTMLElement;
       if (!container) return;
@@ -155,7 +173,7 @@ export class ComingSoonComponent implements OnInit {
       const moveX = (event.clientX - centerX) / 30;
       const moveY = (event.clientY - centerY) / 30;
 
-      elements.forEach((element: Element, index: number) => {
+      elements.forEach((element: Element) => {
         const htmlElement = element as HTMLElement;
         const depth = parseFloat(htmlElement.getAttribute('data-depth') || '0.1');
         const translateX = moveX * depth;
@@ -168,7 +186,7 @@ export class ComingSoonComponent implements OnInit {
 
   // For mobile touch events
   onTouchMove(event: TouchEvent) {
-    if (event.touches.length > 0) {
+    if (!this.isLandscapeMobile && event.touches.length > 0) {
       this.onMouseMove(event.touches[0] as unknown as MouseEvent);
     }
   }

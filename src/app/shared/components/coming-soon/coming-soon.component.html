@@ -1,128 +1,59 @@
 <!-- coming-soon.component.html -->
-<div class="coming-soon" dir="rtl" 
-     (mousemove)="onMouseMove($event)" 
-     (touchmove)="onTouchMove($event)">
-
-    <!-- Geometric Patterns -->
-    <div class="pattern-overlay">
-        <div class="pattern pattern-1"></div>
-        <div class="pattern pattern-2"></div>
-        <div class="pattern pattern-3"></div>
-        <div class="pattern pattern-4"></div>
+<div class="coming-soon" dir="rtl">
+    <!-- Animated Background Elements -->
+    <div class="background-elements">
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="floating-shape shape-4"></div>
+      <div class="glow-effect"></div>
     </div>
-
-    <!-- Ornamental Background with Parallax -->
-    <div class="ornamental-background">
-        <div class="ornament ornament--top-left parallax-element" 
-             data-depth="0.2" 
-             [@ornamentAnimation]
-             [@floatAnimation]="floatState">
-            <i class="fas fa-mosque"></i>
+  
+    <!-- Main Content Container -->
+    <div class="content-container">
+      <!-- Header Section -->
+      <div class="header-section">
+        <div class="logo-container">
+          <i class="fas fa-book-quran"></i>
         </div>
-        <div class="ornament ornament--bottom-right parallax-element" 
-             data-depth="0.3" 
-             [@ornamentAnimation]
-             [@floatAnimation]="floatState === 'start' ? 'end' : 'start'">
-            <i class="fas fa-book-quran"></i>
+        <h1 class="title">ميزات تجويد القرآن قريباً</h1>
+        <p class="subtitle">نعمل على تطوير ميزات جديدة لمساعدتك في تعلم وإتقان قواعد التجويد</p>
+      </div>
+  
+      <!-- Features Grid -->
+      <div class="features-grid">
+        <!-- Feature Cards -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headphones"></i>
+          </div>
+          <h3 class="feature-title">دروس صوتية</h3>
+          <p class="feature-description">استمع إلى تلاوات نموذجية مع شرح مفصل للقواعد</p>
         </div>
-        <div class="ornament ornament--bottom-left parallax-element" 
-             data-depth="0.15">
-            <i class="fas fa-star-and-crescent"></i>
+  
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-microphone-alt"></i>
+          </div>
+          <h3 class="feature-title">تدريب النطق</h3>
+          <p class="feature-description">تسجيل صوتي وتحليل أدائك في قراءة القرآن</p>
         </div>
-        <div class="ornament ornament--top-right parallax-element" 
-             data-depth="0.25">
-            <i class="fas fa-kaaba"></i>
+  
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="feature-title">جلسات جماعية</h3>
+          <p class="feature-description">تعلم وتدرب مع مجموعات أخرى من المتعلمين</p>
         </div>
+  
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3 class="feature-title">شهادات إتمام</h3>
+          <p class="feature-description">احصل على شهادة معتمدة بعد إكمال كل مستوى</p>
+        </div>
+      </div>
     </div>
-
-    <!-- Main Content -->
-    <div class="coming-soon__container parallax-element" data-depth="0.05">
-        <!-- Header Section -->
-        <div class="coming-soon__header" [@fadeInUp]>
-            <div class="header-icon" [@shimmerAnimation]="shimmerState">
-                <i class="fas fa-magic"></i>
-            </div>
-            <h1 class="header-title">{{ title }}</h1>
-            <p class="header-description">{{ mainDescription }}</p>
-            
-            <!-- Countdown Element -->
-            <div class="countdown-timer">
-                <div class="countdown-number">{{ days }}</div>
-                <div class="countdown-label">يوم قبل الإطلاق</div>
-            </div>
-        </div>
-
-        <!-- Upcoming Features -->
-        <div class="coming-soon__features">
-            <h2 class="features-title">ميزات قادمة</h2>
-            <div class="features-grid" [@staggeredFeatures]="upcomingFeatures.length">
-                <div *ngFor="let feature of upcomingFeatures; let i = index" 
-                     class="feature-card parallax-element" 
-                     [attr.data-depth]="0.1 + (i * 0.02)" 
-                     [@featureAnimation]>
-                    <div class="feature-icon">
-                        <i class="fas {{ feature.icon }}"></i>
-                    </div>
-                    <h3 class="feature-title">{{ feature.title }}</h3>
-                    <p class="feature-description">{{ feature.description }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Email Notification Section -->
-        <div class="coming-soon__notification parallax-element" data-depth="0.12" [@fadeInUp]>
-            <ng-container *ngIf="!isEmailSubmitted; else successMessage">
-                <h2>كن على اطلاع</h2>
-                <p>أرسل بريدك الإلكتروني لتلقي أحدث التحديثات</p>
-
-                <div class="notification-form">
-                    <input type="email" placeholder="أدخل بريدك الإلكتروني" class="notification-input">
-                    <button class="notification-button" (click)="submitEmail()">
-                        <i class="fas fa-paper-plane"></i>
-                        إرسال
-                    </button>
-                </div>
-
-                <div *ngIf="showSubscriberCount" class="subscriber-count">
-                    <i class="fas fa-users"></i>
-                    <span>{{ subscribers }} مشترك</span>
-                </div>
-            </ng-container>
-
-            <ng-template #successMessage>
-                <div class="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>شكراً لاهتمامك!</h3>
-                    <p>سنبلغك بمجرد إطلاق الميزات الجديدة</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                    <button class="reset-button" (click)="resetEmailSubmission()">
-                        إضافة بريد آخر
-                    </button>
-                </div>
-            </ng-template>
-        </div>
-    </div>
-
-    <!-- Inspirational Quote -->
-    <div class="coming-soon__quote parallax-element" data-depth="0.08" [@fadeInUp]>
-        <blockquote>
-            <p>«وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا»</p>
-            <cite>- سورة المزمل 4</cite>
-        </blockquote>
-    </div>
-
-    <!-- Decorative Footer -->
-    <div class="decorative-footer">
-        <div class="wave-pattern"></div>
-    </div>
-</div>
+  </div>

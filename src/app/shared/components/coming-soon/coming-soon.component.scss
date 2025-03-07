@@ -1,499 +1,383 @@
 // coming-soon.component.scss
 @use "sass:map";
 @use 'variables' as vars;
-@use 'mixins' as mix;
 
+// Modern Coming Soon Component Styles
 .coming-soon {
-    min-height: 100vh;
-    background: linear-gradient(135deg,
-            map.get(vars.$colors, 'primary', 'dark') 0%,
-            map.get(vars.$colors, 'primary', 'base') 70%,
-            adjust-color(map.get(vars.$colors, 'primary', 'base'), $lightness: 5%) 100%);
-    color: map.get(vars.$colors, 'text', 'light');
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, 
+    darken(map.get(vars.$colors, 'primary', 'dark'), 5%) 0%,
+    map.get(vars.$colors, 'primary', 'base') 100%);
+  padding: map.get(vars.$spacing, 'lg');
+  
+  // Background Elements
+  .background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     overflow: hidden;
-    padding: map.get(vars.$spacing, 'xl') map.get(vars.$spacing, 'lg');
-
-    // Geometric Pattern Overlay
-    .pattern-overlay {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-        opacity: 0.05;
-        pointer-events: none;
-
-        .pattern {
-            position: absolute;
-            background-size: 200px 200px;
-            opacity: 0.5;
-
-            &-1 {
-                top: -5%;
-                left: -5%;
-                width: 50%;
-                height: 50%;
-                background-image: repeating-linear-gradient(45deg,
-                        transparent,
-                        transparent 10px,
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 10px,
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 20px);
-                transform: rotate(15deg);
-            }
-
-            &-2 {
-                bottom: -5%;
-                right: -5%;
-                width: 60%;
-                height: 60%;
-                background-image: radial-gradient(circle at center,
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 2px,
-                        transparent 3px);
-                background-size: 20px 20px;
-            }
-
-            &-3 {
-                top: 30%;
-                right: 10%;
-                width: 20%;
-                height: 40%;
-                background-image: linear-gradient(to right,
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5),
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 1px,
-                        transparent 1px,
-                        transparent);
-                background-size: 10px 10px;
-                transform: rotate(-30deg);
-            }
-
-            &-4 {
-                top: 20%;
-                left: 10%;
-                width: 30%;
-                height: 30%;
-                background-image: repeating-conic-gradient(rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 0%,
-                        rgba(map.get(vars.$colors, 'accent', 'base'), 0.5) 10%,
-                        transparent 10%,
-                        transparent 20%);
-                border-radius: 50%;
-                opacity: 0.7;
-            }
-        }
+    
+    .floating-shape {
+      position: absolute;
+      background: linear-gradient(to right, 
+        rgba(map.get(vars.$colors, 'accent', 'base'), 0.05),
+        rgba(map.get(vars.$colors, 'accent', 'light'), 0.15));
+      border-radius: 50%;
+      filter: blur(20px);
+      
+      &.shape-1 {
+        top: -10%;
+        right: -5%;
+        width: 300px;
+        height: 300px;
+        animation: float 20s infinite ease-in-out;
+      }
+      
+      &.shape-2 {
+        bottom: -15%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        animation: float 25s infinite ease-in-out reverse;
+      }
+      
+      &.shape-3 {
+        top: 30%;
+        right: 20%;
+        width: 150px;
+        height: 150px;
+        opacity: 0.3;
+        animation: float 18s infinite ease-in-out 2s;
+      }
+      
+      &.shape-4 {
+        bottom: 20%;
+        right: 10%;
+        width: 100px;
+        height: 100px;
+        opacity: 0.2;
+        animation: float 15s infinite ease-in-out 1s;
+      }
     }
-
-    // Ornamental Background
-    .ornamental-background {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-        opacity: 0.1;
-
-        .ornament {
-            position: absolute;
-            color: map.get(vars.$colors, 'accent', 'base');
-            font-size: 15rem;
-            z-index: 1;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 0 30px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3));
-
-            &--top-left {
-                top: -10%;
-                left: -10%;
-                transform: rotate(-15deg);
-            }
-
-            &--bottom-right {
-                bottom: -10%;
-                right: -10%;
-                transform: rotate(15deg);
-            }
-
-            &--bottom-left {
-                bottom: 5%;
-                left: 5%;
-                font-size: 8rem;
-                transform: rotate(15deg);
-                opacity: 0.7;
-            }
-
-            &--top-right {
-                top: 5%;
-                right: 5%;
-                font-size: 8rem;
-                transform: rotate(-15deg);
-                opacity: 0.7;
-            }
-        }
+    
+    .glow-effect {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 80vh;
+      background: radial-gradient(
+        circle at center,
+        rgba(map.get(vars.$colors, 'accent', 'base'), 0.1) 0%,
+        rgba(map.get(vars.$colors, 'accent', 'base'), 0) 70%
+      );
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: pulse 8s infinite ease-in-out;
     }
-
-    // Container
-    &__container {
-        position: relative;
-        z-index: 10;
-        width: 100%;
-        max-width: 1200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
+  }
+  
+  // Main Content Container
+  .content-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    
     // Header Section
-    &__header {
-        margin-bottom: map.get(vars.$spacing, 'xxl');
+    .header-section {
+      width: 40%;
+      padding-right: map.get(vars.$spacing, 'xl');
+      
+      .logo-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 30px;
+        background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: map.get(vars.$spacing, 'lg');
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         position: relative;
-
-        .header-icon {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg,
-                    rgba(map.get(vars.$colors, 'accent', 'base'), 0.1) 0%,
-                    rgba(map.get(vars.$colors, 'accent', 'bright'), 0.2) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto map.get(vars.$spacing, 'lg');
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-
-            // Shimmer effect
-            &::after {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: linear-gradient(to right,
-                        rgba(255, 255, 255, 0) 0%,
-                        rgba(255, 255, 255, 0.3) 50%,
-                        rgba(255, 255, 255, 0) 100%);
-                transform: rotate(30deg);
-                transition: all 0.5s ease;
-            }
-
-            i {
-                font-size: 4rem;
-                color: map.get(vars.$colors, 'accent', 'base');
-                filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
-                z-index: 2;
-            }
+        overflow: hidden;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(to right, 
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%);
+          transform: rotate(30deg);
+          animation: shimmer 4s infinite linear;
         }
-
-        .header-title {
-            font-size: map.get(vars.$font-size, 'title');
-            color: map.get(vars.$colors, 'accent', 'light');
-            margin-bottom: map.get(vars.$spacing, 'md');
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: inline-block;
-
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: -10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 80px;
-                height: 3px;
-                background: map.get(vars.$colors, 'accent', 'base');
-                border-radius: 3px;
-            }
+        
+        i {
+          font-size: 3.5rem;
+          color: map.get(vars.$colors, 'accent', 'base');
+          filter: drop-shadow(0 4px 12px rgba(map.get(vars.$colors, 'accent', 'dark'), 0.6));
         }
-
-        .header-description {
-            max-width: 800px;
-            margin: 0 auto map.get(vars.$spacing, 'lg');
-            color: map.get(vars.$colors, 'text', 'muted');
-            line-height: 1.6;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      
+      .title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: map.get(vars.$colors, 'accent', 'light');
+        margin-bottom: map.get(vars.$spacing, 'md');
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -15px;
+          right: 0;
+          width: 80px;
+          height: 4px;
+          background: map.get(vars.$colors, 'accent', 'base');
+          border-radius: 2px;
         }
-
-        // Countdown Timer
-        .countdown-timer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: map.get(vars.$spacing, 'lg');
-
-            .countdown-number {
-                font-size: 3rem;
-                font-weight: 700;
-                color: map.get(vars.$colors, 'accent', 'light');
-                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-                background: linear-gradient(to bottom,
-                        map.get(vars.$colors, 'accent', 'light') 0%,
-                        map.get(vars.$colors, 'accent', 'base') 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                margin-bottom: map.get(vars.$spacing, 'xs');
-                position: relative;
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: -5px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 40px;
-                    height: 2px;
-                    background: map.get(vars.$colors, 'accent', 'base');
-                    border-radius: 2px;
-                }
-            }
-
-            .countdown-label {
-                font-size: 1rem;
-                color: map.get(vars.$colors, 'text', 'muted');
-            }
-        }
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+        color: map.get(vars.$colors, 'text', 'muted');
+        line-height: 1.6;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
     }
-
-    // Features Section with Improved Graphics
-    &__features {
-        width: 100%;
-        margin-bottom: map.get(vars.$spacing, 'xxl');
-
-        .features-title {
-            color: map.get(vars.$colors, 'text', 'light');
-            margin-bottom: map.get(vars.$spacing, 'lg');
-            position: relative;
-            display: inline-block;
-
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: -10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 60px;
-                height: 2px;
-                background: map.get(vars.$colors, 'accent', 'muted');
-                border-radius: 2px;
-            }
-        }
-
-        .features-grid {
-            display: flex;
-            justify-content: center;
-            gap: map.get(vars.$spacing, 'lg');
-            flex-wrap: wrap;
-        }
-
-        .feature-card {
-            background: linear-gradient(145deg,
-                    rgba(map.get(vars.$colors, 'primary', 'light'), 0.1) 0%,
-                    rgba(map.get(vars.$colors, 'primary', 'light'), 0.3) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: map.get(vars.$border-radius, 'lg');
-            padding: map.get(vars.$spacing, 'lg');
-            width: 280px;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-            &:hover {
-                transform: translateY(-10px) scale(1.02);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-                border-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-
-                .feature-icon {
-                    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-                    transform: scale(1.1);
-                    box-shadow: 0 0 30px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-
-                    i {
-                        transform: scale(1.1);
-                    }
-                }
-            }
-
-            .feature-icon {
-                width: 80px;
-                height: 80px;
-                background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto map.get(vars.$spacing, 'md');
-                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-                i {
-                    font-size: 2.5rem;
-                    color: map.get(vars.$colors, 'accent', 'base');
-                    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                }
-            }
-
-            .feature-title {
-                color: map.get(vars.$colors, 'accent', 'light');
-                margin-bottom: map.get(vars.$spacing, 'sm');
-            }
-
-            .feature-description {
-                color: map.get(vars.$colors, 'text', 'muted');
-                line-height: 1.6;
-            }
-        }
-    }
-
-    // Enhanced Notification Section
-    &__notification {
-        background: linear-gradient(145deg,
-                rgba(map.get(vars.$colors, 'primary', 'light'), 0.2) 0%,
-                rgba(map.get(vars.$colors, 'primary', 'light'), 0.4) 100%);
+    
+    // Features Grid
+    .features-grid {
+      width: 60%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: map.get(vars.$spacing, 'lg');
+      
+      // Feature Card
+      .feature-card {
+        background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: map.get(vars.$border-radius, 'lg');
-        padding: map.get(vars.$spacing, 'xl');
-        width: 100%;
-        max-width: 600px;
+        padding: map.get(vars.$spacing, 'lg');
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         text-align: center;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+        
         &:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        h2 {
-            color: map.get(vars.$colors, 'accent', 'light');
-            margin-bottom: map.get(vars.$spacing, 'md');
-        }
-
-        .notification-form {
-            display: flex;
-            gap: map.get(vars.$spacing, 'sm');
-            margin-top: map.get(vars.$spacing, 'lg');
-
-            .notification-input {
-                flex: 1;
-                padding: map.get(vars.$spacing, 'md');
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-                border-radius: map.get(vars.$border-radius, 'full');
-                color: map.get(vars.$colors, 'text', 'light');
-                transition: all 0.3s ease;
-
-                &:focus {
-                    outline: none;
-                    border-color: map.get(vars.$colors, 'accent', 'base');
-                    box-shadow: 0 0 15px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-                }
-
-                &::placeholder {
-                    color: map.get(vars.$colors, 'text', 'muted');
-                }
-            }
-
-            .notification-button {
-                padding: map.get(vars.$spacing, 'md');
-                background: map.get(vars.$colors, 'accent', 'base');
-                color: map.get(vars.$colors, 'text', 'dark');
-                border: none;
-                border-radius: map.get(vars.$border-radius, 'full');
-                display: flex;
-                align-items: center;
-                gap: map.get(vars.$spacing, 'sm');
-                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-
-                &:hover {
-                    transform: translateY(-3px) scale(1.05);
-                    box-shadow: 0 7px 20px rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
-                    background: map.get(vars.$colors, 'accent', 'bright');
-                }
-
-                &:active {
-                    transform: translateY(0) scale(0.98);
-                }
-            }
-        }
-
-        // Subscriber count
-        .subscriber-count {
-            margin-top: map.get(vars.$spacing, 'md');
-            display: inline-flex;
-            align-items: center;
-            gap: map.get(vars.$spacing, 'sm');
-            color: map.get(vars.$colors, 'text', 'muted');
-            font-size: 0.9rem;
-            animation: fadeIn 0.5s ease-in;
-
+          transform: translateY(-8px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+          border-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+          
+          .feature-icon {
+            background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+            transform: scale(1.1);
+            
             i {
-                color: map.get(vars.$colors, 'accent', 'base');
+              transform: scale(1.1);
             }
+          }
         }
-
-        .success-message {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 0.5s ease;
-
-            .fa-check-circle {
-                font-size: 4rem;
-                color: map.get(vars.$colors, 'status', 'success');
-                margin-bottom: map.get(vars.$spacing, 'md');
-                animation: pulseSuccess 2s infinite;
-            }
-
-            h3 {
-                color: map.get(vars.$colors, 'accent', 'light');
-                margin-bottom: map.get(vars.$spacing, 'sm');
-            }
-
-            .social-links {
-                display: flex;
-                gap: map.get(vars.$spacing, 'md');
-                margin: map.get(vars.$spacing, 'md') 0;
-
-                .social-link {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: map.get(vars.$colors, 'accent', 'base');
-                    transition: all 0.3s ease;
-
-                    &:hover {
-                        transform: translateY(-3px);
-                        background: map.get(vars.$colors, 'accent', 'base');
-                        color: map.get(vars.$colors, 'text', 'dark');
-                    }
-                }
-            }
-
-            .reset-button {
-                margin-top: map.get(vars.$spacing, 'md');
-                padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'md');
-                background: transparent;
-                border: 1px solid map.get(vars.$colors, 'accent', 'base');
-                color: map.get(vars.$colors, 'accent', 'base');
-                border-radius: map.get(vars.$border-radius, 'full');
-                transition: all 0.3s ease;
-                cursor: pointer;
-
-                &:hover {
-                    background: map.get(vars.$colors, 'accent', 'base');
-                    color: map.get(vars.$colors, 'text', 'dark');
-                    transform: translateY(-2px);
-                    box-shadow: 0 5px 15px rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
-                }
-            }
+        
+        .feature-icon {
+          width: 80px;
+          height: 80px;
+          background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto map.get(vars.$spacing, 'md');
+          transition: all 0.4s ease;
+          
+          i {
+            font-size: 2.5rem;
+            color: map.get(vars.$colors, 'accent', 'base');
+            transition: transform 0.4s ease;
+          }
         }
+        
+        .feature-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: map.get(vars.$colors, 'accent', 'light');
+          margin-bottom: map.get(vars.$spacing, 'sm');
+        }
+        
+        .feature-description {
+          font-size: 0.95rem;
+          color: map.get(vars.$colors, 'text', 'muted');
+          line-height: 1.5;
+        }
+      }
     }
+  }
+  
+  // Mobile Landscape Optimization
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    align-items: flex-start;
+    overflow: auto;
+    padding: map.get(vars.$spacing, 'md');
+    
+    .content-container {
+      padding: map.get(vars.$spacing, 'md');
+      
+      .header-section {
+        width: 35%;
+        padding-right: map.get(vars.$spacing, 'md');
+        
+        .logo-container {
+          width: 100px;
+          height: 100px;
+          border-radius: 20px;
+          margin-bottom: map.get(vars.$spacing, 'md');
+          
+        }
+        
+        .title {
+          margin-bottom: map.get(vars.$spacing, 'sm');
+          
+          &::after {
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+          }
+        }
+        
+        .subtitle {
+          font-size: 0.9rem;
+          line-height: 1.4;
+        }
+      }
+      
+      .features-grid {
+        width: 65%;
+        grid-gap: map.get(vars.$spacing, 'md');
+        
+        .feature-card {
+          padding: map.get(vars.$spacing, 'sm') map.get(vars.$spacing, 'xs');
+          
+          .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: map.get(vars.$spacing, 'sm');
+            
+            i {
+              font-size: 1.5rem;
+            }
+          }
+          
+          .feature-title {
+            font-size: 1rem;
+            margin-bottom: map.get(vars.$spacing, 'xs');
+          }
+          
+          .feature-description {
+            font-size: 0.85rem;
+            line-height: 1.3;
+          }
+          
+          &:hover {
+            transform: none;
+          }
+        }
+      }
+    }
+    
+    .background-elements {
+      .floating-shape {
+        opacity: 0.07;
+      }
+      
+      .glow-effect {
+        opacity: 0.7;
+      }
+    }
+  }
+  
+  // Mobile Portrait
+  @media screen and (max-width: 768px) {
+    .content-container {
+      flex-direction: column;
+      align-items: center;
+      
+      .header-section {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: map.get(vars.$spacing, 'xl');
+        text-align: center;
+        
+        .logo-container {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+        .title::after {
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
+        }
+      }
+      
+      .features-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(30deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(30deg) translateX(100%);
+  }
 }
