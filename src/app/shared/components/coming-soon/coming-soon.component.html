@@ -1,30 +1,65 @@
 <!-- coming-soon.component.html -->
-<div class="coming-soon" dir="rtl">
-    <!-- Ornamental Background -->
+<div class="coming-soon" dir="rtl" 
+     (mousemove)="onMouseMove($event)" 
+     (touchmove)="onTouchMove($event)">
+
+    <!-- Geometric Patterns -->
+    <div class="pattern-overlay">
+        <div class="pattern pattern-1"></div>
+        <div class="pattern pattern-2"></div>
+        <div class="pattern pattern-3"></div>
+        <div class="pattern pattern-4"></div>
+    </div>
+
+    <!-- Ornamental Background with Parallax -->
     <div class="ornamental-background">
-        <div class="ornament ornament--top-left" [@ornamentAnimation]>
+        <div class="ornament ornament--top-left parallax-element" 
+             data-depth="0.2" 
+             [@ornamentAnimation]
+             [@floatAnimation]="floatState">
             <i class="fas fa-mosque"></i>
         </div>
-        <div class="ornament ornament--bottom-right" [@ornamentAnimation]>
+        <div class="ornament ornament--bottom-right parallax-element" 
+             data-depth="0.3" 
+             [@ornamentAnimation]
+             [@floatAnimation]="floatState === 'start' ? 'end' : 'start'">
             <i class="fas fa-book-quran"></i>
+        </div>
+        <div class="ornament ornament--bottom-left parallax-element" 
+             data-depth="0.15">
+            <i class="fas fa-star-and-crescent"></i>
+        </div>
+        <div class="ornament ornament--top-right parallax-element" 
+             data-depth="0.25">
+            <i class="fas fa-kaaba"></i>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="coming-soon__container">
+    <div class="coming-soon__container parallax-element" data-depth="0.05">
         <!-- Header Section -->
-        <div class="coming-soon__header">
-            <div class="header-icon">
+        <div class="coming-soon__header" [@fadeInUp]>
+            <div class="header-icon" [@shimmerAnimation]="shimmerState">
                 <i class="fas fa-magic"></i>
             </div>
             <h1 class="header-title">{{ title }}</h1>
             <p class="header-description">{{ mainDescription }}</p>
+            
+            <!-- Countdown Element -->
+            <div class="countdown-timer">
+                <div class="countdown-number">{{ days }}</div>
+                <div class="countdown-label">يوم قبل الإطلاق</div>
+            </div>
         </div>
 
         <!-- Upcoming Features -->
         <div class="coming-soon__features">
-            <div class="features-grid">
-                <div *ngFor="let feature of upcomingFeatures" class="feature-card" [@featureAnimation]>
+            <h2 class="features-title">ميزات قادمة</h2>
+            <div class="features-grid" [@staggeredFeatures]="upcomingFeatures.length">
+                <div *ngFor="let feature of upcomingFeatures; let i = index" 
+                     class="feature-card parallax-element" 
+                     [attr.data-depth]="0.1 + (i * 0.02)" 
+                     [@featureAnimation]>
                     <div class="feature-icon">
                         <i class="fas {{ feature.icon }}"></i>
                     </div>
@@ -35,7 +70,7 @@
         </div>
 
         <!-- Email Notification Section -->
-        <div class="coming-soon__notification">
+        <div class="coming-soon__notification parallax-element" data-depth="0.12" [@fadeInUp]>
             <ng-container *ngIf="!isEmailSubmitted; else successMessage">
                 <h2>كن على اطلاع</h2>
                 <p>أرسل بريدك الإلكتروني لتلقي أحدث التحديثات</p>
@@ -47,6 +82,11 @@
                         إرسال
                     </button>
                 </div>
+
+                <div *ngIf="showSubscriberCount" class="subscriber-count">
+                    <i class="fas fa-users"></i>
+                    <span>{{ subscribers }} مشترك</span>
+                </div>
             </ng-container>
 
             <ng-template #successMessage>
@@ -54,6 +94,17 @@
                     <i class="fas fa-check-circle"></i>
                     <h3>شكراً لاهتمامك!</h3>
                     <p>سنبلغك بمجرد إطلاق الميزات الجديدة</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
                     <button class="reset-button" (click)="resetEmailSubmission()">
                         إضافة بريد آخر
                     </button>
@@ -63,10 +114,15 @@
     </div>
 
     <!-- Inspirational Quote -->
-    <div class="coming-soon__quote">
+    <div class="coming-soon__quote parallax-element" data-depth="0.08" [@fadeInUp]>
         <blockquote>
-            <p>«طلب العلم فريضة على كل مسلم»</p>
-            <cite>- الحديث النبوي الشريف</cite>
+            <p>«وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا»</p>
+            <cite>- سورة المزمل 4</cite>
         </blockquote>
+    </div>
+
+    <!-- Decorative Footer -->
+    <div class="decorative-footer">
+        <div class="wave-pattern"></div>
     </div>
 </div>
