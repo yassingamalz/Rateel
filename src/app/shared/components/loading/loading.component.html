@@ -1,1 +1,52 @@
-<p>loading works!</p>
+<!-- src/app/shared/components/loading/loading.component.html -->
+<div class="loading-container">
+    <!-- Geometric Pattern Background -->
+    <div class="pattern-background">
+      <div *ngFor="let delay of patternElements; let i = index" 
+           class="pattern-element" 
+           [style.animation-delay.s]="delay">
+      </div>
+    </div>
+    
+    <!-- Main Loading Circle -->
+    <div class="loading-circle-container">
+      <svg class="loading-circle" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+        <!-- Background Circle -->
+        <circle class="loading-circle__bg" cx="50" cy="50" r="46" />
+        
+        <!-- Progress Circle (animated or based on progress) -->
+        <circle *ngIf="!showProgress" class="loading-circle__progress loading-circle__progress--animated" 
+                cx="50" cy="50" r="46" />
+                
+        <!-- Progress circle when showing actual progress -->
+        <circle *ngIf="showProgress" class="loading-circle__progress" 
+                cx="50" cy="50" r="46"
+                [style.strokeDasharray]="progress * 2.89 + ' 289'" />
+        
+        <!-- Center Icon -->
+        <g class="loading-circle__icon">
+          <circle class="loading-circle__icon-bg" cx="50" cy="50" r="30" />
+          <!-- Book icon as path -->
+          <path class="loading-circle__icon-path" d="M38,35 v25 h24 v-25 h-24 M38,42 h24 M46,35 v25 M50,42 c0,0 6,-4 12,0" />
+        </g>
+      </svg>
+      
+      <!-- Progress Percentage (shown only when showProgress is true) -->
+      <div *ngIf="showProgress" class="progress-percentage">
+        {{ progress | number:'1.0-0' }}%
+      </div>
+    </div>
+    
+    <!-- Loading Text -->
+    <div class="loading-text">
+      <h3>{{ message }}</h3>
+      <p>{{ submessage }}</p>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div class="loading-indicator">
+      <span class="indicator-dot"></span>
+      <span class="indicator-dot"></span>
+      <span class="indicator-dot"></span>
+    </div>
+  </div>
