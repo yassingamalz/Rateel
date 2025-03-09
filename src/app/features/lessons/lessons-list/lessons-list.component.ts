@@ -1,4 +1,4 @@
-// src/app/features/lessons/lessons-list/lessons-list.component.ts
+// Final fixed LessonsListComponent with improved highlight timing
 import {
   Component,
   OnInit,
@@ -7,11 +7,12 @@ import {
   ElementRef,
   NgZone,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  AfterViewInit
 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
-import { tap, map, takeUntil, take, shareReplay, filter } from 'rxjs/operators';
+import { tap, map, takeUntil, take, shareReplay, filter, delay } from 'rxjs/operators';
 import { LessonsService } from '../lessons.service';
 import { UnitsService } from '../../units/units.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -51,7 +52,7 @@ import { DragScrollBase } from '../../../shared/components/drag-scroll/drag-scro
     ])
   ]
 })
-export class LessonsListComponent extends DragScrollBase implements OnInit, OnDestroy {
+export class LessonsListComponent extends DragScrollBase implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('lessonsContainer') lessonsContainer!: ElementRef;
 
   completedLessonAnimating = false;
@@ -63,6 +64,11 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   private isNavigating = false;
   private completionHandled = new Set<string>();
   private currentQueryParams: any = {};
+  private isNavigatingFromLessonCompletion = false;
+  private isNavigatingFromLessonDetails = false;
+  private activeStorageKey = '';
+  private unitVisitKey = '';
+  private isCompletionInProgress = false;
 
   constructor(
     elementRef: ElementRef,
@@ -76,15 +82,33 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   ) {
     super(elementRef, ngZone, storageService);
 
+    // Track navigation events to detect the source
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
+      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd),
       takeUntil(this.destroy$)
-    ).subscribe(() => {
-      if (this.completingLessonId) {
-        this.completingLessonId = null;
-        this.cdr.detectChanges();
+    ).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        // Detect navigation from lesson details
+        const lessonDetailsPattern = /\/courses\/.*\/units\/.*\/lessons\/[^\/]+$/;
+        this.isNavigatingFromLessonDetails = lessonDetailsPattern.test(event.url);
+
+        // Check query params for lesson completion
+        const hasCompletionParam = event.url.includes('completedLessonId=');
+        this.isNavigatingFromLessonCompletion = hasCompletionParam;
+
+        console.log(`[LessonsList] Navigation starting from: ${event.url}`);
+        console.log(`[LessonsList] Is from lesson details: ${this.isNavigatingFromLessonDetails}`);
+        console.log(`[LessonsList] Is from lesson completion: ${this.isNavigatingFromLessonCompletion}`);
       }
-      this.isNavigating = false;
+
+      if (event instanceof NavigationEnd) {
+        if (this.completingLessonId) {
+          this.completingLessonId = null;
+          this.cdr.detectChanges();
+        }
+        this.isNavigating = false;
+        this.isCompletionInProgress = false;
+      }
     });
   }
 
@@ -92,6 +116,11 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.unitId = this.route.snapshot.paramMap.get('unitId')!;
     this.lessonsService.setCurrentUnit(this.unitId);
+
+    // Set up active lesson storage key
+    this.activeStorageKey = `active_lesson_${this.courseId}_${this.unitId}`;
+    this.unitVisitKey = `unit_visited_${this.courseId}_${this.unitId}`;
+    console.log(`[LessonsList] Active lesson storage key: ${this.activeStorageKey}`);
 
     // Initialize lessons with proper state management
     this.lessons$ = this.lessonsService.getLessonsByUnitId(this.courseId, this.unitId).pipe(
@@ -123,6 +152,156 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
       });
   }
 
+  override ngAfterViewInit(): void {
+    // Don't restore position if coming from lesson completion
+    if (!this.isNavigatingFromLessonCompletion && !this.isCompletionInProgress) {
+      setTimeout(() => {
+        // Check if this is the first visit to this unit
+        const hasVisitedBefore = localStorage.getItem(this.unitVisitKey) === 'true';
+
+        // Check for stored active lesson
+        const storedActiveLessonId = localStorage.getItem(this.activeStorageKey);
+
+        if (storedActiveLessonId && hasVisitedBefore) {
+          console.log(`[LessonsList] Found stored active lesson: ${storedActiveLessonId}`);
+
+          // Find lesson to check if it's the first one
+          this.lessons$.pipe(take(1)).subscribe(lessons => {
+            const lesson = lessons.find(l => l.id === storedActiveLessonId);
+
+            // Set active but don't scroll for first lesson
+            this.activeLessonId = storedActiveLessonId;
+
+            if (lesson && lesson.order !== 1) {
+              // Only scroll to non-first lessons after a slight delay
+              setTimeout(() => {
+                this.scrollToLesson(storedActiveLessonId);
+
+                // Add highlight after scrolling is complete
+                setTimeout(() => {
+                  this.addHighlightToLesson(storedActiveLessonId);
+                  this.cdr.detectChanges();
+                }, 500);
+              }, 200);
+            } else {
+              // Reset to beginning for first lesson
+              this.resetScrollToBeginning();
+
+              // Still add highlight after a brief moment
+              setTimeout(() => {
+                this.addHighlightToLesson(storedActiveLessonId);
+                this.cdr.detectChanges();
+              }, 300);
+            }
+          });
+        } else {
+          // If first visit or no active lesson stored, just highlight the first lesson
+          this.findAndSetCurrentLesson(hasVisitedBefore);
+        }
+
+        // Mark as visited for future navigation
+        localStorage.setItem(this.unitVisitKey, 'true');
+      }, 300);
+    }
+  }
+
+  /**
+   * Adds a brief visual highlight to a lesson element
+   */
+  private addHighlightToLesson(lessonId: string): void {
+    if (!this.lessonsContainer) return;
+
+    const lessonElement = this.lessonsContainer.nativeElement.querySelector(`[data-lesson-id="${lessonId}"]`);
+    if (lessonElement) {
+      lessonElement.classList.add('focus-highlight');
+      setTimeout(() => {
+        lessonElement.classList.remove('focus-highlight');
+      }, 1500);
+    }
+  }
+
+  private findAndSetCurrentLesson(shouldScroll: boolean): void {
+    this.lessons$.pipe(take(1)).subscribe(lessons => {
+      if (lessons.length === 0) {
+        console.log(`[LessonsList] No lessons found`);
+        return;
+      }
+
+      // Find the first unlocked, uncompleted lesson
+      const nextLesson = lessons.find(l => !l.isCompleted && !l.isLocked);
+
+      if (nextLesson) {
+        this.activeLessonId = nextLesson.id;
+        console.log(`[LessonsList] Found next uncompleted lesson: ${nextLesson.id}`);
+
+        // Only scroll if this is not the first visit to the unit AND it's not the first lesson
+        if (shouldScroll && nextLesson.order !== 1) {
+          setTimeout(() => {
+            this.scrollToLesson(nextLesson.id);
+
+            // Add highlight after scrolling is complete
+            setTimeout(() => {
+              this.addHighlightToLesson(nextLesson.id);
+            }, 500);
+          }, 200);
+        } else {
+          if (nextLesson.order === 1) {
+            console.log(`[LessonsList] Not scrolling to first lesson (order=1)`);
+            this.resetScrollToBeginning();
+
+            // Add brief highlight after a delay
+            setTimeout(() => {
+              this.addHighlightToLesson(nextLesson.id);
+            }, 300);
+          } else {
+            console.log(`[LessonsList] First visit to unit, NOT scrolling`);
+          }
+        }
+      } else if (lessons.length > 0) {
+        // If all lessons are completed, highlight the last one
+        const lastLesson = lessons[lessons.length - 1];
+        this.activeLessonId = lastLesson.id;
+        console.log(`[LessonsList] All lessons completed, setting active lesson: ${lastLesson.id}`);
+
+        // Only scroll if this is not the first visit to the unit AND it's not the first lesson
+        if (shouldScroll && lastLesson.order !== 1) {
+          setTimeout(() => {
+            this.scrollToLesson(lastLesson.id);
+
+            // Add highlight after scrolling is complete
+            setTimeout(() => {
+              this.addHighlightToLesson(lastLesson.id);
+            }, 500);
+          }, 200);
+        } else {
+          if (lastLesson.order === 1) {
+            console.log(`[LessonsList] Not scrolling to first lesson (order=1)`);
+            this.resetScrollToBeginning();
+
+            // Add brief highlight after a delay
+            setTimeout(() => {
+              this.addHighlightToLesson(lastLesson.id);
+            }, 300);
+          } else {
+            console.log(`[LessonsList] First visit to unit, NOT scrolling`);
+          }
+        }
+      }
+
+      this.cdr.detectChanges();
+    });
+  }
+
+  /**
+   * Resets the scroll position to the beginning of the list (0)
+   */
+  private resetScrollToBeginning(): void {
+    if (this.lessonsContainer && this.lessonsContainer.nativeElement) {
+      console.log(`[LessonsList] Resetting scroll position to 0`);
+      this.lessonsContainer.nativeElement.scrollLeft = 0;
+    }
+  }
+
   private updateLessonsProgress(lessons: Lesson[]): Lesson[] {
     let previousLessonCompleted = true;
     const completedLessons = lessons.filter(lesson => {
@@ -151,7 +330,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   private checkAndHandleLessonCompletion(lessonId: string) {
     console.log('[LessonsList] Starting lesson completion check for:', lessonId);
 
-    if (this.isNavigating) {
+    if (this.isNavigating || this.isCompletionInProgress) {
       console.log('[LessonsList] Navigation already in progress, skipping');
       return;
     }
@@ -164,6 +343,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
 
     this.completionHandled.add(lessonId); // Mark as handled
     this.isNavigating = true;
+    this.isCompletionInProgress = true;
 
     const storageKey = `${this.courseId}_${this.unitId}_${lessonId}`;
     const progressData = this.storageService.getProgress('lesson', storageKey);
@@ -183,6 +363,11 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
       console.log('[LessonsList] Lesson ' + (currentIndex + 1) + '/' + lessons.length +
         ', has next:', !!nextLesson);
 
+      // Clear BOTH active lesson ID and completing lesson ID to avoid any highlighting
+      this.activeLessonId = null;
+      this.completingLessonId = null;
+      this.cdr.detectChanges();
+
       if (isFirstCompletion) {
         // First completion - show animation
         this.completingLessonId = lessonId;
@@ -199,6 +384,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
       } else {
         // Subsequent completion - skip animation
         console.log('[LessonsList] Subsequent completion, skipping animation');
+
         setTimeout(() => {
           this.navigateAfterCompletion(lessonId, isLastLesson, nextLesson);
         }, 500); // Shorter delay for better experience
@@ -210,10 +396,14 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
     if (isLastLesson) {
       console.log('[LessonsList] Last lesson completed, navigating to unit completion');
 
-      // Scroll to the completed lesson first
+      // First scroll to the last lesson so user can see the completion state
       this.scrollToLesson(lessonId);
 
-      // Then navigate after a delay to see the scroll effect
+      // Set it as active to highlight it
+      this.activeLessonId = lessonId;
+      this.cdr.detectChanges();
+
+      // Navigate after a longer delay to allow the animation and scrolling to complete
       setTimeout(() => {
         this.router.navigate(['/courses', this.courseId, 'units'], {
           queryParams: {
@@ -225,28 +415,40 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
           console.log('[LessonsList] Navigation to units with completion successful');
           setTimeout(() => {
             this.isNavigating = false;
+            this.isCompletionInProgress = false;
             this.resetCompletionState();
           }, 100);
         }).catch(err => {
           console.error('[LessonsList] Navigation failed:', err);
           this.isNavigating = false;
+          this.isCompletionInProgress = false;
           this.resetCompletionState();
         });
-      }, 800); // Delay to allow the scrolling to complete
+      }, 1200); // Increased delay to match the animation timing
 
     } else if (nextLesson && !nextLesson.isLocked) {
       console.log('[LessonsList] Navigating to next lesson:', nextLesson.id);
 
-      // First scroll to the next lesson
-      this.scrollToLesson(nextLesson.id);
+      // Store the active lesson BEFORE navigation, but don't highlight it yet
+      localStorage.setItem(this.activeStorageKey, nextLesson.id);
+      console.log(`[LessonsList] Stored active lesson: ${nextLesson.id}`);
 
-      // Then navigate after a delay
+      // Scroll to next lesson without highlighting
+      if (nextLesson.order !== 1) {
+        this.scrollToLesson(nextLesson.id);
+      } else {
+        console.log(`[LessonsList] Next lesson is first lesson, resetting scroll position`);
+        this.resetScrollToBeginning();
+      }
+
+      // Navigate after a delay
       setTimeout(() => {
         this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', nextLesson.id], {
           replaceUrl: true
         }).then(() => {
           setTimeout(() => {
             this.isNavigating = false;
+            this.isCompletionInProgress = false;
             this.resetCompletionState();
           }, 100);
         });
@@ -254,60 +456,88 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
 
     } else {
       this.isNavigating = false;
+      this.isCompletionInProgress = false;
       this.resetCompletionState();
     }
   }
 
   /**
- * Scrolls to a specific lesson card with smooth animation
- * @param lessonId ID of the lesson to scroll to
- */
-  private scrollToLesson(lessonId: string): void {
+   * Scrolls to a specific lesson card adding a highlight
+   */
+  private scrollToLessonWithHighlight(lessonId: string): void {
     // Wait for the DOM to update
     setTimeout(() => {
-      if (!this.lessonsContainer) return;
+      if (!this.lessonsContainer) {
+        console.log('[LessonsList] Cannot scroll, container not available');
+        return;
+      }
 
       // Find the lesson element by data attribute
       const lessonElement = this.lessonsContainer.nativeElement.querySelector(`[data-lesson-id="${lessonId}"]`);
-      if (!lessonElement) return;
+      if (!lessonElement) {
+        console.log(`[LessonsList] Cannot find lesson element with ID: ${lessonId}`);
+        return;
+      }
 
-      // Get container dimensions
-      const containerRect = this.lessonsContainer.nativeElement.getBoundingClientRect();
-      const containerWidth = containerRect.width;
+      // Find the lesson object to check if it's the first lesson
+      this.lessons$.pipe(take(1)).subscribe(lessons => {
+        const lesson = lessons.find(l => l.id === lessonId);
 
-      // Calculate the scroll position to center the lesson
-      const lessonRect = lessonElement.getBoundingClientRect();
-      const lessonWidth = lessonRect.width;
+        if (lesson && lesson.order === 1) {
+          // If it's the first lesson, just reset to the beginning
+          console.log(`[LessonsList] Found first lesson (order=1), resetting scroll to 0`);
+          this.resetScrollToBeginning();
+          return;
+        }
 
-      // For RTL layout, scroll calculation is different (right-to-left)
-      const currentScrollLeft = this.lessonsContainer.nativeElement.scrollLeft;
-      const targetScrollLeft =
-        lessonElement.offsetLeft - (containerWidth / 2) + (lessonWidth / 2);
+        console.log(`[LessonsList] Scrolling to lesson ${lessonId} (without highlight)`);
 
-      // Scroll with smooth animation
-      this.lessonsContainer.nativeElement.scrollTo({
-        left: targetScrollLeft,
-        behavior: 'smooth'
+        // Get container dimensions
+        const containerRect = this.lessonsContainer.nativeElement.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+
+        // Calculate the scroll position to center the lesson
+        const lessonRect = lessonElement.getBoundingClientRect();
+        const lessonWidth = lessonRect.width;
+
+        // For RTL layout, scroll calculation is different (right-to-left)
+        const targetScrollLeft =
+          lessonElement.offsetLeft - (containerWidth / 2) + (lessonWidth / 2);
+
+        console.log(`[LessonsList] Target scroll position: ${targetScrollLeft}px`);
+
+        // Scroll with smooth animation
+        this.lessonsContainer.nativeElement.scrollTo({
+          left: targetScrollLeft,
+          behavior: 'smooth'
+        });
+        this.addHighlightToLesson(lessonId);
       });
-
-      // Visual highlight for the focused card
-      lessonElement.classList.add('focus-highlight');
-      setTimeout(() => {
-        lessonElement.classList.remove('focus-highlight');
-      }, 1500);
     }, 100); // Short delay to ensure DOM is updated
+  }
+
+  /**
+   * Scrolls to a specific lesson card with smooth animation and highlight
+   */
+  private scrollToLesson(lessonId: string): void {
+    this.scrollToLessonWithHighlight(lessonId);
+
   }
 
   private resetCompletionState(): void {
     console.log('[LessonsList] Resetting completion state');
     this.completingLessonId = null;
-    this.completionHandled.clear(); // Clear handled completions when resetting
     this.cdr.detectChanges();
   }
 
   onLessonSelected(lesson: Lesson): void {
     if (!lesson.isLocked) {
       this.activeLessonId = lesson.id;
+
+      // Store the active lesson in localStorage
+      localStorage.setItem(this.activeStorageKey, lesson.id);
+      console.log(`[LessonsList] Stored active lesson before navigation: ${lesson.id}`);
+
       this.router.navigate(['/courses', this.courseId, 'units', this.unitId, 'lessons', lesson.id]);
     }
   }
@@ -340,6 +570,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
         });
       }
     }
+
     super.handleDragEnd(event.pageX);
   }
 
@@ -366,6 +597,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
         });
       }
     }
+
     super.handleDragEnd(event.changedTouches[0].pageX);
   }
 
@@ -376,6 +608,7 @@ export class LessonsListComponent extends DragScrollBase implements OnInit, OnDe
   override ngOnDestroy(): void {
     console.log('[LessonsList] Component destroying, cleaning up');
     this.isNavigating = false;
+    this.isCompletionInProgress = false;
     this.resetCompletionState();
     super.ngOnDestroy();
   }

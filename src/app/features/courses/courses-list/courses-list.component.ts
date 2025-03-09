@@ -154,7 +154,7 @@ export class CoursesListComponent extends DragScrollBase implements OnInit, Afte
       });
   }
 
-  ngAfterViewInit(): void {
+ override ngAfterViewInit(): void {
     this.setupScrollBehavior();
     this.setupIntersectionObserver();
   }
