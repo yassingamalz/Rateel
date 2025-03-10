@@ -13,6 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { BorderFillDirective } from '../../shared/directives/border-fill.directive';
 import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson.component';
 import { FormsModule } from '@angular/forms';
+import { AssessmentModule } from './assessment/assessment.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     BorderFillDirective,
     LessonsRoutingModule,
+    AssessmentModule
   ]
 })
 export class LessonsModule { }
