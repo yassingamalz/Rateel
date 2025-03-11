@@ -7,13 +7,16 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ComponentRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PlatformService } from '../../../core/services/platform.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AssessmentQuestion } from './assessment-lesson.types';
 import { AssessmentService } from '../assessment/services/assessment-service.service';
+import { DynamicModalService } from '../../../shared/services/dynamic-modal.service';
+import { FeedbackModalComponent } from '../assessment/components/feedback-modal/feedback-modal.component';
 
 @Component({
   selector: 'app-assessment-lesson',
@@ -44,7 +47,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   isDarkMode = false;
 
   // Modal visibility states
-  showFeedbackModal = false;
   showCompletionModal = false;
   showDetailsModal = false;
 
@@ -52,12 +54,16 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   currentQuestion?: AssessmentQuestion;
   selectedQuestionIndex: number | null = null;
 
+  // Dynamic modal reference
+  private currentFeedbackModal: ComponentRef<FeedbackModalComponent> | null = null;
+
   private subscriptions: Subscription[] = [];
   private isCompletionInProgress = false;
 
   constructor(
     public assessmentService: AssessmentService,
     private platformService: PlatformService,
+    private dynamicModalService: DynamicModalService,
     protected cdr: ChangeDetectorRef
   ) { }
 
@@ -95,9 +101,8 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
         if (this.currentQuestion &&
           state.answers.has(this.currentQuestion.id) &&
           !this.assessmentService.isFeedbackDismissed()) {
-          this.showFeedbackModal = true;
-        } else {
-          this.showFeedbackModal = false;
+          this.showFeedbackModal(this.currentQuestion.id);
+          this.assessmentService.dismissFeedback();
         }
 
         // Trigger completion if needed
@@ -128,8 +133,70 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Close any open modals
+    if (this.currentFeedbackModal) {
+      this.dynamicModalService.close(this.currentFeedbackModal);
+    }
+
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.assessmentService.resetState();
+  }
+  private showFeedbackModal(questionId: string): void {
+    // Close any existing modal first
+    if (this.currentFeedbackModal) {
+      this.dynamicModalService.close(this.currentFeedbackModal);
+      this.currentFeedbackModal = null;
+    }
+
+    console.log('[AssessmentLesson] Opening feedback modal for question:', questionId);
+
+    // Get complete question details and prepare all required data
+    const content = this.assessmentService.getContent();
+    const question = content?.questions.find(q => q.id === questionId);
+
+    if (!question) {
+      console.error('[AssessmentLesson] Could not find question with id:', questionId);
+      return;
+    }
+
+    // Get all the data needed for the modal
+    const questionResult = this.assessmentService.getQuestionResult(questionId);
+    const currentStreak = this.assessmentService.getCurrentStreak();
+    const earnedPoints = questionResult === 'correct' ?
+      this.assessmentService.getQuestionPoints() : 0;
+    const correctAnswerText = this.assessmentService.getCorrectAnswerText(question);
+    const userAnswerText = this.assessmentService.getUserAnswerText(questionId);
+
+    // Create the modal component with all necessary data
+    this.currentFeedbackModal = this.dynamicModalService.open(FeedbackModalComponent, {
+      questionId,
+      question,
+      questionResult,
+      currentStreak,
+      earnedPoints,
+      correctAnswerText,
+      userAnswerText
+    });
+
+    // Log what we're passing to help debug any issues
+    console.log('[AssessmentLesson] Feedback modal data:', {
+      question: question?.text?.substring(0, 30) + '...',
+      result: questionResult,
+      streak: currentStreak,
+      points: earnedPoints,
+      correctAnswer: correctAnswerText?.substring(0, 30) + '...',
+      userAnswer: userAnswerText?.substring(0, 30) + '...'
+    });
+
+    // Handle dismiss event
+    const instance = this.currentFeedbackModal.instance;
+    instance.dismissFeedback.subscribe(() => {
+      if (this.currentFeedbackModal) {
+        this.dynamicModalService.close(this.currentFeedbackModal);
+        this.currentFeedbackModal = null;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   private async handleCompletion(): Promise<void> {
@@ -171,12 +238,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   }
 
   // Event handlers for child components
-  onFeedbackDismissed(): void {
-    this.assessmentService.dismissFeedback();
-    this.showFeedbackModal = false;
-    this.cdr.markForCheck();
-  }
-
   onCompletionClosed(): void {
     this.assessmentService.setShowCompletionAnimation(false);
     this.showCompletionModal = false;

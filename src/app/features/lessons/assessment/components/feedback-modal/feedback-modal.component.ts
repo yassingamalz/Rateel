@@ -1,4 +1,4 @@
-// src/app/features/lessons/assessment/components/feedback-modal/feedback-modal.component.ts
+//feedback-modal.component.ts
 import {
   Component,
   OnInit,
@@ -7,12 +7,13 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ElementRef,
+  AfterViewInit,
+  Renderer2,
+  HostListener
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { trigger, transition, style, animate, state } from '@angular/animations';
 import { AssessmentQuestion } from '../../../assessment-lesson/assessment-lesson.types';
-import { AssessmentService } from '../../services/assessment-service.service';
 import { PlatformService } from '../../../../../core/services/platform.service';
 
 @Component({
@@ -20,96 +21,180 @@ import { PlatformService } from '../../../../../core/services/platform.service';
   standalone: false,
   templateUrl: './feedback-modal.component.html',
   styleUrls: ['./feedback-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('modalAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.8)' }),
-        animate('300ms cubic-bezier(0.4, 0.0, 0.2, 1)',
-          style({ opacity: 1, transform: 'scale(1)' }))
-      ]),
-      transition(':leave', [
-        animate('200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
-          style({ opacity: 0, transform: 'scale(0.8)' }))
-      ])
-    ]),
-    trigger('iconBounce', [
-      state('bounce', style({ transform: 'scale(1.2)' })),
-      state('normal', style({ transform: 'scale(1)' })),
-      transition('normal <=> bounce', animate('300ms ease-in-out'))
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeedbackModalComponent implements OnInit, OnDestroy {
-  @Input() questionId?: string;
+export class FeedbackModalComponent implements OnInit, OnDestroy, AfterViewInit {
+  // Inputs directly from parent
+  @Input() questionId!: string;
+  @Input() question?: AssessmentQuestion;
+  @Input() questionResult: 'correct' | 'incorrect' | 'unanswered' = 'unanswered';
+  @Input() currentStreak = 0;
+  @Input() earnedPoints = 0;
+  @Input() correctAnswerText = '';
+  @Input() userAnswerText = '';
+
   @Output() dismissFeedback = new EventEmitter<void>();
 
-  question?: AssessmentQuestion;
-  questionResult: 'correct' | 'incorrect' | 'unanswered' = 'unanswered';
-  iconState: 'normal' | 'bounce' = 'normal';
-  currentStreak = 0;
-  earnedPoints = 0;
+  // Animation states
+  iconBounceState = false;
+  isLandscape = window.innerWidth > window.innerHeight;
 
-  private subscriptions: Subscription[] = [];
+  // Timers
+  private autoDismissTimer?: any;
+  private iconBounceTimer?: any;
+  private orientationCheckTimer?: any;
 
   constructor(
-    public assessmentService: AssessmentService,
     private platformService: PlatformService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) { }
 
-  ngOnInit(): void {
-    // Get current question if not explicitly provided
-    if (!this.questionId) {
-      const currentQuestion = this.assessmentService.getCurrentQuestion();
-      if (currentQuestion) {
-        this.questionId = currentQuestion.id;
-      }
-    }
+  // Track orientation changes
+  @HostListener('window:resize')
+  onResize() {
+    const wasLandscape = this.isLandscape;
+    this.isLandscape = window.innerWidth > window.innerHeight;
 
-    if (this.questionId) {
-      // Get question details
-      const content = this.assessmentService.getContent();
-      if (content) {
-        this.question = content.questions.find(q => q.id === this.questionId);
-        this.questionResult = this.assessmentService.getQuestionResult(this.questionId);
-      }
-
-      // Get streak and points
-      this.currentStreak = this.assessmentService.getCurrentStreak();
-      this.earnedPoints = this.questionResult === 'correct' ?
-        this.assessmentService.getQuestionPoints() : 0;
-    }
-
-    // Start animation
-    setTimeout(() => {
-      this.iconState = 'bounce';
+    // If orientation changed, force change detection
+    if (wasLandscape !== this.isLandscape) {
       this.cdr.markForCheck();
+    }
+  }
 
-      // Reset animation after a delay
-      setTimeout(() => {
-        this.iconState = 'normal';
+  ngOnInit(): void {
+    console.log('[FeedbackModal] Initializing with data:', {
+      questionId: this.questionId,
+      question: this.question,
+      result: this.questionResult,
+      streak: this.currentStreak,
+      points: this.earnedPoints,
+      isLandscape: this.isLandscape
+    });
+
+    // Start periodic orientation check to handle device rotation
+    this.orientationCheckTimer = setInterval(() => {
+      const newIsLandscape = window.innerWidth > window.innerHeight;
+      if (this.isLandscape !== newIsLandscape) {
+        this.isLandscape = newIsLandscape;
         this.cdr.markForCheck();
-      }, 500);
+      }
     }, 300);
+
+    // Trigger icon bounce animation after a short delay
+    this.startIconBounceAnimation();
+
+    // Add haptic feedback based on result
+    if (this.questionResult === 'correct') {
+      this.platformService.vibrateSuccess().catch(() => { });
+    } else {
+      this.platformService.vibrateWarning().catch(() => { });
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // Add confetti for correct answers
+    if (this.questionResult === 'correct') {
+      this.createConfetti();
+    }
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    // Clean up all timers
+    if (this.autoDismissTimer) {
+      clearTimeout(this.autoDismissTimer);
+    }
+
+    if (this.iconBounceTimer) {
+      clearTimeout(this.iconBounceTimer);
+    }
+
+    if (this.orientationCheckTimer) {
+      clearInterval(this.orientationCheckTimer);
+    }
   }
 
   onDismiss(): void {
-    this.dismissFeedback.emit();
+    // Play haptic feedback
     this.platformService.vibrateSuccess().catch(() => { });
+    this.dismissFeedback.emit();
   }
 
-  getCorrectAnswerText(): string {
-    if (!this.question) return '';
-    return this.assessmentService.getCorrectAnswerText(this.question);
+  // Methods for animations
+  private startIconBounceAnimation(): void {
+    // Start with a bounce
+    this.iconBounceState = true;
+    this.cdr.markForCheck();
+
+    // Reset after 300ms
+    this.iconBounceTimer = setTimeout(() => {
+      this.iconBounceState = false;
+      this.cdr.markForCheck();
+
+      // Add another bounce after 1s (only for correct answers)
+      if (this.questionResult === 'correct') {
+        this.iconBounceTimer = setTimeout(() => {
+          this.iconBounceState = true;
+          this.cdr.markForCheck();
+
+          // And reset again
+          this.iconBounceTimer = setTimeout(() => {
+            this.iconBounceState = false;
+            this.cdr.markForCheck();
+          }, 300);
+        }, 1000);
+      }
+    }, 300);
   }
 
-  getUserAnswerText(): string {
-    if (!this.questionId) return '';
-    return this.assessmentService.getUserAnswerText(this.questionId);
+  private createConfetti(): void {
+    // Get confetti container element
+    const container = this.elementRef.nativeElement.querySelector('.confetti-container');
+    if (!container) return;
+
+    // Confetti colors based on theme 
+    const colors = [
+      '#DAA520', '#FFD700', '#FCC200', // Golds
+      '#D4AF37', '#1F4037', '#2D6A4F'  // Greens
+    ];
+
+    // Create fewer confetti pieces for better performance
+    const pieceCount = this.isLandscape ? 30 : 50;
+    const shapes = ['square', 'triangle', 'circle'];
+
+    for (let i = 0; i < pieceCount; i++) {
+      // Create confetti piece
+      const piece = this.renderer.createElement('div');
+      this.renderer.addClass(piece, 'confetti');
+
+      // Add random shape
+      const shape = shapes[Math.floor(Math.random() * shapes.length)];
+      this.renderer.addClass(piece, shape);
+
+      // Set random position
+      const left = Math.random() * 100;
+      this.renderer.setStyle(piece, 'left', `${left}%`);
+
+      // Set random delay (shorter in landscape for better performance)
+      const delay = Math.random() * (this.isLandscape ? 1 : 1.5);
+      this.renderer.setStyle(piece, 'animation-delay', `${delay}s`);
+
+      // Set random size (smaller in landscape)
+      const size = 5 + Math.random() * (this.isLandscape ? 8 : 10);
+      this.renderer.setStyle(piece, 'width', `${size}px`);
+      this.renderer.setStyle(piece, 'height', `${size}px`);
+
+      // Set random rotation
+      const rotation = Math.random() * 360;
+      this.renderer.setStyle(piece, 'transform', `rotate(${rotation}deg)`);
+
+      // Set random color
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      this.renderer.setStyle(piece, 'background-color', color);
+
+      // Add to container
+      this.renderer.appendChild(container, piece);
+    }
   }
 }

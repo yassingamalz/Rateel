@@ -49,16 +49,12 @@
         </div>
     </ng-container>
 
-    <!-- Modals - Use component visibility flags -->
-    <app-feedback-modal *ngIf="showFeedbackModal && currentQuestion" 
-        [questionId]="currentQuestion.id"
-        (dismissFeedback)="onFeedbackDismissed()">
-    </app-feedback-modal>
-
+    <!-- Completion Modal -->
     <app-completion-modal *ngIf="showCompletionModal" 
         (completed)="onCompletionClosed()">
     </app-completion-modal>
 
+    <!-- Question Details Modal -->
     <app-question-details-modal *ngIf="showDetailsModal && selectedQuestionIndex !== null"
         (closeDetails)="onDetailsModalClosed()">
     </app-question-details-modal>

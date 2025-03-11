@@ -2,154 +2,174 @@
 @use "sass:map";
 @use 'variables' as vars;
 
+:host {
+  display: contents;
+}
+
 .modal-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1050; // High z-index to ensure it's above all other content
-    overflow: hidden;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 99999 !important; // Extremely high z-index
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: auto !important;
+  overflow: hidden !important;
 }
 
 .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 1051;
+  position: fixed !important; // Changed from absolute to fixed
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 99998 !important; // Ensure it's below the modal container but above everything else
 }
 
 .modal-container {
-    position: relative;
-    z-index: 1052;
-    max-height: 90vh;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    background: rgba(map-get(vars.$colors, 'primary', 'base'), 0.9);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-
-    // Size variations
-    &.sm {
-        max-width: 400px;
-    }
-
-    &.md {
-        max-width: 600px;
-    }
-
-    &.lg {
-        max-width: 800px;
-    }
-
-    &.xl {
-        max-width: 1000px;
-    }
-
-    &.fullscreen {
-        width: 95%;
-        height: 95vh;
-        max-width: none;
-        max-height: 95vh;
-    }
-
-    // Position variations
-    &.center {
-        margin: auto;
-    }
-
-    &.top {
-        margin-top: 5vh;
-        margin-bottom: auto;
-    }
-
-    &.bottom {
-        margin-top: auto;
-        margin-bottom: 5vh;
-    }
+  position: relative !important;
+  z-index: 100000 !important; // Higher than overlay and wrapper
+  max-height: 90vh !important;
+  width: 90% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 15px !important;
+  background: rgba(map-get(vars.$colors, 'primary', 'base'), 0.95) !important; // Slightly more opaque
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7) !important; // Stronger shadow
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  overflow: hidden !important;
+  transform: translateZ(0) !important; // Force hardware acceleration
+  
+  // Size variations
+  &.sm {
+    max-width: 400px !important;
+  }
+  
+  &.md {
+    max-width: 600px !important;
+  }
+  
+  &.lg {
+    max-width: 800px !important;
+  }
+  
+  &.xl {
+    max-width: 1000px !important;
+  }
+  
+  &.fullscreen {
+    width: 95% !important;
+    height: 95vh !important;
+    max-width: none !important;
+    max-height: 95vh !important;
+  }
+  
+  // Position variations
+  &.center {
+    margin: auto !important;
+  }
+  
+  &.top {
+    margin-top: 5vh !important;
+    margin-bottom: auto !important;
+  }
+  
+  &.bottom {
+    margin-top: auto !important;
+    margin-bottom: 5vh !important;
+  }
 }
 
 .modal-close-btn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1;
-    transition: all 0.3s ease;
+  position: absolute !important;
+  top: 15px !important;
+  left: 15px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 1 !important;
+  transition: all 0.3s ease !important;
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: rotate(90deg);
-    }
+  &:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: rotate(90deg) !important;
+  }
 }
 
 .modal-content {
-    flex: 1;
-    overflow-y: auto;
-    position: relative;
-
-    // Apply custom scrollbar styling
-    scrollbar-width: thin;
-    scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2);
-
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
-        border-radius: 3px;
-    }
+  flex: 1 !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  
+  // Apply custom scrollbar styling
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2) !important;
+  
+  &::-webkit-scrollbar {
+    width: 6px !important;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 3px !important;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) !important;
+    border-radius: 3px !important;
+  }
 }
 
 // Mobile optimizations
 @media (max-width: 768px) {
-    .modal-container {
-        width: 95%;
-
-        &.sm,
-        &.md,
-        &.lg,
-        &.xl {
-            max-width: 95%;
-        }
+  .modal-container {
+    width: 95% !important;
+    
+    &.sm, &.md, &.lg, &.xl {
+      max-width: 95% !important;
     }
+  }
 }
 
 // Extreme landscape mode (very short height)
 @media (orientation: landscape) and (max-height: 500px) {
-    .modal-container {
-        max-height: 95vh;
-    }
+  .modal-container {
+    max-height: 95vh !important;
+  }
+  
+  .modal-content {
+    max-height: calc(95vh - 50px) !important;
+  }
+}
 
-    .modal-content {
-        max-height: calc(95vh - 50px);
-    }
+// Important reset fixes for any potential inheritance issues
+.modal-wrapper,
+.modal-overlay,
+.modal-container,
+.modal-content {
+  all: initial !important;
+  box-sizing: border-box !important;
+  font-family: 'Cairo', sans-serif !important;
+}
+
+// Additional override to ensure our styles take precedence
+.modal-wrapper * {
+  box-sizing: border-box !important;
 }

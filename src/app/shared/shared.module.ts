@@ -5,13 +5,15 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ModalHostComponent } from './components/modal-host/modal-host.component';
 
 @NgModule({
   declarations: [
     LoadingComponent,
     ComingSoonComponent,
     ThemeToggleComponent,
-    ModalComponent
+    ModalComponent,
+    ModalHostComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ModalComponent } from './components/modal/modal.component';
     LoadingComponent,
     ComingSoonComponent,
     ThemeToggleComponent,
-    ModalComponent
+    ModalComponent,
+    ModalHostComponent
   ]
 })
 export class SharedModule { }

@@ -1,347 +1,767 @@
-// src/app/features/lessons/assessment/components/feedback-modal/feedback-modal.component.scss
+// Enhanced feedback-modal.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 
-.feedback-modal {
+:host {
+  display: contents;
+}
+
+// Main modal wrapper
+.feedback-modal-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999999;
+  pointer-events: auto;
+}
 
-  // Modal overlay
-  .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    animation: fadeIn 0.3s ease-out;
+// Improved overlay with better blur
+.feedback-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000000;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+// Enhanced modal content with better visual appeal
+.feedback-modal-content {
+  position: relative;
+  z-index: 1000001;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 20px;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: modalSlideUp 0.5s ease-out 0.1s forwards;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  // Different styling for correct and incorrect answers
+  &.feedback-correct {
+    overflow: hidden;
+    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.98);
+    border: 2px solid rgba(39, 174, 96, 0.5);
+    box-shadow: 0 15px 40px rgba(39, 174, 96, 0.3),
+      0 0 0 2px rgba(39, 174, 96, 0.2),
+      0 0 100px rgba(39, 174, 96, 0.2);
+
+    .feedback-icon {
+      background: #2ECC71;
+      box-shadow: 0 0 20px rgba(39, 174, 96, 0.6);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .feedback-title {
+      color: white;
+    }
+
+    // Add animated particles for correct answer
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -100px;
+      z-index: -1;
+      opacity: 0.3;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(46, 204, 113, 0.3) 0%, transparent 70%),
+        radial-gradient(circle at 80% 70%, rgba(39, 174, 96, 0.3) 0%, transparent 70%);
+      filter: blur(20px);
+      animation: pulseGlow 2s infinite alternate;
+    }
   }
 
-  // Modal content
-  .modal-content {
+  &.feedback-incorrect {
+    overflow: hidden;
+    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.98);
+    border: 2px solid rgba(231, 76, 60, 0.5);
+    box-shadow: 0 15px 40px rgba(231, 76, 60, 0.3),
+      0 0 0 2px rgba(231, 76, 60, 0.2);
+
+    .feedback-icon {
+      background: #E74C3C;
+      box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .feedback-title {
+      color: white;
+    }
+
+    // Add subtle animation for incorrect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -50px;
+      z-index: -1;
+      opacity: 0.2;
+      background-image:
+        radial-gradient(circle at 30% 20%, rgba(231, 76, 60, 0.2) 0%, transparent 70%),
+        radial-gradient(circle at 70% 80%, rgba(243, 156, 18, 0.2) 0%, transparent 70%);
+      filter: blur(20px);
+    }
+  }
+
+  // Large enhanced feedback icon
+  .feedback-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: iconEntranceWithBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+
+    &.bounce {
+      transform: scale(1.1);
+    }
+
+    i {
+      font-size: 40px;
+      color: white;
+    }
+  }
+
+  // Enhanced title styling
+  .feedback-title {
+    font-size: 2.2rem;
+    color: white;
+    margin: 0 0 15px;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    animation: titleEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+  }
+
+  // Improved points styling with better visualization
+  .points-award {
+    background: linear-gradient(135deg,
+        rgba(map-get(vars.$colors, 'accent', 'dark'), 0.3),
+        rgba(map-get(vars.$colors, 'accent', 'base'), 0.3));
+    border: 2px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+    border-radius: 18px;
+    padding: 12px 30px;
+    margin: 15px 0 25px;
     position: relative;
-    width: 90%;
-    max-width: 500px;
-    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.85);
-    border-radius: 15px;
-    padding: 30px 25px;
+    overflow: hidden;
+    animation: pointsEntrance 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both;
+
+    // Add subtle shimmer effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    .points-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: map-get(vars.$colors, 'accent', 'light');
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+      animation: countUpPoints 1s ease-out 0.5s backwards;
+    }
+
+    .points-label {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  // Enhanced streak indicator
+  .streak-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 1001;
-    
-    // Different styling for correct and incorrect answers
-    &.feedback-correct {
-      border-top: 4px solid #27AE60;
+    margin-bottom: 25px;
+    padding: 12px 25px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    animation: streakEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both;
 
-      .feedback-icon {
-        background: #27AE60;
-        box-shadow: 0 0 20px rgba(39, 174, 96, 0.4);
-      }
+    // Animated background
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(231, 76, 60, 0.1), rgba(255, 152, 0, 0.1));
+      filter: blur(5px);
+      animation: flameBg 3s infinite alternate;
     }
 
-    &.feedback-incorrect {
-      border-top: 4px solid #E74C3C;
-
-      .feedback-icon {
-        background: #E74C3C;
-        box-shadow: 0 0 20px rgba(231, 76, 60, 0.4);
-      }
-    }
-
-    // Feedback icon
-    .feedback-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
+    .streak-flames {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      animation: iconEnter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      gap: 8px;
+      margin-bottom: 6px;
 
       i {
-        font-size: 3rem;
-        color: white;
-      }
-    }
-
-    // Title styling
-    .feedback-title {
-      font-size: 1.8rem;
-      color: white;
-      margin: 0 0 15px;
-      font-weight: 700;
-      animation: fadeUp 0.5s ease-out;
-    }
-
-    // Points styling
-    .points-award {
-      background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
-      border-radius: 15px;
-      padding: 10px 25px;
-      margin: 10px 0 20px;
-      animation: fadeUp 0.6s ease-out;
-
-      .points-value {
         font-size: 2rem;
-        font-weight: 700;
-        color: map-get(vars.$colors, 'accent', 'light');
-      }
+        color: #FF9800;
+        filter: drop-shadow(0 0 8px rgba(255, 152, 0, 0.7));
+        animation: flameFlicker 1.2s infinite alternate;
 
-      .points-label {
-        font-size: 1rem;
-        color: map-get(vars.$colors, 'text', 'muted');
-      }
-    }
+        &:nth-child(1) {
+          animation-delay: 0s;
+          transform: rotate(-10deg);
+        }
 
-    // Streak indicator
-    .streak-indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
-      animation: fadeUp 0.7s ease-out;
+        &:nth-child(2) {
+          animation-delay: 0.4s;
+          font-size: 2.3rem;
+        }
 
-      .streak-flames {
-        display: flex;
-        gap: 5px;
-
-        i {
-          font-size: 1.5rem;
-          color: #E74C3C;
-          animation: flameFlicker 0.5s infinite alternate;
-
-          &:nth-child(2) {
-            animation-delay: 0.1s;
-          }
-
-          &:nth-child(3) {
-            animation-delay: 0.2s;
-          }
+        &:nth-child(3) {
+          animation-delay: 0.8s;
+          transform: rotate(10deg);
         }
       }
-
-      .streak-count {
-        color: white;
-        font-weight: 600;
-        margin-top: 5px;
-      }
     }
 
-    // Explanation content
-    .explanation-content, .correct-answer-section {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 15px;
-      border-radius: 10px;
-      margin: 0 0 20px;
-      text-align: right;
-      width: 100%;
-      animation: fadeUp 0.8s ease-out;
-
-      .explanation-title, .correct-answer-title {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1rem;
-        margin: 0 0 10px;
-      }
-
-      .explanation-text, .correct-answer-text {
-        color: white;
-        margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
+    .streak-count {
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
     }
+  }
 
-    // Correct answer section
-    .correct-answer-section {
-      .correct-answer-text {
-        color: #2ECC71;
-        font-weight: 500;
-      }
-    }
+  // Improved explanation content
+  .explanation-content,
+  .correct-answer-section {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin: 0 0 20px;
+    text-align: right;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    animation: contentFadeIn 0.8s ease-out 0.5s both;
+    border-right: 4px solid rgba(255, 255, 255, 0.2);
 
-    // Dismiss button
-    .dismiss-feedback {
-      padding: 12px 25px;
-      background: map-get(vars.$colors, 'accent', 'base');
-      color: map-get(vars.$colors, 'primary', 'dark');
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
+    .explanation-title {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.3rem;
+      margin: 0 0 15px;
       font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      animation: fadeUp 0.9s ease-out;
+      position: relative;
 
-      &:hover {
-        background: map-get(vars.$colors, 'accent', 'light');
-        transform: translateY(-2px);
-
-        i {
-          transform: translateX(-3px);
-        }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        right: 0;
+        width: 60px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.3);
       }
+    }
+
+    .explanation-text {
+      color: white;
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+  }
+
+  // Enhanced correct answer section
+  .correct-answer-section {
+    border-right: 4px solid rgba(46, 204, 113, 0.5);
+    margin-top: 15px;
+
+    .correct-answer-title {
+      color: #2ECC71;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        right: 0;
+        width: 80px;
+        height: 2px;
+        background: rgba(46, 204, 113, 0.5);
+      }
+    }
+
+    .correct-answer-text {
+      color: #00c853;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      display: inline-block;
+      padding: 6px 10px;
+      background: rgba(46, 204, 113, 0.1);
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+  }
+
+  // Enhanced dismiss button
+  .dismiss-feedback {
+    padding: 12px 25px;
+    background: map-get(vars.$colors, 'accent', 'base');
+    color: map-get(vars.$colors, 'primary', 'dark');
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    animation: buttonEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s both;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+
+    // Button highlight effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    // Pulsing arrow to indicate action
+    i {
+      transition: transform 0.3s ease;
+      animation: arrowPulse 1.5s infinite alternate;
+    }
+
+    &:hover {
+      background: map-get(vars.$colors, 'accent', 'light');
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+      i {
+        transform: translateX(-5px);
+        animation: none;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     }
   }
 }
 
-// Animations
+// Confetti effect for correct answers
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    animation: confettiFall 3s ease-out forwards;
+
+    &.square {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    &.triangle {
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    &.circle {
+      border-radius: 50%;
+    }
+  }
+}
+
+// ---------------
+// ANIMATIONS
+// ---------------
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
-@keyframes fadeUp {
+@keyframes modalSlideUp {
   from {
+    transform: translateY(40px);
     opacity: 0;
-    transform: translateY(20px);
   }
+
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
-@keyframes iconEnter {
-  from {
+@keyframes iconEntranceWithBounce {
+  0% {
     opacity: 0;
     transform: scale(0.5) rotate(-30deg);
   }
-  to {
+
+  50% {
+    transform: scale(1.2) rotate(5deg);
+  }
+
+  70% {
+    transform: scale(0.95) rotate(0deg);
+  }
+
+  100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
   }
 }
 
-@keyframes flameFlicker {
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pointsEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes streakEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconPulse {
   0% {
     transform: scale(1);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes flameFlicker {
+  0% {
+    transform: scaleY(1) rotate(0deg);
     opacity: 0.7;
   }
+
   100% {
-    transform: scale(1.1);
+    transform: scaleY(1.1) rotate(5deg);
     opacity: 1;
+  }
+}
+
+@keyframes flameBg {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes countUpPoints {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  80% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes arrowPulse {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(calc(100vh)) rotate(720deg);
+    opacity: 0;
   }
 }
 
 // Mobile optimizations
 @media (max-width: 768px) {
-  .feedback-modal .modal-content {
-    padding: 25px 20px;
-    
+  .feedback-modal-content {
+    padding: 30px 20px;
+
     .feedback-icon {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 15px;
-      
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+
       i {
-        font-size: 2.5rem;
+        font-size: 40px;
       }
     }
-    
+
     .feedback-title {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 12px;
     }
-    
+
     .points-award {
-      padding: 8px 20px;
-      margin: 8px 0 15px;
-      
+      padding: 10px 25px;
+      margin: 10px 0 20px;
+
       .points-value {
-        font-size: 1.7rem;
+        font-size: 2rem;
+      }
+
+      .points-label {
+        font-size: 1rem;
       }
     }
-    
-    .dismiss-feedback {
+
+    .streak-indicator {
       padding: 10px 20px;
-      font-size: 0.9rem;
+
+      .streak-flames i {
+        font-size: 1.8rem;
+      }
+
+      .streak-count {
+        font-size: 1.1rem;
+      }
+    }
+
+    .explanation-content,
+    .correct-answer-section {
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .dismiss-feedback {
+      padding: 12px 25px;
+      font-size: 1rem;
     }
   }
 }
 
-// Extreme landscape mode (very short height)
-@media (orientation: landscape) and (max-height: 500px) {
-  .feedback-modal .modal-content {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+// Landscape mode optimizations - improved based on screenshots
+@media (orientation: landscape) {
+  .feedback-modal-content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon title"
+      "explanation explanation"
+      "answer answer"
+      "button button";
     align-items: flex-start;
-    padding: 20px;
-    max-width: 90%;
-    
+    text-align: right;
+    gap: 15px 20px;
+    padding: 20px 25px;
+    max-height: 85vh;
+    overflow-y: auto;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+
     .feedback-icon {
-      width: 60px;
-      height: 60px;
+      grid-area: icon;
       margin-bottom: 0;
-      margin-right: 15px;
-      
+      width: 65px;
+      height: 65px;
+      margin-left: 15px;
+
       i {
-        font-size: 2rem;
+        font-size: 32px;
       }
     }
-    
+
     .feedback-title {
-      font-size: 1.3rem;
-      margin: 0;
+      grid-area: title;
       text-align: right;
+      margin: 0;
+      font-size: 2rem;
       align-self: center;
-      flex: 1;
     }
-    
+
     .points-award {
-      width: 100%;
-      order: 3;
-      margin: 10px 0;
+      display: none; // Hide in landscape to save space
     }
-    
+
     .streak-indicator {
-      width: 100%;
-      order: 4;
-      margin-bottom: 10px;
+      display: none; // Hide in landscape to save space
     }
-    
-    .explanation-content, .correct-answer-section {
-      width: 100%;
-      order: 5;
-      padding: 10px;
-      margin-bottom: 10px;
-      
-      .explanation-title, .correct-answer-title {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
+
+    .explanation-content {
+      grid-area: explanation;
+      margin: 5px 0 10px 0;
+      padding: 15px;
+    }
+
+    .correct-answer-section {
+      grid-area: answer;
+      margin: 0 0 10px 0;
+      padding: 15px;
+
+      .correct-answer-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
       }
-      
-      .explanation-text, .correct-answer-text {
-        font-size: 0.85rem;
+
+      .correct-answer-text {
+        font-size: 1.1rem;
       }
     }
-    
+
     .dismiss-feedback {
-      order: 10;
-      padding: 8px 15px;
-      font-size: 0.85rem;
-      margin-left: auto;
+      grid-area: button;
+      margin: 5px auto 0 auto;
+      padding: 10px 25px;
+      font-size: 1rem;
+      justify-self: center;
     }
+  }
+
+  // Fade out the overlay more in landscape to see the background better
+  .feedback-modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
   }
 }

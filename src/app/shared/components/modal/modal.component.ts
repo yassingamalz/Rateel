@@ -10,7 +10,9 @@ import {
   ElementRef,
   ViewChild,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -41,7 +43,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit, OnDestroy, OnChanges {
   @ViewChild('modalContent') modalContent!: ElementRef;
 
   @Input() isOpen = false;
@@ -62,6 +64,17 @@ export class ModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.isOpen) {
       this.preventBodyScroll();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // React to isOpen changes
+    if (changes['isOpen']) {
+      if (changes['isOpen'].currentValue) {
+        this.preventBodyScroll();
+      } else {
+        this.enableBodyScroll();
+      }
     }
   }
 
