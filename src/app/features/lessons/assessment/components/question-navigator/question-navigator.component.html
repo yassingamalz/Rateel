@@ -1,1 +1,49 @@
-<p>question-navigator works!</p>
+<!-- question-navigator.component.html -->
+<div class="question-nav">
+  <!-- Progress Bar and Counter -->
+  <div class="progress-container">
+    <div class="progress-counter">{{ currentQuestionIndex + 1 }}/{{ totalQuestions }}</div>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+    </div>
+  </div>
+  
+  <!-- Question Dots with Status Indicators -->
+  <div class="question-dots">
+    <div *ngFor="let question of questions; let i = index" 
+         class="question-dot"
+         [class.active]="isCurrentQuestion(i)"
+         [class.completed]="isAnswered(question.id)"
+         [class.correct]="getQuestionResult(question.id) === 'correct'"
+         [class.incorrect]="getQuestionResult(question.id) === 'incorrect'"
+         [class.locked]="i > 0 && !isQuestionUnlocked(i)"
+         (click)="isQuestionUnlocked(i) && goToQuestion(i)">
+      <div class="question-dot-inner">
+        <div *ngIf="isAnswered(question.id); else numberTemplate" class="question-icon">
+          <i *ngIf="getQuestionResult(question.id) === 'correct'" class="fas fa-check"></i>
+          <i *ngIf="getQuestionResult(question.id) === 'incorrect'" class="fas fa-times"></i>
+        </div>
+        <ng-template #numberTemplate>
+          <div class="question-number">{{ i + 1 }}</div>
+        </ng-template>
+      </div>
+      <div class="tooltip">{{ question.text | slice:0:30 }}{{ question.text.length > 30 ? '...' : '' }}</div>
+    </div>
+  </div>
+  
+  <!-- Navigation Arrows with Pulse Animation for Direction Hint -->
+  <div class="nav-buttons">
+    <button class="nav-btn prev-btn" 
+            [disabled]="isFirstQuestion()" 
+            [class.pulse-right]="!isFirstQuestion() && !showingPulseAnimation"
+            (click)="previousQuestion()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <button class="nav-btn next-btn" 
+            [disabled]="isLastQuestion()" 
+            [class.pulse-left]="!isLastQuestion() && showingPulseAnimation"
+            (click)="nextQuestion()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+</div>

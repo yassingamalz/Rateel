@@ -1,0 +1,85 @@
+// question-actions.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+
+.question-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &.submit-button {
+      background: map-get(vars.$colors, 'accent', 'base');
+      color: map-get(vars.$colors, 'primary', 'dark');
+
+      &:hover:not(:disabled) {
+        background: map-get(vars.$colors, 'accent', 'light');
+        transform: translateY(-2px);
+
+        i {
+          transform: translateX(-3px);
+        }
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &.next-button {
+      background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+      color: white;
+
+      &:hover {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        transform: translateY(-2px);
+
+        i {
+          transform: translateX(-3px);
+        }
+      }
+    }
+
+    &.finish-button {
+      background: map-get(vars.$colors, 'accent', 'base');
+      color: map-get(vars.$colors, 'primary', 'dark');
+
+      &:hover {
+        background: map-get(vars.$colors, 'accent', 'light');
+        transform: translateY(-2px);
+
+        i {
+          transform: translateX(-3px);
+        }
+      }
+    }
+  }
+}
+
+// Mobile optimizations
+@media (orientation: landscape) and (max-height: 600px) {
+  .question-actions {
+    margin-top: 10px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
