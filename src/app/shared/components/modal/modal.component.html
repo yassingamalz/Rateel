@@ -1,0 +1,21 @@
+<!-- src/app/shared/components/modal/modal.component.html -->
+<div *ngIf="isOpen" class="modal-wrapper" [@modalAnimation] dir="rtl">
+    <div class="modal-overlay" (click)="onBackdropClick($event)"></div>
+    
+    <div class="modal-container" 
+         [ngClass]="[size, position, customClass]" 
+         [@contentAnimation]
+         #modalContent>
+         
+      <button *ngIf="showCloseButton" 
+              class="modal-close-btn" 
+              (click)="close()" 
+              aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>

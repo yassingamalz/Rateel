@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     LoadingComponent,
     ComingSoonComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
   exports: [
     LoadingComponent,
     ComingSoonComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ModalComponent
   ]
 })
 export class SharedModule { }
