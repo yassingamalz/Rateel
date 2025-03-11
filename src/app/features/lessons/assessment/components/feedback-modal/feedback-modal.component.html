@@ -1,1 +1,55 @@
-<p>feedback-modal works!</p>
+<!-- src/app/features/lessons/assessment/components/feedback-modal/feedback-modal.component.html -->
+<div class="feedback-modal" [@modalAnimation] dir="rtl">
+    <div class="modal-overlay" (click)="onDismiss()"></div>
+    
+    <div class="modal-content" 
+         [class.feedback-correct]="questionResult === 'correct'" 
+         [class.feedback-incorrect]="questionResult === 'incorrect'">
+         
+      <!-- Feedback Icon -->
+      <div class="feedback-icon" [@iconBounce]="iconState">
+        <i class="fas" 
+           [class.fa-check-circle]="questionResult === 'correct'"
+           [class.fa-times-circle]="questionResult === 'incorrect'"></i>
+      </div>
+      
+      <!-- Feedback Title -->
+      <h3 class="feedback-title">
+        {{ questionResult === 'correct' ? 'إجابة صحيحة!' : 'إجابة خاطئة' }}
+      </h3>
+      
+      <!-- Points Award (only for correct answers) -->
+      <div class="points-award" *ngIf="questionResult === 'correct'">
+        <div class="points-value">+{{ earnedPoints }}</div>
+        <div class="points-label">نقطة</div>
+      </div>
+      
+      <!-- Streak indicator for correct answers -->
+      <div class="streak-indicator" *ngIf="currentStreak > 1 && questionResult === 'correct'">
+        <div class="streak-flames">
+          <i class="fas fa-fire"></i>
+          <i class="fas fa-fire"></i>
+          <i class="fas fa-fire"></i>
+        </div>
+        <div class="streak-count">{{ currentStreak }} إجابات متتالية!</div>
+      </div>
+  
+      <!-- Explanation section if available -->
+      <div class="explanation-content" *ngIf="question?.explanation">
+        <h4 class="explanation-title">الشرح:</h4>
+        <p class="explanation-text">{{ question!.explanation }}</p>
+      </div>
+      
+      <!-- If incorrect, show correct answer -->
+      <div class="correct-answer-section" *ngIf="questionResult === 'incorrect'">
+        <h4 class="correct-answer-title">الإجابة الصحيحة:</h4>
+        <p class="correct-answer-text">{{ getCorrectAnswerText() }}</p>
+      </div>
+  
+      <!-- Dismiss button -->
+      <button class="dismiss-feedback" (click)="onDismiss()">
+        <span>متابعة</span>
+        <i class="fas fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>

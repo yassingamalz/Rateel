@@ -1,0 +1,347 @@
+// src/app/features/lessons/assessment/components/feedback-modal/feedback-modal.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Modal overlay
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  // Modal content
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.85);
+    border-radius: 15px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1001;
+    
+    // Different styling for correct and incorrect answers
+    &.feedback-correct {
+      border-top: 4px solid #27AE60;
+
+      .feedback-icon {
+        background: #27AE60;
+        box-shadow: 0 0 20px rgba(39, 174, 96, 0.4);
+      }
+    }
+
+    &.feedback-incorrect {
+      border-top: 4px solid #E74C3C;
+
+      .feedback-icon {
+        background: #E74C3C;
+        box-shadow: 0 0 20px rgba(231, 76, 60, 0.4);
+      }
+    }
+
+    // Feedback icon
+    .feedback-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      animation: iconEnter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      i {
+        font-size: 3rem;
+        color: white;
+      }
+    }
+
+    // Title styling
+    .feedback-title {
+      font-size: 1.8rem;
+      color: white;
+      margin: 0 0 15px;
+      font-weight: 700;
+      animation: fadeUp 0.5s ease-out;
+    }
+
+    // Points styling
+    .points-award {
+      background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+      border-radius: 15px;
+      padding: 10px 25px;
+      margin: 10px 0 20px;
+      animation: fadeUp 0.6s ease-out;
+
+      .points-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: map-get(vars.$colors, 'accent', 'light');
+      }
+
+      .points-label {
+        font-size: 1rem;
+        color: map-get(vars.$colors, 'text', 'muted');
+      }
+    }
+
+    // Streak indicator
+    .streak-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      animation: fadeUp 0.7s ease-out;
+
+      .streak-flames {
+        display: flex;
+        gap: 5px;
+
+        i {
+          font-size: 1.5rem;
+          color: #E74C3C;
+          animation: flameFlicker 0.5s infinite alternate;
+
+          &:nth-child(2) {
+            animation-delay: 0.1s;
+          }
+
+          &:nth-child(3) {
+            animation-delay: 0.2s;
+          }
+        }
+      }
+
+      .streak-count {
+        color: white;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+    }
+
+    // Explanation content
+    .explanation-content, .correct-answer-section {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 0 0 20px;
+      text-align: right;
+      width: 100%;
+      animation: fadeUp 0.8s ease-out;
+
+      .explanation-title, .correct-answer-title {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        margin: 0 0 10px;
+      }
+
+      .explanation-text, .correct-answer-text {
+        color: white;
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+    }
+
+    // Correct answer section
+    .correct-answer-section {
+      .correct-answer-text {
+        color: #2ECC71;
+        font-weight: 500;
+      }
+    }
+
+    // Dismiss button
+    .dismiss-feedback {
+      padding: 12px 25px;
+      background: map-get(vars.$colors, 'accent', 'base');
+      color: map-get(vars.$colors, 'primary', 'dark');
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      animation: fadeUp 0.9s ease-out;
+
+      &:hover {
+        background: map-get(vars.$colors, 'accent', 'light');
+        transform: translateY(-2px);
+
+        i {
+          transform: translateX(-3px);
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes flameFlicker {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+// Mobile optimizations
+@media (max-width: 768px) {
+  .feedback-modal .modal-content {
+    padding: 25px 20px;
+    
+    .feedback-icon {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
+      
+      i {
+        font-size: 2.5rem;
+      }
+    }
+    
+    .feedback-title {
+      font-size: 1.5rem;
+    }
+    
+    .points-award {
+      padding: 8px 20px;
+      margin: 8px 0 15px;
+      
+      .points-value {
+        font-size: 1.7rem;
+      }
+    }
+    
+    .dismiss-feedback {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Extreme landscape mode (very short height)
+@media (orientation: landscape) and (max-height: 500px) {
+  .feedback-modal .modal-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    max-width: 90%;
+    
+    .feedback-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0;
+      margin-right: 15px;
+      
+      i {
+        font-size: 2rem;
+      }
+    }
+    
+    .feedback-title {
+      font-size: 1.3rem;
+      margin: 0;
+      text-align: right;
+      align-self: center;
+      flex: 1;
+    }
+    
+    .points-award {
+      width: 100%;
+      order: 3;
+      margin: 10px 0;
+    }
+    
+    .streak-indicator {
+      width: 100%;
+      order: 4;
+      margin-bottom: 10px;
+    }
+    
+    .explanation-content, .correct-answer-section {
+      width: 100%;
+      order: 5;
+      padding: 10px;
+      margin-bottom: 10px;
+      
+      .explanation-title, .correct-answer-title {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+      
+      .explanation-text, .correct-answer-text {
+        font-size: 0.85rem;
+      }
+    }
+    
+    .dismiss-feedback {
+      order: 10;
+      padding: 8px 15px;
+      font-size: 0.85rem;
+      margin-left: auto;
+    }
+  }
+}

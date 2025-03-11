@@ -1,1 +1,56 @@
-<p>completion-modal works!</p>
+<!-- src/app/features/lessons/assessment/components/completion-modal/completion-modal.component.html -->
+<div class="completion-modal" [@modalAnimation] dir="rtl">
+  <div class="modal-overlay"></div>
+  
+  <div class="animation-container" [@itemsAnimation]>
+    <!-- Animated particles -->
+    <div class="completion-particles" [@particles]>
+      <div *ngFor="let particle of particles" class="particle"
+           [style.--tx]="particle.tx"
+           [style.--ty]="particle.ty"
+           [style.width]="particle.size"
+           [style.height]="particle.size"
+           [style.animation-delay]="particle.delay"
+           [style.background-color]="particle.color">
+      </div>
+    </div>
+    
+    <!-- Completion message -->
+    <div class="completion-message" [@contentAnimation]>
+      <i class="animated-item fa-check-circle" 
+         [class.fas]="isPassed" 
+         [class.far]="!isPassed"></i>
+      
+      <div class="animated-item completion-title">مبروك!</div>
+      
+      <div class="animated-item completion-subtitle">
+        {{ isPassed ? 'لقد أكملت الاختبار بنجاح!' : 'لقد أكملت الاختبار' }}
+      </div>
+      
+      <div class="animated-item completion-score">{{ score }}%</div>
+      
+      <div class="animated-item completion-points">
+        <i class="fas fa-star"></i>
+        <span>{{ totalPoints }} نقطة</span>
+      </div>
+      
+      <!-- Success message for passing -->
+      <div *ngIf="isPassed" class="animated-item success-message">
+        <i class="fas fa-trophy"></i>
+        <p>أحسنت! لقد تجاوزت درجة النجاح وأكملت هذا الاختبار بنجاح.</p>
+      </div>
+      
+      <!-- Different message for not passing -->
+      <div *ngIf="!isPassed" class="animated-item try-again-message">
+        <i class="fas fa-redo"></i>
+        <p>حاول مرة أخرى للحصول على درجة أعلى!</p>
+      </div>
+      
+      <!-- Continue button appears after animation completes -->
+      <button *ngIf="animationComplete" class="animated-item continue-button" (click)="onComplete()">
+        <span>متابعة</span>
+        <i class="fas fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+</div>

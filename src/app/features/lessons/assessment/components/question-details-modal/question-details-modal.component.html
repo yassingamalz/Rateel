@@ -1,1 +1,68 @@
-<p>question-details-modal works!</p>
+<!-- src/app/features/lessons/assessment/components/question-details-modal/question-details-modal.component.html -->
+<div class="question-details-modal" [@modalAnimation] dir="rtl">
+  <div class="modal-overlay" (click)="onClose()"></div>
+  
+  <div class="modal-content" [@contentAnimation]>
+    <!-- Close button -->
+    <button class="close-modal" (click)="onClose()">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="modal-body" *ngIf="question">
+      <!-- Question number and title -->
+      <h3 class="modal-title">السؤال {{ questionIndex! + 1 }}</h3>
+      <p class="modal-question">{{ question.text }}</p>
+      
+      <!-- Question media (if available) -->
+      <div class="question-media" *ngIf="question.imageUrl || question.audioUrl">
+        <div class="media-container">
+          <img *ngIf="question.imageUrl" [src]="question.imageUrl" 
+               alt="Question Image" class="question-image" loading="lazy">
+          <audio *ngIf="question.audioUrl" controls class="question-audio">
+            <source [src]="question.audioUrl" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+      
+      <!-- Answer results -->
+      <div class="modal-answer" 
+           [class.correct]="questionResult === 'correct'"
+           [class.incorrect]="questionResult === 'incorrect'">
+        
+        <!-- Result header with icon -->
+        <div class="answer-header">
+          <i class="fas" 
+             [class.fa-check-circle]="questionResult === 'correct'"
+             [class.fa-times-circle]="questionResult === 'incorrect'"></i>
+          <span>{{ questionResult === 'correct' ? 'إجابة صحيحة' : 'إجابة خاطئة' }}</span>
+        </div>
+        
+        <!-- User's answer -->
+        <div class="user-answer" [@highlightAnimation]="highlightState">
+          <span class="label">إجابتك:</span>
+          <div class="answer-content">{{ getUserAnswerText() }}</div>
+        </div>
+        
+        <!-- Correct answer (only show if user was wrong) -->
+        <div class="correct-answer" *ngIf="questionResult === 'incorrect'">
+          <span class="label">الإجابة الصحيحة:</span>
+          <div class="answer-content">{{ getCorrectAnswerText() }}</div>
+        </div>
+        
+        <!-- Explanation (if available) -->
+        <div class="explanation" *ngIf="question.explanation">
+          <span class="label">الشرح:</span>
+          <div class="explanation-content">{{ question.explanation }}</div>
+        </div>
+      </div>
+      
+      <!-- Close button at bottom -->
+      <div class="action-buttons">
+        <button class="done-button" (click)="onClose()">
+          <span>إغلاق</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,341 @@
+// src/app/features/lessons/assessment/components/completion-modal/completion-modal.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+
+.completion-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Modal overlay
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1001;
+  }
+
+  // Animation container
+  .animation-container {
+    position: relative;
+    z-index: 1002;
+    
+    // Particles animation
+    .completion-particles {
+      position: absolute;
+      inset: -200px;
+      pointer-events: none;
+      
+      .particle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        filter: blur(1px);
+        animation: particle 3s ease-out forwards;
+      }
+    }
+    
+    // Completion message
+    .completion-message {
+      background: rgba(map-get(vars.$colors, 'primary', 'base'), 0.9);
+      padding: 35px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      min-width: 320px;
+      
+      i.fa-check-circle {
+        font-size: 5rem;
+        color: map-get(vars.$colors, 'accent', 'light');
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+      }
+      
+      .completion-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 10px;
+      }
+      
+      .completion-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 20px;
+      }
+      
+      .completion-score {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: map-get(vars.$colors, 'accent', 'base');
+        margin-bottom: 10px;
+        text-shadow: 0 0 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+      }
+      
+      .completion-points {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        
+        i {
+          font-size: 1.5rem;
+          color: gold;
+          animation: starPulse 1.5s infinite alternate;
+        }
+        
+        span {
+          color: white;
+          font-weight: 600;
+          font-size: 1.2rem;
+        }
+      }
+      
+      .success-message, .try-again-message {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        border-radius: 10px;
+        margin: 0 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        
+        i {
+          font-size: 2rem;
+          margin-bottom: 10px;
+        }
+        
+        i.fa-trophy {
+          color: gold;
+          animation: trophyShine 2s infinite alternate;
+        }
+        
+        i.fa-redo {
+          color: #3498DB;
+        }
+        
+        p {
+          color: white;
+          margin: 0;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+      }
+      
+      .continue-button {
+        padding: 12px 30px;
+        background: map-get(vars.$colors, 'accent', 'base');
+        color: map-get(vars.$colors, 'primary', 'dark');
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        animation: buttonPulse 2s infinite;
+        
+        &:hover {
+          background: map-get(vars.$colors, 'accent', 'light');
+          transform: translateY(-2px);
+          animation: none;
+          
+          i {
+            transform: translateX(-3px);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes particle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes starPulse {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes trophyShine {
+  0% {
+    text-shadow: 0 0 5px gold;
+    transform: rotate(-5deg);
+  }
+  50% {
+    text-shadow: 0 0 15px gold, 0 0 30px rgba(255, 215, 0, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 5px gold;
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 10px rgba(map-get(vars.$colors, 'accent', 'base'), 0);
+  }
+}
+
+// Mobile optimizations
+@media (max-width: 768px) {
+  .completion-modal .animation-container .completion-message {
+    padding: 25px;
+    min-width: 280px;
+    
+    i.fa-check-circle {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+    
+    .completion-title {
+      font-size: 2rem;
+    }
+    
+    .completion-subtitle {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    
+    .completion-score {
+      font-size: 3rem;
+    }
+    
+    .completion-points {
+      padding: 8px 15px;
+      
+      i {
+        font-size: 1.2rem;
+      }
+      
+      span {
+        font-size: 1rem;
+      }
+    }
+    
+    .continue-button {
+      padding: 10px 25px;
+      font-size: 1rem;
+    }
+  }
+}
+
+// Extreme landscape mode (very short height)
+@media (orientation: landscape) and (max-height: 500px) {
+  .completion-modal .animation-container .completion-message {
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    
+    i.fa-check-circle {
+      font-size: 3rem;
+      margin-bottom: 0;
+      margin-right: 15px;
+    }
+    
+    .completion-title {
+      font-size: 1.5rem;
+      margin-bottom: 0;
+      margin-right: auto;
+    }
+    
+    .completion-subtitle {
+      width: 100%;
+      order: 10;
+      margin: 10px 0;
+      text-align: center;
+    }
+    
+    .completion-score {
+      font-size: 2.5rem;
+      margin: 0 15px;
+    }
+    
+    .completion-points {
+      margin-bottom: 0;
+    }
+    
+    .success-message, .try-again-message {
+      width: 100%;
+      order: 20;
+      flex-direction: row;
+      align-items: center;
+      text-align: right;
+      gap: 10px;
+      padding: 10px;
+      
+      i {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+      }
+    }
+    
+    .continue-button {
+      order: 30;
+      margin-top: 15px;
+      margin-left: auto;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
