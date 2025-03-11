@@ -1,0 +1,103 @@
+<!-- Updated assessment-results.component.html -->
+<div class="assessment-results" [@fadeInOut]>
+  <!-- Score and Summary Section - Fixed at top -->
+  <div class="results-header">
+    <h2 class="results-title" [@scaleIn]>نتائج الاختبار</h2>
+    
+    <div class="results-summary">
+      <!-- Score circle -->
+      <div class="score-circle" 
+          [class.score-passed]="isPassed()"
+          [class.score-failed]="!isPassed()"
+          [@scaleIn]>
+        <svg viewBox="0 0 100 100">
+          <circle class="score-circle-bg" cx="50" cy="50" r="45"/>
+          <circle class="score-circle-fill" cx="50" cy="50" r="45" 
+                 [style.stroke-dasharray]="getScoreCircleValue()"/>
+        </svg>
+        <div class="score-value">{{ score }}%</div>
+      </div>
+      
+      <!-- Results message -->
+      <div class="results-message" [@scaleIn]>
+        <ng-container *ngIf="isPassed()">
+          <i class="fas fa-trophy"></i>
+          <h3>أحسنت! لقد اجتزت الاختبار بنجاح.</h3>
+        </ng-container>
+        <ng-container *ngIf="!isPassed()">
+          <i class="fas fa-exclamation-circle"></i>
+          <h3>لم تتمكن من اجتياز الاختبار. يمكنك المحاولة مرة أخرى.</h3>
+        </ng-container>
+      </div>
+    </div>
+    
+    <!-- Performance Stats -->
+    <div class="performance-stats">
+      <div class="stat-item" [@scaleIn]>
+        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-value">{{ correctAnswers }}</div>
+        <div class="stat-label">إجابات صحيحة</div>
+      </div>
+      <div class="stat-item" [@scaleIn]>
+        <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+        <div class="stat-value">{{ incorrectAnswers }}</div>
+        <div class="stat-label">إجابات خاطئة</div>
+      </div>
+      <div class="stat-item" [@scaleIn]>
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div class="stat-value">{{ totalPoints }}</div>
+        <div class="stat-label">مجموع النقاط</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable Content Area -->
+  <div class="scrollable-content">
+    <!-- Question Results -->
+    <div class="results-breakdown">
+      <h3 class="breakdown-title">تفاصيل الإجابات</h3>
+
+      <div class="questions-summary">
+        <div *ngFor="let question of content?.questions; let i = index"
+            class="question-result-item"
+            [class.result-correct]="getQuestionResult(question.id) === 'correct'"
+            [class.result-incorrect]="getQuestionResult(question.id) === 'incorrect'"
+            (click)="showQuestionDetails(i)"
+            [@fadeInOut]>
+          <div class="question-result-number">{{ i + 1 }}</div>
+          <div class="question-result-text">{{ question.text | slice:0:60 }}{{
+            question.text.length > 60 ? '...' : '' }}</div>
+          <div class="question-result-icon">
+            <i class="fas" 
+                [class.fa-check]="getQuestionResult(question.id) === 'correct'"
+                [class.fa-times]="getQuestionResult(question.id) === 'incorrect'"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="recommendations-section" *ngIf="recommendations.length > 0">
+      <h3 class="recommendations-title">توصيات للتحسين</h3>
+      <div class="recommendations-list">
+        <div *ngFor="let rec of recommendations" class="recommendation-item" [@fadeInOut]>
+          <i class="fas fa-lightbulb"></i>
+          <span>{{ rec }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Action Buttons -->
+  <div class="results-actions">
+    <button class="restart-button" (click)="restart()">
+      <i class="fas fa-redo"></i>
+      <span>إعادة الاختبار</span>
+    </button>
+
+    <button class="complete-button" (click)="complete()">
+      <i class="fas fa-check"></i>
+      <span>إنهاء الدرس</span>
+    </button>
+  </div>
+</div>

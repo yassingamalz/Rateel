@@ -9,6 +9,7 @@ import { FeedbackModalComponent } from './components/feedback-modal/feedback-mod
 import { CompletionModalComponent } from './components/completion-modal/completion-modal.component';
 import { QuestionDetailsModalComponent } from './components/question-details-modal/question-details-modal.component';
 import { QuestionActionsComponent } from './components/question-actions/question-actions.component';
+import { AssessmentResultsComponent } from './components/assessment-results/assessment-results.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { QuestionActionsComponent } from './components/question-actions/question
     CompletionModalComponent,
     QuestionDetailsModalComponent,
     QuestionActionsComponent,
+    AssessmentResultsComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { QuestionActionsComponent } from './components/question-actions/question
     FeedbackModalComponent,
     CompletionModalComponent,
     QuestionDetailsModalComponent,
+    AssessmentResultsComponent
   ]
 })
 export class AssessmentModule { }
