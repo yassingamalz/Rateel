@@ -1,4 +1,4 @@
-// Enhanced feedback-modal.component.scss
+// Complete feedback-modal.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 
@@ -40,10 +40,10 @@
 .feedback-modal-content {
   position: relative;
   z-index: 1000001;
-  max-width: 500px;
+  max-width: 450px;
   width: 90%;
   border-radius: 20px;
-  padding: 30px 25px;
+  padding: 25px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,10 +146,70 @@
   .feedback-title {
     font-size: 2.2rem;
     color: white;
-    margin: 0 0 15px;
+    margin: 0 0 10px;
     font-weight: 700;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     animation: titleEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+  }
+
+  .answer-display {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 10px 0 15px;
+    background: rgba(27, 67, 50, 0.7);
+    /* Darker background for better contrast */
+    border-radius: 10px;
+    animation: contentFadeIn 0.8s ease-out 0.5s both;
+    position: relative;
+    overflow: hidden;
+    border-right: 3px solid #2ECC71;
+    /* Green accent border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    /* Better shadow for depth */
+
+    /* Add subtle highlight effect */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to left,
+          rgba(46, 204, 113, 0.2),
+          rgba(46, 204, 113, 0.05) 30%,
+          transparent 60%);
+      z-index: 0;
+    }
+  }
+
+  .answer-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* Position above the gradient */
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    /* Subtle text shadow for readability */
+    text-align: right;
+    /* Right-align for RTL */
+  }
+
+  // Explanation text that matches the screenshot
+  .explanation-text {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin: 0 0 15px;
+    text-align: right;
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    animation: contentFadeIn 0.8s ease-out 0.5s both;
   }
 
   // Improved points styling with better visualization
@@ -258,81 +318,6 @@
     }
   }
 
-  // Improved explanation content
-  .explanation-content,
-  .correct-answer-section {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px 20px;
-    border-radius: 12px;
-    margin: 0 0 20px;
-    text-align: right;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    animation: contentFadeIn 0.8s ease-out 0.5s both;
-    border-right: 4px solid rgba(255, 255, 255, 0.2);
-
-    .explanation-title {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.3rem;
-      margin: 0 0 15px;
-      font-weight: 600;
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        right: 0;
-        width: 60px;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.3);
-      }
-    }
-
-    .explanation-text {
-      color: white;
-      margin: 0;
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-  }
-
-  // Enhanced correct answer section
-  .correct-answer-section {
-    border-right: 4px solid rgba(46, 204, 113, 0.5);
-    margin-top: 15px;
-
-    .correct-answer-title {
-      color: #2ECC71;
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        right: 0;
-        width: 80px;
-        height: 2px;
-        background: rgba(46, 204, 113, 0.5);
-      }
-    }
-
-    .correct-answer-text {
-      color: #00c853;
-      font-weight: 600;
-      font-size: 1.1rem;
-      position: relative;
-      display: inline-block;
-      padding: 6px 10px;
-      background: rgba(46, 204, 113, 0.1);
-      border-radius: 6px;
-      margin-top: 5px;
-    }
-  }
-
   // Enhanced dismiss button
   .dismiss-feedback {
     padding: 12px 25px;
@@ -351,7 +336,7 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    margin-top: 20px;
+    margin-top: 10px;
 
     // Button highlight effect
     &::before {
@@ -627,26 +612,41 @@
 // Mobile optimizations
 @media (max-width: 768px) {
   .feedback-modal-content {
-    padding: 30px 20px;
+    padding: 25px 15px;
 
     .feedback-icon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 20px;
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
 
       i {
-        font-size: 40px;
+        font-size: 35px;
       }
     }
 
     .feedback-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .answer-display {
+      padding: 12px 15px;
+      border-right-width: 2px;
+    }
+
+    .answer-text {
+      font-size: 1.1rem;
+    }
+
+    .explanation-text {
+      padding: 12px 15px;
+      font-size: 0.9rem;
       margin-bottom: 12px;
     }
 
     .points-award {
       padding: 10px 25px;
-      margin: 10px 0 20px;
+      margin: 10px 0 15px;
 
       .points-value {
         font-size: 2rem;
@@ -659,6 +659,7 @@
 
     .streak-indicator {
       padding: 10px 20px;
+      margin-bottom: 15px;
 
       .streak-flames i {
         font-size: 1.8rem;
@@ -669,48 +670,42 @@
       }
     }
 
-    .explanation-content,
-    .correct-answer-section {
-      padding: 15px;
-      margin-bottom: 20px;
-    }
-
     .dismiss-feedback {
-      padding: 12px 25px;
+      padding: 10px 20px;
       font-size: 1rem;
     }
   }
 }
 
-// Landscape mode optimizations - improved based on screenshots
-@media (orientation: landscape) {
+// Landscape mode optimizations
+@media (orientation: landscape) and (max-height: 600px) {
   .feedback-modal-content {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-areas:
       "icon title"
-      "explanation explanation"
       "answer answer"
+      "explanation explanation"
       "button button";
     align-items: flex-start;
     text-align: right;
-    gap: 15px 20px;
-    padding: 20px 25px;
+    gap: 10px 15px;
+    padding: 20px 15px;
     max-height: 85vh;
     overflow-y: auto;
     width: 80%;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
 
     .feedback-icon {
       grid-area: icon;
       margin-bottom: 0;
-      width: 65px;
-      height: 65px;
+      width: 60px;
+      height: 60px;
       margin-left: 15px;
 
       i {
-        font-size: 32px;
+        font-size: 30px;
       }
     }
 
@@ -718,8 +713,26 @@
       grid-area: title;
       text-align: right;
       margin: 0;
-      font-size: 2rem;
+      font-size: 1.8rem;
       align-self: center;
+    }
+
+    .answer-display {
+      grid-area: answer;
+      padding: 10px 15px;
+      margin: 5px 0;
+      grid-area: answer;
+    }
+
+    .answer-text {
+      font-size: 1rem;
+    }
+
+    .explanation-text {
+      grid-area: explanation;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      margin: 0 0 5px;
     }
 
     .points-award {
@@ -730,32 +743,11 @@
       display: none; // Hide in landscape to save space
     }
 
-    .explanation-content {
-      grid-area: explanation;
-      margin: 5px 0 10px 0;
-      padding: 15px;
-    }
-
-    .correct-answer-section {
-      grid-area: answer;
-      margin: 0 0 10px 0;
-      padding: 15px;
-
-      .correct-answer-title {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-      }
-
-      .correct-answer-text {
-        font-size: 1.1rem;
-      }
-    }
-
     .dismiss-feedback {
       grid-area: button;
-      margin: 5px auto 0 auto;
-      padding: 10px 25px;
-      font-size: 1rem;
+      margin: 5px auto 0;
+      padding: 8px 20px;
+      font-size: 0.9rem;
       justify-self: center;
     }
   }

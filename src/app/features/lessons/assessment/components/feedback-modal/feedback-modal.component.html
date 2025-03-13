@@ -1,4 +1,4 @@
-<!-- Enhanced feedback-modal.component.html -->
+<!-- Complete feedback-modal.component.html -->
 <div class="feedback-modal-wrapper" dir="rtl">
   <div class="feedback-modal-overlay"></div>
 
@@ -17,6 +17,16 @@
       {{ questionResult === 'correct' ? 'إجابة صحيحة!' : 'إجابة خاطئة' }}
     </h3>
 
+    <!-- Direct correct answer display for incorrect answers -->
+    <div class="answer-display" *ngIf="questionResult === 'incorrect'">
+      <p class="answer-text">{{ correctAnswerText }}</p>
+    </div>
+
+    <!-- Explanation text (if available) -->
+    <p class="explanation-text" *ngIf="question?.explanation">
+      {{ question?.explanation }}
+    </p>
+
     <!-- Points Award (only for correct answers) -->
     <div class="points-award" *ngIf="questionResult === 'correct'">
       <div class="points-value">+{{ earnedPoints }}</div>
@@ -33,19 +43,7 @@
       <div class="streak-count">{{ currentStreak }} إجابات متتالية!</div>
     </div>
 
-    <!-- Explanation section if available -->
-    <div class="explanation-content" *ngIf="question?.explanation">
-      <h4 class="explanation-title">الشرح:</h4>
-      <p class="explanation-text">{{ question?.explanation }}</p>
-    </div>
-
-    <!-- Correct answer section for incorrect answers -->
-    <div class="correct-answer-section" *ngIf="questionResult === 'incorrect'">
-      <h4 class="correct-answer-title">الإجابة الصحيحة:</h4>
-      <p class="correct-answer-text">{{ correctAnswerText || 'لا توجد إجابة متاحة' }}</p>
-    </div>
-
-    <!-- Dismiss button with pulse animation -->
+    <!-- Dismiss button -->
     <button class="dismiss-feedback" (click)="onDismiss()">
       <span>متابعة</span>
       <i class="fas fa-arrow-left"></i>
