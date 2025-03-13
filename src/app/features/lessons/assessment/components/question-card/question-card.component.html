@@ -5,10 +5,14 @@
     <div class="card-header">
       <!-- Question Number Badge -->
       <div class="question-badge">{{ currentQuestionIndex + 1 }}</div>
-      
+
       <!-- Question Text aligned horizontally with the number -->
-      <h3 class="question-text">{{ currentQuestion.text }}</h3>
-      
+      <div class="question-text">
+        {{ currentQuestion.text }}
+        <span *ngIf="currentQuestion.type === QuestionType.MULTIPLE_CHOICE" class="multiple-choice-indicator">(اختر أكثر
+          من إجابة)</span>
+      </div>
+
       <!-- Points badge moved to top right corner -->
       <div class="points-badge" *ngIf="!isAnswered(currentQuestion.id)">
         <i class="fas fa-star"></i>
@@ -21,8 +25,8 @@
       <!-- Question Media (Image or Audio) -->
       <div class="question-media" *ngIf="currentQuestion.imageUrl || currentQuestion.audioUrl">
         <div class="media-container">
-          <img *ngIf="currentQuestion.imageUrl" [src]="currentQuestion.imageUrl" 
-               alt="Question Image" class="question-image" loading="lazy">
+          <img *ngIf="currentQuestion.imageUrl" [src]="currentQuestion.imageUrl" alt="Question Image"
+            class="question-image" loading="lazy">
           <audio *ngIf="currentQuestion.audioUrl" controls class="question-audio">
             <source [src]="currentQuestion.audioUrl" type="audio/mpeg">
             Your browser does not support the audio element.
@@ -36,14 +40,16 @@
         <ng-container *ngIf="currentQuestion.type === QuestionType.SINGLE_CHOICE">
           <div class="option-list">
             <div *ngFor="let option of currentQuestion.options" class="option-item"
-                [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
-                [class.correct]="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"
-                [class.incorrect]="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"
-                (click)="onOptionSelected(currentQuestion.id, option.id)">
-                              <div class="option-marker">
+              [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
+              [class.correct]="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"
+              [class.incorrect]="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"
+              (click)="onOptionSelected(currentQuestion.id, option.id)">
+              <div class="option-marker">
                 <div class="radio-circle"></div>
-                <i class="fas fa-check" *ngIf="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"></i>
-                <i class="fas fa-times" *ngIf="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"></i>
+                <i class="fas fa-check"
+                  *ngIf="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"></i>
+                <i class="fas fa-times"
+                  *ngIf="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"></i>
                 <div class="ripple-effect" *ngIf="isOptionSelected(currentQuestion.id, option.id)"></div>
               </div>
               <div class="option-text">{{ option.text }}</div>
@@ -54,16 +60,17 @@
         <!-- Multiple choice -->
         <ng-container *ngIf="currentQuestion.type === QuestionType.MULTIPLE_CHOICE">
           <div class="option-list">
-            <div *ngFor="let option of currentQuestion.options"
-                class="option-item option-item--checkbox"
-                [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
-                [class.correct]="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"
-                [class.incorrect]="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"
-                (click)="onMultipleOptionSelected(currentQuestion.id, option.id, !isOptionSelected(currentQuestion.id, option.id))">
+            <div *ngFor="let option of currentQuestion.options" class="option-item option-item--checkbox"
+              [class.selected]="isOptionSelected(currentQuestion.id, option.id)"
+              [class.correct]="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"
+              [class.incorrect]="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"
+              (click)="onMultipleOptionSelected(currentQuestion.id, option.id, !isOptionSelected(currentQuestion.id, option.id))">
               <div class="option-marker">
                 <div class="checkbox"></div>
-                <i class="fas fa-check" *ngIf="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"></i>
-                <i class="fas fa-times" *ngIf="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"></i>
+                <i class="fas fa-check"
+                  *ngIf="isAnswered(currentQuestion.id) && isCorrectOption(currentQuestion, option.id)"></i>
+                <i class="fas fa-times"
+                  *ngIf="isAnswered(currentQuestion.id) && isIncorrectSelectedOption(currentQuestion.id, option.id)"></i>
               </div>
               <div class="option-text">{{ option.text }}</div>
             </div>
@@ -73,19 +80,17 @@
         <!-- True/False -->
         <ng-container *ngIf="currentQuestion.type === QuestionType.TRUE_FALSE">
           <div class="true-false-buttons">
-            <button class="true-button"
-                [class.selected]="isOptionSelected(currentQuestion.id, 'true')"
-                [class.correct]="isAnswered(currentQuestion.id) && 'true' === currentQuestion.correctAnswer"
-                [class.incorrect]="isAnswered(currentQuestion.id) && isOptionSelected(currentQuestion.id, 'true') && 'true' !== currentQuestion.correctAnswer"
-                (click)="onTrueFalseSelected(currentQuestion.id, true)">
+            <button class="true-button" [class.selected]="isOptionSelected(currentQuestion.id, 'true')"
+              [class.correct]="isAnswered(currentQuestion.id) && 'true' === currentQuestion.correctAnswer"
+              [class.incorrect]="isAnswered(currentQuestion.id) && isOptionSelected(currentQuestion.id, 'true') && 'true' !== currentQuestion.correctAnswer"
+              (click)="onTrueFalseSelected(currentQuestion.id, true)">
               <i class="fas fa-check"></i>
               <span>صحيح</span>
             </button>
-            <button class="false-button"
-                [class.selected]="isOptionSelected(currentQuestion.id, 'false')"
-                [class.correct]="isAnswered(currentQuestion.id) && 'false' === currentQuestion.correctAnswer"
-                [class.incorrect]="isAnswered(currentQuestion.id) && isOptionSelected(currentQuestion.id, 'false') && 'false' !== currentQuestion.correctAnswer"
-                (click)="onTrueFalseSelected(currentQuestion.id, false)">
+            <button class="false-button" [class.selected]="isOptionSelected(currentQuestion.id, 'false')"
+              [class.correct]="isAnswered(currentQuestion.id) && 'false' === currentQuestion.correctAnswer"
+              [class.incorrect]="isAnswered(currentQuestion.id) && isOptionSelected(currentQuestion.id, 'false') && 'false' !== currentQuestion.correctAnswer"
+              (click)="onTrueFalseSelected(currentQuestion.id, false)">
               <i class="fas fa-times"></i>
               <span>خطأ</span>
             </button>
@@ -95,17 +100,16 @@
         <!-- Text Input -->
         <ng-container *ngIf="currentQuestion.type === QuestionType.TEXT_INPUT">
           <div class="text-input-container">
-            <div class="input-wrapper" 
-                [class.answered]="isAnswered(currentQuestion.id)"
-                [class.correct]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"
-                [class.incorrect]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'incorrect'">
-              <input type="text" class="text-answer-input" 
-                  placeholder="اكتب إجابتك هنا..." 
-                  [(ngModel)]="textAnswer" 
-                  [disabled]="isAnswered(currentQuestion.id)"
-                  (input)="onTextAnswerChange(currentQuestion.id, textAnswer)">
-              <i class="fas fa-check-circle" *ngIf="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"></i>
-              <i class="fas fa-times-circle" *ngIf="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'incorrect'"></i>
+            <div class="input-wrapper" [class.answered]="isAnswered(currentQuestion.id)"
+              [class.correct]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"
+              [class.incorrect]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'incorrect'">
+              <input type="text" class="text-answer-input" placeholder="اكتب إجابتك هنا..." [(ngModel)]="textAnswer"
+                [disabled]="isAnswered(currentQuestion.id)"
+                (input)="onTextAnswerChange(currentQuestion.id, textAnswer)">
+              <i class="fas fa-check-circle"
+                *ngIf="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"></i>
+              <i class="fas fa-times-circle"
+                *ngIf="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'incorrect'"></i>
             </div>
             <div class="input-feedback" *ngIf="isAnswered(currentQuestion.id)">
               <div class="correct-answer" *ngIf="getQuestionResult(currentQuestion.id) === 'incorrect'">
@@ -131,9 +135,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <app-question-actions 
-      [questionId]="currentQuestion.id"
-      (answerSubmitted)="answerSubmitted.emit()">
+    <app-question-actions [questionId]="currentQuestion.id" (answerSubmitted)="answerSubmitted.emit()">
     </app-question-actions>
   </div>
 </ng-container>
