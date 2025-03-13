@@ -34,7 +34,6 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   lesson: Lesson | undefined;
   animationState: string = '*';
 
-  // State management
   currentProgress$ = new BehaviorSubject<number>(0);
   lessonState$ = new BehaviorSubject<LessonState>({
     currentPosition: 0,
@@ -43,6 +42,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
   });
 
   isMenuOpen = false;
+  hideControls = false;
 
   private courseId: string;
   private unitId: string;
@@ -336,6 +336,12 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
         container.classList.remove('menu-open');
       }
     }
+    this.cdr.markForCheck();
+  }
+
+  onAssessmentModeChange(mode: 'assessment' | 'review'): void {
+    console.log(`[LessonDetails] Assessment mode changed to: ${mode}`);
+    this.hideControls = mode === 'review';
     this.cdr.markForCheck();
   }
 

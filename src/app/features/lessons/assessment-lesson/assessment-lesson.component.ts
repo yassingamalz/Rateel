@@ -42,6 +42,7 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   @Input() isCompleted?: boolean;
   @Output() onProgress = new EventEmitter<number>();
   @Output() onComplete = new EventEmitter<void>();
+  @Output() modeChange = new EventEmitter<'assessment' | 'review'>();
 
   // Track if dark mode is enabled
   isDarkMode = false;
@@ -56,6 +57,8 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
 
   // Dynamic modal reference
   private currentFeedbackModal: ComponentRef<FeedbackModalComponent> | null = null;
+
+  private currentMode: 'assessment' | 'review' = 'assessment';
 
   private subscriptions: Subscription[] = [];
   private isCompletionInProgress = false;
@@ -84,6 +87,13 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
       console.warn('[AssessmentLessonComponent] No content provided');
     }
 
+    const initialState = this.assessmentService.getCurrentState();
+    if (initialState.mode) {
+      this.currentMode = initialState.mode;
+      this.modeChange.emit(this.currentMode);
+      console.log(`[AssessmentLesson] Initial mode: ${this.currentMode}`);
+    }
+
     // Subscribe to state changes
     this.subscriptions.push(
       this.assessmentService.getState().subscribe(state => {
@@ -110,6 +120,13 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
           this.handleCompletion();
         }
 
+        // Emit mode change event only when it actually changes
+        if (state.mode && state.mode !== this.currentMode) {
+          console.log(`[AssessmentLesson] Mode changed from ${this.currentMode} to ${state.mode}`);
+          this.currentMode = state.mode;
+          this.modeChange.emit(state.mode);
+        }
+        
         this.cdr.markForCheck();
       })
     );

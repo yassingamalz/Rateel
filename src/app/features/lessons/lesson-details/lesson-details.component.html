@@ -1,15 +1,15 @@
 <!-- lesson-details.component.html -->
 <div class="lesson-details" [@slideDown]="animationState">
-  <!-- Progress Container -->
-  <div class="progress-container">
+  <!-- Progress Container - Hidden when controls are hidden -->
+  <div class="progress-container" *ngIf="!hideControls">
     <div class="progress-bar">
       <div class="progress-fill" [style.width.%]="currentProgress" [style.transition]="'width 300ms ease-out'"></div>
     </div>
     <div class="progress-text">{{currentProgress}}/100</div>
   </div>
 
-  <!-- Control Button / Menu -->
-  <div class="controls-area" [class.menu-open]="isMenuOpen">
+  <!-- Control Button / Menu - Hidden when controls are hidden -->
+  <div class="controls-area" [class.menu-open]="isMenuOpen" *ngIf="!hideControls">
     <button class="control-button" [class.menu-active]="isMenuOpen" (click)="toggleMenu()">
       <i class="fas" [class.fa-pause]="!isMenuOpen" [class.fa-play]="isMenuOpen"></i>
     </button>
@@ -41,8 +41,10 @@
       </app-interactive-lesson>
 
       <app-assessment-lesson *ngSwitchCase="'assessment'" [content]="lesson?.assessmentContent"
-        [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
-      </app-assessment-lesson>
+      [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()"
+      (modeChange)="onAssessmentModeChange($event)">
+    </app-assessment-lesson>
+    
     </div>
   </div>
 </div>
