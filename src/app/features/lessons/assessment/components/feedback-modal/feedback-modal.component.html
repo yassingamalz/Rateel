@@ -1,4 +1,4 @@
-<!-- Complete feedback-modal.component.html -->
+<!-- feedback-modal.component.html -->
 <div class="feedback-modal-wrapper" dir="rtl">
   <div class="feedback-modal-overlay"></div>
 
@@ -17,6 +17,25 @@
       {{ questionResult === 'correct' ? 'إجابة صحيحة' : 'إجابة خاطئة' }}
     </h3>
 
+    <!-- Rewards container - always present for correct answers -->
+    <div class="rewards-container" *ngIf="questionResult === 'correct'">
+      <!-- Points badge - always shown for correct answers -->
+      <div class="points-award">
+        <div class="points-value">+{{ earnedPoints }}</div>
+        <div class="points-label">نقطة</div>
+      </div>
+      
+      <!-- Streak indicator - only shown when streak exists -->
+      <div class="streak-indicator" *ngIf="currentStreak > 1">
+        <div class="streak-flames">
+          <i class="fas fa-fire"></i>
+          <i class="fas fa-fire"></i>
+          <i class="fas fa-fire"></i>
+        </div>
+        <div class="streak-count">{{ currentStreak }} إجابات متتالية</div>
+      </div>
+    </div>
+
     <!-- Direct correct answer display for incorrect answers -->
     <div class="answer-display" *ngIf="questionResult === 'incorrect'">
       <p class="answer-text">{{ correctAnswerText }}</p>
@@ -26,22 +45,6 @@
     <p class="explanation-text" *ngIf="question?.explanation">
       {{ question?.explanation }}
     </p>
-
-    <!-- Points Award (only for correct answers) -->
-    <div class="points-award" *ngIf="questionResult === 'correct'">
-      <div class="points-value">+{{ earnedPoints }}</div>
-      <div class="points-label">نقطة</div>
-    </div>
-
-    <!-- Streak indicator with flame animations -->
-    <div class="streak-indicator" *ngIf="currentStreak > 1 && questionResult === 'correct'">
-      <div class="streak-flames">
-        <i class="fas fa-fire"></i>
-        <i class="fas fa-fire"></i>
-        <i class="fas fa-fire"></i>
-      </div>
-      <div class="streak-count">{{ currentStreak }} إجابات متتالية!</div>
-    </div>
 
     <!-- Dismiss button -->
     <button class="dismiss-feedback" (click)="onDismiss()">

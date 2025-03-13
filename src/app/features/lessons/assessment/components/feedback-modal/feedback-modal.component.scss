@@ -1,4 +1,4 @@
-// Complete feedback-modal.component.scss
+// Fixed feedback-modal.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 
@@ -152,20 +152,19 @@
     animation: titleEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
   }
 
+  // Answer display for incorrect answers
   .answer-display {
     width: 100%;
     padding: 15px 20px;
     margin: 10px 0 15px;
     background: rgba(27, 67, 50, 0.7);
-    /* Darker background for better contrast */
     border-radius: 10px;
     animation: contentFadeIn 0.8s ease-out 0.5s both;
     position: relative;
     overflow: hidden;
     border-right: 3px solid #2ECC71;
-    /* Green accent border */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    /* Better shadow for depth */
+    order: 3; // Ensure it appears before rewards
 
     /* Add subtle highlight effect */
     &::before {
@@ -190,12 +189,9 @@
     margin: 0;
     padding: 0;
     position: relative;
-    /* Position above the gradient */
     z-index: 1;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    /* Subtle text shadow for readability */
     text-align: right;
-    /* Right-align for RTL */
   }
 
   // Explanation text that matches the screenshot
@@ -210,6 +206,23 @@
     font-size: 0.95rem;
     line-height: 1.5;
     animation: contentFadeIn 0.8s ease-out 0.5s both;
+    order: 4; // Ensure it appears before rewards
+  }
+
+  // Points and streak container for portrait mode
+  .rewards-container {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    margin: 10px 0 20px;
+    justify-content: center;
+    order: 5; // After explanation
+
+    // No streak indicator - points should fill container
+    &:not(:has(.streak-indicator)) .points-award {
+      max-width: 50%;
+      width: 50%;
+    }
   }
 
   // Improved points styling with better visualization
@@ -220,10 +233,11 @@
     border: 2px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
     border-radius: 18px;
     padding: 12px 30px;
-    margin: 15px 0 25px;
     position: relative;
     overflow: hidden;
     animation: pointsEntrance 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both;
+    flex: 1;
+    max-width: 45%;
 
     // Add subtle shimmer effect
     &::before {
@@ -259,13 +273,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 25px;
     padding: 12px 25px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     position: relative;
     overflow: hidden;
     animation: streakEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both;
+    flex: 1;
+    max-width: 45%;
 
     // Animated background
     &::before {
@@ -337,6 +352,7 @@
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     margin-top: 10px;
+    order: 10; // Always at the end
 
     // Button highlight effect
     &::before {
@@ -644,9 +660,12 @@
       margin-bottom: 12px;
     }
 
+    .rewards-container {
+      gap: 10px;
+    }
+
     .points-award {
-      padding: 10px 25px;
-      margin: 10px 0 15px;
+      padding: 10px 20px;
 
       .points-value {
         font-size: 2rem;
@@ -659,7 +678,6 @@
 
     .streak-indicator {
       padding: 10px 20px;
-      margin-bottom: 15px;
 
       .streak-flames i {
         font-size: 1.8rem;
@@ -681,13 +699,13 @@
 @media (orientation: landscape) and (max-height: 600px) {
   .feedback-modal-content {
     display: grid;
-    grid-template-columns: auto 1fr auto; // Added third column for points
+    grid-template-columns: auto 1fr auto;
     grid-template-areas:
-      "icon title points"  // Added points area to top right
+      "icon title rewards"
       "answer answer answer"
       "explanation explanation explanation"
       "button button button";
-    align-items: flex-start;
+    align-items: center;
     text-align: right;
     gap: 10px 15px;
     padding: 20px 15px;
@@ -696,6 +714,19 @@
     width: 80%;
     max-width: 600px;
     margin: 0 auto;
+
+    /* Keep rewards container but adjust layout */
+    .rewards-container {
+      grid-area: rewards;
+      display: flex !important;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      width: auto;
+      height: 100%;
+    }
 
     .feedback-icon {
       grid-area: icon;
@@ -723,10 +754,6 @@
       margin: 5px 0;
     }
 
-    .answer-text {
-      font-size: 1rem;
-    }
-
     .explanation-text {
       grid-area: explanation;
       padding: 10px 12px;
@@ -734,35 +761,63 @@
       margin: 0 0 5px;
     }
 
+    /* Style for both reward elements */
+    .points-award,
+    .streak-indicator {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 6px 10px !important;
+      margin: 0 !important;
+      height: 40px !important;
+      max-width: none !important;
+      width: auto !important;
+      flex: 0 1 auto !important;
+      border-radius: 20px !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    /* Specific styles for points */
     .points-award {
-      grid-area: points; // Position in top-right
-      display: flex; // Show in landscape now
-      flex-direction: row; // Make horizontal
-      align-items: center;
-      justify-content: center;
-      padding: 6px 10px;
-      margin: 0;
-      min-width: auto;
-      height: auto;
-      align-self: center;
-      
+      background: linear-gradient(135deg,
+          rgba(218, 165, 32, 0.3),
+          rgba(218, 165, 32, 0.3)) !important;
+      border: 1px solid rgba(218, 165, 32, 0.4) !important;
+
       .points-value {
-        font-size: 1.4rem;
-        margin-right: 5px;
+        font-size: 1.3rem !important;
+        margin-right: 5px !important;
+        margin-bottom: 0 !important;
       }
-      
+
       .points-label {
-        font-size: 0.9rem;
-      }
-      
-      // Remove animation and shimmer in landscape to improve performance
-      &::before {
-        display: none;
+        font-size: 0.9rem !important;
       }
     }
 
+    /* Specific styles for streak */
     .streak-indicator {
-      display: none; // Keep streak hidden to save space
+      background: rgba(255, 87, 34, 0.15) !important;
+      border: 1px solid rgba(255, 87, 34, 0.3) !important;
+      padding-left: 8px !important;
+      padding-right: 12px !important;
+
+      .streak-flames {
+        display: flex !important;
+        margin: 0 5px 0 0 !important;
+        padding-left: 10px;
+
+        i {
+          font-size: 1.1rem !important;
+          margin: 0 -2px !important;
+        }
+      }
+
+      .streak-count {
+        font-size: 0.9rem !important;
+        white-space: nowrap !important;
+      }
     }
 
     .dismiss-feedback {
@@ -774,8 +829,21 @@
     }
   }
 
-  // Fade out the overlay more in landscape to see the background better
-  .feedback-modal-overlay {
-    background: rgba(0, 0, 0, 0.7);
+  /* Fix for only points badge */
+  .feedback-modal-content .rewards-container .points-award:only-child {
+    margin-left: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    .points-value {
+      font-size: 1.3rem !important;
+      margin-right: 5px !important;
+      margin-bottom: 0 !important;
+    }
+
+    .points-label {
+      font-size: 0.9rem !important;
+    }
   }
 }
