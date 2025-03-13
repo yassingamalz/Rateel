@@ -681,12 +681,12 @@
 @media (orientation: landscape) and (max-height: 600px) {
   .feedback-modal-content {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto; // Added third column for points
     grid-template-areas:
-      "icon title"
-      "answer answer"
-      "explanation explanation"
-      "button button";
+      "icon title points"  // Added points area to top right
+      "answer answer answer"
+      "explanation explanation explanation"
+      "button button button";
     align-items: flex-start;
     text-align: right;
     gap: 10px 15px;
@@ -721,7 +721,6 @@
       grid-area: answer;
       padding: 10px 15px;
       margin: 5px 0;
-      grid-area: answer;
     }
 
     .answer-text {
@@ -736,11 +735,34 @@
     }
 
     .points-award {
-      display: none; // Hide in landscape to save space
+      grid-area: points; // Position in top-right
+      display: flex; // Show in landscape now
+      flex-direction: row; // Make horizontal
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      margin: 0;
+      min-width: auto;
+      height: auto;
+      align-self: center;
+      
+      .points-value {
+        font-size: 1.4rem;
+        margin-right: 5px;
+      }
+      
+      .points-label {
+        font-size: 0.9rem;
+      }
+      
+      // Remove animation and shimmer in landscape to improve performance
+      &::before {
+        display: none;
+      }
     }
 
     .streak-indicator {
-      display: none; // Hide in landscape to save space
+      display: none; // Keep streak hidden to save space
     }
 
     .dismiss-feedback {
