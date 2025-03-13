@@ -478,16 +478,16 @@
           
           .stat-icon {
             font-size: 1.2rem;
-            margin-bottom: 2px;
+            margin-bottom: -2px;
           }
           
           .stat-value {
             font-size: 1.3rem;
-            margin-bottom: 2px;
+            margin-bottom: -2px;
           }
           
           .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.9rem;
           }
         }
       }
@@ -507,7 +507,7 @@
     }
     
     .results-actions {
-      bottom: 10px;
+      bottom: -70px;
       
       button {
         padding: 8px 15px;
