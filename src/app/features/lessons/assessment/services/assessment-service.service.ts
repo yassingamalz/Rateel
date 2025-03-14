@@ -1,6 +1,6 @@
-// src/app/features/lessons/assessment/services/assessment-service.service.ts
+// Modified assessment-service.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AssessmentContent, AssessmentQuestion, QuestionType } from '../../assessment-lesson/assessment-lesson.types';
 import { PlatformService } from '../../../../core/services/platform.service';
 
@@ -18,6 +18,12 @@ export interface AssessmentState {
   mode: 'assessment' | 'review';
 }
 
+export interface AnswerSubmittedEvent {
+  questionId: string;
+  result: 'correct' | 'incorrect';
+  isLastQuestion: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +36,13 @@ export class AssessmentService {
   private feedbackDismissed = true;
   private showCompletionAnimationSubject = new BehaviorSubject<boolean>(false);
   private selectedQuestionIndexSubject = new BehaviorSubject<number | null>(null);
+  
+  // New properties for tracking attempts
+  private isFirstAttempt = true;
+  private readonly STORAGE_KEY_PREFIX = 'tajweed_assessment_completed_';
+  
+  // New subject for immediate answer feedback
+  private answerSubmittedSubject = new Subject<AnswerSubmittedEvent>();
 
   // State management
   private state = new BehaviorSubject<AssessmentState>({
@@ -99,6 +112,11 @@ export class AssessmentService {
   getSelectedQuestionIndexState(): Observable<number | null> {
     return this.selectedQuestionIndexSubject.asObservable();
   }
+  
+  // New method to get answer submitted events
+  getAnswerSubmittedEvents(): Observable<AnswerSubmittedEvent> {
+    return this.answerSubmittedSubject.asObservable();
+  }
 
   getTextAnswers(): { [questionId: string]: string } {
     return this.textAnswers;
@@ -146,6 +164,48 @@ export class AssessmentService {
   initializeAssessment(content: AssessmentContent): void {
     this.content = content;
     this.resetState();
+    this.checkIfFirstAttempt();
+  }
+  
+  // New method to check if this is the first assessment attempt
+  private checkIfFirstAttempt(): void {
+    if (!this.content) return;
+    
+    try {
+      // Use title as a unique identifier if id not available
+      const assessmentId = (this.content.id || this.content.title || 'unknown');
+      const storageKey = `${this.STORAGE_KEY_PREFIX}${assessmentId}`;
+      
+      const storedValue = localStorage.getItem(storageKey);
+      this.isFirstAttempt = !storedValue;
+      
+      console.log(`[AssessmentService] Assessment "${assessmentId}" is ${this.isFirstAttempt ? 'a first attempt' : 'a repeat attempt'}`);
+    } catch (error) {
+      console.error('[AssessmentService] Error checking if first attempt:', error);
+      this.isFirstAttempt = true; // Default to first attempt on error
+    }
+  }
+  
+  // New method to mark an assessment as completed
+  private markAssessmentCompleted(): void {
+    if (!this.content) return;
+    
+    try {
+      const assessmentId = (this.content.id || this.content.title || 'unknown');
+      const storageKey = `${this.STORAGE_KEY_PREFIX}${assessmentId}`;
+      
+      localStorage.setItem(storageKey, Date.now().toString());
+      this.isFirstAttempt = false;
+      
+      console.log(`[AssessmentService] Marked assessment "${assessmentId}" as completed`);
+    } catch (error) {
+      console.error('[AssessmentService] Error marking assessment as completed:', error);
+    }
+  }
+  
+  // New public method to check if this is the first attempt
+  isFirstAttemptCheck(): boolean {
+    return this.isFirstAttempt;
   }
 
   resetState(): void {
@@ -287,23 +347,37 @@ export class AssessmentService {
       showExplanation: true
     });
 
-    // Update streak and points
-    const result = this.getQuestionResult(questionId);
-    if (result === 'correct') {
-      this.currentStreak++;
-      this.totalPoints += this.getQuestionPoints();
+    // Only update streak and add points on first attempt
+    if (this.isFirstAttempt) {
+      // Update streak and points
+      const result = this.getQuestionResult(questionId);
+      if (result === 'correct') {
+        this.currentStreak++;
+        this.totalPoints += this.getQuestionPoints();
 
-      // Provide success haptic feedback
-      this.platformService.vibrateSuccess().catch(() => { });
-    } else {
-      this.currentStreak = 0;
+        // Provide success haptic feedback
+        this.platformService.vibrateSuccess().catch(() => { });
+      } else {
+        this.currentStreak = 0;
 
-      // Provide error haptic feedback
-      this.platformService.vibrateError().catch(() => { });
+        // Provide error haptic feedback
+        this.platformService.vibrateWarning().catch(() => { });
+      }
     }
 
-    // Show feedback
-    this.feedbackDismissed = false;
+    // Show feedback immediately for first attempts only
+    this.feedbackDismissed = !this.isFirstAttempt;
+    
+    // Check if this is the last question
+    const isLastQuestion = currentState.currentQuestionIndex === this.content.questions.length - 1;
+    
+    // Emit the answer submitted event immediately
+    const result = this.getQuestionResult(questionId);
+    this.answerSubmittedSubject.next({
+      questionId,
+      result: result === 'correct' ? 'correct' : 'incorrect',
+      isLastQuestion
+    });
   }
 
   dismissFeedback(): void {
@@ -380,11 +454,19 @@ export class AssessmentService {
       progress: 100,
       mode: 'review'
     });
+    
+    // If this is the first attempt, mark as completed for future reference
+    if (this.isFirstAttempt) {
+      this.markAssessmentCompleted();
+    }
   }
 
   restartAssessment(): void {
     if (!this.content) return;
 
+    // Keep track that this is not the first attempt anymore
+    this.isFirstAttempt = false;
+    
     // Reset the state but keep the content
     this.state.next({
       currentQuestionIndex: 0,
@@ -401,7 +483,7 @@ export class AssessmentService {
     this.textAnswers = {};
     this.currentStreak = 0;
     this.totalPoints = 0;
-    this.feedbackDismissed = true;
+    this.feedbackDismissed = true; // Always dismissed for repeat attempts
   }
 
   setCompleted(): void {
@@ -412,6 +494,11 @@ export class AssessmentService {
       isCompleted: true,
       progress: 100
     });
+    
+    // If this is the first attempt, mark as completed
+    if (this.isFirstAttempt) {
+      this.markAssessmentCompleted();
+    }
   }
 
   // Utility methods

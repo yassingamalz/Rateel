@@ -40,6 +40,7 @@ export interface AssessmentState {
 }
 
 export interface AssessmentContent {
+    id?: string;          // Added optional ID field for better tracking 
     title: string;
     description?: string;
     questions: AssessmentQuestion[];

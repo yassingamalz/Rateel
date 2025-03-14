@@ -25,6 +25,7 @@ export class QuestionActionsComponent implements OnInit, OnDestroy {
   isAnswered = false;
   isLastQuestion = false;
   canSubmit = false;
+  isFirstAttempt = true;
 
   private subscriptions: Subscription[] = [];
 
@@ -34,6 +35,9 @@ export class QuestionActionsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Check if this is a first attempt
+    this.isFirstAttempt = this.assessmentService.isFirstAttemptCheck();
+    
     this.subscriptions.push(
       this.assessmentService.getState().subscribe(state => {
         if (this.questionId) {
@@ -62,7 +66,11 @@ export class QuestionActionsComponent implements OnInit, OnDestroy {
 
   submitAnswer(): void {
     if (this.questionId && this.canSubmit) {
+      // Call the assessment service to submit the answer
+      // This is where the answer submission happens and triggers the feedback
       this.assessmentService.submitAnswer(this.questionId);
+      
+      // Emit event to parent component to handle UI updates
       this.answerSubmitted.emit();
     }
   }

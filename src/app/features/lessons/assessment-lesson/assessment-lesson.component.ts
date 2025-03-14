@@ -1,4 +1,4 @@
-// src/app/features/lessons/assessment-lesson/assessment-lesson.component.ts
+// Modified assessment-lesson.component.ts
 import {
   Component,
   OnInit,
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 import { PlatformService } from '../../../core/services/platform.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AssessmentQuestion } from './assessment-lesson.types';
-import { AssessmentService } from '../assessment/services/assessment-service.service';
+import { AssessmentService, AnswerSubmittedEvent } from '../assessment/services/assessment-service.service';
 import { DynamicModalService } from '../../../shared/services/dynamic-modal.service';
 import { FeedbackModalComponent } from '../assessment/components/feedback-modal/feedback-modal.component';
 import { CompletionModalComponent } from '../assessment/components/completion-modal/completion-modal.component';
@@ -106,14 +106,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
           }
         }
 
-        // Check if feedback should be shown
-        if (this.currentQuestion &&
-          state.answers.has(this.currentQuestion.id) &&
-          !this.assessmentService.isFeedbackDismissed()) {
-          this.showFeedbackModal(this.currentQuestion.id);
-          this.assessmentService.dismissFeedback();
-        }
-
         // Trigger completion if needed
         if (state.isCompleted && !this.isCompleted && !this.isCompletionInProgress) {
           this.handleCompletion();
@@ -127,6 +119,13 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
         }
         
         this.cdr.markForCheck();
+      })
+    );
+    
+    // Subscribe to answer submitted events for immediate feedback
+    this.subscriptions.push(
+      this.assessmentService.getAnswerSubmittedEvents().subscribe(event => {
+        this.handleAnswerSubmitted(event);
       })
     );
 
@@ -174,8 +173,34 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.assessmentService.resetState();
   }
+  
+  // New handler for answer submitted events
+  private handleAnswerSubmitted(event: AnswerSubmittedEvent): void {
+    // Skip feedback for non-first attempts
+    if (!this.assessmentService.isFirstAttemptCheck()) {
+      console.log('[AssessmentLesson] Skipping feedback for repeat attempt');
+      return;
+    }
+    
+    console.log(`[AssessmentLesson] Answer submitted: ${event.questionId}, result: ${event.result}, isLast: ${event.isLastQuestion}`);
+    
+    // Get question details
+    const content = this.assessmentService.getContent();
+    if (!content) return;
+    
+    const question = content.questions.find(q => q.id === event.questionId);
+    if (!question) return;
+    
+    // Show feedback immediately
+    this.showFeedbackModal(event.questionId);
+  }
 
   private showFeedbackModal(questionId: string): void {
+    // Skip feedback for repeat attempts
+    if (!this.assessmentService.isFirstAttemptCheck()) {
+      return;
+    }
+    
     // Close any existing modal first
     if (this.currentFeedbackModal) {
       this.dynamicModalService.close(this.currentFeedbackModal);
@@ -218,6 +243,7 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
       if (this.currentFeedbackModal) {
         this.dynamicModalService.close(this.currentFeedbackModal);
         this.currentFeedbackModal = null;
+        this.assessmentService.dismissFeedback();
         this.cdr.markForCheck();
       }
     });
@@ -304,8 +330,14 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
       console.warn('Haptic feedback not available', error);
     }
 
-    // Show completion animation
-    this.assessmentService.setShowCompletionAnimation(true);
+    // Show completion animation only on first completion
+    if (this.assessmentService.isFirstAttemptCheck()) {
+      this.assessmentService.setShowCompletionAnimation(true);
+    } else {
+      // For repeat attempts, just complete without animation
+      this.onComplete.emit();
+    }
+    
     this.cdr.markForCheck();
   }
 
