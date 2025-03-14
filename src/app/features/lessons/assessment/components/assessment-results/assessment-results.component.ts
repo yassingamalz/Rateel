@@ -5,7 +5,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  AfterViewInit,
+  ElementRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -36,7 +38,7 @@ import { AssessmentContent } from '../../../assessment-lesson/assessment-lesson.
     ])
   ]
 })
-export class AssessmentResultsComponent implements OnInit, OnDestroy {
+export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() questionDetailsRequested = new EventEmitter<number>();
   @Output() restartRequested = new EventEmitter<void>();
   @Output() completeRequested = new EventEmitter<void>();
@@ -53,7 +55,8 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy {
 
   constructor(
     public assessmentService: AssessmentService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -110,4 +113,44 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy {
     const value = (this.score / 100) * circumference;
     return `${value}, ${circumference}`;
   }
+
+
+  ngAfterViewInit() {
+    // Get scrollable elements
+    const questionsList = this.elementRef.nativeElement.querySelector('.questions-summary');
+    const recommendationsList = this.elementRef.nativeElement.querySelector('.recommendations-list');
+
+    // Add scroll event listeners
+    this.addScrollIndicator(questionsList, '.results-breakdown');
+    this.addScrollIndicator(recommendationsList, '.recommendations-section');
+  }
+
+
+  private addScrollIndicator(element: HTMLElement, parentSelector: string) {
+    if (!element) return;
+
+    const parent = this.elementRef.nativeElement.querySelector(parentSelector);
+    if (!parent) return;
+
+    element.addEventListener('scroll', () => {
+      // Check if scrolled to the bottom
+      const isAtBottom =
+        element.scrollHeight - element.scrollTop <= element.clientHeight + 1; // +1 for potential rounding issues
+
+      const canScrollDown = element.scrollHeight > element.clientHeight && !isAtBottom;
+
+      if (canScrollDown) {
+        parent.classList.add('can-scroll-down');
+      } else {
+        parent.classList.remove('can-scroll-down');
+      }
+    });
+
+    // Initial check
+    const canScrollDown = element.scrollHeight > element.clientHeight;
+    if (canScrollDown) {
+      parent.classList.add('can-scroll-down');
+    }
+  }
+
 }
