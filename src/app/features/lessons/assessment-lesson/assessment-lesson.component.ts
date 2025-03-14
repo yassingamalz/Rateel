@@ -96,6 +96,7 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     // Subscribe to state changes
     this.subscriptions.push(
       this.assessmentService.getState().subscribe(state => {
+        // Always emit progress, but don't trigger completion
         this.onProgress.emit(state.progress);
 
         // Update current question
@@ -104,11 +105,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
           if (content && state.currentQuestionIndex < content.questions.length) {
             this.currentQuestion = content.questions[state.currentQuestionIndex];
           }
-        }
-
-        // Trigger completion if needed
-        if (state.isCompleted && !this.isCompleted && !this.isCompletionInProgress) {
-          this.handleCompletion();
         }
 
         // Emit mode change event only when it actually changes
@@ -341,10 +337,11 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
+  // Modified to handle explicit completion requests from the results page
   handleSkip(): void {
-    console.log("[AssessmentLessonComponent] Skip button clicked, isCompleted:", this.isCompleted);
+    console.log("[AssessmentLessonComponent] Skip/Complete button clicked, isCompleted:", this.isCompleted);
 
-    // Always emit completion event immediately for any click
+    // Emit completion event to trigger course completion
     this.onComplete.emit();
 
     // Add haptic feedback
@@ -366,7 +363,7 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   // Event handlers for child components
   onCompletionClosed(): void {
     this.assessmentService.setShowCompletionAnimation(false);
-    this.onComplete.emit();
+    // Don't automatically emit completion event when closing the modal
     this.isCompletionInProgress = false;
     this.cdr.markForCheck();
   }

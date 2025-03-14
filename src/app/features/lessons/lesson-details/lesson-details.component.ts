@@ -1,4 +1,4 @@
-// lesson-details.component.ts
+// Modified lesson-details.component.ts
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -43,6 +43,11 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   isMenuOpen = false;
   hideControls = false;
+
+  // Track if we're dealing with an assessment lesson
+  private isAssessmentLesson = false;
+  // Flag to handle explicit assessment completion
+  private assessmentCompletionRequested = false;
 
   private courseId: string;
   private unitId: string;
@@ -98,6 +103,14 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
           }
 
           console.log(`[LessonDetails] Lesson loaded: type=${lesson.type}`);
+
+          // Check if this is an assessment lesson
+          this.isAssessmentLesson = lesson.type === 'assessment';
+
+          // Log for debugging
+          if (this.isAssessmentLesson) {
+            console.log('[LessonDetails] This is an assessment lesson - special handling enabled');
+          }
 
           // If it's a practice lesson and verses are not loaded
           if (lesson.type === 'practice' && (!lesson.verses || lesson.verses.length === 0)) {
@@ -218,7 +231,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       progress,
       timestamp: Date.now(),
       expiresAt: Date.now() + (2 * 365 * 24 * 60 * 60 * 1000), // 2 years from now
-      isCompleted: progress >= 100,
+      isCompleted: (progress >= 100) && (!this.isAssessmentLesson || this.assessmentCompletionRequested),
       isLocked: false,
       currentPosition: currentState.currentPosition,
       volume: currentState.volume,
@@ -235,6 +248,7 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       stateToSave.scrollPosition = currentState.scrollPosition;
     }
 
+    console.log(`[LessonDetails] Saving state: progress=${progress}, isCompleted=${stateToSave.isCompleted}, isAssessment=${this.isAssessmentLesson}, completionRequested=${this.assessmentCompletionRequested}`);
     this.storageService.saveProgress('lesson', this.getLessonStorageKey(), stateToSave);
   }
 
@@ -301,11 +315,13 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
 
   // Progress Management
   updateProgress(progress: number): void {
-    console.log(`[LessonDetails] Progress update: ${progress}%`);
+    console.log(`[LessonDetails] Progress update: ${progress}% (Assessment: ${this.isAssessmentLesson})`);
     this.currentProgress$.next(progress);
     this.saveCurrentState();
 
-    if (progress >= 100 && !this.lesson?.isCompleted) {
+    // Special handling for assessment lessons - don't auto-complete based on progress
+    if (progress >= 100 && !this.lesson?.isCompleted && !this.isAssessmentLesson) {
+      console.log('[LessonDetails] Non-assessment lesson reached 100%, marking as completed');
       this.markAsCompleted();
     }
 
@@ -423,6 +439,34 @@ export class LessonDetailsComponent implements OnInit, OnDestroy {
       event.answer,
       event.isCorrect
     );
+  }
+
+  // Handle explicit assessment completion
+  handleAssessmentComplete(): void {
+    console.log('[LessonDetails] Assessment explicitly requested completion');
+
+    // Mark that assessment specifically requested completion
+    this.assessmentCompletionRequested = true;
+
+    // Save state with completion flag
+    this.saveCurrentState();
+
+    // Apply animation state for the slide transition
+    this.animationState = 'exit';
+
+    // Proceed with delayed navigation to allow animation to play
+    setTimeout(() => {
+      // Navigate after animations complete
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParams: {
+          completedLessonId: this.lessonId,
+          returnTo: 'lessons',
+          // Add timestamp to prevent caching
+          t: Date.now()
+        }
+      });
+    }, 500); // Animation duration
   }
 
   private getPlayerState() {

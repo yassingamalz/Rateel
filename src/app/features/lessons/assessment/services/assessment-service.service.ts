@@ -36,11 +36,11 @@ export class AssessmentService {
   private feedbackDismissed = true;
   private showCompletionAnimationSubject = new BehaviorSubject<boolean>(false);
   private selectedQuestionIndexSubject = new BehaviorSubject<number | null>(null);
-  
+
   // New properties for tracking attempts
   private isFirstAttempt = true;
   private readonly STORAGE_KEY_PREFIX = 'tajweed_assessment_completed_';
-  
+
   // New subject for immediate answer feedback
   private answerSubmittedSubject = new Subject<AnswerSubmittedEvent>();
 
@@ -112,7 +112,7 @@ export class AssessmentService {
   getSelectedQuestionIndexState(): Observable<number | null> {
     return this.selectedQuestionIndexSubject.asObservable();
   }
-  
+
   // New method to get answer submitted events
   getAnswerSubmittedEvents(): Observable<AnswerSubmittedEvent> {
     return this.answerSubmittedSubject.asObservable();
@@ -166,43 +166,43 @@ export class AssessmentService {
     this.resetState();
     this.checkIfFirstAttempt();
   }
-  
+
   // New method to check if this is the first assessment attempt
   private checkIfFirstAttempt(): void {
     if (!this.content) return;
-    
+
     try {
       // Use title as a unique identifier if id not available
       const assessmentId = (this.content.id || this.content.title || 'unknown');
       const storageKey = `${this.STORAGE_KEY_PREFIX}${assessmentId}`;
-      
+
       const storedValue = localStorage.getItem(storageKey);
       this.isFirstAttempt = !storedValue;
-      
+
       console.log(`[AssessmentService] Assessment "${assessmentId}" is ${this.isFirstAttempt ? 'a first attempt' : 'a repeat attempt'}`);
     } catch (error) {
       console.error('[AssessmentService] Error checking if first attempt:', error);
       this.isFirstAttempt = true; // Default to first attempt on error
     }
   }
-  
+
   // New method to mark an assessment as completed
   private markAssessmentCompleted(): void {
     if (!this.content) return;
-    
+
     try {
       const assessmentId = (this.content.id || this.content.title || 'unknown');
       const storageKey = `${this.STORAGE_KEY_PREFIX}${assessmentId}`;
-      
+
       localStorage.setItem(storageKey, Date.now().toString());
       this.isFirstAttempt = false;
-      
+
       console.log(`[AssessmentService] Marked assessment "${assessmentId}" as completed`);
     } catch (error) {
       console.error('[AssessmentService] Error marking assessment as completed:', error);
     }
   }
-  
+
   // New public method to check if this is the first attempt
   isFirstAttemptCheck(): boolean {
     return this.isFirstAttempt;
@@ -367,10 +367,10 @@ export class AssessmentService {
 
     // Show feedback immediately for first attempts only
     this.feedbackDismissed = !this.isFirstAttempt;
-    
+
     // Check if this is the last question
     const isLastQuestion = currentState.currentQuestionIndex === this.content.questions.length - 1;
-    
+
     // Emit the answer submitted event immediately
     const result = this.getQuestionResult(questionId);
     this.answerSubmittedSubject.next({
@@ -454,10 +454,16 @@ export class AssessmentService {
       progress: 100,
       mode: 'review'
     });
-    
+
     // If this is the first attempt, mark as completed for future reference
     if (this.isFirstAttempt) {
       this.markAssessmentCompleted();
+
+      // Show completion animation for first attempts
+      // This is important - trigger the completion animation
+      setTimeout(() => {
+        this.setShowCompletionAnimation(true);
+      }, 500); // Brief delay to ensure state transition occurs first
     }
   }
 
@@ -466,7 +472,7 @@ export class AssessmentService {
 
     // Keep track that this is not the first attempt anymore
     this.isFirstAttempt = false;
-    
+
     // Reset the state but keep the content
     this.state.next({
       currentQuestionIndex: 0,
@@ -494,7 +500,7 @@ export class AssessmentService {
       isCompleted: true,
       progress: 100
     });
-    
+
     // If this is the first attempt, mark as completed
     if (this.isFirstAttempt) {
       this.markAssessmentCompleted();

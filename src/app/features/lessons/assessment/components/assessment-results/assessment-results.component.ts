@@ -7,12 +7,15 @@ import {
   Output,
   EventEmitter,
   AfterViewInit,
-  ElementRef
+  ElementRef,
+  Inject,
+  Optional
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AssessmentService } from '../../services/assessment-service.service';
 import { AssessmentContent } from '../../../assessment-lesson/assessment-lesson.types';
+import { PlatformService } from '../../../../../core/services/platform.service';
 
 @Component({
   selector: 'app-assessment-results',
@@ -50,16 +53,21 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewI
   incorrectAnswers = 0;
   totalPoints = 0;
   recommendations: string[] = [];
+  isFirstAttempt = true;
 
   private subscriptions: Subscription[] = [];
 
   constructor(
     public assessmentService: AssessmentService,
     private cdr: ChangeDetectorRef,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    @Optional() private platformService?: PlatformService // Optional injection
   ) { }
 
   ngOnInit(): void {
+    // Check if this is a first attempt
+    this.isFirstAttempt = this.assessmentService.isFirstAttemptCheck();
+
     this.subscriptions.push(
       this.assessmentService.getState().subscribe(state => {
         this.score = state.score;
@@ -96,7 +104,24 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   complete(): void {
-    this.completeRequested.emit();
+    console.log('[AssessmentResults] User clicked complete button, emitting completion event');
+    
+    // If this is the first attempt, show a haptic feedback
+    if (this.isFirstAttempt && this.platformService) {
+      // Safely use the platform service if it's available
+      try {
+        this.platformService.vibrateSuccess().catch(err => {
+          console.log('Haptic feedback failed:', err);
+        });
+      } catch (e) {
+        console.log('Haptic feedback not available');
+      }
+    }
+    
+    // Small delay to allow any animation or feedback to register
+    setTimeout(() => {
+      this.completeRequested.emit();
+    }, 100);
   }
 
   getQuestionResult(questionId: string): 'correct' | 'incorrect' | 'unanswered' {
@@ -114,7 +139,6 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewI
     return `${value}, ${circumference}`;
   }
 
-
   ngAfterViewInit() {
     // Get scrollable elements
     const questionsList = this.elementRef.nativeElement.querySelector('.questions-summary');
@@ -124,7 +148,6 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewI
     this.addScrollIndicator(questionsList, '.results-breakdown');
     this.addScrollIndicator(recommendationsList, '.recommendations-section');
   }
-
 
   private addScrollIndicator(element: HTMLElement, parentSelector: string) {
     if (!element) return;
@@ -152,5 +175,4 @@ export class AssessmentResultsComponent implements OnInit, OnDestroy, AfterViewI
       parent.classList.add('can-scroll-down');
     }
   }
-
 }

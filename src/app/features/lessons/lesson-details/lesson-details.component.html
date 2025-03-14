@@ -41,10 +41,9 @@
       </app-interactive-lesson>
 
       <app-assessment-lesson *ngSwitchCase="'assessment'" [content]="lesson?.assessmentContent"
-      [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()"
-      (modeChange)="onAssessmentModeChange($event)">
-    </app-assessment-lesson>
-    
+        [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" 
+        (onComplete)="handleAssessmentComplete()" (modeChange)="onAssessmentModeChange($event)">
+      </app-assessment-lesson>
     </div>
   </div>
 </div>
