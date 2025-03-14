@@ -49,16 +49,6 @@
         </div>
     </ng-container>
 
-    <!-- Completion Modal -->
-    <app-completion-modal *ngIf="showCompletionModal" 
-        (completed)="onCompletionClosed()">
-    </app-completion-modal>
-
-    <!-- Question Details Modal -->
-    <app-question-details-modal *ngIf="showDetailsModal && selectedQuestionIndex !== null"
-        (closeDetails)="onDetailsModalClosed()">
-    </app-question-details-modal>
-
     <!-- No Content Template -->
     <ng-template #noContent>
         <div class="error-message">

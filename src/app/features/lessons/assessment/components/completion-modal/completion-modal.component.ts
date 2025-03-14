@@ -6,11 +6,11 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Input
 } from '@angular/core';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { Subscription } from 'rxjs';
-import { AssessmentService } from '../../services/assessment-service.service';
 
 @Component({
   selector: 'app-completion-modal',
@@ -63,11 +63,13 @@ import { AssessmentService } from '../../services/assessment-service.service';
 })
 export class CompletionModalComponent implements OnInit, OnDestroy {
   @Output() completed = new EventEmitter<void>();
-
-  score = 0;
-  totalPoints = 0;
-  isPassed = false;
-  passingScore = 60;
+  
+  // Properties that will be set when created by the dynamic modal service
+  @Input() score = 0;
+  @Input() totalPoints = 0;
+  @Input() isPassed = false;
+  @Input() passingScore = 60;
+  
   animationComplete = false;
   particles: { tx: string, ty: string, size: string, delay: string, color: string }[] = [];
 
@@ -75,24 +77,10 @@ export class CompletionModalComponent implements OnInit, OnDestroy {
   private autoCloseTimer: any;
 
   constructor(
-    public assessmentService: AssessmentService,
     private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    // Get score and points
-    const state = this.assessmentService.getCurrentState();
-    this.score = state.score;
-    this.totalPoints = this.assessmentService.getTotalPoints();
-
-    // Get passing score from content
-    const content = this.assessmentService.getContent();
-    if (content?.passingScore) {
-      this.passingScore = content.passingScore;
-    }
-
-    this.isPassed = this.score >= this.passingScore;
-
     // Generate random particles for the animation
     this.generateParticles();
 

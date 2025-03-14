@@ -17,6 +17,8 @@ import { AssessmentQuestion } from './assessment-lesson.types';
 import { AssessmentService } from '../assessment/services/assessment-service.service';
 import { DynamicModalService } from '../../../shared/services/dynamic-modal.service';
 import { FeedbackModalComponent } from '../assessment/components/feedback-modal/feedback-modal.component';
+import { CompletionModalComponent } from '../assessment/components/completion-modal/completion-modal.component';
+import { QuestionDetailsModalComponent } from '../assessment/components/question-details-modal/question-details-modal.component';
 
 @Component({
   selector: 'app-assessment-lesson',
@@ -47,16 +49,13 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   // Track if dark mode is enabled
   isDarkMode = false;
 
-  // Modal visibility states
-  showCompletionModal = false;
-  showDetailsModal = false;
-
   // Current question for feedback modal
   currentQuestion?: AssessmentQuestion;
-  selectedQuestionIndex: number | null = null;
 
-  // Dynamic modal reference
+  // Dynamic modal references
   private currentFeedbackModal: ComponentRef<FeedbackModalComponent> | null = null;
+  private currentCompletionModal: ComponentRef<CompletionModalComponent> | null = null;
+  private currentDetailsModal: ComponentRef<QuestionDetailsModalComponent> | null = null;
 
   private currentMode: 'assessment' | 'review' = 'assessment';
 
@@ -134,7 +133,12 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     // Track completion animation state
     this.subscriptions.push(
       this.assessmentService.getCompletionAnimationState().subscribe(isShowing => {
-        this.showCompletionModal = isShowing;
+        if (isShowing) {
+          this.showCompletionModal();
+        } else if (this.currentCompletionModal) {
+          this.dynamicModalService.close(this.currentCompletionModal);
+          this.currentCompletionModal = null;
+        }
         this.cdr.markForCheck();
       })
     );
@@ -142,8 +146,12 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     // Track question details state
     this.subscriptions.push(
       this.assessmentService.getSelectedQuestionIndexState().subscribe(index => {
-        this.selectedQuestionIndex = index;
-        this.showDetailsModal = index !== null;
+        if (index !== null) {
+          this.showQuestionDetailsModal(index);
+        } else if (this.currentDetailsModal) {
+          this.dynamicModalService.close(this.currentDetailsModal);
+          this.currentDetailsModal = null;
+        }
         this.cdr.markForCheck();
       })
     );
@@ -154,10 +162,19 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
     if (this.currentFeedbackModal) {
       this.dynamicModalService.close(this.currentFeedbackModal);
     }
+    
+    if (this.currentCompletionModal) {
+      this.dynamicModalService.close(this.currentCompletionModal);
+    }
+    
+    if (this.currentDetailsModal) {
+      this.dynamicModalService.close(this.currentDetailsModal);
+    }
 
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.assessmentService.resetState();
   }
+
   private showFeedbackModal(questionId: string): void {
     // Close any existing modal first
     if (this.currentFeedbackModal) {
@@ -195,16 +212,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
       userAnswerText
     });
 
-    // Log what we're passing to help debug any issues
-    console.log('[AssessmentLesson] Feedback modal data:', {
-      question: question?.text?.substring(0, 30) + '...',
-      result: questionResult,
-      streak: currentStreak,
-      points: earnedPoints,
-      correctAnswer: correctAnswerText?.substring(0, 30) + '...',
-      userAnswer: userAnswerText?.substring(0, 30) + '...'
-    });
-
     // Handle dismiss event
     const instance = this.currentFeedbackModal.instance;
     instance.dismissFeedback.subscribe(() => {
@@ -212,6 +219,76 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
         this.dynamicModalService.close(this.currentFeedbackModal);
         this.currentFeedbackModal = null;
         this.cdr.markForCheck();
+      }
+    });
+  }
+
+  private showCompletionModal(): void {
+    // Close existing modal if open
+    if (this.currentCompletionModal) {
+      this.dynamicModalService.close(this.currentCompletionModal);
+    }
+
+    // Create completion modal
+    this.currentCompletionModal = this.dynamicModalService.open(CompletionModalComponent);
+    
+    // Set up props and event handling
+    const instance = this.currentCompletionModal.instance;
+    
+    // Pass necessary data from assessmentService
+    const state = this.assessmentService.getCurrentState();
+    instance.score = state.score;
+    instance.totalPoints = this.assessmentService.getTotalPoints();
+    
+    // Get passing score from content
+    const content = this.assessmentService.getContent();
+    if (content?.passingScore) {
+      instance.passingScore = content.passingScore;
+    }
+    
+    instance.isPassed = state.score >= instance.passingScore;
+    
+    // Handle completion event
+    instance.completed.subscribe(() => {
+      if (this.currentCompletionModal) {
+        this.dynamicModalService.close(this.currentCompletionModal);
+        this.currentCompletionModal = null;
+        this.onCompletionClosed();
+      }
+    });
+  }
+
+  private showQuestionDetailsModal(index: number): void {
+    // Close existing modal if open
+    if (this.currentDetailsModal) {
+      this.dynamicModalService.close(this.currentDetailsModal);
+    }
+
+    // Get question data
+    const content = this.assessmentService.getContent();
+    if (!content || index >= content.questions.length) {
+      console.error('[AssessmentLesson] Invalid question index:', index);
+      return;
+    }
+
+    const question = content.questions[index];
+    const questionResult = this.assessmentService.getQuestionResult(question.id);
+
+    // Create modal
+    this.currentDetailsModal = this.dynamicModalService.open(QuestionDetailsModalComponent);
+    
+    // Set up props and event handling
+    const instance = this.currentDetailsModal.instance;
+    instance.question = question;
+    instance.questionIndex = index;
+    instance.questionResult = questionResult;
+    
+    // Handle close event
+    instance.closeDetails.subscribe(() => {
+      if (this.currentDetailsModal) {
+        this.dynamicModalService.close(this.currentDetailsModal);
+        this.currentDetailsModal = null;
+        this.onDetailsModalClosed();
       }
     });
   }
@@ -257,7 +334,6 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
   // Event handlers for child components
   onCompletionClosed(): void {
     this.assessmentService.setShowCompletionAnimation(false);
-    this.showCompletionModal = false;
     this.onComplete.emit();
     this.isCompletionInProgress = false;
     this.cdr.markForCheck();
@@ -265,14 +341,12 @@ export class AssessmentLessonComponent implements OnInit, OnDestroy {
 
   onDetailsModalClosed(): void {
     this.assessmentService.setSelectedQuestionIndex(null);
-    this.showDetailsModal = false;
     this.cdr.markForCheck();
   }
 
   // Helper for review mode
   showQuestionDetails(index: number): void {
     this.assessmentService.setSelectedQuestionIndex(index);
-    this.showDetailsModal = true;
     this.cdr.markForCheck();
   }
 }

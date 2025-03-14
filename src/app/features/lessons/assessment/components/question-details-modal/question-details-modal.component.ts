@@ -6,7 +6,8 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Input
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate, state } from '@angular/animations';
@@ -59,9 +60,11 @@ import { AssessmentService } from '../../services/assessment-service.service';
 export class QuestionDetailsModalComponent implements OnInit, OnDestroy {
   @Output() closeDetails = new EventEmitter<void>();
 
-  questionIndex: number | null = null;
-  question?: AssessmentQuestion;
-  questionResult: 'correct' | 'incorrect' | 'unanswered' = 'unanswered';
+  // Properties that will be set when created by the dynamic modal service
+  @Input() questionIndex: number | null = null;
+  @Input() question?: AssessmentQuestion;
+  @Input() questionResult: 'correct' | 'incorrect' | 'unanswered' = 'unanswered';
+  
   highlightState: 'active' | 'inactive' = 'inactive';
 
   private subscriptions: Subscription[] = [];
@@ -73,21 +76,6 @@ export class QuestionDetailsModalComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // Get the selected question index from the service
-    this.questionIndex = this.assessmentService.getSelectedQuestionIndex();
-
-    if (this.questionIndex !== null) {
-      // Get question details
-      const content = this.assessmentService.getContent();
-      if (content && this.questionIndex < content.questions.length) {
-        this.question = content.questions[this.questionIndex];
-
-        if (this.question) {
-          this.questionResult = this.assessmentService.getQuestionResult(this.question.id);
-        }
-      }
-    }
-
     // Start highlight animation
     this.highlightTimer = setInterval(() => {
       this.highlightState = this.highlightState === 'active' ? 'inactive' : 'active';
