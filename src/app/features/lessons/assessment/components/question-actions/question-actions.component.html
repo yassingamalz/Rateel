@@ -1,29 +1,30 @@
-<!-- question-actions.component.html -->
+<!-- updated question-actions.component.html -->
 <div class="question-actions">
-    <!-- Submit Answer Button - Only visible when not answered yet -->
-    <ng-container *ngIf="!isAnswered">
-      <button class="submit-button"
-              [disabled]="!canSubmit"
-              (click)="submitAnswer()">
-        <span>تأكيد الإجابة</span>
-        <i class="fas fa-arrow-left"></i>
-      </button>
-    </ng-container>
-  
-    <!-- Next/Finish Button - Only visible after answering -->
-    <ng-container *ngIf="isAnswered">
-      <button *ngIf="!isLastQuestion" 
-              class="next-button" 
-              (click)="nextQuestion()">
-        <span>السؤال التالي</span>
-        <i class="fas fa-arrow-left"></i>
-      </button>
-      
-      <button *ngIf="isLastQuestion" 
-              class="finish-button" 
-              (click)="finishAssessment()">
-        <span>إنهاء الاختبار</span>
-        <i class="fas fa-flag-checkered"></i>
-      </button>
-    </ng-container>
-  </div>
+  <!-- Submit Answer Button - Only visible when not answered yet -->
+  <ng-container *ngIf="!isAnswered">
+    <button class="submit-button" 
+            [class.enabled]="canSubmit"
+            [disabled]="!canSubmit"
+            (click)="submitAnswer()">
+      <span>تأكيد الإجابة</span>
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  </ng-container>
+
+  <!-- Next/Finish Button - Only visible after answering -->
+  <ng-container *ngIf="isAnswered">
+    <button *ngIf="!isLastQuestion" 
+            class="next-button" 
+            (click)="nextQuestion()">
+      <span>السؤال التالي</span>
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    
+    <button *ngIf="isLastQuestion" 
+            class="finish-button" 
+            (click)="finishAssessment()">
+      <span>إنهاء الاختبار</span>
+      <i class="fas fa-flag-checkered"></i>
+    </button>
+  </ng-container>
+</div>

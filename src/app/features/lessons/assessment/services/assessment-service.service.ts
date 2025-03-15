@@ -127,8 +127,15 @@ export class AssessmentService {
   }
 
   setTextAnswer(questionId: string, answer: string): void {
+    // Store text answer and log it for debugging
     this.textAnswers[questionId] = answer;
+    console.log(`[AssessmentService] Text answer set for ${questionId}: "${answer}", length: ${answer.length}`);
+
+    // Notify state subscribers about the change
+    const currentState = this.state.value;
+    this.state.next({ ...currentState });
   }
+
 
   getContent(): AssessmentContent | undefined {
     return this.content;
@@ -710,17 +717,29 @@ export class AssessmentService {
     const question = this.content.questions.find(q => q.id === questionId);
     if (!question) return false;
 
+    let result = false;
+
     switch (question.type) {
       case QuestionType.SINGLE_CHOICE:
       case QuestionType.MULTIPLE_CHOICE:
-        return selectedOptions.length > 0;
+        result = selectedOptions.length > 0;
+        break;
       case QuestionType.TRUE_FALSE:
-        return selectedOptions.length === 1;
+        result = selectedOptions.length === 1;
+        break;
       case QuestionType.TEXT_INPUT:
-        return !!this.textAnswers[questionId]?.trim();
+        // Specifically check if there's any text, ensuring we trim whitespace
+        const hasText = !!(this.textAnswers[questionId]?.trim());
+        result = hasText;
+        break;
       default:
-        return false;
+        result = false;
     }
+
+    console.log(`[AssessmentService] canSubmitAnswer for ${questionId} (${question.type}): ${result}`,
+      question.type === QuestionType.TEXT_INPUT ? `Text: "${this.textAnswers[questionId] || ''}"` : '');
+
+    return result;
   }
 
   getRecommendations(): string[] {

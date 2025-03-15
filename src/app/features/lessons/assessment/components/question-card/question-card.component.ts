@@ -1,10 +1,10 @@
-import { 
-  Component, 
-  OnInit, 
-  OnDestroy, 
-  ChangeDetectionStrategy, 
-  ChangeDetectorRef, 
-  Output, 
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Output,
   EventEmitter
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -43,40 +43,40 @@ import { AssessmentService } from '../../services/assessment-service.service';
 })
 export class QuestionCardComponent implements OnInit, OnDestroy {
   @Output() answerSubmitted = new EventEmitter<void>();
-  
+
   // Question data
   currentQuestion?: AssessmentQuestion;
   currentQuestionIndex = 0;
   QuestionType = QuestionType; // For template access
-  
+
   // UI state
   showHint = false;
   textAnswer = '';
-  
+
   private subscriptions: Subscription[] = [];
 
   constructor(
     protected assessmentService: AssessmentService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Subscribe to changes in the assessment state
     this.subscriptions.push(
       this.assessmentService.getState().subscribe(state => {
         this.currentQuestionIndex = state.currentQuestionIndex;
-        
+
         // Get current question
         const content = this.assessmentService.getContent();
         if (content && state.currentQuestionIndex < content.questions.length) {
           this.currentQuestion = content.questions[state.currentQuestionIndex];
-          
+
           // Get saved text answer if any
           if (this.currentQuestion && this.currentQuestion.type === QuestionType.TEXT_INPUT) {
             this.textAnswer = this.assessmentService.getTextAnswer(this.currentQuestion.id);
           }
         }
-        
+
         this.cdr.markForCheck();
       })
     );
@@ -102,11 +102,31 @@ export class QuestionCardComponent implements OnInit, OnDestroy {
     this.assessmentService.submitTrueFalseAnswer(questionId, value);
   }
 
-  onTextAnswerChange(questionId: string, answer: string): void {
+  onTextAnswerChange(questionId: string, value: string | Event): void {
     if (this.isAnswered(questionId)) return;
-    this.textAnswer = answer;
-    this.assessmentService.setTextAnswer(questionId, answer);
-    this.assessmentService.submitTextAnswer(questionId, answer);
+
+    // Handle both string input and Event objects
+    let textValue: string;
+    if (typeof value === 'string') {
+      textValue = value;
+    } else {
+      // It's an event, so extract the value from the target
+      textValue = (value.target as HTMLInputElement)?.value || '';
+    }
+
+    console.log(`[QuestionCard] Text answer changed for ${questionId}: "${textValue}"`);
+
+    // Update local component state
+    this.textAnswer = textValue;
+
+    // Store the text input without submitting the answer
+    this.assessmentService.setTextAnswer(questionId, textValue);
+
+    // Force external updates to ensure button state is updated
+    this.answerSubmitted.emit();
+
+    // Force change detection
+    this.cdr.markForCheck();
   }
 
   // UI interaction methods
@@ -123,19 +143,19 @@ export class QuestionCardComponent implements OnInit, OnDestroy {
   isOptionSelected(questionId: string, optionId: string): boolean {
     return this.assessmentService.isOptionSelected(questionId, optionId);
   }
-  
+
   isCorrectOption(question: AssessmentQuestion, optionId: string): boolean {
     return this.assessmentService.isCorrectOption(question, optionId);
   }
-  
+
   isIncorrectSelectedOption(questionId: string, optionId: string): boolean {
     return this.assessmentService.isIncorrectSelectedOption(questionId, optionId);
   }
-  
+
   getQuestionResult(questionId: string): 'correct' | 'incorrect' | 'unanswered' {
     return this.assessmentService.getQuestionResult(questionId);
   }
-  
+
   getCorrectAnswerText(question?: AssessmentQuestion): string {
     return this.assessmentService.getCorrectAnswerText(question);
   }

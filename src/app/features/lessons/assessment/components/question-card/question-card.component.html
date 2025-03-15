@@ -98,14 +98,15 @@
         </ng-container>
 
         <!-- Text Input -->
+        <!-- Fixed text input container with proper typing -->
         <ng-container *ngIf="currentQuestion.type === QuestionType.TEXT_INPUT">
           <div class="text-input-container">
             <div class="input-wrapper" [class.answered]="isAnswered(currentQuestion.id)"
               [class.correct]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"
               [class.incorrect]="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'incorrect'">
-              <input type="text" class="text-answer-input" placeholder="اكتب إجابتك هنا..." [(ngModel)]="textAnswer"
-                [disabled]="isAnswered(currentQuestion.id)"
-                (input)="onTextAnswerChange(currentQuestion.id, textAnswer)">
+              <input #textInput type="text" class="text-answer-input" placeholder="اكتب إجابتك هنا..."
+                [(ngModel)]="textAnswer" [disabled]="isAnswered(currentQuestion.id)"
+                (input)="onTextAnswerChange(currentQuestion.id, textInput.value)">
               <i class="fas fa-check-circle"
                 *ngIf="isAnswered(currentQuestion.id) && getQuestionResult(currentQuestion.id) === 'correct'"></i>
               <i class="fas fa-times-circle"
