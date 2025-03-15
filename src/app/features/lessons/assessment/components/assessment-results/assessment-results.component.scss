@@ -630,6 +630,10 @@
 
 // Enhanced landscape mode optimizations
 @media (orientation: landscape) and (max-height: 500px) {
+    .assessment-results .results-header .results-summary.isPassed {
+        margin-left: 100px;
+    }
+
     .assessment-results {
 
         // Horizontal compact layout for header

@@ -4,8 +4,8 @@
   <div class="results-header">
     <h2 class="results-title" [@scaleIn]>نتائج الاختبار</h2>
     
-    <div class="results-summary">
-      <!-- Score circle -->
+    <div class="results-summary" [class.isPassed]="isPassed()">
+        <!-- Score circle -->
       <div class="score-circle" 
           [class.score-passed]="isPassed()"
           [class.score-failed]="!isPassed()"
