@@ -1,9 +1,8 @@
-<!-- src/app/features/lessons/assessment/components/completion-modal/completion-modal.component.html -->
 <div class="completion-modal" [@modalAnimation] dir="rtl">
   <div class="modal-overlay"></div>
   
   <div class="animation-container" [@itemsAnimation]>
-    <!-- Animated particles -->
+    <!-- Animated particles with different intensities based on pass/fail -->
     <div class="completion-particles" [@particles]>
       <div *ngFor="let particle of particles" class="particle"
            [style.--tx]="particle.tx"
@@ -15,40 +14,61 @@
       </div>
     </div>
     
-    <!-- Completion message -->
-    <div class="completion-message" [@contentAnimation]>
-      <i class="animated-item fas fa-check-circle"></i>
+    <!-- Enhanced completion message -->
+    <div class="completion-message" 
+         [class.passed-message]="isPassed" 
+         [class.failed-message]="!isPassed"
+         [@contentAnimation]>
+      <!-- Different icons based on pass/fail status -->
+      <i class="animated-item fas" 
+         [class.fa-check-circle]="isPassed" 
+         [class.fa-graduation-cap]="!isPassed"></i>
       
-      <div class="animated-item completion-title">مبروك!</div>
+      <!-- Different titles based on pass/fail status -->
+      <div class="animated-item completion-title">
+        {{ isPassed ? 'مبروك' : 'انتهى الاختبار' }}
+      </div>
       
+      <!-- Subtitle with adaptive message -->
       <div class="animated-item completion-subtitle">
         {{ isPassed ? 'لقد أكملت الاختبار بنجاح!' : 'لقد أكملت الاختبار' }}
       </div>
       
-      <div class="animated-item completion-score">{{ score }}%</div>
+      <!-- Score display with enhanced success/failure styling -->
+      <div class="animated-item completion-score" 
+           [class.passing-score]="isPassed" 
+           [class.failing-score]="!isPassed">
+        {{ score }}%
+      </div>
       
+      <!-- Points display -->
       <div class="animated-item completion-points">
         <i class="fas fa-star"></i>
         <span>{{ totalPoints }} نقطة</span>
       </div>
       
-      <!-- Success message for passing -->
+      <!-- Success message for passing with celebratory style -->
       <div *ngIf="isPassed" class="animated-item success-message">
         <i class="fas fa-trophy"></i>
-        <p>أحسنت! لقد تجاوزت درجة النجاح وأكملت هذا الاختبار بنجاح.</p>
+        <p>أحسنت لقد تجاوزت درجة النجاح وأكملت هذا الاختبار بنجاح.</p>
       </div>
       
-      <!-- Different message for not passing -->
+      <!-- Enhanced message for not passing with encouragement -->
       <div *ngIf="!isPassed" class="animated-item try-again-message">
         <i class="fas fa-redo"></i>
-        <p>حاول مرة أخرى للحصول على درجة أعلى!</p>
+        <p>حاول مرة أخرى للحصول على درجة أعلى أنت بحاجة إلى {{ passingScore }}% للنجاح.</p>
       </div>
       
-      <!-- Continue button appears after animation completes -->
-      <button *ngIf="animationComplete" class="animated-item continue-button" (click)="onComplete()">
-        <span>متابعة</span>
-        <i class="fas fa-arrow-left"></i>
-      </button>
+      <!-- Auto-close countdown indicator -->
+      <div *ngIf="showCountdown" class="auto-close-indicator animated-item">
+        <div class="countdown-text">
+          <span>تلقائي في</span>
+          <span class="countdown-number">{{ timeLeft }}</span>
+        </div>
+        <div class="countdown-progress">
+          <div class="countdown-fill" [style.width.%]="(timeLeft / (isPassed ? (autoCloseTimeoutPass/1000) : (autoCloseTimeoutFail/1000))) * 100"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
