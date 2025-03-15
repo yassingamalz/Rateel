@@ -1,105 +1,104 @@
+// help-tips.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 
 :host {
-  display: block;
-}
-
-.help-tips {
-  position: fixed;
+  position: absolute;
   bottom: 130px;
   left: 0;
   right: 0;
+  z-index: 5;
+  width: 100%;
+  pointer-events: none;
+}
+
+.help-tips {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 0 20px;
-  z-index: 5;
-  pointer-events: none;
-  animation: fadeIn 0.5s ease-out;
+}
 
-  .tip-card {
-    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.5);
-    backdrop-filter: blur(10px);
-    padding: 15px 20px;
-    border-radius: 12px;
+// Base styles (dark theme by default)
+.tip-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  max-width: 250px;
+  pointer-events: auto;
+  background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.5);
+
+  .tip-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
     display: flex;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    max-width: 300px;
-    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-content: center;
 
-    &:nth-child(2) {
-      animation-delay: 0.1s;
+    i {
+      color: map-get(vars.$colors, 'accent', 'base');
+      font-size: 1.2rem;
     }
+  }
 
+  .tip-text {
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+// Light theme styles - activated when the component is inside a .theme-light container
+:host-context(.theme-light) {
+  .tip-card {
+    background: rgba(248, 243, 230, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    .tip-text {
+      color: #1A0F00;
+    }
+    
     .tip-icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
+      background: rgba(196, 164, 132, 0.2);
+      
       i {
-        color: map-get(vars.$colors, 'accent', 'base');
-        font-size: 1.2rem;
+        color: #1A0F00;
       }
     }
-
-    .tip-text {
-      color: white;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
 // Media queries
 @media (max-width: 768px) {
   .help-tips {
-    bottom: 110px;
     flex-direction: column;
     align-items: center;
   }
+  
+  :host {
+    bottom: 110px;
+  }
 }
 
-// Mobile landscape optimizations
 @media (orientation: landscape) and (max-height: 600px) {
-  .help-tips {
+  :host {
     bottom: 80px;
-
-    .tip-card {
-      padding: 8px 15px;
-
-      .tip-icon {
-        width: 30px;
-        height: 30px;
-      }
+  }
+  
+  .tip-card {
+    padding: 8px 15px;
+    
+    .tip-icon {
+      width: 30px;
+      height: 30px;
     }
   }
 }

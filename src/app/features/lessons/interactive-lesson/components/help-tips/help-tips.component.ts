@@ -1,17 +1,17 @@
+// help-tips.component.ts
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-help-tips',
-  standalone: false,
   templateUrl: './help-tips.component.html',
   styleUrls: ['./help-tips.component.scss'],
+  standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HelpTipsComponent {
   @Input() hasStartedLesson = false;
   @Input() isRecording = false;
-  
-  // Tips to display
+
   tips = [
     {
       icon: 'microphone',
