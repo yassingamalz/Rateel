@@ -1,0 +1,53 @@
+<div class="verses-container" #versesContainer 
+     [class.dragging]="isDragging" 
+     [class.snap-scrolling]="isSnapScrolling"
+     (mousedown)="onMouseDown($event)" 
+     (mousemove)="onMouseMove($event)" 
+     (mouseup)="onMouseUp()"
+     (mouseleave)="onMouseLeave()" 
+     (touchstart)="onTouchStart($event)" 
+     (touchmove)="onTouchMove($event)"
+     (touchend)="onTouchEnd()">
+
+  <div class="verses-track" #versesTrack>
+    <ng-container *ngFor="let verse of verses; let i = index">
+      <!-- Verse Card -->
+      <app-verse-card 
+        [verse]="verse"
+        [verseIndex]="i"
+        [isActive]="isVerseActive(i)"
+        [isCompleted]="isVerseCompleted(i)"
+        [currentWordIndex]="currentWordIndex"
+        [recognizedWords]="recognizedWords">
+        <app-tajweed-legend 
+          *ngIf="isVerseActive(i) && verse.highlights?.length"
+          [rules]="verse.highlights | uniqueRules"
+          [isActive]="isVerseActive(i)">
+        </app-tajweed-legend>
+      </app-verse-card>
+
+      <!-- Connector Line -->
+      <div class="connector-line" *ngIf="i < verses.length - 1" 
+           [class.completed]="isVerseCompleted(i)"
+           [class.active]="isVerseActive(i)">
+        <div class="connector-progress" [style.width.%]="getConnectorProgress(i)"></div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Scroll Indicators -->
+  <div class="scroll-indicators" *ngIf="verses.length > 1">
+    <!-- Right arrow (for previous in RTL) -->
+    <div class="scroll-indicator scroll-right" 
+         [class.visible]="canScrollLeft()" 
+         (click)="scrollToPreviousVerse()">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <!-- Left arrow (for next in RTL) -->
+    <div class="scroll-indicator scroll-left" 
+         [class.visible]="canScrollRight()" 
+         (click)="scrollToNextVerse()">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+  </div>
+</div>

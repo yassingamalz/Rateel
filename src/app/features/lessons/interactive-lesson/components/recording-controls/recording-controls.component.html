@@ -1,0 +1,19 @@
+<div class="controls-container" [class.is-recording]="isRecording">
+    <!-- Visual Audio Wave with Enhanced Animation -->
+    <div class="audio-visualization" *ngIf="isRecording">
+        <div class="wave-bars">
+            <div class="wave-bar" *ngFor="let height of waveBarHeights; let idx = index" [style.height.px]="height"
+                [style.animation-delay]="(idx * 0.1) + 's'">
+            </div>
+        </div>
+    </div>
+
+    <button class="record-button" [class.recording]="isRecording" [disabled]="isCompleted"
+        (click)="toggleRecording($event)" (touchstart)="toggleRecording($event)">
+        <div class="button-content">
+            <i class="fas" [class.fa-microphone]="!isRecording" [class.fa-stop]="isRecording"></i>
+            <span class="button-text">{{ isRecording ? 'إيقاف' : 'ابدأ القراءة' }}</span>
+        </div>
+        <div class="record-ripple" *ngIf="isRecording"></div>
+    </button>
+</div>

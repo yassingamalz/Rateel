@@ -1,0 +1,52 @@
+<div class="verse-card" 
+     [class.active]="isActive" 
+     [class.completed]="isCompleted"
+     [class.inactive]="!isActive && !isCompleted" 
+     [attr.data-verse-index]="verseIndex">
+
+  <!-- Verse Frame -->
+  <div class="verse-frame">
+    <!-- Decorative Corner Elements -->
+    <div class="frame-corner frame-corner--tl"></div>
+    <div class="frame-corner frame-corner--tr"></div>
+    <div class="frame-corner frame-corner--bl"></div>
+    <div class="frame-corner frame-corner--br"></div>
+
+    <!-- Light Bulb/Verse Glow Effect -->
+    <div class="verse-glow"></div>
+
+    <!-- Verse Number Badge -->
+    <div class="verse-number">
+      <span>{{verseIndex + 1}}</span>
+    </div>
+
+    <!-- Verse Text with Enhanced Word-Level Highlighting -->
+    <div class="verse-text-container">
+      <div class="verse-text">
+        <ng-container *ngFor="let word of words; let wordIndex = index">
+          <span class="word" 
+                [class.highlight]="hasHighlight(word, wordIndex)"
+                [class.spoken]="isWordSpoken(wordIndex)" 
+                [class.current-word]="isCurrentWord(wordIndex)"
+                [style.color]="getWordColor(word, wordIndex)">
+            {{word}}
+          </span>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Word Progress Indicator -->
+    <div class="word-progress" *ngIf="isActive">
+      <div class="word-dots">
+        <span class="dot" 
+              *ngFor="let word of words; let wordIndex = index"
+              [class.completed]="isWordSpoken(wordIndex)" 
+              [class.current]="isCurrentWord(wordIndex)">
+        </span>
+      </div>
+    </div>
+
+    <!-- Tajweed Rules Legend -->
+    <ng-content select="app-tajweed-legend"></ng-content>
+  </div>
+</div>

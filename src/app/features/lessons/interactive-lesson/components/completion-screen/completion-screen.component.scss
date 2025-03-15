@@ -1,0 +1,143 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+:host {
+  display: block;
+}
+
+.completion-animation {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+
+  .completion-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: map-get(vars.$colors, 'accent', 'base');
+      box-shadow: 0 0 10px map-get(vars.$colors, 'accent', 'glow');
+      animation: particle 2s ease-out infinite;
+    }
+
+    @for $i from 1 through 20 {
+      &::before {
+        left: random(100) * 1%;
+        top: random(100) * 1%;
+        animation-delay: random(10) * 0.1s;
+      }
+
+      &::after {
+        left: random(100) * 1%;
+        top: random(100) * 1%;
+        animation-delay: random(10) * 0.1s;
+      }
+    }
+  }
+
+  .completion-message {
+    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+
+    i {
+      font-size: 4rem;
+      color: map-get(vars.$colors, 'accent', 'base');
+      animation: pulse 2s infinite;
+    }
+
+    span {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes particle {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Media query for mobile
+@media (max-width: 768px) {
+  .completion-animation {
+    .completion-message {
+      padding: 25px;
+      
+      i {
+        font-size: 3rem;
+      }
+      
+      span {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+// Mobile landscape optimizations
+@media (orientation: landscape) and (max-height: 600px) {
+  .completion-animation {
+    .completion-message {
+      padding: 20px;
+      flex-direction: row;
+      gap: 15px;
+      
+      i {
+        font-size: 2.5rem;
+      }
+      
+      span {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

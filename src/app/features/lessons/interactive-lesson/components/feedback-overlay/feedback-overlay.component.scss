@@ -1,0 +1,104 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+:host {
+  display: block;
+}
+
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+
+  .feedback-dialog {
+    background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &.success {
+      background: rgba(darken(#4CAF50, 10%), 0.9);
+
+      .feedback-icon {
+        background: #4CAF50;
+      }
+    }
+
+    .feedback-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #F44336;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+      i {
+        font-size: 2rem;
+        color: white;
+      }
+    }
+
+    .feedback-message {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+    }
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+  .feedback-overlay {
+    .feedback-dialog {
+      padding: 25px;
+      max-width: 95%;
+      
+      .feedback-icon {
+        width: 60px;
+        height: 60px;
+        
+        i {
+          font-size: 1.8rem;
+        }
+      }
+      
+      .feedback-message {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+// Mobile landscape optimizations
+@media (orientation: landscape) and (max-height: 600px) {
+  .feedback-overlay {
+    .feedback-dialog {
+      padding: 20px;
+      flex-direction: row;
+      gap: 20px;
+      
+      .feedback-icon {
+        width: 50px;
+        height: 50px;
+        
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}

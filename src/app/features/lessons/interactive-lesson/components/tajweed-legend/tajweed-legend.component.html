@@ -1,0 +1,9 @@
+<div class="tajweed-legend" *ngIf="isActive && rules.length > 0">
+    <div class="legend-title">قواعد التجويد:</div>
+    <div class="legend-items">
+      <div class="legend-item" *ngFor="let rule of rules">
+        <span class="color-dot" [style.background-color]="rule.color"></span>
+        <span class="rule-name">{{rule.rule}}</span>
+      </div>
+    </div>
+  </div>

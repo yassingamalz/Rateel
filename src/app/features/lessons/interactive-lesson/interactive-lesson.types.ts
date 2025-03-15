@@ -21,7 +21,7 @@ export interface InteractionState {
   isCompleted: boolean;
   progress: number;
   feedback?: string;
-  isRecording?: boolean;
+  isRecording: boolean;
   currentAudio?: string;
   scrollPosition: number;
   currentWordIndex?: number;

@@ -1,0 +1,8 @@
+<div class="help-tips" *ngIf="!isRecording && !hasStartedLesson">
+    <div class="tip-card" *ngFor="let tip of tips">
+      <div class="tip-icon">
+        <i class="fas fa-{{tip.icon}}"></i>
+      </div>
+      <div class="tip-text">{{tip.text}}</div>
+    </div>
+  </div>
