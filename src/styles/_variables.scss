@@ -60,6 +60,26 @@ $colors: (
   )
 );
 
+// Mushaf style colors (light theme)
+$mushaf-colors: (
+  paper: #F8F3E6,        // Paper background
+  border: #C4A484,       // Decorative border
+  text: #1A0F00,         // Main text
+  highlight: rgba(#C4A484, 0.15), // Subtle highlight
+  shadow: rgba(#000, 0.15),       // Subtle shadow
+  glow: rgba(#C4A484, 0.3)        // Paper glow effect
+);
+
+// Tajweed rule colors
+$tajweed-rules: (
+  ghunnah: #FF7F7F,      // Nasal sound (غنة)
+  ikhfa: #FF9F40,        // Hidden/partial nasal sound (إخفاء)
+  idgham: #98D8D6,       // Merging letters (إدغام)
+  iqlab: #FF80FF,        // Conversion (إقلاب)
+  qalqalah: #DD99FF,     // Echo/bouncing sound (قلقلة)
+  ikhfa-shafawi: #FFB380 // Labial hiding (إخفاء شفوي)
+);
+
 // Maintain existing spacing scale
 $spacing: (
   xs: 0.25rem,   // 4px
