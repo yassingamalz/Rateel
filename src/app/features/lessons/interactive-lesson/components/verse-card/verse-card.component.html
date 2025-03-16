@@ -4,20 +4,23 @@
      [class.inactive]="!isActive && !isCompleted" 
      [attr.data-verse-index]="verseIndex">
 
-  <!-- Verse Frame -->
+  <!-- Verse Frame with Enhanced Islamic Decorations -->
   <div class="verse-frame">
-    <!-- Decorative Corner Elements -->
-    <div class="frame-corner frame-corner--tl"></div>
-    <div class="frame-corner frame-corner--tr"></div>
-    <div class="frame-corner frame-corner--bl"></div>
-    <div class="frame-corner frame-corner--br"></div>
+    <!-- Islamic Corner Decorations -->
+    <div class="islamic-corner islamic-corner--tl"></div>
+    <div class="islamic-corner islamic-corner--tr"></div>
+    <div class="islamic-corner islamic-corner--bl"></div>
+    <div class="islamic-corner islamic-corner--br"></div>
 
-    <!-- Light Bulb/Verse Glow Effect -->
+    <!-- Islamic Decorative Border -->
+    <div class="islamic-border"></div>
+
+    <!-- Verse Glow Effect -->
     <div class="verse-glow"></div>
 
-    <!-- Verse Number Badge -->
+    <!-- Verse Number Badge with Arabic Numerals -->
     <div class="verse-number">
-      <span>{{verseIndex + 1}}</span>
+      <span>{{convertToArabicNumeral(verseIndex + 1)}}</span>
     </div>
 
     <!-- Verse Text with Enhanced Word-Level Highlighting -->
@@ -46,7 +49,7 @@
       </div>
     </div>
 
-    <!-- Tajweed Rules Legend -->
-    <ng-content select="app-tajweed-legend"></ng-content>
+    <!-- Islamic Decorative Divider -->
+    <div class="islamic-divider"></div>
   </div>
 </div>

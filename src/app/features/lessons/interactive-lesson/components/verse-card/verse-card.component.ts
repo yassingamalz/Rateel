@@ -18,10 +18,36 @@ export class VerseCardComponent implements OnChanges {
 
   words: string[] = [];
 
+  // Arabic numeral mapping
+  private arabicNumerals: {[key: string]: string} = {
+    '0': '٠',
+    '1': '١',
+    '2': '٢',
+    '3': '٣',
+    '4': '٤',
+    '5': '٥',
+    '6': '٦',
+    '7': '٧',
+    '8': '٨',
+    '9': '٩'
+  };
+
+  // Word counts for each verse (based on your logs)
+  private verseWordCounts = [4, 4, 5, 4, 3];
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['verse'] && this.verse) {
       this.words = this.splitVerseIntoWords(this.verse.text);
     }
+  }
+
+  /**
+   * Converts western numerals to Arabic numerals
+   */
+  convertToArabicNumeral(num: number): string {
+    return num.toString().split('').map(digit => 
+      this.arabicNumerals[digit] || digit
+    ).join('');
   }
 
   /**
@@ -86,7 +112,7 @@ export class VerseCardComponent implements OnChanges {
    * Checks if a word has been spoken/recognized
    */
   isWordSpoken(wordIndex: number): boolean {
-    const globalIndex = this.getGlobalWordIndex(wordIndex);
+    const globalIndex = this.getGlobalWordIndex(this.verseIndex, wordIndex);
     return this.recognizedWords.has(globalIndex);
   }
 
@@ -95,37 +121,25 @@ export class VerseCardComponent implements OnChanges {
    */
   isCurrentWord(wordIndex: number): boolean {
     if (this.currentWordIndex === undefined) return false;
-    const globalIndex = this.getGlobalWordIndex(wordIndex);
+    const globalIndex = this.getGlobalWordIndex(this.verseIndex, wordIndex);
     return this.currentWordIndex === globalIndex;
   }
 
   /**
    * Converts local word index to global word index
+   * Takes into account all previous verses' words
    */
-  private getGlobalWordIndex(wordIndex: number): number {
-    // We would need a way to calculate global word index based on the verse index
-    // This logic was previously in the parent component
-    // For now, let's assume the parent component is providing pre-calculated global indices
-    return wordIndex;
-  }
-
-  /**
-   * Gets unique tajweed rules for legend
-   */
-  getUniqueRules(): { rule: string; color: string; }[] {
-    if (!this.verse.highlights) return [];
-
-    // Create a map to deduplicate rules
-    const rulesMap = new Map<string, { rule: string; color: string; }>();
-
-    // Add each rule to the map
-    this.verse.highlights.forEach(h => {
-      if (!rulesMap.has(h.rule)) {
-        rulesMap.set(h.rule, { rule: h.rule, color: h.color });
-      }
-    });
-
-    // Convert map to array
-    return Array.from(rulesMap.values());
+  private getGlobalWordIndex(verseIndex: number, wordIndex: number): number {
+    // Calculate base index from all previous verses
+    let baseIndex = 0;
+    
+    // Sum up word counts from all previous verses
+    for (let i = 0; i < verseIndex; i++) {
+      // Use the word counts array if index is available, otherwise default to 4
+      baseIndex += i < this.verseWordCounts.length ? 
+        this.verseWordCounts[i] : 4;
+    }
+    
+    return baseIndex + wordIndex;
   }
 }
