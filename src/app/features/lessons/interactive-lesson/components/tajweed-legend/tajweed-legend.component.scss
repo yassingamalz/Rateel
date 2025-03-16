@@ -3,59 +3,103 @@
 
 :host {
   display: block;
+  width: 100%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .tajweed-legend {
   margin-top: 20px;
-  padding: 10px 15px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
   width: 100%;
-  animation: fadeIn 0.3s ease;
-
+  
   .legend-title {
     font-size: 0.9rem;
-    color: map-get(vars.$colors, 'text', 'muted');
     margin-bottom: 8px;
     text-align: center;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility;
   }
-
+  
   .legend-items {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-
+    
     .legend-item {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 4px 10px;
       border-radius: 20px;
-
+      padding: 4px 10px;
+      
       .color-dot {
         width: 10px;
         height: 10px;
         border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
       }
-
+      
       .rule-name {
         font-size: 0.85rem;
-        color: map-get(vars.$colors, 'text', 'light');
+        font-weight: 500;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        text-rendering: optimizeLegibility;
       }
     }
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+// Dark theme (default)
+:host-context(.theme-dark), :host {
+  .tajweed-legend {
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    
+    .legend-title {
+      color: white !important;
+      opacity: 0.8;
+    }
+    
+    .legend-items {
+      .legend-item {
+        background: rgba(255, 255, 255, 0.1);
+        
+        .rule-name {
+          color: white !important;
+        }
+      }
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+// Light theme (Mushaf style)
+:host-context(.theme-light) {
+  .tajweed-legend {
+    background-color: rgba(248, 243, 230, 0.9) !important;
+    border-radius: 8px;
+    border: 1px solid rgba(196, 164, 132, 0.2) !important;
+    padding: 12px 15px;
+    
+    .legend-title {
+      color: #1A0F00 !important;
+      opacity: 0.8;
+    }
+    
+    .legend-items {
+      .legend-item {
+        background-color: rgba(196, 164, 132, 0.1) !important;
+        
+        .rule-name {
+          color: #1A0F00 !important;
+        }
+      }
+    }
   }
 }
 
@@ -63,7 +107,6 @@
 @media (orientation: landscape) and (max-height: 600px) {
   .tajweed-legend {
     margin-top: 10px;
-    padding: 8px 10px;
     
     .legend-title {
       font-size: 0.8rem;

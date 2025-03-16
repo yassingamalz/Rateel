@@ -1,26 +1,28 @@
-// help-tips.component.scss
 @use "sass:map";
 @use 'variables' as vars;
 
 :host {
-  position: absolute;
+  display: block;
+  position: fixed;
   bottom: 130px;
   left: 0;
   right: 0;
   z-index: 5;
-  width: 100%;
   pointer-events: none;
 }
 
 .help-tips {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 0 20px;
+  animation: fadeIn 0.5s ease-out;
 }
 
-// Base styles (dark theme by default)
+// Base styles for dark theme
 .tip-card {
+  background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 15px 20px;
@@ -29,9 +31,13 @@
   align-items: center;
   gap: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  max-width: 250px;
+  max-width: 300px;
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
-  background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.5);
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
 
   .tip-icon {
     flex-shrink: 0;
@@ -56,49 +62,84 @@
   }
 }
 
-// Light theme styles - activated when the component is inside a .theme-light container
+// Light theme styles (Mushaf paper style)
 :host-context(.theme-light) {
   .tip-card {
-    background: rgba(248, 243, 230, 0.6);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    
-    .tip-text {
-      color: #1A0F00;
-    }
+    background: rgba(map-get(vars.$mushaf-colors, 'paper'), 0.8);
+    box-shadow: 0 4px 10px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(map-get(vars.$mushaf-colors, 'border'), 0.1);
     
     .tip-icon {
-      background: rgba(196, 164, 132, 0.2);
+      background: rgba(map-get(vars.$mushaf-colors, 'border'), 0.15);
+      box-shadow: 0 2px 4px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.1);
       
       i {
-        color: #1A0F00;
+        color: map-get(vars.$mushaf-colors, 'text');
+        opacity: 0.8;
       }
     }
+    
+    .tip-text {
+      color: map-get(vars.$mushaf-colors, 'text');
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 // Media queries
 @media (max-width: 768px) {
+  :host {
+    bottom: 110px;
+  }
+  
   .help-tips {
     flex-direction: column;
     align-items: center;
   }
-  
-  :host {
-    bottom: 110px;
-  }
 }
 
+// Mobile landscape optimizations
 @media (orientation: landscape) and (max-height: 600px) {
   :host {
     bottom: 80px;
   }
-  
+
   .tip-card {
     padding: 8px 15px;
-    
+
     .tip-icon {
       width: 30px;
       height: 30px;
+      
+      i {
+        font-size: 1rem;
+      }
+    }
+    
+    .tip-text {
+      font-size: 1rem;
     }
   }
 }

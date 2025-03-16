@@ -12,7 +12,8 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  NgZone
+  NgZone,
+  HostBinding
 } from '@angular/core';
 import { TajweedVerse } from '../../interactive-lesson.types';
 import { timer, Subscription } from 'rxjs';
@@ -34,7 +35,10 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
   @Input() recognizedWords: Set<number> = new Set<number>();
 
   @Output() verseChange = new EventEmitter<number>();
-  
+
+  @HostBinding('style.transform') get hostTransform() { return 'translateZ(0)'; }
+  @HostBinding('style.backfaceVisibility') get hostBackface() { return 'hidden'; }
+
   // UI state variables
   isDragging = false;
   isSnapScrolling = false;
@@ -63,7 +67,7 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
   constructor(
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setupResizeObserver();
@@ -197,7 +201,7 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
       const nextIndex = this.currentVerseIndex + 1;
 
       this.snapToVerse(nextIndex);
-      
+
       // Emit the verse change event
       this.verseChange.emit(nextIndex);
 
@@ -217,7 +221,7 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
       const prevIndex = this.currentVerseIndex - 1;
 
       this.snapToVerse(prevIndex);
-      
+
       // Emit the verse change event
       this.verseChange.emit(prevIndex);
 
@@ -248,7 +252,7 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
     // For now, let's assume a verse is completed if all its words are recognized
     const verse = this.verses[index];
     if (!verse) return false;
-    
+
     const words = this.splitVerseIntoWords(verse.text);
     let recognizedCount = 0;
 
@@ -410,6 +414,16 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
       boundedPosition = maxScroll + (position - maxScroll) / 3; // Resistance when pulling past end
     }
 
+    if (trackElement instanceof HTMLElement) {
+      const roundedPosition = Math.round(boundedPosition); // Round to avoid blurriness
+      trackElement.style.transform = `translateX(${roundedPosition}px)`;
+
+      // Force hardware acceleration
+      trackElement.style.willChange = 'transform';
+      trackElement.style.backfaceVisibility = 'hidden';
+      trackElement.style.webkitBackfaceVisibility = 'hidden';
+    }
+
     // Update scrollPosition
     this.scrollPosition = boundedPosition;
 
@@ -528,7 +542,7 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
 
     // Snap to nearest verse
     this.snapToVerse(nearestIndex);
-    
+
     // Emit the verse change event
     if (this.currentVerseIndex !== nearestIndex) {
       this.verseChange.emit(nearestIndex);
@@ -537,39 +551,39 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
 
   private snapToVerse(index: number): void {
     if (!this.versesContainer || index < 0 || index >= this.verses.length) return;
-  
+
     this.isSnapScrolling = true;
-    
+
     // Get all verse elements 
     const verseElements = this.versesContainer.nativeElement.querySelectorAll('.verse-card');
     if (!verseElements.length) {
       this.isSnapScrolling = false;
       return;
     }
-  
+
     // Get container dimensions
     const containerWidth = this.versesContainer.nativeElement.clientWidth;
     const containerCenter = containerWidth / 2;
-    
+
     // Calculate the position to center the current verse
     let scrollPosition = 0;
-    
+
     // Calculate position by measuring actual element positions
     for (let i = 0; i < index; i++) {
       const element = verseElements[i] as HTMLElement;
       if (element) {
         // For each verse before our target, add its width + any connector
         scrollPosition += element.offsetWidth;
-        
+
         // Add any margins/padding between verses (including connectors)
         const style = window.getComputedStyle(element);
         scrollPosition += parseFloat(style.marginRight) || 0;
-        
+
         // If there's a connector after this verse, include its width
         const connector = element.nextElementSibling;
         if (connector && connector.classList.contains('connector-line')) {
           scrollPosition += connector.clientWidth;
-          
+
           // Also add any margins on the connector
           const connectorStyle = window.getComputedStyle(connector);
           scrollPosition += parseFloat(connectorStyle.marginRight) || 0;
@@ -577,25 +591,30 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
         }
       }
     }
-    
+
     // Get the current verse element
     const currentVerse = verseElements[index] as HTMLElement;
     if (currentVerse) {
       // Add left margin of current verse
       const currentStyle = window.getComputedStyle(currentVerse);
       scrollPosition += parseFloat(currentStyle.marginLeft) || 0;
-      
+
       // Center adjustment: subtract half container width, add half verse width
-      scrollPosition -= containerCenter; 
+      scrollPosition -= containerCenter;
       scrollPosition += currentVerse.offsetWidth / 2;
-      
-      // Apply minor centering adjustment if needed
-      scrollPosition += 100; // This can be tuned for better positioning
+
+      // Apply progressive centering adjustment: 100px for first verse, +30px for each subsequent verse
+      const progressiveAdjustment = 100 + (index * 85);
+      console.log(`Verse ${index}: Using progressive adjustment of ${progressiveAdjustment}px`);
+      scrollPosition += progressiveAdjustment;
+
+      // Round to whole pixels to avoid blurriness
+      scrollPosition = Math.round(scrollPosition);
     }
-    
+
     // Ensure position is not negative
     scrollPosition = Math.max(0, scrollPosition);
-    
+
     // Calculate max scroll position to prevent overscroll
     let maxScroll = 0;
     const trackElement = this.versesContainer.nativeElement.querySelector('.verses-track');
@@ -604,21 +623,25 @@ export class VersesContainerComponent implements OnInit, OnChanges, AfterViewIni
       // Bound the position
       scrollPosition = Math.min(scrollPosition, maxScroll);
     }
-    
+
     // Update scrollPosition state
     this.scrollPosition = scrollPosition;
-  
-    // Apply transform to DOM (with RTL adjustment)
+
+    // Apply transform to DOM (with RTL adjustment and hardware acceleration)
     if (trackElement instanceof HTMLElement) {
-      // For RTL layout, we use positive translateX values
+      // For RTL layout, we use positive translateX values with hardware acceleration
       trackElement.style.transform = `translateX(${scrollPosition}px)`;
+      trackElement.style.willChange = 'transform';
+      trackElement.style.backfaceVisibility = 'hidden';
+      trackElement.style.webkitBackfaceVisibility = 'hidden';
+      console.log(`Applied transform: ${trackElement.style.transform}`);
     }
-    
+
     // Reset snap scrolling flag after animation
     setTimeout(() => {
       this.isSnapScrolling = false;
     }, this.SNAP_ANIMATION_DURATION);
-    
+
     // Update UI
     this.cdr.detectChanges();
   }

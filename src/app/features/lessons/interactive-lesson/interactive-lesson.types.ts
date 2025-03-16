@@ -25,7 +25,7 @@ export interface InteractionState {
   currentAudio?: string;
   scrollPosition: number;
   currentWordIndex?: number;
-  recognizedWords?: Set<number>;
+  recognizedWords: Set<number>;
 }
 
 export interface InteractiveLessonProps {

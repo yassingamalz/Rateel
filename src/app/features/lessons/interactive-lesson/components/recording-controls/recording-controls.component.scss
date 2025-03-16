@@ -3,112 +3,240 @@
 
 :host {
   display: block;
-}
-
-.controls-container {
   position: fixed;
   bottom: 40px;
   left: 0;
   right: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.controls-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  z-index: 10;
-
-  &.is-recording {
-    .record-button {
-      background: darken(#FF4444, 10%);
-      box-shadow: 0 0 20px rgba(#FF4444, 0.4);
-      transform: scale(1.05);
-
-      .button-content {
-        transform: scale(0.95);
-      }
-    }
-  }
-
-  // Enhanced Audio Visualization
+  
+  // Audio Visualization (Base Styles)
   .audio-visualization {
     width: 100%;
-    height: 50px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
+    
     .wave-bars {
       display: flex;
       align-items: center;
       gap: 5px;
       height: 100%;
-
+      
       .wave-bar {
-        width: 4px;
-        background: map-get(vars.$colors, 'accent', 'base');
         border-radius: 2px;
         animation: waveAnimation 0.8s ease-in-out infinite;
+        
+        @for $i from 1 through 7 {
+          &:nth-child(#{$i}) {
+            animation-delay: $i * 0.1s;
+            height: 10px + random(20) + px;
+          }
+        }
       }
     }
   }
-
-  // Enhanced Record Button
+  
+  // Record Button (Base Styles)
   .record-button {
     position: relative;
-    padding: 16px 30px;
-    background: map-get(vars.$colors, 'primary', 'light');
     border: none;
     border-radius: 50px;
-    color: white;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-
-    &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      background: lighten(map-get(vars.$colors, 'primary', 'light'), 5%);
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
+    pointer-events: auto;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
-
-    &.recording {
-      background: #FF4444;
-      padding: 16px 24px;
-
-      .button-text {
-        opacity: 1;
-      }
-
-      .record-ripple {
-        position: absolute;
-        inset: -5px;
-        border: 2px solid rgba(#FF4444, 0.5);
-        border-radius: inherit;
-        animation: ripple 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      }
-    }
-
+    
     .button-content {
       display: flex;
       align-items: center;
       gap: 10px;
       transition: transform 0.2s ease;
-
+      
       i {
         font-size: 1.2rem;
       }
-
+      
       .button-text {
         font-weight: 500;
         opacity: 0.9;
+      }
+    }
+    
+    .record-ripple {
+      position: absolute;
+      inset: -5px;
+      border-radius: inherit;
+      animation: ripple 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  }
+}
+
+// Dark theme (default theme)
+:host-context(.theme-dark), :host {
+  .controls-container {
+    // Audio visualization
+    .audio-visualization {
+      height: 50px;
+      
+      .wave-bars .wave-bar {
+        width: 4px;
+        background: map-get(vars.$colors, 'accent', 'base');
+      }
+    }
+    
+    // Record button
+    .record-button {
+      padding: 16px 30px;
+      background: map-get(vars.$colors, 'primary', 'light');
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        background: lighten(map-get(vars.$colors, 'accent', 'base'), 5%);
+      }
+      
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      
+      &.recording {
+        background: #FF4444;
+        padding: 16px 24px;
+        
+        .record-ripple {
+          border: 2px solid rgba(#FF4444, 0.5);
+        }
+      }
+    }
+    
+    // Recording state
+    &.is-recording {
+      .record-button {
+        background: darken(#FF4444, 10%);
+        box-shadow: 0 0 20px rgba(#FF4444, 0.4);
+        transform: scale(1.05);
+        
+        .button-content {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
+// Light theme
+:host-context(.theme-light) {
+  .controls-container {
+    // Audio visualization
+    .audio-visualization {
+      height: 40px;
+      
+      .wave-bars .wave-bar {
+        width: 3px;
+        background: map-get(vars.$mushaf-colors, 'border');
+      }
+    }
+    
+    // Record button
+    .record-button {
+      padding: 15px 25px;
+      background: map-get(vars.$mushaf-colors, 'paper');
+      color: map-get(vars.$mushaf-colors, 'text');
+      box-shadow: 0 4px 15px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.3),
+        inset 0 0 0 1px rgba(map-get(vars.$mushaf-colors, 'border'), 0.2);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.4),
+          inset 0 0 0 1px rgba(map-get(vars.$mushaf-colors, 'border'), 0.3);
+      }
+      
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      
+      &.recording {
+        background: #FF4444;
+        color: white;
+        
+        .button-text {
+          opacity: 1;
+        }
+        
+        .record-ripple {
+          border: 2px solid rgba(#FF4444, 0.5);
+        }
+      }
+    }
+    
+    // Recording state
+    &.is-recording {
+      .record-button {
+        background: #FF4444;
+        box-shadow: 0 0 20px rgba(#FF4444, 0.4);
+        transform: scale(1.05);
+        color: white;
+        
+        .button-content {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
+// Media queries
+@media (max-width: 768px) {
+  :host {
+    bottom: 30px;
+  }
+}
+
+// Mobile landscape optimizations
+@media (orientation: landscape) and (max-height: 600px) {
+  :host {
+    bottom: 20px;
+  }
+  
+  :host-context(.theme-dark), :host {
+    .controls-container {
+      .audio-visualization {
+        height: 30px;
+      }
+      
+      .record-button {
+        padding: 12px 25px;
+      }
+    }
+  }
+  
+  :host-context(.theme-light) {
+    .controls-container {
+      .audio-visualization {
+        height: 30px;
+      }
+      
+      .record-button {
+        padding: 10px 20px;
       }
     }
   }
@@ -131,27 +259,5 @@
   100% {
     transform: scale(1.5);
     opacity: 0;
-  }
-}
-
-// Media queries for responsiveness
-@media (max-width: 768px) {
-  .controls-container {
-    bottom: 30px;
-  }
-}
-
-// Mobile landscape optimizations
-@media (orientation: landscape) and (max-height: 600px) {
-  .controls-container {
-    bottom: 20px;
-
-    .audio-visualization {
-      height: 30px;
-    }
-
-    .record-button {
-      padding: 12px 25px;
-    }
   }
 }

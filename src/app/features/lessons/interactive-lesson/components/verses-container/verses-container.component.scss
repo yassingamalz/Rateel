@@ -1,9 +1,22 @@
 @use "sass:map";
 @use 'variables' as vars;
 
+// Import Mushaf colors for light theme
+$mushaf-colors: (
+  paper: #F8F3E6,
+  border: #C4A484,
+  text: #1A0F00,
+  highlight: rgba(#C4A484, 0.15),
+  shadow: rgba(#000, 0.15)
+);
+
 :host {
   display: block;
   width: 100%;
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .verses-container {
@@ -14,6 +27,7 @@
   align-items: center;
   cursor: grab;
   margin-bottom: 30px;
+  z-index: 1;
   
   &.dragging {
     cursor: grabbing;
@@ -33,38 +47,12 @@
     padding: 0 15%;
     transition: transform 0.3s ease;
     will-change: transform;
+    transform-style: preserve-3d;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     @media (orientation: landscape) {
       padding: 0 10%;
-    }
-  }
-
-  // Connector Line between verses
-  .connector-line {
-    height: 4px;
-    width: 100px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    margin: 0 5px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-
-    &.active {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    &.completed {
-      background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
-    }
-
-    .connector-progress {
-      position: absolute;
-      top: 0;
-      right: 0; // RTL direction
-      height: 100%;
-      background: map-get(vars.$colors, 'accent', 'base');
-      transition: width 0.3s ease-out;
     }
   }
 
@@ -83,16 +71,13 @@
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: rgba(0, 0, 0, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       opacity: 0;
       transition: opacity 0.3s ease;
-      pointer-events: all;
-      cursor: pointer;
+      pointer-events: auto;
 
       &.visible {
         opacity: 0.7;
@@ -100,7 +85,6 @@
 
       &:hover {
         opacity: 1;
-        background: rgba(0, 0, 0, 0.3);
       }
 
       &.scroll-left {
@@ -118,18 +102,99 @@
   }
 }
 
-// Media queries for responsiveness
-@media (max-width: 768px) {
+// Dark Theme (default)
+:host-context(.theme-dark), :host {
   .verses-container {
-    .connector-line {
-      width: 60px;
+    .scroll-indicator {
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .scroll-indicators {
-      .scroll-indicator {
-        width: 36px;
-        height: 36px;
+    .connector-line {
+      height: 4px;
+      width: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin: 0 5px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+
+      &.active {
+        background: rgba(255, 255, 255, 0.15);
       }
+
+      &.completed {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+      }
+
+      .connector-progress {
+        position: absolute;
+        top: 0;
+        right: 0; // RTL direction
+        height: 100%;
+        background: map-get(vars.$colors, 'accent', 'base');
+        transition: width 0.3s ease-out;
+      }
+    }
+  }
+}
+
+// Light Theme (Mushaf)
+:host-context(.theme-light) {
+  .verses-container {
+    .scroll-indicator {
+      background: rgba(map-get($mushaf-colors, 'border'), 0.1);
+      color: map-get($mushaf-colors, 'text');
+      box-shadow: 0 2px 4px rgba(map-get($mushaf-colors, 'shadow'), 0.15);
+    }
+
+    .connector-line {
+      height: 3px;
+      width: 80px;
+      background: rgba(map-get($mushaf-colors, 'border'), 0.1);
+      border-radius: 2px;
+      margin: 0 5px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+
+      &.active {
+        background: rgba(map-get($mushaf-colors, 'border'), 0.2);
+      }
+
+      &.completed {
+        background: rgba(map-get($mushaf-colors, 'border'), 0.3);
+      }
+
+      .connector-progress {
+        position: absolute;
+        top: 0;
+        right: 0; // RTL direction
+        height: 100%;
+        background: map-get($mushaf-colors, 'border');
+        transition: width 0.3s ease-out;
+      }
+    }
+  }
+}
+
+// Media queries
+@media (max-width: 768px) {
+  .verses-container {
+    height: 60vh;
+  }
+
+  :host-context(.theme-dark), :host {
+    .connector-line {
+      width: 60px !important;
+    }
+  }
+  
+  :host-context(.theme-light) {
+    .connector-line {
+      width: 60px !important;
     }
   }
 }
@@ -138,16 +203,17 @@
 @media (orientation: landscape) and (max-height: 600px) {
   .verses-container {
     height: 60vh;
-    
+  }
+  
+  :host-context(.theme-dark), :host {
     .connector-line {
-      width: 40px;
+      width: 60px !important;
     }
-
-    .scroll-indicators {
-      .scroll-indicator {
-        width: 32px;
-        height: 32px;
-      }
+  }
+  
+  :host-context(.theme-light) {
+    .connector-line {
+      width: 40px !important;
     }
   }
 }

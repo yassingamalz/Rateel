@@ -1,5 +1,4 @@
-<!-- interactive-lesson.component.html -->
-<div class="interactive-lesson" [ngClass]="[themeClass, 'theme-wrapper']" [class.is-recording]="state.isRecording"
+<div class="interactive-lesson" [ngClass]="currentTheme" [class.is-recording]="state.isRecording"
   [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
@@ -18,143 +17,37 @@
   <!-- Theme Toggle -->
   <div class="theme-toggle-wrapper">
     <button class="theme-toggle-btn" (click)="toggleTheme()">
-      <i class="fas" [class.fa-sun]="currentTheme === 'dark'" [class.fa-moon]="currentTheme === 'light'"></i>
+      <i class="fas" [class.fa-sun]="currentTheme === 'theme-dark'" [class.fa-moon]="currentTheme === 'theme-light'"></i>
     </button>
   </div>
 
-  <!-- Verses Container with Enhanced Horizontal Scroll -->
-  <div class="verses-container" #versesContainer [class.dragging]="isDragging" [class.snap-scrolling]="isSnapScrolling"
-    (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()"
-    (mouseleave)="onMouseLeave()" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
-    (touchend)="onTouchEnd()">
+  <!-- Verses Container -->
+  <app-verses-container 
+    [verses]="verses" 
+    [currentVerseIndex]="state.currentVerseIndex"
+    [currentWordIndex]="state.currentWordIndex"
+    [recognizedWords]="state.recognizedWords"
+    (verseChange)="onVerseChange($event)">
+  </app-verses-container>
 
-    <div class="verses-track" #versesTrack>
-      <ng-container *ngFor="let verse of verses; let i = index">
-        <!-- Enhanced Verse Card with Mushaf Style -->
-        <div class="verse-card" [class.active]="isVerseActive(i)" [class.completed]="isVerseCompleted(i)"
-          [class.inactive]="!isVerseActive(i) && !isVerseCompleted(i)" 
-          [attr.data-verse-index]="i">
+  <!-- Recording Controls -->
+  <app-recording-controls
+    [isRecording]="state.isRecording"
+    [isCompleted]="state.isCompleted"
+    (recordingToggle)="toggleRecording()">
+  </app-recording-controls>
 
-          <!-- Verse Frame -->
-          <div class="verse-frame">
-            <!-- Decorative Corner Elements -->
-            <div class="frame-corner frame-corner--tl"></div>
-            <div class="frame-corner frame-corner--tr"></div>
-            <div class="frame-corner frame-corner--bl"></div>
-            <div class="frame-corner frame-corner--br"></div>
+  <!-- Help Tips -->
+  <app-help-tips
+    [hasStartedLesson]="hasStartedLesson"
+    [isRecording]="state.isRecording">
+  </app-help-tips>
 
-            <!-- Light Bulb/Verse Glow Effect -->
-            <div class="verse-glow"></div>
+  <!-- Feedback Overlay -->
+  <app-feedback-overlay *ngIf="state.feedback" [message]="state.feedback">
+  </app-feedback-overlay>
 
-            <!-- Verse Number Badge -->
-            <div class="verse-number">
-              <span>{{i + 1}}</span>
-            </div>
-
-            <!-- Verse Text with Enhanced Word-Level Highlighting -->
-            <div class="verse-text-container">
-              <div class="verse-text">
-                <ng-container *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index">
-                  <span class="word" [class.highlight]="hasHighlight(verse, word, wordIndex)"
-                    [class.spoken]="isWordSpoken(i, wordIndex)" [class.current-word]="isCurrentWord(i, wordIndex)"
-                    [style.color]="getWordColor(verse, word, wordIndex)">
-                    {{word}}
-                  </span>
-                </ng-container>
-              </div>
-            </div>
-
-            <!-- Word Progress Indicator -->
-            <div class="word-progress" *ngIf="isVerseActive(i)">
-              <div class="word-dots">
-                <span class="dot" *ngFor="let word of splitVerseIntoWords(verse.text); let wordIndex = index"
-                  [class.completed]="isWordSpoken(i, wordIndex)" [class.current]="isCurrentWord(i, wordIndex)">
-                </span>
-              </div>
-            </div>
-
-            <!-- Tajweed Rules Legend -->
-            <div class="tajweed-legend" *ngIf="isVerseActive(i) && verse.highlights?.length">
-              <div class="legend-title">قواعد التجويد:</div>
-              <div class="legend-items">
-                <div class="legend-item" *ngFor="let rule of getUniqueRules(verse)">
-                  <span class="color-dot" [style.background-color]="rule.color"></span>
-                  <span class="rule-name">{{rule.rule}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Enhanced Connector Line -->
-        <div class="connector-line" *ngIf="i < verses.length - 1" [class.completed]="isVerseCompleted(i)"
-          [class.active]="isVerseActive(i)">
-          <div class="connector-progress" [style.width.%]="getConnectorProgress(i)"></div>
-        </div>
-      </ng-container>
-    </div>
-
-    <!-- Scroll Indicators -->
-    <div class="scroll-indicators" *ngIf="verses.length > 1">
-      <!-- Right arrow (for previous in RTL) -->
-      <div class="scroll-indicator scroll-right" [class.visible]="canScrollLeft()" (click)="scrollToPreviousVerse()">
-        <i class="fas fa-chevron-right"></i>
-      </div>
-      <!-- Left arrow (for next in RTL) -->
-      <div class="scroll-indicator scroll-left" [class.visible]="canScrollRight()" (click)="scrollToNextVerse()">
-        <i class="fas fa-chevron-left"></i>
-      </div>
-    </div>
-  </div>
-
-  <!-- Enhanced Recording Controls -->
-  <div class="controls-container" [class.is-recording]="state.isRecording">
-    <!-- Visual Audio Wave with Enhanced Animation -->
-    <div class="audio-visualization" *ngIf="state.isRecording">
-      <div class="wave-bars">
-        <div class="wave-bar" *ngFor="let _ of [1,2,3,4,5,6,7]"></div>
-      </div>
-    </div>
-
-    <button class="record-button" [class.recording]="state.isRecording" [disabled]="state.isCompleted"
-      (click)="toggleRecording($event)" (touchstart)="toggleRecording($event)">
-      <div class="button-content">
-        <i class="fas" [class.fa-microphone]="!state.isRecording" [class.fa-stop]="state.isRecording"></i>
-        <span class="button-text">{{ state.isRecording ? 'إيقاف' : 'ابدأ القراءة' }}</span>
-      </div>
-      <div class="record-ripple" *ngIf="state.isRecording"></div>
-    </button>
-  </div>
-
-  <!-- Enhanced Feedback Overlay -->
-  <div class="feedback-overlay" *ngIf="state.feedback" [@feedbackAnimation]>
-    <div class="feedback-dialog" [class.success]="isSuccessFeedback(state.feedback)">
-      <div class="feedback-icon">
-        <i class="fas" [class.fa-check-circle]="isSuccessFeedback(state.feedback)"
-          [class.fa-exclamation-circle]="!isSuccessFeedback(state.feedback)"></i>
-      </div>
-      <div class="feedback-message">{{state.feedback}}</div>
-    </div>
-  </div>
-
-  <!-- Enhanced Help Tips -->
-  <div class="help-tips" *ngIf="!state.isRecording && !hasStartedLesson">
-    <div class="tip-card">
-      <div class="tip-icon"><i class="fas fa-microphone"></i></div>
-      <div class="tip-text">انقر على زر الميكروفون للبدء في القراءة</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon"><i class="fas fa-arrows-alt-h"></i></div>
-      <div class="tip-text">اسحب يميناً أو يساراً للتنقل بين الآيات</div>
-    </div>
-  </div>
-
-  <!-- Completion Animation -->
-  <div class="completion-animation" *ngIf="state.isCompleted">
-    <div class="completion-particles"></div>
-    <div class="completion-message">
-      <i class="fas fa-check-circle"></i>
-      <span>أحسنت! أكملت الدرس</span>
-    </div>
-  </div>
+  <!-- Completion Screen -->
+  <app-completion-screen *ngIf="state.isCompleted" [isCompleted]="state.isCompleted">
+  </app-completion-screen>
 </div>

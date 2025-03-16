@@ -84,7 +84,10 @@ body {
   -webkit-tap-highlight-color: transparent;
   touch-action: pan-x;
   overscroll-behavior: none;
-  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
   // Performance optimizations
   transform: translateZ(0);
   backface-visibility: hidden;

@@ -11,13 +11,13 @@ export class RecordingControlsComponent {
   @Input() isRecording = false;
   @Input() isCompleted = false;
   
-  @Output() recordingToggle = new EventEmitter<void>();
+  @Output() recordingToggle = new EventEmitter<Event>();
 
   // Wave bar heights for the audio visualization
   waveBarHeights = [10, 15, 20, 25, 30, 20, 15];
   
   /**
-   * Toggles recording state
+   * Toggles recording state and passes the original event to parent
    */
   toggleRecording(event: Event): void {
     if (event) {
@@ -25,6 +25,6 @@ export class RecordingControlsComponent {
       event.stopPropagation();
     }
     
-    this.recordingToggle.emit();
+    this.recordingToggle.emit(event);
   }
 }
