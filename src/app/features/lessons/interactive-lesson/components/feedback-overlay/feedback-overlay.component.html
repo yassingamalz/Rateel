@@ -1,11 +1,14 @@
-<div class="feedback-overlay" *ngIf="message" [@feedbackAnimation]>
-    <div class="feedback-dialog" [class.success]="isSuccessFeedback()">
-      <div class="feedback-icon">
-        <i class="fas" 
-           [class.fa-check-circle]="isSuccessFeedback()"
-           [class.fa-exclamation-circle]="!isSuccessFeedback()">
-        </i>
-      </div>
-      <div class="feedback-message">{{message}}</div>
-    </div>
+<!-- feedback-overlay.component.html -->
+<div class="feedback-notification" 
+     [class.visible]="message" 
+     [class.success]="isSuccessFeedback()" 
+     [class.error]="!isSuccessFeedback()"
+     [@notificationAnimation]>
+  <div class="notification-icon">
+    <i class="fas" 
+       [class.fa-check-circle]="isSuccessFeedback()"
+       [class.fa-exclamation-circle]="!isSuccessFeedback()">
+    </i>
   </div>
+  <p class="notification-message">{{message}}</p>
+</div>

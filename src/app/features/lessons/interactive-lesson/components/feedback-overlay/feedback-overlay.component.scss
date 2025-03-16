@@ -9,184 +9,147 @@
   pointer-events: none;
 }
 
-.feedback-overlay {
-  width: 100%;
-  height: 100%;
+.feedback-notification {
+  position: fixed;
+  top: 40px; // Position at top of screen instead of full-screen overlay
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: 300px; // Wider notification (increased from previous)
+  width: 85%; // Use more screen width
+  pointer-events: auto;
+  border-radius: 16px 0 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
-  justify-content: center;
-  pointer-events: auto;
+  gap: 16px;
+  padding: 8px 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px) scale(0.95);
+  transition: 
+    opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); // Improved spring-like animation
   
-  .feedback-dialog {
+  &.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  
+  .notification-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    max-width: 90%;
+    justify-content: center;
     
-    .feedback-icon {
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    i {
+      font-size: 1.4rem;
+      animation: pulse 2s infinite; // Add subtle pulse animation to icon
+    }
+  }
+  
+  .notification-message {
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    text-align: start;
+    margin: 0;
+    flex-grow: 1;
+  }
+}
+
+// Dark theme styles
+:host-context(.theme-dark), :host {
+  .feedback-notification {
+    background: linear-gradient(to right, #2D6A4F, #1B4332); // Gradient background
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    
+    &.success {
+      background: linear-gradient(to right, #2E7D32, #1B5E20); // Gradient success
+      
+      .notification-icon {
+        color: white;
+      }
+    }
+    
+    &.error {
+      background: linear-gradient(to right, #C62828, #8E0000); // Gradient error
+      
+      .notification-icon {
+        color: white;
+      }
+    }
+    
+    .notification-message {
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Light theme (Mushaf paper style)
+:host-context(.theme-light) {
+  .feedback-notification {
+    background: #F8F3E6; // Paper background
+    border: 1px solid rgba(196, 164, 132, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(196, 164, 132, 0.1);
+    
+    &.success {
+      border-left: 6px solid #2E7D32;
+      
+      .notification-icon {
+        color: #2E7D32;
+      }
+    }
+    
+    &.error {
+      border-left: 6px solid #C62828;
+      
+      .notification-icon {
+        color: #C62828;
+      }
+    }
+    
+    .notification-message {
+      color: #1A0F00;
+    }
+  }
+}
+
+// Mobile adjustments
+@media (orientation: landscape) and (max-height: 600px) {
+  .feedback-notification {
+    max-width: 200px;
+    padding: 0;
+
+    .notification-icon {
+      width: 36px;
+      height: 36px;
       
       i {
-        color: white;
-      }
-    }
-    
-    .feedback-message {
-      font-weight: 600;
-      text-align: center;
-    }
-  }
-}
-
-// Dark theme (default theme)
-:host-context(.theme-dark), :host {
-  .feedback-overlay {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    
-    .feedback-dialog {
-      background: rgba(map-get(vars.$colors, 'primary', 'light'), 0.9);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      gap: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      
-      &.success {
-        background: rgba(darken(#4CAF50, 10%), 0.9);
-        
-        .feedback-icon {
-          background: #4CAF50;
-        }
-      }
-      
-      .feedback-icon {
-        width: 70px;
-        height: 70px;
-        background: #F44336;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        
-        i {
-          font-size: 2rem;
-        }
-      }
-      
-      .feedback-message {
-        font-size: 1.5rem;
-        color: white;
-      }
-    }
-  }
-}
-
-// Light theme (Mushaf style)
-:host-context(.theme-light) {
-  .feedback-overlay {
-    background: rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.3);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    
-    .feedback-dialog {
-      background: map-get(vars.$mushaf-colors, 'paper');
-      padding: 25px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.4);
-      gap: 15px;
-      border: 1px solid rgba(map-get(vars.$mushaf-colors, 'border'), 0.2);
-      
-      &.success {
-        border-top: 4px solid #4CAF50;
-        
-        .feedback-icon {
-          background: #4CAF50;
-        }
-      }
-      
-      &:not(.success) {
-        border-top: 4px solid #F44336;
-        
-        .feedback-icon {
-          background: #F44336;
-        }
-      }
-      
-      .feedback-icon {
-        width: 60px;
-        height: 60px;
-        box-shadow: 0 5px 15px rgba(map-get(vars.$mushaf-colors, 'shadow'), 0.2);
-        
-        i {
-          font-size: 1.8rem;
-        }
-      }
-      
-      .feedback-message {
-        font-size: 1.3rem;
-        color: map-get(vars.$mushaf-colors, 'text');
-      }
-    }
-  }
-}
-
-// Media queries for responsiveness
-@media (max-width: 768px) {
-  :host-context(.theme-dark), :host {
-    .feedback-overlay .feedback-dialog {
-      padding: 25px;
-      
-      .feedback-icon {
-        width: 60px;
-        height: 60px;
-        
-        i {
-          font-size: 1.8rem;
-        }
-      }
-      
-      .feedback-message {
-        font-size: 1.3rem;
-      }
-    }
-  }
-}
-
-// Mobile landscape optimizations
-@media (orientation: landscape) and (max-height: 600px) {
-  :host-context(.theme-dark), :host {
-    .feedback-overlay .feedback-dialog {
-      padding: 20px;
-      flex-direction: row;
-      gap: 20px;
-      
-      .feedback-icon {
-        width: 50px;
-        height: 50px;
-        
-        i {
-          font-size: 1.5rem;
-        }
-      }
-      
-      .feedback-message {
         font-size: 1.2rem;
-        text-align: left;
       }
+    }
+    
+    .notification-message {
+      font-size: 1rem;
     }
   }
-  
-  :host-context(.theme-light) {
-    .feedback-overlay .feedback-dialog {
-      padding: 20px;
-      flex-direction: row;
-      
-      .feedback-icon {
-        width: 45px;
-        height: 45px;
-      }
-    }
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 }
