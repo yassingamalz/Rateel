@@ -3,19 +3,52 @@
 @use 'mixins' as mix;
 
 .lessons-page {
-  padding: map.get(vars.$spacing, 'xxl') 0  map.get(vars.$spacing, 'xxl') 0;
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
     map.get(vars.$colors, 'primary', 'base'),
     map.get(vars.$colors, 'primary', 'dark')
   );
+  overflow: hidden;
+}
+
+.islamic-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url('/assets/images/islamic-pattern-2-dark.svg');
+    background-repeat: repeat;
+    background-size: 1000px 1000px; 
+    rotate: 20deg;
+    opacity: 0.03; 
+    z-index: 1;
+  }
 }
 
 .lessons-header {
+  padding: 40px;
+  background: linear-gradient(to bottom,
+  rgba(map.get(vars.$colors, 'primary', 'dark'), 0.9),
+  rgba(map.get(vars.$colors, 'primary', 'dark'), 0));
   margin-bottom: map.get(vars.$spacing, 'xl');
-  
+  position: relative;
+  z-index: 2;
   .header-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     gap: map.get(vars.$spacing, 'md');
@@ -87,16 +120,15 @@
   
   // Your existing styles remain exactly the same
   .lessons-page {
-    padding: map.get(vars.$spacing, 'md') 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
   .lessons-header {
-    margin-bottom: map.get(vars.$spacing, 'md');
-    padding: 0 map.get(vars.$spacing, 'md');
-    
+    margin-bottom: 0;
+    padding: 30px 30px 0;
+
     .header-content {
       gap: map.get(vars.$spacing, 'sm');
     }

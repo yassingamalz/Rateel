@@ -1,5 +1,7 @@
 <!-- src/app/features/lessons/lessons-list.component.html -->
 <div class="lessons-page" dir="rtl">
+  <!-- Islamic Pattern Decorations -->
+  <div class="islamic-decorations"></div>
   <header class="lessons-header">
     <div class="header-content">
       <button class="back-button" (click)="router.navigate(['../../'], { relativeTo: route })">
@@ -10,23 +12,13 @@
   </header>
 
   <ng-container *ngIf="(lessons$ | async) as lessons; else loading">
-    <div class="lessons-container"
-         #lessonsContainer
-         [class.dragging]="isDragging"
-         (mousedown)="onMouseDown($event)"
-         (mousemove)="onMouseMove($event)"
-         (mouseup)="onMouseUp($event)"
-         (mouseleave)="onMouseLeave()"
-         (touchstart)="onTouchStart($event)"
-         (touchmove)="onTouchMove($event)"
-         (touchend)="onTouchEnd($event)">
+    <div class="lessons-container" #lessonsContainer [class.dragging]="isDragging" (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)" (mouseleave)="onMouseLeave()"
+      (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)">
       <div class="lessons-wrapper" @lessonsAnimation>
         <ng-container *ngFor="let lesson of lessons; let i = index">
-          <app-lesson-card
-            [lesson]="lesson"
-            [isActive]="lesson.id === activeLessonId"
-            [isCompleting]="lesson.id === completingLessonId"
-            (lessonClick)="onLessonSelected(lesson)"
+          <app-lesson-card [lesson]="lesson" [isActive]="lesson.id === activeLessonId"
+            [isCompleting]="lesson.id === completingLessonId" (lessonClick)="onLessonSelected(lesson)"
             class="lesson-item">
           </app-lesson-card>
 
