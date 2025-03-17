@@ -6,6 +6,7 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalHostComponent } from './components/modal-host/modal-host.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ModalHostComponent } from './components/modal-host/modal-host.component
     ComingSoonComponent,
     ThemeToggleComponent,
     ModalComponent,
-    ModalHostComponent
+    ModalHostComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,7 @@ import { ModalHostComponent } from './components/modal-host/modal-host.component
     ComingSoonComponent,
     ThemeToggleComponent,
     ModalComponent,
-    ModalHostComponent
+    ModalHostComponent,
   ]
 })
 export class SharedModule { }
