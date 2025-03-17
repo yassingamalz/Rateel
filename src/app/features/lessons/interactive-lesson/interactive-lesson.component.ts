@@ -71,6 +71,7 @@ export class InteractiveLessonComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   private destroy$ = new Subscription();
+  svgSrc: string = 'assets/images/islamic-decorations-dark.svg'; // Default to dark theme
 
   constructor(
     private interactiveService: InteractiveLessonService,
@@ -81,13 +82,15 @@ export class InteractiveLessonComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // Initialize UI and device state
-    this.updateDeviceState();
+    this.currentTheme = 'theme-dark';
+    this.svgSrc = 'assets/images/islamic-decorations-dark.svg';
 
     // Subscribe to theme changes
     this.subscriptions.push(
       this.themeService.theme$.subscribe(theme => {
-        this.currentTheme = `theme-${theme}`;
+        const themeClass = `theme-${theme}`;
+        this.currentTheme = themeClass;
+        this.updateSvgSource(theme);
         console.log(`[InteractiveLessonComponent] Theme updated to: ${this.currentTheme}`);
         this.cdr.markForCheck();
       })
@@ -136,6 +139,17 @@ export class InteractiveLessonComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+  private updateSvgSource(themeClass: string) {
+    // Only update the source URL, don't change any positioning
+    this.svgSrc = themeClass === 'theme-dark' || themeClass === 'dark'
+      ? 'assets/images/islamic-decorations-dark.svg'
+      : 'assets/images/islamic-decorations-light.svg';
+
+    // Force detection of changes
+    this.cdr.detectChanges();
+  }
+
 
   // Handle verse change from the verses-container component
   onVerseChange(verseIndex: number): void {

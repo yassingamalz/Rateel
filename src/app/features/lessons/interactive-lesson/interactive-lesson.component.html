@@ -2,6 +2,10 @@
   [class.lesson-completed]="state.isCompleted">
   <!-- Ambient Background -->
   <div class="ambient-background">
+    <div class="islamic-decorations">
+      <!-- Force the SVG to always be visible with inline style -->
+      <img [src]="svgSrc" alt="" class="decoration-svg" style="opacity: 0.25; display: block; visibility: visible;">
+    </div>
     <div class="pattern-overlay"></div>
     <div class="ambient-glow"></div>
   </div>
@@ -17,30 +21,24 @@
   <!-- Theme Toggle -->
   <div class="theme-toggle-wrapper">
     <button class="theme-toggle-btn" (click)="toggleTheme()">
-      <i class="fas" [class.fa-sun]="currentTheme === 'theme-dark'" [class.fa-moon]="currentTheme === 'theme-light'"></i>
+      <i class="fas" [class.fa-sun]="currentTheme === 'theme-dark'"
+        [class.fa-moon]="currentTheme === 'theme-light'"></i>
     </button>
   </div>
 
   <!-- Verses Container -->
-  <app-verses-container 
-    [verses]="verses" 
-    [currentVerseIndex]="state.currentVerseIndex"
-    [currentWordIndex]="state.currentWordIndex"
-    [recognizedWords]="state.recognizedWords"
+  <app-verses-container [verses]="verses" [currentVerseIndex]="state.currentVerseIndex"
+    [currentWordIndex]="state.currentWordIndex" [recognizedWords]="state.recognizedWords"
     (verseChange)="onVerseChange($event)">
   </app-verses-container>
 
   <!-- Recording Controls -->
-  <app-recording-controls
-    [isRecording]="state.isRecording"
-    [isCompleted]="state.isCompleted"
+  <app-recording-controls [isRecording]="state.isRecording" [isCompleted]="state.isCompleted"
     (recordingToggle)="toggleRecording()">
   </app-recording-controls>
 
   <!-- Help Tips -->
-  <app-help-tips
-    [hasStartedLesson]="hasStartedLesson"
-    [isRecording]="state.isRecording">
+  <app-help-tips [hasStartedLesson]="hasStartedLesson" [isRecording]="state.isRecording">
   </app-help-tips>
 
   <!-- Feedback Overlay -->

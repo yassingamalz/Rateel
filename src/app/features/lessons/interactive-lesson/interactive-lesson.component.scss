@@ -1,8 +1,85 @@
 // interactive-lesson.component.scss
-// Combined from all three original files with proper theme support
 
 @use "sass:map";
 @use 'variables' as vars;
+
+.ambient-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.islamic-decorations {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  
+  .decoration-svg {
+    position: absolute;
+    top: -10%;
+    left: -45%; // Force positioning to left side
+    width: 130%;
+    height: 130%;
+    opacity: 0.25; // Higher base opacity
+    transform-origin: top left; // Pivot point for animation
+    animation: pendulumRightToLeft 8s ease-in-out infinite alternate; // Refined pendulum animation
+    transform: translateZ(0); // Force hardware acceleration
+  }
+}
+
+// Enhanced Pendulum Animation (Right to Left)
+@keyframes pendulumRightToLeft {
+  0% {
+    transform: 
+      translateX(0) 
+      rotate(-3deg); // Start slightly rotated
+  }
+  50% {
+    transform: 
+      translateX(-20px)  // Subtle horizontal movement
+      rotate(3deg);  // Opposite rotation
+  }
+  100% {
+    transform: 
+      translateX(0)
+      rotate(-3deg); // Return to original position
+  }
+}
+
+// Theme-specific styles
+.theme-dark {
+  .islamic-decorations .decoration-svg {
+    opacity: 0.7; // Adjust for dark theme
+    filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.15));
+  }
+}
+
+.theme-light {
+  .islamic-decorations .decoration-svg {
+    opacity: 0.7 !important; // Force visibility in light mode with !important
+    filter: drop-shadow(0 0 8px rgba(196, 164, 132, 0.2));
+  }
+}
+
+// Always ensure Islamic decorations are visible regardless of theme
+.interactive-lesson.theme-light .islamic-decorations .decoration-svg,
+.interactive-lesson.theme-dark .islamic-decorations .decoration-svg {
+  visibility: visible !important;
+  display: block !important;
+}
+
+// Media queries for responsive behavior
+@media (max-width: 768px) {
+  .islamic-decorations .decoration-svg {
+    left: -50%; // Keep to the left on mobile
+    width: 150%;
+    height: 150%;
+  }
+}
 
 // Common styles for both themes
 .interactive-lesson {
