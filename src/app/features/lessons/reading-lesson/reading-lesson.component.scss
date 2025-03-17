@@ -3,30 +3,14 @@
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Define theme colors for light and dark modes
-$theme-colors: (
-  light: (
-    background: linear-gradient(to bottom, rgba(11, 28, 23, 0.9), rgba(27, 67, 50, 0.8)),
-    verse-bg: rgba(31, 64, 55, 0.7),
-    verse-active-bg: rgba(map.get(vars.$colors, 'primary', 'light'), 0.7),
-    text: map.get(vars.$colors, 'text', 'light'),
-    text-muted: map.get(vars.$colors, 'text', 'muted'),
-    border: rgba(255, 255, 255, 0.1),
-    card-bg: rgba(0, 0, 0, 0.2),
-    control-bg: rgba(255, 255, 255, 0.1),
-    dropdown-bg: rgba(45, 106, 79, 0.95)
-  ),
-  dark: (
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(8, 20, 17, 0.9)),
-    verse-bg: rgba(16, 32, 28, 0.85),
-    verse-active-bg: rgba(23, 46, 40, 0.9),
-    text: #FFFFFF,
-    text-muted: #95D5B2,
-    border: rgba(255, 255, 255, 0.05),
-    card-bg: rgba(0, 0, 0, 0.4),
-    control-bg: rgba(255, 255, 255, 0.08),
-    dropdown-bg: rgba(16, 32, 28, 0.98)
-  )
+// Import Mushaf colors for light theme
+$mushaf-colors: (
+  paper: #F8F3E6,
+  border: #C4A484,
+  text: #1A0F00,
+  highlight: rgba(#C4A484, 0.15),
+  shadow: rgba(#000, 0.15),
+  glow: rgba(#C4A484, 0.3)
 );
 
 .reading-lesson {
@@ -34,49 +18,311 @@ $theme-colors: (
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: map-get($theme-colors, light, background);
   overflow: hidden;
   position: relative;
   transition: background 0.3s ease, color 0.3s ease;
+  
+  // Default (dark mode) theme
+  background: linear-gradient(to bottom right, 
+    map.get(vars.$colors, 'primary', 'base'),
+    map.get(vars.$colors, 'primary', 'dark'));
 
-  // Dark mode styles
-  &.dark-mode {
-    background: map-get($theme-colors, dark, background);
-
-    .verse {
-      background: map-get($theme-colors, dark, verse-bg);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  // Light mode (Mushaf style)
+  &:not(.dark-mode) {
+    background: linear-gradient(to bottom,
+        map.get($mushaf-colors, 'paper'),
+        darken(map.get($mushaf-colors, 'paper'), 5%));
+    color: map.get($mushaf-colors, 'text');
+    
+    // Update lesson header for light theme
+    .lesson-header {
+      .lesson-title {
+        color: darken(map.get($mushaf-colors, 'border'), 15%);
+        text-shadow: 0 1px 2px rgba(map.get($mushaf-colors, 'shadow'), 0.1);
+      }
       
-      &.active {
-        background: map-get($theme-colors, dark, verse-active-bg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      .lesson-description {
+        color: rgba(map.get($mushaf-colors, 'text'), 0.7);
       }
     }
 
-    .reading-controls {
-      background: rgba(0, 0, 0, 0.25);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    // Skip button light styling
+    .skip-button {
+      background: rgba(map.get($mushaf-colors, 'border'), 0.3);
+      color: map.get($mushaf-colors, 'text');
+      box-shadow: 0 2px 8px rgba(map.get($mushaf-colors, 'shadow'), 0.15);
       
-      .control-button, .rules-toggle {
-        background: rgba(255, 255, 255, 0.08);
+      &:hover {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.4);
+      }
+      
+      &--completed {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.5);
+      }
+    }
+
+    // Reading controls light styling
+    .reading-controls {
+      background: rgba(map.get($mushaf-colors, 'border'), 0.15);
+      border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.25);
+      box-shadow: 0 2px 8px rgba(map.get($mushaf-colors, 'shadow'), 0.1);
+      backdrop-filter: blur(5px);
+      
+      .control-button, .typography-button {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.25);
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.4);
         
         &:hover:not(:disabled) {
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(map.get($mushaf-colors, 'border'), 0.35);
+        }
+      }
+      
+      .navigation-group .progress-text {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.15);
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.25);
+      }
+      
+      .rules-toggle {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.25);
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.35);
+        
+        &.active {
+          background: rgba(map.get($mushaf-colors, 'border'), 0.35);
+          color: darken(map.get($mushaf-colors, 'border'), 25%);
         }
       }
     }
 
-    .verse-container {
-      scrollbar-color: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.5);
+    // Content area light styling
+    .content-area {
+      .verse-container {
+        background: rgba(map.get($mushaf-colors, 'paper'), 0.8);
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+        box-shadow: 0 4px 10px rgba(map.get($mushaf-colors, 'shadow'), 0.1);
+        
+        &::-webkit-scrollbar-track {
+          background: rgba(map.get($mushaf-colors, 'border'), 0.1);
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(map.get($mushaf-colors, 'border'), 0.3);
+        }
+        
+        // Verse styling for light mode
+        .verse {
+          background: map.get($mushaf-colors, 'paper');
+          box-shadow: 0 4px 8px rgba(map.get($mushaf-colors, 'shadow'), 0.1);
+          border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+          
+          &.active {
+            background: lighten(map.get($mushaf-colors, 'paper'), 2%);
+            box-shadow: 0 6px 12px rgba(map.get($mushaf-colors, 'shadow'), 0.15);
+            border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.3);
+            
+            &::before {
+              background: map.get($mushaf-colors, 'border');
+            }
+          }
+          
+          &.completed {
+            &::after {
+              background: map.get($mushaf-colors, 'border');
+              color: map.get($mushaf-colors, 'paper');
+            }
+          }
+          
+          .verse-number {
+            background: rgba(map.get($mushaf-colors, 'border'), 0.25);
+            color: darken(map.get($mushaf-colors, 'text'), 5%);
+            border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.35);
+            font-weight: 600;
+          }
+          
+          .verse-text {
+            color: map.get($mushaf-colors, 'text');
+            
+            ::ng-deep .tajweed-mark::after {
+              background: rgba(map.get($mushaf-colors, 'text'), 0.9);
+              color: map.get($mushaf-colors, 'paper');
+            }
+          }
+          
+          .verse-translation {
+            color: rgba(map.get($mushaf-colors, 'text'), 0.7);
+            border-top: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+          }
+          
+          .verse-explanation {
+            .explanation-toggle {
+              background: rgba(map.get($mushaf-colors, 'border'), 0.15);
+              color: rgba(map.get($mushaf-colors, 'text'), 0.7);
+              
+              &:hover {
+                background: rgba(map.get($mushaf-colors, 'border'), 0.25);
+                color: map.get($mushaf-colors, 'text');
+              }
+            }
+            
+            .explanation-content {
+              background: rgba(map.get($mushaf-colors, 'border'), 0.08);
+              color: rgba(map.get($mushaf-colors, 'text'), 0.8);
+              border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.15);
+            }
+          }
+        }
+      }
       
-      &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.5);
+      // Tajweed panel light styling
+      .tajweed-panel {
+        background: map.get($mushaf-colors, 'paper');
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+        box-shadow: 0 4px 10px rgba(map.get($mushaf-colors, 'shadow'), 0.15);
+        
+        .panel-header {
+          background: rgba(map.get($mushaf-colors, 'border'), 0.15);
+          border-bottom: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+          
+          h3 {
+            color: map.get($mushaf-colors, 'text');
+            font-weight: 600;
+          }
+          
+          .close-panel {
+            background: rgba(map.get($mushaf-colors, 'border'), 0.2);
+            color: map.get($mushaf-colors, 'text');
+            border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.3);
+            
+            &:hover {
+              background: rgba(map.get($mushaf-colors, 'border'), 0.3);
+            }
+          }
+        }
+        
+        .search-box {
+          input {
+            background: rgba(map.get($mushaf-colors, 'paper'), 0.9);
+            border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.2);
+            color: map.get($mushaf-colors, 'text');
+            
+            &::placeholder {
+              color: rgba(map.get($mushaf-colors, 'text'), 0.4);
+            }
+            
+            &:focus {
+              background: rgba(map.get($mushaf-colors, 'paper'), 1);
+              border-color: rgba(map.get($mushaf-colors, 'border'), 0.3);
+            }
+          }
+          
+          i, .clear-search {
+            color: rgba(map.get($mushaf-colors, 'text'), 0.5);
+          }
+        }
+        
+        .rules-list {
+          &::-webkit-scrollbar-track {
+            background: rgba(map.get($mushaf-colors, 'border'), 0.1);
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba(map.get($mushaf-colors, 'border'), 0.3);
+          }
+          
+          .rule-item {
+            background: rgba(map.get($mushaf-colors, 'border'), 0.05);
+            border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.15);
+            
+            &:hover {
+              background: rgba(map.get($mushaf-colors, 'border'), 0.1);
+              border-color: rgba(map.get($mushaf-colors, 'border'), 0.25);
+            }
+            
+            &.active {
+              background: rgba(map.get($mushaf-colors, 'border'), 0.15);
+              border-left: 3px solid map.get($mushaf-colors, 'border');
+            }
+            
+            .rule-content {
+              h4 {
+                color: map.get($mushaf-colors, 'text');
+                font-weight: 600;
+              }
+              
+              p {
+                color: rgba(map.get($mushaf-colors, 'text'), 0.8);
+              }
+              
+              .rule-example {
+                .example-label {
+                  color: rgba(map.get($mushaf-colors, 'text'), 0.7);
+                }
+              }
+            }
+          }
+          
+          .no-results {
+            color: rgba(map.get($mushaf-colors, 'text'), 0.5);
+          }
+        }
       }
     }
-
+    
+    // Typography dropdown light styling
     .typography-dropdown {
-      background: map-get($theme-colors, dark, dropdown-bg);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      background: map.get($mushaf-colors, 'paper');
+      border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.3);
+      box-shadow: 0 5px 15px rgba(map.get($mushaf-colors, 'shadow'), 0.2);
+      
+      .dropdown-title {
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        font-weight: 600;
+      }
+      
+      .dropdown-divider {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.2);
+      }
+      
+      .font-options button,
+      .font-size-controls button,
+      .line-height-controls button {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.2);
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        border: 1px solid rgba(map.get($mushaf-colors, 'border'), 0.3);
+        
+        &:hover {
+          background: rgba(map.get($mushaf-colors, 'border'), 0.3);
+        }
+        
+        &.active {
+          background: rgba(map.get($mushaf-colors, 'border'), 0.4);
+          border-color: rgba(map.get($mushaf-colors, 'border'), 0.6);
+        }
+      }
+      
+      .font-size, .line-height {
+        color: darken(map.get($mushaf-colors, 'text'), 5%);
+        font-weight: 500;
+      }
+    }
+    
+    // Verse navigation dots light styling
+    .verse-navigation .nav-dot {
+      background: rgba(map.get($mushaf-colors, 'border'), 0.25);
+      
+      &:hover {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.4);
+      }
+      
+      &.active {
+        background: map.get($mushaf-colors, 'border');
+      }
+      
+      &.completed {
+        background: rgba(map.get($mushaf-colors, 'border'), 0.6);
+      }
     }
   }
 
@@ -216,7 +462,7 @@ $theme-colors: (
         left: 50%;
         transform: translateX(-50%);
         width: 280px;
-        background: map-get($theme-colors, light, dropdown-bg);
+        background: rgba(map.get(vars.$colors, 'primary', 'base'), 0.95);
         border-radius: 12px;
         padding: 15px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -225,7 +471,7 @@ $theme-colors: (
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         
-        // Fix for landscape mode - ensure the dropdown doesn't get cut off
+        // Fix for landscape mode
         @media (orientation: landscape) and (max-height: 450px) {
           position: fixed;
           top: 50%;
@@ -233,6 +479,7 @@ $theme-colors: (
           transform: translate(-50%, -50%);
           max-height: 80vh;
           overflow-y: auto;
+          max-width: 90vw;
         }
         
         .dropdown-title {
@@ -248,9 +495,10 @@ $theme-colors: (
           margin: 12px 0;
         }
         
+        // Simplified font options to save space
         .font-options {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 8px;
           margin-bottom: 10px;
           
@@ -929,7 +1177,6 @@ $theme-colors: (
     .verse-navigation {
       margin: 10px 0;
     }
-  
   }
 }
 
