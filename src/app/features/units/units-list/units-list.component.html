@@ -1,5 +1,7 @@
 <!-- src/app/features/units/units-list/units-list.component.html -->
 <div class="units-page" [@pageTransition]="animationState" dir="rtl">
+  <!-- Islamic Pattern Decorations -->
+  <div class="islamic-decorations"></div>
   <header class="units-header">
     <div class="header-content">
       <h1 class="page-title">وحدات المقرر</h1>
@@ -20,34 +22,21 @@
 
     <!-- Main Content -->
     <ng-container *ngIf="(units$ | async) as units">
-      <div class="units-container"
-           [class.units-container--ready]="contentReady"
-           [class.dragging]="isDragging"
-           #unitsContainer
-           (mousedown)="onMouseDown($event)"
-           (mousemove)="onMouseMove($event)"
-           (mouseup)="onMouseUp($event)"
-           (mouseleave)="cleanup()"
-           (touchstart)="onTouchStart($event)"
-           (touchmove)="onTouchMove($event)"
-           (touchend)="onTouchEnd($event)">
+      <div class="units-container" [class.units-container--ready]="contentReady" [class.dragging]="isDragging"
+        #unitsContainer (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp($event)" (mouseleave)="cleanup()" (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)">
         <div class="units-wrapper">
           <ng-container *ngFor="let unit of units; let i = index; trackBy: trackByUnitId">
-            <div class="unit-item"
-                 [class.unit-item--active]="activeUnitId === unit.id"
-                 [class.unit-item--completing]="completedUnitId === unit.id"
-                 [attr.data-unit-id]="unit.id">
-              <app-unit-card
-                [unit]="unit"
-                [isCompleting]="unit.id === completedUnitId"
-                [isActive]="activeUnitId === unit.id"
-                (unitSelected)="onUnitSelected($event)">
+            <div class="unit-item" [class.unit-item--active]="activeUnitId === unit.id"
+              [class.unit-item--completing]="completedUnitId === unit.id" [attr.data-unit-id]="unit.id">
+              <app-unit-card [unit]="unit" [isCompleting]="unit.id === completedUnitId"
+                [isActive]="activeUnitId === unit.id" (unitSelected)="onUnitSelected($event)">
               </app-unit-card>
 
               <!-- Connector Line -->
               <div class="connector-line" *ngIf="i < units.length - 1">
-                <div class="connector-line__progress"
-                     [style.width.%]="getConnectorProgress(unit, units[i + 1])">
+                <div class="connector-line__progress" [style.width.%]="getConnectorProgress(unit, units[i + 1])">
                 </div>
               </div>
             </div>
