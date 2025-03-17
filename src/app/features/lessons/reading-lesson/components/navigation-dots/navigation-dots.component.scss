@@ -1,0 +1,100 @@
+// navigation-dots.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.verse-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0 5px;
+    flex-wrap: wrap;
+    max-width: 100%;
+
+    .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+
+        &.active {
+            transform: scale(1.2);
+        }
+    }
+}
+
+// Dark theme
+.theme-dark .verse-navigation .nav-dot {
+    background: rgba(255, 255, 255, 0.2);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    &.active {
+        background: map.get(vars.$colors, 'accent', 'base');
+    }
+
+    &.completed {
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.5);
+    }
+}
+
+// Light theme (Mushaf style)
+.theme-light .verse-navigation .nav-dot {
+    background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+
+    &:hover {
+        background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.4);
+    }
+
+    &.active {
+        background: map.get(vars.$mushaf-colors, 'border');
+    }
+
+    &.completed {
+        background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.6);
+    }
+}
+
+// Media queries
+@media (max-width: 768px) {
+    .verse-navigation {
+        gap: 8px;
+        margin: 12px 0 5px;
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+        }
+    }
+}
+
+// Landscape mode optimizations
+@media (orientation: landscape) and (max-height: 600px) {
+    .verse-navigation {
+        gap: 7px;
+        margin: 10px 0 5px;
+
+        .nav-dot {
+            width: 9px;
+            height: 9px;
+        }
+    }
+}
+
+// When there are many verses
+:host-context(.many-verses) .verse-navigation .nav-dot {
+    width: 8px;
+    height: 8px;
+    gap: 6px;
+}

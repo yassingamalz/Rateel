@@ -1,0 +1,403 @@
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.reading-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    // Control groups
+    .controls-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    // Progress indicator
+    .progress-indicator {
+        .progress-text {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            min-width: 60px;
+            text-align: center;
+        }
+    }
+
+    // Typography dropdown container
+    .typography-dropdown-container {
+        position: relative;
+    }
+
+    // Typography button
+    .typography-button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    // Typography dropdown menu
+    .typography-dropdown {
+        position: absolute;
+        top: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        border-radius: 12px;
+        padding: 15px;
+        z-index: 1000;
+
+        // Fix for landscape mode
+        @media (orientation: landscape) and (max-height: 450px) {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-height: 80vh;
+            overflow-y: auto;
+            max-width: 90vw;
+        }
+
+        // Title within dropdown
+        .dropdown-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        // Divider
+        .dropdown-divider {
+            height: 1px;
+            margin: 12px 0;
+        }
+
+        // Font options
+        .font-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+
+            button {
+                border: none;
+                border-radius: 6px;
+                padding: 8px 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 0.9rem;
+            }
+        }
+
+        // Font size controls
+        .font-size-controls,
+        .line-height-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                width: 36px;
+                height: 36px;
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .font-size,
+            .line-height {
+                font-size: 0.9rem;
+                width: 60px;
+                text-align: center;
+            }
+        }
+    }
+
+    // Control buttons
+    .control-button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+    }
+
+    // Rules toggle button
+    .rules-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        i {
+            font-size: 16px;
+        }
+    }
+}
+
+// Dark theme styling (default) using :host-context()
+.theme-dark,
+:host {
+    .reading-controls {
+        background: rgba(map.get(vars.$colors, 'primary', 'base'), 0.3);
+        @include mix.glass-effect;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+
+        .progress-indicator .progress-text {
+            background: rgba(255, 255, 255, 0.1);
+            color: map.get(vars.$colors, 'text', 'light');
+        }
+
+        .typography-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+
+            &:hover {
+                background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+            }
+        }
+
+        .typography-dropdown {
+            background: rgba(map.get(vars.$colors, 'primary', 'base'), 0.95);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            .dropdown-title {
+                color: map.get(vars.$colors, 'text', 'light');
+            }
+
+            .dropdown-divider {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .font-options button {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+
+                &.active {
+                    background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.3);
+                    border: 1px solid rgba(map.get(vars.$colors, 'accent', 'base'), 0.5);
+                }
+            }
+
+            .font-size-controls button,
+            .line-height-controls button {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+            }
+
+            .font-size,
+            .line-height {
+                color: white;
+            }
+        }
+
+        .control-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+
+            &:hover:not(:disabled) {
+                background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+            }
+        }
+
+        .rules-toggle {
+            @include mix.glass-effect;
+            color: map.get(vars.$colors, 'text', 'light');
+
+            &.active {
+                background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+                color: map.get(vars.$colors, 'accent', 'base');
+            }
+        }
+    }
+}
+
+// Light theme styling using :host-context()
+.theme-light {
+    .reading-controls {
+        background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.15);
+        border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+        box-shadow: 0 2px 8px rgba(map.get(vars.$mushaf-colors, 'shadow'), 0.1);
+        backdrop-filter: blur(5px);
+
+        .progress-indicator .progress-text {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.15);
+            color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+        }
+
+        .typography-button {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+            color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.4);
+        }
+
+        .typography-dropdown {
+            background: map.get(vars.$mushaf-colors, 'paper');
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+            box-shadow: 0 5px 15px rgba(map.get(vars.$mushaf-colors, 'shadow'), 0.2);
+
+            .dropdown-title {
+                color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            }
+
+            .dropdown-divider {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.2);
+            }
+
+            .font-options button {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.2);
+                color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+                border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+
+                &:hover {
+                    background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+                }
+
+                &.active {
+                    background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.4);
+                    border-color: rgba(map.get(vars.$mushaf-colors, 'border'), 0.6);
+                }
+            }
+
+            .font-size-controls button,
+            .line-height-controls button {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.2);
+                color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+                border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+
+                &:hover {
+                    background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+                }
+            }
+
+            .font-size,
+            .line-height {
+                color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            }
+        }
+
+        .control-button {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+            color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.4);
+
+            &:hover:not(:disabled) {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.35);
+            }
+        }
+
+        .rules-toggle {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+            color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.35);
+
+            &.active {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.35);
+                color: darken(map.get(vars.$mushaf-colors, 'border'), 25%);
+            }
+        }
+    }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+    .reading-controls {
+        padding: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        .controls-group {
+            gap: 5px;
+        }
+
+        .control-button,
+        .typography-button {
+            width: 36px;
+            height: 36px;
+        }
+
+        .rules-toggle span {
+            display: none;
+        }
+    }
+}
+
+// Landscape mode optimizations for mobile
+@media (orientation: landscape) and (max-height: 600px) {
+    .reading-controls {
+        margin: 5px 0;
+        padding: 8px 10px;
+
+        .control-button,
+        .typography-button {
+            width: 32px;
+            height: 32px;
+        }
+
+        .progress-text {
+            min-width: 50px;
+            padding: 4px 8px;
+            font-size: 0.85rem;
+        }
+    }
+}

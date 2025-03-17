@@ -1,0 +1,73 @@
+<div class="reading-controls" [ngClass]="currentTheme">
+    <!-- Left Group: Navigation Controls -->
+    <div class="controls-group navigation-group">
+        <button class="control-button" [disabled]="currentVerseIndex === 0" (click)="onPrevious()" title="السابق">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="progress-indicator">
+            <span class="progress-text">
+                {{ currentVerseIndex + 1 }} / {{ totalVerses }}
+            </span>
+        </div>
+
+        <button class="control-button" [disabled]="currentVerseIndex === totalVerses - 1" (click)="onNext()"
+            title="التالي">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <!-- Center Group: Typography Controls -->
+    <div class="controls-group typography-controls">
+        <div class="typography-dropdown-container">
+            <button class="typography-button" (click)="toggleFontMenu()" title="تغيير الخط">
+                <i class="fas fa-font"></i>
+            </button>
+            <div class="typography-dropdown" *ngIf="showFontMenu" [@slideDown] (click)="$event.stopPropagation()">
+                <div class="dropdown-title">خط النص</div>
+                <div class="font-options">
+                    <button *ngFor="let font of availableFonts" [class.active]="selectedFont === font.value"
+                        (click)="onFontSelect(font.value)">
+                        <span [style.fontFamily]="font.value">{{ font.name }}</span>
+                    </button>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-title">حجم الخط</div>
+                <div class="font-size-controls">
+                    <button class="font-size-button" (click)="onFontSizeDecrease()" title="تصغير الخط">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="font-size">{{ fontSize }}px</span>
+                    <button class="font-size-button" (click)="onFontSizeIncrease()" title="تكبير الخط">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-title">تباعد السطور</div>
+                <div class="line-height-controls">
+                    <button class="line-height-button" (click)="onLineHeightDecrease()" title="تقليل المسافة">
+                        <i class="fas fa-compress-alt"></i>
+                    </button>
+                    <span class="line-height">{{ lineHeight }}x</span>
+                    <button class="line-height-button" (click)="onLineHeightIncrease()" title="زيادة المسافة">
+                        <i class="fas fa-expand-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="control-button" (click)="onThemeToggle()" title="تبديل الوضع المظلم">
+            <i class="fas" [class.fa-moon]="currentTheme === 'theme-light'"
+                [class.fa-sun]="currentTheme === 'theme-dark'"></i>
+        </button>
+    </div>
+
+    <!-- Right Group: Toggle Rules Panel -->
+    <div class="controls-group">
+        <button class="rules-toggle" [class.active]="showRules" (click)="onRulesToggle()"
+            title="إظهار/إخفاء قواعد التجويد">
+            <i class="fas fa-info-circle"></i>
+            <span>قواعد التجويد</span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="verse" [ngClass]="currentTheme" [class.active]="isActive()" [class.completed]="isCompleted()"
+    [id]="'verse-' + verseIndex" [@verseAnimation]="getAnimationState()">
+
+    <div class="verse-number">{{ verseIndex + 1 }}</div>
+
+    <div class="verse-text" [innerHTML]="formattedText" [attr.data-verse]="verseIndex + 1">
+    </div>
+
+    <div class="verse-translation" *ngIf="verse.translation">
+        {{ verse.translation }}
+    </div>
+
+    <div class="verse-explanation" *ngIf="verse.explanation">
+        <div class="explanation-toggle" (click)="toggleExplanation()">
+            <i class="fas" [class.fa-chevron-down]="!expandedExplanation"
+                [class.fa-chevron-up]="expandedExplanation"></i>
+            <span>شرح</span>
+        </div>
+        <div class="explanation-content" *ngIf="expandedExplanation" [@slideDown]>
+            {{ verse.explanation }}
+        </div>
+    </div>
+</div>

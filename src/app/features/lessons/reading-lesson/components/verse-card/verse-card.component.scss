@@ -1,0 +1,286 @@
+// verse-card.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.verse {
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    margin-bottom: 20px;
+
+    &.active {
+        transform: translateY(-2px) scale(1.01);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 4px;
+        background: transparent;
+        transition: background 0.3s ease;
+    }
+
+    // Verse Number Badge
+    .verse-number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1rem;
+        z-index: 2;
+    }
+
+    // Verse Text
+    .verse-text {
+        font-family: 'Uthmanic', 'me_quran', 'Cairo', sans-serif;
+        line-height: 2;
+        text-align: right;
+        position: relative;
+        padding: 15px 0 5px;
+        margin-top: 20px;
+        letter-spacing: 0;
+
+        ::ng-deep {
+            .tajweed-mark {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+
+                &::after {
+                    content: attr(data-rule);
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(10px);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 6px;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                    pointer-events: none;
+                    z-index: 10;
+                }
+
+                &:hover {
+                    filter: brightness(1.3);
+                    text-shadow: 0 0 5px currentColor;
+
+                    &::after {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateX(-50%) translateY(0);
+                    }
+                }
+            }
+        }
+    }
+
+    // Verse Translation
+    .verse-translation {
+        margin-top: 15px;
+        padding-top: 15px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    // Verse Explanation
+    .verse-explanation {
+        margin-top: 15px;
+
+        .explanation-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .explanation-content {
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+    }
+}
+
+// Dark theme
+.theme-dark .verse {
+    background: rgba(31, 64, 55, 0.7);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+    &.active {
+        background: rgba(map.get(vars.$colors, 'primary', 'light'), 0.7);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+        &::before {
+            background: map.get(vars.$colors, 'accent', 'base');
+        }
+    }
+
+    &.completed {
+        &::after {
+            content: '✓';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 24px;
+            height: 24px;
+            background: map.get(vars.$colors, 'accent', 'base');
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+
+    .verse-number {
+        background: rgba(map.get(vars.$colors, 'accent', 'base'), 0.2);
+        color: white;
+    }
+
+    .verse-text {
+        color: map.get(vars.$colors, 'text', 'light');
+    }
+
+    .verse-translation {
+        color: map.get(vars.$colors, 'text', 'muted');
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .verse-explanation {
+        .explanation-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: map.get(vars.$colors, 'text', 'muted');
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+        }
+
+        .explanation-content {
+            background: rgba(0, 0, 0, 0.15);
+            color: map.get(vars.$colors, 'text', 'muted');
+        }
+    }
+}
+
+// Light theme (Mushaf style)
+.theme-light .verse {
+    background: map.get(vars.$mushaf-colors, 'paper');
+    box-shadow: 0 4px 8px rgba(map.get(vars.$mushaf-colors, 'shadow'), 0.1);
+    border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.2);
+
+    &.active {
+        background: lighten(map.get(vars.$mushaf-colors, 'paper'), 2%);
+        box-shadow: 0 6px 12px rgba(map.get(vars.$mushaf-colors, 'shadow'), 0.15);
+        border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.3);
+
+        &::before {
+            background: map.get(vars.$mushaf-colors, 'border');
+        }
+    }
+
+    &.completed {
+        &::after {
+            background: map.get(vars.$mushaf-colors, 'border');
+            color: map.get(vars.$mushaf-colors, 'paper');
+        }
+    }
+
+    .verse-number {
+        background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+        color: darken(map.get(vars.$mushaf-colors, 'text'), 5%);
+        border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.35);
+    }
+
+    .verse-text {
+        color: map.get(vars.$mushaf-colors, 'text');
+    }
+
+    .verse-translation {
+        color: rgba(map.get(vars.$mushaf-colors, 'text'), 0.7);
+        border-top: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.2);
+    }
+
+    .verse-explanation {
+        .explanation-toggle {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.15);
+            color: rgba(map.get(vars.$mushaf-colors, 'text'), 0.7);
+
+            &:hover {
+                background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.25);
+                color: map.get(vars.$mushaf-colors, 'text');
+            }
+        }
+
+        .explanation-content {
+            background: rgba(map.get(vars.$mushaf-colors, 'border'), 0.08);
+            color: rgba(map.get(vars.$mushaf-colors, 'text'), 0.8);
+            border: 1px solid rgba(map.get(vars.$mushaf-colors, 'border'), 0.15);
+        }
+    }
+}
+
+// Landscape mode optimizations for mobile
+@media (orientation: landscape) and (max-height: 600px) {
+    .verse {
+        padding: 15px;
+        margin-bottom: 10px;
+
+        .verse-text {
+            padding: 10px 0 0;
+            margin-top: 15px;
+        }
+
+        .verse-number {
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
+
+        .verse-translation {
+            margin-top: 10px;
+            padding-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .verse-explanation {
+            .explanation-toggle {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+
+            .explanation-content {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+    }
+}

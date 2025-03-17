@@ -23,6 +23,7 @@ import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson
 // Interactive lesson feature module
 import { InteractiveLessonComponent } from './interactive-lesson/interactive-lesson.component';
 import { InteractiveLessonComponentsModule } from './interactive-lesson/interactive-lesson-components.module';
+import { ReadingLessonModule } from './reading-lesson/reading-lesson.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,6 @@ import { InteractiveLessonComponentsModule } from './interactive-lesson/interact
     VideoPlayerComponent,
     InteractiveLessonComponent,
     AudioPlayerComponent,
-    ReadingLessonComponent,
     AssessmentLessonComponent
   ],
   imports: [
@@ -47,10 +47,12 @@ import { InteractiveLessonComponentsModule } from './interactive-lesson/interact
     // Shared modules
     SharedModule,
     BorderFillDirective,
-    AssessmentModule,
+
     
     // Feature modules
-    InteractiveLessonComponentsModule
+    InteractiveLessonComponentsModule,
+    AssessmentModule,
+    ReadingLessonModule,
   ]
 })
 export class LessonsModule { }

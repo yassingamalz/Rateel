@@ -1,0 +1,36 @@
+<div class="tajweed-panel" [ngClass]="currentTheme">
+    <div class="panel-header">
+        <h3>قواعد التجويد</h3>
+        <button class="close-panel" (click)="onClose()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="ابحث عن قاعدة..." [(ngModel)]="searchTerm" (input)="onSearch($event)">
+        <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="rules-list">
+        <div *ngFor="let rule of rules" class="rule-item" [class.active]="isRuleActive(rule.id)"
+            (click)="onRuleClick(rule.id)">
+            <div class="rule-color" [style.backgroundColor]="rule.color"></div>
+            <div class="rule-content">
+                <h4>{{ rule.name }}</h4>
+                <p>{{ rule.description }}</p>
+                <div class="rule-example" *ngIf="rule.example">
+                    <span class="example-label">مثال:</span>
+                    <span class="example-text" [style.color]="rule.color">{{ rule.example }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="rules.length === 0" class="no-results">
+            <i class="fas fa-search"></i>
+            <p>لا توجد نتائج للبحث</p>
+        </div>
+    </div>
+</div>

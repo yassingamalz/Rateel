@@ -1,0 +1,5 @@
+<div class="verse-navigation" [ngClass]="currentTheme">
+    <div *ngFor="let i of getVerseIndices()" class="nav-dot" [class.active]="isActive(i)"
+        [class.completed]="isCompleted(i)" (click)="goToVerse(i)">
+    </div>
+</div>
