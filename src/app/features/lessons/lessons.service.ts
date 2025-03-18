@@ -341,11 +341,77 @@ export class LessonsService implements OnDestroy {
     console.log(`[LessonsService] Loading assessment content for ${lessonId} from path: assets/data${contentPath}`);
 
     return this.http.get<any>(`assets/data${contentPath}`).pipe(
+      map(content => {
+        if (content) {
+          // Randomize assessment questions and options
+          console.log(`[LessonsService] Randomizing assessment content for ${lessonId}`);
+          return this.randomizeAssessment(content);
+        }
+        return content;
+      }),
       catchError(error => {
         console.error(`Error loading assessment content for ${lessonId}:`, error);
         return of(null);
       })
     );
+  }
+
+  /**
+   * Randomizes the questions and answer options in an assessment
+   * @param assessment The assessment object to randomize
+   * @returns A new assessment object with randomized questions and options
+   */
+  private randomizeAssessment(assessment: any): any {
+    if (!assessment || !assessment.questions || !Array.isArray(assessment.questions)) {
+      return assessment;
+    }
+
+    // Create a deep copy of the assessment to avoid modifying the original
+    const randomizedAssessment = JSON.parse(JSON.stringify(assessment));
+
+    // Separate questions by type (only randomize single and multiple choice)
+    const shuffleableQuestions = randomizedAssessment.questions.filter((q: any) =>
+      q.type === 'singleChoice' || q.type === 'multipleChoice');
+    const nonShuffleableQuestions = randomizedAssessment.questions.filter((q: any) =>
+      q.type !== 'singleChoice' && q.type !== 'multipleChoice');
+
+    // Shuffle the questions that can be shuffled
+    const shuffledQuestions = this.shuffleArray(shuffleableQuestions);
+
+    // Combine the questions back together (shuffled ones first, then non-shuffleable)
+    randomizedAssessment.questions = [...shuffledQuestions, ...nonShuffleableQuestions];
+
+    // Now randomize options for each single/multiple choice question
+    randomizedAssessment.questions.forEach((question: any) => {
+      if (question.type === 'singleChoice' && question.options) {
+        // For single choice, options can be shuffled as the correctAnswer is an ID reference
+        question.options = this.shuffleArray(question.options);
+
+        // correctAnswer is already the ID, which doesn't change when options are shuffled
+      }
+      else if (question.type === 'multipleChoice' && question.options) {
+        // For multiple choice, options can be shuffled as the correctAnswer is an array of IDs
+        question.options = this.shuffleArray(question.options);
+
+        // correctAnswer is already an array of IDs, which remain valid after shuffling
+      }
+    });
+
+    return randomizedAssessment;
+  }
+
+  /**
+   * Shuffles an array using Fisher-Yates algorithm
+   * @param array The array to shuffle
+   * @returns A new shuffled array (doesn't modify the original)
+   */
+  private shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array]; // Create a copy to avoid modifying the original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
   }
 
   setCurrentUnit(unitId: string): void {
