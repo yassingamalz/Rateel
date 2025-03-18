@@ -1,9 +1,13 @@
 {
   "appId": "com.novavista.rattil",
   "appName": "Rattil",
-  "bundledWebApp": {
-    "htmlDir": "dist/rattil",
-    "jsDir": "dist/rattil/browser"
+  "webDir": "dist/rattil/browser",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": [
+      "*"
+    ]
   },
   "plugins": {
     "SplashScreen": {
@@ -38,7 +42,8 @@
       "webViewSettings": {
         "androidScheme": "https",
         "allowFileAccess": true,
-        "mixedContent": "always"
+        "mixedContent": "always",
+        "textZoom": "100"
       }
     },
     "Browser": {
@@ -51,6 +56,7 @@
     "captureInput": true,
     "initialFocus": true,
     "useLegacyBridge": false,
-    "backgroundColor": "#1B4332"
+    "backgroundColor": "#1B4332",
+    "overrideUserAgent": "Mozilla/5.0 RattilApp"
   }
 }

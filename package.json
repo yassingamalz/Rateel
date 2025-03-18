@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:mobile": "ng build --configuration production",
-    "build:android": "ng build --configuration production && npx @capacitor/assets generate --assetPath resources --iconBackgroundColor transparent --splashBackgroundColor '#1B4332' && node fix-icons.js && npx cap sync android",
+    "build:android": "ng build --configuration production && npx @capacitor/assets generate --assetPath resources --iconBackgroundColor transparent --splashBackgroundColor '#1B4332' && node fix-icons.js && node add-mainactivity.js && npx cap sync android",
     "capacitor:run:ios": "npx cap run ios"
   },
   "private": true,

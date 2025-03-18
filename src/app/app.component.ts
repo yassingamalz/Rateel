@@ -19,9 +19,13 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.logDeviceInfo();
-    this.preventZoomAndScaling();
 
     if (Capacitor.isNativePlatform()) {
+      // Apply the Android font scaling fix first
+      if (Capacitor.getPlatform() === 'android') {
+        this.applyAndroidFontScalingFix();
+      }
+
       this.optimizeRendering();
       await this.setupMobileEnvironment();
     }
@@ -35,59 +39,29 @@ export class AppComponent implements OnInit {
     body.style.setProperty('perspective', '1000px');
   }
 
-  private preventZoomAndScaling() {
-    // Prevent double-tap zoom
-    document.addEventListener('touchstart', (event) => {
-      if (event.touches.length > 1) {
-        event.preventDefault();
-      }
-    }, { passive: false });
+  private applyAndroidFontScalingFix() {
+    console.log('Applying Android font scaling fix');
 
-    // Prevent pinch zoom
-    document.addEventListener('gesturestart', (event) => {
-      event.preventDefault();
-    }, { passive: false });
-
-    // Prevent zooming on input focus
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        document.body.style.zoom = '1';
-        // Adjust viewport meta tag
-        const metaViewport = document.querySelector('meta[name="viewport"]');
-        if (metaViewport) {
-          metaViewport.setAttribute(
-            'content', 
-            'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
-          );
-        }
-      });
-
-      input.addEventListener('blur', () => {
-        document.body.style.zoom = '1';
-      });
-    });
-
-    // Disable text size adjustment
-    const styleElement = document.createElement('style');
-    styleElement.innerHTML = `
+    // This style rule prevents system font scaling without changing app appearance
+    const style = document.createElement('style');
+    style.innerHTML = `
       * {
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-        touch-action: manipulation;
-      }
-      html, body {
-        font-size: 16px !important;
-        text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-        touch-action: manipulation;
-      }
-      input, textarea {
-        font-size: 16px !important;
+        -webkit-text-size-adjust: none !important;
+        -moz-text-size-adjust: none !important;
+        -ms-text-size-adjust: none !important;
+        text-size-adjust: none !important;
       }
     `;
-    document.head.appendChild(styleElement);
+    document.head.appendChild(style);
+
+    // Ensure viewport meta tag has user-scalable=no
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+      const content = viewport.getAttribute('content') || '';
+      if (!content.includes('user-scalable=no')) {
+        viewport.setAttribute('content', content + ', user-scalable=no');
+      }
+    }
   }
 
   private logDeviceInfo() {
@@ -139,25 +113,8 @@ export class AppComponent implements OnInit {
         fadeOutDuration: 500
       });
 
-      // Ensure consistent sizing
-      this.enforceConsistentSizing();
-
     } catch (error) {
       console.error('Mobile environment setup failed', error);
     }
-  }
-
-  private enforceConsistentSizing() {
-    // Additional method to enforce consistent sizing
-    const metaViewport = document.querySelector('meta[name="viewport"]');
-    if (metaViewport) {
-      metaViewport.setAttribute(
-        'content', 
-        'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
-      );
-    }
-
-    // Dynamically adjust root font size
-    document.documentElement.style.setProperty('font-size', '16px');
   }
 }

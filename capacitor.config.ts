@@ -1,6 +1,7 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
-const config: CapacitorConfig = {
+// Create the config object with minimal changes
+const configObj = {
   appId: 'com.novavista.rattil',
   appName: 'Rattil',
   webDir: 'dist/rattil/browser',
@@ -42,7 +43,9 @@ const config: CapacitorConfig = {
       webViewSettings: {
         androidScheme: 'https',
         allowFileAccess: true,
-        mixedContent: 'always'
+        mixedContent: 'always',
+        // This is the essential fix for Android font scaling
+        textZoom: '100'
       }
     },
     Browser: {
@@ -55,8 +58,12 @@ const config: CapacitorConfig = {
     captureInput: true,
     initialFocus: true,
     useLegacyBridge: false,
-    backgroundColor: '#1B4332'
+    backgroundColor: '#1B4332',
+    overrideUserAgent: 'Mozilla/5.0 RattilApp'
   }
 };
+
+// Use type assertion to tell TypeScript this conforms to CapacitorConfig
+const config = configObj as CapacitorConfig;
 
 export default config;
