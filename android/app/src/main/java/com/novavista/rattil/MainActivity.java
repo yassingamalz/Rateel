@@ -1,4 +1,4 @@
-package com.novavista.rattil;
+package com.novavista.rateel;
 
 import android.os.Bundle;
 import android.webkit.WebSettings;

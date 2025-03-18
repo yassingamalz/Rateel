@@ -2,9 +2,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 // Create the config object with minimal changes
 const configObj = {
-  appId: 'com.novavista.rattil',
-  appName: 'Rattil',
-  webDir: 'dist/rattil/browser',
+  appId: 'com.novavista.rateel',
+  appName: 'Rateel',
+  webDir: 'dist/rateel/browser',
   server: {
     androidScheme: 'https',
     cleartext: true,
@@ -59,7 +59,7 @@ const configObj = {
     initialFocus: true,
     useLegacyBridge: false,
     backgroundColor: '#1B4332',
-    overrideUserAgent: 'Mozilla/5.0 RattilApp'
+    overrideUserAgent: 'Mozilla/5.0 RateelApp'
   }
 };
 

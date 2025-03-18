@@ -12,7 +12,7 @@ const mainActivityPath = path.join(
   'java',
   'com',
   'novavista',
-  'rattil',
+  'rateel',
   'MainActivity.java'
 );
 
@@ -23,7 +23,7 @@ if (!fs.existsSync(dirPath)) {
 }
 
 // MainActivity.java content - this is the key fix for Android font scaling
-const mainActivityContent = `package com.novavista.rattil;
+const mainActivityContent = `package com.novavista.rateel;
 
 import android.os.Bundle;
 import android.webkit.WebSettings;

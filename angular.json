@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rattil": {
+    "rateel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rattil",
+            "outputPath": "dist/rateel",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -132,10 +132,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rattil:build:production"
+              "buildTarget": "rateel:build:production"
             },
             "development": {
-              "buildTarget": "rattil:build:development"
+              "buildTarget": "rateel:build:development"
             }
           },
           "defaultConfiguration": "development"
