@@ -29,6 +29,11 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'gamification',
+    loadChildren: () => import('./features/gamification/gamification.module')
+      .then(m => m.GamificationModule)
+  },
+  {
     path: 'quran',
     component: ComingSoonComponent
   },

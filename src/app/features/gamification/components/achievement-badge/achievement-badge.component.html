@@ -1,0 +1,19 @@
+<div class="achievement-badge" [ngClass]="[type, isLocked ? 'locked' : '']">
+    <div class="badge-icon">
+        <i class="fas" [ngClass]="getIconClass()"></i>
+        <div class="lock-overlay" *ngIf="isLocked">
+            <i class="fas fa-lock"></i>
+        </div>
+    </div>
+    <div class="badge-details">
+        <h3 class="badge-title">{{ title }}</h3>
+        <p class="badge-description">{{ description }}</p>
+
+        <div class="badge-progress" *ngIf="showProgress && isLocked">
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="progress"></div>
+            </div>
+            <span class="progress-text">{{ progress }}%</span>
+        </div>
+    </div>
+</div>

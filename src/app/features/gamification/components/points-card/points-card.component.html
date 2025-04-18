@@ -1,0 +1,41 @@
+<div class="points-card">
+    <div class="points-summary">
+        <div class="points-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="points-info">
+            <div class="points-value">{{ totalPoints }}</div>
+            <div class="points-label">نقطة</div>
+        </div>
+
+        <button *ngIf="activities.length > 0" class="history-toggle" (click)="toggleHistory()">
+            <i class="fas" [ngClass]="showHistory ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </button>
+    </div>
+
+    <div class="points-history" *ngIf="showHistory && activities.length > 0">
+        <h3 class="history-title">آخر النشاطات</h3>
+
+        <div class="activity-list">
+            <div class="activity-item" *ngFor="let activity of activities.slice(0, maxHistoryItems)">
+                <div class="activity-icon" [ngClass]="activity.type">
+                    <i class="fas"
+                        [ngClass]="activity.icon ? 'fa-' + activity.icon : getActivityTypeIcon(activity.type)"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-title">{{ activity.title }}</div>
+                    <div class="activity-date">{{ activity.date | date:'shortDate' }}</div>
+                </div>
+                <div class="activity-points" [ngClass]="activity.type">
+                    <span *ngIf="activity.type !== 'spent'">+</span>
+                    <span *ngIf="activity.type === 'spent'">-</span>
+                    {{ activity.points }}
+                </div>
+            </div>
+        </div>
+
+        <div class="view-all" *ngIf="activities.length > maxHistoryItems">
+            <a href="javascript:void(0)">عرض الكل</a>
+        </div>
+    </div>
+</div>

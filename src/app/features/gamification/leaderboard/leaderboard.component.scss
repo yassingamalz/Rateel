@@ -1,0 +1,686 @@
+// src/app/features/gamification/leaderboard/leaderboard.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+// Root Container
+.leaderboard-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom right,
+        map-get(vars.$colors, 'primary', 'base'),
+        map-get(vars.$colors, 'primary', 'dark'));
+    overflow: hidden;
+    position: relative;
+    padding-top: 20px;
+
+    // Add subtle Islamic pattern as background
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/assets/images/islamic-pattern-1-dark.svg');
+        background-repeat: repeat;
+        background-size: 700px 700px;
+        opacity: 0.04;
+        z-index: 0;
+        pointer-events: none;
+    }
+}
+
+// Banner Header - Gold banner with triangular ends
+.banner-header {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    height: 60px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: map-get(vars.$colors, 'accent', 'base');
+    z-index: 10;
+    overflow: visible;
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+    // Triangle decorations on left & right
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        width: 30px;
+        background: map-get(vars.$colors, 'accent', 'dark');
+    }
+    
+    &::before {
+        left: 0;
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+    
+    &::after {
+        right: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+    
+    // Title text
+    .header-title {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+}
+
+// Filter Tabs - Increased height and improved styling
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 0 auto 25px; // Increased bottom margin
+    width: 90%;
+    max-width: 400px;
+    z-index: 1;
+    position: relative;
+
+    .filter-tab {
+        flex: 1;
+        padding: 12px 15px; // Increased padding for height
+        border-radius: 20px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem; // Slightly larger font
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        max-width: 120px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        &.active {
+            background-color: map-get(vars.$colors, 'accent', 'base');
+            color: map-get(vars.$colors, 'primary', 'dark');
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+// Leaderboard Table
+.leaderboard-table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 1;
+}
+
+// Table Header
+.table-header {
+    display: flex;
+    padding: 12px 15px;
+    background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.5));
+    border-bottom: 1px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+
+    >div {
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+}
+
+// Scrollable Table Body
+.table-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    // Hide scrollbar but keep functionality
+    -ms-overflow-style: none; // IE and Edge
+    scrollbar-width: none; // Firefox
+
+    &::-webkit-scrollbar {
+        display: none; // Chrome, Safari and Opera
+    }
+}
+
+// Column Widths
+.rank-column {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.points-column {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rewards-column {
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Player Row Styling
+.player-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.1);
+
+    &.even-row {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    &.odd-row {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    // Special styling for top 3 players
+    &.top-player {
+        position: relative;
+        
+        &.gold-row {
+            background: linear-gradient(to left, rgba(218, 165, 32, 0.15), rgba(0, 0, 0, 0.2));
+        }
+        
+        &.silver-row {
+            background: linear-gradient(to left, rgba(192, 192, 192, 0.15), rgba(0, 0, 0, 0.2));
+        }
+        
+        &.bronze-row {
+            background: linear-gradient(to left, rgba(205, 127, 50, 0.15), rgba(0, 0, 0, 0.2));
+        }
+    }
+
+    // Highlight current user
+    &.current-user {
+        background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.1);
+        border-top: 1px solid map-get(vars.$colors, 'accent', 'base');
+        border-bottom: 1px solid map-get(vars.$colors, 'accent', 'base');
+    }
+}
+
+// Improved Olympic Medal Style
+.medal {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 
+                inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    z-index: 1;
+    
+    // Enhanced ribbon for Olympic medal look
+    .medal-ribbon {
+        position: absolute;
+        width: 16px;
+        height: 25px;
+        background: #e74c3c; // Red ribbon
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+        
+        // Add ribbon details
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background: #e74c3c; // Red ribbon
+            bottom: -5px;
+        }
+        
+        &::before {
+            left: -4px;
+            transform: skewY(15deg);
+        }
+        
+        &::after {
+            right: -4px;
+            transform: skewY(-15deg);
+        }
+    }
+    
+    // Gold medal
+    &.gold-medal {
+        background: radial-gradient(circle at 30% 30%,
+            #FFF6C8,
+            #FFC926 30%,
+            #DAA520 60%,
+            #B8860B);
+        border: 1px solid rgba(255, 215, 0, 0.5);
+    }
+    
+    // Silver medal
+    &.silver-medal {
+        background: radial-gradient(circle at 30% 30%,
+            #FFFFFF,
+            #E0E0E0 30%,
+            #C0C0C0 60%,
+            #A0A0A0);
+        border: 1px solid rgba(192, 192, 192, 0.5);
+    }
+    
+    // Bronze medal
+    &.bronze-medal {
+        background: radial-gradient(circle at 30% 30%,
+            #FFD5B8,
+            #E0A280 30%,
+            #CD7F32 60%,
+            #A0522D);
+        border: 1px solid rgba(205, 127, 50, 0.5);
+    }
+    
+    // Number in medal center
+    .medal-number {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #0B1C17; // Dark green text matching app primary dark
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+}
+
+// Regular rank number
+.rank-number {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+// User Info Styling
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+// Lesson count with icon
+.lesson-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+
+    i {
+        color: map-get(vars.$colors, 'accent', 'base'); // Gold
+        font-size: 0.8rem;
+    }
+}
+
+// Points Display
+.points-display {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+
+    .points-value {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    i {
+        color: map-get(vars.$colors, 'accent', 'base'); // Gold star
+        font-size: 1.1rem;
+        margin-left: 5px;
+    }
+}
+
+// Font Awesome Coin Rewards
+.coin-reward {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 10px;
+    position: relative;
+    
+    // Font Awesome coin icon
+    i.fa-coins {
+        font-size: 1.5rem;
+        color: #FFD700; // Gold color
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+        
+        // Add shine animation
+        animation: coin-shine 3s infinite;
+    }
+    
+    // Text value like 10K, 5K, 2K
+    .coin-value {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+}
+
+// Animation for coin shine
+@keyframes coin-shine {
+    0%, 100% {
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+    }
+}
+
+.empty-rewards {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+// Current User Position Footer
+.current-position {
+    margin: 15px auto;
+    width: 95%;
+    max-width: 800px;
+    padding: 10px 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.position-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    text-align: right;
+}
+
+.position-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.position-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.position-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Gold circle with rank number
+.current-rank-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: map-get(vars.$colors, 'accent', 'base');
+    color: map-get(vars.$colors, 'primary', 'dark');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.position-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.position-name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.position-points {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .points-value {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    i {
+        color: map-get(vars.$colors, 'accent', 'base');
+        font-size: 1.2rem;
+        margin-left: 5px;
+    }
+}
+
+// Responsive adjustments
+@media (max-height: 600px) {
+    .banner-header {
+        height: 50px;
+        margin-bottom: 15px;
+        
+        .header-title {
+            font-size: 1.6rem;
+        }
+    }
+    
+    .filter-tabs {
+        margin-bottom: 15px;
+
+        .filter-tab {
+            padding: 8px 12px; // Reduced padding on smaller screens but still taller than original
+            font-size: 0.9rem;
+        }
+    }
+
+    .player-row {
+        padding: 8px 10px;
+    }
+
+    .medal, 
+    .rank-number,
+    .current-rank-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+
+    .medal .medal-ribbon {
+        width: 14px;
+        height: 22px;
+        top: -12px;
+    }
+
+    .user-avatar, .position-avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+    .user-name {
+        font-size: 1rem;
+    }
+
+    .current-position {
+        margin: 10px auto;
+    }
+    
+    .coin-reward {
+        i.fa-coins {
+            font-size: 1.3rem;
+        }
+        
+        .coin-value {
+            font-size: 0.8rem;
+        }
+    }
+}
+
+// Ultra compact mode for very small screens
+@media (max-height: 450px) {
+    .leaderboard-page {
+        padding-top: 10px;
+    }
+    
+    .banner-header {
+        height: 40px;
+        margin-bottom: 10px;
+        
+        .header-title {
+            font-size: 1.4rem;
+        }
+    }
+    
+    .filter-tabs {
+        margin-bottom: 10px;
+
+        .filter-tab {
+            padding: 6px 10px; // Even with reduced height, still taller than original
+            font-size: 0.8rem;
+        }
+    }
+
+    .table-header>div {
+        font-size: 0.9rem;
+    }
+
+    .player-row {
+        padding: 6px 8px;
+    }
+
+    .medal, 
+    .rank-number,
+    .current-rank-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    .medal .medal-ribbon {
+        width: 12px;
+        height: 18px;
+        top: -10px;
+    }
+
+    .user-avatar, .position-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-name {
+        font-size: 0.9rem;
+    }
+
+    .lesson-count {
+        font-size: 0.8rem;
+    }
+
+    .points-display .points-value {
+        font-size: 1rem;
+    }
+    
+    .coin-reward {
+        i.fa-coins {
+            font-size: 1.2rem;
+        }
+        
+        .coin-value {
+            font-size: 0.75rem;
+        }
+    }
+
+    .current-position {
+        margin: 5px auto;
+        
+        .position-label {
+            margin-bottom: 5px;
+        }
+        
+        .position-content {
+            padding: 5px 10px;
+        }
+    }
+}

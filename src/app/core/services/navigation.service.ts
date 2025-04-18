@@ -10,6 +10,7 @@ export class NavigationService {
     { path: '/courses', icon: 'graduation-cap', label: 'الدروس', count: 30 },
     { path: '/quran', icon: 'book', label: 'القرآن', count: 114 },
     { path: '/practice', icon: 'microphone', label: 'التدريب', count: 2 },
+    { path: '/gamification/leaderboard', icon: 'trophy', label: 'المتصدرين', count: 15 },
     { path: '/certificates', icon: 'certificate', label: 'الشهادات', count: 3 }
   ];
 }

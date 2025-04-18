@@ -1,0 +1,34 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+.user-score {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: map-get(vars.$colors, 'text', 'light');
+
+    .score-icon {
+        color: map-get(vars.$colors, 'accent', 'base');
+    }
+
+    // Size variants
+    &.sm {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    &.md {
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+
+    &.lg {
+        font-size: 1.5rem;
+        font-weight: 700;
+
+        .score-icon {
+            font-size: 1.25rem;
+            color: map-get(vars.$colors, 'accent', 'bright');
+        }
+    }
+}

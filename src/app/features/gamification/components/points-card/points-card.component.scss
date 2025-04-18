@@ -1,0 +1,168 @@
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.points-card {
+    @include mix.glass-effect;
+    border-radius: map-get(vars.$border-radius, 'lg');
+    overflow: hidden;
+
+    .points-summary {
+        display: flex;
+        align-items: center;
+        padding: map-get(vars.$spacing, 'md');
+        background: linear-gradient(to right,
+                rgba(map-get(vars.$colors, 'accent', 'base'), 0.2),
+                rgba(map-get(vars.$colors, 'accent', 'base'), 0.05));
+
+        .points-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: map-get(vars.$spacing, 'md');
+
+            i {
+                font-size: 1.75rem;
+                color: map-get(vars.$colors, 'accent', 'bright');
+                filter: drop-shadow(0 2px 4px rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
+            }
+        }
+
+        .points-info {
+            flex: 1;
+
+            .points-value {
+                font-size: 1.75rem;
+                font-weight: 700;
+                color: map-get(vars.$colors, 'text', 'light');
+                line-height: 1.2;
+            }
+
+            .points-label {
+                font-size: 0.85rem;
+                color: map-get(vars.$colors, 'text', 'muted');
+            }
+        }
+
+        .history-toggle {
+            background: none;
+            border: none;
+            color: map-get(vars.$colors, 'text', 'light');
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                color: map-get(vars.$colors, 'accent', 'base');
+            }
+        }
+    }
+
+    .points-history {
+        padding: map-get(vars.$spacing, 'md');
+
+        .history-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: map-get(vars.$colors, 'text', 'light');
+            margin: 0 0 map-get(vars.$spacing, 'sm');
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: map-get(vars.$spacing, 'sm');
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: map-get(vars.$border-radius, 'md');
+            padding: map-get(vars.$spacing, 'sm');
+
+            .activity-icon {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: map-get(vars.$spacing, 'sm');
+
+                &.earned {
+                    background: rgba(39, 174, 96, 0.2);
+                    color: #27AE60;
+                }
+
+                &.spent {
+                    background: rgba(192, 57, 43, 0.2);
+                    color: #C0392B;
+                }
+
+                &.bonus {
+                    background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+
+            .activity-details {
+                flex: 1;
+
+                .activity-title {
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin-bottom: 2px;
+                }
+
+                .activity-date {
+                    font-size: 0.75rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
+                }
+            }
+
+            .activity-points {
+                font-size: 1rem;
+                font-weight: 600;
+
+                &.earned {
+                    color: #27AE60;
+                }
+
+                &.spent {
+                    color: #C0392B;
+                }
+
+                &.bonus {
+                    color: map-get(vars.$colors, 'accent', 'bright');
+                }
+            }
+        }
+
+        .view-all {
+            text-align: center;
+            margin-top: map-get(vars.$spacing, 'sm');
+
+            a {
+                font-size: 0.85rem;
+                color: map-get(vars.$colors, 'accent', 'base');
+                text-decoration: none;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: map-get(vars.$colors, 'accent', 'light');
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
