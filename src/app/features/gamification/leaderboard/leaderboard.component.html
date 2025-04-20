@@ -1,143 +1,162 @@
 <!-- src/app/features/gamification/leaderboard/leaderboard.component.html -->
 <div class="leaderboard-page" dir="rtl">
-    <!-- Game-style Banner Header -->
-    <div class="banner-header">
-        <div class="header-title">المتصدرين</div>
-    </div>
-
-    <!-- Enhanced Filter Tabs with increased height -->
-    <div class="filter-tabs">
-        <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="setFilter('all')">الكل</button>
-        <button class="filter-tab" [class.active]="currentFilter === 'friends'"
-            (click)="setFilter('friends')">الأصدقاء</button>
-        <button class="filter-tab" [class.active]="currentFilter === 'region'"
-            (click)="setFilter('region')">المنطقة</button>
-    </div>
-
-    <!-- Leaderboard Table -->
-    <div class="leaderboard-table">
-        <!-- Table Header -->
-        <div class="table-header">
-            <div class="rank-column">المركز</div>
-            <div class="user-column">المستخدم</div>
-            <div class="points-column">النقاط</div>
-            <div class="rewards-column">المكافآت</div>
-        </div>
-
-        <!-- Scrollable Table Body -->
-        <div class="table-body">
-            <!-- Top 3 Players with Olympic medals and Font Awesome coins -->
-            <div *ngFor="let player of filteredLeaderboard.slice(0, 3); let i = index" 
-                 class="player-row top-player"
-                 [class.gold-row]="i === 0"
-                 [class.silver-row]="i === 1"
-                 [class.bronze-row]="i === 2"
-                 [class.current-user]="player.isCurrentUser">
-
-                <!-- Rank with Olympic Medal - Improved styling -->
-                <div class="rank-column">
-                    <div class="medal" 
-                         [class.gold-medal]="i === 0"
-                         [class.silver-medal]="i === 1"
-                         [class.bronze-medal]="i === 2">
-                        <div class="medal-ribbon"></div>
-                        <span class="medal-number">{{ i + 1 }}</span>
-                    </div>
-                </div>
-
-                <!-- User Info -->
-                <div class="user-column">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <img [src]="player.avatar" alt="Avatar">
-                        </div>
-                        <div class="user-details">
-                            <div class="user-name">{{ player.name }}</div>
-                            <div class="lesson-count">
-                                <i class="fas fa-book"></i>
-                                <span>{{ player.completedLessons }} درس</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Points -->
-                <div class="points-column">
-                    <div class="points-display">
-                        <span class="points-value">{{ player.score }}</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-
-                <!-- Rewards with Font Awesome Coins -->
-                <div class="rewards-column">
-                    <div class="coin-reward">
-                        <i class="fas fa-coins"></i>
-                        <span class="coin-value">{{ i === 0 ? '10K' : i === 1 ? '5K' : '2K' }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Rest of Players -->
-            <div *ngFor="let player of filteredLeaderboard.slice(3, displayLimit); let i = index"
-                class="player-row" 
-                [class.even-row]="i % 2 === 0" 
-                [class.odd-row]="i % 2 !== 0"
-                [class.current-user]="player.isCurrentUser">
-
-                <!-- Rank -->
-                <div class="rank-column">
-                    <div class="rank-number">{{ player.rank }}</div>
-                </div>
-
-                <!-- User Info -->
-                <div class="user-column">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <img [src]="player.avatar" alt="Avatar">
-                        </div>
-                        <div class="user-details">
-                            <div class="user-name">{{ player.name }}</div>
-                            <div class="lesson-count">
-                                <i class="fas fa-book"></i>
-                                <span>{{ player.completedLessons }} درس</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Points -->
-                <div class="points-column">
-                    <div class="points-display">
-                        <span class="points-value">{{ player.score }}</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-
-                <!-- Rewards (empty for regular players) -->
-                <div class="rewards-column">
-                    <div class="empty-rewards">-</div>
-                </div>
-            </div>
+    <!-- Gold Ribbon Banner Header -->
+    <div class="ribbon-header">
+        <img src="assets/images/gold-ribbon-banner.png" alt="Gold ribbon" class="ribbon-image">
+        <div class="ribbon-text-container">
+            <h1 class="ribbon-title">المتصدرين</h1>
         </div>
     </div>
 
-    <!-- Current User Position -->
-    <div class="current-position" *ngIf="currentUserPosition">
-        <div class="position-label">موقعك الحالي</div>
-        <div class="position-content">
-            <div class="position-info">
-                <div class="position-rank">
-                    <div class="current-rank-badge">{{ currentUserPosition.rank }}</div>
-                </div>
-                <div class="position-avatar">
-                    <img [src]="currentUserPosition.avatar" alt="Your Avatar">
-                </div>
-                <div class="position-name">{{ currentUserPosition.name }}</div>
+    <div class="leaderboard-container">
+        <!-- Vertical Tabs Navigation -->
+        <div class="vertical-tabs">
+            <div class="tab" [class.active]="currentFilter === 'all'" (click)="setFilter('all')">
+                <span class="tab-text">الكل</span>
             </div>
-            <div class="position-points">
-                <span class="points-value">{{ currentUserPosition.score }}</span>
-                <i class="fas fa-star"></i>
+            <div class="tab" [class.active]="currentFilter === 'friends'" (click)="setFilter('friends')">
+                <span class="tab-text">الأصدقاء</span>
+            </div>
+            <div class="tab" [class.active]="currentFilter === 'region'" (click)="setFilter('region')">
+                <span class="tab-text">المنطقة</span>
+            </div>
+        </div>
+
+        <!-- Leaderboard Panel -->
+        <div class="leaderboard-panel">
+            <!-- Table Header -->
+            <div class="table-header">
+                <div class="rank-column">المركز</div>
+                <div class="user-column">المستخدم</div>
+                <div class="points-column">النقاط</div>
+                <div class="rewards-column">المكافآت</div>
+            </div>
+
+            <!-- Scrollable Table Body -->
+            <div class="table-body" #tableBodyRef (scroll)="onTableScroll()">
+                <!-- Top 3 Players with Medal Images -->
+                <div *ngFor="let player of filteredLeaderboard.slice(0, 3); let i = index" class="player-row top-player"
+                    [class.gold-row]="i === 0" [class.silver-row]="i === 1" [class.bronze-row]="i === 2"
+                    [class.current-user]="player.isCurrentUser" [id]="'player-' + player.rank">
+
+                    <!-- Rank with Medal Image -->
+                    <div class="rank-column">
+                        <div class="medal-container">
+                            <img [src]="'assets/images/medals/' + 
+                      (i === 0 ? 'gold' : 
+                       i === 1 ? 'silver' : 'bronze') + 
+                      '-medal.png'" [alt]="i === 0 ? 'Gold medal' : 
+                       i === 1 ? 'Silver medal' : 'Bronze medal'" class="medal-image">
+                        </div>
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="user-column">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img [src]="player.avatar" alt="User avatar">
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name">{{ player.name }}</div>
+                                <div class="lesson-count">
+                                    <i class="fas fa-book"></i>
+                                    <span>{{ player.completedLessons }} درس</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points -->
+                    <div class="points-column">
+                        <div class="points-display">
+                            <span class="points-value">{{ player.score }}</span>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Rewards with Font Awesome Coins -->
+                    <div class="rewards-column">
+                        <div class="coin-reward"
+                            [ngClass]="i === 0 ? 'gold-coins' : i === 1 ? 'silver-coins' : 'bronze-coins'">
+                            <i class="fas fa-coins"></i>
+                            <span class="coin-value">{{ i === 0 ? '10K' : i === 1 ? '5K' : '2K' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Players (limited by displayLimit) -->
+                <div *ngFor="let player of getDisplayedRegularPlayers(); let i = index" class="player-row"
+                    [class.even-row]="i % 2 === 0" [class.odd-row]="i % 2 !== 0"
+                    [class.current-user]="player.isCurrentUser" [id]="'player-' + player.rank">
+
+                    <!-- Regular Rank Number (No Medal) -->
+                    <div class="rank-column">
+                        <div class="rank-number">{{ player.rank }}</div>
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="user-column">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img [src]="player.avatar" alt="User avatar">
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name">{{ player.name }}</div>
+                                <div class="lesson-count">
+                                    <i class="fas fa-book"></i>
+                                    <span>{{ player.completedLessons }} درس</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points -->
+                    <div class="points-column">
+                        <div class="points-display">
+                            <span class="points-value">{{ player.score }}</span>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Rewards (empty for regular players) -->
+                    <div class="rewards-column">
+                        <div class="empty-rewards">-</div>
+                    </div>
+                </div>
+
+                <!-- Current User (if not already in the visible rows) -->
+                <div *ngIf="shouldShowCurrentUserAtBottom()" class="player-row current-user-row"
+                    id="current-user-footer">
+                    <div class="rank-column">
+                        <div class="current-rank-badge">{{ currentUserPosition!.rank }}</div>
+                    </div>
+
+                    <div class="user-column">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img [src]="currentUserPosition!.avatar" alt="Your Avatar">
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name">{{ currentUserPosition!.name }}</div>
+                                <div class="lesson-count">
+                                    <i class="fas fa-book"></i>
+                                    <span>{{ currentUserPosition!.completedLessons }} درس</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="points-column">
+                        <div class="points-display">
+                            <span class="points-value">{{ currentUserPosition!.score }}</span>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="rewards-column">
+                        <div class="empty-rewards">-</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
