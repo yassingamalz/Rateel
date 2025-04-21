@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { UserScoreComponent } from './components/user-score/user-score.component';
 import { AchievementBadgeComponent } from './components/achievement-badge/achievement-badge.component';
 import { PointsCardComponent } from './components/points-card/points-card.component';
+import { DailyChallengesComponent } from './daily-challenges/daily-challenges.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PointsCardComponent } from './components/points-card/points-card.compon
     UserScoreComponent,
     AchievementBadgeComponent,
     PointsCardComponent,
+    DailyChallengesComponent,
   ],
   imports: [
     CommonModule,

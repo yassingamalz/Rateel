@@ -1,0 +1,77 @@
+<!-- Gamified Daily Challenges Path -->
+<div class="gamified-challenges-container" dir="rtl">
+    <!-- Challenge Path Header -->
+    <div class="challenges-header">
+        <div class="challenges-title">
+            <h1>رحلة التحديات اليومية</h1>
+            <p>أكمل التحديات واحصل على المكافآت</p>
+        </div>
+    </div>
+
+    <!-- Challenge Path -->
+    <div class="challenge-path-container">
+        <div class="challenge-path">
+            <div *ngFor="let challenge of challengePath" class="challenge-node" [ngClass]="{
+            'completed': challenge.isCompleted,
+            'active': !challenge.isLocked && !challenge.isCompleted,
+            'locked': challenge.isLocked
+          }">
+
+                <!-- Node Content -->
+                <div class="node-wrapper" (click)="onChallengeNodeClick(challenge)">
+                    <!-- Challenge Icons -->
+                    <div class="node-icon">
+                        <ng-container [ngSwitch]="challenge.icon">
+                            <i *ngSwitchCase="'book'" class="fas fa-book"></i>
+                            <i *ngSwitchCase="'microphone'" class="fas fa-microphone"></i>
+                            <i *ngSwitchCase="'quran'" class="fas fa-quran"></i>
+                            <i *ngSwitchCase="'trophy'" class="fas fa-trophy"></i>
+                            <i *ngSwitchDefault class="fas fa-star"></i>
+                        </ng-container>
+                    </div>
+
+                    <!-- Completed Checkmark -->
+                    <div class="node-completion" *ngIf="challenge.isCompleted">
+                        <i class="fas fa-check"></i>
+                    </div>
+
+                    <!-- Locked Overlay -->
+                    <div class="node-lock" *ngIf="challenge.isLocked">
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <!-- Points -->
+                    <div class="node-points">
+                        <img src="assets/images/coin-icon.png" alt="Coins">
+                        <span>{{ challenge.points }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Bonus Node -->
+        <div class="final-bonus-node" *ngIf="isAllChallengesCompleted">
+            <div class="bonus-content" (click)="claimFinalReward()">
+                <div class="bonus-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="bonus-details">
+                    <h3>مكافأة نهائية</h3>
+                    <p>تهانينا! لقد أكملت جميع التحديات</p>
+                    <span class="bonus-points">500 نقطة</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Streak -->
+    <div class="daily-streak">
+        <div class="streak-icon">
+            <i class="fas fa-fire"></i>
+        </div>
+        <div class="streak-info">
+            <span class="streak-count">{{ dailyStreak }} يوم</span>
+            <span class="streak-label">الاستمرارية</span>
+        </div>
+    </div>
+</div>

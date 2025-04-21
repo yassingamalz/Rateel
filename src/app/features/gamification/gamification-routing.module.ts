@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { DailyChallengesComponent } from './daily-challenges/daily-challenges.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,10 @@ const routes: Routes = [
       {
         path: 'leaderboard',
         component: LeaderboardComponent
+      },
+      {
+        path: 'daily-challenges',
+        component: DailyChallengesComponent
       },
       {
         path: '',
