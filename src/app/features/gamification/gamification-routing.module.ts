@@ -1,7 +1,9 @@
+// src/app/features/gamification/gamification-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { DailyChallengesComponent } from './daily-challenges/daily-challenges.component';
+import { AchievementsComponent } from './achievements/achievements.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,10 @@ const routes: Routes = [
       {
         path: 'daily-challenges',
         component: DailyChallengesComponent
+      },
+      {
+        path: 'achievements',
+        component: AchievementsComponent
       },
       {
         path: '',

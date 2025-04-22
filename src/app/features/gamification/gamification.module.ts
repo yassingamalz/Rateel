@@ -1,3 +1,4 @@
+// src/app/features/gamification/gamification.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,7 @@ import { UserScoreComponent } from './components/user-score/user-score.component
 import { AchievementBadgeComponent } from './components/achievement-badge/achievement-badge.component';
 import { PointsCardComponent } from './components/points-card/points-card.component';
 import { DailyChallengesComponent } from './daily-challenges/daily-challenges.component';
+import { AchievementsComponent } from './achievements/achievements.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { DailyChallengesComponent } from './daily-challenges/daily-challenges.co
     AchievementBadgeComponent,
     PointsCardComponent,
     DailyChallengesComponent,
+    AchievementsComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,9 @@ import { DailyChallengesComponent } from './daily-challenges/daily-challenges.co
     GamificationRoutingModule
   ],
   exports: [
+    UserScoreComponent,
+    AchievementBadgeComponent,
+    PointsCardComponent
   ]
 })
 export class GamificationModule { }

@@ -1,0 +1,528 @@
+// src/app/features/gamification/achievements/achievements.component.scss
+@use "sass:map";
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.achievements-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom right,
+            map-get(vars.$colors, 'primary', 'base'),
+            map-get(vars.$colors, 'primary', 'dark'));
+    position: relative;
+
+    // Add subtle Islamic pattern as background
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/assets/images/islamic-pattern-1-dark.svg');
+        background-repeat: repeat;
+        background-size: 700px 700px;
+        opacity: 0.04;
+        z-index: 0;
+        pointer-events: none;
+    }
+}
+
+// Header Section with Stats
+.achievements-header {
+    padding: map-get(vars.$spacing, 'md');
+    position: relative;
+    z-index: 1;
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: map-get(vars.$spacing, 'md');
+        }
+    }
+
+    .title-section {
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: map-get(vars.$colors, 'text', 'light');
+            margin: 0 0 map-get(vars.$spacing, 'xs');
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            color: map-get(vars.$colors, 'text', 'muted');
+            font-size: 1rem;
+            margin: 0;
+        }
+    }
+
+    .stats-section {
+        display: flex;
+        align-items: center;
+        gap: map-get(vars.$spacing, 'md');
+
+        @media (max-width: 768px) {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+
+    .stats-card {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: map-get(vars.$spacing, 'sm') map-get(vars.$spacing, 'md');
+        border-radius: map-get(vars.$border-radius, 'md');
+        backdrop-filter: blur(4px);
+
+        .stats-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+            margin-left: map-get(vars.$spacing, 'sm');
+
+            i {
+                color: map-get(vars.$colors, 'accent', 'base');
+                font-size: 1.2rem;
+            }
+        }
+
+        .stats-info {
+            .stats-value {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: map-get(vars.$colors, 'text', 'light');
+            }
+
+            .stats-label {
+                font-size: 0.8rem;
+                color: map-get(vars.$colors, 'text', 'muted');
+            }
+        }
+    }
+
+    .stats-progress {
+        display: flex;
+        flex-direction: column;
+        min-width: 150px;
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: map-get(vars.$spacing, 'xs');
+
+            .progress-fill {
+                height: 100%;
+                background: map-get(vars.$colors, 'accent', 'base');
+                border-radius: 3px;
+                transition: width 0.5s ease;
+            }
+        }
+
+        .progress-percentage {
+            font-size: 0.8rem;
+            color: map-get(vars.$colors, 'text', 'muted');
+            text-align: right;
+        }
+    }
+
+    .header-score {
+        margin-right: map-get(vars.$spacing, 'md');
+    }
+}
+
+// Tab Navigation
+.tabs-container {
+    padding: 0 map-get(vars.$spacing, 'md');
+    position: relative;
+    z-index: 1;
+
+    .tab-buttons {
+        display: flex;
+        gap: map-get(vars.$spacing, 'xs');
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: map-get(vars.$spacing, 'xs');
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            color: map-get(vars.$colors, 'text', 'muted');
+            padding: map-get(vars.$spacing, 'sm') map-get(vars.$spacing, 'md');
+            border-radius: map-get(vars.$border-radius, 'md');
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: map-get(vars.$spacing, 'xs');
+            white-space: nowrap;
+            transition: all 0.2s ease;
+
+            i {
+                font-size: 1rem;
+            }
+
+            &:hover {
+                color: map-get(vars.$colors, 'text', 'light');
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            &.active {
+                color: map-get(vars.$colors, 'primary', 'dark');
+                background: map-get(vars.$colors, 'accent', 'base');
+                font-weight: 600;
+
+                i {
+                    color: map-get(vars.$colors, 'primary', 'dark');
+                }
+            }
+        }
+    }
+}
+
+// Content Area
+.content-area {
+    flex: 1;
+    padding: map-get(vars.$spacing, 'md');
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+// Achievements Grid View
+.achievements-view {
+    height: 100%;
+    overflow: hidden;
+
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: map-get(vars.$spacing, 'md');
+        max-height: calc(100vh - 180px);
+        overflow-y: auto;
+        padding-right: map-get(vars.$spacing, 'sm');
+        scrollbar-width: thin;
+        scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2);
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+            border-radius: 3px;
+        }
+
+        .achievement-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: map-get(vars.$border-radius, 'md');
+            padding: map-get(vars.$spacing, 'sm');
+            transition: all 0.3s ease;
+            overflow: hidden;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 5px;
+                height: 100%;
+                background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+            }
+
+            // Category colors
+            &.category-lessons::before {
+                background: #27AE60;
+            }
+
+            &.category-score::before {
+                background: #3498DB;
+            }
+
+            &.category-streak::before {
+                background: #E67E22;
+            }
+
+            &.category-perfect::before {
+                background: #9B59B6;
+            }
+
+            .badge-points,
+            .badge-date {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.8rem;
+                color: map-get(vars.$colors, 'text', 'muted');
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                i {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+        }
+    }
+}
+
+// Badges Collection View
+.badges-view {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: map-get(vars.$spacing, 'sm');
+    scrollbar-width: thin;
+    scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2);
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        border-radius: 3px;
+    }
+
+    .badges-categories {
+        display: flex;
+        flex-direction: column;
+        gap: map-get(vars.$spacing, 'lg');
+    }
+
+    .category-section {
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: map-get(vars.$colors, 'text', 'light');
+            display: flex;
+            align-items: center;
+            gap: map-get(vars.$spacing, 'sm');
+            margin-bottom: map-get(vars.$spacing, 'md');
+
+            i {
+                color: map-get(vars.$colors, 'accent', 'base');
+            }
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: map-get(vars.$spacing, 'md');
+
+            .badge-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                .badge-icon {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 20px;
+                    background: rgba(255, 255, 255, 0.1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    margin-bottom: map-get(vars.$spacing, 'sm');
+                    transition: all 0.3s ease;
+
+                    i {
+                        font-size: 2.5rem;
+                        color: rgba(255, 255, 255, 0.5);
+                        transition: all 0.3s ease;
+                    }
+
+                    .lock-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, 0.4);
+                        border-radius: 20px;
+
+                        i {
+                            font-size: 1.5rem;
+                            color: rgba(255, 255, 255, 0.7);
+                        }
+                    }
+                }
+
+                .badge-name {
+                    font-size: 0.9rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
+                    margin: 0;
+                    transition: all 0.3s ease;
+                }
+
+                &.unlocked {
+                    .badge-icon {
+                        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+                        box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                        i {
+                            color: map-get(vars.$colors, 'accent', 'base');
+                        }
+                    }
+
+                    .badge-name {
+                        color: map-get(vars.$colors, 'text', 'light');
+                        font-weight: 600;
+                    }
+                }
+
+                &:hover .badge-icon {
+                    transform: translateY(-5px);
+                }
+            }
+        }
+    }
+}
+
+// Points View
+.points-view {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: map-get(vars.$spacing, 'lg');
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    .points-stats {
+        display: flex;
+        flex-direction: column;
+        gap: map-get(vars.$spacing, 'md');
+
+        .stats-card {
+            @include mix.glass-effect;
+            display: flex;
+            align-items: center;
+            padding: map-get(vars.$spacing, 'md');
+            border-radius: map-get(vars.$border-radius, 'md');
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-icon {
+                width: 60px;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 15px;
+                margin-left: map-get(vars.$spacing, 'md');
+
+                i {
+                    font-size: 2rem;
+                }
+            }
+
+            .card-details {
+                .card-title {
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin: 0 0 5px;
+                }
+
+                .card-value {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                }
+            }
+
+            &.earned {
+                border-left: 5px solid #27AE60;
+
+                .card-icon {
+                    background: rgba(39, 174, 96, 0.2);
+
+                    i {
+                        color: #27AE60;
+                    }
+                }
+
+                .card-value {
+                    color: #27AE60;
+                }
+            }
+
+            &.bonus {
+                border-left: 5px solid map-get(vars.$colors, 'accent', 'base');
+
+                .card-icon {
+                    background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                    i {
+                        color: map-get(vars.$colors, 'accent', 'base');
+                    }
+                }
+
+                .card-value {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+
+            &.spent {
+                border-left: 5px solid #C0392B;
+
+                .card-icon {
+                    background: rgba(192, 57, 43, 0.2);
+
+                    i {
+                        color: #C0392B;
+                    }
+                }
+
+                .card-value {
+                    color: #C0392B;
+                }
+            }
+        }
+    }
+}

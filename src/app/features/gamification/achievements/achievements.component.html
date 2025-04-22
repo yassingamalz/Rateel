@@ -1,0 +1,202 @@
+<!-- src/app/features/gamification/achievements/achievements.component.html -->
+<div class="achievements-container" dir="rtl">
+    <!-- Header Section with Stats -->
+    <div class="achievements-header">
+        <div class="header-content">
+            <div class="title-section">
+                <h1 class="page-title">الإنجازات</h1>
+                <p class="subtitle">اكتشف تقدمك وإنجازاتك في رحلة التجويد</p>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stats-info">
+                        <div class="stats-value">{{unlockedCount}}/{{totalCount}}</div>
+                        <div class="stats-label">الإنجازات المكتسبة</div>
+                    </div>
+                </div>
+
+                <div class="stats-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+                    </div>
+                    <div class="progress-percentage">{{progressPercentage}}%</div>
+                </div>
+
+                <app-user-score [score]="totalPoints" [size]="'lg'" [showIcon]="true" customClass="header-score">
+                </app-user-score>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tabs-container">
+        <div class="tab-buttons">
+            <button class="tab-button" [class.active]="activeTab === 'all'" (click)="setActiveTab('all')">
+                <i class="fas fa-star"></i>
+                <span>الكل</span>
+            </button>
+
+            <button class="tab-button" [class.active]="activeTab === 'unlocked'" (click)="setActiveTab('unlocked')">
+                <i class="fas fa-unlock"></i>
+                <span>المكتسبة</span>
+            </button>
+
+            <button class="tab-button" [class.active]="activeTab === 'locked'" (click)="setActiveTab('locked')">
+                <i class="fas fa-lock"></i>
+                <span>المقفلة</span>
+            </button>
+
+            <button class="tab-button" [class.active]="activeTab === 'badges'" (click)="setActiveTab('badges')">
+                <i class="fas fa-medal"></i>
+                <span>الأوسمة</span>
+            </button>
+
+            <button class="tab-button" [class.active]="activeTab === 'points'" (click)="setActiveTab('points')">
+                <i class="fas fa-coins"></i>
+                <span>النقاط</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <!-- Achievements View (All, Unlocked, Locked tabs) -->
+        <div class="achievements-view" *ngIf="activeTab === 'all' || activeTab === 'unlocked' || activeTab === 'locked'"
+            @cardEnter>
+            <div class="achievements-grid">
+                <div *ngFor="let achievement of getFilteredAchievements()" class="achievement-card"
+                    [ngClass]="getAchievementCategoryClass(achievement.requirement.type)">
+                    <app-achievement-badge [type]="achievement.type" [icon]="achievement.icon"
+                        [title]="achievement.title" [description]="achievement.description"
+                        [isLocked]="!achievement.isUnlocked" [progress]="achievement.progress"
+                        [showProgress]="!achievement.isUnlocked">
+                    </app-achievement-badge>
+
+                    <div class="badge-points" *ngIf="!achievement.isUnlocked">
+                        <i class="fas fa-star"></i>
+                        <span>{{achievement.points}}</span>
+                    </div>
+
+                    <div class="badge-date" *ngIf="achievement.isUnlocked && achievement.dateUnlocked">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>{{achievement.dateUnlocked | date:'shortDate'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badges Collection View -->
+        <div class="badges-view" *ngIf="activeTab === 'badges'" @fadeIn>
+            <div class="badges-categories">
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>إنجازات الدروس</span>
+                    </h2>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of getLessonsCompletedAchievements()" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked">
+                            <div class="badge-icon">
+                                <i class="fas fa-{{achievement.icon}}"></i>
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-chart-line"></i>
+                        <span>إنجازات التقدم</span>
+                    </h2>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of getScoreAchievements()" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked">
+                            <div class="badge-icon">
+                                <i class="fas fa-{{achievement.icon}}"></i>
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-fire"></i>
+                        <span>إنجازات الاستمرارية</span>
+                    </h2>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of getStreakAchievements()" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked">
+                            <div class="badge-icon">
+                                <i class="fas fa-{{achievement.icon}}"></i>
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Points History View -->
+        <div class="points-view" *ngIf="activeTab === 'points'" @fadeIn>
+            <app-points-card [totalPoints]="totalPoints" [activities]="recentActivities" [showHistory]="true"
+                [maxHistoryItems]="8">
+            </app-points-card>
+
+            <div class="points-stats">
+                <div class="stats-card earned">
+                    <div class="card-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">النقاط المكتسبة</h3>
+                        <div class="card-value">
+                            {{ getEarnedPoints() }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card bonus">
+                    <div class="card-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">نقاط المكافآت</h3>
+                        <div class="card-value">
+                            {{ getBonusPoints() }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card spent">
+                    <div class="card-icon">
+                        <i class="fas fa-minus-circle"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">النقاط المستخدمة</h3>
+                        <div class="card-value">
+                            {{ getSpentPoints() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
