@@ -130,38 +130,40 @@
                         <div class="empty-rewards">-</div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Current User (if not already in the visible rows) -->
-                <div *ngIf="shouldShowCurrentUserAtBottom()" class="player-row current-user-row"
-                    id="current-user-footer">
-                    <div class="rank-column">
-                        <div class="current-rank-badge">{{ currentUserPosition!.rank }}</div>
-                    </div>
+            <!-- Fixed Current User Position with Solid Background -->
+            <div *ngIf="shouldShowCurrentUserAtBottom()" class="player-row current-user-fixed"
+                [class.hidden]="isCurrentUserVisible" id="current-user-fixed-row" (click)="scrollToCurrentUser()">
+                <div class="rank-column">
+                    <div class="current-rank-badge">{{ currentUserPosition!.rank }}</div>
+                </div>
 
-                    <div class="user-column">
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <img [src]="currentUserPosition!.avatar" alt="Your Avatar">
-                            </div>
-                            <div class="user-details">
-                                <div class="user-name">{{ currentUserPosition!.name }}</div>
-                                <div class="lesson-count">
-                                    <i class="fas fa-book"></i>
-                                    <span>{{ currentUserPosition!.completedLessons }} درس</span>
-                                </div>
+                <div class="user-column">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img [src]="currentUserPosition!.avatar" alt="Your Avatar">
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name">{{ currentUserPosition!.name }}</div>
+                            <div class="lesson-count">
+                                <i class="fas fa-book"></i>
+                                <span>{{ currentUserPosition!.completedLessons }} درس</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="points-column">
-                        <div class="points-display">
-                            <span class="points-value">{{ currentUserPosition!.score }}</span>
-                            <i class="fas fa-star"></i>
-                        </div>
+                <div class="points-column">
+                    <div class="points-display">
+                        <span class="points-value">{{ currentUserPosition!.score }}</span>
+                        <i class="fas fa-star"></i>
                     </div>
+                </div>
 
-                    <div class="rewards-column">
-                        <div class="empty-rewards">-</div>
+                <div class="rewards-column">
+                    <div class="go-to-position">
+                        <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
             </div>

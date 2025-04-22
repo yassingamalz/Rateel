@@ -33,7 +33,7 @@
     }
 }
 
-/* Ribbon Header - Updated with SVG Text Path */
+/* Ribbon Header with SVG Text Path */
 .ribbon-header {
     position: relative;
     width: 80%;
@@ -77,7 +77,7 @@
     }
 }
 
-// Main container with flex layout for vertical tabs and panel
+// Main container with flex layout
 .leaderboard-container {
     display: flex;
     flex-direction: row;
@@ -92,17 +92,17 @@
     overflow: hidden;
 }
 
-// Vertical Tabs - UPDATED STYLING FOR GAME-LIKE VERTICAL TABS
+// Vertical Tabs
 .vertical-tabs {
-    width: 60px; // Reduced width to save space 
+    width: 60px;
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly; // Spread tabs evenly
+    justify-content: space-evenly;
     overflow: hidden;
     position: relative;
 
-    // Gradient overlay to enhance visibility
+    // Gradient overlay
     &::after {
         content: '';
         position: absolute;
@@ -119,7 +119,7 @@
     }
 
     .tab {
-        height: 120px; // Taller for vertical text
+        height: 120px;
         position: relative;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -133,7 +133,7 @@
         text-align: center;
         padding: 0;
 
-        // Vertical line indicator on right side
+        // Vertical line indicator
         &::after {
             content: '';
             position: absolute;
@@ -141,7 +141,7 @@
             right: 0;
             width: 4px;
             height: 0;
-            background: map-get(vars.$colors, 'accent', 'base'); // Gold color
+            background: map-get(vars.$colors, 'accent', 'base');
             transition: height 0.3s ease;
         }
 
@@ -162,24 +162,22 @@
             white-space: nowrap;
             letter-spacing: 1px;
             transition: all 0.2s ease;
-            width: 120px; // Set width to match parent height for rotation
+            width: 120px;
             text-align: center;
         }
 
-        // Active tab styling with agenda effect
+        // Active tab styling
         &.active {
-            background: map-get(vars.$colors, 'accent', 'base'); // Golden color
-            color: #0B1C17; // Dark green text
+            background: map-get(vars.$colors, 'accent', 'base');
+            color: #0B1C17;
             font-weight: 700;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-            // Full height indicator when active
             &::after {
                 height: 100%;
                 box-shadow: 0 0 8px rgba(map-get(vars.$colors, 'accent', 'glow'), 0.7);
             }
 
-            // Scale up text slightly when active
             .tab-text {
                 transform: rotate(90deg) scale(1.05);
                 font-weight: 700;
@@ -196,8 +194,9 @@
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border-radius: 0 0 0 15px;
+    border-radius: 0 15px 15px 0;
     overflow: hidden;
+    position: relative; // Required for fixed user position
 }
 
 // Table Header
@@ -225,14 +224,14 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 15px; // Add padding at bottom for aesthetics
+    padding-bottom: 60px; // Space for fixed user position
 
     // Hide scrollbar but keep functionality
-    -ms-overflow-style: none; // IE and Edge
-    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
     &::-webkit-scrollbar {
-        display: none; // Chrome, Safari and Opera
+        display: none;
     }
 }
 
@@ -302,34 +301,85 @@
         }
     }
 
-    // Enhanced current user highlight
-    &.current-user,
-    &.current-user-row {
+    // Current user highlight
+    &.current-user {
         background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.15);
         border-top: 1px solid map-get(vars.$colors, 'accent', 'base');
         border-bottom: 1px solid map-get(vars.$colors, 'accent', 'base');
     }
 
-    // Add animation for current user when highlighted
+    // Animation for highlight
     &.animate-highlight {
         animation: highlight-pulse 1.5s ease;
     }
 }
 
-// Current user row at the bottom
-.current-user-row {
-    position: sticky;
-    bottom: 10px; // Small margin at bottom
-    z-index: 10;
-    background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.15);
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-    border-top: 1px solid map-get(vars.$colors, 'accent', 'base');
-    border-bottom: 1px solid map-get(vars.$colors, 'accent', 'base');
-    margin-top: 5px;
-    border-radius: 8px;
+// Fixed Current User Row - Solid background instead of transparent
+.current-user-fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: #2E7D32; // Solid green background color
+    border-top: 2px solid map-get(vars.$colors, 'accent', 'base');
+    border-bottom: none;
+    cursor: pointer;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+
+    // Subtle gold border
+    border: 1px solid map-get(vars.$colors, 'accent', 'base');
+
+    &:hover {
+        background-color: #266A2B; // Slightly darker on hover
+    }
+
+    &.hidden {
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    // Go to position button
+    .go-to-position {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: map-get(vars.$colors, 'accent', 'base');
+        color: #0B1C17;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 1rem;
+        }
+    }
+
+    // Make text even more visible
+    .user-name {
+        color: white;
+        font-weight: 700;
+    }
+
+    .lesson-count {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .points-value {
+        color: white;
+    }
+
+    .points-display i {
+        color: map-get(vars.$colors, 'accent', 'bright');
+    }
 }
 
-// Animation for highlighted row
+// Animations
 @keyframes highlight-pulse {
 
     0%,
@@ -428,7 +478,7 @@
     font-size: 0.9rem;
 
     i {
-        color: map-get(vars.$colors, 'accent', 'base'); // Gold
+        color: map-get(vars.$colors, 'accent', 'base');
         font-size: 0.8rem;
     }
 }
@@ -447,13 +497,13 @@
     }
 
     i {
-        color: map-get(vars.$colors, 'accent', 'base'); // Gold star
+        color: map-get(vars.$colors, 'accent', 'base');
         font-size: 1.1rem;
         margin-left: 5px;
     }
 }
 
-// Font Awesome Coin Rewards - Updated styling
+// Coin Rewards
 .coin-reward {
     display: flex;
     align-items: center;
@@ -462,7 +512,7 @@
     padding: 5px 10px;
     position: relative;
 
-    // Font Awesome coin icon - no animation
+    // Font Awesome coin icon
     i.fa-coins {
         font-size: 1.5rem;
         filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
@@ -471,23 +521,23 @@
     // Specific coin colors to match medals
     &.gold-coins {
         i.fa-coins {
-            color: #DAA520; // Gold color
+            color: #DAA520;
         }
     }
 
     &.silver-coins {
         i.fa-coins {
-            color: #C0C0C0; // Silver color
+            color: #C0C0C0;
         }
     }
 
     &.bronze-coins {
         i.fa-coins {
-            color: #CD7F32; // Bronze color
+            color: #CD7F32;
         }
     }
 
-    // Text value like 10K, 5K, 2K - slightly bigger
+    // Text value
     .coin-value {
         font-weight: bold;
         font-size: 1.1rem;
@@ -510,18 +560,18 @@
     }
 
     .ribbon-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .vertical-tabs {
-        width: 30px; // Make narrower on small screens
+        width: 30px;
 
         .tab {
-            height: 110px; // Slightly smaller on small screens
+            height: 110px;
 
             .tab-text {
                 font-size: 0.9rem;
-                width: 110px; // Match parent height
+                width: 110px;
             }
         }
     }
@@ -546,18 +596,12 @@
         font-size: 1rem;
     }
 
-    .coin-reward {
-        i.fa-coins {
-            font-size: 1.3rem;
-        }
-
-        .coin-value {
-            font-size: 1rem;
-        }
+    .current-user-fixed {
+        padding: 2px 1px;
     }
 }
 
-// Ultra compact mode for very small screens/mobile
+// Mobile layout
 @media (max-width: 768px) {
     .leaderboard-page {
         padding-top: 10px;
@@ -570,30 +614,30 @@
 
     .vertical-tabs {
         width: 100%;
-        height: 50px; // Fixed height for horizontal layout on mobile
-        flex-direction: row; // Switch to horizontal layout
+        height: 50px;
+        flex-direction: row;
         border-radius: 15px 15px 0 0;
 
         .tab {
-            height: 100%; // Full height in horizontal layout
-            flex: 1; // Equal width tabs
+            height: 100%;
+            flex: 1;
             padding: 0;
 
             .tab-text {
-                transform: rotate(0); // No rotation in horizontal mobile view
-                width: auto; // Auto width
+                transform: rotate(0);
+                width: auto;
                 font-size: 0.9rem;
             }
 
             // Active tab styling for horizontal layout
             &.active {
                 .tab-text {
-                    transform: rotate(0) scale(1.05); // No rotation, just scale
+                    transform: rotate(0) scale(1.05);
                 }
             }
 
             &::after {
-                // Switch indicator to bottom instead of right side
+                // Bottom indicator for horizontal tabs
                 top: auto;
                 right: 0;
                 bottom: 0;
@@ -627,37 +671,7 @@
         padding: 6px 8px;
     }
 
-    .rank-number,
-    .current-rank-badge {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-    }
-
-    .user-avatar {
-        width: 32px;
-        height: 32px;
-    }
-
-    .user-name {
-        font-size: 0.9rem;
-    }
-
-    .lesson-count {
-        font-size: 0.8rem;
-    }
-
-    .points-display .points-value {
-        font-size: 1rem;
-    }
-
-    .coin-reward {
-        i.fa-coins {
-            font-size: 1.2rem;
-        }
-
-        .coin-value {
-            font-size: 0.9rem;
-        }
+    .current-user-fixed {
+        padding: 2px 1px;
     }
 }

@@ -37,8 +37,10 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   highlightedCurrentUser: boolean = false;
   isScrollingToCurrentUser: boolean = false;
+  isCurrentUserVisible: boolean = false;
   visibleRowsStart: number = 3; // Start after medals
   visibleRowsEnd: number = 10; // Initial visible rows
+  scrollCheckThrottle: number = 0; // For performance optimization
 
   private subscriptions: Subscription[] = [];
 
@@ -110,21 +112,15 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
     // Start after medals (3)
     this.visibleRowsStart = 3;
 
-    // End is calculated from displayLimit, but minimum 3
-    this.visibleRowsEnd = Math.max(this.displayLimit, 3);
-
-    // If current user is beyond visible range, adjust to show them at the bottom
-    if (this.currentUserPosition &&
-      this.currentUserPosition.rank > 3 &&
-      this.currentUserPosition.rank > this.visibleRowsEnd) {
-      // We'll handle this in getDisplayedRegularPlayers()
-    }
+    // End is calculated from displayLimit, but add space for sticky user position
+    this.visibleRowsEnd = Math.max(this.displayLimit - 1, 3);
   }
 
   // Filter the leaderboard based on selected filter
   setFilter(filter: 'all' | 'friends' | 'region'): void {
     this.currentFilter = filter;
 
+    // Apply the filter
     switch (filter) {
       case 'all':
         this.filteredLeaderboard = [...this.leaderboard];
@@ -148,7 +144,17 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
         break;
     }
 
-    // Recalculate visible rows after filtering
+    // Important: Reset visibility state when changing tabs
+    this.isCurrentUserVisible = false;
+    this.highlightedCurrentUser = false;
+
+    // Force check if user is immediately visible after filter change
+    setTimeout(() => {
+      this.checkCurrentUserVisibility();
+      this.cdr.markForCheck();
+    }, 100);
+
+    // Recalculate visible rows
     this.calculateVisibleRows();
     this.cdr.markForCheck();
   }
@@ -186,19 +192,19 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
 
     const regions = ['الرياض', 'جدة', 'الدمام', 'المدينة', 'مكة'];
 
-    // Create 12 users with mock data
+    // Create 15 users with mock data
     const mockUsers: GamificationUser[] = [];
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
       // Make the 8th user (index 7) the current user for testing
       const isCurrentUser = i === 7;
 
       mockUsers.push({
         id: `user-${i + 1}`,
         rank: i + 1, // Will be updated after sorting
-        name: names[i],
+        name: names[i % names.length],
         avatar: avatars[i % avatars.length],
-        score: isCurrentUser ? 911 : 1500 - (i * 50) + Math.floor(Math.random() * 30),
+        score: isCurrentUser ? 4500 : 12500 - (i * 800) + Math.floor(Math.random() * 100),
         completedLessons: Math.max(5, Math.floor(Math.random() * 30)),
         isCurrentUser,
         isFriend: Math.random() > 0.6,
@@ -226,72 +232,106 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
     // Get regular players (after top 3)
     const regularPlayers = this.filteredLeaderboard.slice(3);
 
-    // Check if current user is in regular players but outside visible range
-    const displayLimit = this.visibleRowsEnd - 3; // Adjust for the 3 medal positions
+    // Calculate display limit (excluding top 3 and space for fixed user)
+    const displayLimit = this.visibleRowsEnd - 3;
 
-    // Base case: just show next rows after medals
+    // If there are fewer players than our limit, show all
     if (displayLimit >= regularPlayers.length) {
-      // If we can display all, return all
       return regularPlayers;
     }
 
-    // If current user is beyond display limit, replace last visible with current user
-    if (this.currentUserPosition &&
-      this.currentUserPosition.rank > 3 &&
-      !this.shouldShowCurrentUserAtBottom()) {
-      // Current user is within regular displayed range, return normal slice
-      return regularPlayers.slice(0, displayLimit);
-    }
-
-    // If we need to swap last visible row with current user (handled in template),
-    // return one less to make room for current user at bottom
-    if (this.shouldShowCurrentUserAtBottom()) {
-      return regularPlayers.slice(0, displayLimit - 1);
-    }
-
-    // Default case: return standard slice
+    // Otherwise, limit to our calculated display limit 
     return regularPlayers.slice(0, displayLimit);
   }
 
-  // Determine if we should show current user at the bottom of the visible area
+  // Improved current user position logic with comprehensive checks
   shouldShowCurrentUserAtBottom(): boolean {
+    // Don't show if there's no current user
     if (!this.currentUserPosition) {
       return false;
     }
 
-    // Don't show at bottom if current user is in top 3 (medals)
+    // Check if current user exists in the filtered list
+    const userInFilteredList = this.filteredLeaderboard.some(user => user.isCurrentUser);
+    if (!userInFilteredList) {
+      return false; // Don't show if user is not in the filtered list (important for tab switching)
+    }
+
+    // Don't show if current user is in top 3 (medals)
     if (this.currentUserPosition.rank <= 3) {
       return false;
     }
 
-    // Get index in filtered leaderboard (accounting for medals)
-    const currentUserIndex = this.filteredLeaderboard.findIndex(user => user.isCurrentUser);
+    // Don't show if we're already seeing the current user's real position
+    if (this.isCurrentUserVisible) {
+      return false;
+    }
 
-    // If not in view range, show at bottom
-    return currentUserIndex >= this.visibleRowsEnd;
+    // Find user's position in the filtered list
+    const userIndex = this.filteredLeaderboard.findIndex(user => user.isCurrentUser);
+
+    // If within the visible display limit, check if actually visible in viewport
+    const isWithinInitialDisplayList = userIndex >= 0 && userIndex < this.visibleRowsEnd;
+    if (isWithinInitialDisplayList && this.tableBodyRef) {
+      // Check if the user's element exists and is visible
+      const currentUserElement = document.getElementById(`player-${this.currentUserPosition.rank}`);
+      if (currentUserElement) {
+        const tableRect = this.tableBodyRef.nativeElement.getBoundingClientRect();
+        const elemRect = currentUserElement.getBoundingClientRect();
+
+        // If actually visible in the viewport, don't show fixed position
+        if (elemRect.top >= tableRect.top && elemRect.bottom <= tableRect.bottom) {
+          this.isCurrentUserVisible = true;
+          return false;
+        }
+      }
+    }
+
+    // Default: show fixed position
+    return true;
   }
 
-  // Handle table scrolling
+  // Improved scroll handling for better tab support
   onTableScroll(): void {
+    // Skip frequent checks for performance
+    this.scrollCheckThrottle++;
+    if (this.scrollCheckThrottle % 3 !== 0) return;
+
     if (!this.tableBodyRef || this.isScrollingToCurrentUser) {
       return;
     }
 
-    // Check if current user element is visible
-    if (this.currentUserPosition && this.currentUserPosition.rank > 3) {
-      const currentUserElement = document.getElementById(`player-${this.currentUserPosition.rank}`);
+    // Don't do anything if current user isn't in the filtered list
+    const userInFilteredList = this.filteredLeaderboard.some(user => user.isCurrentUser);
+    if (!this.currentUserPosition || !userInFilteredList) {
+      return;
+    }
 
-      if (currentUserElement) {
-        // Check if element is in viewport
-        const rect = currentUserElement.getBoundingClientRect();
-        const isVisible = (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+    // Check if current user exists in filtered list
+    const userIndex = this.filteredLeaderboard.findIndex(user => user.isCurrentUser);
+    if (userIndex === -1) {
+      this.isCurrentUserVisible = false;
+      this.cdr.detectChanges();
+      return;
+    }
 
-        // If visible and not already highlighted, add highlight effect
+    const currentUserElement = document.getElementById(`player-${this.currentUserPosition.rank}`);
+
+    if (currentUserElement) {
+      // Check if element is in viewport
+      const tableRect = this.tableBodyRef.nativeElement.getBoundingClientRect();
+      const elemRect = currentUserElement.getBoundingClientRect();
+
+      // Determine if the current user's actual position is visible
+      const isVisible =
+        elemRect.top >= tableRect.top &&
+        elemRect.bottom <= tableRect.bottom;
+
+      // Update visibility state
+      if (isVisible !== this.isCurrentUserVisible) {
+        this.isCurrentUserVisible = isVisible;
+
+        // Add highlight effect if newly visible
         if (isVisible && !this.highlightedCurrentUser) {
           currentUserElement.classList.add('animate-highlight');
           this.highlightedCurrentUser = true;
@@ -303,8 +343,40 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
             }
           }, 1500);
         }
+
+        this.cdr.detectChanges();
       }
     }
+  }
+
+  // Helper method to check current user visibility
+  private checkCurrentUserVisibility(): void {
+    if (!this.currentUserPosition || !this.tableBodyRef) {
+      this.isCurrentUserVisible = false;
+      return;
+    }
+
+    // Check if current user exists in the filtered list
+    const userInFilteredList = this.filteredLeaderboard.some(user => user.isCurrentUser);
+    if (!userInFilteredList) {
+      this.isCurrentUserVisible = false;
+      return;
+    }
+
+    // Get the DOM element
+    const currentUserElement = document.getElementById(`player-${this.currentUserPosition.rank}`);
+    if (!currentUserElement) {
+      this.isCurrentUserVisible = false;
+      return;
+    }
+
+    // Check visibility in viewport
+    const tableRect = this.tableBodyRef.nativeElement.getBoundingClientRect();
+    const elemRect = currentUserElement.getBoundingClientRect();
+
+    this.isCurrentUserVisible =
+      elemRect.top >= tableRect.top &&
+      elemRect.bottom <= tableRect.bottom;
   }
 
   // Scroll to current user's position
@@ -319,11 +391,16 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
     const currentUserElement = document.getElementById(`player-${this.currentUserPosition.rank}`);
     if (currentUserElement) {
       // Scroll to the element
-      currentUserElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      this.tableBodyRef.nativeElement.scrollTo({
+        top: currentUserElement.offsetTop - 100, // Offset to show some content above
+        behavior: 'smooth'
+      });
 
       // Add highlight animation after scrolling
       setTimeout(() => {
         currentUserElement.classList.add('animate-highlight');
+        this.isCurrentUserVisible = true;
+        this.highlightedCurrentUser = true;
 
         // Remove animation class after it completes
         setTimeout(() => {
@@ -331,6 +408,7 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
             currentUserElement.classList.remove('animate-highlight');
           }
           this.isScrollingToCurrentUser = false;
+          this.cdr.markForCheck();
         }, 1500);
       }, 500);
     } else {
@@ -351,11 +429,13 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
     const height = window.innerHeight;
 
     if (height < 400) {
-      this.displayLimit = 6;
+      this.displayLimit = 6; // Very small screens
     } else if (height < 600) {
-      this.displayLimit = 8;
+      this.displayLimit = 8; // Small screens
+    } else if (height < 800) {
+      this.displayLimit = 10; // Medium screens
     } else {
-      this.displayLimit = 10;
+      this.displayLimit = 12; // Large screens
     }
   }
 
