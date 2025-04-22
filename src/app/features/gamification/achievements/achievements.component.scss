@@ -3,6 +3,7 @@
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
+// Main Container
 .achievements-container {
     width: 100%;
     height: 100vh;
@@ -10,9 +11,10 @@
     display: flex;
     flex-direction: column;
     background: linear-gradient(to bottom right,
-            map-get(vars.$colors, 'primary', 'base'),
-            map-get(vars.$colors, 'primary', 'dark'));
+            map-get(vars.$colors, 'primary', 'dark'),
+            darken(map-get(vars.$colors, 'primary', 'dark'), 10%));
     position: relative;
+    padding: 0;
 
     // Add subtle Islamic pattern as background
     &::before {
@@ -31,9 +33,64 @@
     }
 }
 
+// Particle Animation Background for Game Feel
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+
+    .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, rgba(map-get(vars.$colors, 'accent', 'base'), 0.8) 0%, rgba(map-get(vars.$colors, 'accent', 'base'), 0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: float 8s infinite ease-in-out;
+
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+                $size: random(8) + 2 + px;
+                width: $size;
+                height: $size;
+                left: random(100) + 0%;
+                top: random(100) + 0%;
+                animation-delay: random(5000) + 0ms;
+                animation-duration: (random(8) + 5) + s;
+            }
+        }
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 0.7;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+}
+
 // Header Section with Stats
 .achievements-header {
-    padding: map-get(vars.$spacing, 'md');
+    padding: 15px;
     position: relative;
     z-index: 1;
 
@@ -43,9 +100,7 @@
         align-items: center;
 
         @media (max-width: 768px) {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: map-get(vars.$spacing, 'md');
+            align-items: center;
         }
     }
 
@@ -54,109 +109,189 @@
             font-size: 2rem;
             font-weight: 700;
             color: map-get(vars.$colors, 'text', 'light');
-            margin: 0 0 map-get(vars.$spacing, 'xs');
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 0 0 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                right: 0;
+                width: 60%;
+                height: 3px;
+                background: map-get(vars.$colors, 'accent', 'base');
+                border-radius: 2px;
+                box-shadow: 0 0 10px rgba(map-get(vars.$colors, 'accent', 'base'), 0.7);
+            }
         }
 
-        .subtitle {
-            color: map-get(vars.$colors, 'text', 'muted');
-            font-size: 1rem;
-            margin: 0;
+        .header-progress-bar {
+            position: relative;
+            width: 220px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(to right, map-get(vars.$colors, 'accent', 'base'), map-get(vars.$colors, 'accent', 'bright'));
+                border-radius: 4px;
+                position: relative;
+                transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(90deg,
+                            rgba(255, 255, 255, 0) 0%,
+                            rgba(255, 255, 255, 0.3) 50%,
+                            rgba(255, 255, 255, 0) 100%);
+                    animation: shimmer 2s infinite;
+                }
+            }
+
+            .progress-label {
+                position: absolute;
+                top: -18px;
+                left: 0;
+                color: map-get(vars.$colors, 'text', 'muted');
+                font-size: 12px;
+            }
+
+            .progress-stars {
+                position: absolute;
+                top: -18px;
+                right: 0;
+                display: flex;
+                direction: ltr;
+
+                i {
+                    font-size: 14px;
+                    color: rgba(255, 255, 255, 0.2);
+                    margin-left: 3px;
+
+                    &.filled {
+                        color: map-get(vars.$colors, 'accent', 'base');
+                        filter: drop-shadow(0 0 3px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5));
+                    }
+                }
+            }
         }
     }
 
     .stats-section {
-        display: flex;
-        align-items: center;
-        gap: map-get(vars.$spacing, 'md');
-
-        @media (max-width: 768px) {
-            width: 100%;
-            justify-content: space-between;
-        }
-    }
-
-    .stats-card {
-        display: flex;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.1);
-        padding: map-get(vars.$spacing, 'sm') map-get(vars.$spacing, 'md');
-        border-radius: map-get(vars.$border-radius, 'md');
-        backdrop-filter: blur(4px);
-
-        .stats-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .total-score {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
-            margin-left: map-get(vars.$spacing, 'sm');
 
-            i {
-                color: map-get(vars.$colors, 'accent', 'base');
-                font-size: 1.2rem;
+            .score-circle {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                background: radial-gradient(circle,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) 0%,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.1) 70%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 0 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+                position: relative;
+
+                .score-value {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                }
+
+                .score-icon {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                    font-size: 1rem;
+                    margin-top: -5px;
+                    filter: drop-shadow(0 0 3px rgba(map-get(vars.$colors, 'accent', 'base'), 0.8));
+                }
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    right: -5px;
+                    bottom: -5px;
+                    border-radius: 50%;
+                    border: 2px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+                }
+
+                &::after {
+                    top: -10px;
+                    left: -10px;
+                    right: -10px;
+                    bottom: -10px;
+                    border: 1px solid rgba(map-get(vars.$colors, 'accent', 'base'), 0.1);
+                }
             }
-        }
 
-        .stats-info {
-            .stats-value {
-                font-size: 1.2rem;
-                font-weight: 600;
-                color: map-get(vars.$colors, 'text', 'light');
-            }
-
-            .stats-label {
-                font-size: 0.8rem;
+            .score-label {
+                margin-top: 5px;
+                font-size: 0.9rem;
                 color: map-get(vars.$colors, 'text', 'muted');
             }
         }
     }
+}
 
-    .stats-progress {
-        display: flex;
-        flex-direction: column;
-        min-width: 150px;
+// Pulse Animation
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
 
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: map-get(vars.$spacing, 'xs');
-
-            .progress-fill {
-                height: 100%;
-                background: map-get(vars.$colors, 'accent', 'base');
-                border-radius: 3px;
-                transition: width 0.5s ease;
-            }
-        }
-
-        .progress-percentage {
-            font-size: 0.8rem;
-            color: map-get(vars.$colors, 'text', 'muted');
-            text-align: right;
-        }
+@keyframes pulse {
+    0% {
+        transform: scale(1);
     }
 
-    .header-score {
-        margin-right: map-get(vars.$spacing, 'md');
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
     }
 }
 
 // Tab Navigation
 .tabs-container {
-    padding: 0 map-get(vars.$spacing, 'md');
+    padding: 0 15px;
     position: relative;
     z-index: 1;
+    margin-bottom: 15px;
 
     .tab-buttons {
         display: flex;
-        gap: map-get(vars.$spacing, 'xs');
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: map-get(vars.$spacing, 'xs');
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        padding: 5px;
         overflow-x: auto;
         scrollbar-width: none;
 
@@ -165,21 +300,23 @@
         }
 
         .tab-button {
+            flex: 1;
             background: transparent;
             border: none;
             color: map-get(vars.$colors, 'text', 'muted');
-            padding: map-get(vars.$spacing, 'sm') map-get(vars.$spacing, 'md');
-            border-radius: map-get(vars.$border-radius, 'md');
-            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: map-get(vars.$spacing, 'xs');
-            white-space: nowrap;
-            transition: all 0.2s ease;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            min-width: 100px;
 
             i {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             &:hover {
@@ -189,8 +326,12 @@
 
             &.active {
                 color: map-get(vars.$colors, 'primary', 'dark');
-                background: map-get(vars.$colors, 'accent', 'base');
+                background: linear-gradient(135deg,
+                        map-get(vars.$colors, 'accent', 'base'),
+                        map-get(vars.$colors, 'accent', 'bright'));
                 font-weight: 600;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                transform: translateY(-2px);
 
                 i {
                     color: map-get(vars.$colors, 'primary', 'dark');
@@ -203,52 +344,115 @@
 // Content Area
 .content-area {
     flex: 1;
-    padding: map-get(vars.$spacing, 'md');
+    padding: 0 15px 15px;
     position: relative;
     z-index: 1;
     overflow: hidden;
 }
 
-// Achievements Grid View
+// Carousel Common Styles
+.carousel-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: map-get(vars.$colors, 'text', 'light');
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.left {
+        margin-left: 10px;
+    }
+
+    &.right {
+        margin-right: 10px;
+    }
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.active {
+            background: map-get(vars.$colors, 'accent', 'base');
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(map-get(vars.$colors, 'accent', 'base'), 0.7);
+        }
+
+        &:hover {
+            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+        }
+    }
+}
+
+// Achievements View
 .achievements-view {
     height: 100%;
-    overflow: hidden;
 
-    .achievements-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: map-get(vars.$spacing, 'md');
-        max-height: calc(100vh - 180px);
-        overflow-y: auto;
-        padding-right: map-get(vars.$spacing, 'sm');
-        scrollbar-width: thin;
-        scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2);
+    .achievements-carousel {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 40px);
+        width: 100%;
 
-        &::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
-            border-radius: 3px;
+        .achievement-card-container {
+            padding: 15px;
+            flex: 0 0 300px;
+            height: 100%;
+            display: flex;
+            cursor: pointer;
         }
 
         .achievement-card {
-            position: relative;
+            flex: 1;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: map-get(vars.$border-radius, 'md');
-            padding: map-get(vars.$spacing, 'sm');
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
             &:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                transform: translateY(-10px);
             }
 
             &::before {
@@ -258,228 +462,368 @@
                 left: 0;
                 width: 5px;
                 height: 100%;
-                background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
             }
 
-            // Category colors
-            &.category-lessons::before {
-                background: #27AE60;
-            }
-
-            &.category-score::before {
-                background: #3498DB;
-            }
-
-            &.category-streak::before {
-                background: #E67E22;
-            }
-
-            &.category-perfect::before {
-                background: #9B59B6;
-            }
-
-            .badge-points,
-            .badge-date {
+            // Card glow effect
+            .card-glow {
                 position: absolute;
-                bottom: 10px;
-                right: 10px;
-                font-size: 0.8rem;
-                color: map-get(vars.$colors, 'text', 'muted');
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at center,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.2) 0%,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0) 70%);
+                opacity: 0;
+                transition: opacity 0.5s ease;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+
+            // Badge image
+            .badge-image {
+                width: 120px;
+                height: 120px;
+                position: relative;
+                margin-bottom: 15px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    transition: all 0.3s ease;
+                    filter: saturate(70%);
+                }
+
+                .lock-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 50%;
+
+                    i {
+                        font-size: 30px;
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+                }
+            }
+
+            // Achievement info
+            .achievement-info {
+                width: 100%;
+                text-align: center;
+
+                .achievement-title {
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin: 0 0 15px;
+                    height: 3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .achievement-progress {
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    .progress-bar {
+                        height: 6px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 3px;
+                        overflow: hidden;
+                        margin-bottom: 5px;
+
+                        .progress-fill {
+                            height: 100%;
+                            background: rgba(255, 255, 255, 0.3);
+                            border-radius: 3px;
+                            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                        }
+                    }
+
+                    .progress-text {
+                        font-size: 0.8rem;
+                        color: map-get(vars.$colors, 'text', 'muted');
+                        text-align: center;
+                    }
+                }
+
+                .achievement-completed {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    color: #27AE60;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            // Points indicator
+            .achievement-points {
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 20px;
+                padding: 5px 12px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
 
                 i {
                     color: map-get(vars.$colors, 'accent', 'base');
+                    font-size: 0.8rem;
+                }
+
+                span {
+                    color: map-get(vars.$colors, 'text', 'light');
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+            }
+
+            &.unlocked {
+                background: linear-gradient(135deg,
+                        rgba(map-get(vars.$colors, 'primary', 'base'), 0.4),
+                        rgba(map-get(vars.$colors, 'primary', 'base'), 0.2));
+                box-shadow: 0 10px 30px rgba(map-get(vars.$colors, 'accent', 'base'), 0.15);
+
+                .badge-image img {
+                    filter: saturate(100%) drop-shadow(0 10px 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
+                    transform: scale(1.05);
+                }
+            }
+
+            // Category colors
+            &.category-lessons::before {
+                background: #27AE60;
+                box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+            }
+
+            &.category-score::before {
+                background: #3498DB;
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            }
+
+            &.category-streak::before {
+                background: #E67E22;
+                box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);
+            }
+
+            &.category-perfect::before {
+                background: #9B59B6;
+                box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+            }
+        }
+    }
+}
+
+// Badges View
+.badges-view {
+    height: 100%;
+
+    .badges-carousel {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 40px);
+
+        .badge-category {
+            flex: 0 0 100%;
+            height: 100%;
+            padding: 0 20px;
+
+            .category-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+
+                i {
+                    font-size: 1.8rem;
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin: 0;
+                }
+            }
+
+            .badges-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+
+                .badge-item {
+                    width: 120px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .badge-display {
+                        width: 100px;
+                        height: 100px;
+                        position: relative;
+                        margin-bottom: 10px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            transition: all 0.3s ease;
+                            filter: grayscale(50%) brightness(60%);
+                        }
+
+                        .lock-overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: rgba(0, 0, 0, 0.4);
+                            border-radius: 50%;
+
+                            i {
+                                font-size: 24px;
+                                color: rgba(255, 255, 255, 0.7);
+                            }
+                        }
+
+                        .badge-glow {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            box-shadow: 0 0 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+                            animation: pulse-glow 2s infinite;
+                        }
+                    }
+
+                    .badge-name {
+                        font-size: 0.9rem;
+                        color: map-get(vars.$colors, 'text', 'muted');
+                        text-align: center;
+                        margin: 0;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    &.unlocked {
+                        .badge-display img {
+                            filter: grayscale(0%) brightness(100%);
+                        }
+
+                        .badge-name {
+                            color: map-get(vars.$colors, 'text', 'light');
+                            font-weight: 600;
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-// Badges Collection View
-.badges-view {
-    height: 100%;
-    overflow-y: auto;
-    padding-right: map-get(vars.$spacing, 'sm');
-    scrollbar-width: thin;
-    scrollbar-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3) rgba(0, 0, 0, 0.2);
+@keyframes pulse-glow {
 
-    &::-webkit-scrollbar {
-        width: 6px;
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
     }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
-        border-radius: 3px;
-    }
-
-    .badges-categories {
-        display: flex;
-        flex-direction: column;
-        gap: map-get(vars.$spacing, 'lg');
-    }
-
-    .category-section {
-        .category-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: map-get(vars.$colors, 'text', 'light');
-            display: flex;
-            align-items: center;
-            gap: map-get(vars.$spacing, 'sm');
-            margin-bottom: map-get(vars.$spacing, 'md');
-
-            i {
-                color: map-get(vars.$colors, 'accent', 'base');
-            }
-        }
-
-        .badges-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: map-get(vars.$spacing, 'md');
-
-            .badge-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-
-                .badge-icon {
-                    width: 80px;
-                    height: 80px;
-                    border-radius: 20px;
-                    background: rgba(255, 255, 255, 0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    margin-bottom: map-get(vars.$spacing, 'sm');
-                    transition: all 0.3s ease;
-
-                    i {
-                        font-size: 2.5rem;
-                        color: rgba(255, 255, 255, 0.5);
-                        transition: all 0.3s ease;
-                    }
-
-                    .lock-overlay {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background: rgba(0, 0, 0, 0.4);
-                        border-radius: 20px;
-
-                        i {
-                            font-size: 1.5rem;
-                            color: rgba(255, 255, 255, 0.7);
-                        }
-                    }
-                }
-
-                .badge-name {
-                    font-size: 0.9rem;
-                    color: map-get(vars.$colors, 'text', 'muted');
-                    margin: 0;
-                    transition: all 0.3s ease;
-                }
-
-                &.unlocked {
-                    .badge-icon {
-                        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
-                        box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
-
-                        i {
-                            color: map-get(vars.$colors, 'accent', 'base');
-                        }
-                    }
-
-                    .badge-name {
-                        color: map-get(vars.$colors, 'text', 'light');
-                        font-weight: 600;
-                    }
-                }
-
-                &:hover .badge-icon {
-                    transform: translateY(-5px);
-                }
-            }
-        }
+    50% {
+        box-shadow: 0 0 35px rgba(map-get(vars.$colors, 'accent', 'base'), 0.8);
     }
 }
 
 // Points View
 .points-view {
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: map-get(vars.$spacing, 'lg');
+    display: flex;
+    flex-direction: column;
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
-
-    .points-stats {
+    .points-summary {
         display: flex;
-        flex-direction: column;
-        gap: map-get(vars.$spacing, 'md');
+        justify-content: space-around;
+        margin-bottom: 20px;
 
-        .stats-card {
-            @include mix.glass-effect;
+        .point-type {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: map-get(vars.$spacing, 'md');
-            border-radius: map-get(vars.$border-radius, 'md');
+            padding: 15px;
+            border-radius: 15px;
+            width: 28%;
+            backdrop-filter: blur(5px);
             transition: all 0.3s ease;
 
             &:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                transform: translateY(-5px);
             }
 
-            .card-icon {
+            .point-icon {
                 width: 60px;
                 height: 60px;
+                border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 15px;
-                margin-left: map-get(vars.$spacing, 'md');
+                margin-bottom: 10px;
 
                 i {
                     font-size: 2rem;
                 }
             }
 
-            .card-details {
-                .card-title {
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    color: map-get(vars.$colors, 'text', 'light');
-                    margin: 0 0 5px;
+            .point-info {
+                text-align: center;
+
+                .point-value {
+                    font-size: 1.5rem;
+                    font-weight: 700;
                 }
 
-                .card-value {
-                    font-size: 1.8rem;
-                    font-weight: 700;
+                .point-label {
+                    font-size: 0.9rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
                 }
             }
 
             &.earned {
-                border-left: 5px solid #27AE60;
+                background: rgba(39, 174, 96, 0.1);
+                box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
 
-                .card-icon {
+                .point-icon {
                     background: rgba(39, 174, 96, 0.2);
 
                     i {
@@ -487,15 +831,16 @@
                     }
                 }
 
-                .card-value {
+                .point-value {
                     color: #27AE60;
                 }
             }
 
             &.bonus {
-                border-left: 5px solid map-get(vars.$colors, 'accent', 'base');
+                background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.1);
+                box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
 
-                .card-icon {
+                .point-icon {
                     background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
 
                     i {
@@ -503,15 +848,16 @@
                     }
                 }
 
-                .card-value {
+                .point-value {
                     color: map-get(vars.$colors, 'accent', 'base');
                 }
             }
 
             &.spent {
-                border-left: 5px solid #C0392B;
+                background: rgba(192, 57, 43, 0.1);
+                box-shadow: 0 5px 15px rgba(192, 57, 43, 0.2);
 
-                .card-icon {
+                .point-icon {
                     background: rgba(192, 57, 43, 0.2);
 
                     i {
@@ -519,10 +865,464 @@
                     }
                 }
 
-                .card-value {
+                .point-value {
                     color: #C0392B;
                 }
             }
         }
+    }
+
+    .points-history {
+        flex: 1;
+
+        .history-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: map-get(vars.$colors, 'text', 'light');
+            margin: 0 0 15px;
+            text-align: center;
+        }
+
+        .activity-carousel {
+            display: flex;
+            align-items: center;
+            height: calc(100% - 80px);
+
+            .activity-card {
+                flex: 0 0 250px;
+                height: 160px;
+                margin: 0 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 15px;
+                backdrop-filter: blur(5px);
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                .activity-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 15px;
+
+                    .activity-icon {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        i {
+                            font-size: 1.5rem;
+                        }
+                    }
+
+                    .activity-points {
+                        display: flex;
+                        align-items: center;
+                        gap: 3px;
+                        font-size: 1.2rem;
+                        font-weight: 700;
+
+                        i {
+                            font-size: 0.9rem;
+                            margin-right: 2px;
+                        }
+                    }
+                }
+
+                .activity-title {
+                    font-size: 1.1rem;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin-bottom: 15px;
+                    height: 50px;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+
+                .activity-footer {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.8rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
+                }
+
+                &.earned {
+                    border-right: 3px solid #27AE60;
+
+                    .activity-icon {
+                        background: rgba(39, 174, 96, 0.2);
+
+                        i {
+                            color: #27AE60;
+                        }
+                    }
+
+                    .activity-points {
+                        color: #27AE60;
+
+                        i {
+                            color: #27AE60;
+                        }
+                    }
+                }
+
+                &.bonus {
+                    border-right: 3px solid map-get(vars.$colors, 'accent', 'base');
+
+                    .activity-icon {
+                        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                        i {
+                            color: map-get(vars.$colors, 'accent', 'base');
+                        }
+                    }
+
+                    .activity-points {
+                        color: map-get(vars.$colors, 'accent', 'base');
+
+                        i {
+                            color: map-get(vars.$colors, 'accent', 'base');
+                        }
+                    }
+                }
+
+                &.spent {
+                    border-right: 3px solid #C0392B;
+
+                    .activity-icon {
+                        background: rgba(192, 57, 43, 0.2);
+
+                        i {
+                            color: #C0392B;
+                        }
+                    }
+
+                    .activity-points {
+                        color: #C0392B;
+
+                        i {
+                            color: #C0392B;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Collection View
+.collection-view {
+    height: 100%;
+    overflow: hidden;
+
+    .collection-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 10px 0;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .collection-item {
+            width: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+
+            &:hover {
+                transform: translateY(-5px);
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .badge-display {
+                width: 100px;
+                height: 100px;
+                position: relative;
+                margin-bottom: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    filter: grayscale(80%) brightness(50%);
+                    transition: all 0.3s ease;
+                }
+
+                .lock-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 50%;
+
+                    i {
+                        font-size: 28px;
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+                }
+
+                .rarity-indicator {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+
+                    &.common {
+                        background: #95a5a6;
+                    }
+
+                    &.uncommon {
+                        background: #2ecc71;
+                    }
+
+                    &.rare {
+                        background: #3498db;
+                    }
+
+                    &.epic {
+                        background: #9b59b6;
+                    }
+
+                    &.legendary {
+                        background: map-get(vars.$colors, 'accent', 'base');
+                        box-shadow: 0 0 10px rgba(map-get(vars.$colors, 'accent', 'base'), 0.7);
+                    }
+                }
+            }
+
+            .badge-title {
+                font-size: 1rem;
+                font-weight: 600;
+                color: map-get(vars.$colors, 'text', 'muted');
+                text-align: center;
+                margin: 0 0 5px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .badge-rarity {
+                font-size: 0.8rem;
+                color: map-get(vars.$colors, 'text', 'muted');
+            }
+
+            &.unlocked {
+                background: rgba(map-get(vars.$colors, 'primary', 'base'), 0.2);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+
+                .badge-display img {
+                    filter: grayscale(0%) brightness(100%);
+                    transform: scale(1.05);
+                }
+
+                .badge-title {
+                    color: map-get(vars.$colors, 'text', 'light');
+                }
+
+                .badge-rarity {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+        }
+    }
+}
+
+// Achievement Details Modal
+.achievement-modal {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+
+    .modal-badge {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+
+            i {
+                font-size: 40px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.5) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            background-size: 200% 200%;
+            animation: shine 3s infinite linear;
+            pointer-events: none;
+        }
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: map-get(vars.$colors, 'text', 'light');
+        margin: 0 0 10px;
+    }
+
+    .modal-description {
+        font-size: 1.1rem;
+        color: map-get(vars.$colors, 'text', 'muted');
+        margin: 0 0 20px;
+    }
+
+    .modal-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            i {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: map-get(vars.$colors, 'accent', 'base');
+            }
+
+            span {
+                color: map-get(vars.$colors, 'text', 'light');
+            }
+        }
+    }
+
+    .achievement-progress {
+        margin-bottom: 20px;
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+
+            .progress-fill {
+                height: 100%;
+                background: map-get(vars.$colors, 'accent', 'base');
+                border-radius: 4px;
+                transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+        }
+
+        .progress-percentage {
+            font-size: 0.9rem;
+            color: map-get(vars.$colors, 'text', 'muted');
+            text-align: right;
+        }
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+
+        .modal-button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &.close {
+                background: rgba(255, 255, 255, 0.1);
+                color: map-get(vars.$colors, 'text', 'light');
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+            }
+
+            &.share {
+                background: map-get(vars.$colors, 'accent', 'base');
+                color: map-get(vars.$colors, 'primary', 'dark');
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &:hover {
+                    background: map-get(vars.$colors, 'accent', 'bright');
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+                }
+            }
+        }
+    }
+}
+
+@keyframes shine {
+    0% {
+        background-position: -100% -100%;
+    }
+
+    100% {
+        background-position: 100% 100%;
     }
 }
