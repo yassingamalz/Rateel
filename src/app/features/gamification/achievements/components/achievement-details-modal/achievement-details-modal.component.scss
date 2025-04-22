@@ -1,0 +1,170 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+.achievement-modal {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+
+    .modal-badge {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+
+            i {
+                font-size: 40px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.5) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            background-size: 200% 200%;
+            animation: shine 3s infinite linear;
+            pointer-events: none;
+        }
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: map-get(vars.$colors, 'text', 'light');
+        margin: 0 0 10px;
+    }
+
+    .modal-description {
+        font-size: 1.1rem;
+        color: map-get(vars.$colors, 'text', 'muted');
+        margin: 0 0 20px;
+    }
+
+    .modal-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            i {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: map-get(vars.$colors, 'accent', 'base');
+            }
+
+            span {
+                color: map-get(vars.$colors, 'text', 'light');
+            }
+        }
+    }
+
+    .achievement-progress {
+        margin-bottom: 20px;
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+
+            .progress-fill {
+                height: 100%;
+                background: map-get(vars.$colors, 'accent', 'base');
+                border-radius: 4px;
+                transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+        }
+
+        .progress-percentage {
+            font-size: 0.9rem;
+            color: map-get(vars.$colors, 'text', 'muted');
+            text-align: right;
+        }
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+
+        .modal-button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &.close {
+                background: rgba(255, 255, 255, 0.1);
+                color: map-get(vars.$colors, 'text', 'light');
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+            }
+
+            &.share {
+                background: map-get(vars.$colors, 'accent', 'base');
+                color: map-get(vars.$colors, 'primary', 'dark');
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &:hover {
+                    background: map-get(vars.$colors, 'accent', 'bright');
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+                }
+            }
+        }
+    }
+}
+
+@keyframes shine {
+    0% {
+        background-position: -100% -100%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}

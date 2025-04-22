@@ -1,0 +1,204 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+.badges-view {
+    height: 100%;
+
+    .badges-carousel {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 40px);
+
+        .badge-category {
+            flex: 0 0 100%;
+            height: 100%;
+            padding: 0 20px;
+
+            .category-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+
+                i {
+                    font-size: 1.8rem;
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin: 0;
+                }
+            }
+
+            .badges-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+
+                .badge-item {
+                    width: 120px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .badge-display {
+                        width: 100px;
+                        height: 100px;
+                        position: relative;
+                        margin-bottom: 10px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            transition: all 0.3s ease;
+                            filter: grayscale(50%) brightness(60%);
+                        }
+
+                        .lock-overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: rgba(0, 0, 0, 0.4);
+                            border-radius: 50%;
+
+                            i {
+                                font-size: 24px;
+                                color: rgba(255, 255, 255, 0.7);
+                            }
+                        }
+
+                        .badge-glow {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            box-shadow: 0 0 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+                            animation: pulse-glow 2s infinite;
+                        }
+                    }
+
+                    .badge-name {
+                        font-size: 0.9rem;
+                        color: map-get(vars.$colors, 'text', 'muted');
+                        text-align: center;
+                        margin: 0;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    &.unlocked {
+                        .badge-display img {
+                            filter: grayscale(0%) brightness(100%);
+                        }
+
+                        .badge-name {
+                            color: map-get(vars.$colors, 'text', 'light');
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Carousel controls
+.carousel-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: map-get(vars.$colors, 'text', 'light');
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.left {
+        margin-left: 10px;
+    }
+
+    &.right {
+        margin-right: 10px;
+    }
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.active {
+            background: map-get(vars.$colors, 'accent', 'base');
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(map-get(vars.$colors, 'accent', 'base'), 0.7);
+        }
+
+        &:hover {
+            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+        }
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgba(map-get(vars.$colors, 'accent', 'base'), 0.8);
+    }
+}

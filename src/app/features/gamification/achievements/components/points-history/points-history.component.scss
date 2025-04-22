@@ -1,0 +1,298 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+.points-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .points-summary {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+
+        .point-type {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 15px;
+            width: 28%;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            .point-icon {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 10px;
+
+                i {
+                    font-size: 2rem;
+                }
+            }
+
+            .point-info {
+                text-align: center;
+
+                .point-value {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+
+                .point-label {
+                    font-size: 0.9rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
+                }
+            }
+
+            &.earned {
+                background: rgba(39, 174, 96, 0.1);
+                box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+
+                .point-icon {
+                    background: rgba(39, 174, 96, 0.2);
+
+                    i {
+                        color: #27AE60;
+                    }
+                }
+
+                .point-value {
+                    color: #27AE60;
+                }
+            }
+
+            &.bonus {
+                background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.1);
+                box-shadow: 0 5px 15px rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                .point-icon {
+                    background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                    i {
+                        color: map-get(vars.$colors, 'accent', 'base');
+                    }
+                }
+
+                .point-value {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+
+            &.spent {
+                background: rgba(192, 57, 43, 0.1);
+                box-shadow: 0 5px 15px rgba(192, 57, 43, 0.2);
+
+                .point-icon {
+                    background: rgba(192, 57, 43, 0.2);
+
+                    i {
+                        color: #C0392B;
+                    }
+                }
+
+                .point-value {
+                    color: #C0392B;
+                }
+            }
+        }
+    }
+
+    .points-history {
+        flex: 1;
+
+        .history-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: map-get(vars.$colors, 'text', 'light');
+            margin: 0 0 15px;
+            text-align: center;
+        }
+
+        .activity-carousel {
+            display: flex;
+            align-items: center;
+            height: calc(100% - 80px);
+
+            .activity-card {
+                flex: 0 0 250px;
+                height: 160px;
+                margin: 0 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 15px;
+                backdrop-filter: blur(5px);
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                .activity-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 15px;
+
+                    .activity-icon {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        i {
+                            font-size: 1.5rem;
+                        }
+                    }
+
+                    .activity-points {
+                        display: flex;
+                        align-items: center;
+                        gap: 3px;
+                        font-size: 1.2rem;
+                        font-weight: 700;
+
+                        i {
+                            font-size: 0.9rem;
+                            margin-right: 2px;
+                        }
+                    }
+                }
+
+                .activity-title {
+                    font-size: 1.1rem;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin-bottom: 15px;
+                    height: 50px;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+
+                .activity-footer {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.8rem;
+                    color: map-get(vars.$colors, 'text', 'muted');
+                }
+
+                &.earned {
+                    border-right: 3px solid #27AE60;
+
+                    .activity-icon {
+                        background: rgba(39, 174, 96, 0.2);
+
+                        i {
+                            color: #27AE60;
+                        }
+                    }
+
+                    .activity-points {
+                        color: #27AE60;
+
+                        i {
+                            color: #27AE60;
+                        }
+                    }
+                }
+
+                &.bonus {
+                    border-right: 3px solid map-get(vars.$colors, 'accent', 'base');
+
+                    .activity-icon {
+                        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                        i {
+                            color: map-get(vars.$colors, 'accent', 'base');
+                        }
+                    }
+
+                    .activity-points {
+                        color: map-get(vars.$colors, 'accent', 'base');
+
+                        i {
+                            color: map-get(vars.$colors, 'accent', 'base');
+                        }
+                    }
+                }
+
+                &.spent {
+                    border-right: 3px solid #C0392B;
+
+                    .activity-icon {
+                        background: rgba(192, 57, 43, 0.2);
+
+                        i {
+                            color: #C0392B;
+                        }
+                    }
+
+                    .activity-points {
+                        color: #C0392B;
+
+                        i {
+                            color: #C0392B;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Carousel controls
+.carousel-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: map-get(vars.$colors, 'text', 'light');
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.left {
+        margin-left: 10px;
+    }
+
+    &.right {
+        margin-right: 10px;
+    }
+}

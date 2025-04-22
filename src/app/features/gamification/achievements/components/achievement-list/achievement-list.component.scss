@@ -1,0 +1,284 @@
+@use "sass:map";
+@use 'variables' as vars;
+
+.achievements-view {
+    height: 100%;
+
+    .achievements-carousel {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 40px);
+        width: 100%;
+
+        .achievement-card-container {
+            padding: 15px;
+            flex: 0 0 300px;
+            height: 100%;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .achievement-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                transform: translateY(-10px);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 5px;
+                height: 100%;
+            }
+
+            // Card glow effect
+            .card-glow {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at center,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.2) 0%,
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0) 70%);
+                opacity: 0;
+                transition: opacity 0.5s ease;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+
+            // Badge image
+            .badge-image {
+                width: 120px;
+                height: 120px;
+                position: relative;
+                margin-bottom: 15px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    transition: all 0.3s ease;
+                    filter: saturate(70%);
+                }
+
+                .lock-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 50%;
+
+                    i {
+                        font-size: 30px;
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+                }
+            }
+
+            // Achievement info
+            .achievement-info {
+                width: 100%;
+                text-align: center;
+
+                .achievement-title {
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: map-get(vars.$colors, 'text', 'light');
+                    margin: 0 0 15px;
+                    height: 3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .achievement-progress {
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    .progress-bar {
+                        height: 6px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 3px;
+                        overflow: hidden;
+                        margin-bottom: 5px;
+
+                        .progress-fill {
+                            height: 100%;
+                            background: rgba(255, 255, 255, 0.3);
+                            border-radius: 3px;
+                            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                        }
+                    }
+
+                    .progress-text {
+                        font-size: 0.8rem;
+                        color: map-get(vars.$colors, 'text', 'muted');
+                        text-align: center;
+                    }
+                }
+
+                .achievement-completed {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    color: #27AE60;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            // Points indicator
+            .achievement-points {
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 20px;
+                padding: 5px 12px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                i {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                    font-size: 0.8rem;
+                }
+
+                span {
+                    color: map-get(vars.$colors, 'text', 'light');
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+            }
+
+            &.unlocked {
+                background: linear-gradient(135deg,
+                        rgba(map-get(vars.$colors, 'primary', 'base'), 0.4),
+                        rgba(map-get(vars.$colors, 'primary', 'base'), 0.2));
+                box-shadow: 0 10px 30px rgba(map-get(vars.$colors, 'accent', 'base'), 0.15);
+
+                .badge-image img {
+                    filter: saturate(100%) drop-shadow(0 10px 20px rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
+                    transform: scale(1.05);
+                }
+            }
+
+            // Category colors
+            &.category-lessons::before {
+                background: #27AE60;
+                box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+            }
+
+            &.category-score::before {
+                background: #3498DB;
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            }
+
+            &.category-streak::before {
+                background: #E67E22;
+                box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);
+            }
+
+            &.category-perfect::before {
+                background: #9B59B6;
+                box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+            }
+        }
+    }
+}
+
+// Carousel controls
+.carousel-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: map-get(vars.$colors, 'text', 'light');
+    font-size: U.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.left {
+        margin-left: 10px;
+    }
+
+    &.right {
+        margin-right: 10px;
+    }
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.active {
+            background: map-get(vars.$colors, 'accent', 'base');
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(map-get(vars.$colors, 'accent', 'base'), 0.7);
+        }
+
+        &:hover {
+            background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.5);
+        }
+    }
+}

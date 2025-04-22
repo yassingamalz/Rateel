@@ -1,0 +1,76 @@
+<div class="points-view" @fadeIn>
+    <div class="points-summary">
+        <div class="point-type earned">
+            <div class="point-icon">
+                <i class="fas fa-plus-circle"></i>
+            </div>
+            <div class="point-info">
+                <span class="point-value">{{ earnedPoints }}</span>
+                <span class="point-label">المكتسبة</span>
+            </div>
+        </div>
+
+        <div class="point-type bonus">
+            <div class="point-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="point-info">
+                <span class="point-value">{{ bonusPoints }}</span>
+                <span class="point-label">المكافآت</span>
+            </div>
+        </div>
+
+        <div class="point-type spent">
+            <div class="point-icon">
+                <i class="fas fa-minus-circle"></i>
+            </div>
+            <div class="point-info">
+                <span class="point-value">{{ spentPoints }}</span>
+                <span class="point-label">المستخدمة</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="points-history">
+        <h3 class="history-title">آخر النشاطات</h3>
+
+        <div class="activity-carousel">
+            <div class="carousel-nav left" (click)="previousPage()">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" [style.transform]="'translateX(' + activitySlideOffset + 'px)'">
+                    <div *ngFor="let activity of activities" class="activity-card" [ngClass]="activity.type">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas" [ngClass]="getActivityIcon(activity)"></i>
+                            </div>
+                            <div class="activity-points">
+                                <span *ngIf="activity.type !== 'spent'">+</span>
+                                <span>{{activity.points}}</span>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+
+                        <div class="activity-title">{{activity.title}}</div>
+
+                        <div class="activity-footer">
+                            <span class="activity-date">{{activity.date | date:'shortDate'}}</span>
+                            <span class="activity-time">{{activity.date | date:'shortTime'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-nav right" (click)="nextPage()">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </div>
+
+        <div class="carousel-indicators">
+            <div *ngFor="let page of totalActivityPages; let i = index" class="indicator"
+                [class.active]="currentActivityPage === i" (click)="navigateToPage(i)"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="achievements-view" @fadeIn>
+    <div class="achievements-carousel">
+        <div class="carousel-nav left" (click)="previousPage()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-track" [style.transform]="'translateX(' + achievementSlideOffset + 'px)'">
+                <div *ngFor="let achievement of achievements; let i = index" class="achievement-card-container"
+                    (click)="onShowDetails(achievement)">
+                    <div class="achievement-card" [class.unlocked]="achievement.isUnlocked"
+                        [ngClass]="getAchievementCategoryClass(achievement.requirement.type)">
+
+                        <div class="card-glow" [class.active]="achievement.isUnlocked"></div>
+
+                        <div class="badge-image">
+                            <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
+                            <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+
+                        <div class="achievement-info">
+                            <h3 class="achievement-title">{{achievement.title}}</h3>
+
+                            <div class="achievement-progress" *ngIf="!achievement.isUnlocked">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" [style.width.%]="achievement.progress"></div>
+                                </div>
+                                <span class="progress-text">{{achievement.progress}}%</span>
+                            </div>
+
+                            <div class="achievement-completed" *ngIf="achievement.isUnlocked">
+                                <i class="fas fa-check-circle"></i>
+                                <span>مكتمل</span>
+                            </div>
+                        </div>
+
+                        <div class="achievement-points">
+                            <i class="fas fa-star"></i>
+                            <span>{{achievement.points}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav right" (click)="nextPage()">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+    </div>
+
+    <div class="carousel-indicators">
+        <div *ngFor="let page of totalAchievementPages; let i = index" class="indicator"
+            [class.active]="currentAchievementPage === i" (click)="navigateToPage(i)"></div>
+    </div>
+</div>

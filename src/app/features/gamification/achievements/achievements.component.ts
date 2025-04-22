@@ -1,7 +1,6 @@
-// src/app/features/gamification/achievements/achievements.component.ts
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { GamificationService, Achievement, PointsActivity } from '../services/gamification.service';
 
 interface CollectionBadge {
@@ -25,17 +24,6 @@ interface CollectionBadge {
       transition(':enter', [
         style({ opacity: 0 }),
         animate('300ms ease-out', style({ opacity: 1 }))
-      ])
-    ]),
-    trigger('cardEnter', [
-      transition(':enter', [
-        query('.achievement-card', [
-          style({ opacity: 0, transform: 'scale(0.8)' }),
-          stagger(80, [
-            animate('400ms cubic-bezier(0.35, 0, 0.25, 1)',
-              style({ opacity: 1, transform: 'scale(1)' }))
-          ])
-        ], { optional: true })
       ])
     ])
   ]
@@ -133,16 +121,6 @@ export class AchievementsComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  private updateItemsPerPage() {
-    // Calculate how many items can fit based on screen width
-    // For landscape mobile devices
-    if (this.screenWidth <= 1024) {
-      this.itemsPerPage = 2;
-    } else {
-      this.itemsPerPage = 3;
-    }
-  }
-
   /**
    * Set the active tab
    */
@@ -167,9 +145,6 @@ export class AchievementsComponent implements OnInit, OnDestroy {
    * Generate collection badges from achievements
    */
   private generateCollectionBadges(): void {
-    // Create a collection of badges for the Collection tab
-    // This would normally come from a different data source
-    // but we'll generate it from achievements
     this.collection = this.achievements.map(achievement => {
       // Determine rarity based on achievement type
       let rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
@@ -224,6 +199,17 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Update items per page based on screen width
+   */
+  private updateItemsPerPage(): void {
+    if (this.screenWidth <= 1024) {
+      this.itemsPerPage = 2;
+    } else {
+      this.itemsPerPage = 3;
+    }
+  }
+
+  /**
    * Filter achievements based on active tab
    */
   getFilteredAchievements(): Achievement[] {
@@ -239,25 +225,45 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get the appropriate category class for an achievement
+   * Filtered achievements by requirement type
    */
-  getAchievementCategoryClass(requirement: string): string {
-    switch (requirement) {
-      case 'lessons_completed':
-        return 'category-lessons';
-      case 'score_reached':
-        return 'category-score';
-      case 'streak':
-        return 'category-streak';
-      case 'perfect_score':
-        return 'category-perfect';
-      default:
-        return 'category-custom';
-    }
+  getLessonsCompletedAchievements(): Achievement[] {
+    return this.achievements.filter(a => a.requirement.type === 'lessons_completed');
+  }
+
+  getScoreAchievements(): Achievement[] {
+    return this.achievements.filter(a =>
+      a.requirement.type === 'score_reached' || a.requirement.type === 'perfect_score'
+    );
+  }
+
+  getStreakAchievements(): Achievement[] {
+    return this.achievements.filter(a => a.requirement.type === 'streak');
   }
 
   /**
-   * Get badge image path based on achievement type and status
+   * Get total point statistics
+   */
+  getEarnedPoints(): number {
+    return this.recentActivities
+      .filter(a => a.type === 'earned')
+      .reduce((sum, a) => sum + a.points, 0);
+  }
+
+  getBonusPoints(): number {
+    return this.recentActivities
+      .filter(a => a.type === 'bonus')
+      .reduce((sum, a) => sum + a.points, 0);
+  }
+
+  getSpentPoints(): number {
+    return Math.abs(this.recentActivities
+      .filter(a => a.type === 'spent')
+      .reduce((sum, a) => sum + a.points, 0));
+  }
+
+  /**
+   * Get badge image
    */
   getBadgeImage(achievement: Achievement): string {
     const badgeType = achievement.type || 'bronze';
@@ -280,87 +286,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get icon for activity type
-   */
-  getActivityIcon(activity: PointsActivity): string {
-    switch (activity.type) {
-      case 'earned': return 'fa-plus-circle';
-      case 'spent': return 'fa-minus-circle';
-      case 'bonus': return 'fa-gift';
-      default: return 'fa-circle';
-    }
-  }
-
-  /**
-   * Get achievements filtered by requirement type
-   */
-  getLessonsCompletedAchievements(): Achievement[] {
-    return this.achievements.filter(a => a.requirement.type === 'lessons_completed');
-  }
-
-  /**
-   * Get score-related achievements
-   */
-  getScoreAchievements(): Achievement[] {
-    return this.achievements.filter(a =>
-      a.requirement.type === 'score_reached' || a.requirement.type === 'perfect_score'
-    );
-  }
-
-  /**
-   * Get streak achievements
-   */
-  getStreakAchievements(): Achievement[] {
-    return this.achievements.filter(a => a.requirement.type === 'streak');
-  }
-
-  /**
-   * Get total earned points from activities
-   */
-  getEarnedPoints(): number {
-    return this.recentActivities
-      .filter(a => a.type === 'earned')
-      .reduce((sum, a) => sum + a.points, 0);
-  }
-
-  /**
-   * Get total bonus points from activities
-   */
-  getBonusPoints(): number {
-    return this.recentActivities
-      .filter(a => a.type === 'bonus')
-      .reduce((sum, a) => sum + a.points, 0);
-  }
-
-  /**
-   * Get total spent points from activities (as a positive number)
-   */
-  getSpentPoints(): number {
-    return Math.abs(this.recentActivities
-      .filter(a => a.type === 'spent')
-      .reduce((sum, a) => sum + a.points, 0));
-  }
-
-  /**
-   * Get requirement text for an achievement
-   */
-  getRequirementText(achievement: Achievement): string {
-    switch (achievement.requirement.type) {
-      case 'lessons_completed':
-        return `إكمال ${achievement.requirement.value} دروس`;
-      case 'score_reached':
-        return `الوصول إلى ${achievement.requirement.value} نقطة`;
-      case 'streak':
-        return `استمرار ${achievement.requirement.value} أيام`;
-      case 'perfect_score':
-        return `الحصول على ${achievement.requirement.value} درجات كاملة`;
-      default:
-        return `إكمال المهمة المطلوبة`;
-    }
-  }
-
-  /**
-   * Show achievement details in modal
+   * Show achievement details
    */
   showAchievementDetails(achievement: Achievement): void {
     this.selectedAchievement = achievement;
@@ -369,7 +295,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Show badge details in modal
+   * Show badge details
    */
   showBadgeDetails(badge: CollectionBadge): void {
     // Find the matching achievement for this badge
@@ -380,7 +306,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Close the modal
+   * Close modal
    */
   closeModal(): void {
     this.showModal = false;
@@ -389,7 +315,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Share achievement (placeholder)
+   * Share achievement
    */
   shareAchievement(achievement: Achievement): void {
     // This would connect to a sharing API
@@ -399,7 +325,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Carousel navigation methods
+   * Achievement carousel navigation
    */
   nextAchievementPage(): void {
     if (this.currentAchievementPage < this.totalAchievementPages.length - 1) {
@@ -421,12 +347,14 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   private updateAchievementOffset(): void {
-    // Calculate offset based on item width and gap
     const itemWidth = 330; // width + padding + margin
     this.achievementSlideOffset = -(this.currentAchievementPage * itemWidth * this.itemsPerPage);
     this.cdr.markForCheck();
   }
 
+  /**
+   * Category carousel navigation
+   */
   nextCategoryPage(): void {
     if (this.currentCategoryPage < this.totalCategoryPages.length - 1) {
       this.currentCategoryPage++;
@@ -452,6 +380,9 @@ export class AchievementsComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
+  /**
+   * Activity carousel navigation
+   */
   nextActivityPage(): void {
     if (this.currentActivityPage < this.totalActivityPages.length - 1) {
       this.currentActivityPage++;

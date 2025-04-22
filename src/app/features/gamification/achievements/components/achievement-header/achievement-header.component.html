@@ -1,0 +1,25 @@
+<div class="achievements-header">
+    <div class="header-content">
+        <div class="title-section">
+            <h1 class="page-title">الإنجازات</h1>
+            <div class="header-progress-bar">
+                <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+                <span class="progress-label">{{unlockedCount}}/{{totalCount}}</span>
+                <div class="progress-stars">
+                    <i class="fas fa-star" *ngFor="let i of [1,2,3,4,5]"
+                        [class.filled]="progressPercentage >= i * 20"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="total-score pulse-animation">
+                <div class="score-circle">
+                    <span class="score-value">{{totalPoints}}</span>
+                    <i class="fas fa-star score-icon"></i>
+                </div>
+                <span class="score-label">مجموع النقاط</span>
+            </div>
+        </div>
+    </div>
+</div>

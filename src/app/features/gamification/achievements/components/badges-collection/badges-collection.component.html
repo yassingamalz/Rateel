@@ -1,0 +1,86 @@
+<div class="badges-view" @fadeIn>
+    <div class="badges-carousel">
+        <div class="carousel-nav left" (click)="previousPage()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-track" [style.transform]="'translateX(' + categorySlideOffset + 'px)'">
+                <!-- Lessons Achievements Category -->
+                <div class="badge-category">
+                    <div class="category-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h2>إنجازات الدروس</h2>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of lessonAchievements" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked" (click)="onShowDetails(achievement)">
+                            <div class="badge-display">
+                                <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="badge-glow" *ngIf="achievement.isUnlocked"></div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Achievements Category -->
+                <div class="badge-category">
+                    <div class="category-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h2>إنجازات التقدم</h2>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of scoreAchievements" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked" (click)="onShowDetails(achievement)">
+                            <div class="badge-display">
+                                <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="badge-glow" *ngIf="achievement.isUnlocked"></div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streak Achievements Category -->
+                <div class="badge-category">
+                    <div class="category-header">
+                        <i class="fas fa-fire"></i>
+                        <h2>إنجازات الاستمرارية</h2>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div *ngFor="let achievement of streakAchievements" class="badge-item"
+                            [class.unlocked]="achievement.isUnlocked" (click)="onShowDetails(achievement)">
+                            <div class="badge-display">
+                                <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
+                                <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="badge-glow" *ngIf="achievement.isUnlocked"></div>
+                            </div>
+                            <p class="badge-name">{{achievement.title}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav right" (click)="nextPage()">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+    </div>
+
+    <div class="carousel-indicators">
+        <div *ngFor="let page of totalCategoryPages; let i = index" class="indicator"
+            [class.active]="currentCategoryPage === i" (click)="navigateToPage(i)"></div>
+    </div>
+</div>

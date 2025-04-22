@@ -1,0 +1,45 @@
+<app-modal [isOpen]="isOpen" (closed)="onClose()" size="md" [showCloseButton]="true" position="center">
+    <div class="achievement-modal" *ngIf="achievement">
+        <div class="modal-badge" [class.unlocked]="achievement.isUnlocked">
+            <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
+            <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="badge-shine" *ngIf="achievement.isUnlocked"></div>
+        </div>
+
+        <h2 class="modal-title">{{achievement.title}}</h2>
+        <p class="modal-description">{{achievement.description}}</p>
+
+        <div class="modal-details">
+            <div class="detail-item">
+                <i class="fas fa-star"></i>
+                <span>{{achievement.points}} نقطة</span>
+            </div>
+
+            <div class="detail-item" *ngIf="achievement.isUnlocked && achievement.dateUnlocked">
+                <i class="fas fa-calendar-check"></i>
+                <span>تم الحصول: {{achievement.dateUnlocked | date:'shortDate'}}</span>
+            </div>
+
+            <div class="detail-item" *ngIf="!achievement.isUnlocked">
+                <i class="fas fa-tasks"></i>
+                <span>المطلوب: {{getRequirementText(achievement)}}</span>
+            </div>
+        </div>
+
+        <div class="achievement-progress" *ngIf="!achievement.isUnlocked">
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="achievement.progress"></div>
+            </div>
+            <span class="progress-percentage">{{achievement.progress}}%</span>
+        </div>
+
+        <div class="modal-actions">
+            <button class="modal-button close" (click)="onClose()">إغلاق</button>
+            <button *ngIf="achievement.isUnlocked" class="modal-button share" (click)="onShare(achievement)">
+                <i class="fas fa-share-alt"></i> مشاركة
+            </button>
+        </div>
+    </div>
+</app-modal>
