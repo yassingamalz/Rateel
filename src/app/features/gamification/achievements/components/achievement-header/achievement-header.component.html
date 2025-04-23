@@ -1,25 +1,34 @@
-<div class="achievements-header">
-    <div class="header-content">
-        <div class="title-section">
-            <h1 class="page-title">الإنجازات</h1>
-            <div class="header-progress-bar">
-                <div class="progress-fill" [style.width.%]="progressPercentage"></div>
-                <span class="progress-label">{{unlockedCount}}/{{totalCount}}</span>
-                <div class="progress-stars">
-                    <i class="fas fa-star" *ngFor="let i of [1,2,3,4,5]"
-                        [class.filled]="progressPercentage >= i * 20"></i>
-                </div>
+<!-- Streamlined Gamification Bar for Achievements -->
+<div class="achievements-gamification">
+    <!-- Main components aligned horizontally -->
+    <div class="gamification-bar">
+        <!-- Level Badge - Left Section -->
+        <div class="level-container">
+            <div class="level-badge">
+                <span class="level-value">{{ calculateLevel() }}</span>
+            </div>
+            <div class="level-info">
+                <span class="level-label">المستوى</span>
+                <span class="next-level">{{ getNextLevelPoints() }} للتالي</span>
             </div>
         </div>
 
-        <div class="stats-section">
-            <div class="total-score pulse-animation">
-                <div class="score-circle">
-                    <span class="score-value">{{totalPoints}}</span>
-                    <i class="fas fa-star score-icon"></i>
-                </div>
-                <span class="score-label">مجموع النقاط</span>
+        <!-- Progress Tracker - Middle Section - Removed counts and percentage -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="progressPercentage"></div>
             </div>
+        </div>
+
+        <!-- Points Counter - Right Section - Back to circle with star on right -->
+        <div class="points-container">
+            <div class="points-circle">
+                <div class="points-value">{{ totalPoints | number }}</div>
+                <div class="points-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <span class="points-label">النقاط</span>
         </div>
     </div>
 </div>
