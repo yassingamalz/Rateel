@@ -1,45 +1,124 @@
-<app-modal [isOpen]="isOpen" (closed)="onClose()" size="md" [showCloseButton]="true" position="center">
-    <div class="achievement-modal" *ngIf="achievement">
-        <div class="modal-badge" [class.unlocked]="achievement.isUnlocked">
-            <img [src]="getBadgeImage(achievement)" [alt]="achievement.title">
-            <div class="lock-overlay" *ngIf="!achievement.isUnlocked">
-                <i class="fas fa-lock"></i>
-            </div>
-            <div class="badge-shine" *ngIf="achievement.isUnlocked"></div>
-        </div>
+<div class="achievement-modal-wrapper" dir="rtl" *ngIf="isOpen" [@modalAnimation]>
+    <!-- Backdrop with blur effect -->
+    <div class="modal-overlay" (click)="onClose()"></div>
 
-        <h2 class="modal-title">{{achievement.title}}</h2>
-        <p class="modal-description">{{achievement.description}}</p>
-
-        <div class="modal-details">
-            <div class="detail-item">
-                <i class="fas fa-star"></i>
-                <span>{{achievement.points}} نقطة</span>
-            </div>
-
-            <div class="detail-item" *ngIf="achievement.isUnlocked && achievement.dateUnlocked">
-                <i class="fas fa-calendar-check"></i>
-                <span>تم الحصول: {{achievement.dateUnlocked | date:'shortDate'}}</span>
-            </div>
-
-            <div class="detail-item" *ngIf="!achievement.isUnlocked">
-                <i class="fas fa-tasks"></i>
-                <span>المطلوب: {{getRequirementText(achievement)}}</span>
-            </div>
-        </div>
-
-        <div class="achievement-progress" *ngIf="!achievement.isUnlocked">
-            <div class="progress-bar">
-                <div class="progress-fill" [style.width.%]="achievement.progress"></div>
-            </div>
-            <span class="progress-percentage">{{achievement.progress}}%</span>
-        </div>
-
-        <div class="modal-actions">
-            <button class="modal-button close" (click)="onClose()">إغلاق</button>
-            <button *ngIf="achievement.isUnlocked" class="modal-button share" (click)="onShare(achievement)">
-                <i class="fas fa-share-alt"></i> مشاركة
-            </button>
+    <!-- Floating particles animation container -->
+    <div class="particles-container">
+        <div class="particle" *ngFor="let particle of particles" [style.--tx]="particle.tx" [style.--ty]="particle.ty"
+            [style.width]="particle.size" [style.height]="particle.size" [style.background-color]="particle.color"
+            [style.animation-delay]="particle.delay">
         </div>
     </div>
-</app-modal>
+
+    <!-- Badge card container -->
+    <div class="modal-container">
+        <!-- Game-style achievement card with banner elements -->
+        <div class="achievement-card" [class.achievement-unlocked]="achievement?.isUnlocked"
+            [class.achievement-locked]="achievement && !achievement.isUnlocked">
+
+            <!-- Top banner with type decoration -->
+            <div class="card-banner" [ngClass]="achievement?.type || 'bronze'">
+                <div class="banner-decoration left"></div>
+                <div class="banner-text">{{ getBadgeTypeLabel(achievement?.type) }}</div>
+                <div class="banner-decoration right"></div>
+            </div>
+
+            <!-- Main content area with two columns -->
+            <div class="card-content">
+                <!-- Left side with badge and points -->
+                <div class="badge-showcase">
+                    <!-- Enhanced Badge Display -->
+                    <div class="badge-container" [ngClass]="achievement?.type || 'bronze'">
+                        <div class="badge-glow" [class.active]="achievement?.isUnlocked"></div>
+                        <div class="badge-frame">
+                            <img *ngIf="achievement" class="badge-image" [src]="getBadgeImage(achievement)"
+                                [alt]="achievement?.title">
+                        </div>
+                        <div class="lock-overlay" *ngIf="achievement && !achievement.isUnlocked">
+                            <i class="fas fa-lock"></i>
+                        </div>
+
+                        <!-- Visual Indicator for unlocked status -->
+                        <div class="completion-marker" *ngIf="achievement?.isUnlocked">
+                            <div class="check-container">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points display with star -->
+                    <div class="points-display">
+                        <i class="fas fa-star"></i>
+                        <span>{{ achievement?.points }}</span>
+                    </div>
+
+                    <!-- Removed gem rewards -->
+                </div>
+
+                <!-- Right side with details -->
+                <div class="achievement-details">
+                    <!-- Title with style based on achievement type -->
+                    <h2 class="achievement-title" [ngClass]="achievement?.type || 'bronze'">
+                        {{ achievement?.title }}
+                    </h2>
+
+                    <!-- Description with elegant styling -->
+                    <div class="description-scroll">
+                        <p class="achievement-description">
+                            {{ achievement?.description }}
+                        </p>
+                    </div>
+
+                    <!-- Requirement for locked achievements -->
+                    <div class="achievement-requirement" *ngIf="achievement && !achievement.isUnlocked">
+                        <div class="requirement-icon">
+                            <i class="fas" [ngClass]="getRequirementIcon(achievement)"></i>
+                        </div>
+                        <div class="requirement-text">
+                            <div class="requirement-label">المطلوب:</div>
+                            <div class="requirement-value">{{getRequirementText(achievement)}}</div>
+                        </div>
+                    </div>
+
+                    <!-- Completion date for unlocked achievements -->
+                    <div class="achievement-completion" *ngIf="achievement?.isUnlocked && achievement?.dateUnlocked">
+                        <div class="completion-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="completion-text">
+                            <div class="completion-label">تم الإنجاز:</div>
+                            <div class="completion-date">{{achievement?.dateUnlocked | date:'mediumDate'}}</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress bar for locked achievements -->
+                    <div class="progress-container" *ngIf="achievement && !achievement.isUnlocked">
+                        <div class="progress-label">التقدم: {{ achievement.progress }}%</div>
+                        <div class="progress-bar">
+                            <div class="progress-track">
+                                <div class="progress-fill" [style.width.%]="achievement.progress">
+                                    <div class="progress-glow"></div>
+                                </div>
+                            </div>
+                            <div class="progress-markers">
+                                <div class="marker" *ngFor="let m of [0,25,50,75,100]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom action area with buttons -->
+            <div class="card-actions">
+                <button *ngIf="achievement?.isUnlocked" class="action-button share-button" (click)="onShare()">
+                    <i class="fas fa-share-alt"></i>
+                    <span>مشاركة</span>
+                </button>
+                <button class="action-button continue-button" (click)="onClose()">
+                    <span>متابعة</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
