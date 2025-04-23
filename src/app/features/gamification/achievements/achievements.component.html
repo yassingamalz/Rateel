@@ -1,111 +1,121 @@
 <div class="achievements-container" dir="rtl">
-    <!-- Particles Background for Game Feel -->
-    <div class="particles-container">
-      <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></div>
+  <!-- Particles Background for Game Feel -->
+  <div class="particles-container">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></div>
+  </div>
+
+  <!-- Header Section with Stats -->
+  <app-achievement-header 
+    [totalPoints]="totalPoints"
+    [progressPercentage]="progressPercentage"
+    [unlockedCount]="unlockedCount"
+    [totalCount]="totalCount">
+  </app-achievement-header>
+
+  <!-- Enhanced Tab Navigation -->
+  <div class="tabs-container">
+    <div class="tab-buttons" #tabsScroller (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
+      <button class="tab-button" [class.active]="activeTab === 'all'" (click)="setActiveTab('all')">
+        <i class="fas fa-trophy"></i>
+        <span>الإنجازات</span>
+      </button>
+
+      <button class="tab-button" [class.active]="activeTab === 'badges'" (click)="setActiveTab('badges')">
+        <i class="fas fa-medal"></i>
+        <span>الأوسمة</span>
+      </button>
+
+      <button class="tab-button" [class.active]="activeTab === 'points'" (click)="setActiveTab('points')">
+        <i class="fas fa-coins"></i>
+        <span>النقاط</span>
+      </button>
+
+      <button class="tab-button" [class.active]="activeTab === 'collection'" (click)="setActiveTab('collection')">
+        <i class="fas fa-book"></i>
+        <span>المجموعة</span>
+      </button>
     </div>
-  
-    <!-- Header Section with Stats -->
-    <app-achievement-header 
-      [totalPoints]="totalPoints"
-      [progressPercentage]="progressPercentage"
-      [unlockedCount]="unlockedCount"
-      [totalCount]="totalCount">
-    </app-achievement-header>
-  
-    <!-- Tab Navigation -->
-    <div class="tabs-container">
-      <div class="tab-buttons">
-        <button class="tab-button" [class.active]="activeTab === 'all'" (click)="setActiveTab('all')">
-          <i class="fas fa-trophy"></i>
-          <span>الإنجازات</span>
-        </button>
-  
-        <button class="tab-button" [class.active]="activeTab === 'badges'" (click)="setActiveTab('badges')">
-          <i class="fas fa-medal"></i>
-          <span>الأوسمة</span>
-        </button>
-  
-        <button class="tab-button" [class.active]="activeTab === 'points'" (click)="setActiveTab('points')">
-          <i class="fas fa-coins"></i>
-          <span>النقاط</span>
-        </button>
-  
-        <button class="tab-button" [class.active]="activeTab === 'collection'" (click)="setActiveTab('collection')">
-          <i class="fas fa-book"></i>
-          <span>المجموعة</span>
-        </button>
-      </div>
+    
+    <!-- Swipe hint for mobile landscape mode -->
+    <div class="swipe-hint" *ngIf="isMobile && showSwipeHint">
+      <i class="fas fa-chevron-right"></i>
+      <span>اسحب للتنقل بين التبويبات</span>
+      <i class="fas fa-chevron-left"></i>
     </div>
-  
-    <!-- Main Content Area -->
-    <div class="content-area">
-      <!-- Achievements View -->
-      <app-achievement-list 
-        *ngIf="activeTab === 'all'"
-        [achievements]="getFilteredAchievements()" 
-        [achievementSlideOffset]="achievementSlideOffset"
-        [currentAchievementPage]="currentAchievementPage"
-        [totalAchievementPages]="totalAchievementPages"
-        (showDetails)="showAchievementDetails($event)"
-        (previous)="previousAchievementPage()"
-        (next)="nextAchievementPage()"
-        (goToPage)="goToAchievementPage($event)">
-      </app-achievement-list>
-  
-      <!-- Badges Collection View -->
-      <app-badges-collection 
-        *ngIf="activeTab === 'badges'"
-        [lessonAchievements]="getLessonsCompletedAchievements()"
-        [scoreAchievements]="getScoreAchievements()"
-        [streakAchievements]="getStreakAchievements()"
-        [categorySlideOffset]="categorySlideOffset"
-        [currentCategoryPage]="currentCategoryPage"
-        [totalCategoryPages]="totalCategoryPages"
-        (showDetails)="showAchievementDetails($event)"
-        (previous)="previousCategoryPage()"
-        (next)="nextCategoryPage()"
-        (goToPage)="goToCategoryPage($event)">
-      </app-badges-collection>
-  
-      <!-- Points History View -->
-      <app-points-history 
-        *ngIf="activeTab === 'points'"
-        [earnedPoints]="getEarnedPoints()"
-        [bonusPoints]="getBonusPoints()"
-        [spentPoints]="getSpentPoints()"
-        [activities]="recentActivities"
-        [activitySlideOffset]="activitySlideOffset"
-        [currentActivityPage]="currentActivityPage"
-        [totalActivityPages]="totalActivityPages"
-        (previous)="previousActivityPage()"
-        (next)="nextActivityPage()"
-        (goToPage)="goToActivityPage($event)">
-      </app-points-history>
-  
-      <!-- Collection View (Keep this in main component) -->
-      <div class="collection-view" *ngIf="activeTab === 'collection'" @fadeIn>
-        <div class="collection-grid">
-          <div *ngFor="let badge of collection" class="collection-item" [class.unlocked]="badge.isUnlocked"
-            (click)="showBadgeDetails(badge)">
-            <div class="badge-display">
-              <img [src]="badge.image" [alt]="badge.title">
-              <div class="lock-overlay" *ngIf="!badge.isUnlocked">
-                <i class="fas fa-lock"></i>
-              </div>
-              <div class="rarity-indicator" [ngClass]="badge.rarity"></div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <!-- Achievements View -->
+    <app-achievement-list 
+      *ngIf="activeTab === 'all'"
+      [achievements]="getFilteredAchievements()" 
+      [achievementSlideOffset]="achievementSlideOffset"
+      [currentAchievementPage]="currentAchievementPage"
+      [totalAchievementPages]="totalAchievementPages"
+      (showDetails)="showAchievementDetails($event)"
+      (previous)="previousAchievementPage()"
+      (next)="nextAchievementPage()"
+      (goToPage)="goToAchievementPage($event)"
+      @tabTransition>
+    </app-achievement-list>
+
+    <!-- Badges Collection View -->
+    <app-badges-collection 
+      *ngIf="activeTab === 'badges'"
+      [lessonAchievements]="getLessonsCompletedAchievements()"
+      [scoreAchievements]="getScoreAchievements()"
+      [streakAchievements]="getStreakAchievements()"
+      [categorySlideOffset]="categorySlideOffset"
+      [currentCategoryPage]="currentCategoryPage"
+      [totalCategoryPages]="totalCategoryPages"
+      (showDetails)="showAchievementDetails($event)"
+      (previous)="previousCategoryPage()"
+      (next)="nextCategoryPage()"
+      (goToPage)="goToCategoryPage($event)"
+      @tabTransition>
+    </app-badges-collection>
+
+    <!-- Points History View -->
+    <app-points-history 
+      *ngIf="activeTab === 'points'"
+      [earnedPoints]="getEarnedPoints()"
+      [bonusPoints]="getBonusPoints()"
+      [spentPoints]="getSpentPoints()"
+      [activities]="recentActivities"
+      [activitySlideOffset]="activitySlideOffset"
+      [currentActivityPage]="currentActivityPage"
+      [totalActivityPages]="totalActivityPages"
+      (previous)="previousActivityPage()"
+      (next)="nextActivityPage()"
+      (goToPage)="goToActivityPage($event)"
+      @tabTransition>
+    </app-points-history>
+
+    <!-- Collection View (Keep this in main component) -->
+    <div class="collection-view" *ngIf="activeTab === 'collection'" @tabTransition>
+      <div class="collection-grid">
+        <div *ngFor="let badge of collection" class="collection-item" [class.unlocked]="badge.isUnlocked"
+          (click)="showBadgeDetails(badge)">
+          <div class="badge-display">
+            <img [src]="badge.image" [alt]="badge.title">
+            <div class="lock-overlay" *ngIf="!badge.isUnlocked">
+              <i class="fas fa-lock"></i>
             </div>
-            <h3 class="badge-title">{{badge.title}}</h3>
-            <div class="badge-rarity">{{getBadgeRarityLabel(badge.rarity)}}</div>
+            <div class="rarity-indicator" [ngClass]="badge.rarity"></div>
           </div>
+          <h3 class="badge-title">{{badge.title}}</h3>
+          <div class="badge-rarity">{{getBadgeRarityLabel(badge.rarity)}}</div>
         </div>
       </div>
     </div>
-  
-    <!-- Achievement Details Modal -->
-    <app-achievement-details-modal
-      [isOpen]="showModal"
-      [achievement]="selectedAchievement"
-      (close)="closeModal()"
-      (share)="shareAchievement($event)">
-    </app-achievement-details-modal>
   </div>
+
+  <!-- Achievement Details Modal -->
+  <app-achievement-details-modal
+    [isOpen]="showModal"
+    [achievement]="selectedAchievement"
+    (close)="closeModal()"
+    (share)="shareAchievement($event)">
+  </app-achievement-details-modal>
+</div>

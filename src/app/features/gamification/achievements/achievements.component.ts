@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { GamificationService, Achievement, PointsActivity } from '../services/gamification.service';
@@ -25,10 +25,19 @@ interface CollectionBadge {
         style({ opacity: 0 }),
         animate('300ms ease-out', style({ opacity: 1 }))
       ])
+    ]),
+    trigger('tabTransition', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.95)' }),
+        animate('400ms cubic-bezier(0.22, 1, 0.36, 1)',
+          style({ opacity: 1, transform: 'scale(1)' }))
+      ])
     ])
   ]
 })
 export class AchievementsComponent implements OnInit, OnDestroy {
+  @ViewChild('tabsScroller') tabsScroller!: ElementRef;
+
   // Current user data
   totalPoints: number = 0;
   achievements: Achievement[] = [];
@@ -39,6 +48,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   activeTab: 'all' | 'unlocked' | 'locked' | 'badges' | 'points' | 'collection' = 'all';
   isMobile = window.innerWidth <= 768;
   isLoading = true;
+  showSwipeHint = true;
 
   // Achievement stats
   unlockedCount: number = 0;
@@ -67,6 +77,12 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   // Screen dimensions
   screenWidth: number;
   screenHeight: number;
+
+  // Touch handling for swipe
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
+  private touchThreshold: number = 50;
+  private swiped: boolean = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -108,12 +124,19 @@ export class AchievementsComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       })
     );
+
+    // Hide swipe hint after 5 seconds
+    setTimeout(() => {
+      this.showSwipeHint = false;
+      this.cdr.markForCheck();
+    }, 5000);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
+    this.isMobile = window.innerWidth <= 768;
     this.updateItemsPerPage();
     this.calculateTotalPages();
     this.calculateTotalActivityPages();
@@ -122,11 +145,83 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Touch event handlers for tab swiping
+   */
+  onTouchStart(e: TouchEvent): void {
+    this.touchStartX = e.touches[0].clientX;
+  }
+
+  onTouchMove(e: TouchEvent): void {
+    this.touchEndX = e.touches[0].clientX;
+
+    // If we have a scroller element and we're scrolling horizontally
+    if (this.tabsScroller && this.tabsScroller.nativeElement) {
+      // Let native scrolling behavior handle this if the tabs are scrollable
+      const element = this.tabsScroller.nativeElement;
+      const maxScrollLeft = element.scrollWidth - element.clientWidth;
+
+      // Only prevent default if we're at the edges and need to switch tabs
+      if ((element.scrollLeft <= 0 && this.touchEndX > this.touchStartX) ||
+        (element.scrollLeft >= maxScrollLeft && this.touchEndX < this.touchStartX)) {
+        e.preventDefault();
+      }
+    }
+  }
+
+  onTouchEnd(): void {
+    if (Math.abs(this.touchStartX - this.touchEndX) > this.touchThreshold) {
+      this.swiped = true;
+      // Handle tab switching based on swipe direction
+      if (this.touchEndX < this.touchStartX) {
+        // Swipe right to left - next tab
+        this.switchToNextTab();
+      } else {
+        // Swipe left to right - previous tab
+        this.switchToPreviousTab();
+      }
+    }
+
+    // Reset touch variables
+    this.touchStartX = 0;
+    this.touchEndX = 0;
+  }
+
+  /**
+   * Helper to navigate to next/previous tabs
+   */
+  switchToNextTab(): void {
+    const tabs = ['all', 'badges', 'points', 'collection'];
+    const currentIndex = tabs.indexOf(this.activeTab);
+    if (currentIndex < tabs.length - 1) {
+      this.setActiveTab(tabs[currentIndex + 1] as any);
+    }
+  }
+
+  switchToPreviousTab(): void {
+    const tabs = ['all', 'badges', 'points', 'collection'];
+    const currentIndex = tabs.indexOf(this.activeTab);
+    if (currentIndex > 0) {
+      this.setActiveTab(tabs[currentIndex - 1] as any);
+    }
+  }
+
+  /**
    * Set the active tab
    */
   setActiveTab(tab: 'all' | 'unlocked' | 'locked' | 'badges' | 'points' | 'collection'): void {
     this.activeTab = tab;
     this.resetCarouselPositions();
+
+    // Show swipe hint briefly when changing tabs
+    if (this.isMobile && !this.swiped) {
+      this.showSwipeHint = true;
+      setTimeout(() => {
+        this.showSwipeHint = false;
+        this.cdr.markForCheck();
+      }, 3000);
+    }
+
+    this.swiped = false;
     this.cdr.markForCheck();
   }
 
