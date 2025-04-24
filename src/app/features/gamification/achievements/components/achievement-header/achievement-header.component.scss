@@ -138,8 +138,8 @@
             flex: 0 0 auto;
 
             .points-circle {
-                width: 60px;
-                height: 60px;
+                width: 75px;
+                height: 75px;
                 border-radius: 50%;
                 background: linear-gradient(135deg,
                         rgba(map-get(vars.$colors, 'accent', 'base'), 0.9),

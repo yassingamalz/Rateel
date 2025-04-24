@@ -286,80 +286,91 @@
     min-height: 0; // Important for flexbox
 }
 
-// Left side with badge display
+// Left side with badge display - ENHANCED VERSION
 .badge-showcase {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 240px; // Fixed width for badge showcase
+    width: 250px; // Increased width for larger badge
     flex-shrink: 0;
 
-    // Badge container with glow effects
+    // Badge container with enhanced 3D effects
     .badge-container {
-        width: 220px;
-        height: 220px;
+        width: 100%;
+        height: 260px; // Taller container for bigger badge
         position: relative;
         margin-bottom: 20px;
 
-        // Frame around the badge
-        .badge-frame {
-            position: absolute;
-            inset: 5px;
-            border-radius: 50%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-        }
+        // 3D container with proper perspective
+        .badge-3d-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
 
-        // Glow effect behind badge
-        .badge-glow {
-            position: absolute;
-            inset: -15px;
-            border-radius: 50%;
-            opacity: 0;
-            filter: blur(15px);
-            transition: all 0.5s ease;
-            z-index: 0;
-
-            &.active {
-                opacity: 0.7;
+            // Create a subtle shadow beneath the badge
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 70%;
+                height: 20px;
+                background: rgba(0, 0, 0, 0.3);
+                filter: blur(15px);
+                border-radius: 50%;
+                z-index: -1;
             }
         }
 
-        // Actual badge image
+        // Badge image with enhanced size and 3D effect
         .badge-image {
-            max-width: 100%;
-            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            transform: scale(0.95);
-            transition: transform 0.5s ease;
-            z-index: 1;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+            transform: translateZ(20px) scale(1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            z-index: 5;
 
-            .achievement-unlocked & {
-                transform: scale(1.05);
-                filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
+            // Hover effect - slight lift
+            &:hover {
+                transform: translateZ(30px) scale(1.05);
+            }
+
+            // Grayscale filter for locked badges
+            &.grayscale {
+                filter: grayscale(70%) brightness(0.8) drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+                transform: translateZ(10px) scale(0.98);
+
+                &:hover {
+                    transform: translateZ(15px) scale(1);
+                }
             }
         }
 
-        // Lock overlay for locked achievements
+        // Lock overlay for locked badges
         .lock-overlay {
             position: absolute;
-            inset: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(40px);
+            z-index: 10;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            z-index: 2;
 
             i {
-                font-size: 50px;
-                color: rgba(255, 255, 255, 0.7);
+                font-size: 40px;
+                color: rgba(255, 255, 255, 0.9);
+                filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
             }
         }
 
@@ -367,8 +378,9 @@
         .completion-marker {
             position: absolute;
             bottom: 10px;
-            right: 10px;
-            z-index: 3;
+            right: 0;
+            z-index: 15;
+            transform: translateZ(40px);
 
             .check-container {
                 width: 40px;
@@ -387,74 +399,47 @@
             }
         }
 
-        // Different glow colors by badge type
-        &.bronze .badge-glow {
-            background: radial-gradient(ellipse, #CD7F32 0%, transparent 70%);
-        }
-
-        &.silver .badge-glow {
-            background: radial-gradient(ellipse, #C0C0C0 0%, transparent 70%);
-        }
-
-        &.gold .badge-glow {
-            background: radial-gradient(ellipse, map-get(vars.$colors, 'accent', 'base') 0%, transparent 70%);
-        }
-
-        &.platinum .badge-glow {
-            background: radial-gradient(ellipse, #E5E4E2 0%, transparent 70%);
-        }
-
-        &.diamond .badge-glow {
-            background: radial-gradient(ellipse, #B9F2FF 0%, transparent 70%);
-        }
-    }
-
-    // Points display with star
-    .points-display {
-        background: linear-gradient(135deg,
-                rgba(map-get(vars.$colors, 'accent', 'dark'), 0.6),
-                rgba(map-get(vars.$colors, 'accent', 'base'), 0.6));
-        border-radius: 20px;
-        padding: 10px 25px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        margin-bottom: 15px;
-        position: relative;
-        overflow: hidden;
-
-        // Add shimmer effect
-        &::after {
-            content: '';
+        // Enhanced glow effect for badges
+        .badge-glow {
             position: absolute;
-            top: 0;
-            left: -100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.1),
-                    transparent);
-            animation: shimmer 2s infinite;
-        }
+            border-radius: 2px;
+            opacity: 0;
+            filter: blur(20px);
+            transition: all 0.5s ease;
+            z-index: 1;
 
-        i {
-            font-size: 1.6rem;
-            color: gold;
-            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
-            animation: starPulse 1.5s infinite alternate;
-        }
+            &.active {
+                opacity: 0.5;
+                animation: pulse-glow 3s infinite alternate;
+            }
 
-        span {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+            // Different glow colors by badge type
+            &.bronze {
+                background: radial-gradient(ellipse, #CD7F32 0%, transparent 70%);
+            }
+
+            &.silver {
+                background: radial-gradient(ellipse, #C0C0C0 0%, transparent 70%);
+            }
+
+            &.gold {
+                background: radial-gradient(ellipse, #DAA520 0%, transparent 70%);
+            }
+
+            &.platinum {
+                background: radial-gradient(ellipse, #E5E4E2 0%, transparent 70%);
+            }
+
+            &.diamond {
+                background: radial-gradient(ellipse, #B9F2FF 0%, transparent 70%);
+            }
         }
     }
-
-    // Removed gem rewards section
 }
 
 // Right side with achievement details
@@ -564,52 +549,15 @@
         }
     }
 
-    // Requirement display for locked achievements
-    .achievement-requirement {
+    // Achievement status section with requirement/completion and points
+    .achievement-status {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 15px;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        padding: 12px 15px;
-        margin-bottom: 20px;
-
-        .requirement-icon {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            i {
-                font-size: 1.2rem;
-                color: map-get(vars.$colors, 'accent', 'base');
-            }
-        }
-
-        .requirement-text {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-
-            .requirement-label {
-                font-size: 0.9rem;
-                color: rgba(255, 255, 255, 0.7);
-                margin-bottom: 3px;
-            }
-
-            .requirement-value {
-                font-size: 1.1rem;
-                color: white;
-                font-weight: 600;
-            }
-        }
     }
 
-    // Completion date for unlocked achievements
+    // Enhanced requirement section with inline points
+    .achievement-requirement,
     .achievement-completion {
         display: flex;
         align-items: center;
@@ -617,39 +565,202 @@
         background: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         padding: 12px 15px;
-        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
 
+        // Add subtle gradient background
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(0, 0, 0, 0.05));
+            pointer-events: none;
+        }
+
+        // Icons with dynamic color based on badge type
+        .requirement-icon,
         .completion-icon {
             width: 40px;
             height: 40px;
             flex-shrink: 0;
             border-radius: 50%;
-            background: rgba(46, 204, 113, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 
             i {
                 font-size: 1.2rem;
-                color: #2ECC71;
+                transition: all 0.3s ease;
+            }
+
+            // Dynamic coloring based on badge type
+            &.bronze {
+                background: rgba(205, 127, 50, 0.2);
+
+                i {
+                    color: #CD7F32;
+                }
+            }
+
+            &.silver {
+                background: rgba(192, 192, 192, 0.2);
+
+                i {
+                    color: #C0C0C0;
+                }
+            }
+
+            &.gold {
+                background: rgba(map-get(vars.$colors, 'accent', 'base'), 0.2);
+
+                i {
+                    color: map-get(vars.$colors, 'accent', 'base');
+                }
+            }
+
+            &.platinum {
+                background: rgba(229, 228, 226, 0.2);
+
+                i {
+                    color: #E5E4E2;
+                }
+            }
+
+            &.diamond {
+                background: rgba(185, 242, 255, 0.2);
+
+                i {
+                    color: #B9F2FF;
+                }
             }
         }
 
+        // Requirement/completion text
+        .requirement-text,
         .completion-text {
             display: flex;
             flex-direction: column;
             flex: 1;
 
+            .requirement-label,
             .completion-label {
                 font-size: 0.9rem;
                 color: rgba(255, 255, 255, 0.7);
                 margin-bottom: 3px;
             }
 
+            .requirement-value,
             .completion-date {
                 font-size: 1.1rem;
                 color: white;
                 font-weight: 600;
+            }
+        }
+
+        // Enhanced Points Display
+        .points-display {
+            height: 40px;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 20px;
+            padding: 0 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+
+            // 3D effect with inset shadow
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 3px 6px rgba(0, 0, 0, 0.2);
+
+            // Dynamic shimmer effect
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg,
+                        transparent,
+                        rgba(255, 255, 255, 0.2),
+                        transparent);
+                animation: shimmer 2s infinite;
+            }
+
+            i {
+                font-size: 1.2rem;
+                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+                animation: starPulse 1.5s infinite alternate;
+            }
+
+            span {
+                font-size: 1.2rem;
+                font-weight: 700;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            }
+
+            // Dynamic styles based on badge type
+            &.bronze {
+                background: linear-gradient(135deg, rgba(205, 127, 50, 0.7), rgba(205, 127, 50, 0.4));
+
+                i,
+                span {
+                    color: #FFE6C7;
+                }
+            }
+
+            &.silver {
+                background: linear-gradient(135deg, rgba(192, 192, 192, 0.7), rgba(192, 192, 192, 0.4));
+
+                i,
+                span {
+                    color: #FFFFFF;
+                }
+            }
+
+            &.gold {
+                background: linear-gradient(135deg,
+                        rgba(map-get(vars.$colors, 'accent', 'dark'), 0.7),
+                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
+
+                i,
+                span {
+                    color: #FFFACD;
+                }
+            }
+
+            &.platinum {
+                background: linear-gradient(135deg, rgba(229, 228, 226, 0.7), rgba(229, 228, 226, 0.4));
+
+                i,
+                span {
+                    color: #FFFFFF;
+                }
+            }
+
+            &.diamond {
+                background: linear-gradient(135deg, rgba(185, 242, 255, 0.7), rgba(185, 242, 255, 0.4));
+
+                i,
+                span {
+                    color: #E0FFFF;
+                }
+            }
+
+            // Hover effect
+            &:hover {
+                transform: translateY(-2px);
+                filter: brightness(1.1);
             }
         }
     }
@@ -821,6 +932,20 @@
     }
 }
 
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        filter: blur(20px);
+    }
+
+    50% {
+        opacity: 0.8;
+        filter: blur(25px);
+    }
+}
+
 @keyframes floatParticle {
     0% {
         transform: translate(-50%, -50%) scale(0);
@@ -857,8 +982,6 @@
     }
 }
 
-// Removed gemFloat animation
-
 // Responsive adjustments for smaller screens
 @media (max-width: 850px) {
     .modal-container {
@@ -878,21 +1001,12 @@
         margin-bottom: 10px;
 
         .badge-container {
-            width: 160px; // Make badge slightly smaller on mobile
-            height: 160px;
+            width: 200px; // Make badge slightly smaller on mobile
+            height: 200px;
             margin: 0 auto 15px; // Center badge
-        }
 
-        .points-display {
-            margin: 0 auto 10px; // Center points
-            padding: 8px 20px; // Smaller padding
-
-            i {
-                font-size: 1.4rem;
-            }
-
-            span {
-                font-size: 1.4rem;
+            .lock-overlay i {
+                font-size: 34px;
             }
         }
     }
@@ -926,6 +1040,14 @@
         .achievement-requirement,
         .achievement-completion {
             padding: 10px 12px;
+            flex-wrap: wrap;
+
+            .points-display {
+                margin-top: 10px;
+                margin-left: auto;
+                width: 100%;
+                max-width: 120px;
+            }
         }
     }
 
@@ -963,21 +1085,21 @@
         width: 38%; // Use percentage for better flexibility
 
         .badge-container {
-            width: 130px; // Smaller badge in landscape
-            height: 130px;
+            width: 160px; // Smaller badge in landscape
+            height: 160px;
             margin: 0 auto 10px;
-        }
 
-        .points-display {
-            padding: 6px 15px;
-            margin: 0 auto;
-
-            i {
-                font-size: 1.2rem;
+            .lock-overlay i {
+                font-size: 30px;
             }
 
-            span {
-                font-size: 1.2rem;
+            .completion-marker .check-container {
+                width: 32px;
+                height: 32px;
+
+                i {
+                    font-size: 18px;
+                }
             }
         }
     }
@@ -1027,6 +1149,19 @@
 
                 .requirement-value,
                 .completion-date {
+                    font-size: 1rem;
+                }
+            }
+
+            .points-display {
+                height: 32px;
+                min-width: 70px;
+
+                i {
+                    font-size: 1rem;
+                }
+
+                span {
                     font-size: 1rem;
                 }
             }

@@ -45,11 +45,12 @@ export class AchievementDetailsModalComponent implements OnInit {
 
   /**
    * Get badge image based on achievement type and unlock status
+   * Note: Now we're using just one image and applying grayscale filter in the template
    */
   getBadgeImage(achievement: Achievement): string {
     const badgeType = achievement.type || 'bronze';
-    const status = achievement.isUnlocked ? 'unlocked' : 'locked';
-    return `assets/images/badges/${badgeType}_${status}.png`;
+    // Using the unlocked image for both states since we now apply grayscale with CSS
+    return `assets/images/badges/${badgeType}_unlocked.png`;
   }
 
   /**

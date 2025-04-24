@@ -25,34 +25,35 @@
 
             <!-- Main content area with two columns -->
             <div class="card-content">
-                <!-- Left side with badge and points -->
+                <!-- Left side with badge -->
                 <div class="badge-showcase">
-                    <!-- Enhanced Badge Display -->
+                    <!-- Enhanced Badge Display with 3D effects and no circular container -->
                     <div class="badge-container" [ngClass]="achievement?.type || 'bronze'">
-                        <div class="badge-glow" [class.active]="achievement?.isUnlocked"></div>
-                        <div class="badge-frame">
-                            <img *ngIf="achievement" class="badge-image" [src]="getBadgeImage(achievement)"
-                                [alt]="achievement?.title">
-                        </div>
-                        <div class="lock-overlay" *ngIf="achievement && !achievement.isUnlocked">
-                            <i class="fas fa-lock"></i>
-                        </div>
+                        <!-- 3D container with perspective -->
+                        <div class="badge-3d-container">
+                            <!-- Badge image with proper styling for locked/unlocked state -->
+                            <img *ngIf="achievement" class="badge-image"
+                                [ngClass]="{'grayscale': achievement && !achievement.isUnlocked}"
+                                [src]="getBadgeImage(achievement)" [alt]="achievement.title">
 
-                        <!-- Visual Indicator for unlocked status -->
-                        <div class="completion-marker" *ngIf="achievement?.isUnlocked">
-                            <div class="check-container">
-                                <i class="fas fa-check"></i>
+                            <!-- Lock icon overlay for locked badges -->
+                            <div class="lock-overlay" *ngIf="achievement && !achievement.isUnlocked">
+                                <i class="fas fa-lock"></i>
+                            </div>
+
+                            <!-- Completion checkmark for unlocked badges -->
+                            <div class="completion-marker" *ngIf="achievement?.isUnlocked">
+                                <div class="check-container">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+
+                            <!-- Glow effect for unlocked badges -->
+                            <div class="badge-glow" [class.active]="achievement?.isUnlocked"
+                                [ngClass]="achievement?.type || 'bronze'">
                             </div>
                         </div>
                     </div>
-
-                    <!-- Points display with star -->
-                    <div class="points-display">
-                        <i class="fas fa-star"></i>
-                        <span>{{ achievement?.points }}</span>
-                    </div>
-
-                    <!-- Removed gem rewards -->
                 </div>
 
                 <!-- Right side with details -->
@@ -69,25 +70,39 @@
                         </p>
                     </div>
 
-                    <!-- Requirement for locked achievements -->
-                    <div class="achievement-requirement" *ngIf="achievement && !achievement.isUnlocked">
-                        <div class="requirement-icon">
-                            <i class="fas" [ngClass]="getRequirementIcon(achievement)"></i>
+                    <!-- Achievement status section with requirement/completion and points -->
+                    <div class="achievement-status">
+                        <!-- Requirement for locked achievements -->
+                        <div class="achievement-requirement" *ngIf="achievement && !achievement.isUnlocked">
+                            <div class="requirement-icon" [ngClass]="achievement.type || 'bronze'">
+                                <i class="fas" [ngClass]="getRequirementIcon(achievement)"></i>
+                            </div>
+                            <div class="requirement-text">
+                                <div class="requirement-label">المطلوب:</div>
+                                <div class="requirement-value">{{getRequirementText(achievement)}}</div>
+                            </div>
+                            <!-- Enhanced Points Display -->
+                            <div class="points-display" [ngClass]="achievement.type || 'bronze'">
+                                <i class="fas fa-star"></i>
+                                <span>{{ achievement.points }}</span>
+                            </div>
                         </div>
-                        <div class="requirement-text">
-                            <div class="requirement-label">المطلوب:</div>
-                            <div class="requirement-value">{{getRequirementText(achievement)}}</div>
-                        </div>
-                    </div>
 
-                    <!-- Completion date for unlocked achievements -->
-                    <div class="achievement-completion" *ngIf="achievement?.isUnlocked && achievement?.dateUnlocked">
-                        <div class="completion-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <div class="completion-text">
-                            <div class="completion-label">تم الإنجاز:</div>
-                            <div class="completion-date">{{achievement?.dateUnlocked | date:'mediumDate'}}</div>
+                        <!-- Completion date for unlocked achievements -->
+                        <div class="achievement-completion"
+                            *ngIf="achievement?.isUnlocked && achievement?.dateUnlocked">
+                            <div class="completion-icon" [ngClass]="achievement?.type || 'bronze'">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="completion-text">
+                                <div class="completion-label">تم الإنجاز:</div>
+                                <div class="completion-date">{{achievement?.dateUnlocked | date:'mediumDate'}}</div>
+                            </div>
+                            <!-- Enhanced Points Display for completed achievements -->
+                            <div class="points-display" [ngClass]="achievement?.type || 'bronze'">
+                                <i class="fas fa-star"></i>
+                                <span>{{ achievement?.points }}</span>
+                            </div>
                         </div>
                     </div>
 
