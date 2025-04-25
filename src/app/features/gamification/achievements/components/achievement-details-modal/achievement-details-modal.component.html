@@ -58,10 +58,17 @@
 
                 <!-- Right side with details -->
                 <div class="achievement-details">
-                    <!-- Title with style based on achievement type -->
-                    <h2 class="achievement-title" [ngClass]="achievement?.type || 'bronze'">
-                        {{ achievement?.title }}
-                    </h2>
+                    <!-- Title with style based on achievement type, now with stars inline -->
+                    <div class="title-row">
+                        <h2 class="achievement-title" [ngClass]="achievement?.type || 'bronze'">
+                            {{ achievement?.title }}
+                        </h2>
+                        <!-- Points display moved here -->
+                        <div class="title-points-display" [ngClass]="achievement.type || 'bronze'" *ngIf="achievement">
+                            <i class="fas fa-star"></i>
+                            <span>{{ achievement.points }}</span>
+                        </div>
+                    </div>
 
                     <!-- Description with elegant styling -->
                     <div class="description-scroll">
@@ -70,7 +77,7 @@
                         </p>
                     </div>
 
-                    <!-- Achievement status section with requirement/completion and points -->
+                    <!-- Achievement status section with requirement/completion -->
                     <div class="achievement-status">
                         <!-- Requirement for locked achievements - ENHANCED STYLE -->
                         <div class="achievement-requirement-info" *ngIf="achievement && !achievement.isUnlocked">
@@ -80,11 +87,6 @@
                             <div class="requirement-details">
                                 <div class="requirement-label">المطلوب:</div>
                                 <div class="requirement-value">{{getRequirementText(achievement)}}</div>
-                            </div>
-                            <!-- Large Points Display -->
-                            <div class="points-display" [ngClass]="achievement.type || 'bronze'">
-                                <i class="fas fa-star"></i>
-                                <span>{{ achievement.points }}</span>
                             </div>
                         </div>
 
@@ -97,11 +99,6 @@
                             <div class="completion-details">
                                 <div class="completion-label">تم الإنجاز:</div>
                                 <div class="completion-date">{{achievement?.dateUnlocked | date:'mediumDate'}}</div>
-                            </div>
-                            <!-- Large Points Display -->
-                            <div class="points-display" [ngClass]="achievement?.type || 'bronze'">
-                                <i class="fas fa-star"></i>
-                                <span>{{ achievement?.points }}</span>
                             </div>
                         </div>
                     </div>

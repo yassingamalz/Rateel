@@ -74,6 +74,7 @@
     transform: translateY(30px);
     opacity: 0;
     animation: cardEntry 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+    overflow: visible !important; // Critical to allow badge to float out
 }
 
 // Game-style achievement card
@@ -82,7 +83,7 @@
             rgba(31, 64, 55, 0.95),
             rgba(11, 28, 23, 0.95));
     border-radius: 24px;
-    overflow: hidden;
+    overflow: visible !important; // Allow badge to float out
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
         0 0 0 2px rgba(map-get(vars.$colors, 'accent', 'base'), 0.3);
     display: flex;
@@ -284,22 +285,27 @@
     gap: 25px;
     flex: 1;
     min-height: 0; // Important for flexbox
+    overflow: visible !important; // Critical for floating badge
 }
 
-// Left side with badge display - ENHANCED VERSION
+// Left side with badge display - ENHANCED 3D VERSION
 .badge-showcase {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px; // Increased width for larger badge
+    width: 300px; // Increased width for larger badge
     flex-shrink: 0;
+    overflow: visible !important; // Allow badge to float out
 
     // Badge container with enhanced 3D effects
     .badge-container {
         width: 100%;
-        height: 260px; // Taller container for bigger badge
+        height: 300px; // BIGGER badge
         position: relative;
         margin-bottom: 20px;
+        perspective: 2000px; // Enhanced perspective for stronger 3D effect
+        z-index: 10; // Ensure badge container is above other elements
+        overflow: visible !important; // Critical for allowing badge to float out
 
         // 3D container with proper perspective
         .badge-3d-container {
@@ -307,49 +313,56 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            perspective: 1000px;
+            perspective: 1500px; // Increased from 1000px
+            transform: translateZ(0); // Base transform
+            overflow: visible !important; // Critical for allowing badge to float out
 
-            // Create a subtle shadow beneath the badge
+            // Create a more dramatic shadow beneath the badge
             &::before {
                 content: '';
                 position: absolute;
-                bottom: -10px;
+                bottom: -15px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 70%;
-                height: 20px;
-                background: rgba(0, 0, 0, 0.3);
-                filter: blur(15px);
+                width: 80%;
+                height: 35px; // Increased height for more pronounced shadow
+                background: rgba(0, 0, 0, 0.5); // Darker shadow
+                filter: blur(25px); // More blur for softer shadow
                 border-radius: 50%;
                 z-index: -1;
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
         }
 
         // Badge image with enhanced size and 3D effect
         .badge-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -10%; // Move up slightly to appear more floating
+            left: -10%; // Shift left slightly for better centering
+            width: 120%; // BIGGER than container
+            height: 120%; // BIGGER than container
             object-fit: contain;
-            transform: translateZ(20px) scale(1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            transform: translateZ(100px) scale(1.3); // More dramatic Z translation
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.7)); // Stronger shadow
             z-index: 5;
+            animation: float-badge 5s ease-in-out infinite alternate; // Enhanced floating animation
 
-            // Hover effect - slight lift
+            // Hover effect - more dramatic lift
             &:hover {
-                transform: translateZ(30px) scale(1.05);
+                transform: translateZ(120px) scale(1.4);
+                filter: drop-shadow(0 35px 45px rgba(0, 0, 0, 0.8));
             }
 
             // Grayscale filter for locked badges
             &.grayscale {
-                filter: grayscale(70%) brightness(0.8) drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
-                transform: translateZ(10px) scale(0.98);
+                filter: grayscale(75%) brightness(0.75) drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
+                transform: translateZ(60px) scale(1.15); // Less dramatic but still 3D
+                animation: float-badge-locked 5s ease-in-out infinite alternate;
 
                 &:hover {
-                    transform: translateZ(15px) scale(1);
+                    transform: translateZ(80px) scale(1.25); // More lift but still locked
+                    filter: grayscale(70%) brightness(0.8) drop-shadow(0 25px 35px rgba(0, 0, 0, 0.6));
                 }
             }
         }
@@ -359,18 +372,19 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) translateZ(40px);
+            transform: translate(-50%, -50%) translateZ(110px); // Increased Z for proper depth
             z-index: 10;
-            width: 60px;
-            height: 60px;
+            width: 80px; // Bigger lock icon
+            height: 80px; // Bigger lock icon
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: float-lock 3s ease-in-out infinite alternate;
 
             i {
-                font-size: 40px;
+                font-size: 55px; // Bigger lock icon
                 color: rgba(255, 255, 255, 0.9);
-                filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+                filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.8));
             }
         }
 
@@ -380,21 +394,21 @@
             bottom: 10px;
             right: 0;
             z-index: 15;
-            transform: translateZ(40px);
+            transform: translateZ(110px); // Ensure it's above the badge
 
             .check-container {
-                width: 40px;
-                height: 40px;
+                width: 50px; // Larger checkmark
+                height: 50px; // Larger checkmark
                 border-radius: 50%;
                 background: #2ECC71;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 
                 i {
                     color: white;
-                    font-size: 22px;
+                    font-size: 28px; // Bigger checkmark icon
                 }
             }
         }
@@ -404,17 +418,17 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
+            transform: translate(-50%, -50%) translateZ(10px);
+            width: 110%; // Slightly larger than the badge
+            height: 110%; // Slightly larger than the badge
             border-radius: 2px;
             opacity: 0;
-            filter: blur(20px);
+            filter: blur(30px);
             transition: all 0.5s ease;
             z-index: 1;
 
             &.active {
-                opacity: 0.5;
+                opacity: 0.7;
                 animation: pulse-glow 3s infinite alternate;
             }
 
@@ -450,67 +464,163 @@
     overflow: hidden; // Prevent scrolling
     text-align: right;
 
-    // Achievement title with type-based styling
-    .achievement-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin: 0 0 15px;
-        line-height: 1.2;
+    // New title row with stars aligned
+    .title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
         position: relative;
-        padding-bottom: 10px;
 
         &::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -8px;
             right: 0;
             width: 80px;
             height: 3px;
             border-radius: 1.5px;
         }
 
+        &.bronze::after {
+            background: #CD7F32;
+        }
+
+        &.silver::after {
+            background: #C0C0C0;
+        }
+
+        &.gold::after {
+            background: map-get(vars.$colors, 'accent', 'base');
+        }
+
+        &.platinum::after {
+            background: #E5E4E2;
+        }
+
+        &.diamond::after {
+            background: #B9F2FF;
+        }
+    }
+
+    // Achievement title with type-based styling
+    .achievement-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+        flex: 1;
+        text-align: right;
+
         &.bronze {
             color: #CD7F32;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-            &::after {
-                background: #CD7F32;
-            }
         }
 
         &.silver {
             color: #C0C0C0;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-            &::after {
-                background: #C0C0C0;
-            }
         }
 
         &.gold {
             color: map-get(vars.$colors, 'accent', 'base');
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-            &::after {
-                background: map-get(vars.$colors, 'accent', 'base');
-            }
         }
 
         &.platinum {
             color: #E5E4E2;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-            &::after {
-                background: #E5E4E2;
-            }
         }
 
         &.diamond {
             color: #B9F2FF;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(185, 242, 255, 0.5);
+        }
+    }
 
-            &::after {
-                background: #B9F2FF;
+    // Points display next to title
+    .title-points-display {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        border-radius: 20px;
+        margin-right: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+
+        // Shimmer effect
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        i {
+            font-size: 1.6rem;
+            animation: starPulse 1.5s infinite alternate;
+        }
+
+        span {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        // Color variations
+        &.bronze {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.7), rgba(205, 127, 50, 0.4));
+
+            i,
+            span {
+                color: #FFE6C7;
+            }
+        }
+
+        &.silver {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.7), rgba(192, 192, 192, 0.4));
+
+            i,
+            span {
+                color: #FFFFFF;
+            }
+        }
+
+        &.gold {
+            background: linear-gradient(135deg,
+                    rgba(map-get(vars.$colors, 'accent', 'dark'), 0.7),
+                    rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
+
+            i,
+            span {
+                color: #FFFACD;
+            }
+        }
+
+        &.platinum {
+            background: linear-gradient(135deg, rgba(229, 228, 226, 0.7), rgba(229, 228, 226, 0.4));
+
+            i,
+            span {
+                color: #FFFFFF;
+            }
+        }
+
+        &.diamond {
+            background: linear-gradient(135deg, rgba(185, 242, 255, 0.7), rgba(185, 242, 255, 0.4));
+
+            i,
+            span {
+                color: #E0FFFF;
             }
         }
     }
@@ -562,7 +672,7 @@
         display: flex;
         align-items: center;
         gap: 15px;
-        padding: 5px 10px;
+        padding: 15px;
         position: relative;
         border-radius: 12px;
 
@@ -664,107 +774,6 @@
                 font-weight: 700;
                 color: white;
                 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-            }
-        }
-
-        // ENHANCED points display (shared & larger)
-        .points-display {
-            height: 50px;
-            min-width: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border-radius: 25px;
-            padding: 0 15px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin-left: auto; // Push to the right
-
-            // 3D effect with inset shadow
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                0 5px 15px rgba(0, 0, 0, 0.2);
-
-            // Dynamic shimmer effect
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg,
-                        transparent,
-                        rgba(255, 255, 255, 0.2),
-                        transparent);
-                animation: shimmer 2s infinite;
-            }
-
-            i {
-                font-size: 1.8rem;
-                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-                animation: starPulse 1.5s infinite alternate;
-            }
-
-            span {
-                font-size: 1.8rem;
-                font-weight: 700;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            }
-
-            // Dynamic styles based on badge type
-            &.bronze {
-                background: linear-gradient(135deg, rgba(205, 127, 50, 0.7), rgba(205, 127, 50, 0.4));
-
-                i,
-                span {
-                    color: #FFE6C7;
-                }
-            }
-
-            &.silver {
-                background: linear-gradient(135deg, rgba(192, 192, 192, 0.7), rgba(192, 192, 192, 0.4));
-
-                i,
-                span {
-                    color: #FFFFFF;
-                }
-            }
-
-            &.gold {
-                background: linear-gradient(135deg,
-                        rgba(map-get(vars.$colors, 'accent', 'dark'), 0.7),
-                        rgba(map-get(vars.$colors, 'accent', 'base'), 0.4));
-
-                i,
-                span {
-                    color: #FFFACD;
-                }
-            }
-
-            &.platinum {
-                background: linear-gradient(135deg, rgba(229, 228, 226, 0.7), rgba(229, 228, 226, 0.4));
-
-                i,
-                span {
-                    color: #FFFFFF;
-                }
-            }
-
-            &.diamond {
-                background: linear-gradient(135deg, rgba(185, 242, 255, 0.7), rgba(185, 242, 255, 0.4));
-
-                i,
-                span {
-                    color: #E0FFFF;
-                }
-            }
-
-            // Hover effect
-            &:hover {
-                transform: translateY(-2px);
-                filter: brightness(1.1);
             }
         }
     }
@@ -901,7 +910,7 @@
     }
 }
 
-// Animation keyframes
+// Enhanced Animation keyframes
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1006,6 +1015,65 @@
     }
 }
 
+// Enhanced 3D badge animations
+@keyframes float-badge {
+    0% {
+        transform: translateZ(100px) rotateY(0deg) scale(1.3);
+    }
+
+    25% {
+        transform: translateZ(110px) rotateY(2deg) rotateX(1deg) scale(1.33);
+    }
+
+    50% {
+        transform: translateZ(120px) rotateY(0deg) rotateX(-1deg) scale(1.36);
+    }
+
+    75% {
+        transform: translateZ(110px) rotateY(-2deg) rotateX(0deg) scale(1.33);
+    }
+
+    100% {
+        transform: translateZ(100px) rotateY(0deg) rotateX(1deg) scale(1.3);
+    }
+}
+
+@keyframes float-badge-locked {
+    0% {
+        transform: translateZ(60px) rotateY(0deg) scale(1.15);
+    }
+
+    25% {
+        transform: translateZ(65px) rotateY(1deg) rotateX(0.5deg) scale(1.17);
+    }
+
+    50% {
+        transform: translateZ(70px) rotateY(0deg) rotateX(-0.5deg) scale(1.19);
+    }
+
+    75% {
+        transform: translateZ(65px) rotateY(-1deg) rotateX(0deg) scale(1.17);
+    }
+
+    100% {
+        transform: translateZ(60px) rotateY(0deg) rotateX(0.5deg) scale(1.15);
+    }
+}
+
+@keyframes float-lock {
+    0% {
+        transform: translate(-50%, -50%) translateZ(110px) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateZ(130px) scale(1.05);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) translateZ(110px) scale(1);
+    }
+}
+
 // Responsive adjustments for smaller screens
 @media (max-width: 850px) {
     .modal-container {
@@ -1025,12 +1093,16 @@
         margin-bottom: 10px;
 
         .badge-container {
-            width: 200px; // Make badge slightly smaller on mobile
-            height: 200px;
+            width: 220px; // Still larger but proportional
+            height: 220px;
             margin: 0 auto 15px; // Center badge
 
+            .badge-image {
+                transform: translateZ(80px) scale(1.25); // Adjusted for mobile
+            }
+
             .lock-overlay i {
-                font-size: 34px;
+                font-size: 45px; // Slightly smaller
             }
         }
     }
@@ -1038,18 +1110,25 @@
     .achievement-details {
         width: 100%;
 
-        .achievement-title {
-            text-align: center;
-            font-size: 1.7rem;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
+        .title-row {
+            flex-direction: column; // Stack title and points on mobile
+            align-items: center;
+            gap: 10px;
 
             &::after {
                 left: 50%;
                 right: auto;
                 transform: translateX(-50%);
-                width: 60px;
             }
+        }
+
+        .achievement-title {
+            text-align: center;
+            font-size: 1.7rem;
+        }
+
+        .title-points-display {
+            margin-right: 0;
         }
 
         .description-scroll {
@@ -1063,7 +1142,7 @@
 
         .achievement-requirement-info,
         .achievement-completion-info {
-            padding: 5px;
+            padding: 10px;
 
             .requirement-badge,
             .completion-badge {
@@ -1087,20 +1166,6 @@
                 .requirement-value,
                 .completion-date {
                     font-size: 1.1rem;
-                }
-            }
-
-            .points-display {
-                height: 40px;
-                min-width: 80px;
-                padding: 0 12px;
-
-                i {
-                    font-size: 1.5rem;
-                }
-
-                span {
-                    font-size: 1.5rem;
                 }
             }
         }
@@ -1137,35 +1202,62 @@
     }
 
     .badge-showcase {
-        width: 38%; // Use percentage for better flexibility
+        width: 40%; // Use percentage for better flexibility
 
         .badge-container {
-            width: 160px; // Smaller badge in landscape
-            height: 160px;
+            width: 180px; // Still larger than original
+            height: 180px;
             margin: 0 auto 10px;
 
+            .badge-image {
+                transform: translateZ(70px) scale(1.25); // Still enhanced in landscape
+
+                &:hover {
+                    transform: translateZ(90px) scale(1.35);
+                }
+
+                &.grayscale {
+                    transform: translateZ(45px) scale(1.15);
+
+                    &:hover {
+                        transform: translateZ(60px) scale(1.25);
+                    }
+                }
+            }
+
             .lock-overlay i {
-                font-size: 30px;
+                font-size: 40px;
             }
 
             .completion-marker .check-container {
-                width: 32px;
-                height: 32px;
+                width: 40px;
+                height: 40px;
 
                 i {
-                    font-size: 18px;
+                    font-size: 24px;
                 }
             }
         }
     }
 
     .achievement-details {
-        width: 62%;
+        width: 60%;
+
+        .title-row {
+            margin-bottom: 20px;
+        }
 
         .achievement-title {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
+            font-size: 1.8rem;
+        }
+
+        .title-points-display {
+            padding: 0px 25px;
+
+            i,
+            span {
+                font-size: 1.4rem;
+            }
         }
 
         .description-scroll {
@@ -1181,15 +1273,15 @@
 
         .achievement-requirement-info,
         .achievement-completion-info {
-            padding: 3px 5px;
+            padding: 0px;
 
             .requirement-badge,
             .completion-badge {
-                width: 36px;
-                height: 36px;
+                width: 40px;
+                height: 40px;
 
                 i {
-                    font-size: 1.2rem;
+                    font-size: 1.4rem;
                 }
             }
 
@@ -1205,20 +1297,6 @@
                 .requirement-value,
                 .completion-date {
                     font-size: 1rem;
-                }
-            }
-
-            .points-display {
-                height: 36px;
-                min-width: 80px;
-                padding: 0 12px;
-
-                i {
-                    font-size: 1.4rem;
-                }
-
-                span {
-                    font-size: 1.4rem;
                 }
             }
         }
@@ -1243,7 +1321,7 @@
         padding: 10px;
 
         .action-button {
-            padding: 6px 15px;
+            padding: 8px 15px;
             font-size: 0.9rem;
             min-width: 100px;
         }
