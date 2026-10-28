@@ -1,0 +1,6 @@
+quran-muaalem==0.2.2
+quran-transcript>=0.6.4
+librosa>=0.11.0
+# للتجربة على الموبايل (export_onnx.py) بس
+onnx>=1.17
+onnxruntime>=1.20

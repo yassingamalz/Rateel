@@ -1,0 +1,7 @@
+.venv/
+onnx_model/
+*.wav
+*.m4a
+*.mp3
+*.ogg
+__pycache__/
