@@ -4,7 +4,7 @@
 
 | # | Punto | Dettaglio | Fonte |
 |---|-------|-----------|-------|
-| OP-01 | Chiave di firma Android nel repository | `rateel-key.keystore`, `android/rateel-key.keystore` e `android/keystore.properties` sono tracciati da git anche se elencati in `.gitignore` (sono stati aggiunti prima della regola). Se il repo è o diventa pubblico, chiunque può firmare build come Rateel. Va tolta dal tracking con `git rm --cached`, e se il repo è stato pubblico va valutato il reset della upload key su Play Console | `git ls-files` sul branch master, 2026-11-19 |
+| OP-01 | Chiave di firma Android nel repository | `rateel-key.keystore`, `android/rateel-key.keystore` e `android/keystore.properties` sono tracciati da git anche se elencati in `.gitignore` (sono stati aggiunti prima della regola). Il repo GitHub è pubblico (API GitHub, `private: false`, 2026-11-19), quindi chiave e password sono già esposte. Va tolta dal tracking con `git rm --cached`, ripulita dalla history, e va chiesto il reset della upload key su Play Console | `git ls-files` su master e API GitHub, 2026-11-19 |
 | OP-02 | Trascrizioni integrali delle chat | Su questo branch ci sono sintesi e link; il testo completo va ricavato dall'export di claude.ai con `tools/claude_export_to_md.py` prima di lasciare la piattaforma | [README](README.md) |
 | OP-03 | Brief non recuperati per intero | I brief di U1.L2 e della serie idghām / lām al-taʿrīf (8 lezioni) e i prompt ChatGPT per U1.L2 sono solo nelle chat. Salvarli dall'export | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011), [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) |
 
