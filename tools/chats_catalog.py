@@ -141,7 +141,7 @@ def main() -> None:
         rows.append(f"| {date} | [{title}]({name}) | {area} | {summary} |")
     (root / "ids.txt").write_text("\n".join(c[0] for c in CHATS) + "\n", encoding="utf-8")
     (root / "INDEX.md").write_text(
-        "# Chat del progetto tajweed\n\n"
+        "# Chat del progetto tajweed\n\nTesto completo di ogni chat in [full/](full/) (stesso UUID nel nome del file). Chat di Claude Design in [design/](design/).\n\n"
         f"{len(CHATS)} chat, dalla più recente. Il link originale è in ogni scheda.\n\n"
         "| Data | Chat | Area | Sintesi |\n|------|------|------|---------|\n"
         + "\n".join(rows) + "\n",

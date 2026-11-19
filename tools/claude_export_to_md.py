@@ -13,6 +13,30 @@ import re
 from pathlib import Path
 
 
+def fence(text: str, lang: str = "") -> str:
+    ticks = "```"
+    while ticks in (text or ""):
+        ticks += "`"
+    return f"{ticks}{lang}\n{text or ''}\n{ticks}"
+
+
+def render_tool_use(block: dict) -> str:
+    name = block.get("name", "")
+    inp = block.get("input") or {}
+    if name == "artifacts" and inp.get("content"):
+        title = inp.get("title") or inp.get("id") or "artifact"
+        lang = inp.get("language") or {"text/markdown": "markdown", "application/vnd.ant.mermaid": "mermaid",
+                                        "application/vnd.ant.react": "jsx", "text/html": "html"}.get(inp.get("type", ""), "")
+        return f"**Artifact: {title}** (`{inp.get('type', '')}`, {inp.get('command', '')})\n\n" + fence(inp["content"], lang)
+    if name == "artifacts" and inp.get("command") == "update":
+        return (f"**Artifact update: {inp.get('id', '')}**\n\nSostituito:\n" + fence(inp.get("old_str", ""))
+                + "\n\ncon:\n" + fence(inp.get("new_str", "")))
+    if name in ("create_file",) and inp.get("file_text"):
+        return f"**File creato: `{inp.get('path', '')}`**\n\n" + fence(inp["file_text"])
+    payload = json.dumps(inp, ensure_ascii=False, indent=2)
+    return f"<details><summary>tool: {name}</summary>\n\n" + fence(payload, "json") + "\n</details>"
+
+
 def message_text(msg: dict) -> str:
     parts = []
     for block in msg.get("content") or []:
@@ -20,21 +44,22 @@ def message_text(msg: dict) -> str:
         if kind == "text" and block.get("text"):
             parts.append(block["text"])
         elif kind == "tool_use":
-            payload = json.dumps(block.get("input", {}), ensure_ascii=False, indent=2)
-            parts.append(f"<details><summary>tool: {block.get('name', '')}</summary>\n\n```json\n{payload}\n```\n</details>")
+            parts.append(render_tool_use(block))
         elif kind == "tool_result":
             inner = block.get("content")
             if isinstance(inner, list):
                 inner = "\n".join(c.get("text", "") for c in inner if isinstance(c, dict))
-            parts.append(f"<details><summary>tool result</summary>\n\n```\n{inner or ''}\n```\n</details>")
+            inner = str(inner or "")
+            if len(inner) > 4000:
+                inner = inner[:4000] + "\n[... troncato ...]"
+            parts.append("<details><summary>risultato tool</summary>\n\n" + fence(inner) + "\n</details>")
     if not parts and msg.get("text"):
         parts.append(msg["text"])
     for att in msg.get("attachments") or []:
         name = att.get("file_name", "allegato")
-        body = att.get("extracted_content")
-        parts.append(f"<details><summary>allegato: {name}</summary>\n\n```\n{body or ''}\n```\n</details>")
+        parts.append(f"<details><summary>allegato: {name}</summary>\n\n" + fence(att.get("extracted_content") or "") + "\n</details>")
     for f in msg.get("files") or []:
-        parts.append(f"_file allegato: {f.get('file_name', '')}_")
+        parts.append(f"_file allegato (non incluso nell'export): {f.get('file_name', '')}_")
     return "\n\n".join(parts).strip()
 
 

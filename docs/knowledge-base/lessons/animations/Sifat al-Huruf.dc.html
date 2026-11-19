@@ -1,0 +1,38 @@
+<!-- Ricostruito dall'export di Claude Design. Template, logica e props del Design Component 'Sifat al-Huruf.dc.html'. -->
+<!-- TEMPLATE -->
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #0a0a0a; }
+  #__dc_root { position: absolute; inset: 0; }
+</style>
+</helmet>
+
+<div style="position:absolute; inset:0; width:0; height:0; overflow:hidden; pointer-events:none;">
+  <x-import component-from-global-scope="Stage" from="./animations.jsx" duration="1" autoplay="false" hint-size="0,0"></x-import>
+</div>
+
+<x-import component="App" from="./sifat-anim.jsx" theme="{{ theme }}" script="{{ script }}" motif="{{ motif }}" hint-size="100%,100%" style="position:absolute; inset:0;"></x-import>
+<!-- LOGIC (JS) -->
+<script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "Emerald",
+      script: this.props.script ?? "Naskh",
+      motif: this.props.motif ?? "Girih",
+    };
+  }
+}
+</script>
+<!-- PROPS (JSON) -->
+<script type="application/json">
+{
+  "$preview": { "width": 1280, "height": 720 },
+  "theme": { "editor": "enum", "default": "Emerald", "options": ["Emerald", "Manuscript", "Royal"], "tsType": "string" },
+  "script": { "editor": "enum", "default": "Naskh", "options": ["Naskh", "Kufi"], "tsType": "string" },
+  "motif": { "editor": "enum", "default": "Girih", "options": ["Girih", "Arabesque", "Minimal"], "tsType": "string" }
+}
+</script>

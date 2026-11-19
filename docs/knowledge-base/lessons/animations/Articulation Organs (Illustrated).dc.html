@@ -1,0 +1,38 @@
+<!-- Ricostruito dall'export di Claude Design. Template, logica e props del Design Component 'Articulation Organs (Illustrated).dc.html'. -->
+<!-- TEMPLATE -->
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #08160f; }
+  #__dc_root { position: absolute; inset: 0; }
+</style>
+</helmet>
+
+<div style="position:absolute; inset:0; width:0; height:0; overflow:hidden; pointer-events:none;">
+  <x-import component-from-global-scope="Stage" from="./animations.jsx" duration="1" autoplay="false" hint-size="0,0"></x-import>
+</div>
+
+<x-import component="App" from="./articulation-photo.jsx" accent="{{ accent }}" script="{{ script }}" motif="{{ motif }}" hint-size="100%,100%" style="position:absolute; inset:0;"></x-import>
+<!-- LOGIC (JS) -->
+<script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? "Gold",
+      script: this.props.script ?? "Naskh",
+      motif: this.props.motif ?? "Girih",
+    };
+  }
+}
+</script>
+<!-- PROPS (JSON) -->
+<script type="application/json">
+{
+  "$preview": { "width": 1280, "height": 720 },
+  "accent": { "editor": "enum", "default": "Gold", "options": ["Gold", "Amber", "Ivory"], "tsType": "string" },
+  "script": { "editor": "enum", "default": "Naskh", "options": ["Naskh", "Kufi"], "tsType": "string" },
+  "motif": { "editor": "enum", "default": "Girih", "options": ["Girih", "Arabesque", "Minimal"], "tsType": "string" }
+}
+</script>

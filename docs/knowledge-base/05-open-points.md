@@ -5,8 +5,8 @@
 | # | Punto | Dettaglio | Fonte |
 |---|-------|-----------|-------|
 | OP-01 | Chiave di firma Android nel repository | `rateel-key.keystore`, `android/rateel-key.keystore` e `android/keystore.properties` sono tracciati da git anche se elencati in `.gitignore` (sono stati aggiunti prima della regola). Il repo GitHub è pubblico (API GitHub, `private: false`, 2026-11-19), quindi chiave e password sono già esposte. Va tolta dal tracking con `git rm --cached`, ripulita dalla history, e va chiesto il reset della upload key su Play Console | `git ls-files` su master e API GitHub, 2026-11-19 |
-| OP-02 | Trascrizioni integrali delle chat | Su questo branch ci sono sintesi e link; il testo completo va ricavato dall'export di claude.ai con `tools/claude_export_to_md.py` prima di lasciare la piattaforma | [README](README.md) |
-| OP-03 | Prompt ancora solo nelle chat | Recuperati e salvati in `lessons/` i brief di U1.L2, U3.L1 e della serie idghām / lām al-taʿrīf. Restano nelle chat: l'adattamento Nano Banana del video introduttivo, i prompt Midjourney della chat Kurzgesagt, il codice di training AI | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011), [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) |
+| OP-02 | Allegati e asset fuori dall'export | Risolto per i testi: le 55 chat sono in `chats/full/`. Restano fuori i file caricati (PDF del libro, screenshot, PNG dei badge, le tre illustrazioni di U1.L2) e i componenti starter di Claude Design: vanno salvati a parte prima di lasciare la piattaforma | [README](README.md), [lessons/animations/README.md](lessons/animations/README.md) |
+| OP-03 | Contenuti da estrarre dalle trascrizioni | Ora sono tutti in `chats/full/`, ma alcuni non hanno ancora un file dedicato: adattamento Nano Banana del video introduttivo, prompt Midjourney della chat Kurzgesagt, codice di training AI, curriculum a 29 unità, testi di marketing, privacy policy | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011), [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) |
 
 ## Curriculum
 
@@ -18,7 +18,7 @@
 | OP-07 | Scalare la produzione dei brief | Come produrre in modo sistematico i brief per ~60 lezioni | memoria del progetto (overview) |
 | OP-24 | Numero delle lettere shamsiyya | Nella serie idghām, U6.L4 scrive "اللام الشمسية (١٣ حرفًا)", mentre U7.L1 e U7.L3 dicono 14. Va corretto prima della produzione | [lessons/BOOK-idgham-lam-tarif.md](lessons/BOOK-idgham-lam-tarif.md) |
 | OP-25 | Formato dei video | Le chat usano sia 16:9 (YouTube, ChatGPT) sia 1080×1920 verticale (intro della serie mushaddada). L'app si usa in orizzontale: va scelto un formato unico | [SERIES-nun-meem-mushaddad.md](lessons/SERIES-nun-meem-mushaddad.md), [U1.L2](lessons/U1.L2-organs-of-articulation.md) |
-| OP-26 | U5.L1 senza brief a 5 scene | Per nūn e mīm mushaddada c'è un piano a 9 micro-video ma non un brief come gli altri | [SERIES-nun-meem-mushaddad.md](lessons/SERIES-nun-meem-mushaddad.md) |
+| OP-26 | U5.L1 senza brief a 5 scene | Per nūn e mīm mushaddada c'è un piano a 9 micro-video e un'animazione di 40 s sulla sola nūn costruita in Claude Design, ma non un brief scritto come gli altri; la mīm non ha ancora un video | [SERIES-nun-meem-mushaddad.md](lessons/SERIES-nun-meem-mushaddad.md) |
 | OP-08 | Revisione religiosa dei contenuti | I testi coranici e le regole Ḥafṣ/Shāṭibiyyah generati con l'AI non risultano rivisti da un docente qualificato | nessuna fonte: non emerge in nessuna chat |
 
 ## Video e design

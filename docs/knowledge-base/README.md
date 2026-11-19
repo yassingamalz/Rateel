@@ -22,18 +22,21 @@ Ogni voce riporta la fonte: il link alla chat da cui viene, o il file di progett
 | [lessons/PRODUCTION-PLAN.md](lessons/PRODUCTION-PLAN.md) | Tutte le 66 lezioni del curriculum con lo stato del brief |
 | [videos/intro-journey-storyboard.md](videos/intro-journey-storyboard.md) | Storyboard e prompt del video introduttivo stile Journey |
 | [chats/INDEX.md](chats/INDEX.md) | Elenco delle 55 chat con data, link e sintesi |
+| [lessons/animations/](lessons/animations/) | Codice delle lezioni animate in Claude Design (noon mushaddada, ṣifāt, organi, idghām) |
 | [lessons/](lessons/) | Brief completi: U1.L2, U3.L1, serie idghām / lām al-taʿrīf (8 lezioni), piano della serie nūn e mīm mushaddada |
 | [sources/](sources/) | Documenti di progetto copiati da claude.ai |
 
 ## Trascrizioni complete delle chat
 
-Lo strumento con cui ho letto le chat restituisce pochi turni per volta e tronca i messaggi lunghi (molte chat contengono file SCSS/TS interi), quindi in `chats/` c'è una scheda per chat con sintesi e link, non il testo integrale.
+Dall'export di claude.ai del 19/11/2026: le 55 chat del progetto sono in [chats/full/](chats/full/), un file per chat con tutti i messaggi, gli artefatti e il testo estratto degli allegati (le immagini e i file caricati non sono nell'export). Le due chat di Claude Design in cui sono state costruite le lezioni animate sono in [chats/design/](chats/design/), e i file ricostruiti in [lessons/animations/](lessons/animations/).
 
-Per avere il testo completo di tutte le chat:
+### Come rigenerarle
+
+Da un nuovo export:
 
 1. claude.ai → Settings → Privacy → Export data. Arriva una mail con uno zip.
 2. Estrai `conversations.json`.
 3. Lancia `python3 tools/claude_export_to_md.py conversations.json docs/knowledge-base/chats/full --ids docs/knowledge-base/chats/ids.txt` (il file `ids.txt` contiene gli UUID delle 55 chat del progetto)
 4. Lo script crea un file MD per ogni chat del progetto, con tutti i messaggi in ordine.
 
-Lo script è in `tools/claude_export_to_md.py` su questo branch.
+Per le chat di Claude Design: `python3 tools/design_export_to_md.py <design_chats> docs/knowledge-base/chats/design docs/knowledge-base/lessons/animations --project "Animation for non-Mushdada taskeel"`.

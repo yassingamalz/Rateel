@@ -1,5 +1,7 @@
 # Chat del progetto tajweed
 
+Testo completo di ogni chat in [full/](full/) (stesso UUID nel nome del file). Chat di Claude Design in [design/](design/).
+
 55 chat, dalla più recente. Il link originale è in ogni scheda.
 
 | Data | Chat | Area | Sintesi |
