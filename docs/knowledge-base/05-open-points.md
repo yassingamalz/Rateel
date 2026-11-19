@@ -6,7 +6,7 @@
 |---|-------|-----------|-------|
 | OP-01 | Chiave di firma Android nel repository | `rateel-key.keystore`, `android/rateel-key.keystore` e `android/keystore.properties` sono tracciati da git anche se elencati in `.gitignore` (sono stati aggiunti prima della regola). Il repo GitHub è pubblico (API GitHub, `private: false`, 2026-11-19), quindi chiave e password sono già esposte. Va tolta dal tracking con `git rm --cached`, ripulita dalla history, e va chiesto il reset della upload key su Play Console | `git ls-files` su master e API GitHub, 2026-11-19 |
 | OP-02 | Trascrizioni integrali delle chat | Su questo branch ci sono sintesi e link; il testo completo va ricavato dall'export di claude.ai con `tools/claude_export_to_md.py` prima di lasciare la piattaforma | [README](README.md) |
-| OP-03 | Brief non recuperati per intero | I brief di U1.L2 e della serie idghām / lām al-taʿrīf (8 lezioni) e i prompt ChatGPT per U1.L2 sono solo nelle chat. Salvarli dall'export | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011), [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) |
+| OP-03 | Prompt ancora solo nelle chat | Recuperati e salvati in `lessons/` i brief di U1.L2, U3.L1 e della serie idghām / lām al-taʿrīf. Restano nelle chat: l'adattamento Nano Banana del video introduttivo, i prompt Midjourney della chat Kurzgesagt, il codice di training AI | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011), [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) |
 
 ## Curriculum
 
@@ -16,6 +16,9 @@
 | OP-05 | Quale struttura è quella ufficiale | Esistono tre schemi: 13 unità / ~60 lezioni dal libro, 12 corsi per argomento, e la fusione a 3 livelli con 29 unità. Nessuna chat dice quale entra nell'app | [06-curriculum.md](06-curriculum.md) |
 | OP-06 | Granularità | Claude ha diviso makhārij e madd in una lezione per punto; ha chiesto se tenerle più grosse o più fini. Nessuna risposta | [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011) turno 1 |
 | OP-07 | Scalare la produzione dei brief | Come produrre in modo sistematico i brief per ~60 lezioni | memoria del progetto (overview) |
+| OP-24 | Numero delle lettere shamsiyya | Nella serie idghām, U6.L4 scrive "اللام الشمسية (١٣ حرفًا)", mentre U7.L1 e U7.L3 dicono 14. Va corretto prima della produzione | [lessons/BOOK-idgham-lam-tarif.md](lessons/BOOK-idgham-lam-tarif.md) |
+| OP-25 | Formato dei video | Le chat usano sia 16:9 (YouTube, ChatGPT) sia 1080×1920 verticale (intro della serie mushaddada). L'app si usa in orizzontale: va scelto un formato unico | [SERIES-nun-meem-mushaddad.md](lessons/SERIES-nun-meem-mushaddad.md), [U1.L2](lessons/U1.L2-organs-of-articulation.md) |
+| OP-26 | U5.L1 senza brief a 5 scene | Per nūn e mīm mushaddada c'è un piano a 9 micro-video ma non un brief come gli altri | [SERIES-nun-meem-mushaddad.md](lessons/SERIES-nun-meem-mushaddad.md) |
 | OP-08 | Revisione religiosa dei contenuti | I testi coranici e le regole Ḥafṣ/Shāṭibiyyah generati con l'AI non risultano rivisti da un docente qualificato | nessuna fonte: non emerge in nessuna chat |
 
 ## Video e design

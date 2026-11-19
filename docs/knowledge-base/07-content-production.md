@@ -1,5 +1,7 @@
 # 07. Produzione dei contenuti
 
+Brief completi in [lessons/](lessons/), stile in [11-video-style-guide.md](11-video-style-guide.md), stato di tutte le lezioni in [lessons/PRODUCTION-PLAN.md](lessons/PRODUCTION-PLAN.md).
+
 ## Formato del brief di lezione
 
 Fonte principale: brief [U3.L1](lessons/U3.L1-sifat-overview.md), dalla chat [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea6-4dad2173b011) turno 5.

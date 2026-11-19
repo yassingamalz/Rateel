@@ -32,7 +32,7 @@ Livelli → corsi → unità → lezioni. Tipi di lezione: video, lettura (readi
 
 - App Android passata in closed testing su Google Play (marzo 2025); la produzione pubblica non risulta confermata in nessuna chat.
 - Modulo gamification completo nella UI con dati mock (aprile 2025).
-- Curriculum definito: 13 unità / ~60 micro-lezioni dal libro *Al-Tajwīd Al-Muṣawwar*, più uno schema a 3 livelli e 29 unità (giugno–luglio 2026).
+- Curriculum definito: 13 unità / 66 micro-lezioni dal libro *Al-Tajwīd Al-Muṣawwar*, più uno schema a 3 livelli e 29 unità (giugno–luglio 2026).
 - Brief video pronti per U1.L2, U3.L1 e per le unità U6–U7 (idghām, lām al-taʿrīf) dalla numerazione del libro.
 - Video introduttivo in stile *Journey*: primo frame generato, il resto da fare.
 - Riconoscimento automatico del tajweed: solo roadmap e codice di training proposto, niente in produzione.

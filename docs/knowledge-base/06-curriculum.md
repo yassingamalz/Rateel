@@ -126,7 +126,7 @@ Fonte: [Lesson structure planning](https://claude.ai/chat/2582fa56-c9fa-4caf-9ea
 
 ## B. Serie idghām / lām al-taʿrīf (pp. stampate 229–254)
 
-Fonte: [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba) (sintesi della chat; il testo dei brief non è stato recuperato, vedi OP-03).
+Fonte: [Structured lesson for pages 231-256](https://claude.ai/chat/56987cb3-59a5-42aa-8bf7-f59da44422ba). Brief completi in [lessons/BOOK-idgham-lam-tarif.md](lessons/BOOK-idgham-lam-tarif.md). Stato di tutte le lezioni in [lessons/PRODUCTION-PLAN.md](lessons/PRODUCTION-PLAN.md).
 
 - Unità chiamata "U6" in quella chat, 5 lezioni: idghām e i quattro stati di due lettere che si incontrano (mutamāthilān, mutajānisān, mutaqāribān, mutabāʿidān). Motivo visivo: "Fusion".
 - Unità chiamata "U7", 3 lezioni: lām al-taʿrīf qamariyya e shamsiyya. Motivo visivo: luna e sole.

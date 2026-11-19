@@ -18,8 +18,11 @@ Ogni voce riporta la fonte: il link alla chat da cui viene, o il file di progett
 | [08-ai-recognition.md](08-ai-recognition.md) | Sintesi della strategia di riconoscimento automatico del tajweed |
 | [09-app-engineering-log.md](09-app-engineering-log.md) | Storico del lavoro sul codice Angular, componente per componente |
 | [10-marketing-publishing.md](10-marketing-publishing.md) | Play Store, privacy policy, presentazione, sito Academy |
+| [11-video-style-guide.md](11-video-style-guide.md) | Stile dei video: cosa vuole Yassin, principi di animazione, pipeline |
+| [lessons/PRODUCTION-PLAN.md](lessons/PRODUCTION-PLAN.md) | Tutte le 66 lezioni del curriculum con lo stato del brief |
+| [videos/intro-journey-storyboard.md](videos/intro-journey-storyboard.md) | Storyboard e prompt del video introduttivo stile Journey |
 | [chats/INDEX.md](chats/INDEX.md) | Elenco delle 55 chat con data, link e sintesi |
-| [lessons/](lessons/) | Brief di produzione delle lezioni recuperati dalle chat |
+| [lessons/](lessons/) | Brief completi: U1.L2, U3.L1, serie idghām / lām al-taʿrīf (8 lezioni), piano della serie nūn e mīm mushaddada |
 | [sources/](sources/) | Documenti di progetto copiati da claude.ai |
 
 ## Trascrizioni complete delle chat
