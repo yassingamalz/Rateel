@@ -4,6 +4,8 @@ Questa cartella raccoglie tutto quello che è stato deciso, pensato e lasciato a
 
 Ogni voce riporta la fonte: il link alla chat da cui viene, o il file di progetto. Dove una cosa è stata proposta da Claude e non confermata da Yassin, è scritto "proposta" e non "decisione".
 
+Stato della migrazione, cosa manca e cosa chiedere: [MIGRATION-STATUS.md](MIGRATION-STATUS.md).
+
 ## File
 
 | File | Contenuto |
