@@ -13,7 +13,11 @@ class RateelColors {
   static const panelBottom = Color(0xFF00281C);
 
   /// 4 px light bevel on the left edge of the rail / panel.
-  static const edgeBevel = [Color(0xFF1B4E37), Color(0xFF295F45), Color(0xFF134732)];
+  static const edgeBevel = [
+    Color(0xFF1B4E37),
+    Color(0xFF295F45),
+    Color(0xFF134732),
+  ];
 
   // Gold
   static const gold = Color(0xFFF2B623);
@@ -22,9 +26,11 @@ class RateelColors {
   static const goldEdge = Color(0xFFDAA42A);
   static const amber = Color(0xFFE2A51E); // count bubbles, active disc
   static const amberPill = Color(0xFFEDB120); // count pills in the open menu
-  static const ringLine = Color(0xFF9B822C);
+  static const ringLine = Color(0xFFD8C35A);
   static const goldTintRow = Color(0xFF3B4C1F); // selected row fill (flat)
-  static const iconDisc = Color(0xFF1E361B); // disc behind the selected menu icon
+  static const iconDisc = Color(
+    0xFF1E361B,
+  ); // disc behind the selected menu icon
   static const iconRing = Color(0xFFECBE3B);
 
   // Glass (outline-only on the dark panel)
@@ -44,7 +50,11 @@ class RateelColors {
 }
 
 /// Text in Readex Pro (variable font): the closest match to the ChatGPT titles.
-TextStyle readex(double size, {double weight = 500, Color color = RateelColors.cream}) {
+TextStyle readex(
+  double size, {
+  double weight = 500,
+  Color color = RateelColors.cream,
+}) {
   return TextStyle(
     fontFamily: 'ReadexPro',
     fontSize: size,
@@ -59,11 +69,11 @@ TextStyle readex(double size, {double weight = 500, Color color = RateelColors.c
 final themeMode = ValueNotifier<ThemeMode>(ThemeMode.dark);
 
 ThemeData rateelDarkTheme() => ThemeData(
-      brightness: Brightness.dark,
-      fontFamily: 'ReadexPro',
-      scaffoldBackgroundColor: RateelColors.bgBottom,
-      colorScheme: const ColorScheme.dark(
-        primary: RateelColors.gold,
-        surface: RateelColors.bgBottom,
-      ),
-    );
+  brightness: Brightness.dark,
+  fontFamily: 'ReadexPro',
+  scaffoldBackgroundColor: RateelColors.bgBottom,
+  colorScheme: const ColorScheme.dark(
+    primary: RateelColors.gold,
+    surface: RateelColors.bgBottom,
+  ),
+);

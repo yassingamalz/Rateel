@@ -25,7 +25,8 @@ class SideNavScaffold extends StatefulWidget {
   State<SideNavScaffold> createState() => _SideNavScaffoldState();
 }
 
-class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderStateMixin {
+class _SideNavScaffoldState extends State<SideNavScaffold>
+    with TickerProviderStateMixin {
   late final AnimationController _open = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 420),
@@ -37,10 +38,14 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
   int _selected = 0;
   double _selectFrom = 0;
 
-  bool get _isOpen => _open.value > 0.5 || _open.status == AnimationStatus.forward;
+  bool get _isOpen =>
+      _open.value > 0.5 || _open.status == AnimationStatus.forward;
 
-  double get _active =>
-      lerpDouble(_selectFrom, _selected.toDouble(), Curves.easeInOutCubic.transform(_select.value))!;
+  double get _active => lerpDouble(
+    _selectFrom,
+    _selected.toDouble(),
+    Curves.easeInOutCubic.transform(_select.value),
+  )!;
 
   @override
   void dispose() {
@@ -75,40 +80,44 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop && _isOpen) _close();
       },
-      child: LayoutBuilder(builder: (context, box) {
-        final g = _Geometry(box.maxWidth, box.maxHeight);
-        return AnimatedBuilder(
-          animation: Listenable.merge([_open, _select]),
-          builder: (context, _) {
-            final t = Curves.easeInOutCubic.transform(_open.value);
-            return Stack(
-              fit: StackFit.expand,
-              children: [
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                  right: g.railWidth,
-                  child: IgnorePointer(
-                    ignoring: t > 0,
-                    child: widget.builder(context, _selected),
-                  ),
-                ),
-                // The reference has no dimming; the owner approved a light one
-                // (kept subtle, see DECISIONS.md).
-                if (t > 0)
-                  Positioned.fill(
-                    child: GestureDetector(
-                      onTap: _close,
-                      child: ColoredBox(color: Colors.black.withValues(alpha: 0.12 * t)),
+      child: LayoutBuilder(
+        builder: (context, box) {
+          final g = _Geometry(box.maxWidth, box.maxHeight);
+          return AnimatedBuilder(
+            animation: Listenable.merge([_open, _select]),
+            builder: (context, _) {
+              final t = Curves.easeInOutCubic.transform(_open.value);
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: g.railWidth,
+                    child: IgnorePointer(
+                      ignoring: t > 0,
+                      child: widget.builder(context, _selected),
                     ),
                   ),
-                ..._panel(g, t),
-              ],
-            );
-          },
-        );
-      }),
+                  // The reference has no dimming; the owner approved a light one
+                  // (kept subtle, see DECISIONS.md).
+                  if (t > 0)
+                    Positioned.fill(
+                      child: GestureDetector(
+                        onTap: _close,
+                        child: ColoredBox(
+                          color: Colors.black.withValues(alpha: 0.12 * t),
+                        ),
+                      ),
+                    ),
+                  ..._panel(g, t),
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -137,11 +146,14 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
       // Thin gold arch above the rows (open state only).
       if (t > 0)
         Positioned(
-          left: g.panelLeft + g.u * 39.9 - g.u * 20.5 + (1 - t) * g.u * 6,
-          top: g.u * 3.6,
-          width: g.u * 41,
+          left: g.panelLeft + g.u * 39.3 - g.u * 23 + (1 - t) * g.u * 6,
+          top: g.u * 3.3,
+          width: g.u * 46,
           child: IgnorePointer(
-            child: Opacity(opacity: _late(t), child: Image.asset('assets/ui/decor/arch.png')),
+            child: Opacity(
+              opacity: _late(t),
+              child: const Image(image: AssetImage('assets/ui/decor/arch.png')),
+            ),
           ),
         ),
       ..._filigree(g, t, active),
@@ -162,29 +174,36 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
   /// Filigree end caps, half hidden behind both ends of the selected row.
   List<Widget> _filigree(_Geometry g, double t, double active) {
     if (t == 0) return const [];
-    final row = g.selectedRect(active);
-    final h = g.u * 11.1;
-    final w = h * 296 / 500;
-    Widget cap(double cx, bool mirror) => Positioned(
-          left: cx - w / 2,
-          top: row.center.dy - h / 2,
-          width: w,
-          height: h,
-          child: IgnorePointer(
-            child: Opacity(
-              opacity: _late(t),
-              child: Transform.flip(flipX: mirror, child: Image.asset('assets/ui/decor/filigree.png')),
-            ),
-          ),
-        );
-    return [cap(row.left - g.u * 1.8, false), cap(row.right + g.u * 1.8, true)];
+    final o = ((t - 0.85) / 0.15).clamp(0.0, 1.0);
+    if (o == 0) return const [];
+    // Filled caps from the owner (row_end_caps_pair.png): the flat side sits
+    // just behind the row rim, the scalloped side points outward.
+    final row = Rect.lerp(g.tileRectAt(active), g.selectedRect(active), t)!;
+    final h = g.u * 10.4;
+    final w = h * 267 / 442;
+    Widget cap(double left, String asset) => Positioned(
+      left: left,
+      top: row.center.dy - h / 2,
+      width: w,
+      height: h,
+      child: IgnorePointer(
+        child: Opacity(
+          opacity: o,
+          child: Image(image: AssetImage(asset), fit: BoxFit.fill),
+        ),
+      ),
+    );
+    return [
+      cap(row.left - w + g.u * 0.6, 'assets/ui/decor/cap_left.png'),
+      cap(row.right - g.u * 0.6, 'assets/ui/decor/cap_right.png'),
+    ];
   }
 
   /// Tile (closed) that morphs into the row (open).
   Widget _item(_Geometry g, double t, int i, double active) {
     final row = g.rowRect(i);
     final rect = Rect.lerp(g.tileRect(i), row, t)!;
-    final radius = lerpDouble(g.u * 2.6, g.u * 3.6, t)!;
+    final radius = lerpDouble(g.u * 3.0, g.u * 4.1, t)!;
     final activeness = (1 - (active - i).abs()).clamp(0.0, 1.0);
     // The active rail item has no tile, only the gold disc; the selected row
     // draws its own capsule.
@@ -204,8 +223,14 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(radius),
-                    color: Colors.white.withValues(alpha: 0.012),
-                    border: Border.all(color: Color.lerp(RateelColors.tileRim, RateelColors.rowRim, t)!, width: 2),
+                    border: Border.all(
+                      color: Color.lerp(
+                        RateelColors.tileRim,
+                        RateelColors.rowRim,
+                        t,
+                      )!,
+                      width: 2,
+                    ),
                   ),
                 ),
               ),
@@ -221,7 +246,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
                     child: Text(
                       navItems[i].label,
                       textDirection: TextDirection.rtl,
-                      style: readex(g.u * 4.0, weight: 400, color: RateelColors.label),
+                      style: readex(
+                        g.u * 4.0,
+                        weight: 340,
+                        color: RateelColors.label,
+                      ),
                     ),
                   ),
                 ),
@@ -231,7 +260,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
                 top: rect.height / 2 - g.u * 2.1,
                 child: Opacity(
                   opacity: label,
-                  child: Container(width: 2, height: g.u * 4.2, color: RateelColors.divider),
+                  child: Container(
+                    width: 2,
+                    height: g.u * 4.2,
+                    color: RateelColors.divider,
+                  ),
                 ),
               ),
             ],
@@ -244,7 +277,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
   Widget _selectedRow(_Geometry g, double t, double active) {
     if (t == 0) return const SizedBox.shrink();
     final rect = Rect.lerp(g.tileRectAt(active), g.selectedRect(active), t)!;
-    final radius = lerpDouble(g.u * 2.6, g.u * 3.9, t)!;
+    final radius = lerpDouble(g.u * 3.0, g.u * 4.4, t)!;
     return Positioned.fromRect(
       rect: rect,
       child: IgnorePointer(
@@ -254,16 +287,19 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(radius),
               color: RateelColors.goldTintRow,
-              border: Border.all(color: RateelColors.goldEdge, width: 2.5),
+              border: Border.all(color: RateelColors.goldEdge, width: 1.2),
               boxShadow: [
-                BoxShadow(color: RateelColors.gold.withValues(alpha: 0.30), blurRadius: g.u * 2),
+                BoxShadow(
+                  color: RateelColors.gold.withValues(alpha: 0.15),
+                  blurRadius: g.u * 2,
+                ),
               ],
             ),
             // 1 px light-gold highlight inside the rim (top and bottom edges).
             child: DecoratedBox(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radius - 2.5),
-                border: Border.all(color: RateelColors.goldHighlight.withValues(alpha: 0.85), width: 1),
+                borderRadius: BorderRadius.circular(radius - 1.2),
+                border: Border.all(color: RateelColors.goldHighlight, width: 1),
               ),
             ),
           ),
@@ -275,7 +311,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
   /// Gold disc of the active item: flat amber in the rail, dark disc with a
   /// gold ring in the menu.
   Widget _activeBadge(_Geometry g, double t, double active) {
-    final center = Offset.lerp(g.railCenter(active), g.rowIconCenter(active), t)!;
+    final center = Offset.lerp(
+      g.railCenter(active),
+      g.rowIconCenter(active),
+      t,
+    )!;
     final inner = lerpDouble(g.u * 8.5, g.u * 8.9, t)!;
     final ring = lerpDouble(g.u * 12.3, g.u * 8.9, t)!;
     return Positioned(
@@ -292,10 +332,20 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: RateelColors.gold.withValues(alpha: 0.05),
-                  border: Border.all(color: RateelColors.ringLine, width: 1),
+                  // Inner glow: the gap brightens toward the ring (#415423 → #73772C).
+                  gradient: RadialGradient(
+                    stops: const [0.6, 1],
+                    colors: [
+                      RateelColors.gold.withValues(alpha: 0.12),
+                      RateelColors.gold.withValues(alpha: 0.30),
+                    ],
+                  ),
+                  border: Border.all(color: RateelColors.ringLine, width: 1.7),
                   boxShadow: [
-                    BoxShadow(color: RateelColors.gold.withValues(alpha: 0.18), blurRadius: g.u * 2),
+                    BoxShadow(
+                      color: RateelColors.gold.withValues(alpha: 0.28),
+                      blurRadius: g.u * 2.4,
+                    ),
                   ],
                 ),
               ),
@@ -306,11 +356,16 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color.lerp(RateelColors.amber, RateelColors.iconDisc, t),
-                border: Border.all(color: RateelColors.iconRing, width: lerpDouble(0, 2, t)!),
+                border: Border.all(
+                  color: RateelColors.iconRing,
+                  width: lerpDouble(0, 2, t)!,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: RateelColors.gold.withValues(alpha: lerpDouble(0.35, 0.0, t)!),
-                    blurRadius: g.u * 1.6,
+                    color: RateelColors.gold.withValues(
+                      alpha: lerpDouble(0.15, 0.0, t)!,
+                    ),
+                    blurRadius: g.u * 1.2,
                   ),
                 ],
               ),
@@ -323,10 +378,20 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
 
   Widget _icon(_Geometry g, double t, int i, double active) {
     final activeness = (1 - (active - i).abs()).clamp(0.0, 1.0);
-    final railC = g.railCenter(i.toDouble()) + Offset(g.u * 0.95, g.u * 0.5) * (1 - activeness);
+    final railC =
+        g.railCenter(i.toDouble()) +
+        Offset(g.u * 0.95, g.u * 0.5) * (1 - activeness);
     final c = Offset.lerp(railC, g.rowIconCenter(i.toDouble()), t)!;
-    final size = lerpDouble(g.u * 6.8, lerpDouble(g.u * 6.9, g.u * 7.8, activeness)!, t)!;
-    final activeColor = Color.lerp(RateelColors.activeGlyph, RateelColors.gold, t)!;
+    final size = lerpDouble(
+      g.u * 6.8,
+      lerpDouble(g.u * 6.9, g.u * 7.8, activeness)!,
+      t,
+    )!;
+    final activeColor = Color.lerp(
+      RateelColors.activeGlyph,
+      RateelColors.gold,
+      t,
+    )!;
     final idle = Color.lerp(RateelColors.cream, RateelColors.iconCream, t)!;
     final color = Color.lerp(idle, activeColor, activeness)!;
     return Positioned(
@@ -374,8 +439,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
           ),
           child: Text(
             '${item.count}',
-            style: readex(lerpDouble(g.u * 2.75, g.u * 2.85, t)!, weight: 700, color: RateelColors.countText)
-                .copyWith(height: 1),
+            style: readex(
+              lerpDouble(g.u * 2.75, g.u * 2.85, t)!,
+              weight: 700,
+              color: RateelColors.countText,
+            ).copyWith(height: 1),
           ),
         ),
       ),
@@ -384,9 +452,16 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
 
   /// Rounded-square menu tile (closed) that becomes the round gold close button.
   Widget _menuButton(_Geometry g, double t) {
-    final from = Rect.fromCenter(center: Offset(g.railCenterX, g.u * 6.55), width: g.u * 8.55, height: g.u * 7.4);
+    final from = Rect.fromCenter(
+      center: Offset(g.railCenterX, g.u * 6.55),
+      width: g.u * 8.55,
+      height: g.u * 8.1,
+    );
     final to = Rect.fromCenter(
-        center: Offset(g.panelLeft + g.u * 9.6, g.u * 6.45), width: g.u * 8.2, height: g.u * 8.2);
+      center: Offset(g.panelLeft + g.u * 9.6, g.u * 6.45),
+      width: g.u * 8.2,
+      height: g.u * 8.2,
+    );
     final rect = Rect.lerp(from, to, t)!;
     return Positioned.fromRect(
       rect: rect,
@@ -397,14 +472,24 @@ class _SideNavScaffoldState extends State<SideNavScaffold> with TickerProviderSt
           onTap: _toggle,
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(lerpDouble(g.u * 2.4, rect.width / 2, t)!),
-              color: Colors.white.withValues(alpha: lerpDouble(0.025, 0.012, t)!),
+              borderRadius: BorderRadius.circular(
+                lerpDouble(g.u * 2.4, rect.width / 2, t)!,
+              ),
+              color: Colors.white.withValues(
+                alpha: lerpDouble(0.025, 0.012, t)!,
+              ),
               border: Border.all(
-                color: Color.lerp(RateelColors.menuTileRim, RateelColors.goldRim, t)!,
+                color: Color.lerp(
+                  RateelColors.menuTileRim,
+                  RateelColors.goldRim,
+                  t,
+                )!,
                 width: lerpDouble(2, 3, t)!,
               ),
             ),
-            child: CustomPaint(painter: _MenuCloseGlyph(t: t, u: g.u)),
+            child: CustomPaint(
+              painter: _MenuCloseGlyph(t: t, u: g.u),
+            ),
           ),
         ),
       ),
@@ -438,30 +523,33 @@ class _PanelBackground extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: [0, 0.45, 1],
-              colors: [RateelColors.panelTop, RateelColors.panelMid, RateelColors.panelBottom],
+              colors: [
+                RateelColors.panelTop,
+                RateelColors.panelMid,
+                RateelColors.panelBottom,
+              ],
             ),
           ),
         ),
-        // Geometric pattern strip along the bottom (open state).
+        // Star band along the bottom (owner's star_band.png), faint, fading
+        // in from the top as in the reference.
         if (t > 0)
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0,
-            height: g.u * 11,
+            bottom: g.u * 0.3,
+            height: g.u * 8.3,
             child: Opacity(
-              opacity: ((t - 0.4) / 0.6).clamp(0.0, 1.0),
+              opacity: 0.30 * ((t - 0.4) / 0.6).clamp(0.0, 1.0),
               child: ClipRect(
                 child: OverflowBox(
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.centerLeft,
                   maxWidth: double.infinity,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      for (var k = 0; k < 4; k++)
-                        SvgPicture.asset('assets/ui/decor/bottom_pattern.svg',
-                            height: g.u * 11, width: g.u * 11 * 256 / 96),
-                    ],
+                  child: Image.asset(
+                    'assets/ui/decor/star_band.png',
+                    height: g.u * 8.3,
+                    width: g.u * 8.3 * 2062 / 166,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
@@ -495,7 +583,7 @@ class _MenuCloseGlyph extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
-    final stroke = lerpDouble(u * 0.59, u * 0.56, t)!;
+    final stroke = lerpDouble(u * 0.59, u * 0.56, t)! + 0.8;
     final paint = Paint()
       ..color = Color.lerp(RateelColors.hamburger, RateelColors.closeWhite, t)!
       ..strokeWidth = stroke
@@ -545,17 +633,27 @@ class _Geometry {
   Offset railCenter(double i) => Offset(railCenterX, railY(i));
   Offset rowIconCenter(double i) => Offset(w - u * 14.15, rowY(i));
 
-  Rect tileRectAt(double i) => Rect.fromCenter(center: railCenter(i), width: u * 12.3, height: u * 11.1);
+  Rect tileRectAt(double i) =>
+      Rect.fromCenter(center: railCenter(i), width: u * 12.3, height: u * 11.1);
   Rect tileRect(int i) => tileRectAt(i.toDouble());
 
-  Rect rowRectAt(double i) =>
-      Rect.fromLTRB(panelLeft + u * 8.1, rowY(i) - u * 5.15, w - u * 5.85, rowY(i) + u * 5.15);
+  Rect rowRectAt(double i) => Rect.fromLTRB(
+    panelLeft + u * 8.1,
+    rowY(i) - u * 5.15,
+    w - u * 5.85,
+    rowY(i) + u * 5.15,
+  );
   Rect rowRect(int i) => rowRectAt(i.toDouble());
 
   /// The selected row is taller (99 px vs 88 px) and slightly wider on the left.
   Rect selectedRect(double i) {
     final r = rowRectAt(i);
-    return Rect.fromLTRB(r.left - u * 0.45, r.top - u * 0.65, r.right, r.bottom + u * 0.65);
+    return Rect.fromLTRB(
+      r.left - u * 0.45,
+      r.top - u * 0.65,
+      r.right,
+      r.bottom + u * 0.65,
+    );
   }
 
   double get labelRight => w - u * 23.6;

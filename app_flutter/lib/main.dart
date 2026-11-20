@@ -34,7 +34,8 @@ class RateelApp extends StatelessWidget {
         darkTheme: rateelDarkTheme(),
         themeMode: mode,
         locale: const Locale('ar'),
-        builder: (context, child) => Directionality(textDirection: TextDirection.rtl, child: child!),
+        builder: (context, child) =>
+            Directionality(textDirection: TextDirection.rtl, child: child!),
         home: Scaffold(
           body: SideNavScaffold(
             builder: (context, selected) => SectionPlaceholder(index: selected),

@@ -17,5 +17,9 @@ const navItems = <NavItem>[
   NavItem(label: 'التدريب', icon: 'assets/ui/nav/training.svg', count: 2),
   NavItem(label: 'المتصدرين', icon: 'assets/ui/nav/leaderboard.svg', count: 15),
   NavItem(label: 'الإنجازات', icon: 'assets/ui/nav/achievements.svg', count: 5),
-  NavItem(label: 'الشهادات', icon: 'assets/ui/nav/certificates_two_tone.svg', count: 3),
+  NavItem(
+    label: 'الشهادات',
+    icon: 'assets/ui/nav/certificates_two_tone.svg',
+    count: 3,
+  ),
 ];
