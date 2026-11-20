@@ -33,8 +33,20 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
      **sections/chapters**. No fake taps or buttons inside a video. In the app the player
      pauses at section ends and the app shows the interaction; on YouTube the sections become
      chapters.
-7. **Work on the branch `lesson-production`.** Commit and push all production material there.
-8. **Communicate with the owner in Italian.** Write documentation and rules in English.
+7. **Two official UI/UX design lines, both kept on GitHub** (`docs/design/`):
+   - **Glassy / liquid 3D gamified**: the style of the **first wave**. Replicate it **one to
+     one**, exactly as designed with ChatGPT.
+   - **Flat**: kept as the second, alternative guideline for the future.
+   Design sources are in Google Drive «Tajweed → app → new».
+8. **Ask before any visual decision.** Before implementing anything visual (screens, components,
+   styles, animations), **show the owner a mockup or explain the visual plan and get explicit
+   confirmation**. No visual work starts without a "yes".
+9. **Never invent assets or graphic elements.** Claude cannot create real assets/illustrations.
+   If an element is missing, **ask the owner** for it (to be produced with ChatGPT / Google Flow)
+   and provide the prompts. Do not substitute with self-made drawings, CSS art or placeholders
+   presented as final.
+10. **Work on the branch `lesson-production`.** Commit and push all production material there.
+11. **Communicate with the owner in Italian.** Write documentation and rules in English.
 
 ---
 

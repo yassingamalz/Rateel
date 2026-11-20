@@ -10,6 +10,7 @@ Documento di passaggio tra sessioni. Leggerlo per primo.
 |---|---|---|
 | Asset grafici, batch 2 | ✅ Importati 9 su 11 | Scartati 2 (personaggio con volto) |
 | Asset grafici, batch 3 | ✅ Importati 3 su 3 | **Set di asset completo** |
+| **Design UI/UX (ChatGPT)** | ⏳ File da ricevere | Due linee: **glassy/liquid 3D gamified** (prima wave, da replicare 1:1) e **flat** (futuro). Destinazione: `docs/design/` |
 | **Voce della narrazione** | ⏳ In fase di scelta | Campioni in `voices/samples/` (01–15), provino unico in `voices/rateel-provino-voci.mp3`, nomi in `voices/elenco-voci.txt` |
 | Asset grafici, batch 1 | ✅ Importati | 50 asset WebP in `src/assets/images/guided/`, stato in `ASSET-CATALOGO.md` |
 | Lezione 1 (prototipo) | ✅ Funzionante | Motore «guided» in `src/app/features/lessons/guided-lesson/`, render in `videos/` |

@@ -18,6 +18,10 @@ Current focus: **producing the lessons** of the book «التجويد المصو
   voice** chosen by the owner from `docs/production/voices/samples/`. Never choose it yourself.
 - Hard animations or illustrations: **do not hand-code them**. Write prompts for ChatGPT /
   Google Flow (ZAPI FLOW format: one prompt per line, blank line between).
+- **Design lines:** `docs/design/glassy-gamified/` (first wave, replicate 1:1) and
+  `docs/design/flat/` (alternative, future). Keep both.
+- **Ask first:** show a mockup / visual plan and get the owner's confirmation before any visual work.
+- **Never invent assets:** ask the owner for missing elements (made with ChatGPT / Google Flow).
 - Professional, consistent design is the priority. The mascot lantern never has a face.
 - Full tashkīl in all Arabic text, including narration. Quran verses are recited only by a real
   reciter (al-Ḥuṣarī), never by TTS. No music.
