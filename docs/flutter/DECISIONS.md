@@ -21,4 +21,10 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | **Order changed: the side navigation (screen 04) is built first**, before screen 03. Branch `flutter/04-side-nav`, created from `flutter/03-courses` (it carries the docs). | ✅ |
 | 2026-11-20 | Side navigation: **both states**, the glassy closed rail and the open menu (reference 04). | ✅ |
 | 2026-11-20 | Side navigation plan and 2 asset prompts: `screens/04-side-nav.md`, `prompts/04-side-nav/images.txt`. Open questions listed there (rail variant A/B/C, flat or 3D icons, theme toggle position, الشهادات in the rail, motion). | 🟡 |
-| 2026-11-20 | Light/dark toggle proposed at the bottom of the open menu (instead of the rail). | 🟡 |
+| 2026-11-20 | Closed rail: **style C** (rounded-square glass tiles; active item filled gold circle with glow). | ✅ |
+| 2026-11-20 | Icons: **flat cream glyphs as in style C** (no 3D icons). | ✅ |
+| 2026-11-20 | Light/dark toggle goes in the **settings** screen, not in the side navigation. | ✅ |
+| 2026-11-20 | **الشهادات** is added to the closed rail too: **6 items** in both states. | ✅ |
+| 2026-11-20 | Side navigation motion approved: panel slides in from the right, rail icons morph into the row icons, labels and pills stagger in, content dims, ☰ becomes ✕; close with ✕, tap outside or swipe right. | ✅ |
+| 2026-11-20 | Screen 03 animations and course icons: **decided later**, when we get to screen 03. | ✅ |
+| 2026-11-20 | Fonts: the owner chooses after seeing samples (`screens/fonts/`). Cairo / Amiri Quran stay proposals until then. | 🟡 |
