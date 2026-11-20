@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Lezione animata Iqlab</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&amp;family=Cairo:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFD700}a:hover{color:#FFE355}
+</style>
+</helmet>
+<div dir="rtl" style="width: 844px; height: 390px; box-sizing: border-box; position: relative; overflow: hidden; background: linear-gradient(180deg, #1F4037 0%, #0B1C17 100%); color: #FFFFFF; font-family: 'Cairo', sans-serif; display: flex; flex-direction: column;">
+
+  <svg aria-hidden="true" width="844" height="390" style="position: absolute; inset: 0; opacity: 0.07; pointer-events: none;">
+    <defs>
+      <pattern id="dia2" width="70" height="70" patternUnits="userSpaceOnUse">
+        <path d="M35 0L70 35L35 70L0 35Z M35 9L61 35L35 61L9 35Z M35 18L52 35L35 52L18 35Z" fill="none" stroke="#DAA520" stroke-width="1.2"></path>
+      </pattern>
+    </defs>
+    <rect width="844" height="390" fill="url(#dia2)"></rect>
+  </svg>
+
+  <div style="position: relative; height: 64px; flex: none; display: flex; align-items: center; gap: 16px; padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; width: 150px;">
+      <div style="font-size: 18px; font-weight: 700;">الإقلاب</div>
+      <div style="font-size: 12px; color: #95D5B2;">شاهد · النون الساكنة</div>
+    </div>
+    <div style="flex: 1; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.12); overflow: hidden;">
+      <div style="height: 100%; width: {{progress}}%; background: linear-gradient(90deg, #DAA520, #FFD700); transition: width 0.3s ease-out;"></div>
+    </div>
+    <div style="font-size: 13px; color: #DFC298; width: 54px; text-align: center;">{{progress}}/100</div>
+    <a href="Lessons.dc.html" aria-label="إيقاف مؤقت والقائمة" style="width: 44px; height: 44px; border-radius: 22px; background: #DAA520; color: #0B1C17; display: flex; align-items: center; justify-content: center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"></rect><rect x="14" y="4.5" width="4" height="15" rx="1"></rect></svg>
+    </a>
+  </div>
+
+  <div style="position: relative; flex: 1; display: flex; flex-direction: row; gap: 18px; padding: 0 20px 18px 20px; min-height: 0;">
+
+    <div style="position: relative; flex: 1; border-radius: 20px; background: rgba(45,106,79,0.22); box-shadow: 0 8px 25px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+      <div style="position: absolute; inset: 9px; border: 2px solid rgba(218,165,32,0.18); border-radius: 13px; pointer-events: none;"></div>
+
+      <div style="font-family: 'Amiri Quran', serif; font-size: 46px; line-height: 1.6; display: flex; gap: 16px; align-items: center;">
+        <span><span style="color: {{cA}}; transition: color 0.5s ease;">مِ&#8205;</span><span style="color: {{cB}}; text-shadow: {{gB}}; transition: color 0.5s ease, text-shadow 0.5s ease;">&#8205;{{noonGlyph}}</span></span>
+        <span><span style="color: {{cC}}; text-shadow: {{gC}}; transition: color 0.5s ease, text-shadow 0.5s ease;">بَ&#8205;</span><span style="color: {{cA}}; transition: color 0.5s ease;">&#8205;عْدِ</span></span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="position: relative; width: 92px; height: 92px; border-radius: 18px; border: 1.5px solid rgba(218,165,32,0.4); background: rgba(11,28,23,0.45);">
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Amiri Quran', serif; font-size: 52px; color: #FFD700; opacity: {{nOp}}; transform: scale({{nSc}}) rotate({{nRot}}deg); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4,0,0.2,1);">نْ</span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Amiri Quran', serif; font-size: 52px; color: #FF80FF; opacity: {{mOp}}; transform: scale({{mSc}}); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4,0,0.2,1);">مْ</span>
+        </div>
+        <div style="font-size: 26px; color: #DFC298; opacity: {{plusOp}}; transition: opacity 0.4s ease;">+</div>
+        <div style="width: 92px; height: 92px; border-radius: 18px; border: 1.5px solid rgba(218,165,32,0.4); background: rgba(11,28,23,0.45); display: flex; align-items: center; justify-content: center; font-family: 'Amiri Quran', serif; font-size: 52px; color: {{cC}}; opacity: {{plusOp}}; transition: opacity 0.4s ease, color 0.5s ease;">ب</div>
+      </div>
+
+      <div style="height: 40px; display: flex; align-items: center;">
+        <sc-if value="{{showMushaf}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 2px 14px; border-radius: 14px; background: rgba(255,128,255,0.12); border: 1px solid rgba(255,128,255,0.45);">
+            <span style="font-size: 13px; color: #DFC298;">في المصحف</span>
+            <span style="font-family: 'Amiri Quran', serif; font-size: 24px; line-height: 1.5;">مِنۢ بَعْدِ</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="width: 300px; flex: none; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 16px; padding: 10px 14px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); opacity: {{lipsOp}}; transition: opacity 0.5s ease;">
+        <svg width="96" height="56" viewBox="0 0 120 70" role="img" aria-label="الشفتان">
+          <g style="transform: translateY({{lipUp}}px); transition: transform 0.6s ease;">
+            <path d="M10 33C30 14 48 18 60 24C72 18 90 14 110 33C88 33 72 31 60 33C48 31 32 33 10 33Z" fill="#C0566B" stroke="#FF9FB0" stroke-width="1.5"></path>
+          </g>
+          <g style="transform: translateY({{lipDown}}px); transition: transform 0.6s ease;">
+            <path d="M10 37C32 37 48 39 60 37C72 39 88 37 110 37C92 58 74 62 60 62C46 62 28 58 10 37Z" fill="#A8475B" stroke="#FF9FB0" stroke-width="1.5"></path>
+          </g>
+        </svg>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-size: 13px; font-weight: 700; color: #FF7F7F;">غنة · حركتان</div>
+          <div style="display: flex; gap: 4px;">
+            <sc-for list="{{gCells}}" as="c" hint-placeholder-count="2">
+              <div style="width: 30px; height: 14px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.3); overflow: hidden; display: flex;">
+                <div style="height: 100%; width: {{c.pct}}%; background: #FF7F7F;"></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 16px; font-weight: 600; line-height: 1.6; padding: 0 6px;">{{caption}}</div>
+
+      <div style="display: flex; justify-content: center; align-items: center; gap: 6px;">
+        <sc-for list="{{dots}}" as="d" hint-placeholder-count="6">
+          <button onClick="{{d.go}}" aria-label="{{d.label}}" style="width: 26px; height: 26px; padding: 0; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <span style="width: {{d.size}}px; height: {{d.size}}px; border-radius: 6px; background: {{d.bg}}; transition: all 0.3s ease;"></span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button onClick="{{toggle}}" style="flex: 1; height: 46px; border-radius: 23px; border: none; background: #DAA520; color: #0B1C17; font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <sc-if value="{{playing}}" hint-placeholder-val="{{ false }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"></rect><rect x="14" y="4.5" width="4" height="15" rx="1"></rect></svg>
+          </sc-if>
+          <sc-if value="{{notPlaying}}" hint-placeholder-val="{{ true }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>
+          </sc-if>
+          {{toggleLabel}}
+        </button>
+        <a href="Practice.dc.html" style="flex: 1; height: 46px; border-radius: 23px; border: 1px solid rgba(218,165,32,0.55); color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center;">جرّبها بصوتك</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":844,"height":390}}'>
+var STEP_LEN = 2.6;
+var LAST = 5;
+var CAPTIONS = [
+  'انظر إلى الكلمتين: مِنْ بَعْدِ',
+  'نون ساكنة، وبعدها مباشرة حرف الباء',
+  'قبل الباء تنقلب النون ميمًا',
+  'تنطبق الشفتان بلطف مع غنة مقدارها حركتان',
+  'وفي المصحف تُكتب ميم صغيرة فوق النون',
+  'هذا هو الإقلاب. جرّبه الآن بصوتك'
+];
+
+class Component extends DCLogic {
+  state = { t: 0, playing: false };
+
+  componentDidMount() {
+    var self = this;
+    this.timer = setInterval(function () {
+      var st = self.state;
+      if (!st.playing) return;
+      var t = st.t + 0.05;
+      if (t >= LAST * STEP_LEN + 0.5) { self.setState({ t: LAST * STEP_LEN, playing: false }); return; }
+      self.setState({ t: t });
+    }, 50);
+  }
+
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var step = Math.min(LAST, Math.floor(st.t / STEP_LEN));
+    var dim = 'rgba(255,255,255,0.3)';
+    var focus = step >= 1;
+    var morphed = step >= 2;
+
+    var gStart = 3 * STEP_LEN + 0.6;
+    var gCells = [0, 1].map(function (i) {
+      var f = Math.max(0, Math.min(1, (st.t - gStart) / 0.6 - i));
+      if (step < 3) f = 0;
+      return { pct: Math.round(f * 100) };
+    });
+
+    var dots = [0, 1, 2, 3, 4, 5].map(function (i) {
+      return {
+        label: 'الخطوة ' + (i + 1),
+        size: i === step ? 14 : 10,
+        bg: i < step ? '#DAA520' : (i === step ? '#FFD700' : 'rgba(255,255,255,0.25)'),
+        go: function () { self.setState({ t: i * STEP_LEN + 0.01 }); }
+      };
+    });
+
+    var atEnd = step === LAST && !st.playing;
+
+    return {
+      progress: Math.round((step / LAST) * 100),
+      cA: focus ? dim : '#FFFFFF',
+      cB: morphed ? '#FF80FF' : (focus ? '#FFD700' : '#FFFFFF'),
+      gB: focus ? '0 0 18px rgba(255,215,0,0.5)' : 'none',
+      cC: focus ? '#FFD700' : '#FFFFFF',
+      gC: focus ? '0 0 18px rgba(255,215,0,0.5)' : 'none',
+      noonGlyph: step >= 4 ? 'نۢ' : 'نْ',
+      nOp: morphed ? 0 : (focus ? 1 : 0.35),
+      nSc: morphed ? 0.4 : 1,
+      nRot: morphed ? -25 : 0,
+      mOp: morphed ? 1 : 0,
+      mSc: morphed ? 1 : 1.6,
+      plusOp: focus ? 1 : 0.35,
+      lipsOp: step >= 3 ? 1 : 0.35,
+      lipUp: step >= 3 ? 0 : -8,
+      lipDown: step >= 3 ? 0 : 10,
+      gCells: gCells,
+      showMushaf: step >= 4,
+      caption: CAPTIONS[step],
+      dots: dots,
+      playing: st.playing,
+      notPlaying: !st.playing,
+      toggleLabel: st.playing ? 'إيقاف' : (atEnd ? 'أعد المشاهدة' : 'شاهد'),
+      toggle: function () {
+        if (st.playing) { self.setState({ playing: false }); return; }
+        if (atEnd) { self.setState({ t: 0, playing: true }); return; }
+        self.setState({ playing: true });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
