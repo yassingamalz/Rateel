@@ -60,7 +60,7 @@
             <i class="fas fa-play cta-icon"></i>
           </button>
           <p class="hint"><i class="fas fa-headphones"></i> للحصول على أفضل تجربة استخدم السمّاعات</p>
-          @if (theme() === 'glassy3') { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
+          @if (theme().startsWith('glassy')) { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
         </section>
       } @else {
         @for (s of [step()!]; track s.id) {
@@ -78,7 +78,7 @@
                 <span class="badge">{{ l.badge }}</span>
                 <h1 class="title shimmer" [class.sweep]="on('title', 2)">@if (accentParts(s.title, s.titleAccent); as tp) {<ng-container>{{ tp[0] }}</ng-container><span class="accent">{{ tp[1] }}</span><ng-container>{{ tp[2] }}</ng-container>} @else {<ng-container>{{ s.title }}</ng-container>}</h1>
                 <p class="subtitle"><span>{{ s.subtitle }}</span></p>
-                @if (theme() === 'glassy3') { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
+                @if (theme().startsWith('glassy')) { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
               }
 
               <!-- ── Concept: keyword → meaning ── -->
