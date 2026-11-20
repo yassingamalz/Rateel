@@ -699,3 +699,5 @@ $img: '/assets/images/guided/';
     .points li { padding: 4px 12px; }
   }
 }
+// RTL start button: text first, then the play triangle pointing left (reading direction), like «متابعة ←»
+.guided .splash .cta .cta-icon { transform: scaleX(-1); }
