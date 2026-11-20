@@ -60,6 +60,7 @@
             <span>ابدأ الدرس</span>
           </button>
           <p class="hint"><i class="fas fa-headphones"></i> للحصول على أفضل تجربة استخدم السمّاعات</p>
+          @if (theme() === 'glassy3') { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
         </section>
       } @else {
         @for (s of [step()!]; track s.id) {
