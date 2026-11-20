@@ -40,7 +40,7 @@
         [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-interactive-lesson>
 
-      <app-guided-lesson *ngSwitchCase="'guided'" [content]="lesson?.guidedContent"
+      <app-guided-lesson *ngSwitchCase="'guided'" [content]="lesson?.guidedContent" [paused]="isMenuOpen"
         [isCompleted]="!!lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-guided-lesson>
 

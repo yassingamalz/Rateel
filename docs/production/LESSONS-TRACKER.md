@@ -43,7 +43,7 @@ pages (`pdftoppm -r 110 -f N -l N -png ch10.pdf out`).
 
 | Status | # | Sub-lesson | PDF pages (book) | Content |
 |---|---|---|---|---|
-| 🟡 | 10.1 | **النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ** (first lesson to produce), branch `lesson/10-1-noon-meem-mushaddad` | 2 (256) + 53–56 (307–310) | Lengthen the ghunna at its most complete («أكمل ما تكون») on a mushaddad nūn or mīm, in waṣl and waqf. Examples: ﴿مِنَ الْجِنَّةِ وَالنَّاسِ﴾ ﴿وَلَٰكِنَّ اللَّهَ سَلَّمَ﴾ ﴿حَمَّالَةَ الْحَطَبِ﴾ ﴿فِي الْيَمِّ وَلَا تَخَافِي﴾. Context: the 4 levels of ghunna (أكمل، كاملة، ناقصة، أنقص) |
+| 🟡 | 10.1 | **النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ** (first lesson to produce), branch `lesson/10-1-noon-meem-mushaddad`. **v1 done** (16 steps, glassy, free voice F1 Hamed, video `videos/lesson-10-1-v1-glassy.mp4`); waiting for the owner's review and the 10 images + 1 GIF of `prompts/lesson-10-1/` | 2 (256) + 53–56 (307–310); ghunna definition from ch. 07 p. 79 (203) | Lengthen the ghunna at its most complete («أكمل ما تكون») on a mushaddad nūn or mīm, in waṣl and waqf. Examples: ﴿مِنَ الْجِنَّةِ وَالنَّاسِ﴾ ﴿وَلَٰكِنَّ اللَّهَ سَلَّمَ﴾ ﴿حَمَّالَةَ الْحَطَبِ﴾ ﴿فِي الْيَمِّ وَلَا تَخَافِي﴾. Context: the 4 levels of ghunna (أكمل، كاملة، ناقصة، أنقص) |
 | ⬜ | 10.2 | أَحْكَامُ الْمِيمِ السَّاكِنَةِ | 3–15 (257–270) | Idghām shafawī (5), ikhfāʾ shafawī (6–7), iẓhār shafawī (8–9), warning on wāw/fāʾ (10), comparison table (11), muṣḥaf marks (12–14), common mistakes (15) |
 | ⬜ | 10.3 | التَّنْوِينُ + وَضْعُ النُّونِ السَّاكِنَةِ | 17–20 (271–274) | Definition of tanwīn, notes, the 4 rules overview |
 | ⬜ | 10.4 | الإِظْهَارُ (النون الساكنة والتنوين) | 21–25 (275–279) | Throat letters, examples, muṣḥaf marks |

@@ -288,6 +288,21 @@ export class GuidedAudioService implements OnDestroy {
     }
   }
 
+  /** Pauses whatever narration / recitation is playing (resume() continues it). */
+  pause(): void {
+    for (const el of [this.narrationEl, this.verseEl, this.recEl]) {
+      if (!el.paused && !el.ended && el.src) { (el as any).__held = true; HTMLMediaElement.prototype.pause.call(el); }
+    }
+    window.speechSynthesis?.pause();
+  }
+
+  resume(): void {
+    for (const el of [this.narrationEl, this.verseEl, this.recEl]) {
+      if ((el as any).__held) { (el as any).__held = false; el.play().catch(() => {}); }
+    }
+    window.speechSynthesis?.resume();
+  }
+
   toggleMute(): void {
     this.muted.update((m) => !m);
     for (const el of [this.narrationEl, this.verseEl, this.fxEl, this.recEl]) el.muted = this.muted();
@@ -308,6 +323,7 @@ export class GuidedAudioService implements OnDestroy {
     this.stopLoop();
     for (const el of [this.narrationEl, this.verseEl, this.recEl]) {
       el.onended = el.onerror = el.onloadedmetadata = null;
+      (el as any).__held = false;
       el.pause();
     }
     window.speechSynthesis?.cancel();

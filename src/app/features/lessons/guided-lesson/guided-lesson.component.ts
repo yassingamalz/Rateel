@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { GuidedAudioService } from './guided-audio.service';
-import { GuidedLessonContent, GuidedOption, GuidedStep } from './guided-lesson.types';
+import { GuidedLessonContent, GuidedOption, GuidedStep, GuidedWordTimings } from './guided-lesson.types';
 
 type QuizState = 'idle' | 'correct' | 'wrong';
 type RepeatPhase = 'intro' | 'listening' | 'ready' | 'recording' | 'review' | 'unavailable';
@@ -15,7 +15,7 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
   selector: 'app-guided-lesson',
   standalone: false,
   templateUrl: './guided-lesson.component.html',
-  styleUrls: ['./guided-lesson.component.scss', './guided-lesson.ornate.scss'],
+  styleUrls: ['./guided-lesson.component.scss', './guided-lesson.ornate.scss', './guided-lesson.glassy.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GuidedAudioService],
   animations: [
@@ -35,6 +35,12 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
 export class GuidedLessonComponent implements OnChanges, OnDestroy {
   @Input() content?: string;
   @Input() isCompleted = false;
+  /** Set by the lesson shell's pause button: holds narration and recitation. */
+  @Input() set paused(v: boolean) {
+    if (v === this.pausedState()) return;
+    this.pausedState.set(v);
+    if (v) this.audio.pause(); else this.audio.resume();
+  }
   @Output() onProgress = new EventEmitter<number>();
   @Output() onComplete = new EventEmitter<void>();
 
@@ -58,16 +64,23 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
   readonly step = computed<GuidedStep | undefined>(() => this.steps()[this.index()]);
   readonly isLast = computed(() => this.index() === this.steps().length - 1);
   readonly theme = computed(() => this.lesson()?.theme ?? 'ornate');
+  /** 'glassy' builds on the ornate theme and overrides it. */
+  readonly themeClass = computed(() => this.theme() === 'glassy' ? 'theme-ornate theme-glassy' : 'theme-' + this.theme());
+  readonly pausedState = signal(false);
+  private readonly timings = signal<Record<string, GuidedWordTimings>>({});
 
   readonly captionWords = computed(() => {
     const s = this.step();
     const text = s?.caption ?? s?.narration ?? '';
     const words = text.split(/\s+/).filter(Boolean);
     const total = words.reduce((n, w) => n + w.length + 1, 0) || 1;
+    // Exact word timings (when the caption is the narration itself): rule 3.1.
+    const wt = s && !s.caption ? this.timings()[s.id] : undefined;
+    const exact = wt && wt.t.length === words.length;
     let acc = 0;
     let quoted = false;
-    return words.map((w) => {
-      const at = acc / total;
+    return words.map((w, i) => {
+      const at = exact ? wt!.t[i] / wt!.d : acc / total;
       acc += w.length + 1;
       if (w.includes('«')) quoted = true;
       const q = quoted;
@@ -110,6 +123,7 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
         const parsed: GuidedLessonContent = JSON.parse(this.content);
         this.lesson.set(parsed);
         this.audio.preload(parsed.steps.map((s) => this.narrationUrl(s)!).filter(Boolean));
+        if (parsed.wordTimings) this.loadTimings(parsed);
       } catch (e) {
         console.error('[GuidedLesson] Invalid content', e);
       }
@@ -119,6 +133,17 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
   ngOnDestroy(): void {
     this.audio.stopAll();
   }
+
+  private loadTimings(l: GuidedLessonContent): void {
+    for (const s of l.steps) {
+      if (!s.narration) continue;
+      fetch(`${l.audioBase}/${s.id}.words.json`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((t: GuidedWordTimings | null) => t && this.timings.update((m) => ({ ...m, [s.id]: t })))
+        .catch(() => {});
+    }
+  }
+
 
   // ───────────────────────────── flow ─────────────────────────────
 
@@ -304,6 +329,63 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
     return this.audio.narrationProgress() >= at;
   }
 
+  /** Fraction of the narration at which `key` appears: from step.reveal (exact word) or the fallback. */
+  revealFrac(key: string, fallback?: number): number | undefined {
+    const s = this.step();
+    const word = s?.reveal?.[key];
+    if (!s || word == null) return fallback;
+    return this.wordFrac(word) ?? fallback;
+  }
+
+  /** Fraction of the narration where the given token is spoken. */
+  wordFrac(word: string | null | undefined): number | undefined {
+    const s = this.step();
+    if (!s?.narration || !word) return undefined;
+    const tokens = s.narration.split(/\s+/).filter(Boolean);
+    const i = tokens.indexOf(word);
+    if (i < 0) return undefined;
+    const wt = this.timings()[s.id];
+    if (wt && wt.t.length === tokens.length) return Math.max(0.001, wt.t[i] / wt.d);
+    const before = tokens.slice(0, i).reduce((n, w) => n + w.length + 1, 0);
+    return Math.max(0.001, before / (tokens.reduce((n, w) => n + w.length + 1, 0) || 1));
+  }
+
+  on(key: string, fallback?: number): boolean {
+    return this.isRevealed(this.revealFrac(key, fallback));
+  }
+
+  isWordOn(word: string | null | undefined): boolean {
+    return word == null ? true : this.isRevealed(this.wordFrac(word));
+  }
+
+  /** Index of the reading speed currently named by the voice (levels step), or -1. */
+  activeSpeed(): number {
+    const sp = this.step()?.speeds ?? [];
+    let a = -1;
+    sp.forEach((_, i) => { if (this.on('speed' + i)) a = i; });
+    return a;
+  }
+
+  levelScale(): number {
+    const sp = this.step()?.speeds;
+    const a = this.activeSpeed();
+    return sp && a >= 0 ? sp[a].scale : 1;
+  }
+
+  /** Splits a Quran word around its marked substring: [before, mark, after]. */
+  markParts(word: string, i: number): [string, string, string] | null {
+    const m = this.step()?.verse?.marks?.[String(i)];
+    if (!m) return null;
+    const at = word.indexOf(m);
+    if (at < 0) return null;
+    return [word.slice(0, at), m, word.slice(at + m.length)];
+  }
+
+  /** True while the reciter is on a word that carries a mark (the ghunna is sounding). */
+  isMarkLive(i: number): boolean {
+    return this.audio.activeWord() === i && !!this.step()?.verse?.marks?.[String(i)];
+  }
+
   isWordSpoken(at: number): boolean {
     return this.audio.narrationProgress() > at || (!this.audio.narrating() && this.audio.narrationProgress() >= 1);
   }
@@ -326,7 +408,7 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
   }
 
   private commonUrl(key: string): string {
-    return `assets/audio/guided/common/${key}.mp3`;
+    return `${this.lesson()?.commonBase ?? 'assets/audio/guided/common'}/${key}.mp3`;
   }
 
   private wait(ms: number): Promise<void> {

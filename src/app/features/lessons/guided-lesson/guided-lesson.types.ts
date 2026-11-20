@@ -8,7 +8,10 @@ export type GuidedStepType =
   | 'quiz'      // tap the right answer
   | 'listen'    // Quran recitation with word-by-word highlight
   | 'repeat'    // listen, then record yourself and compare
-  | 'summary';  // stars + key takeaways
+  | 'summary'   // stars + key takeaways
+  | 'definition' // label + defining sentence + illustration (glassy)
+  | 'split'     // a mushaddad letter morphs into its two letters (sākin + mutaḥarrik)
+  | 'levels';   // ranked levels as bars (+ optional reading speeds that rescale them)
 
 export interface GuidedItem {
   icon?: string;
@@ -20,6 +23,10 @@ export interface GuidedItem {
 
 export interface GuidedCard {
   icon?: string;
+  /** Large letter shown as the card's emblem (e.g. «نّ»). */
+  glyph?: string;
+  /** Quran words shown as examples (Uthmani, Quran font). */
+  examples?: string[];
   tone?: 'emerald' | 'gold' | 'ruby' | 'amber';
   title: string;
   subtitle?: string;
@@ -45,6 +52,35 @@ export interface GuidedVerse {
   focusWords?: number[];
   /** True when only part of the ayah is shown. */
   partial?: boolean;
+  /** wordIndex → substring of that word to colour (e.g. the mushaddad letter «نَّ»). */
+  marks?: Record<string, string>;
+}
+
+export interface GuidedMedia {
+  src: string;
+  alt?: string;
+  /** True while the final asset is still being produced: shown with a "provisional" tag. */
+  placeholder?: boolean;
+}
+
+export interface GuidedSplitPair {
+  whole: string;
+  parts: [string, string];
+  /** Narration word on which the letter splits. */
+  split: string;
+  /** Narration word on which the pair appears (null = from the start). */
+  show?: string | null;
+}
+
+export interface GuidedLevel {
+  title: string;
+  text?: string;
+}
+
+export interface GuidedSpeed {
+  title: string;
+  /** Relative length of every level at this speed (proportion is kept). */
+  scale: number;
 }
 
 export interface GuidedStep {
@@ -67,6 +103,23 @@ export interface GuidedStep {
   explanation?: string;
   verse?: GuidedVerse;
   points?: string[];
+  /** element key → narration word on which it appears (exact, via word timings). */
+  reveal?: Record<string, string>;
+  media?: GuidedMedia;
+  pairs?: GuidedSplitPair[];
+  partLabels?: [string, string];
+  link?: string;
+  levels?: GuidedLevel[];
+  highlight?: number;
+  speeds?: GuidedSpeed[];
+  /** Quiz options are Quran words (Quran font). */
+  quran?: boolean;
+}
+
+/** Word timings of a narration clip: duration and the start of every whitespace token (ms). */
+export interface GuidedWordTimings {
+  d: number;
+  t: number[];
 }
 
 export interface GuidedLessonContent {
@@ -75,8 +128,12 @@ export interface GuidedLessonContent {
   title: string;
   badge?: string;
   /** Visual theme: 'ornate' (arch background, gold frames — default) or 'glow' (v1). */
-  theme?: 'ornate' | 'glow';
+  theme?: 'ornate' | 'glow' | 'glassy';
   audioBase: string;
+  /** Folder of the shared feedback lines (default assets/audio/guided/common). */
+  commonBase?: string;
+  /** Each narration has a <stepId>.words.json next to its mp3. */
+  wordTimings?: boolean;
   steps: GuidedStep[];
   common?: Record<string, string>;
 }
