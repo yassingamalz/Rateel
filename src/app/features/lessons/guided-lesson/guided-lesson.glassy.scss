@@ -545,3 +545,5 @@ $img: '/assets/images/guided/';
 }
 // levels: fixed sentence block so s12 and s13 place the cards on the same line
 .guided.theme-glassy .type-levels .sentence.small { height: 3.5em; min-height: 0; max-width: min(56%, 560px); line-height: 1.7; overflow: visible; margin: 6px 0 0; }
+// splash and intro: identical label box, so the title does not move when the lesson starts
+.guided.theme-glassy .scene .badge { height: clamp(34px, 9.5vh, 44px); min-height: clamp(34px, 9.5vh, 44px); padding-block: 0; box-sizing: border-box; }
