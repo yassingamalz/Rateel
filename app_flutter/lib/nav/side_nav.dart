@@ -124,50 +124,66 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
   List<Widget> _panel(_Geometry g, double t) {
     final panelLeft = lerpDouble(g.w - g.railWidth, g.panelLeft, t)!;
     final active = _active;
+    // Every layer has a stable key: layers that appear late (arch, caps)
+    // must not shift the others (v3 bug: icons drawn one row off).
+    Widget k(String id, Widget w) => KeyedSubtree(key: ValueKey(id), child: w);
+    final caps = _filigree(g, t, active);
     final widgets = <Widget>[
-      Positioned(
-        left: panelLeft,
-        top: 0,
-        bottom: 0,
-        right: 0,
-        child: GestureDetector(
-          onHorizontalDragUpdate: (d) {
-            if (_open.value == 0) return;
-            _open.value -= d.delta.dx / (g.panelWidth - g.railWidth);
-          },
-          onHorizontalDragEnd: (d) {
-            if (_open.value == 0) return;
-            final v = d.primaryVelocity ?? 0;
-            (v > 300 || _open.value < 0.6) ? _close() : _open.forward();
-          },
-          child: _PanelBackground(g: g, t: t),
+      k(
+        'panel',
+        Positioned(
+          left: panelLeft,
+          top: 0,
+          bottom: 0,
+          right: 0,
+          child: GestureDetector(
+            onHorizontalDragUpdate: (d) {
+              if (_open.value == 0) return;
+              _open.value -= d.delta.dx / (g.panelWidth - g.railWidth);
+            },
+            onHorizontalDragEnd: (d) {
+              if (_open.value == 0) return;
+              final v = d.primaryVelocity ?? 0;
+              (v > 300 || _open.value < 0.6) ? _close() : _open.forward();
+            },
+            child: _PanelBackground(g: g, t: t),
+          ),
         ),
       ),
-      // Thin gold arch above the rows (open state only).
+      // Gold arch above the rows (open state only). Owner: a little lower than
+      // the reference so its tails meet the selected row; the tails pass
+      // behind the row and the caps.
       if (t > 0)
-        Positioned(
-          left: g.panelLeft + g.u * 39.3 - g.u * 23 + (1 - t) * g.u * 6,
-          top: g.u * 3.3,
-          width: g.u * 46,
-          child: IgnorePointer(
-            child: Opacity(
-              opacity: _late(t),
-              child: const Image(image: AssetImage('assets/ui/decor/arch.png')),
+        k(
+          'arch',
+          Positioned(
+            left: g.panelLeft + g.u * 39.3 - g.u * 22.35 + (1 - t) * g.u * 6,
+            top: g.u * 4.0,
+            width: g.u * 44.7,
+            height: g.u * 44.7 * 222 / 720,
+            child: IgnorePointer(
+              child: Opacity(
+                opacity: _late(t),
+                child: SvgPicture.asset(
+                  'assets/ui/decor/arch.svg',
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
           ),
         ),
-      ..._filigree(g, t, active),
-      _selectedRow(g, t, active),
+      for (var c = 0; c < caps.length; c++) k('cap$c', caps[c]),
+      k('selected', _selectedRow(g, t, active)),
     ];
     for (var i = 0; i < navItems.length; i++) {
-      widgets.add(_item(g, t, i, active));
+      widgets.add(k('item$i', _item(g, t, i, active)));
     }
-    widgets.add(_activeBadge(g, t, active));
+    widgets.add(k('badge', _activeBadge(g, t, active)));
     for (var i = 0; i < navItems.length; i++) {
-      widgets.add(_icon(g, t, i, active));
-      widgets.add(_bubble(g, t, i, active));
+      widgets.add(k('icon$i', _icon(g, t, i, active)));
+      widgets.add(k('bubble$i', _bubble(g, t, i, active)));
     }
-    widgets.add(_menuButton(g, t));
+    widgets.add(k('menu', _menuButton(g, t)));
     return widgets;
   }
 
@@ -194,8 +210,8 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       ),
     );
     return [
-      cap(row.left - w + g.u * 0.6, 'assets/ui/decor/cap_left.png'),
-      cap(row.right - g.u * 0.6, 'assets/ui/decor/cap_right.png'),
+      cap(row.left - w + g.u * 1.7, 'assets/ui/decor/cap_left.png'),
+      cap(row.right - g.u * 1.7, 'assets/ui/decor/cap_right.png'),
     ];
   }
 
@@ -471,24 +487,82 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
         child: GestureDetector(
           onTap: _toggle,
           child: Container(
+            // Rim: a metallic gold gradient on the close button (bright top
+            // right, darker bottom left, as in the reference).
+            padding: EdgeInsets.all(lerpDouble(2, 3, t)!),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 lerpDouble(g.u * 2.4, rect.width / 2, t)!,
               ),
-              color: Colors.white.withValues(
-                alpha: lerpDouble(0.025, 0.012, t)!,
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color.lerp(
+                    RateelColors.menuTileRim,
+                    RateelColors.goldHighlight,
+                    t,
+                  )!,
+                  Color.lerp(
+                    RateelColors.menuTileRim,
+                    RateelColors.goldRim,
+                    t,
+                  )!,
+                  Color.lerp(
+                    RateelColors.menuTileRim,
+                    const Color(0xFF9C7420),
+                    t,
+                  )!,
+                ],
               ),
-              border: Border.all(
-                color: Color.lerp(
-                  RateelColors.menuTileRim,
-                  RateelColors.goldRim,
-                  t,
-                )!,
-                width: lerpDouble(2, 3, t)!,
-              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.30 * t),
+                  blurRadius: g.u * 1.0,
+                  offset: Offset(0, g.u * 0.35),
+                ),
+              ],
             ),
-            child: CustomPaint(
-              painter: _MenuCloseGlyph(t: t, u: g.u),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  lerpDouble(g.u * 2.2, rect.width / 2, t)!,
+                ),
+                // Dark emerald glass: a soft sheen on the upper half, deeper
+                // at the bottom.
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.lerp(
+                      const Color(0xFF0A3A2A),
+                      const Color(0xFF1B4A36),
+                      t,
+                    )!,
+                    Color.lerp(
+                      const Color(0xFF05301F),
+                      const Color(0xFF02281B),
+                      t,
+                    )!,
+                  ],
+                ),
+              ),
+              foregroundDecoration: t > 0
+                  ? BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: RadialGradient(
+                        center: const Alignment(-0.2, -0.8),
+                        radius: 0.75,
+                        colors: [
+                          const Color(0xFFBFE3C8).withValues(alpha: 0.16 * t),
+                          const Color(0xFFBFE3C8).withValues(alpha: 0),
+                        ],
+                      ),
+                    )
+                  : null,
+              child: CustomPaint(
+                painter: _MenuCloseGlyph(t: t, u: g.u),
+              ),
             ),
           ),
         ),
@@ -531,25 +605,51 @@ class _PanelBackground extends StatelessWidget {
             ),
           ),
         ),
-        // Star band along the bottom (owner's star_band.png), faint, fading
-        // in from the top as in the reference.
+        // Emerald glow rising from the bottom edge (reference: the panel
+        // brightens toward the bottom).
         if (t > 0)
           Positioned(
             left: 0,
             right: 0,
-            bottom: g.u * 0.3,
-            height: g.u * 8.3,
+            bottom: 0,
+            height: g.u * 11,
             child: Opacity(
-              opacity: 0.30 * ((t - 0.4) / 0.6).clamp(0.0, 1.0),
+              opacity: ((t - 0.4) / 0.6).clamp(0.0, 1.0),
+              child: const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [Color(0x800E4630), Color(0x000E4630)],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        // Star band along the bottom: seamless vector tile from the owner's
+        // ornament kit, faint as in the reference.
+        if (t > 0)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: g.u * 0.6,
+            height: g.u * 8.1,
+            child: Opacity(
+              opacity: 0.38 * ((t - 0.4) / 0.6).clamp(0.0, 1.0),
               child: ClipRect(
                 child: OverflowBox(
                   alignment: Alignment.centerLeft,
                   maxWidth: double.infinity,
-                  child: Image.asset(
-                    'assets/ui/decor/star_band.png',
-                    height: g.u * 8.3,
-                    width: g.u * 8.3 * 2062 / 166,
-                    fit: BoxFit.fill,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var n = 0; n < 9; n++)
+                        SvgPicture.asset(
+                          'assets/ui/decor/star_tile.svg',
+                          height: g.u * 8.1,
+                          width: g.u * 8.1 * 216 / 170,
+                        ),
+                    ],
                   ),
                 ),
               ),
