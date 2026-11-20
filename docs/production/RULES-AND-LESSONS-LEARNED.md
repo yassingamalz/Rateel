@@ -56,7 +56,16 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
     lips closing), ask the owner for a GIF and give the exact prompt
     (`docs/production/prompts/<lesson>/gifs.txt`). Still images go to ZAPI FLOW
     (`images.txt`, one prompt per line).
-14. **Work on the branch `lesson-production`.** Commit and push all production material there.
+14. **Branches: one branch per lesson.**
+    - `lesson-production` is the **base branch**: rules, tracker, design lines, shared assets,
+      scripts and the lesson engine.
+    - **Every lesson is produced on its own branch**, created from `lesson-production` and named
+      `lesson/<tracker-number>-<slug>` (e.g. `lesson/10-1-noon-meem-mushaddad`). All work for that
+      lesson (script, audio, elements, video, content JSON) is committed and pushed there.
+    - Write the branch name in the tracker row of the lesson.
+    - When the owner approves the lesson (✅), merge it back into `lesson-production`.
+    - Shared changes (rules, engine fixes, tracker structure) go to `lesson-production` directly,
+      then the lesson branch is updated from it.
 15. **Communicate with the owner in Italian.** Write documentation and rules in English.
 
 ---

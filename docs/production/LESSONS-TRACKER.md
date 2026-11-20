@@ -8,7 +8,8 @@ The folder listing can be read without login from:
 Direct download of a PDF (no login): `https://drive.google.com/uc?export=download&id=<FILE_ID>`.
 
 **Status:** ⬜ to do · 🟡 in progress / prototype · ✅ done (approved by the owner only).
-Update this file in the same commit as the lesson work.
+Update this file in the same commit as the lesson work. Each lesson is produced on its own branch
+`lesson/<number>-<slug>` (see the rulebook, rule 14).
 
 | Status | # | Chapter (book) | Source | Current app course | Notes |
 |---|---|---|---|---|---|
@@ -42,7 +43,7 @@ pages (`pdftoppm -r 110 -f N -l N -png ch10.pdf out`).
 
 | Status | # | Sub-lesson | PDF pages (book) | Content |
 |---|---|---|---|---|
-| 🟡 | 10.1 | **النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ** (first lesson to produce) | 2 (256) + 53–56 (307–310) | Lengthen the ghunna at its most complete («أكمل ما تكون») on a mushaddad nūn or mīm, in waṣl and waqf. Examples: ﴿مِنَ الْجِنَّةِ وَالنَّاسِ﴾ ﴿وَلَٰكِنَّ اللَّهَ سَلَّمَ﴾ ﴿حَمَّالَةَ الْحَطَبِ﴾ ﴿فِي الْيَمِّ وَلَا تَخَافِي﴾. Context: the 4 levels of ghunna (أكمل، كاملة، ناقصة، أنقص) |
+| 🟡 | 10.1 | **النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ** (first lesson to produce), branch `lesson/10-1-noon-meem-mushaddad` | 2 (256) + 53–56 (307–310) | Lengthen the ghunna at its most complete («أكمل ما تكون») on a mushaddad nūn or mīm, in waṣl and waqf. Examples: ﴿مِنَ الْجِنَّةِ وَالنَّاسِ﴾ ﴿وَلَٰكِنَّ اللَّهَ سَلَّمَ﴾ ﴿حَمَّالَةَ الْحَطَبِ﴾ ﴿فِي الْيَمِّ وَلَا تَخَافِي﴾. Context: the 4 levels of ghunna (أكمل، كاملة، ناقصة، أنقص) |
 | ⬜ | 10.2 | أَحْكَامُ الْمِيمِ السَّاكِنَةِ | 3–15 (257–270) | Idghām shafawī (5), ikhfāʾ shafawī (6–7), iẓhār shafawī (8–9), warning on wāw/fāʾ (10), comparison table (11), muṣḥaf marks (12–14), common mistakes (15) |
 | ⬜ | 10.3 | التَّنْوِينُ + وَضْعُ النُّونِ السَّاكِنَةِ | 17–20 (271–274) | Definition of tanwīn, notes, the 4 rules overview |
 | ⬜ | 10.4 | الإِظْهَارُ (النون الساكنة والتنوين) | 21–25 (275–279) | Throat letters, examples, muṣḥaf marks |

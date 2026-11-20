@@ -10,7 +10,8 @@ Current focus: **producing the lessons** of the book «التجويد المصو
    (A = app with interactivity built once, possibly native Android; B = linear videos with sections).
 
 ## Key rules (summary; the rulebook wins on conflicts)
-- Work on the branch **`lesson-production`**. Commit and push all production material there.
+- Base branch: **`lesson-production`** (rules, tracker, design, engine). **Each lesson has its own branch**
+  `lesson/<number>-<slug>` created from it (e.g. `lesson/10-1-noon-meem-mushaddad`); merge back after the owner's ✅.
 - Mark each lesson in `LESSONS-TRACKER.md`: ⬜ → 🟡 → ✅. **Only the owner approves ✅.**
 - Content source: Google Drive «Tajweed → التجويد المصور» (22 PDFs, public links in the tracker).
   Never invent content.

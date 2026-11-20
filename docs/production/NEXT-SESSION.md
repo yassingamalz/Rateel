@@ -1,10 +1,12 @@
 # Command to start the next session
 
-Start a new Claude Code session on the repository `yassingamalz/Rateel`, branch **`lesson-production`**,
+Start a new Claude Code session on the repository `yassingamalz/Rateel`, branch **`lesson/10-1-noon-meem-mushaddad`**
+(created from `lesson-production`; each lesson has its own branch),
 and paste this as the first message:
 
 ```
-Lavoriamo sulla produzione delle lezioni di Rateel, sul branch lesson-production.
+Lavoriamo sulla produzione delle lezioni di Rateel. Ogni lezione ha il suo branch:
+questa è la lezione 10.1, branch lesson/10-1-noon-meem-mushaddad (creato da lesson-production).
 Prima di tutto leggi CLAUDE.md, poi docs/production/RULES-AND-LESSONS-LEARNED.md,
 docs/production/LESSONS-TRACKER.md (la lista completa delle lezioni del libro «التجويد المصور»,
 22 capitoli, con le sotto-lezioni del capitolo 10), docs/production/STATO-E-DIREZIONI.md
@@ -24,7 +26,8 @@ Prima di scrivere codice:
    dimmi se vanno bene o cosa cambiare. Non inventare nessun asset: chiedimelo.
 4. Aspetta la mia conferma, poi realizza la lezione, provala nell'app e mandami il video.
 Aggiorna il tracker (⬜/🟡/✅: solo io approvo il ✅). Parlami in italiano.
-Fai commit e push di tutto su lesson-production.
+Fai commit e push del lavoro della lezione su lesson/10-1-noon-meem-mushaddad;
+le modifiche comuni (regole, motore, tracker) vanno su lesson-production. Dopo il mio ✅ si fa il merge.
 ```
 
 ## Waiting on the owner
