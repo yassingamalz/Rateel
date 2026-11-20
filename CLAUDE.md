@@ -6,8 +6,9 @@ natively in Flutter, one screen per branch.
 ## Read first, every session
 1. `docs/flutter/DECISIONS.md`: every decision taken so far (owner ✅ / proposed 🟡).
 2. `docs/flutter/README.md`: workflow (one screen at a time, one branch per screen, owner approval).
-3. The plan of the screen you work on: `docs/flutter/screens/<nn>-<slug>.md`.
-4. Lesson-production rules, design lines and assets live on branch `lesson-production`
+3. `docs/flutter/PROCESS.md`: the step-by-step procedure (plan → build → critic loop → owner review → APK).
+4. The plan of the screen you work on: `docs/flutter/screens/<nn>-<slug>.md`.
+5. Lesson-production rules, design lines and assets live on branch `lesson-production`
    (`docs/production/RULES-AND-LESSONS-LEARNED.md`, `docs/design/`, `src/assets/images/guided/`).
 
 ## Key rules
