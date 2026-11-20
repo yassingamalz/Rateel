@@ -47,3 +47,10 @@ Not designed yet in either line: 01 splash, 08 reading lesson (covered by 07-dar
 - **Light mode:** the glassy line has light variants for 07 and 09. Is light mode part of the
   first wave, or dark only?
 - **Flat line:** it covers 10 screens; the missing ones are not needed now (flat is for the future).
+
+## ChatGPT redesign of lesson 10.1 (reference, not final)
+`glassy-gamified/chatgpt-lesson-10-1/`: 15 screens ChatGPT made from our lesson screenshots and the prompt
+`docs/production/prompts/lesson-10-1/chatgpt-redesign.txt`. The owner likes: positions, sizes, **large type**,
+**variety of colours** (gold key words, two-tone titles, coral rule letters, vivid quiz states). Too much glow:
+tone it down. **The Arabic text in these images has errors** (e.g. «سورة الأنعام» for 8:43, «للغنة» for «للغنن»):
+take layout and styling from them, never the text.
