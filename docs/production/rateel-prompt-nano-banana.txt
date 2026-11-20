@@ -1,0 +1,246 @@
+RATEEL — PROMPT PER NANO BANANA (Google Gemini Image)
+Asset grafici per le lezioni animate
+=====================================================================
+
+COME USARLI
+-----------
+1. In ogni richiesta allega come IMMAGINI DI RIFERIMENTO:
+   - REF-A = la "مكتبة الأيقونات" (libreria icone fatta con ChatGPT)
+   - REF-B = lo sfondo con l'arco e i reticoli negli angoli
+   - REF-C = lo screenshot della lezione (schermata con il versetto)
+   (per il personaggio, dalla sezione 1.2 in poi allega anche il foglio
+   del personaggio generato in 1.1 = REF-D)
+2. Incolla prima il BLOCCO STILE, poi il prompt dell'asset.
+3. UN asset per richiesta. Se il risultato non è uguale allo stile,
+   rispondi: "Match REF-A more closely: same gold, same line weight, same soft shadow."
+4. SFONDO: Nano Banana non fa vera trasparenza. Per tutti gli elementi
+   (non per gli sfondi) chiediamo un fondo MAGENTA pieno #FF00FF:
+   lo rimuovo io con precisione. Non serve scontornare.
+5. Scarica alla massima risoluzione e rinomina col NOME FILE indicato.
+   Mandami tutto anche in un unico zip.
+
+---------------------------------------------------------------------
+BLOCCO STILE (incollalo all'inizio di OGNI prompt)
+---------------------------------------------------------------------
+Use the attached reference images as the strict style guide. Match REF-A
+exactly: premium Islamic educational app UI, deep emerald green (#043226,
+#02271E) with warm metallic gold (#F7BC15, highlights #FFD95A, shadows
+#B5850A) and soft cream (#F6EBCB). Clean vector-like illustration, smooth
+rounded line work with the same stroke weight as REF-A, subtle soft drop
+shadow below (light from top), very gentle inner glow on gold, no harsh
+gradients, no photorealism, no 3D render look, no text unless requested,
+no watermark, no human faces. Centered subject with generous padding.
+Background: solid flat pure magenta #FF00FF, perfectly uniform, no shadow
+cast on the background, no vignette.
+
+=====================================================================
+1. PERSONAGGIO INSEGNANTE (priorità massima)
+=====================================================================
+Nota: personaggio senza volto, rispettoso del contesto coranico.
+
+1.1  NOME FILE: mascot-sheet.png   — formato 16:9
+Character reference sheet of a friendly mascot for a Quran tajweed
+learning app: an elegant golden Islamic lantern (fanous) character with
+small expressive cream-coloured arms, emerald green glass panels with
+a warm inner glow, geometric star cut-outs, a crescent on top. NO face,
+no eyes, no mouth — emotion is shown only through arm poses and the
+intensity of its inner light. Show the same character 4 times: front,
+three-quarter left, three-quarter right, back. Identical proportions and
+colours in every view. Flat magenta background.
+
+1.2  NOME FILE: mascot-hello.png   — 1:1
+Same mascot as REF-D, waving hello with its right arm, inner light warm
+and bright. Full body, centered.
+
+1.3  NOME FILE: mascot-explain.png   — 1:1
+Same mascot as REF-D, pointing to the side (towards the left of the
+image) like a teacher presenting a board, calm steady inner light.
+
+1.4  NOME FILE: mascot-listen.png   — 1:1
+Same mascot as REF-D, one arm cupped near its top as if listening,
+small golden sound-wave arcs around it, soft dimmed light.
+
+1.5  NOME FILE: mascot-cheer.png   — 1:1
+Same mascot as REF-D, both arms raised in celebration, inner light
+glowing intensely, a few small golden sparkles around it.
+
+1.6  NOME FILE: mascot-think.png   — 1:1
+Same mascot as REF-D, one arm resting under the crescent as if thinking,
+gentle encouraging pose, medium light, a small golden question mark
+floating beside it.
+
+1.7  NOME FILE: mascot-celebrate.png   — 1:1
+Same mascot as REF-D holding up a golden trophy, confetti in gold,
+cream and emerald around it.
+
+1.8  (facoltativo, per animarlo mentre parla)
+NOME FILE: mascot-parts.png   — 16:9
+Same mascot as REF-D separated into parts laid out with space between
+them: body without arms, left arm, right arm, crescent top, and the
+inner light glow as a separate soft shape. Flat magenta background.
+
+=====================================================================
+2. ICONE DELLE REGOLE DEL TAJWEED (dalla libreria REF-A)
+=====================================================================
+Prompt base (sostituisci [DESCRIZIONE] e [NOME FILE]), formato 1:1:
+
+Recreate ONLY the glyph of the "[NOME ARABO]" icon from REF-A at high
+resolution, WITHOUT the rounded tile and WITHOUT the label text.
+Identical design, colours, line weight and soft shadow as in REF-A.
+[DESCRIZIONE]. Centered, flat magenta background.
+
+  2.1  izhar.png      — إظهار  — Arabic letter ظ in cream with a curved
+                        gold underline swoosh, letter clearly separated.
+  2.2  idgham.png     — إدغام  — two Arabic letters (م and ه shapes)
+                        merging into each other over a gold swoosh.
+  2.3  iqlab.png      — إقلاب  — letter ب with a small م above it and a
+                        gold curved arrow showing transformation.
+  2.4  ikhfa.png      — إخفاء  — letter ب half-faded / partially hidden.
+  2.5  ghunna.png     — غنة    — a dotted gold circle (nasal resonance).
+  2.6  madd.png       — مدود   — long horizontal elongation strokes,
+                        cream over gold.
+  2.7  qalqala.png    — قلقلة  — letter ق with gold bouncing echo arcs on
+                        both sides.
+  2.8  tafkhim.png    — تفخيم وترقيق — two gold arrows, up (heavy) and
+                        down (light), separated by a thin line.
+  2.9  sifat.png      — صفات الحروف — human head profile in line art with
+                        gold sound waves in front of the mouth.
+
+Altre icone della libreria (stesso prompt base):
+  2.10 mushaf.png     — المصحف  (open Quran on a rehal stand)
+  2.11 sharh.png      — الشرح   (closed book with gold bookmark)
+  2.12 listen.png     — استماع  (headphones)
+  2.13 record.png     — تسجيل   (microphone)
+  2.14 compare.png    — مقارنة الصوت (gold sound wave bars)
+  2.15 nutq.png       — النطق   (letter A and Arabic ع with exchange arrows)
+  2.16 trophy.png     — الإنجازات (trophy with star)
+  2.17 quiz.png       — اختبار  (three gold stars)
+  2.18 target.png     — تدريب   (target with gold arrow)
+  2.19 video.png      — مقطع تعليمي (play button in rounded frame)
+
+=====================================================================
+3. ILLUSTRAZIONI DEI CONCETTI (lezione 1 e corso)   — formato 16:9
+=====================================================================
+
+3.1  NOME FILE: makharij-head.png
+Clean educational illustration of a human head in side profile (cross
+section, no facial detail, stylised like line art), showing the mouth,
+tongue, throat, nasal cavity and lips. Five articulation zones marked
+with small glowing gold circles: throat (الحلق), tongue (اللسان),
+lips (الشفتان), nasal cavity (الخيشوم), mouth/throat cavity (الجوف).
+Cream lines on transparent area, gold highlights. No text labels.
+
+3.2  NOME FILE: letter-emerging.png
+An Arabic letter (ض) in cream calligraphy emerging from an abstract
+stylised mouth outline, with concentric gold sound waves flowing out.
+Concept: "pronouncing each letter from its exact point of articulation".
+
+3.3  NOME FILE: shield-tongue.png
+A golden Islamic-style shield with geometric star pattern, protecting
+a cream sound wave behind it. Concept: "protecting the tongue from
+mistakes in recitation". Calm, noble.
+
+3.4  NOME FILE: lahn-jali.png
+A large cream Arabic letter with a visible red crack (#E05D4F) through
+it and a small warning triangle. Concept: obvious mistake.
+
+3.5  NOME FILE: lahn-khafi.png
+A large cream Arabic letter with a gold magnifying glass revealing a
+tiny subtle flaw on one diacritic mark. Concept: subtle mistake.
+
+3.6  NOME FILE: book-light.png
+An open Quran on a carved golden rehal stand, soft beams of golden light
+rising from the pages, small floating sparkles. No readable text on the
+pages (abstract lines only).
+
+3.7  NOME FILE: medal-lesson.png   — 1:1
+A round gold medal with an eight-pointed Islamic star in the centre and
+an emerald ribbon, matching the badges/medals style of the app.
+
+=====================================================================
+4. CORNICI ED ELEMENTI DECORATIVI (identici a REF-C)
+=====================================================================
+
+4.1  NOME FILE: label-frame.png   — formato 6:1 (es. 1536×256)
+Recreate the gold label frame from REF-C ("انتبه للحركة") EMPTY, with
+no text inside: elongated capsule with pointed notched ends, gold
+outline, dark emerald fill (#022A20), soft shadow. Without the side
+flower ornaments. Flat magenta background around it.
+
+4.2  NOME FILE: flower-ornament.png   — 1:1
+The small gold four-petal diamond flower ornament from REF-C (beside the
+label), isolated, high resolution.
+
+4.3  NOME FILE: verse-frame.png   — formato 3.5:1 (es. 2400×700)
+Recreate the verse card frame from REF-C EMPTY (no text, no icons):
+large rounded rectangle with a thin gold outline, dark emerald
+semi-transparent fill, and the two gold floral rosettes overlapping the
+left and right edges at mid height. Flat magenta outside the frame.
+
+4.4  NOME FILE: rosette.png   — 1:1
+The gold floral rosette from the side of the verse frame in REF-C,
+isolated, high resolution.
+
+4.5  NOME FILE: lattice-corner-left.png   — 1:1
+The golden Islamic lattice pattern from the TOP-LEFT corner of REF-B,
+isolated on magenta, extended slightly so it can be animated (it will
+slide in from the corner). Same thin gold lines with darker green
+under-stroke.
+
+4.6  NOME FILE: lattice-corner-right.png
+Same as 4.5 for the TOP-RIGHT corner (mirror).
+
+4.7  NOME FILE: arch.png   — 16:9
+The scalloped Islamic arch outline from REF-B isolated on magenta: thin
+gold line with emerald outer band, same proportions, nothing else.
+
+=====================================================================
+5. SFONDI (stesso stile di REF-B)   — formato 2:1 (es. 1844×853)
+=====================================================================
+Per gli sfondi NON usare il magenta: togli l'ultima frase del BLOCCO STILE.
+
+5.1  NOME FILE: bg-listen.png
+Same composition and style as REF-B, darker and calmer, with a very
+soft radial light in the centre where a Quran verse will be displayed.
+Keep the arch and the corner lattices. No text.
+
+5.2  NOME FILE: bg-quiz.png
+Same style as REF-B, slightly brighter emerald, faint large eight-point
+star pattern in the background at 5% opacity, arch smaller. No text.
+
+5.3  NOME FILE: bg-celebrate.png
+Same style as REF-B, with soft golden light rays radiating from the
+top centre behind the arch and a few blurred gold bokeh particles.
+Festive but elegant. No text.
+
+5.4  NOME FILE: bg-intro.png
+Same style as REF-B, with a large faint mosque silhouette (domes and
+minarets) at the bottom horizon in slightly lighter emerald, night sky
+mood with a very subtle crescent. No text.
+
+=====================================================================
+6. EFFETTI (facoltativi)   — 1:1
+=====================================================================
+
+6.1  NOME FILE: sparkle.png
+A single four-pointed golden sparkle/star glint with soft glow.
+
+6.2  NOME FILE: star-gold.png
+A five-pointed gold star exactly like the stars in the "اختبار" icon
+of REF-A, single, high resolution, soft shadow.
+
+6.3  NOME FILE: light-rays.png   — 16:9
+Soft golden light rays fanning out from the top centre, on PURE BLACK
+background (#000000) instead of magenta (it will be blended as light).
+
+6.4  NOME FILE: confetti-set.png   — 16:9
+A set of 12 separate confetti pieces laid out in a grid with space
+between them: small gold, cream and emerald rectangles, circles,
+eight-point stars and crescents.
+
+=====================================================================
+ORDINE CONSIGLIATO
+=====================================================================
+1) 1.1 → 1.7 (personaggio)   2) 2.1 → 2.9 (icone tajweed)
+3) 4.1 → 4.7 (cornici)       4) 3.x illustrazioni
+5) 5.x sfondi                6) 6.x effetti

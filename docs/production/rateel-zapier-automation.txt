@@ -1,0 +1,138 @@
+RATEEL — AUTOMAZIONE ZAPIER PER GENERARE GLI ASSET CON NANO BANANA
+=====================================================================
+
+COSA FA
+-------
+Per ogni riga del foglio "rateel-assets-zapier.csv" (49 asset) lo Zap:
+  1) invia il prompt + le immagini di riferimento a Nano Banana (Gemini Image API)
+  2) salva l'immagine generata in una cartella Google Drive col nome file giusto
+  3) segna la riga come "done" e scrive il link del file
+
+COSA TI SERVE
+-------------
+- Account Zapier con piano a pagamento (servono step multipli + Webhooks).
+- Una API key di Google AI Studio (aistudio.google.com → Get API key).
+- Google Drive + Google Sheets.
+
+PREPARAZIONE (una volta sola)
+-----------------------------
+1. Google Sheets: crea il foglio "Rateel Assets" e importa
+   rateel-assets-zapier.csv (File → Importa → Sostituisci foglio).
+   Colonne: id | filename | aspect_ratio | references | prompt | status
+   Aggiungi a mano due colonne vuote: drive_link | error
+
+2. Google Drive: crea la cartella "Rateel Assets / generated".
+
+3. Immagini di riferimento → caricale UNA volta nella Gemini Files API
+   (così lo Zap le passa per URI senza doverle ricaricare ogni volta).
+   Da un terminale (oppure chiedimelo e lo faccio io):
+
+     curl -s "https://generativelanguage.googleapis.com/upload/v1beta/files?key=TUA_KEY" \
+       -H "X-Goog-Upload-Protocol: raw" -H "Content-Type: image/png" \
+       --data-binary @REF-A.png
+
+   La risposta contiene "uri": copiala. Ripeti per REF-B, REF-C (e REF-D quando
+   avrai generato il personaggio 1.1). ATTENZIONE: i file scadono dopo 48 ore,
+   quindi fai girare lo Zap entro 2 giorni (o ricaricali).
+   Metti gli URI in una tab "refs" del foglio:  REF-A | https://...  ecc.
+
+---------------------------------------------------------------------
+PROMPT PER ZAPIER COPILOT (incollalo in "Create a Zap with AI")
+---------------------------------------------------------------------
+Build a Zap that generates images with the Google Gemini image API for each
+row of my Google Sheet "Rateel Assets":
+
+Trigger: Google Sheets – "New or Updated Spreadsheet Row" on the worksheet
+"Sheet1", triggered by the column "status".
+
+Step 2: Filter – only continue if column "status" exactly matches "todo".
+
+Step 3: Google Sheets – "Lookup Spreadsheet Row" in the worksheet "refs" to
+get the file URIs of the reference images listed in the "references" column
+(REF-A, REF-B, REF-C, REF-D).
+
+Step 4: Webhooks by Zapier – "Custom Request", method POST, URL:
+https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image:generateContent
+Headers: Content-Type = application/json, x-goog-api-key = <MY_API_KEY>
+Data (raw JSON):
+{
+  "contents": [{ "parts": [
+    { "file_data": { "mime_type": "image/png", "file_uri": "<REF-A uri>" } },
+    { "file_data": { "mime_type": "image/png", "file_uri": "<REF-B uri>" } },
+    { "file_data": { "mime_type": "image/png", "file_uri": "<REF-C uri>" } },
+    { "text": "<prompt column>" }
+  ]}],
+  "generationConfig": {
+    "responseModalities": ["IMAGE"],
+    "imageConfig": { "aspectRatio": "<aspect_ratio column>", "imageSize": "2K" }
+  }
+}
+(Only include the file_data parts for the references listed in the row.
+For rows whose references include REF-D, add the REF-D part as well.)
+
+Step 5: Code by Zapier (JavaScript) – read the webhook response and return
+the base64 image found at candidates[0].content.parts[*].inlineData.data and
+its mimeType. If there is no image, return an error message instead.
+
+Step 6: Google Drive – "API Request (Beta)", POST to
+https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart
+creating a file named <filename column> inside the folder
+"Rateel Assets / generated", using a multipart/related body whose second part
+has the header "Content-Transfer-Encoding: base64" and the base64 data from
+step 5 as content.
+
+Step 7: Google Sheets – "Update Spreadsheet Row": set "status" to "done" and
+"drive_link" to the link of the uploaded file. If step 5 returned an error,
+set "status" to "error" and write the message in "error".
+
+Add a 20-second Delay before step 4 so the Gemini rate limit is respected.
+
+---------------------------------------------------------------------
+CODICE PER LO STEP 5 (Code by Zapier → Run JavaScript)
+---------------------------------------------------------------------
+Input Data:  body = (Raw Body dello step 4)
+
+  const res = JSON.parse(inputData.body);
+  const parts = res?.candidates?.[0]?.content?.parts || [];
+  const img = parts.find(p => p.inlineData || p.inline_data);
+  if (!img) {
+    return { ok: false, error: JSON.stringify(res).slice(0, 500) };
+  }
+  const d = img.inlineData || img.inline_data;
+  return { ok: true, mime: d.mimeType || d.mime_type, base64: d.data };
+
+---------------------------------------------------------------------
+CORPO PER LO STEP 6 (Google Drive → API Request)
+---------------------------------------------------------------------
+Header:  Content-Type: multipart/related; boundary=rateel_boundary
+Body:
+
+--rateel_boundary
+Content-Type: application/json; charset=UTF-8
+
+{"name": "{{filename}}", "parents": ["ID_DELLA_CARTELLA_GENERATED"]}
+--rateel_boundary
+Content-Type: {{mime}}
+Content-Transfer-Encoding: base64
+
+{{base64}}
+--rateel_boundary--
+
+(L'ID della cartella è la parte finale del link della cartella su Drive.)
+
+---------------------------------------------------------------------
+USO
+---------------------------------------------------------------------
+- Attiva lo Zap: parte da solo su ogni riga con status "todo".
+- Per rigenerare un asset: rimetti "todo" in quella riga.
+- Fai prima SOLO la riga 1.1 (personaggio). Quando è giusta, caricala come
+  REF-D e poi lancia le righe 1.2 → 1.8, così il personaggio resta identico.
+- Modello: gemini-3-pro-image (Nano Banana Pro, qualità massima).
+  Per prove veloci ed economiche usa gemini-3.1-flash-image.
+- Lo sfondo magenta (#FF00FF) è voluto: lo rimuovo io in automatico.
+
+ALTERNATIVA PIÙ SEMPLICE
+------------------------
+La chiave Gemini configurata nel progetto ha già accesso a Nano Banana.
+Se preferisci, lancio io tutta la generazione da qui in un colpo solo
+(stesse 49 richieste), rimuovo il magenta e ti mando lo zip da approvare.
