@@ -93,7 +93,7 @@ Il prototipo attuale mescola due cose: la lezione è *dentro l'app* e il video �
    comuni.
 4. **Direzione B:** definire il formato delle sezioni del video e produrre la lezione 1 come
    video lineare con capitoli.
-5. Poi: tashkīl completo e sincronizzazione parola per parola (vedi `LEZIONI-APPRESE.md`).
+5. Poi: tashkīl completo e sincronizzazione parola per parola (vedi `RULES-AND-LESSONS-LEARNED.md`).
 
-Riferimenti: `LEZIONI-APPRESE.md` (regole), `ASSET-CATALOGO.md` (grafica),
+Riferimenti: `RULES-AND-LESSONS-LEARNED.md` (regole), `ASSET-CATALOGO.md` (grafica),
 `prompt-sequenziali*.txt` (prompt), branch `ccr-db05bd01-tmb3a3`.
