@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="321 101 376 623">
+<g id="icon-2"  fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Sagittal sketch head and throat, simplified anatomical airway -->
+<path d="M 539 147 Q 474 170 459 243 Q 455 284 463 320 Q 450 351 416 384 L 371 418 Q 357 434 387 447 L 444 460 L 451 493 Q 446 515 464 528 L 479 542 Q 466 564 484 592 Q 509 628 565 638 Q 626 633 651 678" stroke="#FFD95A" />
+<!-- Internal oral cavity and tongue -->
+<path d="M 449 488 Q 496 496 539 482 Q 576 467 605 479" stroke="#F2B623" />
+<path d="M 471 547 Q 528 565 554 549 Q 584 535 607 557" stroke="#F2B623" />
+<!-- throat inner line -->
+<path d="M 607 481 Q 600 544 613 607 L 628 653" stroke="#F2B623" />
+<!-- articulation-point dots -->
+<circle cx="466" cy="466" r="18" fill="#FFD95A"/><circle cx="536" cy="490" r="18" fill="#F2B623"/><circle cx="596" cy="567" r="18" fill="#FFD95A"/>
+
+</g>
+</svg>

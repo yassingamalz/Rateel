@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2400" height="1600" viewBox="0 0 2400 1600">
+<g id="icon-1" transform="translate(0 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- REF-03 icon: side-profile looking LEFT, three arcs left of nose -->
+<path d="M 530 160 C 490 168 462 218 470 280 C 472 316 466 323 441 356 L 393 420 Q 379 444 409 455 L 450 468 L 447 516 Q 439 528 455 542 L 474 559 L 470 587 Q 475 640 530 650 Q 564 655 603 647 L 659 639 Q 681 635 693 659 L 711 689" stroke="#FFD95A" />
+<path d="M 321 454 Q 272 502 321 551" stroke="#F2B623" />
+<path d="M 264 420 Q 193 502 264 580" stroke="#F2B623" />
+<path d="M 207 389 Q 107 502 207 616" stroke="#F2B623" />
+</g>
+<g id="icon-2" transform="translate(800 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Sagittal sketch head and throat, simplified anatomical airway -->
+<path d="M 539 147 Q 474 170 459 243 Q 455 284 463 320 Q 450 351 416 384 L 371 418 Q 357 434 387 447 L 444 460 L 451 493 Q 446 515 464 528 L 479 542 Q 466 564 484 592 Q 509 628 565 638 Q 626 633 651 678" stroke="#FFD95A" />
+<!-- Internal oral cavity and tongue -->
+<path d="M 449 488 Q 496 496 539 482 Q 576 467 605 479" stroke="#F2B623" />
+<path d="M 471 547 Q 528 565 554 549 Q 584 535 607 557" stroke="#F2B623" />
+<!-- throat inner line -->
+<path d="M 607 481 Q 600 544 613 607 L 628 653" stroke="#F2B623" />
+<!-- articulation-point dots -->
+<circle cx="466" cy="466" r="18" fill="#FFD95A"/><circle cx="536" cy="490" r="18" fill="#F2B623"/><circle cx="596" cy="567" r="18" fill="#FFD95A"/>
+
+</g>
+<g id="icon-3" transform="translate(1600 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Small resonant circle linking to a long floating ribbon -->
+<circle cx="265" cy="402" r="75" stroke="#FFD95A" />
+<path d="M 352 405 C 425 350 475 348 521 387 S 616 472 676 407 C 713 368 718 323 695 287" stroke="#F2B623" />
+<path d="M 348 405 C 420 455 478 501 534 460 S 619 417 665 455" stroke="#F2B623" />
+<circle cx="709" cy="271" r="15" fill="#FFD95A" />
+
+</g>
+<g id="icon-4" transform="translate(0 800)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Stylized, gently closed lips: two soft strokes meeting at mouth corners -->
+<path d="M 157 416 Q 252 397 325 351 Q 376 330 408 376 Q 455 332 491 355 Q 562 404 646 412" stroke="#FFD95A" />
+<path d="M 157 416 Q 244 459 320 488 Q 408 524 499 486 Q 572 460 646 412" stroke="#F2B623" />
+<path d="M 166 416 Q 269 425 408 425 Q 546 426 638 413" stroke="#F2B623" />
+
+</g>
+<g id="icon-5" transform="translate(800 800)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Single smooth short horizontal waveform -->
+<path d="M 154 421 C 201 421 220 349 270 349 S 341 491 402 491 S 488 349 554 349 S 624 421 647 421" stroke="#F2B623" />
+<circle cx="151" cy="421" r="18" fill="#FFD95A" />
+<circle cx="650" cy="421" r="18" fill="#FFD95A" />
+
+</g>
+<g id="icon-6" transform="translate(1600 800)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Two parallel continuous elongated sound waves -->
+<path d="M 135 341 C 199 341 213 270 277 270 S 361 410 428 410 S 522 270 586 270 S 660 341 665 341" stroke="#FFD95A" />
+<path d="M 135 486 C 199 486 213 415 277 415 S 361 555 428 555 S 522 415 586 415 S 660 486 665 486" stroke="#F2B623" />
+
+</g>
+</svg>

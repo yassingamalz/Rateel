@@ -1,0 +1,175 @@
+{
+  "project": "Rateel",
+  "screen": "Courses / المسارات التعليمية",
+  "count": 12,
+  "assets": [
+    {
+      "id": "CR-01",
+      "name": "Header Mihrab Arch",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-01-header-mihrab.png",
+      "svg": "assets/courses/decorations/cr-01-header-mihrab.svg",
+      "original_source": "elegant_gold_mihrab_arch_outline.png",
+      "png_dimensions": [
+        2172,
+        724
+      ],
+      "png_sha256": "6c7bfd212889abbafd24389413591cbd9ebd3789dedfdbfb5cf5e6e5e7a6a613",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-02",
+      "name": "Header Open Quran",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-02-open-quran-header.png",
+      "svg": "assets/courses/decorations/cr-02-open-quran-header.svg",
+      "original_source": "elegant_golden_open_qur_an_icon.png",
+      "png_dimensions": [
+        1254,
+        1254
+      ],
+      "png_sha256": "35dd44774c4fd9f90e634aacfb2a851954571af96a9cce5a2d49c31ea7cf12e1",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-03",
+      "name": "Mosque Silhouette",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-03-mosque-silhouette.png",
+      "svg": "assets/courses/decorations/cr-03-mosque-silhouette.svg",
+      "original_source": "a_clean_vector_style_silhouette_illustration_on_a.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "edda967cc6791158c2187f2435b5e52e98cb7e590b22e65057ef5875d3d47357",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-04",
+      "name": "Crescent & Star",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-04-crescent-star.png",
+      "svg": "assets/courses/decorations/cr-04-crescent-star.svg",
+      "original_source": "a_clean_high_resolution_vector_style_icon_on_a_tr.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "a197710c9bdb7b0275e68cf7cb03ecd142b053f4fcb5e2074580f172368be9df",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-05",
+      "name": "Corner Geometric Ornament",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-05-corner-ornament.png",
+      "svg": "assets/courses/decorations/cr-05-corner-ornament.svg",
+      "original_source": "a_decorative_transparent_png_overlay_a_golden_isl.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "6b8f6eb8320de2e4c7e4a8ce7a75c517f34e3f6220f3f7d91129174ce9903b30",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-06",
+      "name": "Ornamental Divider",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-06-title-divider.png",
+      "svg": "assets/courses/decorations/cr-06-title-divider.svg",
+      "original_source": "a_clean_minimalist_png_graphic_on_a_transparent_ba.png",
+      "png_dimensions": [
+        2172,
+        724
+      ],
+      "png_sha256": "2ccc556e2f6a5c8b2485d4558c8e7df7aa861d67ce67019b5b7db6b18da920c0",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-07",
+      "name": "Card Bottom Islamic Pattern",
+      "category": "decorations",
+      "png": "assets/courses/decorations/cr-07-card-pattern.png",
+      "svg": "assets/courses/decorations/cr-07-card-pattern.svg",
+      "original_source": "a_seamless_decorative_islamic_arabesque_geometric.png",
+      "png_dimensions": [
+        2172,
+        724
+      ],
+      "png_sha256": "fe14225b65d69931e4acdfc1a58f35d5eb8171e1225e0e0874d13f378d6e937d",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-08",
+      "name": "Quran on Rehal",
+      "category": "icons",
+      "png": "assets/courses/icons/cr-08-quran-rehal.png",
+      "svg": "assets/courses/icons/cr-08-quran-rehal.svg",
+      "original_source": "a_vector_style_digital_illustration_features_an_op.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "db46637184857db58d15c52f8c00fb0a91d7bb444aa1b2756da19ae6510421d6",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-09",
+      "name": "Tajweed Pronunciation",
+      "category": "icons",
+      "png": "assets/courses/icons/cr-09-pronunciation-profile.png",
+      "svg": "assets/courses/icons/cr-09-pronunciation-profile.svg",
+      "original_source": "a_clean_vector_style_icon_on_a_transparent_backgro.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "8e5a3d2102ac5d3bc702d711f8fa3fc5fc860060cfa0475ee274ed9ab687a99b",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-10",
+      "name": "Locked Course Icon",
+      "category": "icons",
+      "png": "assets/courses/icons/cr-10-lock.png",
+      "svg": "assets/courses/icons/cr-10-lock.svg",
+      "original_source": "a_clean_vector_style_icon_illustration_on_a_trans.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "1ce0ea314b5c9030d0b80fd3085adb75fe2e8df6d8876f7f5a215267f86cfb7c",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-11",
+      "name": "Level Star (glowing)",
+      "category": "icons",
+      "png": "assets/courses/icons/cr-11-level-star.png",
+      "svg": "assets/courses/icons/cr-11-level-star.svg",
+      "original_source": "a_clean_isolated_graphic_of_a_glowing_golden_star.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "c3e84ecf4828e8d89cf93a75eefb547a6e6eb2c1f8861390f6c0ade1a9884413",
+      "svg_traced": true
+    },
+    {
+      "id": "CR-12",
+      "name": "Play Glyph",
+      "category": "icons",
+      "png": "assets/courses/icons/cr-12-play.png",
+      "svg": "assets/courses/icons/cr-12-play.svg",
+      "original_source": "a_clean_graphic_illustration_on_a_transparent_back.png",
+      "png_dimensions": [
+        1536,
+        1024
+      ],
+      "png_sha256": "226e7345313780a603a01657bc1f74a403d612b1dfa11f5e58199334ef0f6c8b",
+      "svg_traced": true
+    }
+  ]
+}

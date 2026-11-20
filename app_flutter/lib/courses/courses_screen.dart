@@ -368,60 +368,85 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
     final cx = g.headerCenterX;
     return [
-      // Lattice corners (shared library), faint as in the reference.
+      // Corner ornaments (CR-05), top left and mirrored top right.
       Positioned(
-        left: -g.u * 1,
-        top: -g.u * 1,
-        width: g.u * 26,
+        left: 0,
+        top: 0,
+        width: g.u * 24.7,
+        height: g.u * 24.7 * 924 / 1096,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.45,
-            child: Image.asset('assets/images/lattice-corner-left.webp'),
+            opacity: 0.75,
+            child: SvgPicture.asset('assets/ui/decor/corner_ornament.svg'),
           ),
         ),
       ),
       Positioned(
-        right: g.u * 1,
-        top: -g.u * 2,
-        width: g.u * 19,
+        right: g.u * 1.4,
+        top: 0,
+        width: g.u * 17.6,
+        height: g.u * 17.6 * 924 / 1096,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.45,
-            child: Image.asset('assets/images/lattice-corner-right.webp'),
-          ),
-        ),
-      ),
-      // Header arch. PLACEHOLDER: the side-nav arch (shared library) until
-      // the owner delivers the wide header arch (prompt P1).
-      Positioned(
-        left: cx - g.u * 51.4,
-        top: g.u * 0.2,
-        width: g.u * 102.8,
-        height: g.u * 102.8 * 222 / 720,
-        child: settle(
-          IgnorePointer(
-            child: Opacity(
-              opacity: 0.85,
-              child: SvgPicture.asset(
-                'assets/ui/decor/arch.svg',
-                fit: BoxFit.fill,
-              ),
+            opacity: 0.6,
+            child: Transform.flip(
+              flipX: true,
+              child: SvgPicture.asset('assets/ui/decor/corner_ornament.svg'),
             ),
           ),
         ),
       ),
-      // Open-book emblem on the arch apex: the outline Quran icon of the nav.
+      // Mosque silhouette (CR-03), faint, left of the title.
       Positioned(
-        left: cx - g.u * 7.85,
-        top: g.u * 11.0 - g.u * 7.85,
-        width: g.u * 15.7,
-        height: g.u * 15.7,
+        left: g.u * 11.75,
+        top: g.u * 12.3,
+        width: g.u * 40,
+        height: g.u * 40 * 542 / 900,
+        child: settle(
+          IgnorePointer(
+            child: Image.asset(
+              'assets/ui/decor/mosque.webp',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      ),
+      // Crescent and star (CR-04), top right.
+      Positioned(
+        right: g.w - (g.w - g.u * 30.8) - g.u * 5.35,
+        top: g.u * 12.3 - g.u * 5.75,
+        width: g.u * 10.7,
+        height: g.u * 11.5,
+        child: settle(
+          IgnorePointer(
+            child: SvgPicture.asset('assets/ui/decor/crescent_star.svg'),
+          ),
+        ),
+      ),
+      // Header mihrab arch (CR-01).
+      Positioned(
+        left: cx - g.u * 51.4,
+        top: g.u * 0.6,
+        width: g.u * 102.8,
+        height: g.u * 102.8 * 578 / 1910,
         child: settle(
           IgnorePointer(
             child: SvgPicture.asset(
-              'assets/ui/nav/quran.svg',
-              theme: const SvgTheme(currentColor: RateelColors.gold),
+              'assets/ui/decor/header_arch.svg',
+              fit: BoxFit.fill,
             ),
+          ),
+        ),
+      ),
+      // Open Quran emblem on the arch apex (CR-02).
+      Positioned(
+        left: cx - g.u * 7.15,
+        top: g.u * 11.4 - g.u * 3.25,
+        width: g.u * 14.3,
+        height: g.u * 6.5,
+        child: settle(
+          IgnorePointer(
+            child: SvgPicture.asset('assets/ui/decor/header_book.svg'),
           ),
         ),
       ),
@@ -445,13 +470,17 @@ class _CoursesScreenState extends State<CoursesScreen>
         ),
       ),
       Positioned(
-        left: cx - g.u * 23.5,
-        top: g.u * 31.4 - g.u * 1.2,
-        width: g.u * 47,
-        height: g.u * 2.4,
+        // Title divider (CR-06).
+        left: cx - g.u * 24,
+        top: g.u * 31.4 - g.u * 2.2,
+        width: g.u * 48,
+        height: g.u * 4.4,
         child: settle(
           IgnorePointer(
-            child: CustomPaint(painter: _DividerPainter(u: g.u)),
+            child: SvgPicture.asset(
+              'assets/ui/decor/title_divider.svg',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -536,60 +565,6 @@ class _Background extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Thin gold divider under the title: two lines fading outward, a small bar
-/// next to each, and an outlined diamond in the middle.
-class _DividerPainter extends CustomPainter {
-  _DividerPainter({required this.u});
-
-  final double u;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final c = size.center(Offset.zero);
-    final diamond = u * 1.35;
-    final gap = u * 3.15;
-    final line = Paint()..strokeWidth = 2;
-    for (final s in [-1.0, 1.0]) {
-      final inner = c.dx + s * gap;
-      final outer = s < 0 ? 0.0 : size.width;
-      // Bright next to the diamond, fading outward on both sides.
-      line.shader = LinearGradient(
-        begin: s < 0 ? Alignment.centerRight : Alignment.centerLeft,
-        end: s < 0 ? Alignment.centerLeft : Alignment.centerRight,
-        stops: const [0, 0.6, 1],
-        colors: [
-          RateelColors.gold,
-          RateelColors.gold,
-          RateelColors.gold.withValues(alpha: 0),
-        ],
-      ).createShader(Rect.fromPoints(Offset(inner, 0), Offset(outer, 1)));
-      canvas.drawLine(Offset(inner, c.dy), Offset(outer, c.dy), line);
-      // Short bar between the line and the diamond.
-      canvas.drawCircle(
-        Offset(c.dx + s * (gap - u * 0.2), c.dy),
-        u * 0.28,
-        Paint()..color = RateelColors.gold,
-      );
-    }
-    final path = Path()
-      ..moveTo(c.dx, c.dy - diamond)
-      ..lineTo(c.dx + diamond, c.dy)
-      ..lineTo(c.dx, c.dy + diamond)
-      ..lineTo(c.dx - diamond, c.dy)
-      ..close();
-    canvas.drawPath(
-      path,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2
-        ..color = RateelColors.gold,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_DividerPainter old) => old.u != u;
 }
 
 class _ConnectorPainter extends CustomPainter {

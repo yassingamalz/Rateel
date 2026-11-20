@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="155 142 495 530">
+<g id="icon-5"  fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Floating three-point crown above an open Quran -->
+<path d="M 300 292 L 290 217 L 355 251 L 399 182 L 450 251 L 519 217 L 503 292 Z" stroke="#F2B623" stroke-width="31" />
+<circle cx="290" cy="217" r="16" fill="#FFD95A" stroke="none"/>
+<circle cx="399" cy="182" r="16" fill="#FFD95A" stroke="none"/>
+<circle cx="519" cy="217" r="16" fill="#FFD95A" stroke="none"/>
+<path d="M 400 416 Q 333 369 201 388 L 201 574 Q 331 554 400 626 Q 475 554 604 574 L 604 388 Q 468 368 400 416 Z" stroke="#F2B623" />
+<path d="M 400 418 L 400 626" stroke="#FFD95A" stroke-width="32" />
+<path d="M 225 434 Q 322 427 377 459 M 576 434 Q 474 427 425 459" stroke="#FFD95A" stroke-width="20" /></g>
+</svg>

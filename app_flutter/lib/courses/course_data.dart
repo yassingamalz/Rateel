@@ -19,8 +19,7 @@ class Course {
   final String title;
   final String description;
 
-  /// Course icon from the shared library (`assets/ui/courses/`). Null until the
-  /// owner delivers it (ChatGPT prompts in docs/flutter/prompts/03-courses/).
+  /// Course icon from the shared library (`assets/ui/courses/`, ASSETS.md).
   final String? icon;
   final bool locked;
   final double progress;
@@ -28,51 +27,65 @@ class Course {
 
 const courses = <Course>[
   Course(
+    icon: 'assets/ui/courses/course_01.svg',
     title: 'أساسيات التجويد',
     description: 'المبادئ الأساسية للتجويد وقواعد التلاوة الصحيحة للمبتدئين',
-    icon: 'assets/ui/courses/course_01.webp',
     locked: false,
     progress: 0.3,
   ),
   Course(
+    icon: 'assets/ui/courses/course_02.svg',
     title: 'النون والميم المشددتان',
     description:
         'دراسة متعمقة لأحكام النون والميم المشددتين في التلاوة القرآنية',
   ),
   Course(
+    icon: 'assets/ui/courses/course_03.svg',
     title: 'مخارج الحروف',
     description: 'دورة متخصصة في مخارج الحروف العربية وصفاتها',
   ),
   Course(
+    icon: 'assets/ui/courses/course_04.svg',
     title: 'النون الساكنة والتنوين',
     description: 'دراسة شاملة لأحكام النون الساكنة والتنوين',
   ),
   Course(
+    icon: 'assets/ui/courses/course_05.svg',
     title: 'الميم الساكنة',
     description: 'تعمق في أحكام الميم الساكنة وتطبيقاتها',
   ),
   Course(
+    icon: 'assets/ui/courses/course_06.svg',
     title: 'المد الطبيعي',
     description: 'أساسيات المد الطبيعي وقواعده الأساسية',
   ),
   Course(
+    icon: 'assets/ui/courses/course_07.svg',
     title: 'المد الفرعي',
     description: 'دراسة أنواع المد الفرعي وتطبيقاته',
   ),
   Course(
+    icon: 'assets/ui/courses/course_08.svg',
     title: 'مد البدل',
     description: 'فهم وتطبيق أحكام مد البدل في التلاوة',
   ),
   Course(
+    icon: 'assets/ui/courses/course_09.svg',
     title: 'المد العارض للسكون',
     description: 'دراسة المد العارض للسكون وأحكامه',
   ),
-  Course(title: 'المد اللازم', description: 'تعمق في دراسة أنواع المد اللازم'),
   Course(
+    icon: 'assets/ui/courses/course_10.svg',
+    title: 'المد اللازم',
+    description: 'تعمق في دراسة أنواع المد اللازم',
+  ),
+  Course(
+    icon: 'assets/ui/courses/course_11.svg',
     title: 'القلقلة',
     description: 'دراسة أحكام القلقلة وتطبيقاتها في التلاوة',
   ),
   Course(
+    icon: 'assets/ui/courses/course_12.svg',
     title: 'تجويد متقدم',
     description: 'موضوعات متقدمة في علم التجويد والتلاوة المتميزة',
   ),

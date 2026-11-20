@@ -130,14 +130,13 @@ class _CourseCardState extends State<CourseCard> {
     );
   }
 
-  /// Faint tone-on-tone star lattice along the bottom (shared star tile,
-  /// tinted emerald).
+  /// Faint tone-on-tone lattice along the bottom (CR-07, tinted emerald).
   Widget _pattern(double u) {
-    final h = u * 9;
+    final h = u * 72.4 * 392 / 2172;
     return Positioned(
       left: 0,
       right: 0,
-      bottom: 0,
+      bottom: -u * 3,
       height: h,
       child: IgnorePointer(
         child: ShaderMask(
@@ -147,25 +146,12 @@ class _CourseCardState extends State<CourseCard> {
             end: Alignment.bottomCenter,
             colors: [Color(0x00000000), Color(0xFF000000)],
           ).createShader(r),
-          child: ClipRect(
-            child: OverflowBox(
-              alignment: Alignment.centerRight,
-              maxWidth: double.infinity,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (var n = 0; n < 7; n++)
-                    SvgPicture.asset(
-                      'assets/ui/decor/star_tile.svg',
-                      height: h,
-                      width: h * 216 / 170,
-                      colorFilter: const ColorFilter.mode(
-                        RateelColors.cardPattern,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                ],
-              ),
+          child: SvgPicture.asset(
+            'assets/ui/decor/card_pattern.svg',
+            fit: BoxFit.fill,
+            colorFilter: const ColorFilter.mode(
+              RateelColors.cardPattern,
+              BlendMode.srcIn,
             ),
           ),
         ),
@@ -216,8 +202,12 @@ class _CourseCardState extends State<CourseCard> {
             textDirection: TextDirection.rtl,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // PLACEHOLDER glyph until the owner's UI glyph set (prompt P6).
-              Icon(Icons.star_rounded, size: u * 4.4, color: RateelColors.gold),
+              SvgPicture.asset(
+                'assets/ui/glyphs/star.svg',
+                width: u * 5.1,
+                height: u * 5.1,
+                theme: const SvgTheme(currentColor: RateelColors.gold),
+              ),
               SizedBox(width: u * 1.2),
               Flexible(
                 child: FittedBox(
@@ -237,7 +227,7 @@ class _CourseCardState extends State<CourseCard> {
           ),
         ),
       ),
-      _icon(u, right: u * 5.9, top: u * 3.6, height: u * 8.6),
+      _icon(u, right: u * 5.5, top: u * 4.1, height: u * 8.1, width: u * 14),
       _title(u, c.title, centerY: u * 17.0),
       _rule(u, centerY: u * 23.6, right: u * 7.3, width: u * 51.5),
       _description(u, c.description, firstCenterY: u * 27.7),
@@ -253,7 +243,13 @@ class _CourseCardState extends State<CourseCard> {
             color: RateelColors.playFill,
             border: Border.all(color: RateelColors.goldHighlight, width: 2.6),
           ),
-          child: CustomPaint(painter: _PlayGlyph()),
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            'assets/ui/glyphs/play.svg',
+            width: u * 5.3,
+            height: u * 5.3,
+            theme: const SvgTheme(currentColor: RateelColors.gold),
+          ),
         ),
       ),
       // Progress bar.
@@ -320,11 +316,12 @@ class _CourseCardState extends State<CourseCard> {
           color: RateelColors.lockDisc,
           border: Border.all(color: RateelColors.lockRim, width: 1.6),
         ),
-        // PLACEHOLDER glyph until the owner's UI glyph set (prompt P6).
-        child: Icon(
-          Icons.lock_rounded,
-          size: u * 3.7,
-          color: RateelColors.lockGlyph,
+        alignment: Alignment.center,
+        child: SvgPicture.asset(
+          'assets/ui/glyphs/lock.svg',
+          width: u * 4.2,
+          height: u * 4.2,
+          theme: const SvgTheme(currentColor: RateelColors.lockGlyph),
         ),
       ),
     );
@@ -344,7 +341,13 @@ class _CourseCardState extends State<CourseCard> {
   List<Widget> _lockedContent(double u) {
     final c = widget.course;
     return [
-      _icon(u, centerX: u * 72.4 * 0.475, top: u * 3.2, height: u * 9.6),
+      _icon(
+        u,
+        centerX: u * 72.4 * 0.479,
+        top: u * 2.8,
+        height: u * 10,
+        width: u * 13,
+      ),
       _title(u, c.title, centerY: u * 17.2, right: u * 5.7),
       _rule(u, centerY: u * 23.9, right: u * 6.4, width: u * 54.8),
       _description(u, c.description, firstCenterY: u * 28.2, right: u * 5.7),
@@ -357,17 +360,16 @@ class _CourseCardState extends State<CourseCard> {
     double? centerX,
     required double top,
     required double height,
+    required double width,
   }) {
     final asset = widget.course.icon;
-    final w = height * 1.4;
-    // PLACEHOLDER: the nav's outline Quran glyph in gold for the courses
-    // whose icon is not delivered yet (prompts P4/P5).
-    final child = asset != null
-        ? Image.asset(asset, fit: BoxFit.contain, alignment: Alignment.center)
-        : SvgPicture.asset(
-            'assets/ui/nav/quran.svg',
-            theme: const SvgTheme(currentColor: RateelColors.gold),
-          );
+    final w = width;
+    // Course icons (shared library, assets/ui/courses/): right-aligned on the
+    // course in progress, centred on locked cards.
+    final align = right != null ? Alignment.centerRight : Alignment.center;
+    final child = asset == null
+        ? const SizedBox.shrink()
+        : SvgPicture.asset(asset, fit: BoxFit.contain, alignment: align);
     return Positioned(
       right: right,
       left: centerX == null ? null : centerX - w / 2,
@@ -462,37 +464,6 @@ class _CourseCardState extends State<CourseCard> {
       ),
     );
   }
-}
-
-/// Gold play triangle with softly rounded corners.
-class _PlayGlyph extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final s = size.width;
-    final path = Path()
-      ..moveTo(s * 0.40, s * 0.30)
-      ..lineTo(s * 0.70, s * 0.50)
-      ..lineTo(s * 0.40, s * 0.70)
-      ..close();
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = RateelColors.gold
-        ..style = PaintingStyle.fill
-        ..strokeJoin = StrokeJoin.round,
-    );
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = RateelColors.gold
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = s * 0.06
-        ..strokeJoin = StrokeJoin.round,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_PlayGlyph old) => false;
 }
 
 /// Card rim. Locked: 4 px emerald glass edge, lighter at the top and bright at

@@ -64,6 +64,7 @@ flutter:
     - assets/ui/controls/
     - assets/ui/decor/
     - assets/ui/courses/
+    - assets/ui/glyphs/
   fonts:
     - family: ReadexPro
       fonts:

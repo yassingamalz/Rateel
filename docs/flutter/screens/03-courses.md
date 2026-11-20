@@ -1,6 +1,6 @@
 # Screen 03: courses / learning paths (المسارات التعليمية)
 
-Status: 🟡 v2 built (critic v1 → v2), course-completion sequence added; waiting for the owner's review and the assets P1–P6
+Status: 🟡 v4 with the owner's assets; critic v3 (no exclusions) running; open owner questions below
 Branch: `flutter/03-courses` (contains the approved side navigation)
 Reference: `docs/flutter/screens/03-courses/reference.webp` (1847×851, glassy gamified, dark)
 Code: `app_flutter/lib/courses/` (`courses_screen.dart`, `course_card.dart`, `course_data.dart`)
@@ -28,17 +28,8 @@ replaces it. Horizontal positions are measured from the right edge of the conten
 Code: background, cards (glass, rims, glow, shadows), texts, divider, pill, play triangle, progress bar, path
 line and nodes, toast, motion.
 
-| # | Asset | State |
-|---|---|---|
-| P1 | Wide header arch (thin gold line with tails) | **to generate** (placeholder: side-nav `arch.svg`, shape differs) |
-| — | Open-book emblem on the arch | reused `ui/nav/quran.svg` in gold (to confirm) |
-| P2 | Mosque silhouette, faint, left | **to generate** (absent for now) |
-| P3 | Gold crescent and star | **to generate** (absent for now) |
-| — | Lattice corners | reused (`images/lattice-corner-*.webp`, 32% opacity) |
-| — | Card bottom pattern | reused (`ui/decor/star_tile.svg`, tinted emerald) |
-| — | Course 01 icon (Quran on rehal) | reused from `lesson-production` (`icons/mushaf.webp`) → `ui/courses/course_01.webp` |
-| P4, P5 | Course icons 02–12 | **to generate** (placeholder: outline book) |
-| P6 | Lock, star, play glyphs (SVG, currentColor) | **to generate** (placeholder: Material icons; play drawn in code) |
+All assets delivered by the owner (2026-11-20) and placed in v4; list and evaluation in `ASSETS.md`
+("Courses (screen 03)"). Prompts P1–P6 are fulfilled.
 
 Prompts: `docs/flutter/prompts/03-courses/images-v1.txt` (also pasted in the chat).
 Critic: `03-courses/critic-v1.md`, `critic-v2.md`; comparisons `compare-v1.jpg`, `compare-v2.jpg`; demo `demo-v3.mp4`;

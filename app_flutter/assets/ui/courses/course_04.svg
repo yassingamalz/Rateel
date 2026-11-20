@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="144 232 611 291">
+<g id="icon-3"  fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- Small resonant circle linking to a long floating ribbon -->
+<circle cx="265" cy="402" r="75" stroke="#FFD95A" />
+<path d="M 352 405 C 425 350 475 348 521 387 S 616 472 676 407 C 713 368 718 323 695 287" stroke="#F2B623" />
+<path d="M 348 405 C 420 455 478 501 534 460 S 619 417 665 455" stroke="#F2B623" />
+<circle cx="709" cy="271" r="15" fill="#FFD95A" />
+
+</g>
+</svg>
