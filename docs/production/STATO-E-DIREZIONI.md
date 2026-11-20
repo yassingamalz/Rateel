@@ -9,7 +9,7 @@ Documento di passaggio tra sessioni. Leggerlo per primo.
 | Tema | Stato | Cosa serve per sbloccare |
 |---|---|---|
 | Asset grafici, batch 2 | ✅ Importati 9 su 11 | Scartati 2 (personaggio con volto) |
-| **Asset grafici, batch 3** | ⏳ In attesa della generazione | 3 prompt in `prompt-sequenziali-3.txt` (ZAPI FLOW) |
+| Asset grafici, batch 3 | ✅ Importati 3 su 3 | **Set di asset completo** |
 | **Voce della narrazione** | ⏳ In fase di scelta | Campioni in `voices/samples/` (01–15), provino unico in `voices/rateel-provino-voci.mp3`, nomi in `voices/elenco-voci.txt` |
 | Asset grafici, batch 1 | ✅ Importati | 50 asset WebP in `src/assets/images/guided/`, stato in `ASSET-CATALOGO.md` |
 | Lezione 1 (prototipo) | ✅ Funzionante | Motore «guided» in `src/app/features/lessons/guided-lesson/`, render in `videos/` |
@@ -87,7 +87,7 @@ Il prototipo attuale mescola due cose: la lezione è *dentro l'app* e il video �
 
 ## 3. Prossimi passi (quando si riprende)
 
-1. Ricevere il batch 3 degli asset → conversione → aggiornare `ASSET-CATALOGO.md`.
+1. ✅ Asset completi (batch 1–3).
 2. Scegliere la voce (o le voci: shaykh / donna / bambino).
 3. **Direzione A:** analisi per il passaggio ad Android nativo + design dei componenti interattivi
    comuni.

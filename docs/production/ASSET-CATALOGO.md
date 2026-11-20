@@ -9,7 +9,7 @@ Conversione: `scripts/assets/key-magenta.py` + `scripts/assets/mapping-batch1.cs
 | mascot/ | mascot-parts | ⚠️ parti troppo piccole (sostituite dai file sotto) |
 | mascot/ | mascot-arm-left, mascot-arm-right | ✅ batch 2 |
 | mascot/ | mascot-mic, mascot-quran, mascot-encourage | ✅ batch 2 |
-| mascot/ | mascot-body (senza braccia) | ❌ batch 2 scartato: la lanterna aveva un **volto** → rifare (batch 3, prompt 1) |
+| mascot/ | mascot-body (senza braccia) | ✅ batch 3 (senza volto) |
 | icons/ | izhar, idgham, iqlab, ikhfa, ghunna, madd, qalqala, tafkhim, sifat | ✅ pronti |
 | icons/ | mushaf, sharh, listen, record, compare, nutq, trophy, quiz, target, video | ✅ pronti |
 | illustrations/ | letter-emerging, shield-tongue, lahn-jali, lahn-khafi, book-light, book-light-rays, medal-lesson | ✅ pronti |
@@ -18,8 +18,8 @@ Conversione: `scripts/assets/key-magenta.py` + `scripts/assets/mapping-batch1.cs
 | backgrounds/ | bg-stage, bg-listen, bg-quiz, bg-celebrate, bg-intro | ✅ pronti |
 | effects/ | star-gold, confetti-set | ✅ pronti |
 | effects/ | sparkle, glow | ✅ batch 2 (su nero: usare `mix-blend-mode: screen`) |
-| effects/ | light-rays | ⚠️ batch 2 contiene anche un emblema al centro → rifare (batch 3, prompt 3) |
-| youtube/ | thumbnail-bg | ❌ batch 2 scartato: personaggio con un **volto** → rifare (batch 3, prompt 2) |
+| effects/ | light-rays | ✅ batch 3 (solo raggi, su nero: `mix-blend-mode: screen`) |
+| youtube/ | thumbnail-bg | ✅ batch 3 (senza volto, spazio a sinistra per il titolo) |
 
 ## Batch 2 — `prompt-sequenziali-2.txt` (11 prompt, da ZAPI FLOW)
 
@@ -38,7 +38,9 @@ Conversione: `scripts/assets/key-magenta.py` + `scripts/assets/mapping-batch1.cs
 Riferimenti per Flow: REF-A = `reference/icon-library.webp`, REF-B = `../../src/assets/images/guided/backgrounds/bg-stage.webp`,
 REF-C = `reference/lesson-screen-mockup.webp`, REF-D = `mascot-sheet` (personaggio).
 
-## Batch 3: `prompt-sequenziali-3.txt` (3 prompt)
+## Batch 3: `prompt-sequenziali-3.txt` (3 prompt) ✅ ricevuto e importato
+
+**Set di asset completo: nessun elemento mancante.**
 
 1. mascot-body: senza braccia e **senza volto**
 2. youtube-thumbnail-bg: personaggio **senza volto**
