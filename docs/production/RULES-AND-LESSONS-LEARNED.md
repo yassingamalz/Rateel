@@ -45,8 +45,19 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
    If an element is missing, **ask the owner** for it (to be produced with ChatGPT / Google Flow)
    and provide the prompts. Do not substitute with self-made drawings, CSS art or placeholders
    presented as final.
-10. **Work on the branch `lesson-production`.** Commit and push all production material there.
-11. **Communicate with the owner in Italian.** Write documentation and rules in English.
+10. **Style per direction (owner's decision):**
+    - **App (direction A):** glassy gamified, **dark AND light** mode (light already existed in the app).
+    - **Lessons (direction B):** glassy gamified, **dark only** for now.
+11. **First wave starts with chapter 10.1 «النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ»** (see the tracker).
+12. **Animation principles:** **morphing** transitions (elements transform into each other instead
+    of cutting); a style that is **light on the eye** (calm, few things moving at once, no
+    flashing); and **clear explanations** (one idea per scene, the visual always matches the words).
+13. **ChatGPT can generate GIFs.** When an element must move (e.g. airflow through the nose,
+    lips closing), ask the owner for a GIF and give the exact prompt
+    (`docs/production/prompts/<lesson>/gifs.txt`). Still images go to ZAPI FLOW
+    (`images.txt`, one prompt per line).
+14. **Work on the branch `lesson-production`.** Commit and push all production material there.
+15. **Communicate with the owner in Italian.** Write documentation and rules in English.
 
 ---
 
