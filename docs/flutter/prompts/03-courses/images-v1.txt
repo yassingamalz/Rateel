@@ -1,0 +1,49 @@
+Screen 03 (courses) asset prompts, v1 (2026-11-20). Attach to every prompt: REF-03 =
+docs/flutter/screens/03-courses/reference.webp (lesson-production: docs/design/glassy-gamified/screens/03-corsi.webp).
+Reused, no prompt needed: card bottom pattern (ui/decor/star_tile.svg), lattice corners, course 01 icon
+(lesson-production icons/mushaf.webp), emblem on the arch (ui/nav/quran.svg, to confirm).
+
+=== P1 header arch ===
+Use the attached image REF-03 as the strict style guide. I need ONLY the thin gold header arch that frames the title «المسارات التعليمية» at the top centre, isolated, without the title, without the book emblem, without any other element.
+Shape, exactly as in REF-03: a wide Islamic ogee arch drawn as ONE fine continuous line. Pointed onion peak at the top centre; from the peak the line descends on each side in a smooth S curve, makes a small inward curl/shoulder, then widens into a broad rounded shoulder, drops almost vertically, and at the bottom turns outward into long horizontal tails that fade out to transparent at both ends. Perfectly symmetric left/right.
+Line: warm metallic gold (top #F0CB70, middle #C69B3D, bottom #896925), about 3 px thick at 2000 px width, uniform, soft light sheen, no glow halo, no fill inside.
+Output: an SVG file (single path, stroke only, viewBox about 2000×560, no filters, no embedded raster) AND a transparent PNG 2000×560 of the same arch. No text, no watermark.
+
+=== P2 mosque silhouette ===
+Use the attached image REF-03 as the strict style guide. I need ONLY the faint mosque silhouette on the left of the header (behind the lattice corner, left of the title), isolated.
+Content as in REF-03: one large onion dome with a small crescent finial, one tall slender minaret on its left with a small dome and a balcony, a low base building with three arched windows, and a few small low domes along the bottom. Flat silhouette, no outlines, no gold.
+Colour: muted emerald green slightly lighter than the background (top #3F7A55, bottom #1A4A35), soft and low contrast, the whole silhouette fading to fully transparent towards the bottom.
+Output: transparent PNG, 1600×1200, subject large and centred, no background, no shadow, no text, no watermark.
+
+=== P3 crescent and star ===
+Use the attached image REF-03 as the strict style guide. I need ONLY the gold crescent moon with the small five-pointed star at the top right of REF-03, isolated.
+Crescent opening to the right, the star sitting inside the opening, slightly above the middle, exactly as in REF-03. Smooth warm metallic gold (highlight #FFD95A, mid #E0A92A, shadow #B5850A), soft bevel, no glow halo.
+Output: an SVG (filled paths, linear gradient allowed, no filters) AND a transparent PNG 1024×1024. No text, no watermark.
+
+=== P4 course icons 02-07 (sheet) ===
+Use the attached image REF-03 as the strict style guide for the icon style: the gold head-with-sound-waves icon on the second card of REF-03 (flat warm-gold line glyph, line weight about 6% of the icon size, rounded ends, a few small solid gold accents, no 3D, no glass, no circle or container behind).
+Make a sheet of 6 icons in the same style, arranged in a 3×2 grid on a transparent background, each icon centred in its own cell with generous equal padding, all the same visual size and line weight:
+1) head in side profile (simple outline) with three small sound waves coming out of the nose — exactly like REF-03;
+2) head in side cross-section showing mouth, tongue and throat, with three small dots marking articulation points;
+3) a small circle linked to a flowing ribbon line (soft nasal sound, abstract);
+4) a pair of gently closed lips;
+5) a short smooth wave stretching horizontally;
+6) two parallel longer smooth waves stretching horizontally.
+Colour: gold #F2B623 with light highlights #FFD95A. Output: transparent PNG 2400×1600 (cells 800×800). No text, no letters, no numbers, no watermark.
+
+=== P5 course icons 08-12 (sheet) ===
+Use the attached image REF-03 as the strict style guide for the icon style: the gold head-with-sound-waves icon on the second card of REF-03 (flat warm-gold line glyph, line weight about 6% of the icon size, rounded ends, a few small solid gold accents, no 3D, no glass, no circle or container behind).
+Make a sheet of 6 cells in a 3×2 grid on a transparent background (5 icons + the 6th cell empty), each icon centred in its own cell with generous equal padding, all the same visual size and line weight:
+1) a smooth wave that turns into a curved arrow;
+2) a long smooth wave ending in a small solid stop dot;
+3) a long smooth wave held by a small vertical bar, like a lock;
+4) three concentric echo arcs bouncing up from a small point;
+5) a small crown floating above an open book.
+Colour: gold #F2B623 with light highlights #FFD95A. Output: transparent PNG 2400×1600 (cells 800×800). No text, no letters, no numbers, no watermark.
+
+=== P6 small UI glyphs (lock, star, play) ===
+Use the attached image REF-03 as the strict style guide. I need three small UI glyphs exactly as drawn in REF-03, as separate SVG files, single colour using fill="currentColor", no strokes outside the path, no filters, viewBox 0 0 64 64, glyph centred with 4 px padding:
+1) lock.svg: the padlock inside the round buttons of the locked cards (rounded body, shackle on top, small keyhole);
+2) star.svg: the five-pointed star of the «مستوى مبتدئ» pill, slightly rounded points;
+3) play.svg: the play triangle of the active card, slightly rounded corners.
+Also give a PNG preview of the three on a dark green background #023328.

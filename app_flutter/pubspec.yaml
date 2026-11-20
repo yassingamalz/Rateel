@@ -63,6 +63,7 @@ flutter:
     - assets/ui/nav/
     - assets/ui/controls/
     - assets/ui/decor/
+    - assets/ui/courses/
   fonts:
     - family: ReadexPro
       fonts:

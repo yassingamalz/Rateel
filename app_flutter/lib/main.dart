@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'courses/courses_screen.dart';
 import 'nav/side_nav.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
@@ -38,7 +39,9 @@ class RateelApp extends StatelessWidget {
             Directionality(textDirection: TextDirection.rtl, child: child!),
         home: Scaffold(
           body: SideNavScaffold(
-            builder: (context, selected) => SectionPlaceholder(index: selected),
+            builder: (context, selected) => selected == 0
+                ? const CoursesScreen()
+                : SectionPlaceholder(index: selected),
           ),
         ),
       ),

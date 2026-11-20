@@ -47,6 +47,24 @@ class RateelColors {
   static const hamburger = Color(0xFFEFEACF);
   static const countText = Color(0xFF132C1A);
   static const activeGlyph = Color(0xFF06291C);
+
+  // Screen 03, courses (sampled from reference 03, critic-v1 of 03-courses).
+  // Proposed tokens: the owner confirms them with the screen.
+  static const contentTop = Color(0xFF023328);
+  static const contentBottom = Color(0xFF00271D);
+  static const cardTop = Color(0xFF033529);
+  static const cardMid = Color(0xFF012E23);
+  static const cardBottom = Color(0xFF023D2E);
+  static const cardRim = Color(0xFF27654F); // locked card rim, 3 px
+  static const cardRimDark = Color(0xFF144837); // outer edge of the rim
+  static const pathLine = Color(0xFFD1A93C);
+  static const progressTrack = Color(0xFF265343);
+  static const progressFill = Color(0xFFEBB335);
+  static const playFill = Color(0xFF43552A);
+  static const lockDisc = Color(0xFF01261E);
+  static const lockRim = Color(0xFF1A533F);
+  static const lockGlyph = Color(0xFFDAD7BF);
+  static const pillFill = Color(0xFF063324);
 }
 
 /// Text in Readex Pro (variable font): the closest match to the ChatGPT titles.
