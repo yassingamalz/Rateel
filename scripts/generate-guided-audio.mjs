@@ -39,6 +39,8 @@ const flag = (name, def) => {
 const FORCE = args.includes('--force');
 if (FORCE) args.splice(args.indexOf('--force'), 1);
 const VOICE = flag('voice', 'Charon');
+// Folder for the shared feedback lines, so a voice test does not overwrite the current ones.
+const COMMON_DIR = flag('common-dir', 'common');
 const MODEL = flag('model', 'gemini-3.8-flash-tts');
 const KEY = process.env.GEMINI_API_KEY;
 
@@ -201,7 +203,7 @@ async function main() {
       }
     }
     for (const [key, text] of Object.entries(lesson.common ?? {})) {
-      await queueLine(`common/${key}.mp3`, text);
+      await queueLine(`${COMMON_DIR}/${key}.mp3`, text);
     }
   }
 

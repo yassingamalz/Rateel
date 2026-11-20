@@ -2,7 +2,8 @@
 // CDP screencast frames into ffmpeg at a constant 30 fps. Media playback is logged
 // so mix.py can rebuild the soundtrack in sync.
 // usage: node record2.js <theme: ornate|glow|glassy|keep> <out-dir>
-// env: LESSON_URL (app path of the lesson), STEPS (number of steps), MISTAKE (step index with one deliberate wrong answer)
+// env: LESSON_URL (app path of the lesson), STEPS (number of steps), MISTAKE (step index with one deliberate wrong answer),
+//      CONTENT_FROM (content file to load instead, e.g. lesson-10-1-orus for a voice test)
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const fs = require('fs');
@@ -17,7 +18,9 @@ fs.mkdirSync(out, { recursive: true });
   const ctx = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 2, permissions: ['microphone'] });
   const p = await ctx.newPage();
   await p.route('**/content/guided/*.json', async (route) => {
-    const res = await route.fetch();
+    // CONTENT_FROM=<lessonId>: play another content file (e.g. a voice test) on the same lesson route
+    const from = process.env.CONTENT_FROM;
+    const res = await route.fetch(from ? { url: route.request().url().replace(/[^/]+\.json$/, from + '.json') } : undefined);
     const json = await res.json();
     if (theme !== 'keep') json.theme = theme;
     await route.fulfill({ response: res, json });
