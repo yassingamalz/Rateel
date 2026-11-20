@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" color="#F2E9D2" role="img" aria-label="Certificate with award seal">
+  <g stroke="currentColor" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 53H16c-3.3 0-6-2.7-6-6V15c0-3.3 2.7-6 6-6h26c3.3 0 6 2.7 6 6v21"/>
+    <path d="M20 22h17M20 30h16M20 39h10"/>
+  </g>
+  <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38.7 50.2 38.1 59l5.7-4.1 5.8 4.1-.7-8.8"/>
+    <circle cx="43.8" cy="44" r="8.2"/>
+  </g>
+</svg>

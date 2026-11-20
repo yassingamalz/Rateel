@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" color="#F2E9D2" role="img" aria-label="Achievements medal icon">
+  <title>Rateel — Achievements Medal</title>
+  <g fill="currentColor">
+    <!-- Two broad diagonal ribbon strips; intentionally no enclosure -->
+    <path d="M11.3 7.5 H24.5 Q25.7 7.5 26.2 8.8 L33.1 24.2 23.9 29.2 10.4 12.8 Q9.2 11.5 9.7 9.9 Q10.0 8.7 11.3 7.5 Z"/>
+    <path d="M39.5 7.5 H52.7 Q54.0 8.7 54.3 9.9 Q54.8 11.5 53.6 12.8 L40.1 29.2 30.9 24.2 37.8 8.8 Q38.3 7.5 39.5 7.5 Z"/>
+    <!-- Solid circular medallion, transparent five-pointed star knockout -->
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M49.8 42.1 A17.8 17.8 0 1 1 14.2 42.1 A17.8 17.8 0 1 1 49.8 42.1 Z M 32.000 31.900 L 34.792 38.257 L 41.701 38.948 L 36.518 43.568 L 37.995 50.352 L 32.000 46.850 L 26.005 50.352 L 27.482 43.568 L 22.299 38.948 L 29.208 38.257 Z"/>
+  </g>
+</svg>
