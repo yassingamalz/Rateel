@@ -1,27 +1,29 @@
-# Lesson 10.1 «النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ»: element prompts (PROPOSAL, owner must confirm)
+# Lesson 10.1 «النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ»: element prompts (approved by the owner)
 
-Proposed by Claude from the book (chapter 10, PDF pages 2 and 53–56) and the glassy lesson
-mockups (`docs/design/glassy-gamified/screens/15–21`). **Nothing here is final until the owner
-confirms the visual plan.**
+Owner decisions (2026-11-20): script approved; ghunna definition taken from the book (ch. 07, p. 203);
+the نّ → نْ + نَ split is wanted (done in code, as text morph); long verses play only the needed fragment;
+free voice F1 ar-SA-HamedNeural. `glass-card` and `ghunna-levels` were dropped (cards are CSS);
+`meem-lips` and `noon-tongue` GIFs moved to lessons 10.2 / 10.6.
 
-References to attach in Flow / ChatGPT:
+References to attach in Flow (project assets, named exactly):
 - **REF-G**: the glassy lesson screens 15–21 (`docs/design/glassy-gamified/screens/`)
-- REF-D: mascot sheet (`src/assets/images/guided/mascot/mascot-sheet.webp`), if the mascot is used
+- **REF-H**: `src/assets/images/guided/illustrations/makharij-head.webp` (line style for the head)
 
-## `images.txt`: still images (ZAPI FLOW, in this order)
-1. `header-arch`
-2. `emblem-quran`
-3. `label-pill`
-4. `glass-card`
-5. `icon-ghunna`
-6. `khayshum-head`
-7. `ghunna-levels`
-8. `shadda-3d`
+## `images.txt`: still images (ZAPI FLOW, in this order) → save as
+| # | File | Use in the lesson |
+|---|---|---|
+| 1 | `glassy/header-arch` | top arch on every step |
+| 2 | `glassy/emblem-quran` | emblem on the arch (intro, summary) and the round coach button |
+| 3 | `glassy/label-pill` | section label behind the text |
+| 4 | `icons/ghunna-glassy` | ghunna icon (definition, summary); replaces the broken `icons/ghunna` |
+| 5 | `illustrations/khayshum-head` | step 2, definition of ghunna (also the base of the GIF) |
+| 6 | `glassy/shadda-3d` | steps 3–4, the shadda that splits / glows |
+| 7 | `glassy/bg-glassy` | full background (not on magenta) |
+| 8 | `glassy/mosque-skyline` | bottom of intro and summary |
+| 9 | `icons/hourglass` | summary badge «تطويل» |
+| 10 | `icons/crown` | levels step («أكمل») and summary badge |
 
-## `gifs.txt`: animated GIFs (ChatGPT, one prompt per GIF)
-1. `ghunna-nose-flow`
-2. `meem-lips`
-3. `noon-tongue`
+Images 1–6 and 8–10 are on magenta: keyed with `scripts/assets/key-magenta.py`.
 
-GIFs have a solid #043226 background (GIF transparency is poor), so they sit on the lesson's
-dark green. Simple text morphs (e.g. نّ splitting into نْ + نَ) are done in code, not as GIFs.
+## `gifs.txt`: animated GIF (ChatGPT)
+1. `ghunna-nose-flow`: attach image 5 (`khayshum-head`) so the drawing is identical. Converted to animated WebP.
