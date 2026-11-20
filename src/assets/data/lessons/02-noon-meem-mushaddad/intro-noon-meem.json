@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "unitId": "intro-noon-meem",
+    "courseId": "noon-meem-mushaddad",
+    "lessons": [
+        {
+            "id": "lesson-10-1",
+            "title": "النُّونُ وَالْمِيمُ الْمُشَدَّدَتَانِ",
+            "description": "تطويل الغنة أكمل ما تكون في النون والميم المشددتين، وصلًا ووقفًا",
+            "type": "guided",
+            "icon": "fa-wand-magic-sparkles",
+            "duration": 5,
+            "order": 1,
+            "stepNumber": 1,
+            "totalSteps": 1
+        }
+    ]
+}
