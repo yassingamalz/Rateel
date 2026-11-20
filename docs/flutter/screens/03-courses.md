@@ -1,6 +1,6 @@
 # Screen 03: courses / learning paths (المسارات التعليمية)
 
-Status: 🟡 v1 built, critic loop done, waiting for the owner's review and the assets P1–P6
+Status: 🟡 v2 built (critic v1 → v2), course-completion sequence added; waiting for the owner's review and the assets P1–P6
 Branch: `flutter/03-courses` (contains the approved side navigation)
 Reference: `docs/flutter/screens/03-courses/reference.webp` (1847×851, glassy gamified, dark)
 Code: `app_flutter/lib/courses/` (`courses_screen.dart`, `course_card.dart`, `course_data.dart`)
@@ -41,6 +41,8 @@ line and nodes, toast, motion.
 | P6 | Lock, star, play glyphs (SVG, currentColor) | **to generate** (placeholder: Material icons; play drawn in code) |
 
 Prompts: `docs/flutter/prompts/03-courses/images-v1.txt` (also pasted in the chat).
+Critic: `03-courses/critic-v1.md`, `critic-v2.md`; comparisons `compare-v1.jpg`, `compare-v2.jpg`; demo `demo-v2.mp4`;
+completion frames `completion-frames-v2.jpg`.
 
 Course icons (owner may change): 02 head with sound waves from the nose (as in the reference) · 03 head
 cross-section with articulation points · 04 small circle with a flowing ribbon · 05 closed lips · 06 short wave
@@ -56,8 +58,22 @@ cross-section with articulation points · 04 small circle with a flowing ribbon 
   exists (then a morph into the units screen). Locked card → the lock shakes, light haptic, toast
   «أكمل «<previous course>» أولًا لفتح هذه الدورة».
 - A horizontal drag on the cards never opens the side menu (the menu swipe starts on the rail only).
+- **Course completion (owner, 2026-11-20, same idea as the original HTML/Angular app):** when the last
+  lesson of a course ends, the lesson, unit and course screens close by themselves (lesson → unit → course
+  → this screen; Angular: `navigateAfterCompletion` → `/courses?completedCourseId=`). Here the sequence
+  plays automatically, simplified:
+  1. the path is on the finished course; its progress bar fills to 100% (0.9 s);
+  2. a gold light with a bright spark runs along the line to the next course (0.9 s), medium haptic;
+  3. the next card's lock pops and fades, the rim turns from emerald to gold with a flash, the locked
+     layout fades out and the course-in-progress layout fades in (0.65 s);
+  4. the path glides to the new course (0.75 s), which starts breathing.
+  Hook for the lesson flow: `courseCompleted` (`ValueNotifier<int?>` in `course_data.dart`).
+  Until screens 05–07 exist: **long press on the course in progress** plays it (demo), `?complete=0` on web.
+- Lines between cards: dim emerald track, gold only after a completed course (the reference shows all lines
+  gold; with the completion "fill" the gold must mean "done"). Owner decision.
 
 ## Open points for the owner
+0. Lines: dim until a course is completed (needed for the completion fill) or all gold as in the reference?
 1. Progress text: the reference shows a ~30% bar with the text «0%»; the build shows 30% / 30%.
 2. Emblem on the arch: reuse the nav's outline book (one style) or a new gold book from ChatGPT?
 3. Course icon list (above) and the motion proposal.

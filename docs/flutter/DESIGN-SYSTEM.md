@@ -28,3 +28,15 @@ Confirmed by the owner with the side navigation (2026-11-20): the values in
 | Text | Readex Pro; labels #FFFDF5 weight 340 size 4u; icons #FCF1D0 (menu) / #F4EAD0 (rail) | ✅ |
 | Radii | row 4.1u, selected row 4.4u, tile 3.0u, menu button 2.4u, pills h/2 | ✅ |
 | Content dimming under the open menu | 12% black (reference has none) | 🟡 |
+
+Proposed with screen 03 (courses), waiting for the owner (`RateelColors`, section "Screen 03"):
+
+| Token | Value | Status |
+|---|---|---|
+| Content background | radial #07362A (top centre) → #00271D | 🟡 |
+| Course card | radius 4.7u; fill #033428 → #012F25 (50%) → #023126 (72%) → #053F30; shadow black 40% blur 2.2u y 0.6u + 1.5 px #00160C contact line | 🟡 |
+| Locked card rim | 4 px vertical #2F6954 → #27654F → #559174 | 🟡 (conflict: glass rim token is 2 px #245843) |
+| Active card rim | goldRim 1.4 px + goldHighlight 2 px, breathing gold glow 0–10% | 🟡 (conflict: selected rim is #DAA42A 1.2 px + #FFDA6B 1 px) |
+| Path | line 3 px #D1A93C on track #265343; node #FCC24A r 1.3u with gold glow | 🟡 |
+| Progress | track #265343, fill #EBB335, h 1.4u | 🟡 |
+| Pill | outline gold 2 px, fill #062D20, text gold 3.3u | 🟡 |

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,14 +14,20 @@ class CourseCard extends StatefulWidget {
     super.key,
     required this.course,
     required this.u,
+    required this.unlock,
     required this.breath,
     required this.progress,
     required this.lockShake,
     required this.onTap,
+    this.onLongPress,
   });
 
   final Course course;
   final double u;
+
+  /// 0 = locked, 1 = unlocked (gold rim, level pill, play and progress). In
+  /// between during the unlock of the completion sequence.
+  final double unlock;
 
   /// 0..1, breathing glow of the active rim.
   final double breath;
@@ -31,6 +38,7 @@ class CourseCard extends StatefulWidget {
   /// -1..1, horizontal shake of the lock.
   final double lockShake;
   final VoidCallback onTap;
+  final VoidCallback? onLongPress;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -43,8 +51,11 @@ class _CourseCardState extends State<CourseCard> {
   Widget build(BuildContext context) {
     final u = widget.u;
     final c = widget.course;
-    final active = !c.locked;
-    final radius = BorderRadius.circular(u * 3.5);
+    final t = widget.unlock;
+    // Content cross-fades: locked layout out first, unlocked layout in after.
+    final lockedOpacity = (1 - t / 0.4).clamp(0.0, 1.0);
+    final activeOpacity = ((t - 0.5) / 0.5).clamp(0.0, 1.0);
+    final radius = BorderRadius.circular(u * 4.7);
     return Semantics(
       button: true,
       label: c.title,
@@ -53,6 +64,7 @@ class _CourseCardState extends State<CourseCard> {
         onTapCancel: () => setState(() => _down = false),
         onTapUp: (_) => setState(() => _down = false),
         onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
         child: AnimatedScale(
           scale: _down ? 0.97 : 1,
           duration: const Duration(milliseconds: 120),
@@ -61,15 +73,23 @@ class _CourseCardState extends State<CourseCard> {
             decoration: BoxDecoration(
               borderRadius: radius,
               boxShadow: [
+                // 1.5 px dark contact line under the card.
+                const BoxShadow(
+                  color: RateelColors.cardContact,
+                  offset: Offset(0, 1.5),
+                ),
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.40),
                   blurRadius: u * 2.2,
                   offset: Offset(0, u * 0.6),
                 ),
-                if (active)
+                if (t > 0)
                   BoxShadow(
                     color: RateelColors.gold.withValues(
-                      alpha: lerpDouble(0.08, 0.22, widget.breath)!,
+                      alpha:
+                          t * lerpDouble(0.0, 0.10, widget.breath)! +
+                          // Flash of light when the course unlocks.
+                          0.35 * math.sin(math.pi * t),
                     ),
                     blurRadius: u * 2.4,
                   ),
@@ -85,18 +105,22 @@ class _CourseCardState extends State<CourseCard> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        stops: [0, 0.45, 1],
+                        stops: [0, 0.5, 0.72, 1],
                         colors: [
                           RateelColors.cardTop,
                           RateelColors.cardMid,
+                          RateelColors.cardLow,
                           RateelColors.cardBottom,
                         ],
                       ),
                     ),
                   ),
                   _pattern(u),
-                  ...(active ? _activeContent(u) : _lockedContent(u)),
-                  _rim(u, radius, active),
+                  if (lockedOpacity > 0)
+                    ..._fade(lockedOpacity, _lockedContent(u)),
+                  if (t > 0) ..._fade(activeOpacity, _activeContent(u)),
+                  if (t < 1) _lock(u),
+                  _rim(u, radius, t),
                 ],
               ),
             ),
@@ -136,7 +160,7 @@ class _CourseCardState extends State<CourseCard> {
                       height: h,
                       width: h * 216 / 170,
                       colorFilter: const ColorFilter.mode(
-                        Color(0x8C1A6046),
+                        RateelColors.cardPattern,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -149,33 +173,27 @@ class _CourseCardState extends State<CourseCard> {
     );
   }
 
-  Widget _rim(double u, BorderRadius radius, bool active) {
-    return IgnorePointer(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: radius,
-          border: Border.all(
-            color: active ? RateelColors.goldRim : RateelColors.cardRimDark,
-            width: 1.4,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(1.4),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(radius.topLeft.x - 1.4),
-              border: Border.all(
-                color: active
-                    ? RateelColors.goldHighlight
-                    : RateelColors.cardRim,
-                width: 2,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  List<Widget> _fade(double opacity, List<Widget> children) => [
+    for (final w in children)
+      if (w is Positioned)
+        Positioned(
+          left: w.left,
+          top: w.top,
+          right: w.right,
+          bottom: w.bottom,
+          width: w.width,
+          height: w.height,
+          child: Opacity(opacity: opacity, child: w.child),
+        )
+      else
+        Opacity(opacity: opacity, child: w),
+  ];
+
+  Widget _rim(double u, BorderRadius radius, double t) => IgnorePointer(
+    child: CustomPaint(
+      painter: _RimPainter(radius: radius.topLeft.x, t: t),
+    ),
+  );
 
   List<Widget> _activeContent(double u) {
     final c = widget.course;
@@ -208,9 +226,9 @@ class _CourseCardState extends State<CourseCard> {
                     'مستوى مبتدئ',
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      u * 3.0,
+                      u * 3.3,
                       weight: 400,
-                      color: RateelColors.label,
+                      color: RateelColors.gold,
                     ).copyWith(height: 1),
                   ),
                 ),
@@ -221,7 +239,7 @@ class _CourseCardState extends State<CourseCard> {
       ),
       _icon(u, right: u * 5.9, top: u * 3.6, height: u * 8.6),
       _title(u, c.title, centerY: u * 17.0),
-      _rule(u, centerY: u * 23.6, opacity: 1),
+      _rule(u, centerY: u * 23.6, right: u * 7.3, width: u * 51.5),
       _description(u, c.description, firstCenterY: u * 27.7),
       // Play button: gold ring, olive glass, gold triangle.
       Positioned(
@@ -281,32 +299,50 @@ class _CourseCardState extends State<CourseCard> {
     ];
   }
 
+  /// Lock disc of a locked card; it pops and fades out when the course
+  /// unlocks.
+  Widget _lock(double u) {
+    final t = widget.unlock;
+    final pop = 1 + 0.35 * math.sin(math.pi * (t * 1.4).clamp(0.0, 1.0));
+    final w = Positioned(
+      right: u * 8.1 - u * 3.9 + widget.lockShake * u * 0.8,
+      top: u * 7.5 - u * 3.9,
+      width: u * 7.8,
+      height: u * 7.8,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: RateelColors.lockDisc,
+          border: Border.all(color: RateelColors.lockRim, width: 1.6),
+        ),
+        // PLACEHOLDER glyph until the owner's UI glyph set (prompt P6).
+        child: Icon(
+          Icons.lock_rounded,
+          size: u * 3.7,
+          color: RateelColors.lockGlyph,
+        ),
+      ),
+    );
+    return Positioned(
+      left: w.left,
+      top: w.top,
+      right: w.right,
+      width: w.width,
+      height: w.height,
+      child: Opacity(
+        opacity: (1 - t * 1.3).clamp(0.0, 1.0),
+        child: Transform.scale(scale: pop, child: w.child),
+      ),
+    );
+  }
+
   List<Widget> _lockedContent(double u) {
     final c = widget.course;
     return [
-      Positioned(
-        right: u * 8.1 - u * 3.9 + widget.lockShake * u * 0.8,
-        top: u * 7.5 - u * 3.9,
-        width: u * 7.8,
-        height: u * 7.8,
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: RateelColors.lockDisc,
-            border: Border.all(color: RateelColors.lockRim, width: 1.6),
-          ),
-          // PLACEHOLDER glyph until the owner's UI glyph set (prompt P6).
-          child: Icon(
-            Icons.lock_rounded,
-            size: u * 3.4,
-            color: RateelColors.lockGlyph,
-          ),
-        ),
-      ),
       _icon(u, centerX: u * 72.4 * 0.475, top: u * 3.2, height: u * 9.6),
-      _title(u, c.title, centerY: u * 18.1),
-      _rule(u, centerY: u * 24.3, opacity: 0.55),
-      _description(u, c.description, firstCenterY: u * 28.2),
+      _title(u, c.title, centerY: u * 17.2, right: u * 5.7),
+      _rule(u, centerY: u * 23.9, right: u * 6.4, width: u * 54.8),
+      _description(u, c.description, firstCenterY: u * 28.2, right: u * 5.7),
     ];
   }
 
@@ -337,10 +373,15 @@ class _CourseCardState extends State<CourseCard> {
     );
   }
 
-  Widget _title(double u, String text, {required double centerY}) {
+  Widget _title(
+    double u,
+    String text, {
+    required double centerY,
+    double? right,
+  }) {
     return Positioned(
       left: u * 4,
-      right: u * 6.4,
+      right: right ?? u * 6.4,
       top: centerY - u * 4,
       height: u * 8,
       child: Align(
@@ -363,36 +404,43 @@ class _CourseCardState extends State<CourseCard> {
   }
 
   /// Thin gold rule under the title, fading at both ends.
-  Widget _rule(double u, {required double centerY, required double opacity}) {
+  Widget _rule(
+    double u, {
+    required double centerY,
+    required double right,
+    required double width,
+  }) {
     return Positioned(
-      right: u * 6.5,
-      width: u * 51.5,
+      right: right,
+      width: width,
       top: centerY - 1,
       height: 2,
-      child: Opacity(
-        opacity: opacity,
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              stops: [0, 0.35, 0.85, 1],
-              colors: [
-                Color(0x00F2B623),
-                RateelColors.gold,
-                RateelColors.goldHighlight,
-                Color(0x00F2B623),
-              ],
-            ),
+      child: const DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            stops: [0, 0.35, 0.85, 1],
+            colors: [
+              Color(0x00F2B623),
+              RateelColors.gold,
+              RateelColors.goldHighlight,
+              Color(0x00F2B623),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _description(double u, String text, {required double firstCenterY}) {
+  Widget _description(
+    double u,
+    String text, {
+    required double firstCenterY,
+    double? right,
+  }) {
     final lineH = u * 5.1;
     return Positioned(
       left: u * 15.5,
-      right: u * 6.4,
+      right: right ?? u * 6.4,
       top: firstCenterY - lineH / 2,
       height: lineH * 2,
       child: Text(
@@ -440,4 +488,58 @@ class _PlayGlyph extends CustomPainter {
 
   @override
   bool shouldRepaint(_PlayGlyph old) => false;
+}
+
+/// Card rim. Locked: 4 px emerald glass edge, lighter at the top and bright at
+/// the bottom (#2F6954 → #27654F → #559174). Unlocked: gold double rim
+/// (goldRim 1.4 px outside, goldHighlight 2 px inside). [t] blends them.
+class _RimPainter extends CustomPainter {
+  _RimPainter({required this.radius, required this.t});
+
+  final double radius;
+  final double t;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Offset.zero & size;
+    RRect inset(double d) =>
+        RRect.fromRectAndRadius(rect.deflate(d), Radius.circular(radius - d));
+    if (t < 1) {
+      canvas.drawRRect(
+        inset(2),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 4
+          ..shader = LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0, 0.6, 1],
+            colors: [
+              RateelColors.cardRimTop.withValues(alpha: 1 - t),
+              RateelColors.cardRim.withValues(alpha: 1 - t),
+              RateelColors.cardRimBottom.withValues(alpha: 1 - t),
+            ],
+          ).createShader(rect),
+      );
+    }
+    if (t > 0) {
+      canvas.drawRRect(
+        inset(0.7),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.4
+          ..color = RateelColors.goldRim.withValues(alpha: t),
+      );
+      canvas.drawRRect(
+        inset(2.4),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2
+          ..color = RateelColors.goldHighlight.withValues(alpha: t),
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_RimPainter old) => old.t != t || old.radius != radius;
 }

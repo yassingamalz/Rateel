@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:rateel/courses/course_data.dart';
 import 'package:rateel/main.dart';
 
 // The courses screen has a looping glow: settle with fixed pumps.
@@ -59,6 +60,24 @@ void main() {
     await tester.tap(find.text('النون والميم المشددتان'));
     await settle(tester);
     expect(find.textContaining('أولًا'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 3));
+  });
+
+  testWidgets('completing a course unlocks the next one', (tester) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(const RateelApp());
+    await settle(tester);
+    courseCompleted.value = 0;
+    for (var i = 0; i < 10; i++) {
+      await settle(tester);
+    }
+    // Course 2 is now in progress: tapping it no longer asks to finish course 1.
+    await tester.tap(find.text('النون والميم المشددتان'));
+    await settle(tester);
+    expect(find.textContaining('أولًا'), findsNothing);
+    expect(find.textContaining('قريبًا'), findsOneWidget);
     await tester.pump(const Duration(seconds: 3));
   });
 }

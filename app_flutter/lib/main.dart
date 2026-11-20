@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'courses/course_data.dart';
 import 'courses/courses_screen.dart';
 import 'nav/side_nav.dart';
 import 'screens/section_placeholder.dart';
@@ -12,6 +13,11 @@ Future<void> main() async {
   // Review aid: `?slow=10` (web) plays every animation 10× slower.
   final slow = double.tryParse(Uri.base.queryParameters['slow'] ?? '');
   if (slow != null && slow > 0) timeDilation = slow;
+  // Review aid: `?complete=0` plays the completion of course 0 on start
+  // (the lesson flow sets this when screens 05–07 exist).
+  courseCompleted.value = int.tryParse(
+    Uri.base.queryParameters['complete'] ?? '',
+  );
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,

@@ -1,3 +1,10 @@
+import 'package:flutter/foundation.dart';
+
+/// Set by the lesson flow when the last lesson of a course is finished (the
+/// lesson, unit and course screens then close back to the courses screen,
+/// which plays the completion sequence). Index into [courses].
+final courseCompleted = ValueNotifier<int?>(null);
+
 /// The 12 courses, from the Angular app (`src/assets/data/courses.json`).
 /// Progress is a demo value until real data is wired.
 class Course {

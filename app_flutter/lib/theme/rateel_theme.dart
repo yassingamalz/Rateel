@@ -50,21 +50,27 @@ class RateelColors {
 
   // Screen 03, courses (sampled from reference 03, critic-v1 of 03-courses).
   // Proposed tokens: the owner confirms them with the screen.
-  static const contentTop = Color(0xFF023328);
+  static const contentTop = Color(0xFF07362A);
   static const contentBottom = Color(0xFF00271D);
-  static const cardTop = Color(0xFF033529);
-  static const cardMid = Color(0xFF012E23);
-  static const cardBottom = Color(0xFF023D2E);
-  static const cardRim = Color(0xFF27654F); // locked card rim, 3 px
+  static const cardTop = Color(0xFF033428);
+  static const cardMid = Color(0xFF012F25);
+  static const cardLow = Color(0xFF023126);
+  static const cardBottom = Color(0xFF053F30);
+  static const cardRim = Color(0xFF27654F); // locked card rim, 4 px, middle
+  static const cardRimTop = Color(0xFF2F6954);
+  static const cardRimBottom = Color(0xFF559174);
+  static const cardContact = Color(0xFF00160C); // 1 px line under the card
+  static const cardPattern = Color(0xFF2E6A4C);
   static const cardRimDark = Color(0xFF144837); // outer edge of the rim
   static const pathLine = Color(0xFFD1A93C);
+  static const pathNode = Color(0xFFFCC24A);
   static const progressTrack = Color(0xFF265343);
   static const progressFill = Color(0xFFEBB335);
   static const playFill = Color(0xFF43552A);
   static const lockDisc = Color(0xFF01261E);
   static const lockRim = Color(0xFF1A533F);
   static const lockGlyph = Color(0xFFDAD7BF);
-  static const pillFill = Color(0xFF063324);
+  static const pillFill = Color(0xFF062D20);
 }
 
 /// Text in Readex Pro (variable font): the closest match to the ChatGPT titles.

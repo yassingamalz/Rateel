@@ -50,22 +50,60 @@ class _CoursesScreenState extends State<CoursesScreen>
   );
   String _toastText = '';
 
+  // Course completion (owner, 2026-11-20): when the last lesson of a course
+  // ends, the lesson, unit and course screens close by themselves and land
+  // here; the progress bar completes, light runs along the path to the next
+  // course, its lock pops and the path glides to it.
+  late final AnimationController _fill = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  );
+  late final AnimationController _flow = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  );
+  late final AnimationController _unlock = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 650),
+  );
+
+  /// Index of the course in progress; the ones before it are completed, the
+  /// ones after it locked.
+  late int _current = math.max(0, courses.indexWhere((c) => c.locked) - 1);
+  late final List<double> _progress = [for (final c in courses) c.progress];
+  int? _completing;
+  double _fillFrom = 0;
+
   PageController? _pages;
   double _pageFraction = 0;
 
   @override
+  void initState() {
+    super.initState();
+    courseCompleted.addListener(_onCourseCompleted);
+    // A completion that arrived before this screen was built.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _onCourseCompleted());
+  }
+
+  @override
   void dispose() {
+    courseCompleted.removeListener(_onCourseCompleted);
     _entry.dispose();
     _breath.dispose();
     _shake.dispose();
     _toast.dispose();
+    _fill.dispose();
+    _flow.dispose();
+    _unlock.dispose();
     _pages?.dispose();
     super.dispose();
   }
 
   PageController _controllerFor(double fraction) {
     if (_pages == null || (fraction - _pageFraction).abs() > 0.001) {
-      final page = _pages?.hasClients == true ? _pages!.page ?? 0 : 0.0;
+      final page = _pages?.hasClients == true
+          ? _pages!.page ?? 0
+          : _current.toDouble();
       _pages?.dispose();
       _pageFraction = fraction;
       _pages = PageController(
@@ -76,6 +114,57 @@ class _CoursesScreenState extends State<CoursesScreen>
     return _pages!;
   }
 
+  void _onCourseCompleted() {
+    final i = courseCompleted.value;
+    if (i == null || !mounted || _completing != null) return;
+    courseCompleted.value = null;
+    _complete(i);
+  }
+
+  /// Completion sequence for course [i]: bar to 100%, light along the line,
+  /// the next lock pops, the path glides to the next course.
+  Future<void> _complete(int i) async {
+    if (i != _current) return;
+    final pages = _pages;
+    setState(() {
+      _completing = i;
+      _fillFrom = _progress[i];
+    });
+    if (_entry.isAnimating) await _entry.forward();
+    if (pages != null && pages.hasClients && (pages.page ?? 0).round() != i) {
+      await pages.animateToPage(
+        i,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOutCubic,
+      );
+    }
+    await _fill.forward(from: 0);
+    _progress[i] = 1;
+    HapticFeedback.lightImpact();
+    if (i == courses.length - 1) {
+      setState(() => _completing = null);
+      _showToast('أتممت جميع المسارات');
+      return;
+    }
+    await _flow.forward(from: 0);
+    HapticFeedback.mediumImpact();
+    await _unlock.forward(from: 0);
+    setState(() {
+      _current = i + 1;
+      _completing = null;
+    });
+    _fill.value = 0;
+    _flow.value = 0;
+    _unlock.value = 0;
+    if (pages != null && pages.hasClients) {
+      await pages.animateToPage(
+        i + 1,
+        duration: const Duration(milliseconds: 750),
+        curve: Curves.easeInOutCubic,
+      );
+    }
+  }
+
   Future<void> _showToast(String text) async {
     setState(() => _toastText = text);
     await _toast.forward();
@@ -84,8 +173,8 @@ class _CoursesScreenState extends State<CoursesScreen>
   }
 
   void _tapCourse(int i) {
-    final course = courses[i];
-    if (course.locked) {
+    if (_completing != null) return;
+    if (i > _current) {
       HapticFeedback.lightImpact();
       setState(() => _shaking = i);
       _shake.forward(from: 0);
@@ -103,7 +192,7 @@ class _CoursesScreenState extends State<CoursesScreen>
     return LayoutBuilder(
       builder: (context, box) {
         final g = _Geo(box.maxWidth, box.maxHeight);
-        final pages = _controllerFor(g.pitch / g.w);
+        final pages = _controllerFor(g.pitch / (g.w - g.trackRightInset));
         return Stack(
           fit: StackFit.expand,
           children: [
@@ -115,7 +204,15 @@ class _CoursesScreenState extends State<CoursesScreen>
               top: g.cardCenterY - g.trackHalfHeight,
               height: g.trackHalfHeight * 2,
               child: AnimatedBuilder(
-                animation: Listenable.merge([_entry, _breath, _shake, pages]),
+                animation: Listenable.merge([
+                  _entry,
+                  _breath,
+                  _shake,
+                  _fill,
+                  _flow,
+                  _unlock,
+                  pages,
+                ]),
                 // Mouse drag too (web review captures, desktop).
                 builder: (context, _) => ScrollConfiguration(
                   behavior: const _DragEverywhere(),
@@ -123,6 +220,9 @@ class _CoursesScreenState extends State<CoursesScreen>
                     controller: pages,
                     padEnds: false,
                     clipBehavior: Clip.none,
+                    physics: _completing != null
+                        ? const NeverScrollableScrollPhysics()
+                        : null,
                     itemCount: courses.length,
                     itemBuilder: (context, i) => _page(g, pages, i),
                   ),
@@ -139,16 +239,34 @@ class _CoursesScreenState extends State<CoursesScreen>
   Widget _page(_Geo g, PageController pages, int i) {
     final page = pages.hasClients && pages.position.haveDimensions
         ? pages.page ?? 0
-        : 0.0;
+        : _current.toDouble();
     final focus = (1 - (page - i).abs()).clamp(0.0, 1.0);
     final e = _entry.value;
+    // Cards slide in from the right, starting at the focused one.
+    final order = (i - page.round()).clamp(0, 4);
     final appear = Curves.easeOutCubic.transform(
-      _interval(e, 0.15 + 0.08 * i.clamp(0, 4), 0.55 + 0.08 * i.clamp(0, 4)),
+      _interval(e, 0.15 + 0.08 * order, 0.55 + 0.08 * order),
     );
-    final line = Curves.easeInOutCubic.transform(_interval(e, 0.55, 0.9));
+    final draw = Curves.easeInOutCubic.transform(_interval(e, 0.55, 0.9));
     final shake = _shaking == i
         ? math.sin(_shake.value * math.pi * 5) * (1 - _shake.value)
         : 0.0;
+    final entryFill = Curves.easeOutCubic.transform(_interval(e, 0.6, 1));
+    double progress = _progress[i] * entryFill;
+    if (i < _current) progress = 1;
+    if (i == _completing) {
+      progress = lerpDouble(
+        _fillFrom,
+        1,
+        Curves.easeInOutCubic.transform(_fill.value),
+      )!;
+    }
+    // Light along the line: full after a completed course, running during
+    // the completion sequence, empty otherwise.
+    double lit = i < _current ? 1 : 0;
+    if (i == _completing) lit = _flow.value;
+    double unlock = i <= _current ? 1 : 0;
+    if (_completing != null && i == _completing! + 1) unlock = _unlock.value;
     return Opacity(
       opacity: appear,
       child: Transform.translate(
@@ -157,7 +275,16 @@ class _CoursesScreenState extends State<CoursesScreen>
           clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
-            if (i < courses.length - 1) _connector(g, line),
+            if (i < courses.length - 1)
+              _connector(
+                g,
+                draw,
+                lit,
+                nodeOn: i <= _current,
+                // The focused card is slightly larger: keep the node 22 px
+                // from its rim.
+                cardGrow: g.cardW * (g.focusScale - 1) / 2 * focus,
+              ),
             Transform.scale(
               scale: lerpDouble(1.0, g.focusScale, focus)!,
               child: SizedBox(
@@ -166,12 +293,18 @@ class _CoursesScreenState extends State<CoursesScreen>
                 child: CourseCard(
                   course: courses[i],
                   u: g.u,
-                  breath: Curves.easeInOutSine.transform(_breath.value),
-                  progress:
-                      courses[i].progress *
-                      Curves.easeOutCubic.transform(_interval(e, 0.6, 1)),
+                  unlock: unlock,
+                  breath: i == _current
+                      ? Curves.easeInOutSine.transform(_breath.value)
+                      : 0,
+                  progress: progress,
                   lockShake: shake,
                   onTap: () => _tapCourse(i),
+                  onLongPress: () {
+                    // Demo until screens 05–07 exist: long press on the
+                    // course in progress plays the completion sequence.
+                    if (i == _current) courseCompleted.value = i;
+                  },
                 ),
               ),
             ),
@@ -181,22 +314,33 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
   }
 
-  /// Gold line from this card's left edge to the next card, with a glowing
-  /// node just outside the card (reference: y = card centre + 2.7u).
-  Widget _connector(_Geo g, double draw) {
+  /// Line from this card's left edge to the next card, with a node just
+  /// outside the card (reference: y = card centre + 2.7u). Dim track until
+  /// the course is completed, then gold light.
+  Widget _connector(
+    _Geo g,
+    double draw,
+    double lit, {
+    required bool nodeOn,
+    required double cardGrow,
+  }) {
     final gap = g.pitch - g.cardW;
     final y = g.trackHalfHeight + g.u * 2.7;
     final left = g.pitch / 2 - g.cardW / 2 - gap;
-    final full = gap;
-    final nodeX = g.u * 2.4;
     return Positioned(
       left: left,
       top: y - g.u * 2,
-      width: full,
+      width: gap,
       height: g.u * 4,
       child: IgnorePointer(
         child: CustomPaint(
-          painter: _ConnectorPainter(u: g.u, draw: draw, nodeFromRight: nodeX),
+          painter: _ConnectorPainter(
+            u: g.u,
+            draw: draw,
+            lit: lit,
+            nodeOn: nodeOn,
+            nodeFromRight: g.u * 2.6 + cardGrow,
+          ),
         ),
       ),
     );
@@ -228,7 +372,7 @@ class _CoursesScreenState extends State<CoursesScreen>
         width: g.u * 26,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.32,
+            opacity: 0.45,
             child: Image.asset('assets/images/lattice-corner-left.webp'),
           ),
         ),
@@ -239,7 +383,7 @@ class _CoursesScreenState extends State<CoursesScreen>
         width: g.u * 19,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.32,
+            opacity: 0.45,
             child: Image.asset('assets/images/lattice-corner-right.webp'),
           ),
         ),
@@ -281,7 +425,7 @@ class _CoursesScreenState extends State<CoursesScreen>
       Positioned(
         left: 0,
         right: g.w - 2 * cx,
-        top: g.u * 23.4 - g.u * 7,
+        top: g.u * 22.4 - g.u * 7,
         height: g.u * 14,
         child: settle(
           Center(
@@ -289,8 +433,8 @@ class _CoursesScreenState extends State<CoursesScreen>
               'المسارات التعليمية',
               textDirection: TextDirection.rtl,
               style: readex(
-                g.u * 9.15,
-                weight: 600,
+                g.u * 9.3,
+                weight: 560,
                 color: RateelColors.label,
               ).copyWith(height: 1),
             ),
@@ -298,9 +442,9 @@ class _CoursesScreenState extends State<CoursesScreen>
         ),
       ),
       Positioned(
-        left: cx - g.u * 28,
+        left: cx - g.u * 23.5,
         top: g.u * 31.4 - g.u * 1.2,
-        width: g.u * 56,
+        width: g.u * 47,
         height: g.u * 2.4,
         child: settle(
           IgnorePointer(
@@ -315,7 +459,7 @@ class _CoursesScreenState extends State<CoursesScreen>
     return Positioned(
       left: 0,
       right: 0,
-      bottom: g.u * 4,
+      bottom: g.u * 2.5,
       child: IgnorePointer(
         child: AnimatedBuilder(
           animation: _toast,
@@ -382,7 +526,7 @@ class _Background extends StatelessWidget {
     return const DecoratedBox(
       decoration: BoxDecoration(
         gradient: RadialGradient(
-          center: Alignment(0, -0.5),
+          center: Alignment(0, -1.0),
           radius: 1.1,
           colors: [RateelColors.contentTop, RateelColors.contentBottom],
         ),
@@ -401,13 +545,16 @@ class _DividerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
-    final diamond = u * 1.0;
-    final gap = u * 2.6;
+    final diamond = u * 1.35;
+    final gap = u * 3.15;
     final line = Paint()..strokeWidth = 2;
     for (final s in [-1.0, 1.0]) {
       final inner = c.dx + s * gap;
       final outer = s < 0 ? 0.0 : size.width;
+      // Bright next to the diamond, fading outward on both sides.
       line.shader = LinearGradient(
+        begin: s < 0 ? Alignment.centerRight : Alignment.centerLeft,
+        end: s < 0 ? Alignment.centerLeft : Alignment.centerRight,
         colors: [RateelColors.gold, RateelColors.gold.withValues(alpha: 0)],
       ).createShader(Rect.fromPoints(Offset(inner, 0), Offset(outer, 1)));
       canvas.drawLine(Offset(inner, c.dy), Offset(outer, c.dy), line);
@@ -441,11 +588,19 @@ class _ConnectorPainter extends CustomPainter {
   _ConnectorPainter({
     required this.u,
     required this.draw,
+    required this.lit,
+    required this.nodeOn,
     required this.nodeFromRight,
   });
 
   final double u;
+
+  /// Entry: the line draws itself right to left.
   final double draw;
+
+  /// 0..1: gold light filling the line from the completed course (right).
+  final double lit;
+  final bool nodeOn;
   final double nodeFromRight;
 
   @override
@@ -458,28 +613,67 @@ class _ConnectorPainter extends CustomPainter {
       Offset(left, y),
       Offset(right, y),
       Paint()
-        ..color = RateelColors.pathLine
+        ..color = RateelColors.progressTrack
         ..strokeWidth = 3,
     );
+    if (lit > 0) {
+      final head = right - size.width * lit;
+      canvas.drawLine(
+        Offset(math.max(head, left), y),
+        Offset(right, y),
+        Paint()
+          ..color = RateelColors.gold.withValues(alpha: 0.45)
+          ..strokeWidth = u * 0.9
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
+      );
+      canvas.drawLine(
+        Offset(math.max(head, left), y),
+        Offset(right, y),
+        Paint()
+          ..color = RateelColors.pathLine
+          ..strokeWidth = 3,
+      );
+      if (lit < 1) {
+        // Bright spark at the head of the light.
+        canvas.drawCircle(
+          Offset(head, y),
+          u * 1.6,
+          Paint()
+            ..color = RateelColors.goldHighlight.withValues(alpha: 0.7)
+            ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.0),
+        );
+        canvas.drawCircle(
+          Offset(head, y),
+          u * 0.5,
+          Paint()..color = RateelColors.label,
+        );
+      }
+    }
     final node = Offset(right - nodeFromRight, y);
-    final lit = ((draw - 0.1) / 0.3).clamp(0.0, 1.0);
-    if (lit == 0) return;
+    final on = ((draw - 0.1) / 0.3).clamp(0.0, 1.0);
+    if (on == 0) return;
+    if (nodeOn) {
+      canvas.drawCircle(
+        node,
+        u * 2.2,
+        Paint()
+          ..color = RateelColors.gold.withValues(alpha: 0.30 * on)
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.2),
+      );
+    }
     canvas.drawCircle(
       node,
-      u * 2.2,
+      u * 1.3 * on,
       Paint()
-        ..color = RateelColors.gold.withValues(alpha: 0.30 * lit)
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.2),
-    );
-    canvas.drawCircle(
-      node,
-      u * 1.3 * lit,
-      Paint()..color = RateelColors.progressFill,
+        ..color = nodeOn
+            ? RateelColors.pathNode
+            : RateelColors.progressTrack,
     );
   }
 
   @override
-  bool shouldRepaint(_ConnectorPainter old) => old.draw != draw || old.u != u;
+  bool shouldRepaint(_ConnectorPainter old) =>
+      old.draw != draw || old.lit != lit || old.nodeOn != nodeOn || old.u != u;
 }
 
 /// Reference geometry (u = 1% of the height). Ref px / 8.51.

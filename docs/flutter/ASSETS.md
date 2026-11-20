@@ -24,3 +24,4 @@ SVG icons use `currentColor`; the app sets the colour from `RateelColors` (flutt
 | `ui/decor/star_tile.svg` | `ornaments-svg-kit/vector/rateel_bottom_geometric_tile.svg` | bottom of the open menu, 38% opacity, repeated | seamless; PNG band kept as spare |
 | `ui/decor/bottom_pattern.svg` | `sidebar/decorative/bottom_pattern/` | spare | seamless tile 256×96 (replaced by the star band) |
 | `images/lattice-corner-*.webp` | `lesson-production: src/assets/images/guided/frames/` | screen corners | |
+| `ui/courses/course_01.webp` | `courses/course_01_mushaf_from_lesson_production.webp` (lesson-production `icons/mushaf.webp`) | screen 03, course 01 icon | trimmed, 320 px wide |
