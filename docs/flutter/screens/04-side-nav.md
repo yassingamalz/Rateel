@@ -32,6 +32,8 @@ active-state highlight, dimming of the content. Flat cream glyphs as in style C 
 | N2 | Filigree end cap of the selected row (mirrored for the other side) | **to generate** |
 | A5 | Bottom geometric pattern strip | shared with screen 03 |
 | A4 | Lattice corners | existing (`frames/lattice-corner-*`) |
+| I1–I6 | Rail icons (solid cream, as REF-05) | **to generate** (`prompts/04-side-nav/icons.txt`, lines 1–6) |
+| I7–I12 | Menu icons (as REF-04) | **to generate** (`prompts/04-side-nav/icons.txt`, lines 7–12) |
 
 ## Motion and UX (proposal)
 - **Open** (tap ☰): the panel slides in from the right (320 ms, ease-out); each rail icon **morphs** into
