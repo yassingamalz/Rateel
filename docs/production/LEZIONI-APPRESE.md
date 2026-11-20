@@ -96,6 +96,22 @@ Da rispettare in ogni nuova lezione.
 7. Due temi disponibili: `ornate` (v2, predefinito) e `glow` (v1), scelti con `"theme"` nel
    file della lezione.
 
+### Generazione degli asset con ZAPI FLOW (Google Flow)
+
+1. **Formato del file**: un prompt per riga, una riga vuota tra un prompt e l'altro, niente
+   titoli né numeri (`prompt-sequenziali.txt`). Si carica con «UPLOAD .TXT FILE».
+2. **Il formato immagine va scritto nel prompt** (es. «Aspect ratio 16:9.» alla fine),
+   perché il file non ha altri campi.
+3. **Immagini di riferimento come asset del progetto Flow**, con lo stesso nome usato nei
+   prompt: REF-A (libreria icone), REF-B (sfondo con arco), REF-C (screenshot della lezione),
+   REF-D (personaggio). Con «Character Consistency» attivo, ZAPI FLOW aggiunge da solo gli
+   asset il cui nome compare nel prompt.
+4. **Ordine**: prima il prompt 1 (foglio del personaggio), poi lo si salva come REF-D e solo
+   dopo si lanciano i prompt 2–8 (le pose), così il personaggio resta identico.
+5. **Nomi dei file**: tenere attivo «Include serial number in filename». Il numero
+   corrisponde alla posizione del prompt nel file, e così si ricollega ogni immagine al suo asset.
+6. Non usiamo Zapier.
+
 ## 7. Processo
 
 1. Provare ogni lezione **dall'inizio alla fine nell'app vera** (landscape da telefono)
@@ -109,7 +125,8 @@ Da rispettare in ogni nuova lezione.
 
 ## Materiale in questa cartella
 
-- `prompt-sequenziali.txt`: i 49 prompt in ordine, solo testo
+- `prompt-sequenziali.txt`: i 49 prompt per ZAPI FLOW (uno per riga, in ordine)
+- `voices/elenco-voci.txt`: nomi delle 15 voci nell'ordine del provino
 - `rateel-prompt-nano-banana.txt`: guida d'uso manuale con i prompt per sezione
 - `intro-lesson-1.tashkeel-bozza.json`: lezione 1 completamente vocalizzata (bozza)
 - `videos/`: render della lezione 1 (v1 glow, v2 ornate)
