@@ -1,6 +1,6 @@
 # Screen 04: side navigation (rail closed + menu open)
 
-Status: ✅ approved by the owner (2026-11-20), v5 with PNG end caps
+Status: 🟡 v5 (PNG end caps) waiting for the owner's review
 Branch: `flutter/04-side-nav` (first screen to build: every other screen sits next to it)
 References: `04-side-nav/reference.webp` (menu open), `04-side-nav/rail-options.jpg` (closed rail, three
 glassy variants found in the ChatGPT screens: A = 03/11, B = 13, C = 05).

@@ -41,4 +41,5 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | Owner's ornament SVG kit stored in `docs/design-assets/ornaments-svg-kit/`. Used: **vector arch** (thinner, paler: closer to the reference) and **vector star tile** (seamless). Kept the **PNG end caps** (the vector caps differ in shape). | ✅ |
 | 2026-11-20 | Owner's corrections: end caps attached to the selected row; close button gets a **glass** circle (gold gradient rim, emerald glass fill, top sheen, drop shadow); arch moved **a little lower than the reference** so its tails meet the selected row (owner's choice, not a defect). | ✅ |
 | 2026-11-20 | End caps: tried the brightened vector caps from the kit; **owner chose the filled PNG caps** (`row_end_caps_pair.png`). Final. | ✅ |
-| 2026-11-20 | **Side navigation approved by the owner; proceed to the next screen (03, courses).** | ✅ |
+| 2026-11-20 | Side navigation: owner is reviewing v5 with the PNG end caps (not approved yet). | 🟡 |
+| 2026-11-20 | **Screen 03 (courses) and the lessons will be built in a separate chat/session**, starting from branch `flutter/03-courses` (fast-forwarded to the side-nav work, so it already contains the navigation). | ✅ |
