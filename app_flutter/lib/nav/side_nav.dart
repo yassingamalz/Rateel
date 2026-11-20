@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:ui' show ImageFilter, lerpDouble;
+import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -192,12 +192,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
     if (t == 0) return const [];
     final o = ((t - 0.85) / 0.15).clamp(0.0, 1.0);
     if (o == 0) return const [];
-    // Vector caps from the owner's ornament kit, brightened (owner: lighter
-    // gold, luminous as in the reference). The straight inner edge (x = 213
-    // of 280 on the left cap) sits under the selected row's rim.
+    // Filled PNG caps from the owner (row_end_caps_pair.png, owner's choice
+    // over the vector kit): the flat side sits just under the row rim.
     final row = Rect.lerp(g.tileRectAt(active), g.selectedRect(active), t)!;
-    final h = g.u * 9.6;
-    final w = h * 280 / 470;
+    final h = g.u * 10.4;
+    final w = h * 267 / 442;
     Widget cap(double left, String asset) => Positioned(
       left: left,
       top: row.center.dy - h / 2,
@@ -206,32 +205,13 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       child: IgnorePointer(
         child: Opacity(
           opacity: o,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // Soft gold glow (the SVG blur filter is not supported).
-              ImageFiltered(
-                imageFilter: ImageFilter.blur(
-                  sigmaX: g.u * 0.7,
-                  sigmaY: g.u * 0.7,
-                ),
-                child: Opacity(
-                  opacity: 0.8,
-                  child: SvgPicture.asset(asset, fit: BoxFit.fill),
-                ),
-              ),
-              SvgPicture.asset(asset, fit: BoxFit.fill),
-            ],
-          ),
+          child: Image(image: AssetImage(asset), fit: BoxFit.fill),
         ),
       ),
     );
     return [
-      cap(row.left + g.u * 0.2 - w * 213 / 280, 'assets/ui/decor/cap_left.svg'),
-      cap(
-        row.right - g.u * 0.5 - w * 67 / 280,
-        'assets/ui/decor/cap_right.svg',
-      ),
+      cap(row.left - w + g.u * 1.7, 'assets/ui/decor/cap_left.png'),
+      cap(row.right - g.u * 1.7, 'assets/ui/decor/cap_right.png'),
     ];
   }
 
