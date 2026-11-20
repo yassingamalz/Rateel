@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="96" viewBox="0 0 256 96" fill="none" aria-label="Rateel sidebar seamless eight-pointed star geometric border">
+<title>Rateel Islamic geometric bottom border</title>
+<desc>Transparent, seamlessly repeating gold-sage geometric pattern. Horizontal tile width 256. Four repeating 64-unit motifs with thin outlines and discrete stroke opacities.</desc>
+<defs><clipPath id="tile-clip"><rect x="0" y="0" width="256" height="96"/></clipPath></defs>
+<g clip-path="url(#tile-clip)" stroke="#68805C" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" fill="none">
+<path opacity="0.17" d="M-93,76 L-88,71 L-88,62 L-79,62 L-79,54 L-70,54 L-64,48 L-58,54 L-49,54 L-49,62 L-40,62 L-40,71 L-35,76"/>
+<path opacity="0.35" d="M-35,76 L-40,81 L-40,90 L-49,90 L-49,98 L-58,98 L-64,104 L-70,98 L-79,98 L-79,90 L-88,90 L-88,81 L-93,76"/>
+<path opacity="0.14" d="M-46,76 L-44,73 L-44,69 L-39,69 L-39,65 L-35,65 L-32,61 L-29,65 L-25,65 L-25,69 L-20,69 L-20,73 L-18,76"/>
+<path opacity="0.27" d="M-18,76 L-20,79 L-20,83 L-25,83 L-25,87 L-29,87 L-32,91 L-35,87 L-39,87 L-39,83 L-44,83 L-44,79 L-46,76"/>
+<path opacity="0.14" d="M-35,76 L-46,76"/>
+<path opacity="0.14" d="M-18,76 L-29,76"/>
+<path opacity="0.22" d="M-39,100 L-32,91 L-25,100 L-32,109 Z"/>
+<path opacity="0.14" d="M-40,90 L-39,100 M-25,100 L-24,90"/>
+<path opacity="0.17" d="M-29,76 L-24,71 L-24,62 L-15,62 L-15,54 L-6,54 L0,48 L6,54 L15,54 L15,62 L24,62 L24,71 L29,76"/>
+<path opacity="0.35" d="M29,76 L24,81 L24,90 L15,90 L15,98 L6,98 L0,104 L-6,98 L-15,98 L-15,90 L-24,90 L-24,81 L-29,76"/>
+<path opacity="0.14" d="M18,76 L20,73 L20,69 L25,69 L25,65 L29,65 L32,61 L35,65 L39,65 L39,69 L44,69 L44,73 L46,76"/>
+<path opacity="0.27" d="M46,76 L44,79 L44,83 L39,83 L39,87 L35,87 L32,91 L29,87 L25,87 L25,83 L20,83 L20,79 L18,76"/>
+<path opacity="0.14" d="M29,76 L18,76"/>
+<path opacity="0.14" d="M46,76 L35,76"/>
+<path opacity="0.22" d="M25,100 L32,91 L39,100 L32,109 Z"/>
+<path opacity="0.14" d="M24,90 L25,100 M39,100 L40,90"/>
+<path opacity="0.17" d="M35,76 L40,71 L40,62 L49,62 L49,54 L58,54 L64,48 L70,54 L79,54 L79,62 L88,62 L88,71 L93,76"/>
+<path opacity="0.35" d="M93,76 L88,81 L88,90 L79,90 L79,98 L70,98 L64,104 L58,98 L49,98 L49,90 L40,90 L40,81 L35,76"/>
+<path opacity="0.14" d="M82,76 L84,73 L84,69 L89,69 L89,65 L93,65 L96,61 L99,65 L103,65 L103,69 L108,69 L108,73 L110,76"/>
+<path opacity="0.27" d="M110,76 L108,79 L108,83 L103,83 L103,87 L99,87 L96,91 L93,87 L89,87 L89,83 L84,83 L84,79 L82,76"/>
+<path opacity="0.14" d="M93,76 L82,76"/>
+<path opacity="0.14" d="M110,76 L99,76"/>
+<path opacity="0.22" d="M89,100 L96,91 L103,100 L96,109 Z"/>
+<path opacity="0.14" d="M88,90 L89,100 M103,100 L104,90"/>
+<path opacity="0.17" d="M99,76 L104,71 L104,62 L113,62 L113,54 L122,54 L128,48 L134,54 L143,54 L143,62 L152,62 L152,71 L157,76"/>
+<path opacity="0.35" d="M157,76 L152,81 L152,90 L143,90 L143,98 L134,98 L128,104 L122,98 L113,98 L113,90 L104,90 L104,81 L99,76"/>
+<path opacity="0.14" d="M146,76 L148,73 L148,69 L153,69 L153,65 L157,65 L160,61 L163,65 L167,65 L167,69 L172,69 L172,73 L174,76"/>
+<path opacity="0.27" d="M174,76 L172,79 L172,83 L167,83 L167,87 L163,87 L160,91 L157,87 L153,87 L153,83 L148,83 L148,79 L146,76"/>
+<path opacity="0.14" d="M157,76 L146,76"/>
+<path opacity="0.14" d="M174,76 L163,76"/>
+<path opacity="0.22" d="M153,100 L160,91 L167,100 L160,109 Z"/>
+<path opacity="0.14" d="M152,90 L153,100 M167,100 L168,90"/>
+<path opacity="0.17" d="M163,76 L168,71 L168,62 L177,62 L177,54 L186,54 L192,48 L198,54 L207,54 L207,62 L216,62 L216,71 L221,76"/>
+<path opacity="0.35" d="M221,76 L216,81 L216,90 L207,90 L207,98 L198,98 L192,104 L186,98 L177,98 L177,90 L168,90 L168,81 L163,76"/>
+<path opacity="0.14" d="M210,76 L212,73 L212,69 L217,69 L217,65 L221,65 L224,61 L227,65 L231,65 L231,69 L236,69 L236,73 L238,76"/>
+<path opacity="0.27" d="M238,76 L236,79 L236,83 L231,83 L231,87 L227,87 L224,91 L221,87 L217,87 L217,83 L212,83 L212,79 L210,76"/>
+<path opacity="0.14" d="M221,76 L210,76"/>
+<path opacity="0.14" d="M238,76 L227,76"/>
+<path opacity="0.22" d="M217,100 L224,91 L231,100 L224,109 Z"/>
+<path opacity="0.14" d="M216,90 L217,100 M231,100 L232,90"/>
+<path opacity="0.17" d="M227,76 L232,71 L232,62 L241,62 L241,54 L250,54 L256,48 L262,54 L271,54 L271,62 L280,62 L280,71 L285,76"/>
+<path opacity="0.35" d="M285,76 L280,81 L280,90 L271,90 L271,98 L262,98 L256,104 L250,98 L241,98 L241,90 L232,90 L232,81 L227,76"/>
+<path opacity="0.14" d="M274,76 L276,73 L276,69 L281,69 L281,65 L285,65 L288,61 L291,65 L295,65 L295,69 L300,69 L300,73 L302,76"/>
+<path opacity="0.27" d="M302,76 L300,79 L300,83 L295,83 L295,87 L291,87 L288,91 L285,87 L281,87 L281,83 L276,83 L276,79 L274,76"/>
+<path opacity="0.14" d="M285,76 L274,76"/>
+<path opacity="0.14" d="M302,76 L291,76"/>
+<path opacity="0.22" d="M281,100 L288,91 L295,100 L288,109 Z"/>
+<path opacity="0.14" d="M280,90 L281,100 M295,100 L296,90"/>
+<path opacity="0.17" d="M291,76 L296,71 L296,62 L305,62 L305,54 L314,54 L320,48 L326,54 L335,54 L335,62 L344,62 L344,71 L349,76"/>
+<path opacity="0.35" d="M349,76 L344,81 L344,90 L335,90 L335,98 L326,98 L320,104 L314,98 L305,98 L305,90 L296,90 L296,81 L291,76"/>
+<path opacity="0.14" d="M338,76 L340,73 L340,69 L345,69 L345,65 L349,65 L352,61 L355,65 L359,65 L359,69 L364,69 L364,73 L366,76"/>
+<path opacity="0.27" d="M366,76 L364,79 L364,83 L359,83 L359,87 L355,87 L352,91 L349,87 L345,87 L345,83 L340,83 L340,79 L338,76"/>
+<path opacity="0.14" d="M349,76 L338,76"/>
+<path opacity="0.14" d="M366,76 L355,76"/>
+<path opacity="0.22" d="M345,100 L352,91 L359,100 L352,109 Z"/>
+<path opacity="0.14" d="M344,90 L345,100 M359,100 L360,90"/>
+</g></svg>

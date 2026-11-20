@@ -9,10 +9,10 @@ void main() {
     addTearDown(tester.view.reset);
     await tester.pumpWidget(const RateelApp());
     expect(find.text('الشهادات'), findsNothing); // labels only in the open menu
-    await tester.tap(find.byType(AnimatedIcon));
+    await tester.tap(find.bySemanticsLabel(RegExp('القائمة')));
     await tester.pumpAndSettle();
     expect(find.text('الشهادات'), findsOneWidget);
-    await tester.tap(find.byType(AnimatedIcon));
+    await tester.tap(find.bySemanticsLabel(RegExp('القائمة')));
     await tester.pumpAndSettle();
     expect(find.text('الشهادات'), findsNothing);
   });
