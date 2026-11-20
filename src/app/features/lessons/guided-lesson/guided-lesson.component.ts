@@ -22,9 +22,9 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
     // Calm morph-like cross-fade (rule 0.12): the old scene dissolves while the new one settles in place.
     trigger('stepSwap', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.985)', filter: 'blur(4px)' }),
-        animate('550ms 80ms cubic-bezier(0.16, 1, 0.3, 1)',
-          style({ opacity: 1, transform: 'scale(1)', filter: 'blur(0)' })),
+        // no scale: shared elements (arch, title, cards) must not move between scenes
+        style({ opacity: 0, filter: 'blur(4px)' }),
+        animate('520ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, filter: 'blur(0)' })),
       ]),
       transition(':leave', [
         animate('320ms cubic-bezier(0.4, 0, 1, 1)', style({ opacity: 0, filter: 'blur(3px)' })),
