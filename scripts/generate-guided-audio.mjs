@@ -46,6 +46,8 @@ const CHECK_MODEL = flag('check-model', 'gemini-3.8-flash');
 // Short director's note in the format Gemini TTS expects ("Say <style>: <text>").
 // Longer English instructions are sometimes read aloud, so every result is verified below.
 const STYLE = 'Say in a warm, calm and encouraging Arabic teacher voice: ';
+// Off by default: the TTS model sometimes reads the director's note aloud. Opt in with --style.
+const USE_STYLE = args.includes('--style') && (args.splice(args.indexOf('--style'), 1), true);
 
 const exists = (p) => access(p).then(() => true, () => false);
 const hash = (s) => createHash('sha1').update(s).digest('hex').slice(0, 12);
@@ -62,6 +64,7 @@ async function gemini(model, body) {
       if (attempt > 8) throw new Error(JSON.stringify(json).slice(0, 300));
       const retry = /"retryDelay":\s*"(\d+)/.exec(JSON.stringify(json))?.[1];
       const wait = (Number(retry) || 10 * attempt) * 1000;
+      if (wait > 120_000) throw new Error(`Gemini quota exhausted — retry in ~${Math.round(wait / 60000)} min`);
       process.stdout.write(`    … rate limited, waiting ${wait / 1000}s\n`);
       await new Promise((r) => setTimeout(r, wait));
       continue;
@@ -77,7 +80,7 @@ const duration = async (file) =>
 async function verify(file, text) {
   const secs = await duration(file);
   const letters = text.replace(/[\u064B-\u0652\u0670\s\p{P}]/gu, '').length;
-  const maxSecs = letters * 0.3 + 4; // generous: only catches takes with extra speech
+  const maxSecs = letters * 0.24 + 1.5; // normal pace is ~0.16–0.20 s per letter
   if (secs > maxSecs) return `too long (${secs.toFixed(1)}s > ${maxSecs.toFixed(1)}s)`;
   const json = await gemini(CHECK_MODEL, {
     contents: [{ parts: [
@@ -86,6 +89,7 @@ async function verify(file, text) {
     ] }],
   });
   const transcript = json?.candidates?.[0]?.content?.parts?.map((p) => p.text ?? '').join('') ?? '';
+  if (!transcript.trim()) return 'could not transcribe (API busy) — not verified';
   if (/[A-Za-z]{3,}/.test(transcript)) return `contains non-Arabic speech: ${transcript.slice(0, 80)}`;
   return null;
 }
@@ -94,7 +98,7 @@ async function tts(text, outMp3) {
   for (let attempt = 1; attempt <= 5; attempt++) {
     // Short lines are the ones most likely to have the director's note read aloud:
     // after two bad takes, send the bare text instead.
-    await synth(attempt <= 2 ? STYLE + text : text, outMp3);
+    await synth(USE_STYLE && attempt <= 2 ? STYLE + text : text, outMp3);
     const problem = await verify(outMp3, text);
     if (!problem) return;
     process.stdout.write(`    ✗ ${path.basename(outMp3)}: ${problem} — retrying\n`);
