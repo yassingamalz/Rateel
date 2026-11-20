@@ -140,6 +140,9 @@ Da rispettare in ogni nuova lezione.
 
 ## Materiale in questa cartella
 
+- `STATO-E-DIREZIONI.md`: **stato attuale e le due direzioni (app / video): leggere per primo**
+- `voices/samples/`: i 15 campioni voce singoli (numerati come nel provino)
+
 - `prompt-sequenziali.txt`: i 49 prompt per ZAPI FLOW (uno per riga, in ordine)
 - `prompt-sequenziali-2.txt`: 11 prompt del secondo batch (mancanti e da rifare)
 - `ASSET-CATALOGO.md`: stato di ogni asset
