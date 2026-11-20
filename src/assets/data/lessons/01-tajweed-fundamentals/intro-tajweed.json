@@ -7,13 +7,12 @@
             "id": "intro-lesson-1",
             "title": "مقدمة في علم التجويد",
             "description": "التعريف بعلم التجويد وأهميته في تلاوة القرآن الكريم",
-            "type": "video",
-            "icon": "fa-play-circle",
+            "type": "guided",
+            "icon": "fa-wand-magic-sparkles",
             "duration": 6,
             "order": 1,
             "stepNumber": 1,
-            "totalSteps": 3,
-            "videoUrl": "https://www.youtube.com/watch?v=BqFxf-WspTc"
+            "totalSteps": 3
         },
         {
             "id": "intro-lesson-2",

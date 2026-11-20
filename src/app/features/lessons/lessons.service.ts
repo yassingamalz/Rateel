@@ -262,6 +262,16 @@ export class LessonsService implements OnDestroy {
           );
         }
 
+        if (lesson.type === 'guided' && !lesson.guidedContent) {
+          return this.http.get<any>(`assets/data/content/guided/${lesson.id}.json`).pipe(
+            map(content => content ? { ...lesson, guidedContent: JSON.stringify(content) } : lesson),
+            catchError(error => {
+              console.error(`[LessonsService] Error loading guided content for ${lesson.id}:`, error);
+              return of(lesson);
+            })
+          );
+        }
+
         if (lesson.type === 'assessment' && !lesson.assessmentContent) {
           return this.loadAssessmentContent(lesson.id).pipe(
             map(content => {

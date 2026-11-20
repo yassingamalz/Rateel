@@ -1,0 +1,247 @@
+// Theme "ornate" (v2): matches the Rateel mock-up — arch + lattice background,
+// notched gold labels with flower ornaments, framed mushaf card with rosettes,
+// flat gold buttons and line-icon tiles. Colours sampled from the reference design.
+
+$label-frame: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='56' viewBox='0 0 120 56'%3E%3Cpath d='M3 28 L13 18 Q15 5 30 5 L90 5 Q105 5 107 18 L117 28 L107 38 Q105 51 90 51 L30 51 Q15 51 13 38 Z' fill='%23022A20' stroke='%23F2C230' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E";
+$flower: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-14 -14 28 28'%3E%3Cg fill='none' stroke='%23F2C230' stroke-width='1.3'%3E%3Crect x='-5.5' y='-5.5' width='11' height='11' transform='rotate(45)'/%3E%3Ccircle cy='-7.5' r='3.3'/%3E%3Ccircle cy='7.5' r='3.3'/%3E%3Ccircle cx='-7.5' r='3.3'/%3E%3Ccircle cx='7.5' r='3.3'/%3E%3C/g%3E%3Ccircle r='1.8' fill='%23F2C230'/%3E%3C/svg%3E";
+$rosette: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64'%3E%3Ccircle r='30' fill='%23032A20'/%3E%3Cg fill='none' stroke='%23E9B524' stroke-width='1.4'%3E%3Cg id='p'%3E%3Cellipse cy='-15' rx='6.5' ry='12'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(45)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(90)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(135)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(180)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(225)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(270)'/%3E%3Cellipse cy='-15' rx='6.5' ry='12' transform='rotate(315)'/%3E%3C/g%3E%3Ccircle r='7'/%3E%3Ccircle r='26' stroke-dasharray='2 4' opacity='.5'/%3E%3C/g%3E%3Ccircle r='2.6' fill='%23E9B524'/%3E%3C/svg%3E";
+
+.guided.theme-ornate {
+  --o-bg: #043226;
+  --o-bg-deep: #02271e;
+  --o-panel: rgba(1, 36, 27, 0.72);
+  --o-gold: #f7bc15;
+  --o-gold-line: #e9b524;
+  --o-gold-dark: #b5850a;
+  --o-cream: #f6ebcb;
+  --o-off: #2b473d;
+  --o-tile: #04281b;
+  --o-tile-border: rgba(149, 213, 178, 0.32);
+  background: var(--o-bg-deep);
+
+  // ─── background: the supplied arch & lattice artwork ───
+  .bg {
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      background: url('/assets/images/guided/stage-bg.jpg') center top / cover no-repeat;
+    }
+    .bg-glow {
+      background: radial-gradient(ellipse 50% 45% at 50% 55%, rgba(10, 70, 52, 0.35), transparent 70%);
+      animation: none;
+    }
+    .bg-beam, .bg-rosette, .bg-pattern { display: none; }
+    .particle { display: none; }
+    .bg-vignette { background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.35) 100%); }
+  }
+
+  // ─── top bar ───
+  .topbar .seg {
+    height: 9px;
+    background: var(--o-off);
+    i { background: var(--o-gold); box-shadow: none; }
+    &.current { box-shadow: 0 0 10px rgba(247, 188, 21, 0.35); }
+  }
+  .topbar .step-count { color: #fff; opacity: 0.9; font-size: 15px; }
+  .icon-btn {
+    background: rgba(1, 36, 27, 0.6);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  // ─── notched gold label with flower ornaments ───
+  .label, .badge {
+    position: relative;
+    height: 40px;
+    padding: 0 6px;
+    border-radius: 0;
+    background: none;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0 28px;
+    border-image: url($label-frame) 0 40 fill / 0 28px / 0 stretch;
+    color: var(--o-gold);
+    font-size: clamp(14px, 3.4vh, 18px);
+    font-weight: 800;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      margin-top: -12px;
+      background: url($flower) center / contain no-repeat;
+    }
+    &::before { right: -60px; }
+    &::after { left: -60px; }
+  }
+
+  // ─── mushaf card ───
+  .mushaf {
+    border: 2.5px solid var(--o-gold-line);
+    border-radius: 44px;
+    background: linear-gradient(180deg, rgba(2, 40, 30, 0.75), rgba(1, 34, 25, 0.85));
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 18px 40px rgba(0, 0, 0, 0.45), inset 0 0 40px rgba(0, 0, 0, 0.25);
+    padding-left: 64px;
+    padding-right: 64px;
+
+    &::before, &::after {
+      content: '';
+      width: 58px;
+      height: 58px;
+      opacity: 1;
+      background: url($rosette) center / contain no-repeat;
+    }
+    &::before { right: -8px; }
+    &::after { left: -8px; }
+    &.reciting { box-shadow: 0 0 34px rgba(247, 188, 21, 0.18), 0 18px 40px rgba(0, 0, 0, 0.45); }
+
+    .mushaf-head {
+      opacity: 1;
+      font-size: clamp(13px, 3.4vh, 17px);
+      color: #fff;
+      > span {
+        padding-bottom: 4px;
+        background: linear-gradient(to left, rgba(233, 181, 36, 0.8), transparent) bottom / 100% 1px no-repeat;
+      }
+      .reciter { background-image: linear-gradient(to right, rgba(233, 181, 36, 0.8), transparent); }
+      .reciter i { color: var(--o-gold); }
+    }
+  }
+
+  .ayah .word {
+    &.focus { color: var(--o-gold); text-shadow: 0 2px 14px rgba(247, 188, 21, 0.35); }
+    &.active { background: rgba(247, 188, 21, 0.1); }
+    &::after { background: var(--o-gold); }
+  }
+  .ayah .ayah-num { color: var(--o-gold); }
+
+  // ─── buttons ───
+  .pill-btn {
+    padding: 9px 26px;
+    border: 1.8px solid var(--o-gold-line);
+    background: rgba(1, 36, 27, 0.55);
+    color: #fff;
+    font-size: 15px;
+    i { color: var(--o-gold); font-size: 15px; }
+    &.mine { border-color: rgba(149, 213, 178, 0.6); }
+  }
+
+  .continue {
+    min-width: 150px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    &.ready {
+      color: #02271e;
+      border-color: transparent;
+      background: var(--o-gold);
+      box-shadow: 0 6px 18px rgba(247, 188, 21, 0.28), inset 0 -3px 0 rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      font-weight: 800;
+      &:active { transform: translateY(2px); box-shadow: 0 2px 8px rgba(247, 188, 21, 0.3); }
+    }
+  }
+  .icon-btn.ghost { background: transparent; border-color: rgba(255, 255, 255, 0.28); }
+
+  .splash .cta, .mic:not(.live) {
+    background: var(--o-gold);
+    box-shadow: 0 6px 20px rgba(247, 188, 21, 0.3), inset 0 -3px 0 rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  // ─── coach: open mushaf on a rehal ───
+  .coach {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 2px solid var(--o-gold-line);
+    background: rgba(1, 36, 27, 0.8);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    img { display: none; }
+    .rehal {
+      position: relative;
+      z-index: 2;
+      width: 64%;
+      height: 64%;
+      margin: 18% auto 0;
+    }
+    .coach-wave { inset: -3px; border-color: rgba(247, 188, 21, 0.6); }
+    &.talking .rehal { animation: talk 0.5s ease-in-out infinite alternate; }
+  }
+  .coach:not(.talking) .rehal { transition: transform 0.3s; }
+
+  // ─── captions ───
+  .caption {
+    border-radius: 999px;
+    background: var(--o-panel);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    padding: 6px 26px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    span.quoted.spoken { color: var(--o-gold); }
+    span.quoted:not(.spoken) { color: rgba(247, 188, 21, 0.4); }
+  }
+
+  // ─── icon tiles (library style) ───
+  .pillar-icon, .card-icon {
+    background: var(--o-tile);
+    border: 1.5px solid var(--o-tile-border);
+    color: var(--o-gold);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+  }
+
+  .pillar, .card {
+    background: var(--o-panel);
+    border: 1.5px solid rgba(233, 181, 36, 0.35);
+    border-radius: 26px;
+    backdrop-filter: none;
+    &.on { border-color: var(--o-gold-line); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4); }
+  }
+  .pillar h3 { color: var(--o-gold); }
+
+  .card {
+    .card-icon { color: var(--tone); }
+    background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 10%, rgba(1, 36, 27, 0.85)), rgba(1, 36, 27, 0.85) 60%);
+    border-color: color-mix(in srgb, var(--tone) 55%, transparent);
+  }
+
+  .concept .keyword {
+    background: var(--o-panel);
+    border: 2px solid rgba(233, 181, 36, 0.4);
+  }
+  .concept .meaning {
+    background: var(--o-gold);
+    color: #02271e;
+    box-shadow: 0 12px 30px rgba(247, 188, 21, 0.3);
+  }
+
+  .option {
+    background: var(--o-panel);
+    border: 1.5px solid rgba(233, 181, 36, 0.35);
+    border-radius: 22px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    .option-key { background: var(--o-tile); border-color: var(--o-tile-border); color: var(--o-gold); }
+    &:active { transform: translateY(2px); }
+    &.correct {
+      background: linear-gradient(180deg, #34d27c, #1e9e57);
+      border-color: #7dffb4;
+      box-shadow: 0 0 34px rgba(46, 204, 113, 0.5), 0 8px 20px rgba(0, 0, 0, 0.35);
+      .option-key { color: #fff; background: rgba(255, 255, 255, 0.2); border-color: transparent; }
+    }
+    &.wrong {
+      background: linear-gradient(180deg, rgba(224, 93, 79, 0.55), rgba(224, 93, 79, 0.25));
+      border-color: #e05d4f;
+      .option-key { color: #fff; background: rgba(255, 255, 255, 0.15); border-color: transparent; }
+    }
+  }
+
+  .explain, .sentence .q { border-color: rgba(233, 181, 36, 0.4); }
+
+  .title.shimmer {
+    background-image: linear-gradient(100deg, #fff 0%, #fff 35%, var(--o-gold) 47%, #fff 60%, #fff 100%);
+  }
+
+  .stars i.earned { color: var(--o-gold); }
+}

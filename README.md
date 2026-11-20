@@ -133,6 +133,26 @@ npx cap open ios
 - **Interactive Practice**: Practice pronunciation with feedback
 - **Audio Lessons**: Listen to expert recitation examples
 
+### Guided Lessons (animated, narrated)
+Lessons of type `guided` play as a full-screen, step-by-step animated experience
+(inspired by apps like Simply Piano): a narrating coach with synced captions, animated
+concept reveals, tap-to-answer quizzes, Quran recitation with word-by-word highlighting
+(Al-Husary, Muallim), a "your turn" recording step, and a star-rated finish.
+
+- Component: `src/app/features/lessons/guided-lesson/`
+- Content: `src/assets/data/content/guided/<lessonId>.json` (step types: `intro`, `concept`,
+  `pillars`, `compare`, `quiz`, `listen`, `repeat`, `summary`)
+- Narration audio is generated with Google Gemini TTS:
+
+```bash
+GEMINI_API_KEY=... node scripts/generate-guided-audio.mjs intro-lesson-1 [--voice Charon] [--force]
+```
+
+The script only regenerates changed lines, checks every take (length + transcription) and
+downloads the Quran clips a lesson uses. Word timings for recitations come from the
+quran.com API (`/api/v4/recitations/12/by_ayah/<key>?fields=segments`). If a narration file
+is missing, the app falls back to the device's Arabic voice, then to timed captions.
+
 ### Tajweed Rules Coverage
 - Noon and Meem Mushaddad (النون والميم المشددتان)
 - Noon Sakinah and Tanween (النون الساكنة والتنوين)

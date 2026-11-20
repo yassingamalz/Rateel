@@ -1,7 +1,7 @@
 <!-- lesson-details.component.html -->
 <div class="lesson-details" [@slideDown]="animationState">
   <!-- Progress Container - Hidden when controls are hidden -->
-  <div class="progress-container" *ngIf="!hideControls">
+  <div class="progress-container" *ngIf="!hideControls && lesson?.type !== 'guided'">
     <div class="progress-bar">
       <div class="progress-fill" [style.width.%]="currentProgress" [style.transition]="'width 300ms ease-out'"></div>
     </div>
@@ -39,6 +39,10 @@
       <app-interactive-lesson *ngSwitchCase="'practice'" [verses]="lesson?.verses || []"
         [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
       </app-interactive-lesson>
+
+      <app-guided-lesson *ngSwitchCase="'guided'" [content]="lesson?.guidedContent"
+        [isCompleted]="!!lesson?.isCompleted" (onProgress)="updateProgress($event)" (onComplete)="markAsCompleted()">
+      </app-guided-lesson>
 
       <app-assessment-lesson *ngSwitchCase="'assessment'" [content]="lesson?.assessmentContent"
         [isCompleted]="lesson?.isCompleted" (onProgress)="updateProgress($event)" 

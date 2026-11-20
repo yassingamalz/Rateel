@@ -19,6 +19,7 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReadingLessonComponent } from './reading-lesson/reading-lesson.component';
 import { AssessmentLessonComponent } from './assessment-lesson/assessment-lesson.component';
+import { GuidedLessonComponent } from './guided-lesson/guided-lesson.component';
 
 // Interactive lesson feature module
 import { InteractiveLessonComponent } from './interactive-lesson/interactive-lesson.component';
@@ -34,7 +35,8 @@ import { ReadingLessonModule } from './reading-lesson/reading-lesson.module';
     VideoPlayerComponent,
     InteractiveLessonComponent,
     AudioPlayerComponent,
-    AssessmentLessonComponent
+    AssessmentLessonComponent,
+    GuidedLessonComponent
   ],
   imports: [
     // Angular modules

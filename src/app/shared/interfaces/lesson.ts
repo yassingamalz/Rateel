@@ -2,7 +2,7 @@
 import { TajweedVerse } from "../../features/lessons/interactive-lesson/interactive-lesson.types";
 
 // src/app/shared/interfaces/lesson.ts
-export type LessonType = 'video' | 'practice' | 'listen' | 'read' | 'test' | 'assessment';
+export type LessonType = 'video' | 'practice' | 'listen' | 'read' | 'test' | 'assessment' | 'guided';
 
 export interface Lesson {
   id: string;
@@ -24,6 +24,8 @@ export interface Lesson {
   verses?: TajweedVerse[];
   readingContent?: string;
   assessmentContent?: string;
+  /** JSON of a GuidedLessonContent (Simply-Piano-style animated lesson). */
+  guidedContent?: string;
   defaultContent?: string;
   contentPath?: string;
 }
