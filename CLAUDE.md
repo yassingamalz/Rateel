@@ -16,7 +16,10 @@ natively in Flutter, one screen per branch.
 - **Critic before the owner:** every visual result is reviewed one to one against the reference by a
   separate reviewer and fixed until no high/medium code difference remains (`docs/flutter/CRITIC.md`).
 - Show the owner the visual plan and get a "yes" before any visual work.
-- Never invent assets: write ChatGPT prompts, the owner generates the images.
+- Never invent assets: write ChatGPT prompts, the owner generates the images. **Always paste the prompts in
+  the chat, one copyable code block each**, and say which reference images to attach.
+- **One style for the whole app** (`docs/flutter/DESIGN-SYSTEM.md`): if a reference conflicts with a confirmed
+  token, tell the owner and let them decide.
 - Dark theme first, light/dark toggle always present; landscape; RTL Arabic.
 - Talk to the owner in **Italian**; write docs in English.
 

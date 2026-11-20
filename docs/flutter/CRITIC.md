@@ -17,8 +17,10 @@ Flutter result one to one with the ChatGPT reference and lists every difference.
 3. Output: `docs/flutter/screens/<nn>-<slug>/critic-v<k>.md`, a table of differences, each with severity
    (high / medium / low), whether it is **code** (fix it) or **asset** (ask ChatGPT, give the prompt), and a
    fidelity score 0–10.
-4. Fix all code items, re-run the critic, repeat until no high/medium code item remains.
-5. Only then show the owner: result, comparison image, last critic report, and the asset list.
+4. The critic also checks every value against `DESIGN-SYSTEM.md` and lists **conflicts** with confirmed
+   tokens separately: these go to the owner, they are not fixed silently.
+5. Fix all code items, re-run the critic, repeat until no high/medium code item remains.
+6. Only then show the owner: result, comparison image, last critic report, and the asset list.
 
 Elements that cannot be matched without art (ornaments, illustrations, special icons) are generated with
 ChatGPT; everything else must match in code. **Icons that differ from the reference are generated with
