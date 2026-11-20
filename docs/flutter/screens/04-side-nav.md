@@ -1,6 +1,6 @@
 # Screen 04: side navigation (rail closed + menu open)
 
-Status: 🟡 plan approved, waiting for fonts and assets N1, N2, A5
+Status: 🟡 v1 built (`app_flutter/lib/nav/side_nav.dart`), waiting for the owner's test and assets N1, N2, A5
 Branch: `flutter/04-side-nav` (first screen to build: every other screen sits next to it)
 References: `04-side-nav/reference.webp` (menu open), `04-side-nav/rail-options.jpg` (closed rail, three
 glassy variants found in the ChatGPT screens: A = 03/11, B = 13, C = 05).
@@ -48,4 +48,14 @@ active-state highlight, dimming of the content. Flat cream glyphs as in style C 
 
 ## Still open
 - Where the settings screen is opened from (no settings entry exists in the references).
-- Fonts (see `screens/fonts/`).
+- Assets N1 (arch), N2 (filigree caps), A5 (bottom pattern): not in v1, slots ready.
+
+## v1 (2026-11-20)
+- Font Readex Pro; icons Font Awesome (rail: graduation cap, book, microphone, trophy, medal, award;
+  menu: book-open and file-lines for القرآن and الشهادات).
+- Geometry in units of 1% of the screen height, measured on references 05 (rail) and 04 (menu).
+- The rail tiles morph into the menu rows, icons and count bubbles glide, ☰ morphs into ✕, the selected
+  row grows out of the gold circle. Labels stagger in.
+- Review aid: the web build accepts `?slow=10` to play animations 10× slower.
+- Demo: `04-side-nav/demo-v1.mp4`; comparison with the references: `04-side-nav/compare-v1.jpg`.
+- Known differences: missing assets above; reference icons for القرآن and الشهادات are outline drawings.

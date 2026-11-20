@@ -17,3 +17,9 @@ natively in Flutter, one screen per branch.
 - Never invent assets: write ChatGPT prompts, the owner generates the images.
 - Dark theme first, light/dark toggle always present; landscape; RTL Arabic.
 - Talk to the owner in **Italian**; write docs in English.
+
+## Build and check (cloud container)
+- Flutter is not preinstalled: download stable 3.50.1 to `/opt/flutter` (see `DECISIONS.md`), then
+  `cd app_flutter && flutter analyze && flutter test && flutter build web --release`.
+- Screenshots: serve `app_flutter/build/web` and capture with Playwright at the reference size
+  (1844×853); `?slow=10` slows animations for frame checks.
