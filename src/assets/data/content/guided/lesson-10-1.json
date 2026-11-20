@@ -71,7 +71,11 @@
    "id": "s04-hukm",
    "type": "concept",
    "label": "الْحُكْمُ",
-   "keyword": "نَّ  ·  مَّ",
+   "keyword": "نَّ مَّ",
+   "keywordChips": [
+    "نَّ",
+    "مَّ"
+   ],
    "meaning": "غُنَّةٌ أَكْمَلَ مَا تَكُونُ",
    "note": "وَصْلًا وَوَقْفًا",
    "reveal": {
