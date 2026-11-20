@@ -403,7 +403,7 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
-  opacity: 0.12;
+  opacity: 0;
   transform: translateY(26px) scale(0.92);
   filter: grayscale(1);
   transition: all 0.8s var(--ease-spring);

@@ -158,6 +158,10 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
     const myIndex = this.index();
     const still = () => this.index() === myIndex;
 
+    // Reset before the new step renders: the previous step's narration left progress at 1,
+    // which would briefly reveal every item of the new step and then hide it again.
+    this.audio.narrationProgress.set(0);
+    this.audio.narrating.set(false);
     this.canContinue.set(false);
     this.quizState.set('idle');
     this.picked.set(null);
