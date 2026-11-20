@@ -251,3 +251,21 @@ $active: 0 0 0 1px rgba(255, 217, 90, 0.5), 0 0 26px rgba(247, 188, 21, 0.35);
     li { font-size: clamp(11px, 3.3vh, 14px); .point-text { text-wrap: balance; } }
   }
 }
+
+// owner review 6: the title sweep is back on v3 — white part clipped to a moving gradient, accent stays gold
+.guided.theme-glassy3 .title.shimmer {
+  background-image: linear-gradient(100deg, #fff 0%, #fff 40%, $gold-light 50%, #fff 60%, #fff 100%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  .accent { -webkit-text-fill-color: $gold; color: $gold; }
+}
+.guided.theme-glassy3 .scene.type-intro .title.shimmer.sweep {
+  animation: title-sweep 2.4s ease-in-out both, title-breathe 2.4s ease-in-out both;
+}
+// keyframes must live in this file: Angular scopes animation names per stylesheet
+@keyframes title-sweep { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+@keyframes title-breathe { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.035); filter: drop-shadow(0 0 18px rgba(247, 188, 21, 0.35)); } }

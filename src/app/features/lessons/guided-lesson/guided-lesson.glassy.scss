@@ -701,3 +701,31 @@ $img: '/assets/images/guided/';
 }
 // RTL start button: text first, then the play triangle pointing left (reading direction), like «متابعة ←»
 .guided .splash .cta .cta-icon { transform: scaleX(-1); }
+
+// ════════════════════ Owner review 6: same corrections on v2 (glassy) ════════════════════
+.guided.theme-glassy {
+  // intro template: skyline in flow under the texts, soft and fading (as v3)
+  .bg .bg-skyline { display: none; }
+  .intro-skyline {
+    display: block;
+    flex-shrink: 0;
+    opacity: 0.72;
+    -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+    filter: drop-shadow(0 0 18px rgba(247, 188, 21, 0.3));
+  }
+  .splash .intro-skyline { height: clamp(38px, 12vh, 66px); }
+  .scene.type-intro .intro-skyline { height: clamp(30px, 9vh, 52px); }
+  .splash { gap: clamp(2px, 1.1vh, 8px); }
+  .scene.type-intro { gap: clamp(2px, 1vh, 8px); .emblem { width: clamp(54px, 17vh, 86px) !important; height: clamp(54px, 17vh, 86px) !important; } }
+
+  // summary: no title, stars + points clear of the caption bar
+  .scene.type-summary {
+    .title { display: none; }
+    gap: clamp(8px, 2.4vh, 16px);
+    padding-top: clamp(14px, 5vh, 30px);
+    .stars i { font-size: clamp(28px, 9vh, 46px); &.mid { font-size: clamp(34px, 11vh, 56px); } }
+    .points { grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(94%, 980px); }
+    .points li { padding: 8px 14px; .point-text { text-wrap: balance; } }
+  }
+}
