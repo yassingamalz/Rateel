@@ -165,8 +165,12 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
 7. **Scene transitions:** a calm cross-fade (old scene dissolves, new one settles in place), never two scenes
    sliding over each other. Consecutive scenes that share elements (splash → intro, levels → tanbīh) keep those
    elements in exactly the same place, so only what changes moves.
-8. **End of lesson: a spoken recap of at most 10 seconds** («تَعَلَّمْتَ أَوَّلًا… ثَانِيًا… ثَالِثًا…»), each point
-   appearing on its number. No long goodbye. The free-voice generator trims trailing silence.
+8. **End of lesson: a warm closing with a short recap.** Praise first («مَا شَاءَ اللَّهُ، أَحْسَنْتَ!»), then the
+   recap of the points in about 10 seconds («أَوَّلًا… ثَانِيًا… ثَالِثًا…», each point appearing on its number), then a
+   blessing and goodbye («بَارَكَ اللَّهُ فِيكَ، وَنَلْتَقِي فِي الدَّرْسِ الْقَادِمِ بِإِذْنِ اللَّهِ»). The owner wants the closing
+   to feel alive, not cut short. Never speed up the voice to fit a time limit.
+10. **Arabic UI font: Noto Kufi Arabic** (bundled in `src/assets/fonts/`). Cairo stacks shadda + ḍamma badly
+   (e.g. «النُّونُ»). Quran text stays in Amiri Quran. A font change can widen text: re-check one-line elements.
 9. **Never leave the stage empty while the voice talks:** the scene's main visual is visible from the first word.
 
 ## 6. Graphics and assets
