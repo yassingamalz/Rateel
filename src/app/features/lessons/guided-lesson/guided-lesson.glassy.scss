@@ -523,6 +523,8 @@ $img: '/assets/images/guided/';
     line-height: 1.6;
     padding-block: 8px;
     span { color: rgba(255, 255, 255, 0.45); }
+    span.spoken { color: #fff; }
+    span.quoted.spoken { color: $gold; }
   }
   // definition text centred against the illustration
   .definition .def-text { justify-content: center; }
@@ -542,4 +544,4 @@ $img: '/assets/images/guided/';
   }
 }
 // levels: fixed sentence block so s12 and s13 place the cards on the same line
-.guided.theme-glassy .type-levels .sentence.small { height: 2.9em; min-height: 0; overflow: hidden; margin: 0; }
+.guided.theme-glassy .type-levels .sentence.small { height: 3.5em; min-height: 0; max-width: min(56%, 560px); line-height: 1.7; overflow: visible; margin: 6px 0 0; }
