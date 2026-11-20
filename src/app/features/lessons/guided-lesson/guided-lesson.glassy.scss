@@ -664,7 +664,7 @@ $img: '/assets/images/guided/';
 @keyframes title-sweep { from { background-position: 100% 0; } to { background-position: 0% 0; } }
 @keyframes title-breathe { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.035); filter: drop-shadow(0 0 18px rgba(247, 188, 21, 0.35)); } }
 // the sweep must beat the intro's "animation: none" (same scene)
-.guided.theme-glassy .scene.type-intro .title.shimmer.sweep { animation: title-sweep 1.8s var(--ease-out) both, title-breathe 1.8s ease-in-out both; }
+.guided.theme-glassy .scene.type-intro .title.shimmer.sweep { animation: title-sweep 2.4s ease-in-out both, title-breathe 2.4s ease-in-out both; }
 // levels/tanbih: the sentence stays on one line with the wider Kufi font, so the speed pills keep their place
 .guided.theme-glassy .scene.type-levels .sentence.small { max-width: min(86%, 760px); white-space: nowrap; font-size: clamp(13px, 3.6vh, 17px); }
 .guided.theme-glassy .scene.type-levels .speeds { margin-bottom: 12px; }

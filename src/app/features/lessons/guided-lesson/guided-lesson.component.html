@@ -348,7 +348,7 @@
       </button>
 
       <div class="caption">
-        @for (cw of captionWords(); track $index) {
+        @for (cw of captionPage(); track $index) {
           <span [class.spoken]="isWordSpoken(cw.at)" [class.quoted]="cw.q">{{ cw.w }} </span>
         }
       </div>

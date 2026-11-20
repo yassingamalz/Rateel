@@ -93,6 +93,33 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
     });
   });
 
+  /**
+   * Long narrations are shown as caption pages of about two lines that follow the voice,
+   * so the caption bar never overflows (e.g. a warm closing of four lines).
+   */
+  readonly captionPage = computed(() => {
+    const words = this.captionWords();
+    const MAX = 78; // base letters per page ≈ two lines in the bar (diacritics take no width)
+    const size = (w: string) => w.replace(/[\u064B-\u065F\u0670]/g, '').length + 1;
+    const total = words.reduce((n, w) => n + size(w.w), 0);
+    const target = total / Math.max(1, Math.ceil(total / MAX)); // balanced pages
+    const pages: (typeof words)[] = [];
+    let cur: typeof words = [];
+    let len = 0;
+    for (const w of words) {
+      if (cur.length && len + size(w.w) > target + 6) { pages.push(cur); cur = []; len = 0; }
+      cur.push(w);
+      len += size(w.w);
+    }
+    if (cur.length) pages.push(cur);
+    if (pages.length <= 1) return words;
+    const p = this.audio.narrationProgress();
+    if (!this.audio.narrating() && p >= 1) return pages[pages.length - 1]; // finished: keep the last page
+    let idx = 0;
+    pages.forEach((pg, i) => { if (p > 0 && pg[0].at <= p) idx = i; });
+    return pages[idx];
+  });
+
   readonly stars = computed(() => {
     const quizzes = this.steps().filter((s) => s.type === 'quiz');
     if (!quizzes.length) return 3;
