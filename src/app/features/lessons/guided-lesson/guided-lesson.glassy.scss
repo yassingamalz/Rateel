@@ -668,3 +668,34 @@ $img: '/assets/images/guided/';
 // levels/tanbih: the sentence stays on one line with the wider Kufi font, so the speed pills keep their place
 .guided.theme-glassy .scene.type-levels .sentence.small { max-width: min(86%, 760px); white-space: nowrap; font-size: clamp(13px, 3.6vh, 17px); }
 .guided.theme-glassy .scene.type-levels .speeds { margin-bottom: 12px; }
+
+// ════════════════════ Owner review 4 ════════════════════
+.guided.theme-glassy {
+  // start screen: nothing decorative behind the headphones hint
+  &[data-scene='splash'] .bg .bg-skyline { opacity: 0 !important; }
+  .splash .hint { color: $cream; opacity: 0.9; font-size: clamp(12px, 3.4vh, 15px); }
+
+  // split: room for descenders (م) above the part labels
+  .split {
+    height: clamp(150px, 44vh, 210px);
+    .glyph, .plus { top: 38%; }
+    .part-label { bottom: 10px; }
+  }
+
+  // summary: 2 × 2, each point fully readable
+  .scene.type-summary .points {
+    grid-template-columns: repeat(2, minmax(0, 430px));
+    li { font-size: clamp(11px, 3.2vh, 14px); line-height: 1.5; }
+  }
+}
+.guided.theme-glassy {
+  .split { height: clamp(140px, 39vh, 190px); .glyph, .plus { top: 37%; } }
+  .scene.type-split { justify-content: flex-start; padding-top: clamp(10px, 4vh, 24px); }
+  .scene.type-summary {
+    justify-content: flex-start;
+    gap: clamp(4px, 1.2vh, 8px);
+    .stars i { font-size: clamp(20px, 6vh, 32px); &.mid { font-size: clamp(24px, 7.5vh, 40px); } }
+    .title { font-size: clamp(24px, 8vh, 40px); line-height: 1.4; }
+    .points li { padding: 4px 12px; }
+  }
+}
