@@ -8,7 +8,7 @@ Rebuild of the Rateel app in Flutter, replicating the **glassy gamified** design
   UX) before the next one starts.
 - **One branch per screen**: `flutter/<screen-number>-<slug>` (e.g. `flutter/03-courses`), one pull
   request per screen into `master` after the owner's approval.
-- **First screen: 03, courses / learning paths** (المسارات التعليمية).
+- **First: 04, side navigation** (closed rail + open menu), then **03, courses** (المسارات التعليمية).
 - **Dark theme first.** The light/dark toggle must exist from the start; light mode is enabled later,
   when the owner decides.
 - **Landscape** is the main orientation (phone and tablet).

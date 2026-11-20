@@ -57,6 +57,6 @@ These are proposals: the owner may change them.
 - No music; optional short UI tap sound.
 
 ## Open questions for the owner
-1. Rail icons: plain icon-font glyphs as in the reference, or 3D glassy icons (to generate)?
-2. Course icon list A6: approve or change the proposals.
-3. Light/dark toggle position: in the rail (proposed) or in the side menu (screen 04)?
+1. Course icon list A6: approve or change the proposals.
+2. Motion proposal above: OK?
+(Rail icons and theme toggle moved to screen 04, side navigation.)

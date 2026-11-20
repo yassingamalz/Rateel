@@ -18,5 +18,7 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | Flutter SDK: stable **3.50.1**. App folder: `app_flutter/`. | 🟡 |
 | 2026-11-20 | Screen 03 plan (layout, motion/UX, code vs assets, 16 asset prompts): `screens/03-courses.md`, `prompts/03-courses/images.txt`. | 🟡 |
 | 2026-11-20 | Body font **Cairo** (same as the current app); Quran text **Amiri Quran**, Uthmani script (rule from `lesson-production`). | 🟡 |
-| 2026-11-20 | Simple UI glyphs (menu, lock, play, star, rail icons) from an icon font; open question whether the rail icons should be 3D glassy instead. | 🟡 |
-| 2026-11-20 | Light/dark toggle placed in the right rail; open question whether it belongs in the side menu (screen 04). | 🟡 |
+| 2026-11-20 | **Order changed: the side navigation (screen 04) is built first**, before screen 03. Branch `flutter/04-side-nav`, created from `flutter/03-courses` (it carries the docs). | ✅ |
+| 2026-11-20 | Side navigation: **both states**, the glassy closed rail and the open menu (reference 04). | ✅ |
+| 2026-11-20 | Side navigation plan and 2 asset prompts: `screens/04-side-nav.md`, `prompts/04-side-nav/images.txt`. Open questions listed there (rail variant A/B/C, flat or 3D icons, theme toggle position, الشهادات in the rail, motion). | 🟡 |
+| 2026-11-20 | Light/dark toggle proposed at the bottom of the open menu (instead of the rail). | 🟡 |
