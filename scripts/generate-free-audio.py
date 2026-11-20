@@ -42,6 +42,12 @@ async def synth(text, out, timings=False):
                 f.write(ch['data'])
             elif ch['type'] == 'WordBoundary':
                 bounds.append((ch['text'], ch['offset'] / 10_000))
+    # trim trailing silence (keeps 150 ms), so the step does not wait in silence
+    tmp = out + '.tmp.mp3'
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', out, '-af',
+                    'areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.15,areverse',
+                    '-b:a', '48k', tmp], check=True)
+    os.replace(tmp, out)
     if not timings:
         return None
     tokens = text.split()

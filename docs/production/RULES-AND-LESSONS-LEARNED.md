@@ -156,6 +156,18 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
 4. UI sounds are synthesised on the device and are not in the recording. If YouTube needs them,
    add them as files.
 5. Output: 1688×780, 30 fps, H.264 + AAC, `faststart`.
+6. **Video critic, every time (owner's rule).** Before sending any video to the owner, run
+   `scripts/video/critic-frames.py <video> <media.json> <out> <lessonId>` (8 frames per step: transition in,
+   25/50/75 %, end) and have an independent critic agent compare the sheets with the design screens 15–21 and
+   this rulebook: alignment, overflow/clipping of Arabic, transitions (jumps, overlaps, flashes, dead frames),
+   reveal timing, consistency. Fix blockers and important points, re-render, then deliver. The owner should
+   not be the one spotting problems.
+7. **Scene transitions:** a calm cross-fade (old scene dissolves, new one settles in place), never two scenes
+   sliding over each other. Consecutive scenes that share elements (splash → intro, levels → tanbīh) keep those
+   elements in exactly the same place, so only what changes moves.
+8. **End of lesson: a spoken recap of at most 10 seconds** («تَعَلَّمْتَ أَوَّلًا… ثَانِيًا… ثَالِثًا…»), each point
+   appearing on its number. No long goodbye. The free-voice generator trims trailing silence.
+9. **Never leave the stage empty while the voice talks:** the scene's main visual is visible from the first word.
 
 ## 6. Graphics and assets
 

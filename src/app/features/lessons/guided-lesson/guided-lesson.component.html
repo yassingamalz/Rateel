@@ -1,4 +1,4 @@
-<div class="guided" dir="rtl" [class.is-started]="started()" [ngClass]="themeClass()">
+<div class="guided" dir="rtl" [class.is-started]="started()" [ngClass]="themeClass()" [attr.data-scene]="sceneName()">
   <!-- ═════════ Ambient background ═════════ -->
   <div class="bg" aria-hidden="true">
     <div class="bg-image"></div>
@@ -47,9 +47,11 @@
     <main class="stage">
       @if (!started()) {
         <section class="scene splash" @stepSwap>
-          <div class="emblem">
-            <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-            <img src="assets/icons/android-chrome-192x192.png" alt="" />
+          <div class="arch-head">
+            <div class="emblem">
+              <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+              <img [src]="emblemSrc()" alt="" />
+            </div>
           </div>
           <span class="badge">{{ l.badge }}</span>
           <h1 class="title shimmer">{{ l.title }}</h1>
@@ -66,9 +68,11 @@
 
               <!-- ── Intro ── -->
               @case ('intro') {
-                <div class="emblem small">
-                  <span class="ring r1"></span><span class="ring r2"></span>
-                  <img src="assets/icons/android-chrome-192x192.png" alt="" />
+                <div class="arch-head">
+                  <div class="emblem small">
+                    <span class="ring r1"></span><span class="ring r2"></span>
+                    <img [src]="emblemSrc()" alt="" />
+                  </div>
                 </div>
                 <span class="badge">{{ l.badge }}</span>
                 <h1 class="title shimmer">{{ s.title }}</h1>
@@ -108,6 +112,7 @@
               <!-- ── Split: a mushaddad letter becomes two letters ── -->
               @case ('split') {
                 <span class="label">{{ s.label }}</span>
+                @if (s.emblem) { <img class="scene-emblem" [class.dim]="isWordOn(s.pairs?.[0]?.split)" [src]="s.emblem" alt="" /> }
                 <div class="splits">
                   @for (p of s.pairs; track p.whole; let i = $index) {
                     <div class="split" [class.on]="isWordOn(p.show)" [class.apart]="isWordOn(p.split)">
@@ -128,6 +133,19 @@
               @case ('levels') {
                 <span class="label">{{ s.label }}</span>
                 <p class="sentence small pop-in">{{ s.sentence }}</p>
+                <div class="levels" [style.--scale]="levelScale()">
+                  @for (lv of s.levels; track lv.title; let i = $index) {
+                    <div class="level" [style.--i]="i" [style.--h]="(4 - i) / 4"
+                      [class.on]="s.speeds ? true : on('level' + i)"
+                      [class.top]="s.highlight === i && (s.speeds ? true : on('highlight'))">
+                      <span class="level-num">{{ toArabicDigits(i + 1) }}</span>
+                      @if (lv.icon) { <img class="level-icon" [src]="lv.icon" alt="" /> }
+                      <div class="bar"><i></i></div>
+                      <h3>{{ lv.title }}</h3>
+                      @if (lv.text) { <p>{{ lv.text }}</p> }
+                    </div>
+                  }
+                </div>
                 @if (s.speeds) {
                   <div class="speeds">
                     @for (sp of s.speeds; track sp.title; let i = $index) {
@@ -135,18 +153,6 @@
                     }
                   </div>
                 }
-                <div class="levels" [style.--scale]="levelScale()">
-                  @for (lv of s.levels; track lv.title; let i = $index) {
-                    <div class="level" [style.--i]="i" [style.--h]="(4 - i) / 4"
-                      [class.on]="s.speeds ? true : on('level' + i)"
-                      [class.top]="s.highlight === i && (s.speeds ? true : on('highlight'))">
-                      <span class="level-num">{{ toArabicDigits(i + 1) }}</span>
-                      <div class="bar"><i></i></div>
-                      <h3>{{ lv.title }}</h3>
-                      @if (lv.text) { <p>{{ lv.text }}</p> }
-                    </div>
-                  }
-                </div>
               }
 
               <!-- ── Pillars: definition + 3 items ── -->
@@ -300,7 +306,11 @@
                 <h1 class="title shimmer">{{ s.title }}</h1>
                 <ul class="points">
                   @for (p of s.points; track p; let i = $index) {
-                    <li [style.--i]="i"><i class="fas fa-circle-check"></i> {{ p }}</li>
+                    <li [style.--i]="i" [class.timed]="s.reveal?.['point' + i]" [class.on]="on('point' + i)">
+                      @if (s.pointIcons?.[i]; as ic) { <span class="point-icon"><img [src]="ic" alt="" /></span> }
+                      <span class="point-text">{{ p }}</span>
+                      <i class="fas fa-circle-check"></i>
+                    </li>
                   }
                 </ul>
                 <div class="confetti" aria-hidden="true">
