@@ -75,6 +75,8 @@ export interface GuidedSplitPair {
 export interface GuidedLevel {
   title: string;
   text?: string;
+  /** Image shown on the level card (e.g. the crown on «أكمل»). */
+  icon?: string;
 }
 
 export interface GuidedSpeed {
@@ -114,6 +116,10 @@ export interface GuidedStep {
   speeds?: GuidedSpeed[];
   /** Quiz options are Quran words (Quran font). */
   quran?: boolean;
+  /** Image icon for each summary point (same order as points). */
+  pointIcons?: string[];
+  /** Image shown above the scene content (e.g. the 3D shadda on the split step). */
+  emblem?: string;
 }
 
 /** Word timings of a narration clip: duration and the start of every whitespace token (ms). */

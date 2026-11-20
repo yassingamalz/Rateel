@@ -48,3 +48,25 @@ REF-C = `reference/lesson-screen-mockup.webp`, REF-D = `mascot-sheet` (personagg
 
 Regola: il personaggio non deve mai avere occhi o bocca. Va scritto esplicitamente in ogni prompt
 che lo riguarda.
+
+## Glassy batch 1 (lesson 10.1, shared library) ✅ received and imported
+
+Source: owner's ZIP (ZAPI FLOW, `prompts/lesson-10-1/images.txt`) + ChatGPT GIF. Keyed with
+`scripts/assets/key-magenta.py scripts/assets/mapping-glassy-1.csv`; crown, mosque and static head then had
+their pink glow turned gold with `scripts/assets/fix-pink-glow.py` (next time: generate glows on black, rule 6.3).
+
+| Folder | File | Use |
+|---|---|---|
+| glassy/ | bg-glassy | full lesson background (lattice corners, gold wave) |
+| glassy/ | header-arch | arch with mosque shoulders: title scenes (emblem on apex) and faint behind labels |
+| glassy/ | emblem-quran | Quran on rehal badge: splash / intro emblem |
+| glassy/ | label-pill | section label (ornaments included) |
+| glassy/ | mosque-skyline | glowing skyline, bottom of splash / intro |
+| glassy/ | shadda-3d | 3D shadda: split step, summary icon |
+| icons/ | ghunna-glassy | nose + waves (replaces the broken `icons/ghunna`) |
+| icons/ | hourglass, crown | «تطويل» / «أكمل» (levels, summary) |
+| illustrations/ | khayshum-head | static head with the nasal path (glow fixed) |
+| illustrations/ | ghunna-nose-flow | animated WebP from the owner's GIF (9 frames → 72 with cross-faded in-betweens, 2.6 s loop) |
+
+Note: the GIF has only 9 frames at 553×309. A Google Flow video (1080p, 24 fps) would be sharper and smoother;
+the owner offered to make one if needed.

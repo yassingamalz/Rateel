@@ -19,15 +19,15 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GuidedAudioService],
   animations: [
+    // Calm morph-like cross-fade (rule 0.12): the old scene dissolves while the new one settles in place.
     trigger('stepSwap', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(-70px) scale(0.94)', filter: 'blur(10px)' }),
-        animate('650ms 120ms cubic-bezier(0.16, 1, 0.3, 1)',
-          style({ opacity: 1, transform: 'translateX(0) scale(1)', filter: 'blur(0)' })),
+        style({ opacity: 0, transform: 'scale(0.985)', filter: 'blur(4px)' }),
+        animate('550ms 80ms cubic-bezier(0.16, 1, 0.3, 1)',
+          style({ opacity: 1, transform: 'scale(1)', filter: 'blur(0)' })),
       ]),
       transition(':leave', [
-        animate('380ms cubic-bezier(0.7, 0, 0.84, 0)',
-          style({ opacity: 0, transform: 'translateX(90px) scale(0.96)', filter: 'blur(8px)' })),
+        animate('320ms cubic-bezier(0.4, 0, 1, 1)', style({ opacity: 0, filter: 'blur(3px)' })),
       ]),
     ]),
   ],
@@ -67,6 +67,10 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
   /** 'glassy' builds on the ornate theme and overrides it. */
   readonly themeClass = computed(() => this.theme() === 'glassy' ? 'theme-ornate theme-glassy' : 'theme-' + this.theme());
   readonly pausedState = signal(false);
+  readonly emblemSrc = computed(() => this.theme() === 'glassy'
+    ? 'assets/images/guided/glassy/emblem-quran.webp' : 'assets/icons/android-chrome-192x192.png');
+  /** Scene name on the root, so the theme can show per-scene decoration (e.g. the skyline). */
+  readonly sceneName = computed(() => (this.started() ? this.step()?.type ?? '' : 'splash'));
   private readonly timings = signal<Record<string, GuidedWordTimings>>({});
 
   readonly captionWords = computed(() => {
