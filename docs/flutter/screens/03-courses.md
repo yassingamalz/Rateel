@@ -49,24 +49,27 @@ cross-section with articulation points · 04 small circle with a flowing ribbon 
   exists (then a morph into the units screen). Locked card → the lock shakes, light haptic, toast
   «أكمل «<previous course>» أولًا لفتح هذه الدورة».
 - A horizontal drag on the cards never opens the side menu (the menu swipe starts on the rail only).
-- **Course completion (owner, 2026-11-20, same idea as the original HTML/Angular app):** when the last
-  lesson of a course ends, the lesson, unit and course screens close by themselves (lesson → unit → course
-  → this screen; Angular: `navigateAfterCompletion` → `/courses?completedCourseId=`). Here the sequence
-  plays automatically, simplified:
-  1. the path is on the finished course; its progress bar fills to 100% (0.9 s);
-  2. a gold light with a bright spark runs along the line to the next course (0.9 s), medium haptic;
-  3. the next card's lock pops and fades, the rim turns from emerald to gold with a flash, the locked
-     layout fades out and the course-in-progress layout fades in (0.65 s);
-  4. the path glides to the new course (0.75 s), which starts breathing.
+- **Progress always starts at 0%** (owner, 2026-11-20; the 30% of the reference was only an example).
+- **Line between two courses (owner, 2026-11-20):** a dim track with a node **in the middle**. The first half
+  (from the course to the node) lights up gold when the course reaches **50%**; the node pops and glows. The
+  second half lights up when the course is **completed**, and the light reaches the next course.
+- **Course completion (owner, 2026-11-20, as in the original HTML/Angular app):** when the last lesson of a
+  course ends, the lesson, unit and course screens close by themselves (lesson → unit → course → this
+  screen). Here, automatically:
+  1. the path is on the finished course; the bar fills to 50% (one haptic tick every 10%);
+  2. the first half of the line lights up to the node, the node pops (haptic "milestone") — skipped if the
+     course was already past 50%;
+  3. the bar fills to 100% (ticks), haptic "milestone";
+  4. the light runs along the second half to the next course (ticks), haptic "unlock" (heavy);
+  5. the next card's lock pops, rim emerald → gold with a flash, locked layout out, course layout in;
+  6. the path glides to the new course, haptic "success" (two light taps); the new course starts breathing.
   Hook for the lesson flow: `courseCompleted` (`ValueNotifier<int?>` in `course_data.dart`).
   Until screens 05–07 exist: **long press on the course in progress** plays it (demo), `?complete=0` on web.
-- Lines between cards: dim emerald track, gold only after a completed course (the reference shows all lines
-  gold; with the completion "fill" the gold must mean "done"). Owner decision.
+- **Haptics vocabulary** (`lib/core/haptics.dart`, app-wide): `tick` (progress step), `tap` (card),
+  `milestone` (50%, 100%), `unlock` (next course opens), `success` (double light tap), `denied` (locked card:
+  firm tap + soft echo).
 
 ## Open points for the owner
-0. Lines: dim until a course is completed (needed for the completion fill) or all gold as in the reference?
-1. Progress text: the reference shows a ~30% bar with the text «0%»; the build shows 30% / 30%.
-2. Emblem on the arch: reuse the nav's outline book (one style) or a new gold book from ChatGPT?
-3. Course icon list (above) and the motion proposal.
-4. New tokens proposed for this screen (`RateelColors` section "Screen 03"): card fills, card rim, path line,
-   progress, play, lock, pill. Conflicts with confirmed tokens: see the last critic report.
+1. New tokens proposed for this screen (`RateelColors` section "Screen 03", `DESIGN-SYSTEM.md`): card fills,
+   card rim, path line, progress, play, lock, pill. Conflicts with confirmed tokens: see the last critic report.
+2. Course 03 icon (head cross-section) reads weakly: redo with ChatGPT?

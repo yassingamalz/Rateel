@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 final courseCompleted = ValueNotifier<int?>(null);
 
 /// The 12 courses, from the Angular app (`src/assets/data/courses.json`).
-/// Progress is a demo value until real data is wired.
+/// Progress always starts at 0 (owner, 2026-11-20).
 class Course {
   const Course({
     required this.title,
@@ -31,7 +31,6 @@ const courses = <Course>[
     title: 'أساسيات التجويد',
     description: 'المبادئ الأساسية للتجويد وقواعد التلاوة الصحيحة للمبتدئين',
     locked: false,
-    progress: 0.3,
   ),
   Course(
     icon: 'assets/ui/courses/course_02.svg',
