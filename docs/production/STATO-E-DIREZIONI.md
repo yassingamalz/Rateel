@@ -60,7 +60,7 @@ Il prototipo attuale mescola due cose: la lezione è *dentro l'app* e il video �
   "video": "intro-lesson-1.mp4",
   "sections": [
     { "id": "s1", "title": "التَّجْوِيدُ لُغَةً", "start": 0.0, "end": 24.5 },
-    { "id": "s2", "title": "التَجْوِيدُ اصْطِلَاحًا", "start": 24.5, "end": 61.0,
+    { "id": "s2", "title": "التَّجْوِيدُ اصْطِلَاحًا", "start": 24.5, "end": 61.0,
       "after": { "type": "quiz", "questionId": "q1" } }
   ],
   "questions": [
