@@ -114,6 +114,8 @@ export interface GuidedStep {
   levels?: GuidedLevel[];
   highlight?: number;
   speeds?: GuidedSpeed[];
+  /** Concept step: several separate keyword chips instead of one keyword (e.g. «نَّ» and «مَّ»). */
+  keywordChips?: string[];
   /** Quiz options are Quran words (Quran font). */
   quran?: boolean;
   /** Image icon for each summary point (same order as points). */

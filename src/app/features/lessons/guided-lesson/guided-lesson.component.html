@@ -83,7 +83,13 @@
               @case ('concept') {
                 <span class="label">{{ s.label }}</span>
                 <div class="concept">
-                  <div class="keyword pop-in">{{ s.keyword }}</div>
+                  @if (s.keywordChips) {
+                    <div class="keyword-chips pop-in">
+                      @for (k of s.keywordChips; track k) { <span class="keyword chip">{{ k }}</span> }
+                    </div>
+                  } @else {
+                    <div class="keyword pop-in">{{ s.keyword }}</div>
+                  }
                   <div class="arrow" [class.on]="on('meaning', 0.3)">
                     <span class="line"></span><i class="fas fa-chevron-left"></i>
                   </div>

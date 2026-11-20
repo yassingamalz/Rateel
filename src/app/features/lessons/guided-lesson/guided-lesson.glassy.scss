@@ -547,3 +547,76 @@ $img: '/assets/images/guided/';
 .guided.theme-glassy .type-levels .sentence.small { height: 3.5em; min-height: 0; max-width: min(56%, 560px); line-height: 1.7; overflow: visible; margin: 6px 0 0; }
 // splash and intro: identical label box, so the title does not move when the lesson starts
 .guided.theme-glassy .scene .badge { height: clamp(34px, 9.5vh, 44px); min-height: clamp(34px, 9.5vh, 44px); padding-block: 0; box-sizing: border-box; }
+
+// ════════════════════ Owner review 2: default template, no big arch behind titles ════════════════════
+.guided.theme-glassy {
+  // the default lesson background (thin arch + lattice, as in design screens 16–20)
+  .bg .bg-image { background: url('/assets/images/guided/stage-bg.jpg') center top / cover no-repeat; }
+  .bg .bg-arch { display: none !important; }
+  .bg .bg-skyline { width: min(24vw, 210px); transform: translate(-50%, 22%); }
+  &[data-scene='splash'] .bg .bg-skyline, &[data-scene='intro'] .bg .bg-skyline { opacity: 0.55; }
+
+  // title scenes: the emblem alone, then label and title, all clearly readable
+  .arch-head {
+    width: auto;
+    aspect-ratio: auto;
+    margin: 0;
+    background: none;
+    filter: none;
+    .emblem, .emblem.small {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: clamp(70px, 23vh, 112px);
+      height: clamp(70px, 23vh, 112px);
+    }
+  }
+  .splash, .type-intro { justify-content: center; padding-top: 0; }
+  .splash .hint, .type-intro .subtitle { color: $cream; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
+  .title { text-shadow: 0 3px 14px rgba(0, 0, 0, 0.45); }
+
+  // labels: bigger text inside the pill
+  .label, .badge {
+    font-size: clamp(15px, 4.2vh, 19px);
+    padding: 0 clamp(56px, 11vh, 76px);
+    min-width: 170px;
+    justify-content: center;
+  }
+
+  // step 4: the two mushaddad letters as clean Quran glyphs
+  .concept .keyword {
+    font-family: var(--quran);
+    font-size: clamp(30px, 10vh, 46px);
+    word-spacing: 0.5em;
+    line-height: 1.5;
+    padding-block: 2px 8px;
+  }
+
+  // quizzes: compact answers that do not wrap badly
+  .question { margin-top: 4px; }
+  .option {
+    padding-block: 10px;
+    .option-text { font-size: clamp(14px, 4vh, 18px); line-height: 1.5; text-wrap: balance; }
+  }
+}
+// step 4: one chip per letter, side by side
+.keyword-chips { display: flex; gap: clamp(10px, 2vw, 18px); }
+.guided.theme-glassy .keyword-chips .keyword.chip { min-width: clamp(64px, 18vh, 90px); text-align: center; word-spacing: normal; }
+
+// ════════════════════ Critic pass 3 ════════════════════
+.guided.theme-glassy {
+  // splash and intro share one anchor from the top, so nothing moves when the lesson starts
+  .splash, .type-intro { justify-content: flex-start; padding-top: clamp(10px, 6vh, 34px); }
+  // tanbih/levels sentence on a quiet glass strip, readable over the thin arch line
+  .type-levels .sentence.small {
+    padding: 2px 18px;
+    border-radius: 14px;
+    background: rgba(2, 30, 22, 0.78);
+    box-shadow: 0 0 0 1px rgba(233, 181, 36, 0.18);
+  }
+  // Quran-word answers: verse size, centred
+  .options.quran .option .option-text { font-family: var(--quran); font-size: clamp(22px, 6.4vh, 30px); text-align: center; }
+  // text answers stay on one line
+  .options:not(.quran) .option .option-text { white-space: nowrap; font-size: clamp(13px, 3.7vh, 17px); }
+}
