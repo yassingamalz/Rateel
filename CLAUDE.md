@@ -13,6 +13,8 @@ natively in Flutter, one screen per branch.
 ## Key rules
 - **Write every decision and every piece of work in the branch** (`DECISIONS.md`, the screen plan,
   the prompts) in the same commit as the work. Other sessions rely on it.
+- **Critic before the owner:** every visual result is reviewed one to one against the reference by a
+  separate reviewer and fixed until no high/medium code difference remains (`docs/flutter/CRITIC.md`).
 - Show the owner the visual plan and get a "yes" before any visual work.
 - Never invent assets: write ChatGPT prompts, the owner generates the images.
 - Dark theme first, light/dark toggle always present; landscape; RTL Arabic.

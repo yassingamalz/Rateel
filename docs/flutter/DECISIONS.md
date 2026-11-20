@@ -30,3 +30,5 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | Quran font: **Amiri Quran** (rule from `lesson-production`), to bundle when the first verse appears. | 🟡 |
 | 2026-11-20 | Settings screen holds the light/dark toggle; **how settings is opened is still open** (7th nav item or a gear at the bottom of the rail). | 🟡 |
 | 2026-11-20 | Side navigation **v1 built** (`app_flutter/lib/nav/`): rail style C, 6 items, open menu, morph rail → menu (420 ms, easeInOutCubic), selection glides, close with ✕ / tap outside / swipe right / Android back. Demo `screens/04-side-nav/demo-v1.mp4`, comparison `compare-v1.jpg`. Waiting for the owner's test and the assets N1, N2, A5. | 🟡 |
+| 2026-11-20 | **Every visual result passes a critic** that compares it one to one with the reference before it is shown to the owner (`CRITIC.md`). What needs art is generated with ChatGPT; everything else must match in code. | ✅ |
+| 2026-11-20 | **Language:** documents, rules, code and comments in **English**. The app itself stays in **Arabic** (RTL), as in the references; lessons stay in Arabic. | ✅ |
