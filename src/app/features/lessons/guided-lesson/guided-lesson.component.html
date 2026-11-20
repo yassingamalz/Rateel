@@ -1,4 +1,4 @@
-<div class="guided" dir="rtl" [class.is-started]="started()" [ngClass]="'theme-' + theme()">
+<div class="guided" dir="rtl" [class.is-started]="started()" [ngClass]="themeClass()">
   <!-- ═════════ Ambient background ═════════ -->
   <div class="bg" aria-hidden="true">
     <div class="bg-image"></div>
@@ -21,6 +21,8 @@
         [style.--drift]="p.drift + 'px'"></span>
     }
     <div class="bg-vignette"></div>
+    <div class="bg-arch"></div>
+    <div class="bg-skyline"></div>
   </div>
 
   @if (lesson(); as l) {
@@ -78,12 +80,73 @@
                 <span class="label">{{ s.label }}</span>
                 <div class="concept">
                   <div class="keyword pop-in">{{ s.keyword }}</div>
-                  <div class="arrow" [class.on]="isRevealed(0.3)">
+                  <div class="arrow" [class.on]="on('meaning', 0.3)">
                     <span class="line"></span><i class="fas fa-chevron-left"></i>
                   </div>
-                  <div class="meaning" [class.on]="isRevealed(0.3)">{{ s.meaning }}</div>
+                  <div class="meaning" [class.on]="on('meaning', 0.3)">{{ s.meaning }}</div>
                 </div>
-                <p class="note" [class.on]="isRevealed(0.6)">{{ s.note }}</p>
+                <p class="note" [class.on]="on('note', 0.6)">{{ s.note }}</p>
+              }
+
+              <!-- ── Definition: sentence + illustration ── -->
+              @case ('definition') {
+                <span class="label">{{ s.label }}</span>
+                <div class="definition">
+                  <div class="def-text">
+                    <blockquote class="sentence" [class.on]="on('sentence', 0.15)">{{ s.sentence }}</blockquote>
+                    <p class="note" [class.on]="on('note', 0.7)">{{ s.note }}</p>
+                  </div>
+                  @if (s.media) {
+                    <figure class="def-media" [class.on]="on('media', 0.4)">
+                      <img [src]="s.media.src" [alt]="s.media.alt ?? ''" />
+                      @if (s.media.placeholder) { <figcaption class="provisional">مؤقّت</figcaption> }
+                    </figure>
+                  }
+                </div>
+              }
+
+              <!-- ── Split: a mushaddad letter becomes two letters ── -->
+              @case ('split') {
+                <span class="label">{{ s.label }}</span>
+                <div class="splits">
+                  @for (p of s.pairs; track p.whole; let i = $index) {
+                    <div class="split" [class.on]="isWordOn(p.show)" [class.apart]="isWordOn(p.split)">
+                      <span class="glyph whole">{{ p.whole }}</span>
+                      <span class="glyph part p0">{{ p.parts[0] }}</span>
+                      <span class="plus">+</span>
+                      <span class="glyph part p1">{{ p.parts[1] }}</span>
+                      @if (s.partLabels) {
+                        <small class="part-label l0" [class.on]="on('label0')">{{ s.partLabels[0] }}</small>
+                        <small class="part-label l1" [class.on]="on('label1')">{{ s.partLabels[1] }}</small>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+
+              <!-- ── Levels: ranked bars (+ speeds that rescale them) ── -->
+              @case ('levels') {
+                <span class="label">{{ s.label }}</span>
+                <p class="sentence small pop-in">{{ s.sentence }}</p>
+                @if (s.speeds) {
+                  <div class="speeds">
+                    @for (sp of s.speeds; track sp.title; let i = $index) {
+                      <span class="speed" [class.on]="on('speed' + i)" [class.active]="activeSpeed() === i">{{ sp.title }}</span>
+                    }
+                  </div>
+                }
+                <div class="levels" [style.--scale]="levelScale()">
+                  @for (lv of s.levels; track lv.title; let i = $index) {
+                    <div class="level" [style.--i]="i" [style.--h]="(4 - i) / 4"
+                      [class.on]="s.speeds ? true : on('level' + i)"
+                      [class.top]="s.highlight === i && (s.speeds ? true : on('highlight'))">
+                      <span class="level-num">{{ toArabicDigits(i + 1) }}</span>
+                      <div class="bar"><i></i></div>
+                      <h3>{{ lv.title }}</h3>
+                      @if (lv.text) { <p>{{ lv.text }}</p> }
+                    </div>
+                  }
+                </div>
               }
 
               <!-- ── Pillars: definition + 3 items ── -->
@@ -109,18 +172,32 @@
                 <div class="compare">
                   @for (c of s.cards; track c.title; let i = $index) {
                     <article class="card" [ngClass]="'tone-' + (c.tone || 'emerald')"
-                      [class.on]="isRevealed(i === 0 ? 0.05 : 0.5)">
+                      [class.on]="on('card' + i, i === 0 ? 0.05 : 0.5)">
                       <div class="card-head">
-                        <div class="card-icon"><i class="fas" [ngClass]="c.icon"></i></div>
+                        @if (c.glyph) { <div class="card-icon glyph">{{ c.glyph }}</div> }
+                        @else { <div class="card-icon"><i class="fas" [ngClass]="c.icon"></i></div> }
                         <div>
                           <h3>{{ c.title }}</h3>
                           <small>{{ c.subtitle }}</small>
                         </div>
                       </div>
                       <div class="verdict">{{ c.verdict }}</div>
-                      <p>{{ c.text }}</p>
+                      @if (c.text) { <p>{{ c.text }}</p> }
+                      @if (c.examples) {
+                        <div class="examples">
+                          @for (e of c.examples; track e) { <span class="example">{{ e }}</span> }
+                        </div>
+                      }
                     </article>
-                    @if (i === 0) { <div class="vs" [class.on]="isRevealed(0.5)"><span></span><i class="fas fa-star-of-life"></i><span></span></div> }
+                    @if (i === 0) {
+                      @if (s.link) {
+                        <div class="vs link" [class.on]="on('card1', 0.5)" [class.joined]="on('link')">
+                          <i class="fas fa-right-left"></i><b>{{ s.link }}</b>
+                        </div>
+                      } @else {
+                        <div class="vs" [class.on]="isRevealed(0.5)"><span></span><i class="fas fa-star-of-life"></i><span></span></div>
+                      }
+                    }
                   }
                 </div>
               }
@@ -129,7 +206,7 @@
               @case ('quiz') {
                 <span class="label"><i class="fas fa-circle-question"></i> سؤال</span>
                 <h2 class="question pop-in">{{ s.question }}</h2>
-                <div class="options" [class.two]="s.options?.length === 2"
+                <div class="options" [class.quran]="s.quran" [class.two]="s.options?.length === 2"
                   [class.shake]="quizState() === 'wrong'">
                   @for (o of s.options; track o.id; let i = $index) {
                     <button class="option" [ngClass]="optionState(o)" [style.--i]="i"
@@ -162,7 +239,8 @@
                       <span class="word"
                         [class.active]="audio.activeWord() === i"
                         [class.focus]="isFocus(i) && (playedOnce() || audio.activeWord() >= i && audio.activeWord() !== -1)"
-                        >{{ w }}</span>
+                        [class.mark-live]="isMarkLive(i)"
+                        >@if (markParts(w, i); as mp) {<ng-container>{{ mp[0] }}</ng-container><span class="mark">{{ mp[1] }}</span><ng-container>{{ mp[2] }}</ng-container>} @else {<ng-container>{{ w }}</ng-container>}</span>
                     }
                     @if (s.verse?.partial) { <span class="word ellipsis">…</span> }
                     @else { <span class="ayah-num">﴿{{ toArabicDigits(s.verse?.ayah ?? '') }}﴾</span> }
@@ -213,6 +291,7 @@
 
               <!-- ── Summary ── -->
               @case ('summary') {
+                @if (s.label) { <span class="label">{{ s.label }}</span> }
                 <div class="stars">
                   @for (n of [1, 2, 3]; track n) {
                     <i class="fas fa-star" [class.earned]="earnedStars() >= n" [class.mid]="n === 2"></i>

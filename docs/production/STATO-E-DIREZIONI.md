@@ -12,7 +12,7 @@ Documento di passaggio tra sessioni. Leggerlo per primo.
 | Asset grafici, batch 3 | ✅ Importati 3 su 3 | **Set di asset completo** |
 | Design UI/UX (ChatGPT) | ✅ Salvati in `docs/design/` | **Glassy/liquid 3D gamified**: 22 schermate (prima wave, da replicare 1:1). **Flat**: 10 schermate (futuro) |
 | **Decisione stile** | ✅ Decisa | App: glassy scuro **e** chiaro. Lezioni: glassy **solo scuro** |
-| **Prima lezione: 10.1 النون والميم المشددتان** | ⏳ Piano visivo da confermare | Prompt proposti in `prompts/lesson-10-1/` (8 immagini ZAPI FLOW + 3 GIF ChatGPT) |
+| **Prima lezione: 10.1 النون والميم المشددتان** | 🟡 v1 realizzata (copione approvato) | Video `videos/lesson-10-1-v1-glassy.mp4`. In attesa: revisione del proprietario + 10 immagini e 1 GIF da `prompts/lesson-10-1/` (al posto degli elementi provvisori) |
 | **Voce della narrazione** | ⏳ In fase di scelta | Campioni in `voices/samples/` (01–15), provino unico in `voices/rateel-provino-voci.mp3`, nomi in `voices/elenco-voci.txt` |
 | Asset grafici, batch 1 | ✅ Importati | 50 asset WebP in `src/assets/images/guided/`, stato in `ASSET-CATALOGO.md` |
 | Lezione 1 (prototipo) | ✅ Funzionante | Motore «guided» in `src/app/features/lessons/guided-lesson/`, render in `videos/` |

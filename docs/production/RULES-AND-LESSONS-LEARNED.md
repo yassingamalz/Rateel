@@ -114,6 +114,14 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
    (`/api/v4/recitations/12/by_ayah/<key>?fields=segments`) and is accurate to the millisecond.
 3. **Every element appears when the voice names it** (the definition appears on «إخراج», the
    «حقّه» card on «وحقّ»…), never at guessed percentages of time.
+4. **al-Ḥuṣarī Muʿallim files end with several seconds of silence** (room for the learner to
+   repeat). Always set `verse.clip` to the end of the last segment (+~300 ms), or the lesson waits in silence.
+5. **Long verses: play only the fragment that carries the rule.** Cut it from the ayah file at the
+   quran.com segment boundaries (with a short fade) and store it as `<sss><aaa>-p.mp3`; shift the segments.
+   Check the cut with Whisper: a cut 100 ms early leaves a syllable of the previous word.
+6. **Free voice word timings:** `scripts/generate-free-audio.py` stores `<stepId>.words.json` from the
+   TTS word boundaries. Captions then highlight word by word, and `step.reveal` makes each element appear
+   on the exact word that names it (rules 3.1 and 3.3). Keep `caption` empty so the caption is the narration.
 
 ## 4. Animation and interactivity
 
@@ -127,6 +135,12 @@ while producing lesson 1 («مُقَدِّمَةٌ فِي عِلْمِ التَ�
    explanation when wrong. Stars count only first-try correct answers.
 5. **Recording one's own voice never blocks progress.** It is encouraged (the mic pulses), but
    the learner can always continue.
+6. **Engine step types for chapter 10 (glassy):** `definition` (sentence + illustration), `split`
+   (a mushaddad letter morphs into sākin + mutaḥarrik), `levels` (ranked bars; `speeds` rescale all bars
+   together to show that the proportion is kept). `verse.marks` colours the rule letter inside a Quran
+   word (like the red letters of the book) and makes it glow while the reciter is on that word.
+7. **Provisional images** are allowed only while the owner produces the final asset, and are tagged
+   «مؤقّت» on screen (`media.placeholder`), so they are never mistaken for final art.
 
 ## 5. Videos (YouTube)
 

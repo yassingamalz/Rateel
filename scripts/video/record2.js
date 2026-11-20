@@ -1,7 +1,8 @@
 // Records the guided lesson at real speed, full-frame and sharp (2x), by streaming
 // CDP screencast frames into ffmpeg at a constant 30 fps. Media playback is logged
 // so mix.py can rebuild the soundtrack in sync.
-// usage: node record2.js <theme: ornate|glow> <out-dir>
+// usage: node record2.js <theme: ornate|glow|glassy|keep> <out-dir>
+// env: LESSON_URL (app path of the lesson), STEPS (number of steps), MISTAKE (step index with one deliberate wrong answer)
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const fs = require('fs');
@@ -18,7 +19,7 @@ fs.mkdirSync(out, { recursive: true });
   await p.route('**/content/guided/*.json', async (route) => {
     const res = await route.fetch();
     const json = await res.json();
-    json.theme = theme;
+    if (theme !== 'keep') json.theme = theme;
     await route.fulfill({ response: res, json });
   });
   await p.addInitScript(() => {
@@ -39,7 +40,10 @@ fs.mkdirSync(out, { recursive: true });
     };
     proto.pause = function () { close(this); return pause.call(this); };
   });
-  await p.goto('http://localhost:4300/courses/01-tajweed-fundamentals/units/intro-tajweed/lessons/intro-lesson-1', { waitUntil: 'networkidle' });
+  const lessonUrl = process.env.LESSON_URL || '/courses/01-tajweed-fundamentals/units/intro-tajweed/lessons/intro-lesson-1';
+  const STEPS = +(process.env.STEPS || 14);
+  const MISTAKE = +(process.env.MISTAKE ?? 3);
+  await p.goto('http://localhost:4300' + lessonUrl, { waitUntil: 'networkidle' });
   await p.waitForTimeout(2000);
 
   // ── start capture only once the lesson is on screen (no blank frames) ──
@@ -66,13 +70,13 @@ fs.mkdirSync(out, { recursive: true });
   const human = () => p.waitForTimeout(1300);
   const quiet = (ms = 120000) => p.waitForFunction(() => !document.querySelector('.coach.talking'), null, { timeout: ms });
 
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < STEPS; i++) {
     const type = await p.evaluate(() => document.querySelector('.guided .scene')?.className || '');
     if (type.includes('type-quiz')) {
       await quiet(60000);
       await p.waitForTimeout(900);
       const opts = await p.$$('.option');
-      if (i === 3) { await opts[2].click(); await p.waitForTimeout(2200); } // one deliberate mistake
+      if (i === MISTAKE) { await opts[2].click(); await p.waitForTimeout(2200); } // one deliberate mistake
       const correctIdx = await p.evaluate(() => {
         const c = window.ng?.getComponent?.(document.querySelector('app-guided-lesson'));
         return c ? c.step().options.findIndex((o) => o.id === c.step().correctId) : -1;
@@ -95,7 +99,7 @@ fs.mkdirSync(out, { recursive: true });
       await p.click('.mic');
       await quiet(30000);
     }
-    if (i === 13) { await quiet(90000); await p.waitForTimeout(3000); break; }
+    if (i === STEPS - 1) { await quiet(90000); await p.waitForTimeout(3000); break; }
     await p.waitForSelector('.continue.ready', { timeout: 120000 });
     await quiet();
     await human();
