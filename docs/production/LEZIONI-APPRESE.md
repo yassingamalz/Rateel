@@ -96,6 +96,21 @@ Da rispettare in ogni nuova lezione.
 7. Due temi disponibili: `ornate` (v2, predefinito) e `glow` (v1), scelti con `"theme"` nel
    file della lezione.
 
+### Asset ricevuti dal primo batch (lezioni)
+
+1. Flow esporta in **JPG**, quindi niente trasparenza e una leggera compressione: il magenta si
+   rimuove con `scripts/assets/key-magenta.py`, che separa il colore vero dal magenta pixel per
+   pixel (non un semplice ritaglio a soglia).
+2. **Il magenta "sporca" bagliori e sfumature** (diventano rosa): luci, aloni, scintille e raggi
+   vanno generati **su nero** e usati in fusione «screen».
+3. Il magenta generato **non è perfettamente uniforme**: serve una soglia di distanza dal colore
+   chiave, altrimenti resta un rettangolo di rumore attorno all'immagine.
+4. Chiedere i soggetti **grandi nell'inquadratura** e uno per immagine: le «parti» del personaggio
+   tutte insieme risultano troppo piccole per animarle.
+5. Le illustrazioni da animare (es. la testa con i punti di articolazione) vanno chieste **senza
+   cornice né sfondo**, altrimenti non si possono animare le singole parti.
+6. Nell'app gli asset vanno in **WebP** (19 MB in PNG diventano 4,3 MB).
+
 ### Generazione degli asset con ZAPI FLOW (Google Flow)
 
 1. **Formato del file**: un prompt per riga, una riga vuota tra un prompt e l'altro, niente
@@ -126,6 +141,9 @@ Da rispettare in ogni nuova lezione.
 ## Materiale in questa cartella
 
 - `prompt-sequenziali.txt`: i 49 prompt per ZAPI FLOW (uno per riga, in ordine)
+- `prompt-sequenziali-2.txt`: 11 prompt del secondo batch (mancanti e da rifare)
+- `ASSET-CATALOGO.md`: stato di ogni asset
+- `reference/`: immagini di riferimento per Flow (libreria icone, mockup della lezione)
 - `voices/elenco-voci.txt`: nomi delle 15 voci nell'ordine del provino
 - `rateel-prompt-nano-banana.txt`: guida d'uso manuale con i prompt per sezione
 - `intro-lesson-1.tashkeel-bozza.json`: lezione 1 completamente vocalizzata (bozza)
