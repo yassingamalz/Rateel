@@ -6,16 +6,20 @@ Conversione: `scripts/assets/key-magenta.py` + `scripts/assets/mapping-batch1.cs
 | Cartella | File | Stato |
 |---|---|---|
 | mascot/ | mascot-sheet, -hello, -explain, -listen, -cheer, -think, -celebrate | ✅ pronti |
-| mascot/ | mascot-parts | ⚠️ parti troppo piccole → rifare (batch 2, prompt 1–3) |
+| mascot/ | mascot-parts | ⚠️ parti troppo piccole (sostituite dai file sotto) |
+| mascot/ | mascot-arm-left, mascot-arm-right | ✅ batch 2 |
+| mascot/ | mascot-mic, mascot-quran, mascot-encourage | ✅ batch 2 |
+| mascot/ | mascot-body (senza braccia) | ❌ batch 2 scartato: la lanterna aveva un **volto** → rifare (batch 3, prompt 1) |
 | icons/ | izhar, idgham, iqlab, ikhfa, ghunna, madd, qalqala, tafkhim, sifat | ✅ pronti |
 | icons/ | mushaf, sharh, listen, record, compare, nutq, trophy, quiz, target, video | ✅ pronti |
 | illustrations/ | letter-emerging, shield-tongue, lahn-jali, lahn-khafi, book-light, book-light-rays, medal-lesson | ✅ pronti |
-| illustrations/ | makharij-head | ⚠️ dentro una cornice → rifare isolata (batch 2, prompt 7) |
+| illustrations/ | makharij-head | ✅ batch 2 (isolata, senza cornice) |
 | frames/ | label-frame, flower-ornament, verse-frame, rosette, lattice-corner-left/right, arch | ✅ pronti |
 | backgrounds/ | bg-stage, bg-listen, bg-quiz, bg-celebrate, bg-intro | ✅ pronti |
 | effects/ | star-gold, confetti-set | ✅ pronti |
-| effects/ | sparkle | ⚠️ alone leggermente rosato → rifare su nero (batch 2, prompt 8) |
-| effects/ | light-rays, glow | ❌ mancanti (batch 2, prompt 9–10) |
+| effects/ | sparkle, glow | ✅ batch 2 (su nero: usare `mix-blend-mode: screen`) |
+| effects/ | light-rays | ⚠️ batch 2 contiene anche un emblema al centro → rifare (batch 3, prompt 3) |
+| youtube/ | thumbnail-bg | ❌ batch 2 scartato: personaggio con un **volto** → rifare (batch 3, prompt 2) |
 
 ## Batch 2 — `prompt-sequenziali-2.txt` (11 prompt, da ZAPI FLOW)
 
@@ -33,3 +37,12 @@ Conversione: `scripts/assets/key-magenta.py` + `scripts/assets/mapping-batch1.cs
 
 Riferimenti per Flow: REF-A = `reference/icon-library.webp`, REF-B = `../../src/assets/images/guided/backgrounds/bg-stage.webp`,
 REF-C = `reference/lesson-screen-mockup.webp`, REF-D = `mascot-sheet` (personaggio).
+
+## Batch 3: `prompt-sequenziali-3.txt` (3 prompt)
+
+1. mascot-body: senza braccia e **senza volto**
+2. youtube-thumbnail-bg: personaggio **senza volto**
+3. light-rays: solo raggi, nessun emblema
+
+Regola: il personaggio non deve mai avere occhi o bocca. Va scritto esplicitamente in ogni prompt
+che lo riguarda.
