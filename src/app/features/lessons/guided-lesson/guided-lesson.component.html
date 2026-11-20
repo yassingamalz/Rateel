@@ -75,7 +75,7 @@
                   </div>
                 </div>
                 <span class="badge">{{ l.badge }}</span>
-                <h1 class="title shimmer">{{ s.title }}</h1>
+                <h1 class="title shimmer" [class.sweep]="on('title', 2)">{{ s.title }}</h1>
                 <p class="subtitle">{{ s.subtitle }}</p>
               }
 

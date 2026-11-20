@@ -636,3 +636,35 @@ $img: '/assets/images/guided/';
   .level .bar { height: clamp(30px, 11vh, 56px); }
   .level h3 { font-size: clamp(14px, 3.8vh, 18px); }
 }
+
+// ════════════════════ Owner review 3: Arabic UI font with clean mark placement ════════════════════
+// Cairo stacks shadda + damma badly (e.g. «النُّونُ»); Noto Kufi Arabic places the marks cleanly and
+// keeps the geometric look of the design. Bundled locally (offline app). Quran text keeps Amiri Quran.
+@font-face { font-family: 'Noto Kufi Arabic'; font-weight: 400; font-display: swap; src: url('/assets/fonts/noto-kufi-arabic-400.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: 'Noto Kufi Arabic'; font-weight: 600; font-display: swap; src: url('/assets/fonts/noto-kufi-arabic-600.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: 'Noto Kufi Arabic'; font-weight: 700 900; font-display: swap; src: url('/assets/fonts/noto-kufi-arabic-700.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+
+.guided.theme-glassy {
+  --ui-ar: 'Noto Kufi Arabic', 'Cairo', sans-serif;
+  font-family: var(--ui-ar);
+  .continue, .splash .cta, .pill-btn, .option, .label, .badge, .caption, .title, .subtitle, .question, .explain { font-family: var(--ui-ar); }
+  .caption { line-height: 1.75; }
+
+  // title: solid, readable cream (no static fade); a gold light sweeps across it when the voice names it
+  .title.shimmer {
+    background-image: linear-gradient(100deg, $cream 0%, $cream 40%, $gold-light 50%, $cream 60%, $cream 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    animation: rise 0.8s 0.1s var(--ease-out) both;
+    line-height: 1.6;
+  }
+  .type-intro .title.shimmer { animation: none; }
+  .title.shimmer.sweep { animation: title-sweep 1.8s var(--ease-out) both, title-breathe 1.8s ease-in-out both; }
+}
+@keyframes title-sweep { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+@keyframes title-breathe { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.035); filter: drop-shadow(0 0 18px rgba(247, 188, 21, 0.35)); } }
+// the sweep must beat the intro's "animation: none" (same scene)
+.guided.theme-glassy .scene.type-intro .title.shimmer.sweep { animation: title-sweep 1.8s var(--ease-out) both, title-breathe 1.8s ease-in-out both; }
+// levels/tanbih: the sentence stays on one line with the wider Kufi font, so the speed pills keep their place
+.guided.theme-glassy .scene.type-levels .sentence.small { max-width: min(86%, 760px); white-space: nowrap; font-size: clamp(13px, 3.6vh, 17px); }
+.guided.theme-glassy .scene.type-levels .speeds { margin-bottom: 12px; }
