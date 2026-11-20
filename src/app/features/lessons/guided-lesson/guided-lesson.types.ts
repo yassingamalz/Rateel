@@ -114,6 +114,10 @@ export interface GuidedStep {
   levels?: GuidedLevel[];
   highlight?: number;
   speeds?: GuidedSpeed[];
+  /** Narration words shown in gold in the caption (key terms; exact tokens, punctuation ignored). */
+  goldWords?: string[];
+  /** Part of the title shown in the accent colour (two-tone title). */
+  titleAccent?: string;
   /** Concept step: several separate keyword chips instead of one keyword (e.g. «نَّ» and «مَّ»). */
   keywordChips?: string[];
   /** Quiz options are Quran words (Quran font). */
@@ -136,8 +140,10 @@ export interface GuidedLessonContent {
   title: string;
   badge?: string;
   /** Visual theme: 'ornate' (arch background, gold frames — default) or 'glow' (v1). */
-  theme?: 'ornate' | 'glow' | 'glassy';
+  theme?: 'ornate' | 'glow' | 'glassy' | 'glassy3';
   audioBase: string;
+  /** Part of the lesson title shown in the accent colour on the start screen. */
+  titleAccent?: string;
   /** Folder of the shared feedback lines (default assets/audio/guided/common). */
   commonBase?: string;
   /** Each narration has a <stepId>.words.json next to its mp3. */

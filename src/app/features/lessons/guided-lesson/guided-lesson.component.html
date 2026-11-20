@@ -54,7 +54,7 @@
             </div>
           </div>
           <span class="badge">{{ l.badge }}</span>
-          <h1 class="title shimmer">{{ l.title }}</h1>
+          <h1 class="title shimmer">@if (accentParts(l.title, l.titleAccent); as tp) {<ng-container>{{ tp[0] }}</ng-container><span class="accent">{{ tp[1] }}</span><ng-container>{{ tp[2] }}</ng-container>} @else {<ng-container>{{ l.title }}</ng-container>}</h1>
           <button class="cta" (click)="start()">
             <i class="fas fa-play"></i>
             <span>ابدأ الدرس</span>
@@ -75,8 +75,9 @@
                   </div>
                 </div>
                 <span class="badge">{{ l.badge }}</span>
-                <h1 class="title shimmer" [class.sweep]="on('title', 2)">{{ s.title }}</h1>
-                <p class="subtitle">{{ s.subtitle }}</p>
+                <h1 class="title shimmer" [class.sweep]="on('title', 2)">@if (accentParts(s.title, s.titleAccent); as tp) {<ng-container>{{ tp[0] }}</ng-container><span class="accent">{{ tp[1] }}</span><ng-container>{{ tp[2] }}</ng-container>} @else {<ng-container>{{ s.title }}</ng-container>}</h1>
+                <p class="subtitle"><span>{{ s.subtitle }}</span></p>
+                @if (theme() === 'glassy3') { <img class="intro-skyline" src="assets/images/guided/glassy/mosque-skyline.webp" alt="" /> }
               }
 
               <!-- ── Concept: keyword → meaning ── -->
@@ -95,7 +96,7 @@
                   </div>
                   <div class="meaning" [class.on]="on('meaning', 0.3)">{{ s.meaning }}</div>
                 </div>
-                <p class="note" [class.on]="on('note', 0.6)">{{ s.note }}</p>
+                <p class="note" [class.on]="on('note', 0.6)"><span>{{ s.note }}</span></p>
               }
 
               <!-- ── Definition: sentence + illustration ── -->
@@ -309,7 +310,7 @@
                     <i class="fas fa-star" [class.earned]="earnedStars() >= n" [class.mid]="n === 2"></i>
                   }
                 </div>
-                <h1 class="title shimmer">{{ s.title }}</h1>
+                <h1 class="title shimmer">@if (accentParts(s.title, s.titleAccent); as tp) {<ng-container>{{ tp[0] }}</ng-container><span class="accent">{{ tp[1] }}</span><ng-container>{{ tp[2] }}</ng-container>} @else {<ng-container>{{ s.title }}</ng-container>}</h1>
                 <ul class="points">
                   @for (p of s.points; track p; let i = $index) {
                     <li [style.--i]="i" [class.timed]="s.reveal?.['point' + i]" [class.on]="on('point' + i)">
@@ -349,7 +350,7 @@
 
       <div class="caption">
         @for (cw of captionPage(); track $index) {
-          <span [class.spoken]="isWordSpoken(cw.at)" [class.quoted]="cw.q">{{ cw.w }} </span>
+          <span [class.spoken]="isWordSpoken(cw.at)" [class.quoted]="cw.q" [class.gold]="cw.g">{{ cw.w }} </span>
         }
       </div>
 

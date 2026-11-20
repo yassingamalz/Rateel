@@ -1,0 +1,183 @@
+// Glassy v3 — owner's pick from the ChatGPT redesign (docs/design/glassy-gamified/chatgpt-lesson-10-1/):
+// larger type, colour with a meaning (gold key words, two-tone titles, coral rule letter, vivid quiz states),
+// one unified bottom bar, soft glass cards. Glow is kept at ~30–40 % of the reference: a thin gold line and a
+// soft shadow; full glow only on the active element (right answer, «أكمل», recited word).
+// Builds on .theme-glassy (root classes: theme-ornate theme-glassy theme-glassy3).
+
+$gold: #f7bc15;
+$gold-light: #ffd95a;
+$gold-dark: #b5850a;
+$cream: #f6ebcb;
+$coral: #ff8a7a;
+$green: #2fbf71;
+$red: #d9534f;
+$glass-top: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 42%);
+$glass-body: linear-gradient(180deg, rgba(3, 48, 36, 0.86), rgba(1, 30, 22, 0.9));
+$rim: 1.5px solid rgba(233, 181, 36, 0.55);
+$soft: 0 10px 24px rgba(0, 0, 0, 0.32), 0 0 14px rgba(247, 188, 21, 0.1);
+$active: 0 0 0 1px rgba(255, 217, 90, 0.5), 0 0 26px rgba(247, 188, 21, 0.35);
+
+.guided.theme-glassy3 {
+  // ─── type scale (≈ +25–40 %) ───
+  .label, .badge {
+    height: clamp(38px, 11vh, 50px);
+    min-height: clamp(38px, 11vh, 50px);
+    font-size: clamp(17px, 5vh, 23px);
+    padding: 0 clamp(60px, 13vh, 86px);
+  }
+  .title { font-size: clamp(30px, 10vh, 56px); line-height: 1.5; }
+  .question { font-size: clamp(19px, 6vh, 28px); font-weight: 800; }
+  .caption { font-size: clamp(13px, 3.7vh, 17px); }
+
+  // ─── two-tone titles: cream + gold accent (no static gradient) ───
+  .title.shimmer {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: #fff;
+    .accent { color: $gold; }
+  }
+  .scene.type-intro .title.shimmer.sweep { animation: title-glow 2.4s ease-in-out both; }
+
+  // ─── subtitle / note with gold rules on the sides ───
+  .type-intro .subtitle, .concept .note {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    &::before, &::after {
+      content: '';
+      width: clamp(40px, 9vw, 110px);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, $gold);
+    }
+    &::after { background: linear-gradient(270deg, transparent, $gold); }
+  }
+  .type-intro .subtitle { color: $cream; font-size: clamp(14px, 4.2vh, 19px); }
+  .concept .note { font-size: clamp(17px, 5vh, 24px); color: $cream; }
+  .intro-skyline {
+    height: clamp(44px, 14vh, 76px);
+    filter: drop-shadow(0 0 16px rgba(247, 188, 21, 0.25));
+    animation: rise 0.9s 0.4s var(--ease-out) both;
+  }
+  &[data-scene='intro'] .bg .bg-skyline { opacity: 0 !important; }
+
+  // ─── cards: soft glass, gold rim, gentle shadow ───
+  .card, .split, .level, .option, .def-media, .mushaf, .points li, .keyword-chips .keyword.chip, .concept .keyword {
+    background-image: $glass-top, $glass-body;
+    border: $rim;
+    box-shadow: $soft;
+    border-radius: 26px;
+  }
+
+  // ─── step 3: part labels as small pills ───
+  .split .part-label {
+    padding: 2px 14px;
+    border-radius: 99px;
+    color: $cream;
+    background: rgba(1, 30, 22, 0.85);
+    border: 1px solid rgba(233, 181, 36, 0.6);
+    font-size: clamp(12px, 3.4vh, 15px);
+  }
+  .split .plus { color: $gold; font-size: 32px; font-weight: 800; }
+  .split .glyph { font-size: clamp(54px, 18vh, 86px); }
+
+  // ─── step 4: square letter tiles + big gold pill ───
+  .keyword-chips .keyword.chip {
+    width: clamp(64px, 20vh, 96px);
+    height: clamp(64px, 20vh, 96px);
+    display: grid;
+    place-items: center;
+    padding: 0 0 8px;
+    font-size: clamp(36px, 12vh, 56px);
+    color: #fff;
+    border-radius: 22px;
+  }
+  .concept .meaning {
+    font-size: clamp(24px, 8vh, 40px);
+    padding: 6px 30px 10px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, $gold-light, $gold 55%, #e0a40c);
+    box-shadow: $active;
+  }
+
+  // ─── verse card: larger Quran text, gold recited word, coral rule letter ───
+  .ayah { font-size: clamp(30px, 11vh, 54px); }
+  .ayah .word.focus { color: $gold; }
+  .ayah .word .mark { color: $coral; }
+  .mushaf.reciting { box-shadow: $active; }
+
+  // ─── quiz: vivid states, ✓ / ✕ in a circle, explanation bubble ───
+  .option {
+    .option-text { font-size: clamp(15px, 4.6vh, 21px); font-weight: 700; }
+    .option-key { width: 34px; height: 34px; border-radius: 10px; font-size: 17px; }
+    .option-mark i {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 14px;
+      border: 2px solid currentColor;
+    }
+    &.correct {
+      background-image: linear-gradient(180deg, #3ad883, $green 60%, #1f9a59);
+      border-color: #8affbe;
+      box-shadow: 0 0 0 1px rgba(138, 255, 190, 0.5), 0 0 22px rgba(47, 191, 113, 0.45);
+    }
+    &.wrong {
+      background-image: linear-gradient(180deg, #ef6b62, $red 60%, #a83430);
+      border-color: #ff9a92;
+      box-shadow: 0 0 18px rgba(217, 83, 79, 0.4);
+    }
+  }
+  .options.quran .option .option-text { font-size: clamp(26px, 8vh, 38px); font-weight: 400; }
+  .explain {
+    padding: 8px 20px;
+    border-radius: 99px;
+    border: 1.5px solid rgba(233, 181, 36, 0.6);
+    background: rgba(1, 30, 22, 0.88);
+    font-size: clamp(13px, 3.8vh, 17px);
+    i { color: $gold-light; }
+  }
+
+  // ─── levels: active level glows, others quiet ───
+  .level.top { box-shadow: $active; border-color: $gold-light; }
+  .level h3 { font-size: clamp(16px, 4.8vh, 22px); }
+
+  // ─── summary: two-tone title, rows with check circles ───
+  .points li i { font-size: 20px; color: #3ddc84; }
+
+  // ─── one unified bottom bar: everything inside one glass strip ───
+  .coachbar {
+    margin: 0 clamp(8px, 2vw, 18px) max(8px, env(safe-area-inset-bottom));
+    padding: 6px 10px;
+    border-radius: 999px;
+    background-image: $glass-top, linear-gradient(180deg, rgba(2, 40, 30, 0.9), rgba(1, 26, 19, 0.94));
+    border: 1px solid rgba(233, 181, 36, 0.45);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+  }
+  .caption { background: transparent; border: 0; box-shadow: none; }
+  .caption span.gold, .caption span.gold.spoken { color: $gold; font-weight: 700; }
+  .caption span.gold:not(.spoken) { color: rgba(247, 188, 21, 0.5); }
+}
+
+@keyframes title-glow {
+  0%, 100% { text-shadow: 0 3px 14px rgba(0, 0, 0, 0.45); transform: scale(1); }
+  45% { text-shadow: 0 0 22px rgba(247, 188, 21, 0.55), 0 3px 14px rgba(0, 0, 0, 0.45); transform: scale(1.03); }
+}
+
+// fit checks (v3 has a taller unified bottom bar)
+.guided.theme-glassy3 {
+  .scene.type-levels {
+    .level { padding: 6px 8px 8px; }
+    .level .bar { height: clamp(26px, 9vh, 46px); }
+    .level h3 { font-size: clamp(15px, 4.2vh, 20px); }
+    .level p { font-size: clamp(9px, 2.4vh, 11px); }
+    .speeds { margin-bottom: 4px; }
+  }
+  .scene.type-repeat {
+    gap: clamp(4px, 1.4vh, 10px);
+    .ayah { font-size: clamp(26px, 9vh, 44px); }
+    .mushaf { padding-block: 6px 8px; }
+    .repeat-hint { margin: 0; }
+  }
+}

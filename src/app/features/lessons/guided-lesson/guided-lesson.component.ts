@@ -15,7 +15,7 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
   selector: 'app-guided-lesson',
   standalone: false,
   templateUrl: './guided-lesson.component.html',
-  styleUrls: ['./guided-lesson.component.scss', './guided-lesson.ornate.scss', './guided-lesson.glassy.scss'],
+  styleUrls: ['./guided-lesson.component.scss', './guided-lesson.ornate.scss', './guided-lesson.glassy.scss', './guided-lesson.glassy3.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GuidedAudioService],
   animations: [
@@ -65,9 +65,14 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
   readonly isLast = computed(() => this.index() === this.steps().length - 1);
   readonly theme = computed(() => this.lesson()?.theme ?? 'ornate');
   /** 'glassy' builds on the ornate theme and overrides it. */
-  readonly themeClass = computed(() => this.theme() === 'glassy' ? 'theme-ornate theme-glassy' : 'theme-' + this.theme());
+  readonly themeClass = computed(() => {
+    const t = this.theme();
+    if (t === 'glassy') return 'theme-ornate theme-glassy';
+    if (t === 'glassy3') return 'theme-ornate theme-glassy theme-glassy3';
+    return 'theme-' + t;
+  });
   readonly pausedState = signal(false);
-  readonly emblemSrc = computed(() => this.theme() === 'glassy'
+  readonly emblemSrc = computed(() => this.theme().startsWith('glassy')
     ? 'assets/images/guided/glassy/emblem-quran.webp' : 'assets/icons/android-chrome-192x192.png');
   /** Scene name on the root, so the theme can show per-scene decoration (e.g. the skyline). */
   readonly sceneName = computed(() => (this.started() ? this.step()?.type ?? '' : 'splash'));
@@ -83,13 +88,17 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
     const exact = wt && wt.t.length === words.length;
     let acc = 0;
     let quoted = false;
+    const clean = (x: string) => x.replace(/[^\u0621-\u0652\u0670]/g, '');
+    const gold = new Set((s?.goldWords ?? []).map(clean));
     return words.map((w, i) => {
       const at = exact ? wt!.t[i] / wt!.d : acc / total;
       acc += w.length + 1;
       if (w.includes('«')) quoted = true;
       const q = quoted;
       if (w.includes('»')) quoted = false;
-      return { w, at, q };
+      // gold: listed key terms, and an opening label word such as «سُؤَالٌ:» / «تَنْبِيهٌ:»
+      const g = gold.has(clean(w)) || (i < 3 && w.endsWith(':') && !!s?.goldWords);
+      return { w, at, q, g };
     });
   });
 
@@ -401,6 +410,13 @@ export class GuidedLessonComponent implements OnChanges, OnDestroy {
     const sp = this.step()?.speeds;
     const a = this.activeSpeed();
     return sp && a >= 0 ? sp[a].scale : 1;
+  }
+
+  /** Splits a title around its accent part: [before, accent, after], or null. */
+  accentParts(text: string | undefined, accent: string | undefined): [string, string, string] | null {
+    if (!text || !accent) return null;
+    const at = text.indexOf(accent);
+    return at < 0 ? null : [text.slice(0, at), accent, text.slice(at + accent.length)];
   }
 
   /** Splits a Quran word around its marked substring: [before, mark, after]. */
