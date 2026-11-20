@@ -24,10 +24,10 @@ const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
       transition(':enter', [
         // no scale: shared elements (arch, title, cards) must not move between scenes
         style({ opacity: 0, filter: 'blur(4px)' }),
-        animate('520ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, filter: 'blur(0)' })),
+        animate('520ms 180ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, filter: 'blur(0)' })),
       ]),
       transition(':leave', [
-        animate('320ms cubic-bezier(0.4, 0, 1, 1)', style({ opacity: 0, filter: 'blur(3px)' })),
+        animate('260ms cubic-bezier(0.4, 0, 1, 1)', style({ opacity: 0, filter: 'blur(3px)' })),
       ]),
     ]),
   ],
