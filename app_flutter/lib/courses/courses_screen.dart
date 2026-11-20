@@ -116,9 +116,12 @@ class _CoursesScreenState extends State<CoursesScreen>
 
   void _onCourseCompleted() {
     final i = courseCompleted.value;
+    // A completion that arrives during a running sequence waits for it.
     if (i == null || !mounted || _completing != null) return;
     courseCompleted.value = null;
-    _complete(i);
+    _complete(i).then((_) {
+      if (mounted) _onCourseCompleted();
+    });
   }
 
   /// Completion sequence for course [i]: bar to 100%, light along the line,
@@ -555,7 +558,12 @@ class _DividerPainter extends CustomPainter {
       line.shader = LinearGradient(
         begin: s < 0 ? Alignment.centerRight : Alignment.centerLeft,
         end: s < 0 ? Alignment.centerLeft : Alignment.centerRight,
-        colors: [RateelColors.gold, RateelColors.gold.withValues(alpha: 0)],
+        stops: const [0, 0.6, 1],
+        colors: [
+          RateelColors.gold,
+          RateelColors.gold,
+          RateelColors.gold.withValues(alpha: 0),
+        ],
       ).createShader(Rect.fromPoints(Offset(inner, 0), Offset(outer, 1)));
       canvas.drawLine(Offset(inner, c.dy), Offset(outer, c.dy), line);
       // Short bar between the line and the diamond.
@@ -665,15 +673,17 @@ class _ConnectorPainter extends CustomPainter {
       node,
       u * 1.3 * on,
       Paint()
-        ..color = nodeOn
-            ? RateelColors.pathNode
-            : RateelColors.progressTrack,
+        ..color = nodeOn ? RateelColors.pathNode : RateelColors.progressTrack,
     );
   }
 
   @override
   bool shouldRepaint(_ConnectorPainter old) =>
-      old.draw != draw || old.lit != lit || old.nodeOn != nodeOn || old.u != u;
+      old.draw != draw ||
+      old.lit != lit ||
+      old.nodeOn != nodeOn ||
+      old.nodeFromRight != nodeFromRight ||
+      old.u != u;
 }
 
 /// Reference geometry (u = 1% of the height). Ref px / 8.51.

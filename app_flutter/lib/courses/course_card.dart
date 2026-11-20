@@ -53,8 +53,8 @@ class _CourseCardState extends State<CourseCard> {
     final c = widget.course;
     final t = widget.unlock;
     // Content cross-fades: locked layout out first, unlocked layout in after.
-    final lockedOpacity = (1 - t / 0.4).clamp(0.0, 1.0);
-    final activeOpacity = ((t - 0.5) / 0.5).clamp(0.0, 1.0);
+    final lockedOpacity = (1 - t / 0.5).clamp(0.0, 1.0);
+    final activeOpacity = ((t - 0.4) / 0.5).clamp(0.0, 1.0);
     final radius = BorderRadius.circular(u * 4.7);
     return Semantics(
       button: true,
@@ -211,7 +211,7 @@ class _CourseCardState extends State<CourseCard> {
             borderRadius: BorderRadius.circular(u * 3.05),
             border: Border.all(color: RateelColors.gold, width: 2),
           ),
-          padding: EdgeInsets.symmetric(horizontal: u * 2.0),
+          padding: EdgeInsets.symmetric(horizontal: u * 1.0),
           child: Row(
             textDirection: TextDirection.rtl,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -260,7 +260,7 @@ class _CourseCardState extends State<CourseCard> {
       Positioned(
         left: u * 18.7,
         top: u * 39.8 - u * 0.7,
-        width: u * 40.4,
+        width: u * 38.9,
         height: u * 1.4,
         child: Container(
           decoration: BoxDecoration(
@@ -281,13 +281,18 @@ class _CourseCardState extends State<CourseCard> {
         ),
       ),
       Positioned(
+        // Fixed right-aligned slot: «100%» keeps clear of the bar.
         right: u * 6.3,
+        width: u * 7.6,
         top: u * 39.8 - u * 2,
         height: u * 4,
-        child: Center(
+        child: Align(
+          alignment: Alignment.centerRight,
           child: Text(
             '$pct%',
             textDirection: TextDirection.ltr,
+            maxLines: 1,
+            softWrap: false,
             style: readex(
               u * 2.7,
               weight: 400,
@@ -513,7 +518,7 @@ class _RimPainter extends CustomPainter {
           ..shader = LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: const [0, 0.6, 1],
+            stops: const [0, 0.85, 1],
             colors: [
               RateelColors.cardRimTop.withValues(alpha: 1 - t),
               RateelColors.cardRim.withValues(alpha: 1 - t),

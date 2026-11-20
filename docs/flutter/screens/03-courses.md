@@ -41,8 +41,8 @@ line and nodes, toast, motion.
 | P6 | Lock, star, play glyphs (SVG, currentColor) | **to generate** (placeholder: Material icons; play drawn in code) |
 
 Prompts: `docs/flutter/prompts/03-courses/images-v1.txt` (also pasted in the chat).
-Critic: `03-courses/critic-v1.md`, `critic-v2.md`; comparisons `compare-v1.jpg`, `compare-v2.jpg`; demo `demo-v2.mp4`;
-completion frames `completion-frames-v2.jpg`.
+Critic: `03-courses/critic-v1.md`, `critic-v2.md`; comparisons `compare-v1.jpg`, `compare-v2.jpg`; demo `demo-v3.mp4`;
+completion frames `completion-frames-v3.jpg`; `compare-v3.jpg` (after critic v2 fixes). Critic v1/v2 ran with an exclusion list (see `CRITIC.md`): to redo without exclusions.
 
 Course icons (owner may change): 02 head with sound waves from the nose (as in the reference) · 03 head
 cross-section with articulation points · 04 small circle with a flowing ribbon · 05 closed lips · 06 short wave
