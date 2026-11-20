@@ -109,10 +109,8 @@ Da rispettare in ogni nuova lezione.
 
 ## Materiale in questa cartella
 
-- `zapier-prompts-sequenziali.txt`: i 49 prompt in ordine, solo testo, pronti per Zapier
-- `rateel-assets-zapier.csv`: gli stessi prompt in tabella (file, formato, riferimenti)
+- `prompt-sequenziali.txt`: i 49 prompt in ordine, solo testo
 - `rateel-prompt-nano-banana.txt`: guida d'uso manuale con i prompt per sezione
-- `rateel-zapier-automation.txt`: come costruire lo Zap
 - `intro-lesson-1.tashkeel-bozza.json`: lezione 1 completamente vocalizzata (bozza)
 - `videos/`: render della lezione 1 (v1 glow, v2 ornate)
 - `voices/rateel-provino-voci.mp3`: 15 voci Google a confronto
