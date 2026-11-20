@@ -36,6 +36,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
     duration: const Duration(milliseconds: 360),
   );
   int _selected = 0;
+  bool _dragging = false;
   double _selectFrom = 0;
 
   bool get _isOpen =>
@@ -83,38 +84,64 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       child: LayoutBuilder(
         builder: (context, box) {
           final g = _Geometry(box.maxWidth, box.maxHeight);
-          return AnimatedBuilder(
-            animation: Listenable.merge([_open, _select]),
-            builder: (context, _) {
-              final t = Curves.easeInOutCubic.transform(_open.value);
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    right: g.railWidth,
-                    child: IgnorePointer(
-                      ignoring: t > 0,
-                      child: widget.builder(context, _selected),
-                    ),
-                  ),
-                  // The reference has no dimming; the owner approved a light one
-                  // (kept subtle, see DECISIONS.md).
-                  if (t > 0)
-                    Positioned.fill(
-                      child: GestureDetector(
-                        onTap: _close,
-                        child: ColoredBox(
-                          color: Colors.black.withValues(alpha: 0.12 * t),
-                        ),
+          // Owner: swipe right-to-left on the rail opens the menu, left-to-right
+          // closes it, following the finger. While closed, only drags that start
+          // on the rail count (the content may scroll horizontally).
+          return GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onHorizontalDragStart: (d) {
+              _dragging =
+                  _open.value > 0 || d.localPosition.dx >= g.w - g.railWidth;
+            },
+            onHorizontalDragUpdate: (d) {
+              if (!_dragging) return;
+              _open.value -= d.delta.dx / (g.panelWidth - g.railWidth);
+            },
+            onHorizontalDragEnd: (d) {
+              if (!_dragging) return;
+              _dragging = false;
+              final v = d.primaryVelocity ?? 0;
+              if (v < -300) {
+                _open.forward();
+              } else if (v > 300) {
+                _close();
+              } else {
+                _open.value >= 0.5 ? _open.forward() : _close();
+              }
+            },
+            child: AnimatedBuilder(
+              animation: Listenable.merge([_open, _select]),
+              builder: (context, _) {
+                final t = Curves.easeInOutCubic.transform(_open.value);
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      right: g.railWidth,
+                      child: IgnorePointer(
+                        ignoring: t > 0,
+                        child: widget.builder(context, _selected),
                       ),
                     ),
-                  ..._panel(g, t),
-                ],
-              );
-            },
+                    // The reference has no dimming; the owner approved a light one
+                    // (kept subtle, see DECISIONS.md).
+                    if (t > 0)
+                      Positioned.fill(
+                        child: GestureDetector(
+                          onTap: _close,
+                          child: ColoredBox(
+                            color: Colors.black.withValues(alpha: 0.12 * t),
+                          ),
+                        ),
+                      ),
+                    ..._panel(g, t),
+                  ],
+                );
+              },
+            ),
           );
         },
       ),
@@ -136,18 +163,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
           top: 0,
           bottom: 0,
           right: 0,
-          child: GestureDetector(
-            onHorizontalDragUpdate: (d) {
-              if (_open.value == 0) return;
-              _open.value -= d.delta.dx / (g.panelWidth - g.railWidth);
-            },
-            onHorizontalDragEnd: (d) {
-              if (_open.value == 0) return;
-              final v = d.primaryVelocity ?? 0;
-              (v > 300 || _open.value < 0.6) ? _close() : _open.forward();
-            },
-            child: _PanelBackground(g: g, t: t),
-          ),
+          child: _PanelBackground(g: g, t: t),
         ),
       ),
       // Gold arch above the rows (open state only). Owner: a little lower than
@@ -487,82 +503,44 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
         child: GestureDetector(
           onTap: _toggle,
           child: Container(
-            // Rim: a metallic gold gradient on the close button (bright top
-            // right, darker bottom left, as in the reference).
-            padding: EdgeInsets.all(lerpDouble(2, 3, t)!),
+            // Owner: the close button uses the same light glass as the active
+            // rail item: thin gold ring, soft inner glow, gentle outer glow.
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 lerpDouble(g.u * 2.4, rect.width / 2, t)!,
               ),
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+              gradient: RadialGradient(
+                stops: const [0.55, 1],
                 colors: [
                   Color.lerp(
-                    RateelColors.menuTileRim,
-                    RateelColors.goldHighlight,
+                    Colors.white.withValues(alpha: 0.025),
+                    RateelColors.gold.withValues(alpha: 0.08),
                     t,
                   )!,
                   Color.lerp(
-                    RateelColors.menuTileRim,
-                    RateelColors.goldRim,
-                    t,
-                  )!,
-                  Color.lerp(
-                    RateelColors.menuTileRim,
-                    const Color(0xFF9C7420),
+                    Colors.white.withValues(alpha: 0.025),
+                    RateelColors.gold.withValues(alpha: 0.24),
                     t,
                   )!,
                 ],
               ),
+              border: Border.all(
+                color: Color.lerp(
+                  RateelColors.menuTileRim,
+                  RateelColors.ringLine,
+                  t,
+                )!,
+                width: lerpDouble(2, 1.7, t)!,
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.30 * t),
-                  blurRadius: g.u * 1.0,
-                  offset: Offset(0, g.u * 0.35),
+                  color: RateelColors.gold.withValues(alpha: 0.22 * t),
+                  blurRadius: g.u * 2.0,
                 ),
               ],
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  lerpDouble(g.u * 2.2, rect.width / 2, t)!,
-                ),
-                // Dark emerald glass: a soft sheen on the upper half, deeper
-                // at the bottom.
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.lerp(
-                      const Color(0xFF0A3A2A),
-                      const Color(0xFF1B4A36),
-                      t,
-                    )!,
-                    Color.lerp(
-                      const Color(0xFF05301F),
-                      const Color(0xFF02281B),
-                      t,
-                    )!,
-                  ],
-                ),
-              ),
-              foregroundDecoration: t > 0
-                  ? BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        center: const Alignment(-0.2, -0.8),
-                        radius: 0.75,
-                        colors: [
-                          const Color(0xFFBFE3C8).withValues(alpha: 0.16 * t),
-                          const Color(0xFFBFE3C8).withValues(alpha: 0),
-                        ],
-                      ),
-                    )
-                  : null,
-              child: CustomPaint(
-                painter: _MenuCloseGlyph(t: t, u: g.u),
-              ),
+            child: CustomPaint(
+              painter: _MenuCloseGlyph(t: t, u: g.u),
             ),
           ),
         ),

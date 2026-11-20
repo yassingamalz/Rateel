@@ -61,3 +61,7 @@ active-state highlight, dimming of the content. Flat cream glyphs as in style C 
 - Review aid: the web build accepts `?slow=10` to play animations 10× slower.
 - Demo: `04-side-nav/demo-v1.mp4`; comparison with the references: `04-side-nav/compare-v1.jpg`.
 - Known differences: missing assets above; reference icons for القرآن and الشهادات are outline drawings.
+
+## v6 (2026-11-20, after the phone test)
+- Close button: light glass like the active rail item (the gradient rim was too heavy).
+- Swipe: right-to-left on the rail opens, left-to-right closes, following the finger.

@@ -45,3 +45,5 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | Side-nav style values are now the confirmed design tokens (`DESIGN-SYSTEM.md`). | ✅ |
 | 2026-11-20 | Procedure written in `PROCESS.md`; review tools in `tools/flutter-review/`; next-session prompt in `NEXT-SESSION.md`. | ✅ |
 | 2026-11-20 | **Screen 03 (courses) and the lessons will be built in a separate chat/session**, starting from branch `flutter/03-courses` (fast-forwarded to the side-nav work, so it already contains the navigation). | ✅ |
+| 2026-11-20 | Phone test feedback: the close button rim was too heavy → now the **same light glass as the active rail item** (1.7 px #D8C35A ring, inner radial gold glow 8%→24%, outer glow 22% blur 2u). Replaces the gradient-rim glass button token. | ✅ |
+| 2026-11-20 | **Swipe gestures:** right-to-left drag starting on the rail opens the menu, left-to-right closes it, following the finger (fling or 50% threshold). Drags on the content do not open it (content may scroll horizontally later). | ✅ |
