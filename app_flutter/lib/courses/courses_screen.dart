@@ -31,12 +31,6 @@ class _CoursesScreenState extends State<CoursesScreen>
     duration: const Duration(milliseconds: 1500),
   )..forward();
 
-  /// Slow breathing glow on the active card's gold rim.
-  late final AnimationController _breath = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 2000),
-  )..repeat(reverse: true);
-
   /// Shake of a locked card's lock (index in [_shaking]).
   late final AnimationController _shake = AnimationController(
     vsync: this,
@@ -95,7 +89,6 @@ class _CoursesScreenState extends State<CoursesScreen>
   void dispose() {
     courseCompleted.removeListener(_onCourseCompleted);
     _entry.dispose();
-    _breath.dispose();
     _shake.dispose();
     _toast.dispose();
     _fill.dispose();
@@ -256,7 +249,6 @@ class _CoursesScreenState extends State<CoursesScreen>
               child: AnimatedBuilder(
                 animation: Listenable.merge([
                   _entry,
-                  _breath,
                   _shake,
                   _fill,
                   _half,
@@ -340,8 +332,14 @@ class _CoursesScreenState extends State<CoursesScreen>
                     ? _half.value
                     : 0,
               ),
-            Transform.scale(
-              scale: lerpDouble(1.0, g.focusScale, focus)!,
+            Transform(
+              // Focused card: 626×430 vs 616×426 px (x and y scale differ).
+              transform: Matrix4.diagonal3Values(
+                lerpDouble(1.0, g.focusScale, focus)!,
+                lerpDouble(1.0, 1.009, focus)!,
+                1,
+              ),
+              alignment: Alignment.center,
               child: SizedBox(
                 width: g.cardW,
                 height: g.cardH,
@@ -349,9 +347,8 @@ class _CoursesScreenState extends State<CoursesScreen>
                   course: courses[i],
                   u: g.u,
                   unlock: unlock,
-                  breath: i == _current
-                      ? Curves.easeInOutSine.transform(_breath.value)
-                      : 0,
+                  // The reference is static: no breathing glow (owner to decide).
+                  breath: 0,
                   progress: progress,
                   lockShake: shake,
                   onTap: () => _tapCourse(i),
@@ -424,8 +421,8 @@ class _CoursesScreenState extends State<CoursesScreen>
       Positioned(
         left: 0,
         top: 0,
-        width: g.u * 24.7,
-        height: g.u * 24.7 * 924 / 1096,
+        width: g.u * 29.2,
+        height: g.u * 29.2 * 924 / 1096,
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.75,
@@ -436,11 +433,11 @@ class _CoursesScreenState extends State<CoursesScreen>
       Positioned(
         right: g.u * 1.4,
         top: 0,
-        width: g.u * 17.6,
-        height: g.u * 17.6 * 924 / 1096,
+        width: g.u * 20.6,
+        height: g.u * 20.6 * 924 / 1096,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.6,
+            opacity: 0.8,
             child: Transform.flip(
               flipX: true,
               child: SvgPicture.asset('assets/ui/decor/corner_ornament.svg'),
@@ -450,28 +447,44 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
       // Mosque silhouette (CR-03), faint, left of the title.
       Positioned(
-        left: g.u * 11.75,
+        left: g.u * 14.0,
         top: g.u * 12.3,
-        width: g.u * 40,
-        height: g.u * 40 * 542 / 900,
+        width: g.u * 42.2,
+        height: g.u * 42.2 * 542 / 900,
         child: settle(
           IgnorePointer(
-            child: Image.asset(
-              'assets/ui/decor/mosque.webp',
-              fit: BoxFit.contain,
+            // Faint, fading out at the ground as in the reference.
+            child: Opacity(
+              opacity: 0.83,
+              child: ShaderMask(
+                blendMode: BlendMode.dstIn,
+                shaderCallback: (r) => const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.66, 0.80],
+                  colors: [Color(0xFF000000), Color(0x00000000)],
+                ).createShader(r),
+                child: Image.asset(
+                  'assets/ui/decor/mosque.webp',
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
           ),
         ),
       ),
       // Crescent and star (CR-04), top right.
       Positioned(
-        right: g.w - (g.w - g.u * 30.8) - g.u * 5.35,
-        top: g.u * 12.3 - g.u * 5.75,
-        width: g.u * 10.7,
-        height: g.u * 11.5,
+        right: g.u * 25.9,
+        top: g.u * 7.75,
+        width: g.u * 9.75,
+        height: g.u * 9.15,
         child: settle(
           IgnorePointer(
-            child: SvgPicture.asset('assets/ui/decor/crescent_star.svg'),
+            child: SvgPicture.asset(
+              'assets/ui/decor/crescent_star.svg',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -480,25 +493,38 @@ class _CoursesScreenState extends State<CoursesScreen>
         left: cx - g.u * 51.4,
         top: g.u * 0.6,
         width: g.u * 102.8,
-        height: g.u * 102.8 * 578 / 1910,
+        height: g.u * 26.4,
         child: settle(
           IgnorePointer(
-            child: SvgPicture.asset(
-              'assets/ui/decor/header_arch.svg',
-              fit: BoxFit.fill,
+            // The flanks fade out towards the title, as in the reference.
+            child: ShaderMask(
+              blendMode: BlendMode.dstIn,
+              shaderCallback: (r) => const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.45, 0.92],
+                colors: [Color(0xFF000000), Color(0x00000000)],
+              ).createShader(r),
+              child: SvgPicture.asset(
+                'assets/ui/decor/header_arch.svg',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
       ),
       // Open Quran emblem on the arch apex (CR-02).
       Positioned(
-        left: cx - g.u * 7.15,
-        top: g.u * 11.4 - g.u * 3.25,
-        width: g.u * 14.3,
-        height: g.u * 6.5,
+        left: cx - g.u * 7.0,
+        top: g.u * 7.85,
+        width: g.u * 14.0,
+        height: g.u * 7.0,
         child: settle(
           IgnorePointer(
-            child: SvgPicture.asset('assets/ui/decor/header_book.svg'),
+            child: SvgPicture.asset(
+              'assets/ui/decor/header_book.svg',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -514,7 +540,7 @@ class _CoursesScreenState extends State<CoursesScreen>
               textDirection: TextDirection.rtl,
               style: readex(
                 g.u * 9.3,
-                weight: 560,
+                weight: 530,
                 color: RateelColors.label,
               ).copyWith(height: 1),
             ),
@@ -529,9 +555,25 @@ class _CoursesScreenState extends State<CoursesScreen>
         height: g.u * 4.4,
         child: settle(
           IgnorePointer(
-            child: SvgPicture.asset(
-              'assets/ui/decor/title_divider.svg',
-              fit: BoxFit.fill,
+            // Brightest next to the diamond, fading outward.
+            child: ShaderMask(
+              blendMode: BlendMode.srcIn,
+              shaderCallback: (r) => const LinearGradient(
+                stops: [0, .12, .33, .5, .67, .88, 1],
+                colors: [
+                  Color(0x00B2983A),
+                  Color(0xFFB2983A),
+                  Color(0xFFEFC246),
+                  Color(0xFFF8D053),
+                  Color(0xFFEFC246),
+                  Color(0xFFB2983A),
+                  Color(0x00B2983A),
+                ],
+              ).createShader(r),
+              child: SvgPicture.asset(
+                'assets/ui/decor/title_divider.svg',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
@@ -608,10 +650,31 @@ class _Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DecoratedBox(
+      // Slight lift at the bottom edge (reference #002D23).
+      position: DecorationPosition.foreground,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [0.85, 1],
+          colors: [Color(0x00002D23), RateelColors.contentLift],
+        ),
+      ),
+      child: _BaseGradient(),
+    );
+  }
+}
+
+class _BaseGradient extends StatelessWidget {
+  const _BaseGradient();
+
+  @override
+  Widget build(BuildContext context) {
+    return const DecoratedBox(
       decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment(0, -1.0),
-          radius: 1.1,
+          radius: 1.2,
           colors: [RateelColors.contentTop, RateelColors.contentBottom],
         ),
       ),
@@ -754,5 +817,5 @@ class _Geo {
   double get trackHalfHeight => u * 30;
 
   /// Arch apex / title centre: 810 px from the content's right edge.
-  double get headerCenterX => w - u * 95.2;
+  double get headerCenterX => w - u * 94.8;
 }

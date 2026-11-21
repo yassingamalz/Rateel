@@ -70,6 +70,7 @@ cross-section with articulation points · 04 small circle with a flowing ribbon 
   firm tap + soft echo).
 
 ## Open points for the owner
-1. New tokens proposed for this screen (`RateelColors` section "Screen 03", `DESIGN-SYSTEM.md`): card fills,
-   card rim, path line, progress, play, lock, pill. Conflicts with confirmed tokens: see the last critic report.
-2. Course 03 icon (head cross-section) reads weakly: redo with ChatGPT?
+1. **Colours vs the central tokens (owner, 2026-11-21: to do, one style for the whole app).** The screen-03
+   colours (`RateelColors` section "Screen 03", `DESIGN-SYSTEM.md`) will be compared with the confirmed
+   tokens and unified. Conflicts listed in critic-v3 (C1–C5).
+2. **Course 03 icon** (head cross-section) reads weakly: to redo later with ChatGPT (owner, 2026-11-21).

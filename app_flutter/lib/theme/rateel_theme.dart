@@ -52,6 +52,7 @@ class RateelColors {
   // Proposed tokens: the owner confirms them with the screen.
   static const contentTop = Color(0xFF07362A);
   static const contentBottom = Color(0xFF00271D);
+  static const contentLift = Color(0xFF002D23);
   static const cardTop = Color(0xFF033428);
   static const cardMid = Color(0xFF012F25);
   static const cardLow = Color(0xFF023126);
@@ -62,6 +63,12 @@ class RateelColors {
   static const cardContact = Color(0xFF00160C); // 1 px line under the card
   static const cardPattern = Color(0xFF2E6A4C);
   static const cardRimDark = Color(0xFF144837); // outer edge of the rim
+  // Course in progress: muted gold rim, 4 px (reference 03).
+  static const cardRimGold = Color(0xFFC69F3D);
+  static const cardRimGoldInner = Color(0xFFD3A436);
+  // Small gold glyphs (star, play): vertical gradient.
+  static const glyphGoldTop = Color(0xFFFFD556);
+  static const glyphGoldBottom = Color(0xFFEFB527);
   static const pathLine = Color(0xFFD1A93C);
   static const pathNode = Color(0xFFFCC24A);
   static const progressTrack = Color(0xFF265343);
@@ -69,7 +76,7 @@ class RateelColors {
   static const playFill = Color(0xFF43552A);
   static const lockDisc = Color(0xFF01261E);
   static const lockRim = Color(0xFF1A533F);
-  static const lockGlyph = Color(0xFFDAD7BF);
+  static const lockGlyph = Color(0xFFEDE3CB);
   static const pillFill = Color(0xFF062D20);
 }
 

@@ -115,6 +115,20 @@ class _CourseCardState extends State<CourseCard> {
                       ),
                     ),
                   ),
+                  // Glass sheen: edges slightly lighter than the middle.
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        stops: [0, 0.15, 0.85, 1],
+                        colors: [
+                          Color(0x400A4A36),
+                          Color(0x000A4A36),
+                          Color(0x000A4A36),
+                          Color(0x400A4A36),
+                        ],
+                      ),
+                    ),
+                  ),
                   _pattern(u),
                   if (lockedOpacity > 0)
                     ..._fade(lockedOpacity, _lockedContent(u)),
@@ -144,6 +158,7 @@ class _CourseCardState extends State<CourseCard> {
           shaderCallback: (r) => const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            stops: [0, 0.65],
             colors: [Color(0x00000000), Color(0xFF000000)],
           ).createShader(r),
           child: SvgPicture.asset(
@@ -202,11 +217,21 @@ class _CourseCardState extends State<CourseCard> {
             textDirection: TextDirection.rtl,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/ui/glyphs/star.svg',
-                width: u * 5.1,
-                height: u * 5.1,
-                theme: const SvgTheme(currentColor: RateelColors.gold),
+              ShaderMask(
+                blendMode: BlendMode.srcIn,
+                shaderCallback: (r) => const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    RateelColors.glyphGoldTop,
+                    RateelColors.glyphGoldBottom,
+                  ],
+                ).createShader(r),
+                child: SvgPicture.asset(
+                  'assets/ui/glyphs/star.svg',
+                  width: u * 5.1,
+                  height: u * 5.1,
+                ),
               ),
               SizedBox(width: u * 1.2),
               Flexible(
@@ -227,7 +252,7 @@ class _CourseCardState extends State<CourseCard> {
           ),
         ),
       ),
-      _icon(u, right: u * 5.5, top: u * 4.1, height: u * 8.1, width: u * 14),
+      _icon(u, right: u * 5.9, top: u * 4.4, height: u * 7.6, width: u * 12.0),
       _title(u, c.title, centerY: u * 17.0),
       _rule(u, centerY: u * 23.6, right: u * 7.3, width: u * 51.5),
       _description(u, c.description, firstCenterY: u * 27.7),
@@ -244,11 +269,18 @@ class _CourseCardState extends State<CourseCard> {
             border: Border.all(color: RateelColors.goldHighlight, width: 2.6),
           ),
           alignment: Alignment.center,
-          child: SvgPicture.asset(
-            'assets/ui/glyphs/play.svg',
-            width: u * 5.3,
-            height: u * 5.3,
-            theme: const SvgTheme(currentColor: RateelColors.gold),
+          child: ShaderMask(
+            blendMode: BlendMode.srcIn,
+            shaderCallback: (r) => const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [RateelColors.glyphGoldTop, RateelColors.glyphGoldBottom],
+            ).createShader(r),
+            child: SvgPicture.asset(
+              'assets/ui/glyphs/play.svg',
+              width: u * 5.3,
+              height: u * 5.3,
+            ),
           ),
         ),
       ),
@@ -256,7 +288,7 @@ class _CourseCardState extends State<CourseCard> {
       Positioned(
         left: u * 18.7,
         top: u * 39.8 - u * 0.7,
-        width: u * 38.9,
+        width: u * 40.4,
         height: u * 1.4,
         child: Container(
           decoration: BoxDecoration(
@@ -278,11 +310,12 @@ class _CourseCardState extends State<CourseCard> {
       ),
       Positioned(
         // Fixed right-aligned slot: «100%» keeps clear of the bar.
-        right: u * 6.3,
-        width: u * 7.6,
+        right: u * 6.2,
+        width: u * 6.0,
         top: u * 39.8 - u * 2,
         height: u * 4,
-        child: Align(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
           alignment: Alignment.centerRight,
           child: Text(
             '$pct%',
@@ -344,11 +377,11 @@ class _CourseCardState extends State<CourseCard> {
       _icon(
         u,
         centerX: u * 72.4 * 0.479,
-        top: u * 2.8,
-        height: u * 10,
+        top: u * 3.6,
+        height: u * 8.8,
         width: u * 13,
       ),
-      _title(u, c.title, centerY: u * 17.2, right: u * 5.7),
+      _title(u, c.title, centerY: u * 17.2, right: u * 5.35),
       _rule(u, centerY: u * 23.9, right: u * 6.4, width: u * 54.8),
       _description(u, c.description, firstCenterY: u * 28.2, right: u * 5.7),
     ];
@@ -444,7 +477,7 @@ class _CourseCardState extends State<CourseCard> {
     required double firstCenterY,
     double? right,
   }) {
-    final lineH = u * 5.1;
+    final lineH = u * 4.95;
     return Positioned(
       left: u * 15.5,
       right: right ?? u * 6.4,
@@ -467,8 +500,9 @@ class _CourseCardState extends State<CourseCard> {
 }
 
 /// Card rim. Locked: 4 px emerald glass edge, lighter at the top and bright at
-/// the bottom (#2F6954 → #27654F → #559174). Unlocked: gold double rim
-/// (goldRim 1.4 px outside, goldHighlight 2 px inside). [t] blends them.
+/// the bottom (#2F6954 → #27654F → #559174). Unlocked: 4 px muted gold rim
+/// (cardRimGold 1.6 px outside, cardRimGoldInner 2.4 px inside). [t] blends
+/// them.
 class _RimPainter extends CustomPainter {
   _RimPainter({required this.radius, required this.t});
 
@@ -500,18 +534,18 @@ class _RimPainter extends CustomPainter {
     }
     if (t > 0) {
       canvas.drawRRect(
-        inset(0.7),
+        inset(0.8),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.4
-          ..color = RateelColors.goldRim.withValues(alpha: t),
+          ..strokeWidth = 1.6
+          ..color = RateelColors.cardRimGold.withValues(alpha: t),
       );
       canvas.drawRRect(
-        inset(2.4),
+        inset(2.8),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..color = RateelColors.goldHighlight.withValues(alpha: t),
+          ..strokeWidth = 2.4
+          ..color = RateelColors.cardRimGoldInner.withValues(alpha: t),
       );
     }
   }
