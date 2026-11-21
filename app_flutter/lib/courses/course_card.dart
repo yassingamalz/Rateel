@@ -237,14 +237,19 @@ class _CourseCardState extends State<CourseCard> {
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: Text(
-                    'مستوى مبتدئ',
-                    textDirection: TextDirection.rtl,
-                    style: readex(
-                      u * 3.3,
-                      weight: 400,
-                      color: RateelColors.gold,
-                    ).copyWith(height: 1),
+                  // Readex sets Arabic low in its line box: lift it to the
+                  // optical centre of the pill (owner, 2026-11-21).
+                  child: Transform.translate(
+                    offset: Offset(0, -u * 0.45),
+                    child: Text(
+                      'مستوى مبتدئ',
+                      textDirection: TextDirection.rtl,
+                      style: readex(
+                        u * 3.2,
+                        weight: 400,
+                        color: RateelColors.gold,
+                      ).copyWith(height: 1),
+                    ),
                   ),
                 ),
               ),
@@ -435,8 +440,8 @@ class _CourseCardState extends State<CourseCard> {
             style: readex(
               u * 5.3,
               weight: 560,
-              color: RateelColors.label,
-            ).copyWith(height: 1),
+              color: titleCream,
+            ).copyWith(height: 1, shadows: titleShadows(u)),
           ),
         ),
       ),

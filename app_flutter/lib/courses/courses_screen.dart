@@ -238,6 +238,8 @@ class _CoursesScreenState extends State<CoursesScreen>
         final pages = _controllerFor(g.pitch / (g.w - g.trackRightInset));
         return Stack(
           fit: StackFit.expand,
+          // The top-right ornament runs on under the side rail.
+          clipBehavior: Clip.none,
           children: [
             const _Background(),
             ..._header(g),
@@ -431,10 +433,12 @@ class _CoursesScreenState extends State<CoursesScreen>
         ),
       ),
       Positioned(
-        right: g.u * 1.4,
-        top: 0,
-        width: g.u * 20.6,
-        height: g.u * 20.6 * 924 / 1096,
+        // Larger and running on under the side rail, which covers its right
+        // part (owner, 2026-11-21).
+        right: -g.u * 9,
+        top: -g.u * 1.5,
+        width: g.u * 32,
+        height: g.u * 32 * 924 / 1096,
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.8,
@@ -447,10 +451,11 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
       // Mosque silhouette (CR-03), faint, left of the title.
       Positioned(
-        left: g.u * 14.0,
-        top: g.u * 12.3,
-        width: g.u * 42.2,
-        height: g.u * 42.2 * 542 / 900,
+        // Larger and higher than the reference (owner, 2026-11-21).
+        left: g.u * 10.5,
+        top: g.u * 8.0,
+        width: g.u * 49,
+        height: g.u * 49 * 542 / 900,
         child: settle(
           IgnorePointer(
             // Faint, fading out at the ground as in the reference.
@@ -535,14 +540,36 @@ class _CoursesScreenState extends State<CoursesScreen>
         height: g.u * 14,
         child: settle(
           Center(
-            child: Text(
-              'المسارات التعليمية',
-              textDirection: TextDirection.rtl,
-              style: readex(
-                g.u * 9.3,
-                weight: 530,
-                color: RateelColors.label,
-              ).copyWith(height: 1),
+            child: Stack(
+              children: [
+                // Shadow layer, then the cream gradient on top.
+                Text(
+                  'المسارات التعليمية',
+                  textDirection: TextDirection.rtl,
+                  style: readex(
+                    g.u * 9.3,
+                    weight: 530,
+                    color: Colors.transparent,
+                  ).copyWith(height: 1, shadows: titleShadows(g.u)),
+                ),
+                ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (r) => const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [titleTop, titleBottom],
+                  ).createShader(r),
+                  child: Text(
+                    'المسارات التعليمية',
+                    textDirection: TextDirection.rtl,
+                    style: readex(
+                      g.u * 9.3,
+                      weight: 530,
+                      color: Colors.white,
+                    ).copyWith(height: 1),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

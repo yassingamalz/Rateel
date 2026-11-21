@@ -55,7 +55,7 @@ void main() {
     addTearDown(tester.view.reset);
     await tester.pumpWidget(const RateelApp());
     await settle(tester);
-    expect(find.text('المسارات التعليمية'), findsOneWidget);
+    expect(find.text('المسارات التعليمية'), findsWidgets);
     expect(find.text('أساسيات التجويد'), findsOneWidget);
     await tester.tap(find.text('النون والميم المشددتان'));
     await settle(tester);
