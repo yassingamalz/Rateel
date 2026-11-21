@@ -20,6 +20,9 @@ class CourseCard extends StatefulWidget {
     required this.lockShake,
     required this.onTap,
     this.onLongPress,
+    this.artSet,
+    this.number = 1,
+    this.widthU = 72.4,
   });
 
   final Course course;
@@ -39,6 +42,18 @@ class CourseCard extends StatefulWidget {
   final double lockShake;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
+
+  /// Illustrated card style (owner's mockup, 2026-11-21): a large course
+  /// illustration on the left fading into the card, a gold arc, text on the
+  /// right. `green`, `gold` or `abstract` (`assets/ui/course_art/<set>/`);
+  /// null = the reference-03 card.
+  final String? artSet;
+
+  /// Course number (1-based), for the illustration file.
+  final int number;
+
+  /// Card width in u (the illustrated cards are narrower).
+  final double widthU;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -130,9 +145,42 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   _pattern(u),
+                  if (widget.artSet != null) ...[
+                    _art(u),
+                    IgnorePointer(
+                      child: CustomPaint(painter: _ArcPainter(u: u)),
+                    ),
+                    // Soft veil behind the text column: the art fades under
+                    // the text, which stays readable.
+                    const IgnorePointer(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            stops: [0.3, 0.55, 1],
+                            colors: [
+                              Color(0x00012F25),
+                              Color(0x99012F25),
+                              Color(0xB3012F25),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                   if (lockedOpacity > 0)
-                    ..._fade(lockedOpacity, _lockedContent(u)),
-                  if (t > 0) ..._fade(activeOpacity, _activeContent(u)),
+                    ..._fade(
+                      lockedOpacity,
+                      widget.artSet != null
+                          ? _illustratedText(u, active: false)
+                          : _lockedContent(u),
+                    ),
+                  if (t > 0)
+                    ..._fade(
+                      activeOpacity,
+                      widget.artSet != null
+                          ? _illustratedActive(u)
+                          : _activeContent(u),
+                    ),
                   if (t < 1) _lock(u),
                   _rim(u, radius, t),
                 ],
@@ -195,6 +243,126 @@ class _CourseCardState extends State<CourseCard> {
       painter: _RimPainter(radius: radius.topLeft.x, t: t, u: u),
     ),
   );
+
+  /// Illustration on the left, fading out towards the text.
+  Widget _art(double u) {
+    final set = widget.artSet!;
+    // The green set only has courses 1–3: the others use the gold set.
+    final n = widget.number;
+    final folder = set == 'green' && n > 3 ? 'gold' : set;
+    final file =
+        'assets/ui/course_art/$folder/course_${n.toString().padLeft(2, '0')}.webp';
+    return Positioned(
+      left: 0,
+      top: u * 3,
+      bottom: u * 3,
+      width: u * widget.widthU * 0.6,
+      child: IgnorePointer(
+        child: Opacity(
+          opacity: lerpDouble(0.8, 1.0, widget.unlock)!,
+          child: ShaderMask(
+            blendMode: BlendMode.dstIn,
+            shaderCallback: (r) => const LinearGradient(
+              stops: [0, 0.6, 1],
+              colors: [Color(0xFF000000), Color(0xFF000000), Color(0x00000000)],
+            ).createShader(r),
+            child: Image.asset(
+              file,
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.centerLeft,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Title (up to two lines), small gold divider and description on the right
+  /// half of an illustrated card.
+  List<Widget> _illustratedText(double u, {required bool active}) {
+    final c = widget.course;
+    const colW = 36.0;
+    final top = u * 10.5;
+    final lines = active ? 2 : 3;
+    return [
+      Positioned(
+        right: u * 3.5,
+        width: u * colW,
+        top: top,
+        height: u * 11,
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: Text(
+            c.title,
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: readex(
+              u * 4.4,
+              weight: 560,
+              color: titleCream,
+            ).copyWith(height: 1.2, shadows: titleShadows(u)),
+          ),
+        ),
+      ),
+      Positioned(
+        right: u * 3.5 + u * (colW - 22) / 2,
+        width: u * 22,
+        top: top + u * 11.6,
+        height: u * 2.2,
+        child: SvgPicture.asset(
+          'assets/ui/decor/title_divider.svg',
+          fit: BoxFit.fill,
+        ),
+      ),
+      Positioned(
+        right: u * 3.5,
+        width: u * colW,
+        top: top + u * 14.8,
+        height: u * 4.4 * lines,
+        child: Text(
+          c.description,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.right,
+          maxLines: lines,
+          overflow: TextOverflow.ellipsis,
+          style: readex(
+            u * 3.0,
+            weight: 340,
+            color: RateelColors.cream,
+          ).copyWith(height: 4.4 / 3.0),
+        ),
+      ),
+    ];
+  }
+
+  /// Course in progress, illustrated: pill top right, text, play + progress.
+  List<Widget> _illustratedActive(double u) {
+    final base = _activeContent(u);
+    // base: [pill, icon, title, rule, description, play, bar, percent]
+    final pill = base[0] as Positioned;
+    final bar = base[6] as Positioned;
+    return [
+      Positioned(
+        right: u * 3.5,
+        top: pill.top,
+        width: pill.width,
+        height: pill.height,
+        child: pill.child,
+      ),
+      ..._illustratedText(u, active: true),
+      base[5],
+      Positioned(
+        left: bar.left,
+        top: bar.top,
+        width: u * (widget.widthU - 18.7 - 6.2 - 7.6),
+        height: bar.height,
+        child: bar.child,
+      ),
+      base[7],
+    ];
+  }
 
   List<Widget> _activeContent(double u) {
     final c = widget.course;
@@ -570,4 +738,57 @@ class _RimPainter extends CustomPainter {
   @override
   bool shouldRepaint(_RimPainter old) =>
       old.t != t || old.radius != radius || old.u != u;
+}
+
+/// Gold arc sweeping across an illustrated card (owner's mockup): from the top
+/// edge down to the left edge, bulging towards the top-left corner, fading at
+/// both ends, with a fainter twin line.
+class _ArcPainter extends CustomPainter {
+  _ArcPainter({required this.u});
+
+  final double u;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width, h = size.height;
+    Path arc(double k) => Path()
+      ..moveTo(w * (0.46 + k), -h * 0.02)
+      ..quadraticBezierTo(w * (0.02 + k), h * 0.08, -w * 0.01, h * (0.96 - k));
+    final shader = const LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      stops: [0, 0.35, 0.75, 1],
+      colors: [
+        Color(0x00E1AC36),
+        Color(0xFFF0C04A),
+        Color(0xCCE1AC36),
+        Color(0x00E1AC36),
+      ],
+    ).createShader(Offset.zero & size);
+    canvas.drawPath(
+      arc(0),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.6
+        ..shader = shader
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.5),
+    );
+    canvas.drawPath(
+      arc(0),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.22
+        ..shader = shader,
+    );
+    canvas.drawPath(
+      arc(0.05),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.12
+        ..color = const Color(0x55E1AC36),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_ArcPainter old) => old.u != u;
 }

@@ -70,3 +70,12 @@ Sources: `docs/design-assets/courses/corners-2026-11-21/` (`rateel_ornamento_sin
 | `ui/decor/corner_glow_left.webp`, `corner_glow_right.webp` | `courses/corners-glow-2026-11-21/` (PNG 1254 px with a soft glow) | screen 03 corners | faint fringe pixels (alpha < 90) recoloured gold to avoid red/yellow edges; trimmed, 800 px; frame corner on the screen corner, glow spilling off-screen; right one under the rail; radial fade |
 | `ui/decor/corner_geo_left.svg`, `corner_geo_right.svg` | `courses/corners-geometric-2026-11-21/` (octagons + 8-point stars, scalloped edge) | spares | clean vector, uses clipPath |
 | `ui/decor/corner_owner_left/right.webp` | second set (lobed lattice) | spares | used in v10–v11 |
+
+### Course card art (owner, 2026-11-21), under review
+Sources: `docs/design-assets/courses/card-art-2026-11-21/` (PNG only: the owner rejected the traced SVGs).
+
+| App folder | Source | Notes |
+|---|---|---|
+| `ui/course_art/green/course_01..03.webp` | `green/` (first pack) | emerald glass with gold, courses 1–3 only (others fall back to gold) |
+| `ui/course_art/gold/course_01..12.webp` | `01_original_gold/` | rich gold, "3D"; courses 08–12 have a card frame and green background baked in: to regenerate or crop before use |
+| `ui/course_art/abstract/course_01..12.webp` | `02_abstract_gold_png/` | minimal gold line art |

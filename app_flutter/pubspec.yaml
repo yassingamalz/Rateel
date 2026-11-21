@@ -65,6 +65,9 @@ flutter:
     - assets/ui/decor/
     - assets/ui/courses/
     - assets/ui/glyphs/
+    - assets/ui/course_art/green/
+    - assets/ui/course_art/gold/
+    - assets/ui/course_art/abstract/
   fonts:
     - family: ReadexPro
       fonts:

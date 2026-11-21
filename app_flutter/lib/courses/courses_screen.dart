@@ -354,6 +354,9 @@ class _CoursesScreenState extends State<CoursesScreen>
                   progress: progress,
                   lockShake: shake,
                   onTap: () => _tapCourse(i),
+                  artSet: cardArtSet,
+                  number: i + 1,
+                  widthU: g.cardW / g.u,
                   onLongPress: () {
                     // Demo until screens 05–07 exist: long press on the
                     // course in progress plays the completion sequence.
@@ -865,17 +868,20 @@ class _Geo {
   final double h;
   final double u;
 
-  double get cardW => u * 72.4;
+  bool get illustrated => cardArtSet != null;
+
+  /// Illustrated cards (owner's mockup) are narrower: three fit on screen.
+  double get cardW => illustrated ? u * 62 : u * 72.4;
   double get cardH => u * 50.0;
 
   /// The focused (first) card is 626 px wide against 616 px for the others.
-  double get focusScale => 1.016;
+  double get focusScale => illustrated ? 1.0 : 1.016;
 
   /// Card centre to card centre: 704 px.
-  double get pitch => u * 82.7;
+  double get pitch => illustrated ? u * 66 : u * 82.7;
 
   /// First card centre: 373 px from the content's right edge.
-  double get firstCenterFromRight => u * 43.8;
+  double get firstCenterFromRight => illustrated ? u * 34.5 : u * 43.8;
 
   /// PageView pages are [pitch] wide and start at the right edge; this inset
   /// moves the first card centre to [firstCenterFromRight].

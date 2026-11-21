@@ -18,6 +18,8 @@ Future<void> main() async {
   courseCompleted.value = int.tryParse(
     Uri.base.queryParameters['complete'] ?? '',
   );
+  // Review aid: `?cards=green|gold|abstract` shows the illustrated card style.
+  cardArtSet = Uri.base.queryParameters['cards'];
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,

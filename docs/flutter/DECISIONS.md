@@ -73,3 +73,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | **Line widths scale with the screen** (rims, rings, path lines in u): fixed pixels looked far too thick on the phone. | ✅ |
 | 2026-11-21 | **Progressive app version on every APK build**: versionCode = commits on HEAD, versionName 1.0.<code> (`build-apk.sh`), so the phone updates the installed app. | ✅ |
 | 2026-11-21 | Stable signing key for updates across cloud containers: committing a dev keystore was blocked as sensitive; **owner to choose** (see PROCESS.md, "Signing"). | 🟡 |
+| 2026-11-21 | **Illustrated course cards** (owner's mockup `screens/03-courses/owner-card-mockup.png`): large course art on the left fading into the card, gold arc, title + small divider + description on the right; built behind `?cards=green|gold|abstract` for review, references in `screens/03-courses/card-styles/`. Owner to choose the art set; default card unchanged until then. | 🟡 |
