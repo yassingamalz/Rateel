@@ -431,7 +431,23 @@ class _CoursesScreenState extends State<CoursesScreen>
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.75,
-            child: Image.asset('assets/ui/decor/corner_owner_left.webp'),
+            child: ShaderMask(
+              // Soft fade from the corner outwards (owner, 2026-11-21: a
+              // professional touch): the tails along the edges and the
+              // diagonal dissolve into the background.
+              blendMode: BlendMode.dstIn,
+              shaderCallback: (r) => const RadialGradient(
+                center: Alignment.topLeft,
+                radius: 1.25,
+                stops: [0.0, 0.45, 1.0],
+                colors: [
+                  Color(0xFF000000),
+                  Color(0xCC000000),
+                  Color(0x00000000),
+                ],
+              ).createShader(r),
+              child: Image.asset('assets/ui/decor/corner_owner_left.webp'),
+            ),
           ),
         ),
       ),
@@ -443,7 +459,23 @@ class _CoursesScreenState extends State<CoursesScreen>
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.75,
-            child: Image.asset('assets/ui/decor/corner_owner_right.webp'),
+            child: ShaderMask(
+              // Soft fade from the corner outwards (owner, 2026-11-21: a
+              // professional touch): the tails along the edges and the
+              // diagonal dissolve into the background.
+              blendMode: BlendMode.dstIn,
+              shaderCallback: (r) => const RadialGradient(
+                center: Alignment.topRight,
+                radius: 1.25,
+                stops: [0.0, 0.45, 1.0],
+                colors: [
+                  Color(0xFF000000),
+                  Color(0xCC000000),
+                  Color(0x00000000),
+                ],
+              ).createShader(r),
+              child: Image.asset('assets/ui/decor/corner_owner_right.webp'),
+            ),
           ),
         ),
       ),
