@@ -27,7 +27,7 @@ class Course {
 
 const courses = <Course>[
   Course(
-    icon: 'assets/ui/courses/course_01.svg',
+    icon: 'assets/ui/courses/course_01.webp',
     title: 'أساسيات التجويد',
     description: 'المبادئ الأساسية للتجويد وقواعد التلاوة الصحيحة للمبتدئين',
     locked: false,

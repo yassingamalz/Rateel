@@ -44,3 +44,14 @@ App copies: SVG viewBox trimmed to the drawn area (+20 px), fixed width/height r
 | `ui/courses/course_03…12.svg` | `tajweed-icons/` sheets (6: icons 2–6 → 03–07; 5: icons 1–5 → 08–12) | courses 03–12 | two-tone gold #FFD95A/#F2B623, fixed colours; sheet icon 1 (profile) is a spare of CR-09 |
 | `ui/glyphs/lock.svg`, `star.svg`, `play.svg`, `check.svg` | `ui-glyphs/` | lock disc, level pill, play button; check spare (completed course) | currentColor |
 | spares | CR-10 lock badge, CR-11 3D star (SVG filter: not usable in flutter_svg), CR-12 gradient play | — | kept in the sources |
+
+### Courses refinements, delivered by the owner 2026-11-21
+Sources: `docs/design-assets/courses/refinements-2026-11-21/` (5 PNG + SVG). Evaluation and use:
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/courses/course_01.webp` | `04_open_quran_rehal` PNG | course 01 icon | clean, no brown outline; PNG used (the SVG reconstruction differs); trimmed, 500 px |
+| `ui/courses/course_02.svg` | `05_speaking_profile` SVG | course 02 icon | cream → gold gradient on the face line; viewBox trimmed |
+| `ui/decor/header_book_filled.webp` | `01_open_quran_emblem` PNG | spare | filled pages: the reference's emblem has dark pages with a gold rim, so CR-02 (outline) stays on the arch |
+| `ui/decor/corner_top_left.webp`, `corner_top_right.webp` | `02`, `03` PNG | spares | carved lattice, but denser and brighter than the reference; their SVGs use masks/CSS (not rendered by flutter_svg) |
+| `ui/decor/trellis_corner_left.svg`, `trellis_corner_right.svg` | drawn by Claude (`tools/assets/corner_trellis.py`) on the owner's request | screen 03 corners | Moroccan lobed trellis, brighter towards the diagonal, dark offset line (carved look); right one mirrored with larger cells |

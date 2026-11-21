@@ -419,33 +419,32 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
     final cx = g.headerCenterX;
     return [
-      // Corner ornaments (CR-05), top left and mirrored top right.
+      // Corner trellis drawn by Claude on the owner's request (2026-11-21,
+      // tools/assets/corner_trellis.py): Moroccan lobed cells, brighter towards
+      // the diagonal, as in the reference.
       Positioned(
         left: 0,
         top: 0,
-        width: g.u * 29.2,
-        height: g.u * 29.2 * 924 / 1096,
+        width: g.u * 27,
+        height: g.u * 27,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.75,
-            child: SvgPicture.asset('assets/ui/decor/corner_ornament.svg'),
+            opacity: 0.8,
+            child: SvgPicture.asset('assets/ui/decor/trellis_corner_left.svg'),
           ),
         ),
       ),
       Positioned(
         // Larger and running on under the side rail, which covers its right
         // part (owner, 2026-11-21).
-        right: -g.u * 9,
-        top: -g.u * 1.5,
-        width: g.u * 32,
-        height: g.u * 32 * 924 / 1096,
+        right: -g.u * 12,
+        top: -g.u * 2,
+        width: g.u * 38,
+        height: g.u * 38,
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.8,
-            child: Transform.flip(
-              flipX: true,
-              child: SvgPicture.asset('assets/ui/decor/corner_ornament.svg'),
-            ),
+            child: SvgPicture.asset('assets/ui/decor/trellis_corner_right.svg'),
           ),
         ),
       ),
@@ -526,6 +525,8 @@ class _CoursesScreenState extends State<CoursesScreen>
         height: g.u * 7.8,
         child: settle(
           IgnorePointer(
+            // Outline book (CR-02): the reference's pages are dark with a gold
+            // rim; the filled variant (header_book_filled.webp) is a spare.
             child: SvgPicture.asset(
               'assets/ui/decor/header_book.svg',
               fit: BoxFit.fill,

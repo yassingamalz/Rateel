@@ -62,3 +62,7 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | Locked course tap: lock shake + toast + haptic "denied" (as built). | ✅ |
 | 2026-11-21 | Card descriptions keep `cream` #F4EAD0 (not the reference's #CFD0BA). | ✅ |
 | 2026-11-21 | **References are visual only:** texts and data always come from the app (`courses.json`); course 3 keeps its description. Lessons learned file: `LESSONS-LEARNED.md`. | ✅ |
+| 2026-11-21 | Owner refinements (5 assets) evaluated and stored in the shared library; course 01 and 02 icons replaced; filled emblem and carved corners kept as spares (see `ASSETS.md`). | ✅ |
+| 2026-11-21 | **Corner ornaments drawn by Claude** (owner: "fai pure una decorazione islamica tua, più fedele"): `tools/assets/corner_trellis.py` → `trellis_corner_left/right.svg`. | ✅ |
+| 2026-11-21 | Level pill: text kept clear of the rim (reference spacing: ~16 px rim→star, ~20 px text→rim), scales down instead of touching it (seen on the phone). | ✅ |
+| 2026-11-21 | APK build in one command: `tools/flutter-review/build-apk.sh` (installs what is missing; one Gradle worker against proxy rate limits). `PROCESS.md`, "APK". | ✅ |

@@ -212,10 +212,13 @@ class _CourseCardState extends State<CourseCard> {
             borderRadius: BorderRadius.circular(u * 3.05),
             border: Border.all(color: RateelColors.gold, width: 2),
           ),
-          padding: EdgeInsets.symmetric(horizontal: u * 1.0),
+          // Reference: ~16 px from the rim to the star, ~20 px from the text to
+          // the left rim; the text scales down rather than touch the rim
+          // (owner, 2026-11-21, seen on the phone).
+          padding: EdgeInsets.only(left: u * 2.3, right: u * 1.9),
           child: Row(
             textDirection: TextDirection.rtl,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ShaderMask(
                 blendMode: BlendMode.srcIn,
@@ -233,7 +236,7 @@ class _CourseCardState extends State<CourseCard> {
                   height: u * 5.1,
                 ),
               ),
-              SizedBox(width: u * 1.2),
+              SizedBox(width: u * 1.4),
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -245,7 +248,7 @@ class _CourseCardState extends State<CourseCard> {
                       'مستوى مبتدئ',
                       textDirection: TextDirection.rtl,
                       style: readex(
-                        u * 3.2,
+                        u * 3.0,
                         weight: 400,
                         color: RateelColors.gold,
                       ).copyWith(height: 1),
@@ -407,7 +410,9 @@ class _CourseCardState extends State<CourseCard> {
     final align = right != null ? Alignment.centerRight : Alignment.center;
     final child = asset == null
         ? const SizedBox.shrink()
-        : SvgPicture.asset(asset, fit: BoxFit.contain, alignment: align);
+        : asset.endsWith('.svg')
+        ? SvgPicture.asset(asset, fit: BoxFit.contain, alignment: align)
+        : Image.asset(asset, fit: BoxFit.contain, alignment: align);
     return Positioned(
       right: right,
       left: centerX == null ? null : centerX - w / 2,

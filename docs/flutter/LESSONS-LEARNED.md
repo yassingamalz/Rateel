@@ -27,3 +27,13 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
 - Traced SVGs from the owner keep their colours; small edits (trim the viewBox, split a sub-path to change its
   opacity) are logged in `ASSETS.md`.
 - `flutter_svg` ignores SVG filters: assets with glows (e.g. CR-11) are spares, not used.
+
+## Assets from the owner
+- Evaluate PNG and SVG separately: the SVG "reconstructions" can differ from the PNG (shape, fill). Use the one
+  closest to the reference; SVGs with masks, CSS `<style>` or filters do not render correctly in flutter_svg.
+- A critic's prompt can be wrong about the reference: before replacing an asset, zoom the reference (screen 03:
+  the emblem's pages are dark with a gold rim, not filled).
+- Check text in pills on the phone screenshots too: a few px of padding difference shows on small screens.
+
+## Build
+- APK: `tools/flutter-review/build-apk.sh`; keep `org.gradle.workers.max=1` (proxy rate limits).
