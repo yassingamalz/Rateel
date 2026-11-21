@@ -79,3 +79,6 @@ Sources: `docs/design-assets/courses/card-art-2026-11-21/` (PNG only: the owner 
 | `ui/course_art/green/course_01..03.webp` | `green/` (first pack) | emerald glass with gold, courses 1–3 only (others fall back to gold) |
 | `ui/course_art/gold/course_01..12.webp` | `01_original_gold/` | rich gold, "3D"; courses 08–12 have a card frame and green background baked in: to regenerate or crop before use |
 | `ui/course_art/abstract/course_01..12.webp` | `02_abstract_gold_png/` | minimal gold line art |
+| `ui/course_art/emblem/course_01..12.webp` | `card-art-2026-11-21/emblem/emblem_sheet_original.png` (4×3 sheet) | gold emblems on a green swoosh; split by the transparent gaps, faint fringe recoloured gold, trimmed |
+
+All card art is trimmed to its content and drawn in a 23u box on the left of the card (owner, 2026-11-21: never under the title or description; at most a sliver overlaps the text column).

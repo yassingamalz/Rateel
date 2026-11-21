@@ -45,7 +45,7 @@ class CourseCard extends StatefulWidget {
 
   /// Illustrated card style (owner's mockup, 2026-11-21): a large course
   /// illustration on the left fading into the card, a gold arc, text on the
-  /// right. `green`, `gold` or `abstract` (`assets/ui/course_art/<set>/`);
+  /// right. `green`, `gold`, `abstract` or `emblem` (`assets/ui/course_art/<set>/`);
   /// null = the reference-03 card.
   final String? artSet;
 
@@ -252,25 +252,24 @@ class _CourseCardState extends State<CourseCard> {
     final folder = set == 'green' && n > 3 ? 'gold' : set;
     final file =
         'assets/ui/course_art/$folder/course_${n.toString().padLeft(2, '0')}.webp';
+    // Owner, 2026-11-21: the art stays on the left, never under the title or
+    // the description (at most a sliver overlaps the text column, which
+    // starts at 22.5u).
     return Positioned(
-      left: 0,
-      top: u * 3,
-      bottom: u * 3,
-      width: u * widget.widthU * 0.6,
+      left: u * 1.5,
+      top: u * 5,
+      bottom: u * 5,
+      width: u * 23,
       child: IgnorePointer(
         child: Opacity(
-          opacity: lerpDouble(0.8, 1.0, widget.unlock)!,
+          opacity: lerpDouble(0.85, 1.0, widget.unlock)!,
           child: ShaderMask(
             blendMode: BlendMode.dstIn,
             shaderCallback: (r) => const LinearGradient(
-              stops: [0, 0.6, 1],
+              stops: [0, 0.85, 1],
               colors: [Color(0xFF000000), Color(0xFF000000), Color(0x00000000)],
             ).createShader(r),
-            child: Image.asset(
-              file,
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.centerLeft,
-            ),
+            child: Image.asset(file, fit: BoxFit.contain),
           ),
         ),
       ),
