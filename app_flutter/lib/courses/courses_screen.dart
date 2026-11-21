@@ -419,32 +419,31 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
     final cx = g.headerCenterX;
     return [
-      // Corner trellis drawn by Claude on the owner's request (2026-11-21,
-      // tools/assets/corner_trellis.py): Moroccan lobed cells, brighter towards
-      // the diagonal, as in the reference.
+      // Corner ornaments from the owner (2026-11-21, rateel_ornamento_*):
+      // lobed lattice with a thin frame along the screen edges; the right one
+      // runs on a little under the side rail.
       Positioned(
-        left: 0,
-        top: 0,
-        width: g.u * 27,
-        height: g.u * 27,
+        // The frame lines sit on the screen edges (the reference has none).
+        left: -g.u * 1.2,
+        top: -g.u * 1.2,
+        width: g.u * 30,
+        height: g.u * 30 * 586 / 700,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.8,
-            child: SvgPicture.asset('assets/ui/decor/trellis_corner_left.svg'),
+            opacity: 0.75,
+            child: Image.asset('assets/ui/decor/corner_owner_left.webp'),
           ),
         ),
       ),
       Positioned(
-        // Larger and running on under the side rail, which covers its right
-        // part (owner, 2026-11-21).
-        right: -g.u * 12,
-        top: -g.u * 2,
-        width: g.u * 38,
-        height: g.u * 38,
+        right: -g.u * 3,
+        top: -g.u * 1.2,
+        width: g.u * 32,
+        height: g.u * 32 * 545 / 700,
         child: IgnorePointer(
           child: Opacity(
-            opacity: 0.8,
-            child: SvgPicture.asset('assets/ui/decor/trellis_corner_right.svg'),
+            opacity: 0.75,
+            child: Image.asset('assets/ui/decor/corner_owner_right.webp'),
           ),
         ),
       ),

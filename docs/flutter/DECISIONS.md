@@ -66,3 +66,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | **Corner ornaments drawn by Claude** (owner: "fai pure una decorazione islamica tua, più fedele"): `tools/assets/corner_trellis.py` → `trellis_corner_left/right.svg`. | ✅ |
 | 2026-11-21 | Level pill: text kept clear of the rim (reference spacing: ~16 px rim→star, ~20 px text→rim), scales down instead of touching it (seen on the phone). | ✅ |
 | 2026-11-21 | APK build in one command: `tools/flutter-review/build-apk.sh` (installs what is missing; one Gradle worker against proxy rate limits). `PROCESS.md`, "APK". | ✅ |
+| 2026-11-21 | Screen 03 corners: the owner's ornaments (`corner_owner_left/right.webp`) replace Claude's trellis (kept as a spare): a diagonal band of cells as in the reference, more refined. v10, new APK. | ✅ |

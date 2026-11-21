@@ -54,4 +54,12 @@ Sources: `docs/design-assets/courses/refinements-2026-11-21/` (5 PNG + SVG). Eva
 | `ui/courses/course_02.svg` | `05_speaking_profile` SVG | course 02 icon | cream → gold gradient on the face line; viewBox trimmed |
 | `ui/decor/header_book_filled.webp` | `01_open_quran_emblem` PNG | spare | filled pages: the reference's emblem has dark pages with a gold rim, so CR-02 (outline) stays on the arch |
 | `ui/decor/corner_top_left.webp`, `corner_top_right.webp` | `02`, `03` PNG | spares | carved lattice, but denser and brighter than the reference; their SVGs use masks/CSS (not rendered by flutter_svg) |
-| `ui/decor/trellis_corner_left.svg`, `trellis_corner_right.svg` | drawn by Claude (`tools/assets/corner_trellis.py`) on the owner's request | screen 03 corners | Moroccan lobed trellis, brighter towards the diagonal, dark offset line (carved look); right one mirrored with larger cells |
+| `ui/decor/trellis_corner_left.svg`, `trellis_corner_right.svg` | drawn by Claude (`tools/assets/corner_trellis.py`) on the owner's request | spares (replaced by the owner's corners below) | Moroccan lobed trellis, brighter towards the diagonal, dark offset line (carved look) |
+
+### Corner ornaments, delivered by the owner 2026-11-21 (second set)
+Sources: `docs/design-assets/courses/corners-2026-11-21/` (`rateel_ornamento_sinistro/destro`, PNG 1254 px + traced SVG).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/decor/corner_owner_left.webp` | `rateel_ornamento_sinistro.png` | screen 03, top-left corner | diagonal band of lobed cells with small sparkles and a thin frame; PNG used (the SVG is a stair-step trace); trimmed, 700 px; placed 1.2u off-screen so the frame sits on the screen edges |
+| `ui/decor/corner_owner_right.webp` | `rateel_ornamento_destro.png` | screen 03, top-right corner | fades out towards the left; runs 3u under the side rail |
