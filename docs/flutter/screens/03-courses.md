@@ -74,10 +74,7 @@ cross-section with articulation points · 04 small circle with a flowing ribbon 
    colours (`RateelColors` section "Screen 03", `DESIGN-SYSTEM.md`) will be compared with the confirmed
    tokens and unified. Conflicts listed in critic-v3 (C1–C5).
 2. **Course 03 icon** (head cross-section) reads weakly: to redo later with ChatGPT (owner, 2026-11-21).
-3. Toast on a locked tap (the reference shows none): keep it, or only the lock shake (critic v4 Q1)?
-4. Card descriptions: reference colour #CFD0BA (new token `textSecondary`) or `cream` #F4EAD0 (critic v4 Q2)?
-5. Course 3 description: `courses.json` text (current) or the reference wording (critic v4 Q3)?
-6. Asset refinements from the critic (optional): P-A4 emblem, P-A10 corners, P-B13 course 01, P-B14 course 02
+3. Asset refinements from the critic (optional): P-A4 emblem, P-A10 corners, P-B13 course 01, P-B14 course 02
    (`prompts/03-courses/images-v1.txt`, section v2).
 
 Critic history: v1 7.5 (code only) · v2 8.5 (code only) · v3 7.5 whole screen, no exclusions · v4 8.5 whole screen;

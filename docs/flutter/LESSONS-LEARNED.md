@@ -1,0 +1,29 @@
+# Flutter app: lessons learned
+
+Rules learned while building the screens. Read with `DECISIONS.md` before any work; add a line here in the same
+commit whenever the owner corrects the way of working. Newest at the bottom of each section.
+
+## References
+- **ChatGPT references are visual only** (owner, 2026-11-21). Layout, colours, shapes, sizes and motion come
+  from the reference; **texts and data always come from the app** (`src/assets/data/*.json`, later the real
+  backend): titles, descriptions, counts, progress, levels. If the reference shows different wording or numbers
+  (e.g. screen 03: course 3 description, the «0%» with a 30% bar), keep the app's data and do not flag it as a
+  defect.
+- Values in a reference that are only an example (progress 30%) are not design: progress starts from the real
+  value (0% for a new user).
+
+## Critic
+- The critic gets **no list of accepted differences**: it scores the whole screen one to one, placeholders
+  included. Only owner-approved (✅) decisions are skipped (`CRITIC.md`, 2026-11-20).
+- Any deviation from the reference is **asked before it is built**, not built and listed afterwards.
+- Re-run the critic on the latest build: captures from an older build give stale findings.
+
+## Building
+- Readex Pro sets Arabic low in its line box: in pills and buttons, centre the text optically
+  (screen 03: lift 0.45u), and check it in a zoomed comparison.
+- Flutter web needs mouse drag enabled explicitly for horizontal scrolling (`ScrollBehavior.dragDevices`).
+- Ornaments that should run "under" the side rail: let the screen's Stack overflow (`Clip.none`); the rail panel
+  is opaque and drawn on top, with its shadow.
+- Traced SVGs from the owner keep their colours; small edits (trim the viewBox, split a sub-path to change its
+  opacity) are logged in `ASSETS.md`.
+- `flutter_svg` ignores SVG filters: assets with glows (e.g. CR-11) are spares, not used.

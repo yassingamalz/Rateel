@@ -59,3 +59,6 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | Side nav: the rail and the open menu cast a **shadow on the content** (black 45% blur 3.2u x −0.9u + contact 30% blur 0.8u), so the navigation reads as a layer above the screen (owner). Token `railShadows` in `rateel_theme.dart`. | ✅ |
 | 2026-11-21 | Screen 03 owner corrections (v6): top-right corner ornament larger and running on under the side rail; mosque larger and higher, fading out at the ground; «مستوى مبتدئ» optically centred in the pill; titles in warm cream with a soft shadow (screen title with a cream gradient), tokens `titleCream`, `titleTop`, `titleBottom`, `titleShadows`. | ✅ |
 | 2026-11-21 | Rail shadow merged from `flutter/04-side-nav` (PR #38) into `flutter/03-courses`. | ✅ |
+| 2026-11-21 | Locked course tap: lock shake + toast + haptic "denied" (as built). | ✅ |
+| 2026-11-21 | Card descriptions keep `cream` #F4EAD0 (not the reference's #CFD0BA). | ✅ |
+| 2026-11-21 | **References are visual only:** texts and data always come from the app (`courses.json`); course 3 keeps its description. Lessons learned file: `LESSONS-LEARNED.md`. | ✅ |
