@@ -158,7 +158,7 @@ class _CourseCardState extends State<CourseCard> {
           shaderCallback: (r) => const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0, 0.65],
+            stops: [0.35, 0.85],
             colors: [Color(0x00000000), Color(0xFF000000)],
           ).createShader(r),
           child: SvgPicture.asset(
@@ -257,7 +257,7 @@ class _CourseCardState extends State<CourseCard> {
           ),
         ),
       ),
-      _icon(u, right: u * 5.9, top: u * 4.4, height: u * 7.6, width: u * 12.0),
+      _icon(u, right: u * 5.3, top: u * 3.75, height: u * 8.3, width: u * 13.0),
       _title(u, c.title, centerY: u * 17.0),
       _rule(u, centerY: u * 23.6, right: u * 7.3, width: u * 51.5),
       _description(u, c.description, firstCenterY: u * 27.7),
@@ -382,8 +382,8 @@ class _CourseCardState extends State<CourseCard> {
       _icon(
         u,
         centerX: u * 72.4 * 0.479,
-        top: u * 3.6,
-        height: u * 8.8,
+        top: u * 3.35,
+        height: u * 9.3,
         width: u * 13,
       ),
       _title(u, c.title, centerY: u * 17.2, right: u * 5.35),

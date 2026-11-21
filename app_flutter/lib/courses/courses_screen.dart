@@ -480,10 +480,10 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
       // Crescent and star (CR-04), top right.
       Positioned(
-        right: g.u * 25.9,
-        top: g.u * 7.75,
-        width: g.u * 9.75,
-        height: g.u * 9.15,
+        right: g.u * 25.5,
+        top: g.u * 7.5,
+        width: g.u * 10.65,
+        height: g.u * 9.75,
         child: settle(
           IgnorePointer(
             child: SvgPicture.asset(
@@ -507,7 +507,7 @@ class _CoursesScreenState extends State<CoursesScreen>
               shaderCallback: (r) => const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.45, 0.92],
+                stops: [0.55, 1.0],
                 colors: [Color(0xFF000000), Color(0x00000000)],
               ).createShader(r),
               child: SvgPicture.asset(
@@ -520,10 +520,10 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
       // Open Quran emblem on the arch apex (CR-02).
       Positioned(
-        left: cx - g.u * 7.0,
-        top: g.u * 7.85,
-        width: g.u * 14.0,
-        height: g.u * 7.0,
+        left: cx - g.u * 7.22,
+        top: g.u * 7.45,
+        width: g.u * 14.45,
+        height: g.u * 7.8,
         child: settle(
           IgnorePointer(
             child: SvgPicture.asset(
@@ -576,9 +576,9 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
       Positioned(
         // Title divider (CR-06).
-        left: cx - g.u * 24,
+        left: cx - g.u * 25.3,
         top: g.u * 31.4 - g.u * 2.2,
-        width: g.u * 48,
+        width: g.u * 50.6,
         height: g.u * 4.4,
         child: settle(
           IgnorePointer(
@@ -788,12 +788,16 @@ class _ConnectorPainter extends CustomPainter {
     if (on == 0) return;
     final node = Offset(mid, y);
     final lit = half1 >= 1;
-    if (lit) {
+    // The glow grows with the pop instead of appearing in one frame.
+    final glow = lit
+        ? 1.0
+        : (nodePop > 0 ? math.sin(math.pi / 2 * nodePop) : 0.0);
+    if (glow > 0) {
       canvas.drawCircle(
         node,
         u * 2.2,
         Paint()
-          ..color = RateelColors.gold.withValues(alpha: 0.30 * on)
+          ..color = RateelColors.gold.withValues(alpha: 0.30 * on * glow)
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.2),
       );
     }

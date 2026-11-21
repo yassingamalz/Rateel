@@ -35,7 +35,7 @@ App copies: SVG viewBox trimmed to the drawn area (+20 px), fixed width/height r
 | `ui/decor/header_arch.svg` | CR-01 | screen 03 header arch | traced, faithful; no outward tails at the bottom (the reference has them) |
 | `ui/decor/header_book.svg` | CR-02 | emblem on the arch apex | matches the reference |
 | `ui/decor/mosque.webp` | CR-03 PNG | header, left | PNG kept (it has the fade to transparent; the SVG has none); 900 px |
-| `ui/decor/crescent_star.svg` | CR-04 | header, right | matches |
+| `ui/decor/crescent_star.svg` | CR-04 | header, right | star split into its own path at 55% opacity (muted olive star, as in the reference) |
 | `ui/decor/corner_ornament.svg` | CR-05 SVG | top-left corner, mirrored top-right | SVG without the pale haze of the PNG; replaces `images/lattice-corner-*` on screen 03 |
 | `ui/decor/title_divider.svg` | CR-06 | under the title | replaces the code painter |
 | `ui/decor/card_pattern.svg` | CR-07 | card bottoms, tinted `cardPattern` | one strip per card width (not seamless, not needed) |

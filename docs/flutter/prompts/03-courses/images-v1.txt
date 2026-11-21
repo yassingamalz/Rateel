@@ -48,3 +48,9 @@ Use the attached image REF-03 as the strict style guide. I need four small UI gl
 3) play.svg: the play triangle of the active card, slightly rounded corners;
 4) check.svg: a bold rounded check mark in the same style, for completed courses.
 Also give a PNG preview of the four on a dark green background #023328.
+
+=== v2 (2026-11-21, from critic v3/v4; attach REF-03 to each) ===
+P-A4 emblem: Open Quran emblem in front view, like the book above the title in the attached reference: filled gold page blocks with a thick gold rim and a small base under the spine. Width:height exactly 2:1. Gold #FBD35A to #E3B03B. Transparent background, SVG.
+P-A10 corner ornaments: Top-left corner ornament: an interlaced Islamic star lattice filling a right triangle (the two legs run along the top and left edges). Thick carved gold strokes (about 3% of the width), each with a dark inner shadow and a bright gold top edge, like embossed metal. The strokes fade slightly toward the inner diagonal. Match the corners in the attached reference. Transparent background, SVG or PNG at 1100 px. Also provide the top-right version with its own larger cells, as in the reference.
+P-B13 course 01: Same gold Quran on a rehal, but without the dark brown outline around the shape. Clean gold edges, cream pages. Width:height 1.57:1. Transparent background, SVG.
+P-B14 course 02: Same speaking-profile icon (face profile with sound waves). The face line has a gradient from cream #FBEAA6 at the top to gold #E1AC36 at the chin; the waves stay gold. Transparent background, SVG.
