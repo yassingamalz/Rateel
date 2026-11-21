@@ -94,6 +94,21 @@ List<Shadow> titleShadows(double u) => [
   ),
 ];
 
+/// Shadow of the side rail / open menu on the content (owner, 2026-11-21):
+/// the navigation reads as a layer above the screen.
+List<BoxShadow> railShadows(double u) => [
+  BoxShadow(
+    color: Colors.black.withValues(alpha: 0.45),
+    blurRadius: u * 3.2,
+    offset: Offset(-u * 0.9, 0),
+  ),
+  BoxShadow(
+    color: Colors.black.withValues(alpha: 0.30),
+    blurRadius: u * 0.8,
+    offset: Offset(-u * 0.25, 0),
+  ),
+];
+
 /// Text in Readex Pro (variable font): the closest match to the ChatGPT titles.
 TextStyle readex(
   double size, {

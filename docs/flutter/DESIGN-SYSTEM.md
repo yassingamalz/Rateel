@@ -27,6 +27,7 @@ Confirmed by the owner with the side navigation (2026-11-20): the values in
 | Glass button (close) | same as the active ring: 1.7 px #D8C35A, radial gold glow 8%→24%, outer glow gold 22% blur 2u | ✅ |
 | Text | Readex Pro; labels #FFFDF5 weight 340 size 4u; icons #FCF1D0 (menu) / #F4EAD0 (rail) | ✅ |
 | Radii | row 4.1u, selected row 4.4u, tile 3.0u, menu button 2.4u, pills h/2 | ✅ |
+| Rail / menu shadow on the content | black 45% blur 3.2u offset x −0.9u + black 30% blur 0.8u offset x −0.25u (`railShadows`) | ✅ |
 | Content dimming under the open menu | 12% black (reference has none) | 🟡 |
 
 Proposed with screen 03 (courses), waiting for the owner (`RateelColors`, section "Screen 03"):

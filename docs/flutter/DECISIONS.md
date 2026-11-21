@@ -56,3 +56,6 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-20 | Owner delivered the screen 03 assets (CR-01…CR-12, two course-icon sheets, 4 UI glyphs): evaluated and stored in the shared library (`docs/design-assets/courses/`, `app_flutter/assets/ui/{decor,courses,glyphs}/`, `ASSETS.md`); all placeholders of screen 03 replaced (v4). | ✅ |
 | 2026-11-20 | Course progress always starts at 0% (the reference's 30% bar was an example). | ✅ |
 | 2026-11-20 | **Haptics** mark the completion and the passage to the next course; app-wide vocabulary in `lib/core/haptics.dart` (tick, tap, milestone, unlock, success, denied). | ✅ |
+| 2026-11-21 | Side nav: the rail and the open menu cast a **shadow on the content** (black 45% blur 3.2u x −0.9u + contact 30% blur 0.8u), so the navigation reads as a layer above the screen (owner). Token `railShadows` in `rateel_theme.dart`. | ✅ |
+| 2026-11-21 | Screen 03 owner corrections (v6): top-right corner ornament larger and running on under the side rail; mosque larger and higher, fading out at the ground; «مستوى مبتدئ» optically centred in the pill; titles in warm cream with a soft shadow (screen title with a cream gradient), tokens `titleCream`, `titleTop`, `titleBottom`, `titleShadows`. | ✅ |
+| 2026-11-21 | Rail shadow merged from `flutter/04-side-nav` (PR #38) into `flutter/03-courses`. | ✅ |

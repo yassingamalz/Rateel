@@ -566,86 +566,91 @@ class _PanelBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        const DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [0, 0.45, 1],
-              colors: [
-                RateelColors.panelTop,
-                RateelColors.panelMid,
-                RateelColors.panelBottom,
-              ],
-            ),
-          ),
-        ),
-        // Emerald glow rising from the bottom edge (reference: the panel
-        // brightens toward the bottom).
-        if (t > 0)
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: g.u * 11,
-            child: Opacity(
-              opacity: ((t - 0.4) / 0.6).clamp(0.0, 1.0),
-              child: const DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [Color(0x800E4630), Color(0x000E4630)],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        // Star band along the bottom: seamless vector tile from the owner's
-        // ornament kit, faint as in the reference.
-        if (t > 0)
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: g.u * 0.6,
-            height: g.u * 8.1,
-            child: Opacity(
-              opacity: 0.38 * ((t - 0.4) / 0.6).clamp(0.0, 1.0),
-              child: ClipRect(
-                child: OverflowBox(
-                  alignment: Alignment.centerLeft,
-                  maxWidth: double.infinity,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      for (var n = 0; n < 9; n++)
-                        SvgPicture.asset(
-                          'assets/ui/decor/star_tile.svg',
-                          height: g.u * 8.1,
-                          width: g.u * 8.1 * 216 / 170,
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        // 4 px light bevel on the left edge.
-        const Positioned(
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: 4,
-          child: DecoratedBox(
+    // Owner, 2026-11-21: the rail/panel casts a shadow on the content, so it
+    // reads as a layer above it (soft wide shadow + tight contact shadow).
+    return DecoratedBox(
+      decoration: BoxDecoration(boxShadow: railShadows(g.u)),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          const DecoratedBox(
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: RateelColors.edgeBevel),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0, 0.45, 1],
+                colors: [
+                  RateelColors.panelTop,
+                  RateelColors.panelMid,
+                  RateelColors.panelBottom,
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+          // Emerald glow rising from the bottom edge (reference: the panel
+          // brightens toward the bottom).
+          if (t > 0)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: g.u * 11,
+              child: Opacity(
+                opacity: ((t - 0.4) / 0.6).clamp(0.0, 1.0),
+                child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Color(0x800E4630), Color(0x000E4630)],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          // Star band along the bottom: seamless vector tile from the owner's
+          // ornament kit, faint as in the reference.
+          if (t > 0)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: g.u * 0.6,
+              height: g.u * 8.1,
+              child: Opacity(
+                opacity: 0.38 * ((t - 0.4) / 0.6).clamp(0.0, 1.0),
+                child: ClipRect(
+                  child: OverflowBox(
+                    alignment: Alignment.centerLeft,
+                    maxWidth: double.infinity,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var n = 0; n < 9; n++)
+                          SvgPicture.asset(
+                            'assets/ui/decor/star_tile.svg',
+                            height: g.u * 8.1,
+                            width: g.u * 8.1 * 216 / 170,
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          // 4 px light bevel on the left edge.
+          const Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 4,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: RateelColors.edgeBevel),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
