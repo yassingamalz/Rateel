@@ -74,9 +74,9 @@ class _CourseCardState extends State<CourseCard> {
               borderRadius: radius,
               boxShadow: [
                 // 1.5 px dark contact line under the card.
-                const BoxShadow(
+                BoxShadow(
                   color: RateelColors.cardContact,
-                  offset: Offset(0, 1.5),
+                  offset: Offset(0, u * 0.18),
                 ),
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.40),
@@ -192,7 +192,7 @@ class _CourseCardState extends State<CourseCard> {
 
   Widget _rim(double u, BorderRadius radius, double t) => IgnorePointer(
     child: CustomPaint(
-      painter: _RimPainter(radius: radius.topLeft.x, t: t),
+      painter: _RimPainter(radius: radius.topLeft.x, t: t, u: u),
     ),
   );
 
@@ -210,7 +210,7 @@ class _CourseCardState extends State<CourseCard> {
           decoration: BoxDecoration(
             color: RateelColors.pillFill,
             borderRadius: BorderRadius.circular(u * 3.05),
-            border: Border.all(color: RateelColors.gold, width: 2),
+            border: Border.all(color: RateelColors.gold, width: u * 0.23),
           ),
           // Reference: ~16 px from the rim to the star, ~20 px from the text to
           // the left rim; the text scales down rather than touch the rim
@@ -274,7 +274,10 @@ class _CourseCardState extends State<CourseCard> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: RateelColors.playFill,
-            border: Border.all(color: RateelColors.goldHighlight, width: 2.6),
+            border: Border.all(
+              color: RateelColors.goldHighlight,
+              width: u * 0.3,
+            ),
           ),
           alignment: Alignment.center,
           child: ShaderMask(
@@ -355,7 +358,7 @@ class _CourseCardState extends State<CourseCard> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: RateelColors.lockDisc,
-          border: Border.all(color: RateelColors.lockRim, width: 1.6),
+          border: Border.all(color: RateelColors.lockRim, width: u * 0.19),
         ),
         alignment: Alignment.center,
         child: SvgPicture.asset(
@@ -514,10 +517,14 @@ class _CourseCardState extends State<CourseCard> {
 /// (cardRimGold 1.6 px outside, cardRimGoldInner 2.4 px inside). [t] blends
 /// them.
 class _RimPainter extends CustomPainter {
-  _RimPainter({required this.radius, required this.t});
+  _RimPainter({required this.radius, required this.t, required this.u});
 
   final double radius;
   final double t;
+
+  /// 1% of the screen height: rim widths scale with the screen (owner,
+  /// 2026-11-21: fixed pixels looked far too thick on the phone).
+  final double u;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -526,10 +533,10 @@ class _RimPainter extends CustomPainter {
         RRect.fromRectAndRadius(rect.deflate(d), Radius.circular(radius - d));
     if (t < 1) {
       canvas.drawRRect(
-        inset(2),
+        inset(u * 0.235),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 4
+          ..strokeWidth = u * 0.47
           ..shader = LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -544,22 +551,23 @@ class _RimPainter extends CustomPainter {
     }
     if (t > 0) {
       canvas.drawRRect(
-        inset(0.8),
+        inset(u * 0.095),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.6
+          ..strokeWidth = u * 0.19
           ..color = RateelColors.cardRimGold.withValues(alpha: t),
       );
       canvas.drawRRect(
-        inset(2.8),
+        inset(u * 0.33),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 2.4
+          ..strokeWidth = u * 0.28
           ..color = RateelColors.cardRimGoldInner.withValues(alpha: t),
       );
     }
   }
 
   @override
-  bool shouldRepaint(_RimPainter old) => old.t != t || old.radius != radius;
+  bool shouldRepaint(_RimPainter old) =>
+      old.t != t || old.radius != radius || old.u != u;
 }

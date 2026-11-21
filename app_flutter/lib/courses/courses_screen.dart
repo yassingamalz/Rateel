@@ -665,7 +665,10 @@ class _CoursesScreenState extends State<CoursesScreen>
                     decoration: BoxDecoration(
                       color: RateelColors.cardMid.withValues(alpha: 0.95),
                       borderRadius: BorderRadius.circular(g.u * 3),
-                      border: Border.all(color: RateelColors.cardRim, width: 2),
+                      border: Border.all(
+                        color: RateelColors.cardRim,
+                        width: g.u * 0.23,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.35),
@@ -779,7 +782,7 @@ class _ConnectorPainter extends CustomPainter {
       Offset(from, y),
       Paint()
         ..color = RateelColors.pathLine
-        ..strokeWidth = 3,
+        ..strokeWidth = u * 0.35,
     );
     if (spark) {
       canvas.drawCircle(
@@ -809,7 +812,7 @@ class _ConnectorPainter extends CustomPainter {
       Offset(right, y),
       Paint()
         ..color = RateelColors.progressTrack
-        ..strokeWidth = 3,
+        ..strokeWidth = u * 0.35,
     );
     if (half1 > 0) {
       _light(canvas, right, right - mid * half1, y, half1 < 1);

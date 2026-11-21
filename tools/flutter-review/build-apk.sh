@@ -40,6 +40,13 @@ fi
 cd "$ROOT/app_flutter"
 "$FLUTTER" config --android-sdk "$SDK" >/dev/null
 "$FLUTTER" pub get >/dev/null
-echo "== flutter build apk (release, arm64)"
-"$FLUTTER" build apk --release --target-platform android-arm64
-ls -la build/app/outputs/flutter-apk/app-release.apk
+# Progressive version (owner, 2026-11-21): every build gets a higher versionCode, so the
+# phone can update the installed app. versionCode = number of commits on HEAD (only grows);
+# versionName = 1.0.<code>. NOTE: an update also needs the SAME signing key; the APK is
+# signed with this container's debug key (~/.android/debug.keystore), see PROCESS.md.
+CODE=$(git -C "$ROOT" rev-list --count HEAD)
+echo "== flutter build apk (release, arm64), version 1.0.$CODE ($CODE)"
+"$FLUTTER" build apk --release --target-platform android-arm64 \
+  --build-name="1.0.$CODE" --build-number="$CODE"
+cp build/app/outputs/flutter-apk/app-release.apk "build/app/outputs/flutter-apk/rateel-1.0.$CODE.apk"
+ls -la "build/app/outputs/flutter-apk/rateel-1.0.$CODE.apk"

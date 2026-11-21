@@ -41,8 +41,16 @@ class RateelApp extends StatelessWidget {
         darkTheme: rateelDarkTheme(),
         themeMode: mode,
         locale: const Locale('ar'),
-        builder: (context, child) =>
-            Directionality(textDirection: TextDirection.rtl, child: child!),
+        // Text keeps its designed size (in u) whatever the phone's text zoom
+        // (owner, 2026-11-21): the system scale would break the proportions
+        // between text and cards/ornaments. A text-size option will live in the
+        // app's settings and scale the text proportionally.
+        builder: (context, child) => MediaQuery.withNoTextScaling(
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: child!,
+          ),
+        ),
         home: Scaffold(
           body: SideNavScaffold(
             builder: (context, selected) => selected == 0

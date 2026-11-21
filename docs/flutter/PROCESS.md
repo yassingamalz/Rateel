@@ -50,3 +50,11 @@ tools/flutter-review/build-apk.sh
   timeout), re-run the script: Gradle resumes from its cache. Java/Gradle already trust the proxy CA through
   `JAVA_TOOL_OPTIONS`; never disable TLS checks.
 - The APK is sent in the chat or published as a GitHub release asset, never committed.
+
+### Version and signing
+- `build-apk.sh` sets versionCode = number of commits on HEAD and versionName = `1.0.<code>`, and also writes
+  `rateel-1.0.<code>.apk`. A higher versionCode lets Android update the installed app instead of reinstalling.
+- Android accepts the update only if the APK is signed with the **same key**. Today the APK is signed with the
+  container's debug key (`~/.android/debug.keystore`): builds from the same container update each other; a new
+  container creates a new key, and the phone then asks to uninstall first. Keeping one key for all builds
+  (committing a dev keystore, or storing it outside the repo) is an open owner decision.

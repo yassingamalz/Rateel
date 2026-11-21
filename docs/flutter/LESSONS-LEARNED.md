@@ -37,3 +37,11 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
 
 ## Build
 - APK: `tools/flutter-review/build-apk.sh`; keep `org.gradle.workers.max=1` (proxy rate limits).
+
+## Phone checks (2026-11-21)
+- Every size is in u, **line widths too**: a 4 px rim designed at 853 px height is 0.47u; fixed pixels become
+  very thick on a phone (≈ 410 logical px high).
+- The phone's system text zoom must not change the layout: the app ignores it (`withNoTextScaling`); text size
+  will be an in-app setting.
+- Check every build also at phone size: `viewport 915×412, deviceScaleFactor 2.625` (Playwright).
+- Every APK gets a higher version (`build-apk.sh`) so it updates the installed app.

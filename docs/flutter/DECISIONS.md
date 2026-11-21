@@ -69,3 +69,7 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | Screen 03 corners: the owner's ornaments (`corner_owner_left/right.webp`) replace Claude's trellis (kept as a spare): a diagonal band of cells as in the reference, more refined. v10, new APK. | ✅ |
 | 2026-11-21 | Corner ornaments fade softly from the corner outwards (radial mask: full at the corner, 80% at 45%, transparent at the end) for a professional finish (owner). v11. | ✅ |
 | 2026-11-21 | Screen 03 corners: the owner's glowing geometric lattice (`corner_glow_left/right.webp`) with the radial fade (v12). Previous sets kept as spares. | ✅ |
+| 2026-11-21 | **Text keeps its designed proportions whatever the phone's text zoom** (`MediaQuery.withNoTextScaling` app-wide). A text-size option will be offered in the app's settings and scale text proportionally. | ✅ |
+| 2026-11-21 | **Line widths scale with the screen** (rims, rings, path lines in u): fixed pixels looked far too thick on the phone. | ✅ |
+| 2026-11-21 | **Progressive app version on every APK build**: versionCode = commits on HEAD, versionName 1.0.<code> (`build-apk.sh`), so the phone updates the installed app. | ✅ |
+| 2026-11-21 | Stable signing key for updates across cloud containers: committing a dev keystore was blocked as sensitive; **owner to choose** (see PROCESS.md, "Signing"). | 🟡 |
