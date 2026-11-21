@@ -63,3 +63,10 @@ Sources: `docs/design-assets/courses/corners-2026-11-21/` (`rateel_ornamento_sin
 |---|---|---|---|
 | `ui/decor/corner_owner_left.webp` | `rateel_ornamento_sinistro.png` | screen 03, top-left corner | diagonal band of lobed cells with small sparkles and a thin frame; PNG used (the SVG is a stair-step trace); trimmed, 700 px; placed 1.2u off-screen so the frame sits on the screen edges |
 | `ui/decor/corner_owner_right.webp` | `rateel_ornamento_destro.png` | screen 03, top-right corner | fades out towards the left; runs 3u under the side rail |
+
+### Corner ornaments, third set (owner, 2026-11-21) — in use
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/decor/corner_glow_left.webp`, `corner_glow_right.webp` | `courses/corners-glow-2026-11-21/` (PNG 1254 px with a soft glow) | screen 03 corners | faint fringe pixels (alpha < 90) recoloured gold to avoid red/yellow edges; trimmed, 800 px; frame corner on the screen corner, glow spilling off-screen; right one under the rail; radial fade |
+| `ui/decor/corner_geo_left.svg`, `corner_geo_right.svg` | `courses/corners-geometric-2026-11-21/` (octagons + 8-point stars, scalloped edge) | spares | clean vector, uses clipPath |
+| `ui/decor/corner_owner_left/right.webp` | second set (lobed lattice) | spares | used in v10–v11 |

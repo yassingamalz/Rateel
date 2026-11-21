@@ -68,3 +68,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-21 | APK build in one command: `tools/flutter-review/build-apk.sh` (installs what is missing; one Gradle worker against proxy rate limits). `PROCESS.md`, "APK". | ✅ |
 | 2026-11-21 | Screen 03 corners: the owner's ornaments (`corner_owner_left/right.webp`) replace Claude's trellis (kept as a spare): a diagonal band of cells as in the reference, more refined. v10, new APK. | ✅ |
 | 2026-11-21 | Corner ornaments fade softly from the corner outwards (radial mask: full at the corner, 80% at 45%, transparent at the end) for a professional finish (owner). v11. | ✅ |
+| 2026-11-21 | Screen 03 corners: the owner's glowing geometric lattice (`corner_glow_left/right.webp`) with the radial fade (v12). Previous sets kept as spares. | ✅ |

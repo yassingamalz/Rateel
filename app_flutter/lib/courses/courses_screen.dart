@@ -419,15 +419,16 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
     final cx = g.headerCenterX;
     return [
-      // Corner ornaments from the owner (2026-11-21, rateel_ornamento_*):
-      // lobed lattice with a thin frame along the screen edges; the right one
-      // runs on a little under the side rail.
+      // Corner ornaments from the owner (2026-11-21, glowing geometric
+      // lattice with a frame): the right one runs on under the side rail.
       Positioned(
         // The frame lines sit on the screen edges (the reference has none).
-        left: -g.u * 1.2,
-        top: -g.u * 1.2,
+        // The frame corner sits on the screen corner (the glow around it
+        // spills off-screen).
+        left: -g.u * 2.6,
+        top: -g.u * 2.8,
         width: g.u * 30,
-        height: g.u * 30 * 586 / 700,
+        height: g.u * 30 * 703 / 800,
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.75,
@@ -446,16 +447,16 @@ class _CoursesScreenState extends State<CoursesScreen>
                   Color(0x00000000),
                 ],
               ).createShader(r),
-              child: Image.asset('assets/ui/decor/corner_owner_left.webp'),
+              child: Image.asset('assets/ui/decor/corner_glow_left.webp'),
             ),
           ),
         ),
       ),
       Positioned(
-        right: -g.u * 3,
-        top: -g.u * 1.2,
+        right: -g.u * 5.75,
+        top: -g.u * 2.6,
         width: g.u * 32,
-        height: g.u * 32 * 545 / 700,
+        height: g.u * 32 * 674 / 800,
         child: IgnorePointer(
           child: Opacity(
             opacity: 0.75,
@@ -474,7 +475,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                   Color(0x00000000),
                 ],
               ).createShader(r),
-              child: Image.asset('assets/ui/decor/corner_owner_right.webp'),
+              child: Image.asset('assets/ui/decor/corner_glow_right.webp'),
             ),
           ),
         ),
