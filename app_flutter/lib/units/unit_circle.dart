@@ -219,34 +219,67 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   }
 
   List<Widget> _content(double u) {
-    final unlock = widget.unlock;
-    final done = widget.done;
-    // Locked and completed units show the unit-type icon; the open unit
-    // shows the play disc (start / continue).
-    final video = widget.unit.type == UnitType.video;
-    final playOpacity = (unlock * (video ? 1 : 1 - done)).clamp(0.0, 1.0);
-    final iconOpacity = 1 - playOpacity;
+    // Locked units show the unit-type icon under the padlock; open and
+    // completed units show the play disc (start / replay). The unlock plays
+    // in sequence, never as a cross-fade (owner, 2026-11-22: the icons
+    // looked like they were swapping): the padlock flies off (0–45%), the
+    // type icon sinks away (35–60%), the play disc pops in with a light ring
+    // (55–100%).
+    final t = widget.unlock;
+    final iconOut = Curves.easeIn.transform(_seg(t, 0.35, 0.6));
+    final playIn = _seg(t, 0.55, 1);
     return [
-      if (iconOpacity > 0)
+      if (iconOut < 1)
         Positioned(
           top: u * (23 - 6.2) - u * 5.6,
           child: Opacity(
-            opacity: iconOpacity,
+            opacity: 1 - iconOut,
             child: Transform.scale(
-              scale: done > 0 ? lerpDouble(0.6, 1, _bounce(done))! : 1,
+              scale: 1 - 0.5 * iconOut,
               child: _typeIcon(u),
             ),
           ),
         ),
-      if (playOpacity > 0)
+      if (playIn > 0 && playIn < 1)
+        Positioned(
+          top: u * (23 - 7.9) - u * 9,
+          child: IgnorePointer(
+            child: Container(
+              width: u * 18,
+              height: u * 18,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: RateelColors.goldHighlight.withValues(
+                    alpha: 0.6 * (1 - playIn),
+                  ),
+                  width: u * 0.3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: RateelColors.gold.withValues(
+                      alpha: 0.35 * (1 - playIn),
+                    ),
+                    blurRadius: u * 3,
+                  ),
+                ],
+              ),
+              transform: Matrix4.diagonal3Values(
+                0.5 + 0.5 * playIn,
+                0.5 + 0.5 * playIn,
+                1,
+              ),
+              transformAlignment: Alignment.center,
+            ),
+          ),
+        ),
+      if (playIn > 0)
         Positioned(
           top: u * (23 - 7.9) - u * 5.85,
           child: Opacity(
-            opacity: playOpacity,
+            opacity: playIn.clamp(0.0, 1.0),
             child: Transform.scale(
-              scale:
-                  lerpDouble(0.6, 1, _bounce(unlock))! *
-                  (video ? 1 : 1 - 0.3 * done),
+              scale: lerpDouble(0.4, 1, _bounce(playIn))!,
               child: _playDisc(u),
             ),
           ),
@@ -369,20 +402,27 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   /// Emerald padlock (owner's U2) on the icon of a locked unit: it shakes on
   /// a tap and pops off when the unit opens.
   Widget _padlock(double u) {
-    final t = widget.unlock;
-    final pop = 1 + 0.45 * math.sin(math.pi * (t * 1.3).clamp(0.0, 1.0));
+    final t = _seg(widget.unlock, 0, 0.45);
+    final pop = 1 + 0.35 * math.sin(math.pi * (t * 1.3).clamp(0.0, 1.0));
+    // Reference 05: on the book, 6u wide body, centre 5.5u above the ring
+    // centre. Narrow icons (microphone, scroll) would disappear under it:
+    // there it sits at the icon's lower right, smaller, like a badge.
+    final book = widget.unit.type == UnitType.reading;
+    final size = book ? 6.6 : 5.4;
+    final dx = book ? 0.0 : 4.0;
+    final dy = book ? 5.5 : 3.0;
     return Positioned(
-      top: u * (23 - 5.3) - u * 3.7 - u * 4 * t,
-      left: u * 23 - u * 3.7 + widget.lockShake * u * 0.9,
-      width: u * 7.4,
-      height: u * 7.4,
+      top: u * (23 - dy) - u * size / 2 - u * 5 * t,
+      left: u * (23 + dx) - u * size / 2 + widget.lockShake * u * 0.9,
+      width: u * size,
+      height: u * size,
       child: Opacity(
-        opacity: (1 - t * 1.2).clamp(0.0, 1.0),
+        opacity: (1 - t * 1.1).clamp(0.0, 1.0),
         child: Transform.rotate(
-          angle: widget.lockShake * 0.18 - t * 0.5,
+          angle: widget.lockShake * 0.18 - t * 0.6,
           child: Transform.scale(
             scale: pop,
-            child: SvgPicture.asset('assets/ui/units/padlock.svg'),
+            child: SvgPicture.asset('assets/ui/units/padlock_green.svg'),
           ),
         ),
       ),
@@ -392,7 +432,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   /// Gold progress badge on top of the ring (Ø 9.8u); drops in when the unit
   /// opens; a soft shine sweeps it every 4 s (Angular: every 3 s).
   Widget _badge(double u) {
-    final t = Curves.easeOutBack.transform(widget.unlock.clamp(0.0, 1.0));
+    final t = Curves.easeOutBack.transform(_seg(widget.unlock, 0.6, 1));
     final pct = (widget.progress * 100).round();
     final shine = (widget.ambient * 4).clamp(0.0, 1.0);
     return Positioned(
@@ -401,7 +441,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
       width: u * 9.8,
       height: u * 9.8,
       child: Opacity(
-        opacity: widget.unlock.clamp(0.0, 1.0),
+        opacity: _seg(widget.unlock, 0.6, 0.8),
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -556,6 +596,10 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
 }
 
 /// Overshoot 0 → 1.2 → 1 (Angular `bounce`).
+/// 0..1 progress of [t] inside the segment [a, b].
+double _seg(double t, double a, double b) =>
+    ((t - a) / (b - a)).clamp(0.0, 1.0);
+
 double _bounce(double t) {
   final x = t.clamp(0.0, 1.0);
   if (x < 0.5) return Curves.easeOut.transform(x / 0.5) * 1.2;

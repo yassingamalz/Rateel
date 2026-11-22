@@ -111,7 +111,11 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     // «تغيير المقرر» goes back to the courses screen.
     await tester.tap(find.text('تغيير المقرر'));
-    await settle(tester);
+    for (var i = 0; i < 4; i++) {
+      await settle(tester);
+    }
     expect(find.text('وحدات المقرر'), findsNothing);
+    // Shared progress: 1 of 5 units done → the course bar shows 20%.
+    expect(find.text('20%'), findsOneWidget);
   });
 }

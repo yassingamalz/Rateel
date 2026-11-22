@@ -90,7 +90,7 @@ class _UnitsScreenState extends State<UnitsScreen>
   )..addListener(_flowTicks);
   late final AnimationController _unlock = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 750),
+    duration: const Duration(milliseconds: 1200),
   );
 
   int? _completing;

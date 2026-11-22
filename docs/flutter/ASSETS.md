@@ -92,7 +92,8 @@ identical and crisp, the PNG where it is closer to the reference.
 | App file | Source | Used in | Notes |
 |---|---|---|---|
 | `ui/units/book.webp` | `02_open_book_revised.png` | reading units | PNG: closest to the reference (thin covers, notch); the SVGs and `01_original` are bulkier; trimmed, 600 px |
-| `ui/units/padlock.svg` | `03_padlock.svg` | locked units, over the icon | identical to the PNG; viewBox trimmed |
+| `ui/units/padlock.svg` | `03_padlock.svg` | spare (gold shackle and rim) | identical to the PNG; viewBox trimmed |
+| `ui/units/padlock_green.svg` | `03_padlock.svg`, recoloured | locked units | all green as in reference 05: shackle #12553C, rim #1A5238, body #2E7350→#245F41, keyhole #DFD08C (owner, 2026-11-22) |
 | `ui/units/microphone.svg` | `04_microphone.svg` | practice units | identical to the PNG; viewBox trimmed |
 | `ui/units/test_scroll.svg` | `05_test_scroll.svg` | test units | identical to the PNG; viewBox trimmed |
 | `ui/glyphs/swap.svg` | `06_change_course_arrows.svg` | «تغيير المقرر» | stroke → currentColor |

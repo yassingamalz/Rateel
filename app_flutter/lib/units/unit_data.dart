@@ -37,3 +37,15 @@ CourseUnitsProgress unitsProgressOf(int course) => _progressByCourse
 /// lesson screens then close back to the units screen, which plays the unit
 /// completion). Index into [unitsOf] of the open course.
 final unitCompleted = ValueNotifier<int?>(null);
+
+/// Progress of course [course] from its units (owner, 2026-11-22: one shared
+/// progress): completed units plus the share of the unit in progress.
+/// Courses without units keep 0.
+double courseProgressFromUnits(int course) {
+  final n = unitsOf(course).length;
+  if (n == 0) return 0;
+  final st = unitsProgressOf(course);
+  final done = st.current.clamp(0, n);
+  final partial = st.current < n ? st.progress[st.current] : 0.0;
+  return (done + partial) / n;
+}
