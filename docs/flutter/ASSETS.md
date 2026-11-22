@@ -83,9 +83,20 @@ Sources: `docs/design-assets/courses/card-art-2026-11-21/` (PNG only: the owner 
 
 All card art is trimmed to its content and drawn in a 23u box on the left of the card (owner, 2026-11-21: never under the title or description; at most a sliver overlaps the text column).
 
-### Units (screen 05)
+### Units (screen 05), delivered by the owner 2026-11-22
+Sources: `docs/design-assets/units/assets-2026-11-22/` (10 elements, PNG + SVG each, README), and
+`originals-chatgpt/` (first PNG exports of arrows, scroll, padlock, microphone: same drawing but red/yellow
+keying fringes, kept for reference only). PNG and SVG compared on the screen's green: the SVG is used where it is
+identical and crisp, the PNG where it is closer to the reference.
+
 | App file | Source | Used in | Notes |
 |---|---|---|---|
+| `ui/units/book.webp` | `02_open_book_revised.png` | reading units | PNG: closest to the reference (thin covers, notch); the SVGs and `01_original` are bulkier; trimmed, 600 px |
+| `ui/units/padlock.svg` | `03_padlock.svg` | locked units, over the icon | identical to the PNG; viewBox trimmed |
+| `ui/units/microphone.svg` | `04_microphone.svg` | practice units | identical to the PNG; viewBox trimmed |
+| `ui/units/test_scroll.svg` | `05_test_scroll.svg` | test units | identical to the PNG; viewBox trimmed |
+| `ui/glyphs/swap.svg` | `06_change_course_arrows.svg` | «تغيير المقرر» | stroke → currentColor |
+| `ui/decor/girih_tile.svg` | `07_girih_background_tile.svg` | background of screen 05, tile = 95% of the height, 40% | stroke → currentColor (`girihLine`); PNG is on magenta (spare) |
+| `ui/decor/corner_units_top_left.webp`, `corner_units_bottom_right.webp` | `08`, `09` PNG | screen 05 corners | PNG finer than the traced SVG; trimmed, 800 px; `10_both_corners` is a spare |
 | `sounds/fill-sound.mp3` | Angular app `public/sounds/fill-sound.mp3` | unit completion (`Sounds.fill`) | |
-| reused | `header_arch.svg`, `mosque.webp`, `crescent_star.svg`, `title_divider.svg`, `corner_glow_left.webp` (bottom right = turned 180°), `card_pattern.svg` (disc bottom), `glyphs/play`, `check`, `lock` | screen 05 | |
-| placeholders | `nav/quran.svg` (reading), `nav/training.svg` (practice), `nav/lessons.svg` (test), coded padlock, Material swap icon | screen 05 | replaced by U1–U5 |
+| reused | `header_arch.svg`, `mosque.webp` (olive tint), `crescent_star.svg`, `title_divider.svg`, `card_pattern.svg` (disc bottom), `glyphs/play`, `check` | screen 05 | |

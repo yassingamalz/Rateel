@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="pageGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAEDC8"/>
+      <stop offset="100%" stop-color="#F6E6B4"/>
+    </linearGradient>
+    <linearGradient id="coverGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E7CA79"/>
+      <stop offset="100%" stop-color="#D9B861"/>
+    </linearGradient>
+    <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A24A"/>
+      <stop offset="100%" stop-color="#B89443"/>
+    </linearGradient>
+    <linearGradient id="edgeLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E7CA79"/>
+      <stop offset="100%" stop-color="#D9B861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- outer cover blocks -->
+  <path fill="url(#coverGrad)" d="M96 424C96 397 118 375 145 375H181C223 336 298 296 400 287C477 281 518 312 518 364V809C487 843 434 859 350 859C262 859 183 871 126 892C108 899 96 886 96 866V424Z"/>
+  <path fill="url(#coverGrad)" d="M928 424C928 397 906 375 879 375H843C801 336 726 296 624 287C547 281 506 312 506 364V809C537 843 590 859 674 859C762 859 841 871 898 892C916 899 928 886 928 866V424Z"/>
+
+  <!-- page blocks -->
+  <path fill="url(#pageGrad)" d="M165 353C234 303 314 273 401 273C470 273 503 301 503 349V787C468 755 413 735 331 735C258 735 208 748 165 772V353Z"/>
+  <path fill="url(#pageGrad)" d="M859 353C790 303 710 273 623 273C554 273 521 301 521 349V787C556 755 611 735 693 735C766 735 816 748 859 772V353Z"/>
+
+  <!-- inner vertical side bands -->
+  <path fill="#D9B861" d="M165 353C165 340 176 329 189 329H194V748H189C176 748 165 737 165 724V353Z"/>
+  <path fill="#D9B861" d="M859 353C859 340 848 329 835 329H830V748H835C848 748 859 737 859 724V353Z"/>
+
+  <!-- central valley strip -->
+  <path fill="#CFA955" d="M500 356C500 330 505 312 512 303C519 312 524 330 524 356V756L512 773L500 756V356Z"/>
+
+  <!-- bottom page edges darker -->
+  <path fill="url(#edgeGrad)" d="M171 748C224 718 275 708 333 708C408 708 464 729 512 764C560 729 616 708 691 708C749 708 800 718 853 748C853 767 835 779 812 776C762 770 725 767 678 767C594 767 546 781 512 820C478 781 430 767 346 767C299 767 262 770 212 776C189 779 171 767 171 748Z"/>
+
+  <!-- bottom page edges lighter -->
+  <path fill="url(#edgeLight)" d="M197 775C242 752 287 744 337 744C411 744 467 761 512 793C557 761 613 744 687 744C737 744 782 752 827 775C789 782 746 790 687 790C606 790 551 803 512 837C473 803 418 790 337 790C278 790 235 782 197 775Z"/>
+
+  <!-- outer bottom lip -->
+  <path fill="url(#coverGrad)" d="M125 892C182 870 262 857 350 857C434 857 488 840 512 812C536 840 590 857 674 857C762 857 842 870 899 892C874 912 849 925 801 927C737 930 676 913 612 913C566 913 533 925 512 951C491 925 458 913 412 913C348 913 287 930 223 927C175 925 150 912 125 892Z"/>
+</svg>

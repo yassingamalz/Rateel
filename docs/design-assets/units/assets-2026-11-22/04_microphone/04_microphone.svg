@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="creamPages" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBEDC7"/>
+      <stop offset="1" stop-color="#F6E6B4"/>
+    </linearGradient>
+    <linearGradient id="creamHolder" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FAEBC3"/>
+      <stop offset="1" stop-color="#F6E6B4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- U-shaped holder: precisely traced filled silhouette, no strokes, masks, or filters -->
+  <path fill="#D9B861" d="M235 433C235 408 254 387 280 387C306 387 325 408 325 433V512C325 633 403 721 512 721C621 721 699 633 699 512V433C699 408 718 387 744 387C770 387 789 408 789 433V517C789 677 681 779 512 790C343 779 235 677 235 517V433Z"/>
+  <path fill="url(#creamHolder)" d="M252 433C252 417 264 404 280 404C296 404 308 417 308 433V512C308 647 396 741 512 741C628 741 716 647 716 512V433C716 417 728 404 744 404C760 404 772 417 772 433V517C772 666 671 762 512 774C353 762 252 666 252 517V433Z"/>
+
+  <!-- Short golden stand beneath holder -->
+  <path fill="#D9B861" d="M478 764H546V872H478Z"/>
+  <path fill="#F6E6B4" d="M497 775H527V871H497Z"/>
+
+  <!-- Small flat rounded base -->
+  <path fill="#D9B861" d="M351 850H673C709 850 738 879 738 912C738 945 709 973 673 973H351C315 973 286 945 286 912C286 879 315 850 351 850Z"/>
+  <path fill="url(#creamHolder)" d="M351 869H673C695 869 718 890 718 912C718 934 695 954 673 954H351C329 954 306 934 306 912C306 890 329 869 351 869Z"/>
+
+  <!-- Microphone capsule head in matching flat book palette -->
+  <path fill="#D9B861" d="M512 111C612 111 689 187 689 282V481C689 592 612 673 512 673C412 673 335 592 335 481V282C335 187 412 111 512 111Z"/>
+  <path fill="url(#creamPages)" d="M512 129C601 129 670 198 670 282V481C670 580 601 655 512 655C423 655 354 580 354 481V282C354 198 423 129 512 129Z"/>
+
+  <!-- Three flat, thin, pill-ended grille lines -->
+  <path fill="#B89443" d="M416 302C406 302 398 294 398 284C398 274 406 266 416 266H608C618 266 626 274 626 284C626 294 618 302 608 302H416Z"/>
+  <path fill="#B89443" d="M416 378C406 378 398 370 398 360C398 350 406 342 416 342H608C618 342 626 350 626 360C626 370 618 378 608 378H416Z"/>
+  <path fill="#B89443" d="M416 454C406 454 398 446 398 436C398 426 406 418 416 418H608C618 418 626 426 626 436C626 446 618 454 608 454H416Z"/>
+</svg>

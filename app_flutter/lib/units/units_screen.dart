@@ -460,42 +460,28 @@ class _UnitsScreenState extends State<UnitsScreen>
     child: child,
   );
 
-  /// Corner ornaments: top left and bottom right, as in the reference
-  /// (owner, 2026-11-22). Same glowing lattice as screen 03.
+  /// Corner ornaments top left and bottom right (owner, 2026-11-22), the
+  /// owner's lattice corners drawn after reference 05; the faint girih
+  /// pattern (U6) covers the background.
   List<Widget> _decor(_Geo g) {
-    Widget corner(Alignment from) => IgnorePointer(
-      child: Opacity(
-        opacity: 0.75,
-        child: ShaderMask(
-          blendMode: BlendMode.dstIn,
-          shaderCallback: (r) => const RadialGradient(
-            center: Alignment.topLeft,
-            radius: 1.25,
-            stops: [0.0, 0.45, 1.0],
-            colors: [Color(0xFF000000), Color(0xCC000000), Color(0x00000000)],
-          ).createShader(r),
-          child: Image.asset('assets/ui/decor/corner_glow_left.webp'),
+    return [
+      const Positioned.fill(child: IgnorePointer(child: _Girih())),
+      Positioned(
+        left: 0,
+        top: 0,
+        width: g.u * 21.5,
+        height: g.u * 21.5 * 606 / 800,
+        child: IgnorePointer(
+          child: Image.asset('assets/ui/decor/corner_units_top_left.webp'),
         ),
       ),
-    );
-    final cw = g.u * 30;
-    final ch = g.u * 30 * 703 / 800;
-    return [
       Positioned(
-        left: -g.u * 2.6,
-        top: -g.u * 2.8,
-        width: cw,
-        height: ch,
-        child: corner(Alignment.topLeft),
-      ),
-      Positioned(
-        right: -g.u * 2.6,
-        bottom: -g.u * 2.8,
-        width: cw,
-        height: ch,
-        child: Transform.rotate(
-          angle: math.pi,
-          child: corner(Alignment.topLeft),
+        right: 0,
+        bottom: 0,
+        width: g.u * 22,
+        height: g.u * 22 * 628 / 800,
+        child: IgnorePointer(
+          child: Image.asset('assets/ui/decor/corner_units_bottom_right.webp'),
         ),
       ),
     ];
@@ -514,7 +500,7 @@ class _UnitsScreenState extends State<UnitsScreen>
           g,
           IgnorePointer(
             child: Opacity(
-              opacity: 0.78,
+              opacity: 1,
               child: ShaderMask(
                 blendMode: BlendMode.dstIn,
                 shaderCallback: (r) => const LinearGradient(
@@ -526,6 +512,9 @@ class _UnitsScreenState extends State<UnitsScreen>
                 child: Image.asset(
                   'assets/ui/decor/mosque.webp',
                   fit: BoxFit.contain,
+                  // Olive tint, as in the reference (critic v1).
+                  color: RateelColors.unitMosqueTint,
+                  colorBlendMode: BlendMode.srcATop,
                 ),
               ),
             ),
@@ -542,7 +531,7 @@ class _UnitsScreenState extends State<UnitsScreen>
           g,
           IgnorePointer(
             child: Opacity(
-              opacity: 0.3,
+              opacity: 0.18,
               child: SvgPicture.asset(
                 'assets/ui/decor/crescent_star.svg',
                 fit: BoxFit.fill,
@@ -554,9 +543,9 @@ class _UnitsScreenState extends State<UnitsScreen>
       // Header arch (CR-01), centred on the title (owner, 2026-11-22).
       Positioned(
         left: cx - g.archW / 2,
-        top: g.u * 0.8,
+        top: g.u * 2.4,
         width: g.archW,
-        height: g.u * 18.5,
+        height: g.u * 14,
         child: _settle(
           g,
           IgnorePointer(
@@ -591,10 +580,10 @@ class _UnitsScreenState extends State<UnitsScreen>
                   'وحدات المقرر',
                   textDirection: TextDirection.rtl,
                   style: readex(
-                    g.u * 7.6,
+                    g.u * 7.2,
                     weight: 560,
                     color: Colors.transparent,
-                  ).copyWith(height: 1, shadows: titleShadows(g.u)),
+                  ).copyWith(height: 1.35, shadows: titleShadows(g.u)),
                 ),
                 ShaderMask(
                   blendMode: BlendMode.srcIn,
@@ -607,10 +596,10 @@ class _UnitsScreenState extends State<UnitsScreen>
                     'وحدات المقرر',
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      g.u * 7.6,
+                      g.u * 7.2,
                       weight: 560,
                       color: Colors.white,
-                    ).copyWith(height: 1),
+                    ).copyWith(height: 1.35),
                   ),
                 ),
               ],
@@ -820,6 +809,51 @@ class _DragEverywhere extends MaterialScrollBehavior {
 double _interval(double t, double a, double b) =>
     ((t - a) / (b - a)).clamp(0.0, 1.0);
 
+/// Faint girih lattice over the whole content (owner's U6, seamless tile,
+/// tinted `girihLine`).
+class _Girih extends StatelessWidget {
+  const _Girih();
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, box) {
+        final tile = box.maxHeight * 0.95;
+        final cols = (box.maxWidth / tile).ceil();
+        final rows = (box.maxHeight / tile).ceil();
+        return ClipRect(
+          child: OverflowBox(
+            alignment: Alignment.topLeft,
+            maxWidth: cols * tile,
+            maxHeight: rows * tile,
+            child: Opacity(
+              opacity: 0.4,
+              child: Column(
+                children: [
+                  for (var r = 0; r < rows; r++)
+                    Row(
+                      children: [
+                        for (var c = 0; c < cols; c++)
+                          SvgPicture.asset(
+                            'assets/ui/decor/girih_tile.svg',
+                            width: tile,
+                            height: tile,
+                            theme: const SvgTheme(
+                              currentColor: RateelColors.girihLine,
+                            ),
+                          ),
+                      ],
+                    ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 /// Same background as screen 03 (one style).
 class _Background extends StatelessWidget {
   const _Background();
@@ -931,7 +965,15 @@ class _ConnectorPainter extends CustomPainter {
       );
     }
     // Gold diamond (2.1u), pops when the first half lights up.
-    final s = u * 1.05 * on * (1 + 0.5 * math.sin(math.pi * nodePop));
+    final s = u * 1.3 * on * (1 + 0.5 * math.sin(math.pi * nodePop));
+    // Permanent soft glow (reference), stronger when lit.
+    canvas.drawCircle(
+      node,
+      u * 2,
+      Paint()
+        ..color = RateelColors.gold.withValues(alpha: 0.30 * on)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.0),
+    );
     final diamond = Path()
       ..moveTo(node.dx, node.dy - s)
       ..lineTo(node.dx + s, node.dy)
@@ -941,9 +983,13 @@ class _ConnectorPainter extends CustomPainter {
     canvas.drawPath(
       diamond,
       Paint()
-        ..color = lit || nodePop > 0.5
-            ? RateelColors.goldHighlight
-            : RateelColors.unitDiamond,
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: lit || nodePop > 0.5
+              ? const [RateelColors.label, RateelColors.goldHighlight]
+              : const [RateelColors.unitDiamondTop, RateelColors.unitDiamond],
+        ).createShader(diamond.getBounds()),
     );
   }
 
@@ -983,5 +1029,5 @@ class _Geo {
   double get titleCenterX => w - u * 31.7;
 
   /// Arch width: it frames the title without running under the rail.
-  double get archW => u * 64;
+  double get archW => u * 54;
 }

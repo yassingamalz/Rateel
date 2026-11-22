@@ -164,9 +164,14 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
             const DecoratedBox(
               decoration: BoxDecoration(
                 gradient: RadialGradient(
-                  center: Alignment(0, -0.85),
-                  radius: 1.15,
-                  colors: [RateelColors.unitDiscTop, RateelColors.unitDiscMid],
+                  center: Alignment(0, -1),
+                  radius: 0.85,
+                  stops: [0, 0.45, 1],
+                  colors: [
+                    RateelColors.unitDiscTop,
+                    RateelColors.unitDiscMid,
+                    RateelColors.unitDiscBottom,
+                  ],
                 ),
               ),
             ),
@@ -218,7 +223,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final done = widget.done;
     // Locked and completed units show the unit-type icon; the open unit
     // shows the play disc (start / continue).
-    final playOpacity = (unlock * (1 - done)).clamp(0.0, 1.0);
+    final video = widget.unit.type == UnitType.video;
+    final playOpacity = (unlock * (video ? 1 : 1 - done)).clamp(0.0, 1.0);
     final iconOpacity = 1 - playOpacity;
     return [
       if (iconOpacity > 0)
@@ -238,7 +244,9 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
           child: Opacity(
             opacity: playOpacity,
             child: Transform.scale(
-              scale: lerpDouble(0.6, 1, _bounce(unlock))! * (1 - 0.3 * done),
+              scale:
+                  lerpDouble(0.6, 1, _bounce(unlock))! *
+                  (video ? 1 : 1 - 0.3 * done),
               child: _playDisc(u),
             ),
           ),
@@ -300,8 +308,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
               padding: EdgeInsets.only(left: u * 0.5),
               child: SvgPicture.asset(
                 'assets/ui/glyphs/play.svg',
-                width: u * 6.4,
-                height: u * 6.4,
+                width: u * 9,
+                height: u * 9,
                 theme: const SvgTheme(currentColor: RateelColors.playGlyph),
               ),
             ),
@@ -332,78 +340,49 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     );
   }
 
-  /// Unit-type icon (cream gold). Placeholders from the shared library until
-  /// the owner's icons U1 (book), U3 (microphone), U4 (test) arrive.
+  /// Unit-type icon, owner's assets 2026-11-22 (ASSETS.md, "Units"): book
+  /// (PNG, closest to the reference), microphone and test scroll (SVG). A
+  /// locked video unit shows the play glyph in cream gold.
   Widget _typeIcon(double u) {
-    final asset = switch (widget.unit.type) {
-      UnitType.video => 'assets/ui/glyphs/play.svg',
-      UnitType.reading => 'assets/ui/nav/quran.svg',
-      UnitType.practice => 'assets/ui/nav/training.svg',
-      UnitType.test => 'assets/ui/nav/lessons.svg',
-    };
-    return SizedBox(
-      width: u * 14.9,
-      height: u * 11.2,
-      child: ShaderMask(
-        blendMode: BlendMode.srcIn,
-        shaderCallback: (r) => const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [RateelColors.unitIconTop, RateelColors.unitIconBottom],
-        ).createShader(r),
-        child: SvgPicture.asset(
-          asset,
-          fit: BoxFit.contain,
-          theme: const SvgTheme(currentColor: Colors.white),
-        ),
+    final Widget icon = switch (widget.unit.type) {
+      UnitType.reading => Image.asset(
+        'assets/ui/units/book.webp',
+        fit: BoxFit.contain,
       ),
-    );
+      UnitType.practice => SvgPicture.asset(
+        'assets/ui/units/microphone.svg',
+        fit: BoxFit.contain,
+      ),
+      UnitType.test => SvgPicture.asset(
+        'assets/ui/units/test_scroll.svg',
+        fit: BoxFit.contain,
+      ),
+      UnitType.video => SvgPicture.asset(
+        'assets/ui/glyphs/play.svg',
+        fit: BoxFit.contain,
+        theme: const SvgTheme(currentColor: RateelColors.unitIconTop),
+      ),
+    };
+    return SizedBox(width: u * 14.9, height: u * 11.2, child: icon);
   }
 
-  /// Emerald padlock on the icon of a locked unit (placeholder until U2):
-  /// it shakes on a tap and pops off when the unit opens.
+  /// Emerald padlock (owner's U2) on the icon of a locked unit: it shakes on
+  /// a tap and pops off when the unit opens.
   Widget _padlock(double u) {
     final t = widget.unlock;
     final pop = 1 + 0.45 * math.sin(math.pi * (t * 1.3).clamp(0.0, 1.0));
     return Positioned(
-      top: u * (23 - 4.6) - u * 2.9 - u * 4 * t,
-      left: u * 23 - u * 2.9 + widget.lockShake * u * 0.9,
-      width: u * 5.8,
-      height: u * 5.8,
+      top: u * (23 - 5.3) - u * 3.7 - u * 4 * t,
+      left: u * 23 - u * 3.7 + widget.lockShake * u * 0.9,
+      width: u * 7.4,
+      height: u * 7.4,
       child: Opacity(
         opacity: (1 - t * 1.2).clamp(0.0, 1.0),
         child: Transform.rotate(
           angle: widget.lockShake * 0.18 - t * 0.5,
           child: Transform.scale(
             scale: pop,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(u * 1.2),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [RateelColors.padlockTop, RateelColors.padlockBottom],
-                ),
-                border: Border.all(
-                  color: RateelColors.padlockRim,
-                  width: u * 0.22,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.35),
-                    blurRadius: u * 0.8,
-                    offset: Offset(0, u * 0.3),
-                  ),
-                ],
-              ),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                'assets/ui/glyphs/lock.svg',
-                width: u * 3.6,
-                height: u * 3.6,
-                theme: const SvgTheme(currentColor: RateelColors.padlockRim),
-              ),
-            ),
+            child: SvgPicture.asset('assets/ui/units/padlock.svg'),
           ),
         ),
       ),

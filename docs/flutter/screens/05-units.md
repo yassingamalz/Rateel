@@ -1,6 +1,6 @@
 # Screen 05: course units (وحدات المقرر)
 
-Status: 🟡 v1 built with placeholders (owner said yes to the plan 2026-11-22); waiting for assets U1–U6; critic v1
+Status: 🟡 v2 with the owner's assets (U1–U6 + corners) and the critic-v1 code fixes; waiting for the owner's review (`compare-v2.jpg`, `demo-v2.mp4`, APK) and the token conflicts in DECISIONS.md
 Branch: `flutter/05-units`, from `flutter/03-courses` (contains the side nav and the courses screen)
 Reference: `docs/flutter/screens/05-units/reference.webp` (1672×941, glassy gamified, dark;
 lesson-production `docs/design/glassy-gamified/screens/05-unita-del-corso.webp`)

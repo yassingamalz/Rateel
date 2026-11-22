@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FAEDCB"/>
+    <stop offset="1" stop-color="#F6E6B4"/>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#E8CE82"/>
+    <stop offset="1" stop-color="#D9B861"/>
+  </linearGradient>
+</defs>
+<!-- Warm-gold open book, revised illustration; transparent backdrop -->
+<!-- Outer lower page blocks and covers -->
+<path fill="url(#gold)" d="M112 392Q112 365 145 365H182Q250 286 399 285Q477 285 512 354Q547 285 625 285Q774 286 842 365H879Q912 365 912 392V756Q912 783 881 783Q807 783 734 768Q592 751 512 808Q432 751 290 768Q217 783 143 783Q112 783 112 756Z"/>
+<!-- Left page with broad curved top -->
+<path fill="url(#paper)" d="M186 350Q224 301 303 281Q451 247 509 355L509 731Q419 667 326 668Q239 668 186 709Z"/>
+<!-- Right page mirrors left -->
+<path fill="url(#paper)" d="M838 350Q800 301 721 281Q573 247 515 355L515 731Q605 667 698 668Q785 668 838 709Z"/>
+<!-- Exposed side edges -->
+<path fill="#D9B861" d="M163 365Q163 346 183 341H194V692Q194 703 183 709Q163 715 163 693Z"/>
+<path fill="#D9B861" d="M861 365Q861 346 841 341H830V692Q830 703 841 709Q861 715 861 693Z"/>
+<!-- Binding valley -->
+<path fill="#B89443" d="M505 358Q505 341 512 334Q519 341 519 358V739L512 746L505 739Z"/>
+<!-- Two stacked page layers -->
+<path fill="#B89443" d="M183 692Q300 645 408 681Q473 702 512 736Q551 702 616 681Q724 645 841 692V718Q734 684 642 704Q554 719 512 763Q470 719 382 704Q290 684 183 718Z"/>
+<path fill="#E8CB7F" d="M162 721Q260 695 350 710Q450 725 512 775Q574 725 674 710Q764 695 862 721Q836 754 783 754Q712 733 631 742Q558 752 512 787Q466 752 393 742Q312 733 241 754Q188 754 162 721Z"/>
+</svg>

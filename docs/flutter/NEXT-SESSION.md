@@ -3,6 +3,8 @@
 Branch: `flutter/05-units` (from `flutter/03-courses`). Plan: `docs/flutter/screens/05-units.md` (questions for
 the owner at the bottom), prompts `docs/flutter/prompts/05-units/images-v1.txt`. Bring later screen-03
 corrections in with `git merge origin/flutter/03-courses`.
+State 2026-11-22: v2 built with all owner assets; critic v1 in `screens/05-units/critic-v1.md`; owner to review v2
+and decide the token conflicts (DECISIONS.md). Then screen 06 (lessons of the unit) on `flutter/06-lessons`.
 
 ---
 
