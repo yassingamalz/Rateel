@@ -85,3 +85,6 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
   `?origScale=<k>` (default 1, unchanged): card, text, pill, icons, gaps and title/back button scale; the first card
   stays 8u from the rail. Previews `orig-scale-preview-pc.jpg`, `orig-scale-preview-phone.jpg` (×1, ×1.35, ×1.4,
   lesson 1 done). At ×1.35/×1.4 two cards and a half fit: the third fades out at the left edge.
+- Owner chose **×1.4** → default `origScale = 1.4`. Seen in the demo: long titles («القواعد الأساسية للتلاوة الصحيحة»)
+  were cut with «…» → they now shrink to fit (`capture-v5-orig-phone-unit2.png`). Captures `capture-v5-*`, frames
+  `completion-frames-orig-v3.jpg`, demo `demo-orig-v3.mp4` (demo script updated to the ×1.4 geometry).

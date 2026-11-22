@@ -363,13 +363,16 @@ class _LessonCardState extends State<LessonCard>
         right: u * 3,
         left: u * 3,
         top: u * 7.2,
-        child: Text(
-          l.title,
-          textDirection: TextDirection.rtl,
-          textAlign: TextAlign.right,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: readex(u * 3.4, weight: 600, color: _ink(titleCream)),
+        // Long titles shrink to fit instead of being cut (seen at ×1.4).
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerRight,
+          child: Text(
+            l.title,
+            textDirection: TextDirection.rtl,
+            maxLines: 1,
+            style: readex(u * 3.4, weight: 600, color: _ink(titleCream)),
+          ),
         ),
       ),
       Positioned(

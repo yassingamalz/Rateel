@@ -54,6 +54,6 @@ final lessonsStyle = ValueNotifier<String>('ref');
 /// the lessons screen opens.
 int? startCompleteLesson;
 
-/// Scale of look B's cards and title (owner 2026-11-22: "larger, ×1.35–1.40");
+/// Scale of look B's cards and title: ×1.4 (owner, 2026-11-22);
 /// review: `?origScale=1.35`.
-double origScale = 1.0;
+double origScale = 1.4;
