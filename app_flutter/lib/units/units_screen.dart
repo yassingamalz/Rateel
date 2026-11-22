@@ -329,6 +329,7 @@ class _UnitsScreenState extends State<UnitsScreen>
             controller: pages,
             padEnds: false,
             clipBehavior: Clip.none,
+            allowImplicitScrolling: true,
             physics: _completing != null
                 ? const NeverScrollableScrollPhysics()
                 : null,
@@ -472,7 +473,10 @@ class _UnitsScreenState extends State<UnitsScreen>
         width: g.u * 21.5,
         height: g.u * 21.5 * 606 / 800,
         child: IgnorePointer(
-          child: Image.asset('assets/ui/decor/corner_units_top_left.webp'),
+          child: _GoldCorner(
+            'assets/ui/decor/corner_units_top_left.webp',
+            u: g.u,
+          ),
         ),
       ),
       Positioned(
@@ -481,7 +485,10 @@ class _UnitsScreenState extends State<UnitsScreen>
         width: g.u * 22,
         height: g.u * 22 * 628 / 800,
         child: IgnorePointer(
-          child: Image.asset('assets/ui/decor/corner_units_bottom_right.webp'),
+          child: _GoldCorner(
+            'assets/ui/decor/corner_units_bottom_right.webp',
+            u: g.u,
+          ),
         ),
       ),
     ];
@@ -560,6 +567,11 @@ class _UnitsScreenState extends State<UnitsScreen>
               child: SvgPicture.asset(
                 'assets/ui/decor/header_arch.svg',
                 fit: BoxFit.fill,
+                // Warmer gold, as in reference 05 (critic v2).
+                colorFilter: const ColorFilter.mode(
+                  RateelColors.unitArch,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -765,26 +777,27 @@ class _ChangeCourseButtonState extends State<_ChangeCourseButton> {
               width: u * 0.22,
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: u * 4),
+          padding: EdgeInsets.symmetric(horizontal: u * 3.3),
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Row(
               textDirection: TextDirection.rtl,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.sync_alt_rounded,
-                  size: u * 4.2,
-                  color: RateelColors.cream,
+                SvgPicture.asset(
+                  'assets/ui/glyphs/swap.svg',
+                  width: u * 3.5,
+                  height: u * 3.4,
+                  theme: const SvgTheme(currentColor: RateelColors.cream),
                 ),
-                SizedBox(width: u * 2),
+                SizedBox(width: u * 3.1),
                 Padding(
                   padding: EdgeInsets.only(bottom: u * 0.45),
                   child: Text(
                     'تغيير المقرر',
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      u * 3.4,
+                      u * 3.15,
                       weight: 420,
                       color: RateelColors.cream,
                     ).copyWith(height: 1),
@@ -821,35 +834,83 @@ class _Girih extends StatelessWidget {
         final tile = box.maxHeight * 0.95;
         final cols = (box.maxWidth / tile).ceil();
         final rows = (box.maxHeight / tile).ceil();
-        return ClipRect(
-          child: OverflowBox(
-            alignment: Alignment.topLeft,
-            maxWidth: cols * tile,
-            maxHeight: rows * tile,
-            child: Opacity(
-              opacity: 0.4,
-              child: Column(
-                children: [
-                  for (var r = 0; r < rows; r++)
-                    Row(
-                      children: [
-                        for (var c = 0; c < cols; c++)
-                          SvgPicture.asset(
-                            'assets/ui/decor/girih_tile.svg',
-                            width: tile,
-                            height: tile,
-                            theme: const SvgTheme(
-                              currentColor: RateelColors.girihLine,
+        // The header stays clean: the pattern fades in from 20u to 38u.
+        return ShaderMask(
+          blendMode: BlendMode.dstIn,
+          shaderCallback: (r) => const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.20, 0.38],
+            colors: [Color(0x00000000), Color(0xFF000000)],
+          ).createShader(r),
+          child: ClipRect(
+            child: OverflowBox(
+              alignment: Alignment.topLeft,
+              maxWidth: cols * tile,
+              maxHeight: rows * tile,
+              child: Opacity(
+                opacity: 0.11,
+                child: Column(
+                  children: [
+                    for (var r = 0; r < rows; r++)
+                      Row(
+                        children: [
+                          for (var c = 0; c < cols; c++)
+                            SvgPicture.asset(
+                              'assets/ui/decor/girih_tile.svg',
+                              width: tile,
+                              height: tile,
+                              theme: const SvgTheme(
+                                currentColor: RateelColors.girihLine,
+                              ),
                             ),
-                          ),
-                      ],
-                    ),
-                ],
+                        ],
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
         );
       },
+    );
+  }
+}
+
+/// Owner's corner lattice, tinted to the reference's saturated gold with a
+/// soft relief shadow (critic v2).
+class _GoldCorner extends StatelessWidget {
+  const _GoldCorner(this.asset, {required this.u});
+
+  final String asset;
+  final double u;
+
+  @override
+  Widget build(BuildContext context) {
+    final image = Image.asset(asset, fit: BoxFit.contain);
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Transform.translate(
+          offset: Offset(u * 0.15, u * 0.25),
+          child: ColorFiltered(
+            colorFilter: const ColorFilter.mode(
+              Color(0x73000000),
+              BlendMode.srcIn,
+            ),
+            child: image,
+          ),
+        ),
+        ShaderMask(
+          blendMode: BlendMode.srcIn,
+          shaderCallback: (r) => const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [RateelColors.unitCornerTop, RateelColors.unitCornerBottom],
+          ).createShader(r),
+          child: image,
+        ),
+      ],
     );
   }
 }
@@ -933,17 +994,27 @@ class _ConnectorPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (draw == 0) return;
-    final y = size.height / 2;
+    // Snapped to a pixel row so the thin line stays crisp.
+    final y = (size.height / 2).roundToDouble() + 0.5;
     final right = size.width;
     final mid = size.width / 2;
     final left = right - size.width * draw;
-    // The reference line is a thin gold line; unlit it stays dimmer.
+    // Thin gold line with dark edges (reference). The brighter lit halves
+    // keep the course-path rule (50% / 100%); the full-bright reference line
+    // is an open owner decision.
     canvas.drawLine(
       Offset(left, y),
       Offset(right, y),
       Paint()
-        ..color = RateelColors.unitLine.withValues(alpha: 0.75)
-        ..strokeWidth = u * 0.22,
+        ..color = RateelColors.unitLineEdge
+        ..strokeWidth = u * 0.45,
+    );
+    canvas.drawLine(
+      Offset(left, y),
+      Offset(right, y),
+      Paint()
+        ..color = RateelColors.unitLine
+        ..strokeWidth = u * 0.25,
     );
     if (half1 > 0) _light(canvas, right, right - mid * half1, y, half1 < 1);
     if (half2 > 0) _light(canvas, mid, mid - mid * half2, y, half2 < 1);
@@ -969,9 +1040,9 @@ class _ConnectorPainter extends CustomPainter {
     // Permanent soft glow (reference), stronger when lit.
     canvas.drawCircle(
       node,
-      u * 2,
+      u * 1.4,
       Paint()
-        ..color = RateelColors.gold.withValues(alpha: 0.30 * on)
+        ..color = RateelColors.gold.withValues(alpha: 0.10 * on)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.0),
     );
     final diamond = Path()
@@ -986,9 +1057,18 @@ class _ConnectorPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
+          stops: const [0, 0.2, 1],
           colors: lit || nodePop > 0.5
-              ? const [RateelColors.label, RateelColors.goldHighlight]
-              : const [RateelColors.unitDiamondTop, RateelColors.unitDiamond],
+              ? const [
+                  RateelColors.label,
+                  RateelColors.goldHighlight,
+                  RateelColors.goldHighlight,
+                ]
+              : const [
+                  RateelColors.unitDiamondTop,
+                  RateelColors.unitDiamondMid,
+                  RateelColors.unitDiamond,
+                ],
         ).createShader(diamond.getBounds()),
     );
   }
@@ -1011,7 +1091,7 @@ class _Geo {
   final double u;
 
   /// Outer ring diameter: 433 px.
-  double get ring => u * 46;
+  double get ring => u * 47.2;
 
   /// Circle centre to circle centre: 626 px.
   double get pitch => u * 66.5;
@@ -1029,5 +1109,5 @@ class _Geo {
   double get titleCenterX => w - u * 31.7;
 
   /// Arch width: it frames the title without running under the rail.
-  double get archW => u * 54;
+  double get archW => u * 48;
 }

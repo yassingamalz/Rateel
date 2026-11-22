@@ -86,12 +86,20 @@ class RateelColors {
   static const unitDiscMid = Color(0xFF053C27);
   static const unitDiscBottom = Color(0xFF013524);
   static const unitMosqueTint = Color(0x8C4A6A33); // srcATop, 55%
-  static const unitDiscRim = Color(0xFF10492E);
-  static const playCream = Color(0xFFF4E0A1);
-  static const playCreamTop = Color(0xFFFBEDC4);
+  static const unitDiscRim = Color(0xFF154F37);
+  static const unitDiscEdge = Color(0xFF0B422A); // lit edge of the glass disc
+  // Ring rims (critic v2): lit at the top and bottom, deeper on the sides.
+  static const unitRingSide = Color(0xFFF8BC2C);
+  static const unitRingTopBottom = Color(0xFFFFD54A);
+  static const unitRingLockedSide = Color(0xFFB98F2C);
+  static const unitRingLockedTop = Color(0xFFFBE068);
+  static const unitRingLockedBottom = Color(0xFFFDC849);
+  static const unitRingEdge = Color(0xFF002316);
+  static const playCream = Color(0xFFF2D784);
+  static const playCreamTop = Color(0xFFF4E1A8);
   static const playGlyph = Color(0xFF013321);
-  static const badge = Color(0xFFF2B32E);
-  static const badgeTop = Color(0xFFFFD25E);
+  static const badge = Color(0xFFE5A416);
+  static const badgeTop = Color(0xFFF8C343);
   static const badgeText = Color(0xFF062016);
   static const unitIconTop = Color(0xFFF6E6B4);
   static const unitIconBottom = Color(0xFFE2C680);
@@ -99,9 +107,14 @@ class RateelColors {
   static const padlockBottom = Color(0xFF1B6644);
   static const padlockRim = Color(0xFFE8CF86);
   static const girihLine = Color(0xFF2C6B4F); // U6 background lattice
-  static const unitLine = Color(0xFFC9A23A); // line between units
-  static const unitDiamond = Color(0xFFE2A51E);
-  static const unitDiamondTop = Color(0xFFFFEA79);
+  static const unitLine = Color(0xFFC9A23A); // line between units, 100%
+  static const unitDiamond = Color(0xFFECAB1C);
+  static const unitDiamondMid = Color(0xFFF2B32C);
+  static const unitDiamondTop = Color(0xFFFFE76D);
+  static const unitLineEdge = Color(0xFF00261A);
+  static const unitCornerTop = Color(0xFFFAD26A);
+  static const unitCornerBottom = Color(0xFFE9A41E);
+  static const unitArch = Color(0xFFF7C13A);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

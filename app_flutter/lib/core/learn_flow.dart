@@ -20,6 +20,21 @@ class _LearnFlowState extends State<LearnFlow> {
   final _nav = GlobalKey<NavigatorState>();
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Raster assets of the units screen are decoded ahead, so they do not
+    // pop in after the screen appears (critic v2, phone capture).
+    for (final a in const [
+      'assets/ui/units/book.webp',
+      'assets/ui/decor/mosque.webp',
+      'assets/ui/decor/corner_units_top_left.webp',
+      'assets/ui/decor/corner_units_bottom_right.webp',
+    ]) {
+      precacheImage(AssetImage(a), context);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return NavigatorPopHandler(
       onPopWithResult: (_) => _nav.currentState?.maybePop(),

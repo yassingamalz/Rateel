@@ -112,8 +112,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
           return Transform.scale(
             scale: 1 - 0.04 * press,
             child: SizedBox(
-              width: u * 46,
-              height: u * 46,
+              width: u * _d,
+              height: u * _d,
               child: Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
@@ -124,7 +124,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                         painter: _RingPainter(
                           u: u,
                           progress: widget.progress,
-                          unlock: widget.unlock,
+                          unlock: _seg(widget.unlock, 0.55, 1),
                           done: widget.done,
                           flash: widget.flash,
                           breath: _open && widget.done == 0
@@ -155,8 +155,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   /// star lattice along its bottom (shared CR-07, as on the course cards).
   Widget _disc(double u) {
     return SizedBox(
-      width: u * 40.8,
-      height: u * 40.8,
+      width: u * 41,
+      height: u * 41,
       child: ClipOval(
         child: Stack(
           fit: StackFit.expand,
@@ -205,10 +205,11 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                 border: Border.all(
                   color: RateelColors.unitDiscRim,
                   width: u * 0.22,
+                  strokeAlign: BorderSide.strokeAlignInside,
                 ),
                 gradient: const RadialGradient(
-                  stops: [0.86, 1],
-                  colors: [Color(0x00000000), Color(0x40000000)],
+                  stops: [0.80, 0.985],
+                  colors: [Color(0x00000000), RateelColors.unitDiscEdge],
                 ),
               ),
             ),
@@ -231,9 +232,9 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     return [
       if (iconOut < 1)
         Positioned(
-          top: u * (23 - 6.2) - u * 5.6,
+          top: u * (_r - 6.2) - u * 5.6,
           child: Opacity(
-            opacity: 1 - iconOut,
+            opacity: 1 - _seg(iconOut, 0.6, 1),
             child: Transform.scale(
               scale: 1 - 0.5 * iconOut,
               child: _typeIcon(u),
@@ -242,7 +243,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
         ),
       if (playIn > 0 && playIn < 1)
         Positioned(
-          top: u * (23 - 7.9) - u * 9,
+          top: u * (_r - 7.9) - u * 9,
           child: IgnorePointer(
             child: Container(
               width: u * 18,
@@ -275,9 +276,9 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
         ),
       if (playIn > 0)
         Positioned(
-          top: u * (23 - 7.9) - u * 5.85,
+          top: u * (_r - 7.9) - u * 5.85,
           child: Opacity(
-            opacity: playIn.clamp(0.0, 1.0),
+            opacity: playIn > 0 ? 1 : 0,
             child: Transform.scale(
               scale: lerpDouble(0.4, 1, _bounce(playIn))!,
               child: _playDisc(u),
@@ -286,7 +287,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
         ),
       // Title, two lines, centred at +6.4u.
       Positioned(
-        top: u * (23 + 6.4) - u * 6.4,
+        top: u * (_r + 6.4) - u * 6.4,
         width: u * 32,
         height: u * 12.8,
         child: Center(
@@ -316,9 +317,9 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
       height: u * 11.7,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: const RadialGradient(
-          center: Alignment(0, -0.5),
-          radius: 0.9,
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [RateelColors.playCreamTop, RateelColors.playCream],
         ),
         boxShadow: [
@@ -326,10 +327,6 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
             color: Colors.black.withValues(alpha: 0.35),
             blurRadius: u * 1.2,
             offset: Offset(0, u * 0.4),
-          ),
-          BoxShadow(
-            color: RateelColors.goldHighlight.withValues(alpha: 0.18),
-            blurRadius: u * 2,
           ),
         ],
       ),
@@ -412,8 +409,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final dx = book ? 0.0 : 4.0;
     final dy = book ? 5.5 : 3.0;
     return Positioned(
-      top: u * (23 - dy) - u * size / 2 - u * 5 * t,
-      left: u * (23 + dx) - u * size / 2 + widget.lockShake * u * 0.9,
+      top: u * (_r - dy) - u * size / 2 - u * 5 * t,
+      left: u * (_r + dx) - u * size / 2 + widget.lockShake * u * 0.9,
       width: u * size,
       height: u * size,
       child: Opacity(
@@ -436,27 +433,33 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final pct = (widget.progress * 100).round();
     final shine = (widget.ambient * 4).clamp(0.0, 1.0);
     return Positioned(
-      top: -u * 4.9 - u * 3 * (1 - t),
-      left: u * 23 - u * 4.9,
+      top: -u * 4.9,
+      left: u * _r - u * 4.9,
       width: u * 9.8,
       height: u * 9.8,
-      child: Opacity(
-        opacity: _seg(widget.unlock, 0.6, 0.8),
+      child: Transform.scale(
+        scale: _seg(widget.unlock, 0.6, 1) > 0 ? t.clamp(0.0, 1.2) : 0,
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const RadialGradient(
-              center: Alignment(0, -0.6),
-              radius: 1,
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [RateelColors.badgeTop, RateelColors.badge],
             ),
             boxShadow: [
               BoxShadow(
-                color: RateelColors.gold.withValues(
-                  alpha: 0.35 + 0.4 * widget.flash,
-                ),
-                blurRadius: u * (1.6 + 2 * widget.flash),
+                color: Colors.black.withValues(alpha: 0.35),
+                blurRadius: u * 0.8,
+                offset: Offset(0, u * 0.3),
               ),
+              if (widget.flash > 0)
+                BoxShadow(
+                  color: RateelColors.gold.withValues(
+                    alpha: 0.75 * math.sin(math.pi * widget.flash),
+                  ),
+                  blurRadius: u * 3.6,
+                ),
             ],
           ),
           child: ClipOval(
@@ -466,12 +469,16 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: u * 1.2),
+                    padding: EdgeInsets.only(
+                      left: u * 1.2,
+                      right: u * 1.2,
+                      bottom: u * 0.45,
+                    ),
                     child: Text(
                       '$pct%',
                       textDirection: TextDirection.ltr,
                       style: readex(
-                        u * 3.3,
+                        u * 3.8,
                         weight: 600,
                         color: RateelColors.badgeText,
                       ).copyWith(height: 1),
@@ -514,8 +521,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final s = _bounce(d);
     final pulse = widget.ambient;
     return Positioned(
-      top: u * 46 - u * 3.6,
-      left: u * 23 - u * 3.6,
+      top: u * _d - u * 3.6,
+      left: u * _r - u * 3.6,
       width: u * 7.2,
       height: u * 7.2,
       child: Stack(
@@ -575,8 +582,8 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final t = Curves.easeOutCubic.transform(_ripple.value);
     return IgnorePointer(
       child: Container(
-        width: u * 40.8 * (0.35 + 0.65 * t),
-        height: u * 40.8 * (0.35 + 0.65 * t),
+        width: u * 41 * (0.35 + 0.65 * t),
+        height: u * 41 * (0.35 + 0.65 * t),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
@@ -596,6 +603,10 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
 }
 
 /// Overshoot 0 → 1.2 → 1 (Angular `bounce`).
+/// Ring diameter and radius in u (critic v2: 441–449 px on the reference).
+const _d = 47.2;
+const _r = _d / 2;
+
 /// 0..1 progress of [t] inside the segment [a, b].
 double _seg(double t, double a, double b) =>
     ((t - a) / (b - a)).clamp(0.0, 1.0);
@@ -629,11 +640,6 @@ class _RingPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
     final r = size.width / 2 - u * 0.21;
-    final ring = Color.lerp(
-      RateelColors.unitRingLocked,
-      RateelColors.unitRing,
-      unlock.clamp(0.0, 1.0),
-    )!;
     // Glow of the open ring (breathing), stronger on the flash.
     final glow = 0.16 * unlock + 0.14 * breath + 0.5 * flash;
     if (glow > 0) {
@@ -647,13 +653,56 @@ class _RingPainter extends CustomPainter {
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * (1 + flash)),
       );
     }
+    final rect0 = Rect.fromCircle(center: c, radius: r);
+    final k = unlock.clamp(0.0, 1.0);
+    if (k < 1) {
+      // Locked ring: soft drop shadow (reference).
+      canvas.drawCircle(
+        c + Offset(0, u * 0.3),
+        r,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = u * 0.5
+          ..color = Colors.black.withValues(alpha: 0.35 * (1 - k))
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
+      );
+    }
+    // Dark hairlines on both sides of the rim.
+    for (final d in [-0.26, 0.26]) {
+      canvas.drawCircle(
+        c,
+        r + u * d,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = u * 0.11
+          ..color = RateelColors.unitRingEdge.withValues(alpha: 0.7),
+      );
+    }
+    // Rim lit at the top and bottom, deeper on the sides (sweep from 3 o'clock).
+    Color mix(Color a, Color b) => Color.lerp(a, b, k)!;
+    final side = mix(
+      RateelColors.unitRingLockedSide,
+      RateelColors.unitRingSide,
+    );
     canvas.drawCircle(
       c,
       r,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = u * 0.42
-        ..color = ring,
+        ..shader = SweepGradient(
+          colors: [
+            side,
+            mix(
+              RateelColors.unitRingLockedBottom,
+              RateelColors.unitRingTopBottom,
+            ),
+            side,
+            mix(RateelColors.unitRingLockedTop, RateelColors.unitRingTopBottom),
+            side,
+          ],
+          stops: const [0, 0.25, 0.5, 0.75, 1],
+        ).createShader(rect0),
     );
     // Progress arc from the top, clockwise, brighter and thicker.
     final p = progress.clamp(0.0, 1.0);
