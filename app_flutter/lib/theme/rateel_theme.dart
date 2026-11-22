@@ -78,6 +78,26 @@ class RateelColors {
   static const lockRim = Color(0xFF1A533F);
   static const lockGlyph = Color(0xFFEDE3CB);
   static const pillFill = Color(0xFF062D20);
+
+  // Screen 05, units (sampled from reference 05). Proposed tokens.
+  static const unitRing = Color(0xFFEAAA16); // open unit ring, 0.42u
+  static const unitRingLocked = Color(0xFFC29A33); // locked unit ring
+  static const unitDiscTop = Color(0xFF104732);
+  static const unitDiscMid = Color(0xFF043727);
+  static const unitDiscRim = Color(0xFF10492E);
+  static const playCream = Color(0xFFF4E0A1);
+  static const playCreamTop = Color(0xFFFBEDC4);
+  static const playGlyph = Color(0xFF013321);
+  static const badge = Color(0xFFF2B32E);
+  static const badgeTop = Color(0xFFFFD25E);
+  static const badgeText = Color(0xFF062016);
+  static const unitIconTop = Color(0xFFF6E6B4);
+  static const unitIconBottom = Color(0xFFE2C680);
+  static const padlockTop = Color(0xFF2E8A5E);
+  static const padlockBottom = Color(0xFF1B6644);
+  static const padlockRim = Color(0xFFE8CF86);
+  static const unitLine = Color(0xFFC9A23A); // line between units
+  static const unitDiamond = Color(0xFFECAB1C);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

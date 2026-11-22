@@ -45,3 +45,7 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
   will be an in-app setting.
 - Check every build also at phone size: `viewport 915×412, deviceScaleFactor 2.625` (Playwright).
 - Every APK gets a higher version (`build-apk.sh`) so it updates the installed app.
+
+## Web build in the cloud container (2026-11-22)
+- Build the review web app with `flutter build web --release --no-web-resources-cdn`: the default build loads
+  CanvasKit from gstatic.com, which the headless browser cannot reach here (blank page).

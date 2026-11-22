@@ -82,3 +82,10 @@ Sources: `docs/design-assets/courses/card-art-2026-11-21/` (PNG only: the owner 
 | `ui/course_art/emblem/course_01..12.webp` | `card-art-2026-11-21/emblem/emblem_sheet_original.png` (4×3 sheet) | gold emblems on a green swoosh; split by the transparent gaps, faint fringe recoloured gold, trimmed |
 
 All card art is trimmed to its content and drawn in a 23u box on the left of the card (owner, 2026-11-21: never under the title or description; at most a sliver overlaps the text column).
+
+### Units (screen 05)
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `sounds/fill-sound.mp3` | Angular app `public/sounds/fill-sound.mp3` | unit completion (`Sounds.fill`) | |
+| reused | `header_arch.svg`, `mosque.webp`, `crescent_star.svg`, `title_divider.svg`, `corner_glow_left.webp` (bottom right = turned 180°), `card_pattern.svg` (disc bottom), `glyphs/play`, `check`, `lock` | screen 05 | |
+| placeholders | `nav/quran.svg` (reading), `nav/training.svg` (practice), `nav/lessons.svg` (test), coded padlock, Material swap icon | screen 05 | replaced by U1–U5 |

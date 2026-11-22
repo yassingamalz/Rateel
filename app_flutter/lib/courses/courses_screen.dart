@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
+import '../units/units_screen.dart';
 import 'course_card.dart';
 import 'course_data.dart';
 
@@ -225,8 +226,7 @@ class _CoursesScreenState extends State<CoursesScreen>
       _showToast('أكمل «$previous» أولًا لفتح هذه الدورة');
     } else {
       Haptics.tap();
-      // The units screen (05) is not built yet.
-      _showToast('الوحدات: قريبًا');
+      Navigator.of(context).push(unitsRoute(i));
     }
   }
 

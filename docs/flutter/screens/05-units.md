@@ -1,13 +1,14 @@
 # Screen 05: course units (وحدات المقرر)
 
-Status: 🟡 plan v1, waiting for the owner's "yes" and the assets (prompts U1–U6)
+Status: 🟡 v1 built with placeholders (owner said yes to the plan 2026-11-22); waiting for assets U1–U6; critic v1
 Branch: `flutter/05-units`, from `flutter/03-courses` (contains the side nav and the courses screen)
 Reference: `docs/flutter/screens/05-units/reference.webp` (1672×941, glassy gamified, dark;
 lesson-production `docs/design/glassy-gamified/screens/05-unita-del-corso.webp`)
 Angular original: `src/app/features/units/` (`units-list`, `unit-card`), `shared/directives/border-fill.directive.ts`
 Data: `src/assets/data/units/<nn>-<course>.json` (5–7 units per course; files exist for courses 01–07 and 12,
 **courses 08–11 have no units file yet**). Unit types in the data: `video`, `reading`, `practice`, `test`.
-Code (planned): `app_flutter/lib/units/` (`units_screen.dart`, `unit_circle.dart`, `unit_data.dart`).
+Code: `app_flutter/lib/units/` (`units_screen.dart`, `unit_circle.dart`, `unit_data.dart`, generated `unit_data_gen.dart` from `tools/flutter-review/gen_unit_data.py`); navigation `lib/core/learn_flow.dart`; sound `lib/core/sounds.dart`.
+Review: `?units=<course>` opens the units, `?unit=<i>` sets the unit in progress, `?completeUnit=<i>` plays a completion; long press on the unit in progress plays it too. Captures `capture-v1.png`, `phone-v1.png`, `compare-v1.jpg`, `completion-frames-v1.jpg`, video `demo-v1.mp4` (`tools/flutter-review/units-demo.js`).
 
 ## Layout (landscape, RTL), u = 1% of the screen height (u = 9.41 px on the reference)
 The right rail of the reference is **not** built: the approved side navigation (screen 04) stays.
@@ -60,7 +61,10 @@ animations get vibration and light).
 - From screen 03: tapping the active course opens this screen (replaces the «الوحدات: قريبًا» toast);
   «تغيير المقرر» and the system back go back to the courses screen.
 
-## Questions for the owner (before building)
+## Owner answers (2026-11-22)
+1. Title on the right; the arch is centred on the title. 2. Corners top left + bottom right. 3–7. As proposed: background pattern yes, check badge, next unit's lessons open by themselves, fill sound yes, «قريبًا» for courses without units.
+
+## Questions asked (before building)
 1. **Header**: the reference puts the arch between the mosque and the title (title on the right). Keep it as in
    the reference, or use the same centred arch + title as screen 03 (one style)?
 2. **Corners**: top left + bottom right as in the reference (screen 03 has top left + top right)?
