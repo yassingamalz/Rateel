@@ -60,6 +60,8 @@ Future<void> main() async {
     Uri.base.queryParameters['completeLesson'] ?? '',
   );
   lessonsStyle.value = Uri.base.queryParameters['lessonsStyle'] ?? 'ref';
+  origScale =
+      double.tryParse(Uri.base.queryParameters['origScale'] ?? '') ?? origScale;
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,

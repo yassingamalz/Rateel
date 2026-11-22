@@ -79,3 +79,9 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 - Critic v3 (`critic-v3.md`, on v4): **no high/medium code item left**. Look A **7.5** (code 8.4; assets 4 until
   L1–L5), look B **6.6**. Low items left (mosque ground tone, pattern cell 9.5u vs 8.2u, line step at the rail, …).
   Sent to the owner: `compare-v2.jpg`, completion frames v2, demos v2, APK 1.0.290.
+
+## 5. Look B larger (owner, 2026-11-22)
+- Owner: look B cards and title larger, about ×1.35–1.40; show the screens before implementing. Review parameter
+  `?origScale=<k>` (default 1, unchanged): card, text, pill, icons, gaps and title/back button scale; the first card
+  stays 8u from the rail. Previews `orig-scale-preview-pc.jpg`, `orig-scale-preview-phone.jpg` (×1, ×1.35, ×1.4,
+  lesson 1 done). At ×1.35/×1.4 two cards and a half fit: the third fades out at the left edge.

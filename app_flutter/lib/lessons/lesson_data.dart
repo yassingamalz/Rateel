@@ -53,3 +53,7 @@ final lessonsStyle = ValueNotifier<String>('ref');
 /// Review aid: `?completeLesson=<k>` plays the completion of lesson k when
 /// the lessons screen opens.
 int? startCompleteLesson;
+
+/// Scale of look B's cards and title (owner 2026-11-22: "larger, ×1.35–1.40");
+/// review: `?origScale=1.35`.
+double origScale = 1.0;

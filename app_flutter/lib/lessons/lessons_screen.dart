@@ -424,7 +424,7 @@ class _LessonsScreenState extends State<LessonsScreen>
             key: ValueKey('lesson-$i'),
             lesson: _lessons[i],
             style: _style,
-            u: g.u,
+            u: g.cu,
             step: i + 1,
             total: _lessons.length,
             unlock: unlock,
@@ -552,30 +552,35 @@ class _LessonsScreenState extends State<LessonsScreen>
   List<Widget> _header(_Geo g) {
     final u = g.u;
     if (g.orig) {
+      // Look B scale under review (owner 2026-11-22: cards and title larger).
+      final k = origScale;
       // Angular: small title at the top right with the back arrow; improved
       // with the cream title, a glass back button and a short divider.
       return [
         Positioned(
           right: u * 4.5,
           top: u * 6.2,
-          width: u * 7,
-          height: u * 7,
-          child: _settle(g, _BackButton(u: u)),
+          width: u * 7 * k,
+          height: u * 7 * k,
+          child: _settle(g, _BackButton(u: u * k)),
         ),
         Positioned(
-          right: u * 14,
-          top: u * 5.2,
-          height: u * 9,
+          right: u * (4.5 + 9.5 * k),
+          top: u * 6.2 + u * 3.5 * k - u * 4.5 * k,
+          height: u * 9 * k,
           width: g.w * 0.6,
           child: _settle(
             g,
-            Align(alignment: Alignment.centerRight, child: _title(g, u * 4.8)),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _title(g, u * 4.8 * k),
+            ),
           ),
         ),
         Positioned(
-          right: u * 14,
-          top: u * 14.2,
-          child: _settle(g, _divider(u * 26, u * 2.6)),
+          right: u * (4.5 + 9.5 * k),
+          top: u * 6.2 + u * 8 * k,
+          child: _settle(g, _divider(u * 26 * k, u * 2.6 * k)),
         ),
       ];
     }
@@ -1143,15 +1148,19 @@ class _Geo {
 
   bool get orig => style == 'orig';
 
-  Size get card => LessonCard.sizeFor(style, u);
+  /// Unit of the cards: look B scales them (owner, under review).
+  double get cu => orig ? u * origScale : u;
+
+  Size get card => LessonCard.sizeFor(style, cu);
 
   /// Reference 06: card centres 751 px apart; orig: cards 8u apart.
-  double get pitch => orig ? u * 52 : u * 88;
+  double get pitch => orig ? card.width + cu * 8 : u * 88;
 
-  /// Reference 06: first card centre 447 px from the rail.
-  double get firstCenterFromRight => orig ? u * 30 : u * 52.4;
+  /// Reference 06: first card centre 447 px from the rail; orig: card 8u
+  /// from the rail.
+  double get firstCenterFromRight => orig ? u * 8 + card.width / 2 : u * 52.4;
 
-  double get cardCenterY => orig ? u * 52 : u * 65.7;
+  double get cardCenterY => orig ? u * (52 + 6 * (origScale - 1)) : u * 65.7;
 
   /// Reference 06: title centre 745 px from the rail.
   double get titleCenterX => w - u * 87.3;
