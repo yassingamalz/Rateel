@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:ui' show lerpDouble;
+import 'dart:ui' show ImageFilter, lerpDouble;
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
@@ -119,25 +119,41 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 children: [
                   Positioned.fill(
-                    child: IgnorePointer(
-                      child: CustomPaint(
-                        painter: _RingPainter(
-                          u: u,
-                          progress: widget.progress,
-                          unlock: _seg(widget.unlock, 0.62, 1),
-                          done: widget.done,
-                          flash: widget.flash,
-                          breath: _open && widget.done == 0
-                              ? 0.5 -
-                                    0.5 * math.cos(2 * math.pi * widget.ambient)
-                              : 0,
-                          head: widget.filling,
-                        ),
+                    child: _lockedLook(
+                      u,
+                      Stack(
+                        clipBehavior: Clip.none,
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned.fill(
+                            child: IgnorePointer(
+                              child: CustomPaint(
+                                painter: _RingPainter(
+                                  u: u,
+                                  progress: widget.progress,
+                                  unlock: 1 - _locked,
+                                  done: widget.done,
+                                  flash: widget.flash,
+                                  breath: _open && widget.done == 0
+                                      ? 0.5 -
+                                            0.5 *
+                                                math.cos(
+                                                  2 * math.pi * widget.ambient,
+                                                )
+                                      : 0,
+                                  head: widget.filling,
+                                ),
+                              ),
+                            ),
+                          ),
+                          _disc(u),
+                          ..._content(u),
+                        ],
                       ),
                     ),
                   ),
-                  _disc(u),
-                  ..._content(u),
+                  if (_locked > 0 && lockedStyle == 'a') _frost(u),
+                  if (_locked > 0 && lockedStyle == 'd') _plate(u),
                   if (_ripple.value > 0 && _ripple.value < 1) _rippleRing(u),
                   if (widget.unlock < 1) _padlock(u),
                   if (widget.unlock > 0) _badge(u),
@@ -219,31 +235,124 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     );
   }
 
-  List<Widget> _content(double u) {
-    // Locked units show the unit-type icon under the padlock; open and
-    // completed units show the play disc (start / replay). The unlock plays
-    // in sequence, never as a cross-fade (owner, 2026-11-22: the icons
-    // looked like they were swapping): the padlock flies off (0–45%), the
-    // type icon sinks away (35–60%), the play disc pops in with a light ring
-    // (55–100%).
-    final t = widget.unlock;
-    final iconOut = Curves.easeIn.transform(_seg(t, 0.35, 0.6));
-    final playIn = _seg(t, 0.62, 1);
-    return [
-      if (iconOut < 1)
-        Positioned(
-          top: u * (_r - 6.2) - u * 5.6 + u * 2 * iconOut,
-          child: Opacity(
-            opacity: 1 - _seg(iconOut, 0.85, 1),
-            child: Transform.scale(
-              scale: 1 - 0.5 * iconOut,
-              child: _typeIcon(u),
+  /// 1 while locked, 0 once open: the dark look lifts while the padlock
+  /// flies off (owner, 2026-11-22: the unit icon never changes, it only
+  /// lights up).
+  double get _locked => 1 - _seg(widget.unlock, 0.3, 0.8);
+
+  /// Locked look under review (owner, 2026-11-22), `?locked=a|b|c|d`:
+  /// a = Angular original (70% opacity, frosted disc behind the padlock),
+  /// b = dark veil, c = desaturated and dim, d = dark veil + glass plate.
+  Widget _lockedLook(double u, Widget child) {
+    final l = _locked;
+    if (l == 0) return child;
+    switch (lockedStyle) {
+      case 'a':
+        return Opacity(opacity: 1 - 0.3 * l, child: child);
+      case 'c':
+        final sat = 1 - 0.85 * l;
+        final k = 1 - 0.3 * l;
+        const lr = 0.2126, lg = 0.7152, lb = 0.0722;
+        List<double> row(double r0, double g0, double b0) => [
+          (lr * (1 - sat) + r0 * sat) * k,
+          (lg * (1 - sat) + g0 * sat) * k,
+          (lb * (1 - sat) + b0 * sat) * k,
+          0,
+          0,
+        ];
+        return ColorFiltered(
+          colorFilter: ColorFilter.matrix([
+            ...row(1, 0, 0),
+            ...row(0, 1, 0),
+            ...row(0, 0, 1),
+            0,
+            0,
+            0,
+            1,
+            0,
+          ]),
+          child: child,
+        );
+      default: // b, d: dark veil
+        final k = 1 - (lockedStyle == 'd' ? 0.35 : 0.45) * l;
+        return ColorFiltered(
+          colorFilter: ColorFilter.matrix([
+            k,
+            0,
+            0,
+            0,
+            0,
+            0,
+            k,
+            0,
+            0,
+            0,
+            0,
+            0,
+            k,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+          ]),
+          child: child,
+        );
+    }
+  }
+
+  /// Style a: frosted disc behind the padlock (Angular `backdrop-filter`).
+  Widget _frost(double u) {
+    final l = _locked;
+    return Positioned(
+      top: u * (_r - 6.2) - u * 8,
+      child: Opacity(
+        opacity: l,
+        child: ClipOval(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: u * 0.5, sigmaY: u * 0.5),
+            child: Container(
+              width: u * 16,
+              height: u * 16,
+              color: RateelColors.unitDiscMid.withValues(alpha: 0.35),
             ),
           ),
         ),
-      if (playIn > 0 && playIn < 1)
+      ),
+    );
+  }
+
+  /// Style d: dark glass plate with an emerald rim behind the padlock.
+  Widget _plate(double u) {
+    final l = _locked;
+    return Positioned(
+      top: u * (_r - 6.2) - u * 7.5,
+      child: Opacity(
+        opacity: l,
+        child: Container(
+          width: u * 15,
+          height: u * 15,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: RateelColors.lockDisc.withValues(alpha: 0.72),
+            border: Border.all(color: RateelColors.lockRim, width: u * 0.25),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _content(double u) {
+    // The unit-type icon stays the same in every state (video units: the play
+    // disc); a light ring passes over it as the unit opens.
+    final video = widget.unit.type == UnitType.video;
+    final glow = _seg(widget.unlock, 0.45, 0.95);
+    return [
+      if (glow > 0 && glow < 1)
         Positioned(
-          top: u * (_r - 7.9) - u * 9,
+          top: u * (_r - 6.2) - u * 9,
           child: IgnorePointer(
             child: Container(
               width: u * 18,
@@ -252,39 +361,32 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: RateelColors.goldHighlight.withValues(
-                    alpha: 0.6 * (1 - playIn),
+                    alpha: 0.6 * (1 - glow),
                   ),
                   width: u * 0.3,
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: RateelColors.gold.withValues(
-                      alpha: 0.35 * (1 - playIn),
+                      alpha: 0.35 * (1 - glow),
                     ),
                     blurRadius: u * 3,
                   ),
                 ],
               ),
               transform: Matrix4.diagonal3Values(
-                0.5 + 0.5 * playIn,
-                0.5 + 0.5 * playIn,
+                0.6 + 0.5 * glow,
+                0.6 + 0.5 * glow,
                 1,
               ),
               transformAlignment: Alignment.center,
             ),
           ),
         ),
-      if (playIn > 0)
-        Positioned(
-          top: u * (_r - 7.9) - u * 5.85,
-          child: Opacity(
-            opacity: playIn > 0 ? 1 : 0,
-            child: Transform.scale(
-              scale: lerpDouble(0.4, 1, _bounce(playIn))!,
-              child: _playDisc(u),
-            ),
-          ),
-        ),
+      Positioned(
+        top: video ? u * (_r - 7.9) - u * 5.85 : u * (_r - 6.2) - u * 5.6,
+        child: video ? _playDisc(u) : _typeIcon(u),
+      ),
       // Title, two lines, centred at +6.4u.
       Positioned(
         top: u * (_r + 6.4) - u * 6.4,
@@ -299,7 +401,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
             overflow: TextOverflow.ellipsis,
             // Locked titles 4.6u, open ones 4.9u (reference).
             style: readex(
-              u * lerpDouble(4.6, 4.9, _seg(widget.unlock, 0.62, 1))!,
+              u * lerpDouble(4.6, 4.9, 1 - _locked)!,
               weight: 560,
               color: titleCream,
             ).copyWith(height: 1.22, shadows: titleShadows(u)),
@@ -402,16 +504,13 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   Widget _padlock(double u) {
     final t = _seg(widget.unlock, 0, 0.45);
     final pop = 1 + 0.35 * math.sin(math.pi * (t * 1.3).clamp(0.0, 1.0));
-    // Reference 05: on the book, 6u wide body, centre 5.5u above the ring
-    // centre. Narrow icons (microphone, scroll) would disappear under it:
-    // there it sits at the icon's lower right, smaller, like a badge.
-    final book = widget.unit.type == UnitType.reading;
-    final size = book ? 6.6 : 5.4;
-    final dx = book ? 0.0 : 4.0;
-    final dy = book ? 6.0 : 3.0;
+    // Centred on the unit icon for every type, larger than the reference
+    // (owner, 2026-11-22).
+    final size = lockSize;
+    final cy = widget.unit.type == UnitType.video ? 7.9 : 6.2;
     return Positioned(
-      top: u * (_r - dy) - u * size / 2 - u * 5 * t,
-      left: u * (_r + dx) - u * size / 2 + widget.lockShake * u * 0.9,
+      top: u * (_r - cy) - u * size / 2 - u * 5 * t,
+      left: u * _r - u * size / 2 + widget.lockShake * u * 0.9,
       width: u * size,
       height: u * size,
       child: Opacity(

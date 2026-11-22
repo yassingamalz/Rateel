@@ -49,3 +49,10 @@ double courseProgressFromUnits(int course) {
   final partial = st.current < n ? st.progress[st.current] : 0.0;
   return (done + partial) / n;
 }
+
+/// Locked-unit look under review (owner, 2026-11-22): a, b, c, d
+/// (see `UnitCircle._lockedLook`). Web review: `?locked=c`.
+String lockedStyle = 'b';
+
+/// Padlock size in u on locked units (reference 6.6u; owner: larger).
+double lockSize = 9.0;
