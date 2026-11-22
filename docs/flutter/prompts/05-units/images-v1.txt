@@ -35,3 +35,8 @@ Use the attached image REF-05 as the strict style guide. I need ONLY the very fa
 Pattern: classic Islamic girih / 8-point star lattice with large cells (about 4 cells across the tile), drawn as thin uniform lines only, no fills.
 Colour: lines #2C6B4F on a flat magenta #FF00FF background (the magenta will be keyed out), line width about 3 px at 2048 px.
 Output: a square seamless tile 2048×2048 that repeats without visible seams on all four sides, AND an SVG of the same lines (stroke only, no filters). No text, no watermark.
+
+=== U6b faint background pattern, v2 (critic v2: the reference is a large 10-point girih, not an 8-point grid) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the very faint large geometric line pattern behind the circles of REF-05, isolated as a seamless tile. Look closely at REF-05: it is a classic Persian GIRIH pattern with 10-POINT stars (decagonal rosettes) joined by long elongated hexagons, bow-ties and pentagons, drawn with thin uniform lines; the 10-point stars are LARGE (each star about one fifth of the screen height) and the lines run long and straight between them. Do NOT draw an 8-point star grid and do not draw small cells.
+Lines only, no fills. Colour: lines #2C6B4F on a flat magenta #FF00FF background (keyed out later), line width about 3 px at 2048 px.
+Output: a square seamless tile 2048×2048 containing about 2 star centres across, that repeats without visible seams on all four sides, AND an SVG of the same lines (stroke only, no filters, no masks). No text, no watermark.
