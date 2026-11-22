@@ -76,3 +76,6 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 - APK **1.0.290** (the shallow clone first gave 1.0.5: fetch the branch history before `build-apk.sh`, now in
   LESSONS-LEARNED). Demos `demo-ref-v2.mp4`, `demo-orig-v2.mp4` (full loop: locked tap, 3 lessons, unit completion,
   next unit's lessons open). Comparison `compare-v2.jpg`.
+- Critic v3 (`critic-v3.md`, on v4): **no high/medium code item left**. Look A **7.5** (code 8.4; assets 4 until
+  L1–L5), look B **6.6**. Low items left (mosque ground tone, pattern cell 9.5u vs 8.2u, line step at the rail, …).
+  Sent to the owner: `compare-v2.jpg`, completion frames v2, demos v2, APK 1.0.290.
