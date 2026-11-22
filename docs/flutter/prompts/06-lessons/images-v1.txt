@@ -1,0 +1,31 @@
+Screen 06 (lessons of the unit) asset prompts, v1 (2026-11-22). Attach to every prompt: REF-06 =
+docs/flutter/screens/06-lessons/reference.webp (lesson-production: docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp).
+Reused, no prompt needed: header arch, book emblem, mosque, title divider, card pattern, girih tile, lattice corner,
+check glyph, padlocks, fill sound (ASSETS.md). Locked icons are the same SVGs tinted in code (question 3 of the plan).
+One chat per image; L1 first, then attach the L1 result as well to L2–L5 so the set matches.
+
+=== L1 open book with bookmark (read lesson) ===
+Use the attached image REF-06 as the strict style guide. I need ONLY the gold open-book icon at the bottom of the right (active) card of REF-06, isolated.
+Shape exactly as in REF-06: a wide open book seen from the front, drawn as bold LINE ART: a thick outline for each page, a second outline for the cover behind the pages, a curved spine valley in the middle, a small notch under the spine, and a solid gold BOOKMARK ribbon hanging from the top of the right page (rectangle with a V cut at the bottom). Inside of the pages empty (transparent), not filled.
+Colour: warm gold, stroke and bookmark #F2B623 with a very soft vertical gradient to #FFD95A at the top; uniform stroke width (about 4% of the icon width), rounded joins. Flat, no 3D, no glow, no shadow, no container.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths or strokes converted to filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== L2 video lesson ===
+Use the attached images REF-06 and L1 (the open book I made) as the strict style guide: the same bold gold LINE ART, same stroke width, same gold #F2B623 → #FFD95A, same visual weight and the same width as the book.
+I need ONLY a video-lesson icon in that style: a wide rounded-rectangle screen (16:10) drawn as an outline, a solid gold play triangle with rounded corners in its centre, and a short stand with a small flat base under the screen. Inside of the screen empty (transparent).
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== L3 microphone (practice lesson) ===
+Use the attached images REF-06 and L1 (the open book I made) as the strict style guide: the same bold gold LINE ART, same stroke width, same gold #F2B623 → #FFD95A, same visual weight as the book.
+I need ONLY a microphone icon in that style: a rounded capsule head drawn as an outline with three short horizontal grille lines inside, a U-shaped holder around its lower half, a short stand and a small flat base. Height about the height of the book; inside empty (transparent).
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== L4 listening (listen lesson) ===
+Use the attached images REF-06 and L1 (the open book I made) as the strict style guide: the same bold gold LINE ART, same stroke width, same gold #F2B623 → #FFD95A, same visual weight as the book.
+I need ONLY a listening icon in that style: a pair of over-ear headphones seen from the front (headband arc as an outline, two rounded ear cups, the cups solid gold), with two small curved sound waves on each side. Width about the width of the book.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== L5 test (test / assessment lesson) ===
+Use the attached images REF-06 and L1 (the open book I made) as the strict style guide: the same bold gold LINE ART, same stroke width, same gold #F2B623 → #FFD95A, same visual weight as the book.
+I need ONLY a test icon in that style: a sheet of paper on a clipboard drawn as an outline (clip at the top as a small solid gold tab), three short horizontal lines inside, and a bold solid gold check mark at the lower right overlapping the sheet edge. Inside of the sheet empty (transparent). No letters.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
