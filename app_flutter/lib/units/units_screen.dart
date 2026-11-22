@@ -8,6 +8,9 @@ import '../core/haptics.dart';
 import '../core/sounds.dart';
 import '../courses/course_data.dart';
 import '../theme/rateel_theme.dart';
+import '../core/screen_decor.dart';
+import '../lessons/lesson_data.dart';
+import '../lessons/lessons_screen.dart';
 import 'unit_circle.dart';
 import 'unit_data.dart';
 
@@ -264,8 +267,36 @@ class _UnitsScreenState extends State<UnitsScreen>
     _unlock.value = 0;
   }
 
-  /// Screen 06 (lessons of the unit) is not built yet.
-  void _openLessons(int i) => _showToast('دروس الوحدة: قريبًا');
+  /// Opens screen 06, the lessons of unit [i]. Back here: if its last lesson
+  /// was just finished the unit completion plays; otherwise the ring catches
+  /// up with the lessons done (one shared progress, owner 2026-11-22).
+  Future<void> _openLessons(int i) async {
+    final finished = await Navigator.of(context)
+        .push<bool>(lessonsRoute(widget.course, i));
+    if (!mounted) return;
+    // Last lesson finished: screen 06 has set `unitCompleted`.
+    if (finished == true) return;
+    await _catchUp(i);
+  }
+
+  /// The ring of the unit in progress fills to the share of its lessons done,
+  /// with the ticks; crossing 50% lights the first half of the line.
+  Future<void> _catchUp(int i) async {
+    if (i != _current || _completing != null) return;
+    final target = unitShareFromLessons(_units[i].id);
+    if (target <= _state.progress[i] + 0.001) return;
+    setState(() => _completing = i);
+    if ((_scroll.value - i).abs() > 0.01) await _glideTo(i, 450);
+    if (_state.progress[i] < 0.5 && target >= 0.5) {
+      await _fillRing(i, 0.5);
+      Haptics.milestone();
+      await _half.forward(from: 0);
+    }
+    await _fillRing(i, target);
+    if (!mounted) return;
+    setState(() => _completing = null);
+    _resetSequence();
+  }
 
   Future<void> _showToast(String text) async {
     setState(() => _toastText = text);
@@ -296,7 +327,7 @@ class _UnitsScreenState extends State<UnitsScreen>
           // The bottom-right ornament runs on under the side rail.
           clipBehavior: Clip.none,
           children: [
-            const _Background(),
+            const ScreenBackground(),
             ..._decor(g),
             ..._header(g),
             if (_units.isEmpty) _empty(g) else _path(g),
@@ -480,14 +511,14 @@ class _UnitsScreenState extends State<UnitsScreen>
   /// pattern (U6) covers the background.
   List<Widget> _decor(_Geo g) {
     return [
-      const Positioned.fill(child: IgnorePointer(child: _Girih())),
+      const Positioned.fill(child: IgnorePointer(child: ScreenGirih())),
       Positioned(
         left: 0,
         top: 0,
         width: g.u * 21.5,
         height: g.u * 21.5 * 606 / 800,
         child: IgnorePointer(
-          child: _GoldCorner(
+          child: GoldCorner(
             'assets/ui/decor/corner_units_top_left.webp',
             u: g.u,
           ),
@@ -499,7 +530,7 @@ class _UnitsScreenState extends State<UnitsScreen>
         width: g.u * 22,
         height: g.u * 22 * 628 / 800,
         child: IgnorePointer(
-          child: _GoldCorner(
+          child: GoldCorner(
             'assets/ui/decor/corner_units_bottom_right.webp',
             u: g.u,
           ),
@@ -839,128 +870,6 @@ class _ChangeCourseButtonState extends State<_ChangeCourseButton> {
 
 double _interval(double t, double a, double b) =>
     ((t - a) / (b - a)).clamp(0.0, 1.0);
-
-/// Faint girih lattice over the whole content (owner's U6, seamless tile,
-/// tinted `girihLine`).
-class _Girih extends StatelessWidget {
-  const _Girih();
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, box) {
-        final tile = box.maxHeight * 0.95;
-        final cols = (box.maxWidth / tile).ceil();
-        final rows = (box.maxHeight / tile).ceil();
-        // The header stays clean: the pattern fades in from 20u to 38u.
-        return ShaderMask(
-          blendMode: BlendMode.dstIn,
-          shaderCallback: (r) => const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.20, 0.38],
-            colors: [Color(0x00000000), Color(0xFF000000)],
-          ).createShader(r),
-          child: ClipRect(
-            child: OverflowBox(
-              alignment: Alignment.topLeft,
-              maxWidth: cols * tile,
-              maxHeight: rows * tile,
-              child: Opacity(
-                opacity: 0.11,
-                child: Column(
-                  children: [
-                    for (var r = 0; r < rows; r++)
-                      Row(
-                        children: [
-                          for (var c = 0; c < cols; c++)
-                            SvgPicture.asset(
-                              'assets/ui/decor/girih_tile.svg',
-                              width: tile,
-                              height: tile,
-                              theme: const SvgTheme(
-                                currentColor: RateelColors.girihLine,
-                              ),
-                            ),
-                        ],
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-/// Owner's corner lattice, tinted to the reference's saturated gold with a
-/// soft relief shadow (critic v2).
-class _GoldCorner extends StatelessWidget {
-  const _GoldCorner(this.asset, {required this.u});
-
-  final String asset;
-  final double u;
-
-  @override
-  Widget build(BuildContext context) {
-    final image = Image.asset(asset, fit: BoxFit.contain);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Transform.translate(
-          offset: Offset(u * 0.15, u * 0.25),
-          child: ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              Color(0x73000000),
-              BlendMode.srcIn,
-            ),
-            child: image,
-          ),
-        ),
-        ShaderMask(
-          blendMode: BlendMode.srcIn,
-          shaderCallback: (r) => const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [RateelColors.unitCornerTop, RateelColors.unitCornerBottom],
-          ).createShader(r),
-          child: image,
-        ),
-      ],
-    );
-  }
-}
-
-/// Same background as screen 03 (one style).
-class _Background extends StatelessWidget {
-  const _Background();
-
-  @override
-  Widget build(BuildContext context) {
-    return const DecoratedBox(
-      position: DecorationPosition.foreground,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.85, 1],
-          colors: [Color(0x00002D23), RateelColors.contentLift],
-        ),
-      ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment(0, -1.0),
-            radius: 1.2,
-            colors: [RateelColors.contentTop, RateelColors.contentBottom],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class _ConnectorPainter extends CustomPainter {
   _ConnectorPainter({

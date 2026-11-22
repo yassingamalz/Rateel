@@ -7,6 +7,7 @@ import 'core/learn_flow.dart';
 import 'nav/side_nav.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
+import 'lessons/lesson_data.dart';
 import 'units/unit_data.dart';
 
 Future<void> main() async {
@@ -34,6 +35,31 @@ Future<void> main() async {
   unitCompleted.value = int.tryParse(
     Uri.base.queryParameters['completeUnit'] ?? '',
   );
+  // Review aids (screen 06): `?lessons=0,1` opens the lessons of unit 1 of
+  // course 0 (its units screen below it), `?lessonDone=2` marks 2 lessons
+  // done, `?completeLesson=2` plays the completion of lesson 2 on start,
+  // `?lessonsStyle=orig` shows the original look (B).
+  final lp = (Uri.base.queryParameters['lessons'] ?? '').split(',');
+  if (lp.length == 2) {
+    final c = int.tryParse(lp[0]);
+    final u = int.tryParse(lp[1]);
+    if (c != null && u != null && u < unitsOf(c).length) {
+      LearnFlow.startUnits ??= c;
+      LearnFlow.startLessons = (c, u);
+      final up = unitsProgressOf(c);
+      if (startUnit == null) up.current = u;
+      final done = int.tryParse(Uri.base.queryParameters['lessonDone'] ?? '');
+      if (done != null) {
+        final id = unitsOf(c)[u].id;
+        setLessonsDone(id, done);
+        if (u == up.current) up.progress[u] = unitShareFromLessons(id);
+      }
+    }
+  }
+  startCompleteLesson = int.tryParse(
+    Uri.base.queryParameters['completeLesson'] ?? '',
+  );
+  lessonsStyle.value = Uri.base.queryParameters['lessonsStyle'] ?? 'ref';
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,

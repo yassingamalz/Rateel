@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../courses/courses_screen.dart';
+import '../lessons/lessons_screen.dart';
 import '../units/units_screen.dart';
 
 /// The learning section (rail item 0): courses → units → lessons, stacked in
@@ -11,6 +12,10 @@ class LearnFlow extends StatefulWidget {
 
   /// Review aid: `?units=<course>` (web) opens the units of that course.
   static int? startUnits;
+
+  /// Review aid: `?lessons=<course>,<unit>` (web) opens the lessons of that
+  /// unit (above its units screen).
+  static (int, int)? startLessons;
 
   @override
   State<LearnFlow> createState() => _LearnFlowState();
@@ -29,6 +34,7 @@ class _LearnFlowState extends State<LearnFlow> {
       'assets/ui/decor/mosque.webp',
       'assets/ui/decor/corner_units_top_left.webp',
       'assets/ui/decor/corner_units_bottom_right.webp',
+      'assets/ui/decor/angular_pattern_2.webp',
     ]) {
       precacheImage(AssetImage(a), context);
     }
@@ -47,6 +53,8 @@ class _LearnFlowState extends State<LearnFlow> {
             pageBuilder: (context, a, b) => const CoursesScreen(),
           ),
           if (LearnFlow.startUnits != null) unitsRoute(LearnFlow.startUnits!),
+          if (LearnFlow.startLessons case (final c, final u))
+            lessonsRoute(c, u),
         ],
       ),
     );
