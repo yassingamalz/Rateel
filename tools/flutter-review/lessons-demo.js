@@ -12,5 +12,5 @@ await p.mouse.click(rail-(first+pitch)*u,cy*u);await w(2200);                 //
 await p.mouse.click(rail-first*u,cy*u);await w(1200);                          // open lesson 1
 async function finish(){await p.mouse.click(0.619*W,0.639*H);} // «أكملت الدرس» (measured on the page)
 for(let k=0;k<3;k++){await w(900);await finish();await w(k<2?7200:2500);}
-await w(9000);                                                                   // unit completion + next lessons
+await w(13000);                                                                  // unit completion + next lessons
 await c.close();await b.close()})();

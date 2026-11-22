@@ -78,7 +78,7 @@ class _LessonCardState extends State<LessonCard>
   Widget build(BuildContext context) {
     final u = widget.u;
     final size = LessonCard.sizeFor(widget.style, u);
-    final radius = _orig ? u * 3.2 : u * 4.7;
+    final radius = _orig ? u * 3.2 : u * 5.6;
     final card = SizedBox.fromSize(
       size: size,
       child: Stack(
@@ -94,6 +94,7 @@ class _LessonCardState extends State<LessonCard>
                   children: [
                     _body(radius),
                     if (!_orig) _pattern(),
+                    if (!_orig) _innerGlow(radius),
                     ..._content(size),
                     _shineLayer(size),
                   ],
@@ -162,7 +163,8 @@ class _LessonCardState extends State<LessonCard>
         ? (1 - widget.done) * _seg(widget.unlock, 0.45, 1)
         : 0.0;
     final glow =
-        open * (0.22 + 0.12 * breath) + 0.6 * math.sin(math.pi * widget.flash);
+        open * (_orig ? 0.22 + 0.12 * breath : 0.10 + 0.08 * breath) +
+        0.6 * math.sin(math.pi * widget.flash);
     final shadow = BoxShadow(
       color: Colors.black.withValues(alpha: 0.4),
       blurRadius: u * 2.2,
@@ -204,9 +206,7 @@ class _LessonCardState extends State<LessonCard>
     }
     // Original look: glass card; the lesson in progress is filled gold
     // (Angular `--active`), a done lesson keeps a 15% gold tint.
-    final gold = widget.active
-        ? (1 - widget.done) * _seg(widget.unlock, 0.5, 1)
-        : 0.0;
+    final gold = _goldFill;
     final tint = 0.15 * widget.done;
     return Stack(
       fit: StackFit.expand,
@@ -264,7 +264,7 @@ class _LessonCardState extends State<LessonCard>
             fit: BoxFit.cover,
             alignment: Alignment.bottomCenter,
             colorFilter: const ColorFilter.mode(
-              RateelColors.cardPattern,
+              RateelColors.lessonPattern,
               BlendMode.srcIn,
             ),
           ),
@@ -273,11 +273,32 @@ class _LessonCardState extends State<LessonCard>
     );
   }
 
-  /// Text colour: dark on the filled gold card of the original look.
+  /// Gold fill of the original look's lesson in progress: it comes in while
+  /// the card unlocks and leaves only once the ✓ is in (critic v1 B1, B2).
+  double get _goldFill => widget.active
+      ? (1 - _seg(widget.done, 0.7, 0.95)) * _seg(widget.unlock, 0.55, 0.85)
+      : 0.0;
+
+  /// Text colour: dark on the filled gold card of the original look. The
+  /// ink snaps at the middle of the fill instead of lerping (critic v1 B1).
   Color _ink(Color normal) {
     if (!_orig || !widget.active) return normal;
-    final g = (1 - widget.done) * _seg(widget.unlock, 0.5, 1);
-    return Color.lerp(normal, RateelColors.origCardText, g)!;
+    return _goldFill > 0.5 ? RateelColors.origCardText : normal;
+  }
+
+  /// Gold glow inside the rim of the lesson in progress (reference: ≈ 3u
+  /// inward, critic v1 A4).
+  Widget _innerGlow(double radius) {
+    final u = widget.u;
+    final lit = widget.active
+        ? (1 - widget.done) * _seg(widget.unlock, 0.45, 1)
+        : 0.0;
+    if (lit == 0) return const SizedBox.shrink();
+    return IgnorePointer(
+      child: CustomPaint(
+        painter: _InnerGlowPainter(u: u, radius: radius, alpha: 0.22 * lit),
+      ),
+    );
   }
 
   List<Widget> _content(Size size) {
@@ -421,7 +442,9 @@ class _LessonCardState extends State<LessonCard>
       'assets/ui/glyphs/check.svg',
       width: h * 0.6,
       height: h * 0.6,
-      theme: const SvgTheme(currentColor: RateelColors.badgeText),
+      theme: SvgTheme(
+        currentColor: onGold ? RateelColors.gold : RateelColors.badgeText,
+      ),
     );
     return Transform.scale(
       scale: pop,
@@ -454,8 +477,8 @@ class _LessonCardState extends State<LessonCard>
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Opacity(opacity: 1 - _seg(d, 0.2, 0.5), child: text),
-              Opacity(opacity: _seg(d, 0.4, 0.7), child: check),
+              Opacity(opacity: 1 - _seg(d, 0.3, 0.4), child: text),
+              Opacity(opacity: _seg(d, 0.4, 0.5), child: check),
             ],
           ),
         ),
@@ -616,7 +639,7 @@ class _RimPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final orig = style == 'orig';
-    final w = orig ? u * 0.28 : u * 0.35;
+    final w = orig ? u * 0.28 : u * 0.47;
     final rect = (Offset.zero & size).deflate(w / 2);
     final rrect = RRect.fromRectAndRadius(
       rect,
@@ -625,15 +648,35 @@ class _RimPainter extends CustomPainter {
     final lit = active * _seg(open, 0.45, 1);
     final muted = orig
         ? Colors.white.withValues(alpha: 0.10)
-        : RateelColors.lessonRimMuted;
+        : RateelColors.lessonRimLockedMid;
     final dimGold = RateelColors.cardRimGold.withValues(alpha: 0.75);
-    var base = Color.lerp(muted, dimGold, done)!;
+    final base = Color.lerp(muted, dimGold, done)!;
+    if (!orig) {
+      // Dark hairline outside the rim (reference, critic v1 A9).
+      canvas.drawRRect(
+        rrect.inflate(w / 2 + 0.5),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = RateelColors.lessonRimHairline,
+      );
+    }
     canvas.drawRRect(
       rrect,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = w
-        ..color = base,
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: orig || done > 0
+              ? [base, base, base]
+              : const [
+                  RateelColors.lessonRimLockedTop,
+                  RateelColors.lessonRimLockedMid,
+                  RateelColors.lessonRimLockedBottom,
+                ],
+        ).createShader(rect),
     );
     if (lit > 0) {
       final paint = Paint()
@@ -717,6 +760,42 @@ class _RimPainter extends CustomPainter {
       o.ambient != ambient ||
       o.u != u ||
       o.style != style;
+}
+
+/// Soft gold glow along the inside of the rim, clipped to the card.
+class _InnerGlowPainter extends CustomPainter {
+  _InnerGlowPainter({
+    required this.u,
+    required this.radius,
+    required this.alpha,
+  });
+
+  final double u;
+  final double radius;
+  final double alpha;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rrect = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(radius),
+    );
+    canvas.save();
+    canvas.clipRRect(rrect);
+    canvas.drawRRect(
+      rrect,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 3
+        ..color = RateelColors.gold.withValues(alpha: alpha)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.5),
+    );
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_InnerGlowPainter o) =>
+      o.alpha != alpha || o.u != u || o.radius != radius;
 }
 
 /// Gold sparkles bursting out around the card on the completion flash.

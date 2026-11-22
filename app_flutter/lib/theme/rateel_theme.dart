@@ -125,8 +125,15 @@ class RateelColors {
   static const dividerMid = Color(0xFFEFC246);
   static const dividerPeak = Color(0xFFF8D053);
   // Screen 06, lessons (sampled from reference 06). Proposed tokens.
-  static const lessonRimMuted = Color(0xFF325C46); // locked / waiting card rim
-  static const lessonIconMuted = Color(0xFF3E6B4E); // locked lesson icon
+  static const lessonIconMuted = Color(
+    0xFF4F7E5E,
+  ); // locked lesson icon (critic v1 A3)
+  static const lessonRimLockedTop = Color(0xFF4E795B); // locked rim 0.47u (A9)
+  static const lessonRimLockedMid = Color(0xFF3E644E);
+  static const lessonRimLockedBottom = Color(0xFF395F48);
+  static const lessonRimHairline = Color(0xFF002016);
+  static const lessonPattern = Color(0xFF4E6E36); // warm olive lattice (A5)
+  static const lessonMosqueTint = Color(0xFF7D8E54); // lighter sage (A6)
   static const lessonIconTop = Color(0xFFFFD95A); // lesson icon gold, top
   static const lessonIconBottom = Color(0xFFF2B623);
   // Variant B (original Angular look, improved): filled gold active card.

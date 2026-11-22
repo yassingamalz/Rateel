@@ -308,34 +308,54 @@ class _LessonsScreenState extends State<LessonsScreen>
         behavior: HitTestBehavior.translucent,
         onHorizontalDragUpdate: _onDrag,
         onHorizontalDragEnd: _onDragEnd,
-        child: AnimatedBuilder(
-          animation: Listenable.merge([
-            _entry,
-            _ambient,
-            _shake,
-            _border,
-            _flash,
-            _flow,
-            _unlock,
-            _scroll,
-          ]),
-          builder: (context, _) {
-            final page = _scroll.value;
-            final draw = Curves.easeInOutCubic.transform(
-              _interval(_entry.value, 0.45, 0.85),
-            );
-            return Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Lines first, under the cards.
-                for (var i = 0; i < _lessons.length; i++)
-                  if ((i - page).abs() < 3.2)
-                    _connector(g, page, i, half, draw),
-                for (var i = 0; i < _lessons.length; i++)
-                  if ((i - page).abs() < 3.2) _cardAt(g, page, i, half),
-              ],
-            );
-          },
+        // The path fades out at the left edge (reference: the line runs off,
+        // no card sliver) and just before the rail, so a card gliding under
+        // the rail leaves no sliver (critic v1 A8, A10).
+        child: ShaderMask(
+          blendMode: BlendMode.dstIn,
+          shaderCallback: (r) => LinearGradient(
+            stops: [
+              (g.u * 8 / r.width).clamp(0.0, 1.0),
+              (g.u * 18 / r.width).clamp(0.0, 1.0),
+              ((r.width - g.u * 3) / r.width).clamp(0.0, 1.0),
+              1,
+            ],
+            colors: const [
+              Color(0x00000000),
+              Color(0xFF000000),
+              Color(0xFF000000),
+              Color(0x00000000),
+            ],
+          ).createShader(r),
+          child: AnimatedBuilder(
+            animation: Listenable.merge([
+              _entry,
+              _ambient,
+              _shake,
+              _border,
+              _flash,
+              _flow,
+              _unlock,
+              _scroll,
+            ]),
+            builder: (context, _) {
+              final page = _scroll.value;
+              final draw = Curves.easeInOutCubic.transform(
+                _interval(_entry.value, 0.45, 0.85),
+              );
+              return Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Lines first, under the cards.
+                  for (var i = 0; i < _lessons.length; i++)
+                    if ((i - page).abs() < 3.2)
+                      _connector(g, page, i, half, draw),
+                  for (var i = 0; i < _lessons.length; i++)
+                    if ((i - page).abs() < 3.2) _cardAt(g, page, i, half),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -562,7 +582,7 @@ class _LessonsScreenState extends State<LessonsScreen>
         left: u * 30.5,
         top: u * 11.7,
         width: u * 33.4,
-        height: u * 33.4 * 542 / 900,
+        height: u * 23,
         child: _settle(
           g,
           IgnorePointer(
@@ -571,13 +591,14 @@ class _LessonsScreenState extends State<LessonsScreen>
               shaderCallback: (r) => const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.62, 0.9],
+                stops: [0.72, 1.0],
                 colors: [Color(0xFF000000), Color(0x00000000)],
               ).createShader(r),
               child: Image.asset(
                 'assets/ui/decor/mosque.webp',
                 fit: BoxFit.contain,
-                color: RateelColors.unitMosqueTint,
+                alignment: Alignment.topCenter,
+                color: RateelColors.lessonMosqueTint,
                 colorBlendMode: BlendMode.srcATop,
               ),
             ),
@@ -587,9 +608,9 @@ class _LessonsScreenState extends State<LessonsScreen>
       // Arch centred on the title (reference 06), book emblem on the apex.
       Positioned(
         left: cx - g.archW / 2,
-        top: u * 1.4,
+        top: u * 0.9,
         width: g.archW,
-        height: u * 20,
+        height: u * 21,
         child: _settle(
           g,
           IgnorePointer(
@@ -625,10 +646,10 @@ class _LessonsScreenState extends State<LessonsScreen>
         ),
       ),
       Positioned(
-        left: cx - u * 8.8,
-        top: u * 9.4,
-        width: u * 17.6,
-        height: u * 8,
+        left: cx - u * 9.5,
+        top: u * 13.3 - u * 4.35,
+        width: u * 19,
+        height: u * 8.7,
         child: _settle(
           g,
           IgnorePointer(
@@ -651,10 +672,17 @@ class _LessonsScreenState extends State<LessonsScreen>
           ),
         ),
       ),
+      // Title divider drawn in code (critic v1 A1): two fading lines and an
+      // open diamond on the title axis, 62.7u long.
       Positioned(
-        left: cx - u * 31,
+        left: cx - u * 31.35,
         top: u * 32.1 - u * 1.8,
-        child: _settle(g, _divider(u * 62, u * 3.6)),
+        width: u * 62.7,
+        height: u * 3.6,
+        child: _settle(
+          g,
+          IgnorePointer(child: CustomPaint(painter: _DividerPainter(u))),
+        ),
       ),
       Positioned(
         left: g.w - u * 33.5 - u * 4.55,
@@ -855,11 +883,12 @@ class _ArrowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
-    final s = size.width * 0.2;
+    // Reference: 3.2×2.8u arrow, 0.35u stroke (critic v1 A7).
+    final s = u * 1.6;
     final p = Paint()
       ..color = RateelColors.closeWhite
       ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width * 0.075
+      ..strokeWidth = u * 0.35
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
     canvas.drawLine(c + Offset(-s, 0), c + Offset(s, 0), p);
@@ -874,6 +903,60 @@ class _ArrowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ArrowPainter o) => o.u != u;
+}
+
+/// Title divider of look A: lines fading out to the ends, brightest next to
+/// an open diamond (3.5u tall, 1.2u gap on each side).
+class _DividerPainter extends CustomPainter {
+  _DividerPainter(this.u);
+
+  final double u;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final c = size.center(Offset.zero);
+    final d = u * 1.75;
+    final gap = u * 1.2;
+    final y = c.dy.roundToDouble() + 0.5;
+    for (final side in [-1.0, 1.0]) {
+      final from = c.dx + side * (d + gap);
+      final to = side < 0 ? 0.0 : size.width;
+      canvas.drawLine(
+        Offset(from, y),
+        Offset(to, y),
+        Paint()
+          ..strokeWidth = u * 0.35
+          ..shader = LinearGradient(
+            begin: side < 0 ? Alignment.centerRight : Alignment.centerLeft,
+            end: side < 0 ? Alignment.centerLeft : Alignment.centerRight,
+            stops: const [0, 0.35, 0.8, 1],
+            colors: const [
+              RateelColors.dividerPeak,
+              RateelColors.dividerMid,
+              RateelColors.dividerEnd,
+              RateelColors.dividerEndClear,
+            ],
+          ).createShader(Rect.fromPoints(Offset(from, 0), Offset(to, 1))),
+      );
+    }
+    final diamond = Path()
+      ..moveTo(c.dx, c.dy - d)
+      ..lineTo(c.dx + d * 0.85, c.dy)
+      ..lineTo(c.dx, c.dy + d)
+      ..lineTo(c.dx - d * 0.85, c.dy)
+      ..close();
+    canvas.drawPath(
+      diamond,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.35
+        ..strokeJoin = StrokeJoin.miter
+        ..color = RateelColors.dividerPeak,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_DividerPainter o) => o.u != u;
 }
 
 /// The Angular decoration of the lessons page: islamic-pattern-2 (gold),
