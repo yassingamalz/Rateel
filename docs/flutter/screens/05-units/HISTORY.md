@@ -88,6 +88,22 @@ Branch `flutter/05-units`, created on 2026-11-22 from `flutter/03-courses`. Plan
 - Four looks shown (`locked-styles.jpg`: A Angular, B dark veil, C desaturated, D veil + glass plate);
   **owner chose B** (45% dark veil that lifts while the padlock flies off). Frames: `unlock-frames-v6.jpg`.
 
+## 9. Approval (2026-11-22)
+- **Owner approved screen 05** as in APK 1.0.106 (commit "locked units with dark veil"). Pull request
+  `flutter/05-units` → `master` opened; merge order: #38 (side nav) → screen 03 PR → screen 05 PR (each branch
+  contains the previous one).
+
+## Timeline at a glance
+| Step | Version / APK | Critic | Owner |
+|---|---|---|---|
+| Plan, prompts U1–U6 | — | — | answers on header, corners, completion |
+| v1 placeholders, full motion | — | 6.5 | — |
+| v2 owner assets, critic fixes | 1.0.96 | — | phone test: icon swap, shared progress, green padlock |
+| v3 sequential unlock, shared progress | — | 7.2 | — |
+| v4 critic-v2 fixes | 1.0.99 | 8.1 | — |
+| v5 custom track, critic-v3 fixes | 1.0.101 / 1.0.104 | — | style decisions 1B 2B 3A, corners as they are |
+| v6 icon never changes, 9u padlock, locked look B | 1.0.106 | — | **approved** |
+
 ## Open after screen 05
 - Owner approval on the phone → pull request `flutter/05-units` into `master` (after #38 and the screen 03 PR).
 - Stable APK signing key (each new cloud container signs with a new debug key: the phone asks to uninstall).

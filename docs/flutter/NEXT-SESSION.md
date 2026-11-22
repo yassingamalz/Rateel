@@ -1,6 +1,6 @@
 # Next session: screen 06, lessons of the unit (دروس الوحدة)
 
-Screen 05 is done (v5, waiting for the owner's approval and its PR): read `docs/flutter/screens/05-units/HISTORY.md`.
+Screen 05 is approved (2026-11-22, PR open): read `docs/flutter/screens/05-units/HISTORY.md`.
 Branch `flutter/06-lessons` from `flutter/05-units`. Reference: `docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp`
 on `lesson-production`. Screen 06 replaces the toast «دروس الوحدة: قريبًا» in `units_screen.dart` (`_openLessons`) and
 sets `unitCompleted` when the last lesson of a unit ends. Cloud environment "Rateel" has the hosts for the APK build.
