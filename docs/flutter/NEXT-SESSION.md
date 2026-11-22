@@ -5,6 +5,22 @@ Branch `flutter/06-lessons` from `flutter/05-units`. Reference: `docs/design/gla
 on `lesson-production`. Screen 06 replaces the toast «دروس الوحدة: قريبًا» in `units_screen.dart` (`_openLessons`) and
 sets `unitCompleted` when the last lesson of a unit ends. Cloud environment "Rateel" has the hosts for the APK build.
 
+## Prompt to start the session (screen 06)
+```
+Lavora sul repo Rateel. Crea il branch flutter/06-lessons partendo da flutter/05-units.
+Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
+docs/flutter/ASSETS.md, docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md e
+docs/flutter/screens/05-units/HISTORY.md (come abbiamo lavorato sulla 05).
+Obiettivo: costruire in Flutter la schermata 06, lezioni dell'unità (riferimento ChatGPT
+docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp sul branch lesson-production), insieme alle
+animazioni della versione Angular (src/app/features/lessons), con vibrazioni e luce sui completamenti.
+Deve sostituire il toast «دروس الوحدة: قريبًا» delle unità e chiamare unitCompleted quando finisce l'ultima
+lezione di un'unità; il progresso è condiviso con unità e corsi.
+Segui la procedura: piano della schermata e domande prima di costruire, prompt ChatGPT in blocchi copiabili,
+costruzione, critico con le misure, confronto, video e APK. Tieni HISTORY.md della schermata aggiornato.
+Parla con me in italiano.
+```
+
 ---
 
 # Next session: screen 03, courses (المسارات التعليمية)
