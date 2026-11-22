@@ -1,3 +1,11 @@
+# Next session: screen 05, units (وحدات المقرر)
+
+Branch: `flutter/05-units` (from `flutter/03-courses`). Plan: `docs/flutter/screens/05-units.md` (questions for
+the owner at the bottom), prompts `docs/flutter/prompts/05-units/images-v1.txt`. Bring later screen-03
+corrections in with `git merge origin/flutter/03-courses`.
+
+---
+
 # Next session: screen 03, courses (المسارات التعليمية)
 
 Branch: `flutter/03-courses` (contains the approved side navigation, the rules, the tools and the logs).
