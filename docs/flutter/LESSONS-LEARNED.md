@@ -49,3 +49,9 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
 ## Web build in the cloud container (2026-11-22)
 - Build the review web app with `flutter build web --release --no-web-resources-cdn`: the default build loads
   CanvasKit from gstatic.com, which the headless browser cannot reach here (blank page).
+- The APK version is the commit count on HEAD: in a shallow clone it is tiny (1.0.5) and the phone refuses to
+  update an app with a higher version. Run `git fetch --depth=1000 origin <branch>` before `build-apk.sh`
+  (2026-11-22).
+- `CrossAxisAlignment.end` in a Column under RTL puts children on the LEFT: use `start` for right-aligned Arabic.
+- A screen opened by a review link (initial routes) has nobody awaiting its route result: signal completions through
+  the shared notifiers (`unitCompleted`), not only through `Navigator.pop(result)`.

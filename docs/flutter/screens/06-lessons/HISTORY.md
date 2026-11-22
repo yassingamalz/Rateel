@@ -58,3 +58,21 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
   Scripts: `lessons-capture.js`, `lessons-complete-frames.js`, `lessons-demo.js`.
 - Files: captures `capture-v2-{ref,orig}[-done1|-phone].png`, `compare-v1.jpg`, `completion-frames-{ref,orig}-v1.jpg`,
   `demo-{ref,orig}-v1.mp4`. Widget test: finishing the 3 lessons of unit 1 completes it and opens unit 2's lessons.
+
+## 4. Critic loop (2026-11-22)
+- Critic v1 (`critic-v1.md`, on v2 captures): look A **6.8** (code 7.6, assets 4), look B **6.0**. High: title
+  divider 11u off the title axis and too short (the SVG kept its aspect). Medium: no inner gold glow, teal faint
+  card pattern, mosque too dark, arrow twice as heavy, done card sliver at the rail, thin flat locked rim; look B:
+  text washed out at the flash and during unlock, done card pushed under the rail.
+- v3 fixes: divider drawn in code (62.7u, open diamond), inner glow 3u, locked rim 0.47u gradient + hairline, olive
+  pattern, sage mosque, arrow 3.2×2.8u stroke 0.35u, card radius 5.6u, arch and emblem resized, path faded at the left
+  edge and before the rail; look B: gold fill/ink switch at mid-fill, ✓ in gold on the dark pill, cards stay at the
+  start while they fit (`_pageFor`).
+- Critic v2 (`critic-v2.md`): look A **7.3** (code 8.1), look B **6.5**; remaining medium: mosque flat tint and hard
+  bottom edge (the fade was on a box taller than the image), done-card sliver, pattern contrast.
+- v4 fixes: mosque gradient tint (#7D8E54 → #2F5331) and fade on the image box, cards dropped once only their edge
+  is left before the rail, fade 6u, pattern #5F8541 stronger, pill number/✓ cross-fade overlapped, icon ink on the
+  gold card switches with the text.
+- APK **1.0.290** (the shallow clone first gave 1.0.5: fetch the branch history before `build-apk.sh`, now in
+  LESSONS-LEARNED). Demos `demo-ref-v2.mp4`, `demo-orig-v2.mp4` (full loop: locked tap, 3 lessons, unit completion,
+  next unit's lessons open). Comparison `compare-v2.jpg`.

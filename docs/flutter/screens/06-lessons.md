@@ -1,6 +1,6 @@
 # Screen 06: lessons of the unit (دروس الوحدة)
 
-Status: 🟡 plan, waiting for the owner's answers. History: `06-lessons/HISTORY.md`
+Status: 🟡 v4 built in two looks (A ChatGPT, B original improved), waiting for the owner's choice and answers. History: `06-lessons/HISTORY.md`
 Branch: `flutter/06-lessons`, from `flutter/05-units` (contains side nav, courses, units)
 Reference: `docs/flutter/screens/06-lessons/reference.webp` (1844×853, u = 8.53 px; lesson-production
 `docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp`)
