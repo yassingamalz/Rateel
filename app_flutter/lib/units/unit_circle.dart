@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:ui' show ImageFilter, lerpDouble;
+import 'dart:ui' show lerpDouble;
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
@@ -152,8 +152,6 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  if (_locked > 0 && lockedStyle == 'a') _frost(u),
-                  if (_locked > 0 && lockedStyle == 'd') _plate(u),
                   if (_ripple.value > 0 && _ripple.value < 1) _rippleRing(u),
                   if (widget.unlock < 1) _padlock(u),
                   if (widget.unlock > 0) _badge(u),
@@ -240,107 +238,36 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   /// lights up).
   double get _locked => 1 - _seg(widget.unlock, 0.3, 0.8);
 
-  /// Locked look under review (owner, 2026-11-22), `?locked=a|b|c|d`:
-  /// a = Angular original (70% opacity, frosted disc behind the padlock),
-  /// b = dark veil, c = desaturated and dim, d = dark veil + glass plate.
+  /// Locked units are darkened by a veil (owner's choice B, 2026-11-22),
+  /// which lifts while the padlock flies off.
   Widget _lockedLook(double u, Widget child) {
     final l = _locked;
     if (l == 0) return child;
-    switch (lockedStyle) {
-      case 'a':
-        return Opacity(opacity: 1 - 0.3 * l, child: child);
-      case 'c':
-        final sat = 1 - 0.85 * l;
-        final k = 1 - 0.3 * l;
-        const lr = 0.2126, lg = 0.7152, lb = 0.0722;
-        List<double> row(double r0, double g0, double b0) => [
-          (lr * (1 - sat) + r0 * sat) * k,
-          (lg * (1 - sat) + g0 * sat) * k,
-          (lb * (1 - sat) + b0 * sat) * k,
-          0,
-          0,
-        ];
-        return ColorFiltered(
-          colorFilter: ColorFilter.matrix([
-            ...row(1, 0, 0),
-            ...row(0, 1, 0),
-            ...row(0, 0, 1),
-            0,
-            0,
-            0,
-            1,
-            0,
-          ]),
-          child: child,
-        );
-      default: // b, d: dark veil
-        final k = 1 - (lockedStyle == 'd' ? 0.35 : 0.45) * l;
-        return ColorFiltered(
-          colorFilter: ColorFilter.matrix([
-            k,
-            0,
-            0,
-            0,
-            0,
-            0,
-            k,
-            0,
-            0,
-            0,
-            0,
-            0,
-            k,
-            0,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-          ]),
-          child: child,
-        );
-    }
-  }
-
-  /// Style a: frosted disc behind the padlock (Angular `backdrop-filter`).
-  Widget _frost(double u) {
-    final l = _locked;
-    return Positioned(
-      top: u * (_r - 6.2) - u * 8,
-      child: Opacity(
-        opacity: l,
-        child: ClipOval(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: u * 0.5, sigmaY: u * 0.5),
-            child: Container(
-              width: u * 16,
-              height: u * 16,
-              color: RateelColors.unitDiscMid.withValues(alpha: 0.35),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Style d: dark glass plate with an emerald rim behind the padlock.
-  Widget _plate(double u) {
-    final l = _locked;
-    return Positioned(
-      top: u * (_r - 6.2) - u * 7.5,
-      child: Opacity(
-        opacity: l,
-        child: Container(
-          width: u * 15,
-          height: u * 15,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: RateelColors.lockDisc.withValues(alpha: 0.72),
-            border: Border.all(color: RateelColors.lockRim, width: u * 0.25),
-          ),
-        ),
-      ),
+    final k = 1 - 0.45 * l;
+    return ColorFiltered(
+      colorFilter: ColorFilter.matrix([
+        k,
+        0,
+        0,
+        0,
+        0,
+        0,
+        k,
+        0,
+        0,
+        0,
+        0,
+        0,
+        k,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+      ]),
+      child: child,
     );
   }
 

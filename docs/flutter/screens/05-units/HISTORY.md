@@ -79,6 +79,15 @@ Branch `flutter/05-units`, created on 2026-11-22 from `flutter/03-courses`. Plan
 - Background pattern: the owner keeps the current U6 tile. The U6b image delivered later (8-point stars,
   horizontal overlap bands, edges not seamless) is archived as `07b_girih_tile_v2_unused.png`, not used.
 
+## 8. Locked look and unlock (after the v5 phone test)
+- Owner: keep the padlock fly-off; the **unit icon never changes** when it opens (book stays a book, video keeps
+  the play disc), it only goes from dark to lit with a light ring; padlock **centred on the icon** of every type and
+  **larger** (9u); locked units must look closed.
+- Angular original checked: locked unit at 70% opacity, frosted disc (`backdrop-filter: blur(4px)`) behind a
+  muted lock (`unit-card.component.scss`).
+- Four looks shown (`locked-styles.jpg`: A Angular, B dark veil, C desaturated, D veil + glass plate);
+  **owner chose B** (45% dark veil that lifts while the padlock flies off). Frames: `unlock-frames-v6.jpg`.
+
 ## Open after screen 05
 - Owner approval on the phone → pull request `flutter/05-units` into `master` (after #38 and the screen 03 PR).
 - Stable APK signing key (each new cloud container signs with a new debug key: the phone asks to uninstall).

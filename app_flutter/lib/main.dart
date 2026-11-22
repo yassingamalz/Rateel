@@ -29,7 +29,6 @@ Future<void> main() async {
   if (LearnFlow.startUnits != null && startUnit != null) {
     unitsProgressOf(LearnFlow.startUnits!).current = startUnit;
   }
-  lockedStyle = Uri.base.queryParameters['locked'] ?? lockedStyle;
   lockSize =
       double.tryParse(Uri.base.queryParameters['lock'] ?? '') ?? lockSize;
   unitCompleted.value = int.tryParse(
