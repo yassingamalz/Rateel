@@ -257,6 +257,8 @@ class _LessonCardState extends State<LessonCard>
           shaderCallback: (r) => const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            // Stronger lattice, as the reference (critic v2 A5).
+            stops: [0, 0.45],
             colors: [Color(0x00000000), Color(0xFF000000)],
           ).createShader(r),
           child: SvgPicture.asset(
@@ -477,8 +479,8 @@ class _LessonCardState extends State<LessonCard>
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Opacity(opacity: 1 - _seg(d, 0.3, 0.4), child: text),
-              Opacity(opacity: _seg(d, 0.4, 0.5), child: check),
+              Opacity(opacity: 1 - _seg(d, 0.3, 0.45), child: text),
+              Opacity(opacity: _seg(d, 0.33, 0.48), child: check),
             ],
           ),
         ),
@@ -496,8 +498,8 @@ class _LessonCardState extends State<LessonCard>
       LessonType.listen => 'assets/ui/units/microphone.svg',
       LessonType.test => 'assets/ui/units/test_scroll.svg',
     };
-    final onGold =
-        _orig && widget.active && widget.done < 1 && widget.unlock >= 1;
+    // Dark on the gold fill, switching with the text ink (critic v2 B7).
+    final onGold = _orig && _goldFill > 0.5;
     final lit = _seg(widget.unlock, 0.45, 1);
     final top = onGold
         ? RateelColors.origCardText

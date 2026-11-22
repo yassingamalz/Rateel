@@ -317,7 +317,7 @@ class _LessonsScreenState extends State<LessonsScreen>
             stops: [
               (g.u * 8 / r.width).clamp(0.0, 1.0),
               (g.u * 18 / r.width).clamp(0.0, 1.0),
-              ((r.width - g.u * 3) / r.width).clamp(0.0, 1.0),
+              ((r.width - g.u * 6) / r.width).clamp(0.0, 1.0),
               1,
             ],
             colors: const [
@@ -408,6 +408,9 @@ class _LessonsScreenState extends State<LessonsScreen>
     double done = i < _done ? 1 : 0;
     if (i == _completing) done = _flash.value;
     final cx = _centerX(g, page, i);
+    // A card gliding under the rail is dropped once only its edge is left
+    // (critic v2 A8).
+    if (cx - g.card.width / 2 > g.w - g.u * 5) return const SizedBox.shrink();
     return Positioned(
       left: cx - g.card.width / 2,
       top: half - g.card.height / 2,
@@ -582,7 +585,9 @@ class _LessonsScreenState extends State<LessonsScreen>
         left: u * 30.5,
         top: u * 11.7,
         width: u * 33.4,
-        height: u * 23,
+        // The image is 20.1u tall in this box: the fade ends with it
+        // (critic v2 A6), the sage tint darkens towards the ground.
+        height: u * 20.1,
         child: _settle(
           g,
           IgnorePointer(
@@ -591,15 +596,24 @@ class _LessonsScreenState extends State<LessonsScreen>
               shaderCallback: (r) => const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.72, 1.0],
+                stops: [0.6, 1.0],
                 colors: [Color(0xFF000000), Color(0x00000000)],
               ).createShader(r),
-              child: Image.asset(
-                'assets/ui/decor/mosque.webp',
-                fit: BoxFit.contain,
-                alignment: Alignment.topCenter,
-                color: RateelColors.lessonMosqueTint,
-                colorBlendMode: BlendMode.srcATop,
+              child: ShaderMask(
+                blendMode: BlendMode.srcATop,
+                shaderCallback: (r) => const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    RateelColors.lessonMosqueTint,
+                    RateelColors.lessonMosqueGround,
+                  ],
+                ).createShader(r),
+                child: Image.asset(
+                  'assets/ui/decor/mosque.webp',
+                  fit: BoxFit.contain,
+                  alignment: Alignment.topCenter,
+                ),
               ),
             ),
           ),
