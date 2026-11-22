@@ -85,7 +85,7 @@ class RateelColors {
   static const unitDiscTop = Color(0xFF104631);
   static const unitDiscMid = Color(0xFF053C27);
   static const unitDiscBottom = Color(0xFF013524);
-  static const unitMosqueTint = Color(0x8C4A6A33); // srcATop, 55%
+  static const unitMosqueTint = Color(0xCC3C5426); // srcATop, 80%
   static const unitDiscRim = Color(0xFF154F37);
   static const unitDiscEdge = Color(0xFF0B422A); // lit edge of the glass disc
   // Ring rims (critic v2): lit at the top and bottom, deeper on the sides.
@@ -106,15 +106,24 @@ class RateelColors {
   static const padlockTop = Color(0xFF2E8A5E);
   static const padlockBottom = Color(0xFF1B6644);
   static const padlockRim = Color(0xFFE8CF86);
-  static const girihLine = Color(0xFF2C6B4F); // U6 background lattice
+  static const girihLine = Color(0xFF2F6B3C); // U6 background lattice
   static const unitLine = Color(0xFFC9A23A); // line between units, 100%
   static const unitDiamond = Color(0xFFECAB1C);
   static const unitDiamondMid = Color(0xFFF2B32C);
   static const unitDiamondTop = Color(0xFFFFE76D);
   static const unitLineEdge = Color(0xFF00261A);
-  static const unitCornerTop = Color(0xFFFAD26A);
-  static const unitCornerBottom = Color(0xFFE9A41E);
-  static const unitArch = Color(0xFFF7C13A);
+  static const unitCornerTop = Color(0xFFF3B526);
+  static const unitCornerBottom = Color(0xFFC98816);
+  // Header arch of screen 05, gold along the stroke (critic v3).
+  static const archEnd = Color(0xFFCB9C31);
+  static const archTail = Color(0xFFEEAA21);
+  static const archShoulder = Color(0xFFF9CA32);
+  static const archApex = Color(0xFFFFCA32);
+  // Title divider (screens 03, 05): brightest next to the diamond.
+  static const dividerEndClear = Color(0x00B2983A);
+  static const dividerEnd = Color(0xFFB2983A);
+  static const dividerMid = Color(0xFFEFC246);
+  static const dividerPeak = Color(0xFFF8D053);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

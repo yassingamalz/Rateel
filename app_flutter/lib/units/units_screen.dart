@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:ui' show PointerDeviceKind, lerpDouble;
+import 'dart:ui' show lerpDouble;
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
@@ -98,8 +98,14 @@ class _UnitsScreenState extends State<UnitsScreen>
   double _fillTo = 0;
   int _lastTick = 0;
 
-  PageController? _pages;
-  double _pageFraction = 0;
+  /// Path position in pages (0 = first unit centred). A custom track rather
+  /// than a PageView, so the units on both sides of the screen are always
+  /// drawn, also the completed one next to the rail (critic v3, D15).
+  late final AnimationController _scroll = AnimationController.unbounded(
+    vsync: this,
+    value: _current.clamp(0, math.max(0, _units.length - 1)).toDouble(),
+  );
+  double _dragPitch = 1;
 
   int get _current => _state.current;
 
@@ -123,26 +129,36 @@ class _UnitsScreenState extends State<UnitsScreen>
       _flash,
       _flow,
       _unlock,
+      _scroll,
     ]) {
       c.dispose();
     }
-    _pages?.dispose();
     super.dispose();
   }
 
-  PageController _controllerFor(double fraction) {
-    if (_pages == null || (fraction - _pageFraction).abs() > 0.001) {
-      final page = _pages?.hasClients == true
-          ? _pages!.page ?? 0
-          : _current.toDouble();
-      _pages?.dispose();
-      _pageFraction = fraction;
-      _pages = PageController(
-        viewportFraction: fraction,
-        initialPage: page.round(),
-      );
-    }
-    return _pages!;
+  Future<void> _glideTo(int i, int ms) => _scroll.animateTo(
+    i.toDouble(),
+    duration: Duration(milliseconds: ms),
+    curve: Curves.easeInOutCubic,
+  );
+
+  void _onDrag(DragUpdateDetails d) {
+    if (_completing != null) return;
+    _scroll.stop();
+    // RTL path: dragging to the right brings the next units in.
+    final max = (_units.length - 1).toDouble();
+    var v = _scroll.value + d.delta.dx / _dragPitch;
+    if (v < 0) v = _scroll.value + d.delta.dx / _dragPitch * 0.35;
+    if (v > max) v = _scroll.value + d.delta.dx / _dragPitch * 0.35;
+    _scroll.value = v;
+  }
+
+  void _onDragEnd(DragEndDetails d) {
+    if (_completing != null) return;
+    final v = (d.primaryVelocity ?? 0) / _dragPitch;
+    var target = (_scroll.value + v * 0.25).round();
+    target = target.clamp(0, _units.length - 1);
+    _glideTo(target, 420);
   }
 
   void _onUnitCompleted() {
@@ -196,16 +212,9 @@ class _UnitsScreenState extends State<UnitsScreen>
   ///    screen, which plays the course completion.
   Future<void> _complete(int i) async {
     if (i != _current || i >= _units.length) return;
-    final pages = _pages;
     setState(() => _completing = i);
     if (_entry.isAnimating) await _entry.forward();
-    if (pages != null && pages.hasClients && (pages.page ?? 0).round() != i) {
-      await pages.animateToPage(
-        i,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOutCubic,
-      );
-    }
+    if ((_scroll.value - i).abs() > 0.01) await _glideTo(i, 500);
     Sounds.fill();
     if (_state.progress[i] < 0.5) {
       await _fillRing(i, 0.5);
@@ -240,13 +249,7 @@ class _UnitsScreenState extends State<UnitsScreen>
       _completing = null;
     });
     _resetSequence();
-    if (pages != null && pages.hasClients) {
-      await pages.animateToPage(
-        i + 1,
-        duration: const Duration(milliseconds: 750),
-        curve: Curves.easeInOutCubic,
-      );
-    }
+    await _glideTo(i + 1, 750);
     Haptics.success();
     // Owner (2026-11-22): the next unit's lessons open by themselves.
     await Future<void>.delayed(const Duration(milliseconds: 800));
@@ -305,46 +308,57 @@ class _UnitsScreenState extends State<UnitsScreen>
   }
 
   Widget _path(_Geo g) {
-    final pages = _controllerFor(g.pitch / (g.w - g.trackRightInset));
+    _dragPitch = g.pitch;
     return Positioned(
       left: 0,
-      right: g.trackRightInset,
+      right: 0,
       top: g.circleCenterY - g.trackHalfHeight,
       height: g.trackHalfHeight * 2,
-      child: AnimatedBuilder(
-        animation: Listenable.merge([
-          _entry,
-          _ambient,
-          _shake,
-          _fill,
-          _half,
-          _flash,
-          _flow,
-          _unlock,
-          pages,
-        ]),
-        builder: (context, _) => ScrollConfiguration(
-          behavior: const _DragEverywhere(),
-          child: PageView.builder(
-            controller: pages,
-            padEnds: false,
-            clipBehavior: Clip.none,
-            allowImplicitScrolling: true,
-            physics: _completing != null
-                ? const NeverScrollableScrollPhysics()
-                : null,
-            itemCount: _units.length,
-            itemBuilder: (context, i) => _page(g, pages, i),
-          ),
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onHorizontalDragUpdate: _onDrag,
+        onHorizontalDragEnd: _onDragEnd,
+        child: AnimatedBuilder(
+          animation: Listenable.merge([
+            _entry,
+            _ambient,
+            _shake,
+            _fill,
+            _half,
+            _flash,
+            _flow,
+            _unlock,
+            _scroll,
+          ]),
+          builder: (context, _) {
+            final page = _scroll.value;
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                for (var i = 0; i < _units.length; i++)
+                  if ((i - page).abs() < 3.2)
+                    Positioned(
+                      // Unit i centre: firstCenterFromRight + (i − page)·pitch
+                      // from the content's right edge.
+                      left:
+                          g.w -
+                          g.firstCenterFromRight -
+                          (i - page) * g.pitch -
+                          g.pitch / 2,
+                      top: 0,
+                      width: g.pitch,
+                      height: g.trackHalfHeight * 2,
+                      child: _page(g, page, i),
+                    ),
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _page(_Geo g, PageController pages, int i) {
-    final page = pages.hasClients && pages.position.haveDimensions
-        ? pages.page ?? 0
-        : _current.toDouble().clamp(0, _units.length - 1);
+  Widget _page(_Geo g, double page, int i) {
     final e = _entry.value;
     // Circles pop in right to left, starting at the one in focus.
     final order = (i - page.round()).clamp(0, 4);
@@ -429,7 +443,7 @@ class _UnitsScreenState extends State<UnitsScreen>
     final left = g.pitch / 2 - g.ring / 2 - gap;
     return Positioned(
       left: left,
-      top: g.trackHalfHeight - g.u * 2.5,
+      top: g.trackHalfHeight - g.u * 2.5 - g.u * 0.2,
       width: gap,
       height: g.u * 5,
       child: IgnorePointer(
@@ -550,9 +564,9 @@ class _UnitsScreenState extends State<UnitsScreen>
       // Header arch (CR-01), centred on the title (owner, 2026-11-22).
       Positioned(
         left: cx - g.archW / 2,
-        top: g.u * 2.4,
+        top: g.u * 2.0,
         width: g.archW,
-        height: g.u * 14,
+        height: g.u * 13.2,
         child: _settle(
           g,
           IgnorePointer(
@@ -564,13 +578,24 @@ class _UnitsScreenState extends State<UnitsScreen>
                 stops: [0.5, 1.0],
                 colors: [Color(0xFF000000), Color(0x00000000)],
               ).createShader(r),
-              child: SvgPicture.asset(
-                'assets/ui/decor/header_arch.svg',
-                fit: BoxFit.fill,
-                // Warmer gold, as in reference 05 (critic v2).
-                colorFilter: const ColorFilter.mode(
-                  RateelColors.unitArch,
-                  BlendMode.srcIn,
+              // Gold along the stroke: darker ends, bright apex (critic v3).
+              child: ShaderMask(
+                blendMode: BlendMode.srcIn,
+                shaderCallback: (r) => const LinearGradient(
+                  stops: [0, 0.15, 0.32, 0.5, 0.68, 0.85, 1],
+                  colors: [
+                    RateelColors.archEnd,
+                    RateelColors.archTail,
+                    RateelColors.archShoulder,
+                    RateelColors.archApex,
+                    RateelColors.archShoulder,
+                    RateelColors.archTail,
+                    RateelColors.archEnd,
+                  ],
+                ).createShader(r),
+                child: SvgPicture.asset(
+                  'assets/ui/decor/header_arch.svg',
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -581,7 +606,7 @@ class _UnitsScreenState extends State<UnitsScreen>
       Positioned(
         left: cx - g.u * 30,
         width: g.u * 60,
-        top: g.u * 17.5 - g.u * 6,
+        top: g.u * (17.5 - 0.65) - g.u * 6,
         height: g.u * 12,
         child: _settle(
           g,
@@ -592,7 +617,7 @@ class _UnitsScreenState extends State<UnitsScreen>
                   'وحدات المقرر',
                   textDirection: TextDirection.rtl,
                   style: readex(
-                    g.u * 7.2,
+                    g.u * 7.5,
                     weight: 560,
                     color: Colors.transparent,
                   ).copyWith(height: 1.35, shadows: titleShadows(g.u)),
@@ -608,7 +633,7 @@ class _UnitsScreenState extends State<UnitsScreen>
                     'وحدات المقرر',
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      g.u * 7.2,
+                      g.u * 7.5,
                       weight: 560,
                       color: Colors.white,
                     ).copyWith(height: 1.35),
@@ -621,10 +646,10 @@ class _UnitsScreenState extends State<UnitsScreen>
       ),
       // Title divider (CR-06).
       Positioned(
-        left: cx - g.u * 18.5,
-        top: g.u * 24.2 - g.u * 1.6,
-        width: g.u * 37,
-        height: g.u * 3.2,
+        left: cx - g.u * 17.25,
+        top: g.u * 24.2 - g.u * 1.8,
+        width: g.u * 34.5,
+        height: g.u * 3.6,
         child: _settle(
           g,
           IgnorePointer(
@@ -633,13 +658,13 @@ class _UnitsScreenState extends State<UnitsScreen>
               shaderCallback: (r) => const LinearGradient(
                 stops: [0, .12, .33, .5, .67, .88, 1],
                 colors: [
-                  Color(0x00B2983A),
-                  Color(0xFFB2983A),
-                  Color(0xFFEFC246),
-                  Color(0xFFF8D053),
-                  Color(0xFFEFC246),
-                  Color(0xFFB2983A),
-                  Color(0x00B2983A),
+                  RateelColors.dividerEndClear,
+                  RateelColors.dividerEnd,
+                  RateelColors.dividerMid,
+                  RateelColors.dividerPeak,
+                  RateelColors.dividerMid,
+                  RateelColors.dividerEnd,
+                  RateelColors.dividerEndClear,
                 ],
               ).createShader(r),
               child: SvgPicture.asset(
@@ -652,7 +677,7 @@ class _UnitsScreenState extends State<UnitsScreen>
       ),
       // «تغيير المقرر»: back to the courses screen.
       Positioned(
-        left: g.u * 7.2,
+        left: g.u * 7.5,
         top: g.u * 13.1,
         width: g.u * 30.5,
         height: g.u * 7.8,
@@ -797,7 +822,7 @@ class _ChangeCourseButtonState extends State<_ChangeCourseButton> {
                     'تغيير المقرر',
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      u * 3.15,
+                      u * 2.9,
                       weight: 420,
                       color: RateelColors.cream,
                     ).copyWith(height: 1),
@@ -810,13 +835,6 @@ class _ChangeCourseButtonState extends State<_ChangeCourseButton> {
       ),
     );
   }
-}
-
-class _DragEverywhere extends MaterialScrollBehavior {
-  const _DragEverywhere();
-
-  @override
-  Set<PointerDeviceKind> get dragDevices => PointerDeviceKind.values.toSet();
 }
 
 double _interval(double t, double a, double b) =>
@@ -1109,5 +1127,5 @@ class _Geo {
   double get titleCenterX => w - u * 31.7;
 
   /// Arch width: it frames the title without running under the rail.
-  double get archW => u * 48;
+  double get archW => u * 45.4;
 }

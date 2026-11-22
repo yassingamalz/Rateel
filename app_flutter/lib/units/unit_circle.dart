@@ -124,7 +124,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                         painter: _RingPainter(
                           u: u,
                           progress: widget.progress,
-                          unlock: _seg(widget.unlock, 0.55, 1),
+                          unlock: _seg(widget.unlock, 0.62, 1),
                           done: widget.done,
                           flash: widget.flash,
                           breath: _open && widget.done == 0
@@ -209,7 +209,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                 ),
                 gradient: const RadialGradient(
                   stops: [0.80, 0.985],
-                  colors: [Color(0x00000000), RateelColors.unitDiscEdge],
+                  colors: [Color(0x000B422A), RateelColors.unitDiscEdge],
                 ),
               ),
             ),
@@ -228,13 +228,13 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     // (55–100%).
     final t = widget.unlock;
     final iconOut = Curves.easeIn.transform(_seg(t, 0.35, 0.6));
-    final playIn = _seg(t, 0.55, 1);
+    final playIn = _seg(t, 0.62, 1);
     return [
       if (iconOut < 1)
         Positioned(
-          top: u * (_r - 6.2) - u * 5.6,
+          top: u * (_r - 6.2) - u * 5.6 + u * 2 * iconOut,
           child: Opacity(
-            opacity: 1 - _seg(iconOut, 0.6, 1),
+            opacity: 1 - _seg(iconOut, 0.85, 1),
             child: Transform.scale(
               scale: 1 - 0.5 * iconOut,
               child: _typeIcon(u),
@@ -297,8 +297,9 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
             textDirection: TextDirection.rtl,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            // Locked titles 4.6u, open ones 4.9u (reference).
             style: readex(
-              u * 4.9,
+              u * lerpDouble(4.6, 4.9, _seg(widget.unlock, 0.62, 1))!,
               weight: 560,
               color: titleCream,
             ).copyWith(height: 1.22, shadows: titleShadows(u)),
@@ -407,14 +408,15 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final book = widget.unit.type == UnitType.reading;
     final size = book ? 6.6 : 5.4;
     final dx = book ? 0.0 : 4.0;
-    final dy = book ? 5.5 : 3.0;
+    final dy = book ? 6.0 : 3.0;
     return Positioned(
       top: u * (_r - dy) - u * size / 2 - u * 5 * t,
       left: u * (_r + dx) - u * size / 2 + widget.lockShake * u * 0.9,
       width: u * size,
       height: u * size,
       child: Opacity(
-        opacity: (1 - t * 1.1).clamp(0.0, 1.0),
+        // Solid while it lifts off the book, fades on the second half.
+        opacity: 1 - _seg(t, 0.5, 1),
         child: Transform.rotate(
           angle: widget.lockShake * 0.18 - t * 0.6,
           child: Transform.scale(
@@ -433,7 +435,7 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
     final pct = (widget.progress * 100).round();
     final shine = (widget.ambient * 4).clamp(0.0, 1.0);
     return Positioned(
-      top: -u * 4.9,
+      top: -u * 4.5,
       left: u * _r - u * 4.9,
       width: u * 9.8,
       height: u * 9.8,

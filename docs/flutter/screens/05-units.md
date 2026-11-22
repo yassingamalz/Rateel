@@ -1,6 +1,6 @@
 # Screen 05: course units (وحدات المقرر)
 
-Status: 🟡 v2 with the owner's assets (U1–U6 + corners) and the critic-v1 code fixes; waiting for the owner's review (`compare-v2.jpg`, `demo-v2.mp4`, APK) and the token conflicts in DECISIONS.md
+Status: 🟡 v5 (critic v3: 8.1/10 on v4, medium fixes applied in v5); waiting for the owner's phone review, asset U6b and the token decisions in DECISIONS.md
 Branch: `flutter/05-units`, from `flutter/03-courses` (contains the side nav and the courses screen)
 Reference: `docs/flutter/screens/05-units/reference.webp` (1672×941, glassy gamified, dark;
 lesson-production `docs/design/glassy-gamified/screens/05-unita-del-corso.webp`)
