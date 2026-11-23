@@ -1,6 +1,6 @@
 # Screen 06: lessons of the unit (دروس الوحدة)
 
-Status: 🟡 look B chosen (2026-11-23), padlock position to confirm. History: `06-lessons/HISTORY.md`
+Status: 🟡 look B built (2026-11-23), waiting for the owner's phone test and approval; padlock on the icon (option 1) to confirm. History: `06-lessons/HISTORY.md`
 Branch: `flutter/06-lessons`, from `flutter/05-units` (contains side nav, courses, units)
 Reference: `docs/flutter/screens/06-lessons/reference.webp` (1844×853, u = 8.53 px; lesson-production
 `docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp`)
@@ -71,7 +71,14 @@ Tapping an open lesson needs a way to "finish" it. See question 6.
 Review aids (web): `?lessons=<course>,<unit>`, `?lesson=<i>`, `?completeLesson=<i>`; long press on the
 lesson in progress plays its completion.
 
-## Questions for the owner (before building)
+## Owner decisions (2026-11-22 / 2026-11-23)
+Two trials built (A ChatGPT reference, B original Angular screen improved); **B chosen**, cards and title ×1.4,
+A removed. Header title = unit title; locked = green padlock + dark veil (position on the icon, to confirm);
+placeholder lesson page until each lesson has its own screen; lesson completion = light + completion sound +
+`Haptics.lessonDone`; icons L1–L5 from the owner's original PNGs. The layout and card description above are the
+plan for look A (history); look B is described in `06-lessons/HISTORY.md` §3, §5, §6.
+
+## Questions for the owner (before building, answered above)
 1. **Header title**: the reference (and the Angular app) shows the first lesson's title «مقدمة في علم التجويد».
    Proposed: the **unit title** (e.g. «مقدمة في التجويد»), since the cards already carry the lesson titles.
 2. **Header layout**: centred arch with the book emblem + title + back circle, as in the reference (screen 05 has

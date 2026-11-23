@@ -100,3 +100,35 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
   (`icons-check.png`): the SVGs are reconstructions (different book, headphones, mic, clipboard) → original PNGs,
   cleaned of a faint haze (alpha ≤ 40 scattered around the drawing) and trimmed → `assets/ui/lessons/<type>.webp`.
 - APK **1.0.295** (look B, owner's icons, padlock on the icon, lesson sound + haptic); demo `demo-v4.mp4`, frames `completion-frames-v4.jpg`, captures `capture-v6-*`.
+- Shared assets: the cleaned full-resolution icons are in `docs/design-assets/lessons/icons-2026-11-23/PNG_puliti/`
+  (README there) for other streams; `ASSETS.md` section "Lessons" lists sources and app copies.
+
+## 7. Approval
+- Waiting for the owner's phone test of APK 1.0.295 and the padlock position (option 1 on the icon is built).
+  The screen is marked approved in `DECISIONS.md` only after the owner confirms.
+
+## Timeline at a glance
+| Step | Version / APK | Critic | Owner |
+|---|---|---|---|
+| Plan, reference, prompts L1–L5, 9 questions | — | — | asked to see the original Angular screen |
+| Angular original captured (`angular-original.jpg`) | — | — | two trials: A ChatGPT, B original improved |
+| v1/v2 both looks, review switch, full lesson → unit → course flow | 1.0.290 | A 6.8 / B 6.0 | — |
+| v3 critic fixes (divider, glow, rims, mosque, arrow, B ink and paging) | — | A 7.3 / B 6.5 | — |
+| v4 critic fixes (mosque gradient, rail sliver, pattern, pill) | 1.0.290 | A 7.5 / B 6.6, no high/medium | B cards and title larger |
+| v5 look B ×1.4 (previews ×1 / ×1.35 / ×1.4), long titles shrink | 1.0.294 | — | **B chosen**; answers to the questions; icons L1–L5 delivered |
+| v6 look A removed, owner's icons, lesson sound + haptic, padlock options | 1.0.295 | v4 (final) | padlock position, approval pending |
+
+## Open after screen 06
+- Owner: padlock position (on the icon / card centre) and approval after the phone test.
+- Lesson pages (07+): each lesson type gets its own screen; the placeholder `lesson_page.dart` is replaced then
+  (it returns `true` when the lesson is finished: keep that contract).
+- Data: course 02 file `intro-noon-meem-unit2.json` is not mapped (no matching unit); units of courses 03–07 and 12
+  have no lessons yet («قريبًا»).
+- Progress is kept for the session only (real storage with the backend).
+- Stable APK signing key (each new container signs with a new debug key).
+
+## Files of this screen
+Reference `reference.webp` (ChatGPT, look A history); Angular original `angular-original.jpg`, `locked-compare.jpg`;
+captures `capture-v1…v6-*.png`; comparisons `compare-v1/v2.jpg`; previews `orig-scale-preview-{pc,phone}.jpg`,
+`lock-position-options.jpg`; icons check `icons-check.png`; completion frames `completion-frames-*.jpg`; demos
+`demo-ref-v2.mp4`, `demo-orig-v3.mp4`, `demo-v4.mp4`; critic reports `critic-v1…v4.md`.

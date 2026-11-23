@@ -102,7 +102,11 @@ identical and crisp, the PNG where it is closer to the reference.
 | `sounds/fill-sound.mp3` | Angular app `public/sounds/fill-sound.mp3` | unit completion (`Sounds.fill`) | |
 | reused | `header_arch.svg`, `mosque.webp` (olive tint), `crescent_star.svg`, `title_divider.svg`, `card_pattern.svg` (disc bottom), `glyphs/play`, `check` | screen 05 | |
 
-### Lessons (screen 06), 2026-11-22
+### Lessons (screen 06), 2026-11-22 / 2026-11-23
+Sources: `docs/design-assets/lessons/` — `angular-original/` (the Angular background pattern) and
+`icons-2026-11-23/` (lesson-type icons L1–L5: originals, cleaned full-resolution PNGs in `PNG_puliti/` for any other
+use, ChatGPT SVG reconstructions kept as spares; see its README).
+
 | App file | Source | Used in | Notes |
 |---|---|---|---|
 | `ui/decor/angular_pattern_2.webp` | `lessons/angular-original/islamic-pattern-2-dark.svg` (Angular `src/assets/images/`, an SVG wrapping a 1000 px gold #DAA520 PNG) | look B background | resized to 700 px; tiled 82u, turned 50°, 6% (Angular: 700 px, 50°, 4%) |
