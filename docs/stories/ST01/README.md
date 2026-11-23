@@ -29,7 +29,7 @@ Leave up to 5 seconds for episode identification if required; no animated text i
 
 ## First visual reference
 
-`assets/st01-sc01-concept.webp` — initial landscape **draft**. This figure, if used, is an **anonymous atmospheric traveler**, *not a representation of Prophet Muḥammad ﷺ*. The mountain is an **evocative stylization**, not a topographically accurate depiction of Jabal al-Nūr.
+`assets/st01-sc01-composition.svg` — original scalable composition **draft**, committed to GitHub. A separate AI-rendered 1672×941 PNG art test was generated in the conversation but is **not yet uploaded to GitHub**. This figure, if used, is an **anonymous atmospheric traveler**, *not a representation of Prophet Muḥammad ﷺ*. The mountain is an **evocative stylization**, not a topographically accurate depiction of Jabal al-Nūr.
 
 For the actual final scene, consider a **figure-free** variant if religious reviewers prefer. Maintain one style across the complete sequence.
 
