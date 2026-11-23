@@ -25,3 +25,16 @@
 - Do not re-use the game Journey's characters, scarf pattern, logos or other protectable details. The only borrowed quality is the general contemplative, painterly feeling of vast landscapes.
 
 See [SHOTLIST-v2.md](SHOTLIST-v2.md) and [VISUAL-BIBLE.md](../VISUAL-BIBLE.md).
+
+## Newly generated visual references (same work session)
+
+| Image | Intended use | Editorial status |
+| --- | --- | --- |
+| [SC03 empty cave](assets/SC03-empty-cave-new.webp) | Stronger people-free cave reference with warm light, night sky, crescent moon | **New visual draft**, suitable direction; beam and lunar phase remain metaphorical / imaginative |
+| [SC03 calligraphy experiment](assets/drafts/SC03-calligraphy-test-not-approved.webp) | Experiment with verses drawn into a light column | **REJECT for final text:** generative Arabic is not authoritative; retouch and typeset from a verified muṣḥaf |
+| [Eight-shot storyboard A](assets/drafts/ST01-storyboard-overview-A.webp) | Mood and compositional overview | **CONCEPT ONLY:** text inaccuracies, reused figure-based imagery, and editorial wording to correct |
+| [Eight-shot storyboard B](assets/drafts/ST01-storyboard-overview-B.webp) | Alternative overview of shot sequence | **CONCEPT ONLY:** text inaccuracies and figure-based imagery; not an approved script or layout |
+
+**No standalone, approved full-resolution frames for SC05 and SC06 exist yet.** The overview boards illustrate possible compositions, but their small panels are not production stills. Their final image prompts are ready in [SCENE-PROMPTS-v2.md](SCENE-PROMPTS-v2.md).
+
+A new local ZIP delivered in the ChatGPT conversation (`Rateel_ST01_Visual_References_v2.zip`) contains **12 untouched original PNGs** (the original eight + the four subsequent drafts); the GitHub assets are high-quality WebP exports.
