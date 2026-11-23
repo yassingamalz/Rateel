@@ -56,3 +56,23 @@ White-gold backlight, diffuse shafts, mist and sunlight **stand for a reverent v
 ## Repo organization
 
 Proposed standalone repository name: `yassingamalz/rateel-stories` (not yet created). Current work is staged in `yassingamalz/Rateel` branch `stories/st01-visual-pack-20261123`, ready to migrate. No app code changed.
+
+
+## Approved direction: time of day as a narrative device (owner review, 2026-11-23)
+
+The user approved the **poetic desert-journey visual direction** and explicitly requested variable times of day: **dawn, daylight, sunset, blue hour, full night and moonlight**, while preserving one visual language. The light should shift to express contemplation, return, beginning, mystery and reassurance; never add temporal claims to the historical narration without a source.
+
+- **Dawn:** revelation story opening or new beginning; warm pale gold on sandstone.
+- **Day:** educational and travel sequences; sage-green sky, broad atmospheric perspective.
+- **Sunset / blue hour:** reflective solitude; muted amber contrasted with blue-violet.
+- **Night / moon:** quiet, reverent desert and cave setting; indigo shadows with subdued warm practical light.
+- **White-gold sacred metaphor:** one restrained shaft or diffuse wash where appropriate. Not a representation of how revelation physically appeared, unless explicitly supported by a source.
+- **Interior refuge:** warmth and simple materials, not ornate fantasy settings.
+
+The clock time of the first encounter is **not specified by Ṣaḥīḥ al-Bukhārī 3**. All time-of-day cuts in ST01 are visual direction, not documentary claims.
+
+**Current ST01 sequence:** [Eight-shot shotlist](ST01/SHOTLIST-v2.md) · [Eight-shot prompts](ST01/SCENE-PROMPTS-v2.md) · [Image inventory](ST01/ASSETS.md).
+
+## Artwork quality / reuse gate
+
+The user-approved starting style is not blanket approval of every generated element. Some existing drafts contain invented depictions or inaccurate AI-rendered Arabic writing: retain these as research frames labeled **DRAFT**, replace all Qurʾānic lettering with verified typography, and use figure-free imagery for the specific revelation event and for Khadīja's personal reassurance. User feedback governs further refinements.
