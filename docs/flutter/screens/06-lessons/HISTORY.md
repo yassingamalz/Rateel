@@ -106,7 +106,7 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 ## 7. Approval (2026-11-23)
 - Padlock: **in the circle, green** (owner). The **gold padlock** is kept as a reference for the future:
   `assets/ui/units/padlock_gold.svg`, `?lessonLockColor=gold`, sheet `lock-colour-options.jpg`.
-- **Owner approved screen 06** (APK 1.0.296). The final critic (v4) was stopped for the token budget; the owner
+- **Owner approved screen 06** (APK 1.0.299). The final critic (v4) was stopped for the token budget; the owner
   will run it.
 
 ## Timeline at a glance
@@ -119,7 +119,7 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 | v4 critic fixes (mosque gradient, rail sliver, pattern, pill) | 1.0.290 | A 7.5 / B 6.6, no high/medium | B cards and title larger |
 | v5 look B ×1.4 (previews ×1 / ×1.35 / ×1.4), long titles shrink | 1.0.294 | — | **B chosen**; answers to the questions; icons L1–L5 delivered |
 | v6 look A removed, owner's icons, lesson sound + haptic, padlock options | 1.0.295 | — | padlock in the circle, green (gold kept as reference) |
-| v7 padlock in the circle, green | 1.0.296 | v4 by the owner | **approved** |
+| v7 padlock in the circle, green | 1.0.299 | v4 by the owner | **approved** |
 
 ## Open after screen 06
 - Final critic v4 (owner will run it).

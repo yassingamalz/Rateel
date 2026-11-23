@@ -1,6 +1,6 @@
 # Screen 06: lessons of the unit (دروس الوحدة)
 
-Status: ✅ approved by the owner 2026-11-23 (look B, APK 1.0.296). History: `06-lessons/HISTORY.md`
+Status: ✅ approved by the owner 2026-11-23 (look B, APK 1.0.299). History: `06-lessons/HISTORY.md`
 Branch: `flutter/06-lessons`, from `flutter/05-units` (contains side nav, courses, units)
 Reference: `docs/flutter/screens/06-lessons/reference.webp` (1844×853, u = 8.53 px; lesson-production
 `docs/design/glassy-gamified/screens/06-lezioni-dell-unita.webp`)
