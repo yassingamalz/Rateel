@@ -99,3 +99,4 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 - Icons L1–L5 (`docs/design-assets/lessons/icons-2026-11-23/`): PNG vs SVG checked on the card green
   (`icons-check.png`): the SVGs are reconstructions (different book, headphones, mic, clipboard) → original PNGs,
   cleaned of a faint haze (alpha ≤ 40 scattered around the drawing) and trimmed → `assets/ui/lessons/<type>.webp`.
+- APK **1.0.295** (look B, owner's icons, padlock on the icon, lesson sound + haptic); demo `demo-v4.mp4`, frames `completion-frames-v4.jpg`, captures `capture-v6-*`.
