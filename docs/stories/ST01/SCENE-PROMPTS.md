@@ -12,7 +12,7 @@ Original cinematic stylized illustration for a respectful educational short abou
 
 A vast high-angle view across softly sculpted ochre dunes to an austere rocky mountain mass, a subtle cleft on the mountain face, early sun breaking over its upper ridge, fine beige mist gathering in the valley, sage-green sky with flat soft clouds. Optional **anonymous unidentifiable traveler** seen only from behind, tiny in the lower-right, in a simple cream head wrap and earth-brown woven cloak, standing still and facing the mountain. **This is not the Prophet ﷺ or a named historical individual.** Low, quiet camera at dune height, large negative space for separately typeset Arabic. White-gold backlight is ordinary artistic sunlight, not a literal depiction of revelation. 16:9, no text.
 
-**Concept asset:** `assets/st01-sc01-concept.webp` (draft).
+**Repo concept asset:** `assets/st01-sc01-composition.svg` (scalable compositional sketch, draft). **Separate AI image:** generated as a 1672×941 PNG within the conversation, not uploaded to GitHub yet.
 
 ## SC02 — Stillness of Ḥirāʾ
 
