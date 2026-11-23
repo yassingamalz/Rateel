@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 part 'lesson_data_gen.dart';
 
 /// Lesson types in the data (`src/assets/data/lessons/*/*.json`);
@@ -44,16 +42,14 @@ double unitShareFromLessons(String unitId) {
   return n == 0 ? 0 : lessonsDone(unitId).clamp(0, n) / n;
 }
 
-/// Look of screen 06 under review (owner, 2026-11-22: two trials):
-/// `ref` = the ChatGPT reference, `orig` = the original Angular screen,
-/// improved. Web: `?lessonsStyle=orig`; on the phone a small switch on the
-/// screen.
-final lessonsStyle = ValueNotifier<String>('ref');
-
 /// Review aid: `?completeLesson=<k>` plays the completion of lesson k when
 /// the lessons screen opens.
 int? startCompleteLesson;
 
-/// Scale of look B's cards and title: ×1.4 (owner, 2026-11-22);
-/// review: `?origScale=1.35`.
+/// Scale of the lesson cards and title: ×1.4 (owner, 2026-11-22); review:
+/// `?origScale=1.35`.
 double origScale = 1.4;
+
+/// Padlock of a locked lesson: `icon` (on the lesson-type icon, as screen 05)
+/// or `card` (card centre, on a dark glass disc). Review: `?lessonLock=card`.
+String lessonLockPos = 'icon';

@@ -88,3 +88,14 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 - Owner chose **×1.4** → default `origScale = 1.4`. Seen in the demo: long titles («القواعد الأساسية للتلاوة الصحيحة»)
   were cut with «…» → they now shrink to fit (`capture-v5-orig-phone-unit2.png`). Captures `capture-v5-*`, frames
   `completion-frames-orig-v3.jpg`, demo `demo-orig-v3.mp4` (demo script updated to the ×1.4 geometry).
+
+## 6. Owner's choice and answers (2026-11-23)
+- **Look B chosen.** Look A and the switch removed from `lessons_screen.dart` / `lesson_card.dart` (and their
+  tokens); the A captures, critic reports and the comparison sheets stay here as history.
+- Answers: unit title ✅; green padlock ✅ but "well centred" → two positions in `lock-position-options.jpg`: on the
+  lesson-type icon (default, as screen 05) or card centre on a dark glass disc (`?lessonLock=card`); placeholder
+  lesson page ✅ (each lesson will have its own page); lesson completion: light + the same completion sound as the
+  other screens + its own haptic (`Haptics.lessonDone`: selection, light, medium, 70 ms apart).
+- Icons L1–L5 (`docs/design-assets/lessons/icons-2026-11-23/`): PNG vs SVG checked on the card green
+  (`icons-check.png`): the SVGs are reconstructions (different book, headphones, mic, clipboard) → original PNGs,
+  cleaned of a faint haze (alpha ≤ 40 scattered around the drawing) and trimmed → `assets/ui/lessons/<type>.webp`.

@@ -1,0 +1,11 @@
+RATEEL — Icone dorate corsi · set completo (5 icone)
+
+Contenuto:
+- SVG/: SVG vettoriali effettivi con geometrie editabili (solo path riempiti, nessun bitmap incorporato, nessuna maschera/filter/CSS).
+- PNG_1024/: PNG 1024×1024, trasparenti, generati dai rispettivi SVG, con bordi nitidi.
+- PNG_originali/: le immagini PNG originali generate in chat (1254×1254), conservate senza modifiche.
+
+Icone: libro aperto, video lezione, microfono, ascolto con cuffie, test/verifica.
+
+Stile vettoriale SVG: gradiente verticale #FFD95A (alto) → #F2B623 (basso).
+Nota: gli SVG per libro, video, microfono e ascolto sono ricostruzioni vettoriali fedeli allo stile, non conversioni automatiche pixel-per-pixel dei PNG originali.

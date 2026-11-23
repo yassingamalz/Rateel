@@ -26,6 +26,16 @@ class Haptics {
     await HapticFeedback.lightImpact();
   }
 
+  /// A lesson finished (owner, 2026-11-23: its own feel, a little different
+  /// from the unit and course milestones): three quick rising taps.
+  static Future<void> lessonDone() async {
+    await HapticFeedback.selectionClick();
+    await Future<void>.delayed(const Duration(milliseconds: 70));
+    await HapticFeedback.lightImpact();
+    await Future<void>.delayed(const Duration(milliseconds: 70));
+    await HapticFeedback.mediumImpact();
+  }
+
   /// Not allowed (locked course): a firm tap and a soft echo.
   static Future<void> denied() async {
     await HapticFeedback.mediumImpact();

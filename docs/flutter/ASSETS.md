@@ -106,4 +106,4 @@ identical and crisp, the PNG where it is closer to the reference.
 | App file | Source | Used in | Notes |
 |---|---|---|---|
 | `ui/decor/angular_pattern_2.webp` | `lessons/angular-original/islamic-pattern-2-dark.svg` (Angular `src/assets/images/`, an SVG wrapping a 1000 px gold #DAA520 PNG) | look B background | resized to 700 px; tiled 82u, turned 50°, 6% (Angular: 700 px, 50°, 4%) |
-| placeholders | `ui/units/book.webp`, `microphone.svg`, `test_scroll.svg`, `glyphs/play.svg`, tinted gold | lesson-type icons | until the owner's L1–L5 (`prompts/06-lessons/images-v1.txt`) |
+| `ui/lessons/read.webp`, `video.webp`, `practice.webp`, `listen.webp`, `test.webp` | `lessons/icons-2026-11-23/PNG_originali/01…05` (owner's L1–L5, ChatGPT) | lesson-type icon on the cards (gold as drawn; muted green tint when locked, dark on the gold card) | original PNGs: the SVGs and `PNG_1024` are reconstructions with different shapes (book, headphones, mic, clipboard); scattered haze (alpha ≤ 40) removed except within 3 px of the drawing; trimmed, 600 px |

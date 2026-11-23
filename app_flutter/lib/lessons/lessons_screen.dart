@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
+import '../core/sounds.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
 import 'lesson_card.dart';
@@ -30,9 +31,9 @@ Route<bool> lessonsRoute(int course, int unit) => PageRouteBuilder<bool>(
 
 /// Screen 06, lessons of the unit (docs/flutter/screens/06-lessons.md).
 ///
-/// Two looks under review (owner, 2026-11-22): `ref` (ChatGPT reference 06,
-/// 1844×853, u = 8.53 px) and `orig` (the Angular lessons screen, improved).
-/// Horizontal positions are taken from the right edge of the content (the
+/// The original Angular lessons screen, improved (owner's choice B,
+/// 2026-11-23; the ChatGPT look A was removed, see 06-lessons/HISTORY.md),
+/// cards and title at ×1.4 (owner). Horizontal positions are taken from the right edge of the content (the
 /// left edge of the side rail), the start of the RTL path.
 class LessonsScreen extends StatefulWidget {
   const LessonsScreen({super.key, required this.course, required this.unit});
@@ -103,21 +104,18 @@ class _LessonsScreenState extends State<LessonsScreen>
   );
   double _dragPitch = 1;
 
-  /// Cards that fit between the rail and the left edge (look B only; set on
-  /// layout).
+  /// Cards that fit between the rail and the left edge (set on layout).
   int _fit = 1;
   bool _laidOut = false;
 
-  /// Path position that shows lesson [i]. Look A centres it (reference);
-  /// look B keeps the first lesson at the start as long as [i] is on screen
-  /// (Angular: the small cards all fit), so done lessons stay visible.
-  double _pageFor(int i) =>
-      _style == 'orig' ? math.max(0, i - _fit + 1).toDouble() : i.toDouble();
+  /// Path position that shows lesson [i]: the first lesson stays at the
+  /// start as long as [i] is on screen (Angular: the cards all fit), so done
+  /// lessons stay visible.
+  double _pageFor(int i) => math.max(0, i - _fit + 1).toDouble();
 
   @override
   void initState() {
     super.initState();
-    lessonsStyle.addListener(_restyle);
     final k = startCompleteLesson;
     if (k != null) {
       startCompleteLesson = null;
@@ -125,15 +123,8 @@ class _LessonsScreenState extends State<LessonsScreen>
     }
   }
 
-  void _restyle() => setState(() {
-    _scroll.value = _pageFor(
-      _current.clamp(0, math.max(0, _lessons.length - 1)),
-    );
-  });
-
   @override
   void dispose() {
-    lessonsStyle.removeListener(_restyle);
     for (final c in [
       _entry,
       _ambient,
@@ -149,8 +140,6 @@ class _LessonsScreenState extends State<LessonsScreen>
     }
     super.dispose();
   }
-
-  String get _style => lessonsStyle.value;
 
   void _borderTicks() {
     final q = (_border.value * 4).floor();
@@ -200,8 +189,11 @@ class _LessonsScreenState extends State<LessonsScreen>
     if ((_scroll.value - _pageFor(k)).abs() > 0.01) await _glideTo(k, 500);
     _lastTick = 0;
     Haptics.tick();
+    // Completion sound, the same as the units and courses (owner,
+    // 2026-11-23), while the light runs around the rim.
+    Sounds.fill();
     await _border.forward(from: 0);
-    Haptics.milestone();
+    Haptics.lessonDone();
     await _flash.forward(from: 0);
     final last = k == _lessons.length - 1;
     // The unit share moves on screen 05 when we go back. The last lesson
@@ -266,12 +258,11 @@ class _LessonsScreenState extends State<LessonsScreen>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, box) {
-        final g = _Geo(_style, box.maxWidth, box.maxHeight);
-        final b = _Geo('orig', box.maxWidth, box.maxHeight);
+        final g = _Geo(box.maxWidth, box.maxHeight);
         _fit = math.max(
           1,
-          ((b.w - b.firstCenterFromRight + b.card.width / 2 - b.u * 2) /
-                  b.pitch)
+          ((g.w - g.firstCenterFromRight + g.card.width / 2 - g.u * 2) /
+                  g.pitch)
               .floor(),
         );
         if (!_laidOut) {
@@ -288,7 +279,6 @@ class _LessonsScreenState extends State<LessonsScreen>
             ..._decor(g),
             ..._header(g),
             if (_lessons.isEmpty) _empty(g) else _path(g),
-            _styleSwitch(g),
             _toastLayer(g),
           ],
         );
@@ -369,7 +359,7 @@ class _LessonsScreenState extends State<LessonsScreen>
     final last = i == _lessons.length - 1;
     // From this card's left edge to the next card's right edge; after the
     // last card the line runs off as in the reference (ref look only).
-    if (last && _style == 'orig') return const SizedBox.shrink();
+    if (last) return const SizedBox.shrink();
     final gap = g.pitch - g.card.width;
     final right = cx - g.card.width / 2;
     final width = last ? g.u * 14 : gap;
@@ -388,7 +378,6 @@ class _LessonsScreenState extends State<LessonsScreen>
             lit: last ? 0 : lit,
             node: !last,
             fadeOut: last,
-            style: _style,
           ),
         ),
       ),
@@ -423,7 +412,6 @@ class _LessonsScreenState extends State<LessonsScreen>
           child: LessonCard(
             key: ValueKey('lesson-$i'),
             lesson: _lessons[i],
-            style: _style,
             u: g.cu,
             step: i + 1,
             total: _lessons.length,
@@ -462,32 +450,13 @@ class _LessonsScreenState extends State<LessonsScreen>
     child: child,
   );
 
-  List<Widget> _decor(_Geo g) {
-    if (g.orig) {
-      // Original Angular decoration: islamic-pattern-2 (gold), 700 px tiles,
-      // turned 50°, very faint.
-      return [
-        Positioned.fill(
-          child: IgnorePointer(child: _AngularPattern(tile: g.u * 82)),
-        ),
-      ];
-    }
-    return [
-      const Positioned.fill(child: IgnorePointer(child: ScreenGirih())),
-      Positioned(
-        left: 0,
-        top: 0,
-        width: g.u * 27,
-        height: g.u * 27 * 606 / 800,
-        child: IgnorePointer(
-          child: GoldCorner(
-            'assets/ui/decor/corner_units_top_left.webp',
-            u: g.u,
-          ),
-        ),
-      ),
-    ];
-  }
+  /// Original Angular decoration: islamic-pattern-2 (gold), 700 px tiles,
+  /// turned 50°, very faint.
+  List<Widget> _decor(_Geo g) => [
+    Positioned.fill(
+      child: IgnorePointer(child: _AngularPattern(tile: g.u * 82)),
+    ),
+  ];
 
   Widget _title(_Geo g, double size) {
     final text = _unit.title;
@@ -551,164 +520,35 @@ class _LessonsScreenState extends State<LessonsScreen>
 
   List<Widget> _header(_Geo g) {
     final u = g.u;
-    if (g.orig) {
-      // Look B scale under review (owner 2026-11-22: cards and title larger).
-      final k = origScale;
-      // Angular: small title at the top right with the back arrow; improved
-      // with the cream title, a glass back button and a short divider.
-      return [
-        Positioned(
-          right: u * 4.5,
-          top: u * 6.2,
-          width: u * 7 * k,
-          height: u * 7 * k,
-          child: _settle(g, _BackButton(u: u * k)),
-        ),
-        Positioned(
-          right: u * (4.5 + 9.5 * k),
-          top: u * 6.2 + u * 3.5 * k - u * 4.5 * k,
-          height: u * 9 * k,
-          width: g.w * 0.6,
-          child: _settle(
-            g,
-            Align(
-              alignment: Alignment.centerRight,
-              child: _title(g, u * 4.8 * k),
-            ),
-          ),
-        ),
-        Positioned(
-          right: u * (4.5 + 9.5 * k),
-          top: u * 6.2 + u * 8 * k,
-          child: _settle(g, _divider(u * 26 * k, u * 2.6 * k)),
-        ),
-      ];
-    }
-    final cx = g.titleCenterX;
+    // Title and back button at the owner's ×1.4.
+    final k = origScale;
+    // Angular: small title at the top right with the back arrow; improved
+    // with the cream title, a glass back button and a short divider.
     return [
       Positioned(
-        left: u * 30.5,
-        top: u * 11.7,
-        width: u * 33.4,
-        // The image is 20.1u tall in this box: the fade ends with it
-        // (critic v2 A6), the sage tint darkens towards the ground.
-        height: u * 20.1,
-        child: _settle(
-          g,
-          IgnorePointer(
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.6, 1.0],
-                colors: [Color(0xFF000000), Color(0x00000000)],
-              ).createShader(r),
-              child: ShaderMask(
-                blendMode: BlendMode.srcATop,
-                shaderCallback: (r) => const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    RateelColors.lessonMosqueTint,
-                    RateelColors.lessonMosqueGround,
-                  ],
-                ).createShader(r),
-                child: Image.asset(
-                  'assets/ui/decor/mosque.webp',
-                  fit: BoxFit.contain,
-                  alignment: Alignment.topCenter,
-                ),
-              ),
-            ),
-          ),
-        ),
+        right: u * 4.5,
+        top: u * 6.2,
+        width: u * 7 * k,
+        height: u * 7 * k,
+        child: _settle(g, _BackButton(u: u * k)),
       ),
-      // Arch centred on the title (reference 06), book emblem on the apex.
       Positioned(
-        left: cx - g.archW / 2,
-        top: u * 0.9,
-        width: g.archW,
-        height: u * 21,
+        right: u * (4.5 + 9.5 * k),
+        top: u * 6.2 + u * 3.5 * k - u * 4.5 * k,
+        height: u * 9 * k,
+        width: g.w * 0.6,
         child: _settle(
           g,
-          IgnorePointer(
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.55, 1.0],
-                colors: [Color(0xFF000000), Color(0x00000000)],
-              ).createShader(r),
-              child: ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (r) => const LinearGradient(
-                  stops: [0, 0.15, 0.32, 0.5, 0.68, 0.85, 1],
-                  colors: [
-                    RateelColors.archEnd,
-                    RateelColors.archTail,
-                    RateelColors.archShoulder,
-                    RateelColors.archApex,
-                    RateelColors.archShoulder,
-                    RateelColors.archTail,
-                    RateelColors.archEnd,
-                  ],
-                ).createShader(r),
-                child: SvgPicture.asset(
-                  'assets/ui/decor/header_arch.svg',
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: _title(g, u * 4.8 * k),
           ),
         ),
       ),
       Positioned(
-        left: cx - u * 9.5,
-        top: u * 13.3 - u * 4.35,
-        width: u * 19,
-        height: u * 8.7,
-        child: _settle(
-          g,
-          IgnorePointer(
-            child: SvgPicture.asset(
-              'assets/ui/decor/header_book.svg',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-      ),
-      Positioned(
-        left: cx - u * 45,
-        width: u * 90,
-        top: u * 23.4 - u * 6,
-        height: u * 12,
-        child: _settle(
-          g,
-          Center(
-            child: FittedBox(fit: BoxFit.scaleDown, child: _title(g, u * 7.5)),
-          ),
-        ),
-      ),
-      // Title divider drawn in code (critic v1 A1): two fading lines and an
-      // open diamond on the title axis, 62.7u long.
-      Positioned(
-        left: cx - u * 31.35,
-        top: u * 32.1 - u * 1.8,
-        width: u * 62.7,
-        height: u * 3.6,
-        child: _settle(
-          g,
-          IgnorePointer(child: CustomPaint(painter: _DividerPainter(u))),
-        ),
-      ),
-      Positioned(
-        left: g.w - u * 33.5 - u * 4.55,
-        top: u * 24.4 - u * 4.55,
-        width: u * 9.1,
-        height: u * 9.1,
-        child: _settle(g, _BackButton(u: u)),
+        right: u * (4.5 + 9.5 * k),
+        top: u * 6.2 + u * 8 * k,
+        child: _settle(g, _divider(u * 26 * k, u * 2.6 * k)),
       ),
     ];
   }
@@ -732,58 +572,6 @@ class _LessonsScreenState extends State<LessonsScreen>
             textDirection: TextDirection.rtl,
             style: readex(g.u * 4, weight: 450, color: titleCream),
           ),
-        ),
-      ),
-    );
-  }
-
-  /// Review only (owner's two trials): switch between the ChatGPT look (A)
-  /// and the original look, improved (B). Removed once the owner chooses.
-  Widget _styleSwitch(_Geo g) {
-    final u = g.u;
-    Widget seg(String id, String label) {
-      final on = _style == id;
-      return GestureDetector(
-        onTap: () {
-          Haptics.tap();
-          lessonsStyle.value = id;
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: EdgeInsets.symmetric(horizontal: u * 2.2, vertical: u * 1),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(u * 3),
-            color: on ? RateelColors.gold : Colors.transparent,
-          ),
-          child: Text(
-            label,
-            textDirection: TextDirection.rtl,
-            style: readex(
-              u * 2.4,
-              weight: 500,
-              color: on ? RateelColors.badgeText : RateelColors.cream,
-            ).copyWith(height: 1.1),
-          ),
-        ),
-      );
-    }
-
-    // Under the mosque in look A (the cards fill the bottom), bottom left in B.
-    return Positioned(
-      left: u * 3,
-      top: g.orig ? null : u * 33,
-      bottom: g.orig ? u * 3 : null,
-      child: Container(
-        padding: EdgeInsets.all(u * 0.6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(u * 3.6),
-          color: RateelColors.pillFill.withValues(alpha: 0.85),
-          border: Border.all(color: RateelColors.rowRim, width: u * 0.2),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          textDirection: TextDirection.ltr,
-          children: [seg('ref', 'A  ChatGPT'), seg('orig', 'B  الأصلي')],
         ),
       ),
     );
@@ -924,60 +712,6 @@ class _ArrowPainter extends CustomPainter {
   bool shouldRepaint(_ArrowPainter o) => o.u != u;
 }
 
-/// Title divider of look A: lines fading out to the ends, brightest next to
-/// an open diamond (3.5u tall, 1.2u gap on each side).
-class _DividerPainter extends CustomPainter {
-  _DividerPainter(this.u);
-
-  final double u;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final c = size.center(Offset.zero);
-    final d = u * 1.75;
-    final gap = u * 1.2;
-    final y = c.dy.roundToDouble() + 0.5;
-    for (final side in [-1.0, 1.0]) {
-      final from = c.dx + side * (d + gap);
-      final to = side < 0 ? 0.0 : size.width;
-      canvas.drawLine(
-        Offset(from, y),
-        Offset(to, y),
-        Paint()
-          ..strokeWidth = u * 0.35
-          ..shader = LinearGradient(
-            begin: side < 0 ? Alignment.centerRight : Alignment.centerLeft,
-            end: side < 0 ? Alignment.centerLeft : Alignment.centerRight,
-            stops: const [0, 0.35, 0.8, 1],
-            colors: const [
-              RateelColors.dividerPeak,
-              RateelColors.dividerMid,
-              RateelColors.dividerEnd,
-              RateelColors.dividerEndClear,
-            ],
-          ).createShader(Rect.fromPoints(Offset(from, 0), Offset(to, 1))),
-      );
-    }
-    final diamond = Path()
-      ..moveTo(c.dx, c.dy - d)
-      ..lineTo(c.dx + d * 0.85, c.dy)
-      ..lineTo(c.dx, c.dy + d)
-      ..lineTo(c.dx - d * 0.85, c.dy)
-      ..close();
-    canvas.drawPath(
-      diamond,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.35
-        ..strokeJoin = StrokeJoin.miter
-        ..color = RateelColors.dividerPeak,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_DividerPainter o) => o.u != u;
-}
-
 /// The Angular decoration of the lessons page: islamic-pattern-2 (gold),
 /// tiled, turned 50°, faint.
 class _AngularPattern extends StatelessWidget {
@@ -1026,7 +760,6 @@ class _LinePainter extends CustomPainter {
     required this.lit,
     required this.node,
     required this.fadeOut,
-    required this.style,
   });
 
   final double u;
@@ -1034,7 +767,6 @@ class _LinePainter extends CustomPainter {
   final double lit;
   final bool node;
   final bool fadeOut;
-  final String style;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1134,37 +866,27 @@ class _LinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_LinePainter o) =>
-      o.draw != draw || o.lit != lit || o.u != u || o.style != style;
+      o.draw != draw || o.lit != lit || o.u != u;
 }
 
-/// Geometry per look (u = 1% of the height).
+/// Geometry (u = 1% of the height); cards and title at the owner's ×1.4.
 class _Geo {
-  _Geo(this.style, this.w, this.h) : u = h / 100;
+  _Geo(this.w, this.h) : u = h / 100;
 
-  final String style;
   final double w;
   final double h;
   final double u;
 
-  bool get orig => style == 'orig';
+  /// Unit of the cards.
+  double get cu => u * origScale;
 
-  /// Unit of the cards: look B scales them (owner, under review).
-  double get cu => orig ? u * origScale : u;
+  Size get card => LessonCard.sizeFor(cu);
 
-  Size get card => LessonCard.sizeFor(style, cu);
+  /// Cards 8u (card units) apart.
+  double get pitch => card.width + cu * 8;
 
-  /// Reference 06: card centres 751 px apart; orig: cards 8u apart.
-  double get pitch => orig ? card.width + cu * 8 : u * 88;
+  /// First card 8u from the rail.
+  double get firstCenterFromRight => u * 8 + card.width / 2;
 
-  /// Reference 06: first card centre 447 px from the rail; orig: card 8u
-  /// from the rail.
-  double get firstCenterFromRight => orig ? u * 8 + card.width / 2 : u * 52.4;
-
-  double get cardCenterY => orig ? u * (52 + 6 * (origScale - 1)) : u * 65.7;
-
-  /// Reference 06: title centre 745 px from the rail.
-  double get titleCenterX => w - u * 87.3;
-
-  /// Reference 06: arch 820 px wide.
-  double get archW => u * 96;
+  double get cardCenterY => u * (52 + 6 * (origScale - 1));
 }

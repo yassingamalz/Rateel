@@ -7,7 +7,7 @@ const W=1280,H=592,u=H/100,rail=W-18.3*u;
 const c=await b.newContext({viewport:{width:W,height:H},recordVideo:{dir:d+'/vid-'+s,size:{width:W,height:H}}});const p=await c.newPage();
 const w=ms=>p.waitForTimeout(ms);
 const orig=s==='orig';const first=orig?38.8:52.4,pitch=orig?72.8:88,cy=orig?54.4:65.7; // look B at x1.4
-await p.goto(`http://localhost:8765/?lessons=0,0&lessonsStyle=${s}`,{waitUntil:'networkidle'});await w(2500);
+await p.goto(`http://localhost:8765/?lessons=0,0`,{waitUntil:'networkidle'});await w(2500);
 await p.mouse.click(rail-(first+pitch)*u,cy*u);await w(2200);                 // locked lesson
 await p.mouse.click(rail-first*u,cy*u);await w(1200);                          // open lesson 1
 async function finish(){await p.mouse.click(0.619*W,0.639*H);} // «أكملت الدرس» (measured on the page)

@@ -38,7 +38,7 @@ Future<void> main() async {
   // Review aids (screen 06): `?lessons=0,1` opens the lessons of unit 1 of
   // course 0 (its units screen below it), `?lessonDone=2` marks 2 lessons
   // done, `?completeLesson=2` plays the completion of lesson 2 on start,
-  // `?lessonsStyle=orig` shows the original look (B).
+  // `?origScale=1.35` tries another card scale.
   final lp = (Uri.base.queryParameters['lessons'] ?? '').split(',');
   if (lp.length == 2) {
     final c = int.tryParse(lp[0]);
@@ -59,7 +59,7 @@ Future<void> main() async {
   startCompleteLesson = int.tryParse(
     Uri.base.queryParameters['completeLesson'] ?? '',
   );
-  lessonsStyle.value = Uri.base.queryParameters['lessonsStyle'] ?? 'ref';
+  lessonLockPos = Uri.base.queryParameters['lessonLock'] ?? lessonLockPos;
   origScale =
       double.tryParse(Uri.base.queryParameters['origScale'] ?? '') ?? origScale;
   // Landscape is the main orientation (owner, 2026-11-20).
