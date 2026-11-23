@@ -76,3 +76,14 @@ The clock time of the first encounter is **not specified by Ṣaḥīḥ al-Bukh
 ## Artwork quality / reuse gate
 
 The user-approved starting style is not blanket approval of every generated element. Some existing drafts contain invented depictions or inaccurate AI-rendered Arabic writing: retain these as research frames labeled **DRAFT**, replace all Qurʾānic lettering with verified typography, and use figure-free imagery for the specific revelation event and for Khadīja's personal reassurance. User feedback governs further refinements.
+
+
+## ST01 correction — visual drift review (2026-11-23)
+
+**Owner feedback:** later renders increasingly diverged from the uploaded *Journey* reference artwork. We must reverse the drift. For approval, match the **stylization level**, not only the warm colors: simplified sculpted silhouettes; flat-to-soft painterly surfaces; large simple dune, mountain and sky shapes; minimal geometric rock detail; sparse environment; restrained haze; graceful negative space; calm readable composition. Reference mood includes sage-green skies / pale cream clouds by day, amber sunsets, and simplified indigo night, all with the **same level of abstraction**.
+
+**Reject / regenerate** if the result is photorealistic, glossy, hyper-detailed, textured like a photo, filled with cinematic micro-particles, ornate fabrics, realistic archaeological columns or ruins, hyperreal town lights, decorative lanterns, detailed interiors, or heavily contrasted volumetric effects. Avoid stylistic copying of distinctive game characters and costume decorations.
+
+**For SC06** specifically, depict a **simple, modest early Arabian domestic interior**, unoccupied, containing only an unadorned folded woven blanket on simple bedding, matte earth-plaster walls and one small opening. A subtle warm glow contrasts with the cool night outside. **No cave, no archaeological ruins, no people, no luxury objects, no realistic oil lamps or ornate carpets.** This is atmospheric art direction, not evidence of a historical residence.
+
+**Recent off-brief image generations (desert ruins / luminous-script mountain) do not belong in the approved reference set or the repository as final assets.** The prompts and timeline remain active, but visual approval is paused for SC06 until it conforms.
