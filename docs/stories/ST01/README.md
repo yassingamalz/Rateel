@@ -44,3 +44,10 @@ For the actual final scene, consider a **figure-free** variant if religious revi
 - [ ] Arabic screenplay with timing and correct tashkīl
 - [ ] Full scene reference images approved
 - [ ] Animatics, narration, authentic recitation as needed, final edit
+
+
+## Update — eight-beat sequence and images (2026-11-23)
+
+The five-beat outline above is the **archived initial plan**. The current active plan is **[SHOTLIST-v2.md](SHOTLIST-v2.md)** with **eight story beats inside 60 seconds**: dreams and retreat, cave, the triple `اقْرَأْ` encounter, first verses, return, `زَمِّلُونِي`, Khadīja's reassurance, and a poetic sunrise transition. Follow [SCENE-PROMPTS-v2.md](SCENE-PROMPTS-v2.md), not the older five-scene prompts.
+
+**All eight previous AI-generated image concepts have now been committed** as full-dimension high-quality WebP under [assets/](assets/); see the [image inventory](ASSETS.md) for editorial warnings. A separate ZIP with their untouched original PNG bytes was provided in the user conversation. The branch still has no final narration or approved historical reconstruction.
