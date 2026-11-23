@@ -132,3 +132,4 @@ Reference `reference.webp` (ChatGPT, look A history); Angular original `angular-
 captures `capture-v1…v6-*.png`; comparisons `compare-v1/v2.jpg`; previews `orig-scale-preview-{pc,phone}.jpg`,
 `lock-position-options.jpg`; icons check `icons-check.png`; completion frames `completion-frames-*.jpg`; demos
 `demo-ref-v2.mp4`, `demo-orig-v3.mp4`, `demo-v4.mp4`; critic reports `critic-v1…v4.md`.
+- 2026-11-23: owner likes the padlock **in the circle** (card centre); asked to see it also in gold → `ui/units/padlock_gold.svg` (recoloured from the green one) behind `?lessonLockColor=gold`, sheet `lock-colour-options.jpg`. Owner to choose the colour. Final critic stopped on the owner's request (token budget); the owner will run it.

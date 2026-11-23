@@ -60,6 +60,8 @@ Future<void> main() async {
     Uri.base.queryParameters['completeLesson'] ?? '',
   );
   lessonLockPos = Uri.base.queryParameters['lessonLock'] ?? lessonLockPos;
+  lessonLockColor =
+      Uri.base.queryParameters['lessonLockColor'] ?? lessonLockColor;
   origScale =
       double.tryParse(Uri.base.queryParameters['origScale'] ?? '') ?? origScale;
   // Landscape is the main orientation (owner, 2026-11-20).

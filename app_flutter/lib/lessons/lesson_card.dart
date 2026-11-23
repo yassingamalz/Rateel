@@ -474,7 +474,9 @@ class _LessonCardState extends State<LessonCard>
             child: Transform.scale(
               scale: pop,
               child: onIcon
-                  ? SvgPicture.asset('assets/ui/units/padlock_green.svg')
+                  ? SvgPicture.asset(
+                      'assets/ui/units/padlock_$lessonLockColor.svg',
+                    )
                   : DecoratedBox(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -493,7 +495,7 @@ class _LessonCardState extends State<LessonCard>
                       child: Padding(
                         padding: EdgeInsets.all(s * 0.2),
                         child: SvgPicture.asset(
-                          'assets/ui/units/padlock_green.svg',
+                          'assets/ui/units/padlock_$lessonLockColor.svg',
                         ),
                       ),
                     ),
