@@ -1,3 +1,31 @@
+# Next session: screen 07, video lesson (درس فيديو)
+
+Screen 06 is approved (2026-11-23, look B, APK 1.0.299): read `docs/flutter/screens/06-lessons/HISTORY.md`.
+Its final critic (v4) is still to run: start the session with it (prompt in `HISTORY.md` §7 / `CRITIC.md`).
+Branch `flutter/07-video-lesson` from `flutter/06-lessons`. Reference: `docs/design/glassy-gamified/screens/07-lezione-video-dark.webp`
+(also `-light`) on `lesson-production`. Screen 07 replaces the placeholder `lib/lessons/lesson_page.dart` for `video` lessons
+and must keep its contract: return `true` when the lesson is finished (screen 06 then plays the completion).
+Angular original: `src/app/features/lessons/video-player`, `lesson-details`. Data: `videoUrl` in `src/assets/data/lessons/*/*.json`.
+
+## Prompt to start the session (screen 07)
+```
+Lavora sul repo Rateel. Crea il branch flutter/07-video-lesson partendo da flutter/06-lessons.
+Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
+docs/flutter/ASSETS.md, docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md e
+docs/flutter/screens/06-lessons/HISTORY.md (come abbiamo lavorato sulla 06).
+Prima cosa: lancia il critico finale della schermata 06 (critic-v4) e dimmi il risultato.
+Obiettivo: costruire in Flutter la schermata 07, lezione video (riferimento ChatGPT
+docs/design/glassy-gamified/screens/07-lezione-video-dark.webp sul branch lesson-production), insieme alle
+animazioni della versione Angular (src/app/features/lessons/video-player e lesson-details), con vibrazioni e luce.
+Sostituisce la pagina provvisoria delle lezioni video (lesson_page.dart) e, a lezione finita, torna alla 06
+restituendo true, così parte il completamento; il progresso resta condiviso con lezioni, unità e corsi.
+Mostrami anche come era l'originale Angular. Segui la procedura: piano della schermata e domande prima di
+costruire, prompt ChatGPT in blocchi copiabili, costruzione, critico con le misure, confronto, video e APK.
+Tieni HISTORY.md della schermata aggiornato. Parla con me in italiano.
+```
+
+---
+
 # Next session: screen 06, lessons of the unit (دروس الوحدة)
 
 Screen 05 is approved (2026-11-22, PR open): read `docs/flutter/screens/05-units/HISTORY.md`.
