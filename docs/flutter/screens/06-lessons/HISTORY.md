@@ -103,9 +103,11 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 - Shared assets: the cleaned full-resolution icons are in `docs/design-assets/lessons/icons-2026-11-23/PNG_puliti/`
   (README there) for other streams; `ASSETS.md` section "Lessons" lists sources and app copies.
 
-## 7. Approval
-- Waiting for the owner's phone test of APK 1.0.295 and the padlock position (option 1 on the icon is built).
-  The screen is marked approved in `DECISIONS.md` only after the owner confirms.
+## 7. Approval (2026-11-23)
+- Padlock: **in the circle, green** (owner). The **gold padlock** is kept as a reference for the future:
+  `assets/ui/units/padlock_gold.svg`, `?lessonLockColor=gold`, sheet `lock-colour-options.jpg`.
+- **Owner approved screen 06** (APK 1.0.296). The final critic (v4) was stopped for the token budget; the owner
+  will run it.
 
 ## Timeline at a glance
 | Step | Version / APK | Critic | Owner |
@@ -116,10 +118,11 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 | v3 critic fixes (divider, glow, rims, mosque, arrow, B ink and paging) | — | A 7.3 / B 6.5 | — |
 | v4 critic fixes (mosque gradient, rail sliver, pattern, pill) | 1.0.290 | A 7.5 / B 6.6, no high/medium | B cards and title larger |
 | v5 look B ×1.4 (previews ×1 / ×1.35 / ×1.4), long titles shrink | 1.0.294 | — | **B chosen**; answers to the questions; icons L1–L5 delivered |
-| v6 look A removed, owner's icons, lesson sound + haptic, padlock options | 1.0.295 | v4 (final) | padlock position, approval pending |
+| v6 look A removed, owner's icons, lesson sound + haptic, padlock options | 1.0.295 | — | padlock in the circle, green (gold kept as reference) |
+| v7 padlock in the circle, green | 1.0.296 | v4 by the owner | **approved** |
 
 ## Open after screen 06
-- Owner: padlock position (on the icon / card centre) and approval after the phone test.
+- Final critic v4 (owner will run it).
 - Lesson pages (07+): each lesson type gets its own screen; the placeholder `lesson_page.dart` is replaced then
   (it returns `true` when the lesson is finished: keep that contract).
 - Data: course 02 file `intro-noon-meem-unit2.json` is not mapped (no matching unit); units of courses 03–07 and 12
@@ -130,6 +133,6 @@ Decisions: `../../DECISIONS.md` (rows dated 2026-11-22 onwards). Assets: `../../
 ## Files of this screen
 Reference `reference.webp` (ChatGPT, look A history); Angular original `angular-original.jpg`, `locked-compare.jpg`;
 captures `capture-v1…v6-*.png`; comparisons `compare-v1/v2.jpg`; previews `orig-scale-preview-{pc,phone}.jpg`,
-`lock-position-options.jpg`; icons check `icons-check.png`; completion frames `completion-frames-*.jpg`; demos
+`lock-position-options.jpg`, `lock-colour-options.jpg`; icons check `icons-check.png`; completion frames `completion-frames-*.jpg`; demos
 `demo-ref-v2.mp4`, `demo-orig-v3.mp4`, `demo-v4.mp4`; critic reports `critic-v1…v4.md`.
 - 2026-11-23: owner likes the padlock **in the circle** (card centre); asked to see it also in gold → `ui/units/padlock_gold.svg` (recoloured from the green one) behind `?lessonLockColor=gold`, sheet `lock-colour-options.jpg`. Owner to choose the colour. Final critic stopped on the owner's request (token budget); the owner will run it.

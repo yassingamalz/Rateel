@@ -52,7 +52,7 @@ double origScale = 1.4;
 
 /// Padlock of a locked lesson: `icon` (on the lesson-type icon, as screen 05)
 /// or `card` (card centre, on a dark glass disc). Review: `?lessonLock=card`.
-String lessonLockPos = 'icon';
+String lessonLockPos = 'card';
 
 /// Padlock colour under review: `green` (screen 05) or `gold` (owner's trial,
 /// 2026-11-23). Review: `?lessonLockColor=gold`.
