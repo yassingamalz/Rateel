@@ -71,4 +71,4 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
   (`_InnerGlowPainter`), measured on the reference column through the rim: outside #2E3F21 vs #2F431F.
 - Web check (`t07.js`): section end 1/3 gold play → tap → 2/3 pause → ‹ → 1/3. The widget test checks the waiting play
   and 2/3 (frames stop in the test after the section change, see the comment there).
-- Captures `capture-v6-*`, demo `demo-v6-phone.mp4`.
+- Captures `capture-v6-*`, demo `demo-v6-phone.mp4`, APK 1.0.357.
