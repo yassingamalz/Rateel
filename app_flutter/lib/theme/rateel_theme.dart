@@ -124,6 +124,19 @@ class RateelColors {
   static const dividerEnd = Color(0xFFB2983A);
   static const dividerMid = Color(0xFFEFC246);
   static const dividerPeak = Color(0xFFF8D053);
+  // Screen 06, lessons (sampled from reference 06). Proposed tokens.
+  static const lessonIconMuted = Color(
+    0xFF4F7E5E,
+  ); // locked lesson icon (critic v1 A3)
+  static const lessonIconTop = Color(0xFFFFD95A); // lesson icon gold, top
+  static const lessonIconBottom = Color(0xFFF2B623);
+  // Variant B (original Angular look, improved): filled gold active card.
+  static const origGoldTop = Color(0xFFF1C23E);
+  static const origGoldBottom = Color(0xFFD9A11C);
+  static const origCardText = Color(0xFF13261A);
+  static const origGlass = Color(
+    0xFF123F2E,
+  ); // glass card, Angular rgba(27,67,50)
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

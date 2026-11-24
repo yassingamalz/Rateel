@@ -67,6 +67,7 @@ flutter:
     - assets/ui/courses/
     - assets/ui/glyphs/
     - assets/ui/units/
+    - assets/ui/lessons/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/
