@@ -13,7 +13,7 @@ for (const [W,H,dpr,suf] of [[1844,853,1,''],[915,412,2.625,'-phone']]) {
  for(let i=0;i<7;i++) await clickNext();
  await p.waitForTimeout(400);
  await p.screenshot({path:`${d}/capture-${tag}-step9${suf}.png`});
- await p.mouse.click(W-7.5*u, 7.5*u);await p.waitForTimeout(700);
+ await p.mouse.click(W-10.75*u, 10.75*u);await p.waitForTimeout(700);
  await p.screenshot({path:`${d}/capture-${tag}-paused${suf}.png`});
  await p.close();}
 await b.close()})();

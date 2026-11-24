@@ -223,15 +223,17 @@ class LessonShellState extends State<LessonShell>
 }
 
 /// Geometry of the bar in u (1% of the screen height), measured on the
-/// approved mockup v2, then «slightly larger» (owner, 2026-11-24).
+/// approved mockup v2, then «slightly larger» (owner, 2026-11-24); after the
+/// phone test the buttons as large as Angular's (64 px on a 412 dp phone =
+/// 15.5u) and the capsule only a little larger (owner, 2026-11-24).
 class LessonBarMetrics {
   LessonBarMetrics._();
   static const margin = 3.0; // from the top, left and right edges
-  static const button = 9.0; // pause / back / restart circles
-  static const gap = 1.6; // between the circles
-  static const capsuleW = 41.0;
-  static const capsuleH = 6.2;
-  static const number = 3.2; // «n/N»
+  static const button = 15.5; // pause / back / restart circles
+  static const gap = 2.8; // between the circles
+  static const capsuleW = 46.0;
+  static const capsuleH = 7.0;
+  static const number = 3.6; // «n/N»
 }
 
 /// The bar itself (capsule + buttons). Used by [LessonShell]; public so a
@@ -301,20 +303,29 @@ class LessonTopBar extends StatelessWidget {
           left: (u * m).roundToDouble(),
           width: (u * LessonBarMetrics.capsuleW).roundToDouble(),
           height: (u * LessonBarMetrics.capsuleH).roundToDouble(),
-          child: Semantics(
-            label: 'الخطوة $step من $total',
-            child: TweenAnimationBuilder<double>(
-              tween: Tween(end: share),
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-              builder: (context, v, _) => AnimatedBuilder(
-                animation: sweep,
-                builder: (context, _) => CustomPaint(
-                  painter: _CapsulePainter(
-                    u: u,
-                    share: v,
-                    text: '$step/$total',
-                    sweep: sweep.value,
+          // Angular: the open menu's veil covers the progress bar, so the
+          // capsule fades out while paused (owner, 2026-11-24).
+          child: AnimatedBuilder(
+            animation: menu,
+            builder: (context, child) => Opacity(
+              opacity: 1 - Curves.easeOut.transform(menu.value),
+              child: child,
+            ),
+            child: Semantics(
+              label: 'الخطوة $step من $total',
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(end: share),
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+                builder: (context, v, _) => AnimatedBuilder(
+                  animation: sweep,
+                  builder: (context, _) => CustomPaint(
+                    painter: _CapsulePainter(
+                      u: u,
+                      share: v,
+                      text: '$step/$total',
+                      sweep: sweep.value,
+                    ),
                   ),
                 ),
               ),
@@ -650,7 +661,7 @@ class _GlassPainter extends CustomPainter {
       // Static halo ring 1.2u, amber 25% (mockup).
       canvas.drawCircle(
         c,
-        r + u * 1.2,
+        r + u * 1.2 * LessonBarMetrics.button / 9,
         Paint()..color = RateelColors.amber.withValues(alpha: 0.25 * g),
       );
       // Angular pulse: ring 0 → 1.8u, alpha 0.7 → 0, every 2 s.
@@ -659,7 +670,7 @@ class _GlassPainter extends CustomPainter {
         final k = (t / 0.7).clamp(0.0, 1.0);
         canvas.drawCircle(
           c,
-          r + u * 1.8 * k,
+          r + u * 1.8 * LessonBarMetrics.button / 9 * k,
           Paint()
             ..color = RateelColors.amber.withValues(alpha: 0.7 * (1 - k) * g),
         );

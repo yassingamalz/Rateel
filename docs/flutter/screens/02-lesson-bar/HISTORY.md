@@ -68,3 +68,7 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
 - Sheet `size-options-phone.jpg` (915×412): Angular original (64 px button = 15.5u on a 412 dp phone, bar 200×24),
   A current (button 9u, capsule 41×6.2u), B +33% (12u, 52×8.2u, number 4.2u), C as Angular (15.5u, 62×10u, number
   5.2u). Mockups `tools/flutter-review/lesson-bar-size/`. Waiting for the owner's choice.
+- Owner: the buttons **as Angular** (much larger), the bar only **slightly** larger; and **as Angular, the bar disappears
+  while the menu is open** (in Angular the menu veil covers it). v4: button 15.5u (64 px on a 412 dp phone), gaps 2.8u,
+  halo and pulse scaled with the button, capsule 46×7u, number 3.6u; the capsule fades out with the menu (300 ms) and
+  back in on resume. Captures `capture-v4-*`, sheet `compare-v4-phone.jpg`.
