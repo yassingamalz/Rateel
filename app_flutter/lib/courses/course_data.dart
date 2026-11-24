@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 /// which plays the completion sequence). Index into [courses].
 final courseCompleted = ValueNotifier<int?>(null);
 
-/// Course card style under review (owner, 2026-11-21): null = reference-03
-/// card; `green`, `gold`, `abstract` = illustrated card with that art set.
-/// Web review: `?cards=gold`.
-String? cardArtSet;
+/// Course card style (owner, 2026-11-21): illustrated card with the `emblem`
+/// art as a translucent background (default). Review aid: `?cards=gold|green|
+/// abstract|emblem`, `?cards=classic` = the reference-03 card.
+String? cardArtSet = 'emblem';
 
 /// The 12 courses, from the Angular app (`src/assets/data/courses.json`).
 /// Progress always starts at 0 (owner, 2026-11-20).

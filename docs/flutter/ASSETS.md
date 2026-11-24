@@ -82,3 +82,7 @@ Sources: `docs/design-assets/courses/card-art-2026-11-21/` (PNG only: the owner 
 | `ui/course_art/emblem/course_01..12.webp` | `card-art-2026-11-21/emblem/emblem_sheet_original.png` (4×3 sheet) | gold emblems on a green swoosh; split by the transparent gaps, faint fringe recoloured gold, trimmed |
 
 All card art is trimmed to its content and drawn in a 23u box on the left of the card (owner, 2026-11-21: never under the title or description; at most a sliver overlaps the text column).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/glyphs/lock_badge.webp` | `courses/screen-assets/icons/cr-10-lock.png` | lock on locked course cards (2026-11-24) | owner's badge: cream padlock in a dark disc with a green ring; trimmed, 300 px |

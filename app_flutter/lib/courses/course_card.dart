@@ -145,28 +145,7 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   _pattern(u),
-                  if (widget.artSet != null) ...[
-                    _art(u),
-                    IgnorePointer(
-                      child: CustomPaint(painter: _ArcPainter(u: u)),
-                    ),
-                    // Soft veil behind the text column: the art fades under
-                    // the text, which stays readable.
-                    const IgnorePointer(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            stops: [0.3, 0.55, 1],
-                            colors: [
-                              Color(0x00012F25),
-                              Color(0x99012F25),
-                              Color(0xB3012F25),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  if (widget.artSet != null) _art(u),
                   if (lockedOpacity > 0)
                     ..._fade(
                       lockedOpacity,
@@ -252,21 +231,21 @@ class _CourseCardState extends State<CourseCard> {
     final folder = set == 'green' && n > 3 ? 'gold' : set;
     final file =
         'assets/ui/course_art/$folder/course_${n.toString().padLeft(2, '0')}.webp';
-    // Owner, 2026-11-21: the art stays on the left, never under the title or
-    // the description (at most a sliver overlaps the text column, which
-    // starts at 22.5u).
+    // Owner, 2026-11-21 (style D, background): the course art, enlarged, comes
+    // in from the left edge of the card as a translucent background (45%) and
+    // fades out towards the text. No gold arc.
     return Positioned(
-      left: u * 1.5,
-      top: u * 5,
-      bottom: u * 5,
-      width: u * 23,
+      left: -u * 6,
+      top: -u * 2,
+      width: u * 46,
+      height: u * 46,
       child: IgnorePointer(
         child: Opacity(
-          opacity: lerpDouble(0.85, 1.0, widget.unlock)!,
+          opacity: 0.45,
           child: ShaderMask(
             blendMode: BlendMode.dstIn,
             shaderCallback: (r) => const LinearGradient(
-              stops: [0, 0.85, 1],
+              stops: [0, 0.45, 0.92],
               colors: [Color(0xFF000000), Color(0xFF000000), Color(0x00000000)],
             ).createShader(r),
             child: Image.asset(file, fit: BoxFit.contain),
@@ -410,7 +389,7 @@ class _CourseCardState extends State<CourseCard> {
                   // Readex sets Arabic low in its line box: lift it to the
                   // optical centre of the pill (owner, 2026-11-21).
                   child: Transform.translate(
-                    offset: Offset(0, -u * 0.45),
+                    offset: Offset(0, -u * 0.75),
                     child: Text(
                       'مستوى مبتدئ',
                       textDirection: TextDirection.rtl,
@@ -521,20 +500,9 @@ class _CourseCardState extends State<CourseCard> {
       top: u * 7.5 - u * 3.9,
       width: u * 7.8,
       height: u * 7.8,
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: RateelColors.lockDisc,
-          border: Border.all(color: RateelColors.lockRim, width: u * 0.19),
-        ),
-        alignment: Alignment.center,
-        child: SvgPicture.asset(
-          'assets/ui/glyphs/lock.svg',
-          width: u * 4.2,
-          height: u * 4.2,
-          theme: const SvgTheme(currentColor: RateelColors.lockGlyph),
-        ),
-      ),
+      // The owner's lock badge (CR-10: cream padlock in a dark disc with a
+      // green ring), owner 2026-11-21.
+      child: Image.asset('assets/ui/glyphs/lock_badge.webp'),
     );
     return Positioned(
       left: w.left,
@@ -737,57 +705,4 @@ class _RimPainter extends CustomPainter {
   @override
   bool shouldRepaint(_RimPainter old) =>
       old.t != t || old.radius != radius || old.u != u;
-}
-
-/// Gold arc sweeping across an illustrated card (owner's mockup): from the top
-/// edge down to the left edge, bulging towards the top-left corner, fading at
-/// both ends, with a fainter twin line.
-class _ArcPainter extends CustomPainter {
-  _ArcPainter({required this.u});
-
-  final double u;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final w = size.width, h = size.height;
-    Path arc(double k) => Path()
-      ..moveTo(w * (0.46 + k), -h * 0.02)
-      ..quadraticBezierTo(w * (0.02 + k), h * 0.08, -w * 0.01, h * (0.96 - k));
-    final shader = const LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      stops: [0, 0.35, 0.75, 1],
-      colors: [
-        Color(0x00E1AC36),
-        Color(0xFFF0C04A),
-        Color(0xCCE1AC36),
-        Color(0x00E1AC36),
-      ],
-    ).createShader(Offset.zero & size);
-    canvas.drawPath(
-      arc(0),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.6
-        ..shader = shader
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.5),
-    );
-    canvas.drawPath(
-      arc(0),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.22
-        ..shader = shader,
-    );
-    canvas.drawPath(
-      arc(0.05),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.12
-        ..color = const Color(0x55E1AC36),
-    );
-  }
-
-  @override
-  bool shouldRepaint(_ArcPainter old) => old.u != u;
 }

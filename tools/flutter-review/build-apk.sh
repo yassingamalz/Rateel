@@ -45,6 +45,18 @@ cd "$ROOT/app_flutter"
 # versionName = 1.0.<code>. NOTE: an update also needs the SAME signing key; the APK is
 # signed with this container's debug key (~/.android/debug.keystore), see PROCESS.md.
 CODE=$(git -C "$ROOT" rev-list --count HEAD)
+# Every screen has its own branch: take the highest commit count among all the Flutter
+# branches (+1), so an APK built from any branch is never lower than one already installed
+# (2026-11-24: screen 06 was installed as 1.0.299 while screen 03 had ~100 commits).
+git -C "$ROOT" fetch -q origin 2>/dev/null || true
+for ref in $(git -C "$ROOT" for-each-ref --format='%(refname)' refs/remotes/origin/flutter/); do
+  n=$(git -C "$ROOT" rev-list --count "$ref")
+  [ "$n" -ge "$CODE" ] && CODE=$((n + 1))
+  # Versions already shipped to the phone, as logged in DECISIONS.md ("APK 1.0.N").
+  shipped=$(git -C "$ROOT" show "$ref:docs/flutter/DECISIONS.md" 2>/dev/null \
+    | grep -oE 'APK 1\.0\.[0-9]+' | grep -oE '[0-9]+$' | sort -n | tail -1)
+  [ -n "$shipped" ] && [ "$shipped" -ge "$CODE" ] && CODE=$((shipped + 1))
+done
 echo "== flutter build apk (release, arm64), version 1.0.$CODE ($CODE)"
 "$FLUTTER" build apk --release --target-platform android-arm64 \
   --build-name="1.0.$CODE" --build-number="$CODE"

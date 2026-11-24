@@ -18,8 +18,9 @@ Future<void> main() async {
   courseCompleted.value = int.tryParse(
     Uri.base.queryParameters['complete'] ?? '',
   );
-  // Review aid: `?cards=green|gold|abstract` shows the illustrated card style.
-  cardArtSet = Uri.base.queryParameters['cards'];
+  // Review aid: `?cards=classic|green|gold|abstract|emblem` switches the card style.
+  final cards = Uri.base.queryParameters['cards'];
+  if (cards != null) cardArtSet = cards == 'classic' ? null : cards;
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
