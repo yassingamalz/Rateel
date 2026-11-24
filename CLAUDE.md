@@ -28,6 +28,7 @@ natively in Flutter, one screen per branch.
 
 ## Build and check (cloud container)
 - Flutter is not preinstalled: download stable 3.50.1 to `/opt/flutter` (see `DECISIONS.md`), then
-  `cd app_flutter && flutter analyze && flutter test && flutter build web --release`.
+  `cd app_flutter && flutter analyze && flutter test && flutter build web --release --no-web-resources-cdn` (CanvasKit
+  served locally: the CDN is not reachable from the headless browser).
 - Screenshots: serve `app_flutter/build/web` and capture with Playwright at the reference size
   (1844×853); `?slow=10` slows animations for frame checks.

@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'courses/course_data.dart';
-import 'courses/courses_screen.dart';
+import 'core/learn_flow.dart';
 import 'nav/side_nav.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
+import 'units/unit_data.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,19 @@ Future<void> main() async {
   // Review aid: `?cards=classic|green|gold|abstract|emblem` switches the card style.
   final cards = Uri.base.queryParameters['cards'];
   if (cards != null) cardArtSet = cards == 'classic' ? null : cards;
+  // Review aids (screen 05): `?units=0` opens the units of course 0,
+  // `?unit=2` makes unit 2 the one in progress, `?completeUnit=0` plays the
+  // completion of unit 0 on start.
+  LearnFlow.startUnits = int.tryParse(Uri.base.queryParameters['units'] ?? '');
+  final startUnit = int.tryParse(Uri.base.queryParameters['unit'] ?? '');
+  if (LearnFlow.startUnits != null && startUnit != null) {
+    unitsProgressOf(LearnFlow.startUnits!).current = startUnit;
+  }
+  lockSize =
+      double.tryParse(Uri.base.queryParameters['lock'] ?? '') ?? lockSize;
+  unitCompleted.value = int.tryParse(
+    Uri.base.queryParameters['completeUnit'] ?? '',
+  );
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -57,7 +71,7 @@ class RateelApp extends StatelessWidget {
         home: Scaffold(
           body: SideNavScaffold(
             builder: (context, selected) => selected == 0
-                ? const CoursesScreen()
+                ? const LearnFlow()
                 : SectionPlaceholder(index: selected),
           ),
         ),

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="186 134 659 762">
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F9EDCB"/>
+      <stop offset="1" stop-color="#F6E6B4"/>
+    </linearGradient>
+    <linearGradient id="roll" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6E6B4"/>
+      <stop offset="1" stop-color="#E9D08A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9B861"/>
+      <stop offset="1" stop-color="#B89443"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main parchment sheet and its narrow gold edge -->
+  <path fill="#D9B861" d="M283 244H749C770 244 782 259 782 280V773C782 789 768 799 750 799H284C266 799 254 785 254 768V277C254 257 265 244 283 244Z"/>
+  <path fill="url(#page)" d="M281 275H755V756H281Z"/>
+
+  <!-- Top scroll: rounded gold edge -->
+  <path fill="url(#gold)" d="M309 146H714C789 146 825 189 825 237C825 284 790 316 745 316H292C237 316 198 281 198 235C198 183 242 146 309 146Z"/>
+  <!-- Lighter scroll paper -->
+  <path fill="url(#roll)" d="M315 169H713C763 169 798 195 798 235C798 271 773 291 740 291H286C253 291 223 269 223 236C223 198 257 169 315 169Z"/>
+  <!-- Rolled curl, dark center and tucked paper tip -->
+  <path fill="#B89443" d="M292 198C265 196 244 216 243 241C242 263 258 280 281 282C303 283 321 270 326 250C331 233 322 216 311 209C308 227 297 239 283 244C281 245 279 245 278 245C280 227 286 212 292 198Z"/>
+  <path fill="#F6E6B4" d="M311 206C305 224 293 235 277 240C285 248 301 245 311 235C319 225 319 214 311 206Z"/>
+
+  <!-- Three short decorative text lines; solid rounded shapes, not glyphs -->
+  <path fill="#B89443" d="M385 391H641C655 391 664 400 664 412C664 424 655 433 641 433H385C372 433 363 424 363 412C363 400 372 391 385 391Z"/>
+  <path fill="#B89443" d="M385 474H641C655 474 664 483 664 495C664 507 655 516 641 516H385C372 516 363 507 363 495C363 483 372 474 385 474Z"/>
+  <path fill="#B89443" d="M385 557H584C598 557 607 566 607 578C607 590 598 599 584 599H385C372 599 363 590 363 578C363 566 372 557 385 557Z"/>
+
+  <!-- Bold check mark at lower right, with softly rounded ends -->
+  <path fill="#B89443" d="M625 637C615 627 600 627 590 636C580 646 580 662 590 672L635 718C644 727 659 727 668 717L764 611C773 601 772 587 762 578C752 569 738 570 729 580L650 668L625 637Z"/>
+
+  <!-- Bottom scroll tube and gold outer lip -->
+  <path fill="url(#gold)" d="M307 736H739C803 736 833 773 833 813C833 856 798 884 748 884H305C255 884 219 851 219 812C219 773 255 736 307 736Z"/>
+  <path fill="url(#roll)" d="M309 758H738C784 758 810 781 810 813C810 844 787 861 748 861H305C268 861 244 839 244 812C244 782 270 758 309 758Z"/>
+  <!-- Rolled end viewed from front -->
+  <path fill="#B89443" d="M749 776C774 771 792 793 790 815C789 839 774 853 754 853C734 853 719 837 718 817C718 799 730 781 749 776Z"/>
+  <path fill="#D9B861" d="M746 781C760 778 771 790 771 807C771 825 760 837 746 839C732 841 725 831 725 817C725 802 733 784 746 781Z"/>
+</svg>

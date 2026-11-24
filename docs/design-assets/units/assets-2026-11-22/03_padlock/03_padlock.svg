@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="emerald" x1="0" y1="459" x2="0" y2="849" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E8A5E"/>
+      <stop offset="1" stop-color="#1B6644"/>
+    </linearGradient>
+  </defs>
+  <!-- Gold arch: a solid U-shaped path with a short, heavy shackle. -->
+  <path fill="#E8CF86" d="M314 484V364C314 250 400 168 512 168C624 168 710 250 710 364V484H634V364C634 295 584 246 512 246C440 246 390 295 390 364V484Z"/>
+  <!-- Thin flat cream-gold rim around the body. -->
+  <path fill="#E8CF86" d="M274 445H750C808 445 855 492 855 550V762C855 820 808 867 750 867H274C216 867 169 820 169 762V550C169 492 216 445 274 445Z"/>
+  <!-- Emerald body, no shadows or filters. -->
+  <path fill="url(#emerald)" d="M276 460H748C797 460 839 502 839 551V760C839 809 797 851 748 851H276C227 851 185 809 185 760V551C185 502 227 460 276 460Z"/>
+  <!-- Round-head keyhole with a small rounded slot. -->
+  <path fill="#F6E6B4" d="M512 610C484 610 461 633 461 661C461 683 475 701 494 708V743C494 753 502 761 512 761C522 761 530 753 530 743V708C549 701 563 683 563 661C563 633 540 610 512 610Z"/>
+</svg>

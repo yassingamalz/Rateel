@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.5.0
+  audioplayers: ^6.8.1
 
 dev_dependencies:
   flutter_test:
@@ -65,10 +66,12 @@ flutter:
     - assets/ui/decor/
     - assets/ui/courses/
     - assets/ui/glyphs/
+    - assets/ui/units/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/
     - assets/ui/course_art/emblem/
+    - assets/sounds/
   fonts:
     - family: ReadexPro
       fonts:

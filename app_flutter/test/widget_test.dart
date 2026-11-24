@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
 import 'package:rateel/main.dart';
+import 'package:rateel/units/unit_data.dart';
 
 // The courses screen has a looping glow: settle with fixed pumps.
 Future<void> settle(WidgetTester tester) async {
@@ -77,7 +78,44 @@ void main() {
     await tester.tap(find.text('النون والميم المشددتان'));
     await settle(tester);
     expect(find.textContaining('أولًا'), findsNothing);
-    expect(find.textContaining('قريبًا'), findsOneWidget);
+    // It opens the units screen (05).
+    expect(find.text('وحدات المقرر'), findsWidgets);
     await tester.pump(const Duration(seconds: 3));
+  });
+
+  testWidgets('units screen: locked unit, completion opens the next unit', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(const RateelApp());
+    await settle(tester);
+    await tester.tap(find.text('أساسيات التجويد'));
+    await settle(tester);
+    expect(find.text('وحدات المقرر'), findsWidgets);
+    expect(find.text('مقدمة في التجويد'), findsOneWidget);
+    // Unit 2 is locked.
+    await tester.tap(find.text('أساسيات التلاوة'));
+    await settle(tester);
+    expect(find.textContaining('أولًا'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 3));
+    // Complete unit 1: unit 2 opens (no more «finish first»).
+    unitCompleted.value = 0;
+    for (var i = 0; i < 10; i++) {
+      await settle(tester);
+    }
+    await tester.tap(find.text('أساسيات التلاوة'));
+    await settle(tester);
+    expect(find.textContaining('أولًا'), findsNothing);
+    await tester.pump(const Duration(seconds: 3));
+    // «تغيير المقرر» goes back to the courses screen.
+    await tester.tap(find.text('تغيير المقرر'));
+    for (var i = 0; i < 4; i++) {
+      await settle(tester);
+    }
+    expect(find.text('وحدات المقرر'), findsNothing);
+    // Shared progress: 1 of 5 units done → the course bar shows 20%.
+    expect(find.text('20%'), findsOneWidget);
   });
 }
