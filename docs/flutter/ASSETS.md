@@ -162,6 +162,6 @@ background). Cleaned: magenta keyed out with colour unmixing, alpha < 12% cleare
 | `ui/coming_soon/glyph_group.webp` | `05_group.png` (E4) | جلسات جماعية | cream glyph, 256 px |
 | `ui/coming_soon/glyph_certificate.webp` | `06_certificate_seal.png` (E5) | شهادات إتمام | cream seal, green check, 256 px |
 | `ui/coming_soon/glyph_microphone.webp` | `07_microphone.png` (E6) | تدريب النطق | cream glyph, 256 px; its base is tilted by about 1° |
-| not used | `08_emerald_background.png` | spare | whole background baked in one image (arcs, girih, mosque): the app keeps the shared `ScreenBackground` + `ScreenGirih`, arcs in code (one style) |
+| `ui/coming_soon/background.webp` | `08_emerald_background.png` | background of screen 14 (owner: faithful to the reference) | 1843×853 WebP q88, drawn over the content box (`BoxFit.fill`), darkened with `soonBgTone` |
 | not used | `09_mosque_silhouette.png` | rejected | broken alpha (ragged opaque blob around the mosque); `ui/decor/mosque.webp` is reused |
 

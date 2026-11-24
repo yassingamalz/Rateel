@@ -1,0 +1,42 @@
+card1
+  ref y  231- 268 x  212- 434 (w 223 h 38) | cap y  231- 268 x  208- 425 (w 218 h 38)   d top +0 bot +0 left -4 right -9
+  ref y  289- 292 x  293- 350 (w  58 h  4) | cap y  290- 292 x  289- 345 (w  57 h  3)   d top +1 bot +0 left -4 right -5
+  ref y  310- 383 x  170- 466 (w 297 h 74) | cap y  307- 382 x  158- 475 (w 318 h 76)   d top -3 bot -1 left -12 right +9
+card2
+  ref y  230- 267 x  698- 928 (w 231 h 38) | cap y  229- 268 x  697- 926 (w 230 h 40)   d top -1 bot +1 left -1 right -2
+  ref y  290- 292 x  785- 842 (w  58 h  3) | cap y  290- 292 x  784- 840 (w  57 h  3)   d top +0 bot +0 left -1 right -2
+  ref y  316- 344 x  664- 961 (w 298 h 29) | cap y  314- 345 x  663- 960 (w 298 h 32)   d top -2 bot +1 left -1 right -1
+  ref y  353- 382 x  679- 947 (w 269 h 30) | cap y  351- 382 x  678- 945 (w 268 h 32)   d top -2 bot +0 left -1 right -2
+card3
+  ref y  588- 632 x  197- 446 (w 250 h 45) | cap y  593- 639 x  202- 430 (w 229 h 47)   d top +5 bot +7 left +5 right -16
+  ref y  653- 656 x  293- 350 (w  58 h  4) | cap y  653- 655 x  289- 345 (w  57 h  3)   d top +0 bot -1 left -4 right -5
+  ref y  679- 705 x  175- 469 (w 295 h 27) | cap y  678- 703 x  169- 464 (w 296 h 26)   d top -1 bot -2 left -6 right -5
+  ref y  717- 744 x  197- 448 (w 252 h 28) | cap y  715- 741 x  196- 436 (w 241 h 27)   d top -2 bot -3 left -1 right -12
+card4
+  ref y  591- 620 x  684- 943 (w 260 h 30) | cap y  592- 631 x  683- 940 (w 258 h 40)   d top +1 bot +11 left -1 right -3
+  ref y  624- 629 x  708- 936 (w 229 h  6) | cap y  653- 655 x  784- 840 (w  57 h  3)   d top +29 bot +26 left +76 right -96
+  ref y  653- 656 x  786- 843 (w  58 h  4) | cap y  678- 740 x  668- 956 (w 289 h 63)   d top +25 bot +84 left -118 right +113
+  ref y  679- 742 x  661- 962 (w 302 h 64) | cap ---------------------------------------- 
+right
+  ref y  333- 407 x 1146-1583 (w 438 h 75) | cap y  333- 407 x 1157-1571 (w 415 h 75)   d top +0 bot +0 left +11 right -12
+  ref y  416- 490 x 1169-1566 (w 398 h 75) | cap y  412- 507 x 1168-1556 (w 389 h 96)   d top -4 bot +17 left -1 right -10
+  ref y  495- 505 x 1206-1462 (w 257 h 11) | cap y  535- 576 x 1295-1435 (w 141 h 42)   d top +40 bot +71 left +89 right -27
+  ref y  534- 577 x 1241-1488 (w 248 h 44) | cap y  595- 624 x 1170-1559 (w 390 h 30)   d top +61 bot +47 left -71 right +71
+  ref y  597- 625 x 1172-1559 (w 388 h 29) | cap y  636- 673 x 1153-1576 (w 424 h 38)   d top +39 bot +48 left -19 right +17
+  ref y  640- 673 x 1147-1578 (w 432 h 34) | cap y  679- 708 x 1319-1410 (w  92 h 30)   d top +39 bot +35 left +172 right -168
+  ref y  681- 709 x 1324-1410 (w  87 h 29) | cap ---------------------------------------- 
+emblem
+  ref y   66- 275 x 1246-1485 (w 240 h210) | cap y   67- 329 x 1246-1484 (w 239 h263)   d top +1 bot +54 left +0 right -1
+  ref y  333- 334 x 1319-1482 (w 164 h  2) | cap y  333- 334 x 1324-1457 (w 134 h  2)   d top +0 bot +0 left +5 right -25
+badge1
+  ref y   97- 190 x  265- 375 (w 111 h 94) | cap y   96- 199 x  261- 373 (w 113 h104)   d top -1 bot +9 left -4 right -2
+  ref y  199- 199 x  285- 285 (w   1 h  1) | cap y  203- 206 x  298- 305 (w   8 h  4)   d top +4 bot +7 left +13 right +20
+badge2
+  ref y   97- 181 x  753- 864 (w 112 h 85) | cap y   96- 201 x  756- 868 (w 113 h106)   d top -1 bot +20 left +3 right +4
+  ref ---------------------------------------- | cap y  206- 206 x  800- 800 (w   1 h  1) 
+badge3
+  ref y  457- 544 x  265- 376 (w 112 h 88) | cap y  460- 563 x  261- 373 (w 113 h104)   d top +3 bot +19 left -4 right -3
+  ref ---------------------------------------- | cap y  568- 568 x  302- 302 (w   1 h  1) 
+badge4
+  ref y  457- 541 x  756- 869 (w 114 h 85) | cap y  460- 564 x  756- 868 (w 113 h105)   d top +3 bot +23 left +0 right -1
+  ref ---------------------------------------- | cap y  568- 568 x  797- 797 (w   1 h  1) 

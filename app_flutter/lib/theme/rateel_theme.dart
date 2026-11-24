@@ -242,6 +242,18 @@ class RateelColors {
   /// Modulates the gold art (medals, coins, avatars) to the reference's
   /// warmer, slightly darker gold (#FCBA2D → #F3B02E, #FED210 → #F6BB2C).
   static const leaderArtTone = Color(0xFFF8E6D8);
+
+  // Screen 14, coming soon (measured on 14-in-arrivo.webp).
+  /// Darkens the owner's background (#02331F-ish) to the reference (#062A21).
+  static const soonBgTone = Color(0xFFE0D8D8);
+  static const soonTitle = Color(0xFFFFFFE4); // titles, cream
+  static const soonTitleGold = Color(0xFFF5B71F); // second title line
+  static const soonSubtitle = Color(0xFFFFFFFF);
+  static const soonText = Color(0xFFEFFFE6); // card descriptions
+  static const soonRule = Color(0xFFF9C44C); // short rule under card titles
+  static const soonCardTop = Color(0xFF09332A);
+  static const soonCardBottom = Color(0xFF0B382B);
+  static const soonCardRim = Color(0xFF3F7558);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,
