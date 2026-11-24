@@ -87,3 +87,16 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
   #195826→#04361B and a wider glow, header 4.5u, bar name 4.0u and avatar 11.1u, column positions.
 - v6 result: `verify-v6.md` (all boxes within ±4 px; gradients and lines table), `compare-v6-phone.jpg`,
   `demo-v6-phone.mp4`. Tool: `tools/flutter-review/leaderboard-verify.py`.
+
+## 8. v7: title, avatar circles, tabs (2026-11-24)
+- Owner on v6: the title is not curved/sized as the reference, the avatar circles and the tabs differ.
+- Title: overlay of reference and capture (`title-overlay`, red/green) showed thinner, taller letters; now Readex Pro
+  w680 at 5.9u (reference letters are wider for their height), same arch; overlay coincides within ~3 px.
+- Avatar circles: radial profiles of the reference ring: 4–5 px band cream on top (#FEFEC6), gold on the sides
+  (#F6C840), light gold at the bottom (#FEE476), a dark-gold line inside (#D49302, strongest on top), soft gold glow
+  outside; the yellow disc is the asset's own yellow (the warm tone of v5 darkened it, removed for avatars). Figure scale
+  unchanged (head at ~13% from the top as the reference; a 1.15× test was wrong). The reference's 1st-place figure
+  (grey cap + raised finger) does not exist in the Angular avatars (ChatGPT redrew it).
+- Tabs: gold tab with shaded left edge and lit right rim (no top line), separators pale gold #93985F, column outline
+  dark-gold on the left and bright #EEE695 on the right, inactive labels w420.
+- Detail sheet `detail-v7-title-avatar-tab.jpg` (reference left, app right), `compare-v7-phone.jpg`.

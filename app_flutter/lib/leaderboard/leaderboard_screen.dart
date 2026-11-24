@@ -944,38 +944,124 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rim = u * 0.47; // reference: 4 px pale rim
-    return Container(
+    final rim = u * 0.47; // reference: 4 px ring
+    return SizedBox(
       width: d,
       height: d,
-      padding: EdgeInsets.all(rim),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          // Reference: pale cream-gold rim, lit at the top and bottom.
-          colors: RateelColors.leaderAvatarRim,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.35),
-            blurRadius: u * 1.0,
-            offset: Offset(0, u * 0.3),
+      child: CustomPaint(
+        // Reference ring: cream at the top (#FEFEC6), gold on the sides
+        // (#F6C840), light gold at the bottom (#FEE476), a dark-gold line
+        // inside at the top (#D49302) and a soft gold glow outside.
+        foregroundPainter: _AvatarRingPainter(u: u, rim: rim),
+        child: Padding(
+          padding: EdgeInsets.all(rim),
+          child: ClipOval(
+            child: Image.asset(
+              player.avatarAsset,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
+            ),
           ),
-        ],
-      ),
-      child: ClipOval(
-        child: Image.asset(
-          player.avatarAsset,
-          color: RateelColors.leaderArtTone,
-          colorBlendMode: BlendMode.modulate,
-          fit: BoxFit.cover,
-          filterQuality: FilterQuality.medium,
         ),
       ),
     );
   }
+}
+
+class _AvatarRingPainter extends CustomPainter {
+  _AvatarRingPainter({required this.u, required this.rim});
+  final double u;
+  final double rim;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final c = size.center(Offset.zero);
+    final r = size.width / 2;
+    final box = Rect.fromCircle(center: c, radius: r);
+    canvas.save();
+    canvas.clipPath(
+      Path()
+        ..fillType = PathFillType.evenOdd
+        ..addRect(box.inflate(u * 3))
+        ..addOval(box),
+    );
+    canvas.drawCircle(
+      c,
+      r,
+      Paint()
+        ..color = RateelColors.gold.withValues(alpha: 0.28)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.7),
+    );
+    canvas.restore();
+    canvas.drawCircle(
+      c,
+      r - rim / 2,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = rim
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: RateelColors.leaderAvatarRim,
+          stops: [0, 0.5, 1],
+        ).createShader(box),
+    );
+    canvas.drawCircle(
+      c,
+      r - rim - u * 0.06,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.16
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          // Reference: a dark-gold inner line all around, strongest on top.
+          colors: [
+            RateelColors.leaderAvatarInner,
+            RateelColors.leaderAvatarInner.withValues(alpha: 0.55),
+          ],
+          stops: const [0.05, 0.6],
+        ).createShader(box),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_AvatarRingPainter old) => old.u != u || old.rim != rim;
+}
+
+/// Outline of the tab column: dark-gold on the left, bright on the right.
+class _TabOutlinePainter extends CustomPainter {
+  _TabOutlinePainter({required this.u, required this.radius});
+  final double u;
+  final double radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = math.max(1.0, u * 0.12);
+    final rr = RRect.fromRectAndCorners(
+      (Offset.zero & size).deflate(w / 2),
+      topRight: Radius.circular(radius),
+      bottomRight: Radius.circular(radius),
+    );
+    canvas.drawRRect(
+      rr,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w
+        ..shader = const LinearGradient(
+          colors: [
+            RateelColors.leaderTabOutlineLeft,
+            RateelColors.leaderTabOutlineLeft,
+            RateelColors.leaderTabOutlineRight,
+          ],
+          stops: [0, 0.5, 1],
+        ).createShader(Offset.zero & size),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_TabOutlinePainter old) =>
+      old.u != u || old.radius != radius;
 }
 
 class _Book extends StatelessWidget {
@@ -1256,85 +1342,108 @@ class _Tabs extends StatelessWidget {
           // Dark fill + thin pale-gold line; attached to the panel: straight
           // left side, rounded on the right only (reference).
           child: DecoratedBox(
+            position: DecorationPosition.background,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(radius),
                 bottomRight: Radius.circular(radius),
               ),
               color: Colors.black.withValues(alpha: 0.45),
-              border: Border.all(
-                color: RateelColors.leaderRimThin,
-                width: math.max(1.0, u * 0.12),
-              ),
             ),
-            child: Stack(
-              children: [
-                for (var i = 1; i < 3; i++)
-                  Positioned(
-                    left: u * 0.6,
-                    right: u * 0.6,
-                    top: h * i,
-                    height: math.max(1.0, u * 0.15),
-                    child: const ColoredBox(color: RateelColors.divider),
-                  ),
-                // Gold tab glides to the selected filter (K3: flat amber).
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 360),
-                  curve: Curves.easeInOutCubic,
-                  left: 0,
-                  right: 0,
-                  top: h * sel,
-                  height: h,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      // Reference gold tab: darker at the top, lit at the
-                      // bottom (K3, owner 2026-11-24).
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: RateelColors.leaderTab,
-                        stops: [0, 0.035, 0.33, 0.45, 0.95, 1],
+            child: CustomPaint(
+              foregroundPainter: _TabOutlinePainter(u: u, radius: radius),
+              child: Stack(
+                children: [
+                  for (var i = 1; i < 3; i++)
+                    Positioned(
+                      left: u * 0.6,
+                      right: u * 0.6,
+                      top: h * i,
+                      height: math.max(1.0, u * 0.15),
+                      child: const ColoredBox(
+                        color: RateelColors.leaderTabSeparator,
                       ),
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(radius * 1.4),
-                        bottomRight: Radius.circular(radius * 0.8),
-                        topLeft: Radius.circular(u * 0.6),
-                        bottomLeft: Radius.circular(u * 0.6),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: RateelColors.gold.withValues(alpha: 0.15),
-                          blurRadius: u * 2,
-                        ),
-                      ],
                     ),
-                  ),
-                ),
-                for (var i = 0; i < 3; i++)
-                  Positioned(
+                  // Gold tab glides to the selected filter (K3: flat amber).
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 360),
+                    curve: Curves.easeInOutCubic,
                     left: 0,
                     right: 0,
-                    top: h * i,
+                    top: h * sel,
                     height: h,
-                    child: Center(
-                      child: RotatedBox(
-                        // Reference: the label starts at the bottom.
-                        quarterTurns: 1,
-                        child: AnimatedDefaultTextStyle(
-                          duration: const Duration(milliseconds: 300),
-                          style: readex(
-                            i == sel ? u * 4.6 : u * 4.0, // reference
-                            weight: 560,
-                            color: i == sel
-                                ? RateelColors.countText
-                                : RateelColors.leaderText,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        // Reference gold tab: darker at the top, lit at the
+                        // bottom (K3, owner 2026-11-24).
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: RateelColors.leaderTab,
+                          stops: [0, 0.3, 0.42, 0.95, 1],
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(radius * 1.4),
+                          bottomRight: Radius.circular(radius * 0.8),
+                          topLeft: Radius.circular(u * 0.6),
+                          bottomLeft: Radius.circular(u * 0.6),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: RateelColors.gold.withValues(alpha: 0.15),
+                            blurRadius: u * 2,
                           ),
-                          child: Text(_labels[i]),
+                        ],
+                      ),
+                      // Reference: shaded left edge, lit right rim.
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(radius * 1.4),
+                            bottomRight: Radius.circular(radius * 0.8),
+                            topLeft: Radius.circular(u * 0.6),
+                            bottomLeft: Radius.circular(u * 0.6),
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              RateelColors.leaderTabLeft.withValues(alpha: 0.7),
+                              RateelColors.leaderTabLeft.withValues(alpha: 0),
+                              RateelColors.leaderTabRight.withValues(alpha: 0),
+                              RateelColors.leaderTabRight,
+                            ],
+                            stops: const [0, 0.18, 0.9, 1],
+                          ),
                         ),
                       ),
                     ),
                   ),
-              ],
+                  for (var i = 0; i < 3; i++)
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: h * i,
+                      height: h,
+                      child: Center(
+                        child: RotatedBox(
+                          // Reference: the label starts at the bottom.
+                          quarterTurns: 1,
+                          child: AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 300),
+                            style: readex(
+                              i == sel ? u * 4.6 : u * 4.0, // reference
+                              // Reference: inactive labels thinner.
+                              weight: i == sel ? 560 : 420,
+                              color: i == sel
+                                  ? RateelColors.countText
+                                  : RateelColors.leaderText,
+                            ),
+                            child: Text(_labels[i]),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         );
@@ -1398,7 +1507,7 @@ class _RibbonTitle extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final fs = u * 6.2;
+    final fs = u * 5.9;
     final tp = TextPainter(
       text: TextSpan(
         text: 'المتصدرين',
@@ -1406,7 +1515,7 @@ class _RibbonTitle extends CustomPainter {
           fontFamily: 'ReadexPro',
           fontSize: fs,
           height: 1.25,
-          fontVariations: const [FontVariation('wght', 540)],
+          fontVariations: const [FontVariation('wght', 680)],
           shadows: titleShadows(u),
           foreground: Paint()
             ..shader = const LinearGradient(

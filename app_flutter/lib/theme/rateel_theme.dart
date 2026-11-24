@@ -175,7 +175,6 @@ class RateelColors {
     Color(0xFFE7E091),
   ];
   static const leaderTab = [
-    Color(0xFFDFAC35), // bright line along the top
     Color(0xFF9D7514),
     Color(0xFFBE8E19),
     Color(0xFFE5A71C),
@@ -200,10 +199,16 @@ class RateelColors {
   static const leaderDiscRim = Color(0xFFF6E17A);
   static const leaderStar = [Color(0xFFF0B42C), Color(0xFFF4B81C)];
   static const leaderAvatarRim = [
-    Color(0xFFFFF6B0),
-    Color(0xFFF0D051),
+    Color(0xFFFEFEC6),
+    Color(0xFFF6C840),
     Color(0xFFFEE476),
   ];
+  static const leaderAvatarInner = Color(0xFFD49302);
+  static const leaderTabSeparator = Color(0xFF93985F);
+  static const leaderTabLeft = Color(0xFF8A6514); // shaded left edge
+  static const leaderTabRight = Color(0xFFFFC738); // lit right rim
+  static const leaderTabOutlineLeft = Color(0xFF595722);
+  static const leaderTabOutlineRight = Color(0xFFEEE695);
   static const leaderRing = Color(0xFFFCD542);
   static const leaderLattice = Color(
     0xFFD9A632,
