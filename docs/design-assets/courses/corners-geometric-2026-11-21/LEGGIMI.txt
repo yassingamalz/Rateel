@@ -1,0 +1,10 @@
+RATEEL — DECORAZIONI ISLAMICHE GEOMETRICHE
+
+Ornamento sinistro e destro.
+- SVG: tracciati vettoriali veri, editabili (non PNG incorporati).
+- PNG: 2048 x 2048 pixel, sfondo trasparente.
+- anteprima_su_verde.jpg: solo esempio di applicazione su verde scuro.
+
+Gli SVG sono una ricostruzione geometrica pulita, non una vettorializzazione pixel-per-pixel delle immagini generate in precedenza.
+Pattern costruito con ottagoni regolari, stelle a 8 punte, connettori quadrati ruotati e bordo diagonale a festoni.
+Colore oro: #D6B353. Il destro è il riflesso esatto del sinistro.

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1570 1000" width="1570" height="1000" role="img" aria-label="Open Quran on gold rehal">
+  <defs>
+    <linearGradient id="goldRear" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD95A"/><stop offset=".55" stop-color="#F2B623"/><stop offset="1" stop-color="#D99C25"/></linearGradient>
+    <linearGradient id="goldFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE071"/><stop offset=".55" stop-color="#FBD35A"/><stop offset="1" stop-color="#E4B13B"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E6"/><stop offset=".65" stop-color="#FFF4D9"/><stop offset="1" stop-color="#FBE8B9"/></linearGradient>
+    <linearGradient id="paperEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4DC9A"/><stop offset="1" stop-color="#DAB873"/></linearGradient>
+  </defs>
+  <!-- Back leg of carved rehal: no dark external outlines -->
+  <path fill="url(#goldRear)" d="M260 197 Q284 195 289 218 Q292 231 281 253 L247 365 Q237 395 264 409 L1108 837 Q1143 855 1133 884 Q1121 922 1080 905 L184 461 Q137 439 151 398 L237 215 Q245 199 260 197Z"/>
+  <!-- angular supports beneath book -->
+  <path fill="#E3AF37" d="M526 667 L480 759 Q477 773 494 764 L621 709Z"/>
+  <path fill="#E3AF37" d="M1022 669 L1082 758 Q1091 770 1071 764 L935 711Z"/>
+  <!-- small paper edge below each sheet -->
+  <path fill="url(#paperEdge)" d="M315 125 Q333 110 359 124 L679 241 Q742 266 778 338 L778 625 Q752 597 685 558 L263 383 Q239 372 257 337Z"/>
+  <path fill="url(#paperEdge)" d="M1235 125 Q1217 110 1191 124 L871 241 Q808 266 772 338 L772 625 Q798 597 865 558 L1287 383 Q1311 372 1293 337Z"/>
+  <!-- cream pages -->
+  <path fill="url(#paper)" d="M363 124 Q377 117 390 122 L696 236 Q756 259 770 327 L772 610 Q750 573 680 530 L270 366 Q251 358 263 337 L331 151 Q341 121 363 124Z"/>
+  <path fill="url(#paper)" d="M1187 124 Q1173 117 1160 122 L854 236 Q794 259 780 327 L778 610 Q800 573 870 530 L1280 366 Q1299 358 1287 337 L1219 151 Q1209 121 1187 124Z"/>
+  <!-- lower page bands -->
+  <path fill="#E6CB8B" opacity=".67" d="M270 331 L690 509 Q752 550 772 604 L772 573 Q738 527 685 498 L283 312Z"/>
+  <path fill="#E6CB8B" opacity=".67" d="M1280 331 L860 509 Q798 550 778 604 L778 573 Q812 527 865 498 L1267 312Z"/>
+  <!-- subtle spine -->
+  <path d="M774 328 Q777 449 775 613" stroke="#F6E5B4" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <!-- front crossed wooden beam -->
+  <path fill="url(#goldFront)" d="M1285 203 Q1304 192 1319 210 Q1327 218 1334 239 L1401 390 Q1417 425 1382 446 L468 910 Q438 924 417 899 Q394 867 424 845 L1306 399 Q1323 392 1316 373 L1265 245 Q1258 215 1285 203Z"/>
+</svg>

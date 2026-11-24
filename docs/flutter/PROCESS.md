@@ -39,10 +39,22 @@ Follow these steps for every screen. Decisions go in `DECISIONS.md` in the same 
 - Phone test: APK (see below). Approval → pull request into `master` (only when the owner asks).
 
 ## APK for the owner's phone
+One command, idempotent (installs Flutter 3.50.1 and the Android SDK only when missing):
 ```
-# once per container: Android SDK in /opt/android-sdk (cmdline-tools, platform-tools, platforms;android-36, build-tools;36.0.0)
-cd app_flutter && flutter config --android-sdk /opt/android-sdk
-flutter build apk --release --target-platform android-arm64
-# output: build/app/outputs/flutter-apk/app-release.apk (signed with the debug key: fine for side-loading)
+tools/flutter-review/build-apk.sh
+# output: app_flutter/build/app/outputs/flutter-apk/app-release.apk (signed with the debug key: fine for side-loading)
 ```
-The APK is published as a GitHub release asset or sent in the chat, never committed.
+- First run in a fresh container: ~5 min (SDK + NDK r28c download through the proxy, Gradle cache). Next runs: ~30 s.
+- **Download / "mirror" errors:** Gradle must run with one worker (`app_flutter/android/gradle.properties`:
+  `org.gradle.workers.max=1`); parallel downloads hit the proxy's rate limits. If a download still fails (429,
+  timeout), re-run the script: Gradle resumes from its cache. Java/Gradle already trust the proxy CA through
+  `JAVA_TOOL_OPTIONS`; never disable TLS checks.
+- The APK is sent in the chat or published as a GitHub release asset, never committed.
+
+### Version and signing
+- `build-apk.sh` sets versionCode = number of commits on HEAD and versionName = `1.0.<code>`, and also writes
+  `rateel-1.0.<code>.apk`. A higher versionCode lets Android update the installed app instead of reinstalling.
+- Android accepts the update only if the APK is signed with the **same key**. Today the APK is signed with the
+  container's debug key (`~/.android/debug.keystore`): builds from the same container update each other; a new
+  container creates a new key, and the phone then asks to uninstall first. Keeping one key for all builds
+  (committing a dev keystore, or storing it outside the repo) is an open owner decision.

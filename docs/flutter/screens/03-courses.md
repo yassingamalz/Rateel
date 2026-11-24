@@ -1,62 +1,81 @@
 # Screen 03: courses / learning paths (المسارات التعليمية)
 
-Status: 🟡 plan waiting for the owner's confirmation
-Branch: `flutter/03-courses`
+Status: ✅ approved by the owner on 2026-11-24 (APK 1.0.301). History: `03-courses/HISTORY.md`.
+Branch: `flutter/03-courses` (contains the approved side navigation)
 Reference: `docs/flutter/screens/03-courses/reference.webp` (1847×851, glassy gamified, dark)
-Current app: `src/app/features/courses/` (Angular), data `src/assets/data/courses.json` (12 courses).
+Code: `app_flutter/lib/courses/` (`courses_screen.dart`, `course_card.dart`, `course_data.dart`)
+Data: the 12 courses of `src/assets/data/courses.json` (Angular app), demo progress 30% on course 1.
 
-## Layout (landscape, RTL)
-| Zone | Content |
-|---|---|
-| Right rail (~9% width) | Menu button; five stat items with gold count bubbles: courses (30), Quran/reading (114), recitation (2), leaderboard (15), achievements (5). The active item has a gold ring. |
-| Header (top ~35%) | Arch outline with an open book on its apex, title «المسارات التعليمية» in cream, small gold divider with a diamond. Mosque silhouette on the left, crescent and star on the right, lattice corners at the top edges. |
-| Path (bottom ~60%) | Horizontal track of course cards, right to left, joined by a thin gold line with glowing nodes. The first card is active; the others are locked. |
+## Layout (landscape, RTL), measured in u = 1% of the height (u = 8.51 px on the reference)
+The right rail of the reference is **not** built: the approved side navigation (screen 04, style C, 6 items)
+replaces it. Horizontal positions are measured from the right edge of the content (left edge of the rail).
+
+| Zone | Content | Geometry |
+|---|---|---|
+| Header | thin gold arch, gold open-book emblem on the apex, title «المسارات التعليمية», gold divider with a diamond; mosque silhouette (left), crescent and star (right), lattice corners top left / top right | arch centre 95.2u from the content edge; emblem centre y 11u; title centre y 23.4u, size 9.15u, weight 600; divider y 31.4u, 56u wide |
+| Path | horizontal track of course cards, right to left, joined by a 3 px gold line with a glowing node just outside each card | card 72.4u × 50u, focused card ×1.016, pitch 82.7u, first card centre 43.8u from the content edge, centre y 63.8u; line at card centre + 2.7u |
 
 ### Course card
-- Rounded glass panel, dark emerald, soft shadow, faint geometric pattern along the bottom.
-- **Active**: gold rim with soft glow; level pill «مستوى مبتدئ» with a star; course icon (gold);
-  title (large, cream); thin gold rule; description (2 lines); play button + progress bar + percentage.
-- **Locked**: green-grey rim, lock button in the top corner, dimmed icon and text, no progress row.
+- Glass panel: radius 3.5u, vertical fill `cardTop → cardMid → cardBottom`, drop shadow, faint emerald star
+  lattice along the bottom (shared `star_tile.svg`, tinted).
+- **Active**: gold double rim (`goldRim` 1.4 px + `goldHighlight` 2 px), breathing gold glow; level pill
+  «مستوى مبتدئ» with a star; course icon top right; title 5.3u; gold rule; 2-line description 3.4u;
+  play button 8.1u, progress bar 40.4u × 1.4u, percentage.
+- **Locked**: emerald rim (`cardRim`), lock disc 7.8u top right, icon at the top centre, title, dim rule,
+  description; no progress row.
 
-## Built in code (Flutter)
-Background gradient and vignette, cards (glass, rims, glow, shadows), title and texts, divider,
-level pill, progress bar, play and lock buttons, path line with nodes, right rail, count bubbles,
-light/dark toggle (in the rail, light mode disabled for now). Simple UI glyphs (menu, lock, play, star,
-graduation cap, book, microphone, trophy, medal) come from an icon font.
+## Code vs assets
+Code: background, cards (glass, rims, glow, shadows), texts, divider, pill, play triangle, progress bar, path
+line and nodes, toast, motion.
 
-## Image assets
-| # | Asset | Source |
-|---|---|---|
-| A1 | Header arch outline with open book on the apex | **to generate** (existing `header-arch` is a filled glass shape, not this thin outline) |
-| A2 | Mosque silhouette, faint, left of the header | **to generate** (existing `mosque-skyline` is a bright glowing skyline) |
-| A3 | Gold crescent and star | **to generate** |
-| A4 | Lattice corners, top left / top right | existing `frames/lattice-corner-left/right` (to verify on screen, shown faded) |
-| A5 | Seamless geometric pattern strip for the card bottoms | **to generate** |
-| A6 | Course icons, one per course (12) | **to generate**: 01 open Quran on rehal, 02 head with sound waves, others below |
+All assets delivered by the owner (2026-11-20) and placed in v4; list and evaluation in `ASSETS.md`
+("Courses (screen 03)"). Prompts P1–P6 are fulfilled.
 
-Course icons (A6), flat gold line style as in the reference:
-01 أساسيات التجويد: open Quran on a rehal · 02 النون والميم المشددتان: head profile with sound waves from the
-nose · 03 مخارج الحروف: head cross-section with articulation points · 04 النون الساكنة والتنوين: letter-free
-symbol of a small circle with a flowing link · 05 الميم الساكنة: closed lips · 06 المد الطبيعي: short
-stretching wave · 07 المد الفرعي: longer double wave · 08 مد البدل: wave with a turning arrow ·
-09 المد العارض للسكون: wave ending in a stop dot · 10 المد اللازم: long wave with a lock bar · 11 القلقلة:
-bouncing echo rings · 12 تجويد متقدم: crown over an open book.
-These are proposals: the owner may change them.
+Prompts: `docs/flutter/prompts/03-courses/images-v1.txt` (also pasted in the chat).
+Critic: `03-courses/critic-v1.md`, `critic-v2.md`; comparisons `compare-v1.jpg`, `compare-v2.jpg`; demo `demo-v3.mp4`;
+completion frames `completion-frames-v3.jpg`; `compare-v3.jpg` (after critic v2 fixes). Critic v1/v2 ran with an exclusion list (see `CRITIC.md`): to redo without exclusions.
 
-## Motion and UX (to confirm)
-- **Entry**: header fades and settles from above (300 ms); cards slide in from the right one after the
-  other (60 ms stagger); the path line draws itself from right to left; the nodes light up.
-- **Scroll**: horizontal drag with snapping to the card centre; the card in the centre scales to 1.0, the
-  others to 0.94 and dim slightly (parallax on the header ornaments).
-- **Active card**: slow breathing glow on the gold rim (4 s, very soft). Progress bar fills on entry.
-- **Tap on active card / play**: press-down scale 0.97 with haptic tap, then a morph transition into the
-  units screen (05): the card expands to fill the screen.
-- **Tap on locked card**: small horizontal shake of the lock and a light haptic; a toast explains what
-  to complete first.
-- **Rail**: tap feedback with gold ripple; the active ring morphs between items.
-- No music; optional short UI tap sound.
+Course icons (owner may change): 02 head with sound waves from the nose (as in the reference) · 03 head
+cross-section with articulation points · 04 small circle with a flowing ribbon · 05 closed lips · 06 short wave
+· 07 two long waves · 08 wave turning into an arrow · 09 wave ending in a stop dot · 10 wave held by a bar ·
+11 echo arcs · 12 crown over an open book.
 
-## Open questions for the owner
-1. Course icon list A6: approve or change the proposals.
-2. Motion proposal above: OK?
-(Rail icons and theme toggle moved to screen 04, side navigation.)
+## Motion and UX (built in v1, to confirm)
+- **Entry** (1.5 s): header fades and settles from above; cards slide in from the right one after the other
+  (80 ms stagger); the path line draws itself right to left and the nodes light up; the progress bar fills.
+- **Scroll**: horizontal drag (touch and mouse) snapping card by card (PageView); the focused card is ×1.016.
+- **Active card**: slow breathing glow on the gold rim (2 s each way).
+- **Tap**: press-down scale 0.97 and a haptic tick. Active card → toast «الوحدات: قريبًا» until screen 05
+  exists (then a morph into the units screen). Locked card → the lock shakes, light haptic, toast
+  «أكمل «<previous course>» أولًا لفتح هذه الدورة».
+- A horizontal drag on the cards never opens the side menu (the menu swipe starts on the rail only).
+- **Progress always starts at 0%** (owner, 2026-11-20; the 30% of the reference was only an example).
+- **Line between two courses (owner, 2026-11-20):** a dim track with a node **in the middle**. The first half
+  (from the course to the node) lights up gold when the course reaches **50%**; the node pops and glows. The
+  second half lights up when the course is **completed**, and the light reaches the next course.
+- **Course completion (owner, 2026-11-20, as in the original HTML/Angular app):** when the last lesson of a
+  course ends, the lesson, unit and course screens close by themselves (lesson → unit → course → this
+  screen). Here, automatically:
+  1. the path is on the finished course; the bar fills to 50% (one haptic tick every 10%);
+  2. the first half of the line lights up to the node, the node pops (haptic "milestone") — skipped if the
+     course was already past 50%;
+  3. the bar fills to 100% (ticks), haptic "milestone";
+  4. the light runs along the second half to the next course (ticks), haptic "unlock" (heavy);
+  5. the next card's lock pops, rim emerald → gold with a flash, locked layout out, course layout in;
+  6. the path glides to the new course, haptic "success" (two light taps); the new course starts breathing.
+  Hook for the lesson flow: `courseCompleted` (`ValueNotifier<int?>` in `course_data.dart`).
+  Until screens 05–07 exist: **long press on the course in progress** plays it (demo), `?complete=0` on web.
+- **Haptics vocabulary** (`lib/core/haptics.dart`, app-wide): `tick` (progress step), `tap` (card),
+  `milestone` (50%, 100%), `unlock` (next course opens), `success` (double light tap), `denied` (locked card:
+  firm tap + soft echo).
+
+## Open points for the owner
+1. **Colours vs the central tokens (owner, 2026-11-21: to do, one style for the whole app).** The screen-03
+   colours (`RateelColors` section "Screen 03", `DESIGN-SYSTEM.md`) will be compared with the confirmed
+   tokens and unified. Conflicts listed in critic-v3 (C1–C5).
+2. **Course 03 icon** (head cross-section) reads weakly: to redo later with ChatGPT (owner, 2026-11-21).
+3. Asset refinements from the critic (optional): P-A4 emblem, P-A10 corners, P-B13 course 01, P-B14 course 02
+   (`prompts/03-courses/images-v1.txt`, section v2).
+
+Critic history: v1 7.5 (code only) · v2 8.5 (code only) · v3 7.5 whole screen, no exclusions · v4 8.5 whole screen;
+v7 applies the v4 code fixes (`compare-v7.jpg`).

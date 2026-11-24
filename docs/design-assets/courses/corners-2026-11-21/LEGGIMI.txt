@@ -1,0 +1,9 @@
+Rateel — decorazioni islamiche laterali
+
+Contenuto:
+- rateel_ornamento_sinistro.png / .svg
+- rateel_ornamento_destro.png / .svg
+
+PNG originali: 1254×1254 px, trasparenti.
+SVG: tracciati vettoriali con sfondo trasparente, ottenuti dal ricalco dei PNG originali.
+Nota: il ricalco vettoriale semplifica alcuni dettagli e sfumature dei PNG; non è una copia matematicamente identica.

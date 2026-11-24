@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600" fill="none">
+<g id="icon-1" transform="translate(0 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Smooth undulating wave converting to a curved arrow -->
+<path d="M 142 465 C 194 465 210 358 270 358 C 332 358 324 514 390 514 C 454 514 456 377 512 376 C 570 375 606 370 651 320" stroke="#F2B623" />
+<path d="M 590 317 L 654 317 L 647 381" stroke="#FFD95A" /></g>
+<g id="icon-2" transform="translate(800 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Sustained wave that terminates on a solid stop dot -->
+<path d="M 147 424 C 196 424 208 332 267 332 C 328 332 331 514 398 514 C 463 514 472 332 535 332 C 583 332 585 424 611 424" stroke="#F2B623" />
+<circle cx="659" cy="424" r="29" fill="#FFD95A" stroke="none" /></g>
+<g id="icon-3" transform="translate(1600 0)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Long wave caught by a compact upright stop bar -->
+<path d="M 137 430 C 191 430 206 348 263 348 C 326 348 330 515 396 515 C 459 515 467 348 530 348 C 573 348 584 416 613 430" stroke="#F2B623" />
+<path d="M 646 303 L 646 553" stroke="#FFD95A" />
+<circle cx="616" cy="430" r="16" fill="#FFD95A" stroke="none"/></g>
+<g id="icon-4" transform="translate(0 800)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Three upward concentric echo arcs from a resonant point -->
+<path d="M 327 511 Q 400 382 473 511" stroke="#FFD95A" />
+<path d="M 261 507 Q 400 281 539 507" stroke="#F2B623" />
+<path d="M 194 504 Q 400 176 606 504" stroke="#F2B623" />
+<circle cx="400" cy="568" r="26" fill="#FFD95A" stroke="none"/></g>
+<g id="icon-5" transform="translate(800 800)" fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"><!-- Floating three-point crown above an open Quran -->
+<path d="M 300 292 L 290 217 L 355 251 L 399 182 L 450 251 L 519 217 L 503 292 Z" stroke="#F2B623" stroke-width="31" />
+<circle cx="290" cy="217" r="16" fill="#FFD95A" stroke="none"/>
+<circle cx="399" cy="182" r="16" fill="#FFD95A" stroke="none"/>
+<circle cx="519" cy="217" r="16" fill="#FFD95A" stroke="none"/>
+<path d="M 400 416 Q 333 369 201 388 L 201 574 Q 331 554 400 626 Q 475 554 604 574 L 604 388 Q 468 368 400 416 Z" stroke="#F2B623" />
+<path d="M 400 418 L 400 626" stroke="#FFD95A" stroke-width="32" />
+<path d="M 225 434 Q 322 427 377 459 M 576 434 Q 474 427 425 459" stroke="#FFD95A" stroke-width="20" /></g>
+<!-- Cell 6 intentionally left empty -->
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="126 128 617 592" role="img" aria-label="Speaking profile with gold sound waves">
+  <defs>
+    <linearGradient id="faceCreamGold" x1="0" y1="150" x2="0" y2="690" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBEAA6"/>
+      <stop offset="0.55" stop-color="#F1CF75"/>
+      <stop offset="1" stop-color="#E1AC36"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-width="43" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Same speaking profile silhouette as earlier Tajweed icon sheet. -->
+    <path id="face-profile" d="M 530 160 C 490 168 462 218 470 280 C 472 316 466 323 441 356 L 393 420 Q 379 444 409 455 L 450 468 L 447 516 Q 439 528 455 542 L 474 559 L 470 587 Q 475 640 530 650 Q 564 655 603 647 L 659 639 Q 681 635 693 659 L 711 689" stroke="url(#faceCreamGold)"/>
+    <g id="sound-waves" stroke="#F2B623">
+      <path d="M 321 454 Q 272 502 321 551"/>
+      <path d="M 264 420 Q 193 502 264 580"/>
+      <path d="M 207 389 Q 107 502 207 616"/>
+    </g>
+  </g>
+</svg>

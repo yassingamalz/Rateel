@@ -47,7 +47,52 @@ class RateelColors {
   static const hamburger = Color(0xFFEFEACF);
   static const countText = Color(0xFF132C1A);
   static const activeGlyph = Color(0xFF06291C);
+
+  // Screen 03, courses (sampled from reference 03, critic-v1 of 03-courses).
+  // Proposed tokens: the owner confirms them with the screen.
+  static const contentTop = Color(0xFF07362A);
+  static const contentBottom = Color(0xFF00271D);
+  static const contentLift = Color(0xFF002D23);
+  static const cardTop = Color(0xFF033428);
+  static const cardMid = Color(0xFF012F25);
+  static const cardLow = Color(0xFF023126);
+  static const cardBottom = Color(0xFF053F30);
+  static const cardRim = Color(0xFF27654F); // locked card rim, 4 px, middle
+  static const cardRimTop = Color(0xFF2F6954);
+  static const cardRimBottom = Color(0xFF559174);
+  static const cardContact = Color(0xFF00160C); // 1 px line under the card
+  static const cardPattern = Color(0xFF2E6A4C);
+  static const cardRimDark = Color(0xFF144837); // outer edge of the rim
+  // Course in progress: muted gold rim, 4 px (reference 03).
+  static const cardRimGold = Color(0xFFC69F3D);
+  static const cardRimGoldInner = Color(0xFFD3A436);
+  // Small gold glyphs (star, play): vertical gradient.
+  static const glyphGoldTop = Color(0xFFFFD556);
+  static const glyphGoldBottom = Color(0xFFEFB527);
+  static const pathLine = Color(0xFFD1A93C);
+  static const pathNode = Color(0xFFFCC24A);
+  static const progressTrack = Color(0xFF265343);
+  static const progressFill = Color(0xFFEBB335);
+  static const playFill = Color(0xFF43552A);
+  static const lockDisc = Color(0xFF01261E);
+  static const lockRim = Color(0xFF1A533F);
+  static const lockGlyph = Color(0xFFEDE3CB);
+  static const pillFill = Color(0xFF062D20);
 }
+
+/// Titles (screen title, card titles): warm cream with a soft drop shadow,
+/// as the ChatGPT titles (owner, 2026-11-21). The screen title adds a
+/// top-to-bottom cream gradient (titleTop → titleBottom).
+const titleCream = Color(0xFFFAF1D8);
+const titleTop = Color(0xFFFFFBEA);
+const titleBottom = Color(0xFFE9D7A8);
+List<Shadow> titleShadows(double u) => [
+  Shadow(
+    color: Colors.black.withValues(alpha: 0.45),
+    offset: Offset(0, u * 0.3),
+    blurRadius: u * 0.6,
+  ),
+];
 
 /// Shadow of the side rail / open menu on the content (owner, 2026-11-21):
 /// the navigation reads as a layer above the screen.
