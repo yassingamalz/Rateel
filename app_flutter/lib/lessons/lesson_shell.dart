@@ -32,7 +32,15 @@ class LessonShell extends StatefulWidget {
     required this.child,
     this.onPausedChanged,
     this.controlsVisible = true,
+    this.waiting = false,
+    this.onPlay,
   });
+
+  /// The lesson stopped by itself and waits for the learner (screen 07: end
+  /// of a video section): the button shows the gold play with its pulse,
+  /// without the menu and the veil; a tap calls [onPlay].
+  final bool waiting;
+  final VoidCallback? onPlay;
 
   /// Current step (1-based; 0 before the first) and number of steps.
   final int step;
@@ -73,6 +81,35 @@ class LessonShellState extends State<LessonShell>
     duration: const Duration(milliseconds: 900),
   );
 
+  // Gold of the button while [LessonShell.waiting].
+  late final _wait = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 250),
+    value: widget.waiting ? 1 : 0,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.waiting) _pulse.repeat();
+  }
+
+  @override
+  void didUpdateWidget(LessonShell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.waiting == widget.waiting) return;
+    if (widget.waiting) {
+      _wait.forward();
+      _pulse.repeat();
+    } else {
+      _wait.reverse();
+      if (!paused) {
+        _pulse.stop();
+        _pulse.value = 0;
+      }
+    }
+  }
+
   // True while the completion plays: controls and back are blocked
   // (critic v1 #6).
   bool _locked = false;
@@ -89,8 +126,10 @@ class LessonShellState extends State<LessonShell>
       _pulse.repeat();
     } else {
       _menu.reverse();
-      _pulse.stop();
-      _pulse.value = 0;
+      if (!widget.waiting) {
+        _pulse.stop();
+        _pulse.value = 0;
+      }
     }
     widget.onPausedChanged?.call(p);
   }
@@ -112,6 +151,7 @@ class LessonShellState extends State<LessonShell>
   @override
   void dispose() {
     _menu.dispose();
+    _wait.dispose();
     _pulse.dispose();
     _sweep.dispose();
     super.dispose();
@@ -200,9 +240,16 @@ class LessonShellState extends State<LessonShell>
                     step: widget.step,
                     total: widget.total,
                     menu: _menu,
+                    wait: _wait,
                     pulse: _pulse,
                     sweep: _sweep,
-                    onToggle: () => setPaused(!paused),
+                    onToggle: () {
+                      if (widget.waiting && !paused && widget.onPlay != null) {
+                        widget.onPlay!();
+                      } else {
+                        setPaused(!paused);
+                      }
+                    },
                     onBack: () {
                       setPaused(false);
                       widget.onBack();
@@ -245,6 +292,7 @@ class LessonTopBar extends StatelessWidget {
     required this.step,
     required this.total,
     required this.menu,
+    this.wait = kAlwaysDismissedAnimation,
     required this.pulse,
     required this.sweep,
     required this.onToggle,
@@ -256,6 +304,9 @@ class LessonTopBar extends StatelessWidget {
   final int step;
   final int total;
   final Animation<double> menu;
+
+  /// 1 while the lesson waits for the learner: gold play with the pulse.
+  final Animation<double> wait;
   final Animation<double> pulse;
   final Animation<double> sweep;
   final VoidCallback onToggle;
@@ -339,15 +390,18 @@ class LessonTopBar extends StatelessWidget {
           top: u * m - e,
           right: u * m - e,
           child: AnimatedBuilder(
-            animation: Listenable.merge([menu, pulse]),
-            builder: (context, _) => _GlassButton(
-              u: u,
-              semantics: menu.value > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
-              glyph: menu.value > 0.5 ? _Glyph.play : _Glyph.pause,
-              goldness: Curves.easeOut.transform(menu.value),
-              pulse: menu.value > 0 ? pulse.value : null,
-              onTap: onToggle,
-            ),
+            animation: Listenable.merge([menu, wait, pulse]),
+            builder: (context, _) {
+              final g = math.max(menu.value, wait.value);
+              return _GlassButton(
+                u: u,
+                semantics: g > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
+                glyph: g > 0.5 ? _Glyph.play : _Glyph.pause,
+                goldness: Curves.easeOut.transform(g),
+                pulse: g > 0 ? pulse.value : null,
+                onTap: onToggle,
+              );
+            },
           ),
         ),
       ],

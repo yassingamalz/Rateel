@@ -115,37 +115,42 @@ class _LessonPillState extends State<LessonPill> {
               boxShadow: [
                 BoxShadow(
                   color: RateelColors.videoSkipRim.withValues(
-                    alpha: _down ? 0.35 : (widget.gold ? 0.3 : 0.16),
+                    alpha: _down ? 0.6 : 0.42,
                   ),
-                  blurRadius: u * 1.8,
+                  blurRadius: u * 2.2,
                 ),
               ],
             ),
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                textDirection: TextDirection.rtl,
-                children: [
-                  Text(
-                    widget.label,
-                    textDirection: TextDirection.rtl,
-                    style: readex(
-                      u * 4.6,
-                      weight: widget.gold ? 520 : 340,
-                      color: ink,
-                    ).copyWith(height: 1.0),
-                  ),
-                  if (widget.glyph != null) ...[
-                    SizedBox(width: u * 2.9),
-                    SizedBox(
-                      width: u * 4.1,
-                      height: u * 3.0,
-                      child: CustomPaint(
-                        painter: PillGlyphPainter(widget.glyph!, ink),
-                      ),
+            child: CustomPaint(
+              foregroundPainter: widget.gold
+                  ? null
+                  : _InnerGlowPainter(u: u, radius: u * SkipMetrics.height / 2),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Text(
+                      widget.label,
+                      textDirection: TextDirection.rtl,
+                      style: readex(
+                        u * 4.6,
+                        weight: widget.gold ? 520 : 340,
+                        color: ink,
+                      ).copyWith(height: 1.0),
                     ),
+                    if (widget.glyph != null) ...[
+                      SizedBox(width: u * 2.9),
+                      SizedBox(
+                        width: u * 4.1,
+                        height: u * 3.0,
+                        child: CustomPaint(
+                          painter: PillGlyphPainter(widget.glyph!, ink),
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
@@ -221,18 +226,24 @@ class _LessonRoundButtonState extends State<LessonRoundButton> {
                 boxShadow: [
                   BoxShadow(
                     color: RateelColors.videoSkipRim.withValues(
-                      alpha: _down ? 0.35 : 0.16,
+                      alpha: _down ? 0.6 : 0.42,
                     ),
-                    blurRadius: u * 1.8,
+                    blurRadius: u * 2.2,
                   ),
                 ],
               ),
-              child: Center(
-                child: SizedBox(
-                  width: u * 4.1,
-                  height: u * 4.1,
-                  child: CustomPaint(
-                    painter: PillGlyphPainter(widget.glyph, titleCream),
+              child: CustomPaint(
+                foregroundPainter: _InnerGlowPainter(
+                  u: u,
+                  radius: u * SkipMetrics.height / 2,
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: u * 4.1,
+                    height: u * 4.1,
+                    child: CustomPaint(
+                      painter: PillGlyphPainter(widget.glyph, titleCream),
+                    ),
                   ),
                 ),
               ),
@@ -325,4 +336,35 @@ class PillGlyphPainter extends CustomPainter {
   @override
   bool shouldRepaint(PillGlyphPainter o) =>
       o.glyph != glyph || o.color != color;
+}
+
+/// Soft gold light just inside the rim (reference 07 «تخطي»: #585E28 →
+/// #203D23 over ≈ 1u inside the rim).
+class _InnerGlowPainter extends CustomPainter {
+  _InnerGlowPainter({required this.u, required this.radius});
+
+  final double u;
+  final double radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final r = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(radius),
+    );
+    canvas.save();
+    canvas.clipRRect(r);
+    canvas.drawRRect(
+      r,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 1.0
+        ..color = RateelColors.videoSkipRim.withValues(alpha: 0.6)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
+    );
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_InnerGlowPainter o) => o.u != u || o.radius != radius;
 }

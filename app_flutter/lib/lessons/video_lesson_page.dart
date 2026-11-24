@@ -18,15 +18,12 @@ String? videoMode;
 double videoStartAt = 0;
 
 /// Sections of a lesson video (owner, 2026-11-24): the video stops at the end
-/// of each section with «أعد» (repeat) / «تابع» (continue), and the learner
-/// can go back to an earlier section. The data has no sections yet (MOCK,
+/// of each section and the 02 button turns into the pulsing gold play (tap:
+/// next section; the last section completes the lesson by itself); a small
+/// ‹ button restarts the section, or goes to the previous one from its start. The data has no sections yet (MOCK,
 /// `SCREENS.md`): every video is split in [videoSectionCount] equal parts.
 /// Planned data: `sections: [{start, end}]` in seconds per video lesson.
 int videoSectionCount = 3;
-
-/// How to go back to an earlier section, both built for the owner's choice
-/// (review `?sectionNav=dots|button`): dots under the video or a ‹ button.
-String videoSectionNav = 'dots';
 
 /// Thumbnails bundled for the posters (real YouTube thumbnails of the lesson
 /// videos; the other links of the data are dead, 404 on YouTube).
@@ -60,10 +57,6 @@ class VideoMetrics {
   // Playing state (full screen, owner 2026-11-24).
   static const barCentre = 10.75; // 02: margin 3 + button 15.5 / 2
   static const playTitleSize = 5.0;
-  static const navY = 82.45; // dots: centred on «تخطي»
-  static const dot = 2.8; // reference 08 dots: 2.8u, pitch 5.5u
-  static const dotPitch = 5.5;
-  static const endPillW = 30.0;
   // Corners (cell size and start of the band matched on zoomed crops).
   static const cornerSize = 39.0;
   static const cornerTop = 60.0;
@@ -279,9 +272,14 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     if (_pos >= _end(_section) - 0.2) _endSection();
   }
 
-  /// End of a section: the video stops on its last frame, «أعد» / «تابع».
+  /// End of a section: the video stops on its last frame and the 02 button
+  /// waits (pulsing gold play); after the last section the lesson completes.
   void _endSection() {
     if (_sectionEnd || _finishing || !mounted) return;
+    if (_section >= _sections - 1) {
+      _finish();
+      return;
+    }
     _yt?.pauseVideo();
     Haptics.tick();
     setState(() {
@@ -305,24 +303,6 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     }
   }
 
-  void _repeat() => _playFrom(_section);
-
-  /// «تابع»: next section; after the last one the lesson is complete.
-  void _continue() {
-    if (_section >= _sections - 1) {
-      _finish();
-    } else {
-      _playFrom(_section + 1);
-    }
-  }
-
-  /// Back to an earlier section (dots: any section reached; button: the
-  /// previous one, or the start of the first).
-  void _goTo(int k) {
-    if (_unavailable || _finishing || k > _reached) return;
-    _playFrom(k);
-  }
-
   void _leave(bool done) {
     if (_left || !mounted) return;
     if (ModalRoute.of(context)?.isCurrent != true) return;
@@ -330,8 +310,8 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     Navigator.of(context).pop(done);
   }
 
-  /// End of the video or «تخطي»: the fill reaches 100, the light runs along
-  /// the capsule (screen 02), then the lesson leaves with `true`.
+  /// End of the last section or «تخطي»: the fill reaches the end, the light
+  /// runs along the capsule (screen 02), then the lesson leaves with `true`.
   Future<void> _finish() async {
     if (_finishing || _left) return;
     _finishing = true;
@@ -341,6 +321,14 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     await Future<void>.delayed(const Duration(milliseconds: 320));
     await _shell.currentState?.celebrate();
     _leave(true);
+  }
+
+  /// ‹ : back to the start of the section, or to the previous section when
+  /// already at its start (first 2 s).
+  void _back() {
+    if (_unavailable || _finishing) return;
+    final atStart = !_sectionEnd && _pos < _start(_section) + 2;
+    _playFrom(atStart ? math.max(0, _section - 1) : _section);
   }
 
   void _togglePlay() {
@@ -396,6 +384,8 @@ class _VideoLessonPageState extends State<VideoLessonPage>
       key: _shell,
       step: _step,
       total: _sections,
+      waiting: _sectionEnd && !_finishing,
+      onPlay: () => _playFrom(_section + 1),
       onBack: () => _leave(false),
       onRestart: _restart,
       onPausedChanged: _onPaused,
@@ -718,10 +708,8 @@ class _VideoLessonPageState extends State<VideoLessonPage>
   /// Playing (owner, 2026-11-24, «as Simply Piano»): the video fills the
   /// screen, whole (16:9 at the full height, dark bands at the sides), no
   /// time line; controls always visible on soft dark gradients: the 02 bar,
-  /// the lesson title, «تخطي», the way back to earlier sections; at the end
-  /// of each section «أعد» / «تابع».
+  /// the lesson title, «تخطي» and the small ‹ (restart the section / go back).
   List<Widget> _playingLayer(double u, double cx) {
-    const nav = VideoMetrics.navY;
     return [
       Positioned.fill(key: const ValueKey('video'), child: _player(u)),
       // Legibility of the controls on any video frame.
@@ -768,134 +756,24 @@ class _VideoLessonPageState extends State<VideoLessonPage>
           ),
         ),
       ),
-      if (videoSectionNav == 'dots')
-        Positioned(
-          key: const ValueKey('dots'),
-          left: 0,
-          right: 0,
-          top: u * (nav - 4),
-          height: u * 8,
-          child: _enter(3, Center(child: _dots(u))),
-        )
-      else
-        Positioned(
-          key: const ValueKey('prev'),
-          right: u * (SkipMetrics.right + SkipMetrics.width + 3),
-          top: u * SkipMetrics.top,
-          width: u * SkipMetrics.height,
-          height: u * SkipMetrics.height,
-          child: _enter(
-            3,
-            LessonRoundButton(
-              u: u,
-              label: 'القسم السابق',
-              glyph: PillGlyph.previous,
-              enabled: _section > 0 || _pos > _start(0) + 1,
-              onTap: () => _goTo(math.max(0, _section - 1)),
-            ),
-          ),
-        ),
-      // End of a section: the frame stays, a veil and «أعد» / «تابع».
-      Positioned.fill(
-        key: const ValueKey('sectionEnd'),
-        child: IgnorePointer(
-          ignoring: !_sectionEnd,
-          child: AnimatedOpacity(
-            opacity: _sectionEnd ? 1 : 0,
-            duration: const Duration(milliseconds: 260),
-            child: ColoredBox(
-              color: const Color(0x73000000),
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    SizedBox(
-                      width: u * VideoMetrics.endPillW,
-                      height: u * SkipMetrics.height,
-                      child: LessonPill(
-                        u: u,
-                        label: 'أعد',
-                        glyph: PillGlyph.replay,
-                        onTap: _repeat,
-                      ),
-                    ),
-                    SizedBox(width: u * 5),
-                    SizedBox(
-                      width: u * VideoMetrics.endPillW,
-                      height: u * SkipMetrics.height,
-                      child: LessonPill(
-                        u: u,
-                        label: 'تابع',
-                        glyph: PillGlyph.play,
-                        gold: true,
-                        onTap: _continue,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+      Positioned(
+        key: const ValueKey('back'),
+        right: u * (SkipMetrics.right + SkipMetrics.width + 3),
+        top: u * SkipMetrics.top,
+        width: u * SkipMetrics.height,
+        height: u * SkipMetrics.height,
+        child: _enter(
+          3,
+          LessonRoundButton(
+            u: u,
+            label: 'أعد القسم',
+            glyph: PillGlyph.previous,
+            onTap: _back,
           ),
         ),
       ),
     ];
   }
-
-  /// One dot per section (reference 08's dots): reached sections gold (tap =
-  /// watch again from its start), the current one larger with a glow, the
-  /// next ones dim. RTL: the first section on the right.
-  Widget _dots(double u) => Row(
-    mainAxisSize: MainAxisSize.min,
-    textDirection: TextDirection.rtl,
-    children: [
-      for (var k = 0; k < _sections; k++)
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () {
-            if (k <= _reached) {
-              Haptics.tap();
-              _goTo(k);
-            } else {
-              Haptics.denied();
-            }
-          },
-          child: Semantics(
-            button: true,
-            label: 'القسم ${k + 1}',
-            child: SizedBox(
-              width: u * VideoMetrics.dotPitch,
-              height: u * 8,
-              child: Center(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  width: u * (k == _section ? 3.4 : VideoMetrics.dot),
-                  height: u * (k == _section ? 3.4 : VideoMetrics.dot),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: k == _section
-                        ? RateelColors.videoFill
-                        : k <= _reached
-                        ? RateelColors.videoFillEnd.withValues(alpha: 0.75)
-                        : RateelColors.videoTrack.withValues(alpha: 0.8),
-                    boxShadow: k == _section
-                        ? [
-                            BoxShadow(
-                              color: RateelColors.videoFill.withValues(
-                                alpha: 0.5,
-                              ),
-                              blurRadius: u * 1.4,
-                            ),
-                          ]
-                        : null,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-    ],
-  );
 
   /// The whole video, 16:9 at the full screen height, centred on dark
   /// bands. The poster stays on top until the video plays and while the pause

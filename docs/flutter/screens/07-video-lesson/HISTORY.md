@@ -59,3 +59,16 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Captures `capture-v5-*` (unavailable with band, playing A/B, section end), sheet `compare-v5-phone.jpg`, demo
   `demo-v5-phone.mp4`, APK 1.0.354 (section 1 ends → «تابع» → 02 pause → dot of section 1 → «تخطي» → 06 completion; B variant: last
   section → «تابع» completes; not available → «تخطي»).
+
+## 5. v6: section end on the 02 play, one back button, brighter «تخطي» (2026-11-24)
+- Owner on APK 1.0.354 (with a Simply Piano screen recording): the pause menu should animate as Simply Piano (→ separate
+  02 branch); no «أعد / تابع» since pause/play already exists; repeating / going back = a small button like the ‹ arrow,
+  only for the video; dots not needed; «تخطي» brighter as the reference.
+- Answers: section end → the 02 button waits as the pulsing gold play (tap → next section); dots removed.
+- Code: `LessonShell(waiting:, onPlay:)` (gold play + pulse without menu/veil, `_wait` controller); `_endSection` finishes
+  the lesson after the last section; `_back()` (restart the section, or previous section in its first 2 s);
+  «أعد / تابع» overlay, dots and `?sectionNav` removed; `LessonPill`/`LessonRoundButton` glow 42% σ 2.2u + inner light
+  (`_InnerGlowPainter`), measured on the reference column through the rim: outside #2E3F21 vs #2F431F.
+- Web check (`t07.js`): section end 1/3 gold play → tap → 2/3 pause → ‹ → 1/3. The widget test checks the waiting play
+  and 2/3 (frames stop in the test after the section change, see the comment there).
+- Captures `capture-v6-*`, demo `demo-v6-phone.mp4`.
