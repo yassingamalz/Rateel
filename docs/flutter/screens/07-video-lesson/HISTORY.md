@@ -96,3 +96,10 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - `SkipMetrics.side` (left 7.3u), ‹ at left 7.3 + 33.6 + 3u; skip glyph mirrored (two triangles pointing left); the
   stronger corner fade moved to the left corner. Capsule direction: on `flutter/02-menu-motion` (shared bar).
 - Captures `capture-v9-*`; demo script click positions updated. After merging the 02 branch (capsule left → right, menu motion): `capture-v10-*`.
+
+## 9. Approval (2026-11-24)
+- APK 1.0.366 (v10: buttons bottom left, capsule left → right and the Simply Piano menu motion from
+  `flutter/02-menu-motion`, merged here).
+- **Owner approved screen 07.** PR `flutter/07-video-lesson` → `master` and merge (it also brings the 02 changes).
+- Still open: the YouTube link of `rateel-lezione1-v2.mp4` and the real section times (`sections: [{start, end}]`;
+  mock = 3 equal parts); the dead/mismatched links of the old data (`SCREENS.md`); light theme (dark only for now).

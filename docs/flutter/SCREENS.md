@@ -6,16 +6,16 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | N° | Screen | Reference | State |
 |---|---|---|---|
 | 01 | Open: no reference file. Owner will decide later what it is | – | to define |
-| 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | **approved** (APK 1.0.330), merged into `master` |
+| 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | **approved** (APK 1.0.330), merged into `master`; menu motion as Simply Piano and capsule left → right merged with 07 |
 | 03 | Courses (المسارات التعليمية) | `03-corsi.webp` | done, approved, in `master` |
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
-| 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **v5 built** on `flutter/07-video-lesson`, waiting for the owner's test |
+| 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **approved** (APK 1.0.366), merged into `master`; sections are mock |
 | 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | to do |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
-| 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), PR `flutter/11-leaderboard` → `master`; runs on mock data |
+| 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | to do |
