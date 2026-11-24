@@ -9,6 +9,8 @@ Open: YouTube link of `rateel-lezione1-v2.mp4` and the real section times (mock:
 only, ask first); old video links dead/mismatched (`SCREENS.md`).
 
 ## Next steps (proposal, confirm with the owner)
+0. **Performance fix** (owner: animations feel heavy): `PERFORMANCE.md`, branch `flutter/perf` from `master`, if the owner
+   says yes before 08. New screens follow its rules.
 1. **Screen 08, reading lesson** on the dark/light pair `07-lezione-video-{dark,light}.webp` (they show the reading lesson),
    Angular `reading-lesson`. Branch `flutter/08-reading-lesson` from `master`.
 2. Final critic of 06 when the owner says so; then 09, 10/10b.
