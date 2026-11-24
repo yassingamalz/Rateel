@@ -378,7 +378,7 @@ class _CourseCardState extends State<CourseCard> {
             children: [
               Transform.translate(
                 // Star centred on the body of the text (owner, 2026-11-24).
-                offset: Offset(0, -u * 0.25),
+                offset: Offset(0, u * 0.15),
                 child: ShaderMask(
                   blendMode: BlendMode.srcIn,
                   shaderCallback: (r) => const LinearGradient(
@@ -403,7 +403,7 @@ class _CourseCardState extends State<CourseCard> {
                   // Readex sets Arabic low in its line box: lift it to the
                   // optical centre of the pill (owner, 2026-11-21).
                   child: Transform.translate(
-                    offset: Offset(0, -u * 0.75),
+                    offset: Offset(0, -u * 0.45),
                     child: Text(
                       'مستوى مبتدئ',
                       textDirection: TextDirection.rtl,
