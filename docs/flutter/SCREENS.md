@@ -11,11 +11,11 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
-| 07 | Video lesson (dark / light) | `07-lezione-video-{dark,light}.webp` | to do (after 02 and 11) |
+| 07 | Video lesson (dark / light) | `07-lezione-video-{dark,light}.webp` | to do (next, after the final critic of 06) |
 | 08 | Open: no reference file | – | to define |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
-| 11 | Leaderboard (classifica) | `11-classifica.webp` | to do (next) |
+| 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), PR `flutter/11-leaderboard` → `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | to do |
@@ -31,3 +31,11 @@ Done: 4 screens (03–06). To do: at least 15 (02, 07, 09, 10/10b, 11, 12, 13, 1
 - Same behaviour and structure as the original, with a **small restyle in the classy glass style** of the other screens
   (tokens in `DESIGN-SYSTEM.md`, glass back button as on screen 06, gold progress as `progressFill`/`amberPill`).
 - It is a reusable widget: it takes the progress (0–1), a pause/back callback and returns control to the lesson page.
+
+## Screens running on mock data (no real data yet)
+Remember to connect these to real data (backend or app progress) before release.
+
+| Screen | What is mock | Where |
+|---|---|---|
+| 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. All values are demo, the user's lesson count too. | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
+| 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |

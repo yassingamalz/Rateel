@@ -115,3 +115,17 @@ use, ChatGPT SVG reconstructions kept as spares; see its README).
 |---|---|---|---|
 | `ui/decor/angular_pattern_2.webp` | `lessons/angular-original/islamic-pattern-2-dark.svg` (Angular `src/assets/images/`, an SVG wrapping a 1000 px gold #DAA520 PNG) | look B background | resized to 700 px; tiled 82u, turned 50°, 6% (Angular: 700 px, 50°, 4%) |
 | `ui/lessons/read.webp`, `video.webp`, `practice.webp`, `listen.webp`, `test.webp` | `lessons/icons-2026-11-23/PNG_originali/01…05` (owner's L1–L5, ChatGPT) | lesson-type icon on the cards (gold as drawn; muted green tint when locked, dark on the gold card) | original PNGs: the SVGs and `PNG_1024` are reconstructions with different shapes (book, headphones, mic, clipboard); scattered haze (alpha ≤ 40) removed except within 3 px of the drawing; trimmed, 600 px |
+
+### Leaderboard (screen 11), 2026-11-24
+Sources: `docs/design-assets/leaderboard/` (owner's ChatGPT images A1–A4, on magenta; lattice on black) and the Angular
+app (`src/assets/images/medals/`, `avatars/`). Processing: `tools/assets/leaderboard_assets.py` (magenta un-mix only near
+the key colour, so silver stays opaque; lattice alpha from brightness).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/leaderboard/ribbon.webp` | `ribbon_emerald_gold_02.png` (A1) | header ribbon, title arched in code | darker band of the two variants, closer to the reference; `_01` kept as a spare |
+| `ui/leaderboard/lattice.webp` | `moroccan_ogee_lattice.png` (A2) | background lattice, tile 31.6u (4 cells), fades out by 31u | seamless (edge diff < 5/255); 512 px |
+| `ui/leaderboard/coins_{gold,silver,bronze}.webp` | `coins_*.png` (A3) | rewards of rows 1–3 | trimmed, 256 px |
+| `ui/leaderboard/book.webp` | `book_gold.png` (A4) | «n درس» | trimmed, 160 px |
+| `ui/leaderboard/medal_{gold,silver,bronze}.webp` | Angular `medals/*-medal.png` | rows 1–3 | identical to the reference; trimmed, 400 px |
+| `ui/leaderboard/avatar_1…10.webp` | Angular `avatars/avatar-*.png` | rows, pinned bar (circle + gold rim in code) | 256 px |

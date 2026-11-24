@@ -19,8 +19,14 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
   included. Only owner-approved (✅) decisions are skipped (`CRITIC.md`, 2026-11-20).
 - Any deviation from the reference is **asked before it is built**, not built and listed afterwards.
 - Re-run the critic on the latest build: captures from an older build give stale findings.
+- **Critic at phone size only (915×412)** (owner, 2026-11-24, screen 11): no desktop critic; the owner tests on the
+  phone. Always check brightness of round elements (avatars, discs, medals), that every text uses the app's
+  standard type styles, and the optical position of every text.
 
 ## Building
+- **Verify element by element with numbers before showing anything** (owner, 2026-11-24, screen 11): boxes of every
+  element (±4 px at 853), gradient and line profiles, zoomed side-by-side per region. Whole-screen looks hide errors.
+- `Image(repeat: ...)` needs `fit: BoxFit.none`, or the default `scaleDown` shrinks the tile to the box height.
 - Readex Pro sets Arabic low in its line box: in pills and buttons, centre the text optically
   (screen 03: lift 0.45u), and check it in a zoomed comparison.
 - Flutter web needs mouse drag enabled explicitly for horizontal scrolling (`ScrollBehavior.dragDevices`).

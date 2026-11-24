@@ -1,0 +1,20 @@
+# Screen 11 (leaderboard): ChatGPT prompts v1 (draft; pasted in the chat after the owner's answers to the plan)
+# Attach to every prompt: 11-classifica.webp (reference). For A1 and A3 also 03-corsi.webp (same gold).
+
+A1 ribbon banner
+A single horizontal ribbon banner for a premium Islamic learning game UI, exactly like the banner at the top of the attached screenshot: dark emerald green satin band (deep green #0B3A26 shading to #04281B) with polished gold edges (bright #FFE27A highlights, #B8860B shadows), gently arched upward in the middle, both ends folded back behind the band with V-cut swallow tails. The band is EMPTY: no text, no letters, no symbols. Front view, perfectly symmetrical, soft inner shading, a faint gold glow only along the rims. One object, centred, filling the frame edge to edge, transparent-safe: flat pure magenta #FF00FF background, no shadow on the background, no gradient behind it. Wide format 3000 x 600 px, high resolution, crisp edges.
+
+A2 gold lattice tile
+A seamless repeating pattern tile of a Moroccan ogee / quatrefoil lattice, exactly like the gold lattice behind the banner in the attached screenshot: thin elegant gold lines (#D4A733 with a lighter #F2CF63 highlight along each line, line width about 1.2% of the tile) forming interlocking rounded diamond cells with small pointed arches, on a pure black #000000 background. Exactly one repeat of the pattern so the tile repeats perfectly left-right and top-bottom with no visible seam. Flat front view, no perspective, no glow outside the lines, no texture, no vignette. Square 1024 x 1024 px.
+
+A3a gold coin stack
+Two small stacks of gold coins for a premium game UI icon, exactly like the coins next to «10K» in the attached screenshot: a front stack of 3 coins and a back stack of 2 coins slightly higher and to the right, warm polished gold (#F7C842 faces, #C8901A edges, thin darker grooves between coins), clean semi-flat illustration with soft highlights. One object, centred, filling the frame, flat pure magenta #FF00FF background, no shadow on the background. 1024 x 1024 px.
+
+A3b silver coin stack
+Two small stacks of silver coins for a premium game UI icon, same shape and composition as the gold one and as the coins next to «5K» in the attached screenshot: front stack of 3 coins, back stack of 2 slightly higher and to the right, cool polished silver (#E6E9EC faces, #9AA1A8 edges, thin darker grooves between coins), clean semi-flat illustration with soft highlights. One object, centred, filling the frame, flat pure magenta #FF00FF background, no shadow on the background. 1024 x 1024 px.
+
+A3c bronze coin stack
+Two small stacks of bronze coins for a premium game UI icon, same shape and composition as the gold one: front stack of 3 coins, back stack of 2 slightly higher and to the right, warm bronze (#D9925A faces, #9A5A2E edges, thin darker grooves between coins), clean semi-flat illustration with soft highlights. One object, centred, filling the frame, flat pure magenta #FF00FF background, no shadow on the background. 1024 x 1024 px.
+
+A4 gold book icon
+A small closed book icon for a premium game UI, exactly like the gold book next to «33 درس» in the attached screenshot: front view, rounded corners, warm gold (#F2B623 cover, #C98816 spine and page edge at the bottom), two short horizontal lines embossed on the cover, simple semi-flat style readable at 24 px. One object, centred, filling the frame, flat pure magenta #FF00FF background, no shadow. 1024 x 1024 px.

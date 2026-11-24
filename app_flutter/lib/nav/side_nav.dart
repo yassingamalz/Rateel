@@ -21,6 +21,9 @@ class SideNavScaffold extends StatefulWidget {
   /// Builds the screen shown next to the rail for the selected section.
   final Widget Function(BuildContext context, int selected) builder;
 
+  /// Review aid: section selected on start (`?section=3` opens the leaderboard).
+  static int startSection = 0;
+
   @override
   State<SideNavScaffold> createState() => _SideNavScaffoldState();
 }
@@ -35,9 +38,9 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
     vsync: this,
     duration: const Duration(milliseconds: 360),
   );
-  int _selected = 0;
+  int _selected = SideNavScaffold.startSection;
   bool _dragging = false;
-  double _selectFrom = 0;
+  double _selectFrom = SideNavScaffold.startSection.toDouble();
 
   bool get _isOpen =>
       _open.value > 0.5 || _open.status == AnimationStatus.forward;
