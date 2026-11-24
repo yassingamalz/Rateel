@@ -4,7 +4,7 @@ Chronology of everything done, found and decided for screen 03, so the next sess
 Branch `flutter/03-courses` (also carries the approved side navigation, screen 04). Plan: `../03-courses.md`.
 Decisions: `../../DECISIONS.md` (rows from 2026-11-20). Assets: `../../ASSETS.md`. Lessons: `../../LESSONS-LEARNED.md`.
 
-**Status: approved by the owner on 2026-11-24, APK 1.0.300** (illustrated cards, style D as background, no arc).
+**Status: approved by the owner on 2026-11-24, APK 1.0.301** (illustrated cards, style D as background, no arc).
 
 ## 1. Plan and first build (2026-11-20)
 - Plan updated (layout in u, u = 8.51 px on the 1847×851 reference), prompts P1–P6 for the missing art.

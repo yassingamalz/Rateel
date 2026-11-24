@@ -1,6 +1,6 @@
 # Screen 03: courses / learning paths (المسارات التعليمية)
 
-Status: ✅ approved by the owner on 2026-11-24 (APK 1.0.300). History: `03-courses/HISTORY.md`.
+Status: ✅ approved by the owner on 2026-11-24 (APK 1.0.301). History: `03-courses/HISTORY.md`.
 Branch: `flutter/03-courses` (contains the approved side navigation)
 Reference: `docs/flutter/screens/03-courses/reference.webp` (1847×851, glassy gamified, dark)
 Code: `app_flutter/lib/courses/` (`courses_screen.dart`, `course_card.dart`, `course_data.dart`)

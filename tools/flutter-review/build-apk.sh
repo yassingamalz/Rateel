@@ -51,11 +51,11 @@ CODE=$(git -C "$ROOT" rev-list --count HEAD)
 git -C "$ROOT" fetch -q origin 2>/dev/null || true
 for ref in $(git -C "$ROOT" for-each-ref --format='%(refname)' refs/remotes/origin/flutter/); do
   n=$(git -C "$ROOT" rev-list --count "$ref")
-  [ "$n" -ge "$CODE" ] && CODE=$((n + 1))
+  if [ "$n" -ge "$CODE" ]; then CODE=$((n + 1)); fi
   # Versions already shipped to the phone, as logged in DECISIONS.md ("APK 1.0.N").
   shipped=$(git -C "$ROOT" show "$ref:docs/flutter/DECISIONS.md" 2>/dev/null \
-    | grep -oE 'APK 1\.0\.[0-9]+' | grep -oE '[0-9]+$' | sort -n | tail -1)
-  [ -n "$shipped" ] && [ "$shipped" -ge "$CODE" ] && CODE=$((shipped + 1))
+    | grep -oE 'APK 1\.0\.[0-9]+' | grep -oE '[0-9]+$' | sort -n | tail -1 || true)
+  if [ -n "$shipped" ] && [ "$shipped" -ge "$CODE" ]; then CODE=$((shipped + 1)); fi
 done
 echo "== flutter build apk (release, arm64), version 1.0.$CODE ($CODE)"
 "$FLUTTER" build apk --release --target-platform android-arm64 \
