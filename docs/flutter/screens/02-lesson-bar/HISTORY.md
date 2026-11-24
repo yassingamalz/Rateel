@@ -91,3 +91,5 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
   (back) to 0. Gold, halo and pulse unchanged.
 - Review: `tools/flutter-review/lesson-bar-menu-frames.js` (frames at `?slow=12`), `lesson-bar-menu-demo.js` (video at
   `?slow=3`): `menu-motion-v1-slow3.mp4`.
+- Owner (2026-11-24, testing 07): the capsule fills **from the left** (was from the right, RTL); the leading light sits at
+  the right end of the gold and the light at 100% runs left → right.

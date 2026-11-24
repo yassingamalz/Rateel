@@ -140,3 +140,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-24 | **APK 1.0.346**: screen 11 v7. | ✅ |
 | 2026-11-24 | **Screen 11 (leaderboard) approved by the owner** (v7, APK 1.0.346). PR `flutter/11-leaderboard` → `master`. Next: final critic of 06 (phone only, ask first), then 07 (video lesson with the bar of 02), 09, 10/10b. | ✅ |
 | 2026-11-24 | Screen 02 pause-menu motion as Simply Piano on `flutter/02-menu-motion` (pause ↔ play morph, staggered buttons sliding out from under the pause button with their icons turning). Video `screens/02-lesson-bar/menu-motion-v1-slow3.mp4`; waiting for the owner. | 🟡 |
+| 2026-11-24 | Screen 02 capsule **fills left → right** (owner, while testing 07; was right → left, RTL); leading light and the 100% sweep follow. | ✅ |

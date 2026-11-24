@@ -371,7 +371,7 @@ class LessonTopBar extends StatelessWidget {
   }
 }
 
-/// The capsule: dark glass that fills with gold from the right (RTL), the
+/// The capsule: dark glass that fills with gold from the left (owner), the
 /// number split at the fill edge, the light at 100%.
 class _CapsulePainter extends CustomPainter {
   _CapsulePainter({
@@ -422,7 +422,8 @@ class _CapsulePainter extends CustomPainter {
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
     );
     final fw = size.width * share;
-    final fill = Rect.fromLTWH(size.width - fw, 0, fw, size.height);
+    // Fills from the left (owner, 2026-11-24; was from the right, RTL).
+    final fill = Rect.fromLTWH(0, 0, fw, size.height);
     if (fw > 0) {
       // Gold glow spilling into the empty part (mockup: 1.6u, 45%).
       canvas.drawRect(
@@ -431,7 +432,7 @@ class _CapsulePainter extends CustomPainter {
           ..color = RateelColors.gold.withValues(alpha: 0.45)
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
       );
-      // Gold fill from the right.
+      // Gold fill from the left.
       canvas.drawRect(
         fill,
         Paint()
@@ -463,12 +464,14 @@ class _CapsulePainter extends CustomPainter {
       );
       canvas.restore();
       // Soft light at the leading edge (2.2u, fading into the gold), also at
-      // 16/16 on the left end.
-      final lead = Rect.fromLTWH(fill.left, 0, u * 2.2, size.height);
+      // 16/16 on the right end.
+      final lead = Rect.fromLTWH(fill.right - u * 2.2, 0, u * 2.2, size.height);
       canvas.drawRect(
         lead.intersect(fill),
         Paint()
           ..shader = LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
             colors: [
               RateelColors.lessonBarLight.withValues(alpha: 0.9),
               RateelColors.lessonBarLight.withValues(alpha: 0),
@@ -476,12 +479,12 @@ class _CapsulePainter extends CustomPainter {
           ).createShader(lead),
       );
     }
-    // Light running along the capsule (right → left, as the fill grows).
+    // Light running along the capsule (left → right, as the fill grows).
     if (sweep > 0 && sweep < 1) {
       final band = u * 9;
       final x = lerpDouble(
-        size.width + band,
         -band,
+        size.width + band,
         Curves.easeInOut.transform(sweep),
       )!;
       final rect = Rect.fromLTWH(x - band / 2, 0, band, size.height);
@@ -524,7 +527,7 @@ class _CapsulePainter extends CustomPainter {
       (size.height - light.height) / 2,
     );
     canvas.save();
-    canvas.clipRect(Rect.fromLTRB(0, 0, fill.left, size.height));
+    canvas.clipRect(Rect.fromLTRB(fill.right, 0, size.width, size.height));
     light.paint(canvas, at);
     canvas.restore();
     canvas.save();
