@@ -105,3 +105,13 @@ identical and crisp, the PNG where it is closer to the reference.
 | `ui/decor/corner_units_top_left.webp`, `corner_units_bottom_right.webp` | `08`, `09` PNG | screen 05 corners | PNG finer than the traced SVG; trimmed, 800 px; `10_both_corners` is a spare |
 | `sounds/fill-sound.mp3` | Angular app `public/sounds/fill-sound.mp3` | unit completion (`Sounds.fill`) | |
 | reused | `header_arch.svg`, `mosque.webp` (olive tint), `crescent_star.svg`, `title_divider.svg`, `card_pattern.svg` (disc bottom), `glyphs/play`, `check` | screen 05 | |
+
+### Lessons (screen 06), 2026-11-22 / 2026-11-23
+Sources: `docs/design-assets/lessons/` — `angular-original/` (the Angular background pattern) and
+`icons-2026-11-23/` (lesson-type icons L1–L5: originals, cleaned full-resolution PNGs in `PNG_puliti/` for any other
+use, ChatGPT SVG reconstructions kept as spares; see its README).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/decor/angular_pattern_2.webp` | `lessons/angular-original/islamic-pattern-2-dark.svg` (Angular `src/assets/images/`, an SVG wrapping a 1000 px gold #DAA520 PNG) | look B background | resized to 700 px; tiled 82u, turned 50°, 6% (Angular: 700 px, 50°, 4%) |
+| `ui/lessons/read.webp`, `video.webp`, `practice.webp`, `listen.webp`, `test.webp` | `lessons/icons-2026-11-23/PNG_originali/01…05` (owner's L1–L5, ChatGPT) | lesson-type icon on the cards (gold as drawn; muted green tint when locked, dark on the gold card) | original PNGs: the SVGs and `PNG_1024` are reconstructions with different shapes (book, headphones, mic, clipboard); scattered haze (alpha ≤ 40) removed except within 3 px of the drawing; trimmed, 600 px |
