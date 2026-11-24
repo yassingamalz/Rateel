@@ -57,3 +57,11 @@ Decisions: `../../DECISIONS.md` (rows from 2026-11-20). Assets: `../../ASSETS.md
 - Course 03 icon (classic style) reads weakly; gold-3D art for courses 08–12 has a baked-in card frame.
 - Branch `flutter/05-units` (from this branch at ce7ebc9) also edits `courses_screen.dart` and `main.dart`:
   merge this branch first, then resolve there.
+
+## 7. Card proportions (2026-11-24, after the merge of 03–06 into master)
+- Branch `flutter/03-courses-cards` from `master`. Owner: the cards looked square; wider-than-tall cards with
+  longer connecting lines. HTML mockups A (62×42u) and B (62–63×38u), with short then long lines (12u).
+- Chosen: **A with long lines** → 62u × 42u, pitch 74u, first card 2.5u from the rail, centre y 62u; line at the
+  card centre; art box scaled with the card height; title/divider/description flow from 11.4u (clear of the pill
+  and the lock); play row 6.7u above the bottom. Captures `final-v15.png`, `final-v15-phone.png`. Owner asked for
+  no critic on this change.
