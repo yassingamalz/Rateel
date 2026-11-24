@@ -76,4 +76,4 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 ## 6. v7: corners faded towards the inside (2026-11-24)
 - Owner: the side lattices, above all the right one, should be faded, otherwise they compete with the button.
 - Horizontal masks on top of the vertical fade: left corner full at the edge → 70% at 45% → 0 at 80% of its box; right
-  corner → 50% at 22% → 0 at 50%. Before/after `corners-v6-v7.png`, captures `capture-v7-*`.
+  corner → 50% at 22% → 0 at 50%. Before/after `corners-v6-v7.png`, captures `capture-v7-*`, APK 1.0.359.

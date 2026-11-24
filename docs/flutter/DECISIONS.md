@@ -153,3 +153,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-24 | **Pause-menu animation as Simply Piano** (pause ↔ play morph, buttons sliding out from under the pause button with their icons turning): done on a **separate branch of screen 02** (`flutter/02-menu-motion` from `master`), then merged into 07 (owner). | ✅ |
 | 2026-11-24 | **APK 1.0.357**: screen 07 v6 (section end on the 02 play, ‹ button, brighter skip). | ✅ |
 | 2026-11-24 | Screen 07 v7 (owner): bottom corner lattices **faded towards the inside**, the right one more (gone at 50% of its box), so they do not compete with «تخطي». Sheet `screens/07-video-lesson/corners-v6-v7.png`. | ✅ |
+| 2026-11-24 | **APK 1.0.359**: screen 07 v7 (corners faded towards the inside). | ✅ |
