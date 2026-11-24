@@ -26,7 +26,7 @@ Done: 4 screens (03–06). To do: at least 15 (02, 07, 09, 10/10b, 11, 12, 13, 1
 ## Screen 02: shared lesson top bar (owner, 2026-11-24)
 - Appears in **every type of lesson** (video, reading, practice, listening, test, guided).
 - Source of truth: the Angular original, `src/app/features/lessons/lesson-details/lesson-details.component.{html,scss,ts}`:
-  progress bar with fill and «n/100» text, pause button (pause ↔ play) that opens a small menu with «back»; the interactive lesson
+  progress bar with fill and «n/100» text, pause button (pause ↔ play) that opens a small menu with «back» and «restart»; the interactive lesson
   has its own bar (`interactive-lesson.component.html`, % inside the bar).
 - Same behaviour and structure as the original, with a **small restyle in the classy glass style** of the other screens
   (tokens in `DESIGN-SYSTEM.md`, glass back button as on screen 06, gold progress as `progressFill`/`amberPill`).
