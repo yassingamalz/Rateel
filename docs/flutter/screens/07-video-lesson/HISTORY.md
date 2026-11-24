@@ -13,3 +13,10 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
   1/8), not the video lesson. No reference shows a video playing. Video lessons in the data are YouTube links
   (course 01 unit 1 lessons 1–3, course 02 intro).
 - Plan v1 with 7 questions (Q1–Q7) for the owner.
+
+## 2. Owner answers and prompts (2026-11-24)
+- Q1 07 = video lesson on `07-lezione-video.webp`, dark/light pair → screen 08 (reading). Q2 ChatGPT reference for the
+  playing state (V4). Q3 counter «n / 100». Q4 dark only now. Q5 arch frame from ChatGPT (V2). Q6 new corners from
+  ChatGPT (V3). Q7 the end of the video completes the lesson by itself.
+- Prompts V1 (icon), V2 (arch), V3 (corners), V4 (playing reference) pasted in the chat; crops in
+  `../../prompts/07-video-lesson/attach/`.

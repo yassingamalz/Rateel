@@ -1,7 +1,7 @@
 # Screen 07: video lesson (درس فيديو), plan
 
 Branch `flutter/07-video-lesson`, from `master` (1ab56a1, screens 02–06 and 11 merged). History: `07-video-lesson/HISTORY.md`.
-Status: **plan v1, waiting for the owner's answers** (§6).
+Status: **plan v1 answered** (owner, 2026-11-24): see DECISIONS.md and HISTORY.md §2.
 
 ## 1. References and what they really show
 Copied from `lesson-production` (`docs/design/glassy-gamified/screens/`, 1842×854, u = 8.54 px) into `07-video-lesson/`:
