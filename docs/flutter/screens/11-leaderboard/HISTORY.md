@@ -52,3 +52,13 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
   keeps the gold «15»; ribbon band darkened in `tools/assets/leaderboard_assets.py` (#031C0D vs reference #012418).
 - Captures `capture-v3-*`, sheet `compare-v3-phone.jpg` (reference above, Flutter phone below), demo
   `demo-v3-phone.mp4` (915×412). Lows of critic v1 left for the owner's review.
+
+## 5. v4: title, text sizes and brightness (2026-11-24)
+- Owner on v3: the title in the ribbon, the text sizes and the brightness differ from the reference.
+- Measured (desktop capture vs reference): title in the reference is **straight**, warm gold-cream ≈ #F5E9B4, 11% wider
+  than v3, which was arched, whiter (#F8F4E3) and showed thin vertical seams from the strip drawing; reference texts are
+  brighter (#FFFEDE vs `titleCream` #FAF1D8); «33 درس» 3.5u and #E1E1CF vs 3.1u at 75%; names slightly thinner.
+- v4: straight title 6.6u w540 with `leaderTitleTop → leaderTitleBottom` (K10), texts `leaderText` (K9), names w440,
+  lessons line 3.5u at 88%, book 3.5u. Measured after: title box and colour, lessons and names within a few px of the
+  reference. Captures `capture-v4-*`, sheet `compare-v4-phone.jpg`.
+- Not matchable: the reference writes «عبدالله» with the ﷲ ligature, Readex Pro has none (data text, not changed).

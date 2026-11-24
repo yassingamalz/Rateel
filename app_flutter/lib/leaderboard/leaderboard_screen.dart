@@ -484,7 +484,7 @@ class _Header extends StatelessWidget {
     final style = readex(
       u * 4.4,
       weight: 560,
-      color: titleCream,
+      color: RateelColors.leaderText,
     ).copyWith(shadows: titleShadows(u));
     return LayoutBuilder(
       builder: (context, box) {
@@ -602,7 +602,14 @@ class _PlayerRow extends StatelessWidget {
         badge: me && place >= 3 ? _GoldRank(u: u, rank: rank) : null,
         trailing: place < 3
             ? _Reward(u: u, place: place)
-            : Text('-', style: readex(u * 4.2, weight: 600, color: titleCream)),
+            : Text(
+                '-',
+                style: readex(
+                  u * 4.2,
+                  weight: 600,
+                  color: RateelColors.leaderText,
+                ),
+              ),
         trailingCx: u * 12.9,
       ),
     );
@@ -707,8 +714,8 @@ class _RowContent extends StatelessWidget {
                 player.name,
                 style: readex(
                   u * 3.8,
-                  weight: 500,
-                  color: titleCream,
+                  weight: 440, // thinner strokes, as the reference
+                  color: RateelColors.leaderText,
                 ).copyWith(shadows: titleShadows(u)),
               ),
               SizedBox(height: u * 2.2), // critic v1 A3
@@ -719,10 +726,11 @@ class _RowContent extends StatelessWidget {
                   SizedBox(width: u * 1.0),
                   Text(
                     '${player.lessons} درس',
+                    // Reference: 3.5u, #E1E1CF (owner: size and brightness).
                     style: readex(
-                      u * 3.1,
+                      u * 3.5,
                       weight: 400,
-                      color: RateelColors.label.withValues(alpha: 0.75),
+                      color: RateelColors.leaderText.withValues(alpha: 0.88),
                     ),
                   ),
                 ],
@@ -810,7 +818,7 @@ class _RankDisc extends StatelessWidget {
       ),
       child: Text(
         '$rank',
-        style: readex(u * 3.6, weight: 600, color: titleCream),
+        style: readex(u * 3.6, weight: 600, color: RateelColors.leaderText),
       ),
     );
   }
@@ -866,7 +874,7 @@ class _Book extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(bookAsset, height: u * 3.0);
+    return Image.asset(bookAsset, height: u * 3.5);
   }
 }
 
@@ -901,7 +909,7 @@ class _Points extends StatelessWidget {
             style: readex(
               u * 4.4,
               weight: 600,
-              color: titleCream,
+              color: RateelColors.leaderText,
             ).copyWith(shadows: titleShadows(u)),
           ),
         ],
@@ -927,7 +935,7 @@ class _Reward extends StatelessWidget {
             style: readex(
               u * 4.2,
               weight: 600,
-              color: titleCream,
+              color: RateelColors.leaderText,
             ).copyWith(shadows: titleShadows(u)),
           ),
           SizedBox(width: u * 0.8),
@@ -1186,7 +1194,7 @@ class _Tabs extends StatelessWidget {
                               weight: 560,
                               color: i == sel
                                   ? RateelColors.countText
-                                  : titleCream,
+                                  : RateelColors.leaderText,
                             ),
                             child: Text(_labels[i]),
                           ),
@@ -1233,23 +1241,21 @@ class _Ribbon extends StatelessWidget {
           fit: BoxFit.fill,
           filterQuality: FilterQuality.medium,
         ),
-        // Title arched as Angular (textPath M30,35 Q100,15 170,35).
-        CustomPaint(painter: _ArchedTitle(u: u)),
+        CustomPaint(painter: _RibbonTitle(u: u)),
       ],
     );
   }
 }
 
-/// Text along a gentle arch: the laid-out title is drawn in thin vertical
-/// strips, each moved and turned along the curve (keeps Arabic shaping).
-class _ArchedTitle extends CustomPainter {
-  _ArchedTitle({required this.u});
+/// Title in the ribbon: straight as the reference (owner 2026-11-24: the
+/// arched title differed from it), warm gold-cream gradient, 6.6u.
+class _RibbonTitle extends CustomPainter {
+  _RibbonTitle({required this.u});
   final double u;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Screen-title style: cream gradient titleTop → titleBottom (critic v1 A7).
-    final fs = u * 6.2;
+    final fs = u * 6.6;
     final tp = TextPainter(
       text: TextSpan(
         text: 'المتصدرين',
@@ -1257,45 +1263,36 @@ class _ArchedTitle extends CustomPainter {
           fontFamily: 'ReadexPro',
           fontSize: fs,
           height: 1.25,
-          fontVariations: const [FontVariation('wght', 560)],
+          fontVariations: const [FontVariation('wght', 540)],
           shadows: titleShadows(u),
           foreground: Paint()
             ..shader = const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [titleTop, titleBottom],
+              colors: [
+                RateelColors.leaderTitleTop,
+                RateelColors.leaderTitleBottom,
+              ],
             ).createShader(Rect.fromLTWH(0, fs * 0.2, 1, fs * 0.9)),
         ),
       ),
       textDirection: TextDirection.rtl,
     )..layout();
-    final w = tp.width;
-    final h = tp.height;
-    // Angular arch: chord 70% of the ribbon, rise 7.1% of the chord.
-    final chord = size.width * 0.7;
-    final rise = chord * 0.071;
-    double dy(double x) =>
-        rise * (math.pow(2 * x / chord, 2) - math.pow(w / chord, 2) / 3);
-    double slope(double x) => rise * 8 * x / (chord * chord);
-    final cx = size.width / 2;
-    final cy = size.height * 0.48 - u * 1.6; // critic v1 A7
-    const n = 60;
-    for (var i = 0; i < n; i++) {
-      final x0 = -w / 2 + w * i / n;
-      final x1 = -w / 2 + w * (i + 1) / n;
-      final xc = (x0 + x1) / 2;
-      canvas.save();
-      canvas.translate(cx + xc, cy + dy(xc));
-      canvas.rotate(math.atan(slope(xc)));
-      canvas.clipRect(Rect.fromLTRB(x0 - xc - 0.6, -h, x1 - xc + 0.6, h));
-      tp.paint(canvas, Offset(-w / 2 - xc, -h / 2));
-      canvas.restore();
-    }
+    tp.paint(
+      canvas,
+      Offset(
+        (size.width - tp.width) / 2,
+        size.height * titleCenter - tp.height / 2,
+      ),
+    );
   }
 
   @override
-  bool shouldRepaint(_ArchedTitle old) => old.u != u;
+  bool shouldRepaint(_RibbonTitle old) => old.u != u;
 }
+
+/// Vertical centre of the title in the ribbon box (fraction of its height).
+double titleCenter = 0.47;
 
 /// Gold ogee lattice (A2), tiled and faded out downwards (reference: gone by
 /// y ≈ 31u). The asset's black is keyed to alpha when it is imported.

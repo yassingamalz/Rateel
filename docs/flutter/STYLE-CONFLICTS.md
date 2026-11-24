@@ -38,4 +38,5 @@ the end of the project).
 | K6 | Rank disc «15» | `amber #E2A51E`, `countText #132C1A` | #EEB326, text #0B2315 | tokens (critic option: the screen 02 paused-button gold `badgeTop → amber`) |
 | K7 | Glow of the panel and the pinned bar | gold glow 15% | ≈ 35% gold over ≈ 2.5u (critic v1) | token 15% |
 | K8 | Chevron button | glass button: ring 0.2u #D8C35A, gold radial fill | ring 0.5u #FFDC4A, dark inside (critic v1) | glass button token |
-| K9 | Text cream | `titleCream #FAF1D8` | #FDFBDB (critic v1, minor) | `titleCream` |
+| K9 | Text cream | `titleCream #FAF1D8` | #FDFBDB … #FFFEDE (critic v1) | **reference value** `leaderText #FFFBDC` (owner 2026-11-24: brightness as the reference) |
+| K10 | Title in the ribbon | screen-title gradient `titleTop #FFFBEA → titleBottom #E9D7A8` | warm gold-cream ≈ #F5E9B4 | **reference value** `leaderTitleTop #F8F0C6 → leaderTitleBottom #F1DFA2` (owner 2026-11-24) |

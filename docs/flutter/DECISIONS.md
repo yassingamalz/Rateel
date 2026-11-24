@@ -131,3 +131,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-24 | **APK 1.0.337**: screen 11 v2 (leaderboard from the rail). | ✅ |
 | 2026-11-24 | Screen 11 critic v1 (phone): 7.7, high B1 + 11 medium; all fixed in v3 (`screens/11-leaderboard/HISTORY.md` §4). New conflicts K7–K9 added to `STYLE-CONFLICTS.md` for the end-of-project review. | ✅ |
 | 2026-11-24 | **APK 1.0.339**: screen 11 v3 (critic v1 fixes). | ✅ |
+| 2026-11-24 | Screen 11 v4 (owner: title, text sizes and brightness differ from the reference): ribbon title **straight as the reference** (replaces the Angular arch, which also left thin strip seams), 6.6u w540, warm gold-cream `leaderTitleTop → leaderTitleBottom` (K10); leaderboard texts in the reference's brighter cream `leaderText #FFFBDC` (K9); names w440; «n درس» 3.5u at 88%, book 3.5u. Comparison `screens/11-leaderboard/compare-v4-phone.jpg`. | ✅ |

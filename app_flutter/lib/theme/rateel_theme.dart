@@ -151,6 +151,15 @@ class RateelColors {
   static const meRowTop = Color(0xFF185727);
   static const meRowMid = Color(0xFF0A4322);
   static const meRowBottom = Color(0xFF14431C);
+
+  /// Leaderboard text cream, brighter/warmer than `titleCream` (owner
+  /// 2026-11-24: brightness as the reference). Conflict K9.
+  static const leaderText = Color(0xFFFFFBDC);
+
+  /// Leaderboard title in the ribbon: warm gold-cream (reference #F5E9B4).
+  /// Conflict K10 with the screen-title gradient titleTop → titleBottom.
+  static const leaderTitleTop = Color(0xFFF8F0C6);
+  static const leaderTitleBottom = Color(0xFFF1DFA2);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

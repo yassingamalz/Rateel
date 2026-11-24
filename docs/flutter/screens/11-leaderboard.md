@@ -11,7 +11,7 @@ Status: **plan approved by the owner (2026-11-24)**, v2 built with the owner's a
 
 Owner answers (2026-11-24): (1) **mock data** for now, logged in `SCREENS.md` ("Screens running on mock data");
 (2) filters as Angular; (3) rows 4+ as Angular (rank number, reward «-»); (4) pinned bar as Angular; (5) lattice from
-**ChatGPT**; (6) ribbon title **arched as Angular**; (7) conflicts K1–K6 go to the project-wide register
+**ChatGPT**; (6) ribbon title arched as Angular, **then straight as the reference (v4, owner)**; (7) conflicts K1–K6 go to the project-wide register
 `STYLE-CONFLICTS.md` and are decided one by one at the end of the project (built provisionally with the proposals);
 (8) motion approved; (9) Angular medals and avatars reused.
 
