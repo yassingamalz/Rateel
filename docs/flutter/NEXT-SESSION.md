@@ -1,48 +1,37 @@
-# Next session: consolidate screens 03–06 (do this BEFORE screen 07)
+# Next session: unify the style (03–06), then screen 07
 
 State on 2026-11-24:
-- Screen 03 (courses) approved, APK 1.0.301, PR #42 `flutter/03-courses` → `master`; history `screens/03-courses/HISTORY.md`.
-- Screen 04 (side nav) PR #38; screen 05 (units) PR #39 (approved, APK 1.0.106); screen 06 (lessons) approved
-  on `flutter/06-lessons` (APK 1.0.299), PR still to open. Screen 07 (video lesson) is planned in the
-  `NEXT-SESSION.md` of `flutter/06-lessons`: it comes after this session.
+- **Consolidation done:** PR #38 (04 side nav), #42 (03 courses), #39 (05 units, conflicts resolved) and #43 (06 lessons, opened in
+  this session) are merged into `master` (merge commits, in this order); `flutter analyze` and `flutter test` (6 tests) pass.
+- Screens 03–06 are approved by the owner; histories in `docs/flutter/screens/<nn>-<slug>/HISTORY.md`.
 
-## Tasks, in order
-1. **Merge into `master`, in this order**, each only after the owner's OK in the chat:
-   #38 (04 side nav) → #42 (03 courses) → #39 (05 units) → PR of `flutter/06-lessons` (open it first).
-   `flutter/05-units` branched from 03 at `ce7ebc9` and also edits `lib/courses/courses_screen.dart` and
-   `lib/main.dart`: resolve there (keep 03's illustrated cards, `cardArtSet`, `withNoTextScaling`, haptics, and
-   05's navigation to the units). Docs (`DECISIONS.md`, `ASSETS.md`, `LESSONS-LEARNED.md`, `NEXT-SESSION.md`):
-   keep the rows of both sides, in date order. After each merge: `flutter analyze && flutter test`.
-2. **Stable signing key** (owner decides): today every cloud container signs with its own debug key, so the
-   phone may refuse to update an APK built elsewhere. Options: (a) the owner authorises committing a dev
-   keystore (debug format, public passwords, side-loading only); (b) keep it outside the repo (file kept by the
-   owner, or an environment secret). Ask first; never commit a key without the owner's explicit OK.
-3. **One style for the whole app**: compare the colours, rims, radii, shadows and text styles of screens 03, 05
-   and 06 (`RateelColors`, sections per screen) with the confirmed tokens in `DESIGN-SYSTEM.md`; list every
-   conflict (value, where, proposed token) and let the owner decide; then unify in `rateel_theme.dart` and the
-   screens. Critic without exclusions on each screen afterwards (`CRITIC.md`), phone captures too (915×412).
-4. Small leftovers of screen 03 (optional): gold-3D art for courses 08–12 has a baked-in card frame (spare set);
-   classic-card course 03 icon reads weakly (only used with `?cards=classic`).
-5. Then go on with **screen 07** (prompt in `flutter/06-lessons:docs/flutter/NEXT-SESSION.md`).
+## Open tasks
+1. **Stable signing key:** the owner chose to keep it **outside the repo** (file kept by the owner or an environment secret) and has
+   not supplied it yet. Until then every container signs with its own debug key: the phone may ask to uninstall before updating.
+   Never commit a key without the owner's explicit OK. Ask the owner how to hand the keystore over (environment secret is best).
+2. **Style unification: postponed by the owner** ("we do it in the future"). Conflict list: `docs/flutter/STYLE-CONFLICTS.md`
+   (C1–C10 with proposals). Ask the owner (card rim/ring as documented tokens, gold fills, text, radii), apply in
+   `rateel_theme.dart` and the screens, then run the critic without exclusions per screen (`CRITIC.md`), desktop and phone (915×412).
+3. Leftovers of screen 03 (optional): gold-3D art for courses 08–12 has a baked-in card frame; classic card course 03 icon weak.
+4. **Screen 07** (video lesson): prompt below (from `flutter/06-lessons`). Its first step is the final critic v4 of screen 06.
 
-Build: `tools/flutter-review/build-apk.sh` (versionCode above every APK already shipped from any
-`flutter/*` branch). Log every APK given to the owner as "APK 1.0.N" in `DECISIONS.md`.
+Build: `tools/flutter-review/build-apk.sh`. Log every APK given to the owner as "APK 1.0.N" in `DECISIONS.md`.
 
-## Prompt to start the session
+## Prompt to start screen 07
 ```
-Lavora sul repo Rateel, partendo dal branch flutter/03-courses. Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md,
-docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md, docs/flutter/LESSONS-LEARNED.md e docs/flutter/NEXT-SESSION.md,
-e le storie delle schermate (docs/flutter/screens/03-courses/HISTORY.md, e sui branch flutter/05-units e
-flutter/06-lessons i loro HISTORY.md).
-Obiettivo, prima della schermata 07: consolidare le schermate 03–06.
-1) Unisci in master le pull request nell'ordine #38 → #42 → #39 → 06 (apri prima la PR di flutter/06-lessons),
-   chiedendomi l'ok prima di ogni merge; risolvi i conflitti tenendo il lavoro di entrambe le parti e fai passare
-   analyze e test dopo ogni unione.
-2) Chiedimi come gestire la chiave di firma unica per gli APK (non salvarla nel repo senza il mio ok esplicito).
-3) Confronta colori, bordi, raggi, ombre e testi delle schermate 03, 05 e 06 con i token di DESIGN-SYSTEM.md,
-   dammi la lista dei conflitti da decidere, poi uniforma e fai passare il critico senza eccezioni, anche in
-   formato telefono.
-Alla fine dammi l'APK con la nuova versione. Parla con me in italiano.
+Lavora sul repo Rateel. Crea il branch flutter/07-video-lesson partendo da master (le schermate 03-06 sono gia' unite).
+Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
+docs/flutter/ASSETS.md, docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md, docs/flutter/STYLE-CONFLICTS.md e
+docs/flutter/screens/06-lessons/HISTORY.md (come abbiamo lavorato sulla 06).
+Prima cosa: lancia il critico finale della schermata 06 (critic-v4) e dimmi il risultato.
+Obiettivo: costruire in Flutter la schermata 07, lezione video (riferimento ChatGPT
+docs/design/glassy-gamified/screens/07-lezione-video-dark.webp sul branch lesson-production), insieme alle
+animazioni della versione Angular (src/app/features/lessons/video-player e lesson-details), con vibrazioni e luce.
+Sostituisce la pagina provvisoria delle lezioni video (lesson_page.dart) e, a lezione finita, torna alla 06
+restituendo true, cosi' parte il completamento; il progresso resta condiviso con lezioni, unita' e corsi.
+Mostrami anche come era l'originale Angular. Segui la procedura: piano della schermata e domande prima di
+costruire, prompt ChatGPT in blocchi copiabili, costruzione, critico con le misure, confronto, video e APK.
+Tieni HISTORY.md della schermata aggiornato. Parla con me in italiano.
 ```
 
 ---
