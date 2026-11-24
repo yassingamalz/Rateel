@@ -376,23 +376,27 @@ class _CourseCardState extends State<CourseCard> {
             textDirection: TextDirection.rtl,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (r) => const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    RateelColors.glyphGoldTop,
-                    RateelColors.glyphGoldBottom,
-                  ],
-                ).createShader(r),
-                child: SvgPicture.asset(
-                  'assets/ui/glyphs/star.svg',
-                  width: u * 5.1,
-                  height: u * 5.1,
+              Transform.translate(
+                // Star centred on the body of the text (owner, 2026-11-24).
+                offset: Offset(0, -u * 0.25),
+                child: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (r) => const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      RateelColors.glyphGoldTop,
+                      RateelColors.glyphGoldBottom,
+                    ],
+                  ).createShader(r),
+                  child: SvgPicture.asset(
+                    'assets/ui/glyphs/star.svg',
+                    width: u * 3.6,
+                    height: u * 3.6,
+                  ),
                 ),
               ),
-              SizedBox(width: u * 1.4),
+              SizedBox(width: u * 1.0),
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
