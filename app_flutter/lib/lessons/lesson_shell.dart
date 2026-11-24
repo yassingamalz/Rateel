@@ -276,18 +276,32 @@ class LessonTopBar extends StatelessWidget {
         key: ValueKey('item$k'),
         animation: menu,
         builder: (context, child) {
-          final t = Curves.easeOutCubic.transform(menu.value);
+          // Simply Piano (owner, 2026-11-24): the buttons slide out from
+          // under the pause button, the farther one a little later, while
+          // their icons turn into place (restart: half a turn).
+          final raw = ((menu.value - (k - 1) * 0.12) / 0.88).clamp(0.0, 1.0);
+          final t = Curves.easeOutCubic.transform(raw);
           final x = m + (b + LessonBarMetrics.gap) * k * t;
+          final turn =
+              (1 - t) * (g == _Glyph.restart ? -math.pi : -math.pi / 3);
           return Positioned(
             top: u * m - e,
             right: u * x - e,
             child: IgnorePointer(
               ignoring: menu.value < 0.5,
-              child: Opacity(opacity: t, child: child),
+              child: Opacity(
+                opacity: Curves.easeOut.transform(raw),
+                child: _GlassButton(
+                  u: u,
+                  semantics: label,
+                  glyph: g,
+                  turn: turn,
+                  onTap: onTap,
+                ),
+              ),
             ),
           );
         },
-        child: _GlassButton(u: u, semantics: label, glyph: g, onTap: onTap),
       );
     }
 
@@ -344,6 +358,8 @@ class LessonTopBar extends StatelessWidget {
               u: u,
               semantics: menu.value > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
               glyph: menu.value > 0.5 ? _Glyph.play : _Glyph.pause,
+              // The two bars fold into the triangle (Simply Piano).
+              morph: Curves.easeInOut.transform(menu.value),
               goldness: Curves.easeOut.transform(menu.value),
               pulse: menu.value > 0 ? pulse.value : null,
               onTap: onToggle,
@@ -548,11 +564,19 @@ class _GlassButton extends StatefulWidget {
     required this.onTap,
     this.goldness = 0,
     this.pulse,
+    this.turn = 0,
+    this.morph,
   });
 
   final double u;
   final String semantics;
   final _Glyph glyph;
+
+  /// Rotation of the glyph (radians), for the items' entry.
+  final double turn;
+
+  /// Pause (0) → play (1) morph of the main button; null: [glyph] as is.
+  final double? morph;
   final double goldness;
   final double? pulse;
   final VoidCallback onTap;
@@ -599,21 +623,22 @@ class _GlassButtonState extends State<_GlassButton> {
                   goldness: widget.goldness,
                   pulse: widget.pulse,
                 ),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  transitionBuilder: (c, a) => FadeTransition(
-                    opacity: a,
-                    child: ScaleTransition(
-                      scale: Tween(begin: 0.6, end: 1.0).animate(a),
-                      child: c,
-                    ),
-                  ),
-                  child: CustomPaint(
-                    key: ValueKey(widget.glyph),
-                    size: Size(d, d),
-                    painter: _GlyphPainter(widget.glyph),
-                  ),
-                ),
+                // At the ends the original glyphs (rounded bars, play).
+                child:
+                    widget.morph != null &&
+                        widget.morph! > 0.001 &&
+                        widget.morph! < 0.999
+                    ? CustomPaint(
+                        size: Size(d, d),
+                        painter: _PausePlayPainter(widget.morph!),
+                      )
+                    : Transform.rotate(
+                        angle: widget.turn,
+                        child: CustomPaint(
+                          size: Size(d, d),
+                          painter: _GlyphPainter(widget.glyph),
+                        ),
+                      ),
               ),
             ),
           ),
@@ -828,3 +853,59 @@ Route<T> lessonRoute<T>(WidgetBuilder builder) => PageRouteBuilder<T>(
     return FractionalTranslation(translation: Offset(0, t - 1), child: child);
   },
 );
+
+/// The pause bars fold into the play triangle (Simply Piano's pause button):
+/// each bar is a quad whose corners move onto one half of the triangle, the
+/// colour goes from the cream bars to the dark ink on gold. Same 24-unit box
+/// as [_GlyphPainter].
+class _PausePlayPainter extends CustomPainter {
+  _PausePlayPainter(this.t);
+
+  final double t;
+
+  static const _left = [
+    [Offset(6, 5), Offset(8, 5.2)],
+    [Offset(9.6, 5), Offset(13.5, 8.6)],
+    [Offset(9.6, 19), Offset(13.5, 15.4)],
+    [Offset(6, 19), Offset(8, 18.8)],
+  ];
+  static const _right = [
+    [Offset(14.4, 5), Offset(13.5, 8.6)],
+    [Offset(18, 5), Offset(19, 12)],
+    [Offset(18, 19), Offset(19, 12)],
+    [Offset(14.4, 19), Offset(13.5, 15.4)],
+  ];
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final s = size.width * 0.48 / 24;
+    canvas.save();
+    canvas.translate(size.width / 2 - 12 * s, size.height / 2 - 12 * s);
+    canvas.scale(s);
+    final color = Color.lerp(
+      RateelColors.iconCream,
+      RateelColors.countText,
+      t,
+    )!;
+    final fill = Paint()..color = color;
+    final edge = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.4 * t + 0.2
+      ..strokeJoin = StrokeJoin.round
+      ..color = color;
+    for (final quad in [_left, _right]) {
+      final p = Path();
+      for (var i = 0; i < 4; i++) {
+        final o = Offset.lerp(quad[i][0], quad[i][1], t)!;
+        i == 0 ? p.moveTo(o.dx, o.dy) : p.lineTo(o.dx, o.dy);
+      }
+      p.close();
+      canvas.drawPath(p, fill);
+      canvas.drawPath(p, edge);
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_PausePlayPainter o) => o.t != t;
+}

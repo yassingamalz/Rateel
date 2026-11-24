@@ -78,3 +78,16 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
 - v4 was not re-critiqued (owner rule from now on: ask before launching the critic).
 - Left as low items: restart closes the menu (Angular keeps it open), completion exit 500 ms (Angular 300 ms).
 - PR to `master` and merge.
+
+## 6. Pause-menu motion as Simply Piano (2026-11-24, branch `flutter/02-menu-motion`)
+- Owner, while testing screen 07, sent a Simply Piano screen recording: the menu buttons should animate like it; done on
+  this separate branch from `master`, to be merged into 07 afterwards (owner).
+- Seen in the recording (frames at 8 fps): the pause glyph turns into play, the two side buttons slide out from under the
+  pause button (the farther one a little later) while fading in, their icons turning into place (the restart arrow spins,
+  the menu lines rotate from slanted to straight); closing plays it backwards.
+- Built (`lib/lessons/lesson_shell.dart`): `_PausePlayPainter` folds the two bars into the triangle (each bar a quad whose
+  corners move onto one half of the triangle, colour cream → dark on gold, ends drawn with the original glyphs); items
+  staggered (second item 12% later), opacity and slide on the same 300 ms, glyph rotation from −180° (restart) / −60°
+  (back) to 0. Gold, halo and pulse unchanged.
+- Review: `tools/flutter-review/lesson-bar-menu-frames.js` (frames at `?slow=12`), `lesson-bar-menu-demo.js` (video at
+  `?slow=3`): `menu-motion-v1-slow3.mp4`.
