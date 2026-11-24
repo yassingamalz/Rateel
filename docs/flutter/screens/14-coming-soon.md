@@ -1,6 +1,6 @@
 # Screen 14: coming soon (ميزات تجويد القرآن قريباً)
 
-Branch `flutter/14-coming-soon` (opened 2026-11-24 from `master` + the performance docs). Status: **assets requested**,
+Branch `flutter/14-coming-soon` (opened 2026-11-24 from `master` + the performance docs). Status: **assets received and in the library** (2026-11-24, `ASSETS.md`),
 plan to be confirmed by the owner before building.
 
 - Reference: `screens/14-coming-soon/14-in-arrivo.webp` (copied from `lesson-production`,

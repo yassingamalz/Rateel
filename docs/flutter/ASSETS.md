@@ -149,3 +149,19 @@ towards pink). Tones measured on the reference are applied in code (`video_lesso
 
 Shared code from screen 07 (for the next lesson screens): `SkipButton` / `SkipMetrics`, `LessonPill`, `LessonRoundButton`, `PillGlyph` (`lib/lessons/lesson_widgets.dart`),
 `GoldDivider` and `ScreenGirih(fadeTop:)` (`lib/core/screen_decor.dart`), `video*` tokens (`rateel_theme.dart`).
+
+## Screen 14, coming soon (2026-11-24)
+Source: `docs/design-assets/coming-soon/` (owner's ChatGPT zip, prompts `prompts/14-coming-soon/images-v1.txt`, magenta
+background). Cleaned: magenta keyed out with colour unmixing, alpha < 12% cleared, trimmed, WebP q92.
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/coming_soon/quran_emblem.webp` | `01_quran_emblem.png` (E1) | big emblem above the title | 549×640; `02_quran_emblem_alternative.png` kept as a spare (almost identical) |
+| `ui/coming_soon/badge_frame.webp` | `03_empty_gold_frame.png` (E2) | lobed gold frame of the 4 feature badges | 296×320, filled with #06352A |
+| `ui/coming_soon/glyph_headphones.webp` | `04_headphones.png` (E3) | دروس صوتية | cream glyph, 256 px |
+| `ui/coming_soon/glyph_group.webp` | `05_group.png` (E4) | جلسات جماعية | cream glyph, 256 px |
+| `ui/coming_soon/glyph_certificate.webp` | `06_certificate_seal.png` (E5) | شهادات إتمام | cream seal, green check, 256 px |
+| `ui/coming_soon/glyph_microphone.webp` | `07_microphone.png` (E6) | تدريب النطق | cream glyph, 256 px; its base is tilted by about 1° |
+| not used | `08_emerald_background.png` | spare | whole background baked in one image (arcs, girih, mosque): the app keeps the shared `ScreenBackground` + `ScreenGirih`, arcs in code (one style) |
+| not used | `09_mosque_silhouette.png` | rejected | broken alpha (ragged opaque blob around the mosque); `ui/decor/mosque.webp` is reused |
+
