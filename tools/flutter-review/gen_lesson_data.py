@@ -41,7 +41,8 @@ for f in sorted(glob.glob('src/assets/data/lessons/*/*.json')):
     for l in sorted(d['lessons'], key=lambda l: l['order']):
         out.append(
             f"    Lesson(id: {q(l['id'])}, title: {q(l['title'])}, description: {q(l.get('description', ''))}, "
-            f"type: LessonType.{TYPES[l['type']]}, minutes: {int(l.get('duration') or 0)}),")
+            f"type: LessonType.{TYPES[l['type']]}, minutes: {int(l.get('duration') or 0)}"
+            + (f", videoUrl: {q(l['videoUrl'])}" if l.get('videoUrl') else '') + '),')
     out.append('  ],')
 out.append('};')
 with open('app_flutter/lib/lessons/lesson_data_gen.dart', 'w', encoding='utf-8') as fh:

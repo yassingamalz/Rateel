@@ -1,0 +1,47 @@
+Screen 07, video lesson: ChatGPT prompts v1 (2026-11-24). Pasted in the chat, one block each.
+Attachments: docs/flutter/screens/07-video-lesson/07-lezione-video.webp + the crops in attach/.
+
+=== V1  Video-unavailable icon (attach: 07-lezione-video.webp, attach/v1-icon.png)
+Recreate exactly the icon in the attached crop, as a standalone app asset: a rounded clapperboard drawn as a thick gold
+outline (warm metallic gold #E9C46A to #C9952B, soft highlight on top, no glow), three slanted gold stripes on the top bar,
+a cream (#F4EAD0) rounded play triangle in the centre, and at the lower right a solid gold disc (#E5A71C, lighter rim
+#F8D36A) with a dark green (#0B2315) exclamation mark, overlapping the clapper's corner. Flat front view, same proportions
+and line weights as the crop. Centred on a plain flat magenta background (#FF00FF), nothing else in the image, no shadow
+on the background, no text. Square image 1024×1024, the icon filling about 80% of the width.
+
+=== V2  Lobed arch frame (attach: 07-lezione-video.webp, attach/v2-arch.png)
+Recreate exactly the gold arch frame in the attached crop as a standalone asset: one continuous thin gold line (warm
+metallic gold #D9B04A with a light core #F6DC84, about 4 px at 1800 px width) forming a wide Islamic ogee arch with a
+pointed top, two lobes on each side stepping down, and long tails that fade out to transparent at the bottom ends. Inside
+the line a very soft darker green fill (#022218 at 50%) that also fades out towards the bottom. No mosque, no icon, no
+text, no other ornament. Perfectly symmetric. On a plain flat magenta background (#FF00FF). Wide image 2048×680, the
+arch filling the width like in the crop.
+
+=== V3  Pair of lattice corners (attach: 07-lezione-video.webp, attach/v3-corner-left.png, attach/v3-corner-right.png)
+Recreate exactly the gold Moroccan lattice corner of the attached crops as two separate images (bottom-left corner and
+bottom-right corner, mirror images): a diagonal band of interlocking stepped star/cross cells drawn with a flat gold line
+(#C9A93A with a light edge #E8D06A, a thin dark offset line under it for a carved look), the band runs from the screen
+edge to the bottom edge, strongest at the outer diagonal and fading out softly towards the inside and towards the
+bottom, as in the crops. Same cell size and line weight relative to the image. Plain flat magenta background (#FF00FF),
+nothing else. Two square images 1024×1024, the corner in the image's bottom-left (first) and bottom-right (second).
+
+=== V4  Reference: the video lesson while the video plays (attach: 07-lezione-video.webp)
+Using the attached screen as the exact style reference (same size 1842×854 landscape, same dark emerald background with
+the faint girih pattern, same lattice corners, same top bar: the long glass capsule «37 / 100» at the top left with a
+gold fill to 37%, the round glass pause button at the top right), draw the same screen while the lesson video is
+playing: in the centre, inside the same lobed gold arch frame, a 16:9 video player (about 52% of the screen width,
+centred, top below the capsule) with rounded corners, a fine gold glass rim with a soft gold glow, showing a calm frame
+of a teacher's desk with an open Quran (blurred, no readable text, no faces). Under the player a slim gold progress
+line with a small round light at 37%, «1:58» on the right and «5:20» on the left in cream. Keep the gold «تخطي ⏩» glass
+button at the bottom right exactly as in the reference. Above the player, centred, the lesson title «مقدمة في علم
+التجويد» in the same cream bold style as «الفيديو غير متاح». No YouTube logo, no other controls, no extra ornaments,
+Arabic right-to-left.
+
+=== V5  Seamless bottom lattice band (attach: 07-lezione-video.webp, attach/v5-bottom-band-enhanced.png, the owner's
+         03-lattice-bottom-left.png)
+Create a seamless horizontal strip of the same gold Moroccan lattice as the attached corner image (interlocking stepped
+star/cross cells, same cell shape, same flat gold line with a thin dark offset line under it for a carved look): exactly
+two rows of cells, as in the enhanced crop of the bottom of the screen. The pattern must tile perfectly left-right (the
+left and right edges must join without a seam: the strip width is an exact number of cells, 6 cells). Line colour
+#C9A93A with a light edge #E8D06A. No fade, no other ornament, no background texture. Plain flat magenta background
+(#FF00FF). Image 2048×512, the two rows of cells filling the height with a small margin.

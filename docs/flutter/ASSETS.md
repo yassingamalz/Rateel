@@ -129,3 +129,23 @@ the key colour, so silver stays opaque; lattice alpha from brightness).
 | `ui/leaderboard/book.webp` | `book_gold.png` (A4) | «n درس» | trimmed, 160 px |
 | `ui/leaderboard/medal_{gold,silver,bronze}.webp` | Angular `medals/*-medal.png` | rows 1–3 | identical to the reference; trimmed, 400 px |
 | `ui/leaderboard/avatar_1…10.webp` | Angular `avatars/avatar-*.png` | rows, pinned bar (circle + gold rim in code) | 256 px |
+
+### Video lesson (screen 07), 2026-11-24
+Sources: `docs/design-assets/video-lesson/` (owner's ChatGPT images V1–V4 on magenta, prompts
+`docs/flutter/prompts/07-video-lesson/images-v1.txt`). Processing: `tools/assets/video_lesson_assets.py` (full magenta
+un-mix: keeps the arch's semi-transparent fill; corners re-coloured from the green channel because ChatGPT faded them
+towards pink). Tones measured on the reference are applied in code (`video_lesson_page.dart`, `_iconTone`, `_cornerTone`,
+`_mosqueTone`).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/video/unavailable_icon.webp` | `01b-video-unavailable-icon-v2.png` (V1, second version: closer to the reference) | "video not available" icon | trimmed (alpha > 60), 512 px; `01-…icon.png` kept as a spare |
+| `ui/video/arch_frame.webp` | `02-gold-ogee-arch.png` (V2) | lobed arch frame of the lesson screens | **untrimmed** 2048×683 (fitted on the reference as a whole image); dimmed down the lobes in code |
+| `ui/video/corner_bottom_left/right.webp` | `03-`, `04-lattice-bottom-*.png` (V3) | bottom corners; flipped at 38% for the top corners | 800 px square, olive-gold tone and bottom fade in code |
+| `ui/video/bottom_band.webp` | `06-lattice-bottom-band.png` (V5) | faint lattice band along the bottom (not available state) | seamless tile cut between two crossings (4 cells, 545×256), tone/fade in code |
+| `ui/video/thumbs/<videoId>.webp` | YouTube thumbnails of the lesson videos (`i.ytimg.com`, maxresdefault) | poster before the video plays and under the pause veil | only the two live links (BqFxf-WspTc, XfDdA9UgOVQ) |
+| `docs/flutter/screens/07-video-lesson/reference-playing.webp` | `05-video-playing-screen.png` (V4) | reference of the playing state | not an app asset |
+| reused | `ui/decor/mosque.webp` (tone in code), girih tile (`ScreenGirih(fadeTop: false)`) | screen 07 | |
+
+Shared code from screen 07 (for the next lesson screens): `SkipButton` / `SkipMetrics`, `LessonPill`, `LessonRoundButton`, `PillGlyph` (`lib/lessons/lesson_widgets.dart`),
+`GoldDivider` and `ScreenGirih(fadeTop:)` (`lib/core/screen_decor.dart`), `video*` tokens (`rateel_theme.dart`).

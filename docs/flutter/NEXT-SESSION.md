@@ -1,3 +1,33 @@
+# Next session: 08 reading lesson (and the 06 final critic)
+
+**Update 2026-11-24:** screen 07 (video lesson, `lib/lessons/video_lesson_page.dart`) is **approved** (APK 1.0.366) and merged
+into `master` with the 02 changes (Simply Piano menu motion, capsule left → right). Shared lesson widgets for the next lesson
+screens: `LessonPill`, `LessonRoundButton`, `SkipButton` (bottom left), `PillGlyph` (`lib/lessons/lesson_widgets.dart`),
+`GoldDivider`, `ScreenGirih(fadeTop:)` (`lib/core/screen_decor.dart`), `LessonShell(waiting:, onPlay:)`.
+
+Open: YouTube link of `rateel-lezione1-v2.mp4` and the real section times (mock: 3 equal parts); final critic of 06 (phone
+only, ask first); old video links dead/mismatched (`SCREENS.md`).
+
+## Next steps (proposal, confirm with the owner)
+1. **Screen 08, reading lesson** on the dark/light pair `07-lezione-video-{dark,light}.webp` (they show the reading lesson),
+   Angular `reading-lesson`. Branch `flutter/08-reading-lesson` from `master`.
+2. Final critic of 06 when the owner says so; then 09, 10/10b.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel. Leggi CLAUDE.md, poi docs/flutter/DECISIONS.md, PROCESS.md, DESIGN-SYSTEM.md, LESSONS-LEARNED.md,
+NEXT-SESSION.md, SCREENS.md, STYLE-CONFLICTS.md, ASSETS.md e docs/flutter/screens/07-video-lesson/HISTORY.md.
+Obiettivo: schermata 08, lezione di lettura, uno a uno con i riferimenti 07-lezione-video-dark/light (branch lesson-production,
+docs/design/glassy-gamified/screens/: mostrano la lezione di lettura), con la barra 02 e i widget condivisi della 07.
+Branch flutter/08-reading-lesson da master. Prima piano e domande, poi prompt ChatGPT per gli elementi mancanti (uno per
+blocco copiabile), costruzione, verifica elemento per elemento con i numeri, confronto, video e APK. Conflitti nel registro
+STYLE-CONFLICTS.md. Crea HISTORY.md della schermata. Parla con me in italiano.
+```
+
+---
+
+## Archive: hand-off that started the 06 final critic and screen 07 (2026-11-24)
+
 # Next session: final critic of screen 06, then screen 07 (video lesson)
 
 **Update 2026-11-24:** screen 11 (leaderboard, `lib/leaderboard/`) is **approved** (APK 1.0.346), PR

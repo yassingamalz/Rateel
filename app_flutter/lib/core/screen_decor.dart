@@ -8,7 +8,12 @@ import '../theme/rateel_theme.dart';
 /// Faint girih lattice over the whole content (owner's U6, seamless tile,
 /// tinted `girihLine`).
 class ScreenGirih extends StatelessWidget {
-  const ScreenGirih({super.key});
+  const ScreenGirih({super.key, this.fadeTop = true, this.opacity = 0.11});
+
+  /// Screens 05/06 keep the header clean (fade from 20u to 38u); the lesson
+  /// screens (07) show the lattice everywhere, as their reference.
+  final bool fadeTop;
+  final double opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +25,14 @@ class ScreenGirih extends StatelessWidget {
         // The header stays clean: the pattern fades in from 20u to 38u.
         return ShaderMask(
           blendMode: BlendMode.dstIn,
-          shaderCallback: (r) => const LinearGradient(
+          shaderCallback: (r) => LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.20, 0.38],
-            colors: [Color(0x00000000), Color(0xFF000000)],
+            stops: const [0.20, 0.38],
+            colors: [
+              Color(fadeTop ? 0x00000000 : 0xFF000000),
+              const Color(0xFF000000),
+            ],
           ).createShader(r),
           child: ClipRect(
             child: OverflowBox(
@@ -32,7 +40,7 @@ class ScreenGirih extends StatelessWidget {
               maxWidth: cols * tile,
               maxHeight: rows * tile,
               child: Opacity(
-                opacity: 0.11,
+                opacity: opacity,
                 child: Column(
                   children: [
                     for (var r = 0; r < rows; r++)
@@ -125,4 +133,83 @@ class ScreenBackground extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Gold title divider drawn in code: two lines fading out towards the ends,
+/// pointed next to an open diamond in the middle (reference 07). Size: the
+/// box of the whole divider; the line is 0.35u thick, the diamond 3.6u wide.
+class GoldDivider extends StatelessWidget {
+  const GoldDivider({super.key, required this.u});
+
+  final double u;
+
+  @override
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _GoldDividerPainter(u));
+}
+
+class _GoldDividerPainter extends CustomPainter {
+  _GoldDividerPainter(this.u);
+
+  final double u;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final c = size.center(Offset.zero);
+    final half = size.width / 2;
+    final d = u * 1.8; // half diagonal of the diamond
+    final gap = u * 0.7; // diamond → pointed line end
+    final t = u * 0.35; // line thickness
+    for (final side in [-1.0, 1.0]) {
+      final inner = c.dx + side * (d + gap);
+      final outer = c.dx + side * half;
+      // From the diamond outwards on both sides.
+      final shader = LinearGradient(
+        begin: side < 0 ? Alignment.centerRight : Alignment.centerLeft,
+        end: side < 0 ? Alignment.centerLeft : Alignment.centerRight,
+        // Measured on reference 07 (fraction of the half line from the
+        // diamond): peak to 0.14, then 0.29 #D9A43B, 0.44 #B59135,
+        // 0.59 ≈ 55%, 0.73 ≈ 35%, gone at the end.
+        colors: const [
+          RateelColors.videoDivider,
+          RateelColors.videoDivider,
+          Color(0xFFD9A43B),
+          RateelColors.videoDividerEnd,
+          Color(0x8CB59135),
+          Color(0x59B59135),
+          Color(0x00B59135),
+        ],
+        stops: const [0, 0.18, 0.33, 0.48, 0.62, 0.76, 1],
+      ).createShader(Rect.fromPoints(Offset(inner, 0), Offset(outer, 1)));
+      final paint = Paint()..shader = shader;
+      // Line, with a spindle (wider, pointed) at the end next to the diamond.
+      final p = Path()
+        ..moveTo(inner, c.dy)
+        ..lineTo(inner + side * u * 1.0, c.dy - t * 1.6)
+        ..lineTo(inner + side * u * 1.9, c.dy - t / 2)
+        ..lineTo(outer, c.dy - t * 0.3)
+        ..lineTo(outer, c.dy + t * 0.3)
+        ..lineTo(inner + side * u * 1.9, c.dy + t / 2)
+        ..lineTo(inner + side * u * 1.0, c.dy + t * 1.6)
+        ..close();
+      canvas.drawPath(p, paint);
+    }
+    final diamond = Path()
+      ..moveTo(c.dx, c.dy - d)
+      ..lineTo(c.dx + d, c.dy)
+      ..lineTo(c.dx, c.dy + d)
+      ..lineTo(c.dx - d, c.dy)
+      ..close();
+    canvas.drawPath(
+      diamond,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.45
+        ..strokeJoin = StrokeJoin.miter
+        ..color = RateelColors.videoDivider,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_GoldDividerPainter o) => o.u != u;
 }

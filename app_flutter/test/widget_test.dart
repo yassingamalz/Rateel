@@ -1,4 +1,5 @@
 import 'package:rateel/lessons/lesson_shell.dart';
+import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
@@ -132,6 +133,10 @@ void main() {
     st.current = 0;
     st.progress.fillRange(0, st.progress.length, 0);
     setLessonsDone('intro-tajweed', 0);
+    // Unit 1 has video lessons (screen 07): no platform view in the test,
+    // the "not available" state with «تخطي».
+    videoMode = 'none';
+    addTearDown(() => videoMode = null);
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -149,15 +154,15 @@ void main() {
     await settle(tester);
     expect(find.textContaining('أولًا'), findsOneWidget);
     await tester.pump(const Duration(seconds: 3));
-    // Lesson 1 → placeholder page → «أكملت الدرس»: the completion plays and
-    // the next lesson opens by itself; three times.
+    // Lesson 1 → video lesson (07, not available) → «تخطي»: the completion
+    // plays and the next lesson opens by itself; three times.
     await tester.tap(find.text('مقدمة في علم التجويد'));
     for (var k = 0; k < 3; k++) {
       for (var i = 0; i < 3; i++) {
         await settle(tester);
       }
-      expect(find.text('أكملت الدرس'), findsOneWidget);
-      await tester.tap(find.text('أكملت الدرس'));
+      expect(find.text('الفيديو غير متاح'), findsOneWidget);
+      await tester.tap(find.text('تخطي'));
       for (var i = 0; i < 8; i++) {
         await settle(tester);
       }
@@ -212,4 +217,47 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
     expect(backs, 1);
   });
+
+  testWidgets(
+    'video lesson: section end waits on the 02 play, back button (screen 07)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1844, 853);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      videoMode = 'demo';
+      videoStartAt = 0.33; // 105.6 s: section 1 ends at 106.7 s
+      addTearDown(() {
+        videoMode = null;
+        videoStartAt = 0;
+      });
+      const lesson = Lesson(
+        id: 't',
+        title: 'درس',
+        description: '',
+        type: LessonType.video,
+        minutes: 5,
+        videoUrl: 'https://www.youtube.com/watch?v=BqFxf-WspTc',
+      );
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: VideoLessonPage(lesson: lesson, index: 1, count: 1),
+        ),
+      );
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.bySemanticsLabel('الخطوة 1 من 3'), findsOneWidget);
+      // The video reaches the end of section 1: the 02 button waits.
+      for (var i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 250));
+      }
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.bySemanticsLabel('متابعة'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('متابعة'));
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.bySemanticsLabel('الخطوة 2 من 3'), findsOneWidget);
+      // (The return of the pause glyph and the ‹ button are checked in the web
+      // build, video-demo.js: the simulated video's timer stops the test's
+      // frames after the section change.)
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 }

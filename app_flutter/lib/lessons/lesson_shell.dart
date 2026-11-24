@@ -32,7 +32,15 @@ class LessonShell extends StatefulWidget {
     required this.child,
     this.onPausedChanged,
     this.controlsVisible = true,
+    this.waiting = false,
+    this.onPlay,
   });
+
+  /// The lesson stopped by itself and waits for the learner (screen 07: end
+  /// of a video section): the button shows the gold play with its pulse,
+  /// without the menu and the veil; a tap calls [onPlay].
+  final bool waiting;
+  final VoidCallback? onPlay;
 
   /// Current step (1-based; 0 before the first) and number of steps.
   final int step;
@@ -73,6 +81,35 @@ class LessonShellState extends State<LessonShell>
     duration: const Duration(milliseconds: 900),
   );
 
+  // Gold of the button while [LessonShell.waiting].
+  late final _wait = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 250),
+    value: widget.waiting ? 1 : 0,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.waiting) _pulse.repeat();
+  }
+
+  @override
+  void didUpdateWidget(LessonShell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.waiting == widget.waiting) return;
+    if (widget.waiting) {
+      _wait.forward();
+      _pulse.repeat();
+    } else {
+      _wait.reverse();
+      if (!paused) {
+        _pulse.stop();
+        _pulse.value = 0;
+      }
+    }
+  }
+
   // True while the completion plays: controls and back are blocked
   // (critic v1 #6).
   bool _locked = false;
@@ -89,8 +126,10 @@ class LessonShellState extends State<LessonShell>
       _pulse.repeat();
     } else {
       _menu.reverse();
-      _pulse.stop();
-      _pulse.value = 0;
+      if (!widget.waiting) {
+        _pulse.stop();
+        _pulse.value = 0;
+      }
     }
     widget.onPausedChanged?.call(p);
   }
@@ -112,6 +151,7 @@ class LessonShellState extends State<LessonShell>
   @override
   void dispose() {
     _menu.dispose();
+    _wait.dispose();
     _pulse.dispose();
     _sweep.dispose();
     super.dispose();
@@ -200,9 +240,16 @@ class LessonShellState extends State<LessonShell>
                     step: widget.step,
                     total: widget.total,
                     menu: _menu,
+                    wait: _wait,
                     pulse: _pulse,
                     sweep: _sweep,
-                    onToggle: () => setPaused(!paused),
+                    onToggle: () {
+                      if (widget.waiting && !paused && widget.onPlay != null) {
+                        widget.onPlay!();
+                      } else {
+                        setPaused(!paused);
+                      }
+                    },
                     onBack: () {
                       setPaused(false);
                       widget.onBack();
@@ -245,6 +292,7 @@ class LessonTopBar extends StatelessWidget {
     required this.step,
     required this.total,
     required this.menu,
+    this.wait = kAlwaysDismissedAnimation,
     required this.pulse,
     required this.sweep,
     required this.onToggle,
@@ -256,6 +304,9 @@ class LessonTopBar extends StatelessWidget {
   final int step;
   final int total;
   final Animation<double> menu;
+
+  /// 1 while the lesson waits for the learner: gold play with the pulse.
+  final Animation<double> wait;
   final Animation<double> pulse;
   final Animation<double> sweep;
   final VoidCallback onToggle;
@@ -276,18 +327,32 @@ class LessonTopBar extends StatelessWidget {
         key: ValueKey('item$k'),
         animation: menu,
         builder: (context, child) {
-          final t = Curves.easeOutCubic.transform(menu.value);
+          // Simply Piano (owner, 2026-11-24): the buttons slide out from
+          // under the pause button, the farther one a little later, while
+          // their icons turn into place (restart: half a turn).
+          final raw = ((menu.value - (k - 1) * 0.12) / 0.88).clamp(0.0, 1.0);
+          final t = Curves.easeOutCubic.transform(raw);
           final x = m + (b + LessonBarMetrics.gap) * k * t;
+          final turn =
+              (1 - t) * (g == _Glyph.restart ? -math.pi : -math.pi / 3);
           return Positioned(
             top: u * m - e,
             right: u * x - e,
             child: IgnorePointer(
               ignoring: menu.value < 0.5,
-              child: Opacity(opacity: t, child: child),
+              child: Opacity(
+                opacity: Curves.easeOut.transform(raw),
+                child: _GlassButton(
+                  u: u,
+                  semantics: label,
+                  glyph: g,
+                  turn: turn,
+                  onTap: onTap,
+                ),
+              ),
             ),
           );
         },
-        child: _GlassButton(u: u, semantics: label, glyph: g, onTap: onTap),
       );
     }
 
@@ -339,15 +404,20 @@ class LessonTopBar extends StatelessWidget {
           top: u * m - e,
           right: u * m - e,
           child: AnimatedBuilder(
-            animation: Listenable.merge([menu, pulse]),
-            builder: (context, _) => _GlassButton(
-              u: u,
-              semantics: menu.value > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
-              glyph: menu.value > 0.5 ? _Glyph.play : _Glyph.pause,
-              goldness: Curves.easeOut.transform(menu.value),
-              pulse: menu.value > 0 ? pulse.value : null,
-              onTap: onToggle,
-            ),
+            animation: Listenable.merge([menu, wait, pulse]),
+            builder: (context, _) {
+              final g = math.max(menu.value, wait.value);
+              return _GlassButton(
+                u: u,
+                semantics: g > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
+                glyph: g > 0.5 ? _Glyph.play : _Glyph.pause,
+                // The two bars fold into the triangle (Simply Piano).
+                morph: Curves.easeInOut.transform(g),
+                goldness: Curves.easeOut.transform(g),
+                pulse: g > 0 ? pulse.value : null,
+                onTap: onToggle,
+              );
+            },
           ),
         ),
       ],
@@ -355,7 +425,7 @@ class LessonTopBar extends StatelessWidget {
   }
 }
 
-/// The capsule: dark glass that fills with gold from the right (RTL), the
+/// The capsule: dark glass that fills with gold from the left (owner), the
 /// number split at the fill edge, the light at 100%.
 class _CapsulePainter extends CustomPainter {
   _CapsulePainter({
@@ -406,7 +476,8 @@ class _CapsulePainter extends CustomPainter {
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
     );
     final fw = size.width * share;
-    final fill = Rect.fromLTWH(size.width - fw, 0, fw, size.height);
+    // Fills from the left (owner, 2026-11-24; was from the right, RTL).
+    final fill = Rect.fromLTWH(0, 0, fw, size.height);
     if (fw > 0) {
       // Gold glow spilling into the empty part (mockup: 1.6u, 45%).
       canvas.drawRect(
@@ -415,7 +486,7 @@ class _CapsulePainter extends CustomPainter {
           ..color = RateelColors.gold.withValues(alpha: 0.45)
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
       );
-      // Gold fill from the right.
+      // Gold fill from the left.
       canvas.drawRect(
         fill,
         Paint()
@@ -447,12 +518,14 @@ class _CapsulePainter extends CustomPainter {
       );
       canvas.restore();
       // Soft light at the leading edge (2.2u, fading into the gold), also at
-      // 16/16 on the left end.
-      final lead = Rect.fromLTWH(fill.left, 0, u * 2.2, size.height);
+      // 16/16 on the right end.
+      final lead = Rect.fromLTWH(fill.right - u * 2.2, 0, u * 2.2, size.height);
       canvas.drawRect(
         lead.intersect(fill),
         Paint()
           ..shader = LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
             colors: [
               RateelColors.lessonBarLight.withValues(alpha: 0.9),
               RateelColors.lessonBarLight.withValues(alpha: 0),
@@ -460,12 +533,12 @@ class _CapsulePainter extends CustomPainter {
           ).createShader(lead),
       );
     }
-    // Light running along the capsule (right → left, as the fill grows).
+    // Light running along the capsule (left → right, as the fill grows).
     if (sweep > 0 && sweep < 1) {
       final band = u * 9;
       final x = lerpDouble(
-        size.width + band,
         -band,
+        size.width + band,
         Curves.easeInOut.transform(sweep),
       )!;
       final rect = Rect.fromLTWH(x - band / 2, 0, band, size.height);
@@ -508,7 +581,7 @@ class _CapsulePainter extends CustomPainter {
       (size.height - light.height) / 2,
     );
     canvas.save();
-    canvas.clipRect(Rect.fromLTRB(0, 0, fill.left, size.height));
+    canvas.clipRect(Rect.fromLTRB(fill.right, 0, size.width, size.height));
     light.paint(canvas, at);
     canvas.restore();
     canvas.save();
@@ -548,11 +621,19 @@ class _GlassButton extends StatefulWidget {
     required this.onTap,
     this.goldness = 0,
     this.pulse,
+    this.turn = 0,
+    this.morph,
   });
 
   final double u;
   final String semantics;
   final _Glyph glyph;
+
+  /// Rotation of the glyph (radians), for the items' entry.
+  final double turn;
+
+  /// Pause (0) → play (1) morph of the main button; null: [glyph] as is.
+  final double? morph;
   final double goldness;
   final double? pulse;
   final VoidCallback onTap;
@@ -599,21 +680,22 @@ class _GlassButtonState extends State<_GlassButton> {
                   goldness: widget.goldness,
                   pulse: widget.pulse,
                 ),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  transitionBuilder: (c, a) => FadeTransition(
-                    opacity: a,
-                    child: ScaleTransition(
-                      scale: Tween(begin: 0.6, end: 1.0).animate(a),
-                      child: c,
-                    ),
-                  ),
-                  child: CustomPaint(
-                    key: ValueKey(widget.glyph),
-                    size: Size(d, d),
-                    painter: _GlyphPainter(widget.glyph),
-                  ),
-                ),
+                // At the ends the original glyphs (rounded bars, play).
+                child:
+                    widget.morph != null &&
+                        widget.morph! > 0.001 &&
+                        widget.morph! < 0.999
+                    ? CustomPaint(
+                        size: Size(d, d),
+                        painter: _PausePlayPainter(widget.morph!),
+                      )
+                    : Transform.rotate(
+                        angle: widget.turn,
+                        child: CustomPaint(
+                          size: Size(d, d),
+                          painter: _GlyphPainter(widget.glyph),
+                        ),
+                      ),
               ),
             ),
           ),
@@ -828,3 +910,59 @@ Route<T> lessonRoute<T>(WidgetBuilder builder) => PageRouteBuilder<T>(
     return FractionalTranslation(translation: Offset(0, t - 1), child: child);
   },
 );
+
+/// The pause bars fold into the play triangle (Simply Piano's pause button):
+/// each bar is a quad whose corners move onto one half of the triangle, the
+/// colour goes from the cream bars to the dark ink on gold. Same 24-unit box
+/// as [_GlyphPainter].
+class _PausePlayPainter extends CustomPainter {
+  _PausePlayPainter(this.t);
+
+  final double t;
+
+  static const _left = [
+    [Offset(6, 5), Offset(8, 5.2)],
+    [Offset(9.6, 5), Offset(13.5, 8.6)],
+    [Offset(9.6, 19), Offset(13.5, 15.4)],
+    [Offset(6, 19), Offset(8, 18.8)],
+  ];
+  static const _right = [
+    [Offset(14.4, 5), Offset(13.5, 8.6)],
+    [Offset(18, 5), Offset(19, 12)],
+    [Offset(18, 19), Offset(19, 12)],
+    [Offset(14.4, 19), Offset(13.5, 15.4)],
+  ];
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final s = size.width * 0.48 / 24;
+    canvas.save();
+    canvas.translate(size.width / 2 - 12 * s, size.height / 2 - 12 * s);
+    canvas.scale(s);
+    final color = Color.lerp(
+      RateelColors.iconCream,
+      RateelColors.countText,
+      t,
+    )!;
+    final fill = Paint()..color = color;
+    final edge = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.4 * t + 0.2
+      ..strokeJoin = StrokeJoin.round
+      ..color = color;
+    for (final quad in [_left, _right]) {
+      final p = Path();
+      for (var i = 0; i < 4; i++) {
+        final o = Offset.lerp(quad[i][0], quad[i][1], t)!;
+        i == 0 ? p.moveTo(o.dx, o.dy) : p.lineTo(o.dx, o.dy);
+      }
+      p.close();
+      canvas.drawPath(p, fill);
+      canvas.drawPath(p, edge);
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_PausePlayPainter o) => o.t != t;
+}

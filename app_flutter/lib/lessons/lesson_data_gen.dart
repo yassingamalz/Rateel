@@ -27,6 +27,7 @@ const _lessonsByUnit = <String, List<Lesson>>{
       description: 'التعريف بعلم التجويد وأهميته في تلاوة القرآن الكريم',
       type: LessonType.video,
       minutes: 6,
+      videoUrl: 'https://www.youtube.com/watch?v=BqFxf-WspTc',
     ),
     Lesson(
       id: 'intro-lesson-2',
@@ -34,6 +35,7 @@ const _lessonsByUnit = <String, List<Lesson>>{
       description: 'الحكمة من تعلم التجويد وأثره في تلاوة القرآن',
       type: LessonType.video,
       minutes: 5,
+      videoUrl: 'https://www.youtube.com/watch?v=c9N4j8IF8mM',
     ),
     Lesson(
       id: 'intro-lesson-3',
@@ -41,6 +43,7 @@ const _lessonsByUnit = <String, List<Lesson>>{
       description: 'شرح مراتب أداء التجويد والتلاوة الصحيحة',
       type: LessonType.video,
       minutes: 7,
+      videoUrl: 'https://www.youtube.com/watch?v=_nMiT7QFpIc',
     ),
   ],
   'pronunciation-practice': [
@@ -112,6 +115,7 @@ const _lessonsByUnit = <String, List<Lesson>>{
       description: 'تعريف وشرح مبسط للنون والميم المشددتين مع أمثلة توضيحية',
       type: LessonType.video,
       minutes: 5,
+      videoUrl: 'https://www.youtube.com/watch?v=XfDdA9UgOVQ',
     ),
   ],
   'noon-meem-practical': [

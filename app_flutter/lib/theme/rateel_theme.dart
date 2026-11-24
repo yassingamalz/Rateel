@@ -198,6 +198,31 @@ class RateelColors {
   ];
   static const leaderDiscRim = Color(0xFFF6E17A);
   static const leaderStar = [Color(0xFFF0B42C), Color(0xFFF4B81C)];
+
+  // Screen 07 (video lesson), sampled from reference 07 (`07-lezione-video`,
+  // `reference-playing`). Conflicts V1–V4 in docs/flutter/STYLE-CONFLICTS.md.
+  /// Background: radial, lighter in the centre (V1, vs contentTop/Bottom).
+  static const videoBgCentre = Color(0xFF012D22);
+  static const videoBgEdge = Color(0xFF01261D);
+
+  /// «تخطي» glass pill: dark green fill, thin gold rim with a soft glow (V2).
+  static const videoSkipFill = Color(0xFF033223);
+  static const videoSkipFillEdge = Color(0xFF062E1F);
+  static const videoSkipRim = Color(0xFFE6A533);
+
+  /// Player frame: thin bright gold rim, gold glow (V3).
+  static const videoPlayerRimTop = Color(0xFFF5C958);
+  static const videoPlayerRimSide = Color(0xFFF5AB32);
+
+  /// Progress line under the player (V4).
+  static const videoTrack = Color(0xFF687538);
+  static const videoFill = Color(0xFFF1B53E);
+  static const videoFillEnd = Color(0xFFEDAC37);
+  static const videoKnob = Color(0xFFFDF1DA);
+
+  /// Divider under the title: gold peak next to the diamond.
+  static const videoDivider = Color(0xFFE7B142);
+  static const videoDividerEnd = Color(0xFFB59135);
   static const leaderAvatarRim = [
     Color(0xFFFEFEC6),
     Color(0xFFF6C840),
