@@ -137,6 +137,13 @@ class RateelColors {
   static const origGlass = Color(
     0xFF123F2E,
   ); // glass card, Angular rgba(27,67,50)
+
+  // Screen 02 (lesson top bar), owner 2026-11-24.
+  /// Veil over a paused lesson (Angular's strong veil, with blur 0.55u).
+  static const lessonVeil = Color(0x7300140E);
+
+  /// Soft light at the leading edge of the gold fill in the capsule.
+  static const lessonBarLight = Color(0xFFFFF3C2);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

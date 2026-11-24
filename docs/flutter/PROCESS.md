@@ -22,6 +22,7 @@ Follow these steps for every screen. Decisions go in `DECISIONS.md` in the same 
 - Every layer of an animated Stack gets a stable key (a late layer must not shift the others).
 
 ## 3. Check (critic loop, mandatory)
+**Ask the owner before each critic round** (owner, 2026-11-24: it consumes a lot); start it only after a yes.
 - `flutter analyze && flutter test && flutter build web --release`, serve `build/web` on port 8765.
 - Capture: `node tools/flutter-review/capture-states.js <outdir>` (closed/open at 1844×853),
   `capture-morph-frames.js <outdir>` (`?slow=12`), `record-demo.js <outdir>` (video; speed up ×4 with ffmpeg

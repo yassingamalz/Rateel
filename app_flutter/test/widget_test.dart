@@ -1,3 +1,4 @@
+import 'package:rateel/lessons/lesson_shell.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
@@ -169,5 +170,46 @@ void main() {
     expect(find.text('آداب تلاوة القرآن الكريم'), findsOneWidget);
     expect(lessonsDone('intro-tajweed'), 3);
     expect(unitsProgressOf(0).current, 1);
+  });
+
+  testWidgets('lesson top bar: pause menu, restart, back (screen 02)', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    var step = 3, backs = 0;
+    final paused = <bool>[];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: StatefulBuilder(
+          builder: (context, set) => LessonShell(
+            step: step,
+            total: 16,
+            onBack: () => backs++,
+            onRestart: () => set(() => step = 1),
+            onPausedChanged: paused.add,
+            child: const SizedBox.expand(),
+          ),
+        ),
+      ),
+    );
+    expect(find.bySemanticsLabel('الخطوة 3 من 16'), findsOneWidget);
+    await tester.tap(find.bySemanticsLabel('إيقاف مؤقت'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(paused, [true]);
+    await tester.tap(find.bySemanticsLabel('من البداية'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(step, 1);
+    expect(paused, [true, false]);
+    await tester.tap(find.bySemanticsLabel('إيقاف مؤقت'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.tap(find.bySemanticsLabel('رجوع'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(backs, 1);
   });
 }

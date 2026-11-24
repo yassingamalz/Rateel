@@ -1,48 +1,57 @@
-# Next session: consolidate screens 03–06 (do this BEFORE screen 07)
+# Next session: leaderboard (11), then back to the main line
+
+**Update 2026-11-24:** screen 02 (shared lesson top bar, `lib/lessons/lesson_shell.dart`) is **approved and merged into
+`master`** (APK 1.0.330). Next: **screen 11**, branch `flutter/11-leaderboard` from `master`. Conflict C1 closed (keep
+04/06). **New rule: ask the owner before launching the critic** (it consumes a lot).
+
+---
+
+
+Screens done and missing: `docs/flutter/SCREENS.md`.
 
 State on 2026-11-24:
-- Screen 03 (courses) approved, APK 1.0.301, PR #42 `flutter/03-courses` → `master`; history `screens/03-courses/HISTORY.md`.
-- Screen 04 (side nav) PR #38; screen 05 (units) PR #39 (approved, APK 1.0.106); screen 06 (lessons) approved
-  on `flutter/06-lessons` (APK 1.0.299), PR still to open. Screen 07 (video lesson) is planned in the
-  `NEXT-SESSION.md` of `flutter/06-lessons`: it comes after this session.
+- **Consolidation done:** PR #38 (04), #42 (03), #39 (05) and #43 (06) are merged into `master` (merge commits, in this order);
+  `flutter analyze` and `flutter test` (6 tests) pass. Screens 03–06 are approved; histories in `screens/<nn>-<slug>/HISTORY.md`.
+- APK 1.0.302 built from `master` (logged in `DECISIONS.md`).
 
-## Tasks, in order
-1. **Merge into `master`, in this order**, each only after the owner's OK in the chat:
-   #38 (04 side nav) → #42 (03 courses) → #39 (05 units) → PR of `flutter/06-lessons` (open it first).
-   `flutter/05-units` branched from 03 at `ce7ebc9` and also edits `lib/courses/courses_screen.dart` and
-   `lib/main.dart`: resolve there (keep 03's illustrated cards, `cardArtSet`, `withNoTextScaling`, haptics, and
-   05's navigation to the units). Docs (`DECISIONS.md`, `ASSETS.md`, `LESSONS-LEARNED.md`, `NEXT-SESSION.md`):
-   keep the rows of both sides, in date order. After each merge: `flutter analyze && flutter test`.
-2. **Stable signing key** (owner decides): today every cloud container signs with its own debug key, so the
-   phone may refuse to update an APK built elsewhere. Options: (a) the owner authorises committing a dev
-   keystore (debug format, public passwords, side-loading only); (b) keep it outside the repo (file kept by the
-   owner, or an environment secret). Ask first; never commit a key without the owner's explicit OK.
-3. **One style for the whole app**: compare the colours, rims, radii, shadows and text styles of screens 03, 05
-   and 06 (`RateelColors`, sections per screen) with the confirmed tokens in `DESIGN-SYSTEM.md`; list every
-   conflict (value, where, proposed token) and let the owner decide; then unify in `rateel_theme.dart` and the
-   screens. Critic without exclusions on each screen afterwards (`CRITIC.md`), phone captures too (915×412).
-4. Small leftovers of screen 03 (optional): gold-3D art for courses 08–12 has a baked-in card frame (spare set);
-   classic-card course 03 icon reads weakly (only used with `?cards=classic`).
-5. Then go on with **screen 07** (prompt in `flutter/06-lessons:docs/flutter/NEXT-SESSION.md`).
+## Next steps, in order (owner, 2026-11-24)
+1. **Screen 02, shared lesson top bar** (uses the free number 02; 01 is decided later). The bar at the top of **every kind of lesson**:
+   progress bar, pause and back. Take it from the Angular original (`src/app/features/lessons/lesson-details`, and the bar of
+   `interactive-lesson`): same structure and behaviour, restyled a little in the classy glass style of the other screens.
+   Branch `flutter/02-lesson-bar` from `master`. Built as a reusable widget; the placeholder `lesson_page.dart` (screen 06) uses it
+   straight away, so it can be tested on the phone. Procedure in `PROCESS.md`: plan and questions first, ChatGPT prompts for any
+   missing art, build, critic with numbers, comparison, video, APK. No ChatGPT reference exists: show the owner the Angular
+   original and a visual proposal before building.
+2. **Screen 11, leaderboard (classifica)**, reference `11-classifica.webp` (branch `lesson-production`). Branch `flutter/11-leaderboard`.
+3. **Then back to the main line:** final critic v4 of screen 06, then screen **07** (video lesson, with the bar of 02), then 09, 10/10b, and
+   the rest in `SCREENS.md`. (Interpreted from "tornare alla diretta": confirm with the owner if another meaning was intended.)
 
-Build: `tools/flutter-review/build-apk.sh` (versionCode above every APK already shipped from any
-`flutter/*` branch). Log every APK given to the owner as "APK 1.0.N" in `DECISIONS.md`.
+## Open items, whenever the owner decides
+- **Stable signing key:** owner chose to keep it **outside the repo** (file or environment secret); not supplied yet. Until then each
+  container signs with its own debug key and the phone may ask to uninstall before updating. Never commit a key without explicit OK.
+- **Style unification of 03/05/06: postponed by the owner.** List C1–C10 with proposals: `STYLE-CONFLICTS.md`. When done: apply in
+  `rateel_theme.dart`, critic without exclusions per screen, desktop and phone (915×412). The new screens (02, 11) use the confirmed
+  tokens of `DESIGN-SYSTEM.md` and report any conflict instead of copying silently.
+- Screen 03 leftovers: gold-3D art for courses 08–12 has a baked-in card frame; classic-card course 03 icon weak.
+- Data gaps: lessons exist only for course 01 and part of 02; courses 08–11 have no units; progress lives only in the session.
 
-## Prompt to start the session
+Build: `tools/flutter-review/build-apk.sh` (re-run if Gradle hits a 429 from the proxy). Log every APK as "APK 1.0.N" in `DECISIONS.md`.
+
+## Prompt to start the next session (screen 02)
 ```
-Lavora sul repo Rateel, partendo dal branch flutter/03-courses. Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md,
-docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md, docs/flutter/LESSONS-LEARNED.md e docs/flutter/NEXT-SESSION.md,
-e le storie delle schermate (docs/flutter/screens/03-courses/HISTORY.md, e sui branch flutter/05-units e
-flutter/06-lessons i loro HISTORY.md).
-Obiettivo, prima della schermata 07: consolidare le schermate 03–06.
-1) Unisci in master le pull request nell'ordine #38 → #42 → #39 → 06 (apri prima la PR di flutter/06-lessons),
-   chiedendomi l'ok prima di ogni merge; risolvi i conflitti tenendo il lavoro di entrambe le parti e fai passare
-   analyze e test dopo ogni unione.
-2) Chiedimi come gestire la chiave di firma unica per gli APK (non salvarla nel repo senza il mio ok esplicito).
-3) Confronta colori, bordi, raggi, ombre e testi delle schermate 03, 05 e 06 con i token di DESIGN-SYSTEM.md,
-   dammi la lista dei conflitti da decidere, poi uniforma e fai passare il critico senza eccezioni, anche in
-   formato telefono.
-Alla fine dammi l'APK con la nuova versione. Parla con me in italiano.
+Lavora sul repo Rateel. Crea il branch flutter/02-lesson-bar partendo da master (le schermate 03-06 sono gia' unite).
+Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
+docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md, docs/flutter/SCREENS.md, docs/flutter/STYLE-CONFLICTS.md e
+docs/flutter/screens/06-lessons/HISTORY.md.
+Obiettivo: costruire in Flutter la barra in alto comune a tutti i tipi di lezione (schermata 02): barra di avanzamento,
+pausa e ritorno indietro, come nel progetto Angular di origine (src/app/features/lessons/lesson-details e
+interactive-lesson), con lo stesso comportamento ma uno stile un po' rivisto, "classy" come le altre schermate (token di
+DESIGN-SYSTEM.md; se un valore confligge con un token, dimmelo e decido io). Widget riutilizzabile, da usare subito nella
+pagina provvisoria delle lezioni (lesson_page.dart) per provarlo sul telefono.
+Prima mostrami come e' l'originale Angular e una proposta visiva, con le domande, prima di costruire. Poi: prompt ChatGPT
+per eventuali elementi mancanti in blocchi copiabili, costruzione, critico con le misure (anche formato telefono
+915x412), confronto, video e APK. Crea HISTORY.md della schermata e tienilo aggiornato. Dopo la 02 si passa alla 11
+(classifica), poi si torna alla linea principale (07 lezione video e le altre). Parla con me in italiano.
 ```
 
 ---

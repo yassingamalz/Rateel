@@ -18,6 +18,7 @@ natively in Flutter, one screen per branch.
   the prompts) in the same commit as the work. Other sessions rely on it.
 - **Critic before the owner:** every visual result is reviewed one to one against the reference by a
   separate reviewer and fixed until no high/medium code difference remains (`docs/flutter/CRITIC.md`).
+  **Always ask the owner before launching the critic** (it consumes a lot): propose it, wait for a yes.
 - Show the owner the visual plan and get a "yes" before any visual work.
 - Never invent assets: write ChatGPT prompts, the owner generates the images. **Always paste the prompts in
   the chat, one copyable code block each**, and say which reference images to attach.
