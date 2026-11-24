@@ -61,3 +61,10 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
   of neighbouring tap areas on the phone.
 - Comparison `compare-v3.jpg`, demo `demo-v3.mp4` (`tools/flutter-review/lesson-bar-demo.js`), **APK 1.0.327**.
 - For the owner: conflict C1 (04 close / 06 back buttons brighter than the token, same cause as v1 #1).
+
+## 4. Owner phone test of APK 1.0.327 (2026-11-24)
+- Owner screenshot `owner-phone-1.0.327.jpg`: the buttons (and the capsule) must become **much larger** on the phone;
+  asked to see the Angular original at phone size and examples to choose from.
+- Sheet `size-options-phone.jpg` (915×412): Angular original (64 px button = 15.5u on a 412 dp phone, bar 200×24),
+  A current (button 9u, capsule 41×6.2u), B +33% (12u, 52×8.2u, number 4.2u), C as Angular (15.5u, 62×10u, number
+  5.2u). Mockups `tools/flutter-review/lesson-bar-size/`. Waiting for the owner's choice.
