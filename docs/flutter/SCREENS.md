@@ -18,7 +18,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
-| 14 | Coming soon | `14-in-arrivo.webp` | to do |
+| 14 | Coming soon | `14-in-arrivo.webp` | **started** on `flutter/14-coming-soon`: prompts E1–E6 sent, waiting for the owner's images |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
 
 Done: 4 screens (03–06). To do: at least 15 (02, 07, 09, 10/10b, 11, 12, 13, 14, 15–21), plus 01 and 08 once defined.
