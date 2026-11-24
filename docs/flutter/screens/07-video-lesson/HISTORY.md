@@ -57,5 +57,5 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
   `LessonPill`). Player frame, time line and their metrics removed (conflicts V3/V4 no longer apply). Widget test: section
   end → «تابع» → 2/3 → dot 1 → 1/3.
 - Captures `capture-v5-*` (unavailable with band, playing A/B, section end), sheet `compare-v5-phone.jpg`, demo
-  `demo-v5-phone.mp4` (section 1 ends → «تابع» → 02 pause → dot of section 1 → «تخطي» → 06 completion; B variant: last
+  `demo-v5-phone.mp4`, APK 1.0.354 (section 1 ends → «تابع» → 02 pause → dot of section 1 → «تخطي» → 06 completion; B variant: last
   section → «تابع» completes; not available → «تخطي»).
