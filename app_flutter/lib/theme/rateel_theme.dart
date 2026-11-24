@@ -148,9 +148,9 @@ class RateelColors {
   // Screen 11 (leaderboard), sampled from reference 11. Provisional: conflict
   // K2 in docs/flutter/STYLE-CONFLICTS.md (owner decides at the end).
   /// The user's own row / pinned bar: green, brighter than the rows.
-  static const meRowTop = Color(0xFF185727);
-  static const meRowMid = Color(0xFF0A4322);
-  static const meRowBottom = Color(0xFF14431C);
+  static const meRowTop = Color(0xFF195826);
+  static const meRowMid = Color(0xFF0A4523);
+  static const meRowBottom = Color(0xFF04361B);
 
   /// Leaderboard text cream, brighter/warmer than `titleCream` (owner
   /// 2026-11-24: brightness as the reference). Conflict K9.
@@ -175,11 +175,23 @@ class RateelColors {
     Color(0xFFE7E091),
   ];
   static const leaderTab = [
-    Color(0xFF9A7212),
-    Color(0xFFE4AE26),
-    Color(0xFFE8AB1F),
+    Color(0xFFDFAC35), // bright line along the top
+    Color(0xFF9D7514),
+    Color(0xFFBE8E19),
+    Color(0xFFE5A71C),
+    Color(0xFFEAAC1F),
     Color(0xFFFDE66E),
   ];
+  static const leaderBg = Color(0xFF00251C);
+  static const leaderHeader = Color(0xFF01251A);
+  static const leaderBgCentre = Color(0xFF02291F);
+  static const leaderRow = [
+    Color(0xFF02281C),
+    Color(0xFF052B1D),
+    Color(0xFF0E371E),
+  ];
+  static const leaderRowEdge = Color(0xFF0C3B2D);
+  static const leaderRowLight = Color(0xFF89A87F);
   static const leaderDisc = [
     Color(0xFFEBAE1D),
     Color(0xFFEDAB15),
@@ -193,6 +205,9 @@ class RateelColors {
     Color(0xFFFEE476),
   ];
   static const leaderRing = Color(0xFFFCD542);
+  static const leaderLattice = Color(
+    0xFFD9A632,
+  ); // reference lines #D29F20…#E0B040
 
   /// Modulates the gold art (medals, coins, avatars) to the reference's
   /// warmer, slightly darker gold (#FCBA2D → #F3B02E, #FED210 → #F6BB2C).

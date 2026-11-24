@@ -38,30 +38,32 @@ class _Metrics {
   final double u;
 
   // Content box: margins 4.4u, tabs 8.8u, gap 1.8u (reference 1844×853).
-  double get margin => u * 4.4;
+  double get margin => u * 3.95; // reference panel rim at x 36
   double get tabsW => u * 8.8;
   double get tabsGap => u * 1.8;
   Rect get panel => Rect.fromLTRB(
     margin,
     u * 18.4,
-    size.width - margin - tabsW - tabsGap,
+    size.width - u * 4.4 - tabsW - tabsGap,
     size.height - u * 6.4,
   );
   Rect get tabs => Rect.fromLTRB(
-    size.width - margin - tabsW,
+    size.width - u * 4.4 - tabsW,
     u * 19.3,
-    size.width - margin,
+    size.width - u * 4.4,
     size.height - u * 6.4,
   );
 
   /// Tap area of the tabs: 1.4u wider on each side (≥ 48 dp on a phone,
   /// critic v1 B1); the drawn tabs keep [tabs].
   double get tabsHitPad => u * 1.4;
-  double get headerH => u * 13.6;
-  double get rowH => u * 16.4;
-  double get rowGap => u * 1.2; // reference: rows 280–420, 432–565 px
-  double get listTop => u * 0.8;
-  double get rowInset => u * 1.2;
+  double get headerH => u * 14.05; // reference divider at y 273–275
+  // Reference: rows almost touch (pitch 146 px = 17.1u, 2–3 px apart) and
+  // sit 0.5u inside the panel rim.
+  double get rowH => u * 16.8;
+  double get rowGap => u * 0.3;
+  double get listTop => u * 0.3;
+  double get rowInset => u * 0.5;
   double get pitch => rowH + rowGap;
   double get barH => u * 16.5;
 }
@@ -201,7 +203,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             gradient: RadialGradient(
               center: Alignment(0, -0.4),
               radius: 1.2,
-              colors: [RateelColors.bgTop, RateelColors.bgBottom],
+              colors: [RateelColors.leaderBgCentre, RateelColors.leaderBg],
             ),
           ),
           child: AnimatedBuilder(
@@ -214,7 +216,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   left: 0,
                   right: 0,
                   top: 0,
-                  height: u * 16, // critic v1 A8
+                  height: u * 19, // reference: full to ≈ 15u, gone by the panel
                   child: Opacity(
                     opacity: _iv(0, 0.35),
                     child: _Lattice(u: u),
@@ -452,26 +454,23 @@ class _DragScroll extends ScrollBehavior {
 
 /// Gold rim as the reference (owner 2026-11-24, K1): ≈ 0.6u, dark-gold
 /// edges #A89C48, bright core #FCE75A, centre #FFF878; the pinned bar's rim
-/// is brighter ([bright]: #F8F27D / #FFFFA8). [thin]: the 1 px pale line of
-/// the tab container.
+/// is brighter ([bright]: #F8F27D / #FFFFA8).
 class _GoldRimPainter extends CustomPainter {
   _GoldRimPainter({
     required this.u,
     required this.radius,
     this.extra = 0,
     this.bright = false,
-    this.thin = false,
   });
 
   final double u;
   final double radius;
   final double extra;
   final bool bright;
-  final bool thin;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final w = thin ? math.max(1.0, u * 0.12) : u * 0.6;
+    final w = u * 0.45; // reference: 4–5 px at the top, 2–3 px at the sides
     final r1 = RRect.fromRectAndRadius(
       (Offset.zero & size).deflate(w / 2),
       Radius.circular(radius - w / 2),
@@ -480,9 +479,7 @@ class _GoldRimPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = width
       ..color = c;
-    if (thin) {
-      canvas.drawRRect(r1, stroke(w, RateelColors.leaderRimThin));
-    } else {
+    {
       canvas.drawRRect(r1, stroke(w, RateelColors.leaderRimEdge));
       canvas.drawRRect(
         r1,
@@ -520,6 +517,43 @@ class _GoldRimPainter extends CustomPainter {
       old.u != u || old.radius != radius || old.extra != extra;
 }
 
+/// Pale 1 px light along the bottom edge of a row (reference #89A87F).
+class _RowBottomLight extends CustomPainter {
+  _RowBottomLight({required this.u, required this.radius});
+  final double u;
+  final double radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Inside the dark edge (drawn by the row's foreground border).
+    final edge = math.max(1.0, u * 0.12);
+    final w = math.max(1.5, u * 0.22);
+    final rr = RRect.fromRectAndRadius(
+      (Offset.zero & size).deflate(edge + w / 2),
+      Radius.circular(radius - edge),
+    );
+    canvas.drawRRect(
+      rr,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            RateelColors.leaderRowLight.withValues(alpha: 0),
+            RateelColors.leaderRowLight.withValues(alpha: 0),
+            RateelColors.leaderRowLight.withValues(alpha: 0.95),
+          ],
+          stops: const [0, 0.8, 0.97],
+        ).createShader(Offset.zero & size),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_RowBottomLight old) => old.u != u;
+}
+
 class _Header extends StatelessWidget {
   const _Header({required this.u});
   final double u;
@@ -528,7 +562,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     // Course-card title style (critic v1 A2).
     final style = readex(
-      u * 4.4,
+      u * 4.5, // reference header ≈ 4.5u
       weight: 560,
       color: RateelColors.leaderText,
     ).copyWith(shadows: titleShadows(u));
@@ -548,7 +582,7 @@ class _Header extends StatelessWidget {
           children: [
             // Header shade: a little darker than the rows (reference #012419).
             Positioned.fill(
-              child: ColoredBox(color: Colors.black.withValues(alpha: 0.12)),
+              child: ColoredBox(color: RateelColors.leaderHeader),
             ),
             // Right group: المركز over the medal column, المستخدم next to it.
             Positioned(
@@ -612,6 +646,7 @@ class _PlayerRow extends StatelessWidget {
     Widget body = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
+        // Reference rows: darker at the top, lighter green at the bottom.
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -621,39 +656,51 @@ class _PlayerRow extends StatelessWidget {
                   RateelColors.meRowMid,
                   RateelColors.meRowBottom,
                 ]
-              : const [RateelColors.cardTop, RateelColors.cardMid],
+              : RateelColors.leaderRow,
+          stops: me ? const [0, 0.35, 1] : const [0, 0.55, 1],
         ),
-        border: me
-            ? null
-            : Border.all(
-                color: RateelColors.rowRim,
-                width: math.max(1.0, u * 0.23),
-              ),
       ),
-      child: _RowContent(
-        u: u,
-        player: player,
-        rank: rank,
-        place: place,
-        pop: pop,
-        shine: shine,
-        avatarRight: u * 23.7,
-        badgeRight: u * 9.8,
-        nameRight: u * 33,
-        pointsCx: u * 35.0,
-        // The user's row keeps the gold rank disc of the bar (critic v1 B2).
-        badge: me && place >= 3 ? _GoldRank(u: u, rank: rank) : null,
-        trailing: place < 3
-            ? _Reward(u: u, place: place)
-            : Text(
-                '-',
-                style: readex(
-                  u * 4.2,
-                  weight: 600,
-                  color: RateelColors.leaderText,
-                ),
+      foregroundDecoration: me
+          ? null
+          : BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              // Thin dark-green edge, a pale line along the bottom (reference).
+              border: Border.all(
+                color: RateelColors.leaderRowEdge,
+                width: math.max(1.0, u * 0.12),
               ),
-        trailingCx: u * 12.9,
+            ),
+      child: CustomPaint(
+        foregroundPainter: me ? null : _RowBottomLight(u: u, radius: radius),
+        // Reference: the content sits 0.4u above the row's centre.
+        child: Transform.translate(
+          offset: Offset(0, -u * 0.4),
+          child: _RowContent(
+            u: u,
+            player: player,
+            rank: rank,
+            place: place,
+            pop: pop,
+            shine: shine,
+            avatarRight: u * 24.4,
+            badgeRight: u * 10.5,
+            nameRight: u * 33.7,
+            pointsCx: u * 35.7,
+            // The user's row keeps the gold rank disc of the bar (critic v1 B2).
+            badge: me && place >= 3 ? _GoldRank(u: u, rank: rank) : null,
+            trailing: place < 3
+                ? _Reward(u: u, place: place)
+                : Text(
+                    '-',
+                    style: readex(
+                      u * 4.2,
+                      weight: 600,
+                      color: RateelColors.leaderText,
+                    ),
+                  ),
+            trailingCx: u * 13.55,
+          ),
+        ),
       ),
     );
     if (me) {
@@ -699,7 +746,15 @@ class _RowContent extends StatelessWidget {
     required this.trailingCx,
     this.shine,
     this.badge,
+    this.avatarD = 10.8,
+    this.nameSize = 3.8,
+    this.pointsDy = 0,
   });
+
+  /// Sizes in u (the pinned bar's are larger in the reference).
+  final double avatarD;
+  final double nameSize;
+  final double pointsDy;
 
   final double u;
   final Player player;
@@ -717,7 +772,7 @@ class _RowContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final avatarD = u * 10.8;
+    final avatarD = u * this.avatarD;
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -761,27 +816,31 @@ class _RowContent extends StatelessWidget {
               Text(
                 player.name,
                 style: readex(
-                  u * 3.8,
+                  u * nameSize,
                   weight: 440, // thinner strokes, as the reference
                   color: RateelColors.leaderText,
                 ).copyWith(shadows: titleShadows(u)),
               ),
               SizedBox(height: u * 2.2), // critic v1 A3
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _Book(u: u),
-                  SizedBox(width: u * 1.0),
-                  Text(
-                    '${player.lessons} درس',
-                    // Reference: 3.5u, #E1E1CF (owner: size and brightness).
-                    style: readex(
-                      u * 3.5,
-                      weight: 400,
-                      color: RateelColors.leaderText.withValues(alpha: 0.88),
+              Transform.translate(
+                // Reference: the book sits 0.5u further right than the name.
+                offset: Offset(u * 0.5, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _Book(u: u),
+                    SizedBox(width: u * 1.0),
+                    Text(
+                      '${player.lessons} درس',
+                      // Reference: 3.5u, #E1E1CF (owner: size and brightness).
+                      style: readex(
+                        u * 3.5,
+                        weight: 400,
+                        color: RateelColors.leaderText.withValues(alpha: 0.8),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -795,13 +854,16 @@ class _RowContent extends StatelessWidget {
           bottom: 0,
           child: Align(
             alignment: Alignment.centerLeft,
-            child: _Points(u: u, score: player.score),
+            child: Transform.translate(
+              offset: Offset(0, u * pointsDy),
+              child: _Points(u: u, score: player.score),
+            ),
           ),
         ),
         Positioned(
           left: trailingCx - u * 10,
           width: u * 20,
-          top: 0,
+          top: u * (pointsDy > 0 ? pointsDy * 2 : 0),
           bottom: 0,
           child: Center(child: trailing),
         ),
@@ -1023,8 +1085,13 @@ class _UserBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             // Reference: ≈ 40% gold glow around the bar (K7).
-            color: RateelColors.gold.withValues(alpha: 0.40),
-            blurRadius: u * 1.6,
+            color: RateelColors.gold.withValues(alpha: 0.6),
+            blurRadius: u * 1.3,
+          ),
+          // The reference glow reaches ≈ 2.5u around the bar.
+          BoxShadow(
+            color: RateelColors.gold.withValues(alpha: 0.3),
+            blurRadius: u * 3.2,
           ),
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.30),
@@ -1041,13 +1108,16 @@ class _UserBar extends StatelessWidget {
           rank: rank,
           place: 99,
           pop: 1,
-          avatarRight: u * 24.6,
+          avatarRight: u * 25.0,
           badgeRight: u * 9.5,
           nameRight: u * 34.2,
-          pointsCx: u * 33.9,
+          pointsCx: u * 35.3,
+          avatarD: 11.1,
+          nameSize: 4.0,
+          pointsDy: -0.7,
           badge: _GoldRank(u: u, rank: rank),
           trailing: _Chevron(u: u),
-          trailingCx: u * 11.6,
+          trailingCx: u * 12.05,
         ),
       ),
     );
@@ -1183,81 +1253,88 @@ class _Tabs extends StatelessWidget {
         final sel = filter.index;
         final drawn = Padding(
           padding: EdgeInsets.symmetric(horizontal: pad),
-          // Dark fill + thin pale-gold line (reference).
-          child: CustomPaint(
-            foregroundPainter: _GoldRimPainter(
-              u: u,
-              radius: radius,
-              thin: true,
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radius),
-                color: Colors.black.withValues(alpha: 0.45),
+          // Dark fill + thin pale-gold line; attached to the panel: straight
+          // left side, rounded on the right only (reference).
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(radius),
+                bottomRight: Radius.circular(radius),
               ),
-              child: Stack(
-                children: [
-                  for (var i = 1; i < 3; i++)
-                    Positioned(
-                      left: u * 0.6,
-                      right: u * 0.6,
-                      top: h * i,
-                      height: math.max(1.0, u * 0.15),
-                      child: const ColoredBox(color: RateelColors.divider),
+              color: Colors.black.withValues(alpha: 0.45),
+              border: Border.all(
+                color: RateelColors.leaderRimThin,
+                width: math.max(1.0, u * 0.12),
+              ),
+            ),
+            child: Stack(
+              children: [
+                for (var i = 1; i < 3; i++)
+                  Positioned(
+                    left: u * 0.6,
+                    right: u * 0.6,
+                    top: h * i,
+                    height: math.max(1.0, u * 0.15),
+                    child: const ColoredBox(color: RateelColors.divider),
+                  ),
+                // Gold tab glides to the selected filter (K3: flat amber).
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 360),
+                  curve: Curves.easeInOutCubic,
+                  left: 0,
+                  right: 0,
+                  top: h * sel,
+                  height: h,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      // Reference gold tab: darker at the top, lit at the
+                      // bottom (K3, owner 2026-11-24).
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: RateelColors.leaderTab,
+                        stops: [0, 0.035, 0.33, 0.45, 0.95, 1],
+                      ),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(radius * 1.4),
+                        bottomRight: Radius.circular(radius * 0.8),
+                        topLeft: Radius.circular(u * 0.6),
+                        bottomLeft: Radius.circular(u * 0.6),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: RateelColors.gold.withValues(alpha: 0.15),
+                          blurRadius: u * 2,
+                        ),
+                      ],
                     ),
-                  // Gold tab glides to the selected filter (K3: flat amber).
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 360),
-                    curve: Curves.easeInOutCubic,
+                  ),
+                ),
+                for (var i = 0; i < 3; i++)
+                  Positioned(
                     left: 0,
                     right: 0,
-                    top: h * sel,
+                    top: h * i,
                     height: h,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        // Reference gold tab: darker at the top, lit at the
-                        // bottom (K3, owner 2026-11-24).
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: RateelColors.leaderTab,
-                          stops: [0, 0.3, 0.85, 1],
-                        ),
-                        borderRadius: BorderRadius.circular(radius),
-                        boxShadow: [
-                          BoxShadow(
-                            color: RateelColors.gold.withValues(alpha: 0.15),
-                            blurRadius: u * 2,
+                    child: Center(
+                      child: RotatedBox(
+                        // Reference: the label starts at the bottom.
+                        quarterTurns: 1,
+                        child: AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 300),
+                          style: readex(
+                            i == sel ? u * 4.6 : u * 4.0, // reference
+                            weight: 560,
+                            color: i == sel
+                                ? RateelColors.countText
+                                : RateelColors.leaderText,
                           ),
-                        ],
+                          child: Text(_labels[i]),
+                        ),
                       ),
                     ),
                   ),
-                  for (var i = 0; i < 3; i++)
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: h * i,
-                      height: h,
-                      child: Center(
-                        child: RotatedBox(
-                          quarterTurns: 3,
-                          child: AnimatedDefaultTextStyle(
-                            duration: const Duration(milliseconds: 300),
-                            style: readex(
-                              u * 4.0,
-                              weight: 560,
-                              color: i == sel
-                                  ? RateelColors.countText
-                                  : RateelColors.leaderText,
-                            ),
-                            child: Text(_labels[i]),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
+              ],
             ),
           ),
         );
@@ -1422,6 +1499,19 @@ class _Lattice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Reference: cells ≈ 8u wide, gold lines with a
+    // dark relief shadow under them, full down to ≈ 15u then fading.
+    Widget layer(Color color) => Image.asset(
+      latticeAsset,
+      repeat: ImageRepeat.repeat,
+      // The tile holds 4 cells; reference cell ≈ 8u. `fit: none`, or the
+      // default scaleDown shrinks the tile to the band's height (v2–v6 bug).
+      scale: 512 / (u * 8 * 4),
+      fit: BoxFit.none,
+      alignment: Alignment.topCenter,
+      color: color,
+      colorBlendMode: BlendMode.srcIn,
+    );
     return IgnorePointer(
       child: ShaderMask(
         blendMode: BlendMode.dstIn,
@@ -1430,20 +1520,26 @@ class _Lattice extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             Colors.white,
-            Colors.white.withValues(alpha: 0.45),
+            Colors.white.withValues(alpha: 0.8),
             Colors.white.withValues(alpha: 0),
           ],
-          stops: const [0, 0.4, 1],
+          stops: const [0, 0.45, 0.92],
         ).createShader(r),
-        child: Image.asset(
-          latticeAsset,
-          repeat: ImageRepeat.repeat,
-          // 4 cells per tile, reference cell ≈ 7.9u.
-          scale: 512 / (u * 31.6),
-          alignment: Alignment.topLeft,
-          // Warm gold lines (critic v1 A8: the asset read olive).
-          color: RateelColors.pathLine,
-          colorBlendMode: BlendMode.srcIn,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Transform.translate(
+              offset: Offset(0, u * 0.35),
+              child: ImageFiltered(
+                imageFilter: ui.ImageFilter.blur(
+                  sigmaX: u * 0.15,
+                  sigmaY: u * 0.15,
+                ),
+                child: layer(Colors.black.withValues(alpha: 0.6)),
+              ),
+            ),
+            layer(RateelColors.leaderLattice),
+          ],
         ),
       ),
     );

@@ -76,3 +76,14 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
   all golds above as `leader*` tokens; art modulated by `leaderArtTone`; rows gap 1.2u, list top 0.8u; rows fade
   (to 55%) in the 5u above the pinned bar while it is shown. Captures `capture-v5-*`, `compare-v5-phone.jpg`,
   `demo-v5-phone.mp4`. Conflicts updated (reference values built, K11 added).
+
+## 7. v6: full verification (2026-11-24)
+- Owner: «why don't you notice the differences?», then «almost everything does not match: verify everything, gradients,
+  lines, sizes».
+- Found by zooming region by region: lattice cells 2–3× too small (Flutter `scaleDown` bug, see `verify-v6.md`) and
+  without the relief shadow; tab labels rotated the wrong way; gold tab and tab container shape (attached to the panel);
+  then, with a per-element measuring script: rows almost touching (gap 0.3u, height 16.8u), rows 0.5u inside the panel,
+  row fill dark→lighter downwards with a pale bottom line, background #00251C, header #01251A 0.45u taller, bar gradient
+  #195826→#04361B and a wider glow, header 4.5u, bar name 4.0u and avatar 11.1u, column positions.
+- v6 result: `verify-v6.md` (all boxes within ±4 px; gradients and lines table), `compare-v6-phone.jpg`,
+  `demo-v6-phone.mp4`. Tool: `tools/flutter-review/leaderboard-verify.py`.
