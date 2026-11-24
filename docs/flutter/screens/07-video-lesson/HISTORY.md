@@ -95,4 +95,4 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Owner: «تخطي» and the other button better on the other side for Arabic; the top fill in the other direction.
 - `SkipMetrics.side` (left 7.3u), ‹ at left 7.3 + 33.6 + 3u; skip glyph mirrored (two triangles pointing left); the
   stronger corner fade moved to the left corner. Capsule direction: on `flutter/02-menu-motion` (shared bar).
-- Captures `capture-v9-*`; demo script click positions updated.
+- Captures `capture-v9-*`; demo script click positions updated. After merging the 02 branch (capsule left → right, menu motion): `capture-v10-*`.
