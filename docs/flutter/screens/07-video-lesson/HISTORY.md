@@ -89,4 +89,4 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Cause 2: "not available" came from the 15 s timeout when the stream did not report `playing`. Now buffering/cued/position
   > 0 count as working, timeout 20 s.
 - Poster: maxres 16:9 thumbnail from the network, high-quality fallback, bundled thumbs only for offline review.
-- Captures `capture-v8-*`. To verify on the phone (platform views cannot be checked in the headless browser).
+- Captures `capture-v8-*`, APK 1.0.361. To verify on the phone (platform views cannot be checked in the headless browser).
