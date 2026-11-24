@@ -41,3 +41,13 @@ Proposed with screen 03 (courses), waiting for the owner (`RateelColors`, sectio
 | Path | line 3 px #D1A93C on track #265343; node #FCC24A r 1.3u with gold glow | 🟡 |
 | Progress | track #265343, fill #EBB335, h 1.4u | 🟡 |
 | Pill | outline gold 2 px, fill #062D20, text gold 3.3u | 🟡 |
+
+Proposed with screen 02 (lesson top bar), approved on the mockup by the owner (2026-11-24), `RateelColors` section "Screen 02":
+
+| Token | Value | Status |
+|---|---|---|
+| Lesson capsule | 41×6.2u, radius h/2, rim max(1 px, 0.12u) `cardRimTop #2F6954`, fill `cardTop → cardMid`, inset shade 0.2u, card shadow | ✅ (mockup) |
+| Lesson progress gold | `#FFD95A → amberPill #EDB120 (55%) → #D9A11C`, glow gold 45% σ 0.8u, leading light `lessonBarLight #FFF3C2` 2.2u, sheen white 28% | ✅ (mockup) |
+| Lesson glass button | 9u, glass button token with the glow **outside the circle only**; paused: `badgeTop → amber`, rim `goldHighlight`, halo amber 25% 1.2u, pulse 0→1.8u | ✅ (mockup) |
+| Lesson veil | `lessonVeil #00140E` 45%, blur σ 0.55u, content 98% and 80% brightness | ✅ |
+

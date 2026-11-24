@@ -51,3 +51,13 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
   leading light also at 16/16, number w500 without lift; controls and back locked during the completion, `_leave()`
   pops once; back does nothing with hidden controls; tap area ≥ 48 dp; haptic on the veil tap.
 - Conflict C1 for the owner: the 04 close button and the 06 back button have the same over-bright glass as 02 v1.
+- Critic v2 (`critic-v2.md`, on v2): **8.6** (look 8.5, behaviour 8.8), no high. New medium: N1 the inset shadow was
+  drawn over the gold (olive line at the top of the fill); N2 the 0.12u rim split over two pixel rows (too faint).
+- v3 fixes: inset shadow drawn before the glow and the gold; capsule on whole pixels with a rim of max(1 px, 0.12u);
+  the controls lock as soon as the lesson starts finishing (`LessonShellState.lock()`).
+- Critic v3 (`critic-v3.md`, on v3): **9.2** (look 9.3, behaviour 9.2), **no high/medium item left**. Lows kept: capsule
+  1 px larger from the rounding, empty-glass inset shade 3 px vs 5 px, number slightly heavier, background a bit darker
+  under the veil, completion exit 500 ms (Angular 300 ms), restart closes the menu (Angular keeps it open), 4.4 dp overlap
+  of neighbouring tap areas on the phone.
+- Comparison `compare-v3.jpg`, demo `demo-v3.mp4` (`tools/flutter-review/lesson-bar-demo.js`), **APK 1.0.327**.
+- For the owner: conflict C1 (04 close / 06 back buttons brighter than the token, same cause as v1 #1).
