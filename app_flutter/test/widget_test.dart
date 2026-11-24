@@ -217,4 +217,46 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
     expect(backs, 1);
   });
+
+  testWidgets('video lesson: section end, repeat, continue (screen 07)', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    videoMode = 'demo';
+    videoStartAt = 0.33; // 105.6 s: section 1 ends at 106.7 s
+    addTearDown(() {
+      videoMode = null;
+      videoStartAt = 0;
+    });
+    const lesson = Lesson(
+      id: 't',
+      title: 'درس',
+      description: '',
+      type: LessonType.video,
+      minutes: 5,
+      videoUrl: 'https://www.youtube.com/watch?v=BqFxf-WspTc',
+    );
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: VideoLessonPage(lesson: lesson, index: 1, count: 1),
+      ),
+    );
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.bySemanticsLabel('الخطوة 1 من 3'), findsOneWidget);
+    // The video reaches the end of section 1 and stops.
+    for (var i = 0; i < 12; i++) {
+      await tester.pump(const Duration(milliseconds: 250));
+    }
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('تابع'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.bySemanticsLabel('الخطوة 2 من 3'), findsOneWidget);
+    // Back to section 1 with its dot.
+    await tester.tap(find.bySemanticsLabel('القسم 1'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.bySemanticsLabel('الخطوة 1 من 3'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
 }

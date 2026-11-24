@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -15,6 +16,17 @@ import 'lesson_widgets.dart';
 /// available" state, `?videoAt=0.37` starts the demo at 37%.
 String? videoMode;
 double videoStartAt = 0;
+
+/// Sections of a lesson video (owner, 2026-11-24): the video stops at the end
+/// of each section with «أعد» (repeat) / «تابع» (continue), and the learner
+/// can go back to an earlier section. The data has no sections yet (MOCK,
+/// `SCREENS.md`): every video is split in [videoSectionCount] equal parts.
+/// Planned data: `sections: [{start, end}]` in seconds per video lesson.
+int videoSectionCount = 3;
+
+/// How to go back to an earlier section, both built for the owner's choice
+/// (review `?sectionNav=dots|button`): dots under the video or a ‹ button.
+String videoSectionNav = 'dots';
 
 /// Thumbnails bundled for the posters (real YouTube thumbnails of the lesson
 /// videos; the other links of the data are dead, 404 on YouTube).
@@ -45,25 +57,20 @@ class VideoMetrics {
   static const dividerH = 4.0;
   static const textTop = 66.4;
   static const textSize = 4.52;
-  // Playing state.
-  static const playTitleTop = 18.8;
-  static const playTitleSize = 5.4;
-  static const playerDx = -48.8;
-  static const playerW = 97.2;
-  static const playerTop = 29.6;
-  static const playerH = 49.8;
-  static const playerRadius = 3.6;
-  static const lineDx = -40.4;
-  static const lineW = 80.9;
-  static const lineY = 84.4;
-  static const lineH = 1.0;
-  static const knob = 3.0;
-  static const timeCx = 46.1;
-  static const timeSize = 3.2;
+  // Playing state (full screen, owner 2026-11-24).
+  static const barCentre = 10.75; // 02: margin 3 + button 15.5 / 2
+  static const playTitleSize = 5.0;
+  static const navY = 82.45; // dots: centred on «تخطي»
+  static const dot = 2.8; // reference 08 dots: 2.8u, pitch 5.5u
+  static const dotPitch = 5.5;
+  static const endPillW = 30.0;
   // Corners (cell size and start of the band matched on zoomed crops).
   static const cornerSize = 39.0;
   static const cornerTop = 60.0;
   static const topCornerSize = 30.0;
+  static const bandH = 19.6;
+  static const bandBottom = 96.0;
+  static const bandOpacity = 0.14;
 }
 
 Route<bool> videoLessonRoute(
@@ -133,7 +140,9 @@ class _VideoLessonPageState extends State<VideoLessonPage>
   bool _left = false;
   double _pos = 0; // seconds
   double _dur = 0;
-  double? _dragShare; // while seeking on the line
+  int _section = 0; // current section (0-based)
+  int _reached = 0; // furthest section reached
+  bool _sectionEnd = false; // stopped at the end of [_section]
 
   bool get _demoMode => videoMode == 'demo';
 
@@ -147,12 +156,14 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     } else if (_demoMode) {
       _dur = 320;
       _pos = videoStartAt * _dur;
+      _section = _sectionAt(_pos);
+      _reached = _section;
       _started = true;
       _playing = true;
       _demo = Timer.periodic(const Duration(milliseconds: 250), (_) {
-        if (!_playing || _paused || _finishing) return;
+        if (!_playing || _paused || _finishing || _sectionEnd) return;
         setState(() => _pos = (_pos + 0.25).clamp(0, _dur));
-        if (_pos >= _dur) _finish();
+        _checkSectionEnd();
       });
     } else {
       _openPlayer(_videoId!);
@@ -212,17 +223,19 @@ class _VideoLessonPageState extends State<VideoLessonPage>
           _started = true;
         }
         if (playing != _playing) setState(() => _playing = playing);
-        if (v.playerState == PlayerState.ended) _finish();
+        if (v.playerState == PlayerState.ended) _endSection();
       }),
     );
     _subs.add(
       yt.videoStateStream.listen((s) async {
-        if (!mounted || _dragShare != null) return;
+        if (!mounted) return;
         if (_dur <= 0) {
           final d = await yt.duration;
           if (d > 0 && mounted) _dur = d;
         }
+        if (!mounted || _sectionEnd) return;
         setState(() => _pos = s.position.inMilliseconds / 1000);
+        _checkSectionEnd();
       }),
     );
     // No network or a blocked embed never reaches «playing».
@@ -252,11 +265,62 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     super.dispose();
   }
 
-  /// Video progress in % (the capsule shows «n/100», owner 2026-11-24).
-  int get _percent {
-    if (_finishing) return 100;
-    if (_dur <= 0) return 0;
-    return (_pos / _dur * 100).floor().clamp(0, 100);
+  int get _sections => videoSectionCount;
+  double _start(int k) => _dur * k / _sections;
+  double _end(int k) => _dur * (k + 1) / _sections;
+  int _sectionAt(double pos) =>
+      _dur <= 0 ? 0 : (pos / _dur * _sections).floor().clamp(0, _sections - 1);
+
+  /// The capsule counts sections «n/N» (owner, 2026-11-24).
+  int get _step => _finishing ? _sections : _section + 1;
+
+  void _checkSectionEnd() {
+    if (_dur <= 0 || _sectionEnd || _finishing) return;
+    if (_pos >= _end(_section) - 0.2) _endSection();
+  }
+
+  /// End of a section: the video stops on its last frame, «أعد» / «تابع».
+  void _endSection() {
+    if (_sectionEnd || _finishing || !mounted) return;
+    _yt?.pauseVideo();
+    Haptics.tick();
+    setState(() {
+      _sectionEnd = true;
+      _playing = false;
+    });
+  }
+
+  void _playFrom(int k) {
+    final t = _start(k);
+    setState(() {
+      _section = k;
+      _reached = math.max(_reached, k);
+      _sectionEnd = false;
+      _pos = t;
+      _playing = true;
+    });
+    if (!_demoMode) {
+      _yt?.seekTo(seconds: t, allowSeekAhead: true);
+      _yt?.playVideo();
+    }
+  }
+
+  void _repeat() => _playFrom(_section);
+
+  /// «تابع»: next section; after the last one the lesson is complete.
+  void _continue() {
+    if (_section >= _sections - 1) {
+      _finish();
+    } else {
+      _playFrom(_section + 1);
+    }
+  }
+
+  /// Back to an earlier section (dots: any section reached; button: the
+  /// previous one, or the start of the first).
+  void _goTo(int k) {
+    if (_unavailable || _finishing || k > _reached) return;
+    _playFrom(k);
   }
 
   void _leave(bool done) {
@@ -280,7 +344,7 @@ class _VideoLessonPageState extends State<VideoLessonPage>
   }
 
   void _togglePlay() {
-    if (_unavailable || _finishing) return;
+    if (_unavailable || _finishing || _sectionEnd) return;
     Haptics.tap();
     if (_demoMode) {
       setState(() => _playing = !_playing);
@@ -291,32 +355,21 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     }
   }
 
+  bool _resumeAfterMenu = false;
+
   void _onPaused(bool p) {
     setState(() => _paused = p);
-    if (_demoMode) return;
     if (p) {
-      _yt?.pauseVideo();
-    } else if (_started && !_finishing) {
-      _yt?.playVideo();
+      _resumeAfterMenu = _playing;
+      if (!_demoMode) _yt?.pauseVideo();
+    } else if (_resumeAfterMenu && !_finishing && !_sectionEnd) {
+      if (!_demoMode) _yt?.playVideo();
     }
   }
 
   void _restart() {
     Haptics.tick();
-    setState(() => _pos = 0);
-    if (!_demoMode) {
-      _yt?.seekTo(seconds: 0, allowSeekAhead: true);
-      _yt?.playVideo();
-    } else {
-      _playing = true;
-    }
-  }
-
-  void _seek(double share) {
-    if (_dur <= 0) return;
-    final s = share.clamp(0.0, 1.0) * _dur;
-    setState(() => _pos = s);
-    _yt?.seekTo(seconds: s, allowSeekAhead: true);
+    _playFrom(0);
   }
 
   // Entry: frame and arch first, then icon/player, then texts (60 ms steps).
@@ -341,8 +394,8 @@ class _VideoLessonPageState extends State<VideoLessonPage>
   Widget build(BuildContext context) {
     return LessonShell(
       key: _shell,
-      step: _percent,
-      total: 100,
+      step: _step,
+      total: _sections,
       onBack: () => _leave(false),
       onRestart: _restart,
       onPausedChanged: _onPaused,
@@ -359,6 +412,44 @@ class _VideoLessonPageState extends State<VideoLessonPage>
               const Positioned.fill(
                 key: ValueKey('girih'),
                 child: IgnorePointer(child: ScreenGirih(fadeTop: false)),
+              ),
+              // Faint lattice band along the bottom (owner's V5, seamless
+              // tile; reference: period 89 px = 10.4u, ends at ≈ 96u).
+              Positioned(
+                key: const ValueKey('band'),
+                left: 0,
+                right: 0,
+                top: u * (VideoMetrics.bandBottom - VideoMetrics.bandH),
+                height: u * VideoMetrics.bandH,
+                child: IgnorePointer(
+                  // The reference's upper row fades out upwards.
+                  child: ShaderMask(
+                    blendMode: BlendMode.dstIn,
+                    shaderCallback: (r) => const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0, 0.25, 0.45],
+                      colors: [
+                        Color(0x26000000),
+                        Color(0x99000000),
+                        Color(0xFF000000),
+                      ],
+                    ).createShader(r),
+                    child: Opacity(
+                      opacity: VideoMetrics.bandOpacity,
+                      child: ColorFiltered(
+                        colorFilter: _cornerTone,
+                        child: Image.asset(
+                          'assets/ui/video/bottom_band.webp',
+                          repeat: ImageRepeat.repeatX,
+                          fit: BoxFit.none,
+                          scale: 256 / (u * VideoMetrics.bandH),
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               // Faint lattice in the top corners too (reference: x ≤ 18u,
               // y ≤ 21u, ≈ 35% of the bottom corners): the bottom corners
@@ -624,187 +715,241 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     ];
   }
 
+  /// Playing (owner, 2026-11-24, «as Simply Piano»): the video fills the
+  /// screen, whole (16:9 at the full height, dark bands at the sides), no
+  /// time line; controls always visible on soft dark gradients: the 02 bar,
+  /// the lesson title, «تخطي», the way back to earlier sections; at the end
+  /// of each section «أعد» / «تابع».
   List<Widget> _playingLayer(double u, double cx) {
-    final share =
-        _dragShare ?? (_dur <= 0 ? 0.0 : (_pos / _dur).clamp(0.0, 1.0));
-    final lineW = u * VideoMetrics.lineW;
+    const nav = VideoMetrics.navY;
     return [
-      Positioned(
-        key: const ValueKey('playTitle'),
-        left: 0,
-        right: 0,
-        top: u * VideoMetrics.playTitleTop,
-        child: _enter(
-          1,
-          Text(
-            widget.lesson.title,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.rtl,
-            maxLines: 1,
-            style: readex(
-              u * VideoMetrics.playTitleSize,
-              weight: 560,
-              color: titleCream,
-            ).copyWith(shadows: titleShadows(u)),
-          ),
-        ),
-      ),
-      Positioned(
-        key: const ValueKey('player'),
-        left: cx + u * VideoMetrics.playerDx,
-        top: u * VideoMetrics.playerTop,
-        width: u * VideoMetrics.playerW,
-        height: u * VideoMetrics.playerH,
-        child: _enter(2, _player(u)),
-      ),
-      Positioned(
-        key: const ValueKey('line'),
-        left: cx + u * VideoMetrics.lineDx - u * 2,
-        top: u * (VideoMetrics.lineY - 3),
-        width: lineW + u * 4,
-        height: u * 6,
-        child: _enter(
-          3,
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onHorizontalDragStart: (d) => setState(
-              () => _dragShare = (d.localPosition.dx - u * 2) / lineW,
-            ),
-            onHorizontalDragUpdate: (d) => setState(
-              () => _dragShare = ((d.localPosition.dx - u * 2) / lineW).clamp(
-                0.0,
-                1.0,
-              ),
-            ),
-            onHorizontalDragEnd: (_) {
-              final s = _dragShare;
-              _dragShare = null;
-              if (s != null) _seek(s);
-            },
-            onTapUp: (d) => _seek((d.localPosition.dx - u * 2) / lineW),
-            child: CustomPaint(
-              painter: _LinePainter(u: u, share: share),
-            ),
-          ),
-        ),
-      ),
-      // Times: elapsed on the right, total on the left (reference).
-      for (final (k, x, t) in [
-        ('timeR', VideoMetrics.timeCx, _clock(share * _dur)),
-        ('timeL', -VideoMetrics.timeCx, _clock(_dur)),
-      ])
-        Positioned(
-          key: ValueKey(k),
-          left: cx + u * x - u * 6,
-          width: u * 12,
-          top: u * (VideoMetrics.lineY - VideoMetrics.timeSize * 0.55),
-          child: _enter(
-            3,
-            Text(
-              t,
-              textAlign: TextAlign.center,
-              textDirection: TextDirection.ltr,
-              style: readex(
-                u * VideoMetrics.timeSize,
-                weight: 400,
-                color: RateelColors.leaderText,
-              ).copyWith(height: 1.0),
-            ),
-          ),
-        ),
-    ];
-  }
-
-  static String _clock(double s) {
-    final t = s.isFinite ? s.round() : 0;
-    return '${t ~/ 60}:${(t % 60).toString().padLeft(2, '0')}';
-  }
-
-  /// The video in a gold glass frame. The YouTube view covers the frame
-  /// (16:9 cropped top and bottom to the reference's frame); the poster stays
-  /// on top until the video plays and while the pause menu is open (the
-  /// platform view cannot be blurred by the 02 veil).
-  Widget _player(double u) {
-    final r = BorderRadius.circular(u * VideoMetrics.playerRadius);
-    final poster = _videoId != null && _posters.contains(_videoId)
-        ? Image.asset(
-            'assets/ui/video/thumbs/$_videoId.webp',
-            fit: BoxFit.cover,
-          )
-        : const ColoredBox(color: Color(0xFF0B1A12));
-    final showPoster = _demoMode || !_started || _paused;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: r,
-        boxShadow: [
-          BoxShadow(
-            color: RateelColors.videoPlayerRimSide.withValues(alpha: 0.2),
-            blurRadius: u * 1.6,
-          ),
-        ],
-      ),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _togglePlay,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            ClipRRect(
-              borderRadius: r,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  const ColoredBox(color: Colors.black),
-                  if (_yt != null && !_unavailable)
-                    LayoutBuilder(
-                      builder: (context, b) => OverflowBox(
-                        maxWidth: b.maxWidth,
-                        maxHeight: b.maxWidth * 9 / 16,
-                        child: IgnorePointer(
-                          child: YoutubePlayer(
-                            controller: _yt!,
-                            autoFullScreen: false,
-                            enableFullScreenOnVerticalDrag: false,
-                            backgroundColor: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  AnimatedOpacity(
-                    opacity: showPoster ? 1 : 0,
-                    duration: const Duration(milliseconds: 250),
-                    child: poster,
-                  ),
-                  // Paused (tap on the video): a dim veil and a play disc.
-                  AnimatedOpacity(
-                    opacity: !_playing && !_paused && !_finishing ? 1 : 0,
-                    duration: const Duration(milliseconds: 200),
-                    child: ColoredBox(
-                      color: Colors.black.withValues(alpha: 0.28),
-                      child: Center(
-                        child: SizedBox(
-                          width: u * 11,
-                          height: u * 11,
-                          child: const CustomPaint(painter: _PlayDiscPainter()),
-                        ),
-                      ),
-                    ),
-                  ),
+      Positioned.fill(key: const ValueKey('video'), child: _player(u)),
+      // Legibility of the controls on any video frame.
+      Positioned.fill(
+        key: const ValueKey('shade'),
+        child: const IgnorePointer(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0, 0.26, 0.66, 1],
+                colors: [
+                  Color(0xC7000000),
+                  Color(0x00000000),
+                  Color(0x00000000),
+                  Color(0x8C000000),
                 ],
               ),
             ),
-            IgnorePointer(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: r,
-                  border: Border.all(
-                    color: RateelColors.videoPlayerRimTop,
-                    width: u * 0.3,
+          ),
+        ),
+      ),
+      Positioned(
+        key: const ValueKey('playTitle'),
+        left: u * (LessonBarMetrics.margin + LessonBarMetrics.capsuleW + 3),
+        right: u * (LessonBarMetrics.margin + LessonBarMetrics.button + 3),
+        top: u * (VideoMetrics.barCentre - VideoMetrics.playTitleSize * 0.66),
+        child: _enter(
+          1,
+          IgnorePointer(
+            child: Text(
+              widget.lesson.title,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.rtl,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: readex(
+                u * VideoMetrics.playTitleSize,
+                weight: 560,
+                color: titleCream,
+              ).copyWith(shadows: titleShadows(u)),
+            ),
+          ),
+        ),
+      ),
+      if (videoSectionNav == 'dots')
+        Positioned(
+          key: const ValueKey('dots'),
+          left: 0,
+          right: 0,
+          top: u * (nav - 4),
+          height: u * 8,
+          child: _enter(3, Center(child: _dots(u))),
+        )
+      else
+        Positioned(
+          key: const ValueKey('prev'),
+          right: u * (SkipMetrics.right + SkipMetrics.width + 3),
+          top: u * SkipMetrics.top,
+          width: u * SkipMetrics.height,
+          height: u * SkipMetrics.height,
+          child: _enter(
+            3,
+            LessonRoundButton(
+              u: u,
+              label: 'القسم السابق',
+              glyph: PillGlyph.previous,
+              enabled: _section > 0 || _pos > _start(0) + 1,
+              onTap: () => _goTo(math.max(0, _section - 1)),
+            ),
+          ),
+        ),
+      // End of a section: the frame stays, a veil and «أعد» / «تابع».
+      Positioned.fill(
+        key: const ValueKey('sectionEnd'),
+        child: IgnorePointer(
+          ignoring: !_sectionEnd,
+          child: AnimatedOpacity(
+            opacity: _sectionEnd ? 1 : 0,
+            duration: const Duration(milliseconds: 260),
+            child: ColoredBox(
+              color: const Color(0x73000000),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    SizedBox(
+                      width: u * VideoMetrics.endPillW,
+                      height: u * SkipMetrics.height,
+                      child: LessonPill(
+                        u: u,
+                        label: 'أعد',
+                        glyph: PillGlyph.replay,
+                        onTap: _repeat,
+                      ),
+                    ),
+                    SizedBox(width: u * 5),
+                    SizedBox(
+                      width: u * VideoMetrics.endPillW,
+                      height: u * SkipMetrics.height,
+                      child: LessonPill(
+                        u: u,
+                        label: 'تابع',
+                        glyph: PillGlyph.play,
+                        gold: true,
+                        onTap: _continue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ];
+  }
+
+  /// One dot per section (reference 08's dots): reached sections gold (tap =
+  /// watch again from its start), the current one larger with a glow, the
+  /// next ones dim. RTL: the first section on the right.
+  Widget _dots(double u) => Row(
+    mainAxisSize: MainAxisSize.min,
+    textDirection: TextDirection.rtl,
+    children: [
+      for (var k = 0; k < _sections; k++)
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            if (k <= _reached) {
+              Haptics.tap();
+              _goTo(k);
+            } else {
+              Haptics.denied();
+            }
+          },
+          child: Semantics(
+            button: true,
+            label: 'القسم ${k + 1}',
+            child: SizedBox(
+              width: u * VideoMetrics.dotPitch,
+              height: u * 8,
+              child: Center(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  width: u * (k == _section ? 3.4 : VideoMetrics.dot),
+                  height: u * (k == _section ? 3.4 : VideoMetrics.dot),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: k == _section
+                        ? RateelColors.videoFill
+                        : k <= _reached
+                        ? RateelColors.videoFillEnd.withValues(alpha: 0.75)
+                        : RateelColors.videoTrack.withValues(alpha: 0.8),
+                    boxShadow: k == _section
+                        ? [
+                            BoxShadow(
+                              color: RateelColors.videoFill.withValues(
+                                alpha: 0.5,
+                              ),
+                              blurRadius: u * 1.4,
+                            ),
+                          ]
+                        : null,
                   ),
                 ),
               ),
             ),
-          ],
+          ),
+        ),
+    ],
+  );
+
+  /// The whole video, 16:9 at the full screen height, centred on dark
+  /// bands. The poster stays on top until the video plays and while the pause
+  /// menu is open (the platform view cannot be blurred by the 02 veil).
+  Widget _player(double u) {
+    final poster = _videoId != null && _posters.contains(_videoId)
+        ? Image.asset(
+            'assets/ui/video/thumbs/$_videoId.webp',
+            fit: BoxFit.contain,
+          )
+        : const SizedBox.expand();
+    final showPoster = _demoMode || !_started || _paused;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: _togglePlay,
+      child: ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (_yt != null && !_unavailable)
+                  IgnorePointer(
+                    child: YoutubePlayer(
+                      controller: _yt!,
+                      autoFullScreen: false,
+                      enableFullScreenOnVerticalDrag: false,
+                      backgroundColor: Colors.black,
+                    ),
+                  ),
+                AnimatedOpacity(
+                  opacity: showPoster ? 1 : 0,
+                  duration: const Duration(milliseconds: 250),
+                  child: poster,
+                ),
+                // Paused by a tap on the video: a play disc.
+                AnimatedOpacity(
+                  opacity: !_playing && !_paused && !_finishing && !_sectionEnd
+                      ? 1
+                      : 0,
+                  duration: const Duration(milliseconds: 200),
+                  child: Center(
+                    child: SizedBox(
+                      width: u * 13,
+                      height: u * 13,
+                      child: const CustomPaint(painter: _PlayDiscPainter()),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -824,75 +969,6 @@ class _VideoBackground extends StatelessWidget {
       ),
     ),
   );
-}
-
-/// Progress line under the player: olive track, gold fill from the left, a
-/// cream knob with a soft light at the head (reference-playing).
-class _LinePainter extends CustomPainter {
-  _LinePainter({required this.u, required this.share});
-
-  final double u;
-  final double share;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final x0 = u * 2;
-    final w = size.width - u * 4;
-    final cy = size.height / 2;
-    final h = u * VideoMetrics.lineH;
-    final track = RRect.fromRectAndRadius(
-      Rect.fromLTWH(x0, cy - h / 2, w, h),
-      Radius.circular(h / 2),
-    );
-    canvas.drawRRect(
-      track,
-      Paint()
-        ..shader = LinearGradient(
-          colors: [
-            RateelColors.videoTrack,
-            RateelColors.videoTrack,
-            RateelColors.videoTrack.withValues(alpha: 0.25),
-          ],
-          stops: const [0, 0.7, 1],
-        ).createShader(track.outerRect),
-    );
-    final fx = x0 + w * share;
-    if (share > 0) {
-      final fill = RRect.fromRectAndRadius(
-        Rect.fromLTRB(x0, cy - h / 2, fx, cy + h / 2),
-        Radius.circular(h / 2),
-      );
-      canvas.drawRRect(
-        fill,
-        Paint()
-          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.5)
-          ..color = RateelColors.videoFill.withValues(alpha: 0.4),
-      );
-      canvas.drawRRect(
-        fill,
-        Paint()
-          ..shader = const LinearGradient(
-            colors: [RateelColors.videoFillEnd, RateelColors.videoFill],
-          ).createShader(fill.outerRect),
-      );
-    }
-    final k = u * VideoMetrics.knob / 2;
-    canvas.drawCircle(
-      Offset(fx, cy),
-      k * 1.5,
-      Paint()
-        ..color = RateelColors.videoKnob.withValues(alpha: 0.25)
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
-    );
-    canvas.drawCircle(
-      Offset(fx, cy),
-      k,
-      Paint()..color = RateelColors.videoKnob,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_LinePainter o) => o.share != share || o.u != u;
 }
 
 /// Play disc shown on the paused video: cream glass disc, gold triangle.

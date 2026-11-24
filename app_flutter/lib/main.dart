@@ -70,6 +70,7 @@ Future<void> main() async {
   // `?video=demo|none`, `?videoAt=0.37`.
   startOpenLesson = int.tryParse(Uri.base.queryParameters['openLesson'] ?? '');
   videoMode = Uri.base.queryParameters['video'];
+  videoSectionNav = Uri.base.queryParameters['sectionNav'] ?? videoSectionNav;
   videoStartAt =
       double.tryParse(Uri.base.queryParameters['videoAt'] ?? '') ?? 0;
   lessonLockPos = Uri.base.queryParameters['lessonLock'] ?? lessonLockPos;

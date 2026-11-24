@@ -41,3 +41,21 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Delivered: `compare-v4-phone.jpg`, `demo-v4-phone.mp4` (video ends → completion → lesson 2 → «تخطي»; "not available" →
   «تخطي»), APK 1.0.353 (first Gradle run hit a 429 from Maven Central; the re-run passed).
 - Open for the owner: capsule (02) direction vs the video line; bottom lattice band (asset V5); data links.
+
+## 4. Bottom band and full-screen video with sections (v5, 2026-11-24)
+- Owner delivered V5 (bottom lattice band): cut between two crossings of the middle row into a seamless 4-cell tile
+  (`tools/assets/video_lesson_assets.py` `band()`, edge alpha difference 3/255); matched on contrast-enhanced crops:
+  period 89 px = 10.4u, ends at 96u, upper row fading, contrast p97 − median 31 vs reference 28.
+- Owner: «while the video plays it should not be a container, it should be the whole screen, as Simply Piano's courses».
+  Mockup `proposal-fullscreen-v1.jpg` (A controls visible, B auto-hidden). Answers: the **whole video** visible (bands
+  at the sides), **no time line** because each video will be split into **sections** that can be repeated (also earlier
+  ones), **controls always visible**. Then: section end → «أعد» / «تابع»; mock sections (3 equal parts); capsule = section
+  n/N; the way back to earlier sections: «show me both» → A dots, B ‹ button (`?sectionNav=dots|button`).
+- Code: `_playingLayer` rebuilt (black full screen, 16:9 at full height, top/bottom dark gradients, title centred between
+  capsule and pause, dots centred on the «تخطي» line or the ‹ round button, section-end veil with two pills); shared
+  `LessonPill` (glass / gold), `LessonRoundButton`, `PillGlyph` (`lib/lessons/lesson_widgets.dart`, «تخطي» is now a
+  `LessonPill`). Player frame, time line and their metrics removed (conflicts V3/V4 no longer apply). Widget test: section
+  end → «تابع» → 2/3 → dot 1 → 1/3.
+- Captures `capture-v5-*` (unavailable with band, playing A/B, section end), sheet `compare-v5-phone.jpg`, demo
+  `demo-v5-phone.mp4` (section 1 ends → «تابع» → 02 pause → dot of section 1 → «تخطي» → 06 completion; B variant: last
+  section → «تابع» completes; not available → «تخطي»).

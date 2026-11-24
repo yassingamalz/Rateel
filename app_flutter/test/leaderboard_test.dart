@@ -22,33 +22,34 @@ void main() {
     expect(region.every((e) => e.$2.region == 'الرياض'), isTrue);
   });
 
-  testWidgets('leaderboard: tabs filter, pinned bar scrolls to the user (screen 11)', (
-    tester,
-  ) async {
-    tester.view.physicalSize = const Size(1686, 853);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.reset);
-    await tester.runAsync(() async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Scaffold(body: LeaderboardScreen()),
+  testWidgets(
+    'leaderboard: tabs filter, pinned bar scrolls to the user (screen 11)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1686, 853);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Scaffold(body: LeaderboardScreen()),
+            ),
           ),
-        ),
-      );
-      await Future<void>.delayed(const Duration(milliseconds: 500));
-    });
-    await settle(tester);
-    // Pinned bar + the user's row in the list.
-    expect(find.text('أحمد عبدالرحمن'), findsNWidgets(2));
-    expect(find.text('10K'), findsOneWidget);
-    await tester.tap(find.text('أحمد عبدالرحمن').last);
-    await settle(tester);
-    await tester.tap(find.text('الأصدقاء'));
-    await settle(tester);
-    expect(find.text('الأصدقاء'), findsOneWidget);
-    await tester.tap(find.text('الكل'));
-    await settle(tester);
-  });
+        );
+        await Future<void>.delayed(const Duration(milliseconds: 500));
+      });
+      await settle(tester);
+      // Pinned bar + the user's row in the list.
+      expect(find.text('أحمد عبدالرحمن'), findsNWidgets(2));
+      expect(find.text('10K'), findsOneWidget);
+      await tester.tap(find.text('أحمد عبدالرحمن').last);
+      await settle(tester);
+      await tester.tap(find.text('الأصدقاء'));
+      await settle(tester);
+      expect(find.text('الأصدقاء'), findsOneWidget);
+      await tester.tap(find.text('الكل'));
+      await settle(tester);
+    },
+  );
 }

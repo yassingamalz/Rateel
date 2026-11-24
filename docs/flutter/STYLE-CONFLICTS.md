@@ -51,6 +51,6 @@ Measured on `screens/07-video-lesson/reference.webp` and `reference-playing.webp
 |---|---|---|---|---|
 | V1 | Background | `bgTop #063728 → bgBottom #00281C`; screens 03–06 `contentTop #07362A → contentBottom #00271D` | radial, centre #012D22, edges #01261D, girih over the whole screen | reference (`videoBgCentre/Edge`) (same family as C1/K4) |
 | V2 | Skip button | glass button token (ring 1.7 px #D8C35A, gold radial fill) | pill 33.6×12.9u, dark green #033223, thin gold rim #E6A533 ≈ 0.28u, soft gold glow ≈ 16% | reference (`videoSkip*`) |
-| V3 | Player frame | gold rim token #DAA42A 1.2 px + #FFDA6B 1 px | ≈ 0.3u #F5C958, gold glow ≈ 20% | reference (`videoPlayerRim*`) |
-| V4 | Progress line under the video | progress `track #265343 / fill #EBB335` (03); 02 capsule gold | track #687538, fill #EDAC37 → #F1B53E, cream knob #FDF1DA 3u; **fills from the left** while the 02 capsule fills from the right | reference |
+| V3 (obsolete v5: no frame, full-screen video) | Player frame | gold rim token #DAA42A 1.2 px + #FFDA6B 1 px | ≈ 0.3u #F5C958, gold glow ≈ 20% | reference (`videoPlayerRim*`) |
+| V4 (obsolete v5: no time line; the dots use these colours) | Progress line under the video | progress `track #265343 / fill #EBB335` (03); 02 capsule gold | track #687538, fill #EDAC37 → #F1B53E, cream knob #FDF1DA 3u; **fills from the left** while the 02 capsule fills from the right | reference |
 | V5 | Text cream | `titleCream #FAF1D8`, `cream #F4EAD0` | titles #F6E8CA–#FAF3D1 (kept `titleCream`), sentence #D2D0C2 (`cream` 82%), times #FBFCE4 (`leaderText`) | tokens |

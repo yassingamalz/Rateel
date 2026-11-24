@@ -11,7 +11,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
-| 07 | Video lesson | `07-lezione-video.webp` (+ `reference-playing.webp`, owner's V4) | **v4 built** on `flutter/07-video-lesson`, waiting for the owner's test |
+| 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **v5 built** on `flutter/07-video-lesson`, waiting for the owner's test |
 | 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | to do |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
@@ -38,6 +38,7 @@ Remember to connect these to real data (backend or app progress) before release.
 | Screen | What is mock | Where |
 |---|---|---|
 | 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. All values are demo, the user's lesson count too. | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
+| 07 Video lesson | the **sections** of every video: 3 equal parts (`videoSectionCount`); planned data `sections: [{start, end}]` per video lesson | `app_flutter/lib/lessons/video_lesson_page.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
 
 ## Data problems found (fix in the lesson data before release)

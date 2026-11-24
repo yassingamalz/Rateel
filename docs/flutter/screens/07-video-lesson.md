@@ -1,5 +1,12 @@
 # Screen 07: video lesson (درس فيديو), plan
 
+> **Update v5 (owner, 2026-11-24):** while the video plays it fills the screen (whole 16:9 video at full height, dark
+> bands at the sides), controls always visible, **no time line**; the video is split into **sections** (end of a section:
+> «أعد» / «تابع»; earlier sections can be watched again: dots or ‹ button, owner to choose); the capsule counts sections.
+> Sections are mock (3 equal parts) until the data has `sections: [{start, end}]` (seconds) per video lesson. The playing
+> reference V4 (`reference-playing.webp`, framed player) is superseded; the "not available" state stays 1:1 with
+> `07-lezione-video.webp`. Sections §3–§5 below describe v1–v4.
+
 Branch `flutter/07-video-lesson`, from `master` (1ab56a1, screens 02–06 and 11 merged). History: `07-video-lesson/HISTORY.md`.
 Status: **plan v1 answered** (owner, 2026-11-24): see DECISIONS.md and HISTORY.md §2.
 
