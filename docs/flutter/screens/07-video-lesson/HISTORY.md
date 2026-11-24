@@ -90,3 +90,9 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
   > 0 count as working, timeout 20 s.
 - Poster: maxres 16:9 thumbnail from the network, high-quality fallback, bundled thumbs only for offline review.
 - Captures `capture-v8-*`, APK 1.0.361. To verify on the phone (platform views cannot be checked in the headless browser).
+
+## 8. v9: buttons bottom left (2026-11-24)
+- Owner: «تخطي» and the other button better on the other side for Arabic; the top fill in the other direction.
+- `SkipMetrics.side` (left 7.3u), ‹ at left 7.3 + 33.6 + 3u; skip glyph mirrored (two triangles pointing left); the
+  stronger corner fade moved to the left corner. Capsule direction: on `flutter/02-menu-motion` (shared bar).
+- Captures `capture-v9-*`; demo script click positions updated.

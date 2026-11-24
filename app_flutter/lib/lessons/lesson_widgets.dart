@@ -8,12 +8,13 @@ import '../theme/rateel_theme.dart';
 // Widgets shared by the lesson screens (07 video, 08 reading, …).
 
 /// Geometry of the «تخطي» button in u, measured on reference 07
-/// (1493–1780 × 649–759 px at 854 high): bottom right of every lesson.
+/// (1493–1780 × 649–759 px at 854 high). Placed **bottom left** (owner,
+/// 2026-11-24: in Arabic «forward» is to the left), 7.3u from the edge.
 class SkipMetrics {
   SkipMetrics._();
   static const width = 33.6;
   static const height = 12.9;
-  static const right = 7.3; // screen edge → rim
+  static const side = 7.3; // screen edge → rim
   static const top = 76.0;
 }
 
@@ -255,8 +256,8 @@ class _LessonRoundButtonState extends State<LessonRoundButton> {
   }
 }
 
-/// ⏩ (two rounded triangles pointing right, as the reference and Angular's
-/// fa-forward), ✓, ↻ replay, ▶ play, › previous (RTL: right).
+/// ⏪ forward in RTL (two rounded triangles pointing left: the button sits
+/// bottom left, owner 2026-11-24), ✓, ↻ replay, ▶ play, › back (RTL: right).
 class PillGlyphPainter extends CustomPainter {
   PillGlyphPainter(this.glyph, this.color);
 
@@ -287,7 +288,7 @@ class PillGlyphPainter extends CustomPainter {
     switch (glyph) {
       case PillGlyph.forward:
         for (final x0 in [0.0, w * 0.5]) {
-          final p = tri(x0 + w * 0.03, x0 + w * 0.48);
+          final p = tri(x0 + w * 0.48, x0 + w * 0.03);
           canvas.drawPath(p, fill);
           canvas.drawPath(p, round);
         }

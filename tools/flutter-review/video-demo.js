@@ -9,9 +9,9 @@ for (const [part,q] of [['a','video=demo&videoAt=0.325'],['c','video=demo&videoA
  const c=await b.newContext({viewport:{width:W,height:H},recordVideo:{dir:d+'/vid-07'+part,size:{width:W,height:H}}});const p=await c.newPage();
  const w=ms=>p.waitForTimeout(ms);
  await p.goto(`http://localhost:8765/?lessons=0,0&openLesson=0&${q}`,{waitUntil:'networkidle'});await w(2600);
- const skip=()=>p.mouse.click(W-7.3*u-16.8*u,82.45*u);
+ const skip=()=>p.mouse.click(7.3*u+16.8*u,82.45*u);
  const top=()=>p.mouse.click(W-10.75*u,10.75*u);
- const back=()=>p.mouse.click(W-7.3*u-33.6*u-3*u-6.45*u,82.45*u);
+ const back=()=>p.mouse.click(7.3*u+33.6*u+3*u+6.45*u,82.45*u);
  if(part==='a'){
   await w(4500);await top();await w(2200);    // section end: gold play waits → section 2
   await back();await w(2200);                 // ‹ back to section 1

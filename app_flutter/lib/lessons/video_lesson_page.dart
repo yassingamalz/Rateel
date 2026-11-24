@@ -502,16 +502,16 @@ class _VideoLessonPageState extends State<VideoLessonPage>
                     ).createShader(r),
                     // Faded towards the inside (owner, 2026-11-24): the
                     // lattice must not compete with «تخطي», above all on
-                    // the right.
+                    // the left, where the buttons are (owner, RTL).
                     child: ShaderMask(
                       blendMode: BlendMode.dstIn,
                       shaderCallback: (r) => const LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        stops: [0, 0.45, 0.8],
+                        stops: [0, 0.22, 0.5],
                         colors: [
                           Color(0xFF000000),
-                          Color(0xB3000000),
+                          Color(0x80000000),
                           Color(0x00000000),
                         ],
                       ).createShader(r),
@@ -549,16 +549,16 @@ class _VideoLessonPageState extends State<VideoLessonPage>
                     ).createShader(r),
                     // Faded towards the inside (owner, 2026-11-24): the
                     // lattice must not compete with «تخطي», above all on
-                    // the right.
+                    // the left, where the buttons are (owner, RTL).
                     child: ShaderMask(
                       blendMode: BlendMode.dstIn,
                       shaderCallback: (r) => const LinearGradient(
                         begin: Alignment.centerRight,
                         end: Alignment.centerLeft,
-                        stops: [0, 0.22, 0.5],
+                        stops: [0, 0.45, 0.8],
                         colors: [
                           Color(0xFF000000),
-                          Color(0x80000000),
+                          Color(0xB3000000),
                           Color(0x00000000),
                         ],
                       ).createShader(r),
@@ -612,7 +612,7 @@ class _VideoLessonPageState extends State<VideoLessonPage>
               ..._fade(true, _playingLayer(u, cx)),
               Positioned(
                 key: const ValueKey('skip'),
-                right: u * SkipMetrics.right,
+                left: u * SkipMetrics.side,
                 top: u * SkipMetrics.top,
                 width: u * SkipMetrics.width,
                 height: u * SkipMetrics.height,
@@ -801,7 +801,7 @@ class _VideoLessonPageState extends State<VideoLessonPage>
       ),
       Positioned(
         key: const ValueKey('back'),
-        right: u * (SkipMetrics.right + SkipMetrics.width + 3),
+        left: u * (SkipMetrics.side + SkipMetrics.width + 3),
         top: u * SkipMetrics.top,
         width: u * SkipMetrics.height,
         height: u * SkipMetrics.height,
