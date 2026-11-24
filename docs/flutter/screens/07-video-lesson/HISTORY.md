@@ -39,5 +39,5 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Geometry fitted on the reference (arch by correlation of the line, corners/icon/mosque on zoomed crops); verification
   v1 → v4 in `../07-video-lesson/verify-v4.md` (all boxes within ±4 px except the explained mask cases).
 - Delivered: `compare-v4-phone.jpg`, `demo-v4-phone.mp4` (video ends → completion → lesson 2 → «تخطي»; "not available" →
-  «تخطي»), APK (see DECISIONS.md).
+  «تخطي»), APK 1.0.353 (first Gradle run hit a 429 from Maven Central; the re-run passed).
 - Open for the owner: capsule (02) direction vs the video line; bottom lattice band (asset V5); data links.
