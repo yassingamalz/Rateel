@@ -36,3 +36,19 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
 - v2 captures `capture-v2-*` (start, after tapping the pinned bar, friends, region; desktop and phone), comparison
   `compare-v2.jpg`, demo `demo-v2.mp4` (`tools/flutter-review/leaderboard-{capture,demo}.js`). Critic not run yet:
   to be proposed to the owner first.
+
+## 4. APK, critic v1 (phone only) and v3 (2026-11-24)
+- APK 1.0.337 (v2). Owner: critic **at phone size only** (915×412), with his points: brightness of the circles, fonts
+  standard with the app, text positioning.
+- Critic v1 (`critic-v1.md`): **7.7** (look 7.4, behaviour 8.4). High B1: tabs 36 dp wide. Medium: header labels
+  1.15u high and not in the app's style, names too low / too close to «n درس», row gap 1.2u vs 0.5u, star too small,
+  avatar rim dark, title low and not the screen-title style, lattice too long and olive, bar glow hidden by its shadow,
+  tab container green rim, own row loses the gold rank disc, ribbon band too bright (asset). New conflicts K7–K9
+  (logged in `STYLE-CONFLICTS.md`; K5 note corrected).
+- v3 fixes: tap area of the tabs +1.4u per side; header 4.4u w560 (course-card title style), 1.15u lower; name ↔
+  lessons gap 2.2u; rows gap 0.5u, list top 0.3u; star 6.6u at a fixed place with the number left-aligned; avatar rim
+  0.55u lit top/bottom (unit-ring colours); title 6.2u w560 with the `titleTop → titleBottom` gradient, 1.6u higher;
+  lattice 16u, tinted `pathLine`; bar shadow downwards so the gold glow shows; tabs dark 45% + gold rim token; own row
+  keeps the gold «15»; ribbon band darkened in `tools/assets/leaderboard_assets.py` (#031C0D vs reference #012418).
+- Captures `capture-v3-*`, sheet `compare-v3-phone.jpg` (reference above, Flutter phone below), demo
+  `demo-v3-phone.mp4` (915×412). Lows of critic v1 left for the owner's review.

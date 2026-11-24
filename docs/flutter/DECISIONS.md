@@ -129,3 +129,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-24 | Screen 11 v2 built (`lib/leaderboard/`) with the owner's assets A1–A4 (ribbon variant 02, darker) and the Angular medals/avatars; mock data; conflicts K1–K6 built with the proposals. Comparison `screens/11-leaderboard/compare-v2.jpg`, demo `demo-v2.mp4`. Critic to be proposed to the owner. | 🟡 |
 | 2026-11-24 | **Critic at phone size only (915×412)**, no desktop critic (owner). Screen 11 critic v1 launched with the owner's points: brightness of the circles, fonts standard with the app, text positioning. | ✅ |
 | 2026-11-24 | **APK 1.0.337**: screen 11 v2 (leaderboard from the rail). | ✅ |
+| 2026-11-24 | Screen 11 critic v1 (phone): 7.7, high B1 + 11 medium; all fixed in v3 (`screens/11-leaderboard/HISTORY.md` §4). New conflicts K7–K9 added to `STYLE-CONFLICTS.md` for the end-of-project review. | ✅ |

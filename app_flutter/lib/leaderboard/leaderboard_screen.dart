@@ -52,9 +52,14 @@ class _Metrics {
     size.width - margin,
     size.height - u * 6.4,
   );
+
+  /// Tap area of the tabs: 1.4u wider on each side (≥ 48 dp on a phone,
+  /// critic v1 B1); the drawn tabs keep [tabs].
+  double get tabsHitPad => u * 1.4;
   double get headerH => u * 13.6;
   double get rowH => u * 16.4;
-  double get rowGap => u * 1.2;
+  double get rowGap => u * 0.5; // critic v1 A4
+  double get listTop => u * 0.3;
   double get rowInset => u * 1.2;
   double get pitch => rowH + rowGap;
   double get barH => u * 16.5;
@@ -127,7 +132,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     bool visible = false;
     if (i >= 0 && _viewportH > 0) {
       final m = _Metrics(context.size ?? Size.zero);
-      final top = m.rowGap + i * m.pitch - _scroll.offset;
+      final top = m.listTop + i * m.pitch - _scroll.offset;
       visible = top >= -0.5 && top + m.rowH <= _viewportH + 0.5;
     }
     if (visible != _meVisible) {
@@ -162,7 +167,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     if (i < 0 || !_scroll.hasClients) return;
     Haptics.tap();
     final m = _Metrics(context.size!);
-    final top = m.rowGap + i * m.pitch;
+    final top = m.listTop + i * m.pitch;
     final target = (top - (_viewportH - m.rowH) / 2).clamp(
       0.0,
       _scroll.position.maxScrollExtent,
@@ -208,7 +213,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   left: 0,
                   right: 0,
                   top: 0,
-                  height: u * 31,
+                  height: u * 16, // critic v1 A8
                   child: Opacity(
                     opacity: _iv(0, 0.35),
                     child: _Lattice(u: u),
@@ -227,10 +232,20 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 ),
                 Positioned.fromRect(
                   key: const ValueKey('tabs'),
-                  rect: m.tabs,
+                  rect: Rect.fromLTRB(
+                    m.tabs.left - m.tabsHitPad,
+                    m.tabs.top,
+                    m.tabs.right + m.tabsHitPad,
+                    m.tabs.bottom,
+                  ),
                   child: Opacity(
                     opacity: _iv(0.1, 0.4),
-                    child: _Tabs(u: u, filter: _filter, onPick: _setFilter),
+                    child: _Tabs(
+                      u: u,
+                      pad: m.tabsHitPad,
+                      filter: _filter,
+                      onPick: _setFilter,
+                    ),
                   ),
                 ),
                 Positioned.fromRect(
@@ -304,11 +319,11 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     final entries = _entries;
     final index = {for (var i = 0; i < entries.length; i++) entries[i].$2: i};
     final rank = {for (final e in entries) e.$2: e.$1};
-    final height = m.rowGap + entries.length * m.pitch + u * 1.2;
+    final height = m.listTop + entries.length * m.pitch + u * 1.2;
     final children = <Widget>[];
     for (final p in players) {
       final i = index[p];
-      final top = i == null ? (_lastTop[p] ?? 0) : m.rowGap + i * m.pitch;
+      final top = i == null ? (_lastTop[p] ?? 0) : m.listTop + i * m.pitch;
       _lastTop[p] = top;
       // Entry: rows stagger in (60 ms apart, slide 1.2u + fade, 300 ms).
       final k = i == null ? 1.0 : _iv(0.25 + i * 0.04, 0.45 + i * 0.04);
@@ -465,9 +480,10 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Course-card title style (critic v1 A2).
     final style = readex(
-      u * 4.0,
-      weight: 600,
+      u * 4.4,
+      weight: 560,
       color: titleCream,
     ).copyWith(shadows: titleShadows(u));
     return LayoutBuilder(
@@ -476,8 +492,8 @@ class _Header extends StatelessWidget {
         Widget at(double cx, String t) => Positioned(
           left: cx - u * 15,
           width: u * 30,
-          top: 0,
-          bottom: u * 0.8,
+          top: u * 1.5, // critic v1 A1: 1.15u lower
+          bottom: 0,
           child: Center(
             child: Text(t, style: style, textAlign: TextAlign.center),
           ),
@@ -491,8 +507,8 @@ class _Header extends StatelessWidget {
             // Right group: المركز over the medal column, المستخدم next to it.
             Positioned(
               right: u * 4.8,
-              top: 0,
-              bottom: u * 0.8,
+              top: u * 1.5, // critic v1 A1: 1.15u lower
+              bottom: 0,
               child: Center(child: Text('المركز المستخدم', style: style)),
             ),
             at(u * 37.5, 'النقاط'),
@@ -581,7 +597,9 @@ class _PlayerRow extends StatelessWidget {
         avatarRight: u * 23.7,
         badgeRight: u * 9.8,
         nameRight: u * 33,
-        pointsCx: u * 36.3,
+        pointsCx: u * 35.0,
+        // The user's row keeps the gold rank disc of the bar (critic v1 B2).
+        badge: me && place >= 3 ? _GoldRank(u: u, rank: rank) : null,
         trailing: place < 3
             ? _Reward(u: u, place: place)
             : Text('-', style: readex(u * 4.2, weight: 600, color: titleCream)),
@@ -693,7 +711,7 @@ class _RowContent extends StatelessWidget {
                   color: titleCream,
                 ).copyWith(shadows: titleShadows(u)),
               ),
-              SizedBox(height: u * 0.6),
+              SizedBox(height: u * 2.2), // critic v1 A3
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -713,11 +731,14 @@ class _RowContent extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: pointsCx - u * 12,
-          width: u * 24,
+          // Star at a fixed place, number left-aligned after it, so every
+          // score lines up (critic v1 A5); pointsCx = centre of a 4-digit group.
+          left: pointsCx - u * 8.8,
+          width: u * 30,
           top: 0,
           bottom: 0,
-          child: Center(
+          child: Align(
+            alignment: Alignment.centerLeft,
             child: _Points(u: u, score: player.score),
           ),
         ),
@@ -803,7 +824,7 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rim = u * 0.45;
+    final rim = u * 0.55; // critic v1 A6
     return Container(
       width: d,
       height: d,
@@ -813,7 +834,12 @@ class _Avatar extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [RateelColors.goldHighlight, RateelColors.goldEdge],
+          // Lit at the top and bottom, as the screen 05 unit ring.
+          colors: [
+            RateelColors.unitRingLockedTop,
+            RateelColors.unitRingSide,
+            RateelColors.unitRingTopBottom,
+          ],
         ),
         boxShadow: [
           BoxShadow(
@@ -865,11 +891,11 @@ class _Points extends StatelessWidget {
             ).createShader(r),
             child: SvgPicture.asset(
               'assets/ui/glyphs/star.svg',
-              width: u * 5.2,
-              height: u * 5.2,
+              width: u * 6.6,
+              height: u * 6.6,
             ),
           ),
-          SizedBox(width: u * 1.0),
+          SizedBox(width: u * 1.1),
           Text(
             '$score',
             style: readex(
@@ -939,9 +965,9 @@ class _UserBar extends StatelessWidget {
             blurRadius: u * 2,
           ),
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.45),
+            color: Colors.black.withValues(alpha: 0.30),
             blurRadius: u * 2.2,
-            offset: Offset(0, -u * 0.4),
+            offset: Offset(0, u * 0.6),
           ),
         ],
       ),
@@ -956,7 +982,7 @@ class _UserBar extends StatelessWidget {
           avatarRight: u * 24.6,
           badgeRight: u * 9.5,
           nameRight: u * 34.2,
-          pointsCx: u * 35.2,
+          pointsCx: u * 33.9,
           badge: _GoldRank(u: u, rank: rank),
           trailing: _Chevron(u: u),
           trailingCx: u * 11.6,
@@ -1075,8 +1101,16 @@ class _ChevronPainter extends CustomPainter {
 
 /// Vertical filter tabs (Angular `vertical-tabs`): الكل / الأصدقاء / المنطقة.
 class _Tabs extends StatelessWidget {
-  const _Tabs({required this.u, required this.filter, required this.onPick});
+  const _Tabs({
+    required this.u,
+    required this.pad,
+    required this.filter,
+    required this.onPick,
+  });
   final double u;
+
+  /// Extra tap area on each side (the drawn tabs are inset by it).
+  final double pad;
   final LeaderboardFilter filter;
   final ValueChanged<LeaderboardFilter> onPick;
 
@@ -1089,78 +1123,96 @@ class _Tabs extends StatelessWidget {
       builder: (context, box) {
         final h = box.maxHeight / 3;
         final sel = filter.index;
-        return DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            color: Colors.black.withValues(alpha: 0.25),
-            border: Border.all(
-              color: RateelColors.rowRim,
-              width: math.max(1.0, u * 0.23),
-            ),
-          ),
-          child: Stack(
-            children: [
-              for (var i = 1; i < 3; i++)
-                Positioned(
-                  left: u * 0.6,
-                  right: u * 0.6,
-                  top: h * i,
-                  height: math.max(1.0, u * 0.15),
-                  child: const ColoredBox(color: RateelColors.divider),
-                ),
-              // Gold tab glides to the selected filter (K3: flat amber).
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 360),
-                curve: Curves.easeInOutCubic,
-                left: 0,
-                right: 0,
-                top: h * sel,
-                height: h,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: RateelColors.amber,
-                    borderRadius: BorderRadius.circular(radius),
-                    boxShadow: [
-                      BoxShadow(
-                        color: RateelColors.gold.withValues(alpha: 0.15),
-                        blurRadius: u * 2,
-                      ),
-                    ],
-                  ),
-                  child: CustomPaint(
-                    foregroundPainter: _GoldRimPainter(u: u, radius: radius),
-                  ),
-                ),
+        final drawn = Padding(
+          padding: EdgeInsets.symmetric(horizontal: pad),
+          // Dark fill + gold rim token (critic v1 A11).
+          child: CustomPaint(
+            foregroundPainter: _GoldRimPainter(u: u, radius: radius),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                color: Colors.black.withValues(alpha: 0.45),
               ),
-              for (var i = 0; i < 3; i++)
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: h * i,
-                  height: h,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => onPick(LeaderboardFilter.values[i]),
-                    child: Center(
-                      child: RotatedBox(
-                        quarterTurns: 3,
-                        child: AnimatedDefaultTextStyle(
-                          duration: const Duration(milliseconds: 300),
-                          style: readex(
-                            u * 4.0,
-                            weight: 600,
-                            color: i == sel
-                                ? RateelColors.countText
-                                : titleCream,
+              child: Stack(
+                children: [
+                  for (var i = 1; i < 3; i++)
+                    Positioned(
+                      left: u * 0.6,
+                      right: u * 0.6,
+                      top: h * i,
+                      height: math.max(1.0, u * 0.15),
+                      child: const ColoredBox(color: RateelColors.divider),
+                    ),
+                  // Gold tab glides to the selected filter (K3: flat amber).
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 360),
+                    curve: Curves.easeInOutCubic,
+                    left: 0,
+                    right: 0,
+                    top: h * sel,
+                    height: h,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: RateelColors.amber,
+                        borderRadius: BorderRadius.circular(radius),
+                        boxShadow: [
+                          BoxShadow(
+                            color: RateelColors.gold.withValues(alpha: 0.15),
+                            blurRadius: u * 2,
                           ),
-                          child: Text(_labels[i]),
+                        ],
+                      ),
+                      child: CustomPaint(
+                        foregroundPainter: _GoldRimPainter(
+                          u: u,
+                          radius: radius,
                         ),
                       ),
                     ),
                   ),
-                ),
-            ],
+                  for (var i = 0; i < 3; i++)
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: h * i,
+                      height: h,
+                      child: Center(
+                        child: RotatedBox(
+                          quarterTurns: 3,
+                          child: AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 300),
+                            style: readex(
+                              u * 4.0,
+                              weight: 560,
+                              color: i == sel
+                                  ? RateelColors.countText
+                                  : titleCream,
+                            ),
+                            child: Text(_labels[i]),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ),
+        );
+        return Stack(
+          children: [
+            Positioned.fill(child: drawn),
+            for (var i = 0; i < 3; i++)
+              Positioned(
+                left: 0,
+                right: 0,
+                top: h * i,
+                height: h,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => onPick(LeaderboardFilter.values[i]),
+                ),
+              ),
+          ],
         );
       },
     );
@@ -1196,14 +1248,24 @@ class _ArchedTitle extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Screen-title style: cream gradient titleTop → titleBottom (critic v1 A7).
+    final fs = u * 6.2;
     final tp = TextPainter(
       text: TextSpan(
         text: 'المتصدرين',
-        style: readex(
-          u * 5.9,
-          weight: 600,
-          color: titleCream,
-        ).copyWith(shadows: titleShadows(u)),
+        style: TextStyle(
+          fontFamily: 'ReadexPro',
+          fontSize: fs,
+          height: 1.25,
+          fontVariations: const [FontVariation('wght', 560)],
+          shadows: titleShadows(u),
+          foreground: Paint()
+            ..shader = const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [titleTop, titleBottom],
+            ).createShader(Rect.fromLTWH(0, fs * 0.2, 1, fs * 0.9)),
+        ),
       ),
       textDirection: TextDirection.rtl,
     )..layout();
@@ -1216,7 +1278,7 @@ class _ArchedTitle extends CustomPainter {
         rise * (math.pow(2 * x / chord, 2) - math.pow(w / chord, 2) / 3);
     double slope(double x) => rise * 8 * x / (chord * chord);
     final cx = size.width / 2;
-    final cy = size.height * 0.48;
+    final cy = size.height * 0.48 - u * 1.6; // critic v1 A7
     const n = 60;
     for (var i = 0; i < n; i++) {
       final x0 = -w / 2 + w * i / n;
@@ -1250,11 +1312,11 @@ class _Lattice extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.white.withValues(alpha: 0.7),
-            Colors.white.withValues(alpha: 0.3),
+            Colors.white,
+            Colors.white.withValues(alpha: 0.45),
             Colors.white.withValues(alpha: 0),
           ],
-          stops: const [0, 0.5, 1],
+          stops: const [0, 0.4, 1],
         ).createShader(r),
         child: Image.asset(
           latticeAsset,
@@ -1262,6 +1324,9 @@ class _Lattice extends StatelessWidget {
           // 4 cells per tile, reference cell ≈ 7.9u.
           scale: 512 / (u * 31.6),
           alignment: Alignment.topLeft,
+          // Warm gold lines (critic v1 A8: the asset read olive).
+          color: RateelColors.pathLine,
+          colorBlendMode: BlendMode.srcIn,
         ),
       ),
     );

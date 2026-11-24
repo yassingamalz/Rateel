@@ -34,5 +34,8 @@ the end of the project).
 | K2 | Current-user bar fill | selected row fill #3B4C1F (olive) | green #185727 → #0A4322 → #14431C, gold rim + glow | reference green as `meRowTop/meRowMid/meRowBottom`, rim = gold rim token |
 | K3 | Active tab | flat gold #E2A51E | vertical gradient #A47915 → #E5A71C | flat `amber` + gold rim token |
 | K4 | Background | `bgTop #063728 → bgBottom #00281C` | flat #00251C … #0A2F1E + gold lattice | `bgTop/bgBottom` + lattice (same as C1) |
-| K5 | Rows | glass rim 2 px #245843, no fill | fill #052B1D/#02291E, faint lighter top edge, no visible rim | `rowRim` in u, fill `cardTop → cardMid` |
-| K6 | Rank disc «15» | `amber #E2A51E`, `countText #132C1A` | #EEB326, text #0B2315 | tokens |
+| K5 | Rows | glass rim 2 px #245843, no fill | fill #052B1D/#02291E getting lighter downwards, light edge at the **bottom** (#7CA078, critic v1), no visible rim | `rowRim` in u, fill `cardTop → cardMid` |
+| K6 | Rank disc «15» | `amber #E2A51E`, `countText #132C1A` | #EEB326, text #0B2315 | tokens (critic option: the screen 02 paused-button gold `badgeTop → amber`) |
+| K7 | Glow of the panel and the pinned bar | gold glow 15% | ≈ 35% gold over ≈ 2.5u (critic v1) | token 15% |
+| K8 | Chevron button | glass button: ring 0.2u #D8C35A, gold radial fill | ring 0.5u #FFDC4A, dark inside (critic v1) | glass button token |
+| K9 | Text cream | `titleCream #FAF1D8` | #FDFBDB (critic v1, minor) | `titleCream` |

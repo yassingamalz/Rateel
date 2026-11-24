@@ -12,8 +12,14 @@ out = root + '/app_flutter/assets/ui/leaderboard/'
 K = np.array([255, 0, 255], np.float32)
 
 
-def key(name, target, longest):
+def key(name, target, longest, darken_green=0.0):
     rgb = np.asarray(Image.open(src + name).convert('RGB'), np.float32)
+    if darken_green:
+        # Darken the emerald band only (green-dominant pixels), keep the gold rims
+        # (critic v1 A9: band #055120 vs reference #012418).
+        r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+        green = np.clip((g - r - 20) / 30.0, 0, 1) * (np.linalg.norm(rgb - K, axis=-1) > 180)
+        rgb = rgb * (1 - darken_green * green)[..., None]
     dist = np.linalg.norm(rgb - K, axis=-1)
     g, b = rgb[..., 1], rgb[..., 2]
     unmix = np.clip(1 - (b - 0.85 * g) / 255.0, 0, 1)
@@ -37,7 +43,7 @@ def lattice(name, target, size):
     print(target, im.size)
 
 
-key('ribbon_emerald_gold_02.png', 'ribbon.webp', 1400)
+key('ribbon_emerald_gold_02.png', 'ribbon.webp', 1400, darken_green=0.5)
 key('coins_gold.png', 'coins_gold.webp', 256)
 key('coins_silver.png', 'coins_silver.webp', 256)
 key('coins_bronze.png', 'coins_bronze.webp', 256)

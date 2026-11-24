@@ -2,7 +2,7 @@
 // Courses → rail item المتصدرين → entry (ribbon, rows, medals, light on the 1st medal, pinned bar) → drag the list
 // → tap the pinned bar (scroll to the user, gold pulse) → friends → region → all.
 const {chromium}=require('playwright');(async()=>{const d=process.argv[2];const b=await chromium.launch();
-const W=1280,H=592,u=H/100;
+const W=915,H=412,u=H/100;
 const c=await b.newContext({viewport:{width:W,height:H},recordVideo:{dir:d+'/vid-lb',size:{width:W,height:H}}});const p=await c.newPage();
 const w=ms=>p.waitForTimeout(ms);
 await p.goto('http://localhost:8765/',{waitUntil:'networkidle'});await w(2500);
