@@ -78,6 +78,52 @@ class RateelColors {
   static const lockRim = Color(0xFF1A533F);
   static const lockGlyph = Color(0xFFEDE3CB);
   static const pillFill = Color(0xFF062D20);
+
+  // Screen 05, units (sampled from reference 05). Proposed tokens.
+  static const unitRing = Color(0xFFEAAA16); // open unit ring, 0.42u
+  static const unitRingLocked = Color(0xFFC29A33); // locked unit ring
+  static const unitDiscTop = Color(0xFF104631);
+  static const unitDiscMid = Color(0xFF053C27);
+  static const unitDiscBottom = Color(0xFF013524);
+  static const unitMosqueTint = Color(0xCC3C5426); // srcATop, 80%
+  static const unitDiscRim = Color(0xFF154F37);
+  static const unitDiscEdge = Color(0xFF0B422A); // lit edge of the glass disc
+  // Ring rims (critic v2): lit at the top and bottom, deeper on the sides.
+  static const unitRingSide = Color(0xFFF8BC2C);
+  static const unitRingTopBottom = Color(0xFFFFD54A);
+  static const unitRingLockedSide = Color(0xFFB98F2C);
+  static const unitRingLockedTop = Color(0xFFFBE068);
+  static const unitRingLockedBottom = Color(0xFFFDC849);
+  static const unitRingEdge = Color(0xFF002316);
+  static const playCream = Color(0xFFF2D784);
+  static const playCreamTop = Color(0xFFF4E1A8);
+  static const playGlyph = Color(0xFF013321);
+  static const badge = Color(0xFFE5A416);
+  static const badgeTop = Color(0xFFF8C343);
+  static const badgeText = Color(0xFF062016);
+  static const unitIconTop = Color(0xFFF6E6B4);
+  static const unitIconBottom = Color(0xFFE2C680);
+  static const padlockTop = Color(0xFF2E8A5E);
+  static const padlockBottom = Color(0xFF1B6644);
+  static const padlockRim = Color(0xFFE8CF86);
+  static const girihLine = Color(0xFF2F6B3C); // U6 background lattice
+  static const unitLine = Color(0xFFC9A23A); // line between units, 100%
+  static const unitDiamond = Color(0xFFECAB1C);
+  static const unitDiamondMid = Color(0xFFF2B32C);
+  static const unitDiamondTop = Color(0xFFFFE76D);
+  static const unitLineEdge = Color(0xFF00261A);
+  static const unitCornerTop = Color(0xFFF3B526);
+  static const unitCornerBottom = Color(0xFFC98816);
+  // Header arch of screen 05, gold along the stroke (critic v3).
+  static const archEnd = Color(0xFFCB9C31);
+  static const archTail = Color(0xFFEEAA21);
+  static const archShoulder = Color(0xFFF9CA32);
+  static const archApex = Color(0xFFFFCA32);
+  // Title divider (screens 03, 05): brightest next to the diamond.
+  static const dividerEndClear = Color(0x00B2983A);
+  static const dividerEnd = Color(0xFFB2983A);
+  static const dividerMid = Color(0xFFEFC246);
+  static const dividerPeak = Color(0xFFF8D053);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

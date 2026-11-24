@@ -6,6 +6,8 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
+import '../units/unit_data.dart';
+import '../units/units_screen.dart';
 import 'course_card.dart';
 import 'course_data.dart';
 
@@ -208,6 +210,28 @@ class _CoursesScreenState extends State<CoursesScreen>
     Haptics.success();
   }
 
+  /// Back from the units screen: the course bar catches up with its units
+  /// (shared progress, owner 2026-11-22), with the same light and haptics as
+  /// the completion (first half of the line at 50%). 100% is played by the
+  /// course completion itself.
+  Future<void> _syncProgress(int i) async {
+    if (!mounted || _completing != null || i != _current) return;
+    final target = math.min(courseProgressFromUnits(i), 0.999);
+    if (target <= _progress[i] + 0.001) return;
+    setState(() => _completing = i);
+    await Future<void>.delayed(const Duration(milliseconds: 350));
+    if (_progress[i] < 0.5 && target >= 0.5) {
+      await _fillBar(i, 0.5);
+      Haptics.milestone();
+      await _half.forward(from: 0);
+    }
+    await _fillBar(i, target);
+    if (!mounted) return;
+    setState(() => _completing = null);
+    _fill.value = 0;
+    _half.value = 0;
+  }
+
   Future<void> _showToast(String text) async {
     setState(() => _toastText = text);
     await _toast.forward();
@@ -225,8 +249,7 @@ class _CoursesScreenState extends State<CoursesScreen>
       _showToast('أكمل «$previous» أولًا لفتح هذه الدورة');
     } else {
       Haptics.tap();
-      // The units screen (05) is not built yet.
-      _showToast('الوحدات: قريبًا');
+      Navigator.of(context).push(unitsRoute(i)).then((_) => _syncProgress(i));
     }
   }
 

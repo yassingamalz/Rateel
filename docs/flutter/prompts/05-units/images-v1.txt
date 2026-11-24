@@ -1,0 +1,42 @@
+Screen 05 (course units) asset prompts, v1 (2026-11-22). Attach to every prompt: REF-05 =
+docs/flutter/screens/05-units/reference.webp (lesson-production: docs/design/glassy-gamified/screens/05-unita-del-corso.webp).
+Reused, no prompt needed: header arch, mosque, crescent and star, title divider, glowing corners, star lattice,
+play / check / lock glyphs (ASSETS.md).
+
+=== U1 open book (reading unit) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the open book icon of the left circle of REF-05, WITHOUT the padlock on it, isolated.
+Shape as in REF-05: a wide open book seen from the front, two thick page blocks with a few stacked page edges at the bottom, a soft valley in the middle, flat and simple.
+Colour: warm cream-gold (pages #F6E6B4, page edges and outline #D9B861, darker gold shadow lines #B89443), flat two-tone with a very soft top-to-bottom gradient, no 3D, no glow, no container behind.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== U2 emerald padlock (locked overlay) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the small padlock that sits on the open book in the left circle of REF-05, isolated.
+Shape as in REF-05: rounded padlock body, short thick shackle, small keyhole (round top and short slot).
+Colour: emerald green body (top #2E8A5E, bottom #1B6644) with a thin cream-gold rim #E8CF86, shackle cream-gold #E8CF86, keyhole cream #F6E6B4. Flat, soft, no 3D, no glow.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== U3 microphone (practice unit) ===
+Use the attached image REF-05 as the strict style guide: the same flat cream-gold style as the open book in the left circle of REF-05 (pages #F6E6B4, outline #D9B861, shadow lines #B89443).
+I need ONLY a microphone icon in that style: rounded capsule head with three thin horizontal grille lines, a U-shaped holder around the lower half, a short stand and a small flat base. Same visual weight and size as the book.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no watermark.
+
+=== U4 scroll with check (test unit) ===
+Use the attached image REF-05 as the strict style guide: the same flat cream-gold style as the open book in the left circle of REF-05 (pages #F6E6B4, outline #D9B861, shadow lines #B89443).
+I need ONLY a test icon in that style: a small paper scroll (rolled at the top and bottom) with three short text lines and a bold check mark in the lower right corner. Same visual weight and size as the book.
+Output: transparent PNG 1024×1024, subject large and centred, AND an SVG (filled paths, linear gradients allowed, no filters, no masks, no CSS). No text, no letters, no watermark.
+
+=== U5 swap arrows (change course button) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the small icon inside the button «تغيير المقرر» at the top left of REF-05, isolated, without the button and without the text.
+Shape as in REF-05: two horizontal arrows one above the other, the top one pointing right and the bottom one pointing left, thin rounded strokes, small open arrow heads.
+Colour: single flat colour #F4EAD0. Output: SVG (stroke or filled paths, single colour, no filters) AND a transparent PNG 512×512. No text, no watermark.
+
+=== U6 faint background pattern (seamless tile) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the very faint large geometric line pattern that covers the whole green background of REF-05 (thin lines forming big Islamic star and polygon shapes, visible behind the circles), isolated as a seamless tile.
+Pattern: classic Islamic girih / 8-point star lattice with large cells (about 4 cells across the tile), drawn as thin uniform lines only, no fills.
+Colour: lines #2C6B4F on a flat magenta #FF00FF background (the magenta will be keyed out), line width about 3 px at 2048 px.
+Output: a square seamless tile 2048×2048 that repeats without visible seams on all four sides, AND an SVG of the same lines (stroke only, no filters). No text, no watermark.
+
+=== U6b faint background pattern, v2 (critic v2: the reference is a large 10-point girih, not an 8-point grid) ===
+Use the attached image REF-05 as the strict style guide. I need ONLY the very faint large geometric line pattern behind the circles of REF-05, isolated as a seamless tile. Look closely at REF-05: it is a classic Persian GIRIH pattern with 10-POINT stars (decagonal rosettes) joined by long elongated hexagons, bow-ties and pentagons, drawn with thin uniform lines; the 10-point stars are LARGE (each star about one fifth of the screen height) and the lines run long and straight between them. Do NOT draw an 8-point star grid and do not draw small cells.
+Lines only, no fills. Colour: lines #2C6B4F on a flat magenta #FF00FF background (keyed out later), line width about 3 px at 2048 px.
+Output: a square seamless tile 2048×2048 containing about 2 star centres across, that repeats without visible seams on all four sides, AND an SVG of the same lines (stroke only, no filters, no masks). No text, no watermark.
