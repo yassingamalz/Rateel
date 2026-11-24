@@ -1,37 +1,50 @@
-# Next session: unify the style (03–06), then screen 07
+# Next session: lesson top bar (screen 02), then leaderboard (11), then back to the main line
+
+Screens done and missing: `docs/flutter/SCREENS.md`.
 
 State on 2026-11-24:
-- **Consolidation done:** PR #38 (04 side nav), #42 (03 courses), #39 (05 units, conflicts resolved) and #43 (06 lessons, opened in
-  this session) are merged into `master` (merge commits, in this order); `flutter analyze` and `flutter test` (6 tests) pass.
-- Screens 03–06 are approved by the owner; histories in `docs/flutter/screens/<nn>-<slug>/HISTORY.md`.
+- **Consolidation done:** PR #38 (04), #42 (03), #39 (05) and #43 (06) are merged into `master` (merge commits, in this order);
+  `flutter analyze` and `flutter test` (6 tests) pass. Screens 03–06 are approved; histories in `screens/<nn>-<slug>/HISTORY.md`.
+- APK 1.0.302 built from `master` (logged in `DECISIONS.md`).
 
-## Open tasks
-1. **Stable signing key:** the owner chose to keep it **outside the repo** (file kept by the owner or an environment secret) and has
-   not supplied it yet. Until then every container signs with its own debug key: the phone may ask to uninstall before updating.
-   Never commit a key without the owner's explicit OK. Ask the owner how to hand the keystore over (environment secret is best).
-2. **Style unification: postponed by the owner** ("we do it in the future"). Conflict list: `docs/flutter/STYLE-CONFLICTS.md`
-   (C1–C10 with proposals). Ask the owner (card rim/ring as documented tokens, gold fills, text, radii), apply in
-   `rateel_theme.dart` and the screens, then run the critic without exclusions per screen (`CRITIC.md`), desktop and phone (915×412).
-3. Leftovers of screen 03 (optional): gold-3D art for courses 08–12 has a baked-in card frame; classic card course 03 icon weak.
-4. **Screen 07** (video lesson): prompt below (from `flutter/06-lessons`). Its first step is the final critic v4 of screen 06.
+## Next steps, in order (owner, 2026-11-24)
+1. **Screen 02, shared lesson top bar** (uses the free number 02; 01 is decided later). The bar at the top of **every kind of lesson**:
+   progress bar, pause and back. Take it from the Angular original (`src/app/features/lessons/lesson-details`, and the bar of
+   `interactive-lesson`): same structure and behaviour, restyled a little in the classy glass style of the other screens.
+   Branch `flutter/02-lesson-bar` from `master`. Built as a reusable widget; the placeholder `lesson_page.dart` (screen 06) uses it
+   straight away, so it can be tested on the phone. Procedure in `PROCESS.md`: plan and questions first, ChatGPT prompts for any
+   missing art, build, critic with numbers, comparison, video, APK. No ChatGPT reference exists: show the owner the Angular
+   original and a visual proposal before building.
+2. **Screen 11, leaderboard (classifica)**, reference `11-classifica.webp` (branch `lesson-production`). Branch `flutter/11-leaderboard`.
+3. **Then back to the main line:** final critic v4 of screen 06, then screen **07** (video lesson, with the bar of 02), then 09, 10/10b, and
+   the rest in `SCREENS.md`. (Interpreted from "tornare alla diretta": confirm with the owner if another meaning was intended.)
 
-Build: `tools/flutter-review/build-apk.sh`. Log every APK given to the owner as "APK 1.0.N" in `DECISIONS.md`.
+## Open items, whenever the owner decides
+- **Stable signing key:** owner chose to keep it **outside the repo** (file or environment secret); not supplied yet. Until then each
+  container signs with its own debug key and the phone may ask to uninstall before updating. Never commit a key without explicit OK.
+- **Style unification of 03/05/06: postponed by the owner.** List C1–C10 with proposals: `STYLE-CONFLICTS.md`. When done: apply in
+  `rateel_theme.dart`, critic without exclusions per screen, desktop and phone (915×412). The new screens (02, 11) use the confirmed
+  tokens of `DESIGN-SYSTEM.md` and report any conflict instead of copying silently.
+- Screen 03 leftovers: gold-3D art for courses 08–12 has a baked-in card frame; classic-card course 03 icon weak.
+- Data gaps: lessons exist only for course 01 and part of 02; courses 08–11 have no units; progress lives only in the session.
 
-## Prompt to start screen 07
+Build: `tools/flutter-review/build-apk.sh` (re-run if Gradle hits a 429 from the proxy). Log every APK as "APK 1.0.N" in `DECISIONS.md`.
+
+## Prompt to start the next session (screen 02)
 ```
-Lavora sul repo Rateel. Crea il branch flutter/07-video-lesson partendo da master (le schermate 03-06 sono gia' unite).
+Lavora sul repo Rateel. Crea il branch flutter/02-lesson-bar partendo da master (le schermate 03-06 sono gia' unite).
 Leggi prima CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
-docs/flutter/ASSETS.md, docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md, docs/flutter/STYLE-CONFLICTS.md e
-docs/flutter/screens/06-lessons/HISTORY.md (come abbiamo lavorato sulla 06).
-Prima cosa: lancia il critico finale della schermata 06 (critic-v4) e dimmi il risultato.
-Obiettivo: costruire in Flutter la schermata 07, lezione video (riferimento ChatGPT
-docs/design/glassy-gamified/screens/07-lezione-video-dark.webp sul branch lesson-production), insieme alle
-animazioni della versione Angular (src/app/features/lessons/video-player e lesson-details), con vibrazioni e luce.
-Sostituisce la pagina provvisoria delle lezioni video (lesson_page.dart) e, a lezione finita, torna alla 06
-restituendo true, cosi' parte il completamento; il progresso resta condiviso con lezioni, unita' e corsi.
-Mostrami anche come era l'originale Angular. Segui la procedura: piano della schermata e domande prima di
-costruire, prompt ChatGPT in blocchi copiabili, costruzione, critico con le misure, confronto, video e APK.
-Tieni HISTORY.md della schermata aggiornato. Parla con me in italiano.
+docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md, docs/flutter/SCREENS.md, docs/flutter/STYLE-CONFLICTS.md e
+docs/flutter/screens/06-lessons/HISTORY.md.
+Obiettivo: costruire in Flutter la barra in alto comune a tutti i tipi di lezione (schermata 02): barra di avanzamento,
+pausa e ritorno indietro, come nel progetto Angular di origine (src/app/features/lessons/lesson-details e
+interactive-lesson), con lo stesso comportamento ma uno stile un po' rivisto, "classy" come le altre schermate (token di
+DESIGN-SYSTEM.md; se un valore confligge con un token, dimmelo e decido io). Widget riutilizzabile, da usare subito nella
+pagina provvisoria delle lezioni (lesson_page.dart) per provarlo sul telefono.
+Prima mostrami come e' l'originale Angular e una proposta visiva, con le domande, prima di costruire. Poi: prompt ChatGPT
+per eventuali elementi mancanti in blocchi copiabili, costruzione, critico con le misure (anche formato telefono
+915x412), confronto, video e APK. Crea HISTORY.md della schermata e tienilo aggiornato. Dopo la 02 si passa alla 11
+(classifica), poi si torna alla linea principale (07 lezione video e le altre). Parla con me in italiano.
 ```
 
 ---
