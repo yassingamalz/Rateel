@@ -15,7 +15,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 08 | Open: no reference file | – | to define |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
-| 11 | Leaderboard (classifica) | `11-classifica.webp` | to do (next) |
+| 11 | Leaderboard (classifica) | `11-classifica.webp` | **in progress** on `flutter/11-leaderboard` (plan, waiting for the owner) |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | to do |

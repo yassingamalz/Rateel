@@ -1,0 +1,98 @@
+# Screen 11: leaderboard (المتصدرين)
+
+Branch `flutter/11-leaderboard`, from `master` (688e7ed: screens 02–06 merged).
+Reference: `11-leaderboard/reference.webp` (= `docs/design/glassy-gamified/screens/11-classifica.webp` on
+`lesson-production`, 1844×853). Angular original: `src/app/features/gamification/leaderboard/`
+(capture `11-leaderboard/angular-original.jpg`, from `docs/production/screenshots-app/11-classifica.png`).
+Proposal sheet (reference annotated: code / reused asset / new asset / token conflict): `11-leaderboard/proposal-v1.jpg`.
+History: `11-leaderboard/HISTORY.md`.
+
+Status: **plan v1, waiting for the owner's answers** (section 6). Nothing is built yet.
+
+## 1. What the screen is
+The 4th item of the side navigation (المتصدرين, trophy, count = the user's rank). The content area left of the
+approved rail (screen 04) replaces `SectionPlaceholder` for index 3. The rail stays as it is (approved): the
+reference's rail is the same one.
+
+Behaviour from the Angular original (same structure, restyled as the reference):
+- Three vertical tabs on the right of the table: **الكل** (all), **الأصدقاء** (friends), **المنطقة** (region);
+  each filters the list (friends = `isFriend` + me; region = my region).
+- Table header: المركز · المستخدم (rank + user, right), النقاط (points), المكافآت (rewards).
+- Rows 1–3: medal image (gold / silver / bronze), avatar, name, «n درس» with a book icon, ★ points, coin stack + reward
+  (10K / 5K / 2K). Rows 4+: rank number instead of the medal, reward «-».
+- **Pinned current-user bar** at the bottom: rank disc, avatar, name, lessons, points, a chevron button. It shows while
+  the user's own row is not visible in the list; tap → smooth scroll to the own row and a gold highlight pulse (1.5 s);
+  it hides while the own row is on screen.
+- Angular motion: fade-in 300 ms, rows slide up 10 px 300 ms, highlight pulse.
+
+## 2. Layout (measured on the reference, u = 8.53 px = 1% of the height)
+| Element | Reference px (1844×853) | u |
+|---|---|---|
+| Content area | x 0–1665 (rail from 1665) | – |
+| Ribbon banner | x 535–1130, y 25–140, centred on the content area | 69.8 × 13.5 |
+| Title المتصدرين | cream, centred in the ribbon band, ~ 48 px glyph height | ≈ 6.5 |
+| Lattice pattern | gold ogee lattice, full width, fades out by y ≈ 260 | cell ≈ 15 |
+| Panel | x 37–1537, top y 157, radius ≈ 45 px; bottom hidden by the user bar | 175.8 wide, r ≈ 5.3 |
+| Header row | y 157–273, gold divider line at y 273 (≈ 2 px) | 13.6 high |
+| Header labels | المركز المستخدم right edge x 1495; النقاط centre x 357; المكافآت centre x 157 | size ≈ 4.2 |
+| Row | x 47–1527, h ≈ 140, gap ≈ 10, radius ≈ 30 | 173.5 × 16.4, gap 1.2, r 3.5 |
+| Medal | centre x 1443, h ≈ 95 | ≈ 11 high |
+| Avatar | centre x 1325, Ø ≈ 92, gold rim ≈ 4 px | Ø 10.8, rim 0.45 |
+| Name / lessons | right edge x 1245; name ≈ 3.8u cream; «33 درس» ≈ 3.2u, 75% cream, gold book icon 2.8u | – |
+| Points | ★ centre x 296 (≈ 4.5u), number right of it, x 335–420, ≈ 4.4u w600 | – |
+| Rewards | coins centre x 190 (≈ 6u), «10K» x 90–155, ≈ 4.2u w600 | – |
+| Tabs | x 1552–1627, y 165–798, each ≈ 210 px; active = gold, text rotated −90° | 8.8 wide, 24.6 each |
+| User bar | x 38–1535, y 656–797, radius ≈ 35, gold rim + outer glow | 175.5 × 16.5, r 4.1 |
+| Rank disc «15» | centre (1456, 726), Ø ≈ 80 | Ø 9.4 |
+| Chevron button | centre (137, 726), Ø ≈ 76, glass button token | Ø 8.9 |
+
+Phone (915×412): the same layout in u; on a 412 dp phone a row is 67 dp, avatar 44 dp, tap areas ≥ 48 dp.
+
+## 3. Colours sampled from the reference and conflicts with the tokens (owner decides)
+| # | Element | Reference | Confirmed token | Proposal |
+|---|---|---|---|---|
+| K1 | Panel rim | ≈ 4 px gold, core #FFF878/#FDE55F, edge #A18C34, soft gold glow outside | gold rim 1.2 px #DAA42A + 1 px #FFDA6B, glow 15% | **token rim** scaled in u (0.15u + 0.12u), glow 15%: thinner than the reference |
+| K2 | Current-user bar fill | green #185727 (top) → #0A4322 → #14431C, gold rim + glow | selected row fill #3B4C1F (olive) + gold rim token | **reference green** as a new token `meRowTop/meRowBottom` (the user's row must stand out), rim = gold rim token |
+| K3 | Active tab | vertical gradient #A47915 → #E5A71C | flat gold #E2A51E (pills #EDB120) | flat `amber` #E2A51E with the gold rim token |
+| K4 | Background | flat #00251C… #0A2F1E + gold lattice | `bgTop #063728 → bgBottom #00281C` (C1) | `bgTop/bgBottom` + the lattice |
+| K5 | Rows | fill #052B1D/#02291E, faint lighter top edge, no visible rim | glass rim 2 px #245843, no fill | glass rim token (`rowRim`) in u, card fill `cardTop → cardMid` |
+| K6 | Rank disc «15» | #EEB326, text #0B2315 | `amber #E2A51E`, `countText #132C1A` | tokens |
+| – | Text | names / numbers #FFFCD2 | `label #FFFDF5`, `titleCream` | `titleCream` for names/numbers, `label` 75% for «n درس» |
+
+## 4. Code vs assets
+| Element | Source |
+|---|---|
+| Medals 1st / 2nd / 3rd | **reuse** Angular `src/assets/images/medals/{gold,silver,bronze}-medal.png` (identical to the reference), trimmed + webp |
+| Avatars | **reuse** Angular `src/assets/images/avatars/avatar-1…10.png` (identical), circle crop + gold rim in code, webp 256 px |
+| Star | **reuse** `assets/ui/glyphs/star.svg` |
+| Chevron button | code: glass button token (as 02), chevron drawn in code (02 icon stroke) |
+| Panel, rows, tabs, user bar, rank disc, divider | code, tokens |
+| A1 Ribbon banner (dark green + gold, empty) | **ChatGPT**; title text drawn by the app (Readex Pro, cream) |
+| A2 Gold ogee lattice tile | **ChatGPT** seamless tile, or a vector tile drawn by Claude (pure geometry; owner chooses) |
+| A3 Coin stacks gold / silver / bronze | **ChatGPT**, 3 images |
+| A4 Small gold book icon (lesson count) | **ChatGPT** |
+
+Prompts: `docs/flutter/prompts/11-leaderboard/images-v1.txt` (pasted in the chat after the owner's answers).
+
+## 5. Motion and UX (proposal, from the Angular original + the app's vocabulary)
+- Entry (when the section opens): ribbon drops 2u and settles (350 ms, easeOutBack), panel fades up, rows stagger in
+  (60 ms apart, slide 1.2u + fade, 300 ms as Angular), medals pop (scale 0.6 → 1) with one light sweep on the 1st
+  medal; the user bar slides up from below last.
+- Tab switch: the gold tab glides to the new tab (as the nav selection), haptic `tap`, the list cross-fades and rows
+  that stay move to their new place (animated reorder).
+- Pinned user bar: shown while the own row is off screen; tap → scroll (500 ms easeInOutCubic) to the own row, the row
+  gets a gold rim pulse (2 × 750 ms) and haptic `milestone`; the bar fades down while the own row is visible.
+- Scroll: vertical drag inside the panel (mouse drag enabled for web), header and tabs fixed.
+
+## 6. Questions for the owner
+1. **Data.** There is no backend: a fixed demo list of 15 players (names of the Angular list, avatars 1–10), the user
+   «أحمد عبدالرحمن» at **rank 15** (as the nav badge), points and lessons demo values. Should the user's «n درس» be the
+   **real** count of lessons done in the app (session progress) and the rest demo? Points: demo until a points system exists.
+2. **Tabs** الكل / الأصدقاء / المنطقة filtering as Angular (friends / same region in the demo data)?
+3. **Rows 4+** (not in the reference): rank number in a small glass disc (rim token) in the medal column, reward «-» as Angular?
+4. **Pinned user bar** as Angular (visible when the own row is off screen, tap = scroll + gold pulse)?
+5. **A2 lattice:** ChatGPT tile, or a vector tile drawn by Claude (like the corner trellis of screen 03)?
+6. **Ribbon title:** straight text (as the reference) or slightly arched (as Angular)?
+7. **Conflicts K1–K6** (section 3): accept the proposals, or copy the reference values?
+8. **Motion** of section 5: OK?
+9. **Medals and avatars**: reuse the Angular images (identical to the reference)?
