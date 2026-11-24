@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" aria-label="Graduation cap">
+  <title>Rateel — Lessons graduation cap</title>
+  <!-- Flat top of the mortarboard with a small geometric cutout -->
+  <path fill="currentColor" fill-rule="evenodd" d="M31.12 10.92a2.05 2.05 0 0 1 1.76 0l25.1 12.46a1.65 1.65 0 0 1 .02 2.94L33.04 38.04a2.33 2.33 0 0 1-2.08 0L6 26.32a1.65 1.65 0 0 1 .02-2.94l25.1-12.46ZM15.52 25.02l13.4-6.56a1.1 1.1 0 0 1 1.1 1.9l-12.92 6.88a1.25 1.25 0 0 1-1.58-2.22Z"/>
+  <!-- Gown-like curved cap beneath the flat top -->
+  <path fill="currentColor" d="M17.5 36.16 30.75 42.4a2.86 2.86 0 0 0 2.5 0l13.25-6.24v10.18c0 2.09-1.04 3.35-2.83 4.18a27.88 27.88 0 0 1-23.34 0c-1.79-.83-2.83-2.09-2.83-4.18V36.16Z"/>
+  <!-- Short tassel on the right -->
+  <path d="M52.16 27.18c1.4 4.43 1.48 9.6 1.14 14.19" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+  <path fill="currentColor" d="M53.3 39.4c-.8 2.66-2.45 4.71-2.45 6.95a2.45 2.45 0 0 0 4.9 0c0-2.24-1.65-4.29-2.45-6.95Z"/>
+</svg>
