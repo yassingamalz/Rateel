@@ -144,6 +144,13 @@ class RateelColors {
 
   /// Soft light at the leading edge of the gold fill in the capsule.
   static const lessonBarLight = Color(0xFFFFF3C2);
+
+  // Screen 11 (leaderboard), sampled from reference 11. Provisional: conflict
+  // K2 in docs/flutter/STYLE-CONFLICTS.md (owner decides at the end).
+  /// The user's own row / pinned bar: green, brighter than the rows.
+  static const meRowTop = Color(0xFF185727);
+  static const meRowMid = Color(0xFF0A4322);
+  static const meRowBottom = Color(0xFF14431C);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

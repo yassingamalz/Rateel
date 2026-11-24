@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'courses/course_data.dart';
 import 'core/learn_flow.dart';
 import 'nav/side_nav.dart';
+import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
@@ -69,6 +70,9 @@ Future<void> main() async {
       Uri.base.queryParameters['lessonLockColor'] ?? lessonLockColor;
   origScale =
       double.tryParse(Uri.base.queryParameters['origScale'] ?? '') ?? origScale;
+  // Review aid (screen 11): `?section=3` opens the leaderboard on start.
+  SideNavScaffold.startSection =
+      int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -104,9 +108,11 @@ class RateelApp extends StatelessWidget {
         ),
         home: Scaffold(
           body: SideNavScaffold(
-            builder: (context, selected) => selected == 0
-                ? const LearnFlow()
-                : SectionPlaceholder(index: selected),
+            builder: (context, selected) => switch (selected) {
+              0 => const LearnFlow(),
+              3 => const LeaderboardScreen(),
+              _ => SectionPlaceholder(index: selected),
+            },
           ),
         ),
       ),

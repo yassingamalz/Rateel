@@ -21,3 +21,18 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
   `STYLE-CONFLICTS.md` (decided at the end of the project; built with the proposals meanwhile).
 - Prompts A1, A2, A3a/b/c, A4 pasted in the chat; attachments = `reference.webp` + zoomed crops in
   `docs/flutter/prompts/11-leaderboard/attach/`. Build v1 started with placeholders for the missing art.
+
+## 3. Build v1 (placeholders) and v2 (owner's assets) (2026-11-24)
+- Code: `lib/leaderboard/leaderboard_screen.dart` (screen), `leaderboard_data.dart` (**mock** data, 15 players);
+  `main.dart` routes rail index 3 to it; review aid `?section=3` (`SideNavScaffold.startSection`). Tokens
+  `meRowTop/Mid/Bottom` (K2, provisional). Test `test/leaderboard_test.dart`.
+- Layout in u from the reference (plan §2), relative to the content area left of the approved rail. Rows are absolutely
+  positioned and keyed by player, so a filter change moves the rows that stay (animated reorder) and fades the others.
+  Global rank kept in filtered lists, medals/rewards for the first three rows (as Angular). Title arched as Angular:
+  the laid-out text is drawn in 60 thin strips along a parabola (keeps Arabic shaping).
+- v1 demo showed the ribbon/avatars popping in after the entry → images are precached before the entry starts.
+- Owner delivered A1–A4 (zip): stored in `docs/design-assets/leaderboard/`, processed by
+  `tools/assets/leaderboard_assets.py` (`ASSETS.md`). Ribbon variant 02 (darker band) chosen; lattice is seamless.
+- v2 captures `capture-v2-*` (start, after tapping the pinned bar, friends, region; desktop and phone), comparison
+  `compare-v2.jpg`, demo `demo-v2.mp4` (`tools/flutter-review/leaderboard-{capture,demo}.js`). Critic not run yet:
+  to be proposed to the owner first.
