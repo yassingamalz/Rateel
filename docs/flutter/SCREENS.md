@@ -31,3 +31,11 @@ Done: 4 screens (03–06). To do: at least 15 (02, 07, 09, 10/10b, 11, 12, 13, 1
 - Same behaviour and structure as the original, with a **small restyle in the classy glass style** of the other screens
   (tokens in `DESIGN-SYSTEM.md`, glass back button as on screen 06, gold progress as `progressFill`/`amberPill`).
 - It is a reusable widget: it takes the progress (0–1), a pause/back callback and returns control to the lesson page.
+
+## Screens running on mock data (no real data yet)
+Remember to connect these to real data (backend or app progress) before release.
+
+| Screen | What is mock | Where |
+|---|---|---|
+| 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. Only the user's lesson count is real (lessons done in the app). | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
+| 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
