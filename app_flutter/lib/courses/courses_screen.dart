@@ -380,6 +380,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                   artSet: cardArtSet,
                   number: i + 1,
                   widthU: g.cardW / g.u,
+                  heightU: g.cardH / g.u,
                   onLongPress: () {
                     // Demo until screens 05–07 exist: long press on the
                     // course in progress plays the completion sequence.
@@ -405,7 +406,7 @@ class _CoursesScreenState extends State<CoursesScreen>
     required double nodePop,
   }) {
     final gap = g.pitch - g.cardW;
-    final y = g.trackHalfHeight + g.u * 2.7;
+    final y = g.trackHalfHeight + (g.illustrated ? 0 : g.u * 2.7);
     final left = g.pitch / 2 - g.cardW / 2 - gap;
     return Positioned(
       left: left,
@@ -895,21 +896,25 @@ class _Geo {
 
   /// Illustrated cards (owner's mockup) are narrower: three fit on screen.
   double get cardW => illustrated ? u * 62 : u * 72.4;
-  double get cardH => u * 50.0;
+
+  /// Illustrated cards: wider than tall (owner, 2026-11-24).
+  double get cardH => illustrated ? u * 42 : u * 50.0;
 
   /// The focused (first) card is 626 px wide against 616 px for the others.
   double get focusScale => illustrated ? 1.0 : 1.016;
 
   /// Card centre to card centre: 704 px.
-  double get pitch => illustrated ? u * 66 : u * 82.7;
+  /// Illustrated: 12u between cards, so the connecting lines read clearly
+  /// (the third card is only partly on screen).
+  double get pitch => illustrated ? u * 74 : u * 82.7;
 
   /// First card centre: 373 px from the content's right edge.
-  double get firstCenterFromRight => illustrated ? u * 34.5 : u * 43.8;
+  double get firstCenterFromRight => illustrated ? u * 33.5 : u * 43.8;
 
   /// PageView pages are [pitch] wide and start at the right edge; this inset
   /// moves the first card centre to [firstCenterFromRight].
   double get trackRightInset => firstCenterFromRight - pitch / 2;
-  double get cardCenterY => u * 63.8;
+  double get cardCenterY => illustrated ? u * 62 : u * 63.8;
   double get trackHalfHeight => u * 30;
 
   /// Arch apex / title centre: 810 px from the content's right edge.

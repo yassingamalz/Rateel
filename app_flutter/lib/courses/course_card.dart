@@ -23,6 +23,7 @@ class CourseCard extends StatefulWidget {
     this.artSet,
     this.number = 1,
     this.widthU = 72.4,
+    this.heightU = 50,
   });
 
   final Course course;
@@ -54,6 +55,9 @@ class CourseCard extends StatefulWidget {
 
   /// Card width in u (the illustrated cards are narrower).
   final double widthU;
+
+  /// Card height in u (illustrated cards: 42u, owner 2026-11-24).
+  final double heightU;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -234,11 +238,13 @@ class _CourseCardState extends State<CourseCard> {
     // Owner, 2026-11-21 (style D, background): the course art, enlarged, comes
     // in from the left edge of the card as a translucent background (45%) and
     // fades out towards the text. No gold arc.
+    // Box scaled with the card height (46u on a 50u card).
+    final h = widget.heightU;
     return Positioned(
-      left: -u * 6,
-      top: -u * 2,
-      width: u * 46,
-      height: u * 46,
+      left: -u * h * 0.12,
+      top: -u * h * 0.04,
+      width: u * h * 0.92,
+      height: u * h * 0.92,
       child: IgnorePointer(
         child: Opacity(
           opacity: 0.45,
@@ -259,57 +265,55 @@ class _CourseCardState extends State<CourseCard> {
   /// half of an illustrated card.
   List<Widget> _illustratedText(double u, {required bool active}) {
     final c = widget.course;
-    const colW = 36.0;
-    final top = u * 10.5;
-    final lines = active ? 2 : 3;
+    // Owner, 2026-11-24: wider-than-tall cards (62u × 42u). Title (up to two
+    // lines), divider and a two-line description flow from the top.
     return [
       Positioned(
         right: u * 3.5,
-        width: u * colW,
-        top: top,
-        height: u * 11,
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Text(
-            c.title,
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: readex(
-              u * 4.4,
-              weight: 560,
-              color: titleCream,
-            ).copyWith(height: 1.2, shadows: titleShadows(u)),
-          ),
-        ),
-      ),
-      Positioned(
-        right: u * 3.5 + u * (colW - 22) / 2,
-        width: u * 22,
-        top: top + u * 11.6,
-        height: u * 2.2,
-        child: SvgPicture.asset(
-          'assets/ui/decor/title_divider.svg',
-          fit: BoxFit.fill,
-        ),
-      ),
-      Positioned(
-        right: u * 3.5,
-        width: u * colW,
-        top: top + u * 14.8,
-        height: u * 4.4 * lines,
-        child: Text(
-          c.description,
-          textDirection: TextDirection.rtl,
-          textAlign: TextAlign.right,
-          maxLines: lines,
-          overflow: TextOverflow.ellipsis,
-          style: readex(
-            u * 3.0,
-            weight: 340,
-            color: RateelColors.cream,
-          ).copyWith(height: 4.4 / 3.0),
+        width: u * 36,
+        top: u * 11.4,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              c.title,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: readex(
+                u * 4.4,
+                weight: 560,
+                color: titleCream,
+              ).copyWith(height: 1.15, shadows: titleShadows(u)),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: u * 7,
+                top: u * 0.8,
+                bottom: u * 0.8,
+              ),
+              child: SvgPicture.asset(
+                'assets/ui/decor/title_divider.svg',
+                width: u * 22,
+                height: u * 2.2,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Text(
+              c.description,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: readex(
+                u * 3.0,
+                weight: 340,
+                color: RateelColors.cream,
+              ).copyWith(height: 4.3 / 3.0),
+            ),
+          ],
         ),
       ),
     ];
@@ -320,7 +324,19 @@ class _CourseCardState extends State<CourseCard> {
     final base = _activeContent(u);
     // base: [pill, icon, title, rule, description, play, bar, percent]
     final pill = base[0] as Positioned;
+    final play = base[5] as Positioned;
     final bar = base[6] as Positioned;
+    final pct = base[7] as Positioned;
+    // Play row 6.7u above the bottom edge (base layout: 39.8u on a 50u card).
+    final dy = u * (widget.heightU - 6.7 - 39.8);
+    Positioned down(Positioned p, {double? width}) => Positioned(
+      left: p.left,
+      right: p.right,
+      top: p.top! + dy,
+      width: width ?? p.width,
+      height: p.height,
+      child: p.child,
+    );
     return [
       Positioned(
         right: u * 3.5,
@@ -330,15 +346,9 @@ class _CourseCardState extends State<CourseCard> {
         child: pill.child,
       ),
       ..._illustratedText(u, active: true),
-      base[5],
-      Positioned(
-        left: bar.left,
-        top: bar.top,
-        width: u * (widget.widthU - 18.7 - 6.2 - 7.6),
-        height: bar.height,
-        child: bar.child,
-      ),
-      base[7],
+      down(play),
+      down(bar, width: u * (widget.widthU - 18.7 - 6.2 - 7.6)),
+      down(pct),
     ];
   }
 
