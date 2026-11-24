@@ -31,3 +31,23 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
   capsule, straight leading edge with a soft light gradient (2.2u), top sheen; the number is cream over the dark part
   and `countText #132C1A` over the gold (split at the fill edge); 2/16, 9/16, 16/16; veil strong (45% + blur + 98%)
   vs light (12%, no blur); icons pause / play / restart / back in the 06 arrow stroke. Phone 915×412.
+
+## 3. Build v1 and critic loop (2026-11-24)
+- Owner approved v2 with: button and bar **slightly larger** (button 9u, capsule 41×6.2u, number 3.2u), **strong veil**,
+  **code-drawn icons**. Mockup v3 at the new size = critic reference (`reference/`, `tools/flutter-review/lesson-bar-mockup-v3.*`).
+- Code: `lib/lessons/lesson_shell.dart` (`LessonShell`, `LessonTopBar`, `lessonRoute`), `lesson_page.dart` now a demo
+  lesson of `placeholderSteps` (8; `?steps=16`) with «الخطوة التالية» / «أكملت الدرس». The lesson route is pushed on the
+  **root navigator** (rail hidden). Captures: `tools/flutter-review/lesson-bar-capture.js` → `capture-v<k>-*.png`.
+- Found while building: a route above the app's Scaffold has no Material → yellow double underlines under every text
+  (fixed with a transparent `Material` in `lessonRoute`); blurring + scaling the content showed grey edges (fixed with a
+  base colour under the content and `TileMode.clamp`); `Path.combine` in a painter darkened the whole capsule on the
+  web build → even-odd paths instead.
+- Critic v1 (`critic-v1.md`, on v1): **7.2** (look 7.0, behaviour 7.5). High: glass buttons 3× too bright (the
+  BoxShadow glow was drawn under the translucent fill). Medium: no static halo on the gold button, capsule inner shadow
+  2.5u instead of 0.6u, no gold glow into the empty part, rim twice too heavy, completion race (double pop), Android back
+  with hidden controls, 37 dp tap targets on the phone.
+- v2 fixes: `_GlassPainter` (glow outside the circle only, radial radius 0.707, cross-fade glass → gold, static 1.2u
+  halo, pulse alpha 0.7), capsule inset shadow 0.2u/0.25u, gold glow 0.8u, rim 0.12u, sheen relative to the fill,
+  leading light also at 16/16, number w500 without lift; controls and back locked during the completion, `_leave()`
+  pops once; back does nothing with hidden controls; tap area ≥ 48 dp; haptic on the veil tap.
+- Conflict C1 for the owner: the 04 close button and the 06 back button have the same over-bright glass as 02 v1.

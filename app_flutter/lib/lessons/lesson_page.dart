@@ -43,18 +43,27 @@ class _LessonPageState extends State<LessonPage> {
   final _shell = GlobalKey<LessonShellState>();
   int _step = 1;
   bool _finishing = false;
+  bool _left = false;
+
+  /// Leaves the lesson once (critic v1 #6: no second pop).
+  void _leave(bool done) {
+    if (_left || !mounted) return;
+    if (ModalRoute.of(context)?.isCurrent != true) return;
+    _left = true;
+    Navigator.of(context).pop(done);
+  }
 
   int get _total => placeholderSteps;
 
   Future<void> _finish() async {
-    if (_finishing) return;
+    if (_finishing || _left) return;
     _finishing = true;
     setState(() => _step = _total);
     // Fill reaches the end (300 ms), the light runs along the capsule, then
     // the page leaves (Angular: 100 ms, exit).
     await Future<void>.delayed(const Duration(milliseconds: 320));
     await _shell.currentState?.celebrate();
-    if (mounted) Navigator.of(context).pop(true);
+    _leave(true);
   }
 
   void _next() {
@@ -73,7 +82,7 @@ class _LessonPageState extends State<LessonPage> {
       key: _shell,
       step: _step,
       total: _total,
-      onBack: () => Navigator.of(context).pop(false),
+      onBack: () => _leave(false),
       onRestart: () => setState(() => _step = 1),
       child: LayoutBuilder(
         builder: (context, box) {

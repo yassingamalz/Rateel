@@ -73,6 +73,10 @@ class LessonShellState extends State<LessonShell>
     duration: const Duration(milliseconds: 900),
   );
 
+  // True while the completion plays: controls and back are blocked
+  // (critic v1 #6).
+  bool _locked = false;
+
   bool get paused =>
       _menu.status == AnimationStatus.forward ||
       _menu.status == AnimationStatus.completed;
@@ -94,6 +98,8 @@ class LessonShellState extends State<LessonShell>
   /// The lesson is complete: the light runs along the full capsule, with a
   /// milestone haptic. Completes when the light has passed.
   Future<void> celebrate() async {
+    setPaused(false);
+    setState(() => _locked = true);
     Haptics.milestone();
     await _sweep.forward(from: 0);
   }
@@ -111,7 +117,10 @@ class LessonShellState extends State<LessonShell>
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) setPaused(!paused);
+        // Android back toggles the pause menu; nothing while the controls are
+        // hidden or the completion plays (critic v1 #7, #6).
+        if (didPop || _locked || !widget.controlsVisible) return;
+        setPaused(!paused);
       },
       child: LayoutBuilder(
         builder: (context, box) {
@@ -161,7 +170,10 @@ class LessonShellState extends State<LessonShell>
                   ignoring: _menu.value == 0,
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: () => setPaused(false),
+                    onTap: () {
+                      Haptics.tap();
+                      setPaused(false);
+                    },
                     child: ColoredBox(
                       color: RateelColors.lessonVeil.withValues(
                         alpha:
@@ -177,7 +189,7 @@ class LessonShellState extends State<LessonShell>
                 opacity: widget.controlsVisible ? 1 : 0,
                 duration: const Duration(milliseconds: 250),
                 child: IgnorePointer(
-                  ignoring: !widget.controlsVisible,
+                  ignoring: !widget.controlsVisible || _locked,
                   child: LessonTopBar(
                     u: u,
                     step: widget.step,
@@ -248,6 +260,9 @@ class LessonTopBar extends StatelessWidget {
     const m = LessonBarMetrics.margin;
     const b = LessonBarMetrics.button;
     final share = total == 0 ? 0.0 : (step / total).clamp(0.0, 1.0);
+    // Buttons keep their drawn size; the tap area grows to 48 dp on small
+    // screens (critic v1 #8).
+    final e = _GlassButton.extra(u);
     // Items slide out from under the pause button (Angular: 20 px, 300 ms).
     Widget item(int k, String label, _Glyph g, VoidCallback onTap) {
       return AnimatedBuilder(
@@ -257,21 +272,15 @@ class LessonTopBar extends StatelessWidget {
           final t = Curves.easeOutCubic.transform(menu.value);
           final x = m + (b + LessonBarMetrics.gap) * k * t;
           return Positioned(
-            top: u * m,
-            right: u * x,
+            top: u * m - e,
+            right: u * x - e,
             child: IgnorePointer(
               ignoring: menu.value < 0.5,
               child: Opacity(opacity: t, child: child),
             ),
           );
         },
-        child: _GlassButton(
-          u: u,
-          semantics: label,
-          glyph: g,
-          gold: false,
-          onTap: onTap,
-        ),
+        child: _GlassButton(u: u, semantics: label, glyph: g, onTap: onTap),
       );
     }
 
@@ -309,15 +318,14 @@ class LessonTopBar extends StatelessWidget {
         item(1, 'رجوع', _Glyph.back, onBack),
         Positioned(
           key: const ValueKey('pause'),
-          top: u * m,
-          right: u * m,
+          top: u * m - e,
+          right: u * m - e,
           child: AnimatedBuilder(
             animation: Listenable.merge([menu, pulse]),
             builder: (context, _) => _GlassButton(
               u: u,
               semantics: menu.value > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
               glyph: menu.value > 0.5 ? _Glyph.play : _Glyph.pause,
-              gold: menu.value > 0.5,
               goldness: Curves.easeOut.transform(menu.value),
               pulse: menu.value > 0 ? pulse.value : null,
               onTap: onToggle,
@@ -357,7 +365,7 @@ class _CapsulePainter extends CustomPainter {
     );
     canvas.save();
     canvas.clipRRect(rr);
-    // Dark glass (card gradient) with a soft inner shadow at the top.
+    // Dark glass (card gradient).
     canvas.drawRect(
       Offset.zero & size,
       Paint()
@@ -367,22 +375,17 @@ class _CapsulePainter extends CustomPainter {
           colors: [RateelColors.cardTop, RateelColors.cardMid],
         ).createShader(Offset.zero & size),
     );
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height * 0.45),
-      Paint()
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black.withValues(alpha: 0.35),
-            Colors.black.withValues(alpha: 0),
-          ],
-        ).createShader(Rect.fromLTWH(0, 0, size.width, size.height * 0.45)),
-    );
-    // Gold fill from the right.
     final fw = size.width * share;
     final fill = Rect.fromLTWH(size.width - fw, 0, fw, size.height);
     if (fw > 0) {
+      // Gold glow spilling into the empty part (mockup: 1.6u, 45%).
+      canvas.drawRect(
+        fill,
+        Paint()
+          ..color = RateelColors.gold.withValues(alpha: 0.45)
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
+      );
+      // Gold fill from the right.
       canvas.drawRect(
         fill,
         Paint()
@@ -397,42 +400,47 @@ class _CapsulePainter extends CustomPainter {
             stops: [0, 0.55, 1],
           ).createShader(fill),
       );
-      // Top sheen, only on the gold.
+      // Top sheen, relative to the fill.
       canvas.save();
       canvas.clipRect(fill);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTWH(
-            size.width * 0.04,
-            size.height * 0.08,
-            size.width * 0.92,
-            size.height * 0.28,
+            fill.left + fw * 0.04,
+            size.height * 0.1,
+            fw * 0.92,
+            size.height * 0.27,
           ),
           Radius.circular(size.height * 0.14),
         ),
         Paint()..color = Colors.white.withValues(alpha: 0.28),
       );
       canvas.restore();
-      // Soft light at the leading edge (2.2u, fading into the gold).
-      if (share < 1) {
-        final lead = Rect.fromLTWH(
-          fill.left,
-          0,
-          math.min(u * 2.2, fw),
-          size.height,
-        );
-        canvas.drawRect(
-          lead,
-          Paint()
-            ..shader = LinearGradient(
-              colors: [
-                RateelColors.lessonBarLight.withValues(alpha: 0.9),
-                RateelColors.lessonBarLight.withValues(alpha: 0),
-              ],
-            ).createShader(Rect.fromLTWH(fill.left, 0, u * 2.2, size.height)),
-        );
-      }
+      // Soft light at the leading edge (2.2u, fading into the gold), also at
+      // 16/16 on the left end.
+      final lead = Rect.fromLTWH(fill.left, 0, u * 2.2, size.height);
+      canvas.drawRect(
+        lead.intersect(fill),
+        Paint()
+          ..shader = LinearGradient(
+            colors: [
+              RateelColors.lessonBarLight.withValues(alpha: 0.9),
+              RateelColors.lessonBarLight.withValues(alpha: 0),
+            ],
+          ).createShader(lead),
+      );
     }
+    // Inset shadow (CSS inset 0 0.2u 0.5u black 45%): a thin shade at the
+    // top, a hint at the bottom.
+    canvas.drawPath(
+      (Path()
+        ..fillType = PathFillType.evenOdd
+        ..addRect((Offset.zero & size).inflate(u * 3))
+        ..addRRect(rr.shift(Offset(0, u * 0.2)))),
+      Paint()
+        ..color = Colors.black.withValues(alpha: 0.45)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
+    );
     // Light running along the capsule (right → left, as the fill grows).
     if (sweep > 0 && sweep < 1) {
       final band = u * 9;
@@ -458,7 +466,7 @@ class _CapsulePainter extends CustomPainter {
     final light = _text(
       readex(
         u * LessonBarMetrics.number,
-        weight: 520,
+        weight: 500,
         color: RateelColors.label,
       ).copyWith(
         shadows: [
@@ -472,14 +480,13 @@ class _CapsulePainter extends CustomPainter {
     final dark = _text(
       readex(
         u * LessonBarMetrics.number,
-        weight: 520,
+        weight: 500,
         color: RateelColors.countText,
       ),
     );
-    // Readex sets the glyphs low in the line box: lift (as the pills, 03).
     final at = Offset(
       (size.width - light.width) / 2,
-      (size.height - light.height) / 2 - u * 0.25,
+      (size.height - light.height) / 2,
     );
     canvas.save();
     canvas.clipRect(Rect.fromLTRB(0, 0, fill.left, size.height));
@@ -490,12 +497,12 @@ class _CapsulePainter extends CustomPainter {
     dark.paint(canvas, at);
     canvas.restore();
     canvas.restore();
-    // Rim.
+    // Rim: thin (mockup 1 px at 853), in u.
     canvas.drawRRect(
-      rr.deflate(u * 0.115),
+      rr.deflate(u * 0.06),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.23
+        ..strokeWidth = u * 0.12
         ..color = RateelColors.cardRimTop,
     );
   }
@@ -513,13 +520,12 @@ class _CapsulePainter extends CustomPainter {
 enum _Glyph { pause, play, restart, back }
 
 /// Glass circle (the glass button token of screens 04/06); gold when the
-/// lesson is paused, with Angular's pulse ring.
+/// lesson is paused, with a static halo and Angular's pulse.
 class _GlassButton extends StatefulWidget {
   const _GlassButton({
     required this.u,
     required this.semantics,
     required this.glyph,
-    required this.gold,
     required this.onTap,
     this.goldness = 0,
     this.pulse,
@@ -528,10 +534,13 @@ class _GlassButton extends StatefulWidget {
   final double u;
   final String semantics;
   final _Glyph glyph;
-  final bool gold;
   final double goldness;
   final double? pulse;
   final VoidCallback onTap;
+
+  /// Extra tap margin around the drawn circle, so the target is ≥ 48 dp.
+  static double extra(double u) =>
+      math.max(0, (48 - u * LessonBarMetrics.button) / 2);
 
   @override
   State<_GlassButton> createState() => _GlassButtonState();
@@ -544,11 +553,12 @@ class _GlassButtonState extends State<_GlassButton> {
   Widget build(BuildContext context) {
     final u = widget.u;
     final d = u * LessonBarMetrics.button;
-    final g = widget.goldness;
+    final e = _GlassButton.extra(u);
     return Semantics(
       button: true,
       label: widget.semantics,
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTapDown: (_) => setState(() => _down = true),
         onTapCancel: () => setState(() => _down = false),
         onTapUp: (_) {
@@ -556,56 +566,19 @@ class _GlassButtonState extends State<_GlassButton> {
           Haptics.tap();
           widget.onTap();
         },
-        child: AnimatedScale(
-          scale: _down ? 0.92 : 1,
-          duration: const Duration(milliseconds: 120),
-          child: SizedBox(
-            width: d,
-            height: d,
-            child: CustomPaint(
-              painter: _PulsePainter(u: u, t: widget.pulse, strength: g),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: g == 0
-                      ? RadialGradient(
-                          colors: [
-                            RateelColors.gold.withValues(alpha: 0.08),
-                            RateelColors.gold.withValues(alpha: 0.24),
-                          ],
-                        )
-                      : LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.lerp(
-                              RateelColors.gold.withValues(alpha: 0.14),
-                              RateelColors.badgeTop,
-                              g,
-                            )!,
-                            Color.lerp(
-                              RateelColors.gold.withValues(alpha: 0.2),
-                              RateelColors.amber,
-                              g,
-                            )!,
-                          ],
-                        ),
-                  border: Border.all(
-                    color: Color.lerp(
-                      RateelColors.ringLine,
-                      RateelColors.goldHighlight,
-                      g,
-                    )!,
-                    width: u * 0.2,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: RateelColors.gold.withValues(
-                        alpha: lerpDouble(0.22, 0.45, g)!,
-                      ),
-                      blurRadius: u * lerpDouble(2, 2.4, g)!,
-                    ),
-                  ],
+        child: Padding(
+          padding: EdgeInsets.all(e),
+          child: AnimatedScale(
+            scale: _down ? 0.92 : 1,
+            duration: const Duration(milliseconds: 120),
+            child: SizedBox(
+              width: d,
+              height: d,
+              child: CustomPaint(
+                painter: _GlassPainter(
+                  u: u,
+                  goldness: widget.goldness,
+                  pulse: widget.pulse,
                 ),
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
@@ -631,34 +604,109 @@ class _GlassButtonState extends State<_GlassButton> {
   }
 }
 
-/// Angular's pulse: a gold ring growing 0 → 1.8u and fading, every 2 s.
-class _PulsePainter extends CustomPainter {
-  _PulsePainter({required this.u, required this.t, required this.strength});
+/// The glass circle: glow outside the circle only (critic v1 #1, the glow must
+/// not show through the glass), radial gold 8% → 24%, ring `ringLine`;
+/// cross-fades to the gold disc with a static 1.2u halo and the pulse.
+class _GlassPainter extends CustomPainter {
+  _GlassPainter({required this.u, required this.goldness, this.pulse});
 
   final double u;
-  final double? t;
-  final double strength;
+  final double goldness;
+  final double? pulse;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final t = this.t;
-    if (t == null || strength == 0) return;
-    final k = (t / 0.7).clamp(0.0, 1.0);
+    final g = goldness;
     final c = size.center(Offset.zero);
-    final r = size.width / 2 + u * 1.8 * k;
+    final r = size.width / 2;
+    final outside = (Path()
+      ..fillType = PathFillType.evenOdd
+      ..addRect((Offset.zero & size).inflate(u * 6))
+      ..addOval(Rect.fromCircle(center: c, radius: r)));
+    canvas.save();
+    canvas.clipPath(outside);
+    // Outer glow: gold 22% sigma 1u (glass) → 45% sigma 1.2u (gold).
     canvas.drawCircle(
       c,
       r,
       Paint()
-        ..color = RateelColors.amber.withValues(
-          alpha: 0.55 * (1 - k) * strength,
+        ..color = RateelColors.gold.withValues(
+          alpha: lerpDouble(0.22, 0.45, g)!,
+        )
+        ..maskFilter = MaskFilter.blur(
+          BlurStyle.normal,
+          u * lerpDouble(1.0, 1.2, g)!,
         ),
+    );
+    if (g > 0) {
+      // Static halo ring 1.2u, amber 25% (mockup).
+      canvas.drawCircle(
+        c,
+        r + u * 1.2,
+        Paint()..color = RateelColors.amber.withValues(alpha: 0.25 * g),
+      );
+      // Angular pulse: ring 0 → 1.8u, alpha 0.7 → 0, every 2 s.
+      final t = pulse;
+      if (t != null) {
+        final k = (t / 0.7).clamp(0.0, 1.0);
+        canvas.drawCircle(
+          c,
+          r + u * 1.8 * k,
+          Paint()
+            ..color = RateelColors.amber.withValues(alpha: 0.7 * (1 - k) * g),
+        );
+      }
+    }
+    canvas.restore();
+    final disc = Rect.fromCircle(center: c, radius: r);
+    // Glass fill (radial, CSS «circle» = farthest corner: radius 0.707).
+    if (g < 1) {
+      canvas.drawCircle(
+        c,
+        r,
+        Paint()
+          ..shader = RadialGradient(
+            radius: 0.707,
+            colors: [
+              RateelColors.gold.withValues(alpha: 0.08 * (1 - g)),
+              RateelColors.gold.withValues(alpha: 0.24 * (1 - g)),
+            ],
+          ).createShader(disc),
+      );
+    }
+    if (g > 0) {
+      canvas.drawCircle(
+        c,
+        r,
+        Paint()
+          ..shader = LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              RateelColors.badgeTop.withValues(alpha: g),
+              RateelColors.amber.withValues(alpha: g),
+            ],
+          ).createShader(disc),
+      );
+    }
+    // Ring.
+    canvas.drawCircle(
+      c,
+      r - u * 0.1,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = u * 0.2
+        ..color = Color.lerp(
+          RateelColors.ringLine,
+          RateelColors.goldHighlight,
+          g,
+        )!,
     );
   }
 
   @override
-  bool shouldRepaint(_PulsePainter o) =>
-      o.t != t || o.u != u || o.strength != strength;
+  bool shouldRepaint(_GlassPainter o) =>
+      o.u != u || o.goldness != goldness || o.pulse != pulse;
 }
 
 /// Pause, play, restart and back, drawn on a 24-unit grid with the stroke of
