@@ -36,3 +36,12 @@ line with a small round light at 37%, «1:58» on the right and «5:20» on the 
 button at the bottom right exactly as in the reference. Above the player, centred, the lesson title «مقدمة في علم
 التجويد» in the same cream bold style as «الفيديو غير متاح». No YouTube logo, no other controls, no extra ornaments,
 Arabic right-to-left.
+
+=== V5  Seamless bottom lattice band (attach: 07-lezione-video.webp, attach/v5-bottom-band-enhanced.png, the owner's
+         03-lattice-bottom-left.png)
+Create a seamless horizontal strip of the same gold Moroccan lattice as the attached corner image (interlocking stepped
+star/cross cells, same cell shape, same flat gold line with a thin dark offset line under it for a carved look): exactly
+two rows of cells, as in the enhanced crop of the bottom of the screen. The pattern must tile perfectly left-right (the
+left and right edges must join without a seam: the strip width is an exact number of cells, 6 cells). Line colour
+#C9A93A with a light edge #E8D06A. No fade, no other ornament, no background texture. Plain flat magenta background
+(#FF00FF). Image 2048×512, the two rows of cells filling the height with a small margin.

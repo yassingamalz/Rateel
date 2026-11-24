@@ -20,3 +20,24 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
   ChatGPT (V3). Q7 the end of the video completes the lesson by itself.
 - Prompts V1 (icon), V2 (arch), V3 (corners), V4 (playing reference) pasted in the chat; crops in
   `../../prompts/07-video-lesson/attach/`.
+
+## 3. Owner's assets, build v1–v4, verification (2026-11-24)
+- Owner delivered V1–V4 (zip) and a second icon closer to the reference (V1 v2, used); asked to keep every asset in the
+  shared library («librerie comuni»): sources `docs/design-assets/video-lesson/`, app copies `assets/ui/video/`, `ASSETS.md`
+  section "Video lesson"; shared code `SkipButton`, `GoldDivider`, `ScreenGirih(fadeTop:)`.
+- Found: two of the four video links in the data are dead (c9N4j8IF8mM, _nMiT7QFpIc: 404 on YouTube) → those lessons show
+  the "not available" state; BqFxf-WspTc (lesson «مقدمة في علم التجويد») is a video about «الإقلاب» (episode 06), not an
+  introduction. The release manifest had no INTERNET permission (added).
+- Code: `lib/lessons/video_lesson_page.dart` (`VideoLessonPage`, `videoLessonRoute`), YouTube through
+  `youtube_player_iframe` 6.0.4 (YouTube controls hidden; tap on the video = pause/play; drag/tap on the line = seek; the 02
+  pause button and menu pause/resume/restart it; poster on top while paused, since the platform view cannot be blurred);
+  `lesson_page.dart` routes `LessonType.video` to it (`completed` → «إكمال ✓»); `videoUrl` added to `Lesson` (generator).
+  States: no link / error / not playing after 15 s → "not available". End of the video and «تخطي» → fill 100, 02 light,
+  leave with `true` (screen 06 plays the completion, next lesson opens).
+- Review aids: `?lessons=0,0&openLesson=0&video=demo|none&videoAt=0.37`. Scripts `video-capture.js`, `video-demo.js`,
+  `video-verify.py`. Widget test: unit 1 completed through three video lessons with «تخطي».
+- Geometry fitted on the reference (arch by correlation of the line, corners/icon/mosque on zoomed crops); verification
+  v1 → v4 in `../07-video-lesson/verify-v4.md` (all boxes within ±4 px except the explained mask cases).
+- Delivered: `compare-v4-phone.jpg`, `demo-v4-phone.mp4` (video ends → completion → lesson 2 → «تخطي»; "not available" →
+  «تخطي»), APK (see DECISIONS.md).
+- Open for the owner: capsule (02) direction vs the video line; bottom lattice band (asset V5); data links.

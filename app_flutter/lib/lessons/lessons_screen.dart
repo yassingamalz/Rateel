@@ -116,6 +116,11 @@ class _LessonsScreenState extends State<LessonsScreen>
   @override
   void initState() {
     super.initState();
+    final o = startOpenLesson;
+    if (o != null && o < _lessons.length) {
+      startOpenLesson = null;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _openLesson(o));
+    }
     final k = startCompleteLesson;
     if (k != null) {
       startCompleteLesson = null;
@@ -230,10 +235,15 @@ class _LessonsScreenState extends State<LessonsScreen>
 
   Future<void> _openLesson(int k) async {
     // Root navigator: the lesson covers the side rail (screen 02, owner).
-    final finished = await Navigator.of(
-      context,
-      rootNavigator: true,
-    ).push<bool>(lessonPageRoute(_lessons[k], k + 1, _lessons.length));
+    final finished = await Navigator.of(context, rootNavigator: true)
+        .push<bool>(
+          lessonPageRoute(
+            _lessons[k],
+            k + 1,
+            _lessons.length,
+            completed: k < _done,
+          ),
+        );
     if (!mounted) return;
     if (finished == true && k == _current) await _complete(k);
   }

@@ -11,8 +11,8 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
-| 07 | Video lesson (dark / light) | `07-lezione-video-{dark,light}.webp` | to do (next, after the final critic of 06) |
-| 08 | Open: no reference file | – | to define |
+| 07 | Video lesson | `07-lezione-video.webp` (+ `reference-playing.webp`, owner's V4) | **v4 built** on `flutter/07-video-lesson`, waiting for the owner's test |
+| 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | to do |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), PR `flutter/11-leaderboard` → `master`; runs on mock data |
@@ -39,3 +39,8 @@ Remember to connect these to real data (backend or app progress) before release.
 |---|---|---|
 | 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. All values are demo, the user's lesson count too. | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
+
+## Data problems found (fix in the lesson data before release)
+| Where | Problem |
+|---|---|
+| `src/assets/data/lessons/01-tajweed-fundamentals/intro-tajweed.json` | `intro-lesson-2` (c9N4j8IF8mM) and `intro-lesson-3` (_nMiT7QFpIc): YouTube links dead (404) → "video not available". `intro-lesson-1` (BqFxf-WspTc) is an episode about «الإقلاب», not «مقدمة في علم التجويد». |

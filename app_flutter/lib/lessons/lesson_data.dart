@@ -11,6 +11,7 @@ class Lesson {
     required this.description,
     required this.type,
     required this.minutes,
+    this.videoUrl,
   });
 
   final String id;
@@ -20,6 +21,9 @@ class Lesson {
 
   /// Duration in minutes (0 when the data has none).
   final int minutes;
+
+  /// YouTube link of a video lesson (null for the other types).
+  final String? videoUrl;
 }
 
 /// Lessons of the unit with id [unitId]. Empty for units that have no lessons
@@ -45,6 +49,10 @@ double unitShareFromLessons(String unitId) {
 /// Review aid: `?completeLesson=<k>` plays the completion of lesson k when
 /// the lessons screen opens.
 int? startCompleteLesson;
+
+/// Review aid (screen 07): `?openLesson=0` opens lesson 0 of `?lessons=` on
+/// start.
+int? startOpenLesson;
 
 /// Scale of the lesson cards and title: ×1.4 (owner, 2026-11-22); review:
 /// `?origScale=1.35`.

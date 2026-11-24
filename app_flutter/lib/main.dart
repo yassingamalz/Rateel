@@ -10,6 +10,7 @@ import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
+import 'lessons/video_lesson_page.dart';
 import 'units/unit_data.dart';
 
 Future<void> main() async {
@@ -65,6 +66,12 @@ Future<void> main() async {
   startCompleteLesson = int.tryParse(
     Uri.base.queryParameters['completeLesson'] ?? '',
   );
+  // Review aids (screen 07): `?openLesson=0` opens that lesson on start,
+  // `?video=demo|none`, `?videoAt=0.37`.
+  startOpenLesson = int.tryParse(Uri.base.queryParameters['openLesson'] ?? '');
+  videoMode = Uri.base.queryParameters['video'];
+  videoStartAt =
+      double.tryParse(Uri.base.queryParameters['videoAt'] ?? '') ?? 0;
   lessonLockPos = Uri.base.queryParameters['lessonLock'] ?? lessonLockPos;
   lessonLockColor =
       Uri.base.queryParameters['lessonLockColor'] ?? lessonLockColor;

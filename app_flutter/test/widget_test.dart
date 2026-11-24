@@ -1,4 +1,5 @@
 import 'package:rateel/lessons/lesson_shell.dart';
+import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
@@ -132,6 +133,10 @@ void main() {
     st.current = 0;
     st.progress.fillRange(0, st.progress.length, 0);
     setLessonsDone('intro-tajweed', 0);
+    // Unit 1 has video lessons (screen 07): no platform view in the test,
+    // the "not available" state with «تخطي».
+    videoMode = 'none';
+    addTearDown(() => videoMode = null);
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -149,15 +154,15 @@ void main() {
     await settle(tester);
     expect(find.textContaining('أولًا'), findsOneWidget);
     await tester.pump(const Duration(seconds: 3));
-    // Lesson 1 → placeholder page → «أكملت الدرس»: the completion plays and
-    // the next lesson opens by itself; three times.
+    // Lesson 1 → video lesson (07, not available) → «تخطي»: the completion
+    // plays and the next lesson opens by itself; three times.
     await tester.tap(find.text('مقدمة في علم التجويد'));
     for (var k = 0; k < 3; k++) {
       for (var i = 0; i < 3; i++) {
         await settle(tester);
       }
-      expect(find.text('أكملت الدرس'), findsOneWidget);
-      await tester.tap(find.text('أكملت الدرس'));
+      expect(find.text('الفيديو غير متاح'), findsOneWidget);
+      await tester.tap(find.text('تخطي'));
       for (var i = 0; i < 8; i++) {
         await settle(tester);
       }
