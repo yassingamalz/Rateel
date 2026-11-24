@@ -72,3 +72,8 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Web check (`t07.js`): section end 1/3 gold play → tap → 2/3 pause → ‹ → 1/3. The widget test checks the waiting play
   and 2/3 (frames stop in the test after the section change, see the comment there).
 - Captures `capture-v6-*`, demo `demo-v6-phone.mp4`, APK 1.0.357.
+
+## 6. v7: corners faded towards the inside (2026-11-24)
+- Owner: the side lattices, above all the right one, should be faded, otherwise they compete with the button.
+- Horizontal masks on top of the vertical fade: left corner full at the edge → 70% at 45% → 0 at 80% of its box; right
+  corner → 50% at 22% → 0 at 50%. Before/after `corners-v6-v7.png`, captures `capture-v7-*`.

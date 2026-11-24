@@ -489,10 +489,26 @@ class _VideoLessonPageState extends State<VideoLessonPage>
                         Color(0x00000000),
                       ],
                     ).createShader(r),
-                    child: ColorFiltered(
-                      colorFilter: _cornerTone,
-                      child: Image.asset(
-                        'assets/ui/video/corner_bottom_left.webp',
+                    // Faded towards the inside (owner, 2026-11-24): the
+                    // lattice must not compete with «تخطي», above all on
+                    // the right.
+                    child: ShaderMask(
+                      blendMode: BlendMode.dstIn,
+                      shaderCallback: (r) => const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        stops: [0, 0.45, 0.8],
+                        colors: [
+                          Color(0xFF000000),
+                          Color(0xB3000000),
+                          Color(0x00000000),
+                        ],
+                      ).createShader(r),
+                      child: ColorFiltered(
+                        colorFilter: _cornerTone,
+                        child: Image.asset(
+                          'assets/ui/video/corner_bottom_left.webp',
+                        ),
                       ),
                     ),
                   ),
@@ -520,10 +536,26 @@ class _VideoLessonPageState extends State<VideoLessonPage>
                         Color(0x00000000),
                       ],
                     ).createShader(r),
-                    child: ColorFiltered(
-                      colorFilter: _cornerTone,
-                      child: Image.asset(
-                        'assets/ui/video/corner_bottom_right.webp',
+                    // Faded towards the inside (owner, 2026-11-24): the
+                    // lattice must not compete with «تخطي», above all on
+                    // the right.
+                    child: ShaderMask(
+                      blendMode: BlendMode.dstIn,
+                      shaderCallback: (r) => const LinearGradient(
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                        stops: [0, 0.22, 0.5],
+                        colors: [
+                          Color(0xFF000000),
+                          Color(0x80000000),
+                          Color(0x00000000),
+                        ],
+                      ).createShader(r),
+                      child: ColorFiltered(
+                        colorFilter: _cornerTone,
+                        child: Image.asset(
+                          'assets/ui/video/corner_bottom_right.webp',
+                        ),
                       ),
                     ),
                   ),
