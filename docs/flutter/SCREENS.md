@@ -37,5 +37,5 @@ Remember to connect these to real data (backend or app progress) before release.
 
 | Screen | What is mock | Where |
 |---|---|---|
-| 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. Only the user's lesson count is real (lessons done in the app). | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
+| 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. All values are demo, the user's lesson count too. | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
