@@ -1,4 +1,11 @@
-# Next session: lesson top bar (screen 02), then leaderboard (11), then back to the main line
+# Next session: leaderboard (11), then back to the main line
+
+**Update 2026-11-24:** screen 02 (shared lesson top bar, `lib/lessons/lesson_shell.dart`) is **approved and merged into
+`master`** (APK 1.0.330). Next: **screen 11**, branch `flutter/11-leaderboard` from `master`. Conflict C1 closed (keep
+04/06). **New rule: ask the owner before launching the critic** (it consumes a lot).
+
+---
+
 
 Screens done and missing: `docs/flutter/SCREENS.md`.
 

@@ -13,6 +13,8 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
   value (0% for a new user).
 
 ## Critic
+- **Ask the owner before launching the critic** (owner, 2026-11-24): it consumes a lot. Propose the critic
+  round, say why, and wait for a yes; never start it on your own.
 - The critic gets **no list of accepted differences**: it scores the whole screen one to one, placeholders
   included. Only owner-approved (✅) decisions are skipped (`CRITIC.md`, 2026-11-20).
 - Any deviation from the reference is **asked before it is built**, not built and listed afterwards.

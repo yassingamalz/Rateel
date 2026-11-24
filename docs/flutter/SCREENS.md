@@ -6,7 +6,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | N° | Screen | Reference | State |
 |---|---|---|---|
 | 01 | Open: no reference file. Owner will decide later what it is | – | to define |
-| 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | built, critic 9.2, **APK 1.0.327 to test** (`flutter/02-lesson-bar`) |
+| 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | **approved** (APK 1.0.330), merged into `master` |
 | 03 | Courses (المسارات التعليمية) | `03-corsi.webp` | done, approved, in `master` |
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
@@ -15,7 +15,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 08 | Open: no reference file | – | to define |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
-| 11 | Leaderboard (classifica) | `11-classifica.webp` | to do (next after 02) |
+| 11 | Leaderboard (classifica) | `11-classifica.webp` | to do (next) |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | to do |

@@ -72,3 +72,9 @@ Plan: `../02-lesson-bar.md`. Decisions: `../../DECISIONS.md`.
   while the menu is open** (in Angular the menu veil covers it). v4: button 15.5u (64 px on a 412 dp phone), gaps 2.8u,
   halo and pulse scaled with the button, capsule 46×7u, number 3.6u; the capsule fades out with the menu (300 ms) and
   back in on resume. Captures `capture-v4-*`, sheet `compare-v4-phone.jpg`.
+
+## 5. Approval (2026-11-24)
+- Owner: sizes v4 fine, **screen 02 approved** (APK 1.0.330). Conflict C1: keep the 04/06 buttons as they are.
+- v4 was not re-critiqued (owner rule from now on: ask before launching the critic).
+- Left as low items: restart closes the menu (Angular keeps it open), completion exit 500 ms (Angular 300 ms).
+- PR to `master` and merge.
