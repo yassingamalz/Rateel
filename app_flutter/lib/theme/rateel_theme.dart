@@ -160,6 +160,43 @@ class RateelColors {
   /// Conflict K10 with the screen-title gradient titleTop → titleBottom.
   static const leaderTitleTop = Color(0xFFF8F0C6);
   static const leaderTitleBottom = Color(0xFFF1DFA2);
+
+  // Leaderboard golds measured on reference 11 (owner 2026-11-24: "the gold
+  // brightness must match the reference"). Conflicts K1, K3, K6, K7, K8, K11.
+  static const leaderRimEdge = Color(0xFFA89C48);
+  static const leaderRimCore = Color(0xFFFCE75A);
+  static const leaderRimLight = Color(0xFFFFF878);
+  static const leaderRimCoreBright = Color(0xFFF8F27D);
+  static const leaderRimLightBright = Color(0xFFFFFFA8);
+  static const leaderRimThin = Color(0xCCCFC57A);
+  static const leaderDivider = [
+    Color(0xFFDDD88B),
+    Color(0xFFFFFFB8),
+    Color(0xFFE7E091),
+  ];
+  static const leaderTab = [
+    Color(0xFF9A7212),
+    Color(0xFFE4AE26),
+    Color(0xFFE8AB1F),
+    Color(0xFFFDE66E),
+  ];
+  static const leaderDisc = [
+    Color(0xFFEBAE1D),
+    Color(0xFFEDAB15),
+    Color(0xFFF2B827),
+  ];
+  static const leaderDiscRim = Color(0xFFF6E17A);
+  static const leaderStar = [Color(0xFFF0B42C), Color(0xFFF4B81C)];
+  static const leaderAvatarRim = [
+    Color(0xFFFFF6B0),
+    Color(0xFFF0D051),
+    Color(0xFFFEE476),
+  ];
+  static const leaderRing = Color(0xFFFCD542);
+
+  /// Modulates the gold art (medals, coins, avatars) to the reference's
+  /// warmer, slightly darker gold (#FCBA2D → #F3B02E, #FED210 → #F6BB2C).
+  static const leaderArtTone = Color(0xFFF8E6D8);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

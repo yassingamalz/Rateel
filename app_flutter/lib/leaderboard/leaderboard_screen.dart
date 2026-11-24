@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 import 'dart:ui' show PointerDeviceKind, lerpDouble;
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,8 +59,8 @@ class _Metrics {
   double get tabsHitPad => u * 1.4;
   double get headerH => u * 13.6;
   double get rowH => u * 16.4;
-  double get rowGap => u * 0.5; // critic v1 A4
-  double get listTop => u * 0.3;
+  double get rowGap => u * 1.2; // reference: rows 280–420, 432–565 px
+  double get listTop => u * 0.8;
   double get rowInset => u * 1.2;
   double get pitch => rowH + rowGap;
   double get barH => u * 16.5;
@@ -302,7 +303,34 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                           (_) => _checkMe(),
                         );
                       }
-                      return _list(m, box.maxWidth);
+                      // Reference: the rows fade out just above the pinned
+                      // bar (row 3 dimmed); no fade while the bar is hidden.
+                      final barTop =
+                          m.size.height -
+                          u * 6.6 -
+                          m.barH -
+                          m.panel.top -
+                          m.headerH;
+                      final showBar = _meIndex >= 3 && !_meVisible;
+                      final f0 = ((barTop - u * 5) / box.maxHeight).clamp(
+                        0.0,
+                        1.0,
+                      );
+                      final f1 = (barTop / box.maxHeight).clamp(0.0, 1.0);
+                      return ShaderMask(
+                        blendMode: BlendMode.dstIn,
+                        shaderCallback: (r) => LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white.withValues(alpha: showBar ? 0.55 : 1),
+                          ],
+                          stops: [0, f0, f1],
+                        ).createShader(r),
+                        child: _list(m, box.maxWidth),
+                      );
                     },
                   ),
                 ),
@@ -422,41 +450,59 @@ class _DragScroll extends ScrollBehavior {
   Widget buildScrollbar(context, child, details) => child;
 }
 
-/// Gold rim token (goldEdge 0.15u outside + goldHighlight 0.12u inside),
-/// conflict K1: thinner than the reference's 4 px rim.
+/// Gold rim as the reference (owner 2026-11-24, K1): ≈ 0.6u, dark-gold
+/// edges #A89C48, bright core #FCE75A, centre #FFF878; the pinned bar's rim
+/// is brighter ([bright]: #F8F27D / #FFFFA8). [thin]: the 1 px pale line of
+/// the tab container.
 class _GoldRimPainter extends CustomPainter {
-  _GoldRimPainter({required this.u, required this.radius, this.extra = 0});
+  _GoldRimPainter({
+    required this.u,
+    required this.radius,
+    this.extra = 0,
+    this.bright = false,
+    this.thin = false,
+  });
 
   final double u;
   final double radius;
   final double extra;
+  final bool bright;
+  final bool thin;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final outer = math.max(1.0, u * 0.15);
-    final inner = math.max(1.0, u * 0.12);
+    final w = thin ? math.max(1.0, u * 0.12) : u * 0.6;
     final r1 = RRect.fromRectAndRadius(
-      (Offset.zero & size).deflate(outer / 2),
-      Radius.circular(radius - outer / 2),
+      (Offset.zero & size).deflate(w / 2),
+      Radius.circular(radius - w / 2),
     );
-    canvas.drawRRect(
-      r1,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = outer
-        ..color = RateelColors.goldEdge,
-    );
-    final r2 = RRect.fromRectAndRadius(
-      (Offset.zero & size).deflate(outer + inner / 2),
-      Radius.circular(radius - outer - inner / 2),
-    );
-    canvas.drawRRect(
-      r2,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = inner
-        ..color = RateelColors.goldHighlight,
-    );
+    Paint stroke(double width, Color c) => Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = width
+      ..color = c;
+    if (thin) {
+      canvas.drawRRect(r1, stroke(w, RateelColors.leaderRimThin));
+    } else {
+      canvas.drawRRect(r1, stroke(w, RateelColors.leaderRimEdge));
+      canvas.drawRRect(
+        r1,
+        stroke(
+          w * 0.62,
+          bright
+              ? RateelColors.leaderRimCoreBright
+              : RateelColors.leaderRimCore,
+        ),
+      );
+      canvas.drawRRect(
+        r1,
+        stroke(
+          w * 0.25,
+          bright
+              ? RateelColors.leaderRimLightBright
+              : RateelColors.leaderRimLight,
+        ),
+      );
+    }
     if (extra > 0) {
       canvas.drawRRect(
         r1,
@@ -518,17 +564,14 @@ class _Header extends StatelessWidget {
               left: u * 1.2,
               right: u * 1.2,
               bottom: 0,
-              height: math.max(1.0, u * 0.25),
-              child: DecoratedBox(
+              // Reference: 3 px, #DDD88B / #FFFFB8 / #E7E091.
+              height: u * 0.38,
+              child: const DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      RateelColors.goldEdge.withValues(alpha: 0.6),
-                      RateelColors.goldHighlight,
-                      RateelColors.goldHighlight,
-                      RateelColors.goldEdge.withValues(alpha: 0.6),
-                    ],
-                    stops: const [0, 0.15, 0.85, 1],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: RateelColors.leaderDivider,
                   ),
                 ),
               ),
@@ -623,7 +666,12 @@ class _PlayerRow extends StatelessWidget {
               ? 0.0
               : math.sin(h.value * math.pi * 2).abs();
           return CustomPaint(
-            foregroundPainter: _GoldRimPainter(u: u, radius: radius, extra: v),
+            foregroundPainter: _GoldRimPainter(
+              u: u,
+              radius: radius,
+              extra: v,
+              bright: true,
+            ),
             child: child,
           );
         },
@@ -773,6 +821,8 @@ class _Medal extends StatelessWidget {
     Widget img = Image.asset(
       'assets/ui/leaderboard/medal_${medals[place]}.webp',
       height: u * 11,
+      color: RateelColors.leaderArtTone,
+      colorBlendMode: BlendMode.modulate,
       filterQuality: FilterQuality.medium,
     );
     final s = shine;
@@ -832,7 +882,7 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rim = u * 0.55; // critic v1 A6
+    final rim = u * 0.47; // reference: 4 px pale rim
     return Container(
       width: d,
       height: d,
@@ -842,12 +892,8 @@ class _Avatar extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          // Lit at the top and bottom, as the screen 05 unit ring.
-          colors: [
-            RateelColors.unitRingLockedTop,
-            RateelColors.unitRingSide,
-            RateelColors.unitRingTopBottom,
-          ],
+          // Reference: pale cream-gold rim, lit at the top and bottom.
+          colors: RateelColors.leaderAvatarRim,
         ),
         boxShadow: [
           BoxShadow(
@@ -860,6 +906,8 @@ class _Avatar extends StatelessWidget {
       child: ClipOval(
         child: Image.asset(
           player.avatarAsset,
+          color: RateelColors.leaderArtTone,
+          colorBlendMode: BlendMode.modulate,
           fit: BoxFit.cover,
           filterQuality: FilterQuality.medium,
         ),
@@ -895,7 +943,7 @@ class _Points extends StatelessWidget {
             shaderCallback: (r) => const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [RateelColors.glyphGoldTop, RateelColors.glyphGoldBottom],
+              colors: RateelColors.leaderStar,
             ).createShader(r),
             child: SvgPicture.asset(
               'assets/ui/glyphs/star.svg',
@@ -939,7 +987,12 @@ class _Reward extends StatelessWidget {
             ).copyWith(shadows: titleShadows(u)),
           ),
           SizedBox(width: u * 0.8),
-          Image.asset(coinAssets[place], height: u * 6),
+          Image.asset(
+            coinAssets[place],
+            height: u * 6,
+            color: RateelColors.leaderArtTone,
+            colorBlendMode: BlendMode.modulate,
+          ),
         ],
       ),
     );
@@ -969,8 +1022,9 @@ class _UserBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: RateelColors.gold.withValues(alpha: 0.15),
-            blurRadius: u * 2,
+            // Reference: ≈ 40% gold glow around the bar (K7).
+            color: RateelColors.gold.withValues(alpha: 0.40),
+            blurRadius: u * 1.6,
           ),
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.30),
@@ -980,7 +1034,7 @@ class _UserBar extends StatelessWidget {
         ],
       ),
       child: CustomPaint(
-        foregroundPainter: _GoldRimPainter(u: u, radius: radius),
+        foregroundPainter: _GoldRimPainter(u: u, radius: radius, bright: true),
         child: _RowContent(
           u: u,
           player: player,
@@ -1000,7 +1054,7 @@ class _UserBar extends StatelessWidget {
   }
 }
 
-/// Rank of the user in the pinned bar: flat gold disc (K6: tokens).
+/// Rank of the user in the pinned bar: gold disc as the reference (K6).
 class _GoldRank extends StatelessWidget {
   const _GoldRank({required this.u, required this.rank});
   final double u;
@@ -1014,7 +1068,15 @@ class _GoldRank extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: RateelColors.amber,
+        // Reference (K6, owner 2026-11-24): warm gold, lighter at the bottom,
+        // pale rim lit at the top.
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: RateelColors.leaderDisc,
+          stops: [0, 0.55, 1],
+        ),
+        border: Border.all(color: RateelColors.leaderDiscRim, width: u * 0.3),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.35),
@@ -1031,7 +1093,7 @@ class _GoldRank extends StatelessWidget {
   }
 }
 
-/// Chevron in a glass circle (glass button token, as screen 02).
+/// Chevron in a gold ring (reference, K8).
 class _Chevron extends StatelessWidget {
   const _Chevron({required this.u});
   final double u;
@@ -1066,26 +1128,14 @@ class _ChevronPainter extends CustomPainter {
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u),
     );
     canvas.restore();
-    final disc = Rect.fromCircle(center: c, radius: r);
+    // Reference (K8, owner 2026-11-24): bright 0.3u ring, dark inside.
     canvas.drawCircle(
       c,
-      r,
-      Paint()
-        ..shader = RadialGradient(
-          radius: 0.707,
-          colors: [
-            RateelColors.gold.withValues(alpha: 0.08),
-            RateelColors.gold.withValues(alpha: 0.24),
-          ],
-        ).createShader(disc),
-    );
-    canvas.drawCircle(
-      c,
-      r - u * 0.1,
+      r - u * 0.15,
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.2
-        ..color = RateelColors.ringLine,
+        ..strokeWidth = u * 0.3
+        ..color = RateelColors.leaderRing,
     );
     final w = u * 1.7;
     final p = Path()
@@ -1133,9 +1183,13 @@ class _Tabs extends StatelessWidget {
         final sel = filter.index;
         final drawn = Padding(
           padding: EdgeInsets.symmetric(horizontal: pad),
-          // Dark fill + gold rim token (critic v1 A11).
+          // Dark fill + thin pale-gold line (reference).
           child: CustomPaint(
-            foregroundPainter: _GoldRimPainter(u: u, radius: radius),
+            foregroundPainter: _GoldRimPainter(
+              u: u,
+              radius: radius,
+              thin: true,
+            ),
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(radius),
@@ -1161,7 +1215,14 @@ class _Tabs extends StatelessWidget {
                     height: h,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: RateelColors.amber,
+                        // Reference gold tab: darker at the top, lit at the
+                        // bottom (K3, owner 2026-11-24).
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: RateelColors.leaderTab,
+                          stops: [0, 0.3, 0.85, 1],
+                        ),
                         borderRadius: BorderRadius.circular(radius),
                         boxShadow: [
                           BoxShadow(
@@ -1169,12 +1230,6 @@ class _Tabs extends StatelessWidget {
                             blurRadius: u * 2,
                           ),
                         ],
-                      ),
-                      child: CustomPaint(
-                        foregroundPainter: _GoldRimPainter(
-                          u: u,
-                          radius: radius,
-                        ),
                       ),
                     ),
                   ),
@@ -1241,21 +1296,32 @@ class _Ribbon extends StatelessWidget {
           fit: BoxFit.fill,
           filterQuality: FilterQuality.medium,
         ),
-        CustomPaint(painter: _RibbonTitle(u: u)),
+        CustomPaint(
+          painter: _RibbonTitle(
+            u: u,
+            dpr: MediaQuery.devicePixelRatioOf(context),
+          ),
+        ),
       ],
     );
   }
 }
 
-/// Title in the ribbon: straight as the reference (owner 2026-11-24: the
-/// arched title differed from it), warm gold-cream gradient, 6.6u.
+/// Title in the ribbon, arched along the ribbon as the reference (owner
+/// 2026-11-24): measured sagitta 1.05u over the text width, letters tilted
+/// along the curve (≈ 7° at the ends). The title is drawn once into an image
+/// and mapped on a triangle mesh along the arch (no strip seams).
 class _RibbonTitle extends CustomPainter {
-  _RibbonTitle({required this.u});
+  _RibbonTitle({required this.u, required this.dpr});
   final double u;
+  final double dpr;
+
+  static ui.Image? _image;
+  static double _imageKey = -1;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final fs = u * 6.6;
+    final fs = u * 6.2;
     final tp = TextPainter(
       text: TextSpan(
         text: 'المتصدرين',
@@ -1278,21 +1344,75 @@ class _RibbonTitle extends CustomPainter {
       ),
       textDirection: TextDirection.rtl,
     )..layout();
-    tp.paint(
-      canvas,
-      Offset(
-        (size.width - tp.width) / 2,
-        size.height * titleCenter - tp.height / 2,
-      ),
+    final pad = u * 1.5;
+    final w = tp.width + pad * 2;
+    final h = tp.height + pad * 2;
+    final key = u * 1000 + dpr;
+    if (_image == null || _imageKey != key) {
+      final rec = ui.PictureRecorder();
+      final c = Canvas(rec)..scale(dpr);
+      tp.paint(c, Offset(pad, pad));
+      _image = rec.endRecording().toImageSync(
+        (w * dpr).ceil(),
+        (h * dpr).ceil(),
+      );
+      _imageKey = key;
+    }
+    final image = _image!;
+    final half = tp.width / 2;
+    final sag = u * 1.05;
+    final cx = size.width / 2;
+    final cy = size.height * titleCenter;
+    const n = 48;
+    final tops = <Offset>[],
+        bots = <Offset>[],
+        tt = <Offset>[],
+        tb = <Offset>[];
+    for (var i = 0; i <= n; i++) {
+      final x = -w / 2 + w * i / n;
+      final dy = sag * (x / half) * (x / half);
+      final ang = math.atan(2 * sag * x / (half * half));
+      final nrm = Offset(-math.sin(ang), math.cos(ang));
+      final p = Offset(cx + x, cy + dy);
+      tops.add(p - nrm * (h / 2));
+      bots.add(p + nrm * (h / 2));
+      final tx = (x + w / 2) * dpr;
+      tt.add(Offset(tx, 0));
+      tb.add(Offset(tx, h * dpr));
+    }
+    final pos = <Offset>[], tex = <Offset>[];
+    for (var i = 0; i < n; i++) {
+      pos.addAll([
+        tops[i],
+        bots[i],
+        tops[i + 1],
+        bots[i],
+        bots[i + 1],
+        tops[i + 1],
+      ]);
+      tex.addAll([tt[i], tb[i], tt[i + 1], tb[i], tb[i + 1], tt[i + 1]]);
+    }
+    canvas.drawVertices(
+      ui.Vertices(ui.VertexMode.triangles, pos, textureCoordinates: tex),
+      BlendMode.srcOver,
+      Paint()
+        ..shader = ImageShader(
+          image,
+          TileMode.clamp,
+          TileMode.clamp,
+          Matrix4.identity().storage,
+          filterQuality: FilterQuality.medium,
+        ),
     );
   }
 
   @override
-  bool shouldRepaint(_RibbonTitle old) => old.u != u;
+  bool shouldRepaint(_RibbonTitle old) => old.u != u || old.dpr != dpr;
 }
 
-/// Vertical centre of the title in the ribbon box (fraction of its height).
-double titleCenter = 0.47;
+/// Vertical centre of the title's middle in the ribbon box (fraction of its
+/// height); the ends of the arch sit [sag] lower.
+double titleCenter = 0.39;
 
 /// Gold ogee lattice (A2), tiled and faded out downwards (reference: gone by
 /// y ≈ 31u). The asset's black is keyed to alpha when it is imported.

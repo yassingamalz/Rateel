@@ -25,8 +25,9 @@ and run the critic without exclusions (desktop 1844×853 and phone 915×412).
 | C10 | Content dimming under the open menu | 12% black (🟡, reference has none) | unchanged | owner to confirm |
 
 ## Screen 11, leaderboard (2026-11-24)
-Measured on `screens/11-leaderboard/reference.webp`. Built provisionally with the **proposal** column (owner: decide at
-the end of the project).
+Measured on `screens/11-leaderboard/reference.webp`. **Owner, 2026-11-24 (v5): the leaderboard matches the reference**
+(gold brightness, title, text): K1, K3, K6, K7, K8, K9, K10, K11 are built with the **reference values** (`leader*` tokens);
+the last column below is the original proposal. Decide at the end of the project whether the tokens or the reference win app-wide.
 
 | # | What | Confirmed token | Reference value | Built provisionally |
 |---|---|---|---|---|
@@ -40,3 +41,4 @@ the end of the project).
 | K8 | Chevron button | glass button: ring 0.2u #D8C35A, gold radial fill | ring 0.5u #FFDC4A, dark inside (critic v1) | glass button token |
 | K9 | Text cream | `titleCream #FAF1D8` | #FDFBDB … #FFFEDE (critic v1) | **reference value** `leaderText #FFFBDC` (owner 2026-11-24: brightness as the reference) |
 | K10 | Title in the ribbon | screen-title gradient `titleTop #FFFBEA → titleBottom #E9D7A8` | warm gold-cream ≈ #F5E9B4 | **reference value** `leaderTitleTop #F8F0C6 → leaderTitleBottom #F1DFA2` (owner 2026-11-24) |
+| K11 | Gold glyphs and art | star `glyphGoldTop #FFD556 → glyphGoldBottom #EFB527`; medals/coins as drawn | star #F0B42C → #F4B81C; medals/coins warmer and darker | **reference**: `leaderStar`, `leaderArtTone` modulation |

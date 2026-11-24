@@ -62,3 +62,17 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
   lessons line 3.5u at 88%, book 3.5u. Measured after: title box and colour, lessons and names within a few px of the
   reference. Captures `capture-v4-*`, sheet `compare-v4-phone.jpg`.
 - Not matchable: the reference writes «عبدالله» with the ﷲ ligature, Readex Pro has none (data text, not changed).
+
+## 6. v5: arched title, reference golds (2026-11-24)
+- Owner on v4: «it does not match: the title is not curved as in the reference, the gold brightness of the different
+  elements does not match, the fonts too». (v4 had made the title straight: wrong reading of the reference.)
+- Measured on the reference: title baseline arched, sagitta 1.05u over the text, letters tilted ≈ 7° at the ends;
+  rims ≈ 5 px (#A89C48 edges, #FCE75A core, #FFF878 centre; bar #F8F27D/#FFFFA8 with a strong glow); divider 3 px
+  #DDD88B/#FFFFB8/#E7E091; gold tab #9A7212 (top) → #E5A71C → #FDE66E (bottom); «15» disc #EBAE1D→#F2B827 with a pale
+  rim; star #F0B42C→#F4B81C; chevron ring #FCD542 with a dark inside; avatar rim #FEFEC6/#F0D051; medals and coins
+  warmer/darker than our assets (#F3B02E vs #FCBA2D, #F6BB2C vs #FED210); rows 1.2u apart; row 3 half hidden and dimmed
+  under the bar.
+- v5: title rendered once into an image and mapped on a 48-segment triangle mesh along the arch (no seams), 6.2u;
+  all golds above as `leader*` tokens; art modulated by `leaderArtTone`; rows gap 1.2u, list top 0.8u; rows fade
+  (to 55%) in the 5u above the pinned bar while it is shown. Captures `capture-v5-*`, `compare-v5-phone.jpg`,
+  `demo-v5-phone.mp4`. Conflicts updated (reference values built, K11 added).
