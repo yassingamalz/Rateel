@@ -58,6 +58,7 @@ class _LessonPageState extends State<LessonPage> {
   Future<void> _finish() async {
     if (_finishing || _left) return;
     _finishing = true;
+    _shell.currentState?.lock();
     setState(() => _step = _total);
     // Fill reaches the end (300 ms), the light runs along the capsule, then
     // the page leaves (Angular: 100 ms, exit).

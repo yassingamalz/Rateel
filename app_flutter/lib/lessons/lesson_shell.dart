@@ -97,9 +97,14 @@ class LessonShellState extends State<LessonShell>
 
   /// The lesson is complete: the light runs along the full capsule, with a
   /// milestone haptic. Completes when the light has passed.
-  Future<void> celebrate() async {
+  /// Blocks the controls and the back button (the lesson is finishing).
+  void lock() {
     setPaused(false);
     setState(() => _locked = true);
+  }
+
+  Future<void> celebrate() async {
+    lock();
     Haptics.milestone();
     await _sweep.forward(from: 0);
   }
@@ -290,10 +295,12 @@ class LessonTopBar extends StatelessWidget {
         // Capsule, vertically centred on the button.
         Positioned(
           key: const ValueKey('capsule'),
-          top: u * (m + b / 2 - LessonBarMetrics.capsuleH / 2),
-          left: u * m,
-          width: u * LessonBarMetrics.capsuleW,
-          height: u * LessonBarMetrics.capsuleH,
+          // Whole pixels: the 1 px rim stays crisp (critic v2 N2).
+          top: (u * (m + b / 2 - LessonBarMetrics.capsuleH / 2))
+              .roundToDouble(),
+          left: (u * m).roundToDouble(),
+          width: (u * LessonBarMetrics.capsuleW).roundToDouble(),
+          height: (u * LessonBarMetrics.capsuleH).roundToDouble(),
           child: Semantics(
             label: 'الخطوة $step من $total',
             child: TweenAnimationBuilder<double>(
@@ -375,6 +382,18 @@ class _CapsulePainter extends CustomPainter {
           colors: [RateelColors.cardTop, RateelColors.cardMid],
         ).createShader(Offset.zero & size),
     );
+    // Inset shadow on the empty glass, under the gold (critic v2 N1)
+    // (CSS inset 0 0.2u 0.5u black 45%): a thin shade at the
+    // top, a hint at the bottom.
+    canvas.drawPath(
+      (Path()
+        ..fillType = PathFillType.evenOdd
+        ..addRect((Offset.zero & size).inflate(u * 3))
+        ..addRRect(rr.shift(Offset(0, u * 0.2)))),
+      Paint()
+        ..color = Colors.black.withValues(alpha: 0.45)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
+    );
     final fw = size.width * share;
     final fill = Rect.fromLTWH(size.width - fw, 0, fw, size.height);
     if (fw > 0) {
@@ -430,17 +449,6 @@ class _CapsulePainter extends CustomPainter {
           ).createShader(lead),
       );
     }
-    // Inset shadow (CSS inset 0 0.2u 0.5u black 45%): a thin shade at the
-    // top, a hint at the bottom.
-    canvas.drawPath(
-      (Path()
-        ..fillType = PathFillType.evenOdd
-        ..addRect((Offset.zero & size).inflate(u * 3))
-        ..addRRect(rr.shift(Offset(0, u * 0.2)))),
-      Paint()
-        ..color = Colors.black.withValues(alpha: 0.45)
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
-    );
     // Light running along the capsule (right → left, as the fill grows).
     if (sweep > 0 && sweep < 1) {
       final band = u * 9;
@@ -499,10 +507,10 @@ class _CapsulePainter extends CustomPainter {
     canvas.restore();
     // Rim: thin (mockup 1 px at 853), in u.
     canvas.drawRRect(
-      rr.deflate(u * 0.06),
+      rr.deflate(math.max(1.0, u * 0.12) / 2),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.12
+        ..strokeWidth = math.max(1.0, u * 0.12)
         ..color = RateelColors.cardRimTop,
     );
   }
