@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../core/haptics.dart';
@@ -25,8 +27,8 @@ double videoStartAt = 0;
 /// Planned data: `sections: [{start, end}]` in seconds per video lesson.
 int videoSectionCount = 3;
 
-/// Thumbnails bundled for the posters (real YouTube thumbnails of the lesson
-/// videos; the other links of the data are dead, 404 on YouTube).
+/// Posters: the YouTube thumbnail of the video (network); these two are also
+/// bundled for the offline review captures only.
 const _posters = {'BqFxf-WspTc', 'XfDdA9UgOVQ'};
 
 /// Geometry of screen 07 in u (1% of the screen height), measured on
@@ -211,6 +213,11 @@ class _VideoLessonPageState extends State<VideoLessonPage>
         if (!mounted) return;
         if (v.hasError) return _setUnavailable();
         final playing = v.playerState == PlayerState.playing;
+        // Loading/buffering means the embed works: no "not available".
+        if (v.playerState == PlayerState.buffering ||
+            v.playerState == PlayerState.cued) {
+          _timeout?.cancel();
+        }
         if (playing && !_started) {
           _timeout?.cancel();
           _started = true;
@@ -227,12 +234,16 @@ class _VideoLessonPageState extends State<VideoLessonPage>
           if (d > 0 && mounted) _dur = d;
         }
         if (!mounted || _sectionEnd) return;
+        if (s.position > Duration.zero && !_started) {
+          _timeout?.cancel();
+          _started = true;
+        }
         setState(() => _pos = s.position.inMilliseconds / 1000);
         _checkSectionEnd();
       }),
     );
     // No network or a blocked embed never reaches «playing».
-    _timeout = Timer(const Duration(seconds: 15), () {
+    _timeout = Timer(const Duration(seconds: 20), () {
       if (!_started) _setUnavailable();
     });
   }
@@ -811,12 +822,30 @@ class _VideoLessonPageState extends State<VideoLessonPage>
   /// bands. The poster stays on top until the video plays and while the pause
   /// menu is open (the platform view cannot be blurred by the 02 veil).
   Widget _player(double u) {
-    final poster = _videoId != null && _posters.contains(_videoId)
-        ? Image.asset(
-            'assets/ui/video/thumbs/$_videoId.webp',
-            fit: BoxFit.contain,
-          )
+    final id = _videoId;
+    final bundled = id != null && _posters.contains(id)
+        ? Image.asset('assets/ui/video/thumbs/$id.webp', fit: BoxFit.contain)
         : const SizedBox.expand();
+    final poster = id == null
+        ? bundled
+        // 16:9 maxres thumbnail; the 4:3 one has black bands baked in.
+        : Image.network(
+            YoutubePlayerController.getThumbnail(
+              videoId: id,
+              quality: ThumbnailQuality.max,
+              format: ThumbnailFormat.jpeg,
+            ),
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stack) => Image.network(
+              YoutubePlayerController.getThumbnail(
+                videoId: id,
+                quality: ThumbnailQuality.high,
+                format: ThumbnailFormat.jpeg,
+              ),
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stack) => bundled,
+            ),
+          );
     final showPoster = _demoMode || !_started || _paused;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -830,14 +859,7 @@ class _VideoLessonPageState extends State<VideoLessonPage>
               fit: StackFit.expand,
               children: [
                 if (_yt != null && !_unavailable)
-                  IgnorePointer(
-                    child: YoutubePlayer(
-                      controller: _yt!,
-                      autoFullScreen: false,
-                      enableFullScreenOnVerticalDrag: false,
-                      backgroundColor: Colors.black,
-                    ),
-                  ),
+                  IgnorePointer(child: _InlineYoutube(controller: _yt!)),
                 AnimatedOpacity(
                   opacity: showPoster ? 1 : 0,
                   duration: const Duration(milliseconds: 250),
@@ -932,3 +954,41 @@ ColorFilter _scale(double r, double g, double b, {double sat = 1}) {
 final _iconTone = _scale(0.9, 0.88, 0.9, sat: 0.82);
 final _cornerTone = _scale(0.66, 0.64, 0.8);
 final _mosqueTone = _scale(1.32, 1.21, 1.08);
+
+/// The YouTube embed inside the page, under the lesson controls (owner's
+/// phone test: the package's `YoutubePlayer` draws the WebView in an overlay
+/// above the whole route on Android, covering the capsule and «تخطي»). On
+/// mobile the controller's WebView is placed directly in the tree; on the web
+/// the package's player is already inline.
+class _InlineYoutube extends StatefulWidget {
+  const _InlineYoutube({required this.controller});
+
+  final YoutubePlayerController controller;
+
+  @override
+  State<_InlineYoutube> createState() => _InlineYoutubeState();
+}
+
+class _InlineYoutubeState extends State<_InlineYoutube> {
+  @override
+  void initState() {
+    super.initState();
+    if (!kIsWeb) {
+      widget.controller.initWithParams(params: widget.controller.params);
+      widget.controller.webViewController.setBackgroundColor(Colors.black);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb) {
+      return YoutubePlayer(
+        controller: widget.controller,
+        autoFullScreen: false,
+        enableFullScreenOnVerticalDrag: false,
+        backgroundColor: Colors.black,
+      );
+    }
+    return WebViewWidget(controller: widget.controller.webViewController);
+  }
+}

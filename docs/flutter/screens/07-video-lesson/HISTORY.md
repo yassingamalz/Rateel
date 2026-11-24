@@ -77,3 +77,16 @@ owner's OK). Plan: `../07-video-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Owner: the side lattices, above all the right one, should be faded, otherwise they compete with the button.
 - Horizontal masks on top of the vertical fade: left corner full at the edge → 70% at 45% → 0 at 80% of its box; right
   corner → 50% at 22% → 0 at 50%. Before/after `corners-v6-v7.png`, captures `capture-v7-*`, APK 1.0.359.
+
+## 7. v8: YouTube inside the page, native look (2026-11-24)
+- Owner on APK 1.0.359 (screenshot): the video appeared above the buttons (capsule and «تخطي» cut), and after a tap the
+  app's "video not available" state appeared. The lesson videos will be the app's lessons rendered as linear videos with
+  sections (lesson-production `docs/production/STATO-E-DIREZIONI.md`, «Direzione B»); they go on YouTube to count views from
+  the app; the app must not bundle them (weight) and the player must look native. Test video: `rateel-lezione1-v2.mp4`.
+- Cause 1: `youtube_player_iframe`'s `YoutubePlayer` on mobile shows the WebView through an `OverlayPortal`, i.e. above the
+  whole route, ignoring our Stack. Fix: `_InlineYoutube` puts `WebViewWidget(controller.webViewController)` in the page
+  (web keeps the package's inline player); `webview_flutter` is now a direct dependency.
+- Cause 2: "not available" came from the 15 s timeout when the stream did not report `playing`. Now buffering/cued/position
+  > 0 count as working, timeout 20 s.
+- Poster: maxres 16:9 thumbnail from the network, high-quality fallback, bundled thumbs only for offline review.
+- Captures `capture-v8-*`. To verify on the phone (platform views cannot be checked in the headless browser).
