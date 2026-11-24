@@ -229,8 +229,11 @@ class _LessonsScreenState extends State<LessonsScreen>
   }
 
   Future<void> _openLesson(int k) async {
-    final finished = await Navigator.of(context)
-        .push<bool>(lessonPageRoute(_lessons[k], k + 1, _lessons.length));
+    // Root navigator: the lesson covers the side rail (screen 02, owner).
+    final finished = await Navigator.of(
+      context,
+      rootNavigator: true,
+    ).push<bool>(lessonPageRoute(_lessons[k], k + 1, _lessons.length));
     if (!mounted) return;
     if (finished == true && k == _current) await _complete(k);
   }

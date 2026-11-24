@@ -8,6 +8,7 @@ import 'nav/side_nav.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
+import 'lessons/lesson_page.dart';
 import 'units/unit_data.dart';
 
 Future<void> main() async {
@@ -57,6 +58,9 @@ Future<void> main() async {
       }
     }
   }
+  // Review aid (screen 02): `?steps=16` steps in the placeholder lesson.
+  placeholderSteps =
+      int.tryParse(Uri.base.queryParameters['steps'] ?? '') ?? placeholderSteps;
   startCompleteLesson = int.tryParse(
     Uri.base.queryParameters['completeLesson'] ?? '',
   );
