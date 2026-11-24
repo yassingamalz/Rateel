@@ -11,11 +11,11 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
-| 07 | Video lesson (dark / light) | `07-lezione-video-{dark,light}.webp` | to do (after 02 and 11) |
+| 07 | Video lesson (dark / light) | `07-lezione-video-{dark,light}.webp` | to do (next, after the final critic of 06) |
 | 08 | Open: no reference file | – | to define |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
-| 11 | Leaderboard (classifica) | `11-classifica.webp` | **in progress** on `flutter/11-leaderboard` (plan, waiting for the owner) |
+| 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), PR `flutter/11-leaderboard` → `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | to do |

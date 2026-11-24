@@ -1,3 +1,45 @@
+# Next session: final critic of screen 06, then screen 07 (video lesson)
+
+**Update 2026-11-24:** screen 11 (leaderboard, `lib/leaderboard/`) is **approved** (APK 1.0.346), PR
+`flutter/11-leaderboard` → `master` (merge it before starting). It runs on **mock data** (`SCREENS.md`); its conflicts
+K1–K11 are in the project-wide register `STYLE-CONFLICTS.md` (decided at the end of the project).
+
+**Rules learned on screen 11 (read `LESSONS-LEARNED.md`):**
+- **Critic at phone size only (915×412)**, and **ask the owner before launching it**.
+- **Verify element by element with numbers before showing anything**: boxes of every element (±4 px at 853), gradient and
+  line profiles, zoomed side-by-side per region, overlays for titles (`tools/flutter-review/leaderboard-verify.py` as a model).
+  Whole-screen looks hid many errors on screen 11 (title arch, lattice scale, tab orientation, row spacing, gold brightness).
+- `Image(repeat: ...)` needs `fit: BoxFit.none`.
+
+## Next steps, in order (owner, 2026-11-24)
+1. **Final critic of screen 06** (lessons of the unit, look B) on `master`, phone size only, after asking the owner; fix the
+   high/medium items on a branch `flutter/06-lessons-final`, verify element by element, APK.
+2. **Screen 07, video lesson** (`07-lezione-video-{dark,light}.webp`, branch `lesson-production`), using the approved top bar
+   of screen 02 (`lib/lessons/lesson_shell.dart`). Branch `flutter/07-video-lesson` from `master`. Procedure in `PROCESS.md`.
+3. Then 09 (practice / recitation), 10 and 10b (test), and the rest in `SCREENS.md`.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel. Prima unisci la PR di flutter/11-leaderboard in master se non e' gia' unita (chiedimelo).
+Leggi CLAUDE.md, poi docs/flutter/DECISIONS.md, docs/flutter/PROCESS.md, docs/flutter/DESIGN-SYSTEM.md,
+docs/flutter/LESSONS-LEARNED.md, docs/flutter/NEXT-SESSION.md, docs/flutter/SCREENS.md, docs/flutter/STYLE-CONFLICTS.md,
+docs/flutter/screens/06-lessons/HISTORY.md e docs/flutter/screens/11-leaderboard/HISTORY.md (soprattutto la verifica
+elemento per elemento, verify-v6.md).
+Obiettivo 1: critico finale della schermata 06 (lezioni dell'unita', look B) solo in formato telefono 915x412: chiedimelo
+prima di lanciarlo. Correggi i punti alti/medi su un branch flutter/06-lessons-final da master, verifica elemento per
+elemento con i numeri (posizioni, dimensioni, sfumature, linee) prima di mostrarmi qualcosa, poi confronto, video e APK.
+Obiettivo 2: schermata 07, lezione video, uno a uno con il riferimento ChatGPT 07-lezione-video (dark/light, branch
+lesson-production, docs/design/glassy-gamified/screens/), con la barra in alto della 02 gia' approvata. Branch
+flutter/07-video-lesson da master. Prima piano e domande, poi prompt ChatGPT per gli elementi mancanti (uno per blocco
+copiabile, dimmi quali immagini allegare), costruzione, verifica elemento per elemento, confronto, video e APK.
+Conflitti con i token nel registro STYLE-CONFLICTS.md. Crea HISTORY.md della schermata e tienilo aggiornato.
+Parla con me in italiano.
+```
+
+---
+
+## Archive: hand-off that started screen 11 (2026-11-24)
+
 # Next session: leaderboard (11), then back to the main line
 
 **Update 2026-11-24:** screen 02 (shared lesson top bar, `lib/lessons/lesson_shell.dart`) is **approved and merged into

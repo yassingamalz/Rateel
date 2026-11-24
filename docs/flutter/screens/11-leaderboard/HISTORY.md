@@ -100,3 +100,8 @@ Plan: `../11-leaderboard.md`. Decisions: `../../DECISIONS.md`.
 - Tabs: gold tab with shaded left edge and lit right rim (no top line), separators pale gold #93985F, column outline
   dark-gold on the left and bright #EEE695 on the right, inactive labels w420.
 - Detail sheet `detail-v7-title-avatar-tab.jpg` (reference left, app right), `compare-v7-phone.jpg`.
+
+## 9. Approval (2026-11-24)
+- Owner: «approved, fine for me» on v7 (APK 1.0.346). PR `flutter/11-leaderboard` → `master`.
+- Still open for later: mock data (`SCREENS.md`), conflicts K1–K11 (`STYLE-CONFLICTS.md`, end of the project), optional
+  ChatGPT avatar with the reference's 1st-place pose (grey cap + raised finger).

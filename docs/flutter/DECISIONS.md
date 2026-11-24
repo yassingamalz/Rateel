@@ -138,3 +138,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-24 | **APK 1.0.344**: screen 11 v6 (verified element by element). | ✅ |
 | 2026-11-24 | Screen 11 v7 (owner: title, avatar circles, tabs): title w680 5.9u checked by overlay; avatar ring as the reference (radial profiles), avatars without the warm tone; tab shading, outline and separators as the reference. Details in `screens/11-leaderboard/HISTORY.md` §8. | ✅ |
 | 2026-11-24 | **APK 1.0.346**: screen 11 v7. | ✅ |
+| 2026-11-24 | **Screen 11 (leaderboard) approved by the owner** (v7, APK 1.0.346). PR `flutter/11-leaderboard` → `master`. Next: final critic of 06 (phone only, ask first), then 07 (video lesson with the bar of 02), 09, 10/10b. | ✅ |
