@@ -87,3 +87,4 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Line spacing control removed (it collided with large text sizes); menu with the text size only (17.6u high), sentences
   at a fixed line height 1.4. Capture `capture-v10-menu-light-phone.png`.
 
+- APK 1.0.387 (v10).
