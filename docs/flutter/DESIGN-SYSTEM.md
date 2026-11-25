@@ -51,3 +51,21 @@ Proposed with screen 02 (lesson top bar), approved on the mockup by the owner (2
 | Lesson glass button | 9u, glass button token with the glow **outside the circle only**; paused: `badgeTop → amber`, rim `goldHighlight`, halo amber 25% 1.2u, pulse 0→1.8u | ✅ (mockup) |
 | Lesson veil | `lessonVeil #00140E` 45%, blur σ 0.55u, content 98% and 80% brightness | ✅ |
 
+## Tajweed colours (owner, 2026-11-25), confirmed ✅
+Source: the owner's colour wheel «قواعد ألوان التجويد», `docs/design-assets/reading-lesson/tajweed-colours-wheel.jpg`,
+sampled. Code: `TajweedColors` in `app_flutter/lib/lessons/reading_data.dart`. Same colours in both themes; black is the
+normal text colour, so those words take the theme's ink. Every screen that colours tajweed uses this table.
+
+| Colour | Value | Rules |
+|---|---|---|
+| Black (text ink) | #2B2321 | الإظهار، مد الطبيعي والعوض والبدل |
+| Yellow | #FFD231 | مد الصلة الصغرى، الألف الخنجرية |
+| Orange | #F08237 | مد اللين والعارض للسكون |
+| Red | #CD1518 | مد الصلة الكبرى، مد الواجب (المتصل، المنفصل) |
+| Purple | #8E4590 | مد الفرق، مد اللازم |
+| Dark blue | #013ED7 | تفخيم الراء |
+| Blue | #0B71BB | تفخيم |
+| Cyan | #07D3DA | قلقلة |
+| Green | #43B76E | الإدغام بغنة، إدغام المتماثلين بغنة، الإقلاب، النون والميم المشددتين، إخفاء شفوي، إخفاء حقيقي |
+| Grey | #AAA4A5 | الإدغام بدون غنة، إدغام المتجانسين، إدغام المتقاربين، المرسوم خلاف اللفظ، همزة الوصل، ألف التفريق، اللام الشمسية |
+

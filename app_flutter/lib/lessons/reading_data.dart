@@ -69,36 +69,71 @@ class ReadingContent {
   }
 }
 
-/// Tajweed colours of the marked words (owner, 2026-11-25: «respect the
-/// tajweed colours»), following the classic colour-coded mushaf: green =
-/// ghunna (ikhfa, idgham with ghunna, iqlab, noon/meem mushaddad), blue =
-/// qalqala, red = madd; izhar and the topic marks of the data (adab-*,
-/// intention, …) stay in the text colour. Two shades: dark and light theme.
-/// PROVISIONAL until the owner's list of colours.
-const _tajweedGreen = (Color(0xFF5BD26B), Color(0xFF1E8C2E));
-const _tajweedBlue = (Color(0xFF4FB3E8), Color(0xFF1F6FB5));
-const _tajweedRed = (Color(0xFFFF6B5B), Color(0xFFC62828));
+/// Tajweed colours of the marked words: the owner's colour wheel «قواعد ألوان
+/// التجويد» (2026-11-25, `docs/design-assets/reading-lesson/
+/// tajweed-colours-wheel.jpg`), sampled from it, the same in both themes.
+/// Black (izhar, natural madd) is the normal text colour, so those words take
+/// the theme's ink (cream on dark). Marks that are not tajweed rules (adab-*,
+/// intention, a generic shadda…) keep the text colour.
+class TajweedColors {
+  TajweedColors._();
+  static const ghunna = Color(0xFF43B76E); // green
+  static const silent = Color(0xFFAAA4A5); // grey
+  static const qalqala = Color(0xFF07D3DA); // cyan
+  static const tafkhim = Color(0xFF0B71BB); // blue
+  static const tafkhimRa = Color(0xFF013ED7); // dark blue
+  static const maddLazim = Color(0xFF8E4590); // purple
+  static const maddWajib = Color(0xFFCD1518); // red
+  static const maddArid = Color(0xFFF08237); // orange
+  static const maddSila = Color(0xFFFFD231); // yellow
+}
+
 const _tajweedByRule = {
-  'ikhfa': _tajweedGreen,
-  'idgham': _tajweedGreen,
-  'iqlab': _tajweedGreen,
-  'ghunnah': _tajweedGreen,
-  'shaddah': _tajweedGreen,
-  'qalqalah': _tajweedBlue,
-  'madd': _tajweedRed,
+  // Green: الإدغام بغنة، إدغام المتماثلين بغنة، الإقلاب، النون والميم
+  // المشددتين، إخفاء شفوي، إخفاء حقيقي. The data's generic «idgham» is read as
+  // الإدغام بغنة (to confirm with the owner).
+  'idgham': TajweedColors.ghunna,
+  'idgham-ghunnah': TajweedColors.ghunna,
+  'idgham-mutamathilain': TajweedColors.ghunna,
+  'iqlab': TajweedColors.ghunna,
+  'ghunnah': TajweedColors.ghunna,
+  'noon-meem-mushaddad': TajweedColors.ghunna,
+  'ikhfa': TajweedColors.ghunna,
+  'ikhfa-shafawi': TajweedColors.ghunna,
+  // Grey: الإدغام بدون غنة، المتجانسين، المتقاربين، المرسوم خلاف اللفظ، همزة
+  // الوصل، ألف التفريق، اللام الشمسية.
+  'idgham-no-ghunnah': TajweedColors.silent,
+  'idgham-mutajanisain': TajweedColors.silent,
+  'idgham-mutaqaribain': TajweedColors.silent,
+  'silent': TajweedColors.silent,
+  'hamzat-wasl': TajweedColors.silent,
+  'lam-shamsiyyah': TajweedColors.silent,
+  // Blues: قلقلة، تفخيم، تفخيم الراء.
+  'qalqalah': TajweedColors.qalqala,
+  'tafkhim': TajweedColors.tafkhim,
+  'tafkhim-ra': TajweedColors.tafkhimRa,
+  // Madd: لازم/فرق، واجب/صلة كبرى، لين/عارض، صلة صغرى/ألف خنجرية.
+  'madd-lazim': TajweedColors.maddLazim,
+  'madd-farq': TajweedColors.maddLazim,
+  'madd-wajib': TajweedColors.maddWajib,
+  'madd-munfasil': TajweedColors.maddWajib,
+  'madd-muttasil': TajweedColors.maddWajib,
+  'madd-sila-kubra': TajweedColors.maddWajib,
+  'madd-arid': TajweedColors.maddArid,
+  'madd-leen': TajweedColors.maddArid,
+  'madd-sila-sughra': TajweedColors.maddSila,
+  'alif-khanjariyyah': TajweedColors.maddSila,
 };
 
-/// Colour of a tajweed rule for the theme mix [light] (0 dark … 1 light);
+/// Colour of a tajweed rule (the same in both themes; [light] kept for a
+/// future per-theme shade);
 /// null for marks that are not tajweed rules.
-Color? tajweedColor(String rule, double light) {
-  final c = _tajweedByRule[rule];
-  return c == null ? null : Color.lerp(c.$1, c.$2, light);
-}
+Color? tajweedColor(String rule, double light) => _tajweedByRule[rule];
 
 /// A tajweed rule of the «قواعد التجويد» panel. Names and descriptions are
 /// the Angular service's (`reading-lesson.service.ts`, the only rules with a
 /// definition). Dot colours: the tajweed colours of [tajweedColor] for the
-/// tajweed rules (green ghunna, blue qalqala), the app gold for the others
+/// tajweed rules (owner's wheel: green ghunna, cyan qalqala), the app gold for the others
 /// (owner 2026-11-25: tajweed colours, app-standard colours).
 class TajweedRule {
   const TajweedRule(this.id, this.name, this.description, this.color);
@@ -114,19 +149,19 @@ const tajweedRules = [
     'idgham',
     'إدغام',
     'دمج حرفين متماثلين أو متقاربين بحيث يصيران حرفاً واحداً مشدداً',
-    Color(0xFF5BD26B),
+    TajweedColors.ghunna,
   ),
   TajweedRule(
     'ikhfa',
     'إخفاء',
     'النطق بالحرف بصفة بين الإظهار والإدغام',
-    Color(0xFF5BD26B),
+    TajweedColors.ghunna,
   ),
   TajweedRule(
     'qalqalah',
     'قلقلة',
     'اضطراب الصوت عند النطق بالحرف الساكن حتى يسمع له نبرة قوية',
-    Color(0xFF4FB3E8),
+    TajweedColors.qalqala,
   ),
   TajweedRule(
     'adab-general',

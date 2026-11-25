@@ -66,3 +66,12 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Divider 72u. Tests 11/11. Captures `capture-v7-*`.
 
 - APK 1.0.382 (v7), after 16 build attempts (Maven Central 429).
+
+## 5. v8: the owner's tajweed colour wheel (2026-11-25)
+- Owner on v7: «why green? I did not understand which» → sentence 2 of «أحكام التجويد الرئيسية» has two marks, idgham and
+  a generic shadda; v7 had put the shadda in the ghunna green too, so the whole sentence was green. Owner sent the wheel
+  «قواعد ألوان التجويد» (stored in `docs/design-assets/reading-lesson/`), sampled into `TajweedColors` (10 groups, table in
+  `DESIGN-SYSTEM.md`). Now only the idgham part is green; izhar keeps the text ink (black on the wheel).
+- Owner: token conflicts at the end of the project (one choice everywhere); critic later.
+- Sheet `tajweed-v8-phone.jpg` (idgham dark, izhar dark, idgham light). Tests 11/11.
+
