@@ -20,7 +20,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
-| 22 | **Listening lesson** (owner, 2026-11-25): an audio plays (verse / words), then questions on what was heard, Simply Piano style (e.g. «what was in the word X: a ghunna?», «this one: a ghunna?»). Own lesson type `listen` (already in the data and in the 06 icons, headphones). Proposed: build it **after 10/10b** and reuse their question + answer-feedback widgets; the same audio question can later also appear as one question type inside tests | none yet (no reference file; prompts to write) | to do (decision 🟡) |
+| 22 | **Listening lesson** (owner, 2026-11-25): an audio plays (verse / words), then questions on what was heard, Simply Piano style (e.g. «what was in the word X: a ghunna?», «this one: a ghunna?»). Own lesson type `listen` (already in the data and in the 06 icons, headphones). Confirmed: separate lesson (owner). Build it **after 10/10b** and reuse their question + answer-feedback widgets; the same audio question can later also appear as one question type inside tests | to generate: `prompts/22-listening-lesson/reference-v1.txt` (attach 20, 10b, 08); plan `screens/22-listening-lesson.md` | to do |
 
 Done: 4 screens (03–06). To do: at least 16 (02, 07, 09, 10/10b, 11, 12, 13, 14, 15–21, 22), plus 01 and 08 once defined.
 
