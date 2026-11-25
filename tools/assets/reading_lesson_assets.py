@@ -60,5 +60,22 @@ def badge():
         print(name, im.size)
 
 
+def arch():
+    # R4: full un-mix against the magenta key (as the 07 arch), trimmed to the line.
+    rgb = np.asarray(Image.open(src + '04_reading_header_arch.png').convert('RGB'), np.float32)
+    g, b = rgb[..., 1], rgb[..., 2]
+    alpha = np.clip(1 - (b - 0.85 * g) / 255.0, 0, 1)
+    alpha = np.where(alpha < 0.07, 0, alpha)
+    a = alpha[..., None]
+    k = np.array([255, 0, 255], np.float32)
+    col = np.clip(np.where(a > 0.995, rgb, (rgb - (1 - a) * k) / np.maximum(a, 1e-3)), 0, 255)
+    im = Image.fromarray(np.dstack([col, alpha * 255]).astype(np.uint8), 'RGBA')
+    im = im.crop(im.getchannel('A').point(lambda v: 255 if v > 60 else 0).getbbox())
+    im.thumbnail((2048, 2048), Image.LANCZOS)
+    im.save(out + 'arch.webp', quality=92)
+    print('arch.webp', im.size)
+
+
 lattice()
 badge()
+arch()

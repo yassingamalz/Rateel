@@ -28,9 +28,10 @@ class ReadMetrics {
   ReadMetrics._();
   static const side = 4.6;
   // Header.
-  static const archW = 119.4;
-  static const archH = 26.9;
-  static const archTop = -0.35;
+  // Owner's arch R4, fitted by correlation (F1 0.88): 102.1 × 21.5u.
+  static const archW = 102.1;
+  static const archH = 21.5;
+  static const archTop = 0.94;
   static const bookW = 13.8;
   static const bookH = 6.6;
   static const bookTop = 6.0;
@@ -39,13 +40,17 @@ class ReadMetrics {
   static const mosqueW = 29.4;
   // The arch is hidden left of this x (reference: the mosque covers it).
   static const archClipDx = -37.0;
-  static const crescentDx = 49.1; // left edge
-  static const crescentTop = 9.2;
-  static const crescentH = 9.8;
+  // Crescent and star placed separately (IoU 0.85 / 0.93 on the reference).
+  static const crescentDx = 49.65; // left edge
+  static const crescentTop = 9.6;
+  static const crescentH = 9.02;
+  static const starDx = 55.04;
+  static const starTop = 11.71;
+  static const starH = 3.63;
   static const titleCentre = 18.2;
   static const titleSize = 6.3;
   static const dividerTop = 24.6;
-  static const dividerW = 78.0;
+  static const dividerW = 72.0;
   static const dividerDiamond = 1.5; // half diagonal
   // Toolbar.
   static const toolTop = 27.9;
@@ -221,6 +226,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
       'assets/ui/reading/lattice_tile.webp',
       'assets/ui/reading/badge_line.webp',
       'assets/ui/reading/badge_fill.webp',
+      'assets/ui/reading/arch.webp',
       'assets/ui/decor/mosque.webp',
     ];
     // The entry waits for the images, at most 400 ms.
@@ -834,7 +840,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   }
 
   Widget _sentence(_Pal p, double u, double width, int i, double badgeScale) {
-    final text = _content!.verses[i];
+    final verse = _content!.verses[i];
     final scale = readingFontSize / 24;
     final badgeH = u * ReadMetrics.badgeH;
     return Stack(
@@ -867,8 +873,8 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                 width:
                     _fullWidth -
                     u * (ReadMetrics.verseLeft + ReadMetrics.verseRight),
-                child: Text(
-                  text,
+                child: Text.rich(
+                  _spans(verse, p),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                   style:
@@ -903,6 +909,26 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
         ),
       ],
     );
+  }
+
+  /// The sentence with its tajweed-marked words in the tajweed colours.
+  TextSpan _spans(ReadingVerse v, _Pal p) {
+    final out = <TextSpan>[];
+    var at = 0;
+    for (final m in v.marks) {
+      final c = tajweedColor(m.rule, p.t);
+      if (c == null || m.start < at) continue;
+      if (m.start > at) out.add(TextSpan(text: v.text.substring(at, m.start)));
+      out.add(
+        TextSpan(
+          text: v.text.substring(m.start, m.end),
+          style: TextStyle(color: c),
+        ),
+      );
+      at = m.end;
+    }
+    if (at < v.text.length) out.add(TextSpan(text: v.text.substring(at)));
+    return TextSpan(children: out);
   }
 
   Widget _dots(_Pal p, double u) {
@@ -1479,6 +1505,12 @@ class _Header extends StatelessWidget {
             BlendMode.srcIn,
           )
         : null;
+    ColorFilter? lightTint(Color light) => p.t > 0
+        ? ColorFilter.mode(
+            p.c(RateelColors.glyphGoldBottom, light),
+            BlendMode.srcIn,
+          )
+        : null;
     return IgnorePointer(
       child: Stack(
         fit: StackFit.expand,
@@ -1500,10 +1532,13 @@ class _Header extends StatelessWidget {
                   stops: [f - 0.01, f + 0.02],
                 ).createShader(r);
               },
-              child: SvgPicture.asset(
-                'assets/ui/decor/header_arch.svg',
+              child: Image.asset(
+                'assets/ui/reading/arch.webp',
                 fit: BoxFit.fill,
-                colorFilter: copper,
+                color: copper == null
+                    ? null
+                    : p.c(RateelColors.archShoulder, RateelColors.readLCopper),
+                colorBlendMode: copper == null ? null : BlendMode.srcIn,
               ),
             ),
           ),
@@ -1545,28 +1580,27 @@ class _Header extends StatelessWidget {
                   : null,
             ),
           ),
+          // Crescent and star as two pieces of the 03 asset, each placed on
+          // the reference; colours as the app (star at 55%, as 03/05).
           Positioned(
             left: cx + u * ReadMetrics.crescentDx,
             top: u * ReadMetrics.crescentTop,
             height: u * ReadMetrics.crescentH,
             child: SvgPicture.asset(
-              'assets/ui/decor/crescent_star.svg',
-              // Dark: the reference's crescent is a muted olive gold
-              // (#CAB959 at its brightest), darker than the 03 asset.
-              colorFilter: p.t > 0
-                  ? ColorFilter.mode(
-                      p.c(
-                        RateelColors.glyphGoldBottom,
-                        RateelColors.readLCrescent,
-                      ),
-                      BlendMode.srcIn,
-                    )
-                  : const ColorFilter.matrix([
-                      0.86, 0, 0, 0, 0, //
-                      0, 0.84, 0, 0, 0, //
-                      0, 0, 0.72, 0, 0, //
-                      0, 0, 0, 1, 0, //
-                    ]),
+              'assets/ui/reading/crescent.svg',
+              colorFilter: lightTint(RateelColors.readLCrescent),
+            ),
+          ),
+          Positioned(
+            left: cx + u * ReadMetrics.starDx,
+            top: u * ReadMetrics.starTop,
+            height: u * ReadMetrics.starH,
+            child: Opacity(
+              opacity: p.d(0.55, 1),
+              child: SvgPicture.asset(
+                'assets/ui/reading/star.svg',
+                colorFilter: lightTint(RateelColors.readLCrescent),
+              ),
             ),
           ),
           Positioned(

@@ -49,3 +49,19 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
 - Captures `capture-v6-*` (reference size and phone 915×412), comparison `compare-v6-phone.jpg`, demo `demo-v6-phone.mp4`.
 - Differences left: «A» and the verse number are serif in the reference (Readex here, R7), «الله» ligature, arch lower
   lobes (R4 asset), the 02 pause button keeps its approved style (the reference's is a heavier gold ring).
+
+## 4. v7: owner's arch, crescent and star on the reference, tajweed colours (2026-11-25)
+- Owner on v6: tajweed colours for the marked words; crescent and star not positioned as the reference («get closer to
+  the reference, at least for the positions»); colours standard with the app; arch R4 delivered.
+- Arch R4 (`ui/reading/arch.webp`): correlation on the reference's line F1 0.88 (03 arch: 0.79), 102.1×21.5u, top 0.94u.
+- Crescent/star: the reference's star sits apart in the crescent's opening, the 03 asset has it high and close: the SVG
+  split into `crescent.svg` + `star.svg`, each fitted on the reference (IoU 0.85 / 0.93). Check v7: crescent left/top/bottom
+  exact (1345, 82, 159), horn tips 18 px further right (shape of the asset); star (1392–1423 × 101–130) vs (1392–1423 ×
+  100–131). The dark tone filter on the crescent removed (app colours).
+- Tajweed colours: marks parsed from the data; 38/45 indices are wrong, so the mark text is searched in the sentence;
+  colours (provisional, classic mushaf scheme) for idgham/ikhfa/iqlab/ghunnah/shaddah (green), qalqalah (blue), madd (red);
+  topic marks keep the text colour. Rules panel dots use the same colours (other rules: app gold).
+- Mosque checked by landmarks on the zoomed crop (minaret x ≈ 502, dome 525–610 as the reference); the IoU fit is not
+  reliable there (the green mask also takes the capsule and the arch).
+- Divider 72u. Tests 11/11. Captures `capture-v7-*`.
+

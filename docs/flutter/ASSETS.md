@@ -177,3 +177,6 @@ magenta background). Processing: `tools/assets/reading_lesson_assets.py`.
 | `docs/flutter/screens/08-reading-lesson/reference-panel.png` | `03_lesson_screen_rules_and_typography.png` (R3) | reference of the rules panel and the «A» menu | not an app asset |
 | `data/reading/*.json` | `src/assets/data/content/reading/` (Angular data) | sentences of the 5 reading lessons | copied as they are |
 | reused | `decor/header_arch.svg`, `header_book.svg`, `crescent_star.svg`, `mosque.webp`, `GoldDivider`, `LessonPill`, `LessonRoundButton`, `SkipButton` | screen 08 | arch: upper part fits the reference, lower lobes ≈ 6u wider (see `screens/08-reading-lesson/HISTORY.md`) |
+| `ui/reading/arch.webp` | `04_reading_header_arch.png` (R4, owner 2026-11-25) | header arch of screen 08 | magenta un-mixed, trimmed, 2048×483; fitted by correlation on the reference (F1 0.88, 102.1×21.5u); left part hidden behind the mosque as the reference |
+| `ui/reading/crescent.svg`, `star.svg` | `decor/crescent_star.svg` (CR-04) split into its two paths, viewBox trimmed | screen 08 header | placed separately on the reference (IoU 0.85 / 0.93): the reference's star sits apart, in the crescent's opening; star at 55% as 03/05 |
+
