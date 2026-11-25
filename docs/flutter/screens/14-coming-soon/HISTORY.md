@@ -21,3 +21,4 @@
   3. Card titles/descriptions use one style for all cards; the reference's lettering varies by ±8% between cards.
   4. Emblem inside is the owner's flat green; the reference's is a little more transparent with a soft glow.
 - Captures: `capture-v1.png` (1844×853), `capture-v1-phone.png` (915×412), `compare-v1.png` (reference above).
+- APK 1.0.373 (2026-11-25).
