@@ -1,6 +1,7 @@
 # Screen 12: daily challenges (رحلة التحديات اليومية)
 
-Branch `flutter/12-daily-challenges` (opened 2026-11-25 from `master`). Status: **plan, waiting for the owner's yes**.
+Branch `flutter/12-daily-challenges` (opened 2026-11-25 from `master`). Status: **v1 built** (2026-11-25), waiting for
+the owner's phone test. History: `12-daily-challenges/HISTORY.md`. Code: `app_flutter/lib/challenges/`.
 
 - Reference: `screens/12-daily-challenges/reference.webp` (copied from `lesson-production`,
   `docs/design/glassy-gamified/screens/12-sfide-giornaliere.webp`), 1844x853.
@@ -45,16 +46,18 @@ Branch `flutter/12-daily-challenges` (opened 2026-11-25 from `master`). Status: 
 - New assets (ChatGPT, `prompts/12-daily-challenges/images-v1.txt`): **D1** calendar, **D2** document glyph, **D3** Quran
   on a stand with crescent, **D4** flame.
 
-## Questions for the owner
-1. **How is the screen opened?** It has no rail item (not even in Angular). A) a 7th rail item; B) a streak/flame chip on
-   the courses screen (03) that opens it; C) a tab or button on screen 13 (achievements); D) for now only a review link,
-   decide later. Proposal: **D now, B later**.
-2. Locked tiles: as the reference (dim, no padlock) or with the green padlock of 05/06? Proposal: **as the reference**.
-3. What does tapping the open challenge do? Angular completes it at once (demo). Proposal: it opens the matching activity
-   (lesson → next lesson to do; practice/recitation → screen 14 «coming soon» until 09 exists) and the challenge is
-   completed when the user comes back having done it; for the review, a long press completes it.
-4. Final bonus (500) when all 7 are done: Angular shows a «مكافأة نهائية» card; the reference has none. Proposal: the
-   trophy tile is the bonus, a short celebration (light + sound) and no extra card.
-5. Font: Readex Pro (app standard) or Cairo as on 14 (closer to the reference titles, conflict S4)? Proposal: Readex Pro.
-6. Streak rule (mock for now): +1 for each day with at least one completed challenge, back to 0 after a missed day; the
-   path resets at midnight. OK?
+## Owner's answers (2026-11-25)
+1. **B**: a streak chip (flame + «n يوم») on the courses screen (03), bottom left, opens screen 12 inside the learning
+   navigator (rail stays). Review link: `?challenges=1`.
+2. Locked tiles **darker** than the reference (dark veil 50%, no padlock); the veil lifts when the previous challenge
+   is completed.
+3. OK, and **keep it written here so it is not forgotten**: tapping the open challenge opens its activity (lesson /
+   trophy → the courses path; practice / recitation → screen 14 «coming soon» until 09 exists). **Still to wire:** the
+   challenge must complete by itself when the user comes back having done the activity (today only the review long
+   press completes it); the path must reset at midnight; challenges and streak must be saved (today mock, in memory).
+4. OK: the trophy tile is the final bonus (100), a short celebration (toast, light, sound), no extra card.
+5. Readex Pro (app standard).
+6. Streak rule OK: +1 for each day with at least one completed challenge, back to 0 after a missed day.
+
+Icons: the owner's icon collection (`ASSETS.md`, «Owner's icon collection»), green-line variants; flame and calendar as
+the reference. Header decoration from the shared library (owner: one asset direction for the whole app).

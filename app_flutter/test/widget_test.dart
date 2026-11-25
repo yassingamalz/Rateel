@@ -3,6 +3,8 @@ import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rateel/challenges/challenge_data.dart';
+import 'package:rateel/challenges/daily_challenges_screen.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
 import 'package:rateel/main.dart';
@@ -316,15 +318,15 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('إدغام'), findsOneWidget);
-    // A rule opens its detail over the veiled screen; ✕ closes it.
-    await tester.tap(find.text('إدغام'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text('استمع إلى مثال'), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel('إغلاق').last);
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text('استمع إلى مثال'), findsNothing);
+      // A rule opens its detail over the veiled screen; ✕ closes it.
+      await tester.tap(find.text('إدغام'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('استمع إلى مثال'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('إغلاق').last);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('استمع إلى مثال'), findsNothing);
       await tester.tap(find.bySemanticsLabel('إغلاق'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
@@ -335,6 +337,35 @@ void main() {
         await tester.pump(const Duration(milliseconds: 300));
       }
       expect(result, isTrue);
+    },
+  );
+
+  testWidgets(
+    'daily challenges: streak chip opens 12, long press completes (screen 12)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1844, 853);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      challengesDone.value = 0;
+      dailyStreak.value = 0;
+      await tester.pumpWidget(const RateelApp());
+      await settle(tester);
+      await tester.tap(find.byType(StreakChip));
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsOneWidget);
+      expect(find.text('100'), findsOneWidget);
+      // Locked tile: nothing completes.
+      final tiles = find.byKey(const ValueKey('tile3'));
+      await tester.longPress(tiles);
+      await settle(tester);
+      expect(challengesDone.value, 0);
+      await tester.longPress(find.byKey(const ValueKey('tile0')));
+      for (var i = 0; i < 6; i++) {
+        await tester.pump(const Duration(milliseconds: 400));
+      }
+      expect(challengesDone.value, 1);
+      expect(dailyStreak.value, 1);
+      await settle(tester);
     },
   );
 }

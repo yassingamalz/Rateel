@@ -16,7 +16,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
-| 12 | Daily challenges | `12-sfide-giornaliere.webp` | **plan** on `flutter/12-daily-challenges` (`screens/12-daily-challenges.md`), waiting for the owner |
+| 12 | Daily challenges | `12-sfide-giornaliere.webp` | **v1 built** on `flutter/12-daily-challenges`, opened from the streak chip of 03; waiting for the owner's phone test; mock data |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
@@ -40,6 +40,7 @@ Remember to connect these to real data (backend or app progress) before release.
 |---|---|---|
 | 11 Leaderboard | the whole list: 15 demo players (Angular names and avatars), scores, lessons, friends, regions; the user «أحمد عبدالرحمن» at rank 15; rewards 10K/5K/2K. All values are demo, the user's lesson count too. | `app_flutter/lib/leaderboard/leaderboard_data.dart` |
 | 07 Video lesson | the **sections** of every video: 3 equal parts (`videoSectionCount`); planned data `sections: [{start, end}]` per video lesson | `app_flutter/lib/lessons/video_lesson_page.dart` |
+| 12 Daily challenges | the 7 challenges (Angular list), completed count and streak live in memory only; completion only by the review long press; no midnight reset; the 03 streak chip shows the same mock streak. To wire: completion on return from the activity, reset, saving (plan Q3) | `app_flutter/lib/challenges/challenge_data.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
 
 ## Data problems found (fix in the lesson data before release)

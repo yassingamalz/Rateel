@@ -4,6 +4,7 @@ import 'dart:ui' show PointerDeviceKind, lerpDouble;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../challenges/daily_challenges_screen.dart';
 import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
@@ -295,6 +296,15 @@ class _CoursesScreenState extends State<CoursesScreen>
                     itemBuilder: (context, i) => _page(g, pages, i),
                   ),
                 ),
+              ),
+            ),
+            // Streak chip → daily challenges (screen 12, owner Q1 = B).
+            Positioned(
+              left: g.u * 3,
+              bottom: g.u * 3.5,
+              child: StreakChip(
+                u: g.u,
+                onTap: () => Navigator.of(context).push(dailyChallengesRoute()),
               ),
             ),
             _toastLayer(g),
