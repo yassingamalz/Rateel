@@ -65,3 +65,4 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   reliable there (the green mask also takes the capsule and the arch).
 - Divider 72u. Tests 11/11. Captures `capture-v7-*`.
 
+- APK 1.0.382 (v7), after 16 build attempts (Maven Central 429).
