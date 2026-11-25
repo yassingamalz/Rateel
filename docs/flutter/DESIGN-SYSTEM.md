@@ -52,6 +52,7 @@ Proposed with screen 02 (lesson top bar), approved on the mockup by the owner (2
 | Lesson veil | `lessonVeil #00140E` 45%, blur σ 0.55u, content 98% and 80% brightness | ✅ |
 
 ## Tajweed colours (owner, 2026-11-25), confirmed ✅
+**For the Quran's ayat only** (verses with tajweed applied). The lessons' own sentences keep their text colour.
 Source: the owner's colour wheel «قواعد ألوان التجويد», `docs/design-assets/reading-lesson/tajweed-colours-wheel.jpg`,
 sampled. Code: `TajweedColors` in `app_flutter/lib/lessons/reading_data.dart`. Same colours in both themes; black is the
 normal text colour, so those words take the theme's ink. Every screen that colours tajweed uses this table.

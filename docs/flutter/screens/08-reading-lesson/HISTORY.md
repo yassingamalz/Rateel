@@ -73,5 +73,9 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   «قواعد ألوان التجويد» (stored in `docs/design-assets/reading-lesson/`), sampled into `TajweedColors` (10 groups, table in
   `DESIGN-SYSTEM.md`). Now only the idgham part is green; izhar keeps the text ink (black on the wheel).
 - Owner: token conflicts at the end of the project (one choice everywhere); critic later.
-- Sheet `tajweed-v8-phone.jpg` (idgham dark, izhar dark, idgham light). Tests 11/11.
+- Tests 11/11.
+
+## 6. v9: lesson text in its own colour (2026-11-25)
+- Owner: the wheel colours are for the ayat, not for the lessons; lessons keep their colour. The marks of the lesson data are
+  no longer coloured (still parsed, with the text lookup, for later). Wheel kept in `DESIGN-SYSTEM.md` («ayat only»).
 

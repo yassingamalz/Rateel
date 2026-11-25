@@ -69,7 +69,8 @@ class ReadingContent {
   }
 }
 
-/// Tajweed colours of the marked words: the owner's colour wheel «قواعد ألوان
+/// Tajweed colours for the **Quran's ayat** (owner, 2026-11-25: not for the
+/// lessons' own sentences, which keep the text colour): the owner's colour wheel «قواعد ألوان
 /// التجويد» (2026-11-25, `docs/design-assets/reading-lesson/
 /// tajweed-colours-wheel.jpg`), sampled from it, the same in both themes.
 /// Black (izhar, natural madd) is the normal text colour, so those words take

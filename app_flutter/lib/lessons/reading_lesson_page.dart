@@ -873,8 +873,11 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                 width:
                     _fullWidth -
                     u * (ReadMetrics.verseLeft + ReadMetrics.verseRight),
+                // Lesson text keeps its own colour (owner, 2026-11-25: the
+                // tajweed wheel colours are for the Quran's ayat, not for the
+                // lessons' sentences).
                 child: Text.rich(
-                  _spans(verse, p),
+                  TextSpan(text: verse.text),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                   style:
@@ -909,26 +912,6 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
         ),
       ],
     );
-  }
-
-  /// The sentence with its tajweed-marked words in the tajweed colours.
-  TextSpan _spans(ReadingVerse v, _Pal p) {
-    final out = <TextSpan>[];
-    var at = 0;
-    for (final m in v.marks) {
-      final c = tajweedColor(m.rule, p.t);
-      if (c == null || m.start < at) continue;
-      if (m.start > at) out.add(TextSpan(text: v.text.substring(at, m.start)));
-      out.add(
-        TextSpan(
-          text: v.text.substring(m.start, m.end),
-          style: TextStyle(color: c),
-        ),
-      );
-      at = m.end;
-    }
-    if (at < v.text.length) out.add(TextSpan(text: v.text.substring(at)));
-    return TextSpan(children: out);
   }
 
   Widget _dots(_Pal p, double u) {
