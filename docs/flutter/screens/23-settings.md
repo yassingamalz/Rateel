@@ -1,7 +1,16 @@
 # Screen 23: settings (الإعدادات)
 
-Status: added by the owner (2026-11-25); content and entry point **to confirm**. Reference to generate with
-`prompts/23-settings/reference-v1.txt` (app screenshots 14, 11, 08-rules), saved as `screens/23-settings/23-impostazioni.webp`.
+Status: added by the owner (2026-11-25). Reference: **`screens/23-settings/23-impostazioni.webp`** (owner, generated with
+`prompts/23-settings/reference-v1.txt` from the app screenshots 14, 11, 08-rules).
+
+## Owner changes to the reference (2026-11-25), not defects
+- **The settings list fills the whole content width**: no left column (the left glass panel with the mosque goes).
+- **«عن التطبيق» and «إعادة ضبط التقدم» become rows of the list**, same row style as the others (badge with icon,
+  label, control on the left: a chevron for «عن التطبيق», the muted-red rim for «إعادة ضبط التقدم», which asks
+  for confirmation). With 8 rows the list scrolls under the title (or rows get shorter: to check on the phone).
+- Kept from the reference: title «الإعدادات» with the gold divider, the side rail with the **gear at the bottom**
+  (selected, gold), rows with lobed badges, segmented dark/light pill, −/100%/+ text size, gold switches, reciter
+  picker, reminder time + switch.
 
 ## Proposed content
 | Row | Control | Why |
