@@ -37,3 +37,6 @@
 - Verify (`verify-v2.txt`): card texts within ±10 px in width, ±4 px vertically; title cream 334–411 (ref 333–407),
   gold 413–508 (ref 415–505); subtitle ±3 px.
 - APK 1.0.375 (2026-11-25).
+
+## Approved (2026-11-25)
+Owner approved v2 (APK 1.0.375) and asked for the PR and the merge into `master`.

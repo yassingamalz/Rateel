@@ -1,3 +1,7 @@
+**Update 2026-11-25:** screen 14 (coming soon, `lib/coming_soon/coming_soon_screen.dart`) is **approved** (APK 1.0.375)
+and merged into `master`. It uses the Cairo font (owner's choice, conflict S4) and the owner's baked background. Next
+steps unchanged: performance fix (`PERFORMANCE.md`, if the owner says yes), then screen 08.
+
 # Next session: 08 reading lesson (and the 06 final critic)
 
 **Update 2026-11-24:** screen 07 (video lesson, `lib/lessons/video_lesson_page.dart`) is **approved** (APK 1.0.366) and merged

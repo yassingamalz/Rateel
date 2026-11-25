@@ -170,3 +170,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-25 | **APK 1.0.373**: screen 14 v1 (coming soon on القرآن / التدريب / الشهادات). Build needed several retries (Maven Central 429). | ✅ |
 | 2026-11-25 | Screen 14 v2: emblem tone **B** (darker, more saturated gold, darker green; owner chose it from A/B/C) and font **Cairo** for screen 14 (owner chose it from 10 candidates as closest to the reference). Cards are geometrically equal; owner asked for the feeling that the top ones are taller: screenshot requested. | ✅ |
 | 2026-11-25 | **APK 1.0.375**: screen 14 v2 (emblem B, Cairo). | ✅ |
+| 2026-11-25 | **Screen 14 (coming soon) approved by the owner** (v2, APK 1.0.375: emblem B, Cairo). PR `flutter/14-coming-soon` → `master` and merge (owner). Open: style conflicts S1–S4 for the end of the project. | ✅ |
