@@ -104,3 +104,4 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
 - **Owner approved screen 08.** Still open: ayat tajweed colours (wheel), audio examples, conflicts R1–R7 (end of project),
   critic later, PR to `master`.
 
+- APK 1.0.393 (v12, approved).
