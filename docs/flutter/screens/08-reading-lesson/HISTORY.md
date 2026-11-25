@@ -80,3 +80,10 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   no longer coloured (still parsed, with the text lookup, for later). Wheel kept in `DESIGN-SYSTEM.md` («ayat only»).
 
 - APK 1.0.385 (v9).
+
+## 7. v10: owner's phone test of 1.0.385 (2026-11-25)
+- Light «A» hard to see → dark ink (`readLInk`), as the moon and the chevrons.
+- Capsule rim around «3/8» a little more visible: shared 02 bar, rim 0.18u `cardRimBottom` (was 0.12u `cardRimTop`).
+- Line spacing control removed (it collided with large text sizes); menu with the text size only (17.6u high), sentences
+  at a fixed line height 1.4. Capture `capture-v10-menu-light-phone.png`.
+

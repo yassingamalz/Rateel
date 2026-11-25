@@ -617,14 +617,16 @@ class _CapsulePainter extends CustomPainter {
     dark.paint(canvas, at);
     canvas.restore();
     canvas.restore();
-    // Rim: thin (mockup 1 px at 853), in u.
+    // Rim: thin, in u.
     canvas.drawRRect(
-      rr.deflate(math.max(1.0, u * 0.12) / 2),
+      rr.deflate(math.max(1.0, u * 0.18) / 2),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1.0, u * 0.12)
+        // A little more visible (owner, 2026-11-25, on screen 08): 0.18u,
+        // the 03 card rim's lighter green.
+        ..strokeWidth = math.max(1.0, u * 0.18)
         ..color = Color.lerp(
-          RateelColors.cardRimTop,
+          RateelColors.cardRimBottom,
           RateelColors.lessonLCapsuleRim,
           light,
         )!,

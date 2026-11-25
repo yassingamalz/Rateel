@@ -107,7 +107,8 @@ class ReadMetrics {
   static const panelGap = 1.2;
   // «A» menu.
   static const menuW = 33.4;
-  static const menuH = 33.7;
+  // Text size only (owner, 2026-11-25: no line spacing control).
+  static const menuH = 17.6;
 }
 
 Route<bool> readingLessonRoute(
@@ -677,14 +678,14 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                 readex(
                   u * 5.2,
                   weight: 600,
-                  color: p.c(RateelColors.leaderText, Colors.white),
+                  // Light: dark ink as the other toolbar glyphs (owner,
+                  // 2026-11-25: the reference's white «A» was hard to see).
+                  color: p.c(RateelColors.leaderText, RateelColors.readLInk),
                 ).copyWith(
                   height: 1.0,
                   shadows: [
                     Shadow(
-                      color: p
-                          .c(Colors.black, const Color(0xFF8A6A4A))
-                          .withValues(alpha: p.d(0.35, 0.45)),
+                      color: Colors.black.withValues(alpha: 0.35 * (1 - p.t)),
                       blurRadius: u * 0.5,
                       offset: Offset(0, u * 0.15),
                     ),
@@ -889,9 +890,9 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                           RateelColors.readLInk,
                         ),
                       ).copyWith(
-                        // Angular's line spacing (default 2.0×) in Flutter's
-                        // line-height terms (2.0× → 1.6).
-                        height: readingLineHeight * 0.8,
+                        // Fixed line height (owner: no spacing control; larger spacing
+                        // with a larger text made the lines collide).
+                        height: readingLineHeight,
                         shadows: p.t >= 1
                             ? null
                             : [
@@ -1079,47 +1080,6 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                           Haptics.tick();
                           setState(() => readingFontSize += 2);
                         }, readingFontSize < 36),
-                      ],
-                    ),
-                    SizedBox(height: u * 2.2),
-                    Container(
-                      width: u * 25,
-                      height: math.max(1.0, u * 0.22),
-                      color: p.c(
-                        RateelColors.videoSkipRim,
-                        RateelColors.readLCopper,
-                      ),
-                    ),
-                    SizedBox(height: u * 2.0),
-                    title('تباعد السطور'),
-                    SizedBox(height: u * 1.4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      textDirection: TextDirection.ltr,
-                      children: [
-                        step('تقليل', () {
-                          Haptics.tick();
-                          setState(
-                            () => readingLineHeight = math.max(
-                              1.0,
-                              ((readingLineHeight - 0.1) * 10).roundToDouble() /
-                                  10,
-                            ),
-                          );
-                        }, readingLineHeight > 1.0),
-                        SizedBox(width: u * 1.3),
-                        value('${readingLineHeight.toStringAsFixed(1)}x'),
-                        SizedBox(width: u * 1.3),
-                        step('زيادة', () {
-                          Haptics.tick();
-                          setState(
-                            () => readingLineHeight = math.min(
-                              3.0,
-                              ((readingLineHeight + 0.1) * 10).roundToDouble() /
-                                  10,
-                            ),
-                          );
-                        }, readingLineHeight < 3.0),
                       ],
                     ),
                   ],

@@ -187,7 +187,10 @@ const tajweedRules = [
 /// Reading preferences, kept for the session (Angular: theme service and the
 /// reading service's state). Light/dark of the reading (moon button, owner
 /// 2026-11-25), text size 18–36 px step 2 (default 24 = the reference's
-/// size), line spacing 1.0–3.0× step 0.1 (default 2.0).
+/// size).
 final readingLight = ValueNotifier<bool>(false);
 int readingFontSize = 24;
-double readingLineHeight = 2.0;
+
+/// Fixed line height of the sentences (owner, 2026-11-25: the «A» menu keeps
+/// only the text size).
+const double readingLineHeight = 1.4;
