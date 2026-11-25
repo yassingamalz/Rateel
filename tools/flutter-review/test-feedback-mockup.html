@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- Screen 10: two feedback proposals (A inline bar, B modal), drawn over the reference.
+     Query: ?v=a|b&r=ok|ko. Rendered by test-feedback-mockup.js at 1842×854. -->
+<html dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Readex; src: url('../../app_flutter/assets/fonts/ReadexPro.ttf'); font-weight: 100 900; }
+* { box-sizing: border-box; margin: 0; }
+body { width: 1842px; height: 854px; position: relative; overflow: hidden; font-family: Readex; background: #00261c; }
+.bg { position: absolute; inset: 0; background: url('/tmp/claude-0/reference.png'); }
+.abs { position: absolute; }
+.row { left: 86px; width: 1670px; height: 81px; border-radius: 16px; display: flex; align-items: center;
+  padding-right: 112px; color: #FFFBDC; font-size: 34px; font-weight: 500; }
+.row.ok { background: linear-gradient(180deg, #1F6A45 0%, #10503A 100%); border: 3px solid #56C98C;
+  box-shadow: 0 0 18px rgba(86,201,140,.35), inset 0 1px 0 rgba(255,255,255,.12); }
+.row.ko { background: linear-gradient(180deg, #5A2A22 0%, #43201B 100%); border: 3px solid #D0644F;
+  box-shadow: 0 0 16px rgba(208,100,79,.30), inset 0 1px 0 rgba(255,255,255,.08); }
+.row.dim { background: #082F22; border: 2px solid #1F4A37; color: rgba(255,251,220,.45); }
+.row.dim::after { content: ''; position: absolute; right: 50px; top: 50%; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%; border: 3px solid rgba(160,200,180,.35); }
+.mark { position: absolute; right: 50px; top: 50%; width: 52px; height: 52px; margin-top: -26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; }
+.mark.ok { background: radial-gradient(circle at 40% 35%, #6EDDA0, #2A9A5E 70%); box-shadow: 0 0 12px rgba(86,201,140,.6); }
+.mark.ko { background: radial-gradient(circle at 40% 35%, #F08A72, #B4453A 70%); box-shadow: 0 0 12px rgba(208,100,79,.55); }
+.mark svg { width: 30px; height: 30px; stroke: #FFFBEA; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.nav { left: 1330px; top: 210px; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.nav svg { width: 30px; height: 30px; stroke: #FFFBEA; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.gold-btn { border-radius: 44px; border: 3px solid #F2C84B; background: linear-gradient(180deg, #0B3D2C, #052A1F);
+  box-shadow: 0 0 22px rgba(242,200,75,.45), inset 0 1px 0 rgba(255,240,180,.25); color: #FFFBDC; font-weight: 700;
+  font-size: 34px; display: flex; align-items: center; justify-content: center; gap: 22px; }
+.gold-btn svg { width: 38px; height: 30px; stroke: #FFFBDC; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.veil { position: absolute; inset: 0; background: rgba(0,20,14,.66); }
+.title { font-weight: 700; color: #FFFBDC; }
+.expl { color: #E7E2C8; font-weight: 400; }
+.pts { display: flex; align-items: center; gap: 10px; color: #FFD95A; font-weight: 700; }
+.pts .star { width: 34px; height: 34px; background: #F7C230; clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+</style></head><body>
+<div class="bg"></div>
+<div id="layer"></div>
+<script>
+const q = new URLSearchParams(location.search), v = q.get('v') || 'a', ok = (q.get('r') || 'ok') === 'ok';
+const glyph = (d, size, col) => `<svg viewBox="0 0 30 30" style="width:${size}px;height:${size}px;stroke:${col || '#FFFBEA'};stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round"><path d="${d}"/></svg>`;
+const CK = 'M6 16l6 6 12-13', CX = 'M8 8l14 14M22 8L8 22';
+const check = glyph(CK, 30), cross = glyph(CX, 30);
+const arrow = '<svg viewBox="0 0 38 30"><path d="M34 15H5M15 4L4 15l11 11"/></svg>';
+const L = document.getElementById('layer'); let h = '';
+// option rows: 1 = right answer «مِنْ شَرِّ مَا خَلَقَ», 2 = «مَالِكِ يَوْمِ الدِّينِ» (chosen when wrong)
+h += `<div class="abs row ok" style="top:424px">مِنْ شَرِّ مَا خَلَقَ<div class="mark ok">${check}</div></div>`;
+h += ok ? `<div class="abs row dim" style="top:529px">مَالِكِ يَوْمِ الدِّينِ</div>`
+        : `<div class="abs row ko" style="top:529px">مَالِكِ يَوْمِ الدِّينِ<div class="mark ko">${cross}</div></div>`;
+// question circle 1
+h += `<div class="abs nav" style="background:${ok ? 'radial-gradient(circle at 40% 35%,#6EDDA0,#2A9A5E 70%)' : 'radial-gradient(circle at 40% 35%,#F08A72,#B4453A 70%)'};
+  border:3px solid ${ok ? '#9BE8BE' : '#F3A08E'}; box-shadow:0 0 16px ${ok ? 'rgba(86,201,140,.6)' : 'rgba(208,100,79,.55)'}">${ok ? check : cross}</div>`;
+// points pill: lit when right, faded when wrong
+h += ok ? `<div class="abs" style="left:82px;top:326px;width:231px;height:64px;border-radius:32px;background:linear-gradient(180deg,#FFD95A,#E2A51E);
+  box-shadow:0 0 22px rgba(255,217,90,.6);display:flex;align-items:center;justify-content:center;gap:12px;color:#132C1A;font-weight:700;font-size:31px">
+  +10 نقطة ${glyph(CK, 30, '#132C1A')}</div>`
+        : `<div class="abs" style="left:78px;top:322px;width:240px;height:72px;background:#03301F;opacity:.82;border-radius:36px"></div>`;
+const medal = (r) => `<div style="width:${r * 2}px;height:${r * 2}px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  background:${ok ? 'radial-gradient(circle at 40% 35%,#7BE6AA,#22894F 72%)' : 'radial-gradient(circle at 40% 35%,#F59A82,#A63C32 72%)'};
+  border:3px solid ${ok ? '#C9F2D9' : '#F7C1B4'}; box-shadow:0 0 26px ${ok ? 'rgba(86,201,140,.65)' : 'rgba(208,100,79,.6)'}">
+  ${glyph(ok ? CK : CX, r)}</div>`;
+const expl = 'في كلمة (مِنْ شَرِّ)، النون الساكنة تليها حرف الشين وهو من حروف الإخفاء.';
+if (v === 'a') {
+  // A: feedback bar inside the card, in place of «تأكيد الإجابة» (covers the lattice band)
+  const tint = ok ? '#56C98C' : '#D0644F';
+  h += `<div class="abs" style="left:46px;top:628px;width:1752px;height:176px;border-radius:0 0 22px 22px;background:linear-gradient(180deg,#03301F,#022A1C)"></div>`;
+  h += `<div class="abs" style="left:86px;top:640px;width:1670px;height:150px;border-radius:24px;
+    background:linear-gradient(180deg,${ok ? '#0E4532' : '#3A2420'} 0%,#062F22 100%);border:2px solid ${tint};
+    box-shadow:0 0 24px ${ok ? 'rgba(86,201,140,.25)' : 'rgba(208,100,79,.22)'}, inset 0 1px 0 rgba(255,255,255,.08);
+    display:flex;align-items:center;padding:0 34px;gap:28px">
+    ${medal(44)}
+    <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:26px"><span class="title" style="font-size:40px">${ok ? 'إجابة صحيحة' : 'إجابة خاطئة'}</span>
+        ${ok ? '<span class="pts" style="font-size:32px"><span class="star"></span>+10 نقطة</span>'
+             : '<span class="expl" style="font-size:28px">الإجابة الصحيحة: <b style="color:#9BE8BE">مِنْ شَرِّ مَا خَلَقَ</b></span>'}</div>
+      <div class="expl" style="font-size:26px">${expl}</div>
+    </div>
+    <div class="gold-btn" style="width:360px;height:88px;flex:none">السؤال التالي ${arrow}</div></div>`;
+} else {
+  // B: glass modal over a veil (no live blur), as the Angular feedback modal restyled
+  h += `<div class="veil"></div>`;
+  const tint = ok ? '#56C98C' : '#D0644F';
+  h += `<div class="abs" style="left:471px;top:150px;width:900px;height:${ok ? 560 : 600}px;border-radius:34px;
+    background:linear-gradient(180deg,#0F4633 0%,#063527 55%,#022C20 100%);border:3px solid #F2C84B;
+    box-shadow:0 0 36px rgba(242,200,75,.32),0 18px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,240,180,.25);
+    display:flex;flex-direction:column;align-items:center;padding:82px 56px 0;gap:22px">
+    <div class="title" style="font-size:52px">${ok ? 'إجابة صحيحة' : 'إجابة خاطئة'}</div>
+    <div style="width:300px;height:3px;background:linear-gradient(90deg,transparent,#E9B83A,transparent)"></div>
+    ${ok ? `<div style="display:flex;gap:22px;align-items:center"><div style="height:76px;padding:0 40px;border-radius:38px;border:3px solid #F2C84B;background:#06301F;display:flex;align-items:center;gap:14px;box-shadow:0 0 18px rgba(242,200,75,.35)"><span class="pts" style="font-size:40px"><span class="star" style="width:42px;height:42px"></span>+10 نقطة</span></div>
+           <div style="height:76px;padding:0 30px;border-radius:38px;border:2px solid #2E6A4C;background:#06301F;display:flex;align-items:center;color:#FFFBDC;font-size:28px">🔥 3 إجابات متتالية</div></div>`
+         : `<div style="width:100%;display:flex;flex-direction:column;gap:10px"><div class="expl" style="font-size:26px">الإجابة الصحيحة</div>
+           <div style="height:72px;border-radius:16px;border:3px solid #56C98C;background:linear-gradient(180deg,#1F6A45,#10503A);display:flex;align-items:center;padding:0 26px;gap:18px;color:#FFFBDC;font-size:32px;font-weight:600">
+           <div class="mark ok" style="position:static;margin:0;width:44px;height:44px">${check}</div>مِنْ شَرِّ مَا خَلَقَ</div></div>`}
+    <div class="expl" style="font-size:27px;line-height:1.55;text-align:center;padding:16px 26px;border-radius:18px;background:rgba(0,0,0,.18);border:1px solid #1F4F3A;width:100%">${expl}</div>
+    <div class="gold-btn" style="width:340px;height:84px;margin-top:6px">متابعة ${arrow}</div></div>`;
+  h += `<div class="abs" style="left:${921 - 60}px;top:${150 - 60}px">${medal(60)}</div>`;
+}
+L.innerHTML = h;
+</script></body></html>

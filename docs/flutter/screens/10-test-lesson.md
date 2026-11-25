@@ -1,5 +1,15 @@
 # Screens 10 / 10b: test lesson (اختبار) and answer feedback, plan v1 (2026-11-25)
 
+**Owner answers (2026-11-25):** Q1 **A, dark + light** (the 08 reading lesson light theme is the reference; no T3);
+Q2 **no «تخطي»** (a test question cannot be skipped in the Angular original); Q3 **as the Angular original** = A (one
+column, the list scrolls inside the card, the third row peeks under the bottom band, as the reference); Q4 two proposals
+drawn (`10-test-lesson/feedback-mockups/`: A inline bar, B modal), owner to choose; Q5 **A** (sequential, answered ones
+reviewable); Q6 **A** (n / N); Q7 **as the Angular original**: completion popup (score, points, pass/fail at 70%,
+auto-close 6 s / 8 s) → results (score ring, stats, answers list → details, recommendations, «إعادة الاختبار»,
+«إنهاء الدرس»); «إنهاء الدرس» completes the lesson also below 70% (Angular); Q8 **sounds needed** (owner supplies
+S1/S2). Angular captured: `10-test-lesson/angular/` (`tools/flutter-review/test-angular-capture.js`). Prompts v2:
+`prompts/10-test-lesson/images-v2.txt` (T1 polished feedback, T2 results, T3 completion).
+
 Branch `flutter/10-test-lesson` from `master` (8cbe223: screens 02–08, 11, 14 merged).
 References (branch `lesson-production`, `docs/design/glassy-gamified/screens/`), copied here:
 `10-test-lesson/reference.webp` (`10-lezione-test.webp`, question, nothing selected) and `reference-answer.webp`

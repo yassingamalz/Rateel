@@ -15,3 +15,19 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
 - Library check: arch R4, badge R2, lattice R1, mosque, crescent/star, star glyph, 02 bar and the 08 lesson widgets cover
   every element of the reference; no new app art needed. Missing references: feedback (T1), results (T2), light (T3).
 - Plan v1 with questions Q1–Q8; prompts T1–T3 (`../../prompts/10-test-lesson/images-v1.txt`, attachments in `attach/`).
+
+## 2. Owner answers, Angular capture, feedback proposals (2026-11-25)
+- Answers: dark + light (08 light as the reference), no skip, options/navigation/counter/end as the Angular original,
+  sounds needed (details in the plan's header).
+- Angular original run locally (`npm ci`, `ng serve --port 4300`) and captured at 915×412 with
+  `tools/flutter-review/test-angular-capture.js` (answers right/wrong alternately): `angular/` question, selected,
+  feedback correct/wrong (modal over a blurred veil, confetti on correct), after-feedback rows (green ✓ / red ✕, the
+  correct ones shown), completion popup (pass/fail), results, question details. The reference 10 is the Angular screen
+  restyled. Notes: Angular shuffles the questions; its capsule stays «0/100» (bug); one column of options scrolling
+  inside the card.
+- Feedback proposals drawn over the reference (`tools/flutter-review/test-feedback-mockup.{html,js}`,
+  `feedback-mockups/`): **A** bar inside the card in place of «تأكيد الإجابة» (medallion, title, points or the correct
+  answer, explanation, «السؤال التالي»), no veil; **B** Angular-style glass modal with a gold rim over a dark veil (no live
+  blur), medallion on the top edge, points + streak or the correct answer, explanation, «متابعة». Recommended: A.
+- Prompts v2 (`images-v2.txt`): T1 polish of the chosen feedback, T2 results, T3 completion (passed / not passed);
+  sounds S1/S2 (+S3) described for the owner.
