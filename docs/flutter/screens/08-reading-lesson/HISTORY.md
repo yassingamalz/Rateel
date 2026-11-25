@@ -96,3 +96,4 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   «قريبًا»); ✕, tap outside or Android back close it. Widget test extended (open / close). Capture
   `capture-v11-menu-rule-phone.jpg`.
 
+- APK 1.0.389 (v11).
