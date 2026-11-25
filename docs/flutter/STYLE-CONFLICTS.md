@@ -63,3 +63,18 @@ Measured on `screens/07-video-lesson/reference.webp` and `reference-playing.webp
 | S2 | Text colours | `titleCream #FAF1D8`, `cream #F4EAD0` | titles #FFFFE4, subtitle #FFFFFF, card text #EFFFE6, gold line #F5B71F | reference |
 | S3 | Card glass | 03/06 card tokens | fill #09332A → #0B382B, rim #3F7558 0.3u, radius 4.7u | reference |
 | S4 | Font | Readex Pro (whole app) | Cairo (variable) on screen 14, owner's choice as closest to the reference (2026-11-25) | owner decides at the end: Cairo everywhere, or Readex here |
+
+## Screen 08, reading lesson (2026-11-25)
+Measured on `screens/08-reading-lesson/reference-{dark,light}.webp` and `reference-panel.png`. Built with the **reference
+values** (`read*` tokens), as screens 07/11; the owner decides at the end of the project.
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| R1 | Background | `bgTop/bgBottom`; 07 `videoBgCentre/Edge` | flat radial #013024 → #002B21, no girih, lattice only in the top corners | reference (`readBg*`) (same family as C1/K4/V1) |
+| R2 | Toolbar, panel rows, search field | glass rim 2 px #245843, no fill | fill #01362A, rim 0.25u #3E7055 (top) → #2E5E45 (bottom), radius 3.2u | reference (`readTool*`) |
+| R3 | Verse card | gold rim token #DAA42A 1.2 px + #FFDA6B 1 px; card radius 4.7u | rim 0.35u #F7E27A / #D4B44A with a gold glow ≈ 38%, fill #174C2E → #033B2C → #013729, radius 3.6u | reference (`readCard*`) |
+| R4 | Toolbar round buttons and «8 / 1» | glass button token; 07 `videoSkip*` (V2) | thin ring 0.24u #8C7A2C (top) → #F7D660 (bottom), glow ≈ 16%; «A» filled green #2F6448 → #184832 | reference (`readRing*`, `readADisc*`, `LessonRoundButton(compact:)`) |
+| R5 | Text cream | `titleCream #FAF1D8` | verse and buttons #FFFBDC (= `leaderText`, K9) | reference |
+| R6 | **Light theme** (first light screen of the app) | none yet | cream #F9F1E3 / #FBF2E5, ink #341E06, copper #C99561, title #A17550, tan rims | reference (`readL*`, `lessonL*`; 02 bar and shared lesson buttons take `light:`) |
+| R7 | Font of «A» and of the verse number | Readex Pro | serif (Times-like) in the reference | Readex Pro |
+

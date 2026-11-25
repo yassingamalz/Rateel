@@ -1,0 +1,132 @@
+{
+    "version": "1.0.0",
+    "lessonId": "recitation-basics-lesson-3",
+    "unitId": "quran-recitation-basics",
+    "courseId": "tajweed-fundamentals",
+    "title": "الإعداد النفسي للتلاوة",
+    "description": "كيفية التحضير النفسي والروحي قبل تلاوة القرآن",
+    "verses": [
+        {
+            "id": "preparation-verse-1",
+            "text": "استشعر عظمة كلام الله قبل البدء في التلاوة، وأدرك أنك تتحدث مع رب العالمين",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 32,
+                    "text": "استشعر عظمة كلام الله",
+                    "ruleId": "mental-preparation"
+                },
+                {
+                    "startIndex": 33,
+                    "endIndex": 68,
+                    "text": "أدرك أنك تتحدث مع رب العالمين",
+                    "ruleId": "spiritual-connection"
+                }
+            ]
+        },
+        {
+            "id": "preparation-verse-2",
+            "text": "اختر وقتاً هادئاً وبعيداً عن المشتتات، حيث تستطيع التركيز بكل هدوء",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 25,
+                    "text": "اختر وقتاً هادئاً",
+                    "ruleId": "environment-preparation"
+                },
+                {
+                    "startIndex": 26,
+                    "endIndex": 65,
+                    "text": "بعيداً عن المشتتات، حيث تستطيع التركيز بكل هدوء",
+                    "ruleId": "focus-state"
+                }
+            ]
+        },
+        {
+            "id": "preparation-verse-3",
+            "text": "تطهر روحياً وجسدياً، واستعد بالوضوء والنية الصادقة للتلاوة",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 22,
+                    "text": "تطهر روحياً وجسدياً",
+                    "ruleId": "purification"
+                },
+                {
+                    "startIndex": 23,
+                    "endIndex": 55,
+                    "text": "استعد بالوضوء والنية الصادقة للتلاوة",
+                    "ruleId": "intention"
+                }
+            ]
+        },
+        {
+            "id": "preparation-verse-4",
+            "text": "اخلص نيتك لله، وابتغِ الفهم والهداية وليس مجرد القراءة آلياً",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 25,
+                    "text": "اخلص نيتك لله",
+                    "ruleId": "sincerity"
+                },
+                {
+                    "startIndex": 26,
+                    "endIndex": 62,
+                    "text": "ابتغِ الفهم والهداية وليس مجرد القراءة آلياً",
+                    "ruleId": "tadabbur"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "mental-preparation",
+            "name": "الاستعداد الذهني",
+            "color": "#1F4037",
+            "description": "تهيئة العقل واستشعار قدسية كلام الله قبل التلاوة"
+        },
+        {
+            "id": "spiritual-connection",
+            "name": "الاتصال الروحي",
+            "color": "#DAA520",
+            "description": "الشعور بالقرب من الله والخشوع عند تلاوة القرآن"
+        },
+        {
+            "id": "environment-preparation",
+            "name": "تهيئة البيئة",
+            "color": "#2D6A4F",
+            "description": "اختيار مكان هادئ بعيد عن الضوضاء والمشتتات"
+        },
+        {
+            "id": "focus-state",
+            "name": "حالة التركيز",
+            "color": "#206A5D",
+            "description": "تركيز الذهن والتفرغ التام للتلاوة"
+        },
+        {
+            "id": "purification",
+            "name": "التطهير",
+            "color": "#5B2C6F",
+            "description": "التطهر الجسدي والروحي قبل التلاوة"
+        },
+        {
+            "id": "intention",
+            "name": "النية الصادقة",
+            "color": "#B87333",
+            "description": "إخلاص النية لله والتقرب إليه من خلال التلاوة"
+        },
+        {
+            "id": "sincerity",
+            "name": "الإخلاص",
+            "color": "#C0392B",
+            "description": "تخليص العمل لله وابتغاء مرضاته"
+        },
+        {
+            "id": "tadabbur",
+            "name": "التدبر",
+            "color": "#FF5733",
+            "description": "التفكر والتأمل في معاني القرآن وليس مجرد التلاوة الآلية"
+        }
+    ]
+}

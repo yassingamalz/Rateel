@@ -1,5 +1,7 @@
 import 'package:rateel/lessons/lesson_shell.dart';
 import 'package:rateel/lessons/video_lesson_page.dart';
+import 'package:rateel/lessons/reading_lesson_page.dart';
+import 'package:rateel/lessons/reading_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
@@ -258,6 +260,72 @@ void main() {
       // build, video-demo.js: the simulated video's timer stops the test's
       // frames after the section change.)
       await tester.pumpWidget(const SizedBox());
+    },
+  );
+
+  testWidgets(
+    'reading lesson: sentences, theme, rules panel, completion (screen 08)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1844, 853);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      addTearDown(() => readingLight.value = false);
+      const lesson = Lesson(
+        id: 'recitation-basics-lesson-1',
+        title: 'آداب تلاوة القرآن الكريم',
+        description: '',
+        type: LessonType.read,
+        minutes: 10,
+      );
+      bool? result;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => Center(
+              child: TextButton(
+                onPressed: () async =>
+                    result = await Navigator.of(context)
+                        .push(readingLessonRoute(lesson, 1, 3)),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      for (var i = 0; i < 6; i++) {
+        await tester.pump(const Duration(milliseconds: 300));
+      }
+      // 8 sentences: the capsule shows 1/8, the first sentence is on the card.
+      expect(find.bySemanticsLabel('الخطوة 1 من 8'), findsOneWidget);
+      expect(
+        find.text('ينبغي للقارئ أن يستحضر عظمة كلام الله تعالى'),
+        findsOneWidget,
+      );
+      // ‹ (next in RTL) → sentence 2.
+      await tester.tap(find.bySemanticsLabel('التالي'));
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.bySemanticsLabel('الخطوة 2 من 8'), findsOneWidget);
+      expect(find.text('2 / 8'), findsOneWidget);
+      // Moon → light reading.
+      await tester.tap(find.bySemanticsLabel('الوضع الفاتح'));
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(readingLight.value, isTrue);
+      // Rules panel opens with the rules, closes with ✕.
+      await tester.tap(find.text('قواعد التجويد'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('إدغام'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('إغلاق'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('إدغام'), findsNothing);
+      // «تخطي» completes the lesson: the page leaves with true.
+      await tester.tap(find.text('تخطي'));
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 300));
+      }
+      expect(result, isTrue);
     },
   );
 }

@@ -1,0 +1,102 @@
+{
+    "version": "1.0.0",
+    "lessonId": "rules-overview-lesson-2",
+    "unitId": "tajweed-rules-overview",
+    "courseId": "tajweed-fundamentals",
+    "title": "أحكام التجويد الرئيسية",
+    "description": "دراسة أهم أحكام التجويد في التلاوة القرآنية",
+    "verses": [
+        {
+            "id": "rules-verse-1",
+            "text": "الإظهار هو النطق الواضح للحروف من مخارجها دون إدغام أو إخفاء",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 37,
+                    "text": "الإظهار هو النطق الواضح للحروف من مخارجها",
+                    "ruleId": "izhar"
+                },
+                {
+                    "startIndex": 38,
+                    "endIndex": 60,
+                    "text": "دون إدغام أو إخفاء",
+                    "ruleId": "tajweed-contrast"
+                }
+            ]
+        },
+        {
+            "id": "rules-verse-2",
+            "text": "الإدغام يعني دمج حرفين متماثلين أو متقاربين بحيث يصبحان حرفاً واحداً مشدداً",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 44,
+                    "text": "الإدغام يعني دمج حرفين متماثلين أو متقاربين",
+                    "ruleId": "idgham"
+                },
+                {
+                    "startIndex": 45,
+                    "endIndex": 75,
+                    "text": "بحيث يصبحان حرفاً واحداً مشدداً",
+                    "ruleId": "shaddah"
+                }
+            ]
+        },
+        {
+            "id": "rules-verse-3",
+            "text": "الإخفاء هو النطق بين الإظهار والإدغام مع إخفاء صوت الحرف",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 35,
+                    "text": "الإخفاء هو النطق بين الإظهار والإدغام",
+                    "ruleId": "ikhfa"
+                },
+                {
+                    "startIndex": 36,
+                    "endIndex": 54,
+                    "text": "مع إخفاء صوت الحرف",
+                    "ruleId": "sound-hiding"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "izhar",
+            "name": "الإظهار",
+            "color": "#1F4037",
+            "description": "إظهار الحروف بوضوح تام من مخارجها الصحيحة"
+        },
+        {
+            "id": "tajweed-contrast",
+            "name": "التمييز التجويدي",
+            "color": "#2D6A4F",
+            "description": "التفريق بين أحكام التجويد المختلفة"
+        },
+        {
+            "id": "idgham",
+            "name": "الإدغام",
+            "color": "#DAA520",
+            "description": "دمج حرفين متماثلين أو متقاربين في حرف واحد"
+        },
+        {
+            "id": "shaddah",
+            "name": "الشدة",
+            "color": "#206A5D",
+            "description": "تشديد حرف واحد بوضع علامة الشدة عليه"
+        },
+        {
+            "id": "ikhfa",
+            "name": "الإخفاء",
+            "color": "#5B2C6F",
+            "description": "النطق بين الإظهار والإدغام مع إخفاء صوت الحرف"
+        },
+        {
+            "id": "sound-hiding",
+            "name": "إخفاء الصوت",
+            "color": "#B87333",
+            "description": "التخفيف من وضوح صوت الحرف دون إخفائه تماماً"
+        }
+    ]
+}

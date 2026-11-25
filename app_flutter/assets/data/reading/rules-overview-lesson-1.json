@@ -1,0 +1,102 @@
+{
+    "version": "1.0.0",
+    "lessonId": "rules-overview-lesson-1",
+    "unitId": "tajweed-rules-overview",
+    "courseId": "tajweed-fundamentals",
+    "title": "أساسيات قواعد التجويد",
+    "description": "نظرة شاملة على القواعد الأساسية للنطق الصحيح",
+    "verses": [
+        {
+            "id": "basics-verse-1",
+            "text": "التجويد هو علم يهتم بإخراج الحروف من مخارجها الصحيحة مع مراعاة صفاتها",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 35,
+                    "text": "التجويد هو علم يهتم بإخراج الحروف من مخارجها الصحيحة",
+                    "ruleId": "tajweed-definition"
+                },
+                {
+                    "startIndex": 36,
+                    "endIndex": 66,
+                    "text": "مع مراعاة صفاتها",
+                    "ruleId": "letter-characteristics"
+                }
+            ]
+        },
+        {
+            "id": "basics-verse-2",
+            "text": "مخارج الحروف هي النقاط التي تخرج منها الحروف في جهاز النطق",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 32,
+                    "text": "مخارج الحروف هي النقاط التي تخرج منها الحروف",
+                    "ruleId": "makharij-huruf"
+                },
+                {
+                    "startIndex": 33,
+                    "endIndex": 49,
+                    "text": "في جهاز النطق",
+                    "ruleId": "pronunciation-device"
+                }
+            ]
+        },
+        {
+            "id": "basics-verse-3",
+            "text": "صفات الحروف تشمل الجهر والهمس، والشدة والرخاوة، والاستعلاء والإخفات",
+            "marks": [
+                {
+                    "startIndex": 0,
+                    "endIndex": 40,
+                    "text": "صفات الحروف تشمل الجهر والهمس، والشدة والرخاوة",
+                    "ruleId": "letter-attributes"
+                },
+                {
+                    "startIndex": 41,
+                    "endIndex": 63,
+                    "text": "والاستعلاء والإخفات",
+                    "ruleId": "advanced-attributes"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "tajweed-definition",
+            "name": "تعريف التجويد",
+            "color": "#1F4037",
+            "description": "علم يُعنى بكيفية النطق الصحيح للحروف والكلمات في القرآن الكريم"
+        },
+        {
+            "id": "letter-characteristics",
+            "name": "صفات الحروف",
+            "color": "#2D6A4F",
+            "description": "الخصائص الصوتية التي تميز كل حرف عن غيره"
+        },
+        {
+            "id": "makharij-huruf",
+            "name": "مخارج الحروف",
+            "color": "#DAA520",
+            "description": "نقاط إخراج الحروف في جهاز النطق الإنساني"
+        },
+        {
+            "id": "pronunciation-device",
+            "name": "جهاز النطق",
+            "color": "#206A5D",
+            "description": "الأعضاء المختلفة التي تساهم في إنتاج الصوت والكلام"
+        },
+        {
+            "id": "letter-attributes",
+            "name": "صفات الحروف الأساسية",
+            "color": "#5B2C6F",
+            "description": "الخصائص الصوتية الرئيسية للحروف العربية"
+        },
+        {
+            "id": "advanced-attributes",
+            "name": "صفات متقدمة",
+            "color": "#B87333",
+            "description": "صفات صوتية أكثر دقة في تمييز الحروف"
+        }
+    ]
+}

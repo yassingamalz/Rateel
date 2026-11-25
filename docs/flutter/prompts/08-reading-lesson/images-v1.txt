@@ -33,3 +33,11 @@ toolbar shown active (gold fill, dark text);
 2) under the «A» button, a small glass dropdown with a gold rim: title «حجم الخط» with a − button, «24» and a + button,
 a thin gold divider, title «تباعد السطور» with two buttons and «2.0x».
 Same fonts, golds, glass and rims as the reference; everything Arabic right-to-left; no other new ornaments.
+
+=== R4  Header arch of the reading lesson (attach: reference-dark.png, r4-arch.png)
+Recreate exactly the thin gold arch in the attached crop, as a standalone asset: one continuous fine gold line (warm
+metallic gold #E9B83A with a light core #FFE07A, about 0.5% of the image width), a pointed ogee peak in the centre, long
+gentle shoulders curving down to each side, then on each side one small step and a short lobe that ends in a tail
+sloping down and outwards, ending at about 95% of the image height. Perfectly symmetric (the left half is hidden by the
+mosque in the crop: mirror the right half). No book, no mosque, no crescent, no text, no fill. Plain flat magenta
+background (#FF00FF). Wide image 2048×420, the arch filling the whole width.

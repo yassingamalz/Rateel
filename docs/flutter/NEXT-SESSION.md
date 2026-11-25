@@ -1,3 +1,7 @@
+**Update 2026-11-25 (screen 08):** reading lesson v6 built on `flutter/08-reading-lesson` (dark + light, rules panel, «A»
+menu; `lib/lessons/reading_lesson_page.dart`), waiting for the owner's phone test. Open: arch asset R4, conflicts R1–R7,
+«A»/number serif font. History `screens/08-reading-lesson/HISTORY.md`.
+
 **Update 2026-11-25:** screen 14 (coming soon, `lib/coming_soon/coming_soon_screen.dart`) is **approved** (APK 1.0.375)
 and merged into `master`. It uses the Cairo font (owner's choice, conflict S4) and the owner's baked background. Next
 steps unchanged: performance fix (`PERFORMANCE.md`, if the owner says yes), then screen 08.

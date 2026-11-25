@@ -34,7 +34,12 @@ class LessonShell extends StatefulWidget {
     this.controlsVisible = true,
     this.waiting = false,
     this.onPlay,
+    this.light = 0,
   });
+
+  /// 0 = dark (every lesson), 1 = light (screen 08's light reading, owner
+  /// 2026-11-25); values in between while the theme cross-fades.
+  final double light;
 
   /// The lesson stopped by itself and waits for the learner (screen 07: end
   /// of a video section): the button shows the gold play with its pulse,
@@ -175,9 +180,13 @@ class LessonShellState extends State<LessonShell>
             children: [
               // Base under the content: the scaled-down, blurred lesson
               // never shows what is behind the route.
-              const ColoredBox(
-                key: ValueKey('base'),
-                color: RateelColors.contentBottom,
+              ColoredBox(
+                key: const ValueKey('base'),
+                color: Color.lerp(
+                  RateelColors.contentBottom,
+                  RateelColors.readLBgEdge,
+                  widget.light,
+                )!,
               ),
               // Content: pulled back, dimmed and blurred while paused
               // (Angular: scale 0.98, brightness 0.8, blur 5 px).
@@ -243,6 +252,7 @@ class LessonShellState extends State<LessonShell>
                     wait: _wait,
                     pulse: _pulse,
                     sweep: _sweep,
+                    light: widget.light,
                     onToggle: () {
                       if (widget.waiting && !paused && widget.onPlay != null) {
                         widget.onPlay!();
@@ -298,9 +308,11 @@ class LessonTopBar extends StatelessWidget {
     required this.onToggle,
     required this.onBack,
     required this.onRestart,
+    this.light = 0,
   });
 
   final double u;
+  final double light;
   final int step;
   final int total;
   final Animation<double> menu;
@@ -344,6 +356,7 @@ class LessonTopBar extends StatelessWidget {
                 opacity: Curves.easeOut.transform(raw),
                 child: _GlassButton(
                   u: u,
+                  light: light,
                   semantics: label,
                   glyph: g,
                   turn: turn,
@@ -390,6 +403,7 @@ class LessonTopBar extends StatelessWidget {
                       share: v,
                       text: '$step/$total',
                       sweep: sweep.value,
+                      light: light,
                     ),
                   ),
                 ),
@@ -409,6 +423,7 @@ class LessonTopBar extends StatelessWidget {
               final g = math.max(menu.value, wait.value);
               return _GlassButton(
                 u: u,
+                light: light,
                 semantics: g > 0.5 ? 'متابعة' : 'إيقاف مؤقت',
                 glyph: g > 0.5 ? _Glyph.play : _Glyph.pause,
                 // The two bars fold into the triangle (Simply Piano).
@@ -433,12 +448,14 @@ class _CapsulePainter extends CustomPainter {
     required this.share,
     required this.text,
     required this.sweep,
+    this.light = 0,
   });
 
   final double u;
   final double share;
   final String text;
   final double sweep;
+  final double light;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -448,7 +465,7 @@ class _CapsulePainter extends CustomPainter {
     canvas.drawRRect(
       rr.shift(Offset(0, u * 0.6)),
       Paint()
-        ..color = Colors.black.withValues(alpha: 0.4)
+        ..color = Colors.black.withValues(alpha: 0.4 - 0.3 * light)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.1),
     );
     canvas.save();
@@ -457,10 +474,21 @@ class _CapsulePainter extends CustomPainter {
     canvas.drawRect(
       Offset.zero & size,
       Paint()
-        ..shader = const LinearGradient(
+        ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [RateelColors.cardTop, RateelColors.cardMid],
+          colors: [
+            Color.lerp(
+              RateelColors.cardTop,
+              RateelColors.lessonLCapsule,
+              light,
+            )!,
+            Color.lerp(
+              RateelColors.cardMid,
+              RateelColors.lessonLCapsule,
+              light,
+            )!,
+          ],
         ).createShader(Offset.zero & size),
     );
     // Inset shadow on the empty glass, under the gold (critic v2 N1)
@@ -472,7 +500,7 @@ class _CapsulePainter extends CustomPainter {
         ..addRect((Offset.zero & size).inflate(u * 3))
         ..addRRect(rr.shift(Offset(0, u * 0.2)))),
       Paint()
-        ..color = Colors.black.withValues(alpha: 0.45)
+        ..color = Colors.black.withValues(alpha: 0.45 - 0.35 * light)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.25),
     );
     final fw = size.width * share;
@@ -555,15 +583,15 @@ class _CapsulePainter extends CustomPainter {
       );
     }
     // The number: cream on the dark part, dark on the gold.
-    final light = _text(
+    final onGlass = _text(
       readex(
         u * LessonBarMetrics.number,
         weight: 500,
-        color: RateelColors.label,
+        color: Color.lerp(RateelColors.label, RateelColors.lessonLInk, light)!,
       ).copyWith(
         shadows: [
           Shadow(
-            color: Colors.black.withValues(alpha: 0.75),
+            color: Colors.black.withValues(alpha: 0.75 * (1 - light)),
             blurRadius: u * 0.6,
           ),
         ],
@@ -577,12 +605,12 @@ class _CapsulePainter extends CustomPainter {
       ),
     );
     final at = Offset(
-      (size.width - light.width) / 2,
-      (size.height - light.height) / 2,
+      (size.width - onGlass.width) / 2,
+      (size.height - onGlass.height) / 2,
     );
     canvas.save();
     canvas.clipRect(Rect.fromLTRB(fill.right, 0, size.width, size.height));
-    light.paint(canvas, at);
+    onGlass.paint(canvas, at);
     canvas.restore();
     canvas.save();
     canvas.clipRect(fill);
@@ -595,7 +623,11 @@ class _CapsulePainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = math.max(1.0, u * 0.12)
-        ..color = RateelColors.cardRimTop,
+        ..color = Color.lerp(
+          RateelColors.cardRimTop,
+          RateelColors.lessonLCapsuleRim,
+          light,
+        )!,
     );
   }
 
@@ -606,7 +638,11 @@ class _CapsulePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_CapsulePainter o) =>
-      o.u != u || o.share != share || o.text != text || o.sweep != sweep;
+      o.u != u ||
+      o.share != share ||
+      o.text != text ||
+      o.sweep != sweep ||
+      o.light != light;
 }
 
 enum _Glyph { pause, play, restart, back }
@@ -623,9 +659,11 @@ class _GlassButton extends StatefulWidget {
     this.pulse,
     this.turn = 0,
     this.morph,
+    this.light = 0,
   });
 
   final double u;
+  final double light;
   final String semantics;
   final _Glyph glyph;
 
@@ -679,6 +717,7 @@ class _GlassButtonState extends State<_GlassButton> {
                   u: u,
                   goldness: widget.goldness,
                   pulse: widget.pulse,
+                  light: widget.light,
                 ),
                 // At the ends the original glyphs (rounded bars, play).
                 child:
@@ -687,13 +726,19 @@ class _GlassButtonState extends State<_GlassButton> {
                         widget.morph! < 0.999
                     ? CustomPaint(
                         size: Size(d, d),
-                        painter: _PausePlayPainter(widget.morph!),
+                        painter: _PausePlayPainter(
+                          widget.morph!,
+                          light: widget.light,
+                        ),
                       )
                     : Transform.rotate(
                         angle: widget.turn,
                         child: CustomPaint(
                           size: Size(d, d),
-                          painter: _GlyphPainter(widget.glyph),
+                          painter: _GlyphPainter(
+                            widget.glyph,
+                            light: widget.light,
+                          ),
                         ),
                       ),
               ),
@@ -709,11 +754,17 @@ class _GlassButtonState extends State<_GlassButton> {
 /// not show through the glass), radial gold 8% → 24%, ring `ringLine`;
 /// cross-fades to the gold disc with a static 1.2u halo and the pulse.
 class _GlassPainter extends CustomPainter {
-  _GlassPainter({required this.u, required this.goldness, this.pulse});
+  _GlassPainter({
+    required this.u,
+    required this.goldness,
+    this.pulse,
+    this.light = 0,
+  });
 
   final double u;
   final double goldness;
   final double? pulse;
+  final double light;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -732,7 +783,7 @@ class _GlassPainter extends CustomPainter {
       r,
       Paint()
         ..color = RateelColors.gold.withValues(
-          alpha: lerpDouble(0.22, 0.45, g)!,
+          alpha: lerpDouble(0.22 * (1 - 0.6 * light), 0.45, g)!,
         )
         ..maskFilter = MaskFilter.blur(
           BlurStyle.normal,
@@ -761,6 +812,17 @@ class _GlassPainter extends CustomPainter {
     canvas.restore();
     final disc = Rect.fromCircle(center: c, radius: r);
     // Glass fill (radial, CSS «circle» = farthest corner: radius 0.707).
+    if (g < 1 && light > 0) {
+      // Light reading (reference-light): cream disc.
+      canvas.drawCircle(
+        c,
+        r,
+        Paint()
+          ..color = RateelColors.lessonLButton.withValues(
+            alpha: light * (1 - g),
+          ),
+      );
+    }
     if (g < 1) {
       canvas.drawCircle(
         c,
@@ -769,8 +831,8 @@ class _GlassPainter extends CustomPainter {
           ..shader = RadialGradient(
             radius: 0.707,
             colors: [
-              RateelColors.gold.withValues(alpha: 0.08 * (1 - g)),
-              RateelColors.gold.withValues(alpha: 0.24 * (1 - g)),
+              RateelColors.gold.withValues(alpha: 0.08 * (1 - g) * (1 - light)),
+              RateelColors.gold.withValues(alpha: 0.24 * (1 - g) * (1 - light)),
             ],
           ).createShader(disc),
       );
@@ -798,7 +860,7 @@ class _GlassPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = u * 0.2
         ..color = Color.lerp(
-          RateelColors.ringLine,
+          Color.lerp(RateelColors.ringLine, RateelColors.lessonLRing, light),
           RateelColors.goldHighlight,
           g,
         )!,
@@ -807,15 +869,19 @@ class _GlassPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_GlassPainter o) =>
-      o.u != u || o.goldness != goldness || o.pulse != pulse;
+      o.u != u ||
+      o.goldness != goldness ||
+      o.pulse != pulse ||
+      o.light != light;
 }
 
 /// Pause, play, restart and back, drawn on a 24-unit grid with the stroke of
 /// the approved 06 back arrow (owner, 2026-11-24: icons by Claude, no asset).
 class _GlyphPainter extends CustomPainter {
-  _GlyphPainter(this.glyph);
+  _GlyphPainter(this.glyph, {this.light = 0});
 
   final _Glyph glyph;
+  final double light;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -829,10 +895,19 @@ class _GlyphPainter extends CustomPainter {
       ..strokeWidth = 2.3
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
-      ..color = RateelColors.closeWhite;
+      ..color = Color.lerp(
+        RateelColors.closeWhite,
+        RateelColors.lessonLInk,
+        light,
+      )!;
     switch (glyph) {
       case _Glyph.pause:
-        final p = Paint()..color = RateelColors.iconCream;
+        final p = Paint()
+          ..color = Color.lerp(
+            RateelColors.iconCream,
+            RateelColors.lessonLInk,
+            light,
+          )!;
         for (final x in [6.0, 14.4]) {
           canvas.drawRRect(
             RRect.fromRectAndRadius(
@@ -889,7 +964,7 @@ class _GlyphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_GlyphPainter o) => o.glyph != glyph;
+  bool shouldRepaint(_GlyphPainter o) => o.glyph != glyph || o.light != light;
 }
 
 /// Route of a lesson: above the whole app (the side rail is hidden during a
@@ -916,9 +991,10 @@ Route<T> lessonRoute<T>(WidgetBuilder builder) => PageRouteBuilder<T>(
 /// colour goes from the cream bars to the dark ink on gold. Same 24-unit box
 /// as [_GlyphPainter].
 class _PausePlayPainter extends CustomPainter {
-  _PausePlayPainter(this.t);
+  _PausePlayPainter(this.t, {this.light = 0});
 
   final double t;
+  final double light;
 
   static const _left = [
     [Offset(6, 5), Offset(8, 5.2)],
@@ -940,7 +1016,7 @@ class _PausePlayPainter extends CustomPainter {
     canvas.translate(size.width / 2 - 12 * s, size.height / 2 - 12 * s);
     canvas.scale(s);
     final color = Color.lerp(
-      RateelColors.iconCream,
+      Color.lerp(RateelColors.iconCream, RateelColors.lessonLInk, light),
       RateelColors.countText,
       t,
     )!;
@@ -964,5 +1040,5 @@ class _PausePlayPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_PausePlayPainter o) => o.t != t;
+  bool shouldRepaint(_PausePlayPainter o) => o.t != t || o.light != light;
 }

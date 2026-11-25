@@ -11,6 +11,7 @@ import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
+import 'lessons/reading_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
 import 'units/unit_data.dart';
 
@@ -78,6 +79,13 @@ Future<void> main() async {
       Uri.base.queryParameters['lessonLockColor'] ?? lessonLockColor;
   origScale =
       double.tryParse(Uri.base.queryParameters['origScale'] ?? '') ?? origScale;
+  // Review aids (screen 08): `?readTheme=light`, `?verse=3`, `?rules=1`,
+  // `?fontMenu=1` (with `?lessons=0,1&openLesson=0`).
+  final q = Uri.base.queryParameters;
+  readingStartLight = q['readTheme'] == 'light';
+  readingStartVerse = int.tryParse(q['verse'] ?? '') ?? 0;
+  readingStartRules = q['rules'] == '1';
+  readingStartFontMenu = q['fontMenu'] == '1';
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;

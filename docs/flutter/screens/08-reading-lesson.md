@@ -1,5 +1,9 @@
 # Screen 08: reading lesson (درس قراءة), plan v1 (2026-11-25)
 
+**Owner answers (2026-11-25):** Q1 B (dark + light), Q2/Q3/Q4 standard (skip bottom left; capsule n/N; last sentence
+completes by itself after 1.5 s), Q5 B (reference R3 delivered), Q6 as the reference (size + spacing), Q7/Q8 built as the
+reference, Q9 ChatGPT (R2 delivered), Q10 yes. Built: v6, see `08-reading-lesson/HISTORY.md`.
+
 Branch `flutter/08-reading-lesson` from `master` (49406b6, screens 02–07, 11, 14 merged).
 References (branch `lesson-production`, `docs/design/glassy-gamified/screens/07-lezione-video-{dark,light}.webp`), copied
 here: `08-reading-lesson/reference-dark.webp`, `reference-light.webp`; Angular original `angular-original.png`
