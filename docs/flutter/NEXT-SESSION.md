@@ -1,4 +1,23 @@
-# Next session: merge 08, performance fix, then screen 09 (practice / recitation)
+# Next session: screens 10 / 10b (test lesson), work in progress
+
+**Update 2026-11-25:** PR #49 (screen 08) is **merged into `master`**. Screen **09 (practice / recitation) is postponed**
+by the owner (one of the hardest, done later, maybe last). Screens **10 / 10b (test lesson + answer feedback)** started on
+`flutter/10-test-lesson` from `master`: plan `screens/10-test-lesson.md` (questions Q1–Q8), prompts T1–T3, history
+`screens/10-test-lesson/HISTORY.md`. Continue from the history.
+
+## Prompt to continue
+```
+Lavora sul repo Rateel, branch flutter/10-test-lesson. Leggi CLAUDE.md, poi docs/flutter/DECISIONS.md, PROCESS.md,
+DESIGN-SYSTEM.md, LESSONS-LEARNED.md, PERFORMANCE.md, NEXT-SESSION.md, SCREENS.md, STYLE-CONFLICTS.md, ASSETS.md,
+docs/flutter/screens/10-test-lesson.md e docs/flutter/screens/10-test-lesson/HISTORY.md. Continua le schermate 10/10b
+dal punto in cui è rimasta la storia. Il critico solo quando te lo dico. Parla con me in italiano.
+```
+
+---
+
+## Archive: hand-off after screen 08 (2026-11-25)
+
+## Merge 08, performance fix, then screen 09 (practice / recitation)
 
 **Update 2026-11-25:** screen 08 (reading lesson, `lib/lessons/reading_lesson_page.dart`) is **approved** (v12) on branch
 `flutter/08-reading-lesson`, not yet merged. History `screens/08-reading-lesson/HISTORY.md`. New shared pieces: light theme
