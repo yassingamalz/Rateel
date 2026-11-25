@@ -54,3 +54,12 @@ Measured on `screens/07-video-lesson/reference.webp` and `reference-playing.webp
 | V3 (obsolete v5: no frame, full-screen video) | Player frame | gold rim token #DAA42A 1.2 px + #FFDA6B 1 px | ≈ 0.3u #F5C958, gold glow ≈ 20% | reference (`videoPlayerRim*`) |
 | V4 (obsolete v5: no time line; the dots use these colours) | Progress line under the video | progress `track #265343 / fill #EBB335` (03); 02 capsule gold | track #687538, fill #EDAC37 → #F1B53E, cream knob #FDF1DA 3u; **fills from the left** while the 02 capsule fills from the right | reference |
 | V5 | Text cream | `titleCream #FAF1D8`, `cream #F4EAD0` | titles #F6E8CA–#FAF3D1 (kept `titleCream`), sentence #D2D0C2 (`cream` 82%), times #FBFCE4 (`leaderText`) | tokens |
+
+## Screen 14, coming soon (2026-11-24)
+
+| # | What | Confirmed token | Value in the screen | Proposal |
+|---|---|---|---|---|
+| S1 | Background | shared `ScreenBackground` + `ScreenGirih` | owner's baked image `ui/coming_soon/background.webp` (arcs, girih, waves, mosque), `soonBgTone` | reference |
+| S2 | Text colours | `titleCream #FAF1D8`, `cream #F4EAD0` | titles #FFFFE4, subtitle #FFFFFF, card text #EFFFE6, gold line #F5B71F | reference |
+| S3 | Card glass | 03/06 card tokens | fill #09332A → #0B382B, rim #3F7558 0.3u, radius 4.7u | reference |
+| S4 | Font | Readex Pro (whole app) | Cairo (variable) on screen 14, owner's choice as closest to the reference (2026-11-25) | owner decides at the end: Cairo everywhere, or Readex here |

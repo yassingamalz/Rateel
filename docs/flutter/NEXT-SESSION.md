@@ -1,3 +1,7 @@
+**Update 2026-11-25:** screen 14 (coming soon, `lib/coming_soon/coming_soon_screen.dart`) is **approved** (APK 1.0.375)
+and merged into `master`. It uses the Cairo font (owner's choice, conflict S4) and the owner's baked background. Next
+steps unchanged: performance fix (`PERFORMANCE.md`, if the owner says yes), then screen 08.
+
 # Next session: 08 reading lesson (and the 06 final critic)
 
 **Update 2026-11-24:** screen 07 (video lesson, `lib/lessons/video_lesson_page.dart`) is **approved** (APK 1.0.366) and merged
@@ -9,6 +13,8 @@ Open: YouTube link of `rateel-lezione1-v2.mp4` and the real section times (mock:
 only, ask first); old video links dead/mismatched (`SCREENS.md`).
 
 ## Next steps (proposal, confirm with the owner)
+0. **Performance fix** (owner: animations feel heavy): `PERFORMANCE.md`, branch `flutter/perf` from `master`, if the owner
+   says yes before 08. New screens follow its rules.
 1. **Screen 08, reading lesson** on the dark/light pair `07-lezione-video-{dark,light}.webp` (they show the reading lesson),
    Angular `reading-lesson`. Branch `flutter/08-reading-lesson` from `master`.
 2. Final critic of 06 when the owner says so; then 09, 10/10b.

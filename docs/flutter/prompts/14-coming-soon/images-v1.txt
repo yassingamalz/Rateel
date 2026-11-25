@@ -1,0 +1,52 @@
+Screen 14, coming soon: ChatGPT prompts v1 (2026-11-24). Pasted in the chat, one block each.
+Attachments for every prompt: docs/flutter/screens/14-coming-soon/14-in-arrivo.webp + the crop named in the prompt (attach/).
+The crops are enlarged 3x from the 1844x853 reference.
+
+=== E1  Emblem: open Quran on a stand in a lobed gold frame (attach: 14-in-arrivo.webp, attach/c1-emblem.png)
+Recreate exactly the emblem in the attached crop as a standalone app asset: a tall Islamic lobed ogee frame drawn as one
+continuous thick gold line (warm metallic gold #E9C46A to #C9952B, soft highlight along the top, about 2.5% of the image
+width), pointed apex at the top and a pointed tip at the bottom, two rounded lobes stepping out on each side. The inside of
+the frame is filled with flat deep emerald green #06352A. Inside, centred: a gold crescent moon (#E9B949) with a small
+five-point gold star at its upper right, and below it an open book (the Quran) seen from the front, cream pages (#F4EAD0)
+with a gold cover and spine, resting on a gold X-shaped wooden rehal stand. Same proportions, line weights and spacing as
+the crop, flat front view, perfectly symmetric (except the crescent and star). No text, no letters, no glow, no shadow on
+the background, no geometric pattern. Centred on a plain flat magenta background (#FF00FF), nothing else in the image.
+Square image 1024x1024, the frame filling about 80% of the height.
+
+=== E2  Small lobed badge frame, empty (attach: 14-in-arrivo.webp, attach/c2-badge-frame.png)
+Recreate exactly the small gold frame around the headphones icon in the attached crop, but EMPTY: one continuous thin gold
+line (warm metallic gold #E9C46A to #C9952B, light core #F6DC84, about 2% of the image width) forming a lobed Islamic
+ogee shape with a pointed tip at the top and at the bottom and two rounded lobes on each side, wider than tall as in the
+crop. Inside the line a flat deep emerald green fill #06352A. No icon, no text, no glow, no shadow on the background,
+perfectly symmetric left-right and top-bottom. Centred on a plain flat magenta background (#FF00FF). Square image
+1024x1024, the frame filling about 85% of the width.
+
+=== E3  Headphones glyph (attach: 14-in-arrivo.webp, attach/c2-badge-frame.png)
+Recreate only the headphones icon from inside the gold frame of the attached crop, without the frame: a simple rounded
+headphones glyph, solid flat cream #F4EAD0 with a very subtle lighter top edge, rounded headband and two rounded ear cups,
+same proportions and stroke thickness as the crop. Flat front view, symmetric. No frame, no text, no glow, no shadow on the
+background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the glyph filling about 70% of
+the width.
+
+=== E4  Group of people glyph (attach: 14-in-arrivo.webp, attach/c4-group.png)
+Recreate only the group icon from inside the gold frame of the attached crop, without the frame: three simple rounded
+person silhouettes (head circle + rounded shoulders), the middle one larger and in front, the two side ones smaller and
+behind, solid flat cream #F4EAD0 with a very subtle lighter top edge, a thin dark gap separating the front person from the
+ones behind. Same proportions as the crop, flat front view, symmetric. No frame, no text, no faces, no glow, no shadow on
+the background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the glyph filling about 75%
+of the width.
+
+=== E5  Certificate seal with check glyph (attach: 14-in-arrivo.webp, attach/c5-certificate.png)
+Recreate only the seal icon from inside the gold frame of the attached crop, without the frame: a rosette seal with 12
+soft rounded scallops, solid flat cream #F4EAD0 with a very subtle lighter top edge, and a bold rounded check mark in the
+centre cut out in deep emerald green #06352A. Same proportions as the crop, flat front view, symmetric. No frame, no text,
+no glow, no shadow on the background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the
+seal filling about 70% of the width.
+
+=== E6  Microphone glyph (attach: 14-in-arrivo.webp, attach/c6-microphone.png)
+Recreate only the microphone icon from inside the gold frame of the attached crop, without the frame: a rounded capsule
+microphone with three short horizontal grille lines on the right half, a U-shaped holder around its lower part, a short
+stem and a flat base, solid flat cream #F4EAD0 with a very subtle lighter top edge, grille lines in deep emerald green
+#06352A. Same proportions and stroke thickness as the crop, flat front view. No frame, no text, no glow, no shadow on the
+background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the glyph filling about 70% of
+the height.

@@ -73,6 +73,7 @@ flutter:
     - assets/ui/leaderboard/
     - assets/ui/video/
     - assets/ui/video/thumbs/
+    - assets/ui/coming_soon/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/
@@ -82,6 +83,10 @@ flutter:
     - family: ReadexPro
       fonts:
         - asset: assets/fonts/ReadexPro.ttf
+    # Screen 14 (owner, 2026-11-25: closer to the reference lettering).
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

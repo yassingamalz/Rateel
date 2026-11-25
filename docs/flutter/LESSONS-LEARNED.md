@@ -36,6 +36,10 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
   opacity) are logged in `ASSETS.md`.
 - `flutter_svg` ignores SVG filters: assets with glows (e.g. CR-11) are spares, not used.
 
+- **Performance** (owner, 2026-11-24: "animations feel heavy"): no endless animation may rebuild more than the element
+  it animates; one controller per small `AnimatedBuilder`; `RepaintBoundary` around repeated items and static
+  backgrounds; no blur on live content or platform views. Diagnosis and fix plan: `PERFORMANCE.md`.
+
 ## Assets from the owner
 - Evaluate PNG and SVG separately: the SVG "reconstructions" can differ from the PNG (shape, fill). Use the one
   closest to the reference; SVGs with masks, CSS `<style>` or filters do not render correctly in flutter_svg.

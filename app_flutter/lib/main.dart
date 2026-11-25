@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'coming_soon/coming_soon_screen.dart';
 import 'courses/course_data.dart';
 import 'core/learn_flow.dart';
 import 'nav/side_nav.dart';
@@ -118,6 +119,8 @@ class RateelApp extends StatelessWidget {
             builder: (context, selected) => switch (selected) {
               0 => const LearnFlow(),
               3 => const LeaderboardScreen(),
+              // Sections not built yet: coming soon (screen 14, as Angular).
+              1 || 2 || 5 => const ComingSoonScreen(),
               _ => SectionPlaceholder(index: selected),
             },
           ),

@@ -10,7 +10,8 @@ natively in Flutter, one screen per branch.
 4. The plan of the screen you work on: `docs/flutter/screens/<nn>-<slug>.md`.
 5. `docs/flutter/LESSONS-LEARNED.md`: how the owner wants the work done (references are visual only, critic
    without exclusions, building notes).
-6. Lesson-production rules, design lines and assets live on branch `lesson-production`
+6. `docs/flutter/PERFORMANCE.md`: why the app feels heavy, the fix plan and the performance rules for new screens.
+7. Lesson-production rules, design lines and assets live on branch `lesson-production`
    (`docs/production/RULES-AND-LESSONS-LEARNED.md`, `docs/design/`, `src/assets/images/guided/`).
 
 ## Key rules
