@@ -19,7 +19,7 @@ class SkipMetrics {
 }
 
 /// Glyphs of the lesson pills, drawn in code (cream, or dark on gold).
-enum PillGlyph { forward, check, replay, play, previous }
+enum PillGlyph { forward, check, replay, play, previous, next }
 
 /// «تخطي ⏩» (skip) glass pill of the lesson screens, as Angular's skip
 /// button: completes the lesson. On a lesson already completed it reads
@@ -30,11 +30,13 @@ class SkipButton extends StatelessWidget {
     required this.u,
     required this.onTap,
     this.completed = false,
+    this.light = 0,
   });
 
   final double u;
   final VoidCallback onTap;
   final bool completed;
+  final double light;
 
   @override
   Widget build(BuildContext context) => LessonPill(
@@ -42,6 +44,7 @@ class SkipButton extends StatelessWidget {
     label: completed ? 'إكمال' : 'تخطي',
     glyph: completed ? PillGlyph.check : PillGlyph.forward,
     onTap: onTap,
+    light: light,
   );
 }
 
@@ -57,6 +60,11 @@ class LessonPill extends StatefulWidget {
     required this.glyph,
     required this.onTap,
     this.gold = false,
+    this.light = 0,
+    this.height = SkipMetrics.height,
+    this.fontSize = 4.6,
+    this.leading,
+    this.dim = false,
   });
 
   final double u;
@@ -64,6 +72,20 @@ class LessonPill extends StatefulWidget {
   final PillGlyph? glyph;
   final VoidCallback onTap;
   final bool gold;
+
+  /// 0 dark, 1 light (screen 08's light reading).
+  final double light;
+
+  /// Height and text size in u (07 «تخطي»: 12.9u, 4.6u).
+  final double height;
+  final double fontSize;
+
+  /// Drawn before the label in RTL (right of it), instead of [glyph], e.g.
+  /// the ⓘ disc of «قواعد التجويد».
+  final Widget? leading;
+
+  /// Quieter rim (olive gold, no glow): the «8 / 1» counter of screen 08.
+  final bool dim;
 
   @override
   State<LessonPill> createState() => _LessonPillState();
@@ -75,7 +97,14 @@ class _LessonPillState extends State<LessonPill> {
   @override
   Widget build(BuildContext context) {
     final u = widget.u;
-    final ink = widget.gold ? RateelColors.countText : titleCream;
+    final l = widget.light;
+    final ink = widget.gold
+        ? RateelColors.countText
+        : Color.lerp(titleCream, RateelColors.readLInk, l)!;
+    final rim = widget.dim
+        ? Color.lerp(RateelColors.readCounterRim, RateelColors.readLPillRim, l)!
+        : Color.lerp(RateelColors.videoSkipRim, RateelColors.readLPillRim, l)!;
+    final h = widget.height;
     return Semantics(
       button: true,
       label: widget.label,
@@ -93,64 +122,115 @@ class _LessonPillState extends State<LessonPill> {
           duration: const Duration(milliseconds: 120),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(u * SkipMetrics.height / 2),
+              borderRadius: BorderRadius.circular(u * h / 2),
               gradient: widget.gold
                   ? const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [RateelColors.badgeTop, RateelColors.amber],
                     )
-                  : const RadialGradient(
+                  : RadialGradient(
                       radius: 1.4,
                       colors: [
-                        RateelColors.videoSkipFill,
-                        RateelColors.videoSkipFillEdge,
+                        Color.lerp(
+                          RateelColors.videoSkipFill,
+                          RateelColors.readLPillFill,
+                          l,
+                        )!,
+                        Color.lerp(
+                          RateelColors.videoSkipFillEdge,
+                          RateelColors.readLPillFill,
+                          l,
+                        )!,
                       ],
                     ),
-              border: Border.all(
-                color: widget.gold
-                    ? RateelColors.goldHighlight
-                    : RateelColors.videoSkipRim,
-                width: u * 0.28,
-              ),
+              border: widget.dim
+                  ? null
+                  : Border.all(
+                      color: widget.gold ? RateelColors.goldHighlight : rim,
+                      width: u * 0.28,
+                    ),
               boxShadow: [
-                BoxShadow(
-                  color: RateelColors.videoSkipRim.withValues(
-                    alpha: _down ? 0.6 : 0.42,
+                // Gold glow (dark), soft brown shadow (light).
+                if (!widget.dim)
+                  BoxShadow(
+                    color: RateelColors.videoSkipRim.withValues(
+                      alpha: (_down ? 0.6 : 0.42) * (1 - l),
+                    ),
+                    blurRadius: u * 2.2,
                   ),
-                  blurRadius: u * 2.2,
-                ),
+                if (l > 0)
+                  BoxShadow(
+                    color: const Color(0xFF6B4A2A).withValues(alpha: 0.22 * l),
+                    blurRadius: u * 1.4,
+                    offset: Offset(0, u * 0.5),
+                  ),
               ],
             ),
             child: CustomPaint(
-              foregroundPainter: widget.gold
+              // The dim pill (08 counter): thin olive → cream-gold rim.
+              painter: widget.dim
+                  ? GradientRimPainter(
+                      width: u * 0.24,
+                      radius: u * h / 2,
+                      top: Color.lerp(
+                        RateelColors.readCounterRim,
+                        RateelColors.readLPillRim,
+                        l,
+                      )!,
+                      bottom: Color.lerp(
+                        RateelColors.readCounterRimBottom,
+                        RateelColors.readLPillRim,
+                        l,
+                      )!,
+                    )
+                  : null,
+              foregroundPainter: widget.gold || widget.dim || l >= 1
                   ? null
-                  : _InnerGlowPainter(u: u, radius: u * SkipMetrics.height / 2),
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Text(
-                      widget.label,
+                  : _InnerGlowPainter(u: u, radius: u * h / 2, strength: 1 - l),
+              // Long labels shrink instead of overflowing the pill.
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: u * h * 0.3),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       textDirection: TextDirection.rtl,
-                      style: readex(
-                        u * 4.6,
-                        weight: widget.gold ? 520 : 340,
-                        color: ink,
-                      ).copyWith(height: 1.0),
-                    ),
-                    if (widget.glyph != null) ...[
-                      SizedBox(width: u * 2.9),
-                      SizedBox(
-                        width: u * 4.1,
-                        height: u * 3.0,
-                        child: CustomPaint(
-                          painter: PillGlyphPainter(widget.glyph!, ink),
+                      children: [
+                        // ⓘ-like marks sit before the label (right of it in RTL).
+                        if (widget.leading != null) ...[
+                          widget.leading!,
+                          SizedBox(width: u * 1.6),
+                        ],
+                        Text(
+                          widget.label,
+                          textDirection: TextDirection.rtl,
+                          style: readex(
+                            u * widget.fontSize,
+                            // Small toolbar pills (08) read bolder, as their
+                            // reference; «تخطي» keeps 340.
+                            weight: widget.gold
+                                ? 520
+                                : (widget.height < SkipMetrics.height
+                                      ? 460
+                                      : 340),
+                            color: ink,
+                          ).copyWith(height: 1.0),
                         ),
-                      ),
-                    ],
-                  ],
+                        if (widget.leading == null && widget.glyph != null) ...[
+                          SizedBox(width: u * 2.9),
+                          SizedBox(
+                            width: u * 4.1,
+                            height: u * 3.0,
+                            child: CustomPaint(
+                              painter: PillGlyphPainter(widget.glyph!, ink),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -171,13 +251,31 @@ class LessonRoundButton extends StatefulWidget {
     required this.glyph,
     required this.onTap,
     this.enabled = true,
+    this.light = 0,
+    this.child,
+    this.plain = false,
+    this.glyphSize = 4.1,
+    this.compact = false,
   });
+
+  /// Screen 08 toolbar: thin ring lit at the bottom, faint glow.
+  final bool compact;
 
   final double u;
   final String label;
   final PillGlyph glyph;
   final VoidCallback onTap;
   final bool enabled;
+
+  /// 0 dark, 1 light (screen 08's light reading).
+  final double light;
+
+  /// Replaces the [glyph] (screen 08: moon, «A»).
+  final Widget? child;
+
+  /// Filled green disc without the gold rim and glow (screen 08 «A»).
+  final bool plain;
+  final double glyphSize;
 
   @override
   State<LessonRoundButton> createState() => _LessonRoundButtonState();
@@ -189,6 +287,29 @@ class _LessonRoundButtonState extends State<LessonRoundButton> {
   @override
   Widget build(BuildContext context) {
     final u = widget.u;
+    final l = widget.light;
+    final plain = widget.plain;
+    final compact = widget.compact;
+    final fill = plain
+        ? [
+            Color.lerp(RateelColors.readADiscTop, RateelColors.readLADisc, l)!,
+            Color.lerp(RateelColors.readDiscFill, RateelColors.readLADisc, l)!,
+          ]
+        : [
+            Color.lerp(
+              RateelColors.videoSkipFill,
+              RateelColors.readLDiscFill,
+              l,
+            )!,
+            Color.lerp(
+              RateelColors.videoSkipFillEdge,
+              RateelColors.readLDiscFill,
+              l,
+            )!,
+          ];
+    final rim = plain
+        ? Color.lerp(RateelColors.readADiscRim, RateelColors.readLADisc, l)!
+        : Color.lerp(RateelColors.videoSkipRim, RateelColors.readLDiscRim, l)!;
     return Semantics(
       button: true,
       enabled: widget.enabled,
@@ -213,39 +334,56 @@ class _LessonRoundButtonState extends State<LessonRoundButton> {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const RadialGradient(
-                  radius: 0.8,
-                  colors: [
-                    RateelColors.videoSkipFill,
-                    RateelColors.videoSkipFillEdge,
-                  ],
-                ),
-                border: Border.all(
-                  color: RateelColors.videoSkipRim,
-                  width: u * 0.28,
-                ),
+                gradient: RadialGradient(radius: 0.8, colors: fill),
+                border: compact && l < 0.5
+                    ? null
+                    : Border.all(color: rim, width: u * (plain ? 0.2 : 0.28)),
                 boxShadow: [
-                  BoxShadow(
-                    color: RateelColors.videoSkipRim.withValues(
-                      alpha: _down ? 0.6 : 0.42,
+                  if (!plain)
+                    BoxShadow(
+                      color: RateelColors.videoSkipRim.withValues(
+                        alpha:
+                            (_down ? 0.6 : (compact ? 0.16 : 0.42)) * (1 - l),
+                      ),
+                      blurRadius: u * (compact ? 1.2 : 2.2),
                     ),
-                    blurRadius: u * 2.2,
+                  BoxShadow(
+                    color: (l > 0.5 ? const Color(0xFF6B4A2A) : Colors.black)
+                        .withValues(alpha: plain || l > 0 ? 0.25 : 0),
+                    blurRadius: u * 1.0,
+                    offset: Offset(0, u * 0.4),
                   ),
                 ],
               ),
               child: CustomPaint(
-                foregroundPainter: _InnerGlowPainter(
-                  u: u,
-                  radius: u * SkipMetrics.height / 2,
-                ),
+                painter: compact && l < 0.5
+                    ? GradientRimPainter(
+                        width: u * 0.24,
+                        radius: 9999,
+                        top: RateelColors.readRingTop,
+                        bottom: RateelColors.readRingBottom,
+                      )
+                    : null,
+                foregroundPainter: plain || compact || l >= 1
+                    ? null
+                    : _InnerGlowPainter(
+                        u: u,
+                        radius: u * SkipMetrics.height / 2,
+                        strength: 1 - l,
+                      ),
                 child: Center(
-                  child: SizedBox(
-                    width: u * 4.1,
-                    height: u * 4.1,
-                    child: CustomPaint(
-                      painter: PillGlyphPainter(widget.glyph, titleCream),
-                    ),
-                  ),
+                  child:
+                      widget.child ??
+                      SizedBox(
+                        width: u * widget.glyphSize,
+                        height: u * widget.glyphSize,
+                        child: CustomPaint(
+                          painter: PillGlyphPainter(
+                            widget.glyph,
+                            Color.lerp(titleCream, RateelColors.readLInk, l)!,
+                          ),
+                        ),
+                      ),
                 ),
               ),
             ),
@@ -323,6 +461,14 @@ class PillGlyphPainter extends CustomPainter {
             ..lineTo(tip.dx - r * 0.6, tip.dy + r * 0.4),
           stroke,
         );
+      case PillGlyph.next:
+        canvas.drawPath(
+          Path()
+            ..moveTo(w * 0.65, h * 0.12)
+            ..lineTo(w * 0.32, h * 0.5)
+            ..lineTo(w * 0.65, h * 0.88),
+          stroke,
+        );
       case PillGlyph.previous:
         canvas.drawPath(
           Path()
@@ -342,10 +488,11 @@ class PillGlyphPainter extends CustomPainter {
 /// Soft gold light just inside the rim (reference 07 «تخطي»: #585E28 →
 /// #203D23 over ≈ 1u inside the rim).
 class _InnerGlowPainter extends CustomPainter {
-  _InnerGlowPainter({required this.u, required this.radius});
+  _InnerGlowPainter({required this.u, required this.radius, this.strength = 1});
 
   final double u;
   final double radius;
+  final double strength;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -360,12 +507,55 @@ class _InnerGlowPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = u * 1.0
-        ..color = RateelColors.videoSkipRim.withValues(alpha: 0.6)
+        ..color = RateelColors.videoSkipRim.withValues(alpha: 0.6 * strength)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
     );
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(_InnerGlowPainter o) => o.u != u || o.radius != radius;
+  bool shouldRepaint(_InnerGlowPainter o) =>
+      o.u != u || o.radius != radius || o.strength != strength;
+}
+
+/// Ring or rounded rim with a vertical colour change (screen 08 toolbar:
+/// dark olive at the top, light gold at the bottom).
+class GradientRimPainter extends CustomPainter {
+  GradientRimPainter({
+    required this.width,
+    required this.radius,
+    required this.top,
+    required this.bottom,
+  });
+
+  final double width;
+  final double radius;
+  final Color top;
+  final Color bottom;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final r = math.min(radius, size.shortestSide / 2);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        (Offset.zero & size).deflate(width / 2),
+        Radius.circular(r),
+      ),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = width
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [top, bottom],
+        ).createShader(Offset.zero & size),
+    );
+  }
+
+  @override
+  bool shouldRepaint(GradientRimPainter o) =>
+      o.width != width ||
+      o.radius != radius ||
+      o.top != top ||
+      o.bottom != bottom;
 }

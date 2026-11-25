@@ -1,0 +1,43 @@
+Screen 08, reading lesson: ChatGPT prompts v1 (2026-11-25). Pasted in the chat, one block each.
+Attachments: attach/reference-dark.png (+ attach/reference-light.png for R3) and the crops in attach/.
+
+=== R1  Seamless stepped-quatrefoil lattice tile (attach: reference-dark.png, r1-corner-lattice-top-left.png, r1-card-lattice-band.png)
+Recreate exactly the gold Moroccan lattice shown in the attached crops (the top-left corner of the screen and the band
+along the bottom of the verse card) as a SEAMLESS REPEATING TILE: interlocking quatrefoil cells with small stepped
+(right-angle) notches and a pointed arch at the top and bottom of each cell, joined at the sides, exactly the same cell
+shape as the crops. One flat line, muted olive-gold #B09A3C with a slightly lighter edge #D2BC5A, line width about 2.5%
+of a cell's width, a very thin dark offset line under it for a carved look, no glow, no gradient fade, no other ornament.
+The tile must repeat perfectly left-right and top-bottom: exactly 4 cells across and 4 cells down, the lines touching
+the image edges at the same points on opposite sides. Plain flat magenta background (#FF00FF) everywhere else, no
+shadow on the background. Square image 1024×1024.
+
+=== R2  Verse-number badge frame (attach: reference-dark.png, r2-verse-badge.png)
+Recreate exactly the gold badge frame around the number «1» in the attached crop, as a standalone empty frame (no
+number): a lobed four-pointed Islamic star (pointed tips up, down, left and right, joined by two concave scallops on each
+side), drawn as one thin warm-gold line (#E9B83A with a light core #FFE07A, about 3% of the badge width), filled inside
+with dark emerald #063A2B, a soft dark drop shadow under it only inside the image. Perfectly symmetric, front view, same
+proportions as the crop. Centred on a plain flat magenta background (#FF00FF), nothing else, no text. Square image
+512×512, the badge filling about 85% of the width.
+
+=== R3  Reference: rules panel and font menu open (attach: reference-dark.png, reference-light.png)
+Using the attached dark screen as the exact style reference (same size 1842×854 landscape, same background, header
+arch with the open book, mosque, crescent, title «آداب تلاوة القرآن الكريم», capsule «1 / 8» top left, round pause button
+top right, the toolbar with «قواعد التجويد ⓘ», moon, «A», ‹ «8 / 1» ›, and the verse card «ينبغي للقارئ أن يستحضر عظمة
+كلام الله تعالى» with its gold rim and lattice band), draw the same screen with two things open:
+1) on the RIGHT side, a tall glass side panel sliding in over the content (about 30% of the screen width, from below the
+toolbar to the bottom margin, rounded corners, dark emerald glass fill, thin gold rim, soft shadow on the content, the
+rest of the screen slightly dimmed): header «قواعد التجويد» in cream bold with a small round glass ✕ button, a search
+field «ابحث عن قاعدة...» with a magnifier, and a list of 4 rule rows (a small coloured dot, the rule name in cream bold,
+one line of description in softer cream), e.g. «إدغام», «إخفاء», «قلقلة», «آداب عامة»; the «قواعد التجويد» pill in the
+toolbar shown active (gold fill, dark text);
+2) under the «A» button, a small glass dropdown with a gold rim: title «حجم الخط» with a − button, «24» and a + button,
+a thin gold divider, title «تباعد السطور» with two buttons and «2.0x».
+Same fonts, golds, glass and rims as the reference; everything Arabic right-to-left; no other new ornaments.
+
+=== R4  Header arch of the reading lesson (attach: reference-dark.png, r4-arch.png)
+Recreate exactly the thin gold arch in the attached crop, as a standalone asset: one continuous fine gold line (warm
+metallic gold #E9B83A with a light core #FFE07A, about 0.5% of the image width), a pointed ogee peak in the centre, long
+gentle shoulders curving down to each side, then on each side one small step and a short lobe that ends in a tail
+sloping down and outwards, ending at about 95% of the image height. Perfectly symmetric (the left half is hidden by the
+mosque in the crop: mirror the right half). No book, no mosque, no crescent, no text, no fill. Plain flat magenta
+background (#FF00FF). Wide image 2048×420, the arch filling the whole width.

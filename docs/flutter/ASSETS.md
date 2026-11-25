@@ -165,3 +165,18 @@ background). Cleaned: magenta keyed out with colour unmixing, alpha < 12% cleare
 | `ui/coming_soon/background.webp` | `08_emerald_background.png` | background of screen 14 (owner: faithful to the reference) | 1843×853 WebP q88, drawn over the content box (`BoxFit.fill`), darkened with `soonBgTone` |
 | not used | `09_mosque_silhouette.png` | rejected | broken alpha (ragged opaque blob around the mosque); `ui/decor/mosque.webp` is reused |
 | `fonts/Cairo.ttf` | google/fonts `ofl/cairo/Cairo[slnt,wght].ttf` (OFL, `fonts/OFL-Cairo.txt`) | screen 14 texts (`cairo()`) | variable wght 200–1000 |
+
+## Screen 08, reading lesson (2026-11-25)
+Source: `docs/design-assets/reading-lesson/` (owner's ChatGPT zip, prompts `prompts/08-reading-lesson/images-v1.txt`,
+magenta background). Processing: `tools/assets/reading_lesson_assets.py`.
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `ui/reading/lattice_tile.webp` | `01_moroccan_gold_lattice.png` (R1) | top corners, toolbar patches, band along the bottom of the verse card | stepped quatrefoil lattice; one period measured by autocorrelation (313.5 px), 2×2-cell seamless tile (seam diff x 1.0, y 2.5 /255), 512 px; gold line + dark carved offset; tinted per theme in code |
+| `ui/reading/badge_line.webp`, `badge_fill.webp` | `02_emerald_gold_badge.png` (R2) | verse-number badge | split into the gold line and the inner emerald (flat #023D27, no shadow ring), so the light theme can tint each layer; 250×256 |
+| `docs/flutter/screens/08-reading-lesson/reference-panel.png` | `03_lesson_screen_rules_and_typography.png` (R3) | reference of the rules panel and the «A» menu | not an app asset |
+| `data/reading/*.json` | `src/assets/data/content/reading/` (Angular data) | sentences of the 5 reading lessons | copied as they are |
+| reused | `decor/header_arch.svg`, `header_book.svg`, `crescent_star.svg`, `mosque.webp`, `GoldDivider`, `LessonPill`, `LessonRoundButton`, `SkipButton` | screen 08 | arch: upper part fits the reference, lower lobes ≈ 6u wider (see `screens/08-reading-lesson/HISTORY.md`) |
+| `ui/reading/arch.webp` | `04_reading_header_arch.png` (R4, owner 2026-11-25) | header arch of screen 08 | magenta un-mixed, trimmed, 2048×483; fitted by correlation on the reference (F1 0.88, 102.1×21.5u); left part hidden behind the mosque as the reference |
+| `ui/reading/crescent.svg`, `star.svg` | `decor/crescent_star.svg` (CR-04) split into its two paths, viewBox trimmed | screen 08 header | placed separately on the reference (IoU 0.85 / 0.93): the reference's star sits apart, in the crescent's opening; star at 55% as 03/05 |
+

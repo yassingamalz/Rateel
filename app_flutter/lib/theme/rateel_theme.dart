@@ -254,6 +254,72 @@ class RateelColors {
   static const soonCardTop = Color(0xFF09332A);
   static const soonCardBottom = Color(0xFF0B382B);
   static const soonCardRim = Color(0xFF3F7558);
+
+  // Screen 08 (reading lesson), sampled from `screens/08-reading-lesson/
+  // reference-{dark,light}.webp` and `reference-panel.png`. Built with the
+  // reference values (conflicts R1–R6 in docs/flutter/STYLE-CONFLICTS.md).
+  // Dark.
+  static const readBgCentre = Color(0xFF013024);
+  static const readBgEdge = Color(0xFF002B21);
+  static const readToolFill = Color(0xFF01362A);
+  static const readToolRimTop = Color(0xFF3E7055);
+  static const readToolRimBottom = Color(0xFF2E5E45);
+  static const readSeparator = Color(0xFF6A9574);
+  static const readCardTop = Color(0xFF174C2E);
+  static const readCardMid = Color(0xFF033B2C);
+  static const readCardBottom = Color(0xFF013729);
+  static const readCardRim = Color(0xFFF7E27A); // core of the rim
+  static const readCardRimSide = Color(0xFFD4B44A);
+  static const readShelf = Color(0xFF175D44); // faint line under the card
+  static const readDiscFill = Color(0xFF184832); // «A» disc
+  static const readDiscRim = Color(0xFF2A5C40);
+  static const readCounterRim = Color(0xFF8E9A55); // «8 / 1» pill, olive gold
+  // Toolbar rings (moon, ‹ ›, «8 / 1»): thin, dark olive at the top, light
+  // gold at the bottom, faint glow.
+  static const readRingTop = Color(0xFF8C7A2C);
+  static const readRingBottom = Color(0xFFF7D660);
+  static const readCounterRimBottom = Color(0xFFFBEFA0);
+  static const readADiscTop = Color(0xFF2F6448);
+  static const readADiscRim = Color(0xFF5A8A6C);
+  static const readDotOff = Color(0xFF3E6942);
+  static const readDotDone = Color(0xFF5F7440);
+  static const readDotOn = Color(0xFFFBC950);
+  static const readLattice = Color(0xFFB09A3C); // lattice tile tint (dark)
+  // Light (the same screen with the moon toggle, reference-light).
+  static const readLBgCentre = Color(0xFFF9F1E3);
+  static const readLBgEdge = Color(0xFFFBF2E5);
+  static const readLToolFill = Color(0xFFF6EDE0);
+  static const readLToolRimTop = Color(0xFFFEF9EE);
+  static const readLToolRimBottom = Color(0xFFE9DCCB);
+  static const readLSeparator = Color(0xFFDCC7B0);
+  static const readLCardTop = Color(0xFFFBF3E9);
+  static const readLCardMid = Color(0xFFFCF5EA);
+  static const readLCardBottom = Color(0xFFFDF6EC);
+  static const readLCardRim = Color(0xFFE6D6C2);
+  static const readLCardRimSide = Color(0xFFCBAC93);
+  static const readLShelf = Color(0xFFEAE3D5);
+  static const readLInk = Color(0xFF341E06); // verse, buttons, numbers
+  static const readLTitle = Color(0xFFA17550); // copper title
+  static const readLCopper = Color(0xFFC99561); // arch, divider, badge line
+  static const readLBook = Color(0xFFC1864E);
+  static const readLCrescent = Color(0xFFE2B278);
+  static const readLMosque = Color(0xFFDEC5A7);
+  static const readLLattice = Color(0xFFE4C7A5);
+  static const readLPillFill = Color(0xFFE3CFBB);
+  static const readLPillRim = Color(0xFFD8BDA4);
+  static const readLDiscFill = Color(0xFFEADCCB);
+  static const readLDiscRim = Color(0xFFDFC9B3);
+  static const readLADisc = Color(0xFFF2E6D8);
+  static const readLDotOff = Color(0xFFE9D6C0);
+  static const readLDotDone = Color(0xFFD9BC9C);
+  static const readLDotOn = Color(0xFF9B6E48);
+  static const readLBadgeFill = Color(0xFFFCF4E8);
+  // Screen 02 bar in the light reading lesson (capsule, pause button).
+  static const lessonLCapsule = Color(0xFFDBD8CB);
+  static const lessonLCapsuleRim = Color(0xFFE9E4D7);
+  static const lessonLButton = Color(0xFFFBF2E4);
+  static const lessonLRing = Color(0xFFEAB87C);
+  static const lessonLInk = Color(0xFF341900);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

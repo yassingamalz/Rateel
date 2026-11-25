@@ -139,25 +139,29 @@ class ScreenBackground extends StatelessWidget {
 /// pointed next to an open diamond in the middle (reference 07). Size: the
 /// box of the whole divider; the line is 0.35u thick, the diamond 3.6u wide.
 class GoldDivider extends StatelessWidget {
-  const GoldDivider({super.key, required this.u});
+  const GoldDivider({super.key, required this.u, this.diamond = 1.8});
 
   final double u;
+
+  /// Half diagonal of the diamond in u (07: 1.8u, 08: 1.5u).
+  final double diamond;
 
   @override
   Widget build(BuildContext context) =>
-      CustomPaint(painter: _GoldDividerPainter(u));
+      CustomPaint(painter: _GoldDividerPainter(u, diamond));
 }
 
 class _GoldDividerPainter extends CustomPainter {
-  _GoldDividerPainter(this.u);
+  _GoldDividerPainter(this.u, this.diamond);
 
   final double u;
+  final double diamond;
 
   @override
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
     final half = size.width / 2;
-    final d = u * 1.8; // half diagonal of the diamond
+    final d = u * diamond; // half diagonal of the diamond
     final gap = u * 0.7; // diamond → pointed line end
     final t = u * 0.35; // line thickness
     for (final side in [-1.0, 1.0]) {
@@ -194,14 +198,14 @@ class _GoldDividerPainter extends CustomPainter {
         ..close();
       canvas.drawPath(p, paint);
     }
-    final diamond = Path()
+    final rhombus = Path()
       ..moveTo(c.dx, c.dy - d)
       ..lineTo(c.dx + d, c.dy)
       ..lineTo(c.dx, c.dy + d)
       ..lineTo(c.dx - d, c.dy)
       ..close();
     canvas.drawPath(
-      diamond,
+      rhombus,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = u * 0.45
@@ -211,5 +215,5 @@ class _GoldDividerPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_GoldDividerPainter o) => o.u != u;
+  bool shouldRepaint(_GoldDividerPainter o) => o.u != u || o.diamond != diamond;
 }

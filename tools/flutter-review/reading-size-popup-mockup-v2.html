@@ -1,0 +1,28 @@
+<html><head><style>
+@font-face{font-family:Readex;src:url('../../app_flutter/assets/fonts/ReadexPro.ttf');}
+body{margin:0;background:#002B21;font-family:Readex;display:flex;gap:80px;padding:40px 80px;width:1200px;box-sizing:border-box}
+.col{display:flex;flex-direction:column;align-items:center;gap:14px}
+.lab{color:#FFFBDC;font-size:26px;font-weight:600;text-align:center}
+.sub{color:#cfd8c8;font-size:18px;text-align:center;max-width:470px;line-height:1.4}
+.box{position:relative;width:444px;height:256px;border:2.4px solid #E6A533;border-radius:24px;background:linear-gradient(#174C2E,#033B2C 28%,#013729);box-shadow:0 0 18px rgba(230,165,51,.38),0 6px 14px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center}
+.box:before{content:'';position:absolute;top:-15px;left:50%;margin-left:-14px;border:14px solid transparent;border-bottom-color:#E6A533;border-top:0}
+.t{color:#FFFBDC;font-size:41px;font-weight:600;margin-top:22px}
+.row{display:flex;align-items:center;gap:22px;margin-top:18px;direction:ltr}
+.b{width:85px;height:85px;border-radius:50%;border:2.6px solid #F2B23A;background:radial-gradient(#0A3A24 40%,#1B3F1F);box-shadow:0 0 24px rgba(230,165,51,.6),0 0 6px rgba(255,214,110,.5),inset 0 0 12px rgba(230,165,51,.6),inset 0 0 3px rgba(255,220,120,.7);display:flex;align-items:center;justify-content:center;color:#FFFBDC;font-weight:600;line-height:1}
+.v{width:128px;height:65px;border-radius:33px;border:1.9px solid #8E9A55;background:#033223;display:flex;align-items:center;justify-content:center;color:#FFFBDC;font-size:38px;font-weight:600}
+.tag{color:#F7D660;font-size:17px;margin-top:6px}
+.tags{display:flex;justify-content:space-between;width:330px;direction:ltr}
+</style></head><body>
+<div class="col"><div class="lab">A · «−» a sinistra, «+» a destra</div>
+<div class="box"><div class="t">حجم الخط</div><div class="row"><div class="b" style="font-size:56px">−</div><div class="v">24</div><div class="b" style="font-size:56px">+</div></div>
+<div class="tags"><span class="tag">più piccolo</span><span class="tag">più grande</span></div></div>
+<div class="sub">Come una manopola/volume: si ingrandisce verso destra. È lo standard di quasi tutte le app, anche in arabo (i controlli numerici restano sinistra → destra).</div></div>
+<div class="col"><div class="lab">B · «+» a sinistra, «−» a destra</div>
+<div class="box"><div class="t">حجم الخط</div><div class="row"><div class="b" style="font-size:56px">+</div><div class="v">24</div><div class="b" style="font-size:56px">−</div></div>
+<div class="tags"><span class="tag">più grande</span><span class="tag">più piccolo</span></div></div>
+<div class="sub">Ordine da destra a sinistra (RTL): la direzione di lettura araba, si ingrandisce andando verso sinistra.</div></div>
+<div class="col" style="display:none"><div class="lab">Attuale (v11) · «أ» piccola e grande</div>
+<div class="box"><div class="t">حجم الخط</div><div class="row"><div class="b"><span style="font-size:29px">أ</span><span style="font-size:24px">−</span></div><div class="v">24</div><div class="b"><span style="font-size:48px">أ</span><span style="font-size:24px">+</span></div></div>
+<div class="tags"><span class="tag">più piccolo</span><span class="tag">più grande</span></div></div>
+<div class="sub">Per confronto: la lettera cambia grandezza insieme al segno.</div></div>
+</body></html>

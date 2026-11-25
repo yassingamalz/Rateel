@@ -5,6 +5,7 @@ import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
 import 'lesson_shell.dart';
+import 'reading_lesson_page.dart';
 import 'video_lesson_page.dart';
 
 /// Steps of the placeholder lesson (the data has no steps yet). Review:
@@ -17,7 +18,8 @@ int placeholderSteps = 8;
 /// التالية» and «أكملت الدرس», so the bar and the whole flow lessons → units
 /// → courses can be tried on the phone. Returns `true` when the lesson is
 /// finished. Opened above the whole app: the side rail is hidden.
-/// Video lessons open screen 07 ([VideoLessonPage]); the other types keep
+/// Video lessons open screen 07 ([VideoLessonPage]), reading lessons screen
+/// 08 ([ReadingLessonPage]); the other types keep
 /// this placeholder until their screens exist.
 Route<bool> lessonPageRoute(
   Lesson lesson,
@@ -26,6 +28,8 @@ Route<bool> lessonPageRoute(
   bool completed = false,
 }) => lesson.type == LessonType.video
     ? videoLessonRoute(lesson, index, count, completed: completed)
+    : lesson.type == LessonType.read
+    ? readingLessonRoute(lesson, index, count, completed: completed)
     : lessonRoute<bool>(
         (context) => LessonPage(lesson: lesson, index: index, count: count),
       );

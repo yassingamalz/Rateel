@@ -74,6 +74,8 @@ flutter:
     - assets/ui/video/
     - assets/ui/video/thumbs/
     - assets/ui/coming_soon/
+    - assets/ui/reading/
+    - assets/data/reading/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/

@@ -1,3 +1,40 @@
+# Next session: merge 08, performance fix, then screen 09 (practice / recitation)
+
+**Update 2026-11-25:** screen 08 (reading lesson, `lib/lessons/reading_lesson_page.dart`) is **approved** (v12) on branch
+`flutter/08-reading-lesson`, not yet merged. History `screens/08-reading-lesson/HISTORY.md`. New shared pieces: light theme
+for the lesson chrome (`LessonShell(light:)`, `LessonPill`/`LessonRoundButton`/`SkipButton(light:)`), `LessonRoundButton(
+compact:)`, `GradientRimPainter`, `GoldDivider(diamond:)`, tajweed colour wheel `TajweedColors` (for the **ayat only**,
+`DESIGN-SYSTEM.md`). APK builds: Maven Central may answer 429 through the proxy; retry with long pauses (the Gradle cache
+then fills and later builds take ~1 min).
+
+## Next steps (proposal, confirm with the owner)
+1. PR `flutter/08-reading-lesson` → `master` and merge (ask the owner first).
+2. Performance fix (`PERFORMANCE.md`), branch `flutter/perf` from `master`, if the owner says yes.
+3. Screen 09, practice lesson / recitation (`09-lezione-pratica-recitazione-*.webp`, dark/light), Angular original, with
+   the bar of 02 and the shared lesson widgets (light theme ready). Branch `flutter/09-practice-lesson` from `master`.
+4. Later: critic of 08 and final critic of 06 (phone only, ask first); conflicts R1–R7 with the others at the end.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel. Leggi CLAUDE.md, poi docs/flutter/DECISIONS.md, PROCESS.md, DESIGN-SYSTEM.md, LESSONS-LEARNED.md,
+PERFORMANCE.md, NEXT-SESSION.md, SCREENS.md, STYLE-CONFLICTS.md, ASSETS.md e docs/flutter/screens/08-reading-lesson/HISTORY.md.
+Prima chiedimi se unire la PR di flutter/08-reading-lesson in master. Poi schermata 09, lezione pratica / recitazione, uno a
+uno con i riferimenti 09-lezione-pratica-recitazione dark/light (branch lesson-production, docs/design/glassy-gamified/screens/)
+e l'originale Angular, con la barra 02 e i widget condivisi delle lezioni (tema chiaro compreso). Branch
+flutter/09-practice-lesson da master. Prima piano e domande, poi prompt ChatGPT per gli elementi mancanti (uno per blocco
+copiabile, dimmi quali immagini allegare), costruzione, verifica elemento per elemento con i numeri, confronto, video e APK.
+Segui le regole di PERFORMANCE.md. Conflitti nel registro STYLE-CONFLICTS.md (si decidono a fine progetto). Il critico solo
+quando te lo dico. Crea HISTORY.md della schermata. Parla con me in italiano.
+```
+
+---
+
+## Archive: hand-off that started screen 08 (2026-11-24/25)
+
+**Update 2026-11-25 (screen 08):** reading lesson v6 built on `flutter/08-reading-lesson` (dark + light, rules panel, «A»
+menu; `lib/lessons/reading_lesson_page.dart`), waiting for the owner's phone test. Open: arch asset R4, conflicts R1–R7,
+«A»/number serif font. History `screens/08-reading-lesson/HISTORY.md`.
+
 **Update 2026-11-25:** screen 14 (coming soon, `lib/coming_soon/coming_soon_screen.dart`) is **approved** (APK 1.0.375)
 and merged into `master`. It uses the Cairo font (owner's choice, conflict S4) and the owner's baked background. Next
 steps unchanged: performance fix (`PERFORMANCE.md`, if the owner says yes), then screen 08.
