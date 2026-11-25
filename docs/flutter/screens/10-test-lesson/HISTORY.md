@@ -31,3 +31,36 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   blur), medallion on the top edge, points + streak or the correct answer, explanation, «متابعة». Recommended: A.
 - Prompts v2 (`images-v2.txt`): T1 polish of the chosen feedback, T2 results, T3 completion (passed / not passed);
   sounds S1/S2 (+S3) described for the owner.
+
+## 3. Owner's choices and references (2026-11-25)
+- Feedback **A** (bar inside the card). Owner's ChatGPT images for T1 (feedback correct / wrong) and T3 (end popup
+  passed / not passed) delivered, stored as `reference-feedback-{correct,wrong}.webp`, `reference-completion-{pass,fail}.webp`;
+  owner: «ChatGPT made something quite different from the lessons' standard style: use it only as a reference, do not
+  replicate it exactly; your mockups were very good». T2 (results) not delivered: results built from the Angular content
+  in the lesson style.
+- Sounds: owner «find them online yourself». Chosen from the npm package `uisfx` (CC0 audio), family «dreamy», by
+  measured pitch contour (`docs/design-assets/test-lesson/sounds/README.md`).
+
+## 4. Build v1–v5 and verification (2026-11-25)
+- Shared decor: the 08 private widgets moved to `lib/lessons/lesson_decor.dart` (renamed public, `HeaderSpec` for the
+  header geometry, subtitle, gold title, optional book; `GoldCardPainter(fill:, rimWidth:)`). 08 checked against a
+  `master` build: dark/light identical; the panel/long captures differ in a mosque area that also differs between two
+  `master` runs (nondeterministic).
+- Code: `lib/lessons/test_data.dart` (`TestContent`, `TestRun`: Angular scoring 10 + streak bonus ≤ 10, score %, pass
+  70%, sequential unlock, recommendations), `lib/lessons/test_lesson_page.dart` (`TestLessonPage`, `testLessonRoute`,
+  `TestMetrics`); `lesson_page.dart` routes `LessonType.test` here; tokens `test*` in `rateel_theme.dart`.
+- Header geometry: arch R4 fitted on reference 10 (97.2 × 13.8u, top 1.4u: shoulders within 1 px; the reference's lower
+  right lobe runs longer, asset shape), mosque 2.9u higher than 08, crescent and star placed on the reference, gold title,
+  subtitle from the data description, divider 78u.
+- Fixes found on zoomed side-by-sides: question text 4.3u, option text lifted 0.9u (Readex sits low), points pill star on
+  the right, button keeps the reference look before a choice, card fill darker as the reference (T3), subtitle colour,
+  lattice band 20%, diamond lines 34u, circles' numbers 4.2u, moon glyph 4.4u; after an answer the list scrolls to the
+  correct row (the bar covers the third row); a wrong answer keeps its stake faded in the pill.
+- Verification v5 (`verify-v5.md`): every element within ±4 px except the tapered ends of the shared dividers and the
+  arch's lower right lobe.
+- Tests: `flutter analyze` clean, `flutter test` 13/13 (new: scoring rules, select → confirm → feedback → next with the
+  locked circle).
+- Captures `capture-v5-*-phone.jpg` (question, selected, correct, wrong, light, results, passed, not passed, details),
+  comparison `compare-v5-phone.jpg`, demo `demo-v5-phone.mp4` (questions 8–10, results, popup, light, details,
+  «إنهاء الدرس» back to 06). Scripts `tools/flutter-review/test-capture.js`, `test-demo.js`, `test-angular-capture.js`,
+  `test-feedback-mockup.{html,js}`.

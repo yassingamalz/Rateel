@@ -180,3 +180,18 @@ magenta background). Processing: `tools/assets/reading_lesson_assets.py`.
 | `ui/reading/arch.webp` | `04_reading_header_arch.png` (R4, owner 2026-11-25) | header arch of screen 08 | magenta un-mixed, trimmed, 2048×483; fitted by correlation on the reference (F1 0.88, 102.1×21.5u); left part hidden behind the mosque as the reference |
 | `ui/reading/crescent.svg`, `star.svg` | `decor/crescent_star.svg` (CR-04) split into its two paths, viewBox trimmed | screen 08 header | placed separately on the reference (IoU 0.85 / 0.93): the reference's star sits apart, in the crescent's opening; star at 55% as 03/05 |
 
+
+## Screen 10, test lesson (2026-11-25)
+No new art: the reference's elements come from the library (08 arch R4, badge R2, lattice R1, mosque, crescent and
+star, `glyphs/star.svg`) or are drawn in code (circles, rows, radios, ✓/✕ discs, arrow, ↻, buttons).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `data/test/assessment-lesson-1.json` | `src/assets/data/content/assessments/` (Angular data) | the 10 questions of «اختبار أساسيات التجويد» | copied as it is; the second test (`assessment-lesson-2`) has no content |
+| `sounds/test_correct.mp3`, `test_wrong.mp3`, `test_passed.mp3` | npm `uisfx`, family «dreamy» (`success`, `error`, `achievement`), **CC0 audio**; sources and spares in `docs/design-assets/test-lesson/sounds/` | correct / wrong answer, test passed (`Sounds.correct/wrong/passed`) | chosen by Claude on the owner's request (2026-11-25), by pitch contour (rising chime, descending two notes, arpeggio) |
+| Material icons `emoji_events`, `school`, `lightbulb`, `refresh`, `error_outline` | Flutter Material icon font | trophy, cap medallion, recommendations, ↻, warning (results and end popup) | **placeholders** in the lesson gold until drawn assets exist (prompt T4) |
+| `docs/flutter/screens/10-test-lesson/reference-feedback-{correct,wrong}.webp`, `reference-completion-{pass,fail}.webp` | owner's ChatGPT images from prompts T1/T3 | inspiration only (owner: different from the lesson style, not to replicate exactly) | not app assets |
+
+Shared code from screen 10: `lib/lessons/lesson_decor.dart` (moved from 08 unchanged: `LessonPal`, `LessonBackground`,
+`LatticeField`, `LessonHeader` + `HeaderSpec` (subtitle, gold title, optional book), `LessonBadge`, `GoldCardPainter(fill:)`,
+`ToolRimPainter`, `MoonPainter`, `lessonMosqueTone`).

@@ -78,3 +78,18 @@ values** (`read*` tokens), as screens 07/11; the owner decides at the end of the
 | R6 | **Light theme** (first light screen of the app) | none yet | cream #F9F1E3 / #FBF2E5, ink #341E06, copper #C99561, title #A17550, tan rims | reference (`readL*`, `lessonL*`; 02 bar and shared lesson buttons take `light:`) |
 | R7 | Font of «A» and of the verse number | Readex Pro | serif (Times-like) in the reference | Readex Pro |
 
+
+## Screen 10, test lesson (2026-11-25)
+Measured on `screens/10-test-lesson/reference.webp` and `reference-answer.webp`. Built with the **reference values**
+(`test*` tokens), as 07/08/11; the owner decides at the end of the project. Feedback colours have no reference value
+(owner's choice A from Claude's mockups).
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| T1 | Lesson title | `titleCream` (08 title cream) | gold gradient ≈ #FBDD72 → #F0BE34, bold | reference (`testTitleTop/Bottom`, `HeaderSpec.goldTitle`) |
+| T2 | Option rows, result rows, stat tiles | glass rim 2 px #245843, no fill | flat #0B3A2A, rim 0.3u #70A685 → #498163, radius 1.9u; selected: #214E2D → #1A4728, gold rim #FCE680, gold dot #FDCE2D | reference (`testRow*`, `testSel*`) |
+| T3 | Question card | 08 card `readCardTop #174C2E → readCardBottom #013729` (R3) | darker #002F23 → #00251E, same gold rim | reference (`testCard*`, `GoldCardPainter(fill:)`) |
+| T4 | Question circles | glass button / `amber #E2A51E` | dark disc #104430, rim #5C8F6F 0.3u, number #D5E4D2; current gold #F4C842 → #DDA00A | reference (`testNav*`) |
+| T5 | Correct / wrong (feedback, rows, circles, discs) | none | none in the reference: jewel green #1F6A45 → #10503A rim #56C98C, red #5A2A22 → #43201B rim #D0644F (owner's choice A of the mockups) | `testOk*`, `testKo*`, light `testLOk*`, `testLKo*` |
+| T6 | «+10 نقطة» pill, «تأكيد الإجابة», «السؤال التالي», «إنهاء الدرس» | 07 skip `videoSkip*` (V2) / gold rim token | olive → dark fill #2B481C → #00211A, rim #F7EE9E → #FFD229 with a gold glow, text #F9EAAC | reference (`testPill*`) |
+| T7 | Subtitle | `leaderText` / `cream` | pale green-cream ≈ #C3DBC2 | reference (`testSubtitle`) |

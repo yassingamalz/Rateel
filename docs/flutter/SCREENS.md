@@ -14,7 +14,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **approved** (APK 1.0.366), merged into `master`; sections are mock |
 | 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12, APK 1.0.393), merged into `master` (PR #49) |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | **postponed** (owner 2026-11-25): one of the hardest, done later, maybe last |
-| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **in progress** on `flutter/10-test-lesson` (plan v1, questions Q1–Q8) |
+| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **v5 built** on `flutter/10-test-lesson` (dark + light, feedback A, results, sounds), waiting for the owner's phone test |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |

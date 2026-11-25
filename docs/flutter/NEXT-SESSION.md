@@ -3,7 +3,8 @@
 **Update 2026-11-25:** PR #49 (screen 08) is **merged into `master`**. Screen **09 (practice / recitation) is postponed**
 by the owner (one of the hardest, done later, maybe last). Screens **10 / 10b (test lesson + answer feedback)** started on
 `flutter/10-test-lesson` from `master`: plan `screens/10-test-lesson.md` (questions Q1–Q8), prompts T1–T3, history
-`screens/10-test-lesson/HISTORY.md`. Continue from the history.
+`screens/10-test-lesson/HISTORY.md`. **v5 built** (dark + light, feedback A, end popup, results, CC0 sounds), waiting
+for the owner's phone test; placeholder Material icons (trophy, cap) until drawn assets. Continue from the history.
 
 ## Prompt to continue
 ```

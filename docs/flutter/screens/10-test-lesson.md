@@ -7,7 +7,8 @@ drawn (`10-test-lesson/feedback-mockups/`: A inline bar, B modal), owner to choo
 reviewable); Q6 **A** (n / N); Q7 **as the Angular original**: completion popup (score, points, pass/fail at 70%,
 auto-close 6 s / 8 s) → results (score ring, stats, answers list → details, recommendations, «إعادة الاختبار»,
 «إنهاء الدرس»); «إنهاء الدرس» completes the lesson also below 70% (Angular); Q8 **sounds needed** (owner supplies
-S1/S2). Angular captured: `10-test-lesson/angular/` (`tools/flutter-review/test-angular-capture.js`). Prompts v2:
+S1/S2; later: Claude finds them online, CC0 `uisfx`). Feedback: **A** chosen. Built: v5, see
+`10-test-lesson/HISTORY.md`. Angular captured: `10-test-lesson/angular/` (`tools/flutter-review/test-angular-capture.js`). Prompts v2:
 `prompts/10-test-lesson/images-v2.txt` (T1 polished feedback, T2 results, T3 completion).
 
 Branch `flutter/10-test-lesson` from `master` (8cbe223: screens 02–08, 11, 14 merged).

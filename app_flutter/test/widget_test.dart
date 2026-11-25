@@ -2,6 +2,8 @@ import 'package:rateel/lessons/lesson_shell.dart';
 import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
+import 'package:rateel/lessons/test_data.dart';
+import 'package:rateel/lessons/test_lesson_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
@@ -316,15 +318,15 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('إدغام'), findsOneWidget);
-    // A rule opens its detail over the veiled screen; ✕ closes it.
-    await tester.tap(find.text('إدغام'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text('استمع إلى مثال'), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel('إغلاق').last);
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text('استمع إلى مثال'), findsNothing);
+      // A rule opens its detail over the veiled screen; ✕ closes it.
+      await tester.tap(find.text('إدغام'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('استمع إلى مثال'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('إغلاق').last);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('استمع إلى مثال'), findsNothing);
       await tester.tap(find.bySemanticsLabel('إغلاق'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
@@ -337,4 +339,117 @@ void main() {
       expect(result, isTrue);
     },
   );
+
+  test('test lesson scoring follows the Angular rules (screen 10)', () {
+    final c = TestContent.parse({
+      'title': 't',
+      'passingScore': 70,
+      'questions': [
+        for (var i = 0; i < 3; i++)
+          {
+            'id': 'q$i',
+            'text': 'q$i',
+            'type': 'singleChoice',
+            'options': [
+              {'id': 'a', 'text': 'a'},
+              {'id': 'b', 'text': 'b'},
+            ],
+            'correctAnswer': 'a',
+          },
+        {
+          'id': 'm',
+          'text': 'm',
+          'type': 'multipleChoice',
+          'options': [
+            {'id': 'a', 'text': 'a'},
+            {'id': 'b', 'text': 'b'},
+            {'id': 'c', 'text': 'c'},
+          ],
+          'correctAnswer': ['a', 'b'],
+        },
+        {
+          'id': 't',
+          'text': 't',
+          'type': 'textInput',
+          'correctAnswer': ['من يعمل'],
+        },
+      ],
+    })!;
+    final run = TestRun(c);
+    final qs = c.questions;
+    expect(run.isUnlocked(1), isFalse);
+    // Streak: 10, then 10 + 4, then 10 + 6 (Angular getQuestionPoints).
+    for (final q in qs.take(3)) {
+      run.toggle(q, 'a');
+      expect(run.submit(q), isTrue);
+    }
+    expect(run.points, 10 + 14 + 16);
+    expect(run.isUnlocked(3), isTrue);
+    // Multiple choice needs exactly the right set.
+    run.toggle(qs[3], 'a');
+    expect(run.submit(qs[3]), isFalse);
+    expect(run.streak, 0);
+    // Text answers are trimmed and compared case-insensitively.
+    run.setText(qs[4], '  من يعمل ');
+    expect(run.submit(qs[4]), isTrue);
+    expect(run.score, 80);
+    expect(run.passed, isTrue);
+    expect(run.recommendations().length, 2);
+  });
+
+  testWidgets('test lesson: select, confirm, feedback, next (screen 10)', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    const lesson = Lesson(
+      id: 'assessment-lesson-1',
+      title: 'اختبار المعرفة النظرية',
+      description: '',
+      type: LessonType.test,
+      minutes: 20,
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) => Center(
+            child: TextButton(
+              onPressed: () =>
+                  Navigator.of(context).push(testLessonRoute(lesson, 1, 2)),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    for (var i = 0; i < 6; i++) {
+      await tester.pump(const Duration(milliseconds: 300));
+    }
+    expect(find.text('ما هو تعريف علم التجويد؟'), findsOneWidget);
+    expect(find.bySemanticsLabel('الخطوة 0 من 10'), findsOneWidget);
+    // Question 2 is locked until question 1 is answered.
+    await tester.tap(find.bySemanticsLabel(RegExp('^السؤال 2')));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('ما هو تعريف علم التجويد؟'), findsOneWidget);
+    await tester.tap(
+      find.text('علم يعنى بتحسين تلاوة القرآن الكريم وإخراج كل حرف من مخرجه'),
+    );
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('تأكيد الإجابة'));
+    for (var i = 0; i < 4; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(find.text('إجابة صحيحة'), findsOneWidget);
+    expect(find.bySemanticsLabel('الخطوة 1 من 10'), findsOneWidget);
+    await tester.tap(find.text('السؤال التالي'));
+    for (var i = 0; i < 4; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(
+      find.text('ما هو حكم التجويد عند قراءة القرآن الكريم؟'),
+      findsOneWidget,
+    );
+  });
 }

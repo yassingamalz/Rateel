@@ -12,6 +12,7 @@ import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
 import 'lessons/reading_lesson_page.dart';
+import 'lessons/test_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
 import 'units/unit_data.dart';
 
@@ -86,6 +87,14 @@ Future<void> main() async {
   readingStartVerse = int.tryParse(q['verse'] ?? '') ?? 0;
   readingStartRules = q['rules'] == '1';
   readingStartFontMenu = q['fontMenu'] == '1';
+  // Review aids (screen 10): `?testQ=4&testPick=1&testState=ok|ko|results|
+  // pass|fail|details` (with `?lessons=0,<unit>&openLesson=0`).
+  testStartQuestion = int.tryParse(q['testQ'] ?? '') ?? 0;
+  testStartPick = [
+    for (final s in (q['testPick'] ?? '').split(','))
+      if (int.tryParse(s) != null) int.parse(s),
+  ];
+  testStartState = q['testState'];
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;
