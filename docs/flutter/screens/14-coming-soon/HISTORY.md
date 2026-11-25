@@ -36,4 +36,4 @@
   reference; no geometric difference found. Asked the owner for a phone screenshot of what looks different.
 - Verify (`verify-v2.txt`): card texts within ±10 px in width, ±4 px vertically; title cream 334–411 (ref 333–407),
   gold 413–508 (ref 415–505); subtitle ±3 px.
-
+- APK 1.0.375 (2026-11-25).
