@@ -171,8 +171,8 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
       ),
       // Two title lines placed one by one: cream glyphs y 333–407, gold 415–505.
       for (final (top, line, color) in [
-        (37.9, 'ميزات تجويد', RateelColors.soonTitle),
-        (49.7, 'القرآن قريباً', RateelColors.soonTitleGold),
+        (37.6, 'ميزات تجويد', RateelColors.soonTitle),
+        (48.95, 'القرآن قريباً', RateelColors.soonTitleGold),
       ])
         Positioned(
           left: cx - half,
@@ -182,8 +182,8 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
             Text(
               line,
               textAlign: TextAlign.center,
-              style: readex(
-                u * 8.7,
+              style: cairo(
+                u * 9.6,
                 weight: 700,
                 color: color,
               ).copyWith(height: 1.0, shadows: _textShadow(u)),
@@ -206,11 +206,11 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
           Text(
             'نعمل على تطوير ميزات جديدة\nلمساعدتك في تعلم وإتقان قواعد\nالتجويد',
             textAlign: TextAlign.center,
-            style: readex(
-              u * 3.6,
-              weight: 340,
+            style: cairo(
+              u * 3.95,
+              weight: 400,
               color: RateelColors.soonSubtitle,
-            ).copyWith(height: 1.37),
+            ).copyWith(height: 1.25),
           ),
         ),
       ),
@@ -329,9 +329,9 @@ class _FeatureCard extends StatelessWidget {
             child: Text(
               f.title,
               textAlign: TextAlign.center,
-              style: readex(
-                u * 4.45,
-                weight: 650,
+              style: cairo(
+                u * 4.9,
+                weight: 700,
                 color: RateelColors.soonTitle,
               ).copyWith(height: 1.2),
             ),
@@ -359,8 +359,8 @@ class _FeatureCard extends StatelessWidget {
             child: Text(
               f.text,
               textAlign: TextAlign.center,
-              style: readex(
-                u * 3.1,
+              style: cairo(
+                u * 3.3,
                 weight: 400,
                 color: RateelColors.soonText,
               ).copyWith(height: 1.4),

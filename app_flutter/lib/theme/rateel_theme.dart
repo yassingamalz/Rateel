@@ -300,6 +300,22 @@ TextStyle readex(
   );
 }
 
+/// Cairo (variable, wght 200–1000): screen 14 lettering, chosen by the owner
+/// as the closest to its reference (2026-11-25). Style conflict S4.
+TextStyle cairo(
+  double size, {
+  double weight = 500,
+  Color color = RateelColors.cream,
+}) {
+  return TextStyle(
+    fontFamily: 'Cairo',
+    fontSize: size,
+    color: color,
+    height: 1.25,
+    fontVariations: [FontVariation('wght', weight)],
+  );
+}
+
 /// Light theme is not designed yet: the toggle (settings screen) is planned,
 /// both modes resolve to the dark palette until the owner enables light mode.
 final themeMode = ValueNotifier<ThemeMode>(ThemeMode.dark);

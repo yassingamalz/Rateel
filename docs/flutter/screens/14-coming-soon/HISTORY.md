@@ -22,3 +22,18 @@
   4. Emblem inside is the owner's flat green; the reference's is a little more transparent with a soft glow.
 - Captures: `capture-v1.png` (1844×853), `capture-v1-phone.png` (915×412), `compare-v1.png` (reference above).
 - APK 1.0.373 (2026-11-25).
+
+## v2 (2026-11-25)
+- Owner, after APK 1.0.373: (1) Mushaf emblem darker, more saturated gold, darker green, shown before use;
+  (2) the top cards feel taller than the bottom ones; (3) font closer to the reference.
+- Emblem: three tone proposals (`v2-proposals/emblem-proposals.png`: A light, B medium, C strong; HSV: gold
+  saturation ×1.15/1.3/1.45 and value ×0.93/0.86/0.80, green value ×0.85/0.72/0.60, cream ×1/0.96/0.92). **Owner chose
+  B**; `ui/coming_soon/quran_emblem.webp` replaced (v1 = the keyed `01_quran_emblem.png` in `docs/design-assets/`).
+- Font: 10 Google fonts compared with the reference (`v2-proposals/font-proposals.png`). **Owner chose Cairo**
+  (variable, OFL, `assets/fonts/Cairo.ttf`, helper `cairo()`), for this screen only (style conflict S4).
+  Sizes re-measured: title 9.6u, card titles 4.9u w700, descriptions 3.3u, subtitle 3.95u height 1.25.
+- Cards: measured again, all four are 466×337 px with equal margins (top 77, bottom 76) and gaps (26–27 px), as the
+  reference; no geometric difference found. Asked the owner for a phone screenshot of what looks different.
+- Verify (`verify-v2.txt`): card texts within ±10 px in width, ±4 px vertically; title cream 334–411 (ref 333–407),
+  gold 413–508 (ref 415–505); subtitle ±3 px.
+

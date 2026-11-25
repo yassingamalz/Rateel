@@ -156,7 +156,7 @@ background). Cleaned: magenta keyed out with colour unmixing, alpha < 12% cleare
 
 | App file | Source | Used in | Notes |
 |---|---|---|---|
-| `ui/coming_soon/quran_emblem.webp` | `01_quran_emblem.png` (E1) | big emblem above the title | 549×640; `02_quran_emblem_alternative.png` kept as a spare (almost identical) |
+| `ui/coming_soon/quran_emblem.webp` | `01_quran_emblem.png` (E1), tone **B** (owner 2026-11-25: gold saturation ×1.3 value ×0.86, green value ×0.72, cream ×0.96) | big emblem above the title | 549×640; `02_quran_emblem_alternative.png` kept as a spare (almost identical) |
 | `ui/coming_soon/badge_frame.webp` | `03_empty_gold_frame.png` (E2) | lobed gold frame of the 4 feature badges | 296×320, filled with #06352A |
 | `ui/coming_soon/glyph_headphones.webp` | `04_headphones.png` (E3) | دروس صوتية | cream glyph, 256 px |
 | `ui/coming_soon/glyph_group.webp` | `05_group.png` (E4) | جلسات جماعية | cream glyph, 256 px |
@@ -164,4 +164,4 @@ background). Cleaned: magenta keyed out with colour unmixing, alpha < 12% cleare
 | `ui/coming_soon/glyph_microphone.webp` | `07_microphone.png` (E6) | تدريب النطق | cream glyph, 256 px; its base is tilted by about 1° |
 | `ui/coming_soon/background.webp` | `08_emerald_background.png` | background of screen 14 (owner: faithful to the reference) | 1843×853 WebP q88, drawn over the content box (`BoxFit.fill`), darkened with `soonBgTone` |
 | not used | `09_mosque_silhouette.png` | rejected | broken alpha (ragged opaque blob around the mosque); `ui/decor/mosque.webp` is reused |
-
+| `fonts/Cairo.ttf` | google/fonts `ofl/cairo/Cairo[slnt,wght].ttf` (OFL, `fonts/OFL-Cairo.txt`) | screen 14 texts (`cairo()`) | variable wght 200–1000 |

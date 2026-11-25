@@ -62,4 +62,4 @@ Measured on `screens/07-video-lesson/reference.webp` and `reference-playing.webp
 | S1 | Background | shared `ScreenBackground` + `ScreenGirih` | owner's baked image `ui/coming_soon/background.webp` (arcs, girih, waves, mosque), `soonBgTone` | reference |
 | S2 | Text colours | `titleCream #FAF1D8`, `cream #F4EAD0` | titles #FFFFE4, subtitle #FFFFFF, card text #EFFFE6, gold line #F5B71F | reference |
 | S3 | Card glass | 03/06 card tokens | fill #09332A → #0B382B, rim #3F7558 0.3u, radius 4.7u | reference |
-
+| S4 | Font | Readex Pro (whole app) | Cairo (variable) on screen 14, owner's choice as closest to the reference (2026-11-25) | owner decides at the end: Cairo everywhere, or Readex here |
