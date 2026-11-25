@@ -9,6 +9,12 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
   backend): titles, descriptions, counts, progress, levels. If the reference shows different wording or numbers
   (e.g. screen 03: course 3 description, the «0%» with a 30% bar), keep the app's data and do not flag it as a
   defect.
+- **New references are generated from the app, not from the old ChatGPT references** (owner, 2026-11-25): ChatGPT
+  drifted out of the app's style when given the old `lesson-production` images. Every prompt for a new screen
+  attaches **screenshots of the approved Flutter app** (`docs/flutter/app-references/`, captured from `master` at
+  1844x853) and says «same style as the attached app screenshots, do not invent a new style». Old ChatGPT images
+  may still be attached only for the layout idea, after the app screenshots, and the prompt says so. Refresh the
+  screenshots when a new screen is approved.
 - Values in a reference that are only an example (progress 30%) are not design: progress starts from the real
   value (0% for a new user).
 

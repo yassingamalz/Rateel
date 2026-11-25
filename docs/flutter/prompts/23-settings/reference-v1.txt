@@ -1,0 +1,22 @@
+Screen 23, settings: prompt v1 (style from the app's own screenshots).
+Attach, in this order (docs/flutter/app-references/):
+  1. app-14-coming-soon.webp    (page with the side rail, glass cards, lobed gold badges)
+  2. app-11-leaderboard.webp    (gold-rimmed list rows, gold vertical tabs)
+  3. app-08-reading-rules.webp  (panel, gold pills, small round buttons)
+Output: one landscape image 1844x853, dark. Save as screens/23-settings/23-impostazioni.webp
+
+----- PROMPT -----
+The three attached images are screenshots of my app. Create ONE new screen of the same app, landscape 1844x853 px, Arabic right-to-left, that looks like it belongs to the same app: copy exactly their background (dark emerald green with the thin gold girih pattern), the side rail on the right with its gold badges, their glass cards with thin gold rims, their gold, their cream text, their font (Readex Pro) and their spacing. Do not invent a new style, no new decorations, no new colours.
+
+The screen is the app's SETTINGS page. Title at the top right of the content, as in the first screenshot: «الإعدادات» in large cream text with a thin gold divider with a diamond under it.
+
+Content: a wide glass card made of rows, like the rows of the second screenshot, separated by thin lines. Each row: on the right a small lobed gold badge with a cream icon (as in the first screenshot), then the label in cream text, and on the left the control:
+1. «المظهر» (moon icon): a gold-rimmed segmented pill with two parts «داكن» (selected, gold fill, dark text) and «فاتح».
+2. «حجم الخط» (letter icon): small round «−» button, value «100%» in a pill, small round «+» button, like the round buttons of the third screenshot.
+3. «المؤثرات الصوتية» (speaker icon): a gold toggle switch, on.
+4. «الاهتزاز» (vibration icon): a gold toggle switch, on.
+5. «القارئ» (microphone icon): a pill «محمود خليل الحصري» with a small gold chevron.
+6. «تذكير يومي» (bell icon): a pill «8:00 م» and a gold toggle switch, on.
+On the left of the card, a small vertical glass column with two pills, like the vertical tabs of the second screenshot: «عن التطبيق» and «إعادة ضبط التقدم» (the second one with a muted red rim).
+
+The selected item of the side rail is a new gear icon at the bottom of the rail, gold like the selected items in the screenshots. Everything in Arabic. No people, no faces, no English text.

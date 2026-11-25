@@ -1,7 +1,7 @@
 # Screen 22: listening lesson (درس الاستماع)
 
 Status: **lesson type confirmed by the owner** (2026-11-25): a separate lesson of type `listen`, not part of the tests.
-Reference: **to generate** (prompt `prompts/22-listening-lesson/reference-v1.txt`), to be saved as
+Reference: **to generate** (prompt `prompts/22-listening-lesson/reference-v2.txt`, app screenshots; v1 with the old ChatGPT images is superseded), to be saved as
 `screens/22-listening-lesson/22-lezione-ascolto.webp`, 1844x853. Plan to be shown to the owner before building.
 Build order: after 10/10b (test and answer feedback), reusing their widgets.
 
@@ -11,6 +11,8 @@ The student listens to an audio (a verse, a word), then answers questions on wha
 type inside tests (10).
 
 ## References used (visual only, `LESSONS-LEARNED.md`)
+v2 (current): app screenshots `docs/flutter/app-references/app-08-reading-dark.webp`, `app-14-coming-soon.webp`, `app-11-leaderboard.webp`.
+v1 (superseded, layout idea only):
 | File | Used for |
 |---|---|
 | `22-listening-lesson/20-lezione-guidata-ascolto-versetto.webp` (lesson-production, screen 20) | verse card with reciter and surah, highlighted word, «إعادة الاستماع» replay pill |
