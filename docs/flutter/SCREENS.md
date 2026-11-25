@@ -16,7 +16,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
-| 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
+| 12 | Daily challenges | `12-sfide-giornaliere.webp` | **plan** on `flutter/12-daily-challenges` (`screens/12-daily-challenges.md`), waiting for the owner |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
