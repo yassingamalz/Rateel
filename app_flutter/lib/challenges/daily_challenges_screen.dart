@@ -48,13 +48,14 @@ abstract final class ChalMetrics {
   static const dividerW = 33.2;
   static const subtitleCentre = 35.75;
   static const subtitleSize = 4.4;
-  static const mosqueDx = -78.6; // left edge of the image (its margin included), matched by overlay
-  static const mosqueTop = 6.3;
-  static const mosqueW = 32.5;
-  static const crescentDx = 52.0; // left edge, matched by overlay
-  static const crescentTop = 8.1;
-  static const crescentW = 17.7;
-  static const crescentH = 13.5;
+  // Mosque and crescent + star: screen 03 standard (from the content edges).
+  static const mosqueLeft = 10.5;
+  static const mosqueTop = 8.0;
+  static const mosqueW = 49.0;
+  static const crescentRight = 25.5;
+  static const crescentTop = 7.5;
+  static const crescentW = 10.65;
+  static const crescentH = 9.75;
   // Path: tile centres 199 … 1508 px, first challenge on the right (RTL).
   static const pathDx = 1.4;
   static const pitch = 25.6;
@@ -110,16 +111,6 @@ const _flame = 'assets/ui/icons/flame_gold_01.webp';
 const _coin = 'assets/ui/icons/coin_gold.webp';
 const _band = 'assets/ui/video/bottom_band.webp';
 const _corner = 'assets/ui/video/corner_bottom_';
-
-final _mosqueTone = () {
-  const r = 1.32, g = 1.21, b = 1.08;
-  return const ColorFilter.matrix([
-    r, 0, 0, 0, 0, //
-    0, g, 0, 0, 0, //
-    0, 0, b, 0, 0, //
-    0, 0, 0, 1, 0, //
-  ]);
-}();
 
 class _DailyChallengesScreenState extends State<DailyChallengesScreen>
     with TickerProviderStateMixin {
@@ -923,30 +914,40 @@ class _Header extends StatelessWidget {
               ),
             ),
           ),
+          // Mosque and crescent + star: the app standard of screen 03 (same
+          // asset, size, place from the content edges and treatment), so they
+          // sit in the same place on every screen (owner, 2026-11-25).
           Positioned(
-            left: cx + u * (ChalMetrics.mosqueDx - m),
+            left: u * ChalMetrics.mosqueLeft,
             top: u * ChalMetrics.mosqueTop,
             width: u * ChalMetrics.mosqueW,
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.55, 1],
-                colors: [Color(0xFF000000), Color(0x00000000)],
-              ).createShader(r),
-              child: ColorFiltered(
-                colorFilter: _mosqueTone,
-                child: const Image(image: AssetImage(_mosque)),
+            height: u * ChalMetrics.mosqueW * 542 / 900,
+            child: Opacity(
+              opacity: 0.83,
+              child: ShaderMask(
+                blendMode: BlendMode.dstIn,
+                shaderCallback: (r) => const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.66, 0.80],
+                  colors: [Color(0xFF000000), Color(0x00000000)],
+                ).createShader(r),
+                child: const Image(
+                  image: AssetImage(_mosque),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
           Positioned(
-            left: cx + u * (ChalMetrics.crescentDx - m),
+            right: u * ChalMetrics.crescentRight,
             top: u * ChalMetrics.crescentTop,
             width: u * ChalMetrics.crescentW,
             height: u * ChalMetrics.crescentH,
-            child: SvgPicture.asset('assets/ui/decor/crescent_star.svg'),
+            child: SvgPicture.asset(
+              'assets/ui/decor/crescent_star.svg',
+              fit: BoxFit.fill,
+            ),
           ),
           Positioned(
             left:

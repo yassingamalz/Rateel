@@ -27,7 +27,7 @@ Geometry measured on the reference (u = 8.53 px, offsets from the centre of the 
 | Side lines | 410–615 and 1085–1275, y 694 | `GoldDivider` 24u at −38.3u / +39.4u |
 | Title / divider / subtitle | ink 592–1202 × 166–229; diamond (895, 262); ink 630–1154 × 286–324 | 7.4u at 23.15u; 33.2u at 30.7u; 4.4u at 35.75u |
 | Arch | dome apex ≈ 885, tails 330–1440 | 03 `header_arch.svg` 128×36u, top 0.6u, bottom fade (library arch: shape not identical) |
-| Mosque, crescent | — | placed by overlay (mosque image margin included) |
+| Mosque, crescent | mosque 215–492 px, crescent 1250–1401 px | **screen 03 standard** (owner, v2): mosque 10.5u from the content's left edge, top 8u, 49u wide, 83% with the 03 ground fade; crescent + star 25.5u from the right edge, top 7.5u, 10.65×9.75u |
 
 Check: overlay of the 1844×853 capture on the reference (50/50 blend): tiles, pills, connector, capsule, side lines and
 title coincide; mosque and crescent moved by overlay. Library arch and lattice differ in shape from the reference by
@@ -38,3 +38,9 @@ as Angular, light runs to the open tile, capsule rises); only the open tile's gl
 completion (long press, review) 1.5 s: check badge pops, coin flies in an arc to the flame disc, light runs to the next
 tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%; locked tap: shake + toast +
 `Haptics.denied`. Widget test `daily challenges …` (12 tests pass).
+
+## 4. v2 (2026-11-25)
+- Owner: crescent + star and mosque must be **standard**: same place, size and treatment as the current screens.
+  Now exactly as screen 03 (`ChalMetrics.mosque*`, `crescent*`, anchored to the content edges, as `courses_screen.dart`).
+  The reference draws them a little differently (mosque ≈ 8u further right, crescent larger and lower): library standard
+  wins (one asset direction, `ASSETS.md`).
