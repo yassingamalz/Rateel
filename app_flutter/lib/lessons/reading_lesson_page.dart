@@ -1008,49 +1008,27 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     final ax = toolCx + u * ReadMetrics.aDx;
     final top = u * (ReadMetrics.toolTop + ReadMetrics.toolH) + u * 0.3;
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    // − / + show a small and a large «أ» (the usual text-size sign).
-    Widget step(String label, VoidCallback onTap, bool enabled) {
-      final big = label == 'تكبير';
-      return SizedBox(
-        width: u * 10,
-        height: u * 10,
-        child: LessonRoundButton(
-          u: u,
-          label: label,
-          glyph: PillGlyph.play,
-          light: p.t,
-          enabled: enabled,
-          onTap: onTap,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            textDirection: TextDirection.rtl,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: u * 0.5),
-                child: Text(
-                  'أ',
-                  style: readex(
-                    u * (big ? 5.6 : 3.4),
-                    weight: 600,
-                    color: ink,
-                  ).copyWith(height: 1.0),
-                ),
-              ),
-              Text(
-                big ? '+' : '−',
-                style: readex(
-                  u * 2.8,
-                  weight: 600,
-                  color: ink,
-                ).copyWith(height: 1.0),
-              ),
-            ],
+    // Plain − (left) and + (right), drawn centred in luminous circles
+    // (owner, 2026-11-25: variant A of `size-popup-variants-v2.png`).
+    Widget step(String label, VoidCallback onTap, bool enabled) => SizedBox(
+      width: u * 10,
+      height: u * 10,
+      child: LessonRoundButton(
+        u: u,
+        label: label,
+        glyph: PillGlyph.play,
+        light: p.t,
+        enabled: enabled,
+        onTap: onTap,
+        child: SizedBox(
+          width: u * 4.2,
+          height: u * 4.2,
+          child: CustomPaint(
+            painter: _SignPainter(plus: label == 'تكبير', color: ink),
           ),
         ),
-      );
-    }
-
+      ),
+    );
     Widget value(String s) => Container(
       width: u * 15,
       height: u * 7.6,
@@ -2307,4 +2285,29 @@ class _RuleSheetState extends State<_RuleSheet> {
       },
     );
   }
+}
+
+/// «−» / «+» of the text-size popup, centred in their box.
+class _SignPainter extends CustomPainter {
+  _SignPainter({required this.plus, required this.color});
+
+  final bool plus;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final c = size.center(Offset.zero);
+    final h = size.width / 2;
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = size.width * 0.17
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(c - Offset(h * 0.8, 0), c + Offset(h * 0.8, 0), paint);
+    if (plus) {
+      canvas.drawLine(c - Offset(0, h * 0.8), c + Offset(0, h * 0.8), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_SignPainter o) => o.plus != plus || o.color != color;
 }

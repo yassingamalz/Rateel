@@ -97,3 +97,10 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   `capture-v11-menu-rule-phone.jpg`.
 
 - APK 1.0.389 (v11).
+
+## 9. v12 and approval (2026-11-25)
+- Owner chose variant A of the text-size popup (mockups `size-popup-variants.png`, `-v2.png`: luminous circles): «−» left,
+  «+» right, drawn centred (`_SignPainter`) in the luminous lesson circles. Capture `capture-v12-size-popup-phone.png`.
+- **Owner approved screen 08.** Still open: ayat tajweed colours (wheel), audio examples, conflicts R1–R7 (end of project),
+  critic later, PR to `master`.
+
