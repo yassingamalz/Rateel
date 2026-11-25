@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' show ImageFilter;
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
@@ -106,9 +107,11 @@ class ReadMetrics {
   static const panelBottom = 4.0;
   static const panelGap = 1.2;
   // «A» menu.
-  static const menuW = 33.4;
+  // Larger than the reference's menu (owner, 2026-11-25: it must be clear at
+  // once that it controls the text size).
+  static const menuW = 52.0;
   // Text size only (owner, 2026-11-25: no line spacing control).
-  static const menuH = 17.6;
+  static const menuH = 30.0;
 }
 
 Route<bool> readingLessonRoute(
@@ -1005,28 +1008,55 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     final ax = toolCx + u * ReadMetrics.aDx;
     final top = u * (ReadMetrics.toolTop + ReadMetrics.toolH) + u * 0.3;
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    Widget step(String label, VoidCallback onTap, bool enabled) => SizedBox(
-      width: u * 5.4,
-      height: u * 5.4,
-      child: LessonRoundButton(
-        u: u,
-        label: label,
-        glyph: PillGlyph.play,
-        light: p.t,
-        enabled: enabled,
-        onTap: onTap,
-        child: Text(
-          label == 'تكبير' || label == 'زيادة' ? '+' : '−',
-          style: readex(u * 4.0, weight: 400, color: ink).copyWith(height: 1.0),
+    // − / + show a small and a large «أ» (the usual text-size sign).
+    Widget step(String label, VoidCallback onTap, bool enabled) {
+      final big = label == 'تكبير';
+      return SizedBox(
+        width: u * 10,
+        height: u * 10,
+        child: LessonRoundButton(
+          u: u,
+          label: label,
+          glyph: PillGlyph.play,
+          light: p.t,
+          enabled: enabled,
+          onTap: onTap,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            textDirection: TextDirection.rtl,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: u * 0.5),
+                child: Text(
+                  'أ',
+                  style: readex(
+                    u * (big ? 5.6 : 3.4),
+                    weight: 600,
+                    color: ink,
+                  ).copyWith(height: 1.0),
+                ),
+              ),
+              Text(
+                big ? '+' : '−',
+                style: readex(
+                  u * 2.8,
+                  weight: 600,
+                  color: ink,
+                ).copyWith(height: 1.0),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
+
     Widget value(String s) => Container(
-      width: u * 10.9,
-      height: u * 5.0,
+      width: u * 15,
+      height: u * 7.6,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(u * 2.5),
+        borderRadius: BorderRadius.circular(u * 3.8),
         color: p.c(RateelColors.videoSkipFill, RateelColors.readLPillFill),
         border: Border.all(
           color: p.c(RateelColors.readCounterRim, RateelColors.readLPillRim),
@@ -1036,13 +1066,13 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
       child: Text(
         s,
         textDirection: TextDirection.ltr,
-        style: readex(u * 3.0, weight: 500, color: ink).copyWith(height: 1.0),
+        style: readex(u * 4.4, weight: 600, color: ink).copyWith(height: 1.0),
       ),
     );
     Widget title(String s) => Text(
       s,
       textDirection: TextDirection.rtl,
-      style: readex(u * 3.2, weight: 600, color: ink),
+      style: readex(u * 4.8, weight: 600, color: ink),
     );
     return Positioned(
       left: ax - u * ReadMetrics.menuW / 2,
@@ -1062,9 +1092,9 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                 padding: EdgeInsets.only(top: u * 1.6),
                 child: Column(
                   children: [
-                    SizedBox(height: u * 2.6),
+                    SizedBox(height: u * 2.8),
                     title('حجم الخط'),
-                    SizedBox(height: u * 1.4),
+                    SizedBox(height: u * 2.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       textDirection: TextDirection.ltr,
@@ -1073,9 +1103,9 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                           Haptics.tick();
                           setState(() => readingFontSize -= 2);
                         }, readingFontSize > 18),
-                        SizedBox(width: u * 1.3),
+                        SizedBox(width: u * 2.6),
                         value('$readingFontSize'),
-                        SizedBox(width: u * 1.3),
+                        SizedBox(width: u * 2.6),
                         step('تكبير', () {
                           Haptics.tick();
                           setState(() => readingFontSize += 2);
@@ -1087,6 +1117,26 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  /// Rule detail (owner, 2026-11-25): opens over the whole screen, which is
+  /// veiled and blurred with the pause-menu tokens (`lessonVeil`, blur σ
+  /// 0.55u); explains the rule in words, with an audio-example button for
+  /// later (not active yet).
+  void _openRule(TajweedRule r, _Pal p) {
+    Navigator.of(context).push(
+      PageRouteBuilder<void>(
+        opaque: false,
+        barrierDismissible: true,
+        barrierLabel: 'إغلاق',
+        transitionDuration: const Duration(milliseconds: 300),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
+        pageBuilder: (context, a, _) => Material(
+          type: MaterialType.transparency,
+          child: _RuleSheet(rule: r, p: p, anim: a),
         ),
       ),
     );
@@ -1219,9 +1269,8 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                             return GestureDetector(
                               onTap: () {
                                 Haptics.tap();
-                                setState(
-                                  () => _selectedRule = on ? null : r.id,
-                                );
+                                setState(() => _selectedRule = r.id);
+                                _openRule(r, p);
                               },
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(
@@ -1289,7 +1338,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
                                           Text(
                                             r.description,
                                             textDirection: TextDirection.rtl,
-                                            maxLines: on ? 4 : 1,
+                                            maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: readex(
                                               u * 2.7,
@@ -2015,4 +2064,247 @@ class _SearchPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SearchPainter o) => o.color != color;
+}
+
+/// The rule detail over the veiled, blurred lesson (pause-menu tokens).
+class _RuleSheet extends StatefulWidget {
+  const _RuleSheet({required this.rule, required this.p, required this.anim});
+
+  final TajweedRule rule;
+  final _Pal p;
+  final Animation<double> anim;
+
+  @override
+  State<_RuleSheet> createState() => _RuleSheetState();
+}
+
+class _RuleSheetState extends State<_RuleSheet> {
+  bool _soon = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final p = widget.p;
+    final r = widget.rule;
+    return LayoutBuilder(
+      builder: (context, box) {
+        final u = box.maxHeight / 100;
+        final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+        final soft = p.c(
+          RateelColors.cream.withValues(alpha: 0.86),
+          RateelColors.readLInk.withValues(alpha: 0.8),
+        );
+        return AnimatedBuilder(
+          animation: widget.anim,
+          builder: (context, _) {
+            final t = Curves.easeOut.transform(widget.anim.value);
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                // Veil + blur of everything underneath (02 pause menu).
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.of(context).maybePop(),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: u * 0.55 * t,
+                      sigmaY: u * 0.55 * t,
+                    ),
+                    child: ColoredBox(
+                      color: RateelColors.lessonVeil.withValues(
+                        alpha: RateelColors.lessonVeil.a * t,
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Opacity(
+                    opacity: t,
+                    child: Transform.scale(
+                      scale: 0.92 + 0.08 * t,
+                      child: Container(
+                        width: u * 100,
+                        padding: EdgeInsets.fromLTRB(
+                          u * 5,
+                          u * 3.6,
+                          u * 5,
+                          u * 4,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(u * 3.6),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              p.c(
+                                RateelColors.readCardTop,
+                                RateelColors.readLCardTop,
+                              ),
+                              p.c(
+                                RateelColors.readCardMid,
+                                RateelColors.readLCardMid,
+                              ),
+                              p.c(
+                                RateelColors.readCardBottom,
+                                RateelColors.readLCardBottom,
+                              ),
+                            ],
+                            stops: const [0, 0.28, 1],
+                          ),
+                          border: Border.all(
+                            color: p.c(
+                              RateelColors.readCardRim,
+                              RateelColors.readLCardRimSide,
+                            ),
+                            width: u * 0.35,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: RateelColors.videoSkipRim.withValues(
+                                alpha: 0.38 * (1 - p.t),
+                              ),
+                              blurRadius: u * 2,
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withValues(
+                                alpha: p.d(0.45, 0.15),
+                              ),
+                              blurRadius: u * 3,
+                              offset: Offset(0, u * 1),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                Container(
+                                  width: u * 3.2,
+                                  height: u * 3.2,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: r.color,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: r.color.withValues(alpha: 0.5),
+                                        blurRadius: u * 1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(width: u * 2.4),
+                                Expanded(
+                                  child: Text(
+                                    r.name,
+                                    textDirection: TextDirection.rtl,
+                                    style:
+                                        readex(
+                                          u * 7,
+                                          weight: 600,
+                                          color: ink,
+                                        ).copyWith(
+                                          shadows: p.t > 0.5
+                                              ? null
+                                              : titleShadows(u),
+                                        ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: u * 7.4,
+                                  height: u * 7.4,
+                                  child: LessonRoundButton(
+                                    u: u,
+                                    label: 'إغلاق',
+                                    glyph: PillGlyph.play,
+                                    light: p.t,
+                                    onTap: () =>
+                                        Navigator.of(context).maybePop(),
+                                    child: SizedBox(
+                                      width: u * 2.8,
+                                      height: u * 2.8,
+                                      child: CustomPaint(
+                                        painter: _ClosePainter(ink),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: u * 1.6),
+                            SizedBox(
+                              width: u * 52,
+                              height: u * 4,
+                              child: p.t > 0
+                                  ? ColorFiltered(
+                                      colorFilter: ColorFilter.mode(
+                                        p.c(
+                                          RateelColors.videoDivider,
+                                          RateelColors.readLCopper,
+                                        ),
+                                        BlendMode.srcIn,
+                                      ),
+                                      child: GoldDivider(u: u, diamond: 1.5),
+                                    )
+                                  : GoldDivider(u: u, diamond: 1.5),
+                            ),
+                            SizedBox(height: u * 2.4),
+                            Text(
+                              r.description,
+                              textAlign: TextAlign.center,
+                              textDirection: TextDirection.rtl,
+                              style: readex(
+                                u * 4.6,
+                                weight: 400,
+                                color: soft,
+                              ).copyWith(height: 1.5),
+                            ),
+                            SizedBox(height: u * 4),
+                            // Audio example: the button only, for later.
+                            SizedBox(
+                              width: u * 44,
+                              height: u * 10,
+                              child: Opacity(
+                                opacity: 0.75,
+                                child: LessonPill(
+                                  u: u,
+                                  label: 'استمع إلى مثال',
+                                  glyph: PillGlyph.play,
+                                  light: p.t,
+                                  height: 10,
+                                  fontSize: 4.0,
+                                  onTap: () {
+                                    Haptics.denied();
+                                    setState(() => _soon = true);
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: u * 1.4),
+                            AnimatedOpacity(
+                              opacity: _soon ? 1 : 0,
+                              duration: const Duration(milliseconds: 200),
+                              child: Text(
+                                'المثال الصوتي قريبًا',
+                                textDirection: TextDirection.rtl,
+                                style: readex(
+                                  u * 3.2,
+                                  weight: 400,
+                                  color: soft,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 }

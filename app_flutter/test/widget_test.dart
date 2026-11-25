@@ -316,6 +316,15 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('إدغام'), findsOneWidget);
+    // A rule opens its detail over the veiled screen; ✕ closes it.
+    await tester.tap(find.text('إدغام'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('استمع إلى مثال'), findsOneWidget);
+    await tester.tap(find.bySemanticsLabel('إغلاق').last);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('استمع إلى مثال'), findsNothing);
       await tester.tap(find.bySemanticsLabel('إغلاق'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));

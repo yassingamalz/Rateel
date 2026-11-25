@@ -88,3 +88,11 @@ Plan: `../08-reading-lesson.md`. Decisions: `../../DECISIONS.md`.
   at a fixed line height 1.4. Capture `capture-v10-menu-light-phone.png`.
 
 - APK 1.0.387 (v10).
+
+## 8. v11: larger text-size popup, rule detail (2026-11-25)
+- «A» popup larger (52×30u), − / + with a small / large «أ».
+- Rule tap → `_RuleSheet` (transparent route above the lesson): veil `lessonVeil` + `BackdropFilter` blur σ 0.55u (pause-menu
+  tokens), card as the verse card, rule name + colour dot, `GoldDivider`, description, audio-example pill (not active,
+  «قريبًا»); ✕, tap outside or Android back close it. Widget test extended (open / close). Capture
+  `capture-v11-menu-rule-phone.jpg`.
+
