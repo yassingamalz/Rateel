@@ -18,16 +18,11 @@ import 'test_data.dart';
 
 /// Review aids (screen 10): `?testQ=4` opens question 4 (0-based; the earlier
 /// ones answered right), `?testPick=1,2` selects those options,
-/// `?testState=ok|ko|results|pass|fail|details` shows that state, with
+/// `?testState=ok|ko|partial|streak|results|fail|details` shows that state, with
 /// `?readTheme=light` for the light theme.
 int testStartQuestion = 0;
 List<int> testStartPick = const [];
 String? testStartState;
-
-/// Layouts under review (owner, 2026-11-26): results summary `?results=a|b`,
-/// end popup `?endPopup=a|b`.
-String testResultsStyle = 'a';
-String testEndPopupStyle = 'a';
 
 /// Geometry of screen 10 in u (1% of the screen height), measured on
 /// `screens/10-test-lesson/reference.webp` (1842×854, u = 8.54 px). x values
@@ -192,11 +187,7 @@ class _TestLessonPageState extends State<TestLessonPage>
     vsync: this,
     duration: const Duration(milliseconds: 420),
   );
-  // End popup and details popup.
-  late final _popup = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 420),
-  );
+  // Details popup of an answer.
   late final _details = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 280),
@@ -212,9 +203,6 @@ class _TestLessonPageState extends State<TestLessonPage>
     vsync: this,
     duration: const Duration(milliseconds: 1900),
   );
-
-  // Countdown of the end popup (6 s passed / 8 s not passed, Angular).
-  late final _countdown = AnimationController(vsync: this);
 
   TestContent? _content;
   TestRun? _run;
@@ -261,9 +249,12 @@ class _TestLessonPageState extends State<TestLessonPage>
     final upTo = all ? qs.length : q0;
     for (var i = 0; i < upTo; i++) {
       final q = qs[i];
-      final right = state != 'fail' || i.isEven || i < 2;
+      final right = state != 'fail' || (i.isEven && i < 6);
       if (q.type == QuestionType.text) {
         run.setText(q, right ? q.correct.first : '—');
+      } else if (!right && q.type == QuestionType.multiple) {
+        // Review: a wrong multiple-choice answer is a partial one.
+        run.toggle(q, q.correct.first);
       } else {
         for (final o in q.options) {
           if (run.isCorrectOption(q, o.id) == right) {
@@ -279,6 +270,12 @@ class _TestLessonPageState extends State<TestLessonPage>
     if (!all) {
       for (final k in testStartPick) {
         if (k < q.options.length) run.toggle(q, q.options[k].id);
+      }
+      if (state == 'partial' && q.type == QuestionType.multiple) {
+        run.toggle(q, q.correct.first);
+        run.submit(q);
+        _fb.value = 1;
+        _revealAnswer(q);
       }
       if (state == 'ok' || state == 'ko' || state == 'streak') {
         if (testStartPick.isEmpty) {
@@ -302,10 +299,6 @@ class _TestLessonPageState extends State<TestLessonPage>
     if (all) {
       _phase = _Phase.results;
       _ring.value = 1;
-      if (state == 'pass' || state == 'fail') {
-        _popup.value = 1;
-        _countdown.value = 0.1; // mid-burst for the captures
-      }
       if (state == 'details') {
         _detailsIndex = 1;
         _details.value = 1;
@@ -349,10 +342,8 @@ class _TestLessonPageState extends State<TestLessonPage>
     _swap.dispose();
     _fb.dispose();
     _shake.dispose();
-    _popup.dispose();
     _details.dispose();
     _ring.dispose();
-    _countdown.dispose();
     _streakAnim.dispose();
     _text.dispose();
     _scroll.dispose();
@@ -497,7 +488,9 @@ class _TestLessonPageState extends State<TestLessonPage>
       _fb.value = 0;
     });
     _ring.forward(from: 0);
-    Future<void>.delayed(const Duration(milliseconds: 500), () {
+    // No end popup any more (owner, 2026-11-26: the results show the same;
+    // in the backlog): the ring fills, sound and haptic when passed.
+    Future<void>.delayed(const Duration(milliseconds: 700), () {
       if (!mounted) return;
       if (run.passed) {
         Sounds.passed();
@@ -505,23 +498,12 @@ class _TestLessonPageState extends State<TestLessonPage>
       } else {
         Haptics.tap();
       }
-      _popup.forward(from: 0);
-      _countdown.duration = Duration(seconds: run.passed ? 6 : 8);
-      _countdown.forward(from: 0).whenComplete(_closePopup);
     });
-  }
-
-  void _closePopup() {
-    if (!mounted || _popup.value == 0) return;
-    _countdown.stop();
-    _popup.reverse();
   }
 
   void _restart() {
     final run = _run;
     if (run == null) return;
-    _countdown.stop();
-    _popup.value = 0;
     _details.value = 0;
     setState(() {
       run.reset();
@@ -673,9 +655,9 @@ class _TestLessonPageState extends State<TestLessonPage>
             );
             final out = ((v - 0.8) / 0.2).clamp(0.0, 1.0);
             return Positioned(
-              left: cx - u * 34,
+              left: 0,
+              right: 0,
               top: u * 30,
-              width: u * 68,
               height: u * 15,
               child: IgnorePointer(
                 child: Opacity(
@@ -684,12 +666,14 @@ class _TestLessonPageState extends State<TestLessonPage>
                     offset: Offset(0, -u * 3 * out),
                     child: Transform.scale(
                       scale: 0.7 + 0.3 * inT,
-                      child: _StreakBanner(
-                        u: u,
-                        p: p,
-                        streak: run.streak,
-                        bonus: run.nextPoints - TestRun.pointsPerQuestion,
-                        t: v,
+                      child: Center(
+                        child: _StreakBanner(
+                          u: u,
+                          p: p,
+                          streak: run.streak,
+                          bonus: run.nextPoints - TestRun.pointsPerQuestion,
+                          t: v,
+                        ),
                       ),
                     ),
                   ),
@@ -698,15 +682,7 @@ class _TestLessonPageState extends State<TestLessonPage>
             );
           },
         ),
-        // End popup and details popup above everything (veil, no blur:
-        // PERFORMANCE.md).
-        AnimatedBuilder(
-          key: const ValueKey('popup'),
-          animation: _popup,
-          builder: (context, _) => _popup.value == 0 || _run == null
-              ? const SizedBox.shrink()
-              : _endPopup(p, u, w, box.maxHeight),
-        ),
+        // Details popup above everything (veil, no blur: PERFORMANCE.md).
         AnimatedBuilder(
           key: const ValueKey('details'),
           animation: _details,
@@ -740,6 +716,7 @@ class _TestLessonPageState extends State<TestLessonPage>
               number: i + 1,
               current: i == _index && _phase == _Phase.question,
               result: run.results[run.content.questions[i].id],
+              partial: run.isPartial(run.content.questions[i]),
               locked: !run.isUnlocked(i),
               onTap: () => _goTo(i),
             ),
@@ -923,6 +900,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                 u: u,
                 p: p,
                 ok: run.results[q.id]!,
+                partial: run.isPartial(q),
                 points: run.earned[q.id] ?? 0,
                 streak: run.streaks[q.id] ?? 0,
                 correctText: run.correctText(q),
@@ -1002,9 +980,11 @@ class _TestLessonPageState extends State<TestLessonPage>
             u: u,
             p: p,
             points: answered
-                ? (ok == true ? run.earned[q.id] ?? 0 : run.stakes[q.id] ?? 0)
+                ? (ok == true || run.isPartial(q)
+                      ? run.earned[q.id] ?? 0
+                      : run.stakes[q.id] ?? 0)
                 : run.nextPoints,
-            state: ok,
+            state: run.isPartial(q) ? true : ok,
           ),
         ),
         Positioned(
@@ -1068,8 +1048,18 @@ class _TestLessonPageState extends State<TestLessonPage>
       for (final o in q.options) {
         final chosen = sel.contains(o.id);
         final right = run.isCorrectOption(q, o.id);
+        // Multiple choice not fully right: the right options not chosen are
+        // «missed» (green rim, no fill), the chosen right ones correct.
+        final missed =
+            answered &&
+            right &&
+            !chosen &&
+            q.type == QuestionType.multiple &&
+            run.results[q.id] == false;
         final state = !answered
             ? (chosen ? _RowState.selected : _RowState.idle)
+            : missed
+            ? _RowState.missed
             : right
             ? _RowState.correct
             : chosen
@@ -1127,16 +1117,14 @@ class _TestLessonPageState extends State<TestLessonPage>
     final soft = ink.withValues(alpha: 0.8);
     final rightW = card.width * 0.44;
     return [
-      // Right column: score ring, message, stats (two layouts under
-      // review, owner 2026-11-26: `?results=a|b`).
+      // Right column: one glass panel with the ring, the message and the
+      // numbers (owner chose layout A, 2026-11-26).
       Positioned(
         right: u * 4.5,
         top: u * 3.2,
         width: rightW - u * 4.5,
         height: bandTop - u * 4.2,
-        child: testResultsStyle == 'b'
-            ? _summaryB(p, u, run)
-            : _summaryA(p, u, run),
+        child: _summaryA(p, u, run),
       ),
       // Left column: answers, then recommendations.
       Positioned(
@@ -1166,6 +1154,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                     number: i + 1,
                     text: q.text,
                     ok: run.results[q.id] ?? false,
+                    partial: run.isPartial(q),
                     onTap: () => _openDetails(i),
                   ),
                 ),
@@ -1235,7 +1224,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                 p: p,
                 label: 'إعادة الاختبار',
                 glyph: _BtnGlyph.replay,
-                green: true,
+                tone: _run!.passed ? _Tone.green : _Tone.red,
                 onTap: _restart,
               ),
             ),
@@ -1302,13 +1291,16 @@ class _TestLessonPageState extends State<TestLessonPage>
     ),
   );
 
-  String _resultTitle(TestRun run) => run.passed ? 'أحسنت!' : 'حاول مرة أخرى';
+  // No «!» (owner, 2026-11-26: rare in Arabic, it reads as machine-written).
+  String _resultTitle(TestRun run) => run.passed ? 'أحسنت' : 'حاول مرة أخرى';
   String _resultText(TestRun run) => run.passed
       ? 'لقد اجتزت الاختبار بنجاح.'
       : 'لم تتمكن من اجتياز الاختبار، تحتاج إلى ${run.content.passingScore}%.';
 
   List<_Stat> _stats(TestRun run) => [
     _Stat('${run.correctCount}', 'إجابات صحيحة', _Mark.ok),
+    if (run.partialCount > 0)
+      _Stat('${run.partialCount}', 'إجابات جزئية', _Mark.part),
     _Stat('${run.wrongCount}', 'إجابات خاطئة', _Mark.ko),
     _Stat('${run.points}', 'نقطة', _Mark.star),
   ];
@@ -1409,89 +1401,6 @@ class _TestLessonPageState extends State<TestLessonPage>
     );
   }
 
-  /// B: no panel; the ring and the message on top, three equal vertical
-  /// tiles under them, aligned to the column's edges.
-  Widget _summaryB(LessonPal p, double u, TestRun run) {
-    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    return Column(
-      children: [
-        Expanded(
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              _scoreRing(p, u, run, 20),
-              SizedBox(width: u * 3.5),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _Medallion(
-                      u: u,
-                      p: p,
-                      d: 7,
-                      rays: false,
-                      child: Icon(
-                        run.passed ? Icons.emoji_events : Icons.refresh,
-                        size: u * 4.2,
-                        color: p.c(
-                          RateelColors.testSelDot,
-                          RateelColors.readLCopper,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      _resultTitle(run),
-                      textDirection: TextDirection.rtl,
-                      style: readex(
-                        u * 5,
-                        weight: 700,
-                        color: p.c(
-                          RateelColors.testTitleTop,
-                          RateelColors.readLTitle,
-                        ),
-                      ).copyWith(height: 1.2),
-                    ),
-                    Text(
-                      _resultText(run),
-                      textDirection: TextDirection.rtl,
-                      maxLines: 2,
-                      style: readex(
-                        u * 3.0,
-                        weight: 400,
-                        color: ink,
-                      ).copyWith(height: 1.4),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: u * 1.6),
-        SizedBox(
-          height: u * 12,
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              for (final (i, s) in _stats(run).indexed) ...[
-                if (i > 0) SizedBox(width: u * 1.6),
-                Expanded(
-                  child: _GlassBox(
-                    u: u,
-                    p: p,
-                    padding: EdgeInsets.zero,
-                    child: _StatColumn(u: u, p: p, stat: s),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _sectionTitle(double u, LessonPal p, String t) => Padding(
     padding: EdgeInsets.only(bottom: u * 1.4, right: u * 0.6),
     child: Text(
@@ -1517,305 +1426,12 @@ class _TestLessonPageState extends State<TestLessonPage>
     ),
   );
 
-  /// End of the test (Angular completion modal), redesigned (owner,
-  /// 2026-11-26), two layouts under review (`?endPopup=a|b`): A, the score
-  /// ring in the centre with a burst of gold sparks when passed; B, a wide
-  /// banner with the medallion on the right. Auto-close 6 s / 8 s, a tap
-  /// closes it.
-  Widget _endPopup(LessonPal p, double u, double w, double h) {
-    final t = Curves.easeOutCubic.transform(_popup.value);
-    final pop = Curves.easeOutBack.transform(_popup.value);
-    final b = testEndPopupStyle == 'b';
-    final pw = u * (b ? 124 : 82), ph = u * (b ? 50 : 70);
-    return Stack(
-      children: [
-        Positioned.fill(child: _veil(p, t, _closePopup)),
-        Positioned(
-          left: (w - pw) / 2,
-          top: (h - ph) / 2 + u * (b ? 6 : 2),
-          width: pw,
-          height: ph,
-          child: Opacity(
-            opacity: t,
-            child: Transform.scale(
-              scale: 0.86 + 0.14 * pop,
-              child: GestureDetector(
-                onTap: _closePopup,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: GoldCardPainter(
-                          p,
-                          u,
-                          u * 3.6,
-                          rimWidth: 0.4,
-                          fill: const [
-                            RateelColors.testCardTop,
-                            RateelColors.testCardMid,
-                            RateelColors.testCardBottom,
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Lattice along the bottom, as the card.
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      height: ph * 0.45,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(u * 3.6),
-                        ),
-                        child: LatticeField(
-                          p: p,
-                          u: u,
-                          cell: 7,
-                          opacity: p.d(0.16, 0.3),
-                          mask: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Color(0x00000000), Color(0xFF000000)],
-                          ),
-                        ),
-                      ),
-                    ),
-                    ...(b ? _popupB(p, u, pw, ph) : _popupA(p, u, pw, ph)),
-                    Positioned(
-                      left: u * 10,
-                      right: u * 10,
-                      bottom: u * 2.4,
-                      height: u * 0.55,
-                      child: AnimatedBuilder(
-                        animation: _countdown,
-                        builder: (context, _) => CustomPaint(
-                          painter: _CountdownPainter(p, 1 - _countdown.value),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _popupTitle(LessonPal p, double u, TestRun run, double size) => Text(
-    run.passed ? 'مبروك!' : 'انتهى الاختبار',
-    textDirection: TextDirection.rtl,
-    style: readex(
-      u * size,
-      weight: 700,
-      color: run.passed
-          ? p.c(RateelColors.testTitleTop, RateelColors.readLTitle)
-          : p.c(RateelColors.leaderText, RateelColors.readLInk),
-    ).copyWith(height: 1.15, shadows: p.t > 0.5 ? null : _shadow(u)),
-  );
-
-  Widget _popupChips(LessonPal p, double u, TestRun run) => Row(
-    mainAxisSize: MainAxisSize.min,
-    textDirection: TextDirection.rtl,
-    children: [
-      _Chip(
-        u: u,
-        p: p,
-        lead: SvgPicture.asset(
-          'assets/ui/glyphs/star.svg',
-          width: u * 3.4,
-          height: u * 3.4,
-          colorFilter: ColorFilter.mode(
-            p.c(RateelColors.testSelDot, RateelColors.testLSelRim),
-            BlendMode.srcIn,
-          ),
-        ),
-        text: '${run.points} نقطة',
-      ),
-      SizedBox(width: u * 1.6),
-      _Chip(
-        u: u,
-        p: p,
-        lead: _MarkDisc(u: u, ok: true, d: 3.4),
-        text: '${run.correctCount} / ${run.total}',
-      ),
-    ],
-  );
-
-  List<Widget> _popupA(LessonPal p, double u, double pw, double ph) {
-    final run = _run!;
-    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    return [
-      if (run.passed)
-        Positioned(
-          left: pw / 2 - u * 40,
-          top: u * 2,
-          width: u * 80,
-          height: u * 50,
-          child: IgnorePointer(
-            child: RepaintBoundary(
-              child: AnimatedBuilder(
-                animation: _countdown,
-                builder: (context, _) => CustomPaint(
-                  painter: _BurstPainter(
-                    p: p,
-                    u: u,
-                    t: (_countdown.value * 6 / 1.6).clamp(0.0, 1.0),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      Positioned.fill(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(u * 6, u * 4, u * 6, u * 5),
-          child: Column(
-            children: [
-              _popupTitle(p, u, run, 6.2),
-              SizedBox(height: u * 1.2),
-              SizedBox(
-                width: u * 34,
-                height: u * 2.6,
-                child: _tinted(p, GoldDivider(u: u, diamond: 1.0)),
-              ),
-              SizedBox(height: u * 1.6),
-              _scoreRing(p, u, run, 24),
-              SizedBox(height: u * 2.2),
-              _popupChips(p, u, run),
-              SizedBox(height: u * 1.8),
-              Text(
-                run.passed
-                    ? 'أحسنت، لقد تجاوزت درجة النجاح.'
-                    : 'تحتاج إلى ${run.content.passingScore}% للنجاح، حاول مرة أخرى.',
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-                style: readex(u * 3.0, weight: 400, color: ink),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ];
-  }
-
-  List<Widget> _popupB(LessonPal p, double u, double pw, double ph) {
-    final run = _run!;
-    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    final gold = p.c(RateelColors.testTitleTop, RateelColors.readLTitle);
-    return [
-      Positioned(
-        right: u * 5,
-        top: 0,
-        bottom: u * 3,
-        width: u * 36,
-        child: Center(
-          child: _Medallion(
-            u: u,
-            p: p,
-            d: 22,
-            rays: run.passed,
-            child: Icon(
-              run.passed ? Icons.emoji_events : Icons.school,
-              size: u * 12,
-              color: p.c(RateelColors.testSelDot, RateelColors.readLCopper),
-            ),
-          ),
-        ),
-      ),
-      Positioned(
-        right: u * 44,
-        left: u * 7,
-        top: u * 5,
-        bottom: u * 6,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _popupTitle(p, u, run, 6.4),
-            SizedBox(height: u * 0.6),
-            Text(
-              run.passed ? 'لقد أكملت الاختبار بنجاح!' : 'لقد أكملت الاختبار',
-              textDirection: TextDirection.rtl,
-              style: readex(u * 3.4, weight: 500, color: ink),
-            ),
-            SizedBox(height: u * 2),
-            Row(
-              textDirection: TextDirection.rtl,
-              children: [
-                Text(
-                  '${run.score}%',
-                  textDirection: TextDirection.ltr,
-                  style: readex(
-                    u * 10,
-                    weight: 700,
-                    color: run.passed ? gold : gold.withValues(alpha: 0.75),
-                  ).copyWith(height: 1, shadows: p.t > 0.5 ? null : _shadow(u)),
-                ),
-                SizedBox(width: u * 3),
-                SizedBox(
-                  width: math.max(1.0, u * 0.2),
-                  height: u * 13,
-                  child: ColoredBox(color: gold.withValues(alpha: 0.5)),
-                ),
-                SizedBox(width: u * 3),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _Chip(
-                      u: u,
-                      p: p,
-                      lead: SvgPicture.asset(
-                        'assets/ui/glyphs/star.svg',
-                        width: u * 3.4,
-                        height: u * 3.4,
-                        colorFilter: ColorFilter.mode(
-                          p.c(
-                            RateelColors.testSelDot,
-                            RateelColors.testLSelRim,
-                          ),
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                      text: '${run.points} نقطة',
-                    ),
-                    SizedBox(height: u * 1.2),
-                    _Chip(
-                      u: u,
-                      p: p,
-                      lead: _MarkDisc(u: u, ok: true, d: 3.4),
-                      text: '${run.correctCount} / ${run.total}',
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: u * 2),
-            Text(
-              run.passed
-                  ? 'أحسنت، لقد تجاوزت درجة النجاح.'
-                  : 'تحتاج إلى ${run.content.passingScore}% للنجاح، حاول مرة أخرى.',
-              textDirection: TextDirection.rtl,
-              style: readex(
-                u * 3.0,
-                weight: 400,
-                color: ink.withValues(alpha: 0.85),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ];
-  }
-
   Widget _detailsPopup(LessonPal p, double u, double w, double h) {
     final run = _run!;
     final i = _detailsIndex!;
     final q = run.content.questions[i];
     final ok = run.results[q.id] ?? false;
+    final part = run.isPartial(q);
     final t = Curves.easeOutCubic.transform(_details.value);
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final pw = u * 96, ph = u * 74;
@@ -1902,10 +1518,19 @@ class _TestLessonPageState extends State<TestLessonPage>
                                 Row(
                                   textDirection: TextDirection.rtl,
                                   children: [
-                                    _MarkDisc(u: u, ok: ok, d: 4.6),
+                                    _MarkDisc(
+                                      u: u,
+                                      ok: ok,
+                                      partial: part,
+                                      d: 4.6,
+                                    ),
                                     SizedBox(width: u * 1.4),
                                     Text(
-                                      ok ? 'إجابة صحيحة' : 'إجابة خاطئة',
+                                      ok
+                                          ? 'إجابة صحيحة'
+                                          : part
+                                          ? 'إجابة صحيحة جزئيًا'
+                                          : 'إجابة خاطئة',
                                       textDirection: TextDirection.rtl,
                                       style: readex(
                                         u * 3.6,
@@ -1921,6 +1546,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                                   u: u,
                                   p: p,
                                   ok: ok,
+                                  partial: part,
                                   text: run.userText(q),
                                 ),
                                 if (!ok) ...[
@@ -2003,7 +1629,7 @@ Widget _tinted(LessonPal p, Widget child) => p.t > 0
 
 // ---- Widgets -----------------------------------------------------------------
 
-enum _RowState { idle, selected, correct, wrong, dim }
+enum _RowState { idle, selected, correct, wrong, missed, dim }
 
 /// An option row (reference: flat dark green glass, light green rim, pale
 /// radio on the right; 10b: olive fill, gold rim, gold radio dot; feedback:
@@ -2039,6 +1665,13 @@ class _OptionRowState extends State<_OptionRow> {
     final p = widget.p;
     final s = widget.state;
     final (top, bottom, rimTop, rimBottom, glow) = switch (s) {
+      _RowState.missed => (
+        p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
+        p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
+        p.c(RateelColors.testOkRim, RateelColors.testLOkRim),
+        p.c(RateelColors.testOkRim, RateelColors.testLOkRim),
+        const Color(0x00000000),
+      ),
       _RowState.idle || _RowState.dim => (
         p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
         p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
@@ -2177,6 +1810,19 @@ class _Marker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (state == _RowState.missed) {
+      final g = p.c(RateelColors.testOkRim, RateelColors.testLOkRim);
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: g, width: u * 0.42),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(u * TestMetrics.radioD * 0.22),
+          child: CustomPaint(painter: _CheckPainter(g, 0.17)),
+        ),
+      );
+    }
     if (state == _RowState.correct || state == _RowState.wrong) {
       return TweenAnimationBuilder<double>(
         tween: Tween(begin: 0.4, end: 1),
@@ -2241,7 +1887,15 @@ class _Marker extends StatelessWidget {
 
 /// Enamel disc with a ✓ (green) or ✕ (red), with a thin light rim.
 class _MarkDisc extends StatelessWidget {
-  const _MarkDisc({required this.u, required this.ok, required this.d});
+  const _MarkDisc({
+    required this.u,
+    required this.ok,
+    required this.d,
+    this.partial = false,
+  });
+
+  /// Partly correct (amber, ✓).
+  final bool partial;
 
   final double u;
   final bool ok;
@@ -2249,6 +1903,26 @@ class _MarkDisc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final (top, bottom, rim, glow) = partial
+        ? (
+            RateelColors.testPartDiscTop,
+            RateelColors.testPartDisc,
+            const Color(0xFFFBE3A6),
+            RateelColors.testPartRim,
+          )
+        : ok
+        ? (
+            RateelColors.testOkDiscTop,
+            RateelColors.testOkDisc,
+            const Color(0xFFC9F2D9),
+            RateelColors.testOkRim,
+          )
+        : (
+            RateelColors.testKoDiscTop,
+            RateelColors.testKoDisc,
+            const Color(0xFFF7C1B4),
+            RateelColors.testKoRim,
+          );
     return Container(
       width: u * d,
       height: u * d,
@@ -2257,19 +1931,15 @@ class _MarkDisc extends StatelessWidget {
         gradient: RadialGradient(
           center: const Alignment(-0.25, -0.35),
           radius: 0.9,
-          colors: ok
-              ? const [RateelColors.testOkDiscTop, RateelColors.testOkDisc]
-              : const [RateelColors.testKoDiscTop, RateelColors.testKoDisc],
+          colors: [top, bottom],
         ),
         border: Border.all(
-          color: (ok ? const Color(0xFFC9F2D9) : const Color(0xFFF7C1B4))
-              .withValues(alpha: 0.85),
+          color: rim.withValues(alpha: 0.85),
           width: math.max(1.0, u * d * 0.05),
         ),
         boxShadow: [
           BoxShadow(
-            color: (ok ? RateelColors.testOkRim : RateelColors.testKoRim)
-                .withValues(alpha: 0.55),
+            color: glow.withValues(alpha: 0.55),
             blurRadius: u * d * 0.25,
           ),
         ],
@@ -2277,7 +1947,7 @@ class _MarkDisc extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(u * d * 0.24),
         child: CustomPaint(
-          painter: ok
+          painter: ok || partial
               ? _CheckPainter(const Color(0xFFFFFBEA), 0.17)
               : _CrossPainter(const Color(0xFFFFFBEA), 0.17),
         ),
@@ -2344,6 +2014,7 @@ class _NavCircle extends StatelessWidget {
     required this.number,
     required this.current,
     required this.result,
+    this.partial = false,
     required this.locked,
     required this.onTap,
   });
@@ -2353,6 +2024,7 @@ class _NavCircle extends StatelessWidget {
   final int number;
   final bool current;
   final bool? result;
+  final bool partial;
   final bool locked;
   final VoidCallback onTap;
 
@@ -2360,7 +2032,12 @@ class _NavCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget face;
     if (result != null) {
-      face = _MarkDisc(u: u, ok: result!, d: TestMetrics.navD);
+      face = _MarkDisc(
+        u: u,
+        ok: result!,
+        partial: partial,
+        d: TestMetrics.navD,
+      );
     } else {
       face = DecoratedBox(
         decoration: BoxDecoration(
@@ -2573,10 +2250,13 @@ class _PointsPill extends StatelessWidget {
 
 enum _BtnGlyph { arrow, check, replay }
 
-/// «تأكيد الإجابة ←» (reference): dark glass from olive at the top, bright
-/// gold rim with a glow, cream-gold bold text, arrow on the left. Disabled
-/// until an answer is chosen (Angular), as a dimmer button. [green]: glass
-/// with a green rim («إعادة الاختبار»).
+/// Colour of a filled lesson button.
+enum _Tone { gold, green, red }
+
+/// Filled lesson button (owner, 2026-11-26: filled with white text in both
+/// themes; the reference's «تأكيد الإجابة» was dark glass with a gold rim):
+/// gold for the main actions, green / red for «إعادة الاختبار» after a passed
+/// / failed test. Glow around it in the dark theme, soft shadow in the light.
 class _GoldButton extends StatefulWidget {
   const _GoldButton({
     required this.u,
@@ -2585,7 +2265,7 @@ class _GoldButton extends StatefulWidget {
     required this.onTap,
     this.enabled = true,
     this.glyph = _BtnGlyph.arrow,
-    this.green = false,
+    this.tone = _Tone.gold,
     this.height,
     this.fontSize,
   });
@@ -2596,7 +2276,7 @@ class _GoldButton extends StatefulWidget {
   final VoidCallback onTap;
   final bool enabled;
   final _BtnGlyph glyph;
-  final bool green;
+  final _Tone tone;
   final double? height;
   final double? fontSize;
 
@@ -2612,14 +2292,38 @@ class _GoldButtonState extends State<_GoldButton> {
     final u = widget.u;
     final p = widget.p;
     final h = u * (widget.height ?? TestMetrics.btnH);
-    final green = widget.green;
-    // Light theme: filled gold / green buttons with white text (owner,
-    // 2026-11-26).
-    final text = p.c(
-      green ? RateelColors.leaderText : RateelColors.testPillText,
-      Colors.white,
-    );
+    final (top, bottom, rimTop, rimBottom, glow) = switch (widget.tone) {
+      _Tone.gold => (
+        RateelColors.testLGoldTop,
+        RateelColors.testLGoldBottom,
+        RateelColors.testLGoldRimTop,
+        RateelColors.testLGoldRimBottom,
+        RateelColors.testPillRimBottom,
+      ),
+      _Tone.green => (
+        RateelColors.testLGreenTop,
+        RateelColors.testLGreenBottom,
+        RateelColors.testLGreenRimTop,
+        RateelColors.testLGreenBottom,
+        RateelColors.testOkRim,
+      ),
+      _Tone.red => (
+        RateelColors.testLRedTop,
+        RateelColors.testLRedBottom,
+        RateelColors.testLRedRimTop,
+        RateelColors.testLRedBottom,
+        RateelColors.testKoRim,
+      ),
+    };
+    const text = Colors.white;
     final glyphW = u * 3.6;
+    final textShadow = [
+      Shadow(
+        color: Colors.black.withValues(alpha: 0.28),
+        blurRadius: u * 0.4,
+        offset: Offset(0, u * 0.12),
+      ),
+    ];
     return Semantics(
       button: true,
       enabled: widget.enabled,
@@ -2629,130 +2333,80 @@ class _GoldButtonState extends State<_GoldButton> {
         onTapDown: (_) => setState(() => _down = true),
         onTapCancel: () => setState(() => _down = false),
         onTapUp: (_) => setState(() => _down = false),
+        // Before a choice the button keeps its look; a tap gives the
+        // «denied» haptic.
         onTap: widget.enabled
             ? () {
                 Haptics.tap();
                 widget.onTap();
               }
             : Haptics.denied,
-        child: AnimatedOpacity(
-          // Reference 10: the button keeps its look before a choice; a tap
-          // then only gives the «denied» haptic.
-          opacity: 1,
-          duration: const Duration(milliseconds: 220),
-          child: AnimatedScale(
-            scale: _down ? 0.96 : 1,
-            duration: const Duration(milliseconds: 120),
-            child: SizedBox(
-              height: h,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(h),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: green
-                        ? [
-                            p.c(
-                              RateelColors.testRowFill,
-                              RateelColors.testLGreenTop,
-                            ),
-                            p.c(
-                              RateelColors.testPillBottom,
-                              RateelColors.testLGreenBottom,
-                            ),
-                          ]
-                        : [
-                            p.c(
-                              RateelColors.testPillTop,
-                              RateelColors.testLGoldTop,
-                            ),
-                            p.c(
-                              RateelColors.testPillBottom,
-                              RateelColors.testLGoldBottom,
-                            ),
-                          ],
-                    stops: const [0, 0.75],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          (green
-                                  ? RateelColors.testOkRim
-                                  : RateelColors.testPillRimBottom)
-                              .withValues(
-                                alpha:
-                                    (_down
-                                        ? 0.6
-                                        : (widget.enabled ? 0.42 : 0.15)) *
-                                    (1 - p.t) *
-                                    (green ? 0.5 : 1),
-                              ),
-                      blurRadius: u * 2.0,
-                    ),
-                    BoxShadow(
-                      color: p
-                          .c(Colors.black, const Color(0xFF8A6A4A))
-                          .withValues(alpha: p.d(0.35, 0.15)),
-                      blurRadius: u * 1.0,
-                      offset: Offset(0, u * 0.4),
-                    ),
-                  ],
+        child: AnimatedScale(
+          scale: _down ? 0.96 : 1,
+          duration: const Duration(milliseconds: 120),
+          child: SizedBox(
+            height: h,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(h),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [top, bottom],
                 ),
-                child: CustomPaint(
-                  foregroundPainter: GradientRimPainter(
-                    width: math.max(1.0, u * 0.36),
-                    radius: h,
-                    top: green
-                        ? p.c(
-                            RateelColors.testRowRimTop,
-                            RateelColors.testLGreenRimTop,
-                          )
-                        : p.c(
-                            RateelColors.testPillRimTop,
-                            RateelColors.testLGoldRimTop,
-                          ),
-                    bottom: green
-                        ? p.c(
-                            RateelColors.testOkRim,
-                            RateelColors.testLGreenBottom,
-                          )
-                        : p.c(
-                            RateelColors.testPillRimBottom,
-                            RateelColors.testLGoldRimBottom,
-                          ),
+                boxShadow: [
+                  BoxShadow(
+                    color: glow.withValues(
+                      alpha: (_down ? 0.6 : 0.38) * (1 - p.t),
+                    ),
+                    blurRadius: u * 2.0,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: u * 2.5),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        textDirection: TextDirection.ltr,
-                        children: [
-                          SizedBox(
-                            width: glyphW,
-                            height: glyphW,
-                            child: CustomPaint(
-                              painter: switch (widget.glyph) {
-                                _BtnGlyph.arrow => _ArrowPainter(text),
-                                _BtnGlyph.check => _CheckPainter(text, 0.16),
-                                _BtnGlyph.replay => _ReplayPainter(text),
-                              },
-                            ),
+                  BoxShadow(
+                    color: p
+                        .c(Colors.black, const Color(0xFF8A6A4A))
+                        .withValues(alpha: p.d(0.35, 0.18)),
+                    blurRadius: u * 1.0,
+                    offset: Offset(0, u * 0.4),
+                  ),
+                ],
+              ),
+              child: CustomPaint(
+                foregroundPainter: GradientRimPainter(
+                  width: math.max(1.0, u * 0.3),
+                  radius: h,
+                  top: rimTop,
+                  bottom: rimBottom,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: u * 2.5),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      textDirection: TextDirection.ltr,
+                      children: [
+                        SizedBox(
+                          width: glyphW,
+                          height: glyphW,
+                          child: CustomPaint(
+                            painter: switch (widget.glyph) {
+                              _BtnGlyph.arrow => _ArrowPainter(text),
+                              _BtnGlyph.check => _CheckPainter(text, 0.16),
+                              _BtnGlyph.replay => _ReplayPainter(text),
+                            },
                           ),
-                          SizedBox(width: u * 2.4),
-                          Text(
-                            widget.label,
-                            textDirection: TextDirection.rtl,
-                            style: readex(
-                              u * (widget.fontSize ?? TestMetrics.btnText),
-                              weight: 700,
-                              color: text,
-                            ).copyWith(height: 1.0),
-                          ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: u * 2.4),
+                        Text(
+                          widget.label,
+                          textDirection: TextDirection.rtl,
+                          style: readex(
+                            u * (widget.fontSize ?? TestMetrics.btnText),
+                            weight: 700,
+                            color: text,
+                          ).copyWith(height: 1.0, shadows: textShadow),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -2854,6 +2508,7 @@ class _FeedbackBar extends StatelessWidget {
     required this.u,
     required this.p,
     required this.ok,
+    this.partial = false,
     required this.points,
     required this.streak,
     required this.correctText,
@@ -2868,6 +2523,9 @@ class _FeedbackBar extends StatelessWidget {
   final double u;
   final LessonPal p;
   final bool ok;
+
+  /// Partly correct (amber): half the points, the full answer shown.
+  final bool partial;
   final int points;
   final String correctText;
   final String? explanation;
@@ -2879,6 +2537,8 @@ class _FeedbackBar extends StatelessWidget {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final rim = ok
         ? p.c(RateelColors.testOkRim, RateelColors.testLOkRim)
+        : partial
+        ? p.c(RateelColors.testPartRim, RateelColors.testLPartRim)
         : p.c(RateelColors.testKoRim, RateelColors.testLKoRim);
     final r = u * TestMetrics.fbRadius;
     return DecoratedBox(
@@ -2891,6 +2551,11 @@ class _FeedbackBar extends StatelessWidget {
               ? [
                   p.c(const Color(0xFF0E4532), RateelColors.testLOkTop),
                   p.c(const Color(0xFF062F22), RateelColors.testLOkBottom),
+                ]
+              : partial
+              ? [
+                  p.c(RateelColors.testPartTop, RateelColors.testLPartTop),
+                  p.c(const Color(0xFF1E2A16), RateelColors.testLPartBottom),
                 ]
               : [
                   p.c(const Color(0xFF3A2420), RateelColors.testLKoTop),
@@ -2929,7 +2594,12 @@ class _FeedbackBar extends StatelessWidget {
                 curve: Curves.easeOutBack,
                 builder: (context, s, child) =>
                     Transform.scale(scale: s, child: child),
-                child: _MarkDisc(u: u, ok: ok, d: TestMetrics.fbMedal),
+                child: _MarkDisc(
+                  u: u,
+                  ok: ok,
+                  partial: partial,
+                  d: TestMetrics.fbMedal,
+                ),
               ),
               SizedBox(width: u * 3.2),
               Expanded(
@@ -2942,7 +2612,11 @@ class _FeedbackBar extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          ok ? 'إجابة صحيحة' : 'إجابة خاطئة',
+                          ok
+                              ? 'إجابة صحيحة'
+                              : partial
+                              ? 'إجابة صحيحة جزئيًا'
+                              : 'إجابة خاطئة',
                           textDirection: TextDirection.rtl,
                           style:
                               readex(
@@ -2955,7 +2629,7 @@ class _FeedbackBar extends StatelessWidget {
                               ),
                         ),
                         SizedBox(width: u * 3),
-                        if (ok) ...[
+                        if (ok || partial) ...[
                           SvgPicture.asset(
                             'assets/ui/glyphs/star.svg',
                             width: u * 3.4,
@@ -3016,12 +2690,41 @@ class _FeedbackBar extends StatelessWidget {
                           ),
                       ],
                     ),
+                    if (partial) ...[
+                      SizedBox(height: u * 0.6),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            const TextSpan(text: 'الإجابة الكاملة: '),
+                            TextSpan(
+                              text: correctText,
+                              style: readex(
+                                u * 3.2,
+                                weight: 700,
+                                color: p.c(
+                                  RateelColors.testOkText,
+                                  RateelColors.testLOkRim,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        textDirection: TextDirection.rtl,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: readex(
+                          u * 3.1,
+                          weight: 400,
+                          color: ink.withValues(alpha: 0.85),
+                        ),
+                      ),
+                    ],
                     if (explanation != null) ...[
                       SizedBox(height: u * 0.8),
                       Text(
                         explanation!,
                         textDirection: TextDirection.rtl,
-                        maxLines: 2,
+                        maxLines: partial ? 1 : 2,
                         overflow: TextOverflow.ellipsis,
                         style: readex(
                           u * TestMetrics.fbText,
@@ -3053,7 +2756,7 @@ class _FeedbackBar extends StatelessWidget {
   }
 }
 
-enum _Mark { ok, ko, star }
+enum _Mark { ok, part, ko, star }
 
 class _Stat {
   const _Stat(this.value, this.label, this.mark);
@@ -3092,7 +2795,12 @@ class _StatColumn extends StatelessWidget {
                 ),
               )
             else
-              _MarkDisc(u: u, ok: stat.mark == _Mark.ok, d: 3.6),
+              _MarkDisc(
+                u: u,
+                ok: stat.mark == _Mark.ok,
+                partial: stat.mark == _Mark.part,
+                d: 3.6,
+              ),
             SizedBox(width: u * 1.2),
             Text(
               stat.value,
@@ -3126,6 +2834,7 @@ class _ResultRow extends StatelessWidget {
     required this.number,
     required this.text,
     required this.ok,
+    this.partial = false,
     required this.onTap,
   });
 
@@ -3134,6 +2843,7 @@ class _ResultRow extends StatelessWidget {
   final int number;
   final String text;
   final bool ok;
+  final bool partial;
   final VoidCallback onTap;
 
   @override
@@ -3141,6 +2851,8 @@ class _ResultRow extends StatelessWidget {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final edge = ok
         ? p.c(RateelColors.testOkRim, RateelColors.testLOkRim)
+        : partial
+        ? p.c(RateelColors.testPartRim, RateelColors.testLPartRim)
         : p.c(RateelColors.testKoRim, RateelColors.testLKoRim);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -3186,7 +2898,7 @@ class _ResultRow extends StatelessWidget {
               ),
             ),
             SizedBox(width: u * 1.6),
-            _MarkDisc(u: u, ok: ok, d: 4),
+            _MarkDisc(u: u, ok: ok, partial: partial, d: 4),
           ],
         ),
       ),
@@ -3320,96 +3032,27 @@ class _GoldIcon extends StatelessWidget {
   }
 }
 
-/// Gold medallion of the end popup (reference T3): dark green disc, gold
-/// rim, soft light rays when passed.
-class _Medallion extends StatelessWidget {
-  const _Medallion({
-    required this.u,
-    required this.p,
-    required this.d,
-    required this.rays,
-    required this.child,
-  });
-
-  final double u;
-  final LessonPal p;
-  final double d;
-  final bool rays;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: u * d * 1.9,
-      height: u * d * 1.9,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (rays)
-            DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    RateelColors.testTitleTop.withValues(
-                      alpha: 0.55 * (1 - p.t) + 0.25 * p.t,
-                    ),
-                    RateelColors.testTitleTop.withValues(alpha: 0),
-                  ],
-                ),
-              ),
-              child: SizedBox(width: u * d * 1.9, height: u * d * 1.9),
-            ),
-          Container(
-            width: u * d,
-            height: u * d,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                colors: [
-                  p.c(const Color(0xFF0E4532), RateelColors.readLCardTop),
-                  p.c(const Color(0xFF032A1E), RateelColors.readLToolFill),
-                ],
-              ),
-              border: Border.all(
-                color: p.c(RateelColors.testSelRim, RateelColors.testLSelRim),
-                width: u * 0.45,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: RateelColors.testSelDot.withValues(
-                    alpha: 0.5 * (1 - p.t),
-                  ),
-                  blurRadius: u * 2.2,
-                ),
-              ],
-            ),
-            child: child,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _AnswerBox extends StatelessWidget {
   const _AnswerBox({
     required this.u,
     required this.p,
     required this.ok,
+    this.partial = false,
     required this.text,
   });
 
   final double u;
   final LessonPal p;
   final bool ok;
+  final bool partial;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     final rim = ok
         ? p.c(RateelColors.testOkRim, RateelColors.testLOkRim)
+        : partial
+        ? p.c(RateelColors.testPartRim, RateelColors.testLPartRim)
         : p.c(RateelColors.testKoRim, RateelColors.testLKoRim);
     final r = u * TestMetrics.rowRadius;
     return Container(
@@ -3423,6 +3066,14 @@ class _AnswerBox extends StatelessWidget {
               ? [
                   p.c(RateelColors.testOkTop, RateelColors.testLOkTop),
                   p.c(RateelColors.testOkBottom, RateelColors.testLOkBottom),
+                ]
+              : partial
+              ? [
+                  p.c(RateelColors.testPartTop, RateelColors.testLPartTop),
+                  p.c(
+                    RateelColors.testPartBottom,
+                    RateelColors.testLPartBottom,
+                  ),
                 ]
               : [
                   p.c(RateelColors.testKoTop, RateelColors.testLKoTop),
@@ -3513,147 +3164,6 @@ class _ScoreRingPainter extends CustomPainter {
   @override
   bool shouldRepaint(_ScoreRingPainter o) =>
       o.value != value || o.p.t != p.t || o.u != u;
-}
-
-/// Countdown line of the end popup: gold, shrinking from the left.
-class _CountdownPainter extends CustomPainter {
-  _CountdownPainter(this.p, this.value);
-
-  final LessonPal p;
-  final double value;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final r = Radius.circular(size.height / 2);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(Offset.zero & size, r),
-      Paint()..color = p.c(RateelColors.testNavFill, RateelColors.testLNavFill),
-    );
-    final w = size.width * value.clamp(0.0, 1.0);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(size.width - w, 0, w, size.height),
-        r,
-      ),
-      Paint()
-        ..shader = LinearGradient(
-          colors: [
-            p.c(RateelColors.testNavOnBottom, RateelColors.readLTitle),
-            p.c(const Color(0xFFFFE27A), RateelColors.testLSelRim),
-          ],
-        ).createShader(Offset.zero & size),
-    );
-  }
-
-  @override
-  bool shouldRepaint(_CountdownPainter o) => o.value != value || o.p.t != p.t;
-}
-
-/// Small glass chip (end popup): leading mark and a short text.
-class _Chip extends StatelessWidget {
-  const _Chip({
-    required this.u,
-    required this.p,
-    required this.lead,
-    required this.text,
-  });
-
-  final double u;
-  final LessonPal p;
-  final Widget lead;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final h = u * 7;
-    return Container(
-      height: h,
-      padding: EdgeInsets.symmetric(horizontal: u * 2.6),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(h),
-        color: p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
-        border: Border.all(
-          color: p.c(RateelColors.testRowRimTop, RateelColors.testLRowRim),
-          width: math.max(1.0, u * 0.22),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        textDirection: TextDirection.rtl,
-        children: [
-          lead,
-          SizedBox(width: u * 1.2),
-          Text(
-            text,
-            textDirection: TextDirection.rtl,
-            style: readex(
-              u * 3.3,
-              weight: 600,
-              color: p.c(RateelColors.leaderText, RateelColors.readLInk),
-            ).copyWith(height: 1),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Gold sparks bursting out of the score ring when the test is passed
-/// (Angular completion particles), [t] 0 → 1 over 1.6 s.
-class _BurstPainter extends CustomPainter {
-  _BurstPainter({required this.p, required this.u, required this.t});
-
-  final LessonPal p;
-  final double u;
-  final double t;
-
-  static final _parts = () {
-    final r = math.Random(7);
-    return [
-      for (var i = 0; i < 26; i++)
-        (
-          a: i / 26 * math.pi * 2 + r.nextDouble() * 0.2,
-          d: 0.55 + r.nextDouble() * 0.45,
-          s: 0.5 + r.nextDouble() * 0.7,
-          delay: r.nextDouble() * 0.2,
-        ),
-    ];
-  }();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (t <= 0 || t >= 1) return;
-    final c = Offset(size.width / 2, size.height * 0.52);
-    final gold = p.c(const Color(0xFFFFE07A), RateelColors.readLCopper);
-    for (final q in _parts) {
-      final k = ((t - q.delay) / (1 - q.delay)).clamp(0.0, 1.0);
-      if (k <= 0) continue;
-      final e = Curves.easeOutCubic.transform(k);
-      final dist = u * (12 + 24 * q.d) * e;
-      final pos = c + Offset(math.cos(q.a), math.sin(q.a) * 0.8) * dist;
-      final o = (1 - k) * (k < 0.15 ? k / 0.15 : 1);
-      final r = u * 0.9 * q.s;
-      final paint = Paint()..color = gold.withValues(alpha: o);
-      // Four-point spark.
-      canvas.drawPath(
-        Path()
-          ..moveTo(pos.dx, pos.dy - r)
-          ..lineTo(pos.dx + r * 0.3, pos.dy)
-          ..lineTo(pos.dx, pos.dy + r)
-          ..lineTo(pos.dx - r * 0.3, pos.dy)
-          ..close()
-          ..moveTo(pos.dx - r, pos.dy)
-          ..lineTo(pos.dx, pos.dy + r * 0.3)
-          ..lineTo(pos.dx + r, pos.dy)
-          ..lineTo(pos.dx, pos.dy - r * 0.3)
-          ..close(),
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(_BurstPainter o) => o.t != t || o.p.t != p.t;
 }
 
 /// «🔥 3 إجابات متتالية» (Angular feedback modal: streak indicator with three
@@ -3785,6 +3295,7 @@ class _StreakBanner extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         textDirection: TextDirection.rtl,
         children: [
           SizedBox(width: u * 2),
@@ -3813,14 +3324,15 @@ class _StreakBanner extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: u * 2.6),
-          Expanded(
+          SizedBox(width: u * 2.8),
+          Padding(
+            padding: EdgeInsets.only(left: u * 5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$streak إجابات متتالية!',
+                  '$streak إجابات متتالية',
                   textDirection: TextDirection.rtl,
                   style: readex(
                     u * 4.6,

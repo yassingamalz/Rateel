@@ -83,3 +83,16 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   (uisfx soft streak, provisional). Sheet `streak-v6.jpg`.
 - Sounds: plinkfx (CC0, 274 sounds) downloaded as the release zip (`plinkfx-wav-ogg.zip`); sampler video of 19
   numbered candidates (C1–C6 correct, W1–W6 wrong, S1–S3 streak, P1–P4 passed) sent to the owner.
+
+## 6. v7: owner's choices on v6 (2026-11-26)
+- Sounds from the sampler: C3 gem (correct), W2 error (wrong), S3 sparkle (streak), P2 level-up (passed), all plinkfx
+  (CC0, release zip), converted to mp3 (`assets/sounds/test_*.mp3`; sources and the sampler in
+  `docs/design-assets/test-lesson/sounds/`).
+- Buttons filled with white text in both themes (`_GoldButton` with `_Tone.gold/green/red`); «إعادة الاختبار» green
+  after a passed test, red after a failed one.
+- Results: layout A kept, B removed; the end popup (A/B) removed, backlog.
+- Partly correct answers (`TestRun.partial`): multiple choice with at least one right option chosen but not the exact
+  set: amber disc / row / bar («إجابة صحيحة جزئيًا», «الإجابة الكاملة: …»), 5 points, ½ question in the score, streak
+  reset; right options not chosen shown as «missed»; results stat «إجابات جزئية» (shown only when there are some).
+- Streak banner: width from its content, even padding; «!» removed from every text of the screen.
+- Tests 13/13 (scoring test extended with the partial answer). Captures `capture-v7-*-phone.jpg`.

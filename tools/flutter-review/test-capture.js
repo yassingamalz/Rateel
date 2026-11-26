@@ -6,8 +6,8 @@ const { chromium } = require('playwright');
   const all = {
     q: 'testQ=4', sel: 'testQ=3&testPick=1', ok: 'testQ=4&testState=ok', ko: 'testQ=4&testState=ko&testPick=1',
     light: 'testQ=4&readTheme=light', 'sel-light': 'testQ=3&testPick=1&readTheme=light', 'ko-light': 'testQ=4&testState=ko&testPick=1&readTheme=light',
-    results: 'testState=results', pass: 'testState=pass', fail: 'testState=fail', details: 'testState=details',
-    tf: 'testQ=7', 'results-b': 'testState=results&results=b', 'results-light': 'testState=results&readTheme=light', 'results-b-light': 'testState=results&results=b&readTheme=light', 'pass-b': 'testState=pass&endPopup=b', 'fail-b': 'testState=fail&endPopup=b', streak: 'testQ=4&testState=streak', 'pass-light': 'testState=pass&readTheme=light', text: 'testQ=5&testState=ko', multi: 'testQ=2', first: '',
+    results: 'testState=results', fail: 'testState=fail', details: 'testState=details',
+    tf: 'testQ=7', 'results-light': 'testState=results&readTheme=light', streak: 'testQ=4&testState=streak', partial: 'testQ=3&testState=partial', 'fail-light': 'testState=fail&readTheme=light', 'q-light': 'testQ=4&readTheme=light', text: 'testQ=5&testState=ko', multi: 'testQ=2', first: '',
   };
   const pick = process.argv[5] ? process.argv[5].split(',') : Object.keys(all);
   const sizes = mode === 'phone' ? [[915, 412, 2.625, '-phone']] : mode === 'ref' ? [[1842, 854, 1, '']] : [[1842, 854, 1, ''], [915, 412, 2.625, '-phone']];

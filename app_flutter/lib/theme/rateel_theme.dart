@@ -359,6 +359,15 @@ class RateelColors {
   static const testKoRim = Color(0xFFD0644F);
   static const testKoDiscTop = Color(0xFFF08A72);
   static const testKoDisc = Color(0xFFB4453A);
+  // Partly correct answer (owner, 2026-11-26): jewel amber.
+  static const testPartTop = Color(0xFF5A4A1A);
+  static const testPartBottom = Color(0xFF40351A);
+  static const testPartRim = Color(0xFFE2B243);
+  static const testPartDiscTop = Color(0xFFF7D47A);
+  static const testPartDisc = Color(0xFFC98E1E);
+  static const testLPartTop = Color(0xFFFBEFD0);
+  static const testLPartBottom = Color(0xFFF4E0AE);
+  static const testLPartRim = Color(0xFFC9962E);
   // Light theme of the test (from the 08 light tokens).
   static const testLRowFill = Color(0xFFF7EEE1);
   static const testLRowRim = Color(0xFFDCC5AC);
@@ -381,6 +390,9 @@ class RateelColors {
   static const testLGreenTop = Color(0xFF4FA676);
   static const testLGreenBottom = Color(0xFF2E7A52);
   static const testLGreenRimTop = Color(0xFF8DD2AA);
+  static const testLRedTop = Color(0xFFC95A47); // «إعادة الاختبار» when failed
+  static const testLRedBottom = Color(0xFF9C3527);
+  static const testLRedRimTop = Color(0xFFEE9C8A);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

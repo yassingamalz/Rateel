@@ -6,6 +6,9 @@ by the owner (one of the hardest, done later, maybe last). Screens **10 / 10b (t
 `screens/10-test-lesson/HISTORY.md`. **v5 built** (dark + light, feedback A, end popup, results, CC0 sounds), waiting
 for the owner's phone test; placeholder Material icons (trophy, cap) until drawn assets. Continue from the history.
 
+**Backlog (owner, 2026-11-26):** end-of-test popup (removed from screen 10: the results show the same); designs A/B in
+`screens/10-test-lesson/end-popup-variants-v6.jpg` if it comes back.
+
 ## Prompt to continue
 ```
 Lavora sul repo Rateel, branch flutter/10-test-lesson. Leggi CLAUDE.md, poi docs/flutter/DECISIONS.md, PROCESS.md,

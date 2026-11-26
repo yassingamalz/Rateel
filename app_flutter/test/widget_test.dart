@@ -386,13 +386,18 @@ void main() {
     expect(run.points, 10 + 14 + 16);
     expect(run.isUnlocked(3), isTrue);
     // Multiple choice needs exactly the right set.
+    // Multiple choice: exactly the right set, or partly right (half points).
     run.toggle(qs[3], 'a');
     expect(run.submit(qs[3]), isFalse);
+    expect(run.isPartial(qs[3]), isTrue);
+    expect(run.points, 10 + 14 + 16 + 5);
     expect(run.streak, 0);
     // Text answers are trimmed and compared case-insensitively.
     run.setText(qs[4], '  من يعمل ');
     expect(run.submit(qs[4]), isTrue);
-    expect(run.score, 80);
+    expect(run.score, 90); // (4 + 0.5) / 5
+    expect(run.partialCount, 1);
+    expect(run.wrongCount, 0);
     expect(run.passed, isTrue);
     expect(run.recommendations().length, 2);
   });

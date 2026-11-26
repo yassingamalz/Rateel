@@ -126,8 +126,14 @@ class TestRun {
   /// the answer is confirmed.
   final selected = <String, List<String>>{};
 
-  /// Confirmed answers: question id → correct?
+  /// Confirmed answers: question id → fully correct? A partly correct
+  /// answer is `false` here and listed in [partial].
   final results = <String, bool>{};
+
+  /// Multiple-choice answers partly correct (owner, 2026-11-26): some of the
+  /// right options chosen, but not exactly the right set. Half the points and
+  /// half a question in the score; the streak restarts.
+  final partial = <String>{};
   int points = 0;
   int streak = 0;
 
@@ -144,8 +150,13 @@ class TestRun {
   int get total => content.questions.length;
   int get answered => results.length;
   int get correctCount => results.values.where((r) => r).length;
-  int get wrongCount => results.values.where((r) => !r).length;
-  int get score => total == 0 ? 0 : (correctCount * 100 / total).round();
+  int get partialCount => partial.length;
+  int get wrongCount => results.values.where((r) => !r).length - partial.length;
+  int get score => total == 0
+      ? 0
+      : ((correctCount + partialCount / 2) * 100 / total).round();
+
+  bool isPartial(TestQuestion q) => partial.contains(q.id);
   bool get passed => score >= content.passingScore;
   bool get finished => answered == total;
 
@@ -200,7 +211,13 @@ class TestRun {
     return s.length == 1 && q.correct.contains(s.first);
   }
 
-  /// Confirms the answer; returns whether it is correct.
+  bool _isPartial(TestQuestion q) {
+    if (q.type != QuestionType.multiple) return false;
+    final s = selected[q.id] ?? const [];
+    return s.any(q.correct.contains);
+  }
+
+  /// Confirms the answer; returns whether it is fully correct.
   bool submit(TestQuestion q) {
     final ok = _isCorrect(q);
     results[q.id] = ok;
@@ -211,6 +228,12 @@ class TestRun {
       points += p;
       earned[q.id] = p;
       streaks[q.id] = streak;
+    } else if (_isPartial(q)) {
+      partial.add(q.id);
+      final p = (pointsPerQuestion / 2).round();
+      streak = 0;
+      points += p;
+      earned[q.id] = p;
     } else {
       streak = 0;
       earned[q.id] = 0;
@@ -221,6 +244,7 @@ class TestRun {
   void reset() {
     selected.clear();
     results.clear();
+    partial.clear();
     earned.clear();
     stakes.clear();
     streaks.clear();
@@ -254,7 +278,7 @@ class TestRun {
         if (results[q.id] == false) q,
     ];
     if (wrong.isEmpty) {
-      return const ['أحسنت! لقد أجبت على جميع الأسئلة بشكل صحيح.'];
+      return const ['أحسنت، لقد أجبت على جميع الأسئلة بشكل صحيح.'];
     }
     return [
       'مراجعة المواضيع المتعلقة بالأسئلة التي أخطأت فيها.',
