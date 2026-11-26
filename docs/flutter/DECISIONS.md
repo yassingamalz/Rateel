@@ -207,3 +207,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | Streak chip of 03: owner finds v1 too small and too low; variants A–F built behind `?chip=` (sheet `screens/12-daily-challenges/streak-chip-variants.jpg`), default A until the owner chooses. | 🟡 |
 | 2026-11-26 | **APK 1.0.406**: screen 12 v4 (back gesture; chip variants behind `?chip=`, default A). | ✅ |
 | 2026-11-26 | Streak chip of 03: **D2** chosen by the owner (pill with «الاستمرارية», ×1.35, top left: left 3u, top 3.5u); default of `streakChipVariant`, the other variants stay behind `?chip=` for review. | ✅ |
+| 2026-11-26 | **APK 1.0.409**: screen 12 v5 (streak chip D2 on 03, back gesture). | ✅ |
