@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U5.L2",
+      "titleAr": "النُّونُ السَّاكِنَةُ وَالتَّنْوِينُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ عِنْدَمَا يَلِي النُّونَ السَّاكِنَةَ حَرْفٌ آخَرُ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلنُّونِ السَّاكِنَةِ وَالتَّنْوِينِ أَرْبَعَةُ أَحْكَامٍ: الْإِظْهَارُ، وَالْإِدْغَامُ، وَالْإِقْلَابُ، وَالْإِخْفَاءُ.",
+          "visualDirection": "One letter card branches into four distinct rule motifs."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "انْظُرْ إِلَى الْحَرْفِ التَّالِي وَحَدِّدِ الْحُكْمَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L3",
+      "titleAr": "الْإِظْهَارُ الْحَلْقِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نَنْطِقُ النُّونَ السَّاكِنَةَ وَاضِحَةً؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُظْهِرُ النُّونَ السَّاكِنَةَ وَالتَّنْوِينَ عِنْدَ الْهَمْزَةِ وَالْهَاءِ وَالْعَيْنِ وَالْحَاءِ وَالْغَيْنِ وَالْخَاءِ، دُونَ زِيَادَةِ غُنَّةِ الْحُكْمِ.",
+          "visualDirection": "Separate glowing letter cards, six throat letters appear along a verified anatomical diagram."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْمِثَالِ وَبَيِّنِ النُّونَ فِي الْوَصْلِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L4",
+      "titleAr": "الْإِدْغَامُ بِغُنَّةٍ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى يَنْدَمِجُ حَرْفَانِ مَعَ بَقَاءِ الْغُنَّةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "حُرُوفُ الْإِدْغَامِ بِغُنَّةٍ أَرْبَعَةٌ: الْيَاءُ، وَالنُّونُ، وَالْمِيمُ، وَالْوَاوُ. وَنُرَاعِي شُرُوطَ الْإِدْغَامِ وَالْمَوَاضِعَ الْمُسْتَثْنَاةَ.",
+          "visualDirection": "Fusion animation with nasal-wave motif; distinguish complete and incomplete cases only after review."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ الْإِدْغَامِ وَالْإِظْهَارِ الْمُطْلَقِ مَعَ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L5",
+      "titleAr": "الْإِدْغَامُ بِغَيْرِ غُنَّةٍ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يُصَاحِبُ الْغُنَّةُ كُلَّ إِدْغَامٍ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُدْغِمُ النُّونَ السَّاكِنَةَ وَالتَّنْوِينَ فِي اللَّامِ أَوِ الرَّاءِ بِغَيْرِ غُنَّةِ الْإِدْغَامِ عِنْدَ تَحَقُّقِ شُرُوطِهِ.",
+          "visualDirection": "Letter fusion without nasal-wave overlay; keep actual mushaf text unchanged."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى نَمُوذَجِ الْإِدْغَامِ فِي اللَّامِ وَالرَّاءِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L6",
+      "titleAr": "الْإِقْلَابُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ لِلنُّونِ السَّاكِنَةِ قَبْلَ الْبَاءِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تُقْلَبُ النُّونُ السَّاكِنَةُ أَوِ التَّنْوِينُ قَبْلَ الْبَاءِ مِيمًا مُخْفَاةً مَعَ غُنَّةٍ.",
+          "visualDirection": "Educational letter card morphs into meem; separate from fixed Quran text."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْإِقْلَابِ وَتَلَقَّ هَيْئَةَ أَدَائِهِ مِنْ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L7",
+      "titleAr": "الْإِخْفَاءُ الْحَقِيقِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَقَعُ بَيْنَ الْإِظْهَارِ وَالْإِدْغَامِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تُخْفَى النُّونُ السَّاكِنَةُ وَالتَّنْوِينُ عِنْدَ خَمْسَةَ عَشَرَ حَرْفًا، مَعَ غُنَّةٍ وَدُونَ تَشْدِيدِ الْحَرْفِ التَّالِي بِسَبَبِ الْإِخْفَاءِ.",
+          "visualDirection": "Transition between separate and merged cards; nasal resonance stays visible."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ الْإِخْفَاءِ قَبْلَ الشِّينِ وَقَبْلَ الزَّايِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}
