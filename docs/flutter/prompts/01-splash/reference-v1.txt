@@ -1,0 +1,18 @@
+Screen 01, splash / start-up: prompt v1 (style from the app's own screenshots, LESSONS-LEARNED.md).
+Attach, in this order:
+  1. docs/flutter/app-references/app-14-coming-soon.webp   (background, emblem, title, gold divider)
+  2. docs/flutter/app-references/app-03-courses.webp       (arched header, mosque, crescent, gold line)
+  3. docs/flutter/screens/01-splash/logo-ic-launcher.png   (the Rateel logo: gold arch, «رَتِّل» calligraphy)
+  4. docs/flutter/screens/01-splash/angular-original.webp  (Angular splash: layout only)
+Output: one landscape image 1844x853, dark. Save as docs/flutter/screens/01-splash/01-avvio.webp
+
+----- PROMPT -----
+The first two attached images are screenshots of my app, the third is my app's logo, the fourth is the old start-up screen (use it only for what the screen contains, not for its style). Create ONE new screen of the same app, landscape 1844x853 px, Arabic right-to-left, that looks like it belongs to the same app: copy exactly the background of the first screenshot (dark emerald green, thin gold arcs, gold girih corners, the soft mosque silhouette), their gold, their cream text, their fonts and their gold divider with the diamond. Do not invent a new style, no new colours, no sparkles.
+
+The screen is the app's START-UP (splash) screen, shown for a few seconds while the app loads. No side menu, no buttons.
+
+Centred, slightly above the middle: the app's logo from the third image, large (about one third of the screen height), redrawn cleanly in the same gold as the screenshots, with a soft gold glow behind it. Under it the name «رتّل» in large cream text, then a short line «تعلّم أحكام التجويد» in smaller gold text, then the gold divider with the diamond.
+
+Lower part, centred: a thin glass progress capsule like the one of the lessons (dark track, thin rim, gold fill at about 60%), the text «60%» under it in small cream text, and under that a small muted line «جارٍ تحميل المحتوى…».
+
+Everything in Arabic. Clean, centred, lots of breathing space. No people, no faces, no English text.
