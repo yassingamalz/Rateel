@@ -123,3 +123,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   as the trophy's handles), the inside kept opaque (the cream flame turned half transparent with a full un-mix).
 - Used: trophy 5.2u next to «أحسنت» (results), medallion 11.5u in the streak banner (soft glow, gentle pulse), flame
   3.2u ×3 in the streak chip. Captures `capture-v10-*-phone.jpg`.
+
+- APK 1.0.425 (v10).

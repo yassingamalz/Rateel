@@ -209,3 +209,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | Screen 10 v9 (owner): the **results ring takes the colour of the score**: red up to 50%, darker amber from 51% to the pass mark, gold from the pass mark (70%), full bright gold at 100%; the % text in the same colour; the colour follows the ring while it fills (`scoreColor`, `testScore*` tokens). Sheet `screens/10-test-lesson/score-ring-colours-v9.png`. | ✅ |
 | 2026-11-26 | **APK 1.0.424**: screen 10 v9 (ring coloured by the score; dark buttons outlined, long press on the moon toggles filled). | ✅ |
 | 2026-11-26 | Owner's icons T4–T6 (trophy, flame medallion, flame glyph) evaluated and stored in the **shared library** (`docs/design-assets/test-lesson/icons/`, `assets/ui/test/`, `ASSETS.md`); they replace the placeholder Material trophy and flames on screen 10 (v10). | ✅ |
+| 2026-11-26 | **APK 1.0.425**: screen 10 v10 (owner's trophy and flame icons). | ✅ |
