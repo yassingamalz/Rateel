@@ -1,29 +1,29 @@
-# Screens of the Flutter app: what is done and what is missing (2026-11-24)
+# Screens of the Flutter app: what is done and what is missing (2026-11-26)
 
 Numbers come from the ChatGPT references (branch `lesson-production`, `docs/design/glassy-gamified/screens/`).
 One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next one (`README.md`).
 
 | N° | Screen | Reference | State |
 |---|---|---|---|
-| 01 | **Splash / start-up** (owner, 2026-11-26; Angular `splash-screen`, `initialization`) | `screens/01-splash/01-avvio.webp` + motion `01-avvio-square.gif` (owner); plan `screens/01-splash.md` | to do (branch `flutter/01-splash`, not started) |
+| 01 | **Splash / start-up** (owner, 2026-11-26; Angular `splash-screen`, `initialization`) | `screens/01-splash/01-avvio.webp` + motion `01-avvio-square.gif` (owner); plan `screens/01-splash.md` | implemented on `flutter/01-splash`, awaiting phone review |
 | 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | **approved** (APK 1.0.330), merged into `master`; menu motion as Simply Piano and capsule left → right merged with 07 |
 | 03 | Courses (المسارات التعليمية) | `03-corsi.webp` | done, approved, in `master` |
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
 | 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **approved** (APK 1.0.366), merged into `master`; sections are mock |
-| 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12) on `flutter/08-reading-lesson` (dark + light, rules panel with rule detail, text-size popup); PR to `master` pending |
-| 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
-| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
+| 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12), merged into `master` |
+| 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | postponed |
+| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **approved** (v13) on `flutter/10-test-lesson`, pending integration on the checked-out master revision |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | **approved** (2026-11-26), merged into `master`; opened from the streak chip D2 of 03; mock data; leftovers in `BACKLOG.md` |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
 | 22 | **Listening lesson** (owner, 2026-11-25): an audio plays (verse / words), then questions on what was heard, Simply Piano style (e.g. «what was in the word X: a ghunna?», «this one: a ghunna?»). Own lesson type `listen` (already in the data and in the 06 icons, headphones). Confirmed: separate lesson (owner). Build it **after 10/10b** and reuse their question + answer-feedback widgets; the same audio question can later also appear as one question type inside tests | `screens/22-listening-lesson/22-lezione-ascolto.webp` (from the app screenshots); plan `screens/22-listening-lesson.md` | to do (after 10/10b) |
-| 23 | **Settings** (owner, 2026-11-25; **v1 built** on `flutter/23-settings`, 2026-11-26): theme dark/light, text size (already promised in `main.dart`), sound effects, vibration, reciter, daily reminder, about, reset progress. Gear at the bottom of the rail; list full width, «about» and «reset» are rows of the list (owner) | `screens/23-settings/23-impostazioni.webp`; plan `screens/23-settings.md` | **approved** (v1, APK 1.0.402) on `flutter/23-settings`; PR #50 → `master`, merge after 10 and 12 |
+| 23 | **Settings** (owner, 2026-11-25; **v1 built** on `flutter/23-settings`, 2026-11-26): theme dark/light, text size (already promised in `main.dart`), sound effects, vibration, reciter, daily reminder, about, reset progress. Gear at the bottom of the rail; list full width, «about» and «reset» are rows of the list (owner) | `screens/23-settings/23-impostazioni.webp`; plan `screens/23-settings.md` | **approved** (v1, APK 1.0.402), merged into `master` (PR #50) |
 
-Done: 4 screens (03–06). To do: at least 16 (02, 07, 09, 10/10b, 11, 12, 13, 14, 15–21, 22, 23, 01, 24–30), plus 01 and 08 once defined.
+Remaining screens in the tracker: 09, 13, 15–21, 22 and 24–30. For 25, the test branch already has a results view; review its coverage before building a separate screen. Screen 01 is ready for review on its branch. Branch integration was checked against `master` at `a259ae9`.
 
 ## Screen 02: shared lesson top bar (owner, 2026-11-24)
 - Appears in **every type of lesson** (video, reading, practice, listening, test, guided).

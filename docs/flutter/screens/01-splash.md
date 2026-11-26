@@ -1,8 +1,7 @@
 # Screen 01: splash / start-up (شاشة البداية)
 
-Status: added by the owner (2026-11-26, the free number 01). **References delivered by the owner** (2026-11-26),
-generated with `prompts/01-splash/reference-v1.txt`. **Not started yet**: the owner will say when. The screen must be
-**identical** to the references; the first step, when we start, is the list of what to ask ChatGPT for.
+Status: implemented on `flutter/01-splash` from the current app and the owner's landscape and motion references.
+[Phone-size recording](01-splash/startup-phone.mp4). Physical phone review pending.
 
 ## References (owner, 2026-11-26)
 | File | What |
@@ -15,10 +14,13 @@ mosque bottom right); logo (gold arch with «رَتِّل», open book at its fo
 35% of the height; «رتل» large cream; «تعلم أحكام التجويد» gold; gold divider with the diamond; glass capsule with the
 gold fill; «60%» cream; «جار تحميل المحتوى…» muted green.
 
-## To prepare when we start (probable, check against the code first)
-- Logo emblem as its own transparent image (ChatGPT, from the reference), without the glow (glow drawn in code).
-- Background: check whether `assets/ui/coming_soon/background.webp` (screen 14) matches; otherwise ask for it.
-- Divider, capsule, texts: drawn in code (shared `GoldDivider`, lesson capsule of 02).
+## Artwork and layout
+
+The app uses three small WebP layers derived from the supplied landscape art. The backdrop retains the original arcs,
+corner lattice, lower waves and mosque. Its plain central field is reconstructed behind the moving elements.
+The emblem and the two-line Arabic wordmark retain the original lettering and proportions. The wordmark has an
+Arabic accessibility label. The shared Flutter gold divider, live progress capsule, percentage, status and retry
+control are separate widgets. The square GIF supplies the motion and never changes the landscape aspect ratio.
 
 ## Angular original (behaviour and content, not style)
 - `src/app/core/splash-screen/` (view) + `src/app/core/initialization/` (logic, route `initialization`, guard
@@ -32,9 +34,10 @@ gold fill; «60%» cream; «جار تحميل المحتوى…» muted green.
   the Capacitor placeholder (blue X on white), not used.
 - The real logo is the launcher icon: `01-splash/logo-ic-launcher.png` (gold arch, «رَتِّل», green disc).
 
-## Proposed (to confirm)
-- Title «رتّل» (app name) with «تعلّم أحكام التجويد» under it, instead of Angular's «تجويد القرآن».
-- Task texts in Arabic; in Flutter the real work is short (fonts, images, settings): the bar runs over ~1.5 s and
-  the screen fades into 03.
-- Error state kept (retry), drawn in the same style.
-- Android native splash: same background colour so there is no flash before Flutter starts.
+## Startup behaviour
+
+The halo brightens and dims over 1.5 seconds; a reduced-motion preference skips the pulse and transition.
+On each cold launch the header images are decoded and the existing settings are restored. The bar advances towards
+90% during this work and finishes only after success. A 300 ms fade reveals the existing initial destination,
+including when opened with a review link. A failed asset load offers an Arabic retry. The settings store retains
+its existing offline/default fallback. Android, iOS and web use the splash green behind the first Flutter frame.

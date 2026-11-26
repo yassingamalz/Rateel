@@ -21,13 +21,20 @@ Future<void> settle(WidgetTester tester) async {
   }
 }
 
+Future<void> openApp(WidgetTester tester) async {
+  await tester.pumpWidget(RateelApp(initialize: (_) async {}));
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 1350));
+  await tester.pump(const Duration(milliseconds: 150));
+  await settle(tester);
+}
+
 void main() {
   testWidgets('side nav opens and closes', (tester) async {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     expect(find.text('الشهادات'), findsNothing); // labels only in the open menu
     await tester.tap(find.bySemanticsLabel(RegExp('القائمة')));
     await settle(tester);
@@ -43,8 +50,7 @@ void main() {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     // Start on the rail, below the items.
     await tester.dragFrom(const Offset(1780, 820), const Offset(-500, 0));
     await settle(tester);
@@ -64,8 +70,7 @@ void main() {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     expect(find.text('المسارات التعليمية'), findsWidgets);
     expect(find.text('أساسيات التجويد'), findsOneWidget);
     await tester.tap(find.text('النون والميم المشددتان'));
@@ -78,8 +83,7 @@ void main() {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     courseCompleted.value = 0;
     for (var i = 0; i < 10; i++) {
       await settle(tester);
@@ -99,8 +103,7 @@ void main() {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     await tester.tap(find.text('أساسيات التجويد'));
     await settle(tester);
     expect(find.text('وحدات المقرر'), findsWidgets);
@@ -147,8 +150,7 @@ void main() {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const RateelApp());
-    await settle(tester);
+    await openApp(tester);
     await tester.tap(find.text('أساسيات التجويد'));
     await settle(tester);
     await tester.tap(find.text('مقدمة في التجويد'));
@@ -394,8 +396,7 @@ void main() {
       addTearDown(tester.view.reset);
       challengesDone.value = 0;
       dailyStreak.value = 0;
-      await tester.pumpWidget(const RateelApp());
-      await settle(tester);
+      await openApp(tester);
       await tester.tap(find.byType(StreakChip));
       await settle(tester);
       expect(find.text('رحلة التحديات اليومية'), findsOneWidget);

@@ -74,6 +74,7 @@ flutter:
     - assets/ui/leaderboard/
     - assets/ui/video/
     - assets/ui/video/thumbs/
+    - assets/ui/splash/
     - assets/ui/coming_soon/
     - assets/ui/reading/
     - assets/ui/icons/
