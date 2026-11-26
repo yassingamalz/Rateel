@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U3.L1",
+      "titleAr": "صِفَاتُ الْحُرُوفِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نُمَيِّزُ بَيْنَ حَرْفَيْنِ يَتَقَارَبُ مَخْرَجَاهُمَا؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْمَخْرَجُ يُبَيِّنُ مَوْضِعَ خُرُوجِ الْحَرْفِ، وَالصِّفَةُ تُبَيِّنُ كَيْفِيَّةَ أَدَائِهِ.",
+          "visualDirection": "Compare two letter cards over one anatomical map; morph into contrasting wave patterns."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ السِّينِ وَالصَّادِ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L2",
+      "titleAr": "الْهَمْسُ وَالْجَهْرُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تَشْعُرُ بِاخْتِلَافِ جَرَيَانِ النَّفَسِ عِنْدَ النُّطْقِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْهَمْسُ جَرَيَانُ النَّفَسِ عِنْدَ النُّطْقِ بِالْحَرْفِ، وَالْجَهْرُ انْحِبَاسُ جَرَيَانِهِ وَفْقَ اصْطِلَاحِ عُلَمَاءِ التَّجْوِيدِ.",
+          "visualDirection": "Two distinct airflow diagrams; do not equate classical jahr with modern voicing in every case."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ أَسْ وَأَزْ مَعَ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L3",
+      "titleAr": "الشِّدَّةُ وَالتَّوَسُّطُ وَالرَّخَاوَةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يَسْتَمِرُّ الصَّوْتُ فِي كُلِّ الْحُرُوفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الشِّدَّةُ انْحِبَاسُ جَرَيَانِ الصَّوْتِ، وَالرَّخَاوَةُ جَرَيَانُهُ، وَالتَّوَسُّطُ بَيْنَهُمَا.",
+          "visualDirection": "One wave morphs into stopped, intermediate and continuous patterns."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى أَقْ وَأَلْ وَأَسْ ثُمَّ قَارِنْ بَيْنَهَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L4",
+      "titleAr": "الِاسْتِعْلَاءُ وَالِاسْتِفَالُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الَّذِي يَتَغَيَّرُ فِي اللِّسَانِ عِنْدَ نُطْقِ الصَّادِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "حُرُوفُ الِاسْتِعْلَاءِ سَبْعَةٌ، وَيَرْتَفِعُ أَقْصَى اللِّسَانِ عِنْدَ أَدَائِهَا. وَلِلتَّفْخِيمِ وَالتَّرْقِيقِ أَحْكَامٌ نَدْرُسُهَا بِالتَّدَرُّجِ.",
+          "visualDirection": "Anatomical tongue elevation comparison, no exaggerated distortion."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ صَ وَسَ دُونَ تَغْيِيرِ الْحَرَكَةِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L5",
+      "titleAr": "الْإِطْبَاقُ وَالِانْفِتَاحُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ كُلُّ حَرْفٍ مُسْتَعْلٍ مُطْبَقٌ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "حُرُوفُ الْإِطْبَاقِ أَرْبَعَةٌ: الصَّادُ، وَالضَّادُ، وَالطَّاءُ، وَالظَّاءُ. وَكُلُّ حَرْفٍ مُطْبَقٍ مُسْتَعْلٍ، وَلَيْسَ كُلُّ مُسْتَعْلٍ مُطْبَقًا.",
+          "visualDirection": "Four highlighted letter cards within the seven-letter set; anatomical overlay."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ الطَّاءِ وَالْقَافِ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}
