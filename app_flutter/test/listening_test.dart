@@ -31,8 +31,11 @@ void main() {
     expect(c.steps, hasLength(7));
     expect(c.questions, hasLength(3));
     for (final s in c.steps) {
-      for (final w in s.words) {
-        expect(w, lessThan(s.ayah.words.length));
+      for (final m in s.marks) {
+        final w = s.ayah.words[m.word].text;
+        // The coloured letters are the doubled nun (ghunna).
+        expect(w.substring(m.from, m.to), startsWith('ن'));
+        expect(w.substring(m.from, m.to), contains('\u0651'));
       }
     }
   });

@@ -77,14 +77,31 @@ class ListenRule {
   final String colour;
 }
 
-/// One ayah of a rule lesson: [words] hold the rule (coloured), [note] says
-/// where it is.
+/// Letters [from, to) of word [word] that carry the rule (owner, 2026-11-26:
+/// the letter is coloured, not the whole word: a word can hold several rules).
+class ListenMark {
+  const ListenMark(this.word, this.from, this.to);
+
+  final int word;
+  final int from;
+  final int to;
+}
+
+/// One ayah of a rule lesson: [marks] hold the rule (coloured letters),
+/// [note] says where it is.
 class ListenStep {
-  const ListenStep({required this.ayah, required this.words, required this.note});
+  const ListenStep({required this.ayah, required this.marks, required this.note});
 
   final ListenAyah ayah;
-  final List<int> words;
+  final List<ListenMark> marks;
   final String note;
+
+  ListenMark? markOf(int word) {
+    for (final m in marks) {
+      if (m.word == word) return m;
+    }
+    return null;
+  }
 }
 
 class ListenContent {
@@ -148,7 +165,15 @@ class ListenContent {
               .cast<Map<String, dynamic>>())
             ListenStep(
               ayah: ayat[s['ayah'] as String]!,
-              words: (s['words'] as List).cast<int>(),
+              marks: [
+                for (final m in (s['marks'] as List)
+                    .cast<Map<String, dynamic>>())
+                  ListenMark(
+                    m['word'] as int,
+                    (m['letters'] as List)[0] as int,
+                    (m['letters'] as List)[1] as int,
+                  ),
+              ],
               note: s['note'] as String,
             ),
         ],

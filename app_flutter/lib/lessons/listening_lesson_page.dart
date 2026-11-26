@@ -874,20 +874,56 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     );
   }
 
-  /// The verse word by word (RTL). Rule lesson: the rule's words in their
-  /// tajweed colour from the start (owner, 2026-11-26); quiz: the asked word
-  /// in gold (a colour would give the answer away). Every word lights up in a
-  /// soft gold box while it is recited (lesson-production video).
+  /// The verse word by word (RTL). Rule lesson: the letters that carry the
+  /// rule in their tajweed colour from the start (owner, 2026-11-26: the
+  /// letter, not the word); quiz: the asked word in gold (a colour would give
+  /// the answer away). Every word lights up in a soft gold box while it is
+  /// recited (lesson-production video); the rule letter then glows with its
+  /// own, brighter light.
   Widget _verse(LessonPal p, double u, ListenAyah a, int lit) {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final gold = p.c(RateelColors.listenWord, RateelColors.readLTitle);
-    final rule = _step?.words ?? const <int>[];
+    final step = _step;
     final asked = _q?.word;
-    Color colour(int i) => rule.contains(i)
-        ? _ruleColour
-        : (i == asked || i == lit ? gold : ink);
-    Color glow(int i) =>
-        rule.contains(i) ? _ruleColour : RateelColors.listenWord;
+    final rule = _ruleColour;
+    TextStyle base(Color c) => TextStyle(
+      fontFamily: 'AmiriQuran',
+      fontSize: u * ListenMetrics.verseSize,
+      height: 1.3,
+      color: c,
+      shadows: p.t > 0.5 ? null : titleShadows(u),
+    );
+    InlineSpan word(int i, String text) {
+      final on = i == lit;
+      final colour = i == asked || on ? gold : ink;
+      final m = step?.markOf(i);
+      if (m == null) return TextSpan(text: text, style: base(colour));
+      // The rule letter: wheel colour; recited → lighter, with a halo.
+      final letter = on ? Color.lerp(rule, Colors.white, 0.35)! : rule;
+      return TextSpan(
+        style: base(colour),
+        children: [
+          TextSpan(text: text.substring(0, m.from)),
+          TextSpan(
+            text: text.substring(m.from, m.to),
+            style: TextStyle(
+              color: letter,
+              shadows: on
+                  ? [
+                      Shadow(color: rule, blurRadius: u * 1.2),
+                      Shadow(
+                        color: rule.withValues(alpha: 0.8),
+                        blurRadius: u * 2.6,
+                      ),
+                    ]
+                  : (p.t > 0.5 ? null : titleShadows(u)),
+            ),
+          ),
+          TextSpan(text: text.substring(m.to)),
+        ],
+      );
+    }
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       textDirection: TextDirection.rtl,
@@ -899,32 +935,26 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             padding: EdgeInsets.symmetric(horizontal: u * 1.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(u * 1.6),
-              // The light takes the rule's colour on a rule word.
-              color: glow(i).withValues(
+              color: RateelColors.listenWord.withValues(
                 alpha: i == lit ? 0.16 * (1 - p.t) + 0.2 * p.t : 0,
               ),
               border: Border.all(
-                color: glow(i).withValues(alpha: i == lit ? 0.5 : 0),
+                color: RateelColors.listenWord.withValues(
+                  alpha: i == lit ? 0.45 : 0,
+                ),
                 width: math.max(1, u * 0.18),
               ),
               boxShadow: [
                 if (i == lit && p.t < 0.5)
                   BoxShadow(
-                    color: glow(i).withValues(alpha: 0.28),
+                    color: RateelColors.listenWord.withValues(alpha: 0.25),
                     blurRadius: u * 1.6,
                   ),
               ],
             ),
-            child: Text(
-              w.text,
+            child: Text.rich(
+              word(i, w.text),
               textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontFamily: 'AmiriQuran',
-                fontSize: u * ListenMetrics.verseSize,
-                height: 1.3,
-                color: colour(i),
-                shadows: p.t > 0.5 ? null : titleShadows(u),
-              ),
             ),
           ),
         ],

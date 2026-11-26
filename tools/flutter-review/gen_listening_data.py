@@ -35,12 +35,26 @@ QUIZ = [  # ayah, word index, word as asked, options (RTL order), correct, expla
 ]
 # Rule lesson (owner, 2026-11-26): one rule, several ayat, the rule's words in the tajweed wheel colour.
 NOTE = 'نون مشددة: غنة بمقدار حركتين.'
-STEPS = [  # ayah, rule word indexes, note
+STEPS = [  # ayah, rule word indexes, note; the rule is on the letter(s) found by rule_letters()
     ('114001', [3], f'«النَّاس»: {NOTE}'), ('114002', [1], f'«النَّاس»: {NOTE}'), ('114003', [1], f'«النَّاس»: {NOTE}'),
     ('114004', [3], f'«الخَنَّاس»: {NOTE}'), ('114005', [4], f'«النَّاس»: {NOTE}'),
     ('114006', [1, 2], 'في «الجِنَّة» و«النَّاس» نون مشددة: غنة بمقدار حركتين.'),
     ('108001', [0], f'«إِنَّا»: {NOTE}'),
 ]
+MARKS = set(range(0x064B, 0x0660)) | {0x0670} | set(range(0x06D6, 0x06EE))
+
+
+def rule_letters(word):
+    """Ghunna of a doubled nun / meem (owner, 2026-11-26: colour the letter, not the word): the letter carrying the
+    shadda, with its marks, as [from, to) in UTF-16 code units (= Dart string indexes; Arabic is in the BMP)."""
+    for i, ch in enumerate(word):
+        if ch in 'نم':
+            j = i + 1
+            while j < len(word) and ord(word[j]) in MARKS:
+                j += 1
+            if '\u0651' in word[i + 1:j]:
+                return [i, j]
+    raise ValueError(word)
 RULE_QUIZ = [QUIZ[0], QUIZ[4], QUIZ[1]]
 
 
@@ -76,7 +90,8 @@ def write(lesson, steps, questions, title):
     data = {'id': lesson, 'title': title, 'reciter': 'الحصري', 'pointsPerQuestion': 10,
             'rule': {'name': 'الغنة', 'short': 'غنة', 'colour': 'green'} if steps else None,
             'ayat': [ayah(k) for k in keys],
-            'steps': [{'ayah': a, 'words': w, 'note': n} for a, w, n in steps],
+            'steps': [{'ayah': a, 'marks': [{'word': i, 'letters': rule_letters(AYAT[a][1].split(' ')[i])} for i in w],
+                       'note': n} for a, w, n in steps],
             'questions': quiz(questions)}
     with open(f'app_flutter/assets/data/listening/{lesson}.json', 'w', encoding='utf-8') as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1)
