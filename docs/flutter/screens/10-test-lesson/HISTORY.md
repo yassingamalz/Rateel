@@ -114,3 +114,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   #B9452F / #C27A1C / #C9962E / #D9A21E. Arc gradient from a darker tone to the colour, glow and % text in the colour.
 - Review aid `?testRight=n` (results with the first n answers right); sheet `score-ring-colours-v9.png` (35, 55, 65,
   75, 95, 100% dark; 55, 75, 100% light; partial answers count half).
+
+- APK 1.0.424 (v9).
