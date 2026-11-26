@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "status": "proposed_not_runtime",
+  "source": {
+    "ref": "docs/knowledge-base",
+    "commit": "26848329ee3e16178a7a64b6e65fb265c0e230b6",
+    "path": "docs/knowledge-base/06-curriculum.md",
+    "scheme": "A"
+  },
+  "notes": [
+    "Topic IDs are editorial, not current app course/unit IDs.",
+    "Coverage is not yet verified against all 22 chapter PDFs.",
+    "Reconcile scheme B (meeting letters and lam al-tarif) and scheme C (12 app courses / 29 merged units) before approving the curriculum."
+  ],
+  "units": [
+    {
+      "id": "U0",
+      "titleAr": "المقدمات",
+      "titleEn": "Foundations",
+      "topics": [
+        {
+          "id": "U0.L1",
+          "titleAr": "القرآن الكريم — تعريفه وفضله",
+          "titleEn": "The Holy Quran: definition & virtue",
+          "status": "not_audited"
+        },
+        {
+          "id": "U0.L2",
+          "titleAr": "ما هو علم التجويد؟",
+          "titleEn": "What is the science of Tajweed?",
+          "status": "prototype_exists"
+        },
+        {
+          "id": "U0.L3",
+          "titleAr": "حكم التجويد وفضله",
+          "titleEn": "Ruling & merit of Tajweed",
+          "status": "not_audited"
+        },
+        {
+          "id": "U0.L4",
+          "titleAr": "التعوّذ",
+          "titleEn": "The Isti'ādha",
+          "status": "not_audited"
+        },
+        {
+          "id": "U0.L5",
+          "titleAr": "البسملة وأحكامها بين السورتين",
+          "titleEn": "The Basmala & its rules between surahs",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U1",
+      "titleAr": "الحروف وجهاز النطق",
+      "titleEn": "Letters & the Speech Apparatus",
+      "topics": [
+        {
+          "id": "U1.L1",
+          "titleAr": "الحروف العربية (الهجائية)",
+          "titleEn": "The Arabic letters",
+          "status": "not_audited"
+        },
+        {
+          "id": "U1.L2",
+          "titleAr": "أعضاء النطق",
+          "titleEn": "Organs of articulation",
+          "status": "not_audited"
+        },
+        {
+          "id": "U1.L3",
+          "titleAr": "كيفية حدوث الصوت والحرف",
+          "titleEn": "How sound & letters are produced",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U2",
+      "titleAr": "مخارج الحروف",
+      "titleEn": "Articulation Points",
+      "topics": [
+        {
+          "id": "U2.L1",
+          "titleAr": "المخارج العامة الخمسة (نظرة عامة)",
+          "titleEn": "The 5 general makhārij (overview)",
+          "status": "not_audited"
+        },
+        {
+          "id": "U2.L2",
+          "titleAr": "مخرج الجوف (حروف المد)",
+          "titleEn": "Al-Jawf: madd letters",
+          "status": "not_audited"
+        },
+        {
+          "id": "U2.L3",
+          "titleAr": "مخرج الحلق (٣ مخارج / ٦ حروف)",
+          "titleEn": "Al-Halq: 3 points",
+          "status": "not_audited"
+        },
+        {
+          "id": "U2.L4",
+          "titleAr": "مخرج اللسان (١٠ مخارج)",
+          "titleEn": "Al-Lisān: 10 points",
+          "status": "not_audited"
+        },
+        {
+          "id": "U2.L5",
+          "titleAr": "مخرج الشفتين",
+          "titleEn": "Ash-Shafatān",
+          "status": "not_audited"
+        },
+        {
+          "id": "U2.L6",
+          "titleAr": "مخرج الخيشوم (الغنة)",
+          "titleEn": "Al-Khayshūm",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U3",
+      "titleAr": "صفات الحروف",
+      "titleEn": "Characteristics (Sifāt)",
+      "topics": [
+        {
+          "id": "U3.L1",
+          "titleAr": "الصفات ذات الضد (نظرة عامة)",
+          "titleEn": "Sifāt with opposites (overview)",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L2",
+          "titleAr": "الهمس والجهر",
+          "titleEn": "Hams & Jahr",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L3",
+          "titleAr": "الشدة والتوسط والرخاوة",
+          "titleEn": "Shidda, Tawassut & Rakhāwa",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L4",
+          "titleAr": "الاستعلاء والاستفال (التفخيم والترقيق)",
+          "titleEn": "Isti'lā' & Istifāl",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L5",
+          "titleAr": "الإطباق والانفتاح",
+          "titleEn": "Itbāq & Infitāh",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L6",
+          "titleAr": "الإذلاق والإصمات",
+          "titleEn": "Idhlāq & Ismāt",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L7",
+          "titleAr": "الصفات التي لا ضد لها (نظرة عامة)",
+          "titleEn": "Sifāt without opposites (overview)",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L8",
+          "titleAr": "الصفير، القلقلة، اللين",
+          "titleEn": "Safīr, Qalqala, Līn",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L9",
+          "titleAr": "الانحراف، التكرير، التفشي، الاستطالة",
+          "titleEn": "Inhirāf, Takrīr, Tafashshī, Istitāla",
+          "status": "not_audited"
+        },
+        {
+          "id": "U3.L10",
+          "titleAr": "الغنّة",
+          "titleEn": "Al-Ghunna",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U4",
+      "titleAr": "أبرز الأخطاء في النطق",
+      "titleEn": "Common Pronunciation Errors",
+      "topics": [
+        {
+          "id": "U4.L1",
+          "titleAr": "أخطاء نطق حروف الهجاء",
+          "titleEn": "Common errors in pronouncing letters",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U5",
+      "titleAr": "أحكام النون والميم",
+      "titleEn": "Rules of Noon & Meem ⭐",
+      "topics": [
+        {
+          "id": "U5.L1",
+          "titleAr": "النون والميم المشدّدتان (الغنّة)",
+          "titleEn": "Noon & Meem Mushaddad",
+          "status": "prototype_exists"
+        },
+        {
+          "id": "U5.L2",
+          "titleAr": "أحكام النون الساكنة والتنوين (نظرة عامة)",
+          "titleEn": "Noon Sākina & Tanwīn (overview)",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L3",
+          "titleAr": "الإظهار الحلقي",
+          "titleEn": "Al-Izhār al-Halqī",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L4",
+          "titleAr": "الإدغام بغنّة",
+          "titleEn": "Idghām with ghunna",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L5",
+          "titleAr": "الإدغام بغير غنّة",
+          "titleEn": "Idghām without ghunna",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L6",
+          "titleAr": "الإقلاب",
+          "titleEn": "Al-Iqlāb",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L7",
+          "titleAr": "الإخفاء الحقيقي",
+          "titleEn": "Al-Ikhfā' al-Haqīqī",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L8",
+          "titleAr": "أحكام الميم الساكنة (نظرة عامة)",
+          "titleEn": "Meem Sākina (overview)",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L9",
+          "titleAr": "الإخفاء الشفوي",
+          "titleEn": "Ikhfā' Shafawī",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L10",
+          "titleAr": "الإدغام الشفوي (الصغير)",
+          "titleEn": "Idghām Shafawī",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L11",
+          "titleAr": "الإظهار الشفوي",
+          "titleEn": "Izhār Shafawī",
+          "status": "not_audited"
+        },
+        {
+          "id": "U5.L12",
+          "titleAr": "الحرفان الملتقيان",
+          "titleEn": "The two meeting letters",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U6",
+      "titleAr": "المدود",
+      "titleEn": "Madd",
+      "topics": [
+        {
+          "id": "U6.L1",
+          "titleAr": "المد الطبيعي (الأصلي)",
+          "titleEn": "Natural madd",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L2",
+          "titleAr": "المد المتصل",
+          "titleEn": "Madd Muttasil",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L3",
+          "titleAr": "المد المنفصل",
+          "titleEn": "Madd Munfasil",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L4",
+          "titleAr": "المد العارض للسكون",
+          "titleEn": "Madd 'Ārid lis-Sukūn",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L5",
+          "titleAr": "المد اللازم (الكلمي والحرفي)",
+          "titleEn": "Madd Lāzim",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L6",
+          "titleAr": "مد البدل",
+          "titleEn": "Madd al-Badal",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L7",
+          "titleAr": "مد اللين",
+          "titleEn": "Madd al-Līn",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L8",
+          "titleAr": "مد الصلة (الكبرى والصغرى)",
+          "titleEn": "Madd as-Sila",
+          "status": "not_audited"
+        },
+        {
+          "id": "U6.L9",
+          "titleAr": "مد العوض",
+          "titleEn": "Madd al-'Iwad",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U7",
+      "titleAr": "الحركات والساكنان",
+      "titleEn": "Vowels & Meeting Sukoons",
+      "topics": [
+        {
+          "id": "U7.L1",
+          "titleAr": "إتمام الحركات",
+          "titleEn": "Completing the vowels",
+          "status": "not_audited"
+        },
+        {
+          "id": "U7.L2",
+          "titleAr": "الساكنان الملتقيان في كلمة",
+          "titleEn": "Two sukoons in one word",
+          "status": "not_audited"
+        },
+        {
+          "id": "U7.L3",
+          "titleAr": "الساكنان الملتقيان في كلمتين",
+          "titleEn": "Two sukoons across words",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U8",
+      "titleAr": "أبحاث متفرقة",
+      "titleEn": "Special Topics",
+      "topics": [
+        {
+          "id": "U8.L1",
+          "titleAr": "تسهيل الهمزة",
+          "titleEn": "Tasheel of the hamza",
+          "status": "not_audited"
+        },
+        {
+          "id": "U8.L2",
+          "titleAr": "الإمالة",
+          "titleEn": "Al-Imāla",
+          "status": "not_audited"
+        },
+        {
+          "id": "U8.L3",
+          "titleAr": "النبر في تلاوة القرآن",
+          "titleEn": "An-Nabr",
+          "status": "not_audited"
+        },
+        {
+          "id": "U8.L4",
+          "titleAr": "كلمات لها وضع خاص في رواية حفص",
+          "titleEn": "Special-case words in Hafs",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U9",
+      "titleAr": "الوقف والابتداء",
+      "titleEn": "Stopping & Starting",
+      "topics": [
+        {
+          "id": "U9.L1",
+          "titleAr": "الوقف — تعريفه وأنواعه",
+          "titleEn": "Al-Waqf: definition & types",
+          "status": "not_audited"
+        },
+        {
+          "id": "U9.L2",
+          "titleAr": "علامات الوقف في المصحف",
+          "titleEn": "Waqf symbols in the Mushaf",
+          "status": "not_audited"
+        },
+        {
+          "id": "U9.L3",
+          "titleAr": "الابتداء",
+          "titleEn": "Al-Ibtidā'",
+          "status": "not_audited"
+        },
+        {
+          "id": "U9.L4",
+          "titleAr": "الروم والإشمام",
+          "titleEn": "Ar-Rawm & Al-Ishmām",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U10",
+      "titleAr": "الهمزات والألفات",
+      "titleEn": "Hamza & Alif",
+      "topics": [
+        {
+          "id": "U10.L1",
+          "titleAr": "الألفات السبعة",
+          "titleEn": "The seven alifs",
+          "status": "not_audited"
+        },
+        {
+          "id": "U10.L2",
+          "titleAr": "همزة الوصل",
+          "titleEn": "Hamzat al-Wasl",
+          "status": "not_audited"
+        },
+        {
+          "id": "U10.L3",
+          "titleAr": "همزة القطع",
+          "titleEn": "Hamzat al-Qat'",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U11",
+      "titleAr": "رسم المصحف",
+      "titleEn": "The Mushaf Script",
+      "topics": [
+        {
+          "id": "U11.L1",
+          "titleAr": "مراحل تطور كتابة وضبط المصحف",
+          "titleEn": "Stages of Mushaf writing",
+          "status": "not_audited"
+        },
+        {
+          "id": "U11.L2",
+          "titleAr": "الفرق بين الرسم العثماني والإملائي الحديث",
+          "titleEn": "Uthmani vs. modern script",
+          "status": "not_audited"
+        }
+      ]
+    },
+    {
+      "id": "U12",
+      "titleAr": "حفظ القرآن الكريم",
+      "titleEn": "Memorizing the Quran",
+      "topics": [
+        {
+          "id": "U12.L1",
+          "titleAr": "تعريف حفظ القرآن الكريم",
+          "titleEn": "What memorization means",
+          "status": "not_audited"
+        },
+        {
+          "id": "U12.L2",
+          "titleAr": "أدوات حفظ القرآن الكريم",
+          "titleEn": "Tools for memorization",
+          "status": "not_audited"
+        },
+        {
+          "id": "U12.L3",
+          "titleAr": "أركان حفظ القرآن الكريم",
+          "titleEn": "Pillars of memorization",
+          "status": "not_audited"
+        },
+        {
+          "id": "U12.L4",
+          "titleAr": "الأمور المعينة على الحفظ",
+          "titleEn": "Aids to memorization",
+          "status": "not_audited"
+        }
+      ]
+    }
+  ]
+}
