@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U1.L1",
+      "titleAr": "الحروف العربية",
+      "source": {
+        "chapter": 4,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التفريق بين اسم الحرف وصوته",
+      "explanationAr": "الحروف الهجائية وحدات صوتية، ويختلف اسم الحرف عن صوته في الكلمة.",
+      "examples": [
+        {
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الحروف العربية."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الحروف الهجائية وحدات صوتية، ويختلف اسم الحرف عن صوته في الكلمة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "التفريق بين اسم الحرف وصوته"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "انطق بَ بِ بُ ثم قارنها باسم الحرف باء.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U1.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما أول حرف منطوق في كلمة بِسْمِ عند الابتداء بها؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الباء"
+                },
+                {
+                  "id": "2",
+                  "text": "السين"
+                },
+                {
+                  "id": "3",
+                  "text": "الميم"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الحروف الهجائية وحدات صوتية، ويختلف اسم الحرف عن صوته في الكلمة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U1.L2",
+      "titleAr": "أعضاء النطق",
+      "source": {
+        "chapter": 5,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تحديد أعضاء النطق الأساسية",
+      "explanationAr": "تتعاون أعضاء النطق والتنفس لإنتاج الأصوات؛ ومنها الحلق واللسان والشفتان والخيشوم.",
+      "examples": [
+        {
+          "verseRef": "114:6",
+          "excerptAr": "النَّاسِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى أعضاء النطق."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تتعاون أعضاء النطق والتنفس لإنتاج الأصوات؛ ومنها الحلق واللسان والشفتان والخيشوم."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "114:6"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تحديد أعضاء النطق الأساسية"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "لاحظ حركة الشفتين عند نطق بَ ومَ.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U1.L2.Q1",
+              "type": "singleChoice",
+              "text": "أي عضو يشارك مباشرة في نطق الباء؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الشفتان"
+                },
+                {
+                  "id": "2",
+                  "text": "طرف الأنف"
+                },
+                {
+                  "id": "3",
+                  "text": "الأسنان وحدها"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تتعاون أعضاء النطق والتنفس لإنتاج الأصوات؛ ومنها الحلق واللسان والشفتان والخيشوم."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U1.L3",
+      "titleAr": "حدوث الصوت والحرف",
+      "source": {
+        "chapter": 5,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "ربط حركة الهواء بوضع عضو النطق",
+      "explanationAr": "ينشأ الصوت من حركة الهواء، وتتشكل الأصوات بحسب وضع أعضاء النطق وعملها.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى حدوث الصوت والحرف."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "ينشأ الصوت من حركة الهواء، وتتشكل الأصوات بحسب وضع أعضاء النطق وعملها."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "ربط حركة الهواء بوضع عضو النطق"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن سْ وبْ في تمرين صوتي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U1.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يغيّر هيئة الصوت عند النطق بالحروف؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "وضع أعضاء النطق وعملها"
+                },
+                {
+                  "id": "2",
+                  "text": "شكل الكتابة وحده"
+                },
+                {
+                  "id": "3",
+                  "text": "لون الحرف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "ينشأ الصوت من حركة الهواء، وتتشكل الأصوات بحسب وضع أعضاء النطق وعملها."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
