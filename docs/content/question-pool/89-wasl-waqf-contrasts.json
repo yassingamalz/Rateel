@@ -1,0 +1,1137 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Each comparison concerns the named target only, not the entire word. Stopping inside a connected phrase is a hypothetical pedagogical contrast, not a recommended recitation stop. Use teacher-approved continuous contexts for wasl; apply pure sukun where relevant. Do not treat different descriptions of same rule as distinct; review classification and ambiguous stop cases.",
+  "examples": [
+    {
+      "id": "POOL89.E1",
+      "topicId": "U6.L4",
+      "verseRef": "1:2",
+      "excerptAr": "الْعَالَمِينَ",
+      "focus": "الياء قبل النون",
+      "waslAnswer": "مد طبيعي",
+      "waqfAnswer": "مد عارض للسكون",
+      "feedbackAr": "تسكن النون عند الوقف بالسكون المحض، فينشأ سبب المد العارض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E2",
+      "topicId": "U6.L4",
+      "verseRef": "1:3",
+      "excerptAr": "الرَّحِيمِ",
+      "focus": "الياء قبل الميم",
+      "waslAnswer": "مد طبيعي",
+      "waqfAnswer": "مد عارض للسكون",
+      "feedbackAr": "تسكن الميم عند الوقف بالسكون المحض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E3",
+      "topicId": "U6.L4",
+      "verseRef": "114:1",
+      "excerptAr": "النَّاسِ",
+      "focus": "الألف قبل السين",
+      "waslAnswer": "مد طبيعي",
+      "waqfAnswer": "مد عارض للسكون",
+      "feedbackAr": "تسكن السين عند الوقف بالسكون المحض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E4",
+      "topicId": "U6.L4",
+      "verseRef": "105:4",
+      "excerptAr": "سِجِّيلٍ",
+      "focus": "الياء قبل اللام",
+      "waslAnswer": "مد طبيعي",
+      "waqfAnswer": "مد عارض للسكون",
+      "feedbackAr": "تسكن اللام عند الوقف ويزول التنوين.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E5",
+      "topicId": "U6.L3",
+      "verseRef": "108:1",
+      "excerptAr": "إِنَّا أَعْطَيْنَاكَ",
+      "focus": "ألف إنا",
+      "waslAnswer": "مد منفصل",
+      "waqfAnswer": "مد طبيعي",
+      "feedbackAr": "يزول سبب الهمزة التالية عند الوقف التعليمي على إنا.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E6",
+      "topicId": "U6.L3",
+      "verseRef": "97:1",
+      "excerptAr": "إِنَّا أَنْزَلْنَاهُ",
+      "focus": "ألف إنا",
+      "waslAnswer": "مد منفصل",
+      "waqfAnswer": "مد طبيعي",
+      "feedbackAr": "لا تتصل الألف بالهمزة التالية عند الوقف على الكلمة الأولى.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E7",
+      "topicId": "U6.L3",
+      "verseRef": "51:21",
+      "excerptAr": "وَفِي أَنْفُسِكُمْ",
+      "focus": "ياء في",
+      "waslAnswer": "مد منفصل",
+      "waqfAnswer": "مد طبيعي",
+      "feedbackAr": "يزول سبب المد المنفصل عند الوقف التعليمي على في.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E8",
+      "topicId": "U6.L5",
+      "verseRef": "69:1",
+      "excerptAr": "الْحَاقَّةُ",
+      "focus": "الألف قبل القاف المشددة",
+      "waslAnswer": "مد لازم كلمي مثقل",
+      "waqfAnswer": "مد لازم كلمي مثقل",
+      "feedbackAr": "سبب المد في القاف المشددة أصلي، لا يتغير بالوقف.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E9",
+      "topicId": "U6.L5",
+      "verseRef": "1:7",
+      "excerptAr": "الضَّالِّينَ",
+      "focus": "الألف قبل اللام المشددة",
+      "waslAnswer": "مد لازم كلمي مثقل",
+      "waqfAnswer": "مد لازم كلمي مثقل",
+      "feedbackAr": "السكون الأصلي في اللام المشددة باق في الوصل والوقف.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E10",
+      "topicId": "U6.L7",
+      "verseRef": "106:4",
+      "excerptAr": "خَوْفٍ",
+      "focus": "واو اللين",
+      "waslAnswer": "حرف لين دون مد عارض",
+      "waqfAnswer": "مد لين عارض للسكون",
+      "feedbackAr": "تسكن الفاء عند الوقف بالسكون المحض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E11",
+      "topicId": "U6.L7",
+      "verseRef": "106:3",
+      "excerptAr": "الْبَيْتِ",
+      "focus": "ياء اللين",
+      "waslAnswer": "حرف لين دون مد عارض",
+      "waqfAnswer": "مد لين عارض للسكون",
+      "feedbackAr": "تسكن التاء عند الوقف بالسكون المحض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E12",
+      "topicId": "U6.L7",
+      "verseRef": "106:1",
+      "excerptAr": "قُرَيْشٍ",
+      "focus": "ياء اللين",
+      "waslAnswer": "حرف لين دون مد عارض",
+      "waqfAnswer": "مد لين عارض للسكون",
+      "feedbackAr": "تسكن الشين عند الوقف بالسكون المحض.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E13",
+      "topicId": "U6.L8",
+      "verseRef": "104:3",
+      "excerptAr": "مَالَهُ أَخْلَدَهُ",
+      "focus": "هاء ماله",
+      "waslAnswer": "صلة كبرى",
+      "waqfAnswer": "لا صلة",
+      "feedbackAr": "الصلة مشروطة بالوصل، والوقف هنا تعليمي تحت إشراف المعلم.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E14",
+      "topicId": "U6.L8",
+      "verseRef": "112:4",
+      "excerptAr": "لَهُ كُفُوًا",
+      "focus": "هاء له",
+      "waslAnswer": "صلة صغرى",
+      "waqfAnswer": "لا صلة",
+      "feedbackAr": "تسقط الصلة عند الوقف على الهاء.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E15",
+      "topicId": "U6.L9",
+      "verseRef": "110:3",
+      "excerptAr": "تَوَّابًا",
+      "focus": "تنوين الفتح في آخر الكلمة",
+      "waslAnswer": "تنوين ملفوظ عند الوصل",
+      "waqfAnswer": "مد عوض",
+      "feedbackAr": "يعوض عن التنوين بالألف عند الوقف المعتاد.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E16",
+      "topicId": "U6.L9",
+      "verseRef": "78:14",
+      "excerptAr": "ثَجَّاجًا",
+      "focus": "تنوين الفتح",
+      "waslAnswer": "تنوين ملفوظ عند الوصل",
+      "waqfAnswer": "مد عوض",
+      "feedbackAr": "يثبت ألف العوض في الوقف المعتاد.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E17",
+      "topicId": "U6.L9",
+      "verseRef": "78:15",
+      "excerptAr": "نَبَاتًا",
+      "focus": "تنوين الفتح",
+      "waslAnswer": "تنوين ملفوظ عند الوصل",
+      "waqfAnswer": "مد عوض",
+      "feedbackAr": "يعوض عن تنوين الفتح بالألف.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E18",
+      "topicId": "U6.L9",
+      "verseRef": "4:40",
+      "excerptAr": "حَسَنَةً",
+      "focus": "التاء المربوطة",
+      "waslAnswer": "تاء ملفوظة مع التنوين",
+      "waqfAnswer": "هاء ساكنة دون عوض",
+      "feedbackAr": "توقف التاء المربوطة هاء ساكنة.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E19",
+      "topicId": "U5.L7",
+      "verseRef": "113:2",
+      "excerptAr": "مِنْ شَرِّ",
+      "focus": "نون من",
+      "waslAnswer": "إخفاء حقيقي",
+      "waqfAnswer": "نون ساكنة مظهرة عند الوقف على من",
+      "feedbackAr": "الحكم بين الكلمتين مشروط بالوصل.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E20",
+      "topicId": "U5.L5",
+      "verseRef": "112:4",
+      "excerptAr": "يَكُنْ لَهُ",
+      "focus": "نون يكن",
+      "waslAnswer": "إدغام بغير غنة",
+      "waqfAnswer": "نون ساكنة مظهرة عند الوقف على يكن",
+      "feedbackAr": "لا إدغام في الحرف التالي إذا وقف على الكلمة الأولى.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E21",
+      "topicId": "U5.L10",
+      "verseRef": "2:29",
+      "excerptAr": "لَكُمْ مَا",
+      "focus": "ميم لكم",
+      "waslAnswer": "إدغام شفوي",
+      "waqfAnswer": "ميم ساكنة مظهرة عند الوقف على لكم",
+      "feedbackAr": "لا تلتقي الميمان صوتيًا عند الوقف على الأولى.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E22",
+      "topicId": "U5.L9",
+      "verseRef": "105:4",
+      "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+      "focus": "ميم ترميهم",
+      "waslAnswer": "إخفاء شفوي",
+      "waqfAnswer": "ميم ساكنة مظهرة عند الوقف على ترميهم",
+      "feedbackAr": "الإخفاء قبل الباء مشروط بالوصل.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E23",
+      "topicId": "U3.L8",
+      "verseRef": "112:1",
+      "excerptAr": "أَحَدٌ",
+      "focus": "الدال",
+      "waslAnswer": "لا قلقلة في الدال المتحركة",
+      "waqfAnswer": "قلقلة",
+      "feedbackAr": "تسكن الدال عند الوقف.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E24",
+      "topicId": "U3.L8",
+      "verseRef": "113:1",
+      "excerptAr": "الْفَلَقِ",
+      "focus": "القاف",
+      "waslAnswer": "لا قلقلة في القاف المتحركة",
+      "waqfAnswer": "قلقلة",
+      "feedbackAr": "تسكن القاف عند الوقف.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    },
+    {
+      "id": "POOL89.E25",
+      "topicId": "U3.L8",
+      "verseRef": "112:3",
+      "excerptAr": "يَلِدْ",
+      "focus": "الدال الساكنة",
+      "waslAnswer": "قلقلة",
+      "waqfAnswer": "قلقلة",
+      "feedbackAr": "الدال ساكنة في أصل الكلمة. يختلف سياق الأداء ولا يزول أصل القلقلة.",
+      "verification": "pending_uthmani_reference_context_and_valid_stopping_point"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U6.L4.POOL89.Q1A",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E1",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن النون عند الوقف بالسكون المحض، فينشأ سبب المد العارض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q1B",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E1",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن النون عند الوقف بالسكون المحض، فينشأ سبب المد العارض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q2A",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E2",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن الميم عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q2B",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E2",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن الميم عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q3A",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E3",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن السين عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E3",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q3B",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E3",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن السين عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E3",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q4A",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E4",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن اللام عند الوقف ويزول التنوين.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL89.Q4B",
+      "topicId": "U6.L4",
+      "exampleId": "POOL89.E4",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن اللام عند الوقف ويزول التنوين.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q5A",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E5",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "يزول سبب الهمزة التالية عند الوقف التعليمي على إنا.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E5",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q5B",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E5",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد طبيعي"
+        }
+      ],
+      "feedbackAr": "يزول سبب الهمزة التالية عند الوقف التعليمي على إنا.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E5",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q6A",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E6",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "لا تتصل الألف بالهمزة التالية عند الوقف على الكلمة الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q6B",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E6",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد طبيعي"
+        }
+      ],
+      "feedbackAr": "لا تتصل الألف بالهمزة التالية عند الوقف على الكلمة الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q7A",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E7",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "يزول سبب المد المنفصل عند الوقف التعليمي على في.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL89.Q7B",
+      "topicId": "U6.L3",
+      "exampleId": "POOL89.E7",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد طبيعي"
+        }
+      ],
+      "feedbackAr": "يزول سبب المد المنفصل عند الوقف التعليمي على في.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL89.Q8A",
+      "topicId": "U6.L5",
+      "exampleId": "POOL89.E8",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": true,
+      "feedbackAr": "سبب المد في القاف المشددة أصلي، لا يتغير بالوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E8",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL89.Q9A",
+      "topicId": "U6.L5",
+      "exampleId": "POOL89.E9",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": true,
+      "feedbackAr": "السكون الأصلي في اللام المشددة باق في الوصل والوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E9",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q10A",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E10",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن الفاء عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E10",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q10B",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E10",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "حرف لين دون مد عارض"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد لين عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن الفاء عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E10",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q11A",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E11",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن التاء عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E11",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q11B",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E11",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "حرف لين دون مد عارض"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد لين عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن التاء عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E11",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q12A",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E12",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن الشين عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E12",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL89.Q12B",
+      "topicId": "U6.L7",
+      "exampleId": "POOL89.E12",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "حرف لين دون مد عارض"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد لين عارض للسكون"
+        }
+      ],
+      "feedbackAr": "تسكن الشين عند الوقف بالسكون المحض.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E12",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL89.Q13A",
+      "topicId": "U6.L8",
+      "exampleId": "POOL89.E13",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "الصلة مشروطة بالوصل، والوقف هنا تعليمي تحت إشراف المعلم.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E13",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL89.Q13B",
+      "topicId": "U6.L8",
+      "exampleId": "POOL89.E13",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "صلة كبرى"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "لا صلة"
+        }
+      ],
+      "feedbackAr": "الصلة مشروطة بالوصل، والوقف هنا تعليمي تحت إشراف المعلم.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E13",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL89.Q14A",
+      "topicId": "U6.L8",
+      "exampleId": "POOL89.E14",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسقط الصلة عند الوقف على الهاء.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E14",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL89.Q14B",
+      "topicId": "U6.L8",
+      "exampleId": "POOL89.E14",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "لا صلة"
+        }
+      ],
+      "feedbackAr": "تسقط الصلة عند الوقف على الهاء.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E14",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q15A",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E15",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "يعوض عن التنوين بالألف عند الوقف المعتاد.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E15",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q15B",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E15",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "تنوين ملفوظ عند الوصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عوض"
+        }
+      ],
+      "feedbackAr": "يعوض عن التنوين بالألف عند الوقف المعتاد.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E15",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q16A",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E16",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "يثبت ألف العوض في الوقف المعتاد.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E16",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q16B",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E16",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "تنوين ملفوظ عند الوصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عوض"
+        }
+      ],
+      "feedbackAr": "يثبت ألف العوض في الوقف المعتاد.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E16",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q17A",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E17",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "يعوض عن تنوين الفتح بالألف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E17",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q17B",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E17",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "تنوين ملفوظ عند الوصل"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "مد عوض"
+        }
+      ],
+      "feedbackAr": "يعوض عن تنوين الفتح بالألف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E17",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q18A",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E18",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "توقف التاء المربوطة هاء ساكنة.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E18",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL89.Q18B",
+      "topicId": "U6.L9",
+      "exampleId": "POOL89.E18",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "تاء ملفوظة مع التنوين"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "هاء ساكنة دون عوض"
+        }
+      ],
+      "feedbackAr": "توقف التاء المربوطة هاء ساكنة.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E18",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL89.Q19A",
+      "topicId": "U5.L7",
+      "exampleId": "POOL89.E19",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "الحكم بين الكلمتين مشروط بالوصل.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E19",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL89.Q19B",
+      "topicId": "U5.L7",
+      "exampleId": "POOL89.E19",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "إخفاء حقيقي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "نون ساكنة مظهرة عند الوقف على من"
+        }
+      ],
+      "feedbackAr": "الحكم بين الكلمتين مشروط بالوصل.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E19",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL89.Q20A",
+      "topicId": "U5.L5",
+      "exampleId": "POOL89.E20",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "لا إدغام في الحرف التالي إذا وقف على الكلمة الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E20",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL89.Q20B",
+      "topicId": "U5.L5",
+      "exampleId": "POOL89.E20",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "إدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "نون ساكنة مظهرة عند الوقف على يكن"
+        }
+      ],
+      "feedbackAr": "لا إدغام في الحرف التالي إذا وقف على الكلمة الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E20",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL89.Q21A",
+      "topicId": "U5.L10",
+      "exampleId": "POOL89.E21",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "لا تلتقي الميمان صوتيًا عند الوقف على الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E21",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL89.Q21B",
+      "topicId": "U5.L10",
+      "exampleId": "POOL89.E21",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "إدغام شفوي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "ميم ساكنة مظهرة عند الوقف على لكم"
+        }
+      ],
+      "feedbackAr": "لا تلتقي الميمان صوتيًا عند الوقف على الأولى.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E21",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL89.Q22A",
+      "topicId": "U5.L9",
+      "exampleId": "POOL89.E22",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "الإخفاء قبل الباء مشروط بالوصل.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E22",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL89.Q22B",
+      "topicId": "U5.L9",
+      "exampleId": "POOL89.E22",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "إخفاء شفوي"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "ميم ساكنة مظهرة عند الوقف على ترميهم"
+        }
+      ],
+      "feedbackAr": "الإخفاء قبل الباء مشروط بالوصل.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E22",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL89.Q23A",
+      "topicId": "U3.L8",
+      "exampleId": "POOL89.E23",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن الدال عند الوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E23",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL89.Q23B",
+      "topicId": "U3.L8",
+      "exampleId": "POOL89.E23",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "لا قلقلة في الدال المتحركة"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "قلقلة"
+        }
+      ],
+      "feedbackAr": "تسكن الدال عند الوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E23",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL89.Q24A",
+      "topicId": "U3.L8",
+      "exampleId": "POOL89.E24",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": false,
+      "feedbackAr": "تسكن القاف عند الوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E24",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL89.Q24B",
+      "topicId": "U3.L8",
+      "exampleId": "POOL89.E24",
+      "type": "matching",
+      "text": "صل حالة القراءة بالوجه المناسب في الموضع المحدد.",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوصل",
+          "right": "لا قلقلة في القاف المتحركة"
+        },
+        {
+          "id": "2",
+          "left": "الوقف",
+          "right": "قلقلة"
+        }
+      ],
+      "feedbackAr": "تسكن القاف عند الوقف.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E24",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL89.Q25A",
+      "topicId": "U3.L8",
+      "exampleId": "POOL89.E25",
+      "type": "trueFalse",
+      "text": "هل يبقى الحكم المحدد نفسه في الوصل والوقف بالسكون المحض على الكلمة المستهدفة؟",
+      "correctAnswer": true,
+      "feedbackAr": "الدال ساكنة في أصل الكلمة. يختلف سياق الأداء ولا يزول أصل القلقلة.",
+      "objective": "wasl_waqf_comparison",
+      "difficulty": "intermediate",
+      "variantFamily": "wasl-waqf-POOL89.E25",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}
