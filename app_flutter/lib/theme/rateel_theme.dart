@@ -339,6 +339,90 @@ class RateelColors {
   static const lessonLButton = Color(0xFFFBF2E4);
   static const lessonLRing = Color(0xFFEAB87C);
   static const lessonLInk = Color(0xFF341900);
+
+  // Screen 10, test lesson: sampled on screens/10-test-lesson/reference.webp
+  // and reference-answer.webp (conflicts T1–T6 in STYLE-CONFLICTS.md).
+  static const testTitleTop = Color(0xFFFBDD72); // gold title (T1)
+  static const testTitleBottom = Color(0xFFF0BE34);
+  static const testSubtitle = Color(0xFFC8DDC6);
+  static const testCardTop = Color(0xFF033428); // card, darker than 08 (T3)
+  static const testCardMid = Color(0xFF012B21);
+  static const testCardBottom = Color(0xFF00251E);
+  static const testNavFill = Color(0xFF104430); // question circles
+  static const testNavRim = Color(0xFF5C8F6F);
+  static const testNavText = Color(0xFFD5E4D2);
+  static const testNavOnTop = Color(0xFFF4C842); // current circle (gold)
+  static const testNavOnBottom = Color(0xFFDDA00A);
+  static const testRowFill = Color(0xFF0B3A2A); // option rows (T2)
+  static const testRowRimTop = Color(0xFF70A685);
+  static const testRowRimBottom = Color(0xFF498163);
+  static const testRadio = Color(0xFFBBD7BD);
+  static const testSelTop = Color(0xFF214E2D); // selected row (10b)
+  static const testSelBottom = Color(0xFF1A4728);
+  static const testSelRim = Color(0xFFFCE680);
+  static const testSelDot = Color(0xFFFDCE2D);
+  static const testPillTop = Color(0xFF2B481C); // «+10 نقطة», confirm button
+  static const testPillBottom = Color(0xFF00211A);
+  static const testPillRimTop = Color(0xFFF7EE9E);
+  static const testPillRimBottom = Color(0xFFFFD229);
+  static const testPillText = Color(0xFFF9EAAC);
+  // Feedback (owner's choice A, mockup feedback-a-*): jewel green / red (T5).
+  static const testOkTop = Color(0xFF1F6A45);
+  static const testOkBottom = Color(0xFF10503A);
+  static const testOkRim = Color(0xFF56C98C);
+  static const testOkDiscTop = Color(0xFF6EDDA0);
+  static const testOkDisc = Color(0xFF2A9A5E);
+  static const testOkText = Color(0xFF9BE8BE);
+  static const testKoTop = Color(0xFF5A2A22);
+  static const testKoBottom = Color(0xFF43201B);
+  static const testKoRim = Color(0xFFD0644F);
+  static const testKoDiscTop = Color(0xFFF08A72);
+  static const testKoDisc = Color(0xFFB4453A);
+  // Partly correct answer (owner, 2026-11-26): jewel amber.
+  static const testPartTop = Color(0xFF5A4A1A);
+  static const testPartBottom = Color(0xFF40351A);
+  static const testPartRim = Color(0xFFE2B243);
+  static const testPartDiscTop = Color(0xFFF7D47A);
+  static const testPartDisc = Color(0xFFC98E1E);
+  static const testLPartTop = Color(0xFFFBEFD0);
+  static const testLPartBottom = Color(0xFFF4E0AE);
+  static const testLPartRim = Color(0xFFC9962E);
+  // Light theme of the test (from the 08 light tokens).
+  static const testLRowFill = Color(0xFFF7EEE1);
+  static const testLRowRim = Color(0xFFDCC5AC);
+  static const testLRadio = Color(0xFFB99572);
+  static const testLSelTop = Color(0xFFF8E7C4);
+  static const testLSelBottom = Color(0xFFF3DDB2);
+  static const testLSelRim = Color(0xFFD9A441);
+  static const testLNavFill = Color(0xFFF6EDE0);
+  static const testLOkTop = Color(0xFFDDF1E2);
+  static const testLOkBottom = Color(0xFFCDEAD5);
+  static const testLOkRim = Color(0xFF3E9B66);
+  static const testLKoTop = Color(0xFFF7E0DA);
+  static const testLKoBottom = Color(0xFFF1D0C8);
+  static const testLKoRim = Color(0xFFC0503E);
+  // Light buttons filled, white text (owner, 2026-11-26).
+  static const testLGoldTop = Color(0xFFE6BB58);
+  static const testLGoldBottom = Color(0xFFC48F2C);
+  static const testLGoldRimTop = Color(0xFFF6DC98);
+  static const testLGoldRimBottom = Color(0xFFAE7A22);
+  static const testLGreenTop = Color(0xFF4FA676);
+  static const testLGreenBottom = Color(0xFF2E7A52);
+  static const testLGreenRimTop = Color(0xFF8DD2AA);
+  static const testLRedTop = Color(0xFFC95A47); // «إعادة الاختبار» when failed
+  static const testLRedBottom = Color(0xFF9C3527);
+  static const testLRedRimTop = Color(0xFFEE9C8A);
+  // Score colour of the results ring (owner, 2026-11-26).
+  static const testScoreRedLow = Color(0xFFB8402F);
+  static const testScoreRed = Color(0xFFD9583A);
+  static const testScoreAmber = Color(0xFFD98A24); // 51%: dark amber
+  static const testScoreAmberHigh = Color(0xFFDDA02A);
+  static const testScoreGold = Color(0xFFE9B83A); // pass mark
+  static const testScoreFull = Color(0xFFFFDC5E); // 100%: full bright gold
+  static const testLScoreRed = Color(0xFFB9452F);
+  static const testLScoreAmber = Color(0xFFC27A1C);
+  static const testLScoreGold = Color(0xFFC9962E);
+  static const testLScoreFull = Color(0xFFD9A21E);
   // Screen 12, daily challenges (sampled on the reference, 2026-11-25).
   static const chalRim = Color(0xFFFBC411); // tile rim core
   static const chalRimLight = Color(0xFFFFE98A); // open tile rim highlight

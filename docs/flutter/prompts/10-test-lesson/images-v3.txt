@@ -1,0 +1,28 @@
+Screen 10, test lesson: ChatGPT prompts v3 (2026-11-26), drawn icons to replace the placeholder Material icons.
+Attachments: attach/reference-10.png (style), attach/results-v8.jpg (trophy), attach/streak-v7.jpg (flame).
+
+=== T4  Gold trophy icon (attach: reference-10.png, results-v8.jpg)
+The first attached image is the exact style reference of a premium Islamic learning app (dark emerald and gold
+glass). In the second image a small gold trophy sits next to the word «أحسنت» in the results panel. Draw ONLY that
+trophy as a standalone icon in the same style as the gold ornaments of the first image (arch, crescent, star, badge):
+an elegant classic cup with two curved handles, a short stem and a stepped base, polished warm gold (#F7D06A highlights,
+#E2A51E mid-tones, #A8741A shadows), a soft light reflection on the cup, a thin darker gold outline, one small
+eight-pointed Islamic star engraved on the cup. Front view, perfectly symmetric, no text, no background scene, no glow
+outside the trophy. Centred on a plain flat magenta background (#FF00FF). Square image 1024×1024, the trophy filling
+about 80% of the height.
+
+=== T5  Flame medallion for the streak (attach: reference-10.png, streak-v7.jpg)
+The first attached image is the exact style reference of a premium Islamic learning app (dark emerald and gold
+glass). The second shows the banner «5 إجابات متتالية» that appears when several answers in a row are right, with a
+round orange flame badge on its right. Draw ONLY that badge as a standalone icon in the app's style: a round medallion
+with a thin polished gold rim, inside a warm glowing gradient (amber #FFC266 at the centre to deep orange #E0641E at the
+edge), and on it a stylised cream-white flame (#FFF6E0) with two or three elegant curling tongues, drawn with smooth
+calligraphic curves (not a cartoon flame), a soft inner light. Front view, no text, no background scene, no glow outside
+the rim. Centred on a plain flat magenta background (#FF00FF). Square image 1024×1024, the medallion filling about 85%
+of the width.
+
+=== T6  Small flame glyph (attach: streak-v7.jpg)
+From the same banner, draw ONLY one small flame glyph for the label «إجابات متتالية» (three of them are shown in a row):
+a single stylised flame with two curling tongues, flat warm orange (#FF9A3C) with a lighter yellow core (#FFD27A), smooth
+calligraphic curves, no outline, no shadow, no text. Centred on a plain flat magenta background (#FF00FF). Square image
+512×512, the flame filling about 85% of the height.

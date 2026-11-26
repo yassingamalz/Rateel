@@ -1,0 +1,45 @@
+Screen 10 / 10b, test lesson: ChatGPT prompts v2 (2026-11-25), after the owner's answers (replaces v1: T3 light dropped,
+the reading lesson light theme is the reference; T1 now polishes the chosen feedback mockup; T2 split by state).
+These are REFERENCES for the states without one; everything is drawn in code from them.
+Attachments: attach/reference-10.png, ../../screens/10-test-lesson/feedback-mockups/feedback-{a|b}-{ok|ko}.jpg,
+../../screens/10-test-lesson/angular/{completion,results,details}.jpg.
+
+=== T1  Feedback after «تأكيد الإجابة» (attach: reference-10.png + the two mockups of the chosen variant, ok and ko)
+The first attached image is the exact style reference of a quiz screen of a premium Islamic learning app (1842×854
+landscape, dark emerald and gold glass). The other two images are rough mockups of the same screen right after the
+answer is confirmed: one CORRECT, one WRONG. Redraw each mockup as a finished, polished screen in exactly the style of
+the reference, keeping every element at the same position and size as in the mockup (header, capsule, pause and moon
+buttons, numbered question circles, card with the gold rim, badge, question, option rows, feedback element and its
+button). Only refine the look: the green of the correct answer and the red of the wrong one must be deep, elegant jewel
+tones that sit well on the dark emerald and gold (never flat traffic-light colours), with fine rims, soft inner light and
+a gentle glow; check and ✕ medallions as small polished enamel discs with a thin light rim; texts exactly as in the
+mockups, Arabic right-to-left. Output two separate images, 1842×854 each: first the correct one, then the wrong one.
+
+=== T2  Results of the test (attach: reference-10.png, angular/results.jpg, angular/details.jpg)
+The first attached image is the exact style reference (1842×854 landscape, dark emerald and gold glass: background,
+header arch with mosque and crescent, title «اختبار أساسيات التجويد», capsule top left, round pause button top right,
+the big card with the gold rim and the lattice band). The second image is the old results screen of the same app
+(content and layout to keep), the third its question-detail popup. Draw the RESULTS screen inside the big card in the
+reference style, with the same content as the second image: a circular score ring on the right (thick gold arc on a dark
+green track, «60%» big in the centre) with the message «لم تتمكن من اجتياز الاختبار. يمكنك المحاولة مرة أخرى» and a small
+icon; three glass stat tiles «6 إجابات صحيحة» (green check), «4 إجابات خاطئة» (red ✕), «64 مجموع النقاط» (gold star);
+two columns: «تفاصيل الإجابات» (rows with the question number in a circle, the question text, green check or red ✕ and
+a thin green or red edge) and «توصيات للتحسين» (rows with a small gold lightbulb); at the bottom two buttons with the
+diamond lines of the reference: «إعادة الاختبار ↻» (glass, green rim) and «إنهاء الدرس ✓» (gold rim, glowing, as
+«تأكيد الإجابة»). Same fonts, golds, glass and rims as the reference; Arabic right-to-left; no other new ornaments.
+
+=== T3  End-of-test celebration (attach: reference-10.png, angular/completion.jpg)
+The first attached image is the exact style reference (1842×854 landscape, dark emerald and gold glass). The second is
+the old end-of-test popup of the same app (content to keep). Draw TWO versions in the reference style, side by side,
+each 1842×854, the quiz screen behind darkened by a dark green veil and a glass popup in the centre with a gold rim and
+glow: 1) PASSED: a gold graduation-cap medallion with soft light rays and a few gold sparkles, «مبروك», «لقد أكملت
+الاختبار بنجاح!», «90%» big in gold, a gold pill «⭐ 95 نقطة», a glass box with a small gold trophy and «أحسنت لقد تجاوزت
+درجة النجاح وأكملت هذا الاختبار بنجاح.», and a thin gold countdown line at the bottom; 2) NOT PASSED: a calmer version,
+the cap medallion without rays, «انتهى الاختبار», «لقد أكملت الاختبار», «60%» in muted gold, «⭐ 64 نقطة», a glass box
+with a ↻ icon and «حاول مرة أخرى للحصول على درجة أعلى أنت بحاجة إلى 70% للنجاح.». Same fonts, golds, glass and rims as
+the reference; Arabic right-to-left; no other new ornaments.
+
+=== Sounds (not ChatGPT): two short UI sounds, mp3 or ogg, under 1 s, royalty free (e.g. Pixabay or freesound CC0)
+S1 correct answer: a soft, warm, rising two-note chime (bell or marimba), gentle, not childish.
+S2 wrong answer: a soft low muted «thud» or a short descending two-note tone, never harsh or buzzer-like.
+(Optional S3 test passed: a short warm success flourish, 1–2 s.)
