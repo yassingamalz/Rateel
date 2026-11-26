@@ -1,6 +1,6 @@
 # Screen 23: settings (الإعدادات)
 
-Status: added by the owner (2026-11-25). Reference: **`screens/23-settings/23-impostazioni.webp`** (owner, generated with
+Status: **approved** (v1, APK 1.0.402, 2026-11-26), PR #50 (merge after 10 and 12). Added by the owner (2026-11-25). Reference: **`screens/23-settings/23-impostazioni.webp`** (owner, generated with
 `prompts/23-settings/reference-v1.txt` from the app screenshots 14, 11, 08-rules).
 
 ## Owner changes to the reference (2026-11-25), not defects
