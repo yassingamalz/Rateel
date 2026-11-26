@@ -11,6 +11,7 @@ import 'core/learn_flow.dart';
 import 'nav/nav_items.dart';
 import 'nav/side_nav.dart';
 import 'settings/settings_screen.dart';
+import 'profile/profile_screen.dart';
 import 'splash/startup_screen.dart';
 import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
@@ -175,6 +176,12 @@ class RateelApp extends StatelessWidget {
             ),
           ),
         ),
+        initialRoute:
+            const bool.fromEnvironment('RATEEL_PROFILE_PREVIEW') ||
+                Uri.base.queryParameters['profile'] == '1'
+            ? '/profile'
+            : '/',
+        routes: {'/profile': (_) => const ProfileScreen()},
         home: StartupScreen(initialize: initialize, child: const _Home()),
       ),
     );

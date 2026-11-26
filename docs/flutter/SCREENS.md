@@ -62,6 +62,6 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
 | 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13 |
 | 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type |
-| 29 | Profile (name, avatar, level, streak) | the leaderboard shows the user; no screen yet | may merge with 23 |
+| 29 | Profile (name, avatar, level, streak) | existing app artwork and leaderboard demo data | proposal on `flutter/29-profile`, awaiting review |
 | 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
 Not a new screen: unit / course completion celebrations, already inside 03/05.
