@@ -58,6 +58,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       the saved data too.
 - [ ] **Critic of 23**: the owner launches it himself when he wants.
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
+- [ ] **Settings gear badly positioned when not selected** (owner, 2026-11-26, after APK 1.0.428): in the side rail the
+      gear icon of screen 23 is not well placed when it is not the selected item. Check alignment against the other
+      rail items (selected and unselected states) and fix; related to the 7-item scroll above.
 
 ## Screen 22, listening lesson (reference on `master`)
 - [ ] Build after 10/10b, reusing its question and feedback widgets (`screens/22-listening-lesson.md`).
