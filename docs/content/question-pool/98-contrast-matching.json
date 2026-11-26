@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "id": "U5.L2.POOL98.Q1",
+      "topicId": "U5.L2",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "نْ قبل ه",
+          "right": "إظهار حلقي"
+        },
+        {
+          "id": "B",
+          "left": "نْ قبل ب",
+          "right": "إقلاب"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "نْ قبل ه: إظهار حلقي؛ نْ قبل ب: إقلاب.",
+      "objective": "أحكام النون",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U5.L2-0",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL98.Q2",
+      "topicId": "U5.L2",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "نْ قبل ش",
+          "right": "إخفاء حقيقي"
+        },
+        {
+          "id": "B",
+          "left": "نْ قبل ر",
+          "right": "إدغام بغير غنة"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "نْ قبل ش: إخفاء حقيقي؛ نْ قبل ر: إدغام بغير غنة.",
+      "objective": "أحكام النون",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U5.L2-1",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL98.Q3",
+      "topicId": "U5.L2",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "تنوين قبل ع",
+          "right": "إظهار حلقي"
+        },
+        {
+          "id": "B",
+          "left": "تنوين قبل م",
+          "right": "إدغام بغنة"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "تنوين قبل ع: إظهار حلقي؛ تنوين قبل م: إدغام بغنة.",
+      "objective": "أحكام التنوين",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U5.L2-2",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL98.Q4",
+      "topicId": "U5.L8",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "مْ قبل ب",
+          "right": "إخفاء شفوي"
+        },
+        {
+          "id": "B",
+          "left": "مْ قبل ف",
+          "right": "إظهار شفوي"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "مْ قبل ب: إخفاء شفوي؛ مْ قبل ف: إظهار شفوي.",
+      "objective": "أحكام الميم",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U5.L8-3",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL98.Q5",
+      "topicId": "U5.L8",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "مْ قبل م",
+          "right": "إدغام شفوي"
+        },
+        {
+          "id": "B",
+          "left": "مْ قبل و",
+          "right": "إظهار شفوي"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "مْ قبل م: إدغام شفوي؛ مْ قبل و: إظهار شفوي.",
+      "objective": "أحكام الميم",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U5.L8-4",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U6.L1.POOL98.Q6",
+      "topicId": "U6.L1",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "بُو",
+          "right": "واو مدية"
+        },
+        {
+          "id": "B",
+          "left": "بَوْ",
+          "right": "واو لين"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "بُو: واو مدية؛ بَوْ: واو لين.",
+      "objective": "حروف المد واللين",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U6.L1-5",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U6.L1.POOL98.Q7",
+      "topicId": "U6.L1",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "بِي",
+          "right": "ياء مدية"
+        },
+        {
+          "id": "B",
+          "left": "بَيْ",
+          "right": "ياء لين"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "بِي: ياء مدية؛ بَيْ: ياء لين.",
+      "objective": "حروف المد واللين",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U6.L1-6",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L3.POOL98.Q8",
+      "topicId": "U3.L3",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ق",
+          "right": "شدة"
+        },
+        {
+          "id": "B",
+          "left": "س",
+          "right": "رخاوة"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ق: شدة؛ س: رخاوة.",
+      "objective": "جريان الصوت",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U3.L3-7",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L3.POOL98.Q9",
+      "topicId": "U3.L3",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ل",
+          "right": "توسط"
+        },
+        {
+          "id": "B",
+          "left": "ب",
+          "right": "شدة"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ل: توسط؛ ب: شدة.",
+      "objective": "جريان الصوت",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U3.L3-8",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL98.Q10",
+      "topicId": "U3.L4",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ص",
+          "right": "استعلاء"
+        },
+        {
+          "id": "B",
+          "left": "س",
+          "right": "استفال"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ص: استعلاء؛ س: استفال.",
+      "objective": "الاستعلاء والاستفال",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U3.L4-9",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L5.POOL98.Q11",
+      "topicId": "U3.L5",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ط",
+          "right": "إطباق"
+        },
+        {
+          "id": "B",
+          "left": "ق",
+          "right": "انفتاح"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ط: إطباق؛ ق: انفتاح.",
+      "objective": "الإطباق والانفتاح",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U3.L5-10",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L3.POOL98.Q12",
+      "topicId": "U2.L3",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "هـ",
+          "right": "أقصى الحلق"
+        },
+        {
+          "id": "B",
+          "left": "ح",
+          "right": "وسط الحلق"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "هـ: أقصى الحلق؛ ح: وسط الحلق.",
+      "objective": "مخارج الحلق",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U2.L3-11",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L3.POOL98.Q13",
+      "topicId": "U2.L3",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ع",
+          "right": "وسط الحلق"
+        },
+        {
+          "id": "B",
+          "left": "خ",
+          "right": "أدنى الحلق"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ع: وسط الحلق؛ خ: أدنى الحلق.",
+      "objective": "مخارج الحلق",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U2.L3-12",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L5.POOL98.Q14",
+      "topicId": "U2.L5",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ف",
+          "right": "باطن الشفة السفلى مع الثنايا العليا"
+        },
+        {
+          "id": "B",
+          "left": "ب",
+          "right": "الشفتان"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ف: باطن الشفة السفلى مع الثنايا العليا؛ ب: الشفتان.",
+      "objective": "مخارج الشفتين",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-U2.L5-13",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL98.Q15",
+      "topicId": "X-LAM-01",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "أل قبل ج",
+          "right": "قمرية"
+        },
+        {
+          "id": "B",
+          "left": "أل قبل ش",
+          "right": "شمسية"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "أل قبل ج: قمرية؛ أل قبل ش: شمسية.",
+      "objective": "لام التعريف",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-X-LAM-01-14",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-IDG-01.POOL98.Q16",
+      "topicId": "X-IDG-01",
+      "type": "matching",
+      "text": "صل كل نموذج بالوصف الصحيح. النماذج تعليمية وليست نصًا قرآنيًا.",
+      "pairs": [
+        {
+          "id": "A",
+          "left": "ب مع ب",
+          "right": "تماثل"
+        },
+        {
+          "id": "B",
+          "left": "د مع ت",
+          "right": "تجانس"
+        }
+      ],
+      "context": "For cross-word rules assume wasl, applicable conditions and no transmitted exceptions; for letter attributes classify the letter itself.",
+      "feedbackAr": "ب مع ب: تماثل؛ د مع ت: تجانس.",
+      "objective": "علاقة الحرفين",
+      "difficulty": "intermediate",
+      "variantFamily": "compare-X-IDG-01-15",
+      "status": "editorial_draft"
+    }
+  ]
+}
