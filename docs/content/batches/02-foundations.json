@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U0.L1",
+      "titleAr": "القرآن الكريم",
+      "source": {
+        "chapter": 1,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز القرآن عن سائر الكلام",
+      "explanationAr": "القرآن كلام الله تعالى المنزل على محمد ﷺ، المتعبّد بتلاوته.",
+      "examples": [
+        {
+          "verseRef": "73:4",
+          "excerptAr": "وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى القرآن الكريم."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "القرآن كلام الله تعالى المنزل على محمد ﷺ، المتعبّد بتلاوته."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "73:4"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز القرآن عن سائر الكلام"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "اقرأ الآية مع مراعاة الترتيل.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U0.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما العمل الذي تشير إليه الآية؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "ترتيل القرآن"
+                },
+                {
+                  "id": "2",
+                  "text": "ترك القراءة"
+                },
+                {
+                  "id": "3",
+                  "text": "الإسراع دون مراعاة الحروف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "القرآن كلام الله تعالى المنزل على محمد ﷺ، المتعبّد بتلاوته."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U0.L2",
+      "titleAr": "تعريف التجويد",
+      "source": {
+        "chapter": 2,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التمييز بين المخرج والصفة والحكم العارض",
+      "explanationAr": "التجويد لغةً التحسين، واصطلاحًا إعطاء الحروف حقوقها ومستحقاتها وإخراجها من مخارجها.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "أَنْعَمْتَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى تعريف التجويد."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "التجويد لغةً التحسين، واصطلاحًا إعطاء الحروف حقوقها ومستحقاتها وإخراجها من مخارجها."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:7"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "التمييز بين المخرج والصفة والحكم العارض"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن نطق التاء المفتوحة بالضم في تدريب غير تلاوي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U0.L2.Q1",
+              "type": "singleChoice",
+              "text": "ما معنى التجويد لغةً؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "التحسين"
+                },
+                {
+                  "id": "2",
+                  "text": "الحفظ"
+                },
+                {
+                  "id": "3",
+                  "text": "السرعة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "التجويد لغةً التحسين، واصطلاحًا إعطاء الحروف حقوقها ومستحقاتها وإخراجها من مخارجها."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U0.L3",
+      "titleAr": "حكم التجويد وفضله",
+      "source": {
+        "chapter": 2,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "فهم الغاية من التجويد",
+      "explanationAr": "يهدف تعلم التجويد إلى صون اللسان عن الخطأ في تلاوة القرآن. ويُفرّق في الحكم بين العلم النظري وتصحيح الأداء، مع تفصيل مراتب الأخطاء عند أهل العلم.",
+      "examples": [
+        {
+          "verseRef": "73:4",
+          "excerptAr": "وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى حكم التجويد وفضله."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يهدف تعلم التجويد إلى صون اللسان عن الخطأ في تلاوة القرآن. ويُفرّق في الحكم بين العلم النظري وتصحيح الأداء، مع تفصيل مراتب الأخطاء عند أهل العلم."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "73:4"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "فهم الغاية من التجويد"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى تلاوة متقنة وحدد موضعًا يحتاج إلى تدريب.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U0.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما ثمرة تعلم التجويد؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "صون اللسان عن الخطأ"
+                },
+                {
+                  "id": "2",
+                  "text": "رفع سرعة القراءة فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "تغيير ألفاظ القرآن"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يهدف تعلم التجويد إلى صون اللسان عن الخطأ في تلاوة القرآن. ويُفرّق في الحكم بين العلم النظري وتصحيح الأداء، مع تفصيل مراتب الأخطاء عند أهل العلم."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U0.L4",
+      "titleAr": "الاستعاذة",
+      "source": {
+        "chapter": 3,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "معرفة موضع الاستعاذة وصيغتها المشهورة",
+      "explanationAr": "يستعيذ القارئ بالله من الشيطان الرجيم عند إرادة قراءة القرآن.",
+      "examples": [
+        {
+          "verseRef": "16:98",
+          "excerptAr": "فَاسْتَعِذْ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الاستعاذة."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يستعيذ القارئ بالله من الشيطان الرجيم عند إرادة قراءة القرآن."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "16:98"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "معرفة موضع الاستعاذة وصيغتها المشهورة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرّب على الاستعاذة قبل بدء القراءة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U0.L4.Q1",
+              "type": "singleChoice",
+              "text": "ما الصيغة المشهورة للاستعاذة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "أعوذ بالله من الشيطان الرجيم"
+                },
+                {
+                  "id": "2",
+                  "text": "الحمد لله رب العالمين"
+                },
+                {
+                  "id": "3",
+                  "text": "سبحان الله"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يستعيذ القارئ بالله من الشيطان الرجيم عند إرادة قراءة القرآن."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U0.L5",
+      "titleAr": "البسملة",
+      "source": {
+        "chapter": 3,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز موضع البسملة والاستثناء",
+      "explanationAr": "تقال البسملة عند ابتداء السور إلا سورة التوبة، وللوصل بين السور أوجه مضبوطة تُدرس بالتلقي.",
+      "examples": [
+        {
+          "verseRef": "27:30",
+          "excerptAr": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى البسملة."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تقال البسملة عند ابتداء السور إلا سورة التوبة، وللوصل بين السور أوجه مضبوطة تُدرس بالتلقي."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "27:30"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز موضع البسملة والاستثناء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرّب مع معلم على أوجه الانتقال بين سورتين غير التوبة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U0.L5.Q1",
+              "type": "singleChoice",
+              "text": "أي سورة لا تبدأ بالبسملة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "التوبة"
+                },
+                {
+                  "id": "2",
+                  "text": "الفاتحة"
+                },
+                {
+                  "id": "3",
+                  "text": "الإخلاص"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تقال البسملة عند ابتداء السور إلا سورة التوبة، وللوصل بين السور أوجه مضبوطة تُدرس بالتلقي."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
