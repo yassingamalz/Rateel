@@ -201,3 +201,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-25 | Screen 12 v2 (owner): **mosque and crescent + star in the standard place** of the current screens: same asset, size, position from the content edges and treatment as screen 03, instead of the reference's slightly different placement. Rule for every new screen with this header decoration. | ✅ |
 | 2026-11-25 | **APK 1.0.401**: screen 12 v2 (daily challenges from the 03 streak chip; mosque and crescent as 03). | ✅ |
 | 2026-11-26 | Screen 12 critic v1 (phone, owner OK): 6.8 / 6.5; the header arch was stretched and cut the mosque (owner's remark confirmed). v3 applies every high/medium code fix (03 arch proportions, calendar, title, dividers, 03 corners, connector, open rim, capsule rim). Conflicts D1–D7 in `STYLE-CONFLICTS.md`. Open: T1 connector lit only up to the open tile. | 🟡 |
+| 2026-11-26 | **APK 1.0.404**: screen 12 v3 (critic v1 fixes). | ✅ |
