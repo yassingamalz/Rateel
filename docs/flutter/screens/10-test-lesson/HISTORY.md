@@ -107,3 +107,10 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
 - Prompts v3 (`prompts/10-test-lesson/images-v3.txt`): T4 trophy, T5 flame medallion, T6 flame glyph.
 
 - APK 1.0.423 (v8).
+
+## 8. v9: ring colour by score (2026-11-26)
+- Owner: the final ring's colour should say how it went. `scoreColor(p, value, pass)`: stops 0% #B8402F, 50% #D9583A
+  (red), 51% #D98A24 → pass−1% #DDA02A (dark amber), pass #E9B83A (gold), 100% #FFDC5E (full gold); light theme
+  #B9452F / #C27A1C / #C9962E / #D9A21E. Arc gradient from a darker tone to the colour, glow and % text in the colour.
+- Review aid `?testRight=n` (results with the first n answers right); sheet `score-ring-colours-v9.png` (35, 55, 65,
+  75, 95, 100% dark; 55, 75, 100% light; partial answers count half).

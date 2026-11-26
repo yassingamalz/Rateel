@@ -24,6 +24,9 @@ int testStartQuestion = 0;
 List<int> testStartPick = const [];
 String? testStartState;
 
+/// Review aid: `?testRight=6` answers the first 6 questions right (results).
+int? testStartRight;
+
 /// Dark-theme lesson buttons: outlined with a luminous rim (default, owner
 /// 2026-11-26) or filled as the light theme. Temporary review switch: long
 /// press on the moon button.
@@ -254,7 +257,9 @@ class _TestLessonPageState extends State<TestLessonPage>
     final upTo = all ? qs.length : q0;
     for (var i = 0; i < upTo; i++) {
       final q = qs[i];
-      final right = state != 'fail' || (i.isEven && i < 6);
+      final right = testStartRight != null
+          ? i < testStartRight!
+          : state != 'fail' || (i.isEven && i < 6);
       if (q.type == QuestionType.text) {
         run.setText(q, right ? q.correct.first : '—');
       } else if (!right && q.type == QuestionType.multiple) {
@@ -1264,6 +1269,7 @@ class _TestLessonPageState extends State<TestLessonPage>
             u: u,
             value: run.score / 100 * t,
             passed: run.passed,
+            pass: run.content.passingScore / 100,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1274,9 +1280,10 @@ class _TestLessonPageState extends State<TestLessonPage>
                 style: readex(
                   u * d * (run.score == 100 ? 0.21 : 0.25),
                   weight: 700,
-                  color: p.c(
-                    RateelColors.testTitleTop,
-                    RateelColors.readLTitle,
+                  color: scoreColor(
+                    p,
+                    run.score / 100 * t,
+                    run.content.passingScore / 100,
                   ),
                 ).copyWith(height: 1),
               ),
@@ -3135,19 +3142,59 @@ class _AnswerBox extends StatelessWidget {
   }
 }
 
-/// Score ring of the results: dark green track, gold arc with a light head.
+/// Colour of the score (owner, 2026-11-26: the ring says how well it went):
+/// red up to 50%, a darker amber from 51% to the pass mark, gold from the
+/// pass mark, the full bright gold at 100%. Follows the ring while it fills.
+Color scoreColor(LessonPal p, double v, double pass) {
+  final dark = [
+    (0.0, RateelColors.testScoreRedLow),
+    (0.5, RateelColors.testScoreRed),
+    (0.51, RateelColors.testScoreAmber),
+    (pass - 0.01, RateelColors.testScoreAmberHigh),
+    (pass, RateelColors.testScoreGold),
+    (1.0, RateelColors.testScoreFull),
+  ];
+  final light = [
+    (0.0, RateelColors.testLScoreRed),
+    (0.5, RateelColors.testLScoreRed),
+    (0.51, RateelColors.testLScoreAmber),
+    (pass - 0.01, RateelColors.testLScoreAmber),
+    (pass, RateelColors.testLScoreGold),
+    (1.0, RateelColors.testLScoreFull),
+  ];
+  Color at(List<(double, Color)> stops) {
+    if (v <= stops.first.$1) return stops.first.$2;
+    for (var i = 1; i < stops.length; i++) {
+      if (v <= stops[i].$1) {
+        final (a, ca) = stops[i - 1];
+        final (b, cb) = stops[i];
+        return Color.lerp(ca, cb, b == a ? 1 : (v - a) / (b - a))!;
+      }
+    }
+    return stops.last.$2;
+  }
+
+  return p.c(at(dark), at(light));
+}
+
+/// Score ring of the results: dark green track, arc in the score colour
+/// ([scoreColor]) with a light head.
 class _ScoreRingPainter extends CustomPainter {
   _ScoreRingPainter({
     required this.p,
     required this.u,
     required this.value,
     required this.passed,
+    required this.pass,
   });
 
   final LessonPal p;
   final double u;
   final double value;
   final bool passed;
+
+  /// Pass mark (0–1).
+  final double pass;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -3181,8 +3228,8 @@ class _ScoreRingPainter extends CustomPainter {
         startAngle: -math.pi / 2,
         endAngle: -math.pi / 2 + math.max(sweep, 0.01),
         colors: [
-          p.c(RateelColors.testNavOnBottom, RateelColors.readLTitle),
-          p.c(const Color(0xFFFFE27A), RateelColors.testLSelRim),
+          Color.lerp(scoreColor(p, value, pass), Colors.black, 0.18)!,
+          scoreColor(p, value, pass),
         ],
         transform: const GradientRotation(0),
       ).createShader(rect);
@@ -3195,7 +3242,7 @@ class _ScoreRingPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = sw * 1.8
         ..strokeCap = StrokeCap.round
-        ..color = RateelColors.testNavOnTop.withValues(alpha: 0.22 * (1 - p.t))
+        ..color = scoreColor(p, value, pass).withValues(alpha: 0.28 * (1 - p.t))
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.9),
     );
     canvas.drawArc(rect, -math.pi / 2, sweep, false, gold);
@@ -3203,7 +3250,7 @@ class _ScoreRingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ScoreRingPainter o) =>
-      o.value != value || o.p.t != p.t || o.u != u;
+      o.value != value || o.p.t != p.t || o.u != u || o.pass != pass;
 }
 
 /// «🔥 3 إجابات متتالية» (Angular feedback modal: streak indicator with three

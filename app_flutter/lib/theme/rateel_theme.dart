@@ -393,6 +393,17 @@ class RateelColors {
   static const testLRedTop = Color(0xFFC95A47); // «إعادة الاختبار» when failed
   static const testLRedBottom = Color(0xFF9C3527);
   static const testLRedRimTop = Color(0xFFEE9C8A);
+  // Score colour of the results ring (owner, 2026-11-26).
+  static const testScoreRedLow = Color(0xFFB8402F);
+  static const testScoreRed = Color(0xFFD9583A);
+  static const testScoreAmber = Color(0xFFD98A24); // 51%: dark amber
+  static const testScoreAmberHigh = Color(0xFFDDA02A);
+  static const testScoreGold = Color(0xFFE9B83A); // pass mark
+  static const testScoreFull = Color(0xFFFFDC5E); // 100%: full bright gold
+  static const testLScoreRed = Color(0xFFB9452F);
+  static const testLScoreAmber = Color(0xFFC27A1C);
+  static const testLScoreGold = Color(0xFFC9962E);
+  static const testLScoreFull = Color(0xFFD9A21E);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,
