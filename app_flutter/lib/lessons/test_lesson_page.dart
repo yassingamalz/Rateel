@@ -24,6 +24,11 @@ int testStartQuestion = 0;
 List<int> testStartPick = const [];
 String? testStartState;
 
+/// Dark-theme lesson buttons: outlined with a luminous rim (default, owner
+/// 2026-11-26) or filled as the light theme. Temporary review switch: long
+/// press on the moon button.
+final testDarkFilled = ValueNotifier<bool>(false);
+
 /// Geometry of screen 10 in u (1% of the screen height), measured on
 /// `screens/10-test-lesson/reference.webp` (1842×854, u = 8.54 px). x values
 /// from the card edges or the screen centre.
@@ -610,19 +615,25 @@ class _TestLessonPageState extends State<TestLessonPage>
           height: u * TestMetrics.moonD,
           child: _enter(
             0,
-            LessonRoundButton(
-              u: u,
-              label: p.t > 0.5 ? 'الوضع المظلم' : 'الوضع الفاتح',
-              compact: true,
-              glyph: PillGlyph.play,
-              light: p.t,
-              onTap: _toggleTheme,
-              child: SizedBox(
-                width: u * 4.4,
-                height: u * 4.4,
-                child: CustomPaint(
-                  painter: MoonPainter(
-                    p.c(RateelColors.leaderText, RateelColors.readLInk),
+            GestureDetector(
+              onLongPress: () {
+                Haptics.milestone();
+                setState(() => testDarkFilled.value = !testDarkFilled.value);
+              },
+              child: LessonRoundButton(
+                u: u,
+                label: p.t > 0.5 ? 'الوضع المظلم' : 'الوضع الفاتح',
+                compact: true,
+                glyph: PillGlyph.play,
+                light: p.t,
+                onTap: _toggleTheme,
+                child: SizedBox(
+                  width: u * 4.4,
+                  height: u * 4.4,
+                  child: CustomPaint(
+                    painter: MoonPainter(
+                      p.c(RateelColors.leaderText, RateelColors.readLInk),
+                    ),
                   ),
                 ),
               ),
@@ -2315,11 +2326,40 @@ class _GoldButtonState extends State<_GoldButton> {
         RateelColors.testKoRim,
       ),
     };
-    const text = Colors.white;
+    // Dark theme: outlined glass with a luminous rim (owner, 2026-11-26),
+    // or filled as the light theme (review: long press on the moon).
+    final (oTop, oBottom, oRimTop, oRimBottom, oText) = switch (widget.tone) {
+      _Tone.gold => (
+        RateelColors.testPillTop,
+        RateelColors.testPillBottom,
+        RateelColors.testPillRimTop,
+        RateelColors.testPillRimBottom,
+        RateelColors.testPillText,
+      ),
+      _Tone.green => (
+        RateelColors.testRowFill,
+        RateelColors.testPillBottom,
+        RateelColors.testRowRimTop,
+        RateelColors.testOkRim,
+        RateelColors.leaderText,
+      ),
+      _Tone.red => (
+        const Color(0xFF3A2420),
+        RateelColors.testPillBottom,
+        const Color(0xFFEE9C8A),
+        RateelColors.testKoRim,
+        RateelColors.leaderText,
+      ),
+    };
+    final f = testDarkFilled.value ? 1.0 : p.t;
+    Color mix(Color a, Color b) => Color.lerp(a, b, f)!;
+    final text = mix(oText, Colors.white);
+    final fill = [mix(oTop, top), mix(oBottom, bottom)];
+    final rim = (mix(oRimTop, rimTop), mix(oRimBottom, rimBottom));
     final glyphW = u * 3.6;
     final textShadow = [
       Shadow(
-        color: Colors.black.withValues(alpha: 0.28),
+        color: Colors.black.withValues(alpha: 0.28 * f),
         blurRadius: u * 0.4,
         offset: Offset(0, u * 0.12),
       ),
@@ -2352,7 +2392,7 @@ class _GoldButtonState extends State<_GoldButton> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [top, bottom],
+                  colors: fill,
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -2374,8 +2414,8 @@ class _GoldButtonState extends State<_GoldButton> {
                 foregroundPainter: GradientRimPainter(
                   width: math.max(1.0, u * 0.3),
                   radius: h,
-                  top: rimTop,
-                  bottom: rimBottom,
+                  top: rim.$1,
+                  bottom: rim.$2,
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: u * 2.5),

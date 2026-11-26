@@ -98,3 +98,10 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
 - Tests 13/13 (scoring test extended with the partial answer). Captures `capture-v7-*-phone.jpg`.
 
 - APK 1.0.422 (v7).
+
+## 7. v8: dark buttons outlined again (2026-11-26)
+- Owner: in the dark theme the outlined buttons with the outer glow were better; an APK to compare both. `_GoldButton`
+  blends the dark outlined look (reference: olive → dark glass, rim #F7EE9E → #FFD229, cream-gold text; green / red rim
+  for «إعادة الاختبار») with the filled light look by the theme; `testDarkFilled` (long press on the moon) forces the
+  filled look in the dark theme for the comparison. Captures `capture-v8-*-phone.jpg`.
+- Prompts v3 (`prompts/10-test-lesson/images-v3.txt`): T4 trophy, T5 flame medallion, T6 flame glyph.
