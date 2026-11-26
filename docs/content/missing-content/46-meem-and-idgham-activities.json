@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U5.L8",
+      "examples": [
+        {
+          "id": "U5.L8.M.E1",
+          "verseRef": "105:4",
+          "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L8.M.E2",
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ غَيْرِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L8.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L8.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في المقطع الأول؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإدغام الشفوي"
+            },
+            {
+              "id": "2",
+              "text": "الإخفاء الشفوي"
+            },
+            {
+              "id": "3",
+              "text": "الإظهار الشفوي"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الإخفاء الشفوي",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L8.M.P1",
+          "instructionAr": "صنف الميم قبل الباء والميم والغين.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L8.M.P2",
+          "instructionAr": "قارن الميم المظهرة بالمخفاة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L9",
+      "examples": [
+        {
+          "id": "U5.L9.M.E1",
+          "verseRef": "105:4",
+          "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L9.M.E2",
+          "verseRef": "88:22",
+          "excerptAr": "عَلَيْهِمْ بِمُصَيْطِرٍ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L9.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": [
+            "U5.L9.M.E1",
+            "U5.L9.M.E2"
+          ],
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "أي حرف يلي الميم الساكنة في المقطعين؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الباء"
+            },
+            {
+              "id": "2",
+              "text": "الفاء"
+            },
+            {
+              "id": "3",
+              "text": "الميم"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الباء",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L9.M.P1",
+          "instructionAr": "كرر ترميهم بحجارة مع نموذج معتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L9.M.P2",
+          "instructionAr": "اضبط الغنة وهيئة الشفتين بالتلقي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L10",
+      "examples": [
+        {
+          "id": "U5.L10.M.E1",
+          "verseRef": "106:4",
+          "excerptAr": "وَآمَنَهُمْ مِنْ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L10.M.E2",
+          "verseRef": "2:29",
+          "excerptAr": "لَكُمْ مَا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L10.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L10.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في لكم ما عند الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإخفاء الشفوي"
+            },
+            {
+              "id": "2",
+              "text": "الإظهار الشفوي"
+            },
+            {
+              "id": "3",
+              "text": "الإدغام الشفوي"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الإدغام الشفوي",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L10.M.P1",
+          "instructionAr": "استمع إلى اندماج الميمين في الوصل.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L10.M.P2",
+          "instructionAr": "قارن الوصل بالوقف حيث يصح الوقف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L11",
+      "examples": [
+        {
+          "id": "U5.L11.M.E1",
+          "verseRef": "105:2",
+          "excerptAr": "كَيْدَهُمْ فِي",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L11.M.E2",
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ غَيْرِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L11.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L11.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في كيدهم في؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإدغام الشفوي"
+            },
+            {
+              "id": "2",
+              "text": "الإظهار الشفوي"
+            },
+            {
+              "id": "3",
+              "text": "الإقلاب"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الإظهار الشفوي",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L11.M.P1",
+          "instructionAr": "أظهر الميم قبل الفاء والغين دون إطالة زائدة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L11.M.P2",
+          "instructionAr": "قارن الإظهار قبل الفاء بالإخفاء قبل الباء.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L12",
+      "examples": [
+        {
+          "id": "U5.L12.M.E1",
+          "verseRef": "2:60",
+          "excerptAr": "اضْرِبْ بِعَصَاكَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L12.M.E2",
+          "verseRef": "5:28",
+          "excerptAr": "بَسَطْتَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L12.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L12.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الصفة الباقية في إدغام الطاء في التاء؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإطباق"
+            },
+            {
+              "id": "2",
+              "text": "الصفير"
+            },
+            {
+              "id": "3",
+              "text": "التفشي"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الإطباق",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L12.M.P1",
+          "instructionAr": "قارن إدغام الباء في الباء بإدغام الطاء في التاء.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L12.M.P2",
+          "instructionAr": "تلق أداء الإدغام الناقص من معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}
