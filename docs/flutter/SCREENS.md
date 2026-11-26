@@ -12,9 +12,9 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 05 | Units of the course | `05-unita-del-corso.webp` | done, approved, in `master` |
 | 06 | Lessons of the unit | `06-lezioni-dell-unita.webp` | done, approved, in `master` |
 | 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **approved** (APK 1.0.366), merged into `master`; sections are mock |
-| 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12) on `flutter/08-reading-lesson` (dark + light, rules panel with rule detail, text-size popup); PR to `master` pending |
-| 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | to do |
-| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | to do |
+| 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12, APK 1.0.393), merged into `master` (PR #49) |
+| 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | **postponed** (owner 2026-11-25): one of the hardest, done later, maybe last |
+| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **approved** (v13, 2026-11-26), merged into `master`: dark + light, feedback A, partly correct answers, streak, results, CC0 sounds; a failed test keeps the next lesson locked |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | **approved** (2026-11-26), merged into `master`; opened from the streak chip D2 of 03; mock data; leftovers in `BACKLOG.md` |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
@@ -58,7 +58,7 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 |---|---|---|---|
 | 01 | Splash / start-up (loading) | Angular `splash-screen`, `initialization` | uses the free number 01 |
 | 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02 |
-| 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | after 10/10b |
+| 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | **built inside 10** (results in the card, approved 2026-11-26) |
 | 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
 | 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13 |
 | 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type |

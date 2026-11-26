@@ -34,11 +34,16 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       added on 2026-11-26 in the agreed order: 01 splash, 24 end of lesson, 25 test results, 26 points history,
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
-## Merges
-- [ ] **Screen 10/10b (`flutter/10-test-lesson`)** merges after 12 and 23 (owner, 2026-11-26): merge `master` into it
-      (conflicts in `main.dart`, `rateel_theme.dart`, `widget_test.dart`, `ASSETS.md`, `DECISIONS.md`,
-      `STYLE-CONFLICTS.md`), then gate its test sounds (`Sounds._playTest`) with `AppSettings.sounds` and use `Haptics`
-      instead of raw `HapticFeedback`, so the settings switches apply.
+## Screen 10/10b, test lesson (approved 2026-11-26)
+- [ ] **Long press completes** a course / unit / lesson at once (review aid for testing; owner 2026-11-26: fine for
+      now, **remove before release**): `courses_screen.dart` (onLongPress ≈ l. 384), `units_screen.dart` (≈ l. 452),
+      `lessons_screen.dart` (≈ l. 442), and the same on the challenges of 12.
+- [ ] **Test sounds to improve** (owner, 2026-11-26), above all the **completion (passed)** and the **correct answer**
+      (now plinkfx level-up / gem, CC0): `assets/sounds/test_*.mp3`, sampler in `docs/design-assets/test-lesson/sounds/`.
+- [ ] **End-of-test popup** (score, points, pass/fail, countdown) removed from 10 (owner: the results show the same);
+      designs A/B in `screens/10-test-lesson/end-popup-variants-v6.jpg` if it comes back.
+- [ ] Lightbulb (recommendations) and ↻ (not passed) are still Material icons in the lesson gold: drawn ones if wanted.
+- [ ] Star coins emerald and mint (`ui/test/star_coin_{emerald,mint}.webp`) in the library, not used yet.
 
 ## Screen 23, settings (approved 2026-11-26)
 - [ ] **Daily reminder**: today only stored; wire the real notification with screen 12 (owner, 2026-11-26):

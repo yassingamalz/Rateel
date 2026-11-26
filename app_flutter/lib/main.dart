@@ -17,6 +17,7 @@ import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
 import 'lessons/reading_lesson_page.dart';
+import 'lessons/test_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
 import 'units/unit_data.dart';
 
@@ -91,6 +92,15 @@ Future<void> main() async {
   readingStartVerse = int.tryParse(q['verse'] ?? '') ?? 0;
   readingStartRules = q['rules'] == '1';
   readingStartFontMenu = q['fontMenu'] == '1';
+  // Review aids (screen 10): `?testQ=4&testPick=1&testState=ok|ko|partial|
+  // streak|results|fail|details`, `?testRight=6` (with `?lessons=0,<unit>&openLesson=0`).
+  testStartQuestion = int.tryParse(q['testQ'] ?? '') ?? 0;
+  testStartPick = [
+    for (final s in (q['testPick'] ?? '').split(','))
+      if (int.tryParse(s) != null) int.parse(s),
+  ];
+  testStartState = q['testState'];
+  testStartRight = int.tryParse(q['testRight'] ?? '');
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';

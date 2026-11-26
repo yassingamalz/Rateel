@@ -1,0 +1,47 @@
+Screen 10 / 10b, test lesson: ChatGPT prompts v1 (2026-11-25). Pasted in the chat, one block each.
+Attachments in attach/: reference-10.png (question), reference-10b.png (option selected), reference-08-light.png (light
+theme of the reading lesson, for T3). These are REFERENCES for the missing states, not app assets: the elements on them
+(rows, rims, radio, buttons) are drawn in code; the art is already in the library (arch R4, badge R2, lattice R1,
+mosque, crescent/star, star glyph).
+
+=== T1  Reference: answer feedback after «تأكيد الإجابة» (attach: reference-10.png, reference-10b.png)
+Using the two attached screens as the exact style reference (same size 1842×854 landscape, same background, header
+arch, mosque, crescent and star, title «اختبار أساسيات التجويد» and its subtitle, capsule «1 / 10» top left, round
+pause button top right, round moon button under the capsule, the row of numbered question circles 1–10, the big card
+with the gold rim, the lobed star badge «1», the question «حدد الآية التي تحتوي على إخفاء:» and the lattice band at the
+bottom of the card), draw TWO versions of the same screen right after the user confirmed the answer, side by side in one
+image (left: correct, right: wrong), each 1842×854:
+1) CORRECT: the chosen option row «مِنْ شَرِّ مَا خَلَقَ» turns into a soft emerald-green glass row with a bright green rim
+and a round green check disc in place of the radio circle; the other rows dim a little; the «+10 نقطة» pill becomes a
+glowing gold pill «+10 ✓»; question circle «1» in the top row becomes a green circle with a check; in the bottom area,
+instead of «تأكيد الإجابة», a wide glass feedback bar inside the card: a green check medallion, «إجابة صحيحة» in bold
+cream, «+10 نقطة» with a gold star, one line of explanation in softer cream, and on its left a gold-rimmed button
+«السؤال التالي ←».
+2) WRONG: the chosen row «مَالِكِ يَوْمِ الدِّينِ» turns muted red-brown glass with a soft red rim and a round red ✕ disc;
+the correct row «مِنْ شَرِّ مَا خَلَقَ» is shown with the green rim and green check; question circle «1» red with ✕; the
+feedback bar with a red ✕ medallion, «إجابة خاطئة», «الإجابة الصحيحة: مِنْ شَرِّ مَا خَلَقَ», one line of explanation, and
+the same gold-rimmed button «السؤال التالي ←».
+Greens and reds must be deep and elegant (jewel tones that sit well on dark emerald and gold), never flat bright
+traffic-light colours. Same fonts, golds, glass, rims and spacing as the references; Arabic right-to-left; no other
+new ornaments.
+
+=== T2  Reference: test results at the end (attach: reference-10.png)
+Using the attached screen as the exact style reference (same size 1842×854 landscape, background, header arch with
+mosque and crescent, title «اختبار أساسيات التجويد», capsule «10 / 10» top left fully gold, round pause button top
+right, the big card with the gold rim and the lattice band), draw the RESULTS screen of the test inside the big card:
+on the right a large circular score ring (thick gold arc on a dark green track, «80%» big in the centre, «نجحت» small
+under it) with a soft gold glow; next to it the title «أحسنت! لقد اجتزت الاختبار بنجاح» in bold cream with a small gold
+trophy; under it three small glass stat tiles in a row: a green check «8 إجابات صحيحة», a red ✕ «2 إجابات خاطئة», a gold
+star «95 نقطة»; on the left half a compact list «تفاصيل الإجابات» of the 10 questions as small glass chips in two
+rows of five (number in a circle, green check or red ✕); at the bottom centre two buttons with the diamond lines of
+the reference: «إعادة الاختبار ↻» (glass, green rim) and «إنهاء الدرس ✓» (gold rim, glowing, as «تأكيد الإجابة»).
+Same fonts, golds, glass and rims as the reference; Arabic right-to-left; no other new ornaments.
+
+=== T3  Reference: light theme of the test (attach: reference-10b.png, reference-08-light.png) — only if the owner wants the light theme
+Redraw the first attached screen (dark test lesson, 1842×854 landscape) in the LIGHT theme of the second attached screen
+(the reading lesson in light mode): same layout, same elements and texts at exactly the same positions and sizes, only
+the colours change as in the second image: warm cream paper background with the faint tan lattice in the corners, dark
+brown ink for texts, copper/tan rims, the gold arch and the gold card rim kept, the option rows as light cream glass with
+tan rims, the selected row a soft gold tint with a gold radio dot, the question circles cream with tan rims and the
+current one gold, the moon button showing a sun-lit look as in the second image, the «تأكيد الإجابة» button cream with a
+gold rim. Arabic right-to-left; no other new ornaments.

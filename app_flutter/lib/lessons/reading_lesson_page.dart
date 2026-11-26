@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
+import 'lesson_decor.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'reading_data.dart';
@@ -112,6 +112,30 @@ class ReadMetrics {
   static const menuW = 52.0;
   // Text size only (owner, 2026-11-25: no line spacing control).
   static const menuH = 30.0;
+
+  static const header = HeaderSpec(
+    archW: archW,
+    archH: archH,
+    archTop: archTop,
+    archClipDx: archClipDx,
+    mosqueDx: mosqueDx,
+    mosqueTop: mosqueTop,
+    mosqueW: mosqueW,
+    crescentDx: crescentDx,
+    crescentTop: crescentTop,
+    crescentH: crescentH,
+    starDx: starDx,
+    starTop: starTop,
+    starH: starH,
+    titleCentre: titleCentre,
+    titleSize: titleSize,
+    dividerTop: dividerTop,
+    dividerW: dividerW,
+    dividerDiamond: dividerDiamond,
+    bookW: bookW,
+    bookH: bookH,
+    bookTop: bookTop,
+  );
 }
 
 Route<bool> readingLessonRoute(
@@ -372,14 +396,14 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
           },
           child: LayoutBuilder(
             builder: (context, box) =>
-                _page(box, _Pal(light), box.maxHeight / 100),
+                _page(box, LessonPal(light), box.maxHeight / 100),
           ),
         );
       },
     );
   }
 
-  Widget _page(BoxConstraints box, _Pal p, double u) {
+  Widget _page(BoxConstraints box, LessonPal p, double u) {
     final w = box.maxWidth;
     final cx = w / 2;
     _fullWidth = w - 2 * u * ReadMetrics.side;
@@ -389,11 +413,20 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
       children: [
         RepaintBoundary(
           key: const ValueKey('bg'),
-          child: _Background(p: p, u: u),
+          child: LessonBackground(p: p, u: u),
         ),
         RepaintBoundary(
           key: const ValueKey('header'),
-          child: _enter(0, _Header(p: p, u: u, cx: cx, title: _title)),
+          child: _enter(
+            0,
+            LessonHeader(
+              p: p,
+              u: u,
+              cx: cx,
+              title: _title,
+              s: ReadMetrics.header,
+            ),
+          ),
         ),
         // Content (toolbar, card, dots): narrows while the rules panel is
         // open (reference-panel.png: the panel pushes, it does not cover).
@@ -466,7 +499,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
 
   // Toolbar, card, shelf and dots inside the content box [left, w - right].
   List<Widget> _contentLayers(
-    _Pal p,
+    LessonPal p,
     double u,
     double w,
     double left,
@@ -515,7 +548,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     ];
   }
 
-  Widget _toolbarFrame(_Pal p, double u) => RepaintBoundary(
+  Widget _toolbarFrame(LessonPal p, double u) => RepaintBoundary(
     child: DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(u * ReadMetrics.toolRadius),
@@ -531,7 +564,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
         ],
       ),
       child: CustomPaint(
-        foregroundPainter: _RimPainter(
+        foregroundPainter: ToolRimPainter(
           radius: u * ReadMetrics.toolRadius,
           width: math.max(1.0, u * 0.25),
           top: p.c(RateelColors.readToolRimTop, RateelColors.readLToolRimTop),
@@ -542,7 +575,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(u * ReadMetrics.toolRadius),
-          child: _LatticeField(
+          child: LatticeField(
             p: p,
             u: u,
             cell: ReadMetrics.cell,
@@ -569,7 +602,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   );
 
   List<Widget> _toolbarControls(
-    _Pal p,
+    LessonPal p,
     double u,
     double left,
     double right,
@@ -643,7 +676,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
             width: u * 3.6,
             height: u * 3.6,
             child: CustomPaint(
-              painter: _MoonPainter(
+              painter: MoonPainter(
                 p.c(RateelColors.leaderText, RateelColors.readLInk),
               ),
             ),
@@ -750,7 +783,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     ];
   }
 
-  Widget _card(_Pal p, double u, double width) {
+  Widget _card(LessonPal p, double u, double width) {
     final c = _content;
     final r = u * ReadMetrics.cardRadius;
     return GestureDetector(
@@ -769,7 +802,9 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
       child: Stack(
         fit: StackFit.expand,
         children: [
-          RepaintBoundary(child: CustomPaint(painter: _CardPainter(p, u, r))),
+          RepaintBoundary(
+            child: CustomPaint(painter: GoldCardPainter(p, u, r)),
+          ),
           // Lattice band along the bottom, fading upwards.
           Positioned(
             left: 0,
@@ -779,7 +814,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
             child: RepaintBoundary(
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(r)),
-                child: _LatticeField(
+                child: LatticeField(
                   p: p,
                   u: u,
                   cell: ReadMetrics.cell,
@@ -816,7 +851,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     );
   }
 
-  Widget _verseLayer(_Pal p, double u, double width) {
+  Widget _verseLayer(LessonPal p, double u, double width) {
     final t = Curves.easeOutCubic.transform(_verse.value);
     final shift = u * 14;
     Widget one(int i, double dx, double o, double badgeScale) => Opacity(
@@ -843,7 +878,13 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     );
   }
 
-  Widget _sentence(_Pal p, double u, double width, int i, double badgeScale) {
+  Widget _sentence(
+    LessonPal p,
+    double u,
+    double width,
+    int i,
+    double badgeScale,
+  ) {
     final verse = _content!.verses[i];
     final scale = readingFontSize / 24;
     final badgeH = u * ReadMetrics.badgeH;
@@ -857,7 +898,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
           width: badgeH * 250 / 256,
           child: Transform.scale(
             scale: badgeScale,
-            child: _Badge(p: p, u: u, number: i + 1),
+            child: LessonBadge(p: p, u: u, number: i + 1),
           ),
         ),
         Positioned(
@@ -918,7 +959,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     );
   }
 
-  Widget _dots(_Pal p, double u) {
+  Widget _dots(LessonPal p, double u) {
     final n = _n;
     // RTL: the first sentence is the rightmost dot.
     return LayoutBuilder(
@@ -992,7 +1033,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   }
 
   // «A» menu: text size and line spacing (reference-panel.png), under the A.
-  Widget _fontMenu(_Pal p, double u, double w) {
+  Widget _fontMenu(LessonPal p, double u, double w) {
     final v = _menu.value;
     if (v == 0) return const SizedBox.shrink();
     final t = Curves.easeOutCubic.transform(v);
@@ -1104,7 +1145,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   /// veiled and blurred with the pause-menu tokens (`lessonVeil`, blur σ
   /// 0.55u); explains the rule in words, with an audio-example button for
   /// later (not active yet).
-  void _openRule(TajweedRule r, _Pal p) {
+  void _openRule(TajweedRule r, LessonPal p) {
     Navigator.of(context).push(
       PageRouteBuilder<void>(
         opaque: false,
@@ -1121,7 +1162,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   }
 
   // «قواعد التجويد» side panel (reference-panel.png).
-  Widget _rulesPanel(_Pal p, double u, double w, double h) {
+  Widget _rulesPanel(LessonPal p, double u, double w, double h) {
     final v = _panel.value;
     if (v == 0) return const SizedBox.shrink();
     final t = Curves.easeOutCubic.transform(v);
@@ -1345,335 +1386,6 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
 
 double lerpDoubleSafe(double a, double b, double t) => a + (b - a) * t;
 
-/// Colours of the two themes; [t] 0 = dark, 1 = light.
-class _Pal {
-  const _Pal(this.t);
-
-  final double t;
-
-  Color c(Color dark, Color light) => Color.lerp(dark, light, t)!;
-  double d(double dark, double light) => dark + (light - dark) * t;
-}
-
-class _Background extends StatelessWidget {
-  const _Background({required this.p, required this.u});
-
-  final _Pal p;
-  final double u;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              radius: 0.9,
-              colors: [
-                p.c(RateelColors.readBgCentre, RateelColors.readLBgCentre),
-                p.c(RateelColors.readBgEdge, RateelColors.readLBgEdge),
-              ],
-            ),
-          ),
-        ),
-        // Stepped lattice in the top corners, strongest at the corner and
-        // fading inwards and down (reference: x ≤ 58u, y ≤ 30u).
-        for (final left in [true, false])
-          Positioned(
-            left: left ? 0 : null,
-            right: left ? null : 0,
-            top: 0,
-            width: u * ReadMetrics.cornerW,
-            height: u * ReadMetrics.cornerH,
-            child: _LatticeField(
-              p: p,
-              u: u,
-              cell: ReadMetrics.cornerCell,
-              opacity: p.d(0.27, 0.5),
-              alignment: left ? Alignment.topLeft : Alignment.topRight,
-              mask: RadialGradient(
-                center: left ? Alignment.topLeft : Alignment.topRight,
-                radius: 1.1,
-                colors: const [
-                  Color(0xFF000000),
-                  Color(0x99000000),
-                  Color(0x00000000),
-                ],
-                stops: const [0, 0.45, 1],
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-/// The owner's stepped lattice tile (R1, 2 cells per tile), repeated with a
-/// given cell size, tinted per theme, faded with [mask].
-class _LatticeField extends StatelessWidget {
-  const _LatticeField({
-    required this.p,
-    required this.u,
-    required this.cell,
-    required this.opacity,
-    required this.mask,
-    this.alignment = Alignment.bottomCenter,
-  });
-
-  final _Pal p;
-  final double u;
-  final double cell;
-  final double opacity;
-  final Gradient mask;
-  final Alignment alignment;
-
-  @override
-  Widget build(BuildContext context) {
-    final tile = u * cell * 2;
-    return IgnorePointer(
-      child: ShaderMask(
-        blendMode: BlendMode.dstIn,
-        shaderCallback: mask.createShader,
-        child: Opacity(
-          opacity: opacity,
-          child: Image.asset(
-            'assets/ui/reading/lattice_tile.webp',
-            repeat: ImageRepeat.repeat,
-            fit: BoxFit.none,
-            alignment: alignment,
-            scale: 512 / tile,
-            color: p.t > 0
-                ? p.c(Colors.white, RateelColors.readLLattice)
-                : null,
-            colorBlendMode: p.t > 0 ? BlendMode.modulate : null,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header({
-    required this.p,
-    required this.u,
-    required this.cx,
-    required this.title,
-  });
-
-  final _Pal p;
-  final double u;
-  final double cx;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final copper = p.t > 0
-        ? ColorFilter.mode(
-            p.c(RateelColors.archShoulder, RateelColors.readLCopper),
-            BlendMode.srcIn,
-          )
-        : null;
-    ColorFilter? lightTint(Color light) => p.t > 0
-        ? ColorFilter.mode(
-            p.c(RateelColors.glyphGoldBottom, light),
-            BlendMode.srcIn,
-          )
-        : null;
-    return IgnorePointer(
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned(
-            left: cx - u * ReadMetrics.archW / 2,
-            top: u * ReadMetrics.archTop,
-            width: u * ReadMetrics.archW,
-            height: u * ReadMetrics.archH,
-            // Left of the mosque the arch is not drawn (reference).
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) {
-                final f =
-                    (ReadMetrics.archW / 2 + ReadMetrics.archClipDx) /
-                    ReadMetrics.archW;
-                return LinearGradient(
-                  colors: const [Color(0x00000000), Color(0xFF000000)],
-                  stops: [f - 0.01, f + 0.02],
-                ).createShader(r);
-              },
-              child: Image.asset(
-                'assets/ui/reading/arch.webp',
-                fit: BoxFit.fill,
-                color: copper == null
-                    ? null
-                    : p.c(RateelColors.archShoulder, RateelColors.readLCopper),
-                colorBlendMode: copper == null ? null : BlendMode.srcIn,
-              ),
-            ),
-          ),
-          Positioned(
-            left: cx + u * ReadMetrics.mosqueDx,
-            top: u * ReadMetrics.mosqueTop,
-            width: u * ReadMetrics.mosqueW,
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.55, 1],
-                colors: [Color(0xFF000000), Color(0x00000000)],
-              ).createShader(r),
-              child: ColorFiltered(
-                colorFilter: p.t > 0.5
-                    ? const ColorFilter.mode(
-                        RateelColors.readLMosque,
-                        BlendMode.srcIn,
-                      )
-                    : _mosqueTone,
-                child: Image.asset('assets/ui/decor/mosque.webp'),
-              ),
-            ),
-          ),
-          Positioned(
-            left: cx - u * ReadMetrics.bookW / 2,
-            top: u * ReadMetrics.bookTop,
-            width: u * ReadMetrics.bookW,
-            height: u * ReadMetrics.bookH,
-            child: SvgPicture.asset(
-              'assets/ui/decor/header_book.svg',
-              colorFilter: p.t > 0
-                  ? ColorFilter.mode(
-                      p.c(RateelColors.glyphGoldTop, RateelColors.readLBook),
-                      BlendMode.srcIn,
-                    )
-                  : null,
-            ),
-          ),
-          // Crescent and star as two pieces of the 03 asset, each placed on
-          // the reference; colours as the app (star at 55%, as 03/05).
-          Positioned(
-            left: cx + u * ReadMetrics.crescentDx,
-            top: u * ReadMetrics.crescentTop,
-            height: u * ReadMetrics.crescentH,
-            child: SvgPicture.asset(
-              'assets/ui/reading/crescent.svg',
-              colorFilter: lightTint(RateelColors.readLCrescent),
-            ),
-          ),
-          Positioned(
-            left: cx + u * ReadMetrics.starDx,
-            top: u * ReadMetrics.starTop,
-            height: u * ReadMetrics.starH,
-            child: Opacity(
-              opacity: p.d(0.55, 1),
-              child: SvgPicture.asset(
-                'assets/ui/reading/star.svg',
-                colorFilter: lightTint(RateelColors.readLCrescent),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: u * (ReadMetrics.titleCentre - 6),
-            height: u * 12,
-            child: Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                textDirection: TextDirection.rtl,
-                style:
-                    readex(
-                      u * ReadMetrics.titleSize,
-                      weight: 600,
-                      color: p.c(titleCream, RateelColors.readLTitle),
-                    ).copyWith(
-                      height: 1.2,
-                      shadows: p.t > 0.5 ? null : titleShadows(u),
-                    ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: cx - u * ReadMetrics.dividerW / 2,
-            top: u * ReadMetrics.dividerTop - u * 2,
-            width: u * ReadMetrics.dividerW,
-            height: u * 4,
-            child: p.t > 0
-                ? ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      p.c(RateelColors.videoDivider, RateelColors.readLCopper),
-                      BlendMode.srcIn,
-                    ),
-                    child: GoldDivider(
-                      u: u,
-                      diamond: ReadMetrics.dividerDiamond,
-                    ),
-                  )
-                : GoldDivider(u: u, diamond: ReadMetrics.dividerDiamond),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Mosque tone of the lesson screens (as 07: dome #4E7743).
-final _mosqueTone = () {
-  const r = 1.32, g = 1.21, b = 1.08;
-  return const ColorFilter.matrix([
-    r, 0, 0, 0, 0, //
-    0, g, 0, 0, 0, //
-    0, 0, b, 0, 0, //
-    0, 0, 0, 1, 0, //
-  ]);
-}();
-
-class _Badge extends StatelessWidget {
-  const _Badge({required this.p, required this.u, required this.number});
-
-  final _Pal p;
-  final double u;
-  final int number;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Image.asset(
-          'assets/ui/reading/badge_fill.webp',
-          color: p.t > 0
-              ? p.c(Colors.white, RateelColors.readLBadgeFill)
-              : null,
-          colorBlendMode: p.t > 0
-              ? (p.t > 0.5 ? BlendMode.srcIn : BlendMode.modulate)
-              : null,
-        ),
-        Image.asset(
-          'assets/ui/reading/badge_line.webp',
-          color: p.t > 0
-              ? p.c(RateelColors.goldHighlight, RateelColors.readLCopper)
-              : null,
-          colorBlendMode: p.t > 0 ? BlendMode.srcIn : null,
-        ),
-        Center(
-          child: Text(
-            '$number',
-            textDirection: TextDirection.ltr,
-            style: readex(
-              u * 4.3,
-              weight: 600,
-              color: p.c(RateelColors.leaderText, RateelColors.readLInk),
-            ).copyWith(height: 1.0),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 /// ⓘ disc of «قواعد التجويد»: gold disc, dark «i»; on the gold (panel open)
 /// a dark disc with a gold «i».
 class _InfoDisc extends StatelessWidget {
@@ -1727,7 +1439,7 @@ class _SearchField extends StatelessWidget {
     required this.onChanged,
   });
 
-  final _Pal p;
+  final LessonPal p;
   final double u;
   final ValueChanged<String> onChanged;
 
@@ -1779,124 +1491,12 @@ class _SearchField extends StatelessWidget {
   }
 }
 
-/// Rounded rim with a vertical colour change (top light edge → bottom).
-class _RimPainter extends CustomPainter {
-  _RimPainter({
-    required this.radius,
-    required this.width,
-    required this.top,
-    required this.bottom,
-  });
-
-  final double radius;
-  final double width;
-  final Color top;
-  final Color bottom;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final r = RRect.fromRectAndRadius(
-      (Offset.zero & size).deflate(width / 2),
-      Radius.circular(radius),
-    );
-    canvas.drawRRect(
-      r,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = width
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [top, bottom],
-        ).createShader(Offset.zero & size),
-    );
-  }
-
-  @override
-  bool shouldRepaint(_RimPainter o) =>
-      o.top != top ||
-      o.bottom != bottom ||
-      o.width != width ||
-      o.radius != radius;
-}
-
-/// The verse card: dark green glass lit from the top, thin bright gold rim
-/// with a soft gold glow (light: cream card, tan rim, soft shadow).
-class _CardPainter extends CustomPainter {
-  _CardPainter(this.p, this.u, this.radius);
-
-  final _Pal p;
-  final double u;
-  final double radius;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    final rr = RRect.fromRectAndRadius(rect, Radius.circular(radius));
-    // Glow (dark) / shadow (light), outside the card only.
-    canvas.save();
-    canvas.clipPath(
-      Path()
-        ..fillType = PathFillType.evenOdd
-        ..addRect(rect.inflate(u * 6))
-        ..addRRect(rr),
-    );
-    canvas.drawRRect(
-      rr,
-      Paint()
-        ..color = RateelColors.videoSkipRim.withValues(alpha: 0.38 * (1 - p.t))
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.4),
-    );
-    canvas.drawRRect(
-      rr.shift(Offset(0, u * 0.6)),
-      Paint()
-        ..color = const Color(0xFF8A6A4A).withValues(alpha: 0.22 * p.t)
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.2),
-    );
-    canvas.restore();
-    canvas.drawRRect(
-      rr,
-      Paint()
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            p.c(RateelColors.readCardTop, RateelColors.readLCardTop),
-            p.c(RateelColors.readCardMid, RateelColors.readLCardMid),
-            p.c(RateelColors.readCardBottom, RateelColors.readLCardBottom),
-          ],
-          stops: const [0, 0.28, 1],
-        ).createShader(rect),
-    );
-    final w = u * ReadMetrics.cardRim;
-    canvas.drawRRect(
-      rr.deflate(w / 2),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = w
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            p.c(RateelColors.readCardRim, RateelColors.readLCardRim),
-            p.c(RateelColors.readCardRimSide, RateelColors.readLCardRimSide),
-            p.c(RateelColors.readCardRim, RateelColors.readLCardRim),
-          ],
-        ).createShader(rect),
-    );
-  }
-
-  @override
-  bool shouldRepaint(_CardPainter o) =>
-      o.p.t != p.t || o.u != u || o.radius != radius;
-}
-
 /// Faint line under the card (reference: a lighter line at 83.7u, fading
 /// out towards both ends).
 class _ShelfPainter extends CustomPainter {
   _ShelfPainter(this.p, this.u);
 
-  final _Pal p;
+  final LessonPal p;
   final double u;
 
   @override
@@ -1926,7 +1526,7 @@ class _ShelfPainter extends CustomPainter {
 class _MenuPainter extends CustomPainter {
   _MenuPainter(this.p, this.u);
 
-  final _Pal p;
+  final LessonPal p;
   final double u;
 
   @override
@@ -1977,33 +1577,6 @@ class _MenuPainter extends CustomPainter {
   bool shouldRepaint(_MenuPainter o) => o.p.t != p.t || o.u != u;
 }
 
-/// Crescent of the moon button.
-class _MoonPainter extends CustomPainter {
-  _MoonPainter(this.color);
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final r = size.width / 2;
-    final c = size.center(Offset.zero);
-    final moon = Path.combine(
-      PathOperation.difference,
-      Path()..addOval(Rect.fromCircle(center: c, radius: r)),
-      Path()..addOval(
-        Rect.fromCircle(
-          center: c + Offset(r * 0.55, -r * 0.35),
-          radius: r * 0.82,
-        ),
-      ),
-    );
-    canvas.drawPath(moon, Paint()..color = color);
-  }
-
-  @override
-  bool shouldRepaint(_MoonPainter o) => o.color != color;
-}
-
 class _ClosePainter extends CustomPainter {
   _ClosePainter(this.color);
 
@@ -2049,7 +1622,7 @@ class _RuleSheet extends StatefulWidget {
   const _RuleSheet({required this.rule, required this.p, required this.anim});
 
   final TajweedRule rule;
-  final _Pal p;
+  final LessonPal p;
   final Animation<double> anim;
 
   @override

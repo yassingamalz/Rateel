@@ -181,6 +181,26 @@ magenta background). Processing: `tools/assets/reading_lesson_assets.py`.
 | `ui/reading/crescent.svg`, `star.svg` | `decor/crescent_star.svg` (CR-04) split into its two paths, viewBox trimmed | screen 08 header | placed separately on the reference (IoU 0.85 / 0.93): the reference's star sits apart, in the crescent's opening; star at 55% as 03/05 |
 
 
+## Screen 10, test lesson (2026-11-25)
+No new art: the reference's elements come from the library (08 arch R4, badge R2, lattice R1, mosque, crescent and
+star, `glyphs/star.svg`) or are drawn in code (circles, rows, radios, ✓/✕ discs, arrow, ↻, buttons).
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `data/test/assessment-lesson-1.json` | `src/assets/data/content/assessments/` (Angular data) | the 10 questions of «اختبار أساسيات التجويد» | copied as it is; the second test (`assessment-lesson-2`) has no content |
+| `sounds/test_correct.mp3`, `test_wrong.mp3`, `test_streak.mp3`, `test_passed.mp3` | **plinkfx** (CC0, release `plinkfx-wav-ogg.zip`): `gem-1`, `error-1`, `sparkle-1`, `level-up-1`, converted to mp3; sources, licence and the sampler in `docs/design-assets/test-lesson/sounds/` | correct / wrong answer, streak banner, test passed (`Sounds.correct/wrong/streak/passed`) | owner's choice from the sampler (C3, W2, S3, P2), 2026-11-26; the first uisfx «dreamy» set (2026-11-25) kept there as spares |
+| `ui/test/trophy.webp` | `test-lesson/icons/01_trophy.png` (owner's ChatGPT T4) | trophy next to «أحسنت» in the results | magenta un-mixed on the edge only (inside opaque), trimmed, 384 px (`tools/assets/test_lesson_assets.py`) |
+| `ui/test/flame_medallion.webp` | `test-lesson/icons/02_flame_medallion.png` (T5) | medallion of the streak banner | same processing, 384 px |
+| `ui/test/flame.webp` | `test-lesson/icons/03_flame_glyph.png` (T6) | the three flames of «n إجابات متتالية» in the feedback bar | same processing, 192 px |
+| `ui/test/star_coin_gold.webp` | `test-lesson/icons/04_star_coin_gold.png` (owner, 2026-11-26) | points in the results («نقطة») | all-gold coin with a gold star; same processing, 256 px |
+| `ui/test/star_coin_emerald.webp` | `test-lesson/icons/05_star_coin_emerald.png` | library (not used yet) | emerald coin, gold rim and star |
+| `ui/test/star_coin_mint.webp` | `test-lesson/icons/06_star_coin_mint_glow.png` | library (not used yet) | mint glass coin, cream star, soft glow (the glow beyond 6 px of the edge is cut) |
+| Material icons `lightbulb`, `refresh` | Flutter Material icon font | recommendations, ↻ (not passed) | **placeholders** in the lesson gold until drawn assets exist (prompt T4) |
+| `docs/flutter/screens/10-test-lesson/reference-feedback-{correct,wrong}.webp`, `reference-completion-{pass,fail}.webp` | owner's ChatGPT images from prompts T1/T3 | inspiration only (owner: different from the lesson style, not to replicate exactly) | not app assets |
+
+Shared code from screen 10: `lib/lessons/lesson_decor.dart` (moved from 08 unchanged: `LessonPal`, `LessonBackground`,
+`LatticeField`, `LessonHeader` + `HeaderSpec` (subtitle, gold title, optional book), `LessonBadge`, `GoldCardPainter(fill:)`,
+`ToolRimPainter`, `MoonPainter`, `lessonMosqueTone`).
 ## Owner's icon collection (2026-11-25, screen 12)
 Source: `docs/design-assets/icon-collection/` (owner's zip `Rateel_Icon_Collection`, 21 flat icons on magenta, 1254 px,
 stored as lossless WebP, plus `original_sheet.webp`). Processing: `tools/assets/icon_collection.py` (alpha from the

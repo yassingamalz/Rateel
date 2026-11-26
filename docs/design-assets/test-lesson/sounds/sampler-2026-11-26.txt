@@ -1,0 +1,19 @@
+C1|GIUSTA|plinkfx ding-correct (quiz ding-ding)
+C2|GIUSTA|plinkfx success (rising check chime)
+C3|GIUSTA|plinkfx gem (glassy bell)
+C4|GIUSTA|plinkfx pickup-soft (soft pop + chime)
+C5|GIUSTA|uisfx glass success
+C6|GIUSTA|uisfx soft success
+W1|SBAGLIATA|plinkfx buzzer-wrong (quiz buzzer)
+W2|SBAGLIATA|plinkfx error (two low buzzes)
+W3|SBAGLIATA|plinkfx power-down (falling arpeggio)
+W4|SBAGLIATA|plinkfx deny (dull thunk)
+W5|SBAGLIATA|uisfx glass error
+W6|SBAGLIATA|uisfx soft error
+S1|SERIE|plinkfx combo-chain
+S2|SERIE|uisfx soft streak
+S3|SERIE|plinkfx sparkle
+P1|SUPERATO|plinkfx achievement
+P2|SUPERATO|plinkfx level-up
+P3|SUPERATO|plinkfx victory
+P4|SUPERATO|uisfx soft achievement
