@@ -210,3 +210,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | **APK 1.0.424**: screen 10 v9 (ring coloured by the score; dark buttons outlined, long press on the moon toggles filled). | ✅ |
 | 2026-11-26 | Owner's icons T4–T6 (trophy, flame medallion, flame glyph) evaluated and stored in the **shared library** (`docs/design-assets/test-lesson/icons/`, `assets/ui/test/`, `ASSETS.md`); they replace the placeholder Material trophy and flames on screen 10 (v10). | ✅ |
 | 2026-11-26 | **APK 1.0.425**: screen 10 v10 (owner's trophy and flame icons). | ✅ |
+| 2026-11-26 | Owner's three star coins (gold, emerald, mint) in the **shared library** (`ui/test/star_coin_*.webp`); the **gold coin replaces the star of the points** in the results of screen 10 (v11); emerald and mint kept for later. | ✅ |

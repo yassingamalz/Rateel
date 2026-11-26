@@ -192,6 +192,9 @@ star, `glyphs/star.svg`) or are drawn in code (circles, rows, radios, ✓/✕ di
 | `ui/test/trophy.webp` | `test-lesson/icons/01_trophy.png` (owner's ChatGPT T4) | trophy next to «أحسنت» in the results | magenta un-mixed on the edge only (inside opaque), trimmed, 384 px (`tools/assets/test_lesson_assets.py`) |
 | `ui/test/flame_medallion.webp` | `test-lesson/icons/02_flame_medallion.png` (T5) | medallion of the streak banner | same processing, 384 px |
 | `ui/test/flame.webp` | `test-lesson/icons/03_flame_glyph.png` (T6) | the three flames of «n إجابات متتالية» in the feedback bar | same processing, 192 px |
+| `ui/test/star_coin_gold.webp` | `test-lesson/icons/04_star_coin_gold.png` (owner, 2026-11-26) | points in the results («نقطة») | all-gold coin with a gold star; same processing, 256 px |
+| `ui/test/star_coin_emerald.webp` | `test-lesson/icons/05_star_coin_emerald.png` | library (not used yet) | emerald coin, gold rim and star |
+| `ui/test/star_coin_mint.webp` | `test-lesson/icons/06_star_coin_mint_glow.png` | library (not used yet) | mint glass coin, cream star, soft glow (the glow beyond 6 px of the edge is cut) |
 | Material icons `lightbulb`, `refresh` | Flutter Material icon font | recommendations, ↻ (not passed) | **placeholders** in the lesson gold until drawn assets exist (prompt T4) |
 | `docs/flutter/screens/10-test-lesson/reference-feedback-{correct,wrong}.webp`, `reference-completion-{pass,fail}.webp` | owner's ChatGPT images from prompts T1/T3 | inspiration only (owner: different from the lesson style, not to replicate exactly) | not app assets |
 

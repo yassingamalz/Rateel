@@ -31,3 +31,7 @@ def unmix(name, dst, size):
 unmix('01_trophy.png', 'trophy.webp', 384)
 unmix('02_flame_medallion.png', 'flame_medallion.webp', 384)
 unmix('03_flame_glyph.png', 'flame.webp', 192)
+# Star coins (owner, 2026-11-26): gold used for the points; emerald and mint kept in the library.
+unmix('04_star_coin_gold.png', 'star_coin_gold.webp', 256)
+unmix('05_star_coin_emerald.png', 'star_coin_emerald.webp', 256)
+unmix('06_star_coin_mint_glow.png', 'star_coin_mint.webp', 256)

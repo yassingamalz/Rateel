@@ -334,6 +334,7 @@ class _TestLessonPageState extends State<TestLessonPage>
       'assets/ui/test/trophy.webp',
       'assets/ui/test/flame_medallion.webp',
       'assets/ui/test/flame.webp',
+      'assets/ui/test/star_coin_gold.webp',
       'assets/ui/decor/mosque.webp',
     ];
     Future.any([
@@ -2839,14 +2840,11 @@ class _StatColumn extends StatelessWidget {
           textDirection: TextDirection.rtl,
           children: [
             if (stat.mark == _Mark.star)
-              SvgPicture.asset(
-                'assets/ui/glyphs/star.svg',
-                width: u * 3.6,
-                height: u * 3.6,
-                colorFilter: ColorFilter.mode(
-                  p.c(RateelColors.testSelDot, RateelColors.testLSelRim),
-                  BlendMode.srcIn,
-                ),
+              // Owner's gold star coin (2026-11-26).
+              Image.asset(
+                'assets/ui/test/star_coin_gold.webp',
+                width: u * 4.2,
+                height: u * 4.2,
               )
             else
               _MarkDisc(
