@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Matching and ordering are editorial activity formats, not currently confirmed supported by Flutter. Shuffle independently at runtime, preserve stable IDs.",
+  "questions": [
+    {
+      "id": "U0.L1.M.I1",
+      "topicId": "U0.L1",
+      "text": "اختر ما يعين على التلاوة المتقنة.",
+      "explanation": "السماع والتصحيح يعينان على إتقان الأداء.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإنصات إلى قارئ متقن"
+        },
+        {
+          "id": "2",
+          "text": "المراجعة مع معلم"
+        },
+        {
+          "id": "3",
+          "text": "تعمد تغيير الحروف"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U0.L2.M.I1",
+      "topicId": "U0.L2",
+      "text": "صل المصطلح بمعناه.",
+      "explanation": "لكل مصطلح معنى مستقل.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "المخرج",
+          "right": "موضع خروج الحرف"
+        },
+        {
+          "id": "2",
+          "left": "الصفة",
+          "right": "كيفية أداء الحرف"
+        },
+        {
+          "id": "3",
+          "left": "التجويد لغة",
+          "right": "التحسين"
+        }
+      ]
+    },
+    {
+      "id": "U0.L3.M.I1",
+      "topicId": "U0.L3",
+      "text": "قد يقع اللحن الجلي دون أن يتغير المعنى.",
+      "explanation": "اللحن الجلي خلل ظاهر وقد يغير المعنى أو لا يغيره.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U0.L4.M.I1",
+      "topicId": "U0.L4",
+      "text": "أكمل صيغة الاستعاذة المشهورة: أعوذ بالله من ...",
+      "explanation": "هذه الصيغة المشهورة للاستعاذة.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "الشيطان الرجيم"
+      ]
+    },
+    {
+      "id": "U0.L5.M.I1",
+      "topicId": "U0.L5",
+      "text": "اختر أوجه الانتقال الجائزة بالبسملة بين سورتين في الحالة المعتادة.",
+      "explanation": "الوجه الرابع يوهم أن البسملة خاتمة للسورة الأولى.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "قطع الجميع"
+        },
+        {
+          "id": "2",
+          "text": "وصل الجميع"
+        },
+        {
+          "id": "3",
+          "text": "قطع آخر الأولى ووصل البسملة بالتالية"
+        },
+        {
+          "id": "4",
+          "text": "وصل آخر الأولى بالبسملة ثم الوقف عليها"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U1.L1.M.I1",
+      "topicId": "U1.L1",
+      "text": "صل الحرف باسمه.",
+      "explanation": "اسم الحرف غير صوته في الكلمة.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "ب",
+          "right": "باء"
+        },
+        {
+          "id": "2",
+          "left": "ت",
+          "right": "تاء"
+        },
+        {
+          "id": "3",
+          "left": "ن",
+          "right": "نون"
+        }
+      ]
+    },
+    {
+      "id": "U1.L2.M.I1",
+      "topicId": "U1.L2",
+      "text": "أي أعضاء تشارك في تشكيل أصوات الكلام؟",
+      "explanation": "تتعاون أعضاء النطق في تشكيل الأصوات.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "اللسان"
+        },
+        {
+          "id": "2",
+          "text": "الشفتان"
+        },
+        {
+          "id": "3",
+          "text": "الحنك"
+        },
+        {
+          "id": "4",
+          "text": "الركبة"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U1.L3.M.I1",
+      "topicId": "U1.L3",
+      "text": "جريان النفس وجريان الصوت مصطلحان مختلفان في التجويد.",
+      "explanation": "الهمس والجهر يتعلقان بالنفس، والشدة والرخاوة بجريان الصوت.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    }
+  ]
+}
