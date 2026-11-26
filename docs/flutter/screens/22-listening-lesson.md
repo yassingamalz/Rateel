@@ -1,6 +1,6 @@
 # Screen 22: listening lesson (درس الاستماع)
 
-Status: **lesson type confirmed by the owner** (2026-11-25): a separate lesson of type `listen`, not part of the tests.
+Status: **v5 built** (2026-11-26), answers Q1–Q10 in `22-listening-lesson/HISTORY.md` §2; lesson type confirmed by the owner (2026-11-25): a separate lesson of type `listen`, not part of the tests.
 Reference: **`screens/22-listening-lesson/22-lezione-ascolto.webp`** (owner, 2026-11-25, generated with
 `prompts/22-listening-lesson/reference-v2.txt` from the app screenshots; v1 with the old ChatGPT images is superseded). Plan to be shown to the owner before building.
 Build order: after 10/10b (test and answer feedback), reusing their widgets.

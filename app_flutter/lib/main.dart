@@ -17,6 +17,7 @@ import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
+import 'lessons/listening_lesson_page.dart';
 import 'lessons/reading_lesson_page.dart';
 import 'lessons/test_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
@@ -102,6 +103,12 @@ Future<void> main() async {
   ];
   testStartState = q['testState'];
   testStartRight = int.tryParse(q['testRight'] ?? '');
+  // Review aids (screen 22): `?listenQ=2&listenPick=0&listenState=ok|ko`,
+  // `?listenAt=0.4` (with `?lessons=1,2&openLesson=0`).
+  listenStartQuestion = int.tryParse(q['listenQ'] ?? '') ?? 0;
+  listenStartPick = int.tryParse(q['listenPick'] ?? '');
+  listenStartState = q['listenState'];
+  listenStartAt = double.tryParse(q['listenAt'] ?? '');
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';

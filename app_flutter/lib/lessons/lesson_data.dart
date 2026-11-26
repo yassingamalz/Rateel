@@ -28,7 +28,23 @@ class Lesson {
 
 /// Lessons of the unit with id [unitId]. Empty for units that have no lessons
 /// in the data yet: screen 06 shows «قريبًا».
-List<Lesson> lessonsOf(String unitId) => _lessonsByUnit[unitId] ?? const [];
+List<Lesson> lessonsOf(String unitId) =>
+    _lessonsByUnit[unitId] ?? _mockLessons[unitId] ?? const [];
+
+/// Mock lessons until the data has them (`SCREENS.md`, «mock data»): the
+/// listening lesson of screen 22 in the unit «النون المشددة» (course 02, unit
+/// 2), which has no lessons in the data.
+const _mockLessons = <String, List<Lesson>>{
+  'noon-mushaddad-theory': [
+    Lesson(
+      id: 'listen-kawthar-ghunna',
+      title: 'الاستماع: الغنة',
+      description: 'استمع إلى سورة الكوثر وتعرّف على الغنة',
+      type: LessonType.listen,
+      minutes: 5,
+    ),
+  ],
+};
 
 /// Lessons completed in each unit, kept for the session (the real storage
 /// comes with the backend). One progress for the whole app (owner,

@@ -107,3 +107,13 @@ screens 07/08/11; the owner decides at the end of the project. C7 (two corner la
 | D5 | Golds of the tiles, line, capsule, disc | gold rim #DAA42A + #FFDA6B, gold fill #E2A51E, active ring #D8C35A; glass tile 2 px #1C4E38 | rim #FBC411, open rim #EBC952/#FDFBD1/#B47F01, line #FFE451, capsule #FFFE64→#FAC102 / #FFB201, disc #F5CC02 | reference (`chal*`) |
 | D6 | Pills | 03 pill 🟡 outline gold 2 px, fill #062D20, gold text | fill #0E4422 → #0B3519, rim #B9A52E, cream number | reference |
 | D7 | Connector | 03/05 path: 3 px #D1A93C on #265343 | #FFE451 core, olive glow, on #2C4A25 | reference |
+## Screen 22, listening lesson (2026-11-26)
+Measured on `screens/22-listening-lesson/22-lezione-ascolto.webp`; built with the reference values (`listen*` tokens),
+the owner decides at the end of the project.
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| L1 | Answer pills | 03 pill 🟡 outline gold 2 px, fill #062D20, gold text; 10 option rows (`testRow*`) | fill #032F21, pale gold-cream rim #C9D39A 0.25u, cream text | reference (`listenPill*`) |
+| L2 | Selected answer (gold fill) | gold fill `amber #E2A51E`, pills `#EDB120` | #F3BF41 → #E49F17, rim #FEE987 | reference (`listenGold*`) |
+| L3 | Waveform and asked word | `progressFill #EBB335`, lesson gold | played #EAB00B, rest #3B6C39, word #E2B92B | reference (`listenWave*`, `listenWord`) |
+| L4 | Header title size | 08 title 6.3u | 7.0u (wider in the reference) | reference |

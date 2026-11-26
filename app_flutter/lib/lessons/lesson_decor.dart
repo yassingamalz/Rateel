@@ -48,7 +48,12 @@ class HeaderSpec {
     this.subtitleSize = 0,
     this.starOpacity = 0.55,
     this.subtitleColor,
+    this.emblem,
   });
+
+  /// Raster emblem at the arch apex instead of the 08 book (screen 22:
+  /// gold headphones), in the book box.
+  final String? emblem;
 
   final double archW, archH, archTop, archClipDx;
   final double mosqueDx, mosqueTop, mosqueW;
@@ -299,7 +304,16 @@ class LessonHeader extends StatelessWidget {
               top: u * s.bookTop,
               width: u * s.bookW,
               height: u * s.bookH,
-              child: SvgPicture.asset(
+              child: s.emblem != null
+                  ? Image.asset(
+                      s.emblem!,
+                      fit: BoxFit.contain,
+                      color: p.t > 0
+                          ? p.c(RateelColors.glyphGoldTop, RateelColors.readLBook)
+                          : null,
+                      colorBlendMode: p.t > 0 ? BlendMode.srcIn : null,
+                    )
+                  : SvgPicture.asset(
                 'assets/ui/decor/header_book.svg',
                 colorFilter: p.t > 0
                     ? ColorFilter.mode(

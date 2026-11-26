@@ -1,0 +1,1270 @@
+import 'dart:async';
+import 'dart:math' as math;
+
+import 'package:audioplayers/audioplayers.dart';
+import 'package:material_ui/material_ui.dart';
+
+import '../core/haptics.dart';
+import '../core/sounds.dart';
+import '../theme/rateel_theme.dart';
+import 'lesson_data.dart';
+import 'lesson_decor.dart';
+import 'lesson_shell.dart';
+import 'lesson_widgets.dart';
+import 'listening_data.dart';
+import 'reading_data.dart' show readingLight;
+import 'reading_lesson_page.dart' show readingStartLight, ReadMetrics;
+
+/// Review aids (screen 22): `?listenQ=2` opens question 2 (0-based),
+/// `?listenPick=0` selects that option, `?listenState=ok|ko` shows the
+/// feedback, `?listenAt=0.4` stops the audio at 40% (waveform and lit word,
+/// no autoplay); with `?readTheme=light` for the light theme.
+int listenStartQuestion = 0;
+int? listenStartPick;
+String? listenStartState;
+double? listenStartAt;
+
+/// Geometry of screen 22 in u (1% of the screen height), measured on
+/// `screens/22-listening-lesson/22-lezione-ascolto.webp` (1844×853,
+/// u = 8.53 px). Card values from the card edges; bottom row from the screen
+/// edges; header = the 08 header with the headphones in the book box.
+class ListenMetrics {
+  ListenMetrics._();
+  static const side = 4.6;
+  static final header = HeaderSpec(
+    archW: ReadMetrics.archW,
+    archH: ReadMetrics.archH,
+    archTop: ReadMetrics.archTop,
+    archClipDx: ReadMetrics.archClipDx,
+    mosqueDx: ReadMetrics.mosqueDx,
+    mosqueTop: ReadMetrics.mosqueTop,
+    mosqueW: ReadMetrics.mosqueW,
+    crescentDx: ReadMetrics.crescentDx,
+    crescentTop: ReadMetrics.crescentTop,
+    crescentH: ReadMetrics.crescentH,
+    starDx: ReadMetrics.starDx,
+    starTop: ReadMetrics.starTop,
+    starH: ReadMetrics.starH,
+    titleCentre: titleCentre,
+    titleSize: titleSize,
+    dividerTop: ReadMetrics.dividerTop,
+    dividerW: ReadMetrics.dividerW,
+    dividerDiamond: ReadMetrics.dividerDiamond,
+    bookW: headW,
+    bookH: headH,
+    bookTop: headTop,
+    emblem: 'assets/ui/listening/headphones.webp',
+  );
+  // Title larger than 08 (reference: ink 727–1117 px wide, centre 17.6u).
+  static const titleCentre = 17.3;
+  static const titleSize = 7.0;
+  static const headW = 9.0;
+  static const headH = 7.4;
+  static const headTop = 5.6;
+  // Card.
+  static const cardTop = 27.55;
+  static const cardBottom = 66.7;
+  static const cardRadius = 3.6;
+  static const bandTop = 24.0; // lattice band, from the card top
+  static const badgeRight = 11.0; // card right edge → badge centre
+  static const badgeCy = 7.7; // from the card top
+  static const badgeH = 9.4;
+  static const surahLeft = 4.9; // card left edge → text
+  static const surahCy = 5.3;
+  static const surahSize = 4.1;
+  static const verseCy = 15.2;
+  static const verseSize = 11.5;
+  static const waveCy = 30.5;
+  static const bars = 51;
+  static const barStep = 2.6;
+  static const barW = 1.4;
+  static const barMin = 1.9;
+  static const barMax = 7.0;
+  // Play button under the card.
+  static const playCy = 73.6;
+  static const playD = 12.1;
+  // Line above the bottom row.
+  static const lineY = 82.0;
+  static const lineInset = 7.0;
+  // Bottom row.
+  static const rowCy = 89.6;
+  static const qRight = 7.2; // screen right → question text
+  static const qSize = 4.5;
+  static const pillsRight = 72.6; // screen right → first answer pill
+  static const pillW = 27.2;
+  static const pillH = 9.6;
+  static const pillGap = 3.9;
+  static const pillText = 4.2;
+  static const pillRim = 0.25;
+  static const confirmLeft = 6.8;
+  static const confirmW = 32.5;
+  static const confirmH = 11.8;
+  static const confirmCy = 89.0;
+}
+
+Route<bool> listeningLessonRoute(
+  Lesson lesson,
+  int index,
+  int count, {
+  bool completed = false,
+}) => lessonRoute<bool>(
+  (context) => ListeningLessonPage(lesson: lesson, completed: completed),
+);
+
+class ListeningLessonPage extends StatefulWidget {
+  const ListeningLessonPage({
+    super.key,
+    required this.lesson,
+    this.completed = false,
+  });
+
+  final Lesson lesson;
+  final bool completed;
+
+  @override
+  State<ListeningLessonPage> createState() => _ListeningLessonPageState();
+}
+
+class _ListeningLessonPageState extends State<ListeningLessonPage>
+    with TickerProviderStateMixin {
+  final _shell = GlobalKey<LessonShellState>();
+  late final _entry = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  );
+  late final _theme = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 450),
+    value: readingLight.value ? 1 : 0,
+  );
+  // Question change: card content and bottom row slide (RTL: next from the
+  // left), as 08/10.
+  late final _swap = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 360),
+    value: 1,
+  );
+  // Feedback: the waveform gives way to the explanation strip.
+  late final _fb = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 380),
+  );
+  // Wrong answer: the chosen pill shakes.
+  late final _shake = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 420),
+  );
+
+  final _player = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  final _subs = <StreamSubscription<Object?>>[];
+
+  /// Audio position (ms): drives only the waveform painter and the lit word.
+  final _pos = ValueNotifier<int>(0);
+  final _playing = ValueNotifier<bool>(false);
+  final _lit = ValueNotifier<int>(-1);
+  String? _source;
+  int? _stopAt;
+
+  ListenContent? _content;
+  bool _loaded = false;
+  int _index = 0;
+  int _dir = 1;
+  int? _pick;
+  bool? _ok;
+  int _points = 0;
+  int _answered = 0;
+  bool _finishing = false;
+  bool _left = false;
+
+  ListenQuestion? get _q => _content?.questions[_index];
+
+  /// Points earned in this lesson (for the end of lesson, screen 24).
+  int get points => _points;
+
+  @override
+  void initState() {
+    super.initState();
+    if (readingStartLight) {
+      readingLight.value = true;
+      _theme.value = 1;
+    }
+    readingLight.addListener(_onTheme);
+    _subs
+      ..add(
+        _player.onPositionChanged.listen((d) {
+          final ms = d.inMilliseconds;
+          _pos.value = ms;
+          final q = _q;
+          if (q != null) _lit.value = q.ayah.wordAt(ms);
+          final stop = _stopAt;
+          if (stop != null && ms >= stop) {
+            _stopAt = null;
+            _player.pause();
+            _playing.value = false;
+            _lit.value = -1;
+          }
+        }),
+      )
+      ..add(
+        _player.onPlayerComplete.listen((_) {
+          final q = _q;
+          _playing.value = false;
+          _lit.value = -1;
+          _stopAt = null;
+          if (q != null) _pos.value = q.ayah.durationMs;
+        }),
+      );
+    ListenContent.load(widget.lesson.id).then((c) {
+      if (!mounted) return;
+      setState(() {
+        _content = c;
+        _loaded = true;
+        if (c != null) _applyReviewAids(c);
+      });
+      if (c != null && listenStartAt == null && listenStartState == null) {
+        // The verse plays by itself once the page has entered.
+        Future<void>.delayed(const Duration(milliseconds: 700), () {
+          if (mounted && _shell.currentState?.paused != true) _play();
+        });
+      }
+    });
+  }
+
+  void _applyReviewAids(ListenContent c) {
+    _index = listenStartQuestion.clamp(0, c.questions.length - 1);
+    _answered = _index;
+    final q = c.questions[_index];
+    final at = listenStartAt;
+    if (at != null) {
+      _pos.value = (q.ayah.durationMs * at).round();
+      _lit.value = q.ayah.wordAt(_pos.value);
+    }
+    final pick = listenStartPick;
+    if (pick != null && pick < q.options.length) _pick = pick;
+    final s = listenStartState;
+    if (s == 'ok' || s == 'ko') {
+      _pick ??= s == 'ok'
+          ? q.options.indexOf(q.correct)
+          : q.options.indexWhere((o) => o != q.correct);
+      _ok = q.options[_pick!] == q.correct;
+      if (_ok!) _points += c.points;
+      _answered++;
+      _fb.value = 1;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_entry.value > 0 || _entry.isAnimating) return;
+    Future.any([
+      Future.wait([
+        for (final a in const [
+          'assets/ui/reading/lattice_tile.webp',
+          'assets/ui/reading/badge_line.webp',
+          'assets/ui/reading/badge_fill.webp',
+          'assets/ui/reading/arch.webp',
+          'assets/ui/listening/headphones.webp',
+          'assets/ui/decor/mosque.webp',
+        ])
+          precacheImage(AssetImage(a), context),
+      ]),
+      Future<void>.delayed(const Duration(milliseconds: 400)),
+    ]).whenComplete(() {
+      if (mounted && !_entry.isAnimating && _entry.value == 0) {
+        _entry.forward();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    readingLight.removeListener(_onTheme);
+    for (final s in _subs) {
+      s.cancel();
+    }
+    _player.dispose();
+    _pos.dispose();
+    _playing.dispose();
+    _lit.dispose();
+    _entry.dispose();
+    _theme.dispose();
+    _swap.dispose();
+    _fb.dispose();
+    _shake.dispose();
+    super.dispose();
+  }
+
+  void _onTheme() =>
+      readingLight.value ? _theme.forward() : _theme.reverse();
+
+  void _leave(bool done) {
+    if (_left || !mounted) return;
+    if (ModalRoute.of(context)?.isCurrent != true) return;
+    _left = true;
+    _player.stop();
+    Navigator.of(context).pop(done);
+  }
+
+  // ---- Audio ---------------------------------------------------------------
+
+  /// Plays the verse of the current question from [fromMs]; with [toMs] it
+  /// stops there (the asked word after an answer).
+  Future<void> _play({int fromMs = 0, int? toMs}) async {
+    final q = _q;
+    if (q == null) return;
+    _stopAt = toMs;
+    _playing.value = true;
+    try {
+      if (_source != q.ayah.audio) {
+        _source = q.ayah.audio;
+        await _player.setSource(AssetSource(q.ayah.audio));
+      }
+      await _player.seek(Duration(milliseconds: fromMs));
+      await _player.resume();
+    } catch (_) {
+      _playing.value = false;
+    }
+  }
+
+  void _togglePlay() {
+    final q = _q;
+    if (q == null) return;
+    if (_playing.value) {
+      _player.pause();
+      _playing.value = false;
+      _stopAt = null;
+      return;
+    }
+    // From the start when it had ended (or after the word replay).
+    final atEnd = _pos.value >= q.ayah.durationMs - 150 || _pos.value == 0;
+    if (atEnd || _ok != null) {
+      _play();
+    } else {
+      _playing.value = true;
+      _player.resume();
+    }
+  }
+
+  // ---- Question flow -------------------------------------------------------
+
+  void _select(int i) {
+    if (_ok != null || _finishing) return;
+    Haptics.tick();
+    setState(() => _pick = i);
+  }
+
+  void _confirm() {
+    final c = _content, q = _q;
+    if (c == null || q == null) return;
+    if (_ok != null) {
+      _next();
+      return;
+    }
+    final pick = _pick;
+    if (pick == null) {
+      Haptics.denied();
+      return;
+    }
+    final ok = q.options[pick] == q.correct;
+    setState(() {
+      _ok = ok;
+      _answered++;
+      if (ok) _points += c.points;
+    });
+    if (ok) {
+      Sounds.correct();
+      Haptics.success();
+    } else {
+      Sounds.wrong();
+      Haptics.denied();
+      _shake.forward(from: 0);
+    }
+    _fb.forward(from: 0);
+    // The asked word plays again.
+    final w = q.ayah.words[q.word];
+    Future<void>.delayed(const Duration(milliseconds: 650), () {
+      if (mounted && _ok != null) {
+        _play(fromMs: w.startMs, toMs: w.endMs + 150);
+      }
+    });
+  }
+
+  void _next() {
+    final c = _content;
+    if (c == null || _finishing) return;
+    if (_index >= c.questions.length - 1) {
+      _complete();
+      return;
+    }
+    Haptics.tick();
+    _player.stop();
+    final same = c.questions[_index + 1].ayah.id == _q!.ayah.id;
+    setState(() {
+      _dir = 1;
+      _index++;
+      _pick = null;
+      _ok = null;
+      if (!same) _pos.value = 0;
+    });
+    _pos.value = 0;
+    _lit.value = -1;
+    _playing.value = false;
+    _fb.value = 0;
+    _swap.forward(from: 0);
+    Future<void>.delayed(const Duration(milliseconds: 450), () {
+      if (mounted && _shell.currentState?.paused != true) _play();
+    });
+  }
+
+  void _restart() {
+    _player.stop();
+    setState(() {
+      _index = 0;
+      _answered = 0;
+      _points = 0;
+      _pick = null;
+      _ok = null;
+      _dir = -1;
+    });
+    _pos.value = 0;
+    _lit.value = -1;
+    _playing.value = false;
+    _fb.value = 0;
+    _swap.forward(from: 0);
+    Future<void>.delayed(const Duration(milliseconds: 450), () {
+      if (mounted) _play();
+    });
+  }
+
+  Future<void> _complete() async {
+    if (_finishing || _left) return;
+    _finishing = true;
+    _player.stop();
+    Sounds.passed();
+    Haptics.lessonDone();
+    await _shell.currentState?.celebrate();
+    _leave(true);
+  }
+
+  // Entry: header, card, play button, bottom row (70 ms steps), as 08.
+  Widget _enter(int k, Widget child) => AnimatedBuilder(
+    animation: _entry,
+    child: child,
+    builder: (context, child) {
+      final t = Curves.easeOutCubic.transform(
+        ((_entry.value - k * 0.07) / 0.6).clamp(0.0, 1.0),
+      );
+      return Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, (1 - t) * 12),
+          child: child,
+        ),
+      );
+    },
+  );
+
+  Widget _swapIn(Widget child) => AnimatedBuilder(
+    animation: _swap,
+    child: child,
+    builder: (context, child) {
+      final t = Curves.easeOutCubic.transform(_swap.value);
+      return Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(-40 * (1 - t) * _dir, 0),
+          child: child,
+        ),
+      );
+    },
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _theme,
+      builder: (context, _) {
+        final light = Curves.easeInOut.transform(_theme.value);
+        return LessonShell(
+          key: _shell,
+          step: _answered,
+          total: _content?.questions.length ?? 1,
+          light: light,
+          onBack: () => _leave(false),
+          onRestart: _restart,
+          onPausedChanged: (p) {
+            if (p && _playing.value) {
+              _player.pause();
+              _playing.value = false;
+            }
+          },
+          child: LayoutBuilder(
+            builder: (context, box) =>
+                _page(box, LessonPal(light), box.maxHeight / 100),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _page(BoxConstraints box, LessonPal p, double u) {
+    final w = box.maxWidth;
+    final cx = w / 2;
+    final card = Rect.fromLTRB(
+      u * ListenMetrics.side,
+      u * ListenMetrics.cardTop,
+      w - u * ListenMetrics.side,
+      u * ListenMetrics.cardBottom,
+    );
+    final q = _q;
+    return Stack(
+      fit: StackFit.expand,
+      clipBehavior: Clip.hardEdge,
+      children: [
+        RepaintBoundary(
+          key: const ValueKey('bg'),
+          child: LessonBackground(p: p, u: u),
+        ),
+        RepaintBoundary(
+          key: const ValueKey('header'),
+          child: _enter(
+            0,
+            LessonHeader(
+              p: p,
+              u: u,
+              cx: cx,
+              s: ListenMetrics.header,
+              title: _content?.title ?? widget.lesson.title,
+            ),
+          ),
+        ),
+        Positioned.fromRect(
+          key: const ValueKey('card'),
+          rect: card,
+          child: _enter(1, _card(p, u, card)),
+        ),
+        Positioned(
+          key: const ValueKey('play'),
+          left: cx - u * ListenMetrics.playD / 2,
+          top: u * (ListenMetrics.playCy - ListenMetrics.playD / 2),
+          width: u * ListenMetrics.playD,
+          height: u * ListenMetrics.playD,
+          child: _enter(
+            2,
+            ValueListenableBuilder<bool>(
+              valueListenable: _playing,
+              builder: (context, playing, _) => LessonRoundButton(
+                u: u,
+                label: playing ? 'إيقاف' : 'استمع',
+                glyph: PillGlyph.play,
+                glyphSize: 4.6,
+                light: p.t,
+                onTap: _togglePlay,
+                child: playing
+                    ? SizedBox(
+                        width: u * 3.6,
+                        height: u * 4.2,
+                        child: CustomPaint(
+                          painter: _PausePainter(
+                            p.c(titleCream, RateelColors.readLInk),
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          key: const ValueKey('line'),
+          left: u * ListenMetrics.lineInset,
+          right: u * ListenMetrics.lineInset,
+          top: u * ListenMetrics.lineY - math.max(1, u * 0.12) / 2,
+          height: math.max(1, u * 0.12),
+          child: _enter(
+            3,
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    p.c(RateelColors.listenLine, RateelColors.readLSeparator)
+                        .withValues(alpha: 0),
+                    p.c(RateelColors.listenLine, RateelColors.readLSeparator),
+                    p.c(RateelColors.listenLine, RateelColors.readLSeparator),
+                    p.c(RateelColors.listenLine, RateelColors.readLSeparator)
+                        .withValues(alpha: 0),
+                  ],
+                  stops: const [0, 0.08, 0.92, 1],
+                ),
+              ),
+            ),
+          ),
+        ),
+        if (q != null) ...[
+          Positioned(
+            key: const ValueKey('question'),
+            right: u * ListenMetrics.qRight,
+            width: u *
+                (ListenMetrics.pillsRight -
+                    ListenMetrics.qRight -
+                    ListenMetrics.pillGap),
+            top: u * (ListenMetrics.rowCy - 6.45),
+            height: u * 12,
+            child: _enter(
+              3,
+              _swapIn(
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      q.prompt,
+                      textDirection: TextDirection.rtl,
+                      maxLines: 1,
+                      style: readex(
+                        u * ListenMetrics.qSize,
+                        weight: 600,
+                        color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+                      ).copyWith(height: 1.3),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          for (var i = 0; i < q.options.length; i++)
+            Positioned(
+              key: ValueKey('pill$i'),
+              right: u *
+                  (ListenMetrics.pillsRight +
+                      i * (ListenMetrics.pillW + ListenMetrics.pillGap)),
+              top: u * (ListenMetrics.rowCy - ListenMetrics.pillH / 2),
+              width: u * ListenMetrics.pillW,
+              height: u * ListenMetrics.pillH,
+              child: _enter(3, _swapIn(_answerPill(p, u, q, i))),
+            ),
+        ],
+        Positioned(
+          key: const ValueKey('confirm'),
+          left: u * ListenMetrics.confirmLeft,
+          top: u * (ListenMetrics.confirmCy - ListenMetrics.confirmH / 2),
+          width: u * ListenMetrics.confirmW,
+          height: u * ListenMetrics.confirmH,
+          child: _enter(
+            3,
+            LessonPill(
+              u: u,
+              label: _ok == null
+                  ? 'تأكيد'
+                  : (_index >= (_content?.questions.length ?? 1) - 1
+                        ? 'إنهاء'
+                        : 'التالي'),
+              glyph: _ok == null || _index >= (_content?.questions.length ?? 1) - 1
+                  ? PillGlyph.check
+                  : PillGlyph.forward,
+              height: ListenMetrics.confirmH,
+              light: p.t,
+              onTap: _confirm,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ---- Card ------------------------------------------------------------------
+
+  Widget _card(LessonPal p, double u, Rect card) {
+    final r = u * ListenMetrics.cardRadius;
+    final q = _q;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        RepaintBoundary(
+          child: CustomPaint(painter: GoldCardPainter(p, u, r)),
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          top: u * ListenMetrics.bandTop,
+          bottom: 0,
+          child: RepaintBoundary(
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(r)),
+              child: LatticeField(
+                p: p,
+                u: u,
+                cell: ReadMetrics.cell,
+                opacity: p.d(0.2, 0.4),
+                mask: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0x00000000), Color(0xFF000000)],
+                  stops: [0.0, 0.85],
+                ),
+              ),
+            ),
+          ),
+        ),
+        if (q == null)
+          Center(
+            child: Text(
+              _loaded ? 'عذراً، لا يمكن تحميل محتوى الدرس' : '',
+              textDirection: TextDirection.rtl,
+              style: readex(
+                u * 4.2,
+                weight: 400,
+                color: p.c(RateelColors.cream, RateelColors.readLInk),
+              ),
+            ),
+          )
+        else ...[
+          Positioned(
+            right: u * (ListenMetrics.badgeRight - ListenMetrics.badgeH / 2),
+            top: u * (ListenMetrics.badgeCy - ListenMetrics.badgeH / 2),
+            width: u * ListenMetrics.badgeH,
+            height: u * ListenMetrics.badgeH,
+            child: _swapIn(LessonBadge(p: p, u: u, number: _index + 1)),
+          ),
+          Positioned(
+            left: u * ListenMetrics.surahLeft,
+            top: u * (ListenMetrics.surahCy - 3),
+            height: u * 6,
+            child: Center(
+              child: Text(
+                '${q.ayah.surah} · ${_content!.reciter}',
+                textDirection: TextDirection.rtl,
+                style: readex(
+                  u * ListenMetrics.surahSize,
+                  weight: 500,
+                  color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+                ).copyWith(height: 1.2),
+              ),
+            ),
+          ),
+          Positioned(
+            left: u * 16,
+            right: u * 16,
+            top: u * (ListenMetrics.verseCy - 10),
+            height: u * 20,
+            child: _swapIn(
+              RepaintBoundary(
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: ValueListenableBuilder<int>(
+                      valueListenable: _lit,
+                      builder: (context, lit, _) => _verse(p, u, q, lit),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Waveform, then the explanation after the answer.
+          Positioned(
+            left: 0,
+            right: 0,
+            top: u * (ListenMetrics.waveCy - 4.5),
+            height: u * 9,
+            child: AnimatedBuilder(
+              animation: _fb,
+              builder: (context, _) {
+                final f = Curves.easeOut.transform(_fb.value);
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    if (f < 1)
+                      Opacity(
+                        opacity: 1 - f,
+                        child: RepaintBoundary(
+                          child: CustomPaint(
+                            painter: _WavePainter(
+                              pos: _pos,
+                              ayah: q.ayah,
+                              u: u,
+                              played: p.c(
+                                RateelColors.listenWavePlayed,
+                                RateelColors.readLCopper,
+                              ),
+                              rest: p.c(
+                                RateelColors.listenWaveRest,
+                                RateelColors.readLDotOff,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (f > 0 && _ok != null)
+                      Opacity(
+                        opacity: f,
+                        child: Transform.translate(
+                          offset: Offset(0, u * 2 * (1 - f)),
+                          child: _explanation(p, u, q),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// The verse word by word (RTL): the asked word in gold; the word being
+  /// recited lights up in a soft gold box (lesson-production video).
+  Widget _verse(LessonPal p, double u, ListenQuestion q, int lit) {
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    final gold = p.c(RateelColors.listenWord, RateelColors.readLTitle);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      textDirection: TextDirection.rtl,
+      children: [
+        for (final (i, w) in q.ayah.words.indexed) ...[
+          if (i > 0) SizedBox(width: u * 3.0),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            padding: EdgeInsets.symmetric(horizontal: u * 1.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(u * 1.6),
+              color: (i == lit ? RateelColors.listenWord : Colors.transparent)
+                  .withValues(alpha: i == lit ? 0.16 * (1 - p.t) + 0.2 * p.t : 0),
+              border: Border.all(
+                color: RateelColors.listenWord.withValues(
+                  alpha: i == lit ? 0.45 : 0,
+                ),
+                width: math.max(1, u * 0.18),
+              ),
+              boxShadow: [
+                if (i == lit && p.t < 0.5)
+                  BoxShadow(
+                    color: RateelColors.listenWord.withValues(alpha: 0.25),
+                    blurRadius: u * 1.6,
+                  ),
+              ],
+            ),
+            child: Text(
+              w.text,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontFamily: 'AmiriQuran',
+                fontSize: u * ListenMetrics.verseSize,
+                height: 1.3,
+                color: i == q.word || i == lit ? gold : ink,
+                shadows: p.t > 0.5 ? null : titleShadows(u),
+              ),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _explanation(LessonPal p, double u, ListenQuestion q) {
+    final ok = _ok!;
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: u * 8),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            textDirection: TextDirection.rtl,
+            children: [
+              _MarkDisc(u: u, ok: ok, size: 5.2),
+              SizedBox(width: u * 1.8),
+              Text(
+                ok ? 'أحسنت.' : 'الإجابة الصحيحة: ${q.correct}.',
+                textDirection: TextDirection.rtl,
+                style: readex(
+                  u * 3.6,
+                  weight: 600,
+                  color: ok
+                      ? p.c(RateelColors.testOkText, RateelColors.testLOkRim)
+                      : p.c(RateelColors.testKoDiscTop, RateelColors.testLKoRim),
+                ),
+              ),
+              SizedBox(width: u * 1.4),
+              Text(
+                q.explanation,
+                textDirection: TextDirection.rtl,
+                style: readex(u * 3.6, weight: 400, color: ink),
+              ),
+              if (ok) ...[
+                SizedBox(width: u * 2.2),
+                Container(
+                  height: u * 5.6,
+                  padding: EdgeInsets.symmetric(horizontal: u * 2.0),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(u * 2.8),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        p.c(RateelColors.testPillTop, RateelColors.testLGoldTop),
+                        p.c(
+                          RateelColors.testPillBottom,
+                          RateelColors.testLGoldBottom,
+                        ),
+                      ],
+                    ),
+                    border: Border.all(
+                      color: p.c(
+                        RateelColors.testPillRimBottom,
+                        RateelColors.testLGoldRimBottom,
+                      ),
+                      width: math.max(1, u * 0.22),
+                    ),
+                  ),
+                  child: Text(
+                    '\u2066+${_content!.points}\u2069 نقطة',
+                    textDirection: TextDirection.rtl,
+                    style: readex(
+                      u * 3.2,
+                      weight: 600,
+                      color: p.c(RateelColors.testPillText, Colors.white),
+                    ).copyWith(height: 1.1),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ---- Answer pills ----------------------------------------------------------
+
+  Widget _answerPill(LessonPal p, double u, ListenQuestion q, int i) {
+    final answered = _ok != null;
+    final isPick = _pick == i;
+    final isRight = q.options[i] == q.correct;
+    final state = !answered
+        ? (isPick ? _PillState.selected : _PillState.idle)
+        : isRight
+        ? _PillState.right
+        : isPick
+        ? _PillState.wrong
+        : _PillState.dim;
+    final pill = _AnswerPill(
+      u: u,
+      p: p,
+      label: q.options[i],
+      state: state,
+      onTap: () => _select(i),
+    );
+    if (state != _PillState.wrong) return pill;
+    return AnimatedBuilder(
+      animation: _shake,
+      child: pill,
+      builder: (context, child) => Transform.translate(
+        offset: Offset(
+          math.sin(_shake.value * math.pi * 6) * u * 1.0 * (1 - _shake.value),
+          0,
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+
+enum _PillState { idle, selected, right, wrong, dim }
+
+/// Answer pill of the bottom row (reference): dark glass with a thin pale
+/// gold rim; selected = lesson gold with dark ink; after the answer the right
+/// one turns jewel green ✓, a wrong choice red ✕ (lesson-production video,
+/// owner 2026-11-26, Q6), the others fade.
+class _AnswerPill extends StatelessWidget {
+  const _AnswerPill({
+    required this.u,
+    required this.p,
+    required this.label,
+    required this.state,
+    required this.onTap,
+  });
+
+  final double u;
+  final LessonPal p;
+  final String label;
+  final _PillState state;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final h = u * ListenMetrics.pillH;
+    final List<Color> fill;
+    final Color rim;
+    final Color ink;
+    switch (state) {
+      case _PillState.selected:
+        fill = [
+          p.c(RateelColors.listenGoldTop, RateelColors.testLGoldTop),
+          p.c(RateelColors.listenGoldBottom, RateelColors.testLGoldBottom),
+        ];
+        rim = p.c(RateelColors.listenGoldRim, RateelColors.testLGoldRimBottom);
+        ink = p.c(RateelColors.countText, Colors.white);
+      case _PillState.right:
+        fill = [
+          p.c(RateelColors.testOkTop, RateelColors.testLGreenTop),
+          p.c(RateelColors.testOkBottom, RateelColors.testLGreenBottom),
+        ];
+        rim = p.c(RateelColors.testOkRim, RateelColors.testLGreenRimTop);
+        ink = Colors.white;
+      case _PillState.wrong:
+        fill = [
+          p.c(RateelColors.testKoTop, RateelColors.testLRedTop),
+          p.c(RateelColors.testKoBottom, RateelColors.testLRedBottom),
+        ];
+        rim = p.c(RateelColors.testKoRim, RateelColors.testLRedRimTop);
+        ink = Colors.white;
+      case _PillState.idle:
+      case _PillState.dim:
+        fill = [
+          p.c(RateelColors.listenPillFill, RateelColors.readLPillFill),
+          p.c(RateelColors.listenPillFill, RateelColors.readLPillFill),
+        ];
+        rim = p.c(RateelColors.listenPillRim, RateelColors.readLPillRim);
+        ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    }
+    final mark = state == _PillState.right || state == _PillState.wrong;
+    return Semantics(
+      button: true,
+      selected: state == _PillState.selected,
+      label: label,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: AnimatedOpacity(
+          opacity: state == _PillState.dim ? 0.45 : 1,
+          duration: const Duration(milliseconds: 250),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 220),
+            curve: Curves.easeOut,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(h / 2),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: fill,
+              ),
+              border: Border.all(
+                color: rim,
+                width: math.max(1, u * ListenMetrics.pillRim),
+              ),
+              boxShadow: [
+                if (state == _PillState.selected && p.t < 0.5)
+                  BoxShadow(
+                    color: RateelColors.listenGoldBottom.withValues(alpha: 0.35),
+                    blurRadius: u * 1.6,
+                  ),
+                if (p.t > 0)
+                  BoxShadow(
+                    color: const Color(0xFF6B4A2A).withValues(alpha: 0.18 * p.t),
+                    blurRadius: u * 1.0,
+                    offset: Offset(0, u * 0.4),
+                  ),
+              ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: u * 2.2),
+              child: Row(
+                textDirection: TextDirection.rtl,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Padding(
+                        // Readex sets Arabic low in its line box (lift).
+                        padding: EdgeInsets.only(bottom: u * 0.45),
+                        child: Text(
+                          label,
+                          textDirection: TextDirection.rtl,
+                          maxLines: 1,
+                          style: readex(
+                            u * ListenMetrics.pillText,
+                            weight: state == _PillState.selected ? 700 : 500,
+                            color: ink,
+                          ).copyWith(height: 1.2),
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (mark) ...[
+                    SizedBox(width: u * 1.6),
+                    _MarkDisc(
+                      u: u,
+                      ok: state == _PillState.right,
+                      size: 4.6,
+                      onFill: true,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// ✓ / ✕ disc (jewel green / red as screen 10).
+class _MarkDisc extends StatelessWidget {
+  const _MarkDisc({
+    required this.u,
+    required this.ok,
+    required this.size,
+    this.onFill = false,
+  });
+
+  final double u;
+  final bool ok;
+  final double size;
+
+  /// On a coloured pill: a white disc with a coloured mark.
+  final bool onFill;
+
+  @override
+  Widget build(BuildContext context) {
+    final d = u * size;
+    final col = ok ? RateelColors.testOkDisc : RateelColors.testKoDisc;
+    return Container(
+      width: d,
+      height: d,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: onFill
+            ? null
+            : LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: ok
+                    ? const [RateelColors.testOkDiscTop, RateelColors.testOkDisc]
+                    : const [RateelColors.testKoDiscTop, RateelColors.testKoDisc],
+              ),
+        color: onFill ? Colors.white.withValues(alpha: 0.92) : null,
+      ),
+      padding: EdgeInsets.all(d * 0.26),
+      child: CustomPaint(
+        painter: ok
+            ? PillGlyphPainter(PillGlyph.check, onFill ? col : Colors.white)
+            : _CrossPainter(onFill ? col : Colors.white),
+      ),
+    );
+  }
+}
+
+class _CrossPainter extends CustomPainter {
+  _CrossPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final s = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = size.height * 0.18
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+      Offset(size.width * 0.15, size.height * 0.15),
+      Offset(size.width * 0.85, size.height * 0.85),
+      s,
+    );
+    canvas.drawLine(
+      Offset(size.width * 0.85, size.height * 0.15),
+      Offset(size.width * 0.15, size.height * 0.85),
+      s,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_CrossPainter o) => o.color != color;
+}
+
+class _PausePainter extends CustomPainter {
+  _PausePainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width * 0.32;
+    final paint = Paint()..color = color;
+    for (final x in [0.0, size.width - w]) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(x, 0, w, size.height),
+          Radius.circular(w * 0.35),
+        ),
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_PausePainter o) => o.color != color;
+}
+
+/// Waveform of the verse (51 bars, reference): played part gold, the rest dim
+/// green. Repaints with the audio position only ([pos]).
+class _WavePainter extends CustomPainter {
+  _WavePainter({
+    required this.pos,
+    required this.ayah,
+    required this.u,
+    required this.played,
+    required this.rest,
+  }) : super(repaint: pos);
+
+  final ValueNotifier<int> pos;
+  final ListenAyah ayah;
+  final double u;
+  final Color played;
+  final Color rest;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const n = ListenMetrics.bars;
+    final step = u * ListenMetrics.barStep;
+    final bw = u * ListenMetrics.barW;
+    final total = step * (n - 1) + bw;
+    final x0 = size.width / 2 - total / 2;
+    final cy = size.height / 2;
+    final progress = (pos.value / ayah.durationMs).clamp(0.0, 1.0);
+    final on = Paint()..color = played;
+    final off = Paint()..color = rest;
+    for (var i = 0; i < n; i++) {
+      final peak = i < ayah.peaks.length ? ayah.peaks[i] : 0.2;
+      final h =
+          u * ListenMetrics.barMin +
+          u * (ListenMetrics.barMax - ListenMetrics.barMin) * peak;
+      // RTL reading, but the reference fills from the left (as the 02
+      // capsule, owner 2026-11-24): bar i lit when the progress passes it.
+      final lit = (i + 0.5) / n <= progress;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset(x0 + i * step + bw / 2, cy),
+            width: bw,
+            height: h,
+          ),
+          Radius.circular(bw / 2),
+        ),
+        lit ? on : off,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_WavePainter o) =>
+      o.ayah != ayah || o.u != u || o.played != played || o.rest != rest;
+}
