@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U2.L1",
+      "titleAr": "المخارج العامة",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تسمية المخارج العامة",
+      "explanationAr": "المخارج العامة خمسة: الجوف والحلق واللسان والشفتان والخيشوم.",
+      "examples": [
+        {
+          "verseRef": "114:6",
+          "excerptAr": "النَّاسِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى المخارج العامة."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "المخارج العامة خمسة: الجوف والحلق واللسان والشفتان والخيشوم."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "114:6"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تسمية المخارج العامة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "أشر إلى موضع كل مخرج في رسم تشريحي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L1.Q1",
+              "type": "singleChoice",
+              "text": "كم عدد المخارج العامة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "خمسة"
+                },
+                {
+                  "id": "2",
+                  "text": "ثلاثة"
+                },
+                {
+                  "id": "3",
+                  "text": "سبعة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "المخارج العامة خمسة: الجوف والحلق واللسان والشفتان والخيشوم."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U2.L2",
+      "titleAr": "الجوف",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حروف المد",
+      "explanationAr": "الجوف هو الخلاء داخل الفم والحلق، ومنه حروف المد الثلاثة بشروطها.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "اللَّهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الجوف."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الجوف هو الخلاء داخل الفم والحلق، ومنه حروف المد الثلاثة بشروطها."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز حروف المد"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن بَا وبُو وبِي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L2.Q1",
+              "type": "singleChoice",
+              "text": "أي مجموعة تضم حروف المد؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الألف والواو والياء بشروطها"
+                },
+                {
+                  "id": "2",
+                  "text": "الباء والميم والفاء"
+                },
+                {
+                  "id": "3",
+                  "text": "العين والحاء والهاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الجوف هو الخلاء داخل الفم والحلق، ومنه حروف المد الثلاثة بشروطها."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U2.L3",
+      "titleAr": "الحلق",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تصنيف حروف الحلق",
+      "explanationAr": "للحلق ثلاثة مخارج: أقصاه للهمزة والهاء، ووسطه للعين والحاء، وأدناه للغين والخاء.",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "أَعُوذُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الحلق."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "للحلق ثلاثة مخارج: أقصاه للهمزة والهاء، ووسطه للعين والحاء، وأدناه للغين والخاء."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "113:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تصنيف حروف الحلق"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "انطق أَحْ وأَعْ مع التمييز بين الصوتين.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L3.Q1",
+              "type": "singleChoice",
+              "text": "أي حرفين يخرجان من وسط الحلق؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "العين والحاء"
+                },
+                {
+                  "id": "2",
+                  "text": "الغين والخاء"
+                },
+                {
+                  "id": "3",
+                  "text": "الهمزة والهاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "للحلق ثلاثة مخارج: أقصاه للهمزة والهاء، ووسطه للعين والحاء، وأدناه للغين والخاء."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
