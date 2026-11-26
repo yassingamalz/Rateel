@@ -205,3 +205,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | **Asset style (owner):** keep the app's library assets on 12 (one graphic language); the reference's header assets (yellow-lit mosque, darker gold calendar, luminous arch…) are listed in `ASSET-STYLE-COMPARISON.md` as candidates for a later app-wide standardisation. | ✅ |
 | 2026-11-26 | Screen 12: **back by a gesture, no button** (owner): finger dragged to the right closes 12 (page follows, 25% or fling). | ✅ |
 | 2026-11-26 | Streak chip of 03: owner finds v1 too small and too low; variants A–F built behind `?chip=` (sheet `screens/12-daily-challenges/streak-chip-variants.jpg`), default A until the owner chooses. | 🟡 |
+| 2026-11-26 | **APK 1.0.406**: screen 12 v4 (back gesture; chip variants behind `?chip=`, default A). | ✅ |

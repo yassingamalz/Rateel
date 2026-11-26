@@ -679,9 +679,30 @@ class _CoursesScreenState extends State<CoursesScreen>
   Widget _streakChip(_Geo g) {
     final u = g.u;
     void open() => Navigator.of(context).push(dailyChallengesRoute());
-    Widget chip(double scale, bool label) =>
-        StreakChip(u: u, scale: scale, label: label, onTap: open);
-    return switch (streakChipVariant) {
+    Widget chip(double scale, bool label, [String shape = 'pill']) =>
+        StreakChip(u: u, scale: scale, label: label, shape: shape, onTap: open);
+    // Owner (2026-11-26): only the places of A/B (bottom left) and D (top
+    // left); more shapes and sizes there: b1–b6 bottom left, d1–d6 top left.
+    final v = streakChipVariant;
+    final top = v.startsWith('d');
+    final shapes = <String, (double, bool, String)>{
+      '1': (1.5, false, 'pill'),
+      '2': (1.35, true, 'pill'),
+      '3': (1.6, true, 'pill'),
+      '4': (1.0, false, 'disc'),
+      '5': (1.2, false, 'disc'),
+      '6': (1.0, true, 'column'),
+    };
+    final key = v.length == 2 ? v.substring(1) : '';
+    if (shapes[key] case (final k, final l, final sh)) {
+      return Positioned(
+        left: u * 3,
+        top: top ? u * 3.5 : null,
+        bottom: top ? null : u * 3,
+        child: chip(k, l, sh),
+      );
+    }
+    return switch (v) {
       'b' => Positioned(left: u * 3, bottom: u * 3, child: chip(1.3, false)),
       'c' => Positioned(left: u * 3.5, bottom: u * 5, child: chip(1.25, true)),
       'd' => Positioned(left: u * 3.5, top: u * 4, child: chip(1.2, true)),

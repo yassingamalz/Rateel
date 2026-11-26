@@ -1399,7 +1399,12 @@ class StreakChip extends StatefulWidget {
     required this.onTap,
     this.scale = 1,
     this.label = false,
+    this.shape = 'pill',
   });
+
+  /// 'pill' (flame + «n يوم»), 'disc' (round flame disc with a gold count
+  /// bubble, as the rail counts), 'column' (flame disc above «n يوم»).
+  final String shape;
 
   final double u;
   final VoidCallback onTap;
@@ -1417,9 +1422,146 @@ class StreakChip extends StatefulWidget {
 class _StreakChipState extends State<StreakChip> {
   bool _down = false;
 
+  Widget _tappable(Widget child) => GestureDetector(
+    onTapDown: (_) => setState(() => _down = true),
+    onTapCancel: () => setState(() => _down = false),
+    onTapUp: (_) => setState(() => _down = false),
+    onTap: () {
+      Haptics.tap();
+      widget.onTap();
+    },
+    child: AnimatedScale(
+      scale: _down ? 0.95 : 1,
+      duration: const Duration(milliseconds: 120),
+      child: child,
+    ),
+  );
+
+  Widget _flameDisc(double u, double d) => Container(
+    width: d,
+    height: d,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      gradient: const RadialGradient(
+        colors: [RateelColors.chalDisc, RateelColors.chalDiscEdge],
+      ),
+      border: Border.all(color: RateelColors.chalDiscRim, width: u * 0.3),
+      boxShadow: [
+        BoxShadow(
+          color: RateelColors.chalRim.withValues(alpha: 0.4),
+          blurRadius: u * 1.4,
+        ),
+      ],
+    ),
+    alignment: Alignment.center,
+    child: SizedBox(
+      height: d * 0.58,
+      child: const Image(image: AssetImage(_flame)),
+    ),
+  );
+
+  /// Round disc with a count bubble, or a small column card.
+  Widget _compact(double u) {
+    return ValueListenableBuilder<int>(
+      valueListenable: dailyStreak,
+      builder: (context, days, _) {
+        if (widget.shape == 'disc') {
+          final d = u * 11;
+          return SizedBox(
+            width: d + u * 3,
+            height: d + u * 2,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(left: 0, bottom: 0, child: _flameDisc(u, d)),
+                // Count bubble as the rail's (amber, dark text).
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    constraints: BoxConstraints(minWidth: u * 5.4),
+                    height: u * 5.4,
+                    padding: EdgeInsets.symmetric(horizontal: u * 1.2),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: RateelColors.amber,
+                      borderRadius: BorderRadius.circular(u * 2.7),
+                    ),
+                    child: Text(
+                      '$days',
+                      style: readex(
+                        u * 3.2,
+                        weight: 700,
+                        color: RateelColors.countText,
+                      ).copyWith(height: 1.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        // Column: disc above «n يوم» (and the label), in a capsule card.
+        return Container(
+          padding: EdgeInsets.fromLTRB(u * 2.2, u * 1.6, u * 2.2, u * 1.4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(u * 4),
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                RateelColors.chalCapsuleTop,
+                RateelColors.chalCapsuleBottom,
+              ],
+            ),
+            border: Border.all(
+              color: RateelColors.chalCapsuleRimOuter,
+              width: u * 0.3,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: RateelColors.chalRim.withValues(alpha: 0.35),
+                blurRadius: u * 1.2,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _flameDisc(u, u * 7.5),
+              SizedBox(height: u * 1.0),
+              Text(
+                '$days يوم',
+                textDirection: TextDirection.rtl,
+                style: readex(
+                  u * 3.4,
+                  weight: 600,
+                  color: RateelColors.chalText,
+                ).copyWith(height: 1.0),
+              ),
+              if (widget.label) ...[
+                SizedBox(height: u * 0.7),
+                Text(
+                  'الاستمرارية',
+                  textDirection: TextDirection.rtl,
+                  style: readex(
+                    u * 2.4,
+                    weight: 400,
+                    color: RateelColors.chalLabel,
+                  ).copyWith(height: 1.0),
+                ),
+              ],
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final u = widget.u * widget.scale;
+    if (widget.shape != 'pill') return _tappable(_compact(u));
     final h = u * (widget.label ? 10.4 : 8.4);
     final d = u * 6.2;
     return GestureDetector(
