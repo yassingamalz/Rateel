@@ -18,11 +18,12 @@ class AppSettings {
   /// it; it is the same value as the reading lesson's moon toggle.
   static ValueNotifier<bool> get light => readingLight;
 
-  /// Text size of the whole app, 0.9–1.2 (owner, 2026-11-21: the app ignores
+  /// Text size of the whole app, 0.9–1.1 (1.2 broke the fixed card layouts,
+  /// 2026-11-26; course cards and screen 14 do not scale) (owner, 2026-11-21: the app ignores
   /// the phone's text zoom and scales its own text from here).
   static final textScale = ValueNotifier<double>(1.0);
   static const textScaleMin = 0.9;
-  static const textScaleMax = 1.2;
+  static const textScaleMax = 1.1;
   static const textScaleStep = 0.05;
 
   static final sounds = ValueNotifier<bool>(true);

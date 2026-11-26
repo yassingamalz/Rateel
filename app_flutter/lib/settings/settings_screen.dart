@@ -714,7 +714,7 @@ class _Chevron extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Icon(Icons.chevron_left_rounded, size: u * 7, color: RateelColors.gold);
+      Icon(Icons.chevron_right_rounded, size: u * 7, color: RateelColors.gold);
 }
 
 /// «إعادة الضبط»: the reference's muted-red pill (2–3 px #E17A6F rim).
@@ -840,12 +840,15 @@ Widget _dialogButton(
           padding: EdgeInsets.symmetric(horizontal: u * 5),
           child: Center(
             widthFactor: 1,
-            child: Text(
-              label,
-              style: cairo(
-                u * 3.6,
-                weight: 700,
-                color: gold ? RateelColors.countText : RateelColors.setLabel,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                style: cairo(
+                  u * 3.6,
+                  weight: 700,
+                  color: gold ? RateelColors.countText : RateelColors.setLabel,
+                ),
               ),
             ),
           ),
@@ -992,33 +995,41 @@ void _confirmReset(BuildContext context, double u) {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _dialogButton(u, 'إلغاء', onTap: () => Navigator.of(dialog).pop()),
+            Flexible(
+              child: _dialogButton(
+                u,
+                'إلغاء',
+                onTap: () => Navigator.of(dialog).pop(),
+              ),
+            ),
             SizedBox(width: u * 3),
-            _dialogButton(
-              u,
-              'إعادة الضبط',
-              rim: RateelColors.setDanger,
-              onTap: () {
-                AppSettings.resetProgress();
-                Haptics.success();
-                Navigator.of(dialog).pop();
-                ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: RateelColors.setCardTop,
-                    width: u * 60,
-                    content: Text(
-                      'تمت إعادة ضبط التقدم',
-                      textAlign: TextAlign.center,
-                      style: cairo(
-                        u * 3.4,
-                        weight: 600,
-                        color: RateelColors.setLabel,
+            Flexible(
+              child: _dialogButton(
+                u,
+                'إعادة الضبط',
+                rim: RateelColors.setDanger,
+                onTap: () {
+                  AppSettings.resetProgress();
+                  Haptics.success();
+                  Navigator.of(dialog).pop();
+                  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                    SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: RateelColors.setCardTop,
+                      width: u * 60,
+                      content: Text(
+                        'تمت إعادة ضبط التقدم',
+                        textAlign: TextAlign.center,
+                        style: cairo(
+                          u * 3.4,
+                          weight: 600,
+                          color: RateelColors.setLabel,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),

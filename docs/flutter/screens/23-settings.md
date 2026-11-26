@@ -27,3 +27,16 @@ Status: added by the owner (2026-11-25). Reference: **`screens/23-settings/23-im
 - Entry point: a gear at the bottom of the side rail, an item in the open menu, or both?
 - One page, or a profile + settings page together?
 - Which rows to keep (reciter and reminder need features not built yet).
+
+## v1 (2026-11-26, branch `flutter/23-settings`)
+- Code: `lib/settings/settings_screen.dart`, `lib/core/app_settings.dart`; rail: `lib/nav/side_nav.dart`, `nav_items.dart`.
+- Geometry from the reference (u = 8.53 px): title 6.6u Cairo at 1.6u, divider 82u at 10.4u, card 5u from both
+  edges, top 17u, bottom 10.4u, rim 0.38u pale gold (#F9F59E → #EFCC5D) with a soft glow, rows 11.2u, badge
+  9.8×10u at 3.6u from the right, label 4.4u Cairo 700 at 17u, controls at 4.3u from the left (segmented pill
+  46×7.3u, round buttons 8.2u, value pill 20.5×7u, switch 11.7×5.5u, reciter pill 49×7.5u, time pill 26×7u).
+- Rows: theme, text size, sounds, vibration, reciter, daily reminder, about (gold chevron, opens a dialog), reset
+  progress («إعادة الضبط» pill with the red rim, confirmation dialog, then a small message).
+- Review aids: `?section=6` opens settings, `?textScale=1.1`.
+- Captures: `23-settings/capture-v1.png` (top), `capture-v1-bottom.png` (scrolled, sounds off), `capture-v1-about.png`.
+- Open: text size range and scope (see DECISIONS), reciter list (4 names, owner to confirm), reminder needs the
+  notifications of screen 12, light theme only changes lesson 08 for now.

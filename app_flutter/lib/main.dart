@@ -123,7 +123,7 @@ class RateelApp extends StatelessWidget {
         // (owner, 2026-11-21): the system scale would break the proportions
         // between text and cards/ornaments. A text-size option will live in the
         // app's settings and scale the text proportionally.
-        // Settings «حجم الخط» (screen 23) scales the app's own text, 90–120%.
+        // Settings «حجم الخط» (screen 23) scales the app's own text, 90–110%.
         builder: (context, child) => ValueListenableBuilder<double>(
           valueListenable: AppSettings.textScale,
           builder: (context, scale, _) => MediaQuery(

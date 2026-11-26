@@ -99,8 +99,13 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
   Animation<double> _interval(double a, double b, Curve curve) =>
       CurvedAnimation(parent: _entry, curve: Interval(a, b, curve: curve));
 
+  // Settings «حجم الخط» (screen 23) does not apply here: the title and cards are fixed art compositions
+  // sized in u (owner to confirm, 2026-11-26).
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      MediaQuery.withNoTextScaling(child: Builder(builder: _build));
+
+  Widget _build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, box) {
         final w = box.maxWidth;
