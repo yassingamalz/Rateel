@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U6.L1",
+      "titleAr": "المد الطبيعي",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز المد الطبيعي",
+      "explanationAr": "يمد حرف المد مدًا طبيعيًا بمقدار حركتين إذا لم يوجد سبب زائد من همز أو سكون.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "اللَّهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "المد الطبيعي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يمد حرف المد مدًا طبيعيًا بمقدار حركتين إذا لم يوجد سبب زائد من همز أو سكون."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز المد الطبيعي"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى مقدار الألف في المثال.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L1.Q1",
+              "type": "singleChoice",
+              "text": "كم مقدار المد الطبيعي؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "حركتان"
+                },
+                {
+                  "id": "2",
+                  "text": "ست حركات دائمًا"
+                },
+                {
+                  "id": "3",
+                  "text": "لا يمد"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يمد حرف المد مدًا طبيعيًا بمقدار حركتين إذا لم يوجد سبب زائد من همز أو سكون."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L2",
+      "titleAr": "المد المتصل",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز سبب المد المتصل",
+      "explanationAr": "يأتي الهمز بعد حرف المد في الكلمة نفسها. ويضبط مقدار المد بحسب طريق القراءة وحالة الوصل والوقف.",
+      "examples": [
+        {
+          "verseRef": "110:1",
+          "excerptAr": "جَاءَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "المد المتصل"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يأتي الهمز بعد حرف المد في الكلمة نفسها. ويضبط مقدار المد بحسب طريق القراءة وحالة الوصل والوقف."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "110:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز سبب المد المتصل"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "كرر المثال بالمقدار المعتمد مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L2.Q1",
+              "type": "singleChoice",
+              "text": "أين يقع الهمز في المد المتصل؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "بعد المد في الكلمة نفسها"
+                },
+                {
+                  "id": "2",
+                  "text": "في الكلمة التالية"
+                },
+                {
+                  "id": "3",
+                  "text": "قبل المد دائمًا"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يأتي الهمز بعد حرف المد في الكلمة نفسها. ويضبط مقدار المد بحسب طريق القراءة وحالة الوصل والوقف."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L3",
+      "titleAr": "المد المنفصل",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز المد المنفصل",
+      "explanationAr": "يأتي حرف المد في آخر كلمة والهمز في أول الكلمة التالية حال الوصل، ويختلف المقدار باختلاف الطريق.",
+      "examples": [
+        {
+          "verseRef": "97:1",
+          "excerptAr": "إِنَّا أَنْزَلْنَاهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "المد المنفصل"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يأتي حرف المد في آخر كلمة والهمز في أول الكلمة التالية حال الوصل، ويختلف المقدار باختلاف الطريق."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "97:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز المد المنفصل"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن الوصل والوقف على الكلمة الأولى.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L3.Q1",
+              "type": "singleChoice",
+              "text": "متى يتحقق المد المنفصل؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "عند وصل حرف المد بهمزة الكلمة التالية"
+                },
+                {
+                  "id": "2",
+                  "text": "عند كل وقف"
+                },
+                {
+                  "id": "3",
+                  "text": "عند سكون أصلي داخل كلمة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يأتي حرف المد في آخر كلمة والهمز في أول الكلمة التالية حال الوصل، ويختلف المقدار باختلاف الطريق."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L4",
+      "titleAr": "المد العارض للسكون",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز السكون العارض",
+      "explanationAr": "ينشأ عند الوقف إذا سكن الحرف الواقع بعد حرف المد سكونًا عارضًا، ويجوز فيه في الحالة المعتادة حركتان أو أربع أو ست.",
+      "examples": [
+        {
+          "verseRef": "1:2",
+          "excerptAr": "الْعَالَمِينَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "المد العارض للسكون"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "ينشأ عند الوقف إذا سكن الحرف الواقع بعد حرف المد سكونًا عارضًا، ويجوز فيه في الحالة المعتادة حركتان أو أربع أو ست."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز السكون العارض"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرّب على الأوجه الثلاثة مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L4.Q1",
+              "type": "singleChoice",
+              "text": "ما سبب المد العارض للسكون؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "السكون الناشئ عن الوقف"
+                },
+                {
+                  "id": "2",
+                  "text": "الهمز قبل المد"
+                },
+                {
+                  "id": "3",
+                  "text": "التنوين دائمًا"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "ينشأ عند الوقف إذا سكن الحرف الواقع بعد حرف المد سكونًا عارضًا، ويجوز فيه في الحالة المعتادة حركتان أو أربع أو ست."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L5",
+      "titleAr": "المد اللازم",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز السكون الأصلي",
+      "explanationAr": "يأتي بعد حرف المد سكون أصلي لازم، في كلمة أو في حرف من الحروف المقطعة. ويمد ست حركات في الأصل، مع تفصيل العين في الحروف المقطعة.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "المد اللازم"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يأتي بعد حرف المد سكون أصلي لازم، في كلمة أو في حرف من الحروف المقطعة. ويمد ست حركات في الأصل، مع تفصيل العين في الحروف المقطعة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:7"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز السكون الأصلي"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى مد الألف في الضالين.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L5.Q1",
+              "type": "singleChoice",
+              "text": "ما سبب المد اللازم؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "السكون الأصلي"
+                },
+                {
+                  "id": "2",
+                  "text": "السكون العارض فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "الهمز قبل المد"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يأتي بعد حرف المد سكون أصلي لازم، في كلمة أو في حرف من الحروف المقطعة. ويمد ست حركات في الأصل، مع تفصيل العين في الحروف المقطعة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
