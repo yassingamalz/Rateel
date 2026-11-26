@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U9.L1",
+      "titleAr": "الوقف",
+      "source": {
+        "chapter": 15,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الوقف عن قطع التلاوة نهائيًا",
+      "explanationAr": "الوقف قطع الصوت على كلمة زمنًا يتنفس فيه القارئ عادة بنية استئناف القراءة. وتراعى تمام المعنى والعلاقة بما بعد الموضع.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الوقف"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الوقف قطع الصوت على كلمة زمنًا يتنفس فيه القارئ عادة بنية استئناف القراءة. وتراعى تمام المعنى والعلاقة بما بعد الموضع."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الوقف عن قطع التلاوة نهائيًا"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "اقرأ سورة قصيرة وحدد مواضع الوقف مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U9.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي ينبغي مراعاته عند اختيار الوقف؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "المعنى والتركيب"
+                },
+                {
+                  "id": "2",
+                  "text": "عدد الحروف فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "السرعة فقط"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الوقف قطع الصوت على كلمة زمنًا يتنفس فيه القارئ عادة بنية استئناف القراءة. وتراعى تمام المعنى والعلاقة بما بعد الموضع."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U9.L2",
+      "titleAr": "علامات الوقف",
+      "source": {
+        "chapter": 15,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "قراءة مفتاح علامات الوقف",
+      "explanationAr": "تدل علامات المصحف على توجيهات الوقف والوصل بحسب اصطلاح المصحف، مثل م ولا وج وصلى وقلى. يجب الرجوع إلى مفتاح الطبعة المعتمدة.",
+      "examples": [
+        {
+          "verseRef": "2:2",
+          "excerptAr": "لَا رَيْبَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "علامات الوقف"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تدل علامات المصحف على توجيهات الوقف والوصل بحسب اصطلاح المصحف، مثل م ولا وج وصلى وقلى. يجب الرجوع إلى مفتاح الطبعة المعتمدة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "2:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "قراءة مفتاح علامات الوقف"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن العلامات في المصحف المعتمد دون تغيير النص.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U9.L2.Q1",
+              "type": "singleChoice",
+              "text": "أين تتحقق من معنى علامة الوقف في طبعة معينة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "مفتاح علامات المصحف"
+                },
+                {
+                  "id": "2",
+                  "text": "رقم الصفحة وحده"
+                },
+                {
+                  "id": "3",
+                  "text": "لون الغلاف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تدل علامات المصحف على توجيهات الوقف والوصل بحسب اصطلاح المصحف، مثل م ولا وج وصلى وقلى. يجب الرجوع إلى مفتاح الطبعة المعتمدة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U9.L3",
+      "titleAr": "الابتداء",
+      "source": {
+        "chapter": 15,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "اختيار ابتداء لا يفسد المعنى",
+      "explanationAr": "يختار القارئ عند استئناف القراءة موضعًا يحقق معنى صحيحًا، وقد يحتاج إلى الرجوع إلى كلمات سابقة إذا وقف اضطرارًا.",
+      "examples": [
+        {
+          "verseRef": "1:5",
+          "excerptAr": "إِيَّاكَ نَعْبُدُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الابتداء"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يختار القارئ عند استئناف القراءة موضعًا يحقق معنى صحيحًا، وقد يحتاج إلى الرجوع إلى كلمات سابقة إذا وقف اضطرارًا."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:5"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "اختيار ابتداء لا يفسد المعنى"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرب على استئناف القراءة من موضع يكتمل به المعنى.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U9.L3.Q1",
+              "type": "singleChoice",
+              "text": "ماذا يفعل القارئ بعد وقف اضطراري أخل بالمعنى؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "يرجع إلى موضع مناسب للابتداء"
+                },
+                {
+                  "id": "2",
+                  "text": "يغير الكلمات"
+                },
+                {
+                  "id": "3",
+                  "text": "يتجاهل المعنى"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يختار القارئ عند استئناف القراءة موضعًا يحقق معنى صحيحًا، وقد يحتاج إلى الرجوع إلى كلمات سابقة إذا وقف اضطرارًا."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U9.L4",
+      "titleAr": "الروم والإشمام",
+      "source": {
+        "chapter": 16,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التمييز بين الإشارة الصوتية والبصرية",
+      "explanationAr": "الروم الإتيان ببعض الحركة بصوت خفي عند الوقف في مواضعه، والإشمام في الوقف إشارة بالشفتين إلى الضمة بعد الإسكان دون صوت، مع شروط واستثناءات.",
+      "examples": [
+        {
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الروم والإشمام"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الروم الإتيان ببعض الحركة بصوت خفي عند الوقف في مواضعه، والإشمام في الوقف إشارة بالشفتين إلى الضمة بعد الإسكان دون صوت، مع شروط واستثناءات."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التمييز بين الإشارة الصوتية والبصرية"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "راقب الشفتين عند أداء الإشمام مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U9.L4.Q1",
+              "type": "singleChoice",
+              "text": "أي الوجهين في الوقف إشارة بالشفتين دون صوت؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الإشمام"
+                },
+                {
+                  "id": "2",
+                  "text": "الروم"
+                },
+                {
+                  "id": "3",
+                  "text": "المد الطبيعي"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الروم الإتيان ببعض الحركة بصوت خفي عند الوقف في مواضعه، والإشمام في الوقف إشارة بالشفتين إلى الضمة بعد الإسكان دون صوت، مع شروط واستثناءات."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
