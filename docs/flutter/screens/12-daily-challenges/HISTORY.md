@@ -44,3 +44,15 @@ tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%
   Now exactly as screen 03 (`ChalMetrics.mosque*`, `crescent*`, anchored to the content edges, as `courses_screen.dart`).
   The reference draws them a little differently (mosque ≈ 8u further right, crescent larger and lower): library standard
   wins (one asset direction, `ASSETS.md`).
+
+## 5. Critic v1 and v3 (2026-11-26)
+- Owner: «the upper part, symbols and arch, are not placed well» → critic v1 at phone size (owner OK):
+  `critic-v1.md`, **code 6.8, whole 6.5**. High: H1 arch stretched (128×36u: dome pinched to ≈ 11u at the calendar,
+  tails down to 34u beside the subtitle), H2 left tail through the mosque base.
+- v3 fixes: arch with 03's proportions 102.8×26.4u on the title axis (+6.2u), fade [0.55, 1] (fix A); calendar 11.6u
+  at +6.2u, top 5.8u; title centre 22.4u (as 03); subtitle 3.9u; title and side dividers = 03's `title_divider.svg`
+  (38u / 24u); top corners = 03's glowing lattice (same place, 75%, radial fade); connector core 0.9u with pale top
+  edge and glow 75% σ 1.3u; open tile rim three tones 0.8u (`_OpenRimPainter`), glow 55–75% blur 1.6–2u spread 0.3u;
+  capsule rim #FFFE64 → #FAC102 with #FFB201 outside, 0.65u.
+- Open for the owner: T1, connector lit only up to the open tile (the reference lights all six links).
+- Conflicts D1–D7 in `STYLE-CONFLICTS.md`.

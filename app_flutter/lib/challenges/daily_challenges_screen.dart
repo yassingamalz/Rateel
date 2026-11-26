@@ -33,21 +33,23 @@ Route<void> dailyChallengesRoute() => PageRouteBuilder<void>(
 abstract final class ChalMetrics {
   // Header (title centre x 897 px: +6.5u).
   static const headerDx = 6.4;
-  // Shared header arch of screen 03 (CR-01): dome apex 885 px, tails
-  // 330–1440 px down to ≈ 245 px.
-  static const archDx = 5.1;
-  static const archW = 128.0;
-  static const archH = 36.0;
+  // Shared header arch of screen 03 (CR-01) with 03's own proportions
+  // (critic v1 H1–H3: the stretched 128×36u arch pinched the dome and its
+  // tail cut the mosque), on the title's axis.
+  static const archDx = 6.2;
+  static const archW = 102.8;
+  static const archH = 26.4;
   static const archTop = 0.6;
-  static const calendarDx = 5.0; // calendar box 843–925 × 50–135 px
-  static const calendarTop = 5.9;
-  static const calendarH = 10.0;
-  static const titleCentre = 23.15;
+  // Calendar ink 6.2–17.2u as the reference (6.5–17.1), centred on the title.
+  static const calendarDx = 6.2;
+  static const calendarTop = 5.8;
+  static const calendarH = 11.6;
+  static const titleCentre = 22.4; // as 03
   static const titleSize = 7.4;
   static const dividerCentre = 30.7;
-  static const dividerW = 33.2;
+  static const dividerW = 38.0; // 03's title divider (critic H7)
   static const subtitleCentre = 35.75;
-  static const subtitleSize = 4.4;
+  static const subtitleSize = 3.9;
   // Mosque and crescent + star: screen 03 standard (from the content edges).
   static const mosqueLeft = 10.5;
   static const mosqueTop = 8.0;
@@ -110,7 +112,6 @@ const _calendar = 'assets/ui/icons/calendar_gold.webp';
 const _flame = 'assets/ui/icons/flame_gold_01.webp';
 const _coin = 'assets/ui/icons/coin_gold.webp';
 const _band = 'assets/ui/video/bottom_band.webp';
-const _corner = 'assets/ui/video/corner_bottom_';
 
 class _DailyChallengesScreenState extends State<DailyChallengesScreen>
     with TickerProviderStateMixin {
@@ -160,8 +161,8 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
       _flame,
       _coin,
       _band,
-      '${_corner}left.webp',
-      '${_corner}right.webp',
+      'assets/ui/decor/corner_glow_left.webp',
+      'assets/ui/decor/corner_glow_right.webp',
       for (final c in dailyChallenges) c.icon,
     ];
     Future.wait([for (final a in assets) precacheImage(AssetImage(a), context)])
@@ -575,10 +576,9 @@ class _Tile extends StatelessWidget {
                       RateelColors.chalTileBottom,
                     ],
             ),
-            border: Border.all(
-              color: open ? RateelColors.chalRimLight : RateelColors.chalRim,
-              width: u * (open ? 0.5 : 0.32),
-            ),
+            border: open
+                ? null
+                : Border.all(color: RateelColors.chalRim, width: u * 0.32),
             boxShadow: [
               BoxShadow(
                 color: RateelColors.chalRim.withValues(
@@ -594,6 +594,9 @@ class _Tile extends StatelessWidget {
             ],
           ),
         ),
+        // Open tile rim in three tones (critic T3): dark gold inside, pale
+        // core, warm gold outside, ≈ 0.8u.
+        if (open) CustomPaint(painter: _OpenRimPainter(u: u)),
         // Inner light along the rim of the open tile (reference: olive glow
         // inside the edge).
         if (open)
@@ -658,10 +661,10 @@ class _Tile extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: RateelColors.chalRim.withValues(
-                        alpha: 0.42 + 0.18 * b,
+                        alpha: 0.55 + 0.2 * b,
                       ),
-                      blurRadius: u * (2.2 + 0.8 * b),
-                      spreadRadius: u * 0.15,
+                      blurRadius: u * (1.6 + 0.4 * b),
+                      spreadRadius: u * 0.3,
                     ),
                   ],
                 ),
@@ -847,7 +850,7 @@ class _LinePainter extends CustomPainter {
     final y = u * ChalMetrics.lineCy;
     double x(double i) => cx + u * ChalMetrics.pitch * (3 - i);
     final n = dailyChallenges.length;
-    final t = u * 0.55;
+    final t = u * 0.9;
     final track = Paint()
       ..color = RateelColors.chalLineTrack
       ..strokeWidth = t
@@ -863,9 +866,9 @@ class _LinePainter extends CustomPainter {
       a,
       b,
       Paint()
-        ..color = RateelColors.chalRim.withValues(alpha: 0.55)
-        ..strokeWidth = t * 3.2
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.9),
+        ..color = RateelColors.chalRim.withValues(alpha: 0.75)
+        ..strokeWidth = t * 2.4
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.3),
     );
     canvas.drawLine(
       a,
@@ -873,6 +876,15 @@ class _LinePainter extends CustomPainter {
       Paint()
         ..color = RateelColors.chalLine
         ..strokeWidth = t
+        ..strokeCap = StrokeCap.round,
+    );
+    // Pale top edge of the lit line.
+    canvas.drawLine(
+      a.translate(0, -t * 0.25),
+      b.translate(0, -t * 0.25),
+      Paint()
+        ..color = RateelColors.chalLineEdge
+        ..strokeWidth = t * 0.35
         ..strokeCap = StrokeCap.round,
     );
   }
@@ -905,7 +917,7 @@ class _Header extends StatelessWidget {
               shaderCallback: (r) => const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.6, 1.0],
+                stops: [0.55, 1.0],
                 colors: [Color(0xFF000000), Color(0x00000000)],
               ).createShader(r),
               child: SvgPicture.asset(
@@ -986,10 +998,10 @@ class _Header extends StatelessWidget {
           ),
           Positioned(
             left: cx - u * ChalMetrics.dividerW / 2,
-            top: u * (ChalMetrics.dividerCentre - 2),
+            top: u * (ChalMetrics.dividerCentre - 2.2),
             width: u * ChalMetrics.dividerW,
-            height: u * 4,
-            child: GoldDivider(u: u, diamond: 1.5),
+            height: u * 4.4,
+            child: const _TitleDivider(),
           ),
           Positioned(
             left: cx - u * 60,
@@ -1038,10 +1050,10 @@ class _Streak extends StatelessWidget {
         ])
           Positioned(
             left: cx + u * (dx - ChalMetrics.sideLineW / 2),
-            top: u * (ChalMetrics.sideLineCy - 2),
+            top: u * (ChalMetrics.sideLineCy - 1.4),
             width: u * ChalMetrics.sideLineW,
-            height: u * 4,
-            child: GoldDivider(u: u * 0.85, diamond: 1.1),
+            height: u * 2.8,
+            child: const _TitleDivider(),
           ),
         Positioned(
           left: ccx - w / 2,
@@ -1160,7 +1172,9 @@ class _RimPainter extends CustomPainter {
       Offset.zero & size,
       Radius.circular(size.height / 2),
     );
-    final w = u * 0.55;
+    // Critic S1: warm saturated gold, pale only on top (#FFFE64 → #FAC102),
+    // #FFB201 outside, ≈ 0.6u.
+    final w = u * 0.65;
     canvas.drawRRect(
       r.deflate(w / 2),
       Paint()
@@ -1172,8 +1186,12 @@ class _RimPainter extends CustomPainter {
       r.deflate(w / 2),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = w * 0.5
-        ..color = RateelColors.chalCapsuleRim,
+        ..strokeWidth = w * 0.55
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [RateelColors.chalCapsuleRim, RateelColors.chalCapsuleRimLow],
+        ).createShader(Offset.zero & size),
     );
   }
 
@@ -1197,19 +1215,34 @@ class _Decor extends StatelessWidget {
         builder: (context, box) => Stack(
           clipBehavior: Clip.none,
           children: [
-            for (final left in [true, false])
+            // Top corners: the screen 03 standard (critic H8): owner's
+            // glowing lattice, same place, size, opacity and radial fade.
+            for (final (left, dx, dy, w, ratio) in [
+              (true, -2.6, -2.8, 30.0, 703 / 800),
+              (false, -5.75, -2.6, 32.0, 674 / 800),
+            ])
               Positioned(
-                left: left ? 0 : null,
-                right: left ? null : 0,
-                top: 0,
-                width: u * 30,
-                height: u * 30,
+                left: left ? u * dx : null,
+                right: left ? null : u * dx,
+                top: u * dy,
+                width: u * w,
+                height: u * w * ratio,
                 child: Opacity(
-                  opacity: 0.3,
-                  child: Transform.flip(
-                    flipY: true,
+                  opacity: 0.75,
+                  child: ShaderMask(
+                    blendMode: BlendMode.dstIn,
+                    shaderCallback: (r) => RadialGradient(
+                      center: left ? Alignment.topLeft : Alignment.topRight,
+                      radius: 1.25,
+                      stops: const [0.0, 0.45, 1.0],
+                      colors: const [
+                        Color(0xFF000000),
+                        Color(0xCC000000),
+                        Color(0x00000000),
+                      ],
+                    ).createShader(r),
                     child: Image.asset(
-                      '$_corner${left ? 'left' : 'right'}.webp',
+                      'assets/ui/decor/corner_glow_${left ? 'left' : 'right'}.webp',
                     ),
                   ),
                 ),
@@ -1404,4 +1437,78 @@ class _StreakChipState extends State<StreakChip> {
       ),
     );
   }
+}
+
+/// Title divider of screen 03 (CR-06, `title_divider.svg` with 03's gradient):
+/// one divider style for the titles (critic H7, S4).
+class _TitleDivider extends StatelessWidget {
+  const _TitleDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      blendMode: BlendMode.srcIn,
+      shaderCallback: (r) => const LinearGradient(
+        stops: [0, .12, .33, .5, .67, .88, 1],
+        colors: [
+          Color(0x00B2983A),
+          Color(0xFFB2983A),
+          Color(0xFFEFC246),
+          Color(0xFFF8D053),
+          Color(0xFFEFC246),
+          Color(0xFFB2983A),
+          Color(0x00B2983A),
+        ],
+      ).createShader(r),
+      child: SvgPicture.asset(
+        'assets/ui/decor/title_divider.svg',
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+}
+
+/// Rim of the open tile in three tones (reference: #EBC952→#B47F01 outside,
+/// pale #FDFBD1 core, #E9DD97 inside), ≈ 0.8u.
+class _OpenRimPainter extends CustomPainter {
+  _OpenRimPainter({required this.u});
+
+  final double u;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final r = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(u * ChalMetrics.tileRadius),
+    );
+    final w = u * 0.8;
+    canvas.drawRRect(
+      r.deflate(w / 2),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [RateelColors.chalOpenRimTop, RateelColors.chalOpenRimBottom],
+        ).createShader(Offset.zero & size),
+    );
+    canvas.drawRRect(
+      r.deflate(w * 0.5),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w * 0.4
+        ..color = RateelColors.chalOpenRimCore,
+    );
+    canvas.drawRRect(
+      r.deflate(w * 0.92),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w * 0.16
+        ..color = RateelColors.chalOpenRimInner,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_OpenRimPainter o) => o.u != u;
 }

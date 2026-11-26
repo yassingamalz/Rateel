@@ -335,8 +335,14 @@ class RateelColors {
   static const chalLineTrack = Color(0xFF2C4A25); // connector not yet lit
   static const chalCapsuleTop = Color(0xFF062C18);
   static const chalCapsuleBottom = Color(0xFF022412);
-  static const chalCapsuleRim = Color(0xFFFFF5C0);
-  static const chalCapsuleRimOuter = Color(0xFFC79A14);
+  static const chalCapsuleRim = Color(0xFFFFFE64); // rim core, top
+  static const chalCapsuleRimLow = Color(0xFFFAC102); // rim core, bottom
+  static const chalCapsuleRimOuter = Color(0xFFFFB201);
+  static const chalLineEdge = Color(0xFFFEFCD6); // pale top edge of the line
+  static const chalOpenRimTop = Color(0xFFEBC952);
+  static const chalOpenRimBottom = Color(0xFFB47F01);
+  static const chalOpenRimCore = Color(0xFFFDFBD1);
+  static const chalOpenRimInner = Color(0xFFE9DD97);
   static const chalDisc = Color(0xFF3A3C08);
   static const chalDiscEdge = Color(0xFF242E06);
   static const chalDiscRim = Color(0xFFF5CC02);
