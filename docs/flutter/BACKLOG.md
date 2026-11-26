@@ -66,6 +66,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
 - [ ] **Real listening lessons** in the data (today one mock lesson, سورة الكوثر, in the unit «النون المشددة»).
+- [ ] **Word light as a user setting** (owner, 2026-11-26): glowing letters (default) or the light box around the word
+      (`listenWordLight`, `?wordLight=box`; look in `screens/22-listening-lesson/word-light-variants.jpg`); add the switch
+      to the settings (23).
 - [ ] **Loudness normalisation of the recitations** (owner, 2026-11-26: later, to hear first): same level for every
       ayah, fuller on phone speakers; today the Husary files are bundled as downloaded.
 - [ ] **Guided voice for the listening lessons** with Gemini TTS voice **08 Orus** (owner, 2026-11-26): short, fully

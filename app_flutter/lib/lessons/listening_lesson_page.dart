@@ -44,7 +44,7 @@ bool listenLitAll = false;
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
 /// (brighter gold with a halo), no box. Review `?wordLight=glow`.
-String listenWordLight = 'box';
+String listenWordLight = 'glow'; // owner's choice (2026-11-26); 'box' kept for a future user setting
 bool get _glow => listenWordLight == 'glow';
 
 void _logAudio(String e) {

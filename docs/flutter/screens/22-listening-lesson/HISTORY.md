@@ -95,3 +95,4 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   it follows the style note without reading it, but some takes are cut («إنّ», «in» instead of the line) → the check now
   also compares the transcription with the line (letters ≥ 85% alike) and rejects incomplete takes. Second audition
   `narrazione-provino-orus-2.mp3`: B (2.5 Pro plain), E (3.1 plain), F (3.1 calm note).
+- Owner: **glowing letters are the default**; the box is kept for a future user setting (BACKLOG).
