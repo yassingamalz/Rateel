@@ -63,6 +63,17 @@ def transcribe(path):
     return j['candidates'][0]['content']['parts'][0]['text'].strip()
 
 
+def letters(t):
+    import re
+    return re.sub(r'[^\u0621-\u064A]', '', t.replace('\u0671', '\u0627').replace('\u0629', '\u0647'))
+
+
+def same_text(t, line):
+    """The transcription holds the whole line (letters only, ≥ 85% alike)."""
+    import difflib
+    return difflib.SequenceMatcher(None, letters(t), letters(line)).ratio() >= 0.85
+
+
 def duration(f):
     return float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f],
                                 capture_output=True, text=True).stdout)
@@ -78,9 +89,10 @@ for key, line in LINES.items():
             t, dur = transcribe(f), duration(f)
             latin = any(c.isascii() and c.isalpha() for c in t)
             long = bare is not None and dur > bare * 1.9
-            if not latin and not long:
+            whole = same_text(t, line)
+            if not latin and not long and whole:
                 break
             print(f'  {key}-{style} take {take}: rejected ({dur:.1f}s «{t[:60]}»)')
         if style == 'bare':
             bare = dur
-        print(f'{key}-{style}: {dur:.1f}s  «{t}»' + (' ⚠ NOT CLEAN' if latin or long else ''))
+        print(f'{key}-{style}: {dur:.1f}s  «{t}»' + (' ⚠ NOT CLEAN' if latin or long or not whole else ''))

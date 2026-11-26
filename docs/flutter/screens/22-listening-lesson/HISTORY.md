@@ -91,3 +91,7 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
 - Owner: instead of the big highlighter, can the letters themselves light up? Built behind `?wordLight=glow`: the recited
   word turns a brighter gold with a gold halo, no box; the rule letter keeps its own green glow. Default still `box`
   until the owner chooses. Sheet `word-light-variants.jpg`, demo with sound `demo-glow-audio.mp4` (first three ayat).
+- Owner prefers **B** (2.5 Pro, no style note) and asked about **gemini-3.1-flash-tts-preview** (not tried at first):
+  it follows the style note without reading it, but some takes are cut («إنّ», «in» instead of the line) → the check now
+  also compares the transcription with the line (letters ≥ 85% alike) and rejects incomplete takes. Second audition
+  `narrazione-provino-orus-2.mp3`: B (2.5 Pro plain), E (3.1 plain), F (3.1 calm note).
