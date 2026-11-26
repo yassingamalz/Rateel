@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U2.L4",
+      "titleAr": "اللسان",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز مناطق اللسان",
+      "explanationAr": "للّسان عشرة مخارج خاصة تخرج منها ثمانية عشر حرفًا، ويختلف موضع التماس باختلاف الحرف.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى اللسان."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "للّسان عشرة مخارج خاصة تخرج منها ثمانية عشر حرفًا، ويختلف موضع التماس باختلاف الحرف."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز مناطق اللسان"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن قْ وكْ مع معلم دون تكلف.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L4.Q1",
+              "type": "singleChoice",
+              "text": "أي الحروف التالية من حروف اللسان؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "القاف"
+                },
+                {
+                  "id": "2",
+                  "text": "الباء"
+                },
+                {
+                  "id": "3",
+                  "text": "الهاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "للّسان عشرة مخارج خاصة تخرج منها ثمانية عشر حرفًا، ويختلف موضع التماس باختلاف الحرف."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U2.L5",
+      "titleAr": "الشفتان",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز المخرج الشفوي",
+      "explanationAr": "تخرج الفاء من باطن الشفة السفلى مع أطراف الثنايا العليا، وتخرج الباء والميم والواو غير المدية من الشفتين بأوضاع مختلفة.",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الشفتان."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تخرج الفاء من باطن الشفة السفلى مع أطراف الثنايا العليا، وتخرج الباء والميم والواو غير المدية من الشفتين بأوضاع مختلفة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "113:1"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز المخرج الشفوي"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن فْ وبْ ومْ أمام مرآة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L5.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف يخرج من باطن الشفة السفلى وأطراف الثنايا العليا؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الفاء"
+                },
+                {
+                  "id": "2",
+                  "text": "القاف"
+                },
+                {
+                  "id": "3",
+                  "text": "الحاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تخرج الفاء من باطن الشفة السفلى مع أطراف الثنايا العليا، وتخرج الباء والميم والواو غير المدية من الشفتين بأوضاع مختلفة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U2.L6",
+      "titleAr": "الخيشوم",
+      "source": {
+        "chapter": 6,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الغنة عن الحرف",
+      "explanationAr": "الخيشوم مخرج الغنة، وهي صفة للنون والميم وليست حرفًا مستقلًا.",
+      "examples": [
+        {
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "narrationAr": "سَنَتَعَرَّفُ فِي هَذَا الدَّرْسِ عَلَى الخيشوم."
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الخيشوم مخرج الغنة، وهي صفة للنون والميم وليست حرفًا مستقلًا."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "114:6"
+          },
+          {
+            "kind": "recap",
+            "narrationAr": "تمييز الغنة عن الحرف"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى النون المشددة وكررها مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U2.L6.Q1",
+              "type": "singleChoice",
+              "text": "ما الصوت الذي يخرج من الخيشوم؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الغنة"
+                },
+                {
+                  "id": "2",
+                  "text": "القلقلة"
+                },
+                {
+                  "id": "3",
+                  "text": "الصفير"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الخيشوم مخرج الغنة، وهي صفة للنون والميم وليست حرفًا مستقلًا."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
