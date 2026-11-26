@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U11.L1",
+      "titleAr": "تَطَوُّرُ ضَبْطِ الْمُصْحَفِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ تُسَاعِدُنَا الْعَلَامَاتُ فِي قِرَاءَةِ الْمُصْحَفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تَطَوَّرَ ضَبْطُ الْمُصْحَفِ عَبْرَ مَرَاحِلَ تَارِيخِيَّةٍ، وَتَسَاعَدَتْ وَسَائِلُ الضَّبْطِ مَعَ التَّلَقِّي فِي تَعْلِيمِ الْقِرَاءَةِ.",
+          "visualDirection": "Authenticated manuscript images with verified dates and rights."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ الرَّسْمِ وَعَلَامَاتِ الضَّبْطِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U11.L2",
+      "titleAr": "الرَّسْمُ الْعُثْمَانِيُّ وَالْإِمْلَائِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "لِمَاذَا تَخْتَلِفُ كِتَابَةُ بَعْضِ الْكَلِمَاتِ فِي الْمُصْحَفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلرَّسْمِ الْعُثْمَانِيِّ خَصَائِصُهُ، وَقَدْ يَخْتَلِفُ عَنِ الْإِمْلَاءِ الْحَدِيثِ. وَنَعْتَمِدُ نَصَّ الْمُصْحَفِ الْمُوَثَّقَ عِنْدَ عَرْضِ الْآيَاتِ.",
+          "visualDirection": "Side-by-side verified textual comparison; keep Quran text clearly distinguished."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "لَاحِظِ الْفَرْقَ بَيْنَ الرَّسْمِ وَالْإِمْلَاءِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U12.L1",
+      "titleAr": "حِفْظُ الْقُرْآنِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نَنْتَقِلُ مِنَ الْقِرَاءَةِ إِلَى الْحِفْظِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَقْرَأُ الْمَقْطَعَ قِرَاءَةً صَحِيحَةً، ثُمَّ نُكَرِّرُهُ وَنَسْتَرْجِعُهُ مِنَ الذَّاكِرَةِ وَنُرَاجِعُهُ.",
+          "visualDirection": "Open book morphs to recall card and review cycle."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اخْتَرْ مَقْطَعًا قَصِيرًا وَتَدَرَّبْ عَلَى حِفْظِهِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U12.L2",
+      "titleAr": "أَدَوَاتُ حِفْظِ الْقُرْآنِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الَّذِي يُعِينُنَا عَلَى الْحِفْظِ الصَّحِيحِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "يُعِينُنَا مُصْحَفٌ مُعْتَمَدٌ، وَتِلَاوَةٌ مُتْقَنَةٌ، وَمُعَلِّمٌ يُصَحِّحُ أَدَاءَنَا، وَخُطَّةٌ لِلْمُرَاجَعَةِ.",
+          "visualDirection": "Book, headphones, teacher and calendar glyphs."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اخْتَرْ أَدَوَاتِكَ وَحَدِّدْ وَقْتًا لِلتَّسْمِيعِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U12.L3",
+      "titleAr": "دَوْرَةُ الْحِفْظِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا نَفْعَلُ بَعْدَ حِفْظِ مَقْطَعٍ جَدِيدٍ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَتَدَرَّبُ عَلَى الْقِرَاءَةِ الصَّحِيحَةِ وَالتَّكْرَارِ وَالِاسْتِرْجَاعِ وَالتَّسْمِيعِ وَالْمُرَاجَعَةِ.",
+          "visualDirection": "Circular learning sequence; label as suggested training cycle, not exact book pillars."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "رَاجِعْ مَا حَفِظْتَهُ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U12.L4",
+      "titleAr": "مَا يُعِينُ عَلَى الْحِفْظِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نُوَاظِبُ عَلَى الْحِفْظِ وَالْمُرَاجَعَةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُنَظِّمُ وَقْتَنَا، وَنَخْتَارُ مِقْدَارًا مُنَاسِبًا لِقُدْرَتِنَا، وَنُرَاجِعُ مَا حَفِظْنَاهُ بِانْتِظَامٍ.",
+          "visualDirection": "Calendar and manageable progress cards, no pressure or exaggerated promises."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "ضَعْ خُطَّةً صَغِيرَةً لِلْحِفْظِ وَالْمُرَاجَعَةِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}
