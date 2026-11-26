@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U1.L1",
+      "examples": [
+        {
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ",
+          "id": "U1.L1.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "id": "U1.L1.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U1.L1.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "1:1",
+          "additionalTarget": null,
+          "promptAr": "ما الحركة التي سمعتها على الباء في بِسْمِ؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الكسرة"
+            },
+            {
+              "id": "b",
+              "text": "الفتحة"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الكسرة.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U1.L1.M.P1",
+          "instructionAr": "انطق بَ بِ بُ منفصلة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U1.L1.M.P2",
+          "instructionAr": "ميز اسم الحرف عن صوته في كلمة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U1.L2",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "id": "U1.L2.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "id": "U1.L2.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U1.L2.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "112:1",
+          "additionalTarget": null,
+          "promptAr": "أي عضو يشارك في تشكيل صوت الغنة في المثال الثاني؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الخيشوم"
+            },
+            {
+              "id": "b",
+              "text": "الأسنان وحدها"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الخيشوم.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U1.L2.M.P1",
+          "instructionAr": "راقب حركة الشفتين عند بَ ومَ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U1.L2.M.P2",
+          "instructionAr": "حدد اللسان والحنك والحلق في الرسم التشريحي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U1.L3",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "id": "U1.L3.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "103:1",
+          "excerptAr": "وَالْعَصْرِ",
+          "id": "U1.L3.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U1.L3.M.A1",
+          "kind": "teacher_recorded_non_quran",
+          "audioTarget": "أَسْ وأَبْ",
+          "additionalTarget": null,
+          "promptAr": "في نموذج أَسْ وأَبْ أيهما يستمر فيه جريان الصوت؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "أَسْ"
+            },
+            {
+              "id": "b",
+              "text": "أَبْ"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: أَسْ.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U1.L3.M.P1",
+          "instructionAr": "قارن سْ وبْ ولْ في تدريب صوتي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U1.L3.M.P2",
+          "instructionAr": "لاحظ اختلاف وضع أعضاء النطق دون إجهاد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}
