@@ -5,7 +5,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 
 | N° | Screen | Reference | State |
 |---|---|---|---|
-| 01 | Open: no reference file. Owner will decide later what it is | – | to define |
+| 01 | **Splash / start-up** (owner, 2026-11-26; Angular `splash-screen`, `initialization`) | `screens/01-splash/01-avvio.webp` + motion `01-avvio-square.gif` (owner); plan `screens/01-splash.md` | to do (branch `flutter/01-splash`, not started) |
 | 02 | **Shared top bar of every lesson** (progress bar, pause, back). Uses the free number 02 (owner, 2026-11-24) | none: Angular original `src/app/features/lessons/lesson-details` | **approved** (APK 1.0.330), merged into `master`; menu motion as Simply Piano and capsule left → right merged with 07 |
 | 03 | Courses (المسارات التعليمية) | `03-corsi.webp` | done, approved, in `master` |
 | 04 | Side navigation (rail + open menu) | `04-menu-laterale-aperto.webp` | done, approved, in `master` |
