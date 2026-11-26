@@ -4,10 +4,13 @@ import 'package:material_ui/material_ui.dart';
 
 import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
+import 'core/app_settings.dart';
 import 'courses/course_data.dart';
 import 'courses/courses_screen.dart';
 import 'core/learn_flow.dart';
+import 'nav/nav_items.dart';
 import 'nav/side_nav.dart';
+import 'settings/settings_screen.dart';
 import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
@@ -103,6 +106,10 @@ Future<void> main() async {
     DeviceOrientation.landscapeRight,
   ]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await AppSettings.load();
+  // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
+  final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
+  if (ts != null) AppSettings.textScale.value = ts;
   runApp(const RateelApp());
 }
 
@@ -124,10 +131,16 @@ class RateelApp extends StatelessWidget {
         // (owner, 2026-11-21): the system scale would break the proportions
         // between text and cards/ornaments. A text-size option will live in the
         // app's settings and scale the text proportionally.
-        builder: (context, child) => MediaQuery.withNoTextScaling(
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: child!,
+        // Settings «حجم الخط» (screen 23) scales the app's own text, 90–110%.
+        builder: (context, child) => ValueListenableBuilder<double>(
+          valueListenable: AppSettings.textScale,
+          builder: (context, scale, _) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(scale)),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: child!,
+            ),
           ),
         ),
         home: Scaffold(
@@ -137,6 +150,7 @@ class RateelApp extends StatelessWidget {
               3 => const LeaderboardScreen(),
               // Sections not built yet: coming soon (screen 14, as Angular).
               1 || 2 || 5 => const ComingSoonScreen(),
+              settingsSection => const SettingsScreen(),
               _ => SectionPlaceholder(index: selected),
             },
           ),

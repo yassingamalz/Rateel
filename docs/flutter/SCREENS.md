@@ -21,9 +21,9 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
 | 22 | **Listening lesson** (owner, 2026-11-25): an audio plays (verse / words), then questions on what was heard, Simply Piano style (e.g. «what was in the word X: a ghunna?», «this one: a ghunna?»). Own lesson type `listen` (already in the data and in the 06 icons, headphones). Confirmed: separate lesson (owner). Build it **after 10/10b** and reuse their question + answer-feedback widgets; the same audio question can later also appear as one question type inside tests | `screens/22-listening-lesson/22-lezione-ascolto.webp` (from the app screenshots); plan `screens/22-listening-lesson.md` | to do (after 10/10b) |
-| 23 | **Settings** (owner, 2026-11-25): theme dark/light, text size (already promised in `main.dart`), sound effects, vibration, reciter, daily reminder, about, reset progress. Gear at the bottom of the rail; list full width, «about» and «reset» are rows of the list (owner) | `screens/23-settings/23-impostazioni.webp`; plan `screens/23-settings.md` | to do |
+| 23 | **Settings** (owner, 2026-11-25; **v1 built** on `flutter/23-settings`, 2026-11-26): theme dark/light, text size (already promised in `main.dart`), sound effects, vibration, reciter, daily reminder, about, reset progress. Gear at the bottom of the rail; list full width, «about» and «reset» are rows of the list (owner) | `screens/23-settings/23-impostazioni.webp`; plan `screens/23-settings.md` | **approved** (v1, APK 1.0.402) on `flutter/23-settings`; PR #50 → `master`, merge after 10 and 12 |
 
-Done: 4 screens (03–06). To do: at least 16 (02, 07, 09, 10/10b, 11, 12, 13, 14, 15–21, 22, 23), plus 01 and 08 once defined.
+Done: 4 screens (03–06). To do: at least 16 (02, 07, 09, 10/10b, 11, 12, 13, 14, 15–21, 22, 23, 01, 24–30), plus 01 and 08 once defined.
 
 ## Screen 02: shared lesson top bar (owner, 2026-11-24)
 - Appears in **every type of lesson** (video, reading, practice, listening, test, guided).
@@ -51,16 +51,17 @@ Remember to connect these to real data (backend or app progress) before release.
 | `src/assets/data/content/reading/*.json` + Angular `reading-lesson.service.ts` | Tajweed marks use rule ids (adab-taharah, ikhfa, makharij-huruf…) that mostly have **no definition/colour**: only 6 rules exist in the Angular service, and `adab-general` (#1F4037) is invisible on dark green. |
 | `src/assets/data/content/reading/*.json` | **38 of the 45 marks have wrong startIndex/endIndex** (Angular coloured cut words, e.g. «لاوة الط» for «الطهارة»); the app looks up the mark's text instead. Only 4 marks are tajweed rules (idgham, ikhfa, izhar, shaddah); the others are topics (adab-*, intention…). |
 
-## Screens possibly forgotten (found 2026-11-25, owner to decide: add, merge into another screen, or drop)
-From the Angular original (`src/app`) and the app's flow. None has a number yet.
-| Candidate | Where it comes from | Note |
-|---|---|---|
-| Splash / start-up (loading) | Angular `splash-screen`, `initialization` | could be screen **01** (still open) |
-| End of lesson (completion: points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02 |
-| Test results (score, correct/wrong, retry) | Angular `assessment-results` | after 10/10b |
-| Points history | Angular `points-history`, `points-card` | could live in 13 or in a profile |
-| Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | probably part of 13 |
-| Help / tips overlay | Angular `help-tips` | first use of a lesson |
-| Profile (name, avatar, level, streak) | leaderboard shows the user, no screen yet | could merge with settings |
-| Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
-| Unit / course completed celebration | already done inside 03/05 (completion animations) | probably nothing to add |
+## Screens added on 2026-11-26 (owner: «all of them, in the suggested order»)
+Found by comparing the Angular original (`src/app`) with this list. Built in this order, after the screens above;
+each one gets its reference from the app screenshots (`docs/flutter/app-references/`) before building.
+| N° | Screen | Comes from | Note |
+|---|---|---|---|
+| 01 | Splash / start-up (loading) | Angular `splash-screen`, `initialization` | uses the free number 01 |
+| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02 |
+| 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | after 10/10b |
+| 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
+| 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13 |
+| 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type |
+| 29 | Profile (name, avatar, level, streak) | the leaderboard shows the user; no screen yet | may merge with 23 |
+| 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
+Not a new screen: unit / course completion celebrations, already inside 03/05.

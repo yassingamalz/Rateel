@@ -11,6 +11,8 @@ import 'package:rateel/courses/course_data.dart';
 import 'package:rateel/main.dart';
 import 'package:rateel/lessons/lesson_data.dart';
 import 'package:rateel/units/unit_data.dart';
+import 'package:rateel/core/app_settings.dart';
+import 'package:rateel/settings/settings_screen.dart';
 
 // The courses screen has a looping glow: settle with fixed pumps.
 Future<void> settle(WidgetTester tester) async {
@@ -340,6 +342,49 @@ void main() {
       expect(result, isTrue);
     },
   );
+
+  testWidgets('settings: theme, switches, text size, reset (screen 23)', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    addTearDown(() {
+      AppSettings.light.value = false;
+      AppSettings.sounds.value = true;
+      AppSettings.textScale.value = 1.0;
+    });
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: Directionality(
+            textDirection: TextDirection.rtl,
+            child: SettingsScreen(),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('الإعدادات'), findsOneWidget);
+    await tester.tap(find.text('فاتح'));
+    await tester.pumpAndSettle();
+    expect(AppSettings.light.value, isTrue);
+    await tester.tap(find.byIcon(Icons.add_rounded));
+    await tester.pumpAndSettle();
+    expect(AppSettings.textScale.value, closeTo(1.05, 0.001));
+    expect(find.text('105%'), findsOneWidget);
+    // Scroll to the last rows, reset with confirmation.
+    await tester.drag(find.text('القارئ'), const Offset(0, -400));
+    await tester.pumpAndSettle();
+    setLessonsDone('x', 2);
+    await tester.tap(find.text('إعادة الضبط'));
+    await tester.pumpAndSettle();
+    expect(find.text('إلغاء'), findsOneWidget);
+    await tester.tap(find.text('إعادة الضبط').last);
+    await tester.pumpAndSettle();
+    expect(lessonsDone('x'), 0);
+    expect(find.text('تمت إعادة ضبط التقدم'), findsOneWidget);
+  });
 
   testWidgets(
     'daily challenges: streak chip opens 12, long press completes (screen 12)',

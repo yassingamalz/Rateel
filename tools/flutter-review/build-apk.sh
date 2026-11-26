@@ -59,6 +59,7 @@ for ref in $(git -C "$ROOT" for-each-ref --format='%(refname)' refs/remotes/orig
 done
 echo "== flutter build apk (release, arm64), version 1.0.$CODE ($CODE)"
 "$FLUTTER" build apk --release --target-platform android-arm64 \
-  --build-name="1.0.$CODE" --build-number="$CODE"
+  --build-name="1.0.$CODE" --build-number="$CODE" \
+  --dart-define=RATEEL_VERSION="1.0.$CODE"
 cp build/app/outputs/flutter-apk/app-release.apk "build/app/outputs/flutter-apk/rateel-1.0.$CODE.apk"
 ls -la "build/app/outputs/flutter-apk/rateel-1.0.$CODE.apk"
