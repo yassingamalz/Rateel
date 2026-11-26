@@ -64,3 +64,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   comparison `compare-v5-phone.jpg`, demo `demo-v5-phone.mp4` (questions 8–10, results, popup, light, details,
   «إنهاء الدرس» back to 06). Scripts `tools/flutter-review/test-capture.js`, `test-demo.js`, `test-angular-capture.js`,
   `test-feedback-mockup.{html,js}`.
+
+- APK 1.0.402 (v5), after 3 build attempts (Maven Central 429).
