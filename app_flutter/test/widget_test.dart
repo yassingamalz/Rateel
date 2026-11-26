@@ -3,6 +3,7 @@ import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rateel/nav/side_nav.dart';
 import 'package:rateel/challenges/challenge_data.dart';
 import 'package:rateel/challenges/daily_challenges_screen.dart';
 import 'package:material_ui/material_ui.dart';
@@ -371,6 +372,15 @@ void main() {
         find.text('رحلة التحديات اليومية'),
         const Offset(700, 0),
       );
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsNothing);
+      expect(find.byType(StreakChip), findsOneWidget);
+      // The courses icon of the rail goes back from 12 to the courses.
+      await tester.tap(find.byType(StreakChip));
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsOneWidget);
+      SideNavScaffold.reselected.value = null;
+      SideNavScaffold.reselected.value = 0;
       await settle(tester);
       expect(find.text('رحلة التحديات اليومية'), findsNothing);
       expect(find.byType(StreakChip), findsOneWidget);

@@ -72,3 +72,8 @@ tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%
   bubble, 5 the same larger, 6 small vertical card with label); sheets `streak-chip-variants-b.jpg`, `-d.jpg`. B2/B3
   touch the bottom edge of the partly visible left card; D1–D3 cover part of the mosque.
 - **Owner's choice: D2** (pill with label ×1.35, top left), now the default.
+
+## 7. v6 and approval (2026-11-26)
+- The courses icon of the rail, tapped while 12 is open, goes back to the courses (`SideNavScaffold.reselected`); on the
+  courses screen it does nothing. Checked in the browser and in the widget test.
+- Owner: the back gesture is not very intuitive → `BACKLOG.md`. **Screen 12 approved**; PR and merge into `master`.

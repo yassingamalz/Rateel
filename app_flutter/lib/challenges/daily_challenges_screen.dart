@@ -8,6 +8,7 @@ import '../coming_soon/coming_soon_screen.dart';
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../core/sounds.dart';
+import '../nav/side_nav.dart';
 import '../theme/rateel_theme.dart';
 import 'challenge_data.dart';
 
@@ -145,6 +146,7 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
   @override
   void initState() {
     super.initState();
+    SideNavScaffold.reselected.addListener(_onReselect);
     _back.addListener(
       () => _drag.value =
           _settleFrom * (1 - Curves.easeOut.transform(_back.value)),
@@ -178,6 +180,7 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
 
   @override
   void dispose() {
+    SideNavScaffold.reselected.removeListener(_onReselect);
     _drag.dispose();
     _back.dispose();
     _entry.dispose();
@@ -292,6 +295,15 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
         );
       },
     );
+  }
+
+  /// The courses icon of the rail, tapped while this screen is open, goes
+  /// back to the courses (owner, 2026-11-26).
+  void _onReselect() {
+    if (SideNavScaffold.reselected.value != 0 || _leaving) return;
+    if (!(ModalRoute.of(context)?.isCurrent ?? false)) return;
+    _leaving = true;
+    Navigator.of(context).popUntil((r) => r.isFirst);
   }
 
   final _drag = ValueNotifier<double>(0);

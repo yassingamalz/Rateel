@@ -1,7 +1,6 @@
 # Screen 12: daily challenges (رحلة التحديات اليومية)
 
-Branch `flutter/12-daily-challenges` (opened 2026-11-25 from `master`). Status: **v1 built** (2026-11-25), waiting for
-the owner's phone test. History: `12-daily-challenges/HISTORY.md`. Code: `app_flutter/lib/challenges/`.
+Branch `flutter/12-daily-challenges` (opened 2026-11-25 from `master`). Status: **approved** (2026-11-26); leftovers in `../BACKLOG.md`. History: `12-daily-challenges/HISTORY.md`. Code: `app_flutter/lib/challenges/`.
 
 - Reference: `screens/12-daily-challenges/reference.webp` (copied from `lesson-production`,
   `docs/design/glassy-gamified/screens/12-sfide-giornaliere.webp`), 1844x853.
