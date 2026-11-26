@@ -11,12 +11,15 @@ natively in Flutter, one screen per branch.
 5. `docs/flutter/LESSONS-LEARNED.md`: how the owner wants the work done (references are visual only, critic
    without exclusions, building notes).
 6. `docs/flutter/PERFORMANCE.md`: why the app feels heavy, the fix plan and the performance rules for new screens.
+6b. `docs/flutter/BACKLOG.md`: everything left for later.
 7. Lesson-production rules, design lines and assets live on branch `lesson-production`
    (`docs/production/RULES-AND-LESSONS-LEARNED.md`, `docs/design/`, `src/assets/images/guided/`).
 
 ## Key rules
 - **Write every decision and every piece of work in the branch** (`DECISIONS.md`, the screen plan,
   the prompts) in the same commit as the work. Other sessions rely on it.
+- **Everything left for later goes into `docs/flutter/BACKLOG.md`** (owner, 2026-11-26), in the same commit;
+  read it at the start of each session and tick items off (logging them in `DECISIONS.md`) when done.
 - **Critic before the owner:** every visual result is reviewed one to one against the reference by a
   separate reviewer and fixed until no high/medium code difference remains (`docs/flutter/CRITIC.md`).
   **Always ask the owner before launching the critic** (it consumes a lot): propose it, wait for a yes.
