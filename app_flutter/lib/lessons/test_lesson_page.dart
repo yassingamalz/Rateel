@@ -24,6 +24,11 @@ int testStartQuestion = 0;
 List<int> testStartPick = const [];
 String? testStartState;
 
+/// Layouts under review (owner, 2026-11-26): results summary `?results=a|b`,
+/// end popup `?endPopup=a|b`.
+String testResultsStyle = 'a';
+String testEndPopupStyle = 'a';
+
 /// Geometry of screen 10 in u (1% of the screen height), measured on
 /// `screens/10-test-lesson/reference.webp` (1842×854, u = 8.54 px). x values
 /// from the card edges or the screen centre.
@@ -201,6 +206,13 @@ class _TestLessonPageState extends State<TestLessonPage>
     vsync: this,
     duration: const Duration(milliseconds: 1300),
   );
+  // Streak banner (Angular streak indicator, owner 2026-11-26: «we lost the
+  // screen of the correct answers in a row»): pops over the card for 1.9 s.
+  late final _streakAnim = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1900),
+  );
+
   // Countdown of the end popup (6 s passed / 8 s not passed, Angular).
   late final _countdown = AnimationController(vsync: this);
 
@@ -268,28 +280,32 @@ class _TestLessonPageState extends State<TestLessonPage>
       for (final k in testStartPick) {
         if (k < q.options.length) run.toggle(q, q.options[k].id);
       }
-      if (state == 'ok' || state == 'ko') {
+      if (state == 'ok' || state == 'ko' || state == 'streak') {
         if (testStartPick.isEmpty) {
           for (final o in q.options) {
             final right = run.isCorrectOption(q, o.id);
-            if (right == (state == 'ok')) {
+            if (right == (state != 'ko')) {
               run.toggle(q, o.id);
               if (q.type != QuestionType.multiple) break;
             }
           }
           if (q.type == QuestionType.text) {
-            run.setText(q, state == 'ok' ? q.correct.first : 'من');
+            run.setText(q, state != 'ko' ? q.correct.first : 'من');
           }
         }
         run.submit(q);
         _fb.value = 1;
         _revealAnswer(q);
+        if (state == 'streak') _streakAnim.value = 0.45;
       }
     }
     if (all) {
       _phase = _Phase.results;
       _ring.value = 1;
-      if (state == 'pass' || state == 'fail') _popup.value = 1;
+      if (state == 'pass' || state == 'fail') {
+        _popup.value = 1;
+        _countdown.value = 0.1; // mid-burst for the captures
+      }
       if (state == 'details') {
         _detailsIndex = 1;
         _details.value = 1;
@@ -337,6 +353,7 @@ class _TestLessonPageState extends State<TestLessonPage>
     _details.dispose();
     _ring.dispose();
     _countdown.dispose();
+    _streakAnim.dispose();
     _text.dispose();
     _scroll.dispose();
     super.dispose();
@@ -378,6 +395,13 @@ class _TestLessonPageState extends State<TestLessonPage>
     if (ok) {
       Sounds.correct();
       Haptics.success();
+      if (run.streak > 1) {
+        Future<void>.delayed(const Duration(milliseconds: 450), () {
+          if (!mounted) return;
+          Sounds.streak();
+          _streakAnim.forward(from: 0);
+        });
+      }
     } else {
       Sounds.wrong();
       Haptics.denied();
@@ -637,6 +661,43 @@ class _TestLessonPageState extends State<TestLessonPage>
           rect: card,
           child: _enter(2, _card(p, u, card)),
         ),
+        AnimatedBuilder(
+          key: const ValueKey('streak'),
+          animation: _streakAnim,
+          builder: (context, _) {
+            final v = _streakAnim.value;
+            final run = _run;
+            if (v == 0 || v == 1 || run == null) return const SizedBox.shrink();
+            final inT = Curves.easeOutBack.transform(
+              (v / 0.22).clamp(0.0, 1.0),
+            );
+            final out = ((v - 0.8) / 0.2).clamp(0.0, 1.0);
+            return Positioned(
+              left: cx - u * 34,
+              top: u * 30,
+              width: u * 68,
+              height: u * 15,
+              child: IgnorePointer(
+                child: Opacity(
+                  opacity: (inT.clamp(0.0, 1.0)) * (1 - out),
+                  child: Transform.translate(
+                    offset: Offset(0, -u * 3 * out),
+                    child: Transform.scale(
+                      scale: 0.7 + 0.3 * inT,
+                      child: _StreakBanner(
+                        u: u,
+                        p: p,
+                        streak: run.streak,
+                        bonus: run.nextPoints - TestRun.pointsPerQuestion,
+                        t: v,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
         // End popup and details popup above everything (veil, no blur:
         // PERFORMANCE.md).
         AnimatedBuilder(
@@ -863,6 +924,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                 p: p,
                 ok: run.results[q.id]!,
                 points: run.earned[q.id] ?? 0,
+                streak: run.streaks[q.id] ?? 0,
                 correctText: run.correctText(q),
                 explanation: q.explanation,
                 last: run.finished,
@@ -1063,102 +1125,18 @@ class _TestLessonPageState extends State<TestLessonPage>
     final run = _run!;
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final soft = ink.withValues(alpha: 0.8);
-    final ringD = u * 21;
     final rightW = card.width * 0.44;
     return [
-      // Right column: score ring, message, stats.
+      // Right column: score ring, message, stats (two layouts under
+      // review, owner 2026-11-26: `?results=a|b`).
       Positioned(
-        right: u * 5,
-        top: u * 4,
-        width: rightW - u * 5,
-        height: bandTop - u * 5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              textDirection: TextDirection.rtl,
-              children: [
-                SizedBox(
-                  width: ringD,
-                  height: ringD,
-                  child: AnimatedBuilder(
-                    animation: _ring,
-                    builder: (context, _) => CustomPaint(
-                      painter: _ScoreRingPainter(
-                        p: p,
-                        u: u,
-                        value:
-                            run.score /
-                            100 *
-                            Curves.easeOutCubic.transform(_ring.value),
-                        passed: run.passed,
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${(run.score * Curves.easeOutCubic.transform(_ring.value)).round()}%',
-                          textDirection: TextDirection.ltr,
-                          style: readex(
-                            u * (run.score == 100 ? 4.4 : 5.2),
-                            weight: 700,
-                            color: p.c(
-                              RateelColors.testTitleTop,
-                              RateelColors.readLTitle,
-                            ),
-                          ).copyWith(height: 1),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: u * 3),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _GoldIcon(
-                        u: u,
-                        icon: run.passed
-                            ? Icons.emoji_events
-                            : Icons.error_outline,
-                        size: 4.8,
-                        p: p,
-                        tint: run.passed ? null : RateelColors.testKoRim,
-                      ),
-                      SizedBox(height: u),
-                      Text(
-                        run.passed ? 'أحسنت! لقد اجتزت الاختبار بنجاح.' : 'لم تتمكن من اجتياز الاختبار. يمكنك المحاولة مرة أخرى.',
-                        textDirection: TextDirection.rtl,
-                        maxLines: 3,
-                        style: readex(u * 3.4, weight: 600, color: ink)
-                            .copyWith(
-                              height: 1.35,
-                              shadows: p.t > 0.5 ? null : _shadow(u),
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: u * 3),
-            Row(
-              textDirection: TextDirection.rtl,
-              children: [
-                for (final (i, s) in [
-                  (0, _Stat('${run.correctCount}', 'إجابات صحيحة', _Mark.ok)),
-                  (1, _Stat('${run.wrongCount}', 'إجابات خاطئة', _Mark.ko)),
-                  (2, _Stat('${run.points}', 'مجموع النقاط', _Mark.star)),
-                ]) ...[
-                  if (i > 0) SizedBox(width: u * 1.6),
-                  Expanded(
-                    child: _StatTile(u: u, p: p, stat: s),
-                  ),
-                ],
-              ],
-            ),
-          ],
-        ),
+        right: u * 4.5,
+        top: u * 3.2,
+        width: rightW - u * 4.5,
+        height: bandTop - u * 4.2,
+        child: testResultsStyle == 'b'
+            ? _summaryB(p, u, run)
+            : _summaryA(p, u, run),
       ),
       // Left column: answers, then recommendations.
       Positioned(
@@ -1273,6 +1251,247 @@ class _TestLessonPageState extends State<TestLessonPage>
     ];
   }
 
+  Widget _scoreRing(LessonPal p, double u, TestRun run, double d) => SizedBox(
+    width: u * d,
+    height: u * d,
+    child: AnimatedBuilder(
+      animation: _ring,
+      builder: (context, _) {
+        final t = Curves.easeOutCubic.transform(_ring.value);
+        return CustomPaint(
+          painter: _ScoreRingPainter(
+            p: p,
+            u: u,
+            value: run.score / 100 * t,
+            passed: run.passed,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${(run.score * t).round()}%',
+                textDirection: TextDirection.ltr,
+                style: readex(
+                  u * d * (run.score == 100 ? 0.21 : 0.25),
+                  weight: 700,
+                  color: p.c(
+                    RateelColors.testTitleTop,
+                    RateelColors.readLTitle,
+                  ),
+                ).copyWith(height: 1),
+              ),
+              SizedBox(height: u * 0.6),
+              Text(
+                run.passed ? 'ناجح' : 'لم تنجح',
+                textDirection: TextDirection.rtl,
+                style: readex(
+                  u * d * 0.12,
+                  weight: 500,
+                  color: run.passed
+                      ? p.c(RateelColors.testOkText, RateelColors.testLOkRim)
+                      : p.c(
+                          RateelColors.testKoDiscTop,
+                          RateelColors.testLKoRim,
+                        ),
+                ).copyWith(height: 1),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+
+  String _resultTitle(TestRun run) => run.passed ? 'أحسنت!' : 'حاول مرة أخرى';
+  String _resultText(TestRun run) => run.passed
+      ? 'لقد اجتزت الاختبار بنجاح.'
+      : 'لم تتمكن من اجتياز الاختبار، تحتاج إلى ${run.content.passingScore}%.';
+
+  List<_Stat> _stats(TestRun run) => [
+    _Stat('${run.correctCount}', 'إجابات صحيحة', _Mark.ok),
+    _Stat('${run.wrongCount}', 'إجابات خاطئة', _Mark.ko),
+    _Stat('${run.points}', 'نقطة', _Mark.star),
+  ];
+
+  /// A: one glass panel, everything centred: ring, title + message, then the
+  /// three numbers in columns divided by thin lines.
+  Widget _summaryA(LessonPal p, double u, TestRun run) {
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    final line = p.c(RateelColors.testRowRimBottom, RateelColors.testLRowRim);
+    return _GlassBox(
+      u: u,
+      p: p,
+      padding: EdgeInsets.symmetric(vertical: u * 2, horizontal: u * 2),
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                _scoreRing(p, u, run, 18),
+                SizedBox(width: u * 3),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        children: [
+                          _GoldIcon(
+                            u: u,
+                            p: p,
+                            icon: run.passed
+                                ? Icons.emoji_events
+                                : Icons.refresh,
+                            size: 4.6,
+                          ),
+                          SizedBox(width: u * 1.2),
+                          Text(
+                            _resultTitle(run),
+                            textDirection: TextDirection.rtl,
+                            style: readex(
+                              u * 4.6,
+                              weight: 700,
+                              color: p.c(
+                                RateelColors.testTitleTop,
+                                RateelColors.readLTitle,
+                              ),
+                            ).copyWith(height: 1.2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: u * 0.8),
+                      Text(
+                        _resultText(run),
+                        textDirection: TextDirection.rtl,
+                        maxLines: 2,
+                        style: readex(
+                          u * 3.1,
+                          weight: 400,
+                          color: ink,
+                        ).copyWith(height: 1.4),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: u * 1.4),
+            child: SizedBox(
+              height: math.max(1.0, u * 0.18),
+              child: ColoredBox(color: line.withValues(alpha: 0.6)),
+            ),
+          ),
+          SizedBox(
+            height: u * 10.5,
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                for (final (i, s) in _stats(run).indexed) ...[
+                  if (i > 0)
+                    SizedBox(
+                      width: math.max(1.0, u * 0.18),
+                      height: u * 8,
+                      child: ColoredBox(color: line.withValues(alpha: 0.6)),
+                    ),
+                  Expanded(
+                    child: _StatColumn(u: u, p: p, stat: s),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// B: no panel; the ring and the message on top, three equal vertical
+  /// tiles under them, aligned to the column's edges.
+  Widget _summaryB(LessonPal p, double u, TestRun run) {
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    return Column(
+      children: [
+        Expanded(
+          child: Row(
+            textDirection: TextDirection.rtl,
+            children: [
+              _scoreRing(p, u, run, 20),
+              SizedBox(width: u * 3.5),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _Medallion(
+                      u: u,
+                      p: p,
+                      d: 7,
+                      rays: false,
+                      child: Icon(
+                        run.passed ? Icons.emoji_events : Icons.refresh,
+                        size: u * 4.2,
+                        color: p.c(
+                          RateelColors.testSelDot,
+                          RateelColors.readLCopper,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      _resultTitle(run),
+                      textDirection: TextDirection.rtl,
+                      style: readex(
+                        u * 5,
+                        weight: 700,
+                        color: p.c(
+                          RateelColors.testTitleTop,
+                          RateelColors.readLTitle,
+                        ),
+                      ).copyWith(height: 1.2),
+                    ),
+                    Text(
+                      _resultText(run),
+                      textDirection: TextDirection.rtl,
+                      maxLines: 2,
+                      style: readex(
+                        u * 3.0,
+                        weight: 400,
+                        color: ink,
+                      ).copyWith(height: 1.4),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: u * 1.6),
+        SizedBox(
+          height: u * 12,
+          child: Row(
+            textDirection: TextDirection.rtl,
+            children: [
+              for (final (i, s) in _stats(run).indexed) ...[
+                if (i > 0) SizedBox(width: u * 1.6),
+                Expanded(
+                  child: _GlassBox(
+                    u: u,
+                    p: p,
+                    padding: EdgeInsets.zero,
+                    child: _StatColumn(u: u, p: p, stat: s),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _sectionTitle(double u, LessonPal p, String t) => Padding(
     padding: EdgeInsets.only(bottom: u * 1.4, right: u * 0.6),
     child: Text(
@@ -1298,20 +1517,22 @@ class _TestLessonPageState extends State<TestLessonPage>
     ),
   );
 
+  /// End of the test (Angular completion modal), redesigned (owner,
+  /// 2026-11-26), two layouts under review (`?endPopup=a|b`): A, the score
+  /// ring in the centre with a burst of gold sparks when passed; B, a wide
+  /// banner with the medallion on the right. Auto-close 6 s / 8 s, a tap
+  /// closes it.
   Widget _endPopup(LessonPal p, double u, double w, double h) {
-    final run = _run!;
     final t = Curves.easeOutCubic.transform(_popup.value);
     final pop = Curves.easeOutBack.transform(_popup.value);
-    final passed = run.passed;
-    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    final gold = p.c(RateelColors.testTitleTop, RateelColors.readLTitle);
-    final pw = u * 84, ph = u * 58;
+    final b = testEndPopupStyle == 'b';
+    final pw = u * (b ? 124 : 82), ph = u * (b ? 50 : 70);
     return Stack(
       children: [
         Positioned.fill(child: _veil(p, t, _closePopup)),
         Positioned(
           left: (w - pw) / 2,
-          top: (h - ph) / 2 + u * 4,
+          top: (h - ph) / 2 + u * (b ? 6 : 2),
           width: pw,
           height: ph,
           child: Opacity(
@@ -1325,134 +1546,48 @@ class _TestLessonPageState extends State<TestLessonPage>
                   children: [
                     Positioned.fill(
                       child: CustomPaint(
-                        painter: GoldCardPainter(p, u, u * 3.6, rimWidth: 0.4),
-                      ),
-                    ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: -u * 8,
-                      height: u * 16,
-                      child: Center(
-                        child: _Medallion(
-                          u: u,
-                          p: p,
-                          d: 15,
-                          rays: passed,
-                          child: Icon(
-                            Icons.school,
-                            size: u * 8.4,
-                            color: p.c(
-                              RateelColors.testSelDot,
-                              RateelColors.readLCopper,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      top: u * 9,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: u * 5),
-                        child: Column(
-                          children: [
-                            Text(
-                              passed ? 'مبروك' : 'انتهى الاختبار',
-                              textDirection: TextDirection.rtl,
-                              style: readex(
-                                u * 6,
-                                weight: 700,
-                                color: passed ? gold : ink,
-                              ).copyWith(height: 1.3, shadows: _shadow(u)),
-                            ),
-                            SizedBox(height: u * 0.6),
-                            SizedBox(
-                              width: u * 36,
-                              height: u * 2.4,
-                              child: _tinted(
-                                p,
-                                GoldDivider(u: u, diamond: 1.0),
-                              ),
-                            ),
-                            Text(
-                              passed
-                                  ? 'لقد أكملت الاختبار بنجاح!'
-                                  : 'لقد أكملت الاختبار',
-                              textDirection: TextDirection.rtl,
-                              style: readex(u * 3.4, weight: 500, color: ink),
-                            ),
-                            SizedBox(height: u * 1.6),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              textDirection: TextDirection.rtl,
-                              children: [
-                                Text(
-                                  '${run.score}%',
-                                  textDirection: TextDirection.ltr,
-                                  style: readex(
-                                    u * 9,
-                                    weight: 700,
-                                    color: passed
-                                        ? gold
-                                        : gold.withValues(alpha: 0.75),
-                                  ).copyWith(height: 1.0, shadows: _shadow(u)),
-                                ),
-                                SizedBox(width: u * 4),
-                                SizedBox(
-                                  height: u * 7.4,
-                                  width: u * 26,
-                                  child: _PointsPill(
-                                    u: u,
-                                    p: p,
-                                    points: run.points,
-                                    state: true,
-                                    total: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: u * 2.2),
-                            _GlassBox(
-                              u: u,
-                              p: p,
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                children: [
-                                  _GoldIcon(
-                                    u: u,
-                                    p: p,
-                                    icon: passed
-                                        ? Icons.emoji_events
-                                        : Icons.refresh,
-                                    size: 5,
-                                  ),
-                                  SizedBox(width: u * 2),
-                                  Expanded(
-                                    child: Text(
-                                      passed
-                                          ? 'أحسنت لقد تجاوزت درجة النجاح وأكملت هذا الاختبار بنجاح.'
-                                          : 'حاول مرة أخرى للحصول على درجة أعلى أنت بحاجة إلى ${run.content.passingScore}% للنجاح.',
-                                      textDirection: TextDirection.rtl,
-                                      style: readex(
-                                        u * 3.0,
-                                        weight: 400,
-                                        color: ink,
-                                      ).copyWith(height: 1.4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                        painter: GoldCardPainter(
+                          p,
+                          u,
+                          u * 3.6,
+                          rimWidth: 0.4,
+                          fill: const [
+                            RateelColors.testCardTop,
+                            RateelColors.testCardMid,
+                            RateelColors.testCardBottom,
                           ],
                         ),
                       ),
                     ),
-                    // Countdown line (Angular: auto-close).
+                    // Lattice along the bottom, as the card.
                     Positioned(
-                      left: u * 8,
-                      right: u * 8,
-                      bottom: u * 2.2,
-                      height: u * 0.6,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      height: ph * 0.45,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(u * 3.6),
+                        ),
+                        child: LatticeField(
+                          p: p,
+                          u: u,
+                          cell: 7,
+                          opacity: p.d(0.16, 0.3),
+                          mask: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Color(0x00000000), Color(0xFF000000)],
+                          ),
+                        ),
+                      ),
+                    ),
+                    ...(b ? _popupB(p, u, pw, ph) : _popupA(p, u, pw, ph)),
+                    Positioned(
+                      left: u * 10,
+                      right: u * 10,
+                      bottom: u * 2.4,
+                      height: u * 0.55,
                       child: AnimatedBuilder(
                         animation: _countdown,
                         builder: (context, _) => CustomPaint(
@@ -1468,6 +1603,212 @@ class _TestLessonPageState extends State<TestLessonPage>
         ),
       ],
     );
+  }
+
+  Widget _popupTitle(LessonPal p, double u, TestRun run, double size) => Text(
+    run.passed ? 'مبروك!' : 'انتهى الاختبار',
+    textDirection: TextDirection.rtl,
+    style: readex(
+      u * size,
+      weight: 700,
+      color: run.passed
+          ? p.c(RateelColors.testTitleTop, RateelColors.readLTitle)
+          : p.c(RateelColors.leaderText, RateelColors.readLInk),
+    ).copyWith(height: 1.15, shadows: p.t > 0.5 ? null : _shadow(u)),
+  );
+
+  Widget _popupChips(LessonPal p, double u, TestRun run) => Row(
+    mainAxisSize: MainAxisSize.min,
+    textDirection: TextDirection.rtl,
+    children: [
+      _Chip(
+        u: u,
+        p: p,
+        lead: SvgPicture.asset(
+          'assets/ui/glyphs/star.svg',
+          width: u * 3.4,
+          height: u * 3.4,
+          colorFilter: ColorFilter.mode(
+            p.c(RateelColors.testSelDot, RateelColors.testLSelRim),
+            BlendMode.srcIn,
+          ),
+        ),
+        text: '${run.points} نقطة',
+      ),
+      SizedBox(width: u * 1.6),
+      _Chip(
+        u: u,
+        p: p,
+        lead: _MarkDisc(u: u, ok: true, d: 3.4),
+        text: '${run.correctCount} / ${run.total}',
+      ),
+    ],
+  );
+
+  List<Widget> _popupA(LessonPal p, double u, double pw, double ph) {
+    final run = _run!;
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    return [
+      if (run.passed)
+        Positioned(
+          left: pw / 2 - u * 40,
+          top: u * 2,
+          width: u * 80,
+          height: u * 50,
+          child: IgnorePointer(
+            child: RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: _countdown,
+                builder: (context, _) => CustomPaint(
+                  painter: _BurstPainter(
+                    p: p,
+                    u: u,
+                    t: (_countdown.value * 6 / 1.6).clamp(0.0, 1.0),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      Positioned.fill(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(u * 6, u * 4, u * 6, u * 5),
+          child: Column(
+            children: [
+              _popupTitle(p, u, run, 6.2),
+              SizedBox(height: u * 1.2),
+              SizedBox(
+                width: u * 34,
+                height: u * 2.6,
+                child: _tinted(p, GoldDivider(u: u, diamond: 1.0)),
+              ),
+              SizedBox(height: u * 1.6),
+              _scoreRing(p, u, run, 24),
+              SizedBox(height: u * 2.2),
+              _popupChips(p, u, run),
+              SizedBox(height: u * 1.8),
+              Text(
+                run.passed
+                    ? 'أحسنت، لقد تجاوزت درجة النجاح.'
+                    : 'تحتاج إلى ${run.content.passingScore}% للنجاح، حاول مرة أخرى.',
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+                style: readex(u * 3.0, weight: 400, color: ink),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _popupB(LessonPal p, double u, double pw, double ph) {
+    final run = _run!;
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    final gold = p.c(RateelColors.testTitleTop, RateelColors.readLTitle);
+    return [
+      Positioned(
+        right: u * 5,
+        top: 0,
+        bottom: u * 3,
+        width: u * 36,
+        child: Center(
+          child: _Medallion(
+            u: u,
+            p: p,
+            d: 22,
+            rays: run.passed,
+            child: Icon(
+              run.passed ? Icons.emoji_events : Icons.school,
+              size: u * 12,
+              color: p.c(RateelColors.testSelDot, RateelColors.readLCopper),
+            ),
+          ),
+        ),
+      ),
+      Positioned(
+        right: u * 44,
+        left: u * 7,
+        top: u * 5,
+        bottom: u * 6,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _popupTitle(p, u, run, 6.4),
+            SizedBox(height: u * 0.6),
+            Text(
+              run.passed ? 'لقد أكملت الاختبار بنجاح!' : 'لقد أكملت الاختبار',
+              textDirection: TextDirection.rtl,
+              style: readex(u * 3.4, weight: 500, color: ink),
+            ),
+            SizedBox(height: u * 2),
+            Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                Text(
+                  '${run.score}%',
+                  textDirection: TextDirection.ltr,
+                  style: readex(
+                    u * 10,
+                    weight: 700,
+                    color: run.passed ? gold : gold.withValues(alpha: 0.75),
+                  ).copyWith(height: 1, shadows: p.t > 0.5 ? null : _shadow(u)),
+                ),
+                SizedBox(width: u * 3),
+                SizedBox(
+                  width: math.max(1.0, u * 0.2),
+                  height: u * 13,
+                  child: ColoredBox(color: gold.withValues(alpha: 0.5)),
+                ),
+                SizedBox(width: u * 3),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _Chip(
+                      u: u,
+                      p: p,
+                      lead: SvgPicture.asset(
+                        'assets/ui/glyphs/star.svg',
+                        width: u * 3.4,
+                        height: u * 3.4,
+                        colorFilter: ColorFilter.mode(
+                          p.c(
+                            RateelColors.testSelDot,
+                            RateelColors.testLSelRim,
+                          ),
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      text: '${run.points} نقطة',
+                    ),
+                    SizedBox(height: u * 1.2),
+                    _Chip(
+                      u: u,
+                      p: p,
+                      lead: _MarkDisc(u: u, ok: true, d: 3.4),
+                      text: '${run.correctCount} / ${run.total}',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: u * 2),
+            Text(
+              run.passed
+                  ? 'أحسنت، لقد تجاوزت درجة النجاح.'
+                  : 'تحتاج إلى ${run.content.passingScore}% للنجاح، حاول مرة أخرى.',
+              textDirection: TextDirection.rtl,
+              style: readex(
+                u * 3.0,
+                weight: 400,
+                color: ink.withValues(alpha: 0.85),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ];
   }
 
   Widget _detailsPopup(LessonPal p, double u, double w, double h) {
@@ -2116,7 +2457,6 @@ class _PointsPill extends StatelessWidget {
     required this.p,
     required this.points,
     required this.state,
-    this.total = false,
   });
 
   final double u;
@@ -2124,8 +2464,7 @@ class _PointsPill extends StatelessWidget {
   final int points;
   final bool? state;
 
-  /// Total of the test (end popup): «⭐ 64 نقطة» on gold.
-  final bool total;
+  bool get total => false;
 
   @override
   Widget build(BuildContext context) {
@@ -2274,9 +2613,11 @@ class _GoldButtonState extends State<_GoldButton> {
     final p = widget.p;
     final h = u * (widget.height ?? TestMetrics.btnH);
     final green = widget.green;
+    // Light theme: filled gold / green buttons with white text (owner,
+    // 2026-11-26).
     final text = p.c(
       green ? RateelColors.leaderText : RateelColors.testPillText,
-      RateelColors.readLInk,
+      Colors.white,
     );
     final glyphW = u * 3.6;
     return Semantics(
@@ -2314,21 +2655,21 @@ class _GoldButtonState extends State<_GoldButton> {
                         ? [
                             p.c(
                               RateelColors.testRowFill,
-                              RateelColors.testLRowFill,
+                              RateelColors.testLGreenTop,
                             ),
                             p.c(
                               RateelColors.testPillBottom,
-                              RateelColors.readLToolFill,
+                              RateelColors.testLGreenBottom,
                             ),
                           ]
                         : [
                             p.c(
                               RateelColors.testPillTop,
-                              RateelColors.readLCardTop,
+                              RateelColors.testLGoldTop,
                             ),
                             p.c(
                               RateelColors.testPillBottom,
-                              RateelColors.readLToolFill,
+                              RateelColors.testLGoldBottom,
                             ),
                           ],
                     stops: const [0, 0.75],
@@ -2365,17 +2706,20 @@ class _GoldButtonState extends State<_GoldButton> {
                     top: green
                         ? p.c(
                             RateelColors.testRowRimTop,
-                            RateelColors.testLOkRim,
+                            RateelColors.testLGreenRimTop,
                           )
                         : p.c(
                             RateelColors.testPillRimTop,
-                            RateelColors.testLSelRim,
+                            RateelColors.testLGoldRimTop,
                           ),
                     bottom: green
-                        ? p.c(RateelColors.testOkRim, RateelColors.testLOkRim)
+                        ? p.c(
+                            RateelColors.testOkRim,
+                            RateelColors.testLGreenBottom,
+                          )
                         : p.c(
                             RateelColors.testPillRimBottom,
-                            RateelColors.testLSelRim,
+                            RateelColors.testLGoldRimBottom,
                           ),
                   ),
                   child: Padding(
@@ -2511,11 +2855,15 @@ class _FeedbackBar extends StatelessWidget {
     required this.p,
     required this.ok,
     required this.points,
+    required this.streak,
     required this.correctText,
     required this.explanation,
     required this.last,
     required this.onNext,
   });
+
+  /// Correct answers in a row up to this one (Angular: shown from 2).
+  final int streak;
 
   final double u;
   final LessonPal p;
@@ -2633,6 +2981,10 @@ class _FeedbackBar extends StatelessWidget {
                               ),
                             ),
                           ),
+                          if (streak > 1) ...[
+                            SizedBox(width: u * 2.4),
+                            _StreakChip(u: u, p: p, streak: streak),
+                          ],
                         ] else
                           Flexible(
                             child: Text.rich(
@@ -2711,8 +3063,9 @@ class _Stat {
   final _Mark mark;
 }
 
-class _StatTile extends StatelessWidget {
-  const _StatTile({required this.u, required this.p, required this.stat});
+/// A result number in a column: mark on top, the number, one-line label.
+class _StatColumn extends StatelessWidget {
+  const _StatColumn({required this.u, required this.p, required this.stat});
 
   final double u;
   final LessonPal p;
@@ -2721,47 +3074,45 @@ class _StatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
-    return _GlassBox(
-      u: u,
-      p: p,
-      padding: EdgeInsets.symmetric(vertical: u * 1.6, horizontal: u * 1.2),
-      child: Row(
-        textDirection: TextDirection.rtl,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (stat.mark == _Mark.star)
-            SvgPicture.asset(
-              'assets/ui/glyphs/star.svg',
-              width: u * 4,
-              height: u * 4,
-              colorFilter: ColorFilter.mode(
-                p.c(RateelColors.testSelDot, RateelColors.testLSelRim),
-                BlendMode.srcIn,
-              ),
-            )
-          else
-            _MarkDisc(u: u, ok: stat.mark == _Mark.ok, d: 4),
-          SizedBox(width: u * 1.2),
-          Text(
-            stat.value,
-            textDirection: TextDirection.ltr,
-            style: readex(u * 4.6, weight: 700, color: ink).copyWith(height: 1),
-          ),
-          SizedBox(width: u * 1.2),
-          Flexible(
-            child: Text(
-              stat.label,
-              textDirection: TextDirection.rtl,
-              maxLines: 2,
-              style: readex(
-                u * 2.5,
-                weight: 400,
-                color: ink.withValues(alpha: 0.8),
-              ).copyWith(height: 1.2),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          textDirection: TextDirection.rtl,
+          children: [
+            if (stat.mark == _Mark.star)
+              SvgPicture.asset(
+                'assets/ui/glyphs/star.svg',
+                width: u * 3.6,
+                height: u * 3.6,
+                colorFilter: ColorFilter.mode(
+                  p.c(RateelColors.testSelDot, RateelColors.testLSelRim),
+                  BlendMode.srcIn,
+                ),
+              )
+            else
+              _MarkDisc(u: u, ok: stat.mark == _Mark.ok, d: 3.6),
+            SizedBox(width: u * 1.2),
+            Text(
+              stat.value,
+              textDirection: TextDirection.ltr,
+              style: readex(u * 5, weight: 700, color: ink).copyWith(height: 1),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        SizedBox(height: u * 1.0),
+        Text(
+          stat.label,
+          textDirection: TextDirection.rtl,
+          maxLines: 1,
+          style: readex(
+            u * 2.7,
+            weight: 400,
+            color: ink.withValues(alpha: 0.8),
+          ).copyWith(height: 1.1),
+        ),
+      ],
     );
   }
 }
@@ -2944,21 +3295,16 @@ class _GoldIcon extends StatelessWidget {
     required this.p,
     required this.icon,
     required this.size,
-    this.tint,
   });
 
   final double u;
   final LessonPal p;
   final IconData icon;
   final double size;
-  final Color? tint;
 
   @override
   Widget build(BuildContext context) {
     final i = Icon(icon, size: u * size, color: Colors.white);
-    if (tint != null) {
-      return Icon(icon, size: u * size, color: tint);
-    }
     return ShaderMask(
       blendMode: BlendMode.srcIn,
       shaderCallback: (r) => LinearGradient(
@@ -3201,4 +3547,308 @@ class _CountdownPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_CountdownPainter o) => o.value != value || o.p.t != p.t;
+}
+
+/// Small glass chip (end popup): leading mark and a short text.
+class _Chip extends StatelessWidget {
+  const _Chip({
+    required this.u,
+    required this.p,
+    required this.lead,
+    required this.text,
+  });
+
+  final double u;
+  final LessonPal p;
+  final Widget lead;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final h = u * 7;
+    return Container(
+      height: h,
+      padding: EdgeInsets.symmetric(horizontal: u * 2.6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(h),
+        color: p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
+        border: Border.all(
+          color: p.c(RateelColors.testRowRimTop, RateelColors.testLRowRim),
+          width: math.max(1.0, u * 0.22),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        textDirection: TextDirection.rtl,
+        children: [
+          lead,
+          SizedBox(width: u * 1.2),
+          Text(
+            text,
+            textDirection: TextDirection.rtl,
+            style: readex(
+              u * 3.3,
+              weight: 600,
+              color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+            ).copyWith(height: 1),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Gold sparks bursting out of the score ring when the test is passed
+/// (Angular completion particles), [t] 0 → 1 over 1.6 s.
+class _BurstPainter extends CustomPainter {
+  _BurstPainter({required this.p, required this.u, required this.t});
+
+  final LessonPal p;
+  final double u;
+  final double t;
+
+  static final _parts = () {
+    final r = math.Random(7);
+    return [
+      for (var i = 0; i < 26; i++)
+        (
+          a: i / 26 * math.pi * 2 + r.nextDouble() * 0.2,
+          d: 0.55 + r.nextDouble() * 0.45,
+          s: 0.5 + r.nextDouble() * 0.7,
+          delay: r.nextDouble() * 0.2,
+        ),
+    ];
+  }();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (t <= 0 || t >= 1) return;
+    final c = Offset(size.width / 2, size.height * 0.52);
+    final gold = p.c(const Color(0xFFFFE07A), RateelColors.readLCopper);
+    for (final q in _parts) {
+      final k = ((t - q.delay) / (1 - q.delay)).clamp(0.0, 1.0);
+      if (k <= 0) continue;
+      final e = Curves.easeOutCubic.transform(k);
+      final dist = u * (12 + 24 * q.d) * e;
+      final pos = c + Offset(math.cos(q.a), math.sin(q.a) * 0.8) * dist;
+      final o = (1 - k) * (k < 0.15 ? k / 0.15 : 1);
+      final r = u * 0.9 * q.s;
+      final paint = Paint()..color = gold.withValues(alpha: o);
+      // Four-point spark.
+      canvas.drawPath(
+        Path()
+          ..moveTo(pos.dx, pos.dy - r)
+          ..lineTo(pos.dx + r * 0.3, pos.dy)
+          ..lineTo(pos.dx, pos.dy + r)
+          ..lineTo(pos.dx - r * 0.3, pos.dy)
+          ..close()
+          ..moveTo(pos.dx - r, pos.dy)
+          ..lineTo(pos.dx, pos.dy + r * 0.3)
+          ..lineTo(pos.dx + r, pos.dy)
+          ..lineTo(pos.dx, pos.dy - r * 0.3)
+          ..close(),
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_BurstPainter o) => o.t != t || o.p.t != p.t;
+}
+
+/// «🔥 3 إجابات متتالية» (Angular feedback modal: streak indicator with three
+/// flames, from 2 correct answers in a row): a warm chip that pops in, its
+/// flames lit one after the other.
+class _StreakChip extends StatelessWidget {
+  const _StreakChip({required this.u, required this.p, required this.streak});
+
+  final double u;
+  final LessonPal p;
+  final int streak;
+
+  @override
+  Widget build(BuildContext context) {
+    final h = u * 6.2;
+    const flame = Color(0xFFFF9A3C);
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 900),
+      builder: (context, t, _) {
+        final pop = Curves.easeOutBack.transform((t / 0.45).clamp(0.0, 1.0));
+        return Transform.scale(
+          scale: 0.6 + 0.4 * pop,
+          child: Opacity(
+            opacity: pop.clamp(0.0, 1.0),
+            child: Container(
+              height: h,
+              padding: EdgeInsets.symmetric(horizontal: u * 1.8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(h),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    p.c(const Color(0xFF5A3A14), const Color(0xFFFBE3C4)),
+                    p.c(const Color(0xFF3A2610), const Color(0xFFF6D3A8)),
+                  ],
+                ),
+                border: Border.all(
+                  color: flame.withValues(alpha: 0.85),
+                  width: math.max(1.0, u * 0.22),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: flame.withValues(alpha: 0.35 * (1 - p.t)),
+                    blurRadius: u * 1.4,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                textDirection: TextDirection.rtl,
+                children: [
+                  for (var i = 0; i < 3; i++)
+                    Opacity(
+                      opacity: ((t - 0.3 - i * 0.15) / 0.2).clamp(0.3, 1.0),
+                      child: Icon(
+                        Icons.local_fire_department,
+                        size: u * 3.4,
+                        color: flame,
+                      ),
+                    ),
+                  SizedBox(width: u * 0.8),
+                  Text(
+                    '$streak إجابات متتالية',
+                    textDirection: TextDirection.rtl,
+                    style: readex(
+                      u * 3.2,
+                      weight: 600,
+                      color: p.c(
+                        const Color(0xFFFFE3B8),
+                        const Color(0xFF6A3A10),
+                      ),
+                    ).copyWith(height: 1),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Streak banner over the card: flame medallion, «3 إجابات متتالية!» and the
+/// bonus the next answer is worth.
+class _StreakBanner extends StatelessWidget {
+  const _StreakBanner({
+    required this.u,
+    required this.p,
+    required this.streak,
+    required this.bonus,
+    required this.t,
+  });
+
+  final double u;
+  final LessonPal p;
+  final int streak;
+  final int bonus;
+  final double t;
+
+  @override
+  Widget build(BuildContext context) {
+    const flame = Color(0xFFFF9A3C);
+    final r = u * 7.5;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(r),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            p.c(const Color(0xFF4A3213), const Color(0xFFFCE6C6)),
+            p.c(const Color(0xFF1E2412), const Color(0xFFF5D2A2)),
+          ],
+        ),
+        border: Border.all(color: flame, width: math.max(1.0, u * 0.32)),
+        boxShadow: [
+          BoxShadow(
+            color: flame.withValues(alpha: 0.45 * (1 - p.t) + 0.15),
+            blurRadius: u * 3,
+          ),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: p.d(0.45, 0.15)),
+            blurRadius: u * 1.6,
+            offset: Offset(0, u * 0.6),
+          ),
+        ],
+      ),
+      child: Row(
+        textDirection: TextDirection.rtl,
+        children: [
+          SizedBox(width: u * 2),
+          Container(
+            width: u * 11,
+            height: u * 11,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: const RadialGradient(
+                colors: [Color(0xFFFFC266), Color(0xFFE0641E)],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: flame.withValues(alpha: 0.6),
+                  blurRadius: u * 2,
+                ),
+              ],
+            ),
+            child: Transform.scale(
+              scale: 1 + 0.08 * math.sin(t * math.pi * 6),
+              child: Icon(
+                Icons.local_fire_department,
+                size: u * 7.6,
+                color: const Color(0xFFFFF6E0),
+              ),
+            ),
+          ),
+          SizedBox(width: u * 2.6),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$streak إجابات متتالية!',
+                  textDirection: TextDirection.rtl,
+                  style: readex(
+                    u * 4.6,
+                    weight: 700,
+                    color: p.c(
+                      const Color(0xFFFFE3B8),
+                      const Color(0xFF6A3A10),
+                    ),
+                  ).copyWith(height: 1.15),
+                ),
+                if (bonus > 0)
+                  Text(
+                    'مكافأة السلسلة: +$bonus نقطة للإجابة التالية',
+                    textDirection: TextDirection.rtl,
+                    style: readex(
+                      u * 2.9,
+                      weight: 400,
+                      color: p.c(
+                        const Color(0xFFF3D9B0),
+                        const Color(0xFF7A4A1E),
+                      ),
+                    ).copyWith(height: 1.3),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

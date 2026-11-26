@@ -95,6 +95,8 @@ Future<void> main() async {
       if (int.tryParse(s) != null) int.parse(s),
   ];
   testStartState = q['testState'];
+  testResultsStyle = q['results'] ?? testResultsStyle;
+  testEndPopupStyle = q['endPopup'] ?? testEndPopupStyle;
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;

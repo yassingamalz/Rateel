@@ -35,6 +35,9 @@ class Sounds {
   /// Wrong answer: a soft descending two-note tone.
   static Future<void> wrong() => _playTest('test_wrong.mp3', 0.55);
 
+  /// Correct answers in a row (streak banner).
+  static Future<void> streak() => _playTest('test_streak.mp3', 0.55);
+
   /// Test passed: a short warm arpeggio.
   static Future<void> passed() => _playTest('test_passed.mp3', 0.65);
 }

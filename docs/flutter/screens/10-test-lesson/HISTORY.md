@@ -66,3 +66,20 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   `test-feedback-mockup.{html,js}`.
 
 - APK 1.0.402 (v5), after 3 build attempts (Maven Central 429).
+
+## 5. v6: owner's phone test of 1.0.402 (2026-11-26)
+- Owner: the lesson works very well; criticisms: light final buttons should be filled (white text); the right part of the
+  results is not well composed; the correct/wrong sounds are not good (search libraries online); the screen of the
+  correct answers in a row was lost (Angular); the end popup must be redesigned.
+- Light buttons filled for every test button (`testLGold*`, `testLGreen*`), text white.
+- Results summary: two layouts for the owner (`?results=a|b`): A one glass panel (ring 18u + trophy title + message,
+  divider, three stat columns divided by lines), B ring 20u + medallion title + message, three equal vertical tiles.
+  Sheet `results-variants-v6.jpg`.
+- End popup: A centred score ring 24u with gold sparks bursting when passed (`_BurstPainter`), chips «⭐ n نقطة» and
+  «✓ n / N», one message line; B wide banner with the medallion (trophy / cap) on the right, score, chips, message.
+  Both keep the countdown line and tap-to-close. Sheet `end-popup-variants-v6.jpg`.
+- Streak (Angular `streak-indicator`, from 2 right answers): banner over the card for 1.9 s (flame medallion,
+  «n إجابات متتالية!», the bonus of the next answer) + flames chip in the feedback bar; sound `test_streak.mp3`
+  (uisfx soft streak, provisional). Sheet `streak-v6.jpg`.
+- Sounds: plinkfx (CC0, 274 sounds) downloaded as the release zip (`plinkfx-wav-ogg.zip`); sampler video of 19
+  numbered candidates (C1–C6 correct, W1–W6 wrong, S1–S3 streak, P1–P4 passed) sent to the owner.

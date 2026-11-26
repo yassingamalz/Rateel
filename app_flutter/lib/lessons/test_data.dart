@@ -136,6 +136,9 @@ class TestRun {
   final earned = <String, int>{};
   final stakes = <String, int>{};
 
+  /// Correct answers in a row when each question was answered.
+  final streaks = <String, int>{};
+
   static const pointsPerQuestion = 10;
 
   int get total => content.questions.length;
@@ -207,6 +210,7 @@ class TestRun {
       streak++;
       points += p;
       earned[q.id] = p;
+      streaks[q.id] = streak;
     } else {
       streak = 0;
       earned[q.id] = 0;
@@ -219,6 +223,7 @@ class TestRun {
     results.clear();
     earned.clear();
     stakes.clear();
+    streaks.clear();
     points = 0;
     streak = 0;
   }

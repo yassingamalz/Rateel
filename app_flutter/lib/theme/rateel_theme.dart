@@ -373,6 +373,14 @@ class RateelColors {
   static const testLKoTop = Color(0xFFF7E0DA);
   static const testLKoBottom = Color(0xFFF1D0C8);
   static const testLKoRim = Color(0xFFC0503E);
+  // Light buttons filled, white text (owner, 2026-11-26).
+  static const testLGoldTop = Color(0xFFE6BB58);
+  static const testLGoldBottom = Color(0xFFC48F2C);
+  static const testLGoldRimTop = Color(0xFFF6DC98);
+  static const testLGoldRimBottom = Color(0xFFAE7A22);
+  static const testLGreenTop = Color(0xFF4FA676);
+  static const testLGreenBottom = Color(0xFF2E7A52);
+  static const testLGreenRimTop = Color(0xFF8DD2AA);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,
