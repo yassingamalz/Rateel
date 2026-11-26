@@ -24,6 +24,15 @@ int? listenStartPick;
 String? listenStartState;
 double? listenStartAt;
 
+/// Review aid: `?logAudio=1` prints the audio events to the console, so the
+/// demo video can get its sound track back (`listening-demo.js`).
+bool listenLogAudio = false;
+
+void _logAudio(String e) {
+  // ignore: avoid_print
+  if (listenLogAudio) print('AUDIO $e');
+}
+
 /// Geometry of screen 22 in u (1% of the screen height), measured on
 /// `screens/22-listening-lesson/22-lezione-ascolto.webp` (1844×853,
 /// u = 8.53 px). Card values from the card edges; bottom row from the screen
@@ -164,6 +173,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   final _lit = ValueNotifier<int>(-1);
   String? _source;
   int? _stopAt;
+  int? _seekTo;
 
   ListenContent? _content;
   bool _loaded = false;
@@ -193,7 +203,16 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       ..add(
         _player.onPositionChanged.listen((d) {
           final ms = d.inMilliseconds;
+          final seek = _seekTo;
+          if (seek != null) {
+            if (ms < seek - 300) {
+              _player.seek(Duration(milliseconds: seek));
+              return;
+            }
+            _seekTo = null;
+          }
           _pos.value = ms;
+          _logAudio('pos $_source $ms');
           final q = _q;
           if (q != null) _lit.value = q.ayah.wordAt(ms);
           final stop = _stopAt;
@@ -315,13 +334,16 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     if (q == null) return;
     _stopAt = toMs;
     _playing.value = true;
+    _seekTo = fromMs > 0 ? fromMs : null;
     try {
-      if (_source != q.ayah.audio) {
-        _source = q.ayah.audio;
-        await _player.setSource(AssetSource(q.ayah.audio));
-      }
-      await _player.seek(Duration(milliseconds: fromMs));
-      await _player.resume();
+      // play(position:) starts there; a seek before resume() was sometimes
+      // ignored after the end of the verse (the word replay restarted the
+      // verse). [_seekTo] corrects a late start in the position listener.
+      _source = q.ayah.audio;
+      await _player.play(
+        AssetSource(q.ayah.audio),
+        position: Duration(milliseconds: fromMs),
+      );
     } catch (_) {
       _playing.value = false;
     }
@@ -374,9 +396,11 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     });
     if (ok) {
       Sounds.correct();
+      _logAudio('sfx test_correct');
       Haptics.success();
     } else {
       Sounds.wrong();
+      _logAudio('sfx test_wrong');
       Haptics.denied();
       _shake.forward(from: 0);
     }
@@ -442,6 +466,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     _finishing = true;
     _player.stop();
     Sounds.passed();
+    _logAudio('sfx test_passed');
     Haptics.lessonDone();
     await _shell.currentState?.celebrate();
     _leave(true);
