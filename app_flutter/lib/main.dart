@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
 import 'courses/course_data.dart';
+import 'courses/courses_screen.dart';
 import 'core/learn_flow.dart';
 import 'nav/side_nav.dart';
 import 'leaderboard/leaderboard_screen.dart';
@@ -90,6 +91,7 @@ Future<void> main() async {
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';
+  streakChipVariant = q['chip'] ?? streakChipVariant;
   challengesDone.value = int.tryParse(q['chalDone'] ?? '') ?? 0;
   dailyStreak.value = int.tryParse(q['streak'] ?? '') ?? 0;
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.

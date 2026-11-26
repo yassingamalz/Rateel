@@ -212,3 +212,5 @@ Screen 12 also reuses: `decor/header_arch.svg` (03), `decor/mosque.webp`, `decor
 set on every screen, even where a reference draws them better (more three-dimensional). If they are improved, they are
 **regenerated once with ChatGPT for the whole app** and replaced everywhere, never per screen. Their **place and size are standard too**: mosque and crescent + star as on screen 03
 (mosque 10.5u from the content's left edge, top 8u, 49u wide; crescent 25.5u from the right edge, top 7.5u, 10.65×9.75u).
+
+Comparison of the reference's header assets with the library (owner, 2026-11-26): `ASSET-STYLE-COMPARISON.md`.

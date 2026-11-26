@@ -299,14 +299,8 @@ class _CoursesScreenState extends State<CoursesScreen>
               ),
             ),
             // Streak chip → daily challenges (screen 12, owner Q1 = B).
-            Positioned(
-              left: g.u * 3,
-              bottom: g.u * 3.5,
-              child: StreakChip(
-                u: g.u,
-                onTap: () => Navigator.of(context).push(dailyChallengesRoute()),
-              ),
-            ),
+            // Review variants (owner, 2026-11-26): `?chip=a…f`.
+            _streakChip(g),
             _toastLayer(g),
           ],
         );
@@ -678,6 +672,30 @@ class _CoursesScreenState extends State<CoursesScreen>
     ];
   }
 
+  /// Streak chip variants for the owner's choice (2026-11-26, v1 = a):
+  /// a small bottom left; b larger bottom left; c larger with the label,
+  /// bottom left, raised; d larger with the label, top left; e larger with
+  /// the label, bottom centre; f larger, left, under the mosque.
+  Widget _streakChip(_Geo g) {
+    final u = g.u;
+    void open() => Navigator.of(context).push(dailyChallengesRoute());
+    Widget chip(double scale, bool label) =>
+        StreakChip(u: u, scale: scale, label: label, onTap: open);
+    return switch (streakChipVariant) {
+      'b' => Positioned(left: u * 3, bottom: u * 3, child: chip(1.3, false)),
+      'c' => Positioned(left: u * 3.5, bottom: u * 5, child: chip(1.25, true)),
+      'd' => Positioned(left: u * 3.5, top: u * 4, child: chip(1.2, true)),
+      'e' => Positioned(
+        left: 0,
+        right: g.trackRightInset,
+        bottom: u * 2.5,
+        child: Center(child: chip(1.2, true)),
+      ),
+      'f' => Positioned(left: u * 3.5, top: u * 33, child: chip(1.2, true)),
+      _ => Positioned(left: u * 3, bottom: u * 3.5, child: chip(1, false)),
+    };
+  }
+
   Widget _toastLayer(_Geo g) {
     return Positioned(
       left: 0,
@@ -895,6 +913,9 @@ class _ConnectorPainter extends CustomPainter {
 }
 
 /// Reference geometry (u = 1% of the height). Ref px / 8.51.
+/// Review aid: `?chip=a…f` picks the streak chip variant (owner's choice).
+String streakChipVariant = 'a';
+
 class _Geo {
   _Geo(this.w, this.h) : u = h / 100;
 

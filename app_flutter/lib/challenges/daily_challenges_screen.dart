@@ -145,6 +145,10 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
   @override
   void initState() {
     super.initState();
+    _back.addListener(
+      () => _drag.value =
+          _settleFrom * (1 - Curves.easeOut.transform(_back.value)),
+    );
     _entry.addStatusListener((s) {
       if (s == AnimationStatus.completed) _breath.repeat(reverse: true);
     });
@@ -174,6 +178,8 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
 
   @override
   void dispose() {
+    _drag.dispose();
+    _back.dispose();
     _entry.dispose();
     _breath.dispose();
     _done.dispose();
@@ -258,60 +264,109 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
       builder: (context, box) {
         final u = box.maxHeight / 100;
         final cx = box.maxWidth / 2;
-        return ValueListenableBuilder<int>(
-          valueListenable: challengesDone,
-          builder: (context, done, _) => Stack(
-            clipBehavior: Clip.none,
-            children: [
-              const Positioned.fill(
-                key: ValueKey('bg'),
-                child: RepaintBoundary(child: ScreenBackground()),
-              ),
-              Positioned.fill(
-                key: const ValueKey('decor'),
-                child: RepaintBoundary(child: _Decor(u: u)),
-              ),
-              Positioned.fill(
-                key: const ValueKey('header'),
-                child: _fadeDown(
-                  u,
-                  RepaintBoundary(
-                    child: _Header(u: u, cx: cx + u * ChalMetrics.headerDx),
-                  ),
+        final w = box.maxWidth;
+        // Back without a button (owner, 2026-11-26): drag the finger to the
+        // right anywhere on the screen, the page follows and closes past 25%
+        // of the width or on a fling (same direction that closes the menu).
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragStart: (_) => _back.stop(),
+          onHorizontalDragUpdate: (d) =>
+              _drag.value = (_drag.value + d.delta.dx).clamp(0.0, w),
+          onHorizontalDragEnd: (d) => _endDrag(w, d.primaryVelocity ?? 0),
+          onHorizontalDragCancel: () => _endDrag(w, 0),
+          child: AnimatedBuilder(
+            animation: _drag,
+            builder: (context, child) {
+              final t = (_drag.value / w).clamp(0.0, 1.0);
+              return Opacity(
+                opacity: 1 - 0.6 * t,
+                child: Transform.translate(
+                  offset: Offset(_drag.value, 0),
+                  child: child,
                 ),
-              ),
-              Positioned.fill(
-                key: const ValueKey('line'),
-                child: RepaintBoundary(
-                  child: AnimatedBuilder(
-                    animation: Listenable.merge([_entry, _done]),
-                    builder: (context, _) => CustomPaint(
-                      painter: _LinePainter(
-                        u: u,
-                        cx: cx + u * ChalMetrics.pathDx,
-                        lit: _litTo(done),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              for (var i = 0; i < dailyChallenges.length; i++)
-                _tile(i, done, u, cx),
-              Positioned.fill(
-                key: const ValueKey('streak'),
-                child: _rise(
-                  u,
-                  RepaintBoundary(
-                    child: _Streak(u: u, cx: cx),
-                  ),
-                ),
-              ),
-              _coinFlight(u, cx),
-              _toastLayer(u),
-            ],
+              );
+            },
+            child: _content(u, cx),
           ),
         );
       },
+    );
+  }
+
+  final _drag = ValueNotifier<double>(0);
+  late final AnimationController _back = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 220),
+  );
+  bool _leaving = false;
+  double _settleFrom = 0;
+
+  void _endDrag(double w, double velocity) {
+    if (_leaving) return;
+    if (_drag.value > w * 0.25 || velocity > 700) {
+      _leaving = true;
+      Haptics.tap();
+      Navigator.of(context).maybePop();
+      return;
+    }
+    _settleFrom = _drag.value;
+    _back.forward(from: 0);
+  }
+
+  Widget _content(double u, double cx) {
+    return ValueListenableBuilder<int>(
+      valueListenable: challengesDone,
+      builder: (context, done, _) => Stack(
+        clipBehavior: Clip.none,
+        children: [
+          const Positioned.fill(
+            key: ValueKey('bg'),
+            child: RepaintBoundary(child: ScreenBackground()),
+          ),
+          Positioned.fill(
+            key: const ValueKey('decor'),
+            child: RepaintBoundary(child: _Decor(u: u)),
+          ),
+          Positioned.fill(
+            key: const ValueKey('header'),
+            child: _fadeDown(
+              u,
+              RepaintBoundary(
+                child: _Header(u: u, cx: cx + u * ChalMetrics.headerDx),
+              ),
+            ),
+          ),
+          Positioned.fill(
+            key: const ValueKey('line'),
+            child: RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: Listenable.merge([_entry, _done]),
+                builder: (context, _) => CustomPaint(
+                  painter: _LinePainter(
+                    u: u,
+                    cx: cx + u * ChalMetrics.pathDx,
+                    lit: _litTo(done),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          for (var i = 0; i < dailyChallenges.length; i++)
+            _tile(i, done, u, cx),
+          Positioned.fill(
+            key: const ValueKey('streak'),
+            child: _rise(
+              u,
+              RepaintBoundary(
+                child: _Streak(u: u, cx: cx),
+              ),
+            ),
+          ),
+          _coinFlight(u, cx),
+          _toastLayer(u),
+        ],
+      ),
     );
   }
 
@@ -1338,10 +1393,22 @@ class _WaveEdgePainter extends CustomPainter {
 /// Small streak chip of screen 03 (owner Q1 = B): the flame disc and «n يوم»
 /// in the streak capsule's style; a tap opens the daily challenges.
 class StreakChip extends StatefulWidget {
-  const StreakChip({super.key, required this.u, required this.onTap});
+  const StreakChip({
+    super.key,
+    required this.u,
+    required this.onTap,
+    this.scale = 1,
+    this.label = false,
+  });
 
   final double u;
   final VoidCallback onTap;
+
+  /// Size of the chip relative to v1 (owner, 2026-11-26: v1 too small).
+  final double scale;
+
+  /// Second line «الاستمرارية» under «n يوم», as the capsule of screen 12.
+  final bool label;
 
   @override
   State<StreakChip> createState() => _StreakChipState();
@@ -1352,8 +1419,8 @@ class _StreakChipState extends State<StreakChip> {
 
   @override
   Widget build(BuildContext context) {
-    final u = widget.u;
-    final h = u * 8.4;
+    final u = widget.u * widget.scale;
+    final h = u * (widget.label ? 10.4 : 8.4);
     final d = u * 6.2;
     return GestureDetector(
       onTapDown: (_) => setState(() => _down = true),
@@ -1420,14 +1487,32 @@ class _StreakChipState extends State<StreakChip> {
                 valueListenable: dailyStreak,
                 builder: (context, days, _) => Padding(
                   padding: EdgeInsets.only(bottom: u * 0.45),
-                  child: Text(
-                    '$days يوم',
-                    textDirection: TextDirection.rtl,
-                    style: readex(
-                      u * 3.6,
-                      weight: 600,
-                      color: RateelColors.chalText,
-                    ).copyWith(height: 1.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$days يوم',
+                        textDirection: TextDirection.rtl,
+                        style: readex(
+                          u * 3.6,
+                          weight: 600,
+                          color: RateelColors.chalText,
+                        ).copyWith(height: 1.0),
+                      ),
+                      if (widget.label) ...[
+                        SizedBox(height: u * 0.9),
+                        Text(
+                          'الاستمرارية',
+                          textDirection: TextDirection.rtl,
+                          style: readex(
+                            u * 2.6,
+                            weight: 400,
+                            color: RateelColors.chalLabel,
+                          ).copyWith(height: 1.0),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
               ),

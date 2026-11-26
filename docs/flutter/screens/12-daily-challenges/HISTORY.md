@@ -56,3 +56,14 @@ tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%
   capsule rim #FFFE64 → #FAC102 with #FFB201 outside, 0.65u.
 - Open for the owner: T1, connector lit only up to the open tile (the reference lights all six links).
 - Conflicts D1–D7 in `STYLE-CONFLICTS.md`.
+
+## 6. v4 (2026-11-26, owner's phone test of 1.0.404)
+- **Back without a button** (owner: no way back to the courses except the rail): drag the finger to the right anywhere
+  on screen 12; the page follows the finger (and fades) and closes past 25% of the width or on a fling; otherwise it
+  springs back. Same direction that closes the side menu. Android back also closes it (learning navigator).
+- **Streak chip on 03 too small / too low**: six variants for the owner, `?chip=a…f`, sheet
+  `streak-chip-variants.jpg` (A v1 small bottom left; B ×1.3 bottom left; C ×1.25 with «الاستمرارية», bottom left raised;
+  D ×1.2 with label, top left; E ×1.2 with label, bottom centre; F ×1.2 with label, left under the mosque). C and F touch
+  the edge of the partly visible left card.
+- **Asset style**: reference vs library comparison in `docs/flutter/ASSET-STYLE-COMPARISON.md`; the app's assets are
+  kept, the reference's are candidates for a later app-wide standardisation.

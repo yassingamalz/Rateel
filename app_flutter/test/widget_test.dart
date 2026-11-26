@@ -366,6 +366,14 @@ void main() {
       expect(challengesDone.value, 1);
       expect(dailyStreak.value, 1);
       await settle(tester);
+      // Back without a button: drag the finger to the right (owner, 2026-11-26).
+      await tester.drag(
+        find.text('رحلة التحديات اليومية'),
+        const Offset(700, 0),
+      );
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsNothing);
+      expect(find.byType(StreakChip), findsOneWidget);
     },
   );
 }
