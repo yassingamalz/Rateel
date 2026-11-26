@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Matching and ordering are editorial activity formats, not currently confirmed supported by Flutter. Shuffle independently at runtime, preserve stable IDs.",
+  "questions": [
+    {
+      "id": "U5.L2.M.I1",
+      "topicId": "U5.L2",
+      "text": "صل الحرف التالي للنون بالحكم.",
+      "explanation": "يتحدد الحكم بحسب الحرف التالي وشروط الوصل.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "ء",
+          "right": "إظهار"
+        },
+        {
+          "id": "2",
+          "left": "ب",
+          "right": "إقلاب"
+        },
+        {
+          "id": "3",
+          "left": "ل",
+          "right": "إدغام بلا غنة"
+        },
+        {
+          "id": "4",
+          "left": "ش",
+          "right": "إخفاء"
+        }
+      ]
+    },
+    {
+      "id": "U5.L3.M.I1",
+      "topicId": "U5.L3",
+      "text": "اختر حروف الإظهار الحلقي.",
+      "explanation": "هذه الحروف الستة حلقية.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ء"
+        },
+        {
+          "id": "2",
+          "text": "هـ"
+        },
+        {
+          "id": "3",
+          "text": "ع"
+        },
+        {
+          "id": "4",
+          "text": "ح"
+        },
+        {
+          "id": "5",
+          "text": "غ"
+        },
+        {
+          "id": "6",
+          "text": "خ"
+        },
+        {
+          "id": "7",
+          "text": "ب"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": "U5.L4.M.I1",
+      "topicId": "U5.L4",
+      "text": "تدغم النون في ياء الدنيا عند حفص.",
+      "explanation": "الدنيا من أمثلة الإظهار المطلق.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U5.L5.M.I1",
+      "topicId": "U5.L5",
+      "text": "اختر حرفي الإدغام بغير غنة.",
+      "explanation": "اللام والراء حرفا الإدغام بغير غنة.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ل"
+        },
+        {
+          "id": "2",
+          "text": "ر"
+        },
+        {
+          "id": "3",
+          "text": "م"
+        },
+        {
+          "id": "4",
+          "text": "و"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U5.L6.M.I1",
+      "topicId": "U5.L6",
+      "text": "أكمل: حرف الإقلاب هو ...",
+      "explanation": "يكون الإقلاب قبل الباء.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "الباء",
+        "باء",
+        "ب"
+      ]
+    },
+    {
+      "id": "U5.L7.M.I1",
+      "topicId": "U5.L7",
+      "text": "اختر الحروف التي يخفى عندها النون.",
+      "explanation": "الشين والزاي والقاف والثاء من حروف الإخفاء.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ش"
+        },
+        {
+          "id": "2",
+          "text": "ز"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        },
+        {
+          "id": "4",
+          "text": "ث"
+        },
+        {
+          "id": "5",
+          "text": "ء"
+        },
+        {
+          "id": "6",
+          "text": "ب"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "U5.L8.M.I1",
+      "topicId": "U5.L8",
+      "text": "صل الحرف التالي للميم بالحكم.",
+      "explanation": "لكل حرف من هذه الأمثلة حكمه.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "ب",
+          "right": "إخفاء شفوي"
+        },
+        {
+          "id": "2",
+          "left": "م",
+          "right": "إدغام شفوي"
+        },
+        {
+          "id": "3",
+          "left": "ف",
+          "right": "إظهار شفوي"
+        }
+      ]
+    },
+    {
+      "id": "U5.L9.M.I1",
+      "topicId": "U5.L9",
+      "text": "الميم قبل الباء في الوصل من الإخفاء الشفوي.",
+      "explanation": "تخفى الميم مع غنة.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U5.L10.M.I1",
+      "topicId": "U5.L10",
+      "text": "أكمل: عند إدغام ميم ساكنة في ميم متحركة تصيران ميمًا ...",
+      "explanation": "تدغم الميمان مع غنة.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "مشددة",
+        "مشددة مع غنة"
+      ]
+    },
+    {
+      "id": "U5.L11.M.I1",
+      "topicId": "U5.L11",
+      "text": "اختر الحروف التي تظهر الميم قبلها.",
+      "explanation": "تظهر الميم قبل غير الباء والميم.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ف"
+        },
+        {
+          "id": "2",
+          "text": "و"
+        },
+        {
+          "id": "3",
+          "text": "غ"
+        },
+        {
+          "id": "4",
+          "text": "ب"
+        },
+        {
+          "id": "5",
+          "text": "م"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U5.L12.M.I1",
+      "topicId": "U5.L12",
+      "text": "صل العلاقة بالتعريف.",
+      "explanation": "الحكم العملي يتبع الرواية والموضع.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "التماثل",
+          "right": "اتفاق المخرج والصفات"
+        },
+        {
+          "id": "2",
+          "left": "التجانس",
+          "right": "اتفاق المخرج واختلاف الصفات"
+        },
+        {
+          "id": "3",
+          "left": "التقارب",
+          "right": "تقارب المخرج أو الصفات"
+        }
+      ]
+    },
+    {
+      "id": "U6.L1.M.I1",
+      "topicId": "U6.L1",
+      "text": "أكمل: مقدار المد الطبيعي ...",
+      "explanation": "يمد الطبيعي حركتين.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "حركتان",
+        "حركتين",
+        "2",
+        "٢"
+      ]
+    },
+    {
+      "id": "U6.L2.M.I1",
+      "topicId": "U6.L2",
+      "text": "في المد المتصل تقع الهمزة بعد المد في الكلمة نفسها.",
+      "explanation": "هذا هو سبب المد المتصل.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U6.L3.M.I1",
+      "topicId": "U6.L3",
+      "text": "في المد المنفصل يقع حرف المد في الكلمة الأولى والهمزة في التالية.",
+      "explanation": "يتحقق السبب عند الوصل.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U6.L4.M.I1",
+      "topicId": "U6.L4",
+      "text": "اختر أوجه العارض للسكون المحض في الحالة المعتادة.",
+      "explanation": "الأوجه المعتادة القصر والتوسط والطول.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "حركتان"
+        },
+        {
+          "id": "2",
+          "text": "أربع"
+        },
+        {
+          "id": "3",
+          "text": "ست"
+        },
+        {
+          "id": "4",
+          "text": "حركة واحدة"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U6.L5.M.I1",
+      "topicId": "U6.L5",
+      "text": "صل نوع السكون بنوع المد في الأمثلة المعتادة.",
+      "explanation": "سبب السكون يفرق بين النوعين.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "سكون أصلي بعد المد",
+          "right": "لازم"
+        },
+        {
+          "id": "2",
+          "left": "سكون ناشئ عن الوقف",
+          "right": "عارض للسكون"
+        }
+      ]
+    },
+    {
+      "id": "U6.L6.M.I1",
+      "topicId": "U6.L6",
+      "text": "في مد البدل يتقدم الهمز على حرف المد.",
+      "explanation": "من أمثلته آمن وإيمانًا.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U6.L7.M.I1",
+      "topicId": "U6.L7",
+      "text": "اختر شرطي حرف اللين.",
+      "explanation": "حرف اللين ساكن قبله فتح.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "واو أو ياء ساكنة"
+        },
+        {
+          "id": "2",
+          "text": "فتح ما قبلها"
+        },
+        {
+          "id": "3",
+          "text": "ضم ما قبلها دائمًا"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U6.L8.M.I1",
+      "topicId": "U6.L8",
+      "text": "صل الصلة بنوع الحرف التالي مع تحقق الشروط.",
+      "explanation": "هذا في حال الوصل مع مراعاة الاستثناءات.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "همزة قطع",
+          "right": "كبرى"
+        },
+        {
+          "id": "2",
+          "left": "غير الهمز",
+          "right": "صغرى"
+        }
+      ]
+    },
+    {
+      "id": "U6.L9.M.I1",
+      "topicId": "U6.L9",
+      "text": "يوقف على التاء المربوطة المنونة بالفتح بألف مد العوض.",
+      "explanation": "يوقف عليها بهاء ساكنة.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    }
+  ]
+}
