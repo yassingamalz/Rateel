@@ -96,3 +96,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   reset; right options not chosen shown as «missed»; results stat «إجابات جزئية» (shown only when there are some).
 - Streak banner: width from its content, even padding; «!» removed from every text of the screen.
 - Tests 13/13 (scoring test extended with the partial answer). Captures `capture-v7-*-phone.jpg`.
+
+- APK 1.0.422 (v7).
