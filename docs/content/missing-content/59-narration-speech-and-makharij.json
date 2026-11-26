@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U1.L1",
+      "titleAr": "الْحُرُوفُ الْعَرَبِيَّةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الْفَرْقُ بَيْنَ اسْمِ الْحَرْفِ وَصَوْتِهِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلْحَرْفِ اسْمٌ وَصَوْتٌ وَرَسْمٌ. وَنَتَدَرَّبُ عَلَى صَوْتِهِ مَعَ الْحَرَكَاتِ الْمُخْتَلِفَةِ.",
+          "visualDirectionAr": "بِطَاقَةُ بَاءٍ تَتَحَوَّلُ إِلَى بَ، بِ، بُ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ ثُمَّ رَدِّدْ كُلَّ حَرَكَةٍ وَحْدَهَا.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U1.L2",
+      "titleAr": "أَعْضَاءُ النُّطْقِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الَّذِي يَتَحَرَّكُ فِي فَمِنَا عِنْدَ نُطْقِ الْحُرُوفِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تَتَعَاوَنُ أَعْضَاءُ النُّطْقِ وَمَجْرَى الْهَوَاءِ لِتَشْكِيلِ الْأَصْوَاتِ، وَمِنْهَا اللِّسَانُ وَالشَّفَتَانِ وَالْحَلْقُ.",
+          "visualDirectionAr": "رَسْمٌ تَشْرِيحِيٌّ جَانِبِيٌّ؛ يُضِيءُ كُلُّ عُضْوٍ عِنْدَ ذِكْرِهِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "لَاحِظْ حَرَكَةَ شَفَتَيْكَ عِنْدَ نُطْقِ الْبَاءِ وَالْمِيمِ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U1.L3",
+      "titleAr": "كَيْفَ يَحْدُثُ الصَّوْتُ؟",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "لِمَاذَا يَخْتَلِفُ صَوْتُ السِّينِ عَنْ صَوْتِ الْبَاءِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "يَتَشَكَّلُ الصَّوْتُ بِحَرَكَةِ الْهَوَاءِ وَوَضْعِ أَعْضَاءِ النُّطْقِ. وَيَخْتَلِفُ جَرَيَانُ الصَّوْتِ بِاخْتِلَافِ الْحَرْفِ.",
+          "visualDirectionAr": "مَسَارُ هَوَاءٍ يَتَغَيَّرُ بَيْنَ مَوْضِعَيْنِ فِي رَسْمٍ تَشْرِيحِيٍّ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ أَسْ وَأَبْ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L1",
+      "titleAr": "الْمَخَارِجُ الْعَامَّةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مِنْ أَيْنَ تَخْرُجُ حُرُوفُنَا؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْمَخَارِجُ الْعَامَّةُ خَمْسَةٌ: الْجَوْفُ، وَالْحَلْقُ، وَاللِّسَانُ، وَالشَّفَتَانِ، وَالْخَيْشُومُ.",
+          "visualDirectionAr": "خَمْسُ مَنَاطِقَ مُضَاءَةٍ عَلَى رَسْمٍ جَانِبِيٍّ لِأَعْضَاءِ النُّطْقِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "حَدِّدْ كُلَّ مَخْرَجٍ عَلَى الرَّسْمِ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L2",
+      "titleAr": "مَخْرَجُ الْجَوْفِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "أَيْنَ يَخْرُجُ صَوْتُ حُرُوفِ الْمَدِّ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْجَوْفُ هُوَ الْخَلَاءُ فِي الْفَمِ وَالْحَلْقِ، وَمِنْهُ تَخْرُجُ حُرُوفُ الْمَدِّ بِشُرُوطِهَا.",
+          "visualDirectionAr": "مَسَارٌ مُسْتَمِرٌّ لِلصَّوْتِ مَعَ ثَلَاثِ هَيْئَاتٍ لِلْفَمِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ بَا، وَبُو، وَبِي.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L3",
+      "titleAr": "مَخْرَجُ الْحَلْقِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تَخْرُجُ حُرُوفُ الْحَلْقِ مِنْ مَكَانٍ وَاحِدٍ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلْحَلْقِ ثَلَاثَةُ مَخَارِجَ: أَقْصَاهُ لِلْهَمْزَةِ وَالْهَاءِ، وَوَسَطُهُ لِلْعَيْنِ وَالْحَاءِ، وَأَدْنَاهُ لِلْغَيْنِ وَالْخَاءِ.",
+          "visualDirectionAr": "ثَلَاثُ مَنَاطِقَ فِي الْحَلْقِ تُضَاءُ بِالتَّدْرِيجِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْحُرُوفِ السِّتَّةِ وَصَنِّفْهَا.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L4",
+      "titleAr": "مَخَارِجُ اللِّسَانِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَمْ مَوْضِعًا نَسْتَخْدِمُ فِي اللِّسَانِ لِلنُّطْقِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلِّسَانِ عَشَرَةُ مَخَارِجَ خَاصَّةٍ فِي التَّصْنِيفِ الْمُعْتَمَدِ. وَنَدْرُسُ أَقْصَاهُ وَوَسَطَهُ وَحَافَتَهُ وَطَرَفَهُ.",
+          "visualDirectionAr": "رَسْمٌ مُكَبَّرٌ لِلِّسَانِ يَنْتَقِلُ فِيهِ الضَّوْءُ بَيْنَ الْمَوَاضِعِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَعَلَّمْ كُلَّ مَخْرَجٍ بِالتَّدَرُّجِ مَعَ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L5",
+      "titleAr": "مَخْرَجُ الشَّفَتَيْنِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "جَرِّبْ أَنْ تَنْطِقَ الْفَاءَ ثُمَّ الْبَاءَ. مَا الَّذِي تَغَيَّرَ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تَخْرُجُ الْفَاءُ مِنْ بَاطِنِ الشَّفَةِ السُّفْلَى مَعَ أَطْرَافِ الثَّنَايَا الْعُلْيَا، وَتَخْرُجُ الْبَاءُ وَالْمِيمُ وَالْوَاوُ غَيْرُ الْمَدِّيَّةِ مِنَ الشَّفَتَيْنِ بِهَيْئَاتٍ مُخْتَلِفَةٍ.",
+          "visualDirectionAr": "لَقْطَةٌ تَشْرِيحِيَّةٌ قَرِيبَةٌ لِلشَّفَتَيْنِ وَالثَّنَايَا."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "رَدِّدْ فَ، وَبَ، وَمَ، وَوَ مَعَ مُلَاحَظَةِ حَرَكَةِ الشَّفَتَيْنِ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U2.L6",
+      "titleAr": "مَخْرَجُ الْخَيْشُومِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مِنْ أَيْنَ نَسْمَعُ صَوْتَ الْغُنَّةِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْخَيْشُومُ مَخْرَجُ الْغُنَّةِ، وَهِيَ صِفَةٌ لَازِمَةٌ لِلنُّونِ وَالْمِيمِ، وَتَتَفَاوَتُ مَرَاتِبُهَا.",
+          "visualDirectionAr": "مَوْجَةٌ ضَوْئِيَّةٌ تَمُرُّ فِي الْمَجْرَى الْأَنْفِيِّ عَلَى رَسْمٍ تَشْرِيحِيٍّ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى النُّونِ وَالْمِيمِ الْمُشَدَّدَتَيْنِ ثُمَّ رَدِّدْ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    }
+  ]
+}
