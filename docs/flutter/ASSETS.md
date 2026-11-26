@@ -189,7 +189,10 @@ star, `glyphs/star.svg`) or are drawn in code (circles, rows, radios, ✓/✕ di
 |---|---|---|---|
 | `data/test/assessment-lesson-1.json` | `src/assets/data/content/assessments/` (Angular data) | the 10 questions of «اختبار أساسيات التجويد» | copied as it is; the second test (`assessment-lesson-2`) has no content |
 | `sounds/test_correct.mp3`, `test_wrong.mp3`, `test_streak.mp3`, `test_passed.mp3` | **plinkfx** (CC0, release `plinkfx-wav-ogg.zip`): `gem-1`, `error-1`, `sparkle-1`, `level-up-1`, converted to mp3; sources, licence and the sampler in `docs/design-assets/test-lesson/sounds/` | correct / wrong answer, streak banner, test passed (`Sounds.correct/wrong/streak/passed`) | owner's choice from the sampler (C3, W2, S3, P2), 2026-11-26; the first uisfx «dreamy» set (2026-11-25) kept there as spares |
-| Material icons `emoji_events`, `lightbulb`, `refresh`, `local_fire_department` | Flutter Material icon font | trophy, recommendations, ↻ (results), flames (streak) | **placeholders** in the lesson gold until drawn assets exist (prompt T4) |
+| `ui/test/trophy.webp` | `test-lesson/icons/01_trophy.png` (owner's ChatGPT T4) | trophy next to «أحسنت» in the results | magenta un-mixed on the edge only (inside opaque), trimmed, 384 px (`tools/assets/test_lesson_assets.py`) |
+| `ui/test/flame_medallion.webp` | `test-lesson/icons/02_flame_medallion.png` (T5) | medallion of the streak banner | same processing, 384 px |
+| `ui/test/flame.webp` | `test-lesson/icons/03_flame_glyph.png` (T6) | the three flames of «n إجابات متتالية» in the feedback bar | same processing, 192 px |
+| Material icons `lightbulb`, `refresh` | Flutter Material icon font | recommendations, ↻ (not passed) | **placeholders** in the lesson gold until drawn assets exist (prompt T4) |
 | `docs/flutter/screens/10-test-lesson/reference-feedback-{correct,wrong}.webp`, `reference-completion-{pass,fail}.webp` | owner's ChatGPT images from prompts T1/T3 | inspiration only (owner: different from the lesson style, not to replicate exactly) | not app assets |
 
 Shared code from screen 10: `lib/lessons/lesson_decor.dart` (moved from 08 unchanged: `LessonPal`, `LessonBackground`,

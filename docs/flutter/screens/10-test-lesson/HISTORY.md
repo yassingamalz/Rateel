@@ -116,3 +116,10 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   75, 95, 100% dark; 55, 75, 100% light; partial answers count half).
 
 - APK 1.0.424 (v9).
+
+## 9. v10: owner's icons (2026-11-26)
+- Owner's zip `Rateel_quiz_icons.zip` (T4 trophy, T5 flame medallion, T6 flame glyph, 1254 px on magenta): all three
+  usable. `tools/assets/test_lesson_assets.py`: un-mix against magenta only next to the key (outside and in holes such
+  as the trophy's handles), the inside kept opaque (the cream flame turned half transparent with a full un-mix).
+- Used: trophy 5.2u next to «أحسنت» (results), medallion 11.5u in the streak banner (soft glow, gentle pulse), flame
+  3.2u ×3 in the streak chip. Captures `capture-v10-*-phone.jpg`.

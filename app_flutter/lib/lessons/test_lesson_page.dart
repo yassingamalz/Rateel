@@ -331,6 +331,9 @@ class _TestLessonPageState extends State<TestLessonPage>
       'assets/ui/reading/badge_line.webp',
       'assets/ui/reading/badge_fill.webp',
       'assets/ui/reading/arch.webp',
+      'assets/ui/test/trophy.webp',
+      'assets/ui/test/flame_medallion.webp',
+      'assets/ui/test/flame.webp',
       'assets/ui/decor/mosque.webp',
     ];
     Future.any([
@@ -1348,14 +1351,18 @@ class _TestLessonPageState extends State<TestLessonPage>
                       Row(
                         textDirection: TextDirection.rtl,
                         children: [
-                          _GoldIcon(
-                            u: u,
-                            p: p,
-                            icon: run.passed
-                                ? Icons.emoji_events
-                                : Icons.refresh,
-                            size: 4.6,
-                          ),
+                          // Owner's trophy (T4); ↻ when not passed.
+                          run.passed
+                              ? Image.asset(
+                                  'assets/ui/test/trophy.webp',
+                                  height: u * 5.2,
+                                )
+                              : _GoldIcon(
+                                  u: u,
+                                  p: p,
+                                  icon: Icons.refresh,
+                                  size: 4.6,
+                                ),
                           SizedBox(width: u * 1.2),
                           Text(
                             _resultTitle(run),
@@ -3046,8 +3053,8 @@ class _GlassRimPainter extends CustomPainter {
       o.top != top || o.bottom != bottom || o.edge != edge || o.u != u;
 }
 
-/// Material glyph in the lesson gold (placeholder art: trophy, lightbulb,
-/// cap, ↻; owner prompt T4 for drawn ones).
+/// Material glyph in the lesson gold (lightbulb, ↻); the trophy and the
+/// flames are the owner's drawn icons (T4–T6, `assets/ui/test/`).
 class _GoldIcon extends StatelessWidget {
   const _GoldIcon({
     required this.u,
@@ -3307,10 +3314,10 @@ class _StreakChip extends StatelessWidget {
                   for (var i = 0; i < 3; i++)
                     Opacity(
                       opacity: ((t - 0.3 - i * 0.15) / 0.2).clamp(0.3, 1.0),
-                      child: Icon(
-                        Icons.local_fire_department,
-                        size: u * 3.4,
-                        color: flame,
+                      // Owner's flame glyph (T6).
+                      child: Image.asset(
+                        'assets/ui/test/flame.webp',
+                        height: u * 3.2,
                       ),
                     ),
                   SizedBox(width: u * 0.8),
@@ -3386,28 +3393,24 @@ class _StreakBanner extends StatelessWidget {
         textDirection: TextDirection.rtl,
         children: [
           SizedBox(width: u * 2),
-          Container(
-            width: u * 11,
-            height: u * 11,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: const RadialGradient(
-                colors: [Color(0xFFFFC266), Color(0xFFE0641E)],
+          // Owner's flame medallion (T5), with a soft orange glow and a
+          // gentle pulse.
+          Transform.scale(
+            scale: 1 + 0.05 * math.sin(t * math.pi * 6),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: flame.withValues(alpha: 0.55),
+                    blurRadius: u * 2,
+                  ),
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: flame.withValues(alpha: 0.6),
-                  blurRadius: u * 2,
-                ),
-              ],
-            ),
-            child: Transform.scale(
-              scale: 1 + 0.08 * math.sin(t * math.pi * 6),
-              child: Icon(
-                Icons.local_fire_department,
-                size: u * 7.6,
-                color: const Color(0xFFFFF6E0),
+              child: Image.asset(
+                'assets/ui/test/flame_medallion.webp',
+                width: u * 11.5,
+                height: u * 11.5,
               ),
             ),
           ),

@@ -75,6 +75,7 @@ flutter:
     - assets/ui/video/thumbs/
     - assets/ui/coming_soon/
     - assets/ui/reading/
+    - assets/ui/test/
     - assets/data/reading/
     - assets/data/test/
     - assets/ui/course_art/green/
