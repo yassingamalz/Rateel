@@ -1,0 +1,817 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Independent supplemental topics with provisional IDs; do not silently change baseline 66 count. Legacy brief has inconsistencies: ذ not د before ظ; lam-ra is taught as mutaqarib in chosen classification, not duplicated in mutajanis; 14 solar letters includes lam itself. Verify all examples and path-specific cases.",
+  "topics": [
+    {
+      "topicId": "X-IDG-01",
+      "titleAr": "الإدغام: المفهوم والأقسام",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands U5.L12",
+      "source": {
+        "printedPagesCandidate": "229–231",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "الإدغام إدخال حرف في حرف، ويدرس هنا الإدغام الصغير حيث يسكن الأول ويتحرك الثاني. قد يكون كاملا أو ناقصا بحسب ما يبقى من صفات الأول.",
+      "examples": [
+        {
+          "id": "X-IDG-01.E1",
+          "verseRef": "2:282",
+          "excerptAr": "وَلْيَكْتُبْ بَيْنَكُمْ",
+          "focus": "ب+ب",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-01.E2",
+          "verseRef": "4:78",
+          "excerptAr": "يُدْرِكْكُمْ",
+          "focus": "ك+ك",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "الإدغام: المفهوم والأقسام"
+        },
+        {
+          "kind": "explain",
+          "textAr": "الإدغام إدخال حرف في حرف، ويدرس هنا الإدغام الصغير حيث يسكن الأول ويتحرك الثاني. قد يكون كاملا أو ناقصا بحسب ما يبقى من صفات الأول."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-IDG-01.E1",
+            "X-IDG-01.E2"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "ادمج بطاقتي بْ وبَ في بَّ، ثم استمع إلى المثال."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-IDG-01.Q1",
+          "type": "trueFalse",
+          "text": "الإدغام الصغير يكون الأول فيه ساكنًا والثاني متحركًا.",
+          "correctAnswer": true,
+          "explanation": "هذا وصف الإدغام الصغير."
+        },
+        {
+          "id": "X-IDG-01.Q2",
+          "type": "trueFalse",
+          "text": "كل إدغام يلزم أن يكون معه غنة.",
+          "correctAnswer": false,
+          "explanation": "الغنة ليست ملازمة لكل إدغام."
+        }
+      ],
+      "practice": {
+        "instructionAr": "ادمج بطاقتي بْ وبَ في بَّ، ثم استمع إلى المثال.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "two letter cards morph; never alter actual Quran text"
+      }
+    },
+    {
+      "topicId": "X-IDG-02",
+      "titleAr": "الحرفان المتماثلان",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands U5.L12",
+      "source": {
+        "printedPagesCandidate": "231–235",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "المتماثلان متفقان في المخرج والصفات. يدغم الساكن في المتحرك في المواضع المروية؛ ولا يخلط بين حرف المد والحرف غير المدي، وتراعى حالات السكت.",
+      "examples": [
+        {
+          "id": "X-IDG-02.E1",
+          "verseRef": "2:60",
+          "excerptAr": "اضْرِبْ بِعَصَاكَ",
+          "focus": "ب+ب",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-02.E2",
+          "verseRef": "4:78",
+          "excerptAr": "يُدْرِكْكُمْ",
+          "focus": "ك+ك",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-02.E3",
+          "verseRef": "3:200",
+          "excerptAr": "اصْبِرُوا وَصَابِرُوا",
+          "focus": "لا إدغام: واو مدية ثم واو",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "الحرفان المتماثلان"
+        },
+        {
+          "kind": "explain",
+          "textAr": "المتماثلان متفقان في المخرج والصفات. يدغم الساكن في المتحرك في المواضع المروية؛ ولا يخلط بين حرف المد والحرف غير المدي، وتراعى حالات السكت."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-IDG-02.E1",
+            "X-IDG-02.E2",
+            "X-IDG-02.E3"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "صنف المثالين الأولين ثم قارن بالواو المدية في المثال الثالث."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-IDG-02.Q1",
+          "type": "trueFalse",
+          "text": "الباءان في اضرب بعصاك متماثلان.",
+          "correctAnswer": true,
+          "explanation": "هما الحرف نفسه."
+        },
+        {
+          "id": "X-IDG-02.Q2",
+          "type": "trueFalse",
+          "text": "كل واوين متتاليتين تدغمان دون النظر إلى نوع الأولى.",
+          "correctAnswer": false,
+          "explanation": "الواو المدية لها مخرج وحكم مختلفان."
+        }
+      ],
+      "practice": {
+        "instructionAr": "صنف المثالين الأولين ثم قارن بالواو المدية في المثال الثالث.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "two letter cards morph; never alter actual Quran text"
+      }
+    },
+    {
+      "topicId": "X-IDG-03",
+      "titleAr": "الحرفان المتجانسان",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands U5.L12",
+      "source": {
+        "printedPagesCandidate": "235–241",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "يتفق المتجانسان في المخرج ويختلفان في بعض الصفات. يدغم الأول في الثاني في الحالات المنقولة لحفص؛ من ذلك د في ت، ت في د، ت في ط، ذ في ظ، ث في ذ، ب في م. ط في ت إدغام ناقص مع بقاء الإطباق.",
+      "examples": [
+        {
+          "id": "X-IDG-03.E1",
+          "verseRef": "2:256",
+          "excerptAr": "قَدْ تَبَيَّنَ",
+          "focus": "د+ت",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E2",
+          "verseRef": "7:189",
+          "excerptAr": "أَثْقَلَتْ دَعَوَا",
+          "focus": "ت+د",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E3",
+          "verseRef": "3:122",
+          "excerptAr": "هَمَّتْ طَائِفَتَانِ",
+          "focus": "ت+ط",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E4",
+          "verseRef": "43:39",
+          "excerptAr": "إِذْ ظَلَمْتُمْ",
+          "focus": "ذ+ظ",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E5",
+          "verseRef": "7:176",
+          "excerptAr": "يَلْهَثْ ذَلِكَ",
+          "focus": "ث+ذ",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E6",
+          "verseRef": "11:42",
+          "excerptAr": "ارْكَبْ مَعَنَا",
+          "focus": "ب+م",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-03.E7",
+          "verseRef": "5:28",
+          "excerptAr": "بَسَطْتَ",
+          "focus": "ط+ت؛ ناقص",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "الحرفان المتجانسان"
+        },
+        {
+          "kind": "explain",
+          "textAr": "يتفق المتجانسان في المخرج ويختلفان في بعض الصفات. يدغم الأول في الثاني في الحالات المنقولة لحفص؛ من ذلك د في ت، ت في د، ت في ط، ذ في ظ، ث في ذ، ب في م. ط في ت إدغام ناقص مع بقاء الإطباق."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-IDG-03.E1",
+            "X-IDG-03.E2",
+            "X-IDG-03.E3",
+            "X-IDG-03.E4",
+            "X-IDG-03.E5",
+            "X-IDG-03.E6",
+            "X-IDG-03.E7"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "تدرب على بَسَطْتَ مع معلم دون توليد قلقلة أو حركة زائدة؛ وقارن بقد تبين."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-IDG-03.Q1",
+          "type": "trueFalse",
+          "text": "في إدغام الطاء في التاء تبقى صفة الإطباق.",
+          "correctAnswer": true,
+          "explanation": "هو إدغام ناقص."
+        },
+        {
+          "id": "X-IDG-03.Q2",
+          "type": "trueFalse",
+          "text": "المتجانسان متفقان في جميع الصفات بالضرورة.",
+          "correctAnswer": false,
+          "explanation": "يتفقان في المخرج ويختلفان في بعض الصفات."
+        }
+      ],
+      "practice": {
+        "instructionAr": "تدرب على بَسَطْتَ مع معلم دون توليد قلقلة أو حركة زائدة؛ وقارن بقد تبين.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "two letter cards morph; never alter actual Quran text"
+      }
+    },
+    {
+      "topicId": "X-IDG-04",
+      "titleAr": "الحرفان المتقاربان",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands U5.L12",
+      "source": {
+        "printedPagesCandidate": "241–245",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "يتقارب الحرفان في المخرج أو الصفات بحسب التصنيف. لا يعمم الإدغام على جميع المتقاربين. من أمثلة حفص لام قبل راء وقاف قبل كاف في مواضعها، مع تفصيل السكت والطريق.",
+      "examples": [
+        {
+          "id": "X-IDG-04.E1",
+          "verseRef": "17:24",
+          "excerptAr": "قُلْ رَبِّ",
+          "focus": "ل+ر",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-04.E2",
+          "verseRef": "77:20",
+          "excerptAr": "نَخْلُقْكُمْ",
+          "focus": "ق+ك",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-04.E3",
+          "verseRef": "4:116",
+          "excerptAr": "فَقَدْ ضَلَّ",
+          "focus": "د+ض؛ إظهار لحفص",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "الحرفان المتقاربان"
+        },
+        {
+          "kind": "explain",
+          "textAr": "يتقارب الحرفان في المخرج أو الصفات بحسب التصنيف. لا يعمم الإدغام على جميع المتقاربين. من أمثلة حفص لام قبل راء وقاف قبل كاف في مواضعها، مع تفصيل السكت والطريق."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-IDG-04.E1",
+            "X-IDG-04.E2",
+            "X-IDG-04.E3"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "حدد موضع الحرفين ثم قارن الإدغام بالإظهار في الأمثلة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-IDG-04.Q1",
+          "type": "trueFalse",
+          "text": "يدغم كل حرفين متقاربين في رواية حفص.",
+          "correctAnswer": false,
+          "explanation": "يتبع الحكم الرواية والموضع."
+        },
+        {
+          "id": "X-IDG-04.Q2",
+          "type": "trueFalse",
+          "text": "في قل رب مثال لام قبل راء.",
+          "correctAnswer": true,
+          "explanation": "يدرس وجه الأداء في الوصل."
+        }
+      ],
+      "practice": {
+        "instructionAr": "حدد موضع الحرفين ثم قارن الإدغام بالإظهار في الأمثلة.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "two letter cards morph; never alter actual Quran text"
+      }
+    },
+    {
+      "topicId": "X-IDG-05",
+      "titleAr": "الحرفان المتباعدان وعلامات الضبط",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands U5.L12",
+      "source": {
+        "printedPagesCandidate": "245–247",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "إذا تباعد المخرجان والصفات كان الأصل الإظهار في هذا الباب. علامات ضبط الإدغام في المصحف تختلف باختلاف نوعه واصطلاح الطبعة؛ في الإدغام الكامل غالبًا يجرد الأول من السكون ويشدد التالي.",
+      "examples": [
+        {
+          "id": "X-IDG-05.E1",
+          "verseRef": "2:62",
+          "excerptAr": "مَنْ آمَنَ",
+          "focus": "ن+ء؛ إظهار حلقي",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-05.E2",
+          "verseRef": "1:7",
+          "excerptAr": "أَنْعَمْتَ",
+          "focus": "ن+ع؛ إظهار",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-IDG-05.E3",
+          "verseRef": "4:78",
+          "excerptAr": "يُدْرِكْكُمْ",
+          "focus": "مقارنة: إدغام",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "الحرفان المتباعدان وعلامات الضبط"
+        },
+        {
+          "kind": "explain",
+          "textAr": "إذا تباعد المخرجان والصفات كان الأصل الإظهار في هذا الباب. علامات ضبط الإدغام في المصحف تختلف باختلاف نوعه واصطلاح الطبعة؛ في الإدغام الكامل غالبًا يجرد الأول من السكون ويشدد التالي."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-IDG-05.E1",
+            "X-IDG-05.E2",
+            "X-IDG-05.E3"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "صنف المقاطع حسب العلاقة ثم قارن ضبطها في المصحف المعتمد."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-IDG-05.Q1",
+          "type": "trueFalse",
+          "text": "كل حرفين متباعدين يدغمان.",
+          "correctAnswer": false,
+          "explanation": "الأصل في هذا الباب الإظهار."
+        },
+        {
+          "id": "X-IDG-05.Q2",
+          "type": "trueFalse",
+          "text": "يمكن الاستعانة بعلامات المصحف بعد معرفة اصطلاحها.",
+          "correctAnswer": true,
+          "explanation": "الضبط يساعد على فهم الأداء ولا يغني عن التلقي."
+        }
+      ],
+      "practice": {
+        "instructionAr": "صنف المقاطع حسب العلاقة ثم قارن ضبطها في المصحف المعتمد.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "two letter cards morph; never alter actual Quran text"
+      }
+    },
+    {
+      "topicId": "X-LAM-01",
+      "titleAr": "لام التعريف",
+      "status": "supplemental_editorial_draft",
+      "mapping": "new topic, placement undecided",
+      "source": {
+        "printedPagesCandidate": "248–249",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "لام التعريف لام ساكنة تسبق الاسم في أل، وتسبقها همزة وصل مفتوحة عند الابتداء. تظهر اللام عند أربعة عشر حرفًا وتدغم عند أربعة عشر حرفًا.",
+      "examples": [
+        {
+          "id": "X-LAM-01.E1",
+          "verseRef": "54:1",
+          "excerptAr": "الْقَمَرُ",
+          "focus": "قمرية",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-01.E2",
+          "verseRef": "91:1",
+          "excerptAr": "وَالشَّمْسِ",
+          "focus": "شمسية",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-01.E3",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "شمسية",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "لام التعريف"
+        },
+        {
+          "kind": "explain",
+          "textAr": "لام التعريف لام ساكنة تسبق الاسم في أل، وتسبقها همزة وصل مفتوحة عند الابتداء. تظهر اللام عند أربعة عشر حرفًا وتدغم عند أربعة عشر حرفًا."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-LAM-01.E1",
+            "X-LAM-01.E2",
+            "X-LAM-01.E3"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "صنف القمر والشمس والصمد إلى قمرية وشمسية."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-LAM-01.Q1",
+          "type": "trueFalse",
+          "text": "تنطق لام التعريف في القمر.",
+          "correctAnswer": true,
+          "explanation": "القاف من الحروف القمرية."
+        },
+        {
+          "id": "X-LAM-01.Q2",
+          "type": "trueFalse",
+          "text": "تسقط لام التعريف لفظًا في كل الكلمات.",
+          "correctAnswer": false,
+          "explanation": "تظهر في القمرية وتدغم في الشمسية."
+        }
+      ],
+      "practice": {
+        "instructionAr": "صنف القمر والشمس والصمد إلى قمرية وشمسية.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "moon/sun; letter persists or merges"
+      }
+    },
+    {
+      "topicId": "X-LAM-02",
+      "titleAr": "اللام القمرية",
+      "status": "supplemental_editorial_draft",
+      "mapping": "new topic, placement undecided",
+      "source": {
+        "printedPagesCandidate": "249–251",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "حروفها ء ب غ ح ج ك و خ ف ع ق ي م هـ. تجمع في ابغ حجك وخف عقيمه. تظهر اللام ساكنة، ومن علامات ضبطها رأس الخاء الصغيرة في المصحف المعتاد.",
+      "examples": [
+        {
+          "id": "X-LAM-02.E1",
+          "verseRef": "54:1",
+          "excerptAr": "الْقَمَرُ",
+          "focus": "ق",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-02.E2",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "ف",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-02.E3",
+          "verseRef": "1:2",
+          "excerptAr": "الْحَمْدُ",
+          "focus": "ح",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-02.E4",
+          "verseRef": "2:255",
+          "excerptAr": "الْحَيُّ",
+          "focus": "ح",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-02.E5",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "focus": "ج",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "اللام القمرية"
+        },
+        {
+          "kind": "explain",
+          "textAr": "حروفها ء ب غ ح ج ك و خ ف ع ق ي م هـ. تجمع في ابغ حجك وخف عقيمه. تظهر اللام ساكنة، ومن علامات ضبطها رأس الخاء الصغيرة في المصحف المعتاد."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-LAM-02.E1",
+            "X-LAM-02.E2",
+            "X-LAM-02.E3",
+            "X-LAM-02.E4",
+            "X-LAM-02.E5"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "اقرأ الحمد والفلق والقمر مع بيان اللام دون إضافة حركة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-LAM-02.Q1",
+          "type": "trueFalse",
+          "text": "الفاء من الحروف القمرية.",
+          "correctAnswer": true,
+          "explanation": "تظهر اللام في الفلق."
+        },
+        {
+          "id": "X-LAM-02.Q2",
+          "type": "trueFalse",
+          "text": "تدغم اللام في القاف في كلمة القمر.",
+          "correctAnswer": false,
+          "explanation": "اللام قمرية مظهرة."
+        }
+      ],
+      "practice": {
+        "instructionAr": "اقرأ الحمد والفلق والقمر مع بيان اللام دون إضافة حركة.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "moon/sun; letter persists or merges"
+      }
+    },
+    {
+      "topicId": "X-LAM-03",
+      "titleAr": "اللام الشمسية",
+      "status": "supplemental_editorial_draft",
+      "mapping": "new topic, placement undecided",
+      "source": {
+        "printedPagesCandidate": "251–253",
+        "reference": "docs/knowledge-base/lessons/BOOK-idgham-lam-tarif.md",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "حروفها ط ث ص ر ت ض ذ ن د س ظ ز ش ل. تدغم اللام الساكنة في الحرف التالي ويشدد، وتبقى مكتوبة في الرسم. مع اللام يكون الإدغام من المتماثلين.",
+      "examples": [
+        {
+          "id": "X-LAM-03.E1",
+          "verseRef": "91:1",
+          "excerptAr": "وَالشَّمْسِ",
+          "focus": "ش",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-03.E2",
+          "verseRef": "92:1",
+          "excerptAr": "وَاللَّيْلِ",
+          "focus": "ل",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-03.E3",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "ن",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-03.E4",
+          "verseRef": "1:3",
+          "excerptAr": "الرَّحْمَٰنِ",
+          "focus": "ر",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        },
+        {
+          "id": "X-LAM-03.E5",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "ص",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "اللام الشمسية"
+        },
+        {
+          "kind": "explain",
+          "textAr": "حروفها ط ث ص ر ت ض ذ ن د س ظ ز ش ل. تدغم اللام الساكنة في الحرف التالي ويشدد، وتبقى مكتوبة في الرسم. مع اللام يكون الإدغام من المتماثلين."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-LAM-03.E1",
+            "X-LAM-03.E2",
+            "X-LAM-03.E3",
+            "X-LAM-03.E4",
+            "X-LAM-03.E5"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "قارن القمر بالشمس، ثم اقرأ الناس والصمد مع ضبط الشدة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-LAM-03.Q1",
+          "type": "trueFalse",
+          "text": "اللام الشمسية تحذف من كتابة الكلمة.",
+          "correctAnswer": false,
+          "explanation": "تبقى في الرسم وتدغم لفظًا."
+        },
+        {
+          "id": "X-LAM-03.Q2",
+          "type": "trueFalse",
+          "text": "الشين من الحروف الشمسية.",
+          "correctAnswer": true,
+          "explanation": "تدغم اللام فيها."
+        }
+      ],
+      "practice": {
+        "instructionAr": "قارن القمر بالشمس، ثم اقرأ الناس والصمد مع ضبط الشدة.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "moon/sun; letter persists or merges"
+      }
+    },
+    {
+      "topicId": "X-REC-01",
+      "titleAr": "مراتب سرعة التلاوة",
+      "status": "supplemental_editorial_draft",
+      "mapping": "expands foundations",
+      "source": {
+        "printedPagesCandidate": "chapter 2; exact pages pending",
+        "reference": "lesson-production tracker chapter 2",
+        "verification": "legacy brief; verify original PDF; ranges are approximate subdivisions"
+      },
+      "explanationAr": "من مراتب الأداء التحقيق والتدوير والحدر. التحقيق بتأنٍ، والتدوير متوسط، والحدر أسرع مع المحافظة على الحروف والأحكام. لا يبرر الحدر إسقاط شيء من الأداء.",
+      "examples": [
+        {
+          "id": "X-REC-01.E1",
+          "verseRef": "73:4",
+          "excerptAr": "وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا",
+          "focus": "سياق",
+          "script": "imlai_candidate",
+          "verification": "pending"
+        }
+      ],
+      "narration": [
+        {
+          "kind": "intro",
+          "textAr": "مراتب سرعة التلاوة"
+        },
+        {
+          "kind": "explain",
+          "textAr": "من مراتب الأداء التحقيق والتدوير والحدر. التحقيق بتأنٍ، والتدوير متوسط، والحدر أسرع مع المحافظة على الحروف والأحكام. لا يبرر الحدر إسقاط شيء من الأداء."
+        },
+        {
+          "kind": "demonstrate",
+          "exampleIds": [
+            "X-REC-01.E1"
+          ]
+        },
+        {
+          "kind": "practice",
+          "textAr": "استمع إلى المقطع نفسه بثلاث سرعات معتمدة وقارن تناسب أزمنة الغنن والمدود."
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-REC-01.Q1",
+          "type": "trueFalse",
+          "text": "الحدر يسمح بإسقاط الحروف أو الحركات.",
+          "correctAnswer": false,
+          "explanation": "تبقى أحكام التلاوة محفوظة."
+        },
+        {
+          "id": "X-REC-01.Q2",
+          "type": "trueFalse",
+          "text": "التدوير مرتبة وسطى في السرعة.",
+          "correctAnswer": true,
+          "explanation": "بين التحقيق والحدر."
+        }
+      ],
+      "practice": {
+        "instructionAr": "استمع إلى المقطع نفسه بثلاث سرعات معتمدة وقارن تناسب أزمنة الغنن والمدود.",
+        "assessment": "teacher_or_self"
+      },
+      "media": {
+        "status": "pending_verified_audio",
+        "reciterCandidate": "Al-Husary",
+        "visual": "same excerpt, speed comparison"
+      }
+    }
+  ]
+}
