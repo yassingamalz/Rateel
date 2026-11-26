@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U5.L2",
+      "titleAr": "النون الساكنة والتنوين",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          17,
+          20
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تسمية الأحكام الأربعة",
+      "explanationAr": "للنون الساكنة والتنوين عند الوصل أربعة أحكام بحسب الحرف التالي: الإظهار والإدغام والإقلاب والإخفاء.",
+      "examples": [
+        {
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "النون الساكنة والتنوين"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "للنون الساكنة والتنوين عند الوصل أربعة أحكام بحسب الحرف التالي: الإظهار والإدغام والإقلاب والإخفاء."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "113:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تسمية الأحكام الأربعة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "صنّف أمثلة بحسب الحرف التالي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L2.Q1",
+              "type": "singleChoice",
+              "text": "كم حكمًا للنون الساكنة والتنوين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "أربعة"
+                },
+                {
+                  "id": "2",
+                  "text": "ثلاثة"
+                },
+                {
+                  "id": "3",
+                  "text": "خمسة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "للنون الساكنة والتنوين عند الوصل أربعة أحكام بحسب الحرف التالي: الإظهار والإدغام والإقلاب والإخفاء."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L3",
+      "titleAr": "الإظهار الحلقي",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          21,
+          25
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حروف الإظهار",
+      "explanationAr": "تظهر النون الساكنة أو التنوين عند الهمزة والهاء والعين والحاء والغين والخاء دون غنة زائدة.",
+      "examples": [
+        {
+          "verseRef": "97:5",
+          "excerptAr": "مِنْ أَلْفِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإظهار الحلقي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تظهر النون الساكنة أو التنوين عند الهمزة والهاء والعين والحاء والغين والخاء دون غنة زائدة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "97:5"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز حروف الإظهار"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى النون قبل الهمزة وكررها.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L3.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف يوجب الإظهار الحلقي بعد النون الساكنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الهمزة"
+                },
+                {
+                  "id": "2",
+                  "text": "الباء"
+                },
+                {
+                  "id": "3",
+                  "text": "الميم"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تظهر النون الساكنة أو التنوين عند الهمزة والهاء والعين والحاء والغين والخاء دون غنة زائدة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L4",
+      "titleAr": "الإدغام بغنة",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          26,
+          37
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حروف الإدغام بغنة",
+      "explanationAr": "تدغم النون الساكنة أو التنوين في الحرف التالي عند الوصل إذا كان من حروف ينمو وفق شروط الحكم واستثناءاته. أما نحو الدنيا وبنيان فلا يدغم داخل الكلمة.",
+      "examples": [
+        {
+          "verseRef": "99:7",
+          "excerptAr": "فَمَنْ يَعْمَلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإدغام بغنة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تدغم النون الساكنة أو التنوين في الحرف التالي عند الوصل إذا كان من حروف ينمو وفق شروط الحكم واستثناءاته. أما نحو الدنيا وبنيان فلا يدغم داخل الكلمة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "99:7"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز حروف الإدغام بغنة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى المثال في الوصل وقارنه بالوقف.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L4.Q1",
+              "type": "singleChoice",
+              "text": "أي مجموعة لحروف الإدغام بغنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "ي ن م و"
+                },
+                {
+                  "id": "2",
+                  "text": "ل ر"
+                },
+                {
+                  "id": "3",
+                  "text": "ء ه ع ح غ خ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تدغم النون الساكنة أو التنوين في الحرف التالي عند الوصل إذا كان من حروف ينمو وفق شروط الحكم واستثناءاته. أما نحو الدنيا وبنيان فلا يدغم داخل الكلمة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L5",
+      "titleAr": "الإدغام بغير غنة",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          26,
+          37
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الإدغام بلا غنة",
+      "explanationAr": "تدغم النون الساكنة أو التنوين في اللام أو الراء عند الوصل دون غنة الإدغام، مع مراعاة مواضع السكت في الرواية والطريق.",
+      "examples": [
+        {
+          "verseRef": "112:4",
+          "excerptAr": "وَلَمْ يَكُنْ لَهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإدغام بغير غنة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تدغم النون الساكنة أو التنوين في اللام أو الراء عند الوصل دون غنة الإدغام، مع مراعاة مواضع السكت في الرواية والطريق."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الإدغام بلا غنة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى يكن له في الوصل.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L5.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف من حروف الإدغام بغير غنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "اللام"
+                },
+                {
+                  "id": "2",
+                  "text": "الميم"
+                },
+                {
+                  "id": "3",
+                  "text": "الباء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تدغم النون الساكنة أو التنوين في اللام أو الراء عند الوصل دون غنة الإدغام، مع مراعاة مواضع السكت في الرواية والطريق."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
