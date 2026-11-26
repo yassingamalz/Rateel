@@ -1,0 +1,35 @@
+Screen 12, daily challenges: ChatGPT prompts v1 (2026-11-25). Pasted in the chat, one block each.
+Attachments for every prompt: docs/flutter/screens/12-daily-challenges/reference.webp + the crop named in the prompt (attach/).
+The crops are enlarged 3x from the 1844x853 reference.
+Reused, no prompt: coin (Angular src/assets/images/coin-icon.png), microphone (nav/training.svg), trophy
+(nav/leaderboard.svg), headphones (coming_soon/glyph_headphones.webp), header arch, mosque, crescent, corners.
+
+=== D1  Calendar emblem for the header (attach: reference.webp, attach/d1-calendar.png)
+Recreate exactly the calendar icon in the attached crop as a standalone app asset: a rounded-square calendar drawn as one
+thick warm metallic gold line (#F2C14E to #D9A11C, light core #FFE08A, line about 6% of the icon width), two rounded
+rings on top, a horizontal band under the top edge, and two rows of four round gold dots inside. Same proportions, line
+weights and spacing as the crop, flat front view, symmetric. No text, no numbers, no glow, no shadow on the background.
+Centred on a plain flat magenta background (#FF00FF), nothing else in the image. Square image 1024x1024, the icon filling
+about 80% of the height.
+
+=== D2  Lesson document glyph (attach: reference.webp, attach/d2-document.png)
+Recreate exactly the document icon inside the first gold tile of the attached crop, without the tile: a solid cream sheet
+(#F4EAD0, a very subtle lighter top edge) with rounded corners, taller than wide, with dark green cut-out lines of text
+(#06352A): three long lines, one short line with a small dot, and a small folded corner mark at the lower left as in the
+crop. Same proportions and line thickness as the crop. Flat front view. No tile, no frame, no glow, no shadow on the
+background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the glyph filling about 75% of
+the height.
+
+=== D3  Quran on a stand with crescent glyph (attach: reference.webp, attach/d3-quran-stand.png)
+Recreate exactly the icon inside the tile of the attached crop, without the tile: an open book (the Quran) seen from the
+front resting on an X-shaped rehal stand, all in solid flat cream (#F4EAD0) with thin dark green separation lines
+(#06352A) between the pages and the stand, and above it a small cream crescent moon with a small five-point star at its
+upper right. Same proportions and spacing as the crop, flat, symmetric except the crescent and star. No tile, no glow, no
+shadow on the background. Centred on a plain flat magenta background (#FF00FF). Square image 1024x1024, the glyph filling
+about 75% of the width.
+
+=== D4  Flame glyph for the streak (attach: reference.webp, attach/d4-flame-disc.png)
+Recreate only the flame inside the gold disc of the attached crop, without the disc: a rounded flame with two side
+tongues and a teardrop-shaped hole in the middle, solid warm gold (#FFC21A to #F2A900, slightly lighter at the top). Same
+proportions as the crop, flat front view, symmetric. No disc, no ring, no glow, no shadow on the background. Centred on a
+plain flat magenta background (#FF00FF). Square image 1024x1024, the flame filling about 75% of the height.

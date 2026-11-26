@@ -1,0 +1,79 @@
+# Screen 12, daily challenges: history
+
+## 1. Plan (2026-11-25)
+- Branch `flutter/12-daily-challenges` from `master`, opened in parallel with the sessions on 10/10b and 22 (owner:
+  start the screens that are easy to get).
+- Plan `../12-daily-challenges.md` with questions Q1–Q6, prompts D1–D4 `../../prompts/12-daily-challenges/images-v1.txt`
+  (crops in `attach/`).
+
+## 2. Owner's answers and assets (2026-11-25)
+- Q1 B (streak chip on 03), Q2 darker locked tiles, Q3 OK + keep the wiring written, Q4 OK, Q5 Readex Pro, Q6 OK
+  (details in the plan).
+- Instead of D1–D4 the owner sent a whole **icon collection** (21 icons): all stored in the shared library
+  (`ASSETS.md`); green-line variants preferred; flame and calendar as the reference; header decoration from the
+  library (one asset direction for the whole app, future note in `ASSETS.md`).
+
+## 3. v1 (2026-11-25)
+Code: `app_flutter/lib/challenges/challenge_data.dart` (mock data), `daily_challenges_screen.dart` (screen, `StreakChip`
+for 03). Review links: `?challenges=1`, `&chalDone=3`, `&streak=4`, `&slow=3`.
+
+Geometry measured on the reference (u = 8.53 px, offsets from the centre of the 1683 px content box), `ChalMetrics`:
+| Element | Reference (px at 853) | Built |
+|---|---|---|
+| Tiles | centres 199 … 1508.5, pitch ≈ 218; normal 172×179, open 187×184; centre y 465.5 | pitch 25.6u, 20.2×21.0u, open ×1.07, y 54.6u |
+| Connector | y 454–461, pale core #FFE451 + glow | y 53.6u, 0.55u core + blurred glow, lit up to the open tile, dim track after (lines B of 03/05) |
+| Icon / pill / coin | icon centre y ≈ 444; pill 111×44 at y 515; coin Ø 36 | 8.2u box at 51.7u; 13×5.2u at 60.4u; coin 4.2u |
+| Streak capsule | 637–1064 × 615–778; disc Ø 103 at x 968 | 50×19.1u at 81.65u; disc 12u at +14.9u |
+| Side lines | 410–615 and 1085–1275, y 694 | `GoldDivider` 24u at −38.3u / +39.4u |
+| Title / divider / subtitle | ink 592–1202 × 166–229; diamond (895, 262); ink 630–1154 × 286–324 | 7.4u at 23.15u; 33.2u at 30.7u; 4.4u at 35.75u |
+| Arch | dome apex ≈ 885, tails 330–1440 | 03 `header_arch.svg` 128×36u, top 0.6u, bottom fade (library arch: shape not identical) |
+| Mosque, crescent | mosque 215–492 px, crescent 1250–1401 px | **screen 03 standard** (owner, v2): mosque 10.5u from the content's left edge, top 8u, 49u wide, 83% with the 03 ground fade; crescent + star 25.5u from the right edge, top 7.5u, 10.65×9.75u |
+
+Check: overlay of the 1844×853 capture on the reference (50/50 blend): tiles, pills, connector, capsule, side lines and
+title coincide; mosque and crescent moved by overlay. Library arch and lattice differ in shape from the reference by
+the owner's rule (one asset direction). Phone 915×412 checked (arch shoulder clear of the crescent after the fit).
+
+Motion (PERFORMANCE.md): one entry controller (header fades down, tiles pop from the right 60 ms apart, scale 0.8 → 1
+as Angular, light runs to the open tile, capsule rises); only the open tile's glow breathes, in its own builder;
+completion (long press, review) 1.5 s: check badge pops, coin flies in an arc to the flame disc, light runs to the next
+tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%; locked tap: shake + toast +
+`Haptics.denied`. Widget test `daily challenges …` (12 tests pass).
+
+## 4. v2 (2026-11-25)
+- Owner: crescent + star and mosque must be **standard**: same place, size and treatment as the current screens.
+  Now exactly as screen 03 (`ChalMetrics.mosque*`, `crescent*`, anchored to the content edges, as `courses_screen.dart`).
+  The reference draws them a little differently (mosque ≈ 8u further right, crescent larger and lower): library standard
+  wins (one asset direction, `ASSETS.md`).
+
+## 5. Critic v1 and v3 (2026-11-26)
+- Owner: «the upper part, symbols and arch, are not placed well» → critic v1 at phone size (owner OK):
+  `critic-v1.md`, **code 6.8, whole 6.5**. High: H1 arch stretched (128×36u: dome pinched to ≈ 11u at the calendar,
+  tails down to 34u beside the subtitle), H2 left tail through the mosque base.
+- v3 fixes: arch with 03's proportions 102.8×26.4u on the title axis (+6.2u), fade [0.55, 1] (fix A); calendar 11.6u
+  at +6.2u, top 5.8u; title centre 22.4u (as 03); subtitle 3.9u; title and side dividers = 03's `title_divider.svg`
+  (38u / 24u); top corners = 03's glowing lattice (same place, 75%, radial fade); connector core 0.9u with pale top
+  edge and glow 75% σ 1.3u; open tile rim three tones 0.8u (`_OpenRimPainter`), glow 55–75% blur 1.6–2u spread 0.3u;
+  capsule rim #FFFE64 → #FAC102 with #FFB201 outside, 0.65u.
+- Open for the owner: T1, connector lit only up to the open tile (the reference lights all six links).
+- Conflicts D1–D7 in `STYLE-CONFLICTS.md`.
+
+## 6. v4 (2026-11-26, owner's phone test of 1.0.404)
+- **Back without a button** (owner: no way back to the courses except the rail): drag the finger to the right anywhere
+  on screen 12; the page follows the finger (and fades) and closes past 25% of the width or on a fling; otherwise it
+  springs back. Same direction that closes the side menu. Android back also closes it (learning navigator).
+- **Streak chip on 03 too small / too low**: six variants for the owner, `?chip=a…f`, sheet
+  `streak-chip-variants.jpg` (A v1 small bottom left; B ×1.3 bottom left; C ×1.25 with «الاستمرارية», bottom left raised;
+  D ×1.2 with label, top left; E ×1.2 with label, bottom centre; F ×1.2 with label, left under the mosque). C and F touch
+  the edge of the partly visible left card.
+- **Asset style**: reference vs library comparison in `docs/flutter/ASSET-STYLE-COMPARISON.md`; the app's assets are
+  kept, the reference's are candidates for a later app-wide standardisation.
+- Owner liked only the places of A/B (bottom left) and D (top left): twelve more variants there, `?chip=b1…b6` and
+  `?chip=d1…d6` (1 pill ×1.5, 2 pill with label ×1.35, 3 pill with label ×1.6, 4 flame disc with an amber count
+  bubble, 5 the same larger, 6 small vertical card with label); sheets `streak-chip-variants-b.jpg`, `-d.jpg`. B2/B3
+  touch the bottom edge of the partly visible left card; D1–D3 cover part of the mosque.
+- **Owner's choice: D2** (pill with label ×1.35, top left), now the default.
+
+## 7. v6 and approval (2026-11-26)
+- The courses icon of the rail, tapped while 12 is open, goes back to the courses (`SideNavScaffold.reselected`); on the
+  courses screen it does nothing. Checked in the browser and in the widget test.
+- Owner: the back gesture is not very intuitive → `BACKLOG.md`. **Screen 12 approved**; PR and merge into `master`.

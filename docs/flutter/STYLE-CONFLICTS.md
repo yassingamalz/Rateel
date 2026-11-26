@@ -78,3 +78,17 @@ values** (`read*` tokens), as screens 07/11; the owner decides at the end of the
 | R6 | **Light theme** (first light screen of the app) | none yet | cream #F9F1E3 / #FBF2E5, ink #341E06, copper #C99561, title #A17550, tan rims | reference (`readL*`, `lessonL*`; 02 bar and shared lesson buttons take `light:`) |
 | R7 | Font of «A» and of the verse number | Readex Pro | serif (Times-like) in the reference | Readex Pro |
 
+
+## Screen 12, daily challenges (2026-11-26)
+From critic v1 (`screens/12-daily-challenges/critic-v1.md` §3). Built with the reference values (`chal*` tokens), as
+screens 07/08/11; the owner decides at the end of the project. C7 (two corner lattices) is solved in v3 (03 corners).
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| D1 | Header arch stroke | library `header_arch.svg`, flat #E6C159 | luminous three-tone stroke with halo | library (asset direction ✅ 2026-11-25) |
+| D2 | Title colour | `titleTop #FFFBEA → titleBottom #E9D7A8` | flat #F5EDCA | token |
+| D3 | Dividers | 03 `title_divider.svg` and the shared `GoldDivider` (07/08): two styles in the app | bright pale lemon #FFF94B…#FFF8AC at full length | 03 divider (v3) |
+| D4 | Content background | 🟡 #07362A → #00271D | #002418…#002819 | token (03) |
+| D5 | Golds of the tiles, line, capsule, disc | gold rim #DAA42A + #FFDA6B, gold fill #E2A51E, active ring #D8C35A; glass tile 2 px #1C4E38 | rim #FBC411, open rim #EBC952/#FDFBD1/#B47F01, line #FFE451, capsule #FFFE64→#FAC102 / #FFB201, disc #F5CC02 | reference (`chal*`) |
+| D6 | Pills | 03 pill 🟡 outline gold 2 px, fill #062D20, gold text | fill #0E4422 → #0B3519, rim #B9A52E, cream number | reference |
+| D7 | Connector | 03/05 path: 3 px #D1A93C on #265343 | #FFE451 core, olive glow, on #2C4A25 | reference |

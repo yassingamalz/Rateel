@@ -3,6 +3,9 @@ import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rateel/nav/side_nav.dart';
+import 'package:rateel/challenges/challenge_data.dart';
+import 'package:rateel/challenges/daily_challenges_screen.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rateel/courses/course_data.dart';
 import 'package:rateel/main.dart';
@@ -382,4 +385,50 @@ void main() {
     expect(lessonsDone('x'), 0);
     expect(find.text('تمت إعادة ضبط التقدم'), findsOneWidget);
   });
+
+  testWidgets(
+    'daily challenges: streak chip opens 12, long press completes (screen 12)',
+    (tester) async {
+      tester.view.physicalSize = const Size(1844, 853);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      challengesDone.value = 0;
+      dailyStreak.value = 0;
+      await tester.pumpWidget(const RateelApp());
+      await settle(tester);
+      await tester.tap(find.byType(StreakChip));
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsOneWidget);
+      expect(find.text('100'), findsOneWidget);
+      // Locked tile: nothing completes.
+      final tiles = find.byKey(const ValueKey('tile3'));
+      await tester.longPress(tiles);
+      await settle(tester);
+      expect(challengesDone.value, 0);
+      await tester.longPress(find.byKey(const ValueKey('tile0')));
+      for (var i = 0; i < 6; i++) {
+        await tester.pump(const Duration(milliseconds: 400));
+      }
+      expect(challengesDone.value, 1);
+      expect(dailyStreak.value, 1);
+      await settle(tester);
+      // Back without a button: drag the finger to the right (owner, 2026-11-26).
+      await tester.drag(
+        find.text('رحلة التحديات اليومية'),
+        const Offset(700, 0),
+      );
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsNothing);
+      expect(find.byType(StreakChip), findsOneWidget);
+      // The courses icon of the rail goes back from 12 to the courses.
+      await tester.tap(find.byType(StreakChip));
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsOneWidget);
+      SideNavScaffold.reselected.value = null;
+      SideNavScaffold.reselected.value = 0;
+      await settle(tester);
+      expect(find.text('رحلة التحديات اليومية'), findsNothing);
+      expect(find.byType(StreakChip), findsOneWidget);
+    },
+  );
 }

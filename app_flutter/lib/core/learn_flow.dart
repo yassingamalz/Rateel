@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../challenges/daily_challenges_screen.dart';
 import '../courses/courses_screen.dart';
 import '../lessons/lessons_screen.dart';
 import '../units/units_screen.dart';
@@ -16,6 +17,9 @@ class LearnFlow extends StatefulWidget {
   /// Review aid: `?lessons=<course>,<unit>` (web) opens the lessons of that
   /// unit (above its units screen).
   static (int, int)? startLessons;
+
+  /// Review aid: `?challenges=1` (web) opens the daily challenges (screen 12).
+  static bool startChallenges = false;
 
   @override
   State<LearnFlow> createState() => _LearnFlowState();
@@ -55,6 +59,7 @@ class _LearnFlowState extends State<LearnFlow> {
           if (LearnFlow.startUnits != null) unitsRoute(LearnFlow.startUnits!),
           if (LearnFlow.startLessons case (final c, final u))
             lessonsRoute(c, u),
+          if (LearnFlow.startChallenges) dailyChallengesRoute(),
         ],
       ),
     );

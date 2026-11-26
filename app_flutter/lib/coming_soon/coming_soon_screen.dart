@@ -97,7 +97,10 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
   }
 
   Animation<double> _interval(double a, double b, Curve curve) =>
-      CurvedAnimation(parent: _entry, curve: Interval(a, b, curve: curve));
+      CurvedAnimation(
+        parent: _entry,
+        curve: Interval(a, b, curve: curve),
+      );
 
   // Settings «حجم الخط» (screen 23) does not apply here: the title and cards are fixed art compositions
   // sized in u (owner to confirm, 2026-11-26).
@@ -245,7 +248,9 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
           child: _rising(
             i,
             u,
-            RepaintBoundary(child: _FeatureCard(feature: _features[i], u: u)),
+            RepaintBoundary(
+              child: _FeatureCard(feature: _features[i], u: u),
+            ),
           ),
         ),
     ];

@@ -339,6 +339,35 @@ class RateelColors {
   static const lessonLButton = Color(0xFFFBF2E4);
   static const lessonLRing = Color(0xFFEAB87C);
   static const lessonLInk = Color(0xFF341900);
+  // Screen 12, daily challenges (sampled on the reference, 2026-11-25).
+  static const chalRim = Color(0xFFFBC411); // tile rim core
+  static const chalRimLight = Color(0xFFFFE98A); // open tile rim highlight
+  static const chalTileTop = Color(0xFF052A17);
+  static const chalTileBottom = Color(0xFF01200F);
+  static const chalOpenTop = Color(0xFF2A3A10); // olive glass of the open tile
+  static const chalOpenBottom = Color(0xFF1A2C0B);
+  static const chalPillTop = Color(0xFF0E4422);
+  static const chalPillBottom = Color(0xFF0B3519);
+  static const chalPillRim = Color(0xFFB9A52E);
+  static const chalOpenPill = Color(0xFF4A4D0E);
+  static const chalLine = Color(0xFFFFE451); // connector core
+  static const chalLineTrack = Color(0xFF2C4A25); // connector not yet lit
+  static const chalCapsuleTop = Color(0xFF062C18);
+  static const chalCapsuleBottom = Color(0xFF022412);
+  static const chalCapsuleRim = Color(0xFFFFFE64); // rim core, top
+  static const chalCapsuleRimLow = Color(0xFFFAC102); // rim core, bottom
+  static const chalCapsuleRimOuter = Color(0xFFFFB201);
+  static const chalLineEdge = Color(0xFFFEFCD6); // pale top edge of the line
+  static const chalOpenRimTop = Color(0xFFEBC952);
+  static const chalOpenRimBottom = Color(0xFFB47F01);
+  static const chalOpenRimCore = Color(0xFFFDFBD1);
+  static const chalOpenRimInner = Color(0xFFE9DD97);
+  static const chalDisc = Color(0xFF3A3C08);
+  static const chalDiscEdge = Color(0xFF242E06);
+  static const chalDiscRim = Color(0xFFF5CC02);
+  static const chalText = Color(0xFFF7F1DC); // «50», streak number
+  static const chalLabel = Color(0xFFE1E1C1); // subtitle, streak label
+  static const chalBandEdge = Color(0xFFB8932E); // gold edge of the bottom band
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,
