@@ -255,6 +255,25 @@ class RateelColors {
   static const soonCardBottom = Color(0xFF0B382B);
   static const soonCardRim = Color(0xFF3F7558);
 
+  // Screen 23 settings, measured on `23-impostazioni.webp`.
+  static const setRimTop = Color(0xFFF9F59E); // card rim, pale gold (top)
+  static const setRimSide = Color(0xFFEFCC5D); // card rim (sides, bottom)
+  static const setRimGlow = Color(0xFFF3D567);
+  static const setCardTop = Color(0xFF14532B); // lit top edge inside the rim
+  static const setCardMid = Color(0xFF02331F);
+  static const setCardBottom = Color(0xFF00321F);
+  static const setLine = Color(0xFF5E8A6C); // row separator (light half)
+  static const setLineDark = Color(0xFF002510); // row separator (dark half)
+  static const setLabel = Color(0xFFFFFFDF);
+  static const setMuted = Color(0xFFB9CBB0);
+  static const setPillRim = Color(0xFFDEDC8A);
+  static const setPillFill = Color(0xFF073B26);
+  static const setGoldTop = Color(0xFFFDC146);
+  static const setGoldBottom = Color(0xFFE8A51F);
+  static const setKnob = Color(0xFFF8EBC0);
+  static const setKnobOff = Color(0xFFB9C3A6);
+  static const setDanger = Color(0xFFE17A6F); // «إعادة ضبط التقدم» rim
+
   // Screen 08 (reading lesson), sampled from `screens/08-reading-lesson/
   // reference-{dark,light}.webp` and `reference-panel.png`. Built with the
   // reference values (conflicts R1–R6 in docs/flutter/STYLE-CONFLICTS.md).

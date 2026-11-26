@@ -30,6 +30,9 @@ class CourseUnitsProgress {
 
 final _progressByCourse = <int, CourseUnitsProgress>{};
 
+/// Settings «إعادة ضبط التقدم»: every course back to its first unit at 0.
+void resetUnitsProgress() => _progressByCourse.clear();
+
 CourseUnitsProgress unitsProgressOf(int course) => _progressByCourse
     .putIfAbsent(course, () => CourseUnitsProgress(unitsOf(course).length));
 
