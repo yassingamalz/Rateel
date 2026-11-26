@@ -23,7 +23,7 @@ const { chromium } = require('playwright');
   if (mode === 'rule') {
     // Each ayah of سورة الناس plays by itself (ghunna words green, every word lit in turn) → «التالي» → … → 3 questions.
     await p.goto('http://localhost:8765/?lessons=1,1&openLesson=0&logAudio=1', { waitUntil: 'networkidle' });
-    await w(9500);
+    await w(13500);
     for (const ms of [5800, 5800, 10300, 11300, 9300, 9800]) { await confirm(); await w(ms); }
     await confirm(); await w(9500);
     await pill(0); await w(900); await confirm(); await w(4500); await confirm(); await w(7500);
