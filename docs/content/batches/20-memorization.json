@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U12.L1",
+      "titleAr": "حفظ القرآن",
+      "source": {
+        "chapter": 22,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الحفظ عن القراءة بالنظر",
+      "explanationAr": "الحفظ تعلم الآيات عن ظهر قلب مع المحافظة على اللفظ الصحيح والمراجعة المستمرة.",
+      "examples": [
+        {
+          "verseRef": "54:17",
+          "excerptAr": "وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "حفظ القرآن"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الحفظ تعلم الآيات عن ظهر قلب مع المحافظة على اللفظ الصحيح والمراجعة المستمرة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "54:17"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الحفظ عن القراءة بالنظر"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "اختر آية قصيرة وكررها ثم استظهرها.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U12.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يساعد على تثبيت الحفظ؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "المراجعة المنتظمة"
+                },
+                {
+                  "id": "2",
+                  "text": "القراءة مرة واحدة فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "إهمال التصحيح"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الحفظ تعلم الآيات عن ظهر قلب مع المحافظة على اللفظ الصحيح والمراجعة المستمرة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U12.L2",
+      "titleAr": "أدوات حفظ القرآن",
+      "source": {
+        "chapter": 22,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "اختيار أدوات موثوقة للحفظ",
+      "explanationAr": "من الوسائل المساعدة مصحف معتمد وتلاوة متقنة ومعلم وخطة مراجعة مناسبة.",
+      "examples": [
+        {
+          "verseRef": "73:4",
+          "excerptAr": "وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "أدوات حفظ القرآن"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "من الوسائل المساعدة مصحف معتمد وتلاوة متقنة ومعلم وخطة مراجعة مناسبة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "73:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "اختيار أدوات موثوقة للحفظ"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى آية ثم اقرأها من المصحف وسمعها.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U12.L2.Q1",
+              "type": "singleChoice",
+              "text": "أي وسيلة تساعد على تصحيح الحفظ؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "التسميع لمعلم متقن"
+                },
+                {
+                  "id": "2",
+                  "text": "الاعتماد على الذاكرة وحدها"
+                },
+                {
+                  "id": "3",
+                  "text": "تغيير الكلمات"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "من الوسائل المساعدة مصحف معتمد وتلاوة متقنة ومعلم وخطة مراجعة مناسبة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U12.L3",
+      "titleAr": "أركان حفظ القرآن",
+      "source": {
+        "chapter": 22,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "بناء دورة حفظ ومراجعة",
+      "explanationAr": "يقوم برنامج الحفظ عمليًا على تعلم النص الصحيح وتكراره واسترجاعه ومراجعته؛ وتراجع صياغة أركان الحفظ مع المصدر قبل الاعتماد.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "أركان حفظ القرآن"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يقوم برنامج الحفظ عمليًا على تعلم النص الصحيح وتكراره واسترجاعه ومراجعته؛ وتراجع صياغة أركان الحفظ مع المصدر قبل الاعتماد."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "بناء دورة حفظ ومراجعة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "سمع المقطع ثم أعد مراجعته في اليوم التالي.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U12.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما الخطوة التالية بعد حفظ مقطع جديد؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "مراجعته واسترجاعه"
+                },
+                {
+                  "id": "2",
+                  "text": "تركه نهائيًا"
+                },
+                {
+                  "id": "3",
+                  "text": "تغيير ترتيبه"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يقوم برنامج الحفظ عمليًا على تعلم النص الصحيح وتكراره واسترجاعه ومراجعته؛ وتراجع صياغة أركان الحفظ مع المصدر قبل الاعتماد."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U12.L4",
+      "titleAr": "الأمور المعينة على الحفظ",
+      "source": {
+        "chapter": 22,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "اختيار خطة حفظ قابلة للاستمرار",
+      "explanationAr": "يساعد على الحفظ انتظام الوقت وتقسيم المقاطع والتكرار والتسميع والمراجعة وتجنب الاستعجال.",
+      "examples": [
+        {
+          "verseRef": "54:17",
+          "excerptAr": "وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الأمور المعينة على الحفظ"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يساعد على الحفظ انتظام الوقت وتقسيم المقاطع والتكرار والتسميع والمراجعة وتجنب الاستعجال."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "54:17"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "اختيار خطة حفظ قابلة للاستمرار"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "حدد مقدارًا صغيرًا للحفظ وجدولًا للمراجعة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U12.L4.Q1",
+              "type": "singleChoice",
+              "text": "أي خطة أنسب لتثبيت الحفظ؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "مقدار مناسب مع مراجعة منتظمة"
+                },
+                {
+                  "id": "2",
+                  "text": "مقدار كبير دون مراجعة"
+                },
+                {
+                  "id": "3",
+                  "text": "الحفظ المتقطع دون خطة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يساعد على الحفظ انتظام الوقت وتقسيم المقاطع والتكرار والتسميع والمراجعة وتجنب الاستعجال."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
