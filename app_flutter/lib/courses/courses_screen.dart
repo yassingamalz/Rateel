@@ -4,6 +4,7 @@ import 'dart:ui' show PointerDeviceKind, lerpDouble;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../challenges/daily_challenges_screen.dart';
 import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
@@ -297,6 +298,9 @@ class _CoursesScreenState extends State<CoursesScreen>
                 ),
               ),
             ),
+            // Streak chip → daily challenges (screen 12, owner Q1 = B).
+            // Review variants (owner, 2026-11-26): `?chip=a…f`.
+            _streakChip(g),
             _toastLayer(g),
           ],
         );
@@ -668,6 +672,51 @@ class _CoursesScreenState extends State<CoursesScreen>
     ];
   }
 
+  /// Streak chip variants for the owner's choice (2026-11-26, v1 = a):
+  /// a small bottom left; b larger bottom left; c larger with the label,
+  /// bottom left, raised; d larger with the label, top left; e larger with
+  /// the label, bottom centre; f larger, left, under the mosque.
+  Widget _streakChip(_Geo g) {
+    final u = g.u;
+    void open() => Navigator.of(context).push(dailyChallengesRoute());
+    Widget chip(double scale, bool label, [String shape = 'pill']) =>
+        StreakChip(u: u, scale: scale, label: label, shape: shape, onTap: open);
+    // Owner (2026-11-26): only the places of A/B (bottom left) and D (top
+    // left); more shapes and sizes there: b1–b6 bottom left, d1–d6 top left.
+    final v = streakChipVariant;
+    final top = v.startsWith('d');
+    final shapes = <String, (double, bool, String)>{
+      '1': (1.5, false, 'pill'),
+      '2': (1.35, true, 'pill'),
+      '3': (1.6, true, 'pill'),
+      '4': (1.0, false, 'disc'),
+      '5': (1.2, false, 'disc'),
+      '6': (1.0, true, 'column'),
+    };
+    final key = v.length == 2 ? v.substring(1) : '';
+    if (shapes[key] case (final k, final l, final sh)) {
+      return Positioned(
+        left: u * 3,
+        top: top ? u * 3.5 : null,
+        bottom: top ? null : u * 3,
+        child: chip(k, l, sh),
+      );
+    }
+    return switch (v) {
+      'b' => Positioned(left: u * 3, bottom: u * 3, child: chip(1.3, false)),
+      'c' => Positioned(left: u * 3.5, bottom: u * 5, child: chip(1.25, true)),
+      'd' => Positioned(left: u * 3.5, top: u * 4, child: chip(1.2, true)),
+      'e' => Positioned(
+        left: 0,
+        right: g.trackRightInset,
+        bottom: u * 2.5,
+        child: Center(child: chip(1.2, true)),
+      ),
+      'f' => Positioned(left: u * 3.5, top: u * 33, child: chip(1.2, true)),
+      _ => Positioned(left: u * 3, bottom: u * 3.5, child: chip(1, false)),
+    };
+  }
+
   Widget _toastLayer(_Geo g) {
     return Positioned(
       left: 0,
@@ -885,6 +934,9 @@ class _ConnectorPainter extends CustomPainter {
 }
 
 /// Reference geometry (u = 1% of the height). Ref px / 8.51.
+/// Review aid: `?chip=a…f` picks the streak chip variant (owner's choice).
+String streakChipVariant = 'd2'; // owner's choice, 2026-11-26
+
 class _Geo {
   _Geo(this.w, this.h) : u = h / 100;
 

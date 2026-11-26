@@ -66,8 +66,13 @@ class CourseCard extends StatefulWidget {
 class _CourseCardState extends State<CourseCard> {
   bool _down = false;
 
+  // Settings «حجم الخط» (screen 23) does not apply here: course cards are fixed art compositions
+  // sized in u (owner to confirm, 2026-11-26).
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      MediaQuery.withNoTextScaling(child: Builder(builder: _build));
+
+  Widget _build(BuildContext context) {
     final u = widget.u;
     final c = widget.course;
     final t = widget.unlock;

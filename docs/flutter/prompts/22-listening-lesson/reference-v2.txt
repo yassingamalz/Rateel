@@ -1,0 +1,22 @@
+Screen 22, listening lesson: prompt v2 (owner 2026-11-25: use the app's own screenshots, v1 attached old ChatGPT
+images and ChatGPT drifted out of the app's style).
+Attach, in this order (docs/flutter/app-references/):
+  1. app-08-reading-dark.webp   (lesson page: top bar of 02, header, card, buttons)
+  2. app-14-coming-soon.webp    (glass cards, gold lobed badge with the headphones glyph)
+  3. app-11-leaderboard.webp    (gold-rimmed rows, gold pills, star)
+Output: one landscape image 1844x853, dark. Save as screens/22-listening-lesson/22-lezione-ascolto.webp
+
+----- PROMPT -----
+The three attached images are screenshots of my app. Create ONE new screen of the same app, landscape 1844x853 px, Arabic right-to-left, that looks like it belongs to the same app: copy exactly their background (dark emerald green with the thin gold girih pattern), their glass cards with thin gold rims, their gold, their cream text, their font (Readex Pro), their round gold-rimmed buttons and their spacing. Do not invent a new style, do not add new decorations, no sparkles, no new colours.
+
+The screen is a "listening lesson": the student listens to a short recitation, then answers a question about what they heard.
+
+Top, exactly as in the first screenshot: the pause button top right, the progress capsule top left (gold fill at about 40%, text "4/10"), the arched gold header in the middle with the mosque and the crescent, the title «الاستماع: الغُنّة» and, in the arch, a small gold headphones icon instead of the book.
+
+Middle: one wide glass card, like the sentence card of the first screenshot. Inside, top right a small gold eight-pointed badge «1» as in the first screenshot; top left small cream text «سورة الكوثر · الحصري». Centred, the verse in large cream Quranic script: «إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ», the word «إِنَّا» in gold. Under the verse, a thin audio waveform across the card, the played part gold, the rest dim green.
+
+Under the card, centred, a round gold-rimmed button with a play/replay icon, same style as the pause button.
+
+Bottom: the question in cream text on the right: «ماذا سمعت في كلمة «إِنَّا»؟». Next to it, three answer buttons in a row, gold-rimmed glass pills like the «قواعد التجويد» pill of the first screenshot: «غُنّة», «قلقلة», «مدّ». «غُنّة» is selected (filled gold like the selected course card, dark text). Bottom left, the «تأكيد» button in the same style as the «تخطي» button of the first screenshot.
+
+No side menu on this screen. Everything in Arabic. No people, no faces, no English text.

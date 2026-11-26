@@ -2,10 +2,15 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
+import 'core/app_settings.dart';
 import 'courses/course_data.dart';
+import 'courses/courses_screen.dart';
 import 'core/learn_flow.dart';
+import 'nav/nav_items.dart';
 import 'nav/side_nav.dart';
+import 'settings/settings_screen.dart';
 import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
@@ -87,8 +92,8 @@ Future<void> main() async {
   readingStartVerse = int.tryParse(q['verse'] ?? '') ?? 0;
   readingStartRules = q['rules'] == '1';
   readingStartFontMenu = q['fontMenu'] == '1';
-  // Review aids (screen 10): `?testQ=4&testPick=1&testState=ok|ko|results|
-  // pass|fail|details` (with `?lessons=0,<unit>&openLesson=0`).
+  // Review aids (screen 10): `?testQ=4&testPick=1&testState=ok|ko|partial|
+  // streak|results|fail|details`, `?testRight=6` (with `?lessons=0,<unit>&openLesson=0`).
   testStartQuestion = int.tryParse(q['testQ'] ?? '') ?? 0;
   testStartPick = [
     for (final s in (q['testPick'] ?? '').split(','))
@@ -96,6 +101,12 @@ Future<void> main() async {
   ];
   testStartState = q['testState'];
   testStartRight = int.tryParse(q['testRight'] ?? '');
+  // Review aids (screen 12): `?challenges=1` opens the daily challenges,
+  // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
+  LearnFlow.startChallenges = q['challenges'] == '1';
+  streakChipVariant = q['chip'] ?? streakChipVariant;
+  challengesDone.value = int.tryParse(q['chalDone'] ?? '') ?? 0;
+  dailyStreak.value = int.tryParse(q['streak'] ?? '') ?? 0;
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;
@@ -105,6 +116,10 @@ Future<void> main() async {
     DeviceOrientation.landscapeRight,
   ]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await AppSettings.load();
+  // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
+  final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
+  if (ts != null) AppSettings.textScale.value = ts;
   runApp(const RateelApp());
 }
 
@@ -126,10 +141,16 @@ class RateelApp extends StatelessWidget {
         // (owner, 2026-11-21): the system scale would break the proportions
         // between text and cards/ornaments. A text-size option will live in the
         // app's settings and scale the text proportionally.
-        builder: (context, child) => MediaQuery.withNoTextScaling(
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: child!,
+        // Settings «حجم الخط» (screen 23) scales the app's own text, 90–110%.
+        builder: (context, child) => ValueListenableBuilder<double>(
+          valueListenable: AppSettings.textScale,
+          builder: (context, scale, _) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(scale)),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: child!,
+            ),
           ),
         ),
         home: Scaffold(
@@ -139,6 +160,7 @@ class RateelApp extends StatelessWidget {
               3 => const LeaderboardScreen(),
               // Sections not built yet: coming soon (screen 14, as Angular).
               1 || 2 || 5 => const ComingSoonScreen(),
+              settingsSection => const SettingsScreen(),
               _ => SectionPlaceholder(index: selected),
             },
           ),

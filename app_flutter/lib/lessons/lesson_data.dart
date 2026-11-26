@@ -40,6 +40,9 @@ int lessonsDone(String unitId) => _doneByUnit[unitId] ?? 0;
 
 void setLessonsDone(String unitId, int done) => _doneByUnit[unitId] = done;
 
+/// Settings «إعادة ضبط التقدم».
+void resetLessonsDone() => _doneByUnit.clear();
+
 /// Share of the unit done by its lessons (0 when it has none).
 double unitShareFromLessons(String unitId) {
   final n = lessonsOf(unitId).length;

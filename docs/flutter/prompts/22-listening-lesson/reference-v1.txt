@@ -1,0 +1,23 @@
+Screen 22, listening lesson: prompt to generate the reference (ChatGPT, image generation).
+Attach, in this order:
+  1. screens/22-listening-lesson/20-lezione-guidata-ascolto-versetto.webp  (layout of the audio part)
+  2. screens/22-listening-lesson/10b-lezione-test-risposta.webp            (question and answer rows)
+  3. screens/22-listening-lesson/08-reference-dark.webp                    (approved app style, top bar)
+Output expected: one landscape image, 1844x853, dark theme. Save it as
+screens/22-listening-lesson/22-lezione-ascolto.webp
+
+----- PROMPT -----
+Create a landscape mobile app screen, 1844x853 px, dark theme, Arabic right-to-left, in exactly the same visual style as the attached images: deep emerald green background with a faint gold girih pattern in the corners, glass cards with thin gold rims and a soft inner light, gold and cream text, small gold sparkles. Same fonts, same gold, same glass as the attached screens. Do not invent a new style.
+
+This is a "listening lesson" of a Tajweed learning app: the student listens to a short recitation, then answers a question about what they heard (like Simply Piano: listen, then answer).
+
+Layout, right to left:
+- Top bar, as in the attached reading lesson: round gold-rimmed pause button at the top right, a thin glass progress capsule next to it with gold fill at about 40% and the text "4 / 10". No title banner, no mosque.
+- Under the bar, centred, a small gold-rimmed glass chip with the text «استمع ثم أجب».
+- A wide glass verse card in the upper middle (as in the first attached image): top right small label «سورة الكوثر», top left a small gold microphone icon with «محمود خليل الحصري». Inside, the verse in large cream Quranic script: «إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ». The word «إِنَّا» is gold and glowing, with a soft gold underline. Under the verse, a thin gold audio waveform across the card, the part already played in gold, the rest dim green.
+- Centred under the card, a large round gold play button with a glow (listen again) and, next to it, a smaller glass pill «إعادة الاستماع» with a circular-arrow icon.
+- Lower half: the question on the right, cream text with a small gold eight-pointed star number badge «1» before it: «ماذا سمعت في كلمة «إِنَّا»؟». On the left of the question line, a small gold-rimmed pill «+10 نقطة» with a gold star.
+- Three answer options in a horizontal row, as glass pills with a gold rim (same style as the answer rows of the second attached image, but shorter and side by side): «غُنَّة», «قلقلة», «مدّ لازم». Each one has a round radio circle on its right. The first one «غُنَّة» is selected: filled with a slightly lighter green, brighter gold rim, gold filled radio.
+- Bottom centre: a gold-rimmed glass button «تأكيد الإجابة» with a left arrow, with thin gold diamond lines on both sides, as in the second attached image.
+
+Everything in Arabic, right to left. Clean, centred, lots of breathing space, no extra decorations, no people, no faces, no English text.

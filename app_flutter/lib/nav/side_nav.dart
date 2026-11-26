@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
 import 'nav_items.dart';
 
@@ -24,6 +24,11 @@ class SideNavScaffold extends StatefulWidget {
   /// Review aid: section selected on start (`?section=3` opens the leaderboard).
   static int startSection = 0;
 
+  /// Tap on the section that is already selected (its index): a screen deep
+  /// inside the section may go back to the section's first screen (screen 12
+  /// → courses, owner 2026-11-26). On the first screen it does nothing.
+  static final reselected = ValueNotifier<int?>(null);
+
   @override
   State<SideNavScaffold> createState() => _SideNavScaffoldState();
 }
@@ -40,6 +45,14 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
   );
   int _selected = SideNavScaffold.startSection;
   bool _dragging = false;
+
+  /// Vertical scroll of the closed rail in px (owner, 2026-11-25: the rail
+  /// scrolls when its items do not fit, e.g. with the settings gear). The open
+  /// menu does not scroll: its rows fit.
+  double _scroll = 0;
+  bool _scrolling = false;
+  bool _scrollReady = false;
+  _Geometry? _g;
   double _selectFrom = SideNavScaffold.startSection.toDouble();
 
   bool get _isOpen =>
@@ -59,20 +72,33 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
   }
 
   void _toggle() {
-    HapticFeedback.lightImpact();
+    Haptics.tap();
     _isOpen ? _close() : _open.forward();
   }
 
   void _close() => _open.reverse();
 
+  /// Scroll that keeps rail item [i] fully visible below the menu tile.
+  double _scrollToShow(_Geometry g, int i) {
+    final top = g.railY0(i.toDouble()) - g.u * 5.55 - g.railTop;
+    final bottom = g.railY0(i.toDouble()) + g.u * 5.55 + g.u * 2.5 - g.h;
+    return _scroll.clamp(bottom, top).clamp(0.0, g.maxScroll);
+  }
+
   void _pick(int index) {
-    HapticFeedback.selectionClick();
+    Haptics.tick();
     if (index != _selected) {
       setState(() {
         _selectFrom = _active;
         _selected = index;
+        final g = _g;
+        if (g != null) _scroll = _scrollToShow(g, index);
       });
       _select.forward(from: 0);
+    } else {
+      // Fire even when the same index is tapped twice in a row.
+      SideNavScaffold.reselected.value = null;
+      SideNavScaffold.reselected.value = index;
     }
     if (_isOpen) _close();
   }
@@ -86,7 +112,13 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       },
       child: LayoutBuilder(
         builder: (context, box) {
-          final g = _Geometry(box.maxWidth, box.maxHeight);
+          var g = _Geometry(box.maxWidth, box.maxHeight, 0);
+          if (!_scrollReady) {
+            _scrollReady = true;
+            _scroll = _scrollToShow(g, _selected);
+          }
+          _scroll = _scroll.clamp(0.0, g.maxScroll);
+          g = _g = _Geometry(box.maxWidth, box.maxHeight, _scroll);
           // Owner: swipe right-to-left on the rail opens the menu, left-to-right
           // closes it, following the finger. While closed, only drags that start
           // on the rail count (the content may scroll horizontally).
@@ -100,6 +132,19 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
               if (!_dragging) return;
               _open.value -= d.delta.dx / (g.panelWidth - g.railWidth);
             },
+            onVerticalDragStart: (d) {
+              _scrolling =
+                  _open.value == 0 &&
+                  g.maxScroll > 0 &&
+                  d.localPosition.dx >= g.w - g.railWidth;
+            },
+            onVerticalDragUpdate: (d) {
+              if (!_scrolling) return;
+              setState(
+                () => _scroll = (_scroll - d.delta.dy).clamp(0.0, g.maxScroll),
+              );
+            },
+            onVerticalDragEnd: (_) => _scrolling = false,
             onHorizontalDragEnd: (d) {
               if (!_dragging) return;
               _dragging = false;
@@ -158,7 +203,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
     // must not shift the others (v3 bug: icons drawn one row off).
     Widget k(String id, Widget w) => KeyedSubtree(key: ValueKey(id), child: w);
     final caps = _filigree(g, t, active);
-    final widgets = <Widget>[
+    final back = <Widget>[
       k(
         'panel',
         Positioned(
@@ -191,6 +236,8 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
             ),
           ),
         ),
+    ];
+    final widgets = <Widget>[
       for (var c = 0; c < caps.length; c++) k('cap$c', caps[c]),
       k('selected', _selectedRow(g, t, active)),
     ];
@@ -202,8 +249,22 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       widgets.add(k('icon$i', _icon(g, t, i, active)));
       widgets.add(k('bubble$i', _bubble(g, t, i, active)));
     }
-    widgets.add(k('menu', _menuButton(g, t)));
-    return widgets;
+    // Scrolled rail items slide under the menu tile: clip them there
+    // (closed rail only; the open menu needs no clip).
+    final clipTop = g.scroll > 0 ? g.railTop * (1 - t) : 0.0;
+    return [
+      ...back,
+      k(
+        'items',
+        Positioned.fill(
+          child: ClipRect(
+            clipper: _TopClip(clipTop),
+            child: Stack(fit: StackFit.expand, children: widgets),
+          ),
+        ),
+      ),
+      k('menu', _menuButton(g, t)),
+    ];
   }
 
   /// Filigree end caps, half hidden behind both ends of the selected row.
@@ -290,18 +351,19 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
                   ),
                 ),
               ),
-              Positioned(
-                left: g.dividerX - row.left,
-                top: rect.height / 2 - g.u * 2.1,
-                child: Opacity(
-                  opacity: label,
-                  child: Container(
-                    width: 2,
-                    height: g.u * 4.2,
-                    color: RateelColors.divider,
+              if (navItems[i].count != null)
+                Positioned(
+                  left: g.dividerX - row.left,
+                  top: rect.height / 2 - g.u * 2.1,
+                  child: Opacity(
+                    opacity: label,
+                    child: Container(
+                      width: 2,
+                      height: g.u * 4.2,
+                      color: RateelColors.divider,
+                    ),
                   ),
                 ),
-              ),
             ],
           ],
         ),
@@ -435,17 +497,21 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
       width: size,
       height: size,
       child: IgnorePointer(
-        child: SvgPicture.asset(
-          navItems[i].icon,
-          theme: SvgTheme(currentColor: color),
-        ),
+        child: navItems[i].iconData != null
+            ? Icon(navItems[i].iconData, size: size * 0.95, color: color)
+            : SvgPicture.asset(
+                navItems[i].icon!,
+                theme: SvgTheme(currentColor: color),
+              ),
       ),
     );
   }
 
   Widget _bubble(_Geometry g, double t, int i, double active) {
     final item = navItems[i];
-    final threeDigits = item.count >= 100;
+    final count = item.count;
+    if (count == null) return const SizedBox.shrink();
+    final threeDigits = count >= 100;
     final activeness = (1 - (active - i).abs()).clamp(0.0, 1.0);
     final tile = g.tileRect(i);
     final railW = threeDigits ? g.u * 7.5 : g.u * 6.5;
@@ -473,7 +539,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
             color: Color.lerp(RateelColors.amber, RateelColors.amberPill, t),
           ),
           child: Text(
-            '${item.count}',
+            '$count',
             style: readex(
               lerpDouble(g.u * 2.75, g.u * 2.85, t)!,
               weight: 700,
@@ -702,18 +768,30 @@ class _MenuCloseGlyph extends CustomPainter {
 
 /// Reference geometry, in units of 1% of the screen height (critic-v1.md).
 class _Geometry {
-  _Geometry(this.w, this.h) : u = h / 100;
+  _Geometry(this.w, this.h, this.scroll) : u = h / 100;
 
   final double w;
   final double h;
   final double u;
+
+  /// Rail scroll in px (closed rail only).
+  final double scroll;
+
+  /// Top of the area where rail items may show (below the menu tile).
+  double get railTop => u * 11.6;
+
+  double get maxScroll => math.max(
+    0,
+    railY0((navItems.length - 1).toDouble()) + u * 5.55 + u * 2.5 - h,
+  );
 
   double get railWidth => u * 18.5;
   double get panelWidth => math.min(u * 78.4, w * 0.45);
   double get panelLeft => w - panelWidth;
   double get railCenterX => w - u * 8.8;
 
-  double railY(double i) => u * 21.3 + i * u * 13.9;
+  double railY0(double i) => u * 21.3 + i * u * 13.9;
+  double railY(double i) => railY0(i) - scroll;
   double rowY(double i) => u * 22.2 + i * u * 11.14;
 
   Offset railCenter(double i) => Offset(railCenterX, railY(i));
@@ -745,4 +823,17 @@ class _Geometry {
   double get labelRight => w - u * 23.6;
   double get pillX => panelLeft + u * 16.9;
   double get dividerX => panelLeft + u * 24.0;
+}
+
+class _TopClip extends CustomClipper<Rect> {
+  _TopClip(this.top);
+
+  final double top;
+
+  @override
+  Rect getClip(Size size) =>
+      Rect.fromLTRB(-size.width, top, size.width * 2, size.height * 2);
+
+  @override
+  bool shouldReclip(_TopClip old) => old.top != top;
 }

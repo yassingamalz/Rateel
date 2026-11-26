@@ -201,3 +201,36 @@ star, `glyphs/star.svg`) or are drawn in code (circles, rows, radios, ✓/✕ di
 Shared code from screen 10: `lib/lessons/lesson_decor.dart` (moved from 08 unchanged: `LessonPal`, `LessonBackground`,
 `LatticeField`, `LessonHeader` + `HeaderSpec` (subtitle, gold title, optional book), `LessonBadge`, `GoldCardPainter(fill:)`,
 `ToolRimPainter`, `MoonPainter`, `lessonMosqueTone`).
+## Owner's icon collection (2026-11-25, screen 12)
+Source: `docs/design-assets/icon-collection/` (owner's zip `Rateel_Icon_Collection`, 21 flat icons on magenta, 1254 px,
+stored as lossless WebP, plus `original_sheet.webp`). Processing: `tools/assets/icon_collection.py` (alpha from the
+distance to magenta only: the blue/green model of `key-magenta.py` tinted the cream towards green), app copies 512 px
+WebP in `app_flutter/assets/ui/icons/`. **All of them are in the shared library**, for the whole app.
+
+**Owner's rules for icons (2026-11-25):**
+- Where a cream icon comes with and without **dark green inner lines**, use the variant **with the green lines**:
+  it goes in the same visual direction as the rest of the app.
+- The **gold icons** (`*_gold_*`, `lantern_gold`) are for **decoration** of the app.
+- Exceptions on screen 12: **flame and calendar** are used exactly as the reference (gold).
+
+| App file | Used in | Notes |
+|---|---|---|
+| `ui/icons/calendar_gold.webp` | 12, header emblem | as the reference |
+| `ui/icons/flame_gold_01.webp` (`_02`, `_03` spares) | 12, streak disc; 03, streak chip | as the reference |
+| `ui/icons/document_01.webp` (`_02` spare) | 12, lesson challenge | green lines |
+| `ui/icons/quran_rehal_01.webp` (`_02`, `_03` spares) | 12, recitation challenge | green lines |
+| `ui/icons/trophy_cream_01.webp` (`_02` spare) | 12, trophy challenge | |
+| `ui/icons/trophy_gold_01/02.webp`, `lantern_cream/gold.webp`, `mosque_dome_01/02.webp`, `mosque_full.webp`, `prayer_beads_01/02/03.webp` | library | not used yet |
+| `ui/icons/coin_gold.webp` | 12, «50» pills and the flying coin | Angular `src/assets/images/coin-icon.png`, trimmed, 256 px |
+
+Screen 12 also reuses: `decor/header_arch.svg` (03), `decor/mosque.webp`, `decor/crescent_star.svg`,
+`video/corner_bottom_*.webp` (top corners), `video/bottom_band.webp` (bottom band, under a gold wave drawn in code),
+`coming_soon/glyph_microphone.webp`, `glyphs/check.svg`.
+
+**Future note (owner, 2026-11-25): one asset direction for the whole app.** The header decoration of the references
+(stars, crescent, mosque, arch, the lattice of the top corners) is taken from the shared library, the same standard
+set on every screen, even where a reference draws them better (more three-dimensional). If they are improved, they are
+**regenerated once with ChatGPT for the whole app** and replaced everywhere, never per screen. Their **place and size are standard too**: mosque and crescent + star as on screen 03
+(mosque 10.5u from the content's left edge, top 8u, 49u wide; crescent 25.5u from the right edge, top 7.5u, 10.65×9.75u).
+
+Comparison of the reference's header assets with the library (owner, 2026-11-26): `ASSET-STYLE-COMPARISON.md`.
