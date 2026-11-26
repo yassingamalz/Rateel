@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "status": "editorial_draft_not_publishable",
+  "base": {
+    "topics": 66,
+    "assessmentQuestions": 75,
+    "pilotListeningQuestions": 2,
+    "batchDirectory": "../batches"
+  },
+  "expansion": {
+    "topics": 65,
+    "additionalQuestions": 325,
+    "batches": [
+      {
+        "file": "21-noon-sakinah.json",
+        "topics": 6,
+        "additionalQuestions": 30
+      },
+      {
+        "file": "22-meem-and-meeting-letters.json",
+        "topics": 5,
+        "additionalQuestions": 25
+      },
+      {
+        "file": "23-madd-a.json",
+        "topics": 5,
+        "additionalQuestions": 25
+      },
+      {
+        "file": "24-madd-b.json",
+        "topics": 4,
+        "additionalQuestions": 20
+      },
+      {
+        "file": "25-foundations.json",
+        "topics": 5,
+        "additionalQuestions": 25
+      },
+      {
+        "file": "26-speech-apparatus.json",
+        "topics": 3,
+        "additionalQuestions": 15
+      },
+      {
+        "file": "27-articulation-a.json",
+        "topics": 3,
+        "additionalQuestions": 15
+      },
+      {
+        "file": "28-articulation-b.json",
+        "topics": 3,
+        "additionalQuestions": 15
+      },
+      {
+        "file": "29-sifat-a.json",
+        "topics": 5,
+        "additionalQuestions": 25
+      },
+      {
+        "file": "30-sifat-b.json",
+        "topics": 5,
+        "additionalQuestions": 25
+      },
+      {
+        "file": "31-pronunciation-errors.json",
+        "topics": 1,
+        "additionalQuestions": 5
+      },
+      {
+        "file": "32-vowels-sukoon.json",
+        "topics": 3,
+        "additionalQuestions": 15
+      },
+      {
+        "file": "33-special-topics.json",
+        "topics": 4,
+        "additionalQuestions": 20
+      },
+      {
+        "file": "34-waqf-ibtida.json",
+        "topics": 4,
+        "additionalQuestions": 20
+      },
+      {
+        "file": "35-hamza-alif.json",
+        "topics": 3,
+        "additionalQuestions": 15
+      },
+      {
+        "file": "36-mushaf-script.json",
+        "topics": 2,
+        "additionalQuestions": 10
+      },
+      {
+        "file": "37-memorization.json",
+        "topics": 4,
+        "additionalQuestions": 20
+      }
+    ]
+  },
+  "combined": {
+    "topics": 66,
+    "assessmentQuestions": 400,
+    "minimumPerTopic": 6,
+    "pilotAssessmentQuestions": 10
+  },
+  "mergePolicy": [
+    "Join by topicId; preserve Q1 from baseline and Q2–Q6 from expansion; pilot retains Q1–Q10.",
+    "Use expansion explanation and practice where present. Prefer targeted expansion examples but preserve provenance; do not mark as approved.",
+    "U5.L11: discard incorrect legacy 106:4 izhar example; use expansion candidates.",
+    "U7.L3: replace contextual legacy example with 17:110 candidate.",
+    "Deduplicate question concepts and balance positions at runtime; validate answer identifiers."
+  ],
+  "blockers": [
+    "Original book PDFs not inspected directly; all source, legal/religious and pedagogical verification pending.",
+    "Quran excerpts are candidates in imlai or legacy text; verify against a trusted Uthmani edition and relevant context before display.",
+    "Audio assets, timing, narrator tashkeel, complete explanations, and Flutter integration remain pending.",
+    "Some topics still have only one contextual or candidate verse; advanced topics need exact cases, not generic summaries.",
+    "Lunar/solar lam and other curriculum coverage gaps require review.",
+    "Question bank is primarily single choice; listening, multi-select and applied practice require expansion.",
+    "Counts are based on successful writes, not independent full-repository validation."
+  ]
+}
