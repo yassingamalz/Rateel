@@ -28,8 +28,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Screen 08: tajweed colours for the ayat (wheel in `DESIGN-SYSTEM.md`), audio example of the rules.
 - [ ] **Refresh the app screenshots** used as ChatGPT references (`app-references/`, rule in `LESSONS-LEARNED.md`)
       after each approved screen: 12 and 23 are not in it yet (2026-11-26).
-- [ ] **Order of the remaining screens**: Claude's proposed timeline is in `NEXT-SESSION.md` (2026-11-26); the owner
-      confirms or reorders it at the start of the next session.
+- [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
       added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
