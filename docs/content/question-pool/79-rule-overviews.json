@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "id": "U5.L2.POOL79.Q1",
+      "topicId": "U5.L2",
+      "text": "أي حكم يشترك فيه التنوين والنون الساكنة قبل الباء؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "التصنيف يتبع الحرف التالي للنون أو التنوين.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U5.L2.POOL79.Q2",
+      "topicId": "U5.L2",
+      "text": "صل المقطع بالحكم عند الوصل.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التصنيف يتبع الحرف التالي للنون أو التنوين.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "من خوف",
+          "right": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "left": "من شر",
+          "right": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "left": "من بعد",
+          "right": "الإقلاب"
+        }
+      ]
+    },
+    {
+      "id": "U5.L2.POOL79.Q3",
+      "topicId": "U5.L2",
+      "text": "أي مثال يحتوي نونًا ساكنة داخل كلمة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التصنيف يتبع الحرف التالي للنون أو التنوين.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "من شر"
+        },
+        {
+          "id": "2",
+          "text": "عذاب أليم"
+        },
+        {
+          "id": "3",
+          "text": "أنزلناه"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U5.L8.POOL79.Q1",
+      "topicId": "U5.L8",
+      "text": "صل المقطع بحكم الميم الأولى عند الوصل.",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "للميم الساكنة ثلاثة أحكام عند الوصل.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "كيدهم في",
+          "right": "إظهار شفوي"
+        },
+        {
+          "id": "2",
+          "left": "لكم ما",
+          "right": "إدغام شفوي"
+        },
+        {
+          "id": "3",
+          "left": "هم بمؤمنين",
+          "right": "إخفاء شفوي"
+        }
+      ]
+    },
+    {
+      "id": "U5.L8.POOL79.Q2",
+      "topicId": "U5.L8",
+      "text": "ما الحكم في الميم الساكنة إذا تلاها حرف راء؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "للميم الساكنة ثلاثة أحكام عند الوصل.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U5.L8.POOL79.Q3",
+      "topicId": "U5.L8",
+      "text": "تتغير أحكام الميم الساكنة بحسب الحرف التالي.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "للميم الساكنة ثلاثة أحكام عند الوصل.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U5.L12.POOL79.Q1",
+      "topicId": "U5.L12",
+      "text": "إذا اتحد الحرفان في المخرج والصفات فهما ...",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الحكم العملي يتبع النقل وليس العلاقة وحدها.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "متماثلان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان"
+        },
+        {
+          "id": "3",
+          "text": "متجانسان مختلفان"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U5.L12.POOL79.Q2",
+      "topicId": "U5.L12",
+      "text": "إذا اشترك حرفان في المخرج واختلفا في بعض الصفات فما التصنيف؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الحكم العملي يتبع النقل وليس العلاقة وحدها.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "متماثلان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان بالضرورة"
+        },
+        {
+          "id": "3",
+          "text": "متجانسان"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U5.L12.POOL79.Q3",
+      "topicId": "U5.L12",
+      "text": "هل معرفة العلاقة وحدها تكفي لإيجاب الإدغام في كل موضع؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الحكم العملي يتبع النقل وليس العلاقة وحدها.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L1.POOL79.Q1",
+      "topicId": "U3.L1",
+      "text": "صل السؤال بالمفهوم الذي يجيب عنه.",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "المخرج والصفات مفهومان متكاملان.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "أين يخرج الحرف؟",
+          "right": "المخرج"
+        },
+        {
+          "id": "2",
+          "left": "كيف يجري صوته؟",
+          "right": "الصفة"
+        }
+      ]
+    },
+    {
+      "id": "U3.L1.POOL79.Q2",
+      "topicId": "U3.L1",
+      "text": "يمكن أن تجتمع عدة صفات في حرف واحد.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "المخرج والصفات مفهومان متكاملان.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U3.L1.POOL79.Q3",
+      "topicId": "U3.L1",
+      "text": "أي مفهوم يتعلق بطريقة خروج الصوت لا بموضعه؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "المخرج والصفات مفهومان متكاملان.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "رقم السورة"
+        },
+        {
+          "id": "2",
+          "text": "اسم الحرف"
+        },
+        {
+          "id": "3",
+          "text": "الصفة"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U3.L6.POOL79.Q1",
+      "topicId": "U3.L6",
+      "text": "أي مجموعة لا تضم حرفًا مذلقًا؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الإذلاق ستة حروف مجموعة في فر من لب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ن ل ب"
+        },
+        {
+          "id": "2",
+          "text": "ق ط د"
+        },
+        {
+          "id": "3",
+          "text": "ف ر م"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U3.L6.POOL79.Q2",
+      "topicId": "U3.L6",
+      "text": "أي حرفين مذلقين في كلمة فلق؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الإذلاق ستة حروف مجموعة في فر من لب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الفاء واللام"
+        },
+        {
+          "id": "2",
+          "text": "الفاء والقاف"
+        },
+        {
+          "id": "3",
+          "text": "اللام والقاف"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U3.L6.POOL79.Q3",
+      "topicId": "U3.L6",
+      "text": "تعد القاف من حروف الإذلاق.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الإذلاق ستة حروف مجموعة في فر من لب.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L7.POOL79.Q1",
+      "topicId": "U3.L7",
+      "text": "أي صفة من الصفات المفردة تتعلق بحرف ساكن من قطب جد؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "قد يجمع الحرف صفات متعددة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد البدل"
+        },
+        {
+          "id": "2",
+          "text": "القلقلة"
+        },
+        {
+          "id": "3",
+          "text": "الإمالة"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U3.L7.POOL79.Q2",
+      "topicId": "U3.L7",
+      "text": "صل الصفة بالمثال.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "قد يجمع الحرف صفات متعددة.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الصفير",
+          "right": "سين"
+        },
+        {
+          "id": "2",
+          "left": "التفشي",
+          "right": "شين"
+        },
+        {
+          "id": "3",
+          "left": "الاستطالة",
+          "right": "ضاد"
+        }
+      ]
+    },
+    {
+      "id": "U3.L7.POOL79.Q3",
+      "topicId": "U3.L7",
+      "text": "هل تصنيف الصفة بأنها بلا ضد يعني أن الحرف لا يتصف بغيرها؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "قد يجمع الحرف صفات متعددة.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L10.POOL79.Q1",
+      "topicId": "U3.L10",
+      "text": "أي نموذج يوضح اختلاف مراتب الغنة؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الغنة لازمة للنون والميم وتختلف مراتبها.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "نَ ونَّ"
+        },
+        {
+          "id": "2",
+          "text": "قَ وكَ"
+        },
+        {
+          "id": "3",
+          "text": "سَ وصَ"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U3.L10.POOL79.Q2",
+      "topicId": "U3.L10",
+      "text": "هل الميم المتحركة خالية من أصل الغنة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الغنة لازمة للنون والميم وتختلف مراتبها.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L10.POOL79.Q3",
+      "topicId": "U3.L10",
+      "text": "ما الذي يجب الحفاظ عليه عند زيادة سرعة التلاوة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الغنة لازمة للنون والميم وتختلف مراتبها.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "حذف الغنة"
+        },
+        {
+          "id": "2",
+          "text": "التناسب بين أزمنة الغنن"
+        },
+        {
+          "id": "3",
+          "text": "ثوان ثابتة لكل حرف"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U4.L1.POOL79.Q1",
+      "topicId": "U4.L1",
+      "text": "أي خطأ يتعلق بالمخرج أكثر من الزمن؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح النطق يحتاج تشخيصًا محددًا وتدريبًا متدرجًا.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "إطالة الحركة"
+        },
+        {
+          "id": "2",
+          "text": "استبدال الضاد بالظاء"
+        },
+        {
+          "id": "3",
+          "text": "تقصير المد"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U4.L1.POOL79.Q2",
+      "topicId": "U4.L1",
+      "text": "أي خطأ يتعلق بزمن الصوت؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح النطق يحتاج تشخيصًا محددًا وتدريبًا متدرجًا.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "توليد حرف مد بعد حركة قصيرة"
+        },
+        {
+          "id": "2",
+          "text": "تغيير لون البطاقة"
+        },
+        {
+          "id": "3",
+          "text": "تسمية السورة"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U4.L1.POOL79.Q3",
+      "topicId": "U4.L1",
+      "text": "اختر خطوات التصحيح.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح النطق يحتاج تشخيصًا محددًا وتدريبًا متدرجًا.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "تحديد الخلل"
+        },
+        {
+          "id": "2",
+          "text": "سماع النموذج الصحيح"
+        },
+        {
+          "id": "3",
+          "text": "تكرار الأداء بعد التصحيح"
+        },
+        {
+          "id": "4",
+          "text": "تثبيت الخطأ"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    }
+  ]
+}
