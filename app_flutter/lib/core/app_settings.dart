@@ -9,7 +9,7 @@ import '../units/unit_data.dart';
 /// App settings, screen 23 (docs/flutter/screens/23-settings.md).
 ///
 /// One notifier per setting; every change is stored at once on the device
-/// (shared_preferences) and read back on start ([load], before runApp).
+/// (shared_preferences) and read back on start ([load], during startup).
 /// Failures of the storage are ignored: the app keeps working with defaults.
 class AppSettings {
   AppSettings._();

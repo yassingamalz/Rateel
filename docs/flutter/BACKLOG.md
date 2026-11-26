@@ -31,7 +31,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **`NEXT-SESSION.md` is out of date on `master`** (still says «merge 08, then 09»): rewrite it with the real
       order once the owner chooses the order of the remaining screens (asked 2026-11-26).
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
-      added on 2026-11-26 in the agreed order: 01 splash, 24 end of lesson, 25 test results, 26 points history,
+      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
 ## Screen 10/10b, test lesson (approved 2026-11-26)
@@ -64,8 +64,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Open questions for the owner: answers side by side (reference) or stacked as 10b; also «tap the word where you
       heard the ghunna» questions; points (+10) or no points.
 
-## Screen 01, splash (references on branch `flutter/01-splash`, not started)
-- [ ] When it starts: first the list of what to ask ChatGPT (logo emblem without glow, maybe the background), then
-      build it **identical** to `01-avvio.webp` with the motion of `01-avvio-square.gif` (`screens/01-splash.md`).
-- [ ] Error state with «إعادة المحاولة» (Angular has it): asked to the owner, not answered yet.
-- [ ] Android native splash in the same green, so nothing flashes before Flutter starts.
+## Screen 01, splash (merged into `master` 2026-11-26)
+- [ ] Owner review on a physical phone, including the native launch handoff. Browser capture:
+      [startup-phone.mp4](screens/01-splash/startup-phone.mp4).
+- [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
+      wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
+      Owner to decide whether to align them. The critic was not run on screen 01.
