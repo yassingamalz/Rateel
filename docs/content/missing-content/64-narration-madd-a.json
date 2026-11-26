@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U6.L1",
+      "titleAr": "الْمَدُّ الطَّبِيعِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نُطِيلُ صَوْتَ الْحَرْفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْمَدُّ الطَّبِيعِيُّ مِقْدَارُهُ حَرَكَتَانِ، إِذَا لَمْ يَأْتِ بَعْدَ حَرْفِ الْمَدِّ هَمْزٌ أَوْ سُكُونٌ يُوجِبُ مَدًّا زَائِدًا.",
+          "visualDirection": "Two equal relative beats; separate vowel from letter of madd."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "رَدِّدْ بَا، وَبُو، وَبِي.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L2",
+      "titleAr": "الْمَدُّ الْمُتَّصِلُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ إِذَا جَاءَتِ الْهَمْزَةُ بَعْدَ حَرْفِ الْمَدِّ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "إِذَا اجْتَمَعَ حَرْفُ الْمَدِّ وَالْهَمْزَةُ بَعْدَهُ فِي كَلِمَةٍ وَاحِدَةٍ، فَهَذَا هُوَ الْمَدُّ الْمُتَّصِلُ. وَنَلْتَزِمُ مِقْدَارَهُ الْمَرْوِيَّ.",
+          "visualDirection": "One word card with a connected pair; extend relative duration."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْمَدِّ فِي كَلِمَةِ جَاءَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L3",
+      "titleAr": "الْمَدُّ الْمُنْفَصِلُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "وَمَاذَا لَوْ كَانَتِ الْهَمْزَةُ فِي الْكَلِمَةِ التَّالِيَةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "يَكُونُ الْمَدُّ مُنْفَصِلًا إِذَا جَاءَ حَرْفُ الْمَدِّ فِي آخِرِ كَلِمَةٍ، وَجَاءَتْ هَمْزَةُ قَطْعٍ فِي أَوَّلِ الْكَلِمَةِ التَّالِيَةِ عِنْدَ الْوَصْلِ.",
+          "visualDirection": "Two distinct word cards linked by a continuous waveform."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنِ الْوَصْلَ بِالْوَقْفِ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L4",
+      "titleAr": "الْمَدُّ الْعَارِضُ لِلسُّكُونِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ يَتَغَيَّرُ الْمَدُّ عِنْدَ الْوَقْفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "إِذَا سَكَنَ الْحَرْفُ الَّذِي يَلِي حَرْفَ الْمَدِّ بِسَبَبِ الْوَقْفِ، نَدْرُسُ أَوْجُهَ الْمَدِّ الْعَارِضِ لِلسُّكُونِ. وَمِنْ أَوْجُهِهِ الْمُعْتَادَةِ حَرَكَتَانِ، وَأَرْبَعٌ، وَسِتٌّ.",
+          "visualDirection": "Relative bars 2, 4, 6; switch from wasl to pure sukun."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَدَرَّبْ عَلَى أَوْجُهِ الْوَقْفِ الْمَعْتَمَدَةِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L5",
+      "titleAr": "الْمَدُّ اللَّازِمُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الْفَرْقُ بَيْنَ السُّكُونِ الْأَصْلِيِّ وَالسُّكُونِ الْعَارِضِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "يَكُونُ الْمَدُّ لَازِمًا إِذَا جَاءَ بَعْدَ حَرْفِ الْمَدِّ سُكُونٌ أَصْلِيٌّ. وَأَصْلُ مِقْدَارِهِ سِتُّ حَرَكَاتٍ، مَعَ تَفْصِيلِ الْمَوَاضِعِ الْخَاصَّةِ.",
+          "visualDirection": "Six relative pulses; show original sukun and shadda in educational overlay."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى مَدِّ الْأَلِفِ فِي الضَّالِّينَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}
