@@ -34,7 +34,7 @@ bool listenLogAudio = false;
 /// card on the left of the verse, `b` in line with the waveform (player),
 /// `c` in the bottom row next to «تأكيد». In a, b, c the card grows down to
 /// the line.
-String listenPlayPos = 'below';
+String listenPlayPos = 'b'; // owner's choice B (2026-11-26)
 bool get _playBelow => listenPlayPos == 'below';
 
 void _logAudio(String e) {
@@ -1223,7 +1223,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       fontSize: u * ListenMetrics.verseSize,
       // With the room freed below the card the light box takes the whole
       // word, harakat above and kasra below included (owner, 2026-11-26).
-      height: _playBelow ? 1.3 : 1.6,
+      height: _playBelow ? 1.3 : 1.45,
       color: c,
       shadows: p.t > 0.5 ? null : titleShadows(u),
     );
@@ -1321,7 +1321,12 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             onTap: fm == null ? null : () => _selectWord(i),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 180),
-              padding: EdgeInsets.symmetric(horizontal: u * 1.0),
+              // Amiri draws the tails (س، ن) and the kasra below its line box
+              // and to the left: the light box gets room on those sides, so
+              // the whole word sits inside it (owner, 2026-11-26).
+              padding: _playBelow
+                  ? EdgeInsets.symmetric(horizontal: u * 1.0)
+                  : EdgeInsets.fromLTRB(u * 2.6, u * 0.2, u * 1.6, u * 2.2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(u * 1.6),
                 color: box(i).withValues(
@@ -1718,7 +1723,8 @@ class _AnswerPill extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                       child: Padding(
                         // Readex sets Arabic low in its line box (lift).
-                        padding: EdgeInsets.only(bottom: quran ? 0 : u * 0.45),
+                        // Amiri sits low in a pill: lift it a little.
+                        padding: EdgeInsets.only(bottom: u * (quran ? 0.9 : 0.45)),
                         child: Text(
                           label,
                           textDirection: TextDirection.rtl,

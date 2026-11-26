@@ -67,3 +67,10 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   single rule word (114:2, 108:3, 108:1; 114:4 left out because «مِن شَرّ» has an ikhfa with ghunna too).
 - The quiz → practice after several rules and daily practice (screen 31, added to `SCREENS.md`).
 - Captures `capture-v9-find.jpg`, demo with sound `demo-v9-rule-audio.mp4`.
+
+## 7. Phone test 1.0.472 and play button (v10, 2026-11-26)
+- Owner (screenshots from the phone): the play button below the card eats the room: the waveform is close to the words,
+  the light box does not take the whole word, the letters spill out of their circles. Variants A/B/C built behind
+  `?playPos=` (sheet `play-variants-v10.jpg`); owner chose **B** (in line with the waveform).
+- v10: B by default; light box padded so the whole word is inside it; letter pills centred. Sheet `capture-v10-b-phone.jpg`.
+- Voice: the confirmed narration voice is Gemini TTS **08 Orus** (DECISIONS); loudness normalisation and a guided voice → BACKLOG.
