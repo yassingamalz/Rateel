@@ -28,6 +28,15 @@ double? listenStartAt;
 /// demo video can get its sound track back (`listening-demo.js`).
 bool listenLogAudio = false;
 
+/// Where the play button sits (owner, 2026-11-26: below the card it takes the
+/// room the verse, its light box and the waveform need). Variants for the
+/// owner's choice, review `?playPos=`: `below` (reference), `a` inside the
+/// card on the left of the verse, `b` in line with the waveform (player),
+/// `c` in the bottom row next to «تأكيد». In a, b, c the card grows down to
+/// the line.
+String listenPlayPos = 'below';
+bool get _playBelow => listenPlayPos == 'below';
+
 void _logAudio(String e) {
   // ignore: avoid_print
   if (listenLogAudio) print('AUDIO $e');
@@ -72,18 +81,18 @@ class ListenMetrics {
   static const headTop = 5.6;
   // Card.
   static const cardTop = 27.55;
-  static const cardBottom = 66.7;
+  static double get cardBottom => _playBelow ? 66.7 : 79.0;
   static const cardRadius = 3.6;
-  static const bandTop = 24.0; // lattice band, from the card top
+  static double get bandTop => _playBelow ? 24.0 : 35.0; // lattice band, from the card top
   static const badgeRight = 11.0; // card right edge → badge centre
   static const badgeCy = 7.7; // from the card top
   static const badgeH = 9.4;
   static const surahLeft = 4.9; // card left edge → text
   static const surahCy = 5.3;
   static const surahSize = 4.1;
-  static const verseCy = 15.2;
+  static double get verseCy => _playBelow ? 15.2 : 19.0;
   static const verseSize = 11.5;
-  static const waveCy = 30.5;
+  static double get waveCy => _playBelow ? 30.5 : 41.0;
   static const bars = 51;
   static const barStep = 2.6;
   static const barW = 1.4;
@@ -92,6 +101,8 @@ class ListenMetrics {
   // Play button under the card.
   static const playCy = 73.6;
   static const playD = 12.1;
+  // Half width of the waveform (51 bars, step 2.6u, bar 1.4u).
+  static const waveHalf = 65.7;
   // Line above the bottom row.
   static const lineY = 82.0;
   static const lineInset = 7.0;
@@ -702,6 +713,33 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     final q = _q;
     final step = _step;
     final last = _index >= _total - 1;
+    final playRect = switch (listenPlayPos) {
+      'a' => Rect.fromCircle(
+        center: Offset(
+          card.left + u * 12,
+          card.top + u * ListenMetrics.verseCy,
+        ),
+        radius: u * 5.5,
+      ),
+      'b' => Rect.fromCircle(
+        center: Offset(
+          cx - u * (ListenMetrics.waveHalf + 7.5),
+          card.top + u * ListenMetrics.waveCy,
+        ),
+        radius: u * 4.6,
+      ),
+      'c' => Rect.fromCircle(
+        center: Offset(
+          u * (ListenMetrics.confirmLeft + ListenMetrics.confirmW + 8.5),
+          u * ListenMetrics.confirmCy,
+        ),
+        radius: u * 5.3,
+      ),
+      _ => Rect.fromCircle(
+        center: Offset(cx, u * ListenMetrics.playCy),
+        radius: u * ListenMetrics.playD / 2,
+      ),
+    };
     final pending = _find != null
         ? _fLetterOk == null
         : step == null && _ok == null;
@@ -733,10 +771,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         ),
         Positioned(
           key: const ValueKey('play'),
-          left: cx - u * ListenMetrics.playD / 2,
-          top: u * (ListenMetrics.playCy - ListenMetrics.playD / 2),
-          width: u * ListenMetrics.playD,
-          height: u * ListenMetrics.playD,
+          left: playRect.left,
+          top: playRect.top,
+          width: playRect.width,
+          height: playRect.height,
           child: _enter(
             2,
             ValueListenableBuilder<bool>(
@@ -794,7 +832,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           Positioned(
             key: const ValueKey('rule'),
             right: u * ListenMetrics.qRight,
-            left: u * (ListenMetrics.confirmLeft + ListenMetrics.confirmW + 4),
+            left: u *
+                (ListenMetrics.confirmLeft +
+                    ListenMetrics.confirmW +
+                    (listenPlayPos == 'c' ? 16 : 4)),
             top: u * (ListenMetrics.rowCy - ListenMetrics.pillH / 2),
             height: u * ListenMetrics.pillH,
             child: _enter(3, _swapIn(_ruleRow(p, u, step))),
@@ -1078,10 +1119,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             ),
           ),
           Positioned(
-            left: u * 16,
+            left: u * (listenPlayPos == 'a' ? 22 : 16),
             right: u * 16,
-            top: u * (ListenMetrics.verseCy - 10),
-            height: u * 20,
+            top: u * (ListenMetrics.verseCy - (_playBelow ? 10 : 12)),
+            height: u * (_playBelow ? 20 : 24),
             child: _swapIn(
               RepaintBoundary(
                 child: Center(
@@ -1180,7 +1221,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     TextStyle base(Color c) => TextStyle(
       fontFamily: 'AmiriQuran',
       fontSize: u * ListenMetrics.verseSize,
-      height: 1.3,
+      // With the room freed below the card the light box takes the whole
+      // word, harakat above and kasra below included (owner, 2026-11-26).
+      height: _playBelow ? 1.3 : 1.6,
       color: c,
       shadows: p.t > 0.5 ? null : titleShadows(u),
     );
@@ -1686,8 +1729,10 @@ class _AnswerPill extends StatelessWidget {
                                   fontSize:
                                       u *
                                       ListenMetrics.pillText *
-                                      (letter ? 1.7 : 1.3),
-                                  height: 1.25,
+                                      (letter ? 1.35 : 1.15),
+                                  // Amiri's line box is tall: height 1 keeps
+                                  // the letter and its marks inside the pill.
+                                  height: 1.0,
                                   color: ink,
                                 )
                               : readex(

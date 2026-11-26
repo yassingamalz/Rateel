@@ -110,6 +110,7 @@ Future<void> main() async {
   listenStartState = q['listenState'];
   listenStartAt = double.tryParse(q['listenAt'] ?? '');
   listenLogAudio = q['logAudio'] == '1';
+  listenPlayPos = q['playPos'] ?? listenPlayPos;
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';
