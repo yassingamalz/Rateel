@@ -27,11 +27,6 @@ String? testStartState;
 /// Review aid: `?testRight=6` answers the first 6 questions right (results).
 int? testStartRight;
 
-/// Dark-theme lesson buttons: outlined with a luminous rim (default, owner
-/// 2026-11-26) or filled as the light theme. Temporary review switch: long
-/// press on the moon button.
-final testDarkFilled = ValueNotifier<bool>(false);
-
 /// Geometry of screen 10 in u (1% of the screen height), measured on
 /// `screens/10-test-lesson/reference.webp` (1842×854, u = 8.54 px). x values
 /// from the card edges or the screen centre.
@@ -532,6 +527,13 @@ class _TestLessonPageState extends State<TestLessonPage>
 
   Future<void> _completeLesson() async {
     if (_finishing || _left) return;
+    // A test not passed does not complete the lesson: the next one stays
+    // locked (owner, 2026-11-26).
+    if (_run?.passed != true) {
+      Haptics.tap();
+      _leave(false);
+      return;
+    }
     _finishing = true;
     Haptics.success();
     await _shell.currentState?.celebrate();
@@ -624,25 +626,19 @@ class _TestLessonPageState extends State<TestLessonPage>
           height: u * TestMetrics.moonD,
           child: _enter(
             0,
-            GestureDetector(
-              onLongPress: () {
-                Haptics.milestone();
-                setState(() => testDarkFilled.value = !testDarkFilled.value);
-              },
-              child: LessonRoundButton(
-                u: u,
-                label: p.t > 0.5 ? 'الوضع المظلم' : 'الوضع الفاتح',
-                compact: true,
-                glyph: PillGlyph.play,
-                light: p.t,
-                onTap: _toggleTheme,
-                child: SizedBox(
-                  width: u * 4.4,
-                  height: u * 4.4,
-                  child: CustomPaint(
-                    painter: MoonPainter(
-                      p.c(RateelColors.leaderText, RateelColors.readLInk),
-                    ),
+            LessonRoundButton(
+              u: u,
+              label: p.t > 0.5 ? 'الوضع المظلم' : 'الوضع الفاتح',
+              compact: true,
+              glyph: PillGlyph.play,
+              light: p.t,
+              onTap: _toggleTheme,
+              child: SizedBox(
+                width: u * 4.4,
+                height: u * 4.4,
+                child: CustomPaint(
+                  painter: MoonPainter(
+                    p.c(RateelColors.leaderText, RateelColors.readLInk),
                   ),
                 ),
               ),
@@ -1231,8 +1227,8 @@ class _TestLessonPageState extends State<TestLessonPage>
               child: _GoldButton(
                 u: u,
                 p: p,
-                label: 'إنهاء الدرس',
-                glyph: _BtnGlyph.check,
+                label: _run!.passed ? 'إنهاء الدرس' : 'العودة إلى الدروس',
+                glyph: _run!.passed ? _BtnGlyph.check : _BtnGlyph.arrow,
                 onTap: _completeLesson,
               ),
             ),
@@ -2341,8 +2337,8 @@ class _GoldButtonState extends State<_GoldButton> {
         RateelColors.testKoRim,
       ),
     };
-    // Dark theme: outlined glass with a luminous rim (owner, 2026-11-26),
-    // or filled as the light theme (review: long press on the moon).
+    // Dark theme: outlined glass with a luminous rim; light theme: filled,
+    // white text (owner, 2026-11-26, approved).
     final (oTop, oBottom, oRimTop, oRimBottom, oText) = switch (widget.tone) {
       _Tone.gold => (
         RateelColors.testPillTop,
@@ -2366,7 +2362,7 @@ class _GoldButtonState extends State<_GoldButton> {
         RateelColors.leaderText,
       ),
     };
-    final f = testDarkFilled.value ? 1.0 : p.t;
+    final f = p.t;
     Color mix(Color a, Color b) => Color.lerp(a, b, f)!;
     final text = mix(oText, Colors.white);
     final fill = [mix(oTop, top), mix(oBottom, bottom)];
@@ -3313,7 +3309,22 @@ class _StreakChip extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 textDirection: TextDirection.rtl,
                 children: [
-                  for (var i = 0; i < 3; i++)
+                  if (streak > 3)
+                    Padding(
+                      padding: EdgeInsets.only(right: u * 0.3),
+                      child: Text(
+                        '+',
+                        textDirection: TextDirection.ltr,
+                        style: readex(
+                          u * 3.4,
+                          weight: 700,
+                          color: flame,
+                        ).copyWith(height: 1),
+                      ),
+                    ),
+                  // One flame per answer in the row, at most three; from 4 a
+                  // «+» on their left (owner, 2026-11-26).
+                  for (var i = 0; i < math.min(streak, 3); i++)
                     Opacity(
                       opacity: ((t - 0.3 - i * 0.15) / 0.2).clamp(0.3, 1.0),
                       // Owner's flame glyph (T6).

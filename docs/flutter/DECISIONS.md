@@ -214,3 +214,6 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | **APK 1.0.426**: screen 10 v11 (gold star coin for the points). | ✅ |
 | 2026-11-26 | Screen 10 v12: the marks of the results numbers (✓, partial ✓, ✕, gold coin) share **one diameter, 4u** (owner: the coin looked bigger). | ✅ |
 | 2026-11-26 | **APK 1.0.427**: screen 10 v12 (one size for the result marks). | ✅ |
+| 2026-11-26 | Screen 10 v13 (owner): streak flames = **one per answer up to 3, from 4 three flames with a «+» on their left**; **a test not passed does not complete the lesson** (the next lesson stays locked; the button reads «العودة إلى الدروس»); dark buttons **outlined with the luminous rim** (the long-press switch removed). | ✅ |
+| 2026-11-26 | **Screens 10 / 10b (test lesson) approved by the owner** (v13). PR `flutter/10-test-lesson` → `master` and merge (owner). | ✅ |
+| 2026-11-26 | **Backlog** (owner): (1) the test sounds need another pass, above all the completion (passed) and the correct-answer sounds; (2) the **long press that completes a course / unit / lesson** (review aid on screens 03, 05, 06) is fine for testing but **must be removed before release**; (3) end-of-test popup (removed from screen 10). List in `SCREENS.md`, «Backlog». | ✅ |

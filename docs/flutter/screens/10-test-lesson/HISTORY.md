@@ -136,3 +136,11 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
 ## 11. v12: one size for the result marks (2026-11-26)
 - Owner: the coin looked bigger than the ✓ / ✕ discs. All four marks of the numbers now 4u (`_statIcon`; coin 4.2u → 4u, discs 3.6u → 4u). Captures `capture-v12-*-phone.jpg`.
 - APK 1.0.427 (v12).
+
+## 12. v13 and approval (2026-11-26)
+- Streak chip: flames = streak up to 3; from 4, three flames and a «+» on their left.
+- A test not passed: «إنهاء الدرس» becomes «العودة إلى الدروس» and leaves without completing (the next lesson stays
+  locked); passed: completion as before.
+- Dark buttons outlined (owner's earlier choice), the long-press switch on the moon removed.
+- **Owner approved screens 10 / 10b.** Backlog: test sounds (completion, correct), the long-press completion on
+  03/05/06 (remove before release), the end popup. PR to `master`.

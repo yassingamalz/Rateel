@@ -14,7 +14,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 07 | Video lesson | `07-lezione-video.webp` (not available); playing: full screen as Simply Piano (owner) | **approved** (APK 1.0.366), merged into `master`; sections are mock |
 | 08 | Reading lesson (dark / light) | `07-lezione-video-{dark,light}.webp` (they show the reading lesson, owner 2026-11-24) | **approved** (v12, APK 1.0.393), merged into `master` (PR #49) |
 | 09 | Practice lesson, recitation (dark / light) | `09-lezione-pratica-recitazione-*.webp` | **postponed** (owner 2026-11-25): one of the hardest, done later, maybe last |
-| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **v5 built** on `flutter/10-test-lesson` (dark + light, feedback A, results, sounds), waiting for the owner's phone test |
+| 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **approved** (v13, 2026-11-26), merged into `master`: dark + light, feedback A, partly correct answers, streak, results, CC0 sounds; a failed test keeps the next lesson locked |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | to do |
 | 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
@@ -47,3 +47,10 @@ Remember to connect these to real data (backend or app progress) before release.
 | `src/assets/data/lessons/01-tajweed-fundamentals/intro-tajweed.json` | `intro-lesson-2` (c9N4j8IF8mM) and `intro-lesson-3` (_nMiT7QFpIc): YouTube links dead (404) → "video not available". `intro-lesson-1` (BqFxf-WspTc) is an episode about «الإقلاب», not «مقدمة في علم التجويد». |
 | `src/assets/data/content/reading/*.json` + Angular `reading-lesson.service.ts` | Tajweed marks use rule ids (adab-taharah, ikhfa, makharij-huruf…) that mostly have **no definition/colour**: only 6 rules exist in the Angular service, and `adab-general` (#1F4037) is invisible on dark green. |
 | `src/assets/data/content/reading/*.json` | **38 of the 45 marks have wrong startIndex/endIndex** (Angular coloured cut words, e.g. «لاوة الط» for «الطهارة»); the app looks up the mark's text instead. Only 4 marks are tajweed rules (idgham, ikhfa, izhar, shaddah); the others are topics (adab-*, intention…). |
+
+## Backlog (do not forget before release)
+| Since | What | Where |
+|---|---|---|
+| 2026-11-26 | **Long press completes** a course / unit / lesson at once (review aid for testing): **remove before release** | `courses_screen.dart` (onLongPress ≈ l. 384), `units_screen.dart` (≈ l. 452), `lessons_screen.dart` (≈ l. 442) |
+| 2026-11-26 | Test sounds to improve, above all the **completion (passed)** and the **correct answer** (now plinkfx level-up / gem, CC0) | `app_flutter/assets/sounds/test_*.mp3`, sampler `docs/design-assets/test-lesson/sounds/` |
+| 2026-11-26 | End-of-test popup (score, points, pass/fail, countdown): removed from screen 10, designs A/B kept | `screens/10-test-lesson/end-popup-variants-v6.jpg` |

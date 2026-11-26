@@ -1,10 +1,11 @@
-# Next session: screens 10 / 10b (test lesson), work in progress
+# Next session: after screens 10 / 10b (approved, merged)
 
 **Update 2026-11-25:** PR #49 (screen 08) is **merged into `master`**. Screen **09 (practice / recitation) is postponed**
 by the owner (one of the hardest, done later, maybe last). Screens **10 / 10b (test lesson + answer feedback)** started on
 `flutter/10-test-lesson` from `master`: plan `screens/10-test-lesson.md` (questions Q1–Q8), prompts T1–T3, history
-`screens/10-test-lesson/HISTORY.md`. **v5 built** (dark + light, feedback A, end popup, results, CC0 sounds), waiting
-for the owner's phone test; placeholder Material icons (trophy, cap) until drawn assets. Continue from the history.
+`screens/10-test-lesson/HISTORY.md`. **approved (v13) and merged into `master`**. Backlog in `SCREENS.md`
+(long-press completion to remove before release, test sounds, end popup). Next screen: ask the owner (09 is postponed;
+candidates 12, 13, 15–21).
 
 **Backlog (owner, 2026-11-26):** end-of-test popup (removed from screen 10: the results show the same); designs A/B in
 `screens/10-test-lesson/end-popup-variants-v6.jpg` if it comes back.
