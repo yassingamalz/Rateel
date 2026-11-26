@@ -935,7 +935,7 @@ class _ConnectorPainter extends CustomPainter {
 
 /// Reference geometry (u = 1% of the height). Ref px / 8.51.
 /// Review aid: `?chip=a…f` picks the streak chip variant (owner's choice).
-String streakChipVariant = 'a';
+String streakChipVariant = 'd2'; // owner's choice, 2026-11-26
 
 class _Geo {
   _Geo(this.w, this.h) : u = h / 100;

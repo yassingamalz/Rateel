@@ -71,3 +71,4 @@ tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%
   `?chip=d1…d6` (1 pill ×1.5, 2 pill with label ×1.35, 3 pill with label ×1.6, 4 flame disc with an amber count
   bubble, 5 the same larger, 6 small vertical card with label); sheets `streak-chip-variants-b.jpg`, `-d.jpg`. B2/B3
   touch the bottom edge of the partly visible left card; D1–D3 cover part of the mosque.
+- **Owner's choice: D2** (pill with label ×1.35, top left), now the default.
