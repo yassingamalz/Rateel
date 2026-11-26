@@ -1,8 +1,8 @@
 # Screen 22: listening lesson (درس الاستماع)
 
 Status: **lesson type confirmed by the owner** (2026-11-25): a separate lesson of type `listen`, not part of the tests.
-Reference: **to generate** (prompt `prompts/22-listening-lesson/reference-v1.txt`), to be saved as
-`screens/22-listening-lesson/22-lezione-ascolto.webp`, 1844x853. Plan to be shown to the owner before building.
+Reference: **`screens/22-listening-lesson/22-lezione-ascolto.webp`** (owner, 2026-11-25, generated with
+`prompts/22-listening-lesson/reference-v2.txt` from the app screenshots; v1 with the old ChatGPT images is superseded). Plan to be shown to the owner before building.
 Build order: after 10/10b (test and answer feedback), reusing their widgets.
 
 ## Idea (owner)
@@ -11,14 +11,25 @@ The student listens to an audio (a verse, a word), then answers questions on wha
 type inside tests (10).
 
 ## References used (visual only, `LESSONS-LEARNED.md`)
+v2 (current): app screenshots `docs/flutter/app-references/app-08-reading-dark.webp`, `app-14-coming-soon.webp`, `app-11-leaderboard.webp`.
+v1 (superseded, layout idea only):
 | File | Used for |
 |---|---|
 | `22-listening-lesson/20-lezione-guidata-ascolto-versetto.webp` (lesson-production, screen 20) | verse card with reciter and surah, highlighted word, «إعادة الاستماع» replay pill |
 | `22-listening-lesson/10b-lezione-test-risposta.webp` (screen 10b) | question line with star number badge, «+10 نقطة» pill, answer rows with radio, «تأكيد الإجابة» button |
 | `22-listening-lesson/08-reference-dark.webp` (screen 08, approved) | app style and the shared top bar of 02 |
-| `22-listening-lesson/22-lezione-ascolto.webp` (to generate) | **the reference of this screen** once the owner generates it |
+| `22-listening-lesson/22-lezione-ascolto.webp` | **the reference of this screen** (owner, 2026-11-25) |
 
-## Planned layout (from the prompt)
+## Layout of the reference
+- 02 top bar: pause top right, capsule «4/10» top left; arched header of 08 with mosque, crescent, gold headphones
+  and the title «الاستماع: الغنة».
+- Glass card (as the 08 sentence card): badge «1» right, «سورة الكوثر · الحصري» left, verse with the asked word in
+  gold, waveform (played part gold, rest dim green).
+- Round gold-rimmed play/replay button under the card.
+- Bottom row: question on the right, three answer pills (selected = gold fill, dark text), «تأكيد» left in the style
+  of «تخطي».
+
+## Planned layout (from the prompt, superseded by the reference above)
 - Top: shared lesson bar of screen 02 (pause, progress capsule «n / 10»).
 - Chip «استمع ثم أجب»; verse card (surah, reciter, verse with the asked word in gold, waveform).
 - Large gold play (listen again) + «إعادة الاستماع».

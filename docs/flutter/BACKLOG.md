@@ -26,5 +26,5 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.
 - [ ] Screen 08: tajweed colours for the ayat (wheel in `DESIGN-SYSTEM.md`), audio example of the rules.
-- [ ] Settings screen (light/dark toggle, text size) and how it is opened.
-- [ ] Screen 01: still to define.
+- [ ] Settings screen = screen 23 (plan and reference on `master`, `SCREENS.md`); how it is opened.
+- [ ] Screen 01: still to define; possibly forgotten screens listed at the end of `SCREENS.md`.
