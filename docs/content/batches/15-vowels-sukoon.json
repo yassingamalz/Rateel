@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U7.L1",
+      "titleAr": "إتمام الحركات",
+      "source": {
+        "chapter": 12,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الحركة القصيرة عن المد",
+      "explanationAr": "تؤدى الفتحة والضمة والكسرة بأوضاع النطق المناسبة دون اختلاس الحركة أو توليد حرف مد زائد.",
+      "examples": [
+        {
+          "verseRef": "1:2",
+          "excerptAr": "الْحَمْدُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "إتمام الحركات"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تؤدى الفتحة والضمة والكسرة بأوضاع النطق المناسبة دون اختلاس الحركة أو توليد حرف مد زائد."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الحركة القصيرة عن المد"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن بُ وبُو مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U7.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما المطلوب عند أداء الضمة القصيرة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "إتمامها دون توليد واو مدية"
+                },
+                {
+                  "id": "2",
+                  "text": "حذفها"
+                },
+                {
+                  "id": "3",
+                  "text": "مدها ست حركات"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تؤدى الفتحة والضمة والكسرة بأوضاع النطق المناسبة دون اختلاس الحركة أو توليد حرف مد زائد."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U7.L2",
+      "titleAr": "التقاء الساكنين في كلمة",
+      "source": {
+        "chapter": 13,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التعرف على السكون الأصلي والعارض",
+      "explanationAr": "قد يجتمع ساكنان في كلمة في أحوال مخصوصة، مثل حرف المد قبل حرف مشدد أو عند الوقف. ويضبط الأداء بحسب سبب السكون.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "التقاء الساكنين في كلمة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "قد يجتمع ساكنان في كلمة في أحوال مخصوصة، مثل حرف المد قبل حرف مشدد أو عند الوقف. ويضبط الأداء بحسب سبب السكون."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:7"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التعرف على السكون الأصلي والعارض"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى المثال ولا تحذف أحد الحرفين.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U7.L2.Q1",
+              "type": "singleChoice",
+              "text": "ما حكم الألف قبل اللام المشددة في الضالين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "مد لازم"
+                },
+                {
+                  "id": "2",
+                  "text": "مد طبيعي فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "إقلاب"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "قد يجتمع ساكنان في كلمة في أحوال مخصوصة، مثل حرف المد قبل حرف مشدد أو عند الوقف. ويضبط الأداء بحسب سبب السكون."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U7.L3",
+      "titleAr": "التقاء الساكنين في كلمتين",
+      "source": {
+        "chapter": 13,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الوصل عن الابتداء",
+      "explanationAr": "عند وصل كلمتين قد يسقط لفظ همزة الوصل فيلتقي ساكنان؛ ويعالج ذلك بالحذف أو التحريك بحسب الموضع والرواية.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ هُوَ اللَّهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "التقاء الساكنين في كلمتين"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "عند وصل كلمتين قد يسقط لفظ همزة الوصل فيلتقي ساكنان؛ ويعالج ذلك بالحذف أو التحريك بحسب الموضع والرواية."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الوصل عن الابتداء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرب مع معلم على وصل قُلِ ادْعُوا في 17:110.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U7.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يحدد طريقة معالجة التقاء الساكنين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "نوع الحرف والموضع والرواية"
+                },
+                {
+                  "id": "2",
+                  "text": "لون الكتابة"
+                },
+                {
+                  "id": "3",
+                  "text": "عدد آيات السورة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "عند وصل كلمتين قد يسقط لفظ همزة الوصل فيلتقي ساكنان؛ ويعالج ذلك بالحذف أو التحريك بحسب الموضع والرواية."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}
