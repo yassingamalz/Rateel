@@ -86,3 +86,8 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   slower: 8.0 s vs 5.9 s), checked by Gemini transcription. Tool `tools/flutter-review/listening-tts-samples.py`.
 - Audition `narrazione-provino-orus.mp3`: 3 lines (intro, before the questions, praise) × A 3.8 plain, B 2.5 Pro plain,
   C 2.5 Pro calm note, D = C with a soft mosque-like echo (post-processing). Owner to choose.
+
+## 9. Word light: box or glowing letters (2026-11-26)
+- Owner: instead of the big highlighter, can the letters themselves light up? Built behind `?wordLight=glow`: the recited
+  word turns a brighter gold with a gold halo, no box; the rule letter keeps its own green glow. Default still `box`
+  until the owner chooses. Sheet `word-light-variants.jpg`, demo with sound `demo-glow-audio.mp4` (first three ayat).

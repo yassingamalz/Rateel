@@ -41,6 +41,12 @@ bool get _playBelow => listenPlayPos == 'below';
 /// boxes hold the whole words, harakat included).
 bool listenLitAll = false;
 
+/// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
+/// soft gold box around the word, `glow` the letters themselves light up
+/// (brighter gold with a halo), no box. Review `?wordLight=glow`.
+String listenWordLight = 'box';
+bool get _glow => listenWordLight == 'glow';
+
 void _logAudio(String e) {
   // ignore: avoid_print
   if (listenLogAudio) print('AUDIO $e');
@@ -1241,13 +1247,25 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       return null;
     }
 
+    // Glow mode: the recited word's letters light up themselves.
+    final glowInk = Color.lerp(gold, Colors.white, p.t > 0.5 ? 0 : 0.3)!;
+    List<Shadow>? glowShadows() => p.t > 0.5
+        ? [Shadow(color: gold.withValues(alpha: 0.55), blurRadius: u * 1.4)]
+        : [
+            Shadow(color: gold.withValues(alpha: 0.95), blurRadius: u * 1.0),
+            Shadow(color: gold.withValues(alpha: 0.6), blurRadius: u * 2.8),
+          ];
+    TextStyle wordStyle(bool on, Color colour) => on && _glow
+        ? base(glowInk).copyWith(shadows: glowShadows())
+        : base(colour);
+
     InlineSpan word(int i, String text) {
       final on = i == lit;
       final colour = i == asked || on ? gold : ink;
       if (fm != null) {
         if (_phase == 1 && i == fm.word) {
           return TextSpan(
-            style: base(colour),
+            style: wordStyle(on, colour),
             children: [
               for (final (k, c) in letterClusters(text).indexed)
                 TextSpan(
@@ -1268,14 +1286,14 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             ],
           );
         }
-        return TextSpan(text: text, style: base(colour));
+        return TextSpan(text: text, style: wordStyle(on, colour));
       }
       final m = step?.markOf(i);
-      if (m == null) return TextSpan(text: text, style: base(colour));
+      if (m == null) return TextSpan(text: text, style: wordStyle(on, colour));
       // The rule letter: wheel colour; recited → lighter, with a halo.
       final letter = on ? Color.lerp(rule, Colors.white, 0.35)! : rule;
       return TextSpan(
-        style: base(colour),
+        style: wordStyle(on, colour),
         children: [
           TextSpan(text: text.substring(0, m.from)),
           TextSpan(
@@ -1310,7 +1328,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
 
     bool boxOn(int i) =>
         listenLitAll ||
-        i == lit ||
+        (i == lit && !_glow) ||
         (fm != null &&
             ((_fWordOk == null && i == _fWord) ||
                 (_fWordOk != null && (i == fm.word || i == _fWord))));
