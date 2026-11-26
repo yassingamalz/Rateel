@@ -77,3 +77,12 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
 - v11 (owner: «the tashkīl still goes out of the light box»): verse line height 1.8, box padding 3.4u left, 0.4u top,
   1.8u right, 3.2u below; verse moved 1.6u down so a long ayah stays clear of the surah line. Checked with every word
   lit at once (review aid `?litAll=1`, sheet `light-box-v11.jpg`): harakat above, kasra and tails below all inside.
+
+## 8. Guided narration: first audition (2026-11-26)
+- Owner asked for the narrator with Gemini TTS (voice 08 Orus) with a spiritual, teaching tone. The owner pasted the key in
+  the chat (advised to rotate all the keys pasted); used only from a temporary file, never in the repo.
+- `gemini-3.8-flash-tts` (the lesson-production model) **reads the style note aloud** in 17 of 18 takes; a system
+  instruction is refused (HTTP 400). `gemini-2.5-pro-preview-tts` follows the note without reading it (calmer and
+  slower: 8.0 s vs 5.9 s), checked by Gemini transcription. Tool `tools/flutter-review/listening-tts-samples.py`.
+- Audition `narrazione-provino-orus.mp3`: 3 lines (intro, before the questions, praise) × A 3.8 plain, B 2.5 Pro plain,
+  C 2.5 Pro calm note, D = C with a soft mosque-like echo (post-processing). Owner to choose.
