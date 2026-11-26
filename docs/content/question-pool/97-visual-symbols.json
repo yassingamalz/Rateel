@@ -1,0 +1,577 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Verify mushaf edition and marks. Rom visual alternative may need audio or audiovisual recording; do not score auditory properties from a silent image.",
+  "questions": [
+    {
+      "id": "U9.L2.POOL97.Q1",
+      "topicId": "U9.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: م؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف اللازم"
+        },
+        {
+          "id": "2",
+          "text": "جواز الوقف والوصل"
+        },
+        {
+          "id": "3",
+          "text": "الوصل أولى"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تراجع العلامة في مفتاح المصحف المعتمد.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-0",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L2.POOL97.V1",
+      "topicId": "U9.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "م",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف اللازم"
+        },
+        {
+          "id": "2",
+          "text": "جواز الوقف والوصل"
+        },
+        {
+          "id": "3",
+          "text": "الوصل أولى"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تراجع العلامة في مفتاح المصحف المعتمد.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-0",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L2.POOL97.Q2",
+      "topicId": "U9.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: ج؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف اللازم"
+        },
+        {
+          "id": "2",
+          "text": "الوقف ممنوع مطلقًا"
+        },
+        {
+          "id": "3",
+          "text": "جواز الوقف والوصل"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تراجع العلامة في مفتاح المصحف المعتمد.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-1",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L2.POOL97.V2",
+      "topicId": "U9.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "ج",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف اللازم"
+        },
+        {
+          "id": "2",
+          "text": "الوقف ممنوع مطلقًا"
+        },
+        {
+          "id": "3",
+          "text": "جواز الوقف والوصل"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تراجع العلامة في مفتاح المصحف المعتمد.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-1",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L2.POOL97.Q3",
+      "topicId": "U9.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: صلى؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد ست حركات"
+        },
+        {
+          "id": "2",
+          "text": "الوصل أولى"
+        },
+        {
+          "id": "3",
+          "text": "الوقف أولى"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "هذه علامة إرشادية لا تنطق.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-2",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L2.POOL97.V3",
+      "topicId": "U9.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "صلى",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "مد ست حركات"
+        },
+        {
+          "id": "2",
+          "text": "الوصل أولى"
+        },
+        {
+          "id": "3",
+          "text": "الوقف أولى"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "هذه علامة إرشادية لا تنطق.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-2",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L2.POOL97.Q4",
+      "topicId": "U9.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: قلى؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف أولى"
+        },
+        {
+          "id": "2",
+          "text": "الوصل أولى"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "هذه علامة إرشادية لا تنطق.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-3",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L2.POOL97.V4",
+      "topicId": "U9.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "قلى",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الوقف أولى"
+        },
+        {
+          "id": "2",
+          "text": "الوصل أولى"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "هذه علامة إرشادية لا تنطق.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-3",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L2.POOL97.Q5",
+      "topicId": "U9.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: ۛ ۛ؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "وجوب الوقف على الموضعين"
+        },
+        {
+          "id": "2",
+          "text": "علامة قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "الوقف على أحد الموضعين دون الجمع بينهما"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "علامتا التعانق تدرسان في موضع موثق.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-4",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L2.POOL97.V5",
+      "topicId": "U9.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "ۛ ۛ",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "وجوب الوقف على الموضعين"
+        },
+        {
+          "id": "2",
+          "text": "علامة قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "الوقف على أحد الموضعين دون الجمع بينهما"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "علامتا التعانق تدرسان في موضع موثق.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-4",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L4.POOL97.Q6",
+      "topicId": "U9.L4",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: روم؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إطالة الحركة"
+        },
+        {
+          "id": "2",
+          "text": "صوت خفي ببعض الحركة"
+        },
+        {
+          "id": "3",
+          "text": "إشارة صامتة بالشفتين"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يحتاج النموذج إلى تسجيل تعليمي معتمد.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-5",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L4.POOL97.V6",
+      "topicId": "U9.L4",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "teacher_demonstration",
+        "stimulusCandidate": "روم",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "إطالة الحركة"
+        },
+        {
+          "id": "2",
+          "text": "صوت خفي ببعض الحركة"
+        },
+        {
+          "id": "3",
+          "text": "إشارة صامتة بالشفتين"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يحتاج النموذج إلى تسجيل تعليمي معتمد.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-5",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U9.L4.POOL97.Q7",
+      "topicId": "U9.L4",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: إشمام الوقف؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إشارة بالشفتين إلى الضم بلا صوت بعد الإسكان"
+        },
+        {
+          "id": "2",
+          "text": "نطق ضمة كاملة"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "يحتاج النموذج إلى تصوير مرئي معتمد.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-6",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U9.L4.POOL97.V7",
+      "topicId": "U9.L4",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "teacher_demonstration",
+        "stimulusCandidate": "إشمام الوقف",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "إشارة بالشفتين إلى الضم بلا صوت بعد الإسكان"
+        },
+        {
+          "id": "2",
+          "text": "نطق ضمة كاملة"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "يحتاج النموذج إلى تصوير مرئي معتمد.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-6",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U11.L1.POOL97.Q8",
+      "topicId": "U11.L1",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: نقط الباء؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تحديد المد"
+        },
+        {
+          "id": "2",
+          "text": "تحديد موضع الوقف"
+        },
+        {
+          "id": "3",
+          "text": "تمييز الحرف من نظائره في الرسم"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "نقط الإعجام يميز الحروف.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-7",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U11.L1.POOL97.V8",
+      "topicId": "U11.L1",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "نقط الباء",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "تحديد المد"
+        },
+        {
+          "id": "2",
+          "text": "تحديد موضع الوقف"
+        },
+        {
+          "id": "3",
+          "text": "تمييز الحرف من نظائره في الرسم"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "نقط الإعجام يميز الحروف.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-7",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U11.L1.POOL97.Q9",
+      "topicId": "U11.L1",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: الفتحة؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "بيان عدد الآيات"
+        },
+        {
+          "id": "2",
+          "text": "بيان الحركة"
+        },
+        {
+          "id": "3",
+          "text": "تمييز الباء من التاء"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الفتحة علامة ضبط.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-8",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U11.L1.POOL97.V9",
+      "topicId": "U11.L1",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "الفتحة",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "بيان عدد الآيات"
+        },
+        {
+          "id": "2",
+          "text": "بيان الحركة"
+        },
+        {
+          "id": "3",
+          "text": "تمييز الباء من التاء"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الفتحة علامة ضبط.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-8",
+      "status": "blocked_until_asset_review"
+    },
+    {
+      "id": "U11.L2.POOL97.Q10",
+      "topicId": "U11.L2",
+      "type": "singleChoice",
+      "text": "ما الوصف المناسب للمفهوم الآتي: مقارنة الرسم العثماني والإملائي؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "المحافظة على نص المصحف الموثق عند عرض الآية"
+        },
+        {
+          "id": "2",
+          "text": "تحويل الآية آليًا"
+        },
+        {
+          "id": "3",
+          "text": "حذف الحروف المختلفة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الشرح الإملائي مستقل عن النص القرآني.",
+      "objective": "visual_symbol_understanding",
+      "difficulty": "basic",
+      "variantFamily": "visual-9",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U11.L2.POOL97.V10",
+      "topicId": "U11.L2",
+      "type": "visualRecognition",
+      "text": "اختر الوصف المطابق للنموذج المعروض.",
+      "mediaRequest": {
+        "kind": "approved_mushaf_or_teaching_asset",
+        "stimulusCandidate": "مقارنة الرسم العثماني والإملائي",
+        "assetId": null
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "المحافظة على نص المصحف الموثق عند عرض الآية"
+        },
+        {
+          "id": "2",
+          "text": "تحويل الآية آليًا"
+        },
+        {
+          "id": "3",
+          "text": "حذف الحروف المختلفة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الشرح الإملائي مستقل عن النص القرآني.",
+      "objective": "visual_symbol_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "visual-9",
+      "status": "blocked_until_asset_review"
+    }
+  ]
+}
