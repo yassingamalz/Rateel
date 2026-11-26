@@ -67,3 +67,7 @@ tile, its veil lifts, `Haptics.success` + `Sounds.fill`, `Haptics.unlock` at 62%
   the edge of the partly visible left card.
 - **Asset style**: reference vs library comparison in `docs/flutter/ASSET-STYLE-COMPARISON.md`; the app's assets are
   kept, the reference's are candidates for a later app-wide standardisation.
+- Owner liked only the places of A/B (bottom left) and D (top left): twelve more variants there, `?chip=b1…b6` and
+  `?chip=d1…d6` (1 pill ×1.5, 2 pill with label ×1.35, 3 pill with label ×1.6, 4 flame disc with an amber count
+  bubble, 5 the same larger, 6 small vertical card with label); sheets `streak-chip-variants-b.jpg`, `-d.jpg`. B2/B3
+  touch the bottom edge of the partly visible left card; D1–D3 cover part of the mosque.
