@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Supplementary rule bank; not a complete decision table for ra. Verify all examples and exact context, especially stop cases, before publication. Several examples may repeat earlier files.",
+  "examples": [
+    {
+      "id": "POOL93.E1",
+      "topicId": "U3.L4",
+      "subtopic": "لام لفظ الجلالة",
+      "verseRef": "1:1",
+      "excerptAr": "بِسْمِ اللَّهِ",
+      "focus": "لام لفظ الجلالة",
+      "correct": "ترقيق",
+      "feedbackAr": "سبق لفظ الجلالة كسر في الوصل.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E2",
+      "topicId": "U3.L4",
+      "subtopic": "لام لفظ الجلالة",
+      "verseRef": "112:1",
+      "excerptAr": "هُوَ اللَّهُ",
+      "focus": "لام لفظ الجلالة",
+      "correct": "تفخيم",
+      "feedbackAr": "سبق لفظ الجلالة فتح في الوصل.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E3",
+      "topicId": "U3.L4",
+      "subtopic": "لام لفظ الجلالة",
+      "verseRef": "110:1",
+      "excerptAr": "نَصْرُ اللَّهِ",
+      "focus": "لام لفظ الجلالة",
+      "correct": "تفخيم",
+      "feedbackAr": "سبق لفظ الجلالة ضم في الوصل.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E4",
+      "topicId": "U3.L4",
+      "subtopic": "الراء المتحركة",
+      "verseRef": "1:2",
+      "excerptAr": "رَبِّ",
+      "focus": "الراء المفتوحة",
+      "correct": "تفخيم",
+      "feedbackAr": "الراء المفتوحة مفخمة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E5",
+      "topicId": "U3.L4",
+      "subtopic": "الراء المتحركة",
+      "verseRef": "2:25",
+      "excerptAr": "رُزِقُوا",
+      "focus": "الراء المضمومة",
+      "correct": "تفخيم",
+      "feedbackAr": "الراء المضمومة مفخمة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E6",
+      "topicId": "U3.L4",
+      "subtopic": "الراء المتحركة",
+      "verseRef": "2:25",
+      "excerptAr": "رِزْقٍ",
+      "focus": "الراء المكسورة",
+      "correct": "ترقيق",
+      "feedbackAr": "الراء المكسورة مرققة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E7",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "2:45",
+      "excerptAr": "وَاسْتَعِينُوا بِالصَّبْرِ",
+      "focus": "الراء المكسورة حال الوصل",
+      "correct": "ترقيق",
+      "feedbackAr": "الراء مكسورة عند الوصل.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E8",
+      "topicId": "U3.L4",
+      "subtopic": "الألف التابعة",
+      "verseRef": "1:7",
+      "excerptAr": "صِرَاطَ",
+      "focus": "الألف بعد الراء المفتوحة",
+      "correct": "تفخيم",
+      "feedbackAr": "الألف تتبع الحرف السابق لها في التفخيم والترقيق.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E9",
+      "topicId": "U3.L4",
+      "subtopic": "الألف التابعة",
+      "verseRef": "2:8",
+      "excerptAr": "النَّاسِ",
+      "focus": "الألف بعد النون",
+      "correct": "ترقيق",
+      "feedbackAr": "الألف تتبع النون المرققة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E10",
+      "topicId": "U3.L4",
+      "subtopic": "الألف التابعة",
+      "verseRef": "79:34",
+      "excerptAr": "الطَّامَّةُ",
+      "focus": "الألف بعد الطاء",
+      "correct": "تفخيم",
+      "feedbackAr": "الألف تتبع الطاء المفخمة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E11",
+      "topicId": "U3.L4",
+      "subtopic": "الألف التابعة",
+      "verseRef": "69:1",
+      "excerptAr": "الْحَاقَّةُ",
+      "focus": "الألف بعد الحاء",
+      "correct": "ترقيق",
+      "feedbackAr": "الألف تتبع الحاء المرققة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E12",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "89:1",
+      "excerptAr": "وَالْفَجْرِ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء جيم ساكنة وقبلها فتح.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E13",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "97:1",
+      "excerptAr": "الْقَدْرِ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء دال ساكنة وقبلها فتح.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E14",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "103:1",
+      "excerptAr": "وَالْعَصْرِ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء صاد ساكنة وقبلها فتح.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E15",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "74:35",
+      "excerptAr": "الْكُبَرِ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء باء مفتوحة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E16",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "54:1",
+      "excerptAr": "الْقَمَرُ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء ميم مفتوحة.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E17",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "89:2",
+      "excerptAr": "وَلَيَالٍ عَشْرٍ",
+      "focus": "الراء عند الوقف بالسكون المحض على عشر",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء شين ساكنة وقبلها فتح.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    },
+    {
+      "id": "POOL93.E18",
+      "topicId": "U3.L4",
+      "subtopic": "الراء الساكنة",
+      "verseRef": "82:19",
+      "excerptAr": "وَالْأَمْرُ",
+      "focus": "الراء عند الوقف بالسكون المحض",
+      "correct": "تفخيم",
+      "feedbackAr": "قبل الراء ميم ساكنة وقبلها فتح.",
+      "verification": "pending_source_uthmani_context_and_audio"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U3.L4.POOL93.Q1",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E1",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "سبق لفظ الجلالة كسر في الوصل.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-لام لفظ الجلالة-1:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q2",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E2",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "سبق لفظ الجلالة فتح في الوصل.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-لام لفظ الجلالة-112:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q3",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E3",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "سبق لفظ الجلالة ضم في الوصل.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-لام لفظ الجلالة-110:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q4",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E4",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الراء المفتوحة مفخمة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الراء المتحركة-1:2",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q5",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E5",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الراء المضمومة مفخمة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الراء المتحركة-2:25",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q6",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E6",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الراء المكسورة مرققة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الراء المتحركة-2:25",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q7",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E7",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الراء مكسورة عند الوصل.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الراء الساكنة-2:45",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q8",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E8",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الألف تتبع الحرف السابق لها في التفخيم والترقيق.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الألف التابعة-1:7",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q9",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E9",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الألف تتبع النون المرققة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الألف التابعة-2:8",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q10",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E10",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الألف تتبع الطاء المفخمة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الألف التابعة-79:34",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q11",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E11",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الألف تتبع الحاء المرققة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-الألف التابعة-69:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q12",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E12",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "قبل الراء جيم ساكنة وقبلها فتح.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-89:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q13",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E13",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "قبل الراء دال ساكنة وقبلها فتح.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-97:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q14",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E14",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "قبل الراء صاد ساكنة وقبلها فتح.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-103:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q15",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E15",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "قبل الراء باء مفتوحة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-74:35",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q16",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E16",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "قبل الراء ميم مفتوحة.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-54:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q17",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E17",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "قبل الراء شين ساكنة وقبلها فتح.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-89:2",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.Q18",
+      "topicId": "U3.L4",
+      "exampleId": "POOL93.E18",
+      "type": "singleChoice",
+      "text": "ما صفة الأداء في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ترقيق"
+        },
+        {
+          "id": "2",
+          "text": "تفخيم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "قبل الراء ميم ساكنة وقبلها فتح.",
+      "objective": "tafkhim_tarqiq_application",
+      "difficulty": "advanced",
+      "variantFamily": "tafkhim-الراء الساكنة-82:19",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U3.L4.POOL93.T1",
+      "topicId": "U3.L4",
+      "text": "الراء المكسورة في الوصل ترقق في الأصل.",
+      "type": "trueFalse",
+      "correctAnswer": true,
+      "feedbackAr": "الكسرة من أسباب ترقيق الراء.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL93.T2",
+      "topicId": "U3.L4",
+      "text": "لام لفظ الجلالة تفخم بعد الكسر في الوصل.",
+      "type": "trueFalse",
+      "correctAnswer": false,
+      "feedbackAr": "ترقق لام لفظ الجلالة بعد الكسر.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL93.T3",
+      "topicId": "U3.L4",
+      "text": "الألف المدية تتبع ما قبلها في التفخيم والترقيق.",
+      "type": "trueFalse",
+      "correctAnswer": true,
+      "feedbackAr": "لا تستقل الألف بصفة تفخيم ثابتة في كل المواضع.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL93.T4",
+      "topicId": "U3.L4",
+      "text": "كل حرف مستعل مطبق.",
+      "type": "trueFalse",
+      "correctAnswer": false,
+      "feedbackAr": "الخاء والغين والقاف مستعلية منفتحة.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL93.T5",
+      "topicId": "U3.L4",
+      "text": "كل حرف مطبق من حروف الاستعلاء.",
+      "type": "trueFalse",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإطباق الأربعة من حروف الاستعلاء.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L4.POOL93.T6",
+      "topicId": "U3.L4",
+      "text": "يكفي النظر إلى حركة الراء وحدها في جميع حالات الوقف.",
+      "type": "trueFalse",
+      "correctAnswer": false,
+      "feedbackAr": "تحتاج الراء عند الوقف إلى النظر في الحروف والحركات السابقة والأوجه المروية.",
+      "objective": "tafkhim_tarqiq_principles",
+      "difficulty": "intermediate",
+      "variantFamily": "tafkhim-principles",
+      "status": "editorial_draft"
+    }
+  ]
+}
