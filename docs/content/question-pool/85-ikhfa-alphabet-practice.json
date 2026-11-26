@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Candidate examples only, not full verified verse coverage. Membership questions are one family; sample at most one per assessment. Confirm exact word context and target before publication.",
+  "topicId": "U5.L7",
+  "title": "الإخفاء الحقيقي",
+  "examples": [
+    {
+      "id": "U5.L7.POOL85.E1",
+      "verseRef": "90:15",
+      "excerptAr": "يَتِيمًا ذَا",
+      "targetLetter": "ذ",
+      "context": "tanwin",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E2",
+      "verseRef": "2:25",
+      "excerptAr": "مِنْ ثَمَرَةٍ",
+      "targetLetter": "ث",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E3",
+      "verseRef": "2:23",
+      "excerptAr": "وَإِنْ كُنْتُمْ",
+      "targetLetter": "ك",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E4",
+      "verseRef": "113:2",
+      "excerptAr": "مِنْ شَرِّ",
+      "targetLetter": "ش",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E5",
+      "verseRef": "2:21",
+      "excerptAr": "مِنْ قَبْلِكُمْ",
+      "targetLetter": "ق",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E6",
+      "verseRef": "2:22",
+      "excerptAr": "أَنْدَادًا",
+      "targetLetter": "د",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E7",
+      "verseRef": "2:57",
+      "excerptAr": "مِنْ طَيِّبَاتِ",
+      "targetLetter": "ط",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E8",
+      "verseRef": "97:1",
+      "excerptAr": "أَنْزَلْنَاهُ",
+      "targetLetter": "ز",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E9",
+      "verseRef": "2:25",
+      "excerptAr": "مِنْ تَحْتِهَا",
+      "targetLetter": "ت",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E10",
+      "verseRef": "4:114",
+      "excerptAr": "مِنْ صَدَقَةٍ",
+      "targetLetter": "ص",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL85.E11",
+      "verseRef": "2:198",
+      "excerptAr": "مِنْ فَضْلٍ",
+      "targetLetter": "ف",
+      "context": "nun",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L7.POOL85.Q1",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E1",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ذ",
+      "options": [
+        {
+          "id": "1",
+          "text": "ذ"
+        },
+        {
+          "id": "2",
+          "text": "ب"
+        },
+        {
+          "id": "3",
+          "text": "ت"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ذ.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q2",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E2",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ث",
+      "options": [
+        {
+          "id": "1",
+          "text": "ت"
+        },
+        {
+          "id": "2",
+          "text": "ق"
+        },
+        {
+          "id": "3",
+          "text": "ث"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ث.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q3",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E3",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ك",
+      "options": [
+        {
+          "id": "1",
+          "text": "د"
+        },
+        {
+          "id": "2",
+          "text": "ك"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو ك.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q4",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E4",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ش",
+      "options": [
+        {
+          "id": "1",
+          "text": "ش"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ز"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ش.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q5",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E5",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ق",
+      "options": [
+        {
+          "id": "1",
+          "text": "ز"
+        },
+        {
+          "id": "2",
+          "text": "ط"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ق.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q6",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E6",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-د",
+      "options": [
+        {
+          "id": "1",
+          "text": "ت"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ب"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو د.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q7",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E7",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ط",
+      "options": [
+        {
+          "id": "1",
+          "text": "ط"
+        },
+        {
+          "id": "2",
+          "text": "ت"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ط.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q8",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E8",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ز",
+      "options": [
+        {
+          "id": "1",
+          "text": "ق"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ز"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ز.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q9",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E9",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ت",
+      "options": [
+        {
+          "id": "1",
+          "text": "ز"
+        },
+        {
+          "id": "2",
+          "text": "ت"
+        },
+        {
+          "id": "3",
+          "text": "ش"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو ت.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q10",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E10",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ص",
+      "options": [
+        {
+          "id": "1",
+          "text": "ص"
+        },
+        {
+          "id": "2",
+          "text": "ش"
+        },
+        {
+          "id": "3",
+          "text": "ز"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ص.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.Q11",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحرف الذي يلي النون الساكنة أو التنوين في الموضع المحدد؟",
+      "exampleId": "U5.L7.POOL85.E11",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U5.L7-target-ف",
+      "options": [
+        {
+          "id": "1",
+          "text": "ب"
+        },
+        {
+          "id": "2",
+          "text": "ت"
+        },
+        {
+          "id": "3",
+          "text": "ف"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL85.S1",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ص من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S2",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ذ من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S3",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ث من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S4",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ك من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S5",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ج من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S6",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ش من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S7",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ق من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S8",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف س من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S9",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف د من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S10",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ط من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S11",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ز من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S12",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ف من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S13",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ت من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S14",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ض من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L7.POOL85.S15",
+      "topicId": "U5.L7",
+      "type": "trueFalse",
+      "text": "الحرف ظ من حروف الإخفاء الحقيقي.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف الإخفاء خمسة عشر.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U5.L7-membership",
+      "status": "editorial_draft"
+    }
+  ]
+}
