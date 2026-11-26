@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U10.L1",
+      "titleAr": "الْأَلِفَاتُ السَّبْعُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تُنْطَقُ كُلُّ أَلِفٍ مَكْتُوبَةٍ فِي الْوَصْلِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَدْرُسُ أَلِفَاتٍ مَخْصُوصَةً فِي رِوَايَةِ حَفْصٍ، وَنُرَاعِي أَحْكَامَ إِثْبَاتِهَا وَحَذْفِهَا وَأَوْجُهَ الْوَصْلِ وَالْوَقْفِ.",
+          "visualDirection": "Separate educational layer shows wasl/waqf; no automatic spelling changes."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَلَقَّ الْأَوْجُهَ الْمَرْوِيَّةَ مِنْ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U10.L2",
+      "titleAr": "هَمْزَةُ الْوَصْلِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نَنْطِقُ هَمْزَةَ الْوَصْلِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تَثْبُتُ هَمْزَةُ الْوَصْلِ فِي الِابْتِدَاءِ، وَتَسْقُطُ لَفْظًا عِنْدَ الْوَصْلِ بِمَا قَبْلَهَا.",
+          "visualDirection": "Two states: starting alone and connected to previous word."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنِ الِابْتِدَاءَ بِالْوَصْلِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U10.L3",
+      "titleAr": "هَمْزَةُ الْقَطْعِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الْفَرْقُ بَيْنَ هَمْزَتَيِ الْوَصْلِ وَالْقَطْعِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تَثْبُتُ هَمْزَةُ الْقَطْعِ فِي الِابْتِدَاءِ وَالْوَصْلِ فِي الْأَصْلِ، مَعَ مُرَاعَاةِ أَوْجُهِ الْأَدَاءِ الْمَرْوِيَّةِ.",
+          "visualDirection": "Hamza card persists through both states."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "مَيِّزْ هَمْزَةَ الْقَطْعِ مِنْ هَمْزَةِ الْوَصْلِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}
