@@ -130,3 +130,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
 - Owner's three star coins (gold, emerald, mint glass) processed with `tools/assets/test_lesson_assets.py` into
   `ui/test/star_coin_{gold,emerald,mint}.webp`; the gold one (4.2u) replaces the star glyph of «نقطة» in the results.
   Captures `capture-v11-*-phone.jpg`.
+
+- APK 1.0.426 (v11).
