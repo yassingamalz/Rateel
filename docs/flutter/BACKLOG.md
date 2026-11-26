@@ -66,6 +66,10 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
 - [ ] **Real listening lessons** in the data (today one mock lesson, سورة الكوثر, in the unit «النون المشددة»).
+- [ ] **Loudness normalisation of the recitations** (owner, 2026-11-26: later, to hear first): same level for every
+      ayah, fuller on phone speakers; today the Husary files are bundled as downloaded.
+- [ ] **Guided voice for the listening lessons** with Gemini TTS voice **08 Orus** (owner, 2026-11-26): short, fully
+      vocalised lines that help without giving the answers, a calm and spiritual teaching tone; needs the Gemini key.
 - [ ] Points (+10) are counted in the lesson only: show them at the end of the lesson (screen 24) and save them.
 - [ ] **Listening quiz** (owner, 2026-11-26): the first version of 22 (listen, then «what did you hear in the word X?»)
       stays on the branch as the lesson «اختبار الاستماع»; later it becomes part of the **practice after several rules**,
