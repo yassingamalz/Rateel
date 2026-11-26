@@ -19,7 +19,7 @@ for t, e in ev:
         sfx.append((t, f'{A}sounds/{k[1]}.mp3'))
         continue
     f, ms = k[1], int(k[2])
-    if cur and cur['f'] == f and 0 <= ms - cur['to'] <= (t - cur['tl']) + 400 and ms > cur['to'] - 50:
+    if cur and cur['f'] == f and t - cur['tl'] < 1000 and abs((ms - cur['to']) - (t - cur['tl'])) < 600 and ms >= cur['to']:
         if ms > cur['to']:
             cur['to'], cur['tl'] = ms, t
         continue

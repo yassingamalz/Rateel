@@ -37,3 +37,13 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
 - Verified element by element: `verify-v5.md` (all within 4 px except the font of the verse and the standard header);
   comparison `compare-v5.jpg`, phone states `capture-v5-states-phone.jpg` (default, right, wrong, light), demo
   `demo-v5-phone.mp4` (phone, real audio timing).
+
+## 4. Demo with sound, replay fix (2026-11-26)
+- Owner (watching from iOS) asked for a demo video and whether the recitation moves from word to word, lit, as in the
+  original: yes, the recited word lights up in a soft gold box and the light moves word by word with the audio (word times).
+- Demo with the real sound: `demo-v6-phone-audio.mp4` (H.264 + AAC, 1280×576). Playwright records no audio: the page
+  logs its audio events with `?logAudio=1`, `tools/flutter-review/listening-demo-audio.py` mixes the Husary segments and
+  the effect sounds back at their times.
+- Bug found while rebuilding the sound: after an answer the asked word sometimes did not replay alone, the verse restarted
+  from the beginning (a seek before `resume()` was ignored after the end of the verse). Fixed with `play(position:)` and a
+  late-start correction in the position listener.
