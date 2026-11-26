@@ -74,3 +74,6 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   `?playPos=` (sheet `play-variants-v10.jpg`); owner chose **B** (in line with the waveform).
 - v10: B by default; light box padded so the whole word is inside it; letter pills centred. Sheet `capture-v10-b-phone.jpg`.
 - Voice: the confirmed narration voice is Gemini TTS **08 Orus** (DECISIONS); loudness normalisation and a guided voice → BACKLOG.
+- v11 (owner: «the tashkīl still goes out of the light box»): verse line height 1.8, box padding 3.4u left, 0.4u top,
+  1.8u right, 3.2u below; verse moved 1.6u down so a long ayah stays clear of the surah line. Checked with every word
+  lit at once (review aid `?litAll=1`, sheet `light-box-v11.jpg`): harakat above, kasra and tails below all inside.

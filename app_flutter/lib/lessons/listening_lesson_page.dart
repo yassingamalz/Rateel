@@ -37,6 +37,10 @@ bool listenLogAudio = false;
 String listenPlayPos = 'b'; // owner's choice B (2026-11-26)
 bool get _playBelow => listenPlayPos == 'below';
 
+/// Review aid `?litAll=1`: every word shows its light box (to check that the
+/// boxes hold the whole words, harakat included).
+bool listenLitAll = false;
+
 void _logAudio(String e) {
   // ignore: avoid_print
   if (listenLogAudio) print('AUDIO $e');
@@ -90,7 +94,7 @@ class ListenMetrics {
   static const surahLeft = 4.9; // card left edge → text
   static const surahCy = 5.3;
   static const surahSize = 4.1;
-  static double get verseCy => _playBelow ? 15.2 : 19.0;
+  static double get verseCy => _playBelow ? 15.2 : 20.6;
   static const verseSize = 11.5;
   static double get waveCy => _playBelow ? 30.5 : 41.0;
   static const bars = 51;
@@ -1121,8 +1125,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           Positioned(
             left: u * (listenPlayPos == 'a' ? 22 : 16),
             right: u * 16,
-            top: u * (ListenMetrics.verseCy - (_playBelow ? 10 : 12)),
-            height: u * (_playBelow ? 20 : 24),
+            top: u * (ListenMetrics.verseCy - (_playBelow ? 10 : 12.8)),
+            height: u * (_playBelow ? 20 : 25.6),
             child: _swapIn(
               RepaintBoundary(
                 child: Center(
@@ -1223,7 +1227,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       fontSize: u * ListenMetrics.verseSize,
       // With the room freed below the card the light box takes the whole
       // word, harakat above and kasra below included (owner, 2026-11-26).
-      height: _playBelow ? 1.3 : 1.45,
+      height: _playBelow ? 1.3 : 1.8,
       color: c,
       shadows: p.t > 0.5 ? null : titleShadows(u),
     );
@@ -1305,6 +1309,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     }
 
     bool boxOn(int i) =>
+        listenLitAll ||
         i == lit ||
         (fm != null &&
             ((_fWordOk == null && i == _fWord) ||
@@ -1326,7 +1331,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
               // the whole word sits inside it (owner, 2026-11-26).
               padding: _playBelow
                   ? EdgeInsets.symmetric(horizontal: u * 1.0)
-                  : EdgeInsets.fromLTRB(u * 2.6, u * 0.2, u * 1.6, u * 2.2),
+                  : EdgeInsets.fromLTRB(u * 3.4, u * 0.4, u * 1.8, u * 3.2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(u * 1.6),
                 color: box(i).withValues(
