@@ -105,3 +105,5 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   for «إعادة الاختبار») with the filled light look by the theme; `testDarkFilled` (long press on the moon) forces the
   filled look in the dark theme for the comparison. Captures `capture-v8-*-phone.jpg`.
 - Prompts v3 (`prompts/10-test-lesson/images-v3.txt`): T4 trophy, T5 flame medallion, T6 flame glyph.
+
+- APK 1.0.423 (v8).
