@@ -28,7 +28,7 @@ const { chromium } = require('playwright');
     for (const ms of [5800, 5800, 10300, 11300, 9300, 9800]) { await confirm(); await w(ms); }
     await confirm(); await w(9500);
     // «Find» questions: tap the word in the verse (x from the centre, in u), confirm, then its letter, confirm.
-    const word = (dx) => tap(W / 2 + dx * u, 46.55 * u);
+    const word = (dx) => tap(W / 2 + dx * u, 48.15 * u);
     const letter = (k) => tap(W - u * (72.6 + k * 13.7 + 5.75), 89.6 * u);
     for (const [dx, k] of [[-10.8, 2], [33.9, 0], [35.9, 1]]) {
       await word(dx); await w(900); await confirm(); await w(2400);
