@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U3.L6",
+      "examples": [
+        {
+          "id": "U3.L6.M.E1",
+          "verseRef": "112:3",
+          "excerptAr": "يَلِدْ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U3.L6.M.E2",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U3.L6.M.P1",
+          "instructionAr": "صنف الفاء والقاف حسب الإذلاق والإصمات.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U3.L6.M.P2",
+          "instructionAr": "استخرج ثلاثة حروف مذلقة من بطاقات الحروف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U3.L7",
+      "examples": [
+        {
+          "id": "U3.L7.M.E1",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U3.L7.M.E2",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U3.L7.M.A1",
+          "kind": "teacher_recorded_non_quran",
+          "audioTarget": "دْ",
+          "promptAr": "أي صفة تلاحظ في نموذج الدال الساكنة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإمالة"
+            },
+            {
+              "id": "2",
+              "text": "مد البدل"
+            },
+            {
+              "id": "3",
+              "text": "القلقلة"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "القلقلة",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U3.L7.M.P1",
+          "instructionAr": "اربط بطاقات الحروف بصفاتها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U3.L7.M.P2",
+          "instructionAr": "قارن مثال القلقلة بمثال الغنة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U3.L8",
+      "examples": [
+        {
+          "id": "U3.L8.M.E1",
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U3.L8.M.E2",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U3.L8.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "second_example_with_valid_waqf",
+          "promptAr": "ما الصفة البارزة في الدال عند الوقف بالسكون؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الغنة"
+            },
+            {
+              "id": "2",
+              "text": "الصفير"
+            },
+            {
+              "id": "3",
+              "text": "القلقلة"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "القلقلة",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U3.L8.M.P1",
+          "instructionAr": "كرر الدال الساكنة دون توليد حركة كاملة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U3.L8.M.P2",
+          "instructionAr": "قارن خَوْف عند الوصل والوقف مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U3.L9",
+      "examples": [
+        {
+          "id": "U3.L9.M.E1",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U3.L9.M.E2",
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U3.L9.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "second_example",
+          "promptAr": "أي حرف يتصف بالتفشي في المقطع الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الراء"
+            },
+            {
+              "id": "2",
+              "text": "الميم"
+            },
+            {
+              "id": "3",
+              "text": "الشين"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الشين",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U3.L9.M.P1",
+          "instructionAr": "استمع إلى ضَ وشَ ورَ من معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U3.L9.M.P2",
+          "instructionAr": "كرر الراء دون مبالغة في التكرير.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U3.L10",
+      "examples": [
+        {
+          "id": "U3.L10.M.E1",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ وَالنَّاسِ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U3.L10.M.E2",
+          "verseRef": "111:4",
+          "excerptAr": "حَمَّالَةَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U3.L10.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "second_example",
+          "promptAr": "أي حرف فيه غنة مشددة في المثال الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الحاء"
+            },
+            {
+              "id": "2",
+              "text": "اللام"
+            },
+            {
+              "id": "3",
+              "text": "الميم"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الميم",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U3.L10.M.P1",
+          "instructionAr": "قارن مَ ومَّ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U3.L10.M.P2",
+          "instructionAr": "قارن نَ ونَّ مع الحفاظ على تناسب الأزمنة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}
