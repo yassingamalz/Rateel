@@ -107,3 +107,8 @@ Q9 glyph of «تأكيد» · Q10 light theme · Q11 assets list.
 - **2–3 questions at the end** with the quiz UI of v5 (asked word in gold, not in the rule colour: it would give the answer).
 - The **v5 quiz stays** as a second lesson «اختبار الاستماع»; as a test question type → `BACKLOG.md`.
 - Data: `listen-ghunna.json` (`rule`, `steps: [{ayah, words, note}]`, `questions`); `tools/flutter-review/gen_listening_data.py`.
+
+## v9 (owner, 2026-11-26)
+- Rule letters coloured (not the word); the letter glows with its own light when recited.
+- End questions «find»: tap the word in the verse → choose its letter (data `finds: [{ayah, marks}]`); prompts built from
+  the rule name, so other rules (madd…) use the same flow.

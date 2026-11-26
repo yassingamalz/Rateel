@@ -29,6 +29,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Refresh the app screenshots** used as ChatGPT references (`app-references/`, rule in `LESSONS-LEARNED.md`)
       after each approved screen: 12 and 23 are not in it yet (2026-11-26).
 - [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
+- [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
+      and design it; it reuses the listening quiz of 22.
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
       added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
@@ -65,9 +67,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
 - [ ] **Real listening lessons** in the data (today one mock lesson, سورة الكوثر, in the unit «النون المشددة»).
 - [ ] Points (+10) are counted in the lesson only: show them at the end of the lesson (screen 24) and save them.
-- [ ] **Listening quiz as a question type of the tests (10)** (owner, 2026-11-26): the first version of 22 (listen, then
-      «what did you hear in the word X?») stays on the branch as the lesson «اختبار الاستماع»; move it into the tests (and/or
-      audio test lessons) later.
+- [ ] **Listening quiz** (owner, 2026-11-26): the first version of 22 (listen, then «what did you hear in the word X?»)
+      stays on the branch as the lesson «اختبار الاستماع»; later it becomes part of the **practice after several rules**,
+      of the **daily practice** (screen 31) and possibly a question type of the tests (10).
 - [ ] Rule lessons for the other rules (qalqala, madd, ikhfa, …) with their wheel colours: data only (the page reads
       `rule.colour`).
 

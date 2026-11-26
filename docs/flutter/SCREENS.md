@@ -65,4 +65,5 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type |
 | 29 | Profile (name, avatar, level, streak) | the leaderboard shows the user; no screen yet | may merge with 23 |
 | 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
+| 31 | **Daily practice** (owner, 2026-11-26: «ci siamo dimenticati»): a short daily session mixing what was learnt; the listening quiz of 22 (v5) is one of its exercises | not designed yet | to define with the owner: own screen or part of 12 (daily challenges); also a **practice edition** after several rules |
 Not a new screen: unit / course completion celebrations, already inside 03/05.

@@ -1,6 +1,7 @@
 """Mock data of screen 22 (listening lessons): app_flutter/assets/data/listening/<id>.json.
 
-listen-ghunna: rule lesson (several ayat, rule words coloured, then 3 questions); listen-kawthar-ghunna: the quiz.
+listen-ghunna: rule lesson (several ayat, rule letters coloured, then 3 «find the word, then the letter» questions);
+listen-kawthar-ghunna: the quiz (later: practice after several rules, daily practice).
 
 Usage (repo root): python3 tools/flutter-review/gen_listening_data.py
 Audio: Husary murattal 128 kbps from everyayah.com (owner 2026-11-26, Q1 A), in
@@ -56,6 +57,9 @@ def rule_letters(word):
                 return [i, j]
     raise ValueError(word)
 RULE_QUIZ = [QUIZ[0], QUIZ[4], QUIZ[1]]
+# End of the rule lesson (owner, 2026-11-26): the ayah plays, the student taps the word where the rule was heard, then
+# chooses its letter. Ayat with one rule word only (114:4 is left out: its «مِن شَرّ» has an ikhfa with ghunna too).
+FINDS = [('114002', 1), ('108003', 0), ('108001', 0)]
 
 
 def peaks(path):
@@ -85,18 +89,20 @@ def quiz(rows):
              'explanation': e} for a, w, asked, o, c, e in rows]
 
 
-def write(lesson, steps, questions, title):
-    keys = sorted({a for a, *_ in steps} | {q[0] for q in questions})
+def write(lesson, steps, questions, title, finds=()):
+    keys = sorted({a for a, *_ in steps} | {q[0] for q in questions} | {a for a, _ in finds})
     data = {'id': lesson, 'title': title, 'reciter': 'الحصري', 'pointsPerQuestion': 10,
             'rule': {'name': 'الغنة', 'short': 'غنة', 'colour': 'green'} if steps else None,
             'ayat': [ayah(k) for k in keys],
             'steps': [{'ayah': a, 'marks': [{'word': i, 'letters': rule_letters(AYAT[a][1].split(' ')[i])} for i in w],
                        'note': n} for a, w, n in steps],
+            'finds': [{'ayah': a, 'marks': [{'word': w, 'letters': rule_letters(AYAT[a][1].split(' ')[w])}]}
+                      for a, w in finds],
             'questions': quiz(questions)}
     with open(f'app_flutter/assets/data/listening/{lesson}.json', 'w', encoding='utf-8') as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1)
     print('ok', lesson, len(steps), len(questions))
 
 
-write('listen-ghunna', STEPS, RULE_QUIZ, 'الاستماع: الغنة')
+write('listen-ghunna', STEPS, [], 'الاستماع: الغنة', FINDS)
 write('listen-kawthar-ghunna', [], QUIZ, 'اختبار الاستماع: الغنة')

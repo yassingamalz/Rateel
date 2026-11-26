@@ -112,7 +112,12 @@ class ListenContent {
     required this.questions,
     this.rule,
     this.steps = const [],
+    this.finds = const [],
   });
+
+  /// End of a rule lesson (owner, 2026-11-26): an ayah plays without colours,
+  /// the student taps the word where the rule was heard, then its letter.
+  final List<ListenStep> finds;
 
   /// Rule lesson: the ayat with the rule first ([steps]), then [questions] as a
   /// short check. Without a rule: a listening quiz (questions only).
@@ -177,6 +182,23 @@ class ListenContent {
               note: s['note'] as String,
             ),
         ],
+        finds: [
+          for (final f in (j['finds'] as List? ?? const [])
+              .cast<Map<String, dynamic>>())
+            ListenStep(
+              ayah: ayat[f['ayah'] as String]!,
+              marks: [
+                for (final m in (f['marks'] as List)
+                    .cast<Map<String, dynamic>>())
+                  ListenMark(
+                    m['word'] as int,
+                    (m['letters'] as List)[0] as int,
+                    (m['letters'] as List)[1] as int,
+                  ),
+              ],
+              note: '',
+            ),
+        ],
         title: j['title'] as String,
         reciter: j['reciter'] as String,
         points: j['pointsPerQuestion'] as int? ?? 10,
@@ -196,4 +218,22 @@ class ListenContent {
       return null;
     }
   }
+}
+
+/// Letters of an Arabic word as clusters [from, to) (a letter with its marks),
+/// for the letter question of a rule lesson.
+List<(int, int)> letterClusters(String word) {
+  bool mark(int c) =>
+      (c >= 0x064B && c <= 0x065F) || c == 0x0670 || (c >= 0x06D6 && c <= 0x06ED);
+  final out = <(int, int)>[];
+  var i = 0;
+  while (i < word.length) {
+    var j = i + 1;
+    while (j < word.length && mark(word.codeUnitAt(j))) {
+      j++;
+    }
+    out.add((i, j));
+    i = j;
+  }
+  return out;
 }

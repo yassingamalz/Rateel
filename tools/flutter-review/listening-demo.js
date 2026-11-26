@@ -21,14 +21,19 @@ const { chromium } = require('playwright');
   const confirm = () => tap(u * 23, 89 * u);
   const play = () => tap(W / 2, 73.6 * u);
   if (mode === 'rule') {
-    // Each ayah of سورة الناس plays by itself (ghunna words green, every word lit in turn) → «التالي» → … → 3 questions.
+    // Each ayah plays by itself (ghunna letters green, every word lit in turn) → «التالي» → … → 3 «find» questions
+    // (tap the word, then its letter; the second one with a wrong letter).
     await p.goto('http://localhost:8765/?lessons=1,1&openLesson=0&logAudio=1', { waitUntil: 'networkidle' });
     await w(13500);
     for (const ms of [5800, 5800, 10300, 11300, 9300, 9800]) { await confirm(); await w(ms); }
     await confirm(); await w(9500);
-    await pill(0); await w(900); await confirm(); await w(4500); await confirm(); await w(7500);
-    await pill(1); await w(900); await confirm(); await w(4500); await confirm(); await w(6500);
-    await pill(1); await w(900); await confirm(); await w(4500); await confirm(); await w(4000);
+    // «Find» questions: tap the word in the verse (x from the centre, in u), confirm, then its letter, confirm.
+    const word = (dx) => tap(W / 2 + dx * u, 42.75 * u);
+    const letter = (k) => tap(W - u * (72.6 + k * 13.7 + 5.75), 89.6 * u);
+    for (const [dx, k] of [[-10.8, 2], [33.9, 0], [35.9, 1]]) {
+      await word(dx); await w(900); await confirm(); await w(2400);
+      await letter(k); await w(900); await confirm(); await w(4500); await confirm(); await w(8500);
+    }
   } else {
     await p.goto('http://localhost:8765/?lessons=1,1&openLesson=1&logAudio=1', { waitUntil: 'networkidle' });
     await w(10500);

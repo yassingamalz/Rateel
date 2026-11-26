@@ -29,7 +29,14 @@ void main() {
     final c = await ListenContent.load('listen-ghunna');
     expect(c!.rule!.colour, 'green');
     expect(c.steps, hasLength(7));
-    expect(c.questions, hasLength(3));
+    expect(c.questions, isEmpty);
+    expect(c.finds, hasLength(3));
+    for (final f in c.finds) {
+      final m = f.marks.single;
+      final w = f.ayah.words[m.word].text;
+      // The right letter is one of the word's letter clusters.
+      expect(letterClusters(w).any((x) => x.$1 == m.from && x.$2 == m.to), isTrue);
+    }
     for (final s in c.steps) {
       for (final m in s.marks) {
         final w = s.ayah.words[m.word].text;

@@ -56,3 +56,14 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
 - Built: lesson `listen-ghunna` = سورة الناس 1–6 (Husary, word times by hand on the energy envelope) + الكوثر 1, rule words
   النّاس / الخنّاس / الجنّة / إنّا in green; bottom row rule pill + note + «التالي»; then 3 questions (إنّا غنة, الأبتر قلقلة,
   وانحر إظهار). The v5 quiz is lesson 2 «اختبار الاستماع». Capture sheet `capture-v7-rule.jpg`, demo with sound `demo-v7-rule-audio.mp4`.
+
+## 6. Rule letter and «find» questions (v8–v9, 2026-11-26)
+- Owner: colour the **letter** of the rule, not the word (a word can hold several rules); the letter glows with its own
+  light when its word is recited. Built with spans inside the word (Flutter keeps the Arabic joining across colour runs:
+  checked on «الجِنّة»); letters found by `rule_letters()` (doubled nun / meem with its marks).
+- Owner: the end questions go the other way: the ayah plays without colours, a pill asks to **tap the word** in the verse,
+  then at once **which letter** (pills with the word's letters, Amiri Quran); after the answer the right letter takes the rule
+  colour and glows, a wrong one is red; the explanation line says «الغنة في حرف «نّ» من كلمة «النّاس»». Ayat chosen with a
+  single rule word (114:2, 108:3, 108:1; 114:4 left out because «مِن شَرّ» has an ikhfa with ghunna too).
+- The quiz → practice after several rules and daily practice (screen 31, added to `SCREENS.md`).
+- Captures `capture-v9-find.jpg`, demo with sound `demo-v9-rule-audio.mp4`.

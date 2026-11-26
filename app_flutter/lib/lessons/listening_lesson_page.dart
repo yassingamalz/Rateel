@@ -104,6 +104,9 @@ class ListenMetrics {
   static const pillH = 9.6;
   static const pillGap = 3.9;
   static const pillText = 4.2;
+  // Letter pills of the «find» question (phase 2).
+  static const letterW = 11.5;
+  static const letterGap = 2.2;
   static const pillRim = 0.25;
   static const confirmLeft = 6.8;
   static const confirmW = 32.5;
@@ -181,6 +184,13 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   int _dir = 1;
   int? _pick;
   bool? _ok;
+  // «Find» page: 0 = tap the word, 1 = choose its letter.
+  int _phase = 0;
+  int? _fWord;
+  bool? _fWordOk;
+  int? _fLetter;
+  bool? _fLetterOk;
+  int _fEarned = 0;
   int _points = 0;
   int _answered = 0;
   bool _finishing = false;
@@ -188,12 +198,25 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
 
   // Pages: the ayat of the rule first (rule lesson), then the questions.
   int get _nSteps => _content?.steps.length ?? 0;
-  int get _total => _nSteps + (_content?.questions.length ?? 0);
+  int get _nFinds => _content?.finds.length ?? 0;
+  int get _total => _nSteps + _nFinds + (_content?.questions.length ?? 0);
   bool get _isStep => _index < _nSteps;
+  bool get _isFind => _index >= _nSteps && _index < _nSteps + _nFinds;
   ListenStep? get _step => _isStep ? _content?.steps[_index] : null;
-  ListenQuestion? get _q =>
-      _content == null || _isStep ? null : _content!.questions[_index - _nSteps];
-  ListenAyah? get _ayah => _step?.ayah ?? _q?.ayah;
+  ListenStep? get _find => _isFind ? _content!.finds[_index - _nSteps] : null;
+  ListenQuestion? get _q => _content == null || _index < _nSteps + _nFinds
+      ? null
+      : _content!.questions[_index - _nSteps - _nFinds];
+  ListenAyah? get _ayah => _step?.ayah ?? _find?.ayah ?? _q?.ayah;
+
+  /// The rule mark of the current «find» page and its letter clusters.
+  ListenMark? get _fMark => _find?.marks.first;
+  List<(int, int)> get _fClusters {
+    final m = _fMark;
+    return m == null ? const [] : letterClusters(_ayah!.words[m.word].text);
+  }
+
+  int get _fRightLetter => _fClusters.indexWhere((c) => c.$1 == _fMark!.from);
 
   /// Colour of the rule's words (the tajweed wheel, `DESIGN-SYSTEM.md`).
   Color get _ruleColour => switch (_content?.rule?.colour) {
@@ -277,6 +300,27 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _pos.value = (a.durationMs * at).round();
       _lit.value = a.wordAt(_pos.value);
     }
+    final m = _fMark;
+    if (m != null) {
+      final s = listenStartState;
+      if (s == 'word' || s == 'ok' || s == 'ko') {
+        _fWord = m.word;
+        _fWordOk = true;
+        _fEarned = c.points;
+        _phase = 1;
+      } else if (listenStartPick != null) {
+        _fWord = listenStartPick;
+      }
+      if (s == 'ok' || s == 'ko') {
+        final right = _fRightLetter;
+        _fLetter = s == 'ok' ? right : (right + 1) % _fClusters.length;
+        _fLetterOk = s == 'ok';
+        if (_fLetterOk!) _fEarned += c.points;
+        _answered++;
+        _fb.value = 1;
+      }
+      return;
+    }
     final q = _q;
     if (q == null) return;
     final pick = listenStartPick;
@@ -335,8 +379,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     super.dispose();
   }
 
-  void _onTheme() =>
-      readingLight.value ? _theme.forward() : _theme.reverse();
+  void _onTheme() => readingLight.value ? _theme.forward() : _theme.reverse();
 
   void _leave(bool done) {
     if (_left || !mounted) return;
@@ -381,7 +424,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     }
     // From the start when it had ended (or after the word replay).
     final atEnd = _pos.value >= a.durationMs - 150 || _pos.value == 0;
-    if (atEnd || _ok != null) {
+    if (atEnd || _ok != null || _fWordOk != null) {
       _play();
     } else {
       _playing.value = true;
@@ -397,9 +440,88 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     setState(() => _pick = i);
   }
 
+  void _selectWord(int i) {
+    if (!_isFind || _phase != 0 || _fWordOk != null || _finishing) return;
+    Haptics.tick();
+    setState(() => _fWord = i);
+  }
+
+  void _selectLetter(int k) {
+    if (!_isFind || _phase != 1 || _fLetterOk != null || _finishing) return;
+    Haptics.tick();
+    setState(() => _fLetter = k);
+  }
+
+  void _answerFeedback(bool ok) {
+    if (ok) {
+      Sounds.correct();
+      _logAudio('sfx test_correct');
+      Haptics.success();
+    } else {
+      Sounds.wrong();
+      _logAudio('sfx test_wrong');
+      Haptics.denied();
+      _shake.forward(from: 0);
+    }
+  }
+
+  void _replayRuleWord() {
+    final w = _ayah!.words[_fMark!.word];
+    Future<void>.delayed(const Duration(milliseconds: 650), () {
+      if (mounted && _isFind) _play(fromMs: w.startMs, toMs: w.endMs + 150);
+    });
+  }
+
+  /// «Find» page: first the word (then the letter question appears at once,
+  /// on the right word), then the letter.
+  void _confirmFind() {
+    final c = _content!, m = _fMark!;
+    if (_phase == 0) {
+      final w = _fWord;
+      if (w == null) {
+        Haptics.denied();
+        return;
+      }
+      final ok = w == m.word;
+      setState(() {
+        _fWordOk = ok;
+        if (ok) _fEarned += c.points;
+      });
+      _answerFeedback(ok);
+      _replayRuleWord();
+      Future<void>.delayed(const Duration(milliseconds: 1300), () {
+        if (mounted && _isFind && _phase == 0) setState(() => _phase = 1);
+      });
+      return;
+    }
+    if (_fLetterOk != null) {
+      _next();
+      return;
+    }
+    final k = _fLetter;
+    if (k == null) {
+      Haptics.denied();
+      return;
+    }
+    final ok = k == _fRightLetter;
+    setState(() {
+      _fLetterOk = ok;
+      _answered++;
+      if (ok) _fEarned += c.points;
+      _points += _fEarned;
+    });
+    _answerFeedback(ok);
+    _fb.forward(from: 0);
+    _replayRuleWord();
+  }
+
   void _confirm() {
     if (_isStep) {
       _next();
+      return;
+    }
+    if (_isFind) {
+      _confirmFind();
       return;
     }
     final c = _content, q = _q;
@@ -454,6 +576,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _index++;
       _pick = null;
       _ok = null;
+      _resetFind();
     });
     _pos.value = 0;
     _lit.value = -1;
@@ -473,6 +596,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _points = 0;
       _pick = null;
       _ok = null;
+      _resetFind();
       _dir = -1;
     });
     _pos.value = 0;
@@ -483,6 +607,15 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     Future<void>.delayed(const Duration(milliseconds: 450), () {
       if (mounted) _play();
     });
+  }
+
+  void _resetFind() {
+    _phase = 0;
+    _fWord = null;
+    _fWordOk = null;
+    _fLetter = null;
+    _fLetterOk = null;
+    _fEarned = 0;
   }
 
   Future<void> _complete() async {
@@ -569,6 +702,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     final q = _q;
     final step = _step;
     final last = _index >= _total - 1;
+    final pending = _find != null
+        ? _fLetterOk == null
+        : step == null && _ok == null;
     return Stack(
       fit: StackFit.expand,
       clipBehavior: Clip.hardEdge,
@@ -639,11 +775,13 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    p.c(RateelColors.listenLine, RateelColors.readLSeparator)
+                    p
+                        .c(RateelColors.listenLine, RateelColors.readLSeparator)
                         .withValues(alpha: 0),
                     p.c(RateelColors.listenLine, RateelColors.readLSeparator),
                     p.c(RateelColors.listenLine, RateelColors.readLSeparator),
-                    p.c(RateelColors.listenLine, RateelColors.readLSeparator)
+                    p
+                        .c(RateelColors.listenLine, RateelColors.readLSeparator)
                         .withValues(alpha: 0),
                   ],
                   stops: const [0, 0.08, 0.92, 1],
@@ -661,11 +799,13 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             height: u * ListenMetrics.pillH,
             child: _enter(3, _swapIn(_ruleRow(p, u, step))),
           ),
+        if (_find != null) ..._findRow(p, u),
         if (q != null) ...[
           Positioned(
             key: const ValueKey('question'),
             right: u * ListenMetrics.qRight,
-            width: u *
+            width:
+                u *
                 (ListenMetrics.pillsRight -
                     ListenMetrics.qRight -
                     ListenMetrics.pillGap),
@@ -686,7 +826,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                       style: readex(
                         u * ListenMetrics.qSize,
                         weight: 600,
-                        color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+                        color: p.c(
+                          RateelColors.leaderText,
+                          RateelColors.readLInk,
+                        ),
                       ).copyWith(height: 1.3),
                     ),
                   ),
@@ -697,7 +840,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           for (var i = 0; i < q.options.length; i++)
             Positioned(
               key: ValueKey('pill$i'),
-              right: u *
+              right:
+                  u *
                   (ListenMetrics.pillsRight +
                       i * (ListenMetrics.pillW + ListenMetrics.pillGap)),
               top: u * (ListenMetrics.rowCy - ListenMetrics.pillH / 2),
@@ -716,12 +860,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             3,
             LessonPill(
               u: u,
-              label: step == null && _ok == null
-                  ? 'تأكيد'
-                  : (last ? 'إنهاء' : 'التالي'),
-              glyph: (step == null && _ok == null) || last
-                  ? PillGlyph.check
-                  : PillGlyph.forward,
+              label: pending ? 'تأكيد' : (last ? 'إنهاء' : 'التالي'),
+              glyph: pending || last ? PillGlyph.check : PillGlyph.forward,
               height: ListenMetrics.confirmH,
               light: p.t,
               onTap: _confirm,
@@ -729,6 +869,142 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           ),
         ),
       ],
+    );
+  }
+
+  /// Bottom row of a «find» page (owner, 2026-11-26): the question on the
+  /// right; phase 0 one wide pill with the word tapped in the verse, phase 1
+  /// the letters of the word, one pill each.
+  List<Widget> _findRow(LessonPal p, double u) {
+    final rule = _content!.rule!;
+    final a = _ayah!;
+    final m = _fMark!;
+    Widget question(String t) => Align(
+      alignment: Alignment.centerRight,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerRight,
+        child: Text(
+          t,
+          textDirection: TextDirection.rtl,
+          maxLines: 1,
+          style: readex(
+            u * ListenMetrics.qSize,
+            weight: 600,
+            color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+          ).copyWith(height: 1.3),
+        ),
+      ),
+    );
+    final top = u * (ListenMetrics.rowCy - ListenMetrics.pillH / 2);
+    return [
+      Positioned(
+        key: const ValueKey('question'),
+        right: u * ListenMetrics.qRight,
+        width:
+            u *
+            (ListenMetrics.pillsRight -
+                ListenMetrics.qRight -
+                ListenMetrics.pillGap),
+        top: u * (ListenMetrics.rowCy - 6.45),
+        height: u * 12,
+        child: _enter(
+          3,
+          _swapIn(
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: KeyedSubtree(
+                key: ValueKey(_phase),
+                child: question(
+                  _phase == 0
+                      ? 'في أيّ كلمة سمعت ${rule.name}؟'
+                      : 'أيّ حرف فيه ${rule.name}؟',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      if (_phase == 0)
+        Positioned(
+          key: const ValueKey('fword'),
+          right: u * ListenMetrics.pillsRight,
+          top: top,
+          width: u * (ListenMetrics.pillW * 2 + ListenMetrics.pillGap),
+          height: u * ListenMetrics.pillH,
+          child: _enter(
+            3,
+            _swapIn(
+              _AnswerPill(
+                u: u,
+                p: p,
+                label: _fWord == null
+                    ? 'اضغط على الكلمة في الآية'
+                    : a.words[_fWord!].text,
+                quran: _fWord != null,
+                hint: _fWord == null,
+                state: _fWordOk == null
+                    ? (_fWord == null ? _PillState.idle : _PillState.selected)
+                    : (_fWordOk! ? _PillState.right : _PillState.wrong),
+                onTap: () {},
+              ),
+            ),
+          ),
+        )
+      else
+        for (final (k, c) in _fClusters.indexed)
+          Positioned(
+            key: ValueKey('fletter$k'),
+            right:
+                u *
+                (ListenMetrics.pillsRight +
+                    k * (ListenMetrics.letterW + ListenMetrics.letterGap)),
+            top: top,
+            width: u * ListenMetrics.letterW,
+            height: u * ListenMetrics.pillH,
+            child: _LetterIn(
+              delay: k,
+              child: _letterPill(
+                p,
+                u,
+                k,
+                a.words[m.word].text.substring(c.$1, c.$2),
+              ),
+            ),
+          ),
+    ];
+  }
+
+  Widget _letterPill(LessonPal p, double u, int k, String letter) {
+    final answered = _fLetterOk != null;
+    final state = !answered
+        ? (_fLetter == k ? _PillState.selected : _PillState.idle)
+        : k == _fRightLetter
+        ? _PillState.right
+        : k == _fLetter
+        ? _PillState.wrong
+        : _PillState.dim;
+    final pill = _AnswerPill(
+      u: u,
+      p: p,
+      label: letter,
+      quran: true,
+      letter: true,
+      state: state,
+      mark: false,
+      onTap: () => _selectLetter(k),
+    );
+    if (state != _PillState.wrong) return pill;
+    return AnimatedBuilder(
+      animation: _shake,
+      child: pill,
+      builder: (context, child) => Transform.translate(
+        offset: Offset(
+          math.sin(_shake.value * math.pi * 6) * u * 1.0 * (1 - _shake.value),
+          0,
+        ),
+        child: child,
+      ),
     );
   }
 
@@ -741,9 +1017,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     return Stack(
       fit: StackFit.expand,
       children: [
-        RepaintBoundary(
-          child: CustomPaint(painter: GoldCardPainter(p, u, r)),
-        ),
+        RepaintBoundary(child: CustomPaint(painter: GoldCardPainter(p, u, r))),
         Positioned(
           left: 0,
           right: 0,
@@ -861,7 +1135,24 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                         opacity: f,
                         child: Transform.translate(
                           offset: Offset(0, u * 2 * (1 - f)),
-                          child: _explanation(p, u, q),
+                          child: _explanation(
+                            p,
+                            u,
+                            ok: _ok!,
+                            lead: _ok!
+                                ? 'أحسنت.'
+                                : 'الإجابة الصحيحة: ${q.correct}.',
+                            text: q.explanation,
+                            points: _ok! ? _content!.points : 0,
+                          ),
+                        ),
+                      ),
+                    if (f > 0 && _fLetterOk != null)
+                      Opacity(
+                        opacity: f,
+                        child: Transform.translate(
+                          offset: Offset(0, u * 2 * (1 - f)),
+                          child: _findExplanation(p, u),
                         ),
                       ),
                   ],
@@ -893,9 +1184,45 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       color: c,
       shadows: p.t > 0.5 ? null : titleShadows(u),
     );
+    final fm = _fMark;
+    // «Find» page: no colours until the answer; then the right letter in the
+    // rule colour, a wrong one red; the chosen letter gold before.
+    Color? findLetter(int k) {
+      if (_fLetterOk == null) return k == _fLetter ? gold : null;
+      if (k == _fRightLetter) return rule;
+      if (k == _fLetter) return RateelColors.testKoDiscTop;
+      return null;
+    }
+
     InlineSpan word(int i, String text) {
       final on = i == lit;
       final colour = i == asked || on ? gold : ink;
+      if (fm != null) {
+        if (_phase == 1 && i == fm.word) {
+          return TextSpan(
+            style: base(colour),
+            children: [
+              for (final (k, c) in letterClusters(text).indexed)
+                TextSpan(
+                  text: text.substring(c.$1, c.$2),
+                  style: TextStyle(
+                    color: findLetter(k),
+                    shadows: _fLetterOk != null && k == _fRightLetter
+                        ? [
+                            Shadow(color: rule, blurRadius: u * 1.2),
+                            Shadow(
+                              color: rule.withValues(alpha: 0.8),
+                              blurRadius: u * 2.6,
+                            ),
+                          ]
+                        : null,
+                  ),
+                ),
+            ],
+          );
+        }
+        return TextSpan(text: text, style: base(colour));
+      }
       final m = step?.markOf(i);
       if (m == null) return TextSpan(text: text, style: base(colour));
       // The rule letter: wheel colour; recited → lighter, with a halo.
@@ -924,42 +1251,98 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       );
     }
 
+    // Light box of a word: recited (gold); on a «find» page also the word
+    // tapped (gold), then the right word green and a wrong one red.
+    Color box(int i) {
+      if (fm != null && _fWordOk != null) {
+        if (i == fm.word) return RateelColors.testOkRim;
+        if (i == _fWord) return RateelColors.testKoRim;
+      }
+      return RateelColors.listenWord;
+    }
+
+    bool boxOn(int i) =>
+        i == lit ||
+        (fm != null &&
+            ((_fWordOk == null && i == _fWord) ||
+                (_fWordOk != null && (i == fm.word || i == _fWord))));
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       textDirection: TextDirection.rtl,
       children: [
         for (final (i, w) in a.words.indexed) ...[
           if (i > 0) SizedBox(width: u * 3.0),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 180),
-            padding: EdgeInsets.symmetric(horizontal: u * 1.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(u * 1.6),
-              color: RateelColors.listenWord.withValues(
-                alpha: i == lit ? 0.16 * (1 - p.t) + 0.2 * p.t : 0,
-              ),
-              border: Border.all(
-                color: RateelColors.listenWord.withValues(
-                  alpha: i == lit ? 0.45 : 0,
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: fm == null ? null : () => _selectWord(i),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              padding: EdgeInsets.symmetric(horizontal: u * 1.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(u * 1.6),
+                color: box(i).withValues(
+                  alpha: boxOn(i) ? 0.18 * (1 - p.t) + 0.2 * p.t : 0,
                 ),
-                width: math.max(1, u * 0.18),
+                border: Border.all(
+                  color: box(i).withValues(alpha: boxOn(i) ? 0.55 : 0),
+                  width: math.max(1, u * 0.18),
+                ),
+                boxShadow: [
+                  if (boxOn(i) && p.t < 0.5)
+                    BoxShadow(
+                      color: box(i).withValues(alpha: 0.25),
+                      blurRadius: u * 1.6,
+                    ),
+                ],
               ),
-              boxShadow: [
-                if (i == lit && p.t < 0.5)
-                  BoxShadow(
-                    color: RateelColors.listenWord.withValues(alpha: 0.25),
-                    blurRadius: u * 1.6,
-                  ),
-              ],
-            ),
-            child: Text.rich(
-              word(i, w.text),
-              textDirection: TextDirection.rtl,
+              child: Text.rich(
+                word(i, w.text),
+                textDirection: TextDirection.rtl,
+              ),
             ),
           ),
         ],
       ],
     );
+  }
+
+  Widget _findExplanation(LessonPal p, double u) {
+    final m = _fMark!;
+    final w = _ayah!.words[m.word].text;
+    final letter = _plain(w.substring(m.from, m.to), keepShadda: true);
+    final word = _plain(w, keepShadda: true);
+    final rule = _content!.rule!.name;
+    return _explanation(
+      p,
+      u,
+      ok: _fLetterOk!,
+      lead: _fLetterOk! ? 'أحسنت.' : 'الحرف الصحيح:',
+      text: _fLetterOk!
+          ? '$rule في حرف «$letter» من كلمة «$word».'
+          : '«$letter» من كلمة «$word».',
+      points: _fEarned,
+    );
+  }
+
+  /// Uthmani word for a line in Readex: without its small marks and with a
+  /// plain alif for the alif wasla.
+  static String _plain(String w, {bool keepShadda = false}) {
+    final b = StringBuffer();
+    for (final c in w.runes) {
+      if (c == 0x0671) {
+        b.writeCharCode(0x0627);
+      } else if (c == 0x0651 && keepShadda) {
+        b.writeCharCode(c);
+      } else if ((c >= 0x064B && c <= 0x065F) ||
+          c == 0x0670 ||
+          (c >= 0x06D6 && c <= 0x06ED)) {
+        continue;
+      } else {
+        b.writeCharCode(c);
+      }
+    }
+    return b.toString();
   }
 
   /// Bottom row of a rule ayah: the rule pill (its colour dot and name) and
@@ -1041,8 +1424,14 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     );
   }
 
-  Widget _explanation(LessonPal p, double u, ListenQuestion q) {
-    final ok = _ok!;
+  Widget _explanation(
+    LessonPal p,
+    double u, {
+    required bool ok,
+    required String lead,
+    required String text,
+    required int points,
+  }) {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     return Center(
       child: Padding(
@@ -1056,23 +1445,26 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
               _MarkDisc(u: u, ok: ok, size: 5.2),
               SizedBox(width: u * 1.8),
               Text(
-                ok ? 'أحسنت.' : 'الإجابة الصحيحة: ${q.correct}.',
+                lead,
                 textDirection: TextDirection.rtl,
                 style: readex(
                   u * 3.6,
                   weight: 600,
                   color: ok
                       ? p.c(RateelColors.testOkText, RateelColors.testLOkRim)
-                      : p.c(RateelColors.testKoDiscTop, RateelColors.testLKoRim),
+                      : p.c(
+                          RateelColors.testKoDiscTop,
+                          RateelColors.testLKoRim,
+                        ),
                 ),
               ),
               SizedBox(width: u * 1.4),
               Text(
-                q.explanation,
+                text,
                 textDirection: TextDirection.rtl,
                 style: readex(u * 3.6, weight: 400, color: ink),
               ),
-              if (ok) ...[
+              if (points > 0) ...[
                 SizedBox(width: u * 2.2),
                 Container(
                   height: u * 5.6,
@@ -1084,7 +1476,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        p.c(RateelColors.testPillTop, RateelColors.testLGoldTop),
+                        p.c(
+                          RateelColors.testPillTop,
+                          RateelColors.testLGoldTop,
+                        ),
                         p.c(
                           RateelColors.testPillBottom,
                           RateelColors.testLGoldBottom,
@@ -1100,7 +1495,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                     ),
                   ),
                   child: Text(
-                    '\u2066+${_content!.points}\u2069 نقطة',
+                    '\u2066+$points\u2069 نقطة',
                     textDirection: TextDirection.rtl,
                     style: readex(
                       u * 3.2,
@@ -1165,11 +1560,27 @@ class _AnswerPill extends StatelessWidget {
     required this.label,
     required this.state,
     required this.onTap,
+    this.quran = false,
+    this.hint = false,
+    this.mark = true,
+    this.letter = false,
   });
+
+  /// A single letter (larger).
+  final bool letter;
 
   final double u;
   final LessonPal p;
   final String label;
+
+  /// Quran text (a word or a letter of the verse): Amiri Quran.
+  final bool quran;
+
+  /// Instruction instead of an answer (softer text).
+  final bool hint;
+
+  /// ✓ / ✕ disc after the answer (not on the small letter pills).
+  final bool mark;
   final _PillState state;
   final VoidCallback onTap;
 
@@ -1210,7 +1621,8 @@ class _AnswerPill extends StatelessWidget {
         rim = p.c(RateelColors.listenPillRim, RateelColors.readLPillRim);
         ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     }
-    final mark = state == _PillState.right || state == _PillState.wrong;
+    final mark =
+        this.mark && (state == _PillState.right || state == _PillState.wrong);
     return Semantics(
       button: true,
       selected: state == _PillState.selected,
@@ -1238,12 +1650,15 @@ class _AnswerPill extends StatelessWidget {
               boxShadow: [
                 if (state == _PillState.selected && p.t < 0.5)
                   BoxShadow(
-                    color: RateelColors.listenGoldBottom.withValues(alpha: 0.35),
+                    color: RateelColors.listenGoldBottom.withValues(
+                      alpha: 0.35,
+                    ),
                     blurRadius: u * 1.6,
                   ),
                 if (p.t > 0)
                   BoxShadow(
-                    color: const Color(0xFF6B4A2A).withValues(alpha: 0.18 * p.t),
+                    color: const Color(0xFF6B4A2A)
+                        .withValues(alpha: 0.18 * p.t),
                     blurRadius: u * 1.0,
                     offset: Offset(0, u * 0.4),
                   ),
@@ -1260,16 +1675,32 @@ class _AnswerPill extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                       child: Padding(
                         // Readex sets Arabic low in its line box (lift).
-                        padding: EdgeInsets.only(bottom: u * 0.45),
+                        padding: EdgeInsets.only(bottom: quran ? 0 : u * 0.45),
                         child: Text(
                           label,
                           textDirection: TextDirection.rtl,
                           maxLines: 1,
-                          style: readex(
-                            u * ListenMetrics.pillText,
-                            weight: state == _PillState.selected ? 700 : 500,
-                            color: ink,
-                          ).copyWith(height: 1.2),
+                          style: quran
+                              ? TextStyle(
+                                  fontFamily: 'AmiriQuran',
+                                  fontSize:
+                                      u *
+                                      ListenMetrics.pillText *
+                                      (letter ? 1.7 : 1.3),
+                                  height: 1.25,
+                                  color: ink,
+                                )
+                              : readex(
+                                  u *
+                                      ListenMetrics.pillText *
+                                      (hint ? 0.82 : 1),
+                                  weight: state == _PillState.selected
+                                      ? 700
+                                      : (hint ? 400 : 500),
+                                  color: hint
+                                      ? ink.withValues(alpha: 0.7)
+                                      : ink,
+                                ).copyWith(height: 1.2),
                         ),
                       ),
                     ),
@@ -1324,8 +1755,14 @@ class _MarkDisc extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: ok
-                    ? const [RateelColors.testOkDiscTop, RateelColors.testOkDisc]
-                    : const [RateelColors.testKoDiscTop, RateelColors.testKoDisc],
+                    ? const [
+                        RateelColors.testOkDiscTop,
+                        RateelColors.testOkDisc,
+                      ]
+                    : const [
+                        RateelColors.testKoDiscTop,
+                        RateelColors.testKoDisc,
+                      ],
               ),
         color: onFill ? Colors.white.withValues(alpha: 0.92) : null,
       ),
@@ -1444,4 +1881,50 @@ class _WavePainter extends CustomPainter {
   @override
   bool shouldRepaint(_WavePainter o) =>
       o.ayah != ayah || o.u != u || o.played != played || o.rest != rest;
+}
+
+/// Letter pills appear one after another when the letter question shows up.
+class _LetterIn extends StatefulWidget {
+  const _LetterIn({required this.delay, required this.child});
+
+  final int delay;
+  final Widget child;
+
+  @override
+  State<_LetterIn> createState() => _LetterInState();
+}
+
+class _LetterInState extends State<_LetterIn>
+    with SingleTickerProviderStateMixin {
+  late final _c = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 320),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    Future<void>.delayed(Duration(milliseconds: 60 * widget.delay), () {
+      if (mounted) _c.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: _c,
+    child: widget.child,
+    builder: (context, child) {
+      final t = Curves.easeOutBack.transform(_c.value);
+      return Opacity(
+        opacity: _c.value,
+        child: Transform.scale(scale: 0.7 + 0.3 * t, child: child),
+      );
+    },
+  );
 }
