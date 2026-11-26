@@ -2822,6 +2822,10 @@ class _Stat {
 }
 
 /// A result number in a column: mark on top, the number, one-line label.
+/// One diameter for the marks of the results numbers (✓, ✕, coin), in u
+/// (owner, 2026-11-26).
+const _statIcon = 4.0;
+
 class _StatColumn extends StatelessWidget {
   const _StatColumn({required this.u, required this.p, required this.stat});
 
@@ -2843,15 +2847,15 @@ class _StatColumn extends StatelessWidget {
               // Owner's gold star coin (2026-11-26).
               Image.asset(
                 'assets/ui/test/star_coin_gold.webp',
-                width: u * 4.2,
-                height: u * 4.2,
+                width: u * _statIcon,
+                height: u * _statIcon,
               )
             else
               _MarkDisc(
                 u: u,
                 ok: stat.mark == _Mark.ok,
                 partial: stat.mark == _Mark.part,
-                d: 3.6,
+                d: _statIcon,
               ),
             SizedBox(width: u * 1.2),
             Text(

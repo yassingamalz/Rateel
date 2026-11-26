@@ -132,3 +132,6 @@ Branch `flutter/10-test-lesson`, created on 2026-11-25 from `master` (8cbe223: P
   Captures `capture-v11-*-phone.jpg`.
 
 - APK 1.0.426 (v11).
+
+## 11. v12: one size for the result marks (2026-11-26)
+- Owner: the coin looked bigger than the ✓ / ✕ discs. All four marks of the numbers now 4u (`_statIcon`; coin 4.2u → 4u, discs 3.6u → 4u). Captures `capture-v12-*-phone.jpg`.
