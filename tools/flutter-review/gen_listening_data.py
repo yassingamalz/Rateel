@@ -89,7 +89,7 @@ def quiz(rows):
              'explanation': e} for a, w, asked, o, c, e in rows]
 
 
-def write(lesson, steps, questions, title, finds=()):
+def write(lesson, steps, questions, title, finds=(), narration=None):
     keys = sorted({a for a, *_ in steps} | {q[0] for q in questions} | {a for a, _ in finds})
     data = {'id': lesson, 'title': title, 'reciter': 'الحصري', 'pointsPerQuestion': 10,
             'rule': {'name': 'الغنة', 'short': 'غنة', 'colour': 'green'} if steps else None,
@@ -98,11 +98,14 @@ def write(lesson, steps, questions, title, finds=()):
                        'note': n} for a, w, n in steps],
             'finds': [{'ayah': a, 'marks': [{'word': w, 'letters': rule_letters(AYAT[a][1].split(' ')[w])}]}
                       for a, w in finds],
-            'questions': quiz(questions)}
+            'questions': quiz(questions),
+            # Guided voice (Gemini TTS Orus, gen_listening_narration.py): keys of audio/narration/orus/<key>.mp3.
+            'narration': narration or {}}
     with open(f'app_flutter/assets/data/listening/{lesson}.json', 'w', encoding='utf-8') as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1)
     print('ok', lesson, len(steps), len(questions))
 
 
-write('listen-ghunna', STEPS, [], 'الاستماع: الغنة', FINDS)
-write('listen-kawthar-ghunna', [], QUIZ, 'اختبار الاستماع: الغنة')
+write('listen-ghunna', STEPS, [], 'الاستماع: الغنة', FINDS,
+      {'intro': 'ghunna-intro', 'find': 'ghunna-find', 'letter': 'ghunna-letter'})
+write('listen-kawthar-ghunna', [], QUIZ, 'اختبار الاستماع: الغنة', narration={'intro': 'quiz-intro'})

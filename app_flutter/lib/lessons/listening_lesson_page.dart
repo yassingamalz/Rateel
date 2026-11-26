@@ -44,7 +44,8 @@ bool listenLitAll = false;
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
 /// (brighter gold with a halo), no box. Review `?wordLight=glow`.
-String listenWordLight = 'glow'; // owner's choice (2026-11-26); 'box' kept for a future user setting
+String listenWordLight =
+    'glow'; // owner's choice (2026-11-26); 'box' kept for a future user setting
 bool get _glow => listenWordLight == 'glow';
 
 void _logAudio(String e) {
@@ -93,7 +94,8 @@ class ListenMetrics {
   static const cardTop = 27.55;
   static double get cardBottom => _playBelow ? 66.7 : 79.0;
   static const cardRadius = 3.6;
-  static double get bandTop => _playBelow ? 24.0 : 35.0; // lattice band, from the card top
+  static double get bandTop =>
+      _playBelow ? 24.0 : 35.0; // lattice band, from the card top
   static const badgeRight = 11.0; // card right edge → badge centre
   static const badgeCy = 7.7; // from the card top
   static const badgeH = 9.4;
@@ -189,6 +191,12 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   );
 
   final _player = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+
+  /// Guided voice (Gemini TTS «Orus», calm style, owner 2026-11-26): short
+  /// lines that help without giving the answer; never Quran text.
+  final _voice = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  Completer<void>? _voiceDone;
+  int _praise = 0;
   final _subs = <StreamSubscription<Object?>>[];
 
   /// Audio position (ms): drives only the waveform painter and the lit word.
@@ -288,6 +296,12 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         }),
       )
       ..add(
+        _voice.onPlayerComplete.listen((_) {
+          final d = _voiceDone;
+          if (d != null && !d.isCompleted) d.complete();
+        }),
+      )
+      ..add(
         _player.onPlayerComplete.listen((_) {
           final a = _ayah;
           _playing.value = false;
@@ -304,9 +318,13 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         if (c != null) _applyReviewAids(c);
       });
       if (c != null && listenStartAt == null && listenStartState == null) {
-        // The verse plays by itself once the page has entered.
-        Future<void>.delayed(const Duration(milliseconds: 700), () {
-          if (mounted && _shell.currentState?.paused != true) _play();
+        // The guide speaks, then the verse plays by itself.
+        Future<void>.delayed(const Duration(milliseconds: 700), () async {
+          if (!mounted || _shell.currentState?.paused == true) return;
+          await _say(c.narration['intro']);
+          if (mounted && _index == 0 && _shell.currentState?.paused != true) {
+            _play();
+          }
         });
       }
     });
@@ -389,6 +407,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       s.cancel();
     }
     _player.dispose();
+    _voice.dispose();
     _pos.dispose();
     _playing.dispose();
     _lit.dispose();
@@ -407,6 +426,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     if (ModalRoute.of(context)?.isCurrent != true) return;
     _left = true;
     _player.stop();
+    _voice.stop();
     Navigator.of(context).pop(done);
   }
 
@@ -425,6 +445,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       // ignored after the end of the verse (the word replay restarted the
       // verse). [_seekTo] corrects a late start in the position listener.
       _source = a.audio;
+      // A new start while the verse is still playing stalled on web: stop
+      // first (the word replay right after an answer).
+      await _player.stop();
       await _player.play(
         AssetSource(a.audio),
         position: Duration(milliseconds: fromMs),
@@ -437,6 +460,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   void _togglePlay() {
     final a = _ayah;
     if (a == null) return;
+    _stopVoice();
     if (_playing.value) {
       _player.pause();
       _playing.value = false;
@@ -486,11 +510,44 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     }
   }
 
-  void _replayRuleWord() {
+  void _replayRuleWord({String? voice}) {
     final w = _ayah!.words[_fMark!.word];
-    Future<void>.delayed(const Duration(milliseconds: 650), () {
-      if (mounted && _isFind) _play(fromMs: w.startMs, toMs: w.endMs + 150);
+    final page = _index;
+    Future<void>.delayed(const Duration(milliseconds: 650), () async {
+      if (voice != null) await _say(voice);
+      if (mounted && _isFind && _index == page) {
+        _play(fromMs: w.startMs, toMs: w.endMs + 150);
+      }
     });
+  }
+
+  /// The guide says line [key] (`audio/narration/orus/<key>.mp3`); completes
+  /// when it has finished (at most 9 s), at once when there is no line.
+  Future<void> _say(String? key) async {
+    if (key == null || !mounted) return;
+    _player.pause();
+    _playing.value = false;
+    final done = _voiceDone = Completer<void>();
+    _logAudio('voice $key');
+    try {
+      await _voice.play(AssetSource('audio/narration/orus/$key.mp3'));
+    } catch (_) {
+      return;
+    }
+    await done.future.timeout(const Duration(seconds: 9), onTimeout: () {});
+  }
+
+  void _stopVoice() {
+    _voice.stop();
+    final d = _voiceDone;
+    if (d != null && !d.isCompleted) d.complete();
+  }
+
+  /// Praise after a right answer (two lines in turn), or the gentle «listen
+  /// again» after a wrong one.
+  String _feedbackLine(bool ok) {
+    if (!ok) return 'wrong-1';
+    return (_praise++).isEven ? 'correct-1' : 'correct-2';
   }
 
   /// «Find» page: first the word (then the letter question appears at once,
@@ -510,9 +567,20 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       });
       _answerFeedback(ok);
       _replayRuleWord();
+      final page = _index;
       Future<void>.delayed(const Duration(milliseconds: 1300), () {
         if (mounted && _isFind && _phase == 0) setState(() => _phase = 1);
       });
+      // Then the guide asks for the letter, once the word has been heard.
+      final rw = _ayah!.words[_fMark!.word];
+      Future<void>.delayed(
+        Duration(milliseconds: 900 + rw.endMs - rw.startMs + 300),
+        () {
+          if (mounted && _index == page && _fLetterOk == null) {
+            _say(_content!.narration['letter']);
+          }
+        },
+      );
       return;
     }
     if (_fLetterOk != null) {
@@ -533,7 +601,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     });
     _answerFeedback(ok);
     _fb.forward(from: 0);
-    _replayRuleWord();
+    _replayRuleWord(voice: _feedbackLine(ok));
   }
 
   void _confirm() {
@@ -573,10 +641,12 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _shake.forward(from: 0);
     }
     _fb.forward(from: 0);
-    // The asked word plays again.
+    // The guide answers, then the asked word plays again.
     final w = q.ayah.words[q.word];
-    Future<void>.delayed(const Duration(milliseconds: 650), () {
-      if (mounted && _ok != null) {
+    final page = _index;
+    Future<void>.delayed(const Duration(milliseconds: 650), () async {
+      await _say(_feedbackLine(ok));
+      if (mounted && _ok != null && _index == page) {
         _play(fromMs: w.startMs, toMs: w.endMs + 150);
       }
     });
@@ -592,6 +662,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     }
     Haptics.tick();
     _player.stop();
+    _stopVoice();
     setState(() {
       _dir = 1;
       _index++;
@@ -604,13 +675,22 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     _playing.value = false;
     _fb.value = 0;
     _swap.forward(from: 0);
-    Future<void>.delayed(const Duration(milliseconds: 450), () {
-      if (mounted && _shell.currentState?.paused != true) _play();
+    final page = _index;
+    Future<void>.delayed(const Duration(milliseconds: 450), () async {
+      if (!mounted || _shell.currentState?.paused == true) return;
+      // Entering the questions: the guide explains them first.
+      if (_index == _nSteps && _nFinds > 0) {
+        await _say(_content!.narration['find']);
+      }
+      if (mounted && _index == page && _shell.currentState?.paused != true) {
+        _play();
+      }
     });
   }
 
   void _restart() {
     _player.stop();
+    _stopVoice();
     setState(() {
       _index = 0;
       _answered = 0;
@@ -643,10 +723,18 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     if (_finishing || _left) return;
     _finishing = true;
     _player.stop();
+    _stopVoice();
     Sounds.passed();
     _logAudio('sfx test_passed');
     Haptics.lessonDone();
-    await _shell.currentState?.celebrate();
+    // The guide closes the lesson while the light runs along the capsule.
+    await Future.wait([
+      Future<void>.delayed(
+        const Duration(milliseconds: 700),
+        () => _say('done'),
+      ),
+      _shell.currentState?.celebrate() ?? Future<void>.value(),
+    ]);
     _leave(true);
   }
 
@@ -697,6 +785,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           onBack: () => _leave(false),
           onRestart: _restart,
           onPausedChanged: (p) {
+            if (p) _stopVoice();
             if (p && _playing.value) {
               _player.pause();
               _playing.value = false;
@@ -842,7 +931,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           Positioned(
             key: const ValueKey('rule'),
             right: u * ListenMetrics.qRight,
-            left: u *
+            left:
+                u *
                 (ListenMetrics.confirmLeft +
                     ListenMetrics.confirmW +
                     (listenPlayPos == 'c' ? 16 : 4)),
@@ -1747,7 +1837,9 @@ class _AnswerPill extends StatelessWidget {
                       child: Padding(
                         // Readex sets Arabic low in its line box (lift).
                         // Amiri sits low in a pill: lift it a little.
-                        padding: EdgeInsets.only(bottom: u * (quran ? 0.9 : 0.45)),
+                        padding: EdgeInsets.only(
+                          bottom: u * (quran ? 0.9 : 0.45),
+                        ),
                         child: Text(
                           label,
                           textDirection: TextDirection.rtl,

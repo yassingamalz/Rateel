@@ -113,7 +113,12 @@ class ListenContent {
     this.rule,
     this.steps = const [],
     this.finds = const [],
+    this.narration = const {},
   });
+
+  /// Guided voice (owner, 2026-11-26: Gemini TTS «Orus», calm style): moment
+  /// (`intro`, `find`, `letter`) → key of `audio/narration/orus/<key>.mp3`.
+  final Map<String, String> narration;
 
   /// End of a rule lesson (owner, 2026-11-26): an ayah plays without colours,
   /// the student taps the word where the rule was heard, then its letter.
@@ -199,6 +204,8 @@ class ListenContent {
               note: '',
             ),
         ],
+        narration: (j['narration'] as Map<String, dynamic>? ?? const {})
+            .map((k, v) => MapEntry(k, v as String)),
         title: j['title'] as String,
         reciter: j['reciter'] as String,
         points: j['pointsPerQuestion'] as int? ?? 10,

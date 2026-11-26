@@ -24,7 +24,7 @@ const { chromium } = require('playwright');
     // Each ayah plays by itself (ghunna letters green, every word lit in turn) → «التالي» → … → 3 «find» questions
     // (tap the word, then its letter; the second one with a wrong letter).
     await p.goto('http://localhost:8765/?lessons=1,1&openLesson=0&logAudio=1' + (process.env.EXTRA || ''), { waitUntil: 'networkidle' });
-    await w(13500);
+    await w(+(process.env.FIRST || 13500));
     // SHORT=1: only the first three ayat (a quick look at the word light).
     if (process.env.SHORT) { for (const ms of [5800, 5800]) { await confirm(); await w(ms); } await c.close(); await b.close(); require('fs').writeFileSync(d + '/audio-events.json', JSON.stringify(events)); return; }
     for (const ms of [5800, 5800, 10300, 11300, 9300, 9800]) { await confirm(); await w(ms); }

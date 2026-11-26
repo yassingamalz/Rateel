@@ -96,3 +96,11 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   also compares the transcription with the line (letters ≥ 85% alike) and rejects incomplete takes. Second audition
   `narrazione-provino-orus-2.mp3`: B (2.5 Pro plain), E (3.1 plain), F (3.1 calm note).
 - Owner: **glowing letters are the default**; the box is kept for a future user setting (BACKLOG).
+
+## 10. Guided voice in the lesson (v12, 2026-11-26)
+- Owner chose **F** (Gemini 3.1 TTS, Orus, calm note). 8 lines generated and checked (all clean at the first take):
+  intro, before the questions, before the letter question, quiz intro, two praises, «لا بأس، استمع مرة أخرى», closing.
+- In the lesson: the guide speaks, then the ayah plays; the recitation pauses while the guide speaks; pause / next /
+  replay stop the guide. Checked headless with the audio log (`?logAudio=1`): order and no overlap.
+- Fix found in the same check: replay of the word stalled when the answer came while the ayah was still playing.
+- No demo video this time (owner); APK for the approval.

@@ -83,6 +83,7 @@ flutter:
     - assets/data/test/
     - assets/data/listening/
     - assets/audio/quran/husary/
+    - assets/audio/narration/orus/
     - assets/ui/listening/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/

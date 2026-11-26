@@ -242,3 +242,4 @@ Comparison of the reference's header assets with the library (owner, 2026-11-26)
 | Font Amiri Quran (verses) | `@fontsource/amiri-quran` 5.3.0 (OFL), arabic subset, woff → ttf | `assets/fonts/AmiriQuran.ttf`, `OFL-AmiriQuran.txt` | first Quran verse of the app (DECISIONS 2026-11-20 🟡 → ✅) |
 | Headphones emblem (H1) | **placeholder**: copy of `ui/lessons/listen.webp` | `assets/ui/listening/headphones.webp` | to replace with the owner's H1 (`prompts/22-listening-lesson/images-v1.txt`) |
 Reused: `ui/reading/{arch,badge_fill,badge_line,lattice_tile}.webp`, `reading/{crescent,star}.svg`, `decor/mosque.webp`.
+| Guided voice, 8 lines | Gemini TTS `gemini-3.1-flash-tts-preview`, voice Orus, calm style (owner's F) | `assets/audio/narration/orus/*.mp3` + `manifest.json` | `tools/flutter-review/gen_listening_narration.py`; texts with full tashkīl, each take transcribed |

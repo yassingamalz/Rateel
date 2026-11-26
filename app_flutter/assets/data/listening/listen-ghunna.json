@@ -779,5 +779,10 @@
    ]
   }
  ],
- "questions": []
+ "questions": [],
+ "narration": {
+  "intro": "ghunna-intro",
+  "find": "ghunna-find",
+  "letter": "ghunna-letter"
+ }
 }
