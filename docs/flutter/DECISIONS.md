@@ -213,3 +213,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | Owner's three star coins (gold, emerald, mint) in the **shared library** (`ui/test/star_coin_*.webp`); the **gold coin replaces the star of the points** in the results of screen 10 (v11); emerald and mint kept for later. | ✅ |
 | 2026-11-26 | **APK 1.0.426**: screen 10 v11 (gold star coin for the points). | ✅ |
 | 2026-11-26 | Screen 10 v12: the marks of the results numbers (✓, partial ✓, ✕, gold coin) share **one diameter, 4u** (owner: the coin looked bigger). | ✅ |
+| 2026-11-26 | **APK 1.0.427**: screen 10 v12 (one size for the result marks). | ✅ |
