@@ -32,14 +32,25 @@ List<Lesson> lessonsOf(String unitId) =>
     _lessonsByUnit[unitId] ?? _mockLessons[unitId] ?? const [];
 
 /// Mock lessons until the data has them (`SCREENS.md`, «mock data»): the
-/// listening lesson of screen 22 in the unit «النون المشددة» (course 02, unit
+/// listening lessons of screen 22 in the unit «النون المشددة» (course 02, unit
 /// 2), which has no lessons in the data.
 const _mockLessons = <String, List<Lesson>>{
   'noon-mushaddad-theory': [
+    // Rule lesson (owner, 2026-11-26): the ayat of سورة الناس with the
+    // ghunna coloured, then 3 questions.
+    Lesson(
+      id: 'listen-ghunna',
+      title: 'الاستماع: الغنة',
+      description: 'استمع إلى الغنة في آيات سورة الناس',
+      type: LessonType.listen,
+      minutes: 5,
+    ),
+    // The first version of screen 22, kept (owner: «mi piace un sacco»): a
+    // listening quiz, later a question type of the tests (BACKLOG).
     Lesson(
       id: 'listen-kawthar-ghunna',
-      title: 'الاستماع: الغنة',
-      description: 'استمع إلى سورة الكوثر وتعرّف على الغنة',
+      title: 'اختبار الاستماع',
+      description: 'استمع إلى سورة الكوثر وأجب عن الأسئلة',
       type: LessonType.listen,
       minutes: 5,
     ),

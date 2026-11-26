@@ -238,7 +238,7 @@ Comparison of the reference's header assets with the library (owner, 2026-11-26)
 ## Screen 22, listening lesson (2026-11-26)
 | Asset | Source | App copy | Note |
 |---|---|---|---|
-| Husary recitation, سورة الكوثر 108:1–3 | everyayah.com `Husary_128kbps` (owner, Q1 A) | `assets/audio/quran/husary/10800{1,2,3}.mp3` | mock lesson; release: stream with the reciter of the settings (`BACKLOG.md`) |
+| Husary recitation, سورة الكوثر 108:1–3 and سورة الناس 114:1–6 | everyayah.com `Husary_128kbps` (owner, Q1 A) | `assets/audio/quran/husary/10800{1,2,3}.mp3`, `11400{1..6}.mp3` | mock lesson; release: stream with the reciter of the settings (`BACKLOG.md`) |
 | Font Amiri Quran (verses) | `@fontsource/amiri-quran` 5.3.0 (OFL), arabic subset, woff → ttf | `assets/fonts/AmiriQuran.ttf`, `OFL-AmiriQuran.txt` | first Quran verse of the app (DECISIONS 2026-11-20 🟡 → ✅) |
 | Headphones emblem (H1) | **placeholder**: copy of `ui/lessons/listen.webp` | `assets/ui/listening/headphones.webp` | to replace with the owner's H1 (`prompts/22-listening-lesson/images-v1.txt`) |
 Reused: `ui/reading/{arch,badge_fill,badge_line,lattice_tile}.webp`, `reading/{crescent,star}.svg`, `decor/mosque.webp`.

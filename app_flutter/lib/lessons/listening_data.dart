@@ -66,13 +66,41 @@ class ListenQuestion {
   final String explanation;
 }
 
+/// The tajweed rule a listening lesson teaches (owner, 2026-11-26): its
+/// words are coloured with the wheel colour ([colour], key of
+/// `TajweedColors`).
+class ListenRule {
+  const ListenRule(this.name, this.short, this.colour);
+
+  final String name;
+  final String short;
+  final String colour;
+}
+
+/// One ayah of a rule lesson: [words] hold the rule (coloured), [note] says
+/// where it is.
+class ListenStep {
+  const ListenStep({required this.ayah, required this.words, required this.note});
+
+  final ListenAyah ayah;
+  final List<int> words;
+  final String note;
+}
+
 class ListenContent {
   const ListenContent({
     required this.title,
     required this.reciter,
     required this.points,
     required this.questions,
+    this.rule,
+    this.steps = const [],
   });
+
+  /// Rule lesson: the ayat with the rule first ([steps]), then [questions] as a
+  /// short check. Without a rule: a listening quiz (questions only).
+  final ListenRule? rule;
+  final List<ListenStep> steps;
 
   final String title;
   final String reciter;
@@ -106,7 +134,24 @@ class ListenContent {
             peaks: [for (final p in a['peaks'] as List) (p as num).toDouble()],
           ),
       };
+      final r = j['rule'] as Map<String, dynamic>?;
       return ListenContent(
+        rule: r == null
+            ? null
+            : ListenRule(
+                r['name'] as String,
+                r['short'] as String,
+                r['colour'] as String,
+              ),
+        steps: [
+          for (final s in (j['steps'] as List? ?? const [])
+              .cast<Map<String, dynamic>>())
+            ListenStep(
+              ayah: ayat[s['ayah'] as String]!,
+              words: (s['words'] as List).cast<int>(),
+              note: s['note'] as String,
+            ),
+        ],
         title: j['title'] as String,
         reciter: j['reciter'] as String,
         points: j['pointsPerQuestion'] as int? ?? 10,

@@ -1,8 +1,9 @@
 {
  "id": "listen-kawthar-ghunna",
- "title": "الاستماع: الغنة",
+ "title": "اختبار الاستماع: الغنة",
  "reciter": "الحصري",
  "pointsPerQuestion": 10,
+ "rule": null,
  "ayat": [
   {
    "id": "108001",
@@ -10,7 +11,6 @@
    "ayah": 1,
    "audio": "audio/quran/husary/108001.mp3",
    "durationMs": 8933,
-   "waveStartMs": 197,
    "words": [
     {
      "text": "إِنَّآ",
@@ -88,7 +88,6 @@
    "ayah": 2,
    "audio": "audio/quran/husary/108002.mp3",
    "durationMs": 5799,
-   "waveStartMs": 68,
    "words": [
     {
      "text": "فَصَلِّ",
@@ -166,7 +165,6 @@
    "ayah": 3,
    "audio": "audio/quran/husary/108003.mp3",
    "durationMs": 7836,
-   "waveStartMs": 78,
    "words": [
     {
      "text": "إِنَّ",
@@ -244,6 +242,7 @@
    ]
   }
  ],
+ "steps": [],
  "questions": [
   {
    "ayah": "108001",

@@ -12,7 +12,7 @@ import 'lesson_decor.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'listening_data.dart';
-import 'reading_data.dart' show readingLight;
+import 'reading_data.dart' show readingLight, TajweedColors;
 import 'reading_lesson_page.dart' show readingStartLight, ReadMetrics;
 
 /// Review aids (screen 22): `?listenQ=2` opens question 2 (0-based),
@@ -186,7 +186,26 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   bool _finishing = false;
   bool _left = false;
 
-  ListenQuestion? get _q => _content?.questions[_index];
+  // Pages: the ayat of the rule first (rule lesson), then the questions.
+  int get _nSteps => _content?.steps.length ?? 0;
+  int get _total => _nSteps + (_content?.questions.length ?? 0);
+  bool get _isStep => _index < _nSteps;
+  ListenStep? get _step => _isStep ? _content?.steps[_index] : null;
+  ListenQuestion? get _q =>
+      _content == null || _isStep ? null : _content!.questions[_index - _nSteps];
+  ListenAyah? get _ayah => _step?.ayah ?? _q?.ayah;
+
+  /// Colour of the rule's words (the tajweed wheel, `DESIGN-SYSTEM.md`).
+  Color get _ruleColour => switch (_content?.rule?.colour) {
+    'cyan' => TajweedColors.qalqala,
+    'red' => TajweedColors.maddWajib,
+    'orange' => TajweedColors.maddArid,
+    'purple' => TajweedColors.maddLazim,
+    'yellow' => TajweedColors.maddSila,
+    'blue' => TajweedColors.tafkhim,
+    'grey' => TajweedColors.silent,
+    _ => TajweedColors.ghunna,
+  };
 
   /// Points earned in this lesson (for the end of lesson, screen 24).
   int get points => _points;
@@ -213,8 +232,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           }
           _pos.value = ms;
           _logAudio('pos $_source $ms');
-          final q = _q;
-          if (q != null) _lit.value = q.ayah.wordAt(ms);
+          final a = _ayah;
+          if (a != null) _lit.value = a.wordAt(ms);
           final stop = _stopAt;
           if (stop != null && ms >= stop) {
             _stopAt = null;
@@ -226,11 +245,11 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       )
       ..add(
         _player.onPlayerComplete.listen((_) {
-          final q = _q;
+          final a = _ayah;
           _playing.value = false;
           _lit.value = -1;
           _stopAt = null;
-          if (q != null) _pos.value = q.ayah.durationMs;
+          if (a != null) _pos.value = a.durationMs;
         }),
       );
     ListenContent.load(widget.lesson.id).then((c) {
@@ -250,14 +269,16 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   }
 
   void _applyReviewAids(ListenContent c) {
-    _index = listenStartQuestion.clamp(0, c.questions.length - 1);
+    _index = listenStartQuestion.clamp(0, _total - 1);
     _answered = _index;
-    final q = c.questions[_index];
+    final a = _ayah!;
     final at = listenStartAt;
     if (at != null) {
-      _pos.value = (q.ayah.durationMs * at).round();
-      _lit.value = q.ayah.wordAt(_pos.value);
+      _pos.value = (a.durationMs * at).round();
+      _lit.value = a.wordAt(_pos.value);
     }
+    final q = _q;
+    if (q == null) return;
     final pick = listenStartPick;
     if (pick != null && pick < q.options.length) _pick = pick;
     final s = listenStartState;
@@ -330,8 +351,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   /// Plays the verse of the current question from [fromMs]; with [toMs] it
   /// stops there (the asked word after an answer).
   Future<void> _play({int fromMs = 0, int? toMs}) async {
-    final q = _q;
-    if (q == null) return;
+    final a = _ayah;
+    if (a == null) return;
     _stopAt = toMs;
     _playing.value = true;
     _seekTo = fromMs > 0 ? fromMs : null;
@@ -339,9 +360,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       // play(position:) starts there; a seek before resume() was sometimes
       // ignored after the end of the verse (the word replay restarted the
       // verse). [_seekTo] corrects a late start in the position listener.
-      _source = q.ayah.audio;
+      _source = a.audio;
       await _player.play(
-        AssetSource(q.ayah.audio),
+        AssetSource(a.audio),
         position: Duration(milliseconds: fromMs),
       );
     } catch (_) {
@@ -350,8 +371,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   }
 
   void _togglePlay() {
-    final q = _q;
-    if (q == null) return;
+    final a = _ayah;
+    if (a == null) return;
     if (_playing.value) {
       _player.pause();
       _playing.value = false;
@@ -359,7 +380,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       return;
     }
     // From the start when it had ended (or after the word replay).
-    final atEnd = _pos.value >= q.ayah.durationMs - 150 || _pos.value == 0;
+    final atEnd = _pos.value >= a.durationMs - 150 || _pos.value == 0;
     if (atEnd || _ok != null) {
       _play();
     } else {
@@ -377,6 +398,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   }
 
   void _confirm() {
+    if (_isStep) {
+      _next();
+      return;
+    }
     final c = _content, q = _q;
     if (c == null || q == null) return;
     if (_ok != null) {
@@ -417,19 +442,18 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   void _next() {
     final c = _content;
     if (c == null || _finishing) return;
-    if (_index >= c.questions.length - 1) {
+    if (_isStep) _answered++; // an ayah of the rule has been heard
+    if (_index >= _total - 1) {
       _complete();
       return;
     }
     Haptics.tick();
     _player.stop();
-    final same = c.questions[_index + 1].ayah.id == _q!.ayah.id;
     setState(() {
       _dir = 1;
       _index++;
       _pick = null;
       _ok = null;
-      if (!same) _pos.value = 0;
     });
     _pos.value = 0;
     _lit.value = -1;
@@ -514,7 +538,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         return LessonShell(
           key: _shell,
           step: _answered,
-          total: _content?.questions.length ?? 1,
+          total: math.max(1, _total),
           light: light,
           onBack: () => _leave(false),
           onRestart: _restart,
@@ -543,6 +567,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       u * ListenMetrics.cardBottom,
     );
     final q = _q;
+    final step = _step;
+    final last = _index >= _total - 1;
     return Stack(
       fit: StackFit.expand,
       clipBehavior: Clip.hardEdge,
@@ -626,6 +652,15 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             ),
           ),
         ),
+        if (step != null)
+          Positioned(
+            key: const ValueKey('rule'),
+            right: u * ListenMetrics.qRight,
+            left: u * (ListenMetrics.confirmLeft + ListenMetrics.confirmW + 4),
+            top: u * (ListenMetrics.rowCy - ListenMetrics.pillH / 2),
+            height: u * ListenMetrics.pillH,
+            child: _enter(3, _swapIn(_ruleRow(p, u, step))),
+          ),
         if (q != null) ...[
           Positioned(
             key: const ValueKey('question'),
@@ -681,12 +716,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             3,
             LessonPill(
               u: u,
-              label: _ok == null
+              label: step == null && _ok == null
                   ? 'تأكيد'
-                  : (_index >= (_content?.questions.length ?? 1) - 1
-                        ? 'إنهاء'
-                        : 'التالي'),
-              glyph: _ok == null || _index >= (_content?.questions.length ?? 1) - 1
+                  : (last ? 'إنهاء' : 'التالي'),
+              glyph: (step == null && _ok == null) || last
                   ? PillGlyph.check
                   : PillGlyph.forward,
               height: ListenMetrics.confirmH,
@@ -704,6 +737,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   Widget _card(LessonPal p, double u, Rect card) {
     final r = u * ListenMetrics.cardRadius;
     final q = _q;
+    final a = _ayah;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -733,7 +767,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             ),
           ),
         ),
-        if (q == null)
+        if (a == null)
           Center(
             child: Text(
               _loaded ? 'عذراً، لا يمكن تحميل محتوى الدرس' : '',
@@ -759,7 +793,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
             height: u * 6,
             child: Center(
               child: Text(
-                '${q.ayah.surah} · ${_content!.reciter}',
+                '${a.surah} · ${_content!.reciter}',
                 textDirection: TextDirection.rtl,
                 style: readex(
                   u * ListenMetrics.surahSize,
@@ -781,7 +815,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                     fit: BoxFit.scaleDown,
                     child: ValueListenableBuilder<int>(
                       valueListenable: _lit,
-                      builder: (context, lit, _) => _verse(p, u, q, lit),
+                      builder: (context, lit, _) => _verse(p, u, a, lit),
                     ),
                   ),
                 ),
@@ -808,7 +842,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                           child: CustomPaint(
                             painter: _WavePainter(
                               pos: _pos,
-                              ayah: q.ayah,
+                              ayah: a,
                               u: u,
                               played: p.c(
                                 RateelColors.listenWavePlayed,
@@ -822,7 +856,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                           ),
                         ),
                       ),
-                    if (f > 0 && _ok != null)
+                    if (f > 0 && _ok != null && q != null)
                       Opacity(
                         opacity: f,
                         child: Transform.translate(
@@ -840,34 +874,43 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     );
   }
 
-  /// The verse word by word (RTL): the asked word in gold; the word being
-  /// recited lights up in a soft gold box (lesson-production video).
-  Widget _verse(LessonPal p, double u, ListenQuestion q, int lit) {
+  /// The verse word by word (RTL). Rule lesson: the rule's words in their
+  /// tajweed colour from the start (owner, 2026-11-26); quiz: the asked word
+  /// in gold (a colour would give the answer away). Every word lights up in a
+  /// soft gold box while it is recited (lesson-production video).
+  Widget _verse(LessonPal p, double u, ListenAyah a, int lit) {
     final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
     final gold = p.c(RateelColors.listenWord, RateelColors.readLTitle);
+    final rule = _step?.words ?? const <int>[];
+    final asked = _q?.word;
+    Color colour(int i) => rule.contains(i)
+        ? _ruleColour
+        : (i == asked || i == lit ? gold : ink);
+    Color glow(int i) =>
+        rule.contains(i) ? _ruleColour : RateelColors.listenWord;
     return Row(
       mainAxisSize: MainAxisSize.min,
       textDirection: TextDirection.rtl,
       children: [
-        for (final (i, w) in q.ayah.words.indexed) ...[
+        for (final (i, w) in a.words.indexed) ...[
           if (i > 0) SizedBox(width: u * 3.0),
           AnimatedContainer(
             duration: const Duration(milliseconds: 180),
             padding: EdgeInsets.symmetric(horizontal: u * 1.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(u * 1.6),
-              color: (i == lit ? RateelColors.listenWord : Colors.transparent)
-                  .withValues(alpha: i == lit ? 0.16 * (1 - p.t) + 0.2 * p.t : 0),
+              // The light takes the rule's colour on a rule word.
+              color: glow(i).withValues(
+                alpha: i == lit ? 0.16 * (1 - p.t) + 0.2 * p.t : 0,
+              ),
               border: Border.all(
-                color: RateelColors.listenWord.withValues(
-                  alpha: i == lit ? 0.45 : 0,
-                ),
+                color: glow(i).withValues(alpha: i == lit ? 0.5 : 0),
                 width: math.max(1, u * 0.18),
               ),
               boxShadow: [
                 if (i == lit && p.t < 0.5)
                   BoxShadow(
-                    color: RateelColors.listenWord.withValues(alpha: 0.25),
+                    color: glow(i).withValues(alpha: 0.28),
                     blurRadius: u * 1.6,
                   ),
               ],
@@ -879,12 +922,91 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                 fontFamily: 'AmiriQuran',
                 fontSize: u * ListenMetrics.verseSize,
                 height: 1.3,
-                color: i == q.word || i == lit ? gold : ink,
+                color: colour(i),
                 shadows: p.t > 0.5 ? null : titleShadows(u),
               ),
             ),
           ),
         ],
+      ],
+    );
+  }
+
+  /// Bottom row of a rule ayah: the rule pill (its colour dot and name) and
+  /// one line saying where the rule is.
+  Widget _ruleRow(LessonPal p, double u, ListenStep step) {
+    final rule = _content!.rule!;
+    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    final h = u * ListenMetrics.pillH;
+    return Row(
+      textDirection: TextDirection.rtl,
+      children: [
+        Container(
+          height: h,
+          padding: EdgeInsets.symmetric(horizontal: u * 3.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(h / 2),
+            color: p.c(RateelColors.listenPillFill, RateelColors.readLPillFill),
+            border: Border.all(
+              color: _ruleColour,
+              width: math.max(1, u * ListenMetrics.pillRim),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            textDirection: TextDirection.rtl,
+            children: [
+              Container(
+                width: u * 2.6,
+                height: u * 2.6,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _ruleColour,
+                  boxShadow: [
+                    if (p.t < 0.5)
+                      BoxShadow(
+                        color: _ruleColour.withValues(alpha: 0.5),
+                        blurRadius: u * 1.0,
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(width: u * 1.6),
+              Padding(
+                padding: EdgeInsets.only(bottom: u * 0.45),
+                child: Text(
+                  rule.name,
+                  textDirection: TextDirection.rtl,
+                  style: readex(
+                    u * ListenMetrics.pillText,
+                    weight: 600,
+                    color: ink,
+                  ).copyWith(height: 1.2),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(width: u * 3.0),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerRight,
+              child: Text(
+                step.note,
+                textDirection: TextDirection.rtl,
+                maxLines: 1,
+                style: readex(
+                  u * ListenMetrics.qSize * 0.9,
+                  weight: 500,
+                  color: ink,
+                ).copyWith(height: 1.3),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

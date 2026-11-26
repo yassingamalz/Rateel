@@ -1,6 +1,6 @@
 # Screen 22: listening lesson (درس الاستماع)
 
-Status: **v5 built** (2026-11-26), answers Q1–Q10 in `22-listening-lesson/HISTORY.md` §2; lesson type confirmed by the owner (2026-11-25): a separate lesson of type `listen`, not part of the tests.
+Status: **v7: rule lesson** (owner, 2026-11-26, see «Redefinition» at the end) · v5 built (2026-11-26), answers Q1–Q10 in `22-listening-lesson/HISTORY.md` §2; lesson type confirmed by the owner (2026-11-25): a separate lesson of type `listen`, not part of the tests.
 Reference: **`screens/22-listening-lesson/22-lezione-ascolto.webp`** (owner, 2026-11-25, generated with
 `prompts/22-listening-lesson/reference-v2.txt` from the app screenshots; v1 with the old ChatGPT images is superseded). Plan to be shown to the owner before building.
 Build order: after 10/10b (test and answer feedback), reusing their widgets.
@@ -97,3 +97,13 @@ Text at 110% (`?textScale=1.1`) checked on the bottom row and the verse.
 Q1 audio source (everyayah.com is blocked in the container) · Q2 word times by hand for the mock · Q3 answers side by side ·
 Q4 «tap the word» questions now or later · Q5 points · Q6 feedback style · Q7 verse font · Q8 headphones asset ·
 Q9 glyph of «تأكيد» · Q10 light theme · Q11 assets list.
+
+---
+
+## Redefinition (owner, 2026-11-26) → v7
+- **Listening lesson = one rule, several ayat.** Each ayah plays by itself; the rule's words are coloured from the start
+  with the tajweed wheel colour (ghunna = green #43B76E); every word lights up while it is recited (the light box takes the
+  rule colour on a rule word); bottom row: rule pill (colour dot + name), one line saying where the rule is, «التالي».
+- **2–3 questions at the end** with the quiz UI of v5 (asked word in gold, not in the rule colour: it would give the answer).
+- The **v5 quiz stays** as a second lesson «اختبار الاستماع»; as a test question type → `BACKLOG.md`.
+- Data: `listen-ghunna.json` (`rule`, `steps: [{ayah, words, note}]`, `questions`); `tools/flutter-review/gen_listening_data.py`.

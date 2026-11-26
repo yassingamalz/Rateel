@@ -47,3 +47,12 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
 - Bug found while rebuilding the sound: after an answer the asked word sometimes did not replay alone, the verse restarted
   from the beginning (a seek before `resume()` was ignored after the end of the verse). Fixed with `play(position:)` and a
   late-start correction in the position listener.
+
+## 5. Redefinition: rule lesson (v7, 2026-11-26)
+- Owner: the listening lesson must focus on **one rule** and play **several ayat** that contain it, with the rule's words
+  **coloured with the tajweed wheel colour**; what was built (listen, then answer) fits the tests better, keep it.
+  Answers: words coloured from the start and every word lit while recited; «التالي» to go on; 2–3 questions at the end;
+  quiz in the tests → backlog, but keep it on the branch; no new reference, the style is fine.
+- Built: lesson `listen-ghunna` = سورة الناس 1–6 (Husary, word times by hand on the energy envelope) + الكوثر 1, rule words
+  النّاس / الخنّاس / الجنّة / إنّا in green; bottom row rule pill + note + «التالي»; then 3 questions (إنّا غنة, الأبتر قلقلة,
+  وانحر إظهار). The v5 quiz is lesson 2 «اختبار الاستماع». Capture sheet `capture-v7-rule.jpg`, demo with sound `demo-v7-rule-audio.mp4`.

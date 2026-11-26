@@ -65,7 +65,11 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
 - [ ] **Real listening lessons** in the data (today one mock lesson, سورة الكوثر, in the unit «النون المشددة»).
 - [ ] Points (+10) are counted in the lesson only: show them at the end of the lesson (screen 24) and save them.
-- [ ] The same audio question as a question type inside tests (10), idea of 2026-11-25.
+- [ ] **Listening quiz as a question type of the tests (10)** (owner, 2026-11-26): the first version of 22 (listen, then
+      «what did you hear in the word X?») stays on the branch as the lesson «اختبار الاستماع»; move it into the tests (and/or
+      audio test lessons) later.
+- [ ] Rule lessons for the other rules (qalqala, madd, ikhfa, …) with their wheel colours: data only (the page reads
+      `rule.colour`).
 
 ## Screen 01, splash (merged into `master` 2026-11-26)
 - [ ] Owner review on a physical phone, including the native launch handoff. Browser capture:
