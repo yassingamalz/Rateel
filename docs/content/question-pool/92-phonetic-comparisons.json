@@ -1,0 +1,940 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Non-Quranic teaching tokens, not altered recitation. Teacher must verify pronounceability of isolated shadda tokens and supply a suitable carrier syllable if needed. No automatic scoring of pronunciation.",
+  "tasks": [
+    {
+      "id": "U3.L2.POOL92.P1",
+      "topicId": "U3.L2",
+      "type": "audioComparison",
+      "objective": "جريان النفس",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَسْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَزْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "السين مهموسة والزاي مجهورة في اصطلاح التجويد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L3.POOL92.P2",
+      "topicId": "U3.L3",
+      "type": "audioComparison",
+      "objective": "جريان الصوت",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَقْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَسْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "القاف شديدة والسين رخوة.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L3.POOL92.P3",
+      "topicId": "U3.L3",
+      "type": "audioComparison",
+      "objective": "التوسط والرخاوة",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَلْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَسْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "اللام متوسطة والسين رخوة.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L4.POOL92.P4",
+      "topicId": "U3.L4",
+      "type": "audioComparison",
+      "objective": "الاستفال والاستعلاء",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "سَ"
+        },
+        {
+          "id": "B",
+          "textAr": "صَ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "السين مستفلة والصاد مستعلية.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L4.POOL92.P5",
+      "topicId": "U3.L4",
+      "type": "audioComparison",
+      "objective": "الاستفال والاستعلاء",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "تَ"
+        },
+        {
+          "id": "B",
+          "textAr": "طَ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "التاء مستفلة والطاء مستعلية.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L5.POOL92.P6",
+      "topicId": "U3.L5",
+      "type": "audioComparison",
+      "objective": "الانفتاح والإطباق",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "قَ"
+        },
+        {
+          "id": "B",
+          "textAr": "طَ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "القاف منفتحة والطاء مطبقة.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L5.POOL92.P7",
+      "topicId": "U2.L5",
+      "type": "audioComparison",
+      "objective": "المخرج الشفوي",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "فَ"
+        },
+        {
+          "id": "B",
+          "textAr": "بَ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الفاء مع الثنايا العليا والباء من الشفتين.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L3.POOL92.P8",
+      "topicId": "U2.L3",
+      "type": "audioComparison",
+      "objective": "موضع الحلق",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَهْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَحْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الهاء من أقصى الحلق والحاء من وسطه.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L3.POOL92.P9",
+      "topicId": "U2.L3",
+      "type": "audioComparison",
+      "objective": "موضع الحلق",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَحْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَخْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الحاء من وسط الحلق والخاء من أدناه.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L4.POOL92.P10",
+      "topicId": "U2.L4",
+      "type": "audioComparison",
+      "objective": "مخرجا القاف والكاف",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَقْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَكْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "كلاهما من أقصى اللسان مع اختلاف الموضع.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L4.POOL92.P11",
+      "topicId": "U2.L4",
+      "type": "audioComparison",
+      "objective": "الصفات",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "ذَ"
+        },
+        {
+          "id": "B",
+          "textAr": "ظَ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "يشتركان في المخرج وتختلف بعض صفاتهما.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L8.POOL92.P12",
+      "topicId": "U3.L8",
+      "type": "audioComparison",
+      "objective": "القلقلة والغنة",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "أَبْ"
+        },
+        {
+          "id": "B",
+          "textAr": "أَمْ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الباء الساكنة فيها قلقلة والميم تلازمها الغنة.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L10.POOL92.P13",
+      "topicId": "U3.L10",
+      "type": "audioComparison",
+      "objective": "مراتب الغنة",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "نَ"
+        },
+        {
+          "id": "B",
+          "textAr": "نَّ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الغنة في المشددة أكمل.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L10.POOL92.P14",
+      "topicId": "U3.L10",
+      "type": "audioComparison",
+      "objective": "مراتب الغنة",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "مَ"
+        },
+        {
+          "id": "B",
+          "textAr": "مَّ"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الغنة في المشددة أكمل.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.P15",
+      "topicId": "U7.L1",
+      "type": "audioComparison",
+      "objective": "الحركة والمد",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "بَ"
+        },
+        {
+          "id": "B",
+          "textAr": "بَا"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن ألف مد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.P16",
+      "topicId": "U7.L1",
+      "type": "audioComparison",
+      "objective": "الحركة والمد",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "بُ"
+        },
+        {
+          "id": "B",
+          "textAr": "بُو"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن واو مد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.P17",
+      "topicId": "U7.L1",
+      "type": "audioComparison",
+      "objective": "الحركة والمد",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "بِ"
+        },
+        {
+          "id": "B",
+          "textAr": "بِي"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن ياء مد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U6.L7.POOL92.P18",
+      "topicId": "U6.L7",
+      "type": "audioComparison",
+      "objective": "اللين والمد",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "بَوْ"
+        },
+        {
+          "id": "B",
+          "textAr": "بُو"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الواو الأولى حرف لين والثانية حرف مد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U6.L7.POOL92.P19",
+      "topicId": "U6.L7",
+      "type": "audioComparison",
+      "objective": "اللين والمد",
+      "models": [
+        {
+          "id": "A",
+          "textAr": "بَيْ"
+        },
+        {
+          "id": "B",
+          "textAr": "بِي"
+        }
+      ],
+      "mediaRequest": {
+        "kind": "qualified_teacher_recording",
+        "nonQuran": true,
+        "assetIds": [],
+        "review": "pending"
+      },
+      "instructionAr": "استمع إلى النموذجين ثم ردد كل نموذج على حدة، وحدد الفرق في الأداء.",
+      "feedbackAr": "الياء الأولى حرف لين والثانية حرف مد.",
+      "assessment": "teacher_or_self",
+      "status": "blocked_until_verified_recordings"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U3.L2.POOL92.Q1",
+      "topicId": "U3.L2",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L2.POOL92.P1:A",
+          "right": "أَسْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L2.POOL92.P1:B",
+          "right": "أَزْ"
+        }
+      ],
+      "feedbackAr": "السين مهموسة والزاي مجهورة في اصطلاح التجويد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L2-0",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L3.POOL92.Q2",
+      "topicId": "U3.L3",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L3.POOL92.P2:A",
+          "right": "أَقْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L3.POOL92.P2:B",
+          "right": "أَسْ"
+        }
+      ],
+      "feedbackAr": "القاف شديدة والسين رخوة.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L3-1",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L3.POOL92.Q3",
+      "topicId": "U3.L3",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L3.POOL92.P3:A",
+          "right": "أَلْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L3.POOL92.P3:B",
+          "right": "أَسْ"
+        }
+      ],
+      "feedbackAr": "اللام متوسطة والسين رخوة.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L3-2",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L4.POOL92.Q4",
+      "topicId": "U3.L4",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L4.POOL92.P4:A",
+          "right": "سَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L4.POOL92.P4:B",
+          "right": "صَ"
+        }
+      ],
+      "feedbackAr": "السين مستفلة والصاد مستعلية.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L4-3",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L4.POOL92.Q5",
+      "topicId": "U3.L4",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L4.POOL92.P5:A",
+          "right": "تَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L4.POOL92.P5:B",
+          "right": "طَ"
+        }
+      ],
+      "feedbackAr": "التاء مستفلة والطاء مستعلية.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L4-4",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L5.POOL92.Q6",
+      "topicId": "U3.L5",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L5.POOL92.P6:A",
+          "right": "قَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L5.POOL92.P6:B",
+          "right": "طَ"
+        }
+      ],
+      "feedbackAr": "القاف منفتحة والطاء مطبقة.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L5-5",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L5.POOL92.Q7",
+      "topicId": "U2.L5",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U2.L5.POOL92.P7:A",
+          "right": "فَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U2.L5.POOL92.P7:B",
+          "right": "بَ"
+        }
+      ],
+      "feedbackAr": "الفاء مع الثنايا العليا والباء من الشفتين.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U2.L5-6",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L3.POOL92.Q8",
+      "topicId": "U2.L3",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U2.L3.POOL92.P8:A",
+          "right": "أَهْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U2.L3.POOL92.P8:B",
+          "right": "أَحْ"
+        }
+      ],
+      "feedbackAr": "الهاء من أقصى الحلق والحاء من وسطه.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U2.L3-7",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L3.POOL92.Q9",
+      "topicId": "U2.L3",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U2.L3.POOL92.P9:A",
+          "right": "أَحْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U2.L3.POOL92.P9:B",
+          "right": "أَخْ"
+        }
+      ],
+      "feedbackAr": "الحاء من وسط الحلق والخاء من أدناه.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U2.L3-8",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L4.POOL92.Q10",
+      "topicId": "U2.L4",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U2.L4.POOL92.P10:A",
+          "right": "أَقْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U2.L4.POOL92.P10:B",
+          "right": "أَكْ"
+        }
+      ],
+      "feedbackAr": "كلاهما من أقصى اللسان مع اختلاف الموضع.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U2.L4-9",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U2.L4.POOL92.Q11",
+      "topicId": "U2.L4",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U2.L4.POOL92.P11:A",
+          "right": "ذَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U2.L4.POOL92.P11:B",
+          "right": "ظَ"
+        }
+      ],
+      "feedbackAr": "يشتركان في المخرج وتختلف بعض صفاتهما.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U2.L4-10",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L8.POOL92.Q12",
+      "topicId": "U3.L8",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L8.POOL92.P12:A",
+          "right": "أَبْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L8.POOL92.P12:B",
+          "right": "أَمْ"
+        }
+      ],
+      "feedbackAr": "الباء الساكنة فيها قلقلة والميم تلازمها الغنة.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L8-11",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L10.POOL92.Q13",
+      "topicId": "U3.L10",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L10.POOL92.P13:A",
+          "right": "نَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L10.POOL92.P13:B",
+          "right": "نَّ"
+        }
+      ],
+      "feedbackAr": "الغنة في المشددة أكمل.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L10-12",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U3.L10.POOL92.Q14",
+      "topicId": "U3.L10",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U3.L10.POOL92.P14:A",
+          "right": "مَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U3.L10.POOL92.P14:B",
+          "right": "مَّ"
+        }
+      ],
+      "feedbackAr": "الغنة في المشددة أكمل.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U3.L10-13",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.Q15",
+      "topicId": "U7.L1",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U7.L1.POOL92.P15:A",
+          "right": "بَ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U7.L1.POOL92.P15:B",
+          "right": "بَا"
+        }
+      ],
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن ألف مد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U7.L1-14",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.Q16",
+      "topicId": "U7.L1",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U7.L1.POOL92.P16:A",
+          "right": "بُ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U7.L1.POOL92.P16:B",
+          "right": "بُو"
+        }
+      ],
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن واو مد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U7.L1-15",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U7.L1.POOL92.Q17",
+      "topicId": "U7.L1",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U7.L1.POOL92.P17:A",
+          "right": "بِ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U7.L1.POOL92.P17:B",
+          "right": "بِي"
+        }
+      ],
+      "feedbackAr": "الأول حركة قصيرة والثاني يتضمن ياء مد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U7.L1-16",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U6.L7.POOL92.Q18",
+      "topicId": "U6.L7",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U6.L7.POOL92.P18:A",
+          "right": "بَوْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U6.L7.POOL92.P18:B",
+          "right": "بُو"
+        }
+      ],
+      "feedbackAr": "الواو الأولى حرف لين والثانية حرف مد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U6.L7-17",
+      "status": "blocked_until_verified_recordings"
+    },
+    {
+      "id": "U6.L7.POOL92.Q19",
+      "topicId": "U6.L7",
+      "type": "matching",
+      "text": "صل النموذج الصوتي بلفظه بعد الاستماع.",
+      "pairs": [
+        {
+          "id": "A",
+          "leftMediaRef": "U6.L7.POOL92.P19:A",
+          "right": "بَيْ"
+        },
+        {
+          "id": "B",
+          "leftMediaRef": "U6.L7.POOL92.P19:B",
+          "right": "بِي"
+        }
+      ],
+      "feedbackAr": "الياء الأولى حرف لين والثانية حرف مد.",
+      "objective": "phonetic_discrimination",
+      "difficulty": "intermediate",
+      "variantFamily": "phonetic-U6.L7-18",
+      "status": "blocked_until_verified_recordings"
+    }
+  ]
+}
