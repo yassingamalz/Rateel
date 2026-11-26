@@ -24,6 +24,11 @@ class SideNavScaffold extends StatefulWidget {
   /// Review aid: section selected on start (`?section=3` opens the leaderboard).
   static int startSection = 0;
 
+  /// Tap on the section that is already selected (its index): a screen deep
+  /// inside the section may go back to the section's first screen (screen 12
+  /// → courses, owner 2026-11-26). On the first screen it does nothing.
+  static final reselected = ValueNotifier<int?>(null);
+
   @override
   State<SideNavScaffold> createState() => _SideNavScaffoldState();
 }
@@ -73,6 +78,10 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
         _selected = index;
       });
       _select.forward(from: 0);
+    } else {
+      // Fire even when the same index is tapped twice in a row.
+      SideNavScaffold.reselected.value = null;
+      SideNavScaffold.reselected.value = index;
     }
     if (_isOpen) _close();
   }
