@@ -16,6 +16,7 @@ import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
+import 'lessons/guided/guided_page.dart';
 import 'lessons/reading_lesson_page.dart';
 import 'lessons/test_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
@@ -153,6 +154,12 @@ class RateelApp extends StatelessWidget {
             ),
           ),
         ),
+        initialRoute:
+            const bool.fromEnvironment('RATEEL_GUIDED_PREVIEW') ||
+                Uri.base.queryParameters['guided'] == '1'
+            ? '/guided'
+            : '/',
+        routes: {'/guided': (_) => const GuidedPage()},
         home: Scaffold(
           body: SideNavScaffold(
             builder: (context, selected) => switch (selected) {

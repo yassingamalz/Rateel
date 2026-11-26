@@ -32,6 +32,7 @@ class LessonShell extends StatefulWidget {
     required this.child,
     this.onPausedChanged,
     this.controlsVisible = true,
+    this.showCapsule = true,
     this.waiting = false,
     this.onPlay,
     this.light = 0,
@@ -60,6 +61,7 @@ class LessonShell extends StatefulWidget {
 
   /// Hides bar and button (Angular `hideControls`, e.g. a test in review).
   final bool controlsVisible;
+  final bool showCapsule;
 
   /// The lesson content.
   final Widget child;
@@ -246,6 +248,7 @@ class LessonShellState extends State<LessonShell>
                   ignoring: !widget.controlsVisible || _locked,
                   child: LessonTopBar(
                     u: u,
+                    showCapsule: widget.showCapsule,
                     step: widget.step,
                     total: widget.total,
                     menu: _menu,
@@ -302,6 +305,7 @@ class LessonTopBar extends StatelessWidget {
     required this.step,
     required this.total,
     required this.menu,
+    this.showCapsule = true,
     this.wait = kAlwaysDismissedAnimation,
     required this.pulse,
     required this.sweep,
@@ -315,6 +319,7 @@ class LessonTopBar extends StatelessWidget {
   final double light;
   final int step;
   final int total;
+  final bool showCapsule;
   final Animation<double> menu;
 
   /// 1 while the lesson waits for the learner: gold play with the pulse.
@@ -373,44 +378,45 @@ class LessonTopBar extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         // Capsule, vertically centred on the button.
-        Positioned(
-          key: const ValueKey('capsule'),
-          // Whole pixels: the 1 px rim stays crisp (critic v2 N2).
-          top: (u * (m + b / 2 - LessonBarMetrics.capsuleH / 2))
-              .roundToDouble(),
-          left: (u * m).roundToDouble(),
-          width: (u * LessonBarMetrics.capsuleW).roundToDouble(),
-          height: (u * LessonBarMetrics.capsuleH).roundToDouble(),
-          // Angular: the open menu's veil covers the progress bar, so the
-          // capsule fades out while paused (owner, 2026-11-24).
-          child: AnimatedBuilder(
-            animation: menu,
-            builder: (context, child) => Opacity(
-              opacity: 1 - Curves.easeOut.transform(menu.value),
-              child: child,
-            ),
-            child: Semantics(
-              label: 'الخطوة $step من $total',
-              child: TweenAnimationBuilder<double>(
-                tween: Tween(end: share),
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-                builder: (context, v, _) => AnimatedBuilder(
-                  animation: sweep,
-                  builder: (context, _) => CustomPaint(
-                    painter: _CapsulePainter(
-                      u: u,
-                      share: v,
-                      text: '$step/$total',
-                      sweep: sweep.value,
-                      light: light,
+        if (showCapsule)
+          Positioned(
+            key: const ValueKey('capsule'),
+            // Whole pixels: the 1 px rim stays crisp (critic v2 N2).
+            top: (u * (m + b / 2 - LessonBarMetrics.capsuleH / 2))
+                .roundToDouble(),
+            left: (u * m).roundToDouble(),
+            width: (u * LessonBarMetrics.capsuleW).roundToDouble(),
+            height: (u * LessonBarMetrics.capsuleH).roundToDouble(),
+            // Angular: the open menu's veil covers the progress bar, so the
+            // capsule fades out while paused (owner, 2026-11-24).
+            child: AnimatedBuilder(
+              animation: menu,
+              builder: (context, child) => Opacity(
+                opacity: 1 - Curves.easeOut.transform(menu.value),
+                child: child,
+              ),
+              child: Semantics(
+                label: 'الخطوة $step من $total',
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(end: share),
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                  builder: (context, v, _) => AnimatedBuilder(
+                    animation: sweep,
+                    builder: (context, _) => CustomPaint(
+                      painter: _CapsulePainter(
+                        u: u,
+                        share: v,
+                        text: '$step/$total',
+                        sweep: sweep.value,
+                        light: light,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
         item(2, 'من البداية', _Glyph.restart, onRestart),
         item(1, 'رجوع', _Glyph.back, onBack),
         Positioned(

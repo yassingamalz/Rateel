@@ -12,6 +12,7 @@ import '../units/unit_data.dart';
 import 'lesson_card.dart';
 import 'lesson_data.dart';
 import 'lesson_page.dart';
+import 'lesson_widgets.dart';
 
 /// Opens screen 06 for unit [unit] (index into [unitsOf]) of course
 /// [course]. The route returns `true` when the last lesson of the unit was
@@ -538,6 +539,22 @@ class _LessonsScreenState extends State<LessonsScreen>
     // Angular: small title at the top right with the back arrow; improved
     // with the cream title, a glass back button and a short divider.
     return [
+      if (_lessons.isNotEmpty && _lessons.first.id == 'intro-lesson-1')
+        Positioned(
+          left: u * 5,
+          top: u * 6,
+          width: u * 36,
+          height: u * 11,
+          child: LessonPill(
+            u: u,
+            height: 10,
+            fontSize: 3.8,
+            label: 'الدرس الموجّه',
+            glyph: PillGlyph.play,
+            onTap: () =>
+                Navigator.of(context, rootNavigator: true).pushNamed('/guided'),
+          ),
+        ),
       Positioned(
         right: u * 4.5,
         top: u * 6.2,
