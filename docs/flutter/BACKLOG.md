@@ -44,8 +44,11 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [x] **Refresh the app screenshots** used as ChatGPT references (`app-references/`): done 2026-11-27 (12, 22, 23, 10 and
       light added; refresh again after each approved screen).
 - [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
-- [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
-      and design it; it reuses the listening quiz of 22.
+- [ ] **Daily practice (screen 31)** (owner, 2026-11-27): an **own screen, opened by the rail item «التدريب»** (today 14 «coming
+      soon»); a short daily session mixing what was learnt (the listening quiz of 22 is one exercise). **Reminder, both ways:**
+      the daily phone notification of 23 also invites to the practice, and an **in-app popup**: if the practice was not done
+      for **1 day**, the popup appears as soon as the user opens any lesson, **skippable** («go to the practice» / «later»,
+      which opens the lesson). Still to define: content and look (plan + reference), and whether 12's practice challenges open it.
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
       added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history (= tab «النقاط» of 13, owner 2026-11-27),
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
