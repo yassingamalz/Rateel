@@ -104,4 +104,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Rail count bubble of «الإنجازات» (5) is a demo value: use the number of earned badges.
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
 - [ ] Add the earned reward (coins) to the points when real data exists; the «5K» style rewards are display only.
+- [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon (brown/green
+      engraving). Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what
+      the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted
+      in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one +
+      padlock) for each style, and a choice of which badge gets which style.
 
