@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "draft_pending_book_check",
-  "note": "Added by the 2026-11-27 review to cover gaps found against the Hafs ('an 'Asim, Shatibiyya) syllabus of التجويد المصور. Every Quran excerpt was checked word by word against an Uthmani text (quran-json 3.1.2, KFGQPC-based); book page numbers still need the PDFs. Imlai spelling for display candidates only; bind canonical text at integration.",
+  "note": "Added by the 2026-11-27 review to cover gaps found against the Hafs ('an 'Asim, Shatibiyya) syllabus of التجويد المصور. Every Quran excerpt was checked word by word against an Uthmani text (quran-json 3.1.2, KFGQPC-based); book chapters were transcribed the same day (docs/content/sources/musawwar/) and each topic carries its page range. Imlai spelling for display candidates only; bind canonical text at integration.",
   "topics": [
     {
       "topicId": "U3.L4.RA",
@@ -17,7 +17,7 @@
           "focus": "الراء المفتوحة",
           "rule": "تفخيم",
           "explanation": "راء مفتوحة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E2",
@@ -27,7 +27,7 @@
           "focus": "الراء الساكنة بعد ضم",
           "rule": "تفخيم",
           "explanation": "ساكنة وقبلها ضم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E3",
@@ -37,7 +37,7 @@
           "focus": "الراء الساكنة بعد همزة الوصل",
           "rule": "تفخيم",
           "explanation": "الكسر قبلها عارض بسبب همزة الوصل عند الابتداء.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E4",
@@ -47,7 +47,7 @@
           "focus": "الراء الساكنة قبل الصاد",
           "rule": "تفخيم",
           "explanation": "ساكنة بعد كسر أصلي وبعدها حرف استعلاء في الكلمة نفسها.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E5",
@@ -57,7 +57,7 @@
           "focus": "الراء الساكنة بعد كسر",
           "rule": "ترقيق",
           "explanation": "ساكنة بعد كسر أصلي متصل بها، وليس بعدها حرف استعلاء.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E6",
@@ -67,7 +67,7 @@
           "focus": "الراء عند الوقف بالسكون",
           "rule": "ترقيق",
           "explanation": "قبلها كسر.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E7",
@@ -77,7 +77,7 @@
           "focus": "الراء عند الوقف بالسكون",
           "rule": "ترقيق",
           "explanation": "قبلها ياء ساكنة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E8",
@@ -87,7 +87,7 @@
           "focus": "الراء الساكنة قبل القاف المكسورة في الوصل",
           "rule": "وجهان",
           "explanation": "حرف الاستعلاء بعدها مكسور، ففيها الوجهان وصلًا؛ أما الوقف بالسكون فبالتفخيم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E9",
@@ -97,7 +97,7 @@
           "focus": "الراء عند الوقف",
           "rule": "وجهان والتفخيم أولى",
           "explanation": "يوقف عليها بالوجهين، والمختار التفخيم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.RA.POOL99.E10",
@@ -107,7 +107,7 @@
           "focus": "الراء عند الوقف",
           "rule": "وجهان والترقيق أولى",
           "explanation": "يوقف عليها بالوجهين، والمختار الترقيق.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -399,7 +399,7 @@
           "focus": "لام الجلالة بعد كسر",
           "rule": "ترقيق",
           "explanation": "قبلها كسر.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.LAM.POOL99.E2",
@@ -409,7 +409,7 @@
           "focus": "لام الجلالة بعد فتح",
           "rule": "تفخيم",
           "explanation": "قبلها فتح.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.LAM.POOL99.E3",
@@ -419,7 +419,7 @@
           "focus": "لام الجلالة بعد ضم",
           "rule": "تفخيم",
           "explanation": "قبلها ضم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L4.LAM.POOL99.E4",
@@ -429,7 +429,7 @@
           "focus": "الابتداء بلفظ الجلالة",
           "rule": "تفخيم",
           "explanation": "يبدأ بهمزة الوصل المفتوحة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -519,7 +519,7 @@
           "focus": "القاف الساكنة في وسط الكلمة",
           "rule": "قلقلة صغرى",
           "explanation": "القاف ساكنة في الوصل.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L8.QLQ.POOL99.E2",
@@ -529,7 +529,7 @@
           "focus": "الخاء ثم الدال الساكنة",
           "rule": "قلقلة صغرى",
           "explanation": "الدال الأولى ساكنة في وسط الكلمة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L8.QLQ.POOL99.E3",
@@ -539,7 +539,7 @@
           "focus": "الدال عند الوقف",
           "rule": "قلقلة كبرى",
           "explanation": "تسكن الدال عند الوقف.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L8.QLQ.POOL99.E4",
@@ -549,7 +549,7 @@
           "focus": "الباء المشددة عند الوقف",
           "rule": "قلقلة كبرى",
           "explanation": "القلقلة للباء الثانية، ولا يزيدها التشديد وضوحًا.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -666,7 +666,7 @@
     {
       "topicId": "X-SAKT-01",
       "titleAr": "السكت عند حفص",
-      "source": "book ch. 14–15 — page check pending",
+      "source": "book ch. 15 pp. 460–464 — checked against the book 2026-11-27",
       "explanationAr": "السكت قطع الصوت زمنًا يسيرًا دون تنفس بنية مواصلة القراءة. ولحفص من طريق الشاطبية أربعة مواضع يسكت فيها وجوبًا حال الوصل: عِوَجَا في أول الكهف، ومَرْقَدِنَا في يس، ومَنْ رَاقٍ في القيامة، وبَلْ رَانَ في المطففين. وفي مَالِيَهْ هَلَكَ في الحاقة السكت أو الإدغام، وبين الأنفال والتوبة السكت وجه من ثلاثة.",
       "examples": [
         {
@@ -677,7 +677,7 @@
           "focus": "السكت على الألف المبدلة من التنوين",
           "rule": "سكت",
           "explanation": "يسكت حفص على عوجا عند وصلها بما بعدها.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "X-SAKT-01.POOL99.E2",
@@ -687,7 +687,7 @@
           "focus": "السكت على الألف",
           "rule": "سكت",
           "explanation": "يسكت ثم يقول: هذا ما وعد الرحمن.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "X-SAKT-01.POOL99.E3",
@@ -697,7 +697,7 @@
           "focus": "السكت على النون",
           "rule": "سكت",
           "explanation": "يمنع السكت إدغام النون في الراء.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "X-SAKT-01.POOL99.E4",
@@ -707,7 +707,7 @@
           "focus": "السكت على اللام",
           "rule": "سكت",
           "explanation": "يمنع السكت إدغام اللام في الراء.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "X-SAKT-01.POOL99.E5",
@@ -717,7 +717,7 @@
           "focus": "هاء السكت قبل هلك",
           "rule": "سكت أو إدغام",
           "explanation": "وجهان لحفص في الوصل.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -862,7 +862,7 @@
           "focus": "اللام والميم",
           "rule": "لازم حرفي مثقل ثم مخفف",
           "explanation": "اللام مدغمة في الميم فهي مثقلة، والميم مخففة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.L5.HARFI.POOL99.E2",
@@ -872,7 +872,7 @@
           "focus": "الطاء والهاء",
           "rule": "مد طبيعي حرفي",
           "explanation": "هجاء كل منهما حرفان.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.L5.HARFI.POOL99.E3",
@@ -882,7 +882,7 @@
           "focus": "العين",
           "rule": "أربع أو ست حركات",
           "explanation": "العين ملحق بمد اللين، وفيه الوجهان.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.L5.HARFI.POOL99.E4",
@@ -892,7 +892,7 @@
           "focus": "القاف",
           "rule": "لازم حرفي مخفف",
           "explanation": "هجاؤها ثلاثة أحرف أوسطها حرف مد.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.L5.HARFI.POOL99.E5",
@@ -902,7 +902,7 @@
           "focus": "الميم عند الوصل بلفظ الجلالة",
           "rule": "طول أو قصر",
           "explanation": "تحرك الميم بالفتح للتخلص من الساكنين.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1041,7 +1041,7 @@
     {
       "topicId": "U5.FAWATIH",
       "titleAr": "النون الساكنة في هجاء الفواتح عند حفص",
-      "source": "book ch. 10/14 — page check pending",
+      "source": "book ch. 10 p. 287 (يس، ن) and ch. 11 p. 351 (طسم، كهيعص); عسق by the same ikhfa rule — checked 2026-11-27",
       "explanationAr": "تظهر نون هجاء يس ونون عند وصلهما بما بعدهما عند حفص من طريق الشاطبية، وتدغم نون هجاء السين في الميم في طسم، وتخفى نون هجاء العين قبل الصاد في كهيعص، ونون هجاء السين قبل القاف في عسق.",
       "examples": [
         {
@@ -1052,7 +1052,7 @@
           "focus": "نون هجاء السين قبل الواو",
           "rule": "إظهار",
           "explanation": "يقرأ حفص بالإظهار.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.FAWATIH.POOL99.E2",
@@ -1062,7 +1062,7 @@
           "focus": "النون قبل الواو",
           "rule": "إظهار",
           "explanation": "يقرأ حفص بالإظهار.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.FAWATIH.POOL99.E3",
@@ -1072,7 +1072,7 @@
           "focus": "نون السين قبل الميم",
           "rule": "إدغام بغنة",
           "explanation": "تدغم نون السين في ميم ميم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.FAWATIH.POOL99.E4",
@@ -1082,7 +1082,7 @@
           "focus": "نون السين قبل القاف",
           "rule": "إخفاء",
           "explanation": "تخفى عند القاف.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1168,7 +1168,7 @@
           "focus": "الضاد",
           "rule": "فتح أو ضم",
           "explanation": "الوجهان لحفص، والمصحف مضبوط بالفتح.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L4.WORDS.POOL99.E2",
@@ -1178,7 +1178,7 @@
           "focus": "الصاد",
           "rule": "بالصاد أو السين",
           "explanation": "الوجهان لحفص، والنطق بالصاد أشهر.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L4.WORDS.POOL99.E3",
@@ -1188,7 +1188,7 @@
           "focus": "الصاد",
           "rule": "بالصاد فقط",
           "explanation": "وجه واحد.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L4.WORDS.POOL99.E4",
@@ -1198,7 +1198,7 @@
           "focus": "الصاد المكتوبة",
           "rule": "تقرأ سينًا",
           "explanation": "تكتب بالصاد وفوقها سين صغيرة تدل على النطق بالسين.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L4.WORDS.POOL99.E5",
@@ -1208,7 +1208,7 @@
           "focus": "الياء المحذوفة رسمًا بعد النون",
           "rule": "تنطق ياء مفتوحة وصلًا",
           "explanation": "ويوقف على آتان بحذف الياء أو بإثباتها ساكنة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L4.WORDS.POOL99.E6",
@@ -1218,7 +1218,7 @@
           "focus": "نون التوكيد الخفيفة",
           "rule": "يوقف بالألف",
           "explanation": "تكتب تنوينًا وتبدل ألفًا وقفًا.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1370,7 +1370,7 @@
           "focus": "الأمر بالاستعاذة",
           "rule": "استعاذة",
           "explanation": "الاستعاذة عند إرادة القراءة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1526,7 +1526,7 @@
           "focus": "همزة الوصل",
           "rule": "ضم",
           "explanation": "ثالث الفعل مضموم ضمًا لازمًا.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E2",
@@ -1536,7 +1536,7 @@
           "focus": "همزة الوصل",
           "rule": "كسر",
           "explanation": "ثالث الفعل مكسور.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E3",
@@ -1546,7 +1546,7 @@
           "focus": "همزة الوصل",
           "rule": "كسر",
           "explanation": "ثالث الفعل مفتوح.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E4",
@@ -1556,7 +1556,7 @@
           "focus": "همزة الوصل عند الابتداء بامشوا",
           "rule": "كسر",
           "explanation": "الضم في الشين عارض لمجانسة الواو، والأمر من المفرد امش.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E5",
@@ -1566,7 +1566,7 @@
           "focus": "همزة الوصل",
           "rule": "كسر",
           "explanation": "الضم في النون عارض.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E6",
@@ -1576,7 +1576,7 @@
           "focus": "همزة الوصل بعد همزة الاستفهام",
           "rule": "إبدال أو تسهيل",
           "explanation": "تبقى همزة الوصل وتغير بالإبدال أو بالتسهيل.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U10.L2.VERB.POOL99.E7",
@@ -1586,7 +1586,7 @@
           "focus": "الهمزة الساكنة عند البدء",
           "rule": "إبدال واو",
           "explanation": "يبدأ بها أوتمن.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1790,7 +1790,7 @@
           "focus": "الوقف على رب",
           "rule": "وقف قبيح",
           "explanation": "لا يعطي معنى تامًا.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U9.L1.TYPES.POOL99.E2",
@@ -1800,7 +1800,7 @@
           "focus": "علامة التعانق",
           "rule": "تعانق الوقف",
           "explanation": "إذا وقف على أحد الموضعين لا يوقف على الآخر.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -1982,7 +1982,7 @@
           "focus": "النون المشددة",
           "rule": "أكمل ما تكون",
           "explanation": "نون مشددة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L10.LEVELS.POOL99.E2",
@@ -1992,7 +1992,7 @@
           "focus": "النون المخفاة",
           "rule": "كاملة",
           "explanation": "إخفاء حقيقي.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L10.LEVELS.POOL99.E3",
@@ -2002,7 +2002,7 @@
           "focus": "النون الساكنة المظهرة",
           "rule": "ناقصة",
           "explanation": "إظهار حلقي.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.L10.LEVELS.POOL99.E4",
@@ -2012,7 +2012,7 @@
           "focus": "الميم المتحركة",
           "rule": "أنقص ما تكون",
           "explanation": "ميم متحركة مخففة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -2377,7 +2377,7 @@
           "focus": "الضاد",
           "rule": "مخرج الضاد",
           "explanation": "لا تبدل ظاء ولا دالًا، ولا ينطق فراغ صوتي بزعم استطالتها.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U4.L1.LIST.POOL99.E2",
@@ -2387,7 +2387,7 @@
           "focus": "النون والميم الساكنتان",
           "rule": "بلا قلقلة",
           "explanation": "من الأخطاء قلقلة النون أو الميم إذا سكنتا.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -2556,7 +2556,7 @@
           "focus": "التنوين قبل الصاد",
           "rule": "إخفاء بغنة مفخمة",
           "explanation": "الصاد حرف مفخم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.BOOK10.POOL99.E2",
@@ -2566,7 +2566,7 @@
           "focus": "مثال مقابل: إدغام",
           "rule": "إدغام بغنة",
           "explanation": "النون قبل النون.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.BOOK10.POOL99.E3",
@@ -2576,7 +2576,7 @@
           "focus": "النون قبل الواو في كلمة",
           "rule": "إظهار مطلق",
           "explanation": "لا إدغام في كلمة واحدة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U5.BOOK10.POOL99.E4",
@@ -2586,7 +2586,7 @@
           "focus": "النون قبل الطاء",
           "rule": "إخفاء بغنة مفخمة",
           "explanation": "الطاء حرف مفخم.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -2758,7 +2758,7 @@
           "focus": "الألف الأخيرة عند إنهاء التلاوة",
           "rule": "مد طبيعي حركتان",
           "explanation": "لا يزاد على حركتين.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.BOOK11.POOL99.E2",
@@ -2768,7 +2768,7 @@
           "focus": "الياءان",
           "rule": "مد طبيعي",
           "explanation": "لا تقصر الياء حتى تصير كسرة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U6.BOOK11.POOL99.E3",
@@ -2778,7 +2778,7 @@
           "focus": "الياء قبل النون",
           "rule": "مد بلا غنة",
           "explanation": "لا يخلط صوت المد بالغنة.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -2875,7 +2875,7 @@
           "focus": "القاف بعدها ألف",
           "rule": "أعلى مراتب التفخيم",
           "explanation": "مفتوح بعده ألف عند ابن الجزري.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U3.BOOK07.POOL99.E2",
@@ -2885,7 +2885,7 @@
           "focus": "القاف المكسورة",
           "rule": "أدنى مراتب التفخيم",
           "explanation": "تبقى مفخمة وإن كانت في أدنى المراتب.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -3026,7 +3026,7 @@
           "focus": "ألف التثنية الساقطة لفظًا",
           "rule": "نبر",
           "explanation": "لئلا يلتبس بالمفرد ذاق.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L3.NABR.POOL99.E2",
@@ -3036,7 +3036,7 @@
           "focus": "الياء المشددة عند الوقف",
           "rule": "نبر",
           "explanation": "الوقف على حرف مشدد.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         },
         {
           "id": "U8.L3.NABR.POOL99.E3",
@@ -3046,7 +3046,7 @@
           "focus": "الانتقال من الألف إلى القاف المشددة",
           "rule": "نبر",
           "explanation": "انتقال من حرف مد إلى أول المشدد.",
-          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
         }
       ],
       "questions": [
@@ -3126,6 +3126,307 @@
           ],
           "correctAnswer": "1",
           "feedbackAr": "الوقف على همزة مسبوقة بحرف مد أو لين."
+        }
+      ]
+    },
+    {
+      "topicId": "U12.BOOK22",
+      "titleAr": "أدوات حفظ القرآن وأركانه والأمور المعينة عليه",
+      "source": "book ch. 22 pp. 568–572 — checked against the book 2026-11-27",
+      "explanationAr": "حفظ القرآن عملية إدخال النص القرآني بإحدى رواياته التلفظية إلى الذاكرة العميقة. وأدواته: النظر بالعين، والنطق بالفم، والسماع بالأذن، والكتابة عاملًا مساعدًا. وأركانه خمس تاءات: التصميم، والتضرع إلى الله، والتركيز، والتكرار، والتعاهد. ومن الأمور المعينة عليه: إخلاص النية، وصدق التوجه، واغتنام الأوقات، والبعد عن المعاصي، والثبات.",
+      "examples": [],
+      "questions": [
+        {
+          "id": "U12.BOOK22.POOL99.Q1",
+          "topicId": "U12.BOOK22",
+          "objective": "hifz_pillars",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U12.BOOK22",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر أركان عملية حفظ القرآن الخمسة كما في التجويد المصور.",
+          "options": [
+            {
+              "id": "1",
+              "text": "التصميم"
+            },
+            {
+              "id": "2",
+              "text": "التضرع"
+            },
+            {
+              "id": "3",
+              "text": "التركيز"
+            },
+            {
+              "id": "4",
+              "text": "التكرار"
+            },
+            {
+              "id": "5",
+              "text": "التعاهد"
+            },
+            {
+              "id": "6",
+              "text": "التسجيل"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "feedbackAr": "خمس تاءات."
+        },
+        {
+          "id": "U12.BOOK22.POOL99.Q2",
+          "topicId": "U12.BOOK22",
+          "objective": "hifz_pillars",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U12.BOOK22",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما المقصود بالتعاهد في أركان الحفظ؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "المراجعة"
+            },
+            {
+              "id": "2",
+              "text": "الكتابة"
+            },
+            {
+              "id": "3",
+              "text": "السماع"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "التعاهد هو المراجعة."
+        },
+        {
+          "id": "U12.BOOK22.POOL99.Q3",
+          "topicId": "U12.BOOK22",
+          "objective": "hifz_memory",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U12.BOOK22",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الذي ينقل المحفوظ من الذاكرة القريبة إلى العميقة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الاهتمام والتكرار"
+            },
+            {
+              "id": "2",
+              "text": "السرعة"
+            },
+            {
+              "id": "3",
+              "text": "القراءة مرة واحدة"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "تدخل المعلومات إلى الذاكرة العميقة بسبب الاهتمام والتكرار."
+        },
+        {
+          "id": "U12.BOOK22.POOL99.Q4",
+          "topicId": "U12.BOOK22",
+          "objective": "hifz_tools",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U12.BOOK22",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر أدوات الحفظ كما ذكرها الكتاب.",
+          "options": [
+            {
+              "id": "1",
+              "text": "النظر بالعين"
+            },
+            {
+              "id": "2",
+              "text": "النطق بالفم"
+            },
+            {
+              "id": "3",
+              "text": "السماع بالأذن"
+            },
+            {
+              "id": "4",
+              "text": "الكتابة عاملًا مساعدًا"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "feedbackAr": "أربع أدوات، والكتابة مساعدة."
+        }
+      ]
+    },
+    {
+      "topicId": "U11.BOOK20",
+      "titleAr": "مراحل ضبط المصحف والفرق بين الرسم والإملاء",
+      "source": "book ch. 20 pp. 518–560 and ch. 21 pp. 562–566 — checked against the book 2026-11-27",
+      "explanationAr": "كتب القرآن زمن النبوة خاليًا من النقط والشكل. ثم وضع أبو الأسود الدؤلي (ت 69 هـ) نقط الإعراب بنقاط حمراء: فوق الحرف للفتحة، وأمامه للضمة، وتحته للكسرة، ونقطتين للتنوين. ووضع نصر بن عاصم الليثي (ت 90 هـ) نقط الإعجام للتفريق بين الحروف المتشابهة. وطور الخليل بن أحمد الفراهيدي (ت 175 هـ) الحركات إلى ألف مبطوحة وواو وياء صغيرتين، وجعل صورة الهمزة رأس عين، والسكون رأس خاء من خفيف، والشدة رأس شين من شديد، وعلامة همزة الوصل رأس صاد من صلة. وينحصر الفرق بين رسم المصحف والإملاء الحديث في خمس مسائل: حروف تنطق وهي محذوفة في الخط، وحروف تكتب ولا تنطق، وحروف تكتب بكيفية وتنطق بأخرى، والمقطوع والموصول، وما رسم بالتاء المبسوطة.",
+      "examples": [
+        {
+          "id": "U11.BOOK20.POOL99.E1",
+          "topicId": "U11.BOOK20",
+          "verseRef": "1:4",
+          "excerptAr": "مَالِكِ",
+          "focus": "الألف المحذوفة رسمًا",
+          "rule": "تنطق وهي محذوفة",
+          "explanation": "تكتب في المصحف بألف خنجرية صغيرة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
+        },
+        {
+          "id": "U11.BOOK20.POOL99.E2",
+          "topicId": "U11.BOOK20",
+          "verseRef": "2:3",
+          "excerptAr": "الصَّلَاةَ",
+          "focus": "الألف المكتوبة واوًا",
+          "rule": "تكتب بكيفية وتنطق بأخرى",
+          "explanation": "ترسم الصلوة وتنطق بالألف.",
+          "verification": "uthmani_text_checked_2026-11-27; book_checked_2026-11-27"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U11.BOOK20.POOL99.Q1",
+          "topicId": "U11.BOOK20",
+          "objective": "mushaf_history",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U11.BOOK20",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "من وضع نقط الإعراب في المصحف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "أبو الأسود الدؤلي"
+            },
+            {
+              "id": "2",
+              "text": "نصر بن عاصم"
+            },
+            {
+              "id": "3",
+              "text": "الخليل بن أحمد"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "نقطه بنقاط حمراء."
+        },
+        {
+          "id": "U11.BOOK20.POOL99.Q2",
+          "topicId": "U11.BOOK20",
+          "objective": "mushaf_history",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U11.BOOK20",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "من وضع نقط الإعجام للتفريق بين الحروف المتشابهة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الخليل بن أحمد"
+            },
+            {
+              "id": "2",
+              "text": "نصر بن عاصم الليثي"
+            },
+            {
+              "id": "3",
+              "text": "أبو عمرو الداني"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "بخطوط مائلة صغيرة أولًا ثم بالنقاط."
+        },
+        {
+          "id": "U11.BOOK20.POOL99.Q3",
+          "topicId": "U11.BOOK20",
+          "objective": "mushaf_history",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U11.BOOK20",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "من أي كلمة أخذت علامة الشدة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "شديد"
+            },
+            {
+              "id": "2",
+              "text": "شد"
+            },
+            {
+              "id": "3",
+              "text": "شين"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "رأس الشين من أول كلمة شديد."
+        },
+        {
+          "id": "U11.BOOK20.POOL99.Q4",
+          "topicId": "U11.BOOK20",
+          "objective": "rasm",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U11.BOOK20",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "في كم مسألة ينحصر الفرق بين رسم المصحف والإملاء الحديث؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ثلاث"
+            },
+            {
+              "id": "2",
+              "text": "خمس"
+            },
+            {
+              "id": "3",
+              "text": "سبع"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الحذف، والزيادة، والإبدال، والمقطوع والموصول، والتاء المبسوطة."
+        },
+        {
+          "id": "U11.BOOK20.POOL99.Q5",
+          "topicId": "U11.BOOK20",
+          "objective": "rasm",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U11.BOOK20",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما نوع الفرق في الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "حرف ينطق وهو محذوف"
+            },
+            {
+              "id": "2",
+              "text": "حرف يكتب بكيفية وينطق بأخرى"
+            },
+            {
+              "id": "3",
+              "text": "حرف يكتب ولا ينطق"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الألف مكتوبة واوًا.",
+          "exampleId": "U11.BOOK20.POOL99.E2"
         }
       ]
     }

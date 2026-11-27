@@ -71,8 +71,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Android native splash in the same green, so nothing flashes before Flutter starts.
 
 ## Lesson content (`docs/content/`, branch of the content review)
-- [ ] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
-      chapter into `docs/content/sources/musawwar/` and compare. **Done: ch. 02–19.** To do: ch. 01, 20, 21, 22. PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
+- [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
+      chapter into `docs/content/sources/musawwar/` and compare. **Done: all 22 chapters (2026-11-27).** PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
       (ids in `lesson-production:docs/production/LESSONS-TRACKER.md`).
 - [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
       (`REVIEW-2026-11-27.md`, «Still open»).
