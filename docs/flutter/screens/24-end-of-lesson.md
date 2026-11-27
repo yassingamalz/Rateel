@@ -4,8 +4,9 @@ Branch `flutter/24-end-of-lesson` from `master` (2026-11-27). Shared by **every 
 test 10, listening 22, later guided 15–21 and practice 09), like the top bar of screen 02. History: `24-end-of-lesson/HISTORY.md`.
 
 ## Sources
-- **No ChatGPT reference exists.** Reference prompts 24-A (dark) and 24-B (light): `prompts/24-end-of-lesson/reference-v1.txt`,
-  generated from the app screenshots (`app-references/`, refreshed 2026-11-27). Waiting for the owner's images.
+- **References from the owner (2026-11-27):** `24-end-of-lesson/reference-dark.webp` (24-A) and `reference-light.webp` (24-B),
+  generated with `prompts/24-end-of-lesson/reference-v1.txt` from the app screenshots. Star assets in the common library
+  (`ASSETS.md`, «Screen 24»).
 - Angular originals (layout idea only):
   - `interactive-lesson/components/completion-screen`: overlay fading in (500 ms), particles, ✓ circle and
     «أحسنت! أكملت الدرس». Shown at the end of every interactive lesson.
@@ -39,7 +40,18 @@ test 10, listening 22, later guided 15–21 and practice 09), like the top bar o
   the card; one controller per small `AnimatedBuilder`; nothing runs after the entry.
 - **Text 110%:** checked with `?textScale=1.1`; the card grows with the text (no fixed art).
 
-## Questions for the owner (Q1–Q7)
+## Owner's answers (2026-11-27)
+- **Q1 overlay over the lesson** (as the references), built once in `LessonShell`.
+- **Q2 stars by result:** video / reading always 3; lessons with questions 3 = all right, 2 = at least 70%, 1 = below;
+  test 3 ≥ 90%, 2 ≥ 70%; a failed test does not reach 24.
+- **Q3 points as proposed:** video / reading +10; listening +10 per right answer; test = the points of its results.
+- **Q4 test:** 24 is shown **after the test results too** («إنهاء الدرس» → 24), same ending everywhere.
+- **Q5 no auto-close:** the learner taps «متابعة»; Android back = «متابعة».
+- **Q6 two buttons:** «متابعة» and «إعادة الدرس».
+- **Q7 streak tile shown** (mock until 12 is wired to real data).
+- **Tiles only when they apply:** no «إجابات صحيحة» tile for lessons without questions (video, reading).
+
+## Questions for the owner (Q1–Q7), answered above
 1. **Overlay over the lesson** (proposal) or a separate full screen after the lesson?
 2. **Stars:** lessons without questions (video, reading) always 3 stars at the end; lessons with questions (listening,
    guided quiz): 3 = all right, 2 = at least 70%, 1 = below; test: 3 ≥ 90%, 2 ≥ 70% (pass), the failed test does not reach
