@@ -3,6 +3,9 @@ import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
 import 'package:material_ui/material_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../help/reading_help.dart';
 
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
@@ -205,6 +208,8 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
 
   ReadingContent? _content;
   bool _loaded = false;
+  bool _helpVisible = false;
+  SharedPreferences? _helpPrefs;
   int _index = 0;
   int _from = 0; // sentence leaving during [_verse]
   int _dir = 1; // 1: forward (the card content leaves to the right)
@@ -222,6 +227,15 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance()
+        .then((prefs) {
+          _helpPrefs = prefs;
+          if (mounted && !(prefs.getBool('reading_help_seen') ?? false)) {
+            setState(() => _helpVisible = true);
+            _autoFinish?.cancel();
+          }
+        })
+        .catchError((Object _) {});
     if (readingStartLight) {
       readingLight.value = true;
       _theme.value = 1;
@@ -291,6 +305,7 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
   /// Angular: the last sentence sets progress 100 and the lesson completes
   /// 1.5 s later. Cancelled while paused or when the learner goes back.
   void _scheduleAutoFinish() {
+    if (_helpVisible) return;
     _autoFinish?.cancel();
     if (_content == null || _paused || _index < _n - 1) return;
     _autoFinish = Timer(const Duration(milliseconds: 1500), _finish);
@@ -383,21 +398,37 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
       animation: _theme,
       builder: (context, _) {
         final light = Curves.easeInOut.transform(_theme.value);
-        return LessonShell(
-          key: _shell,
-          step: _content == null ? 0 : _index + 1,
-          total: _content == null ? 1 : _n,
-          light: light,
-          onBack: () => _leave(false),
-          onRestart: _restart,
-          onPausedChanged: (p) {
-            _paused = p;
-            p ? _autoFinish?.cancel() : _scheduleAutoFinish();
-          },
-          child: LayoutBuilder(
-            builder: (context, box) =>
-                _page(box, LessonPal(light), box.maxHeight / 100),
-          ),
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: LessonShell(
+                key: _shell,
+                step: _content == null ? 0 : _index + 1,
+                total: _content == null ? 1 : _n,
+                light: light,
+                onBack: () => _leave(false),
+                onRestart: _restart,
+                onPausedChanged: (p) {
+                  _paused = p;
+                  p ? _autoFinish?.cancel() : _scheduleAutoFinish();
+                },
+                child: LayoutBuilder(
+                  builder: (context, box) =>
+                      _page(box, LessonPal(light), box.maxHeight / 100),
+                ),
+              ),
+            ),
+            if (_helpVisible)
+              Positioned.fill(
+                child: ReadingHelp(
+                  onClose: () {
+                    setState(() => _helpVisible = false);
+                    _helpPrefs?.setBool('reading_help_seen', true);
+                    _scheduleAutoFinish();
+                  },
+                ),
+              ),
+          ],
         );
       },
     );
