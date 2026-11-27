@@ -1694,9 +1694,30 @@
     {
       "topicId": "U9.L1.TYPES",
       "titleAr": "أنواع الوقف",
-      "source": "book ch. 15 (الوقف والابتداء) — page check pending",
-      "explanationAr": "الوقف أربعة أنواع: اختباري يكون عند سؤال الممتحن أو تعليم المتعلم، وانتظاري يكون على الكلمة لاستيفاء أوجه القراءات فيها، واضطراري يكون عند ضيق النفس أو العطاس ونحوه، واختياري يقصده القارئ باختياره وهو التام والكافي والحسن والقبيح.",
-      "examples": [],
+      "source": "book ch. 15 pp. 424–464 — checked against the book 2026-11-27",
+      "explanationAr": "الوقف قطع الصوت على كلمة قرآنية بزمن يتنفس فيه عادة بنية استئناف القراءة. وأنواعه ثلاثة: اختياري، واضطراري، واختباري. والاختياري جائز وهو التام والكافي والحسن، وغير جائز وهو القبيح. والوقف على رؤوس الآي سنة مطلقًا، وليس في القرآن وقف واجب أو حرام شرعًا إلا ما أفسد المعنى. وكان حفص يراعي رسم المصحف في الوقف الاضطراري والاختباري على ما كتب مقطوعًا أو موصولًا. والسكت قطع الصوت على حرف بزمن لا يتنفس فيه، والقطع قطع الصوت بنية الإعراض عن القراءة ومحله رؤوس الآي تامة المعنى.",
+      "examples": [
+        {
+          "id": "U9.L1.TYPES.POOL99.E1",
+          "topicId": "U9.L1.TYPES",
+          "verseRef": "1:2",
+          "excerptAr": "الْحَمْدُ لِلَّهِ رَبِّ",
+          "focus": "الوقف على رب",
+          "rule": "وقف قبيح",
+          "explanation": "لا يعطي معنى تامًا.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.E2",
+          "topicId": "U9.L1.TYPES",
+          "verseRef": "2:2",
+          "excerptAr": "لَا رَيْبَ فِيهِ",
+          "focus": "علامة التعانق",
+          "rule": "تعانق الوقف",
+          "explanation": "إذا وقف على أحد الموضعين لا يوقف على الآخر.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
       "questions": [
         {
           "id": "U9.L1.TYPES.POOL99.Q1",
@@ -1706,7 +1727,33 @@
           "variantFamily": "review99-U9.L1.TYPES",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
-          "text": "ما الوقف الذي يكون عند تعليم المتعلم كيفية الوقف على كلمة؟",
+          "text": "كم نوعًا للوقف في التجويد المصور؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نوعان"
+            },
+            {
+              "id": "2",
+              "text": "ثلاثة: اختياري واضطراري واختباري"
+            },
+            {
+              "id": "3",
+              "text": "خمسة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "والاختياري منه التام والكافي والحسن والقبيح."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q2",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_types",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الوقف الذي يكون عند تعليم المتعلم أو امتحانه؟",
           "options": [
             {
               "id": "1",
@@ -1718,37 +1765,11 @@
             },
             {
               "id": "3",
-              "text": "الانتظاري"
+              "text": "القطع"
             }
           ],
           "correctAnswer": "2",
           "feedbackAr": "يقصد به الاختبار أو التعليم."
-        },
-        {
-          "id": "U9.L1.TYPES.POOL99.Q2",
-          "topicId": "U9.L1.TYPES",
-          "objective": "waqf_types",
-          "difficulty": "advanced",
-          "variantFamily": "review99-U9.L1.TYPES",
-          "status": "draft_pending_book_check",
-          "type": "singleChoice",
-          "text": "ما الوقف الذي يكون لاستيفاء أوجه القراءات في الكلمة؟",
-          "options": [
-            {
-              "id": "1",
-              "text": "الانتظاري"
-            },
-            {
-              "id": "2",
-              "text": "الاضطراري"
-            },
-            {
-              "id": "3",
-              "text": "التام"
-            }
-          ],
-          "correctAnswer": "1",
-          "feedbackAr": "ينتظر فيه القارئ استيفاء الأوجه."
         },
         {
           "id": "U9.L1.TYPES.POOL99.Q3",
@@ -1758,7 +1779,7 @@
           "variantFamily": "review99-U9.L1.TYPES",
           "status": "draft_pending_book_check",
           "type": "multipleChoice",
-          "text": "اختر أقسام الوقف الاختياري.",
+          "text": "اختر أقسام الوقف الاختياري الجائز.",
           "options": [
             {
               "id": "1",
@@ -1774,7 +1795,7 @@
             },
             {
               "id": "4",
-              "text": "الاضطراري"
+              "text": "القبيح"
             }
           ],
           "correctAnswer": [
@@ -1782,19 +1803,83 @@
             "2",
             "3"
           ],
-          "feedbackAr": "والرابع القبيح؛ أما الاضطراري فنوع مستقل."
+          "feedbackAr": "القبيح غير جائز."
         },
         {
           "id": "U9.L1.TYPES.POOL99.Q4",
           "topicId": "U9.L1.TYPES",
-          "objective": "waqf_types",
+          "objective": "waqf_rules",
           "difficulty": "beginner",
           "variantFamily": "review99-U9.L1.TYPES",
           "status": "draft_pending_book_check",
           "type": "trueFalse",
-          "text": "الوقف الاضطراري يكون بسبب انقطاع النفس أو عارض.",
+          "text": "الوقف على رؤوس الآي سنة مطلقًا.",
           "correctAnswer": true,
-          "feedbackAr": "ثم يبتدئ القارئ من موضع مناسب."
+          "feedbackAr": "قاعدة من قواعد الوقف."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q5",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_rules",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "علامة مـ في المصحف تعني أن تارك الوقف آثم شرعًا.",
+          "correctAnswer": false,
+          "feedbackAr": "اللزوم اصطلاحي للفصل بين معنيين، لا شرعي."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q6",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_rules",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الفرق بين السكت والقطع؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "السكت بلا تنفس بنية الاستئناف، والقطع بنية الإعراض عن القراءة"
+            },
+            {
+              "id": "2",
+              "text": "لا فرق"
+            },
+            {
+              "id": "3",
+              "text": "القطع بلا تنفس"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "السكت على حرف، والقطع على كلمة ومحله رؤوس الآي."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q7",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_rasm",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف يقف حفص اختبارًا على مما المرسومة موصولة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "على من"
+            },
+            {
+              "id": "2",
+              "text": "على مما كاملة"
+            },
+            {
+              "id": "3",
+              "text": "لا يوقف عليها"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "ما رسم موصولًا يوقف على آخره فقط."
         }
       ]
     },
