@@ -1,0 +1,53 @@
+Screen 24, end of lesson: ChatGPT prompts for the references (2026-11-27). Pasted in the chat, one block each.
+Rule (LESSONS-LEARNED.md): attach the app screenshots first (docs/flutter/app-references/), the Angular original last and
+only for the layout idea.
+
+=== 24-A, dark reference (generate first) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-22-listening-rule.webp   (lesson chrome: top bar 02, header, gold card)
+ 2. docs/flutter/app-references/app-10-test-results.webp     (results inside the card: stats, gold coin, buttons)
+ 3. docs/flutter/app-references/app-12-daily-challenges.webp (gold coins, streak capsule with the flame)
+ 4. docs/flutter/app-references/app-08-reading-dark.webp     (same lesson style, simpler card)
+ 5. docs/flutter/screens/24-end-of-lesson/angular-completion-modal.jpg (Angular original: layout idea only)
+
+Prompt:
+Create a landscape mobile app screen, 1844x853 pixels, Arabic right-to-left, dark theme.
+SAME STYLE AS THE ATTACHED APP SCREENSHOTS (images 1 to 4): same deep emerald background with the faint gold lattice in
+the corners, same gold header arch with the small emblem on top, same mosque silhouette on the left of the title and
+crescent with star on the right, same gold-rimmed glass card, same cream text, same Readex-Pro-like Arabic font, same
+golds and glows. Do not invent a new style, new colours, new fonts or new ornaments: reuse what you see in the app
+screenshots. Image 5 is an old version of the app: use it ONLY for the idea of the content (title, score, points), not
+for its style.
+The screen is the END OF A LESSON, shown over the lesson that has just been completed:
+- Top left: the lesson progress capsule of the app, completely filled with gold, reading «8/8». Top right: the round
+  pause button of the app. Both exactly as in images 1 and 4.
+- Header: the lesson's gold arch with the emblem, title «الاستماع: الغنة», mosque and crescent, exactly as image 1.
+- The lesson content is dimmed behind a dark green veil; in the centre, over it, ONE large card in the app's card style
+  (gold rim, dark emerald glass, faint lattice at the bottom, as in images 1 and 2), wider than tall, about 60% of the
+  screen width.
+- Inside the card, centred, top to bottom:
+  1. Three large five-pointed gold stars side by side on a gentle arc, the middle one larger and higher, polished gold
+     with a soft glow, like the gold of the app's coins (image 3). All three earned.
+  2. The title «أحسنت، أكملت الدرس» in large cream-gold text, with the app's small gold divider with a diamond below it.
+  3. A row of three small stat tiles in the style of the results of image 2: «+40» with the app's gold star coin and the
+     label «نقطة»; «4 / 5» with a small green check and the label «إجابات صحيحة»; «4» with the app's small flame and the
+     label «يوم متتالي».
+  4. Two buttons in the style of image 2: on the right «متابعة» with a ‹ chevron (main action, luminous gold rim), on the
+     left «إعادة الدرس» with a ↻ icon (secondary, quieter rim).
+- A few small gold sparkles around the stars only, subtle and elegant, no confetti, no cartoon effects.
+Write all the Arabic text exactly as given, right to left, correctly joined. No English text, no watermark.
+
+=== 24-B, light reference (generate after 24-A) ===
+Attach, in this order:
+ 1. the 24-A image you generated and the owner accepted (composition to keep)
+ 2. docs/flutter/app-references/app-08-reading-light.webp      (light theme of the app)
+ 3. docs/flutter/app-references/app-10-test-results-light.webp (light results, filled buttons with white text)
+
+Prompt:
+Create the LIGHT THEME version of image 1, 1844x853 pixels, Arabic right-to-left. Keep exactly the same composition,
+sizes, texts and elements as image 1. Use the light style of the attached app screenshots (images 2 and 3): warm cream
+background with the soft beige lattice, copper-brown title and text, tan rims, the same mosque, arch and crescent in light
+beige-gold, the cream card with a thin tan rim, the progress capsule filled with gold. Buttons as in image 3: filled
+gold with white text for «متابعة», filled green with white text for «إعادة الدرس». Stars and gold coin stay polished
+gold. Same style as the attached app screenshots, do not invent a new style. Write the Arabic text exactly as in image 1.
+No English text, no watermark.
