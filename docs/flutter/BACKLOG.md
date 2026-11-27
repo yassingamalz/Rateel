@@ -34,6 +34,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       `SCREENS.md`, «Screens running on mock data»; data problems in the same file.
 - [x] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`): done 2026-11-27 (same look). Still to do: frame times
       measured on the owner's phone (APK).
+- [ ] **Screen 30, onboarding** (owner, 2026-11-27): the app works **without an account**; first start asks name, level and goal,
+      saved on the device (local data is primary). **Later:** optional accounts (e.g. Google / Apple) and sync, which need a
+      server; they also make the leaderboard (11) real and keep progress across phones.
 - [ ] **Stable signing key** for the APKs, kept outside the repo (owner to supply).
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.
