@@ -1,3 +1,5 @@
+import '../profile/profile_destination.dart';
+
 import 'package:material_ui/material_ui.dart';
 
 import '../core/app_settings.dart';
@@ -63,6 +65,25 @@ class _SettingsScreenState extends State<SettingsScreen>
                   fit: BoxFit.fill,
                   color: RateelColors.soonBgTone,
                   colorBlendMode: BlendMode.modulate,
+                ),
+              ),
+            ),
+            Positioned(
+              left: u * 5,
+              top: u * 2,
+              width: u * 33,
+              height: u * 10,
+              child: OutlinedButton.icon(
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const ProfileDestination(),
+                      ),
+                    ),
+                icon: const Icon(Icons.person_outline_rounded),
+                label: Text(
+                  'الملف الشخصي',
+                  style: cairo(u * 3.2, color: RateelColors.soonTitle),
                 ),
               ),
             ),

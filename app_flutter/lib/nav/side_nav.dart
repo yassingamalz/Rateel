@@ -16,7 +16,13 @@ import 'nav_items.dart';
 /// 1% of the screen height (u), measured by the critic on the ChatGPT
 /// references (05 for the rail, 04 for the open menu): see critic-v1.md.
 class SideNavScaffold extends StatefulWidget {
-  const SideNavScaffold({super.key, required this.builder});
+  const SideNavScaffold({
+    super.key,
+    required this.builder,
+    this.initialSection,
+  });
+
+  final int? initialSection;
 
   /// Builds the screen shown next to the rail for the selected section.
   final Widget Function(BuildContext context, int selected) builder;
@@ -43,7 +49,7 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
     vsync: this,
     duration: const Duration(milliseconds: 360),
   );
-  int _selected = SideNavScaffold.startSection;
+  late int _selected = widget.initialSection ?? SideNavScaffold.startSection;
   bool _dragging = false;
 
   /// Vertical scroll of the closed rail in px (owner, 2026-11-25: the rail
@@ -53,7 +59,8 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
   bool _scrolling = false;
   bool _scrollReady = false;
   _Geometry? _g;
-  double _selectFrom = SideNavScaffold.startSection.toDouble();
+  late double _selectFrom =
+      (widget.initialSection ?? SideNavScaffold.startSection).toDouble();
 
   bool get _isOpen =>
       _open.value > 0.5 || _open.status == AnimationStatus.forward;

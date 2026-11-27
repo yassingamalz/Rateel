@@ -282,3 +282,5 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-26 | **APK 1.0.484**: screen 22 v12 (guided voice Orus F, glowing letters, play button B) for the owner's approval. | ✅ |
 | 2026-11-27 | Screen 22 final fixes (owner, phone test of 1.0.484): (1) the guide and the reciter overlapped at the end: a replay still pending when the lesson finishes no longer starts (`_finishing` guard), checked on the audio log (no ayah progress while a guide line plays); (2) letters going below the line (س، ل، ن…) left their circles: Quran text in the pills is now **centred on its measured ink** and scaled to fit (`_InkCentered`). | ✅ |
 | 2026-11-27 | **Screen 22 (listening lesson) approved by the owner** after these two fixes: PR `flutter/22-listening-lesson` → `master` and merge (owner). | ✅ |
+
+| 2026-11-27 | Screen 29 reference approved by owner; implementation based on master b46010c. APK 1.0.490 for phone review. | Awaiting phone review |
