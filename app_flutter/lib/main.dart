@@ -7,6 +7,7 @@ import 'badges/badges_screen.dart';
 import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
 import 'core/app_settings.dart';
+import 'core/progress_store.dart';
 import 'courses/course_data.dart';
 import 'courses/courses_screen.dart';
 import 'core/learn_flow.dart';
@@ -148,6 +149,8 @@ Future<void> _initialize(BuildContext context) async {
       _loadHeaderImage(context, 'assets/ui/decor/$name.webp'),
   ]);
   await AppSettings.load();
+  // The learner's progress saved on the device (before the courses screen).
+  await ProgressStore.load();
   // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
   final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
   if (ts != null) AppSettings.textScale.value = ts;

@@ -62,8 +62,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       exists.
 - [ ] **Text size** 90–110%: course cards and screen 14 do not scale; every new screen must be checked at 110%
       (`?textScale=1.1`) and opt out the same way if a fixed art layout breaks.
-- [ ] **Reset progress** clears the in-memory progress only: when progress is saved for real, the reset must clear
-      the saved data too.
+- [x] **Reset progress** clears the saved progress too: done 2026-11-27 (`flutter/saved-progress`, `ProgressStore.clear`).
+- [ ] **Saved progress, still in memory only** (Claude, 2026-11-27): daily challenges and streak (12, with their midnight
+      reset), points (22 +10, 13 ledger), badges (27). Save them with `ProgressStore` when their real rules exist.
 - [ ] **Critic of 23**: the owner launches it himself when he wants.
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
 

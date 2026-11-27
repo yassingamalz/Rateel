@@ -32,6 +32,10 @@ Future<void> openApp(WidgetTester tester) async {
 }
 
 void main() {
+  // Progress is shared by the whole app (and saved): every test starts
+  // from a new learner.
+  setUp(AppSettings.resetProgress);
+
   testWidgets('side nav opens and closes', (tester) async {
     tester.view.physicalSize = const Size(1844, 853);
     tester.view.devicePixelRatio = 1;

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
+import '../core/progress_store.dart';
 import '../core/sounds.dart';
 import '../courses/course_data.dart';
 import '../theme/rateel_theme.dart';
@@ -202,6 +203,7 @@ class _UnitsScreenState extends State<UnitsScreen>
     _fill.duration = Duration(milliseconds: (1500 * (to - from)).round());
     await _fill.forward(from: 0);
     _state.progress[i] = to;
+    ProgressStore.save();
   }
 
   /// Completion of unit [i], automatic when its last lesson ends:
@@ -233,6 +235,7 @@ class _UnitsScreenState extends State<UnitsScreen>
         _state.current = _units.length;
         _completing = null;
       });
+      ProgressStore.save();
       _resetSequence();
       Haptics.success();
       await Future<void>.delayed(const Duration(milliseconds: 700));
@@ -251,6 +254,7 @@ class _UnitsScreenState extends State<UnitsScreen>
       _state.current = i + 1;
       _completing = null;
     });
+    ProgressStore.save();
     _resetSequence();
     await _glideTo(i + 1, 750);
     Haptics.success();

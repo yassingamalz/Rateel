@@ -33,6 +33,35 @@ final _progressByCourse = <int, CourseUnitsProgress>{};
 /// Settings «إعادة ضبط التقدم»: every course back to its first unit at 0.
 void resetUnitsProgress() => _progressByCourse.clear();
 
+/// Saved form of the units progress (`ProgressStore`): course index →
+/// {current, progress}.
+Map<String, Object> unitsProgressToJson() => {
+  for (final e in _progressByCourse.entries)
+    '${e.key}': {'current': e.value.current, 'progress': e.value.progress},
+};
+
+/// Restores [unitsProgressToJson], fitted to the units in the data today.
+void unitsProgressFromJson(Map<String, dynamic> json) {
+  _progressByCourse.clear();
+  json.forEach((key, value) {
+    final course = int.tryParse(key);
+    if (course == null || value is! Map) return;
+    final n = unitsOf(course).length;
+    if (n == 0) return;
+    final st = CourseUnitsProgress(n);
+    final current = value['current'];
+    if (current is num) st.current = current.toInt().clamp(0, n);
+    final progress = value['progress'];
+    if (progress is List) {
+      for (var i = 0; i < n && i < progress.length; i++) {
+        final v = progress[i];
+        if (v is num) st.progress[i] = v.toDouble().clamp(0.0, 1.0);
+      }
+    }
+    _progressByCourse[course] = st;
+  });
+}
+
 CourseUnitsProgress unitsProgressOf(int course) => _progressByCourse
     .putIfAbsent(course, () => CourseUnitsProgress(unitsOf(course).length));
 

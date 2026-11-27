@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
+import '../core/progress_store.dart';
 import '../core/screen_decor.dart';
 import '../core/sounds.dart';
 import '../theme/rateel_theme.dart';
@@ -204,6 +205,7 @@ class _LessonsScreenState extends State<LessonsScreen>
     // The unit share moves on screen 05 when we go back. The last lesson
     // leaves the ring to the unit completion (it fills it to 100%).
     setLessonsDone(_unit.id, k + 1);
+    ProgressStore.save();
     if (last) {
       Haptics.success();
       await Future<void>.delayed(const Duration(milliseconds: 700));
