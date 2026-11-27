@@ -1,8 +1,9 @@
 # Next session: timeline from 2026-11-26 (proposal, the owner confirms the order)
 
-State on `master` (2026-11-26): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
+State on `master` (2026-11-27): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
 06 lessons, 07 video, 08 reading, 10/10b test (with 25 results inside), 11 leaderboard, 12 daily challenges,
-14 coming soon, 23 settings**; settings gear centred in the rail (PR #54). Open items: `BACKLOG.md`.
+14 coming soon, 22 listening lesson (PR #56 and its follow-up), 23 settings**; timeline confirmed by the owner
+(2026-11-26); next: **24 end of lesson**; settings gear centred in the rail (PR #54). Open items: `BACKLOG.md`.
 
 ## Timeline (Claude's proposal, 2026-11-26; owner to confirm or reorder)
 **Phase A: lessons (the core of the app)**
