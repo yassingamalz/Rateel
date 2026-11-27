@@ -18,7 +18,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 ## App-wide
 - [ ] **Screen 28, help / tips overlay** (owner 2026-11-27: future improvement). Reference `screens/28-help-overlay/reference.webp`,
       notes `screens/28-help-overlay.md`. Owner's answers: shown the **first time** each lesson type opens, then remembered
-      (saved); reopened by a small **«؟» button** (place to decide: maybe the 02 pause menu); which lesson first: later
+      (saved); reopened by a small **«؟» button**, a third item «؟ كيف تستخدم الدرس» in the **02 pause menu** next to back / restart (owner 2026-11-27); which lesson first: later
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
 - [ ] **Screen 24, end of lesson** (postponed by the owner 2026-11-27: «probably not needed»): plan v1, questions Q1–Q7
       and reference prompts in `screens/24-end-of-lesson.md`, `prompts/24-end-of-lesson/reference-v1.txt`. Decide whether to
