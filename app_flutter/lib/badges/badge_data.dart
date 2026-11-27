@@ -162,15 +162,16 @@ final ValueNotifier<int?> badgeEarned = ValueNotifier<int?>(null);
 /// `green` to see one whole set (review aid `?medals=std|green`).
 String badgeMedalSet = 'mix';
 
-String medalAsset(BadgeDef b, {bool locked = false}) {
+String medalAsset(BadgeDef b, {bool locked = false, bool opposite = false}) {
   if (locked) return 'assets/ui/badges/l1.webp';
-  final green = switch (badgeMedalSet) {
+  var green = switch (badgeMedalSet) {
     'std' => false,
     'green' => true,
     _ => b.green,
   };
-  final dir = green ? 'green/' : '';
-  return 'assets/ui/badges/$dir${b.code}.webp';
+  // The other engraving: the base the progress fill starts from (screen 27).
+  if (opposite && badgeMedalSet == 'mix') green = !green;
+  return 'assets/ui/badges/${green ? 'green/' : ''}${b.code}.webp';
 }
 
 /// Order of the grid: earned first, then by progress (highest first), then

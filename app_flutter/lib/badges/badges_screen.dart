@@ -725,10 +725,16 @@ class _BadgeTile extends StatelessWidget {
                     if (s < 1)
                       Transform.translate(
                         offset: Offset(0, -u * 1.5 * s),
-                        child: medal(
-                          medalAsset(badge, locked: true),
-                          scale: 1 + 0.12 * s,
-                          opacity: 1 - s,
+                        child: Opacity(
+                          opacity: (1 - s).clamp(0.0, 1.0),
+                          child: Transform.scale(
+                            scale: 1 + 0.12 * s,
+                            child: _ProgressMedal(
+                              badge: badge,
+                              height: medalH,
+                              share: shareOf(badge),
+                            ),
+                          ),
                         ),
                       ),
                     if (s > 0)
@@ -791,6 +797,64 @@ class _BadgeTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// A medal that fills as the badge progresses (owner, 2026-11-27): the two
+/// engravings we have, one over the other. Below: the OTHER engraving, dimmed
+/// and desaturated; above, from the bottom up to [share] of the height: the
+/// badge's own engraving in full colour. At 100% it is the finished medal.
+/// Both images share the same trim box, so they line up exactly.
+class _ProgressMedal extends StatelessWidget {
+  const _ProgressMedal({
+    required this.badge,
+    required this.height,
+    required this.share,
+  });
+  final BadgeDef badge;
+  final double height;
+  final double share;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget img(String a) =>
+        Image.asset(a, height: height, filterQuality: FilterQuality.medium);
+    final f = share.clamp(0.0, 1.0);
+    return Stack(
+      children: [
+        ColorFiltered(
+          colorFilter: const ColorFilter.matrix(<double>[
+            // saturation 0.35, brightness 0.6
+            0.327, 0.230, 0.043, 0, 0,
+            0.117, 0.440, 0.043, 0, 0,
+            0.117, 0.230, 0.253, 0, 0,
+            0, 0, 0, 1, 0,
+          ]),
+          child: img(medalAsset(badge, opposite: true)),
+        ),
+        if (f > 0)
+          // Soft edge: the colour fades in over the top 7% of the filled part.
+          ShaderMask(
+            blendMode: BlendMode.dstIn,
+            shaderCallback: (r) {
+              final top = (1 - f).clamp(0.0, 1.0);
+              final soft = (top + 0.07).clamp(0.0, 1.0);
+              return LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: const [
+                  Color(0x00FFFFFF),
+                  Color(0x00FFFFFF),
+                  Color(0xFFFFFFFF),
+                  Color(0xFFFFFFFF),
+                ],
+                stops: [0, top, soft, 1],
+              ).createShader(r);
+            },
+            child: img(medalAsset(badge)),
+          ),
+      ],
     );
   }
 }
@@ -1075,11 +1139,22 @@ class _Detail extends StatelessWidget {
           top: u * 2.9,
           height: u * 25.4,
           child: Center(
-            child: Image.asset(
-              medalAsset(badge, locked: !earned),
-              height: u * 25.4,
-              filterQuality: FilterQuality.medium,
-            ),
+            child: earned
+                ? Image.asset(
+                    medalAsset(badge),
+                    height: u * 25.4,
+                    filterQuality: FilterQuality.medium,
+                  )
+                : TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0, end: share),
+                    duration: const Duration(milliseconds: 750),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, v, _) => _ProgressMedal(
+                      badge: badge,
+                      height: u * 25.4,
+                      share: v,
+                    ),
+                  ),
           ),
         ),
         Positioned(
