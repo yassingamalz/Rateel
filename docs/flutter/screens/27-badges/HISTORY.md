@@ -8,3 +8,6 @@
   scrolls. Plan and badge list: `../27-badges.md`. Prompts M01–M12 + L1: `../../prompts/27-badges/images-v2.txt`
   (v1 B1/B2 superseded). Crops to attach: `attach/`.
 - Waiting for the medals and the owner's yes on the visual plan.
+- Owner asked to put everything on the branch so that ChatGPT can read the branch and generate the medals by itself:
+  `prompts/27-badges/README-CHATGPT.md` (repository, branch, files to download, 13 prompts, file names, output folder
+  `docs/design-assets/badges/`); pointer in `27-badges/README.md`.
