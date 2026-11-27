@@ -43,7 +43,10 @@ class LessonCard extends StatefulWidget {
   final bool active;
   final double border;
   final double flash;
-  final double ambient;
+
+  /// 0..1 repeating (4 s): breathing glow of the lesson in progress. Passed
+  /// as an animation so that only that glow follows it (PERFORMANCE.md).
+  final Animation<double> ambient;
   final double lockShake;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
@@ -102,7 +105,6 @@ class _LessonCardState extends State<LessonCard>
                   active: widget.active ? 1 - widget.done : 0,
                   done: widget.done,
                   border: widget.border,
-                  ambient: widget.ambient,
                 ),
               ),
             ),
@@ -146,11 +148,26 @@ class _LessonCardState extends State<LessonCard>
   /// Outer gold glow: breathing on the lesson in progress (as the active
   /// course card), a burst on the completion flash.
   Widget _glow(double radius) {
-    final u = widget.u;
-    final breath = 0.5 - 0.5 * math.cos(widget.ambient * math.pi * 2);
     final open = widget.active
         ? (1 - widget.done) * _seg(widget.unlock, 0.45, 1)
         : 0.0;
+    // Only the lesson in progress breathes: only its glow follows the 4 s
+    // loop, in its own layer (PERFORMANCE.md).
+    if (open <= 0) return _glowBox(radius, open, 0);
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: widget.ambient,
+        builder: (context, _) => _glowBox(
+          radius,
+          open,
+          0.5 - 0.5 * math.cos(widget.ambient.value * math.pi * 2),
+        ),
+      ),
+    );
+  }
+
+  Widget _glowBox(double radius, double open, double breath) {
+    final u = widget.u;
     final glow =
         open * (0.22 + 0.12 * breath) + 0.6 * math.sin(math.pi * widget.flash);
     final shadow = BoxShadow(
@@ -521,7 +538,6 @@ class _RimPainter extends CustomPainter {
     required this.active,
     required this.done,
     required this.border,
-    required this.ambient,
   });
 
   final double u;
@@ -530,7 +546,6 @@ class _RimPainter extends CustomPainter {
   final double active;
   final double done;
   final double border;
-  final double ambient;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -628,7 +643,6 @@ class _RimPainter extends CustomPainter {
       o.active != active ||
       o.done != done ||
       o.border != border ||
-      o.ambient != ambient ||
       o.u != u;
 }
 

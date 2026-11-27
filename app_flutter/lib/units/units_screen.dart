@@ -350,9 +350,11 @@ class _UnitsScreenState extends State<UnitsScreen>
         onHorizontalDragUpdate: _onDrag,
         onHorizontalDragEnd: _onDragEnd,
         child: AnimatedBuilder(
+          // No _ambient here: the 4 s loop drives only the parts of the
+          // circles it animates (UnitCircle), not the whole path
+          // (PERFORMANCE.md, cause 1).
           animation: Listenable.merge([
             _entry,
-            _ambient,
             _shake,
             _fill,
             _half,
@@ -438,22 +440,26 @@ class _UnitsScreenState extends State<UnitsScreen>
           opacity: appear,
           child: Transform.scale(
             scale: lerpDouble(0.85, 1, pop)!,
-            child: UnitCircle(
-              unit: _units[i],
-              u: g.u,
-              progress: progress,
-              unlock: unlock,
-              done: done,
-              flash: i == _completing ? _flash.value : 0,
-              ambient: _ambient.value,
-              lockShake: shake,
-              filling: i == _completing && _fill.isAnimating,
-              onTap: () => _tapUnit(i),
-              onLongPress: () {
-                // Demo until screens 06–07 exist: long press on the unit in
-                // progress plays its completion.
-                if (i == _current) unitCompleted.value = i;
-              },
+            // Each circle paints in its own layer: a drag of the path only
+            // moves the layers (PERFORMANCE.md, cause 4).
+            child: RepaintBoundary(
+              child: UnitCircle(
+                unit: _units[i],
+                u: g.u,
+                progress: progress,
+                unlock: unlock,
+                done: done,
+                flash: i == _completing ? _flash.value : 0,
+                ambient: _ambient,
+                lockShake: shake,
+                filling: i == _completing && _fill.isAnimating,
+                onTap: () => _tapUnit(i),
+                onLongPress: () {
+                  // Demo until screens 06–07 exist: long press on the unit in
+                  // progress plays its completion.
+                  if (i == _current) unitCompleted.value = i;
+                },
+              ),
             ),
           ),
         ),

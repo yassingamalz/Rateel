@@ -1,6 +1,8 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui show Image, PictureRecorder;
 import 'dart:ui' show ImageFilter, lerpDouble;
 
+import 'package:flutter/rendering.dart' show RenderRepaintBoundary;
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
@@ -35,7 +37,14 @@ class LessonShell extends StatefulWidget {
     this.waiting = false,
     this.onPlay,
     this.light = 0,
+    this.stillBlur = true,
   });
+
+  /// While the pause menu is open, show a still, blurred picture of the
+  /// lesson baked once, instead of blurring the live lesson on every frame
+  /// of the button's pulse (PERFORMANCE.md, cause 5). Same look. Off for
+  /// lessons with a platform view (the video WebView cannot be captured).
+  final bool stillBlur;
 
   /// 0 = dark (every lesson), 1 = light (screen 08's light reading, owner
   /// 2026-11-25); values in between while the theme cross-fades.
@@ -96,6 +105,7 @@ class LessonShellState extends State<LessonShell>
   @override
   void initState() {
     super.initState();
+    _menu.addStatusListener(_onMenuStatus);
     if (widget.waiting) _pulse.repeat();
   }
 
@@ -113,6 +123,96 @@ class LessonShellState extends State<LessonShell>
         _pulse.value = 0;
       }
     }
+  }
+
+  /// The lesson content, captured for the still blur.
+  final _contentKey = GlobalKey();
+
+  /// Baked still of the blurred, dimmed, pulled-back lesson (menu fully
+  /// open), or null.
+  ui.Image? _still;
+  int _stillToken = 0;
+
+  void _onMenuStatus(AnimationStatus s) {
+    if (s == AnimationStatus.completed) {
+      if (widget.stillBlur) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => _bakeStill());
+      }
+    } else if (_still != null || s == AnimationStatus.reverse) {
+      _dropStill();
+    }
+  }
+
+  void _dropStill() {
+    _stillToken++;
+    final old = _still;
+    if (old == null) return;
+    setState(() => _still = null);
+    WidgetsBinding.instance.addPostFrameCallback((_) => old.dispose());
+  }
+
+  /// Captures the lesson once and bakes the menu look into a picture: the
+  /// same blur (σ 0.55u), brightness (80%) and scale (98%) as the live
+  /// filters below.
+  Future<void> _bakeStill() async {
+    final token = ++_stillToken;
+    final boundary =
+        _contentKey.currentContext?.findRenderObject()
+            as RenderRepaintBoundary?;
+    if (!mounted || boundary == null || !boundary.attached) return;
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final size = boundary.size;
+    final u = size.height / 100;
+    final ui.Image shot;
+    try {
+      shot = await boundary.toImage(pixelRatio: dpr);
+    } catch (_) {
+      return; // Keep the live blur.
+    }
+    if (!mounted || token != _stillToken || !paused) {
+      shot.dispose();
+      return;
+    }
+    final w = (size.width * dpr).round();
+    final h = (size.height * dpr).round();
+    const b = 0.8;
+    final rec = ui.PictureRecorder();
+    final canvas = Canvas(rec);
+    canvas.saveLayer(
+      Offset.zero & Size(w.toDouble(), h.toDouble()),
+      Paint()
+        ..imageFilter = ImageFilter.blur(
+          sigmaX: u * 0.55 * dpr,
+          sigmaY: u * 0.55 * dpr,
+          tileMode: TileMode.clamp,
+        ),
+    );
+    canvas.translate(w / 2, h / 2);
+    canvas.scale(0.98);
+    canvas.translate(-w / 2, -h / 2);
+    canvas.drawImageRect(
+      shot,
+      Offset.zero & Size(shot.width.toDouble(), shot.height.toDouble()),
+      Offset.zero & Size(w.toDouble(), h.toDouble()),
+      Paint()
+        ..filterQuality = FilterQuality.medium
+        ..colorFilter = const ColorFilter.matrix([
+          b, 0, 0, 0, 0, //
+          0, b, 0, 0, 0, //
+          0, 0, b, 0, 0, //
+          0, 0, 0, 1, 0, //
+        ]),
+    );
+    canvas.restore();
+    final picture = rec.endRecording();
+    final baked = await picture.toImage(w, h);
+    picture.dispose();
+    shot.dispose();
+    if (!mounted || token != _stillToken || !paused) {
+      baked.dispose();
+      return;
+    }
+    setState(() => _still = baked);
   }
 
   // True while the completion plays: controls and back are blocked
@@ -155,6 +255,8 @@ class LessonShellState extends State<LessonShell>
 
   @override
   void dispose() {
+    _stillToken++;
+    _still?.dispose();
     _menu.dispose();
     _wait.dispose();
     _pulse.dispose();
@@ -193,26 +295,47 @@ class LessonShellState extends State<LessonShell>
               AnimatedBuilder(
                 key: const ValueKey('content'),
                 animation: _menu,
-                child: widget.child,
+                // The keyed boundary keeps the lesson's state when the
+                // filters are added or removed around it, and is what the
+                // still blur captures.
+                child: RepaintBoundary(key: _contentKey, child: widget.child),
                 builder: (context, child) {
                   final t = Curves.easeOut.transform(_menu.value);
                   if (t == 0) return child!;
                   final b = 1 - 0.2 * t;
-                  return ImageFiltered(
-                    imageFilter: ImageFilter.blur(
-                      sigmaX: u * 0.55 * t,
-                      sigmaY: u * 0.55 * t,
-                      tileMode: TileMode.clamp,
-                    ),
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.matrix([
-                        b, 0, 0, 0, 0, //
-                        0, b, 0, 0, 0, //
-                        0, 0, b, 0, 0, //
-                        0, 0, 0, 1, 0, //
-                      ]),
-                      child: Transform.scale(scale: 1 - 0.02 * t, child: child),
-                    ),
+                  final still = _still;
+                  return Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      // The live lesson stays mounted; while the baked still
+                      // is shown it is not painted (opacity 0 skips it).
+                      Opacity(
+                        opacity: still == null ? 1 : 0,
+                        child: ImageFiltered(
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: u * 0.55 * t,
+                            sigmaY: u * 0.55 * t,
+                            tileMode: TileMode.clamp,
+                          ),
+                          child: ColorFiltered(
+                            colorFilter: ColorFilter.matrix([
+                              b, 0, 0, 0, 0, //
+                              0, b, 0, 0, 0, //
+                              0, 0, b, 0, 0, //
+                              0, 0, 0, 1, 0, //
+                            ]),
+                            child: Transform.scale(
+                              scale: 1 - 0.02 * t,
+                              child: child,
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (still != null)
+                        RepaintBoundary(
+                          child: RawImage(image: still, fit: BoxFit.fill),
+                        ),
+                    ],
                   );
                 },
               ),
