@@ -801,8 +801,8 @@
     {
       "topicId": "U6.L5.HARFI",
       "titleAr": "المد اللازم الحرفي وفواتح السور",
-      "source": "book ch. 11 (المدود) — page check pending",
-      "explanationAr": "حروف فواتح السور ثلاثة أقسام: ما لا مد فيه وهو الألف؛ وما هجاؤه حرفان فيمد مدًا طبيعيًا وحروفه خمسة في حي طهر؛ وما هجاؤه ثلاثة أحرف أوسطها حرف مد فيمد ست حركات وحروفه ثمانية في نقص عسلكم، إلا العين ففيها التوسط والطول والطول أولى. ويكون مثقلًا إذا أدغم آخره فيما بعده كاللام في الم، ومخففًا إذا لم يدغم كالميم في الم. وفي الم الله أول آل عمران عند الوصل الطول والقصر في الميم مع فتحها.",
+      "source": "book ch. 11 pp. 342–352 — checked against the book 2026-11-27",
+      "explanationAr": "حروف فواتح السور ثلاثة أقسام: ما لا مد فيه وهو الألف؛ وما هجاؤه حرفان فيمد مدًا طبيعيًا وحروفه خمسة في حي طهر؛ وما هجاؤه ثلاثة أحرف أوسطها حرف مد فيمد ست حركات مدًا لازمًا وحروفه سبعة في سنقص لكم؛ والعين يمد بمقدار أربع أو ست حركات ويلحق بمد اللين. ويكون مثقلًا إذا أدغم آخره فيما بعده كاللام في الم، ومخففًا إذا لم يدغم كالميم في الم. وفي الم الله أول آل عمران عند الوصل الطول والقصر في الميم مع فتحها.",
       "examples": [
         {
           "id": "U6.L5.HARFI.POOL99.E1",
@@ -830,8 +830,8 @@
           "verseRef": "19:1",
           "excerptAr": "كهيعص",
           "focus": "العين",
-          "rule": "توسط أو طول",
-          "explanation": "العين وحدها فيها الوجهان.",
+          "rule": "أربع أو ست حركات",
+          "explanation": "العين ملحق بمد اللين، وفيه الوجهان.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         },
         {
@@ -894,7 +894,7 @@
           "options": [
             {
               "id": "1",
-              "text": "نقص عسلكم"
+              "text": "سنقص لكم"
             },
             {
               "id": "2",
@@ -906,7 +906,7 @@
             }
           ],
           "correctAnswer": "1",
-          "feedbackAr": "ثمانية أحرف، والعين لها وجهان."
+          "feedbackAr": "سبعة أحرف؛ أما العين فأربع أو ست."
         },
         {
           "id": "U6.L5.HARFI.POOL99.Q3",
@@ -924,7 +924,7 @@
             },
             {
               "id": "2",
-              "text": "التوسط والطول"
+              "text": "أربع أو ست حركات"
             },
             {
               "id": "3",
@@ -932,7 +932,7 @@
             }
           ],
           "correctAnswer": "2",
-          "feedbackAr": "التوسط والطول، والطول أولى.",
+          "feedbackAr": "العين ملحق بمد اللين، فيمد أربعًا أو ستًا.",
           "exampleId": "U6.L5.HARFI.POOL99.E3"
         },
         {
@@ -1881,8 +1881,8 @@
     {
       "topicId": "U6.SUMMARY",
       "titleAr": "مقادير المدود لحفص وأقوى الأسباب",
-      "source": "book ch. 11 — page check pending",
-      "explanationAr": "مقادير المدود لحفص من طريق الشاطبية: الطبيعي حركتان؛ والمتصل أربع أو خمس ويجوز ست وقفًا إذا تطرفت الهمزة؛ والمنفصل أربع أو خمس؛ والعارض للسكون حركتان أو أربع أو ست؛ واللازم ست؛ والبدل حركتان؛ واللين العارض حركتان أو أربع أو ست؛ والصلة الكبرى كالمنفصل والصغرى حركتان؛ والعوض حركتان. وإذا اجتمع سببان عمل بالأقوى، وترتيبها من الأقوى: اللازم ثم المتصل ثم العارض للسكون ثم المنفصل ثم البدل.",
+      "source": "book ch. 11 pp. 324–376 — checked against the book 2026-11-27",
+      "explanationAr": "مقادير المدود لحفص من طريق الشاطبية: الطبيعي حركتان؛ والمتصل أربع أو خمس ويجوز ست وقفًا إذا تطرفت الهمزة؛ والمنفصل أربع أو خمس؛ والعارض للسكون حركتان أو أربع أو ست؛ واللازم ست؛ والبدل حركتان؛ واللين العارض حركتان أو أربع أو ست؛ والصلة الكبرى كالمنفصل والصغرى حركتان؛ والعوض حركتان. ويمد المنفصل بالمقدار نفسه الذي يمد به المتصل: أربع مع أربع وخمس مع خمس. والأولى في العارض واللين القصر في الحدر والتوسط في التدوير والطول في التحقيق، مع الاستمرار على المقدار المختار إلى نهاية التلاوة، ولا يزيد اللين على العارض. وإذا اجتمع سببان على حرف مد واحد عمل بالأقوى وأهمل الأضعف، وترتيبها من الأقوى: اللازم ثم المتصل ثم العارض للسكون ثم المنفصل ثم البدل.",
       "examples": [],
       "questions": [
         {
@@ -1986,6 +1986,122 @@
           "text": "المد المنفصل أقوى من المد المتصل.",
           "correctAnswer": false,
           "feedbackAr": "المتصل أقوى لاجتماع حرف المد والهمز في كلمة."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q6",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_amounts",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "إذا مد القارئ المتصل أربع حركات فبكم يمد المنفصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "حركتين"
+            },
+            {
+              "id": "2",
+              "text": "أربع"
+            },
+            {
+              "id": "3",
+              "text": "خمس"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "توسط المنفصل يكون مع توسط المتصل فقط."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q7",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_meeting",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "إذا وقف القارئ على العارض بست حركات فما الجائز له في اللين في التلاوة نفسها؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ست فقط"
+            },
+            {
+              "id": "2",
+              "text": "حركتان أو أربع أو ست"
+            },
+            {
+              "id": "3",
+              "text": "ثمان"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يكون اللين مساويًا للعارض أو أقل منه."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q8",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_speed",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الأولى في المد العارض للسكون عند القراءة بالحدر؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "القصر"
+            },
+            {
+              "id": "2",
+              "text": "التوسط"
+            },
+            {
+              "id": "3",
+              "text": "الطول"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "القصر في الحدر والتوسط في التدوير والطول في التحقيق."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q9",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_speed",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يجوز للقارئ أن يغير مقدار العارض من وقف إلى وقف في التلاوة الواحدة.",
+          "correctAnswer": false,
+          "feedbackAr": "يستمر على المقدار الذي ابتدأ به."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q10",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_meeting",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "في رِئَاءَ النَّاسِ اجتمع المتصل والبدل على حرف واحد، فما الذي يعمل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "البدل"
+            },
+            {
+              "id": "2",
+              "text": "المتصل"
+            },
+            {
+              "id": "3",
+              "text": "كلاهما بحركتين"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يعمل الأقوى ويهمل الأضعف."
         }
       ]
     },
@@ -2269,6 +2385,123 @@
             "3"
           ],
           "feedbackAr": "إظهارهما عند الحاء هو الصواب."
+        }
+      ]
+    },
+    {
+      "topicId": "U6.BOOK11",
+      "titleAr": "أخطاء تقع عند نطق أحرف المد",
+      "source": "book ch. 11 pp. 356–357 — checked against the book 2026-11-27",
+      "explanationAr": "من الأخطاء عند نطق أحرف المد: تطويل المد الطبيعي زيادة عن حده خاصة عند إنهاء التلاوة؛ وتقصيره حتى يتحول إلى حركة؛ وتطويل مقادير المدود كالمتصل واللازم والعارض إلى الإفراط؛ وختم صوت حرف المد بهمزة عند الوقف؛ وخلط صوتها بشيء من صوت الغنة.",
+      "examples": [
+        {
+          "id": "U6.BOOK11.POOL99.E1",
+          "topicId": "U6.BOOK11",
+          "verseRef": "87:19",
+          "excerptAr": "صُحُفِ إِبْرَاهِيمَ وَمُوسَىٰ",
+          "focus": "الألف الأخيرة عند إنهاء التلاوة",
+          "rule": "مد طبيعي حركتان",
+          "explanation": "لا يزاد على حركتين.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.BOOK11.POOL99.E2",
+          "topicId": "U6.BOOK11",
+          "verseRef": "95:2",
+          "excerptAr": "سِينِينَ",
+          "focus": "الياءان",
+          "rule": "مد طبيعي",
+          "explanation": "لا تقصر الياء حتى تصير كسرة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.BOOK11.POOL99.E3",
+          "topicId": "U6.BOOK11",
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "focus": "الياء قبل النون",
+          "rule": "مد بلا غنة",
+          "explanation": "لا يخلط صوت المد بالغنة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.BOOK11.POOL99.Q1",
+          "topicId": "U6.BOOK11",
+          "objective": "madd_errors",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U6.BOOK11",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الخطأ في الوقف على غَفُورًا بلفظ غفوراء؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تقصير المد"
+            },
+            {
+              "id": "2",
+              "text": "ختم صوت المد بهمزة"
+            },
+            {
+              "id": "3",
+              "text": "إظهار الغنة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يوقف بألف ممدودة حركتين بلا همز."
+        },
+        {
+          "id": "U6.BOOK11.POOL99.Q2",
+          "topicId": "U6.BOOK11",
+          "objective": "madd_errors",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.BOOK11",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الخطأ الشائع في الموضع المحدد عند ختم التلاوة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تطويل المد الطبيعي زيادة عن حده"
+            },
+            {
+              "id": "2",
+              "text": "إظهار الميم"
+            },
+            {
+              "id": "3",
+              "text": "قلقلة الميم"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "يبقى حركتين.",
+          "exampleId": "U6.BOOK11.POOL99.E1"
+        },
+        {
+          "id": "U6.BOOK11.POOL99.Q3",
+          "topicId": "U6.BOOK11",
+          "objective": "madd_errors",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.BOOK11",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "خلط صوت حرف المد بالغنة في نحو النَّاسِ ونَسْتَعِينُ من الأداء الصحيح.",
+          "correctAnswer": false,
+          "feedbackAr": "من الأخطاء الشائعة."
+        },
+        {
+          "id": "U6.BOOK11.POOL99.Q4",
+          "topicId": "U6.BOOK11",
+          "objective": "madd_errors",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U6.BOOK11",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الإفراط في تطويل المتصل واللازم مما نهى عنه الأئمة.",
+          "correctAnswer": true,
+          "feedbackAr": "يلتزم المقدار المقرر."
         }
       ]
     }
