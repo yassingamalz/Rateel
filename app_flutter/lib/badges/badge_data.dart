@@ -16,7 +16,6 @@ class BadgeDef {
     required this.reward,
     required this.total,
     required this.start,
-    this.green = false,
   });
 
   /// 1…12: medal `assets/ui/badges/m<nn>.webp`.
@@ -30,12 +29,6 @@ class BadgeDef {
   /// Target of the requirement, and the mock value it starts from.
   final int total;
   final int start;
-
-  /// Dark-green engraving (owner, 2026-11-27: a mix of the two sets): the
-  /// letters and bold glyphs (ق, نّ, sound waves, arrows, crown) are green,
-  /// as the reference's ق; the fine objects (lantern, books, microphone,
-  /// flame, scroll, trophy) keep the brown engraving.
-  final bool green;
 
   String get code => 'm${id.toString().padLeft(2, '0')}';
 }
@@ -72,7 +65,6 @@ const badges = <BadgeDef>[
     reward: '500',
     total: 1,
     start: 1,
-    green: true,
   ),
   BadgeDef(
     id: 5,
@@ -97,7 +89,6 @@ const badges = <BadgeDef>[
     reward: '300',
     total: 20,
     start: 6,
-    green: true,
   ),
   BadgeDef(
     id: 8,
@@ -114,7 +105,6 @@ const badges = <BadgeDef>[
     reward: '500',
     total: 10,
     start: 0,
-    green: true,
   ),
   BadgeDef(
     id: 10,
@@ -123,7 +113,6 @@ const badges = <BadgeDef>[
     reward: '300',
     total: 10,
     start: 2,
-    green: true,
   ),
   BadgeDef(
     id: 11,
@@ -140,7 +129,6 @@ const badges = <BadgeDef>[
     reward: '10K',
     total: 12,
     start: 0,
-    green: true,
   ),
 ];
 
@@ -158,21 +146,27 @@ double shareOf(BadgeDef b) =>
 /// requirement is reached; review aid `?earn=5`.
 final ValueNotifier<int?> badgeEarned = ValueNotifier<int?>(null);
 
-/// Medal engraving: `mix` (default, per badge: [BadgeDef.green]), or `std` /
-/// `green` to see one whole set (review aid `?medals=std|green`).
-String badgeMedalSet = 'mix';
+/// Medal engravings (owner, 2026-11-27): the medal WITHOUT green in the middle
+/// (brown engraving, `std`) is the one to fill, the one WITH the green middle
+/// (`green`) is what it becomes: the fill is the green one rising over the
+/// brown one. Earned badges show the green one. Review aid `?medals=std` shows
+/// the brown one as the finished medal.
+String badgeMedalSet = 'green';
 
-String medalAsset(BadgeDef b, {bool locked = false, bool opposite = false}) {
-  if (locked) return 'assets/ui/badges/l1.webp';
-  var green = switch (badgeMedalSet) {
-    'std' => false,
-    'green' => true,
-    _ => b.green,
-  };
-  // The other engraving: the base the progress fill starts from (screen 27).
-  if (opposite && badgeMedalSet == 'mix') green = !green;
-  return 'assets/ui/badges/${green ? 'green/' : ''}${b.code}.webp';
-}
+/// The finished medal (earned, and the colour of the fill).
+String medalAsset(BadgeDef b) => _asset(b, badgeMedalSet == 'green');
+
+/// The medal to fill: the other engraving, as it is before the progress.
+String medalStart(BadgeDef b) => _asset(b, badgeMedalSet != 'green');
+
+String _asset(BadgeDef b, bool green) =>
+    'assets/ui/badges/${green ? 'green/' : ''}${b.code}.webp';
+
+/// Progress-fill kit (owner, 2026-11-27), trimmed to the medals' box:
+/// the padlock closed / open (same box, so the body does not move), and the
+/// owner's empty medals and locked medal, kept in the library for later.
+const kitPadlock = 'assets/ui/badges/padlock.webp';
+const kitPadlockOpen = 'assets/ui/badges/padlock_open.webp';
 
 /// Order of the grid: earned first, then by progress (highest first), then
 /// the list order (stable).

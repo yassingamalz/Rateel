@@ -254,4 +254,10 @@ medals so they line up when swapped, 512 px, WebP.
 | Earned medals, dark green | `badges/dark-green/m<nn>_*.png` | `ui/badges/green/m<nn>.webp` | off by default (`?medals=green`), owner chooses |
 | Locked medal L1 | `badges/l1_locked.png` | `ui/badges/l1.webp` | shared by every locked badge, grid and detail panel |
 Reused from 11: `ui/leaderboard/{ribbon,lattice,coins_gold}.webp`.
+Progress-fill kit from the owner (2026-11-27, ChatGPT, 1254 px, on magenta): sources `docs/design-assets/badges/`
+`blank_olive.png`, `blank_gold.png` (empty medals), `l1_locked_v2.png` (locked medal with a solid cream padlock, replaces `l1_locked.png`),
+`padlock.png` (closed), `padlock_open.png`. App copies (`tools/assets/badge_assets.py`): `ui/badges/blank_olive.webp`, `blank_gold.webp`,
+`l1.webp` (the three share one trim box and the 487×512 size of the medals), `padlock.webp` + `padlock_open.webp` (one common box, keyhole filled
+dark olive; the open one overlays the closed one exactly). **Used by screen 27:** the two padlocks (position on the medal measured from `l1`).
+Spare: `blank_olive`, `blank_gold`, `l1`.
 

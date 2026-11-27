@@ -97,7 +97,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 
 ## Screen 27, badges (built 2026-11-27, waiting for the owner)
 - [ ] **Owner's review** of look, motion and the celebration (`?earn=5`); critic only after the owner's yes (phone size).
-- [ ] **Locked medal L1 v2** from the owner (solid cream padlock as the reference): `prompts/27-badges/images-v3.txt`; then re-run `tools/assets/badge_assets.py` with the new file.
+- [x] Locked medal L1 v2 and the padlocks arrived (2026-11-27); L1 itself is spare for now (DECISIONS).
 - [ ] Screen 13 (achievements, `13-traguardi` reference: level, points, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards): the «الأوسمة» tab is this screen 27; decide with the owner.
 - [ ] **Wire the badges to real progress** (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a
       requirement is reached; save progress; M09 needs screen 09 (recordings). Today: mock, in memory.

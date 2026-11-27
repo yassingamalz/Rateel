@@ -59,7 +59,7 @@ class _BadgesScreenState extends State<BadgesScreen>
   );
   late final AnimationController _fx = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 1500),
+    duration: const Duration(milliseconds: 2000),
   );
   final _scroll = ScrollController();
   BadgeFilter _filter = BadgeFilter.all;
@@ -68,6 +68,9 @@ class _BadgesScreenState extends State<BadgesScreen>
 
   /// Badge being celebrated: kept «locked» for the order until the end.
   int? _fxId;
+
+  /// Progress share the celebration of [_fxId] starts from.
+  double _fxShare0 = 0;
 
   /// Last top-left of every tile, so a tile that leaves the filter fades out
   /// where it was.
@@ -88,8 +91,9 @@ class _BadgesScreenState extends State<BadgesScreen>
       ribbonAsset,
       latticeAsset,
       coinAssets[0],
-      medalAsset(badges.first, locked: true),
-      for (final b in badges) medalAsset(b),
+      kitPadlock,
+      kitPadlockOpen,
+      for (final b in badges) ...[medalAsset(b), medalStart(b)],
     };
     Future.wait([
           for (final a in assets) precacheImage(AssetImage(a), context),
@@ -176,9 +180,11 @@ class _BadgesScreenState extends State<BadgesScreen>
         curve: Curves.easeOutCubic,
       );
     }
+    _fxShare0 = shareOf(b);
     _fx.forward(from: 0);
-    // The medal turns gold at 24% of the effect.
-    await Future<void>.delayed(const Duration(milliseconds: 360));
+    // The padlock opens at 45–65% of the effect: the badge counts as earned
+    // (sound, haptics) at 50%.
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     if (!mounted) return;
     badgeProgress[id] = b.total;
     Sounds.passed();
@@ -288,10 +294,12 @@ class _BadgesScreenState extends State<BadgesScreen>
             children: [...previous, ?current],
           ),
           child: _Detail(
-            key: ValueKey('${b.id}-$earned'),
+            key: ValueKey('${b.id}-${earned && _fxId != b.id}'),
             u: u,
             badge: b,
             earned: earned,
+            fx: _fxId == b.id ? _fx : null,
+            fxShare: _fxShare0,
           ),
         ),
       ),
@@ -414,6 +422,7 @@ class _BadgesScreenState extends State<BadgesScreen>
                             radius: m.tileRadius,
                             pop: k,
                             fx: _fx.value,
+                            fxShare: _fxShare0,
                           ),
                         )
                       : _BadgeTile(
@@ -663,11 +672,15 @@ class _BadgeTile extends StatelessWidget {
     required this.radius,
     required this.pop,
     this.fx,
+    this.fxShare = 0,
   });
   final double u;
   final BadgeDef badge;
   final double radius;
   final double pop;
+
+  /// Progress share the celebration starts from.
+  final double fxShare;
 
   /// 0…1 while this tile's badge is being earned.
   final double? fx;
@@ -676,29 +689,11 @@ class _BadgeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final fxv = fx;
     final earned = isEarned(badge);
-    // Locked → gold: the padlock medal lifts and fades, the gold one pops.
-    final s = fxv == null ? (earned ? 1.0 : 0.0) : Curves.easeOut.transform(
-      ((fxv - 0.2) / 0.3).clamp(0.0, 1.0),
-    );
     final medalH = u * 16.4;
-    Widget medal(String asset, {double scale = 1, double opacity = 1}) =>
-        Opacity(
-          opacity: opacity.clamp(0.0, 1.0),
-          child: Transform.scale(
-            scale: scale,
-            child: Image.asset(
-              asset,
-              height: medalH,
-              filterQuality: FilterQuality.medium,
-            ),
-          ),
-        );
-    final poppedScale = fxv == null
-        ? 1.0
-        : 1 + 0.16 * math.sin(((fxv - 0.2) / 0.5).clamp(0.0, 1.0) * math.pi);
-    final checkK = fxv == null
+    final k = fxv == null ? null : _Unlock(fxv, fxShare);
+    final checkK = k == null
         ? (earned ? 1.0 : 0.0)
-        : Curves.easeOutBack.transform(((fxv - 0.35) / 0.3).clamp(0.0, 1.0));
+        : Curves.easeOutBack.transform(((fxv! - 0.7) / 0.2).clamp(0.0, 1.0));
     return Transform.scale(
       scale: lerpDouble(0.85, 1, pop.clamp(0.0, 1.0))!,
       child: DecoratedBox(
@@ -719,32 +714,17 @@ class _BadgeTile extends StatelessWidget {
               top: u * 2.1,
               height: medalH,
               child: Center(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    if (s < 1)
-                      Transform.translate(
-                        offset: Offset(0, -u * 1.5 * s),
-                        child: Opacity(
-                          opacity: (1 - s).clamp(0.0, 1.0),
-                          child: Transform.scale(
-                            scale: 1 + 0.12 * s,
-                            child: _ProgressMedal(
-                              badge: badge,
-                              height: medalH,
-                              share: shareOf(badge),
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (s > 0)
-                      medal(
+                child: earned && k == null
+                    ? Image.asset(
                         medalAsset(badge),
-                        scale: lerpDouble(0.8, 1, s)! * poppedScale,
-                        opacity: s,
+                        height: medalH,
+                        filterQuality: FilterQuality.medium,
+                      )
+                    : _BadgeMedal(
+                        badge: badge,
+                        height: medalH,
+                        unlock: k ?? _Unlock.idle(shareOf(badge)),
                       ),
-                  ],
-                ),
               ),
             ),
             Positioned(
@@ -782,13 +762,13 @@ class _BadgeTile extends StatelessWidget {
                 ),
               ),
             ),
-            if (fxv != null && fxv > 0.2 && fxv < 1)
+            if (fxv != null && fxv > 0.5 && fxv < 1)
               Positioned.fill(
                 child: IgnorePointer(
                   child: CustomPaint(
                     painter: _BurstPainter(
                       u: u,
-                      t: ((fxv - 0.2) / 0.8).clamp(0.0, 1.0),
+                      t: ((fxv - 0.5) / 0.5).clamp(0.0, 1.0),
                       centre: Offset(0, u * 2.1 + medalH * 0.45),
                     ),
                   ),
@@ -801,46 +781,86 @@ class _BadgeTile extends StatelessWidget {
   }
 }
 
-/// A medal that fills as the badge progresses (owner, 2026-11-27): the two
-/// engravings we have, one over the other. Below: the OTHER engraving, dimmed
-/// and desaturated; above, from the bottom up to [share] of the height: the
-/// badge's own engraving in full colour. At 100% it is the finished medal.
-/// Both images share the same trim box, so they line up exactly.
-class _ProgressMedal extends StatelessWidget {
-  const _ProgressMedal({
+/// Timeline of an unearned medal (owner, 2026-11-27). Progress: the brown
+/// medal (no green in the middle) is filled from the bottom by the green one,
+/// in proportion to the progress, the padlock on top. At 100% (celebration,
+/// t 0…1): the fill completes (0–0.3), the closed padlock shakes (0.3–0.5),
+/// opens and flies off (0.5–0.75).
+class _Unlock {
+  _Unlock(double t, double share0)
+    : fill = lerpDouble(
+        share0,
+        1,
+        Curves.easeOut.transform((t / 0.3).clamp(0.0, 1.0)),
+      )!,
+      shake = ((t - 0.3) / 0.2).clamp(0.0, 1.0),
+      fly = Curves.easeIn.transform(((t - 0.5) / 0.25).clamp(0.0, 1.0)),
+      opened = t >= 0.5;
+
+  /// A badge in progress: only the fill.
+  _Unlock.idle(double share)
+    : fill = share,
+      shake = 0,
+      fly = 0,
+      opened = false;
+
+  final double fill;
+  final double shake;
+  final double fly;
+
+  /// The open padlock replaces the closed one (at the click, t 0.5).
+  final bool opened;
+}
+
+/// The unearned medal: brown medal, green one rising over it (same box, so
+/// they line up), padlock on top (where it is on the owner's locked medal:
+/// rect measured by tools/assets/badge_assets.py; the open padlock has the
+/// same box, the body stays still).
+class _BadgeMedal extends StatelessWidget {
+  const _BadgeMedal({
     required this.badge,
     required this.height,
-    required this.share,
+    required this.unlock,
   });
   final BadgeDef badge;
   final double height;
-  final double share;
+  final _Unlock unlock;
+
+  // Padlock (union box of closed and open) on the medal, as fractions.
+  static const _padLeft = 0.3660, _padTop = 0.2633;
+  static const _padW = 0.2610, _padH = 0.3153;
 
   @override
   Widget build(BuildContext context) {
-    Widget img(String a) =>
-        Image.asset(a, height: height, filterQuality: FilterQuality.medium);
-    final f = share.clamp(0.0, 1.0);
-    return Stack(
-      children: [
-        ColorFiltered(
-          colorFilter: const ColorFilter.matrix(<double>[
-            // saturation 0.35, brightness 0.6
-            0.327, 0.230, 0.043, 0, 0,
-            0.117, 0.440, 0.043, 0, 0,
-            0.117, 0.230, 0.253, 0, 0,
-            0, 0, 0, 1, 0,
-          ]),
-          child: img(medalAsset(badge, opposite: true)),
-        ),
-        if (f > 0)
-          // Soft edge: the colour fades in over the top 7% of the filled part.
-          ShaderMask(
-            blendMode: BlendMode.dstIn,
-            shaderCallback: (r) {
-              final top = (1 - f).clamp(0.0, 1.0);
-              final soft = (top + 0.07).clamp(0.0, 1.0);
-              return LinearGradient(
+    final w = height * 487 / 512;
+    final f = unlock.fill.clamp(0.0, 1.0);
+    Widget img(String a, {BoxFit fit = BoxFit.fill}) => Image.asset(
+      a,
+      width: w,
+      height: height,
+      fit: fit,
+      filterQuality: FilterQuality.medium,
+    );
+    // Soft 6% edge on the fill line.
+    final top = (1 - f).clamp(0.0, 1.0);
+    final soft = (top + 0.06).clamp(0.0, 1.0);
+    // Shake: three quick tilts, dying out; then it opens: lifts, grows, fades.
+    final angle =
+        math.sin(unlock.shake * math.pi * 6) * 0.16 * (1 - unlock.shake);
+    final fly = unlock.fly;
+    final padW = w * _padW;
+    final padH = height * _padH;
+    return SizedBox(
+      width: w,
+      height: height,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          img(medalStart(badge)),
+          if (f > 0)
+            ShaderMask(
+              blendMode: BlendMode.dstIn,
+              shaderCallback: (r) => LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: const [
@@ -850,11 +870,36 @@ class _ProgressMedal extends StatelessWidget {
                   Color(0xFFFFFFFF),
                 ],
                 stops: [0, top, soft, 1],
-              ).createShader(r);
-            },
-            child: img(medalAsset(badge)),
-          ),
-      ],
+              ).createShader(r),
+              child: img(medalAsset(badge)),
+            ),
+          if (fly < 1)
+            Positioned(
+              left: w * _padLeft,
+              top: height * _padTop,
+              width: padW,
+              height: padH,
+              child: Opacity(
+                opacity: 1 - fly,
+                child: Transform.translate(
+                  offset: Offset(0, -height * 0.14 * fly),
+                  child: Transform.rotate(
+                    angle: unlock.opened ? -0.35 * fly : angle,
+                    child: Transform.scale(
+                      scale: 1 +
+                          0.3 * fly +
+                          0.05 * math.sin(unlock.shake * math.pi),
+                      child: Image.asset(
+                        unlock.opened ? kitPadlockOpen : kitPadlock,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -1119,10 +1164,16 @@ class _Detail extends StatelessWidget {
     required this.u,
     required this.badge,
     required this.earned,
+    this.fx,
+    this.fxShare = 0,
   });
   final double u;
   final BadgeDef badge;
   final bool earned;
+
+  /// The celebration of this badge (null otherwise) and its start share.
+  final Animation<double>? fx;
+  final double fxShare;
 
   @override
   Widget build(BuildContext context) {
@@ -1139,7 +1190,16 @@ class _Detail extends StatelessWidget {
           top: u * 2.9,
           height: u * 25.4,
           child: Center(
-            child: earned
+            child: fx != null
+                ? AnimatedBuilder(
+                    animation: fx!,
+                    builder: (context, _) => _BadgeMedal(
+                      badge: badge,
+                      height: u * 25.4,
+                      unlock: _Unlock(fx!.value, fxShare),
+                    ),
+                  )
+                : earned
                 ? Image.asset(
                     medalAsset(badge),
                     height: u * 25.4,
@@ -1149,10 +1209,10 @@ class _Detail extends StatelessWidget {
                     tween: Tween(begin: 0, end: share),
                     duration: const Duration(milliseconds: 750),
                     curve: Curves.easeOutCubic,
-                    builder: (context, v, _) => _ProgressMedal(
+                    builder: (context, v, _) => _BadgeMedal(
                       badge: badge,
                       height: u * 25.4,
-                      share: v,
+                      unlock: _Unlock.idle(v),
                     ),
                   ),
           ),

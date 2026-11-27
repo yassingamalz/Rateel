@@ -23,3 +23,9 @@
 - Checked: `flutter analyze`, `flutter test` (23 pass, 3 new), web build, captures at 1844×853 and 915×412. **No critic yet**
   (asks the owner first). Open points for the owner are in `DECISIONS.md` (3 🟡 rows) and `BACKLOG.md`.
 
+## 3. Owner's review round (2026-11-27)
+- Medals mixed brown/green; borders from the confirmed tokens; locked medal L1 redone by the owner (new padlock assets).
+- **Progress fill**: brown medal (no green) filled bottom-up by the green one, padlock on top; unlock at 100% with the open
+  padlock (`_Unlock`, `_BadgeMedal` in `badges_screen.dart`); owner's corrections are logged in `DECISIONS.md`.
+- Screen 13 (achievements) vs 27: question open (`BACKLOG.md`).
+
