@@ -1,5 +1,34 @@
 # Next session: timeline from 2026-11-26 (proposal, the owner confirms the order)
 
+## Hand-off after screen 13 v1 (2026-11-27): **come back to this screen**
+**Screen 13 (achievements) is a particular one (owner, 2026-11-27): we will return to it later.** It is built (v1) but not
+finished and not merged into `master`.
+- **Session that built it:** https://claude.ai/code/session_017kS8iV5j47ogdjc7VLvvLQ (`session_017kS8iV5j47ogdjc7VLvvLQ`).
+  Resume it from the Claude app if we need exactly that conversation.
+- **Branch:** `claude/flutter-13-achievements-xa7myj` (from `master` a20159c; `flutter/13-achievements` was not created).
+  Code: `app_flutter/lib/achievements/`, `lib/gamification/points.dart`; tests `test/achievements_test.dart`, `test/points_test.dart`.
+- **Where everything is written:** plan `screens/13-achievements.md` (§7 owner's answers, §9 level page), decisions in `DECISIONS.md`
+  (2026-11-27 rows), leftovers in `BACKLOG.md` («Screen 13»), conflicts N1–N4 in `STYLE-CONFLICTS.md`, captures and comparison
+  sheets (Angular / reference / Flutter) `screens/13-achievements/compare-13-v1.jpg`, `compare-level-v1.jpg`.
+- **What is missing** (also in `BACKLOG.md`): owner review of v1 and the critic (phone 915×412, ask first); the card emblems
+  C1–C5 from ChatGPT (`prompts/13-achievements/images-v1.txt`; placeholders are the medals of 27) and then the tier-tinted frame
+  prompts; header arch (too wide and flat) and mosque (too dark) to refine; level page rows (no description or letter in the data,
+  rows do not open the unit yet); points, level reward, ledger and progress are mock; rail count bubble = earned achievements;
+  share button of the detail; phone check at text size 110%; APK on request.
+
+## Prompt to start the next session (see what is missing on 13, then continue)
+```
+Lavora sul repo Rateel. Riparti dal branch claude/flutter-13-achievements-xa7myj (la schermata 13 v1 non e' ancora in master;
+la sessione che l'ha costruita e' https://claude.ai/code/session_017kS8iV5j47ogdjc7VLvvLQ). Leggi CLAUDE.md e tutti i file che
+indica (DECISIONS.md, README.md, PROCESS.md, LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi docs/flutter/NEXT-SESSION.md
+(sezione «Hand-off after screen 13 v1»), docs/flutter/screens/13-achievements.md e STYLE-CONFLICTS.md. Fai un elenco corto di
+cosa manca alla 13 (codice, asset, decisioni aperte, differenze dal riferimento e da Angular) guardando il codice in
+app_flutter/lib/achievements/ e i confronti in docs/flutter/screens/13-achievements/, e dimmi da cosa conviene ripartire.
+Aspetta il mio via prima di toccare il visivo. Asset mancanti: prompt ChatGPT incollati in chat, un blocco copiabile
+ciascuno, con le immagini da allegare. Il critic solo quando te lo dico (formato telefono 915x412). Tutto cio' che resta per
+dopo in BACKLOG.md, ogni decisione in DECISIONS.md nello stesso commit. Parlami in italiano, documenti in inglese.
+```
+
 State on `master` (2026-11-27): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
 06 lessons, 07 video, 08 reading, 10/10b test (with 25 results inside), 11 leaderboard, 12 daily challenges,
 14 coming soon, 22 listening lesson (PR #56 and its follow-up), 23 settings**; timeline confirmed by the owner

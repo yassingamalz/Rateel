@@ -3,7 +3,7 @@
 Branch: `flutter/13-achievements` (session branch `claude/flutter-13-achievements-xa7myj`), from `master` a20159c (27 badges merged, PR #59).
 Reference (visual only): `13-achievements/reference.webp` (= `ref-13-traguardi.png` of 27; original `13-traguardi.webp` on
 `lesson-production`), 1844×853. Angular origin: `src/app/features/gamification/achievements/` (+ `services/gamification.service.ts`).
-**Status (2026-11-27): plan v1, waiting for the owner's yes.** No visual work started.
+**Status (2026-11-27): plan approved, v1 built, owner review and critic pending. A particular screen: we come back to it (owner).** Built in session https://claude.ai/code/session_017kS8iV5j47ogdjc7VLvvLQ on branch `claude/flutter-13-achievements-xa7myj`; hand-off in `NEXT-SESSION.md`.
 
 13 is the page of the rail item «الإنجازات». It shows the **points**, the **level with its progress bar**, **4 tabs**
 (الإنجازات / الأوسمة / النقاط / المجموعة) and, in the first tab, a **carousel of achievement cards**. **27 (badges) is part of 13**:
