@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "id": "U0.L1.POOL76.Q1",
+      "topicId": "U0.L1",
+      "text": "ما الذي يميّز تلاوة القرآن عن مجرد تدريب على النطق؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "القراءة المتأنية وسماع النموذج الصحيح يساعدان على التعلم.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "أنها تغني عن فهم المعنى"
+        },
+        {
+          "id": "2",
+          "text": "أنها عبادة مع العناية بصحة القراءة"
+        },
+        {
+          "id": "3",
+          "text": "أنها مسابقة سرعة فقط"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U0.L1.POOL76.Q2",
+      "topicId": "U0.L1",
+      "text": "اختر سلوكين يعينان على التلاوة.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "القراءة المتأنية وسماع النموذج الصحيح يساعدان على التعلم.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإنصات"
+        },
+        {
+          "id": "2",
+          "text": "مراجعة الأخطاء"
+        },
+        {
+          "id": "3",
+          "text": "تعمد تغيير الألفاظ"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U0.L1.POOL76.Q3",
+      "topicId": "U0.L1",
+      "text": "إذا قرأ المتعلم ببطء ليصحح أداءه فهل ينافي ذلك تعلم الترتيل؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "القراءة المتأنية وسماع النموذج الصحيح يساعدان على التعلم.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "نعم دائمًا"
+        },
+        {
+          "id": "2",
+          "text": "يلزم الإسراع"
+        },
+        {
+          "id": "3",
+          "text": "لا، التدرج مفيد"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U0.L2.POOL76.Q1",
+      "topicId": "U0.L2",
+      "text": "إذا أخطأ الطالب في موضع طرف اللسان فأي جانب يراجع أولًا؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الفرق بين المخرج والصفة والحكم يساعد على تشخيص الخطأ.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "أسماء السور"
+        },
+        {
+          "id": "2",
+          "text": "المخرج"
+        },
+        {
+          "id": "3",
+          "text": "عدد الآيات"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U0.L2.POOL76.Q2",
+      "topicId": "U0.L2",
+      "text": "إذا صح موضع الحرف وبقي خلل في جريان الصوت فأي جانب يراجع؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الفرق بين المخرج والصفة والحكم يساعد على تشخيص الخطأ.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الصفة"
+        },
+        {
+          "id": "2",
+          "text": "ترتيب المصحف"
+        },
+        {
+          "id": "3",
+          "text": "رقم الآية"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U0.L2.POOL76.Q3",
+      "topicId": "U0.L2",
+      "text": "صل المصطلح بالمثال.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الفرق بين المخرج والصفة والحكم يساعد على تشخيص الخطأ.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "المخرج",
+          "right": "موضع خروج القاف"
+        },
+        {
+          "id": "2",
+          "left": "الصفة",
+          "right": "جريان الصوت في السين"
+        },
+        {
+          "id": "3",
+          "left": "الحكم",
+          "right": "الإخفاء قبل الشين"
+        }
+      ]
+    },
+    {
+      "id": "U0.L3.POOL76.Q1",
+      "topicId": "U0.L3",
+      "text": "في تدريب غير قرآني استبدل الطالب ضَ بـ ظَ. ما نوع الخلل؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح الخطأ الظاهر يبدأ بتحديد نوعه ثم التدريب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "اختلاف خط"
+        },
+        {
+          "id": "2",
+          "text": "تبديل حرف"
+        },
+        {
+          "id": "3",
+          "text": "اختيار سرعة"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U0.L3.POOL76.Q2",
+      "topicId": "U0.L3",
+      "text": "في تمرين الحركة قرأ بُ بدل بَ. ماذا يراجع؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح الخطأ الظاهر يبدأ بتحديد نوعه ثم التدريب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الحركة"
+        },
+        {
+          "id": "2",
+          "text": "عدد الحروف"
+        },
+        {
+          "id": "3",
+          "text": "علامة الوقف"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U0.L3.POOL76.Q3",
+      "topicId": "U0.L3",
+      "text": "اختر إجراءات التصحيح.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تصحيح الخطأ الظاهر يبدأ بتحديد نوعه ثم التدريب.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "سماع النموذج"
+        },
+        {
+          "id": "2",
+          "text": "تكرار الأداء بعد التصحيح"
+        },
+        {
+          "id": "3",
+          "text": "تجاهل الخطأ"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U0.L4.POOL76.Q1",
+      "topicId": "U0.L4",
+      "text": "في بداية مجلس التلاوة ما الصيغة التي يتعلمها الطالب أولًا؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم أحوال الاستعاذة والجهر بها والإسرار بها بالتلقي.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "سبحان ربي الأعلى"
+        },
+        {
+          "id": "2",
+          "text": "أعوذ بالله من الشيطان الرجيم"
+        },
+        {
+          "id": "3",
+          "text": "الحمد لله رب العالمين"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U0.L4.POOL76.Q2",
+      "topicId": "U0.L4",
+      "text": "ما الفرق بين الاستعاذة والبسملة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم أحوال الاستعاذة والجهر بها والإسرار بها بالتلقي.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لكل منهما لفظ ومعنى وموضع"
+        },
+        {
+          "id": "2",
+          "text": "هما لفظ واحد"
+        },
+        {
+          "id": "3",
+          "text": "كلتاهما اسم سورة"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U0.L4.POOL76.Q3",
+      "topicId": "U0.L4",
+      "text": "الاستعاذة طلب العوذ بالله من الشيطان الرجيم.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم أحوال الاستعاذة والجهر بها والإسرار بها بالتلقي.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U0.L5.POOL76.Q1",
+      "topicId": "U0.L5",
+      "text": "يريد القارئ الانتقال من سورة غير الأنفال إلى سورة ليست التوبة بالبسملة. أي ترتيب يختار؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "أوجه البسملة تتعلق بموضع الابتداء والانتقال.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "حذف آخر كلمة من الأولى"
+        },
+        {
+          "id": "2",
+          "text": "الوقف على آخر الأولى ثم وصل البسملة بأول التالية"
+        },
+        {
+          "id": "3",
+          "text": "وصل آخر الأولى بالبسملة ثم الوقف عليها"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U0.L5.POOL76.Q2",
+      "topicId": "U0.L5",
+      "text": "هل يستعمل حكم أول السورة نفسه آليًا عند البدء من وسطها؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "أوجه البسملة تتعلق بموضع الابتداء والانتقال.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا، يراجع التفصيل"
+        },
+        {
+          "id": "2",
+          "text": "نعم دائمًا"
+        },
+        {
+          "id": "3",
+          "text": "يحذف كل افتتاح"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U0.L5.POOL76.Q3",
+      "topicId": "U0.L5",
+      "text": "صل الوصف بالوجه.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "أوجه البسملة تتعلق بموضع الابتداء والانتقال.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "قطع الجميع",
+          "right": "وقف عند نهاية الأولى وعند نهاية البسملة"
+        },
+        {
+          "id": "2",
+          "left": "وصل الجميع",
+          "right": "وصل آخر الأولى والبسملة وأول التالية"
+        }
+      ]
+    },
+    {
+      "id": "U1.L1.POOL76.Q1",
+      "topicId": "U1.L1",
+      "text": "أي حرفين يتشابهان في الرسم ويختلفان بالنقط؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "يميز المتعلم الرسم والاسم والصوت والحركة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ق ع"
+        },
+        {
+          "id": "2",
+          "text": "ب ت"
+        },
+        {
+          "id": "3",
+          "text": "ب م"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U1.L1.POOL76.Q2",
+      "topicId": "U1.L1",
+      "text": "صل الحرف بحركته.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "يميز المتعلم الرسم والاسم والصوت والحركة.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "بَ",
+          "right": "فتحة"
+        },
+        {
+          "id": "2",
+          "left": "بُ",
+          "right": "ضمة"
+        },
+        {
+          "id": "3",
+          "left": "بِ",
+          "right": "كسرة"
+        }
+      ]
+    },
+    {
+      "id": "U1.L1.POOL76.Q3",
+      "topicId": "U1.L1",
+      "text": "تغير شكل الحرف حسب موقعه لا يعني تغير اسمه.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "يميز المتعلم الرسم والاسم والصوت والحركة.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U1.L2.POOL76.Q1",
+      "topicId": "U1.L2",
+      "text": "أي جزء يلامس أطراف الثنايا العليا عند الفاء؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "التشريح يوضح موضع النطق ولا يغني عن النموذج الصوتي.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الحلق"
+        },
+        {
+          "id": "2",
+          "text": "باطن الشفة السفلى"
+        },
+        {
+          "id": "3",
+          "text": "أقصى اللسان"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U1.L2.POOL76.Q2",
+      "topicId": "U1.L2",
+      "text": "ما الذي يشارك في تشكيل صوت النون غير الخيشوم؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التشريح يوضح موضع النطق ولا يغني عن النموذج الصوتي.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "اللسان وما يحاذيه"
+        },
+        {
+          "id": "2",
+          "text": "الشفتان وحدهما"
+        },
+        {
+          "id": "3",
+          "text": "الأسنان السفلى وحدها"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U1.L2.POOL76.Q3",
+      "topicId": "U1.L2",
+      "text": "صل العضو بالمثال.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التشريح يوضح موضع النطق ولا يغني عن النموذج الصوتي.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الشفتان",
+          "right": "ب"
+        },
+        {
+          "id": "2",
+          "left": "الحلق",
+          "right": "ح"
+        },
+        {
+          "id": "3",
+          "left": "اللسان",
+          "right": "ك"
+        }
+      ]
+    },
+    {
+      "id": "U1.L3.POOL76.Q1",
+      "topicId": "U1.L3",
+      "text": "في أَسْ يستمر جريان الصوت أكثر من أَبْ. أي مفهوم يفسر ذلك؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "المقارنة بين أصوات صحيحة توضح صفات النطق.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "التنوين"
+        },
+        {
+          "id": "2",
+          "text": "الرخاوة والشدة"
+        },
+        {
+          "id": "3",
+          "text": "الرسم العثماني"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U1.L3.POOL76.Q2",
+      "topicId": "U1.L3",
+      "text": "هل يتغير صوت الحرف بتغيير وضع أعضاء النطق؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "المقارنة بين أصوات صحيحة توضح صفات النطق.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U1.L3.POOL76.Q3",
+      "topicId": "U1.L3",
+      "text": "اختر وسائل ملاحظة اختلاف الأصوات.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "المقارنة بين أصوات صحيحة توضح صفات النطق.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "السماع"
+        },
+        {
+          "id": "2",
+          "text": "رسم المخرج"
+        },
+        {
+          "id": "3",
+          "text": "لون خلفية الشاشة"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    }
+  ]
+}

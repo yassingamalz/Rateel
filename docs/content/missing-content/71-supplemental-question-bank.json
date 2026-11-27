@@ -1,0 +1,834 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "topicId": "X-IDG-01",
+      "id": "X-IDG-01.Q3",
+      "type": "singleChoice",
+      "text": "اختر وصف الإدغام الصغير.",
+      "options": [
+        {
+          "id": "1",
+          "text": "الأول ساكن والثاني متحرك"
+        },
+        {
+          "id": "2",
+          "text": "الأول متحرك والثاني ساكن"
+        },
+        {
+          "id": "3",
+          "text": "كلاهما متحرك"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الإدغام الصغير في هذا الباب يكون بين ساكن ومتحرك.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-01",
+      "id": "X-IDG-01.Q4",
+      "type": "singleChoice",
+      "text": "ما الفرق بين الإدغام الكامل والناقص؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الكامل لا يلتقي فيه حرفان"
+        },
+        {
+          "id": "2",
+          "text": "الناقص هو الوقف فقط"
+        },
+        {
+          "id": "3",
+          "text": "الناقص تبقى فيه صفة من الأول"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "يدرس بقاء الصفة بحسب الموضع.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-01",
+      "id": "X-IDG-01.Q5",
+      "type": "singleChoice",
+      "text": "أي مثال يجتمع فيه حرفا باء؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "من شر"
+        },
+        {
+          "id": "2",
+          "text": "اضرب بعصاك"
+        },
+        {
+          "id": "3",
+          "text": "من خوف"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "الباء الساكنة تلتقي بالباء التالية.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-01",
+      "id": "X-IDG-01.Q6",
+      "type": "singleChoice",
+      "text": "كيف نحدد وجه الإدغام؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "بالرواية والتلقي"
+        },
+        {
+          "id": "2",
+          "text": "بحذف كل ساكن"
+        },
+        {
+          "id": "3",
+          "text": "بالاختيار الشخصي"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الحكم منقول وليس قياسًا مطلقًا.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-02",
+      "id": "X-IDG-02.Q3",
+      "type": "singleChoice",
+      "text": "ما تعريف المتماثلين؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "اختلاف جميع الصفات"
+        },
+        {
+          "id": "2",
+          "text": "تقارب الحركة فقط"
+        },
+        {
+          "id": "3",
+          "text": "اتفاق المخرج والصفات"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "هما الحرف نفسه في المثال المعتاد.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-02",
+      "id": "X-IDG-02.Q4",
+      "type": "singleChoice",
+      "text": "ما العلاقة بين الكافين في يدرككم؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "التباعد"
+        },
+        {
+          "id": "2",
+          "text": "التماثل"
+        },
+        {
+          "id": "3",
+          "text": "التجانس"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "الكاف الأولى والثانية متماثلتان.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-02",
+      "id": "X-IDG-02.Q5",
+      "type": "singleChoice",
+      "text": "ما الذي يراعى عند التقاء واو مدية بواو غير مدية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "اختلاف نوع الواوين ومخرجيهما"
+        },
+        {
+          "id": "2",
+          "text": "إدغامهما دائمًا"
+        },
+        {
+          "id": "3",
+          "text": "حذفهما"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "لا تعمم قاعدة الإدغام على حرف المد.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-02",
+      "id": "X-IDG-02.Q6",
+      "type": "singleChoice",
+      "text": "ما شرط الإدغام الصغير في المواضع المروية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تحرك الأول فقط"
+        },
+        {
+          "id": "2",
+          "text": "وقف القراءة بين الحرفين"
+        },
+        {
+          "id": "3",
+          "text": "سكون الأول وتحرك الثاني"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "يلتقي الحرفان في الوصل.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-03",
+      "id": "X-IDG-03.Q3",
+      "type": "singleChoice",
+      "text": "ما تعريف المتجانسين؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "اختلاف الحركات فقط"
+        },
+        {
+          "id": "2",
+          "text": "اتحاد المخرج واختلاف بعض الصفات"
+        },
+        {
+          "id": "3",
+          "text": "اتحاد جميع الصفات"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "المخرج مشترك والصفات تختلف.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-03",
+      "id": "X-IDG-03.Q4",
+      "type": "singleChoice",
+      "text": "ما الحرف الأول في إذ ظلمتم؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الذال"
+        },
+        {
+          "id": "2",
+          "text": "الدال"
+        },
+        {
+          "id": "3",
+          "text": "الزاي"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الذال تلتقي بالظاء.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-03",
+      "id": "X-IDG-03.Q5",
+      "type": "singleChoice",
+      "text": "ما الصفة الباقية عند إدغام الطاء في التاء؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الصفير"
+        },
+        {
+          "id": "2",
+          "text": "الغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإطباق"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "تبقى صفة الإطباق في الإدغام الناقص.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-03",
+      "id": "X-IDG-03.Q6",
+      "type": "singleChoice",
+      "text": "ما المثال الذي يلتقي فيه الباء بالميم؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "بسطت"
+        },
+        {
+          "id": "2",
+          "text": "اركب معنا"
+        },
+        {
+          "id": "3",
+          "text": "قد تبين"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "يضبط وجهه وفق الطريق المعتمد.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-04",
+      "id": "X-IDG-04.Q3",
+      "type": "singleChoice",
+      "text": "أي حرف يلي اللام في قل رب؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الراء"
+        },
+        {
+          "id": "2",
+          "text": "الميم"
+        },
+        {
+          "id": "3",
+          "text": "الباء"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "اللام والراء متقاربان في هذا التصنيف.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-04",
+      "id": "X-IDG-04.Q4",
+      "type": "singleChoice",
+      "text": "ما الحرفان في نخلقكم عند موضع الالتقاء؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "القاف والميم"
+        },
+        {
+          "id": "2",
+          "text": "اللام والراء"
+        },
+        {
+          "id": "3",
+          "text": "القاف والكاف"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "تلتقي القاف بالكاف في هذا المثال.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-04",
+      "id": "X-IDG-04.Q5",
+      "type": "singleChoice",
+      "text": "هل كل تقارب يوجب الإدغام؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "التقارب يمنع كل إدغام"
+        },
+        {
+          "id": "2",
+          "text": "لا، الحكم يتبع النقل"
+        },
+        {
+          "id": "3",
+          "text": "نعم دائمًا"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "تراعى الرواية والطريق.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-04",
+      "id": "X-IDG-04.Q6",
+      "type": "singleChoice",
+      "text": "ما الأداء لحفص في فقد ضل في المثال المذكور؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "تظهر الدال قبل الضاد في هذا الموضع.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-05",
+      "id": "X-IDG-05.Q3",
+      "type": "singleChoice",
+      "text": "ما الحرف التالي للنون في من آمن؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الباء"
+        },
+        {
+          "id": "2",
+          "text": "الراء"
+        },
+        {
+          "id": "3",
+          "text": "الهمزة"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "الهمزة من حروف الإظهار الحلقي.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-05",
+      "id": "X-IDG-05.Q4",
+      "type": "singleChoice",
+      "text": "ما العلامة الشائعة للإدغام الكامل في ضبط المصحف؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "علامة مد على كل حرف"
+        },
+        {
+          "id": "2",
+          "text": "تجريد الأول من السكون وتشديد التالي"
+        },
+        {
+          "id": "3",
+          "text": "تنوين الحرفين"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "يراجع اصطلاح الطبعة المعتمدة.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-05",
+      "id": "X-IDG-05.Q5",
+      "type": "singleChoice",
+      "text": "كيف نتعلم قراءة علامات الإدغام؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "من المصحف المعتمد مع التلقي"
+        },
+        {
+          "id": "2",
+          "text": "من لون الغلاف"
+        },
+        {
+          "id": "3",
+          "text": "بتغيير النص"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الضبط مساعد على معرفة الأداء.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-IDG-05",
+      "id": "X-IDG-05.Q6",
+      "type": "singleChoice",
+      "text": "ما الأصل في الحرفين المتباعدين في هذا الباب؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب دائمًا"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بلا استثناء"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "يراعى التصنيف والموضع المروي.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-01",
+      "id": "X-LAM-01.Q3",
+      "type": "singleChoice",
+      "text": "كم حرفًا قمريًا؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "ستة"
+        },
+        {
+          "id": "2",
+          "text": "أربعة عشر"
+        },
+        {
+          "id": "3",
+          "text": "ثلاثة عشر"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "الحروف القمرية والشمسية أربع عشرة لكل مجموعة.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-01",
+      "id": "X-LAM-01.Q4",
+      "type": "singleChoice",
+      "text": "كم حرفًا شمسيًا؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أربعة عشر"
+        },
+        {
+          "id": "2",
+          "text": "خمسة عشر"
+        },
+        {
+          "id": "3",
+          "text": "ستة وعشرون"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "تشمل المجموعة اللام نفسها.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-01",
+      "id": "X-LAM-01.Q5",
+      "type": "singleChoice",
+      "text": "ما نوع اللام في القمر؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام فعل"
+        },
+        {
+          "id": "3",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "تظهر اللام قبل القاف.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-01",
+      "id": "X-LAM-01.Q6",
+      "type": "singleChoice",
+      "text": "ما نوع اللام في الشمس؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام فعل"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        },
+        {
+          "id": "3",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "تدغم اللام في الشين.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-02",
+      "id": "X-LAM-02.Q3",
+      "type": "singleChoice",
+      "text": "أي حرف قمري؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "القاف"
+        },
+        {
+          "id": "2",
+          "text": "الشين"
+        },
+        {
+          "id": "3",
+          "text": "النون"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "القاف من الحروف القمرية.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-02",
+      "id": "X-LAM-02.Q4",
+      "type": "singleChoice",
+      "text": "أي كلمة فيها لام قمرية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الناس"
+        },
+        {
+          "id": "2",
+          "text": "الشمس"
+        },
+        {
+          "id": "3",
+          "text": "الفلق"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "تظهر اللام قبل الفاء.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-02",
+      "id": "X-LAM-02.Q5",
+      "type": "singleChoice",
+      "text": "كيف تؤدى اللام القمرية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تحذف من الرسم"
+        },
+        {
+          "id": "2",
+          "text": "تظهر ساكنة"
+        },
+        {
+          "id": "3",
+          "text": "تدغم دائمًا"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "تنطق اللام من مخرجها.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-02",
+      "id": "X-LAM-02.Q6",
+      "type": "singleChoice",
+      "text": "أي حرف ليس قمريًا؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الراء"
+        },
+        {
+          "id": "2",
+          "text": "العين"
+        },
+        {
+          "id": "3",
+          "text": "الحاء"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الراء من الحروف الشمسية.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-03",
+      "id": "X-LAM-03.Q3",
+      "type": "singleChoice",
+      "text": "أي حرف شمسي؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "القاف"
+        },
+        {
+          "id": "2",
+          "text": "الفاء"
+        },
+        {
+          "id": "3",
+          "text": "الشين"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "الشين من الحروف الشمسية.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-03",
+      "id": "X-LAM-03.Q4",
+      "type": "singleChoice",
+      "text": "أي كلمة فيها لام شمسية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الفلق"
+        },
+        {
+          "id": "2",
+          "text": "الناس"
+        },
+        {
+          "id": "3",
+          "text": "القمر"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "تدغم اللام في النون.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-03",
+      "id": "X-LAM-03.Q5",
+      "type": "singleChoice",
+      "text": "ما العلاقة بين اللامين في الليل؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "التماثل"
+        },
+        {
+          "id": "2",
+          "text": "التباعد"
+        },
+        {
+          "id": "3",
+          "text": "التجانس بين حرفين مختلفين"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "تلتقي لام التعريف بلام أصلية.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-LAM-03",
+      "id": "X-LAM-03.Q6",
+      "type": "singleChoice",
+      "text": "ما العلامة الشائعة للام الشمسية في المصحف؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "سكون على اللام وشدة على كل الحروف"
+        },
+        {
+          "id": "2",
+          "text": "حذف اللام من الرسم"
+        },
+        {
+          "id": "3",
+          "text": "تجريد اللام وتشديد الحرف التالي"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "يبقى الرسم ويضبط الإدغام.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-REC-01",
+      "id": "X-REC-01.Q3",
+      "type": "singleChoice",
+      "text": "ما المرتبة المتأنية من مراتب السرعة المذكورة؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "التدوير"
+        },
+        {
+          "id": "2",
+          "text": "التحقيق"
+        },
+        {
+          "id": "3",
+          "text": "الحدر"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "التحقيق قراءة بتأنٍ مع ضبط الأداء.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-REC-01",
+      "id": "X-REC-01.Q4",
+      "type": "singleChoice",
+      "text": "ما المرتبة الأسرع؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الحدر"
+        },
+        {
+          "id": "2",
+          "text": "التحقيق"
+        },
+        {
+          "id": "3",
+          "text": "التدوير"
+        }
+      ],
+      "correctAnswer": "1",
+      "explanation": "الحدر أسرع مع المحافظة على الأحكام.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-REC-01",
+      "id": "X-REC-01.Q5",
+      "type": "singleChoice",
+      "text": "ما الذي يبقى عند تغيير سرعة التلاوة؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "زمن ثابت بالثواني لكل حرف"
+        },
+        {
+          "id": "2",
+          "text": "إسقاط الغنة"
+        },
+        {
+          "id": "3",
+          "text": "التناسب بين الأزمنة وضبط الحروف"
+        }
+      ],
+      "correctAnswer": "3",
+      "explanation": "تراعى مراتب الأحكام مع السرعة.",
+      "status": "editorial_draft"
+    },
+    {
+      "topicId": "X-REC-01",
+      "id": "X-REC-01.Q6",
+      "type": "singleChoice",
+      "text": "كيف نقارن السرعات؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "بحذف المدود"
+        },
+        {
+          "id": "2",
+          "text": "بنماذج متقنة لنفس المقطع"
+        },
+        {
+          "id": "3",
+          "text": "بتسريع تسجيل آلي دون مراجعة"
+        }
+      ],
+      "correctAnswer": "2",
+      "explanation": "المقارنة تحتاج أداءً حقيقيًا معتمدًا.",
+      "status": "editorial_draft"
+    }
+  ]
+}

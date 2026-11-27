@@ -1,0 +1,1227 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Candidate vocabulary pool, not confirmed full alphabet coverage. Verify exact references, spelling and inflection against Uthmani text before use; several examples repeat previous batches.",
+  "examples": [
+    {
+      "id": "X-LAM-02.POOL84.E1",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:22",
+      "excerptAr": "الْأَرْضَ",
+      "nextLetter": "ء",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E2",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:2",
+      "excerptAr": "الْكِتَابُ",
+      "nextLetter": "ك",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E3",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:3",
+      "excerptAr": "الْغَيْبِ",
+      "nextLetter": "غ",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E4",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:8",
+      "excerptAr": "الْيَوْمِ",
+      "nextLetter": "ي",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E5",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:20",
+      "excerptAr": "الْبَرْقُ",
+      "nextLetter": "ب",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+    },
+    {
+      "id": "X-LAM-02.POOL84.E6",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:25",
+      "excerptAr": "الْأَنْهَارُ",
+      "nextLetter": "ء",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E7",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:26",
+      "excerptAr": "الْحَقُّ",
+      "nextLetter": "ح",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E8",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:29",
+      "excerptAr": "الْأَرْضِ",
+      "nextLetter": "ء",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E9",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:49",
+      "excerptAr": "الْعَذَابِ",
+      "nextLetter": "ع",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E10",
+      "topicId": "X-LAM-02",
+      "verseRef": "114:4",
+      "excerptAr": "الْخَنَّاسِ",
+      "nextLetter": "خ",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E11",
+      "topicId": "X-LAM-02",
+      "verseRef": "113:1",
+      "excerptAr": "الْفَلَقِ",
+      "nextLetter": "ف",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E12",
+      "topicId": "X-LAM-02",
+      "verseRef": "114:6",
+      "excerptAr": "الْجِنَّةِ",
+      "nextLetter": "ج",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E13",
+      "topicId": "X-LAM-02",
+      "verseRef": "54:1",
+      "excerptAr": "الْقَمَرُ",
+      "nextLetter": "ق",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E14",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:50",
+      "excerptAr": "الْبَحْرَ",
+      "nextLetter": "ب",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E15",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:60",
+      "excerptAr": "الْحَجَرَ",
+      "nextLetter": "ح",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E16",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:74",
+      "excerptAr": "الْحِجَارَةِ",
+      "nextLetter": "ح",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E17",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:2",
+      "excerptAr": "الْمُتَّقِينَ",
+      "nextLetter": "م",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E18",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:147",
+      "excerptAr": "الْمُمْتَرِينَ",
+      "nextLetter": "م",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E19",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:22",
+      "excerptAr": "السَّمَاءَ",
+      "nextLetter": "س",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E20",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:3",
+      "excerptAr": "الصَّلَاةَ",
+      "nextLetter": "ص",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E21",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:4",
+      "excerptAr": "الْآخِرَةِ",
+      "nextLetter": "ء",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E22",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:16",
+      "excerptAr": "الضَّلَالَةَ",
+      "nextLetter": "ض",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E23",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:19",
+      "excerptAr": "الصَّوَاعِقِ",
+      "nextLetter": "ص",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E24",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:22",
+      "excerptAr": "الثَّمَرَاتِ",
+      "nextLetter": "ث",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E25",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:24",
+      "excerptAr": "النَّارَ",
+      "nextLetter": "ن",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E26",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:25",
+      "excerptAr": "الصَّالِحَاتِ",
+      "nextLetter": "ص",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E27",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:36",
+      "excerptAr": "الشَّيْطَانُ",
+      "nextLetter": "ش",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E28",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:43",
+      "excerptAr": "الزَّكَاةَ",
+      "nextLetter": "ز",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E29",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:61",
+      "excerptAr": "الذِّلَّةُ",
+      "nextLetter": "ذ",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E30",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:65",
+      "excerptAr": "السَّبْتِ",
+      "nextLetter": "س",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E31",
+      "topicId": "X-LAM-03",
+      "verseRef": "2:85",
+      "excerptAr": "الدُّنْيَا",
+      "nextLetter": "د",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E32",
+      "topicId": "X-LAM-03",
+      "verseRef": "1:3",
+      "excerptAr": "الرَّحْمَٰنِ",
+      "nextLetter": "ر",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E33",
+      "topicId": "X-LAM-03",
+      "verseRef": "92:1",
+      "excerptAr": "اللَّيْلِ",
+      "nextLetter": "ل",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL84.E34",
+      "topicId": "X-LAM-03",
+      "verseRef": "86:1",
+      "excerptAr": "الطَّارِقِ",
+      "nextLetter": "ط",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E35",
+      "topicId": "X-LAM-02",
+      "verseRef": "11:44",
+      "excerptAr": "الْمَاءُ",
+      "nextLetter": "م",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E36",
+      "topicId": "X-LAM-02",
+      "verseRef": "42:9",
+      "excerptAr": "الْوَلِيُّ",
+      "nextLetter": "و",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+    },
+    {
+      "id": "X-LAM-02.POOL84.E37",
+      "topicId": "X-LAM-02",
+      "verseRef": "23:1",
+      "excerptAr": "الْمُؤْمِنُونَ",
+      "nextLetter": "م",
+      "rule": "قمرية",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL84.E38",
+      "topicId": "X-LAM-02",
+      "verseRef": "114:1",
+      "excerptAr": "النَّاسِ",
+      "nextLetter": "ن",
+      "rule": "شمسية",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "X-LAM-02.POOL84.Q1",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E1",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ء؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q2",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E2",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ك؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q3",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E3",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو غ؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q4",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E4",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ي؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q5",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E5",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ب؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q6",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E6",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ء؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q7",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E7",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ح؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q8",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E8",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ء؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q9",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E9",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ع؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q10",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E10",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو خ؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q11",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E11",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ف؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q12",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E12",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ج؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q13",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E13",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ق؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q14",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E14",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ب؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q15",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E15",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ح؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q16",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E16",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ح؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q17",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E17",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو م؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q18",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E18",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو م؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q19",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E19",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو س؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q20",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E20",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ص؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q21",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E21",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ء؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q22",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E22",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ض؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q23",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E23",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ص؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q24",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E24",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ث؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q25",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E25",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ن؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q26",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E26",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ص؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q27",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E27",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ش؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q28",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E28",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ز؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q29",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E29",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ذ؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q30",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E30",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو س؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q31",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E31",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو د؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q32",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E32",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ر؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q33",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E33",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو ل؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL84.Q34",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-03.POOL84.E34",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ط؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q35",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E35",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو م؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q36",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E36",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف التالي للام هو و؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q37",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E37",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-قمرية",
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو م؛ لذلك اللام قمرية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL84.Q38",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف في الكلمة المحددة؟",
+      "exampleId": "X-LAM-02.POOL84.E38",
+      "objective": "definite_article_recognition",
+      "difficulty": "basic",
+      "variantFamily": "lam-classification-شمسية",
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف التالي للام هو ن؛ لذلك اللام شمسية.",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

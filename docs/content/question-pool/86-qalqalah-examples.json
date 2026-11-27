@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Candidate examples only, not full verified verse coverage. Membership questions are one family; sample at most one per assessment. Confirm exact word context and target before publication.",
+  "topicId": "U3.L8",
+  "title": "القلقلة",
+  "examples": [
+    {
+      "id": "U3.L8.POOL86.E1",
+      "verseRef": "96:1",
+      "excerptAr": "اقْرَأْ",
+      "targetLetter": "ق",
+      "context": "wasl",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E2",
+      "verseRef": "86:1",
+      "excerptAr": "الطَّارِقِ",
+      "targetLetter": "ق",
+      "context": "waqf_qaf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E3",
+      "verseRef": "111:1",
+      "excerptAr": "وَتَبَّ",
+      "targetLetter": "ب",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E4",
+      "verseRef": "85:1",
+      "excerptAr": "الْبُرُوجِ",
+      "targetLetter": "ج",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E5",
+      "verseRef": "112:1",
+      "excerptAr": "أَحَدٌ",
+      "targetLetter": "د",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E6",
+      "verseRef": "112:2",
+      "excerptAr": "الصَّمَدُ",
+      "targetLetter": "د",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E7",
+      "verseRef": "112:3",
+      "excerptAr": "يَلِدْ",
+      "targetLetter": "د",
+      "context": "wasl",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E8",
+      "verseRef": "113:1",
+      "excerptAr": "الْفَلَقِ",
+      "targetLetter": "ق",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E9",
+      "verseRef": "113:3",
+      "excerptAr": "وَقَبَ",
+      "targetLetter": "ب",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U3.L8.POOL86.E10",
+      "verseRef": "113:5",
+      "excerptAr": "حَسَدَ",
+      "targetLetter": "د",
+      "context": "waqf",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U3.L8.POOL86.Q1",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E1",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ق",
+      "options": [
+        {
+          "id": "1",
+          "text": "ق"
+        },
+        {
+          "id": "2",
+          "text": "ب"
+        },
+        {
+          "id": "3",
+          "text": "ت"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ق.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q2",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E2",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ق",
+      "options": [
+        {
+          "id": "1",
+          "text": "ت"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ق.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q3",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E3",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ب",
+      "options": [
+        {
+          "id": "1",
+          "text": "ش"
+        },
+        {
+          "id": "2",
+          "text": "ب"
+        },
+        {
+          "id": "3",
+          "text": "د"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو ب.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q4",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E4",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ج",
+      "options": [
+        {
+          "id": "1",
+          "text": "ج"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ش"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو ج.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q5",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E5",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-د",
+      "options": [
+        {
+          "id": "1",
+          "text": "ز"
+        },
+        {
+          "id": "2",
+          "text": "ط"
+        },
+        {
+          "id": "3",
+          "text": "د"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو د.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q6",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E6",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-د",
+      "options": [
+        {
+          "id": "1",
+          "text": "ت"
+        },
+        {
+          "id": "2",
+          "text": "د"
+        },
+        {
+          "id": "3",
+          "text": "ب"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو د.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q7",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E7",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-د",
+      "options": [
+        {
+          "id": "1",
+          "text": "د"
+        },
+        {
+          "id": "2",
+          "text": "ت"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو د.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q8",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E8",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ق",
+      "options": [
+        {
+          "id": "1",
+          "text": "د"
+        },
+        {
+          "id": "2",
+          "text": "ش"
+        },
+        {
+          "id": "3",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحرف المحدد هو ق.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q9",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E9",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-ب",
+      "options": [
+        {
+          "id": "1",
+          "text": "ز"
+        },
+        {
+          "id": "2",
+          "text": "ب"
+        },
+        {
+          "id": "3",
+          "text": "ش"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحرف المحدد هو ب.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.Q10",
+      "topicId": "U3.L8",
+      "type": "singleChoice",
+      "text": "ما حرف القلقلة في الموضع المحدد؟",
+      "exampleId": "U3.L8.POOL86.E10",
+      "objective": "target_letter_recognition",
+      "difficulty": "intermediate",
+      "variantFamily": "U3.L8-target-د",
+      "options": [
+        {
+          "id": "1",
+          "text": "د"
+        },
+        {
+          "id": "2",
+          "text": "ز"
+        },
+        {
+          "id": "3",
+          "text": "ط"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحرف المحدد هو د.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL86.S1",
+      "topicId": "U3.L8",
+      "type": "trueFalse",
+      "text": "الحرف ق من حروف القلقلة.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف القلقلة مجموعة في قطب جد.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U3.L8-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L8.POOL86.S2",
+      "topicId": "U3.L8",
+      "type": "trueFalse",
+      "text": "الحرف ط من حروف القلقلة.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف القلقلة مجموعة في قطب جد.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U3.L8-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L8.POOL86.S3",
+      "topicId": "U3.L8",
+      "type": "trueFalse",
+      "text": "الحرف ب من حروف القلقلة.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف القلقلة مجموعة في قطب جد.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U3.L8-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L8.POOL86.S4",
+      "topicId": "U3.L8",
+      "type": "trueFalse",
+      "text": "الحرف ج من حروف القلقلة.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف القلقلة مجموعة في قطب جد.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U3.L8-membership",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U3.L8.POOL86.S5",
+      "topicId": "U3.L8",
+      "type": "trueFalse",
+      "text": "الحرف د من حروف القلقلة.",
+      "correctAnswer": true,
+      "feedbackAr": "حروف القلقلة مجموعة في قطب جد.",
+      "objective": "alphabet_membership",
+      "difficulty": "basic",
+      "variantFamily": "U3.L8-membership",
+      "status": "editorial_draft"
+    }
+  ]
+}

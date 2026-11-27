@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U8.L1",
+      "titleAr": "تسهيل الهمزة",
+      "source": {
+        "chapter": 14,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التعرف على موضع التسهيل",
+      "explanationAr": "التسهيل أداء مخصوص للهمزة بين الهمزة والحرف المجانس لحركتها؛ لا يضبط بالكتابة وحدها. وموضعه الوحيد عند حفص من طريق الشاطبية في همزتين متلاصقتين في كلمة: أأعجمي في فصلت 44، تسهل فيه الثانية وجوبًا.",
+      "examples": [
+        {
+          "verseRef": "41:44",
+          "excerptAr": "أَأَعْجَمِيٌّ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "تسهيل الهمزة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "التسهيل أداء مخصوص للهمزة بين الهمزة والحرف المجانس لحركتها؛ لا يضبط بالكتابة وحدها. وموضعه الوحيد عند حفص من طريق الشاطبية في همزتين متلاصقتين في كلمة: أأعجمي في فصلت 44، تسهل فيه الثانية وجوبًا."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "41:44"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التعرف على موضع التسهيل"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى الموضع من قارئ معتمد وكرره مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U8.L1.Q1",
+              "type": "singleChoice",
+              "text": "كيف يضبط أداء التسهيل؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "بالتلقي والسماع"
+                },
+                {
+                  "id": "2",
+                  "text": "بحذف كل همزة"
+                },
+                {
+                  "id": "3",
+                  "text": "بزيادة مد دائمًا"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "التسهيل أداء مخصوص للهمزة بين الهمزة والحرف المجانس لحركتها؛ لا يضبط بالكتابة وحدها. وموضعه الوحيد عند حفص من طريق الشاطبية في همزتين متلاصقتين في كلمة: أأعجمي في فصلت 44، تسهل فيه الثانية وجوبًا."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U8.L2",
+      "titleAr": "الإمالة",
+      "source": {
+        "chapter": 14,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الإمالة من الفتح المحض",
+      "explanationAr": "الإمالة تقريب الفتحة من الكسرة والألف من الياء على وجه مخصوص. وليس لحفص من طريق الشاطبية إمالة إلا في موضع واحد: مجراها في هود 41. وهي عند حفص إمالة كبرى (ص 400).",
+      "examples": [
+        {
+          "verseRef": "11:41",
+          "excerptAr": "مَجْرَاهَا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإمالة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الإمالة تقريب الفتحة من الكسرة والألف من الياء على وجه مخصوص. وليس لحفص من طريق الشاطبية إمالة إلا في موضع واحد: مجراها في هود 41."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "11:41"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الإمالة من الفتح المحض"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى الأداء المروي ولا تستبدله بياء خالصة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U8.L2.Q1",
+              "type": "singleChoice",
+              "text": "ما الكلمة الوحيدة التي أمالها حفص من طريق الشاطبية؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "مجراها"
+                },
+                {
+                  "id": "2",
+                  "text": "الناس"
+                },
+                {
+                  "id": "3",
+                  "text": "الفلق"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الإمالة تقريب الفتحة من الكسرة والألف من الياء على وجه مخصوص. وليس لحفص من طريق الشاطبية إمالة إلا في موضع واحد: مجراها في هود 41."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U8.L3",
+      "titleAr": "النبر",
+      "source": {
+        "chapter": 14,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز النبر عن إطالة غير مشروعة",
+      "explanationAr": "النبر إبراز صوتي في مواضع مخصوصة يُقصد به بيان الأداء، ويؤخذ ضبط مواضعه وكيفيته من المعلم دون تكلف. وللنبر في التلاوة خمس مسائل: الوقف على المشدد عدا النون والميم وحرف القلقلة المشددة، والواو والياء المشددتان، والانتقال من حرف مد إلى أول المشدد، والوقف على همزة بعد مد أو لين، وسقوط ألف التثنية أو واو الجماعة إذا التبس بالمفرد (ص 405–410).",
+      "examples": [
+        {
+          "verseRef": "7:22",
+          "excerptAr": "ذَاقَا الشَّجَرَةَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending",
+          "reviewNote": "2026-11-27: «أحد» is not a nabr case in the book (pp. 405–410); replaced with the book example."
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "النبر"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "النبر إبراز صوتي في مواضع مخصوصة يُقصد به بيان الأداء، ويؤخذ ضبط مواضعه وكيفيته من المعلم دون تكلف."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز النبر عن إطالة غير مشروعة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "اعرض أداء مواضع النبر على معلم بعد تحديدها من المصدر.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U8.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما الطريقة المناسبة لتعلم النبر؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "التلقي مع معرفة مواضعه"
+                },
+                {
+                  "id": "2",
+                  "text": "رفع الصوت عشوائيًا"
+                },
+                {
+                  "id": "3",
+                  "text": "مد كل حركة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "النبر إبراز صوتي في مواضع مخصوصة يُقصد به بيان الأداء، ويؤخذ ضبط مواضعه وكيفيته من المعلم دون تكلف."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U8.L4",
+      "titleAr": "كلمات خاصة في رواية حفص",
+      "source": {
+        "chapter": 14,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التعرف على ضرورة ضبط الرواية والطريق",
+      "explanationAr": "لبعض الكلمات أوجه أداء خاصة لا تستنتج من الرسم وحده، وتتعلق بالرواية والطريق، مثل الإشمام في تأمنا.",
+      "examples": [
+        {
+          "verseRef": "12:11",
+          "excerptAr": "تَأْمَنَّا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "كلمات خاصة في رواية حفص"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "لبعض الكلمات أوجه أداء خاصة لا تستنتج من الرسم وحده، وتتعلق بالرواية والطريق، مثل الإشمام في تأمنا."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "12:11"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التعرف على ضرورة ضبط الرواية والطريق"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى تأمنا من معلم معتمد.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U8.L4.Q1",
+              "type": "singleChoice",
+              "text": "ما المرجع لضبط أداء الكلمات الخاصة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الرواية والطريق والتلقي"
+                },
+                {
+                  "id": "2",
+                  "text": "التهجئة الحديثة وحدها"
+                },
+                {
+                  "id": "3",
+                  "text": "الاختيار الشخصي"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "لبعض الكلمات أوجه أداء خاصة لا تستنتج من الرسم وحده، وتتعلق بالرواية والطريق، مثل الإشمام في تأمنا."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

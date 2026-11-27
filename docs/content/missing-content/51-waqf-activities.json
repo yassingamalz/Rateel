@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U9.L1",
+      "examples": [
+        {
+          "id": "U9.L1.M.E1",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U9.L1.M.E2",
+          "verseRef": "112:2",
+          "excerptAr": "اللَّهُ الصَّمَدُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U9.L1.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "both_complete_verses",
+          "promptAr": "هل وقف القارئ بين الآيتين ثم استأنف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لا"
+            },
+            {
+              "id": "2",
+              "text": "نعم"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "نعم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U9.L1.M.P1",
+          "instructionAr": "حدد موضع انتهاء كل آية.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U9.L1.M.P2",
+          "instructionAr": "تدرب على الوقف والابتداء مع المحافظة على المعنى.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U9.L2",
+      "examples": [
+        {
+          "id": "U9.L2.M.E1",
+          "verseRef": "2:2",
+          "excerptAr": "لَا رَيْبَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [],
+      "visualTasks": [
+        {
+          "id": "U9.L2.M.A1",
+          "kind": "verified_visual",
+          "mediaTarget": "approved_mushaf_edition",
+          "promptAr": "ما دلالة ج في اصطلاح المصحف الشائع؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "جواز الوقف والوصل"
+            },
+            {
+              "id": "2",
+              "text": "وجوب المد ست حركات"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "جواز الوقف والوصل",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U9.L2.M.P1",
+          "instructionAr": "افتح مفتاح علامات المصحف المعتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U9.L2.M.P2",
+          "instructionAr": "اربط كل علامة بمعناها دون نطق العلامة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U9.L3",
+      "examples": [
+        {
+          "id": "U9.L3.M.E1",
+          "verseRef": "1:5",
+          "excerptAr": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U9.L3.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "full_first_example",
+          "promptAr": "هل يبدأ هذا المقطع بلفظ إياك؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لا"
+            },
+            {
+              "id": "2",
+              "text": "نعم"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "نعم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U9.L3.M.P1",
+          "instructionAr": "تدرب على ابتداء يصح فيه المعنى.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U9.L3.M.P2",
+          "instructionAr": "اعرض مواضع الاستئناف بعد الوقف الاضطراري على معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U9.L4",
+      "examples": [
+        {
+          "id": "U9.L4.M.E1",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [],
+      "visualTasks": [
+        {
+          "id": "U9.L4.M.A1",
+          "kind": "verified_video",
+          "mediaTarget": "teacher_demonstrates_eligible_waqf",
+          "promptAr": "أي الوجهين يدرك بالمشاهدة دون صوت؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإشمام الوقفي"
+            },
+            {
+              "id": "2",
+              "text": "الروم"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الإشمام الوقفي",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U9.L4.M.P1",
+          "instructionAr": "شاهد حركة الشفتين بعد الإسكان.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U9.L4.M.P2",
+          "instructionAr": "استمع إلى الروم من معلم وقارن بالسكون المحض.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

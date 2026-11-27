@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U5.L8",
+      "titleAr": "أَحْكَامُ الْمِيمِ السَّاكِنَةِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ يَتَغَيَّرُ حُكْمُ الْمِيمِ السَّاكِنَةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِلْمِيمِ السَّاكِنَةِ ثَلَاثَةُ أَحْكَامٍ: الْإِخْفَاءُ الشَّفَوِيُّ قَبْلَ الْبَاءِ، وَالْإِدْغَامُ الشَّفَوِيُّ قَبْلَ الْمِيمِ، وَالْإِظْهَارُ الشَّفَوِيُّ قَبْلَ بَقِيَّةِ الْحُرُوفِ.",
+          "visualDirection": "Three-way branching meem card."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "حَدِّدِ الْحَرْفَ التَّالِيَ لِلْمِيمِ، ثُمَّ اخْتَرِ الْحُكْمَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L9",
+      "titleAr": "الْإِخْفَاءُ الشَّفَوِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا حُكْمُ الْمِيمِ السَّاكِنَةِ قَبْلَ الْبَاءِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تُخْفَى الْمِيمُ السَّاكِنَةُ قَبْلَ الْبَاءِ مَعَ غُنَّةٍ، وَنَتَعَلَّمُ هَيْئَةَ الشَّفَتَيْنِ بِالْمُشَافَهَةِ.",
+          "visualDirection": "Close-up lip illustration validated by teacher; nasal-wave overlay."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْمِثَالِ وَرَدِّدْهُ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L10",
+      "titleAr": "الْإِدْغَامُ الشَّفَوِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ عِنْدَ الْتِقَاءِ مِيمَيْنِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "إِذَا جَاءَتْ مِيمٌ مُتَحَرِّكَةٌ بَعْدَ مِيمٍ سَاكِنَةٍ فِي الْوَصْلِ، أُدْغِمَتِ الْأُولَى فِي الثَّانِيَةِ مَعَ غُنَّةٍ.",
+          "visualDirection": "Two identical meem cards merge with shadda."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى انْدِمَاجِ الْمِيمَيْنِ فِي الْوَصْلِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L11",
+      "titleAr": "الْإِظْهَارُ الشَّفَوِيُّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نُظْهِرُ الْمِيمَ السَّاكِنَةَ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُظْهِرُ الْمِيمَ السَّاكِنَةَ قَبْلَ الْحُرُوفِ غَيْرِ الْبَاءِ وَالْمِيمِ، وَنَعْتَنِي بِبَيَانِهَا خَاصَّةً قَبْلَ الْفَاءِ وَالْوَاوِ.",
+          "visualDirection": "Clear meem card remains separate from fa and waw."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ الْمِيمِ قَبْلَ الْفَاءِ وَقَبْلَ الْبَاءِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U5.L12",
+      "titleAr": "الْحَرْفَانِ الْمُلْتَقِيَانِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يَنْدَمِجُ كُلُّ حَرْفَيْنِ عِنْدَ الْتِقَائِهِمَا؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُصَنِّفُ الْحَرْفَيْنِ بِحَسَبِ الْمَخْرَجِ وَالصِّفَاتِ إِلَى مُتَمَاثِلَيْنِ وَمُتَجَانِسَيْنِ وَمُتَقَارِبَيْنِ وَمُتَبَاعِدَيْنِ، وَنَرْجِعُ فِي حُكْمِ الْأَدَاءِ إِلَى الرِّوَايَةِ.",
+          "visualDirection": "Four relation diagrams; fusion only where transmitted."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "حَدِّدْ عَلَاقَةَ الْحَرْفَيْنِ، ثُمَّ تَعَلَّمْ وَجْهَ أَدَائِهِمَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

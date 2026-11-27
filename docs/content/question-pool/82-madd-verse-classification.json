@@ -1,0 +1,828 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Verify all candidate excerpts, context and spans; imlai is not canonical Uthmani text. Render only target span, not answer-revealing focus. Some examples recur in previous pools.",
+  "examples": [
+    {
+      "id": "U6.L1.POOL82.E1",
+      "topicId": "U6.L1",
+      "verseRef": "2:3",
+      "excerptAr": "يُقِيمُونَ",
+      "focus": "الياء الأولى المدية",
+      "rule": "مد طبيعي",
+      "explanation": "الياء ساكنة وقبلها كسرة، ولا يليها سبب زائد.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L1.POOL82.E2",
+      "topicId": "U6.L1",
+      "verseRef": "2:8",
+      "excerptAr": "يَقُولُ",
+      "focus": "الواو",
+      "rule": "مد طبيعي",
+      "explanation": "الواو ساكنة وقبلها ضمة في الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L1.POOL82.E3",
+      "topicId": "U6.L1",
+      "verseRef": "112:1",
+      "excerptAr": "هُوَ",
+      "focus": "الواو",
+      "rule": "ليس حرف مد",
+      "explanation": "الواو متحركة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L2.POOL82.E4",
+      "topicId": "U6.L2",
+      "verseRef": "110:1",
+      "excerptAr": "جَاءَ",
+      "focus": "الألف",
+      "rule": "مد متصل",
+      "explanation": "الهمزة بعد الألف في الكلمة نفسها.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L2.POOL82.E5",
+      "topicId": "U6.L2",
+      "verseRef": "4:123",
+      "excerptAr": "سُوءًا",
+      "focus": "الواو",
+      "rule": "مد متصل",
+      "explanation": "الهمزة بعد الواو المدية في الكلمة نفسها.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L2.POOL82.E6",
+      "topicId": "U6.L2",
+      "verseRef": "2:22",
+      "excerptAr": "السَّمَاءِ",
+      "focus": "الألف",
+      "rule": "مد متصل",
+      "explanation": "الهمز بعد الألف في الكلمة نفسها.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L3.POOL82.E7",
+      "topicId": "U6.L3",
+      "verseRef": "108:1",
+      "excerptAr": "إِنَّا أَعْطَيْنَاكَ",
+      "focus": "ألف إنا",
+      "rule": "مد منفصل",
+      "explanation": "الهمزة في أول الكلمة التالية عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L3.POOL82.E8",
+      "topicId": "U6.L3",
+      "verseRef": "2:14",
+      "excerptAr": "قَالُوا آمَنَّا",
+      "focus": "واو قالوا",
+      "rule": "مد منفصل",
+      "explanation": "الواو المدية في آخر كلمة والهمزة في التالية.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L3.POOL82.E9",
+      "topicId": "U6.L3",
+      "verseRef": "51:21",
+      "excerptAr": "وَفِي أَنْفُسِكُمْ",
+      "focus": "ياء في",
+      "rule": "مد منفصل",
+      "explanation": "الياء المدية قبل همزة القطع في الكلمة التالية.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L4.POOL82.E10",
+      "topicId": "U6.L4",
+      "verseRef": "1:2",
+      "excerptAr": "الْعَالَمِينَ",
+      "focus": "الياء قبل النون عند الوقف بالسكون المحض",
+      "rule": "مد عارض للسكون",
+      "explanation": "تسكن النون عند الوقف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L4.POOL82.E11",
+      "topicId": "U6.L4",
+      "verseRef": "114:1",
+      "excerptAr": "النَّاسِ",
+      "focus": "الألف عند الوقف بالسكون المحض",
+      "rule": "مد عارض للسكون",
+      "explanation": "السكون عارض على السين عند الوقف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L5.POOL82.E12",
+      "topicId": "U6.L5",
+      "verseRef": "69:1",
+      "excerptAr": "الْحَاقَّةُ",
+      "focus": "الألف",
+      "rule": "مد لازم كلمي مثقل",
+      "explanation": "يلي الألف حرف مشدد في الكلمة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L5.POOL82.E13",
+      "topicId": "U6.L5",
+      "verseRef": "79:34",
+      "excerptAr": "الطَّامَّةُ",
+      "focus": "الألف",
+      "rule": "مد لازم كلمي مثقل",
+      "explanation": "الميم مشددة بعد الألف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L6.POOL82.E14",
+      "topicId": "U6.L6",
+      "verseRef": "2:285",
+      "excerptAr": "آمَنَ",
+      "focus": "الألف الأولى",
+      "rule": "مد بدل",
+      "explanation": "تقدم الهمز على حرف المد.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L6.POOL82.E15",
+      "topicId": "U6.L6",
+      "verseRef": "2:101",
+      "excerptAr": "أُوتُوا",
+      "focus": "الواو الأولى",
+      "rule": "مد بدل",
+      "explanation": "تقدم الهمز على الواو المدية.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L7.POOL82.E16",
+      "topicId": "U6.L7",
+      "verseRef": "106:3",
+      "excerptAr": "الْبَيْتِ",
+      "focus": "الياء عند الوقف بالسكون المحض",
+      "rule": "مد اللين",
+      "explanation": "الياء ساكنة وقبلها فتح ويسكن ما بعدها عند الوقف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L7.POOL82.E17",
+      "topicId": "U6.L7",
+      "verseRef": "106:4",
+      "excerptAr": "خَوْفٍ",
+      "focus": "الواو عند الوقف بالسكون المحض",
+      "rule": "مد اللين",
+      "explanation": "الواو ساكنة وقبلها فتح ويسكن ما بعدها عند الوقف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L8.POOL82.E18",
+      "topicId": "U6.L8",
+      "verseRef": "104:3",
+      "excerptAr": "مَالَهُ أَخْلَدَهُ",
+      "focus": "هاء ماله",
+      "rule": "صلة كبرى",
+      "explanation": "تلي هاء الضمير همزة قطع مع تحقق الشروط.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L8.POOL82.E19",
+      "topicId": "U6.L8",
+      "verseRef": "112:4",
+      "excerptAr": "لَهُ كُفُوًا",
+      "focus": "الهاء",
+      "rule": "صلة صغرى",
+      "explanation": "تلي الهاء المستوفية للشروط كاف عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L9.POOL82.E20",
+      "topicId": "U6.L9",
+      "verseRef": "110:3",
+      "excerptAr": "تَوَّابًا",
+      "focus": "تنوين الفتح عند الوقف",
+      "rule": "مد عوض",
+      "explanation": "يعوض عن التنوين بألف عند الوقف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U6.L9.POOL82.E21",
+      "topicId": "U6.L9",
+      "verseRef": "4:40",
+      "excerptAr": "حَسَنَةً",
+      "focus": "التاء المربوطة عند الوقف",
+      "rule": "لا مد عوض",
+      "explanation": "يوقف على التاء المربوطة بهاء ساكنة.",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U6.L1.POOL82.Q1",
+      "topicId": "U6.L1",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L1.POOL82.E1",
+      "focus": "الياء الأولى المدية",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L1",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "text": "مد متصل"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الياء ساكنة وقبلها كسرة، ولا يليها سبب زائد.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL82.Q2",
+      "topicId": "U6.L1",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L1.POOL82.E2",
+      "focus": "الواو",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L1",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "3",
+          "text": "مد طبيعي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الواو ساكنة وقبلها ضمة في الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL82.Q3",
+      "topicId": "U6.L1",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L1.POOL82.E3",
+      "focus": "الواو",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L1",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "2",
+          "text": "ليس حرف مد"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الواو متحركة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L2.POOL82.Q4",
+      "topicId": "U6.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L2.POOL82.E4",
+      "focus": "الألف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L2",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد متصل"
+        },
+        {
+          "id": "2",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "3",
+          "text": "مد بدل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الهمزة بعد الألف في الكلمة نفسها.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L2.POOL82.Q5",
+      "topicId": "U6.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L2.POOL82.E5",
+      "focus": "الواو",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L2",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد بدل"
+        },
+        {
+          "id": "2",
+          "text": "مد اللين"
+        },
+        {
+          "id": "3",
+          "text": "مد متصل"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الهمزة بعد الواو المدية في الكلمة نفسها.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L2.POOL82.Q6",
+      "topicId": "U6.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L2.POOL82.E6",
+      "focus": "الألف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L2",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "2",
+          "text": "مد متصل"
+        },
+        {
+          "id": "3",
+          "text": "مد اللين"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الهمز بعد الألف في الكلمة نفسها.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL82.Q7",
+      "topicId": "U6.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L3.POOL82.E7",
+      "focus": "ألف إنا",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "3",
+          "text": "صلة صغرى"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الهمزة في أول الكلمة التالية عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL82.Q8",
+      "topicId": "U6.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L3.POOL82.E8",
+      "focus": "واو قالوا",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "text": "مد عوض"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الواو المدية في آخر كلمة والهمزة في التالية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL82.Q9",
+      "topicId": "U6.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L3.POOL82.E9",
+      "focus": "ياء في",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا مد عوض"
+        },
+        {
+          "id": "2",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "3",
+          "text": "مد عوض"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الياء المدية قبل همزة القطع في الكلمة التالية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL82.Q10",
+      "topicId": "U6.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L4.POOL82.E10",
+      "focus": "الياء قبل النون عند الوقف بالسكون المحض",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "2",
+          "text": "لا مد عوض"
+        },
+        {
+          "id": "3",
+          "text": "ليس حرف مد"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تسكن النون عند الوقف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL82.Q11",
+      "topicId": "U6.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L4.POOL82.E11",
+      "focus": "الألف عند الوقف بالسكون المحض",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "ليس حرف مد"
+        },
+        {
+          "id": "2",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "3",
+          "text": "مد عارض للسكون"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "السكون عارض على السين عند الوقف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL82.Q12",
+      "topicId": "U6.L5",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L5.POOL82.E12",
+      "focus": "الألف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L5",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد متصل"
+        },
+        {
+          "id": "2",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "3",
+          "text": "مد طبيعي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يلي الألف حرف مشدد في الكلمة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL82.Q13",
+      "topicId": "U6.L5",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L5.POOL82.E13",
+      "focus": "الألف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L5",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد متصل"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الميم مشددة بعد الألف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L6.POOL82.Q14",
+      "topicId": "U6.L6",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L6.POOL82.E14",
+      "focus": "الألف الأولى",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L6",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "3",
+          "text": "مد بدل"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تقدم الهمز على حرف المد.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L6.POOL82.Q15",
+      "topicId": "U6.L6",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L6.POOL82.E15",
+      "focus": "الواو الأولى",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L6",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد بدل"
+        },
+        {
+          "id": "3",
+          "text": "مد عارض للسكون"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تقدم الهمز على الواو المدية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL82.Q16",
+      "topicId": "U6.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L7.POOL82.E16",
+      "focus": "الياء عند الوقف بالسكون المحض",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد اللين"
+        },
+        {
+          "id": "2",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "3",
+          "text": "مد بدل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الياء ساكنة وقبلها فتح ويسكن ما بعدها عند الوقف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL82.Q17",
+      "topicId": "U6.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L7.POOL82.E17",
+      "focus": "الواو عند الوقف بالسكون المحض",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد بدل"
+        },
+        {
+          "id": "2",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "3",
+          "text": "مد اللين"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الواو ساكنة وقبلها فتح ويسكن ما بعدها عند الوقف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL82.Q18",
+      "topicId": "U6.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L8.POOL82.E18",
+      "focus": "هاء ماله",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L8",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "3",
+          "text": "مد اللين"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي هاء الضمير همزة قطع مع تحقق الشروط.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL82.Q19",
+      "topicId": "U6.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L8.POOL82.E19",
+      "focus": "الهاء",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L8",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "3",
+          "text": "مد عوض"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تلي الهاء المستوفية للشروط كاف عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL82.Q20",
+      "topicId": "U6.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L9.POOL82.E20",
+      "focus": "تنوين الفتح عند الوقف",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "text": "لا مد عوض"
+        },
+        {
+          "id": "3",
+          "text": "مد عوض"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "يعوض عن التنوين بألف عند الوقف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L9.POOL82.Q21",
+      "topicId": "U6.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "U6.L9.POOL82.E21",
+      "focus": "التاء المربوطة عند الوقف",
+      "recitationContext": "waqf_with_pure_sukun_as_applicable",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U6.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "ليس حرف مد"
+        },
+        {
+          "id": "2",
+          "text": "لا مد عوض"
+        },
+        {
+          "id": "3",
+          "text": "مد عوض"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يوقف على التاء المربوطة بهاء ساكنة.",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

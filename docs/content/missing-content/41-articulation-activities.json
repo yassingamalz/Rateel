@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U2.L1",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "أَعُوذُ بِرَبِّ الْفَلَقِ",
+          "id": "U2.L1.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "id": "U2.L1.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L1.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "113:1",
+          "additionalTarget": null,
+          "promptAr": "من أي مخرج عام تخرج الفاء؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الشفتان"
+            },
+            {
+              "id": "b",
+              "text": "الحلق"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الشفتان.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L1.M.P1",
+          "instructionAr": "أشر إلى المخارج العامة الخمسة على الرسم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L1.M.P2",
+          "instructionAr": "صنف ق وف وع بحسب المخرج العام.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U2.L2",
+      "examples": [
+        {
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "id": "U2.L2.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "2:8",
+          "excerptAr": "يَقُولُ",
+          "id": "U2.L2.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L2.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "1:5",
+          "additionalTarget": null,
+          "promptAr": "ما حرف المد في نَسْتَعِينُ؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الياء"
+            },
+            {
+              "id": "b",
+              "text": "الواو"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L2.M.P1",
+          "instructionAr": "قارن بَا وبُو وبِي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L2.M.P2",
+          "instructionAr": "استمع إلى مد الواو في يَقُولُ حال الوصل ثم كرره.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U2.L3",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "أَعُوذُ",
+          "id": "U2.L3.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "113:4",
+          "excerptAr": "النَّفَّاثَاتِ فِي الْعُقَدِ",
+          "id": "U2.L3.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L3.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "113:1",
+          "additionalTarget": null,
+          "promptAr": "ما الحرف الحلقي في أَعُوذُ بعد الهمزة؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "العين"
+            },
+            {
+              "id": "b",
+              "text": "الذال"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: العين.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L3.M.P1",
+          "instructionAr": "قارن أَهْ وأَحْ وأَخْ مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L3.M.P2",
+          "instructionAr": "صنف ء هـ ع ح غ خ حسب موضعها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U2.L4",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "id": "U2.L4.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "id": "U2.L4.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L4.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "1:7",
+          "additionalTarget": null,
+          "promptAr": "أي حرف في المثال الثاني يخرج من حافة اللسان مع الأضراس العليا؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الضاد"
+            },
+            {
+              "id": "b",
+              "text": "النون"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الضاد.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L4.M.P1",
+          "instructionAr": "حدد مخرج القاف والكاف في رسم اللسان.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L4.M.P2",
+          "instructionAr": "تدرب على الضاد مع معلم متقن.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U2.L5",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "id": "U2.L5.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ",
+          "id": "U2.L5.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L5.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "113:1",
+          "additionalTarget": null,
+          "promptAr": "ما الحرف الذي يتطلب باطن الشفة السفلى مع أطراف الثنايا العليا؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "الفاء"
+            },
+            {
+              "id": "b",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: الفاء.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L5.M.P1",
+          "instructionAr": "راقب فَ وبَ ومَ ووَ أمام مرآة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L5.M.P2",
+          "instructionAr": "قارن إغلاق الشفتين في الباء والميم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U2.L6",
+      "examples": [
+        {
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ وَالنَّاسِ",
+          "id": "U2.L6.M.E1",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "verseRef": "111:4",
+          "excerptAr": "حَمَّالَةَ الْحَطَبِ",
+          "id": "U2.L6.M.E2",
+          "script": "imlai_candidate",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U2.L6.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "114:6",
+          "additionalTarget": "111:4",
+          "promptAr": "أي حرفين ظهرت فيهما الغنة المشددة في التسجيلين؟",
+          "options": [
+            {
+              "id": "a",
+              "text": "النون والميم"
+            },
+            {
+              "id": "b",
+              "text": "اللام والراء"
+            }
+          ],
+          "correctAnswer": "a",
+          "feedbackAr": "الإجابة الصحيحة: النون والميم.",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U2.L6.M.P1",
+          "instructionAr": "استمع إلى نَ ونَّ ومَ ومَّ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U2.L6.M.P2",
+          "instructionAr": "كرر المثالين مع المحافظة على مخرج الحرف والغنة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

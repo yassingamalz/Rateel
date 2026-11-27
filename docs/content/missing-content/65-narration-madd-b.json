@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U6.L6",
+      "titleAr": "مَدُّ الْبَدَلِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا إِذَا سَبَقَتِ الْهَمْزَةُ حَرْفَ الْمَدِّ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "مِنْ أَمْثِلَةِ مَدِّ الْبَدَلِ آمَنَ وَإِيمَانًا وَأُوتُوا. وَأَصْلُ مِقْدَارِهِ لِحَفْصٍ حَرَكَتَانِ، مَا لَمْ يَعْرِضْ سَبَبٌ أَقْوَى.",
+          "visualDirection": "Reverse the order of the hamza and madd letter cards."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "حَدِّدْ مَوْضِعَ الْهَمْزَةِ فِي كُلِّ مِثَالٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L7",
+      "titleAr": "مَدُّ اللِّينِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ كُلُّ وَاوٍ سَاكِنَةٍ حَرْفُ مَدٍّ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "حَرْفَا اللِّينِ الْوَاوُ وَالْيَاءُ السَّاكِنَتَانِ الْمَفْتُوحُ مَا قَبْلَهُمَا. وَنَدْرُسُ أَوْجُهَ الْمَدِّ عِنْدَ الْوَقْفِ عَلَى الْحَرْفِ الَّذِي يَلِيهِمَا.",
+          "visualDirection": "Smooth wave; distinguish short vowel preceding waw/ya from madd conditions."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنِ الْوَصْلَ وَالْوَقْفَ عَلَى خَوْفٍ وَالْبَيْتِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L8",
+      "titleAr": "مَدُّ الصِّلَةِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نَصِلُ صَوْتَ هَاءِ الضَّمِيرِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تُدْرَسُ صِلَةُ هَاءِ الضَّمِيرِ بِشُرُوطِهَا فِي الْوَصْلِ. وَتَكُونُ كُبْرَى قَبْلَ هَمْزَةِ الْقَطْعِ، وَصُغْرَى قَبْلَ غَيْرِهَا، مَعَ مُرَاعَاةِ الْمَوَاضِعِ الْمُسْتَثْنَاةِ.",
+          "visualDirection": "Pronoun ha card branches to two following-letter cases."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الصِّلَةِ الْكُبْرَى وَالصُّغْرَى.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U6.L9",
+      "titleAr": "مَدُّ الْعِوَضِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ لِتَنْوِينِ الْفَتْحِ عِنْدَ الْوَقْفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُعَوِّضُ عَنْ تَنْوِينِ الْفَتْحِ بِأَلِفٍ تُمَدُّ حَرَكَتَيْنِ فِي الْحَالَةِ الْمُعْتَادَةِ. وَنَقِفُ عَلَى التَّاءِ الْمَرْبُوطَةِ بِهَاءٍ سَاكِنَةٍ.",
+          "visualDirection": "Educational cards compare tanwin and stopping, without changing mushaf."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنِ الْوَقْفَ عَلَى تَوَّابًا وَحَسَنَةً.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

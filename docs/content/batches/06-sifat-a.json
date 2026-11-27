@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U3.L1",
+      "titleAr": "الصفات ذات الضد",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز المخرج عن الصفة",
+      "explanationAr": "تصف صفات الحروف كيفية نطقها. ومن الصفات ذات الضد الهمس والجهر، والشدة والتوسط والرخاوة، والاستعلاء والاستفال، والإطباق والانفتاح، والإذلاق والإصمات.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الصفات ذات الضد"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تصف صفات الحروف كيفية نطقها. ومن الصفات ذات الضد الهمس والجهر، والشدة والتوسط والرخاوة، والاستعلاء والاستفال، والإطباق والانفتاح، والإذلاق والإصمات."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز المخرج عن الصفة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن صوت السين والصاد مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يصف كيفية خروج الحرف؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الصفة"
+                },
+                {
+                  "id": "2",
+                  "text": "رقم الآية"
+                },
+                {
+                  "id": "3",
+                  "text": "اسم السورة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تصف صفات الحروف كيفية نطقها. ومن الصفات ذات الضد الهمس والجهر، والشدة والتوسط والرخاوة، والاستعلاء والاستفال، والإطباق والانفتاح، والإذلاق والإصمات."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L2",
+      "titleAr": "الهمس والجهر",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الهمس والجهر",
+      "explanationAr": "الهمس جريان النفس عند النطق بالحرف، والجهر انحباس جريانه بحسب اصطلاح علماء التجويد. حروف الهمس مجموعة في فحثه شخص سكت.",
+      "examples": [
+        {
+          "verseRef": "114:1",
+          "excerptAr": "قُلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الهمس والجهر"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الهمس جريان النفس عند النطق بالحرف، والجهر انحباس جريانه بحسب اصطلاح علماء التجويد. حروف الهمس مجموعة في فحثه شخص سكت."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "114:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الهمس والجهر"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن سْ وزْ في تمرين صوتي دون مبالغة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L2.Q1",
+              "type": "singleChoice",
+              "text": "أي الحروف التالية مهموس؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "السين"
+                },
+                {
+                  "id": "2",
+                  "text": "الباء"
+                },
+                {
+                  "id": "3",
+                  "text": "الدال"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الهمس جريان النفس عند النطق بالحرف، والجهر انحباس جريانه بحسب اصطلاح علماء التجويد. حروف الهمس مجموعة في فحثه شخص سكت."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L3",
+      "titleAr": "الشدة والتوسط والرخاوة",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تصنيف الحروف بحسب جريان الصوت",
+      "explanationAr": "الشدة انحباس جريان الصوت، والرخاوة جريانه، والتوسط بينهما. حروف الشدة أجد قط بكت، وحروف التوسط لن عمر. ويسمي التجويد المصور هذه المرتبة البينية (ص 134)، ومن الحروف الشديدة الكاف والتاء وهما شديدتان في أولهما مهموستان في آخرهما.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الشدة والتوسط والرخاوة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الشدة انحباس جريان الصوت، والرخاوة جريانه، والتوسط بينهما. حروف الشدة أجد قط بكت، وحروف التوسط لن عمر."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تصنيف الحروف بحسب جريان الصوت"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن أَقْ وأَلْ وأَسْ.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L3.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف من حروف التوسط؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "اللام"
+                },
+                {
+                  "id": "2",
+                  "text": "القاف"
+                },
+                {
+                  "id": "3",
+                  "text": "السين"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الشدة انحباس جريان الصوت، والرخاوة جريانه، والتوسط بينهما. حروف الشدة أجد قط بكت، وحروف التوسط لن عمر."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L4",
+      "titleAr": "الاستعلاء والاستفال",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حروف الاستعلاء",
+      "explanationAr": "حروف الاستعلاء سبعة: خص ضغط قظ. يرتفع أقصى اللسان عند نطقها، وهي مفخمة بدرجات. بقية الحروف مستفلة، مع أحكام خاصة للألف واللام والراء. والمطبق أشد تفخيمًا من المستعلي المنفتح، والمستعلي المكسور يبقى مفخمًا وإن كان في أدنى المراتب (ص 160–182).",
+      "examples": [
+        {
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الاستعلاء والاستفال"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "حروف الاستعلاء سبعة: خص ضغط قظ. يرتفع أقصى اللسان عند نطقها، وهي مفخمة بدرجات. بقية الحروف مستفلة، مع أحكام خاصة للألف واللام والراء."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "113:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز حروف الاستعلاء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن قَ وكَ دون تغيير الحركة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L4.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف من حروف الاستعلاء؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "القاف"
+                },
+                {
+                  "id": "2",
+                  "text": "الفاء"
+                },
+                {
+                  "id": "3",
+                  "text": "اللام"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "حروف الاستعلاء سبعة: خص ضغط قظ. يرتفع أقصى اللسان عند نطقها، وهي مفخمة بدرجات. بقية الحروف مستفلة، مع أحكام خاصة للألف واللام والراء."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L5",
+      "titleAr": "الإطباق والانفتاح",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حروف الإطباق",
+      "explanationAr": "حروف الإطباق ص ض ط ظ، وفيها انطباق جزء من اللسان على الحنك الأعلى بحسب هيئة النطق، والانفتاح في غيرها.",
+      "examples": [
+        {
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإطباق والانفتاح"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "حروف الإطباق ص ض ط ظ، وفيها انطباق جزء من اللسان على الحنك الأعلى بحسب هيئة النطق، والانفتاح في غيرها."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز حروف الإطباق"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن صَ وسَ مع المحافظة على مخرج كل حرف.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L5.Q1",
+              "type": "singleChoice",
+              "text": "أي مجموعة هي حروف الإطباق؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "ص ض ط ظ"
+                },
+                {
+                  "id": "2",
+                  "text": "ق غ خ"
+                },
+                {
+                  "id": "3",
+                  "text": "ب م ف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "حروف الإطباق ص ض ط ظ، وفيها انطباق جزء من اللسان على الحنك الأعلى بحسب هيئة النطق، والانفتاح في غيرها."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

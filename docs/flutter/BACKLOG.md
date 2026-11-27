@@ -87,3 +87,11 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.
+
+## Lesson content (`docs/content/`, branch of the content review)
+- [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
+      chapter into `docs/content/sources/musawwar/` and compare. **Done: all 22 chapters (2026-11-27).** PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
+      (ids in `lesson-production:docs/production/LESSONS-TRACKER.md`).
+- [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
+      (`REVIEW-2026-11-27.md`, «Still open»).
+- [x] Optional tashil/ibdal (آلذكرين، آلآن، آلله) written from the book ch. 19 (pool 99, 2026-11-27); الاسم is in ch. 15 p. 471.

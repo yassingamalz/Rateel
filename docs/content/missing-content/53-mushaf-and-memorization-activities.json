@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U11.L1",
+      "examples": [],
+      "listeningTasks": [],
+      "visualTasks": [
+        {
+          "id": "U11.L1.M.A1",
+          "kind": "verified_visual",
+          "mediaTarget": "two_authenticated_mushaf_images",
+          "promptAr": "ما وظيفة نقط الإعجام؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تحديد مقدار المد فقط"
+            },
+            {
+              "id": "2",
+              "text": "تمييز الحروف المتشابهة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تمييز الحروف المتشابهة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U11.L1.M.P1",
+          "instructionAr": "قارن صورتين موثقتين لمصحفين.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U11.L1.M.P2",
+          "instructionAr": "حدد ما ينتمي إلى الرسم وما ينتمي إلى الضبط.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U11.L2",
+      "examples": [
+        {
+          "id": "U11.L2.M.E1",
+          "verseRef": "1:3",
+          "excerptAr": "الرَّحْمَٰنِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [],
+      "visualTasks": [
+        {
+          "id": "U11.L2.M.A1",
+          "kind": "verified_visual",
+          "mediaTarget": "approved_uthmani_and_imlai_comparison",
+          "promptAr": "أي مصدر يعتمد لعرض الآية؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مصحف موثوق بالرسم المعتمد"
+            },
+            {
+              "id": "2",
+              "text": "تحويل إملائي آلي غير مراجع"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "مصحف موثوق بالرسم المعتمد",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U11.L2.M.P1",
+          "instructionAr": "قارن الرسم العثماني والإملائي للكلمة بعد التحقق.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U11.L2.M.P2",
+          "instructionAr": "ميز النص القرآني عن التوضيح التعليمي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U12.L1",
+      "examples": [
+        {
+          "id": "U12.L1.M.E1",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U12.L1.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "complete_first_example",
+          "promptAr": "ما اللفظ الأخير في المقطع؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الصمد"
+            },
+            {
+              "id": "2",
+              "text": "أحد"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "أحد",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U12.L1.M.P1",
+          "instructionAr": "استمع ثم اقرأ من المصحف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U12.L1.M.P2",
+          "instructionAr": "استظهر المقطع وراجعه من النص المعتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U12.L2",
+      "examples": [
+        {
+          "id": "U12.L2.M.E1",
+          "verseRef": "112:2",
+          "excerptAr": "اللَّهُ الصَّمَدُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U12.L2.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "complete_first_example",
+          "promptAr": "ما المصدر الذي ترجع إليه لتصحيح الحفظ؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مصحف معتمد ومعلم متقن"
+            },
+            {
+              "id": "2",
+              "text": "تخمين اللفظ"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "مصحف معتمد ومعلم متقن",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U12.L2.M.P1",
+          "instructionAr": "اختر تسجيلًا معتمدًا مطابقًا للرواية.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U12.L2.M.P2",
+          "instructionAr": "سمع المقطع لمعلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U12.L3",
+      "examples": [
+        {
+          "id": "U12.L3.M.E1",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U12.L3.M.E2",
+          "verseRef": "112:2",
+          "excerptAr": "اللَّهُ الصَّمَدُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U12.L3.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "both_complete_verses",
+          "promptAr": "أي آية تلي قل هو الله أحد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لم يلد ولم يولد"
+            },
+            {
+              "id": "2",
+              "text": "الله الصمد"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الله الصمد",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U12.L3.M.P1",
+          "instructionAr": "كرر الآيتين ثم استرجعهما بالترتيب.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U12.L3.M.P2",
+          "instructionAr": "راجع المقطع في جلسة لاحقة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U12.L4",
+      "examples": [
+        {
+          "id": "U12.L4.M.E1",
+          "verseRef": "113:1",
+          "excerptAr": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U12.L4.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "complete_first_example",
+          "promptAr": "ما الذي يساعد على تثبيت المقطع؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "المراجعة المنتظمة"
+            },
+            {
+              "id": "2",
+              "text": "تركه بعد أول استظهار"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "المراجعة المنتظمة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U12.L4.M.P1",
+          "instructionAr": "حدد مقدارًا صغيرًا مناسبًا للحفظ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U12.L4.M.P2",
+          "instructionAr": "راجع ما حفظته قبل الانتقال إلى مقطع جديد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

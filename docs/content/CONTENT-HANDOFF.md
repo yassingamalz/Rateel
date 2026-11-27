@@ -1,0 +1,25 @@
+# Rateel — Editorial handoff and variable assessment bank
+Updated 2026-11-26. Owner direction: continue adding content, examples and questions; leave consolidation, runtime integration and merge to owner + Claude. Do not edit master or the existing lesson branches from this workflow.
+
+## Existing work
+- `curriculum-draft.json`: 13 macro-units / 66 original editorial topics, not a final app hierarchy.
+- `batches/` 01–20: initial content, pilot U5.L1 (16 guided steps, 10 assessment items, 2 proposed listening items), 65 other starter topics.
+- `expansion/` 21–37: 325 additional assessment items; baseline + expansion = 400.
+- `missing-content/` 38–72: nine provisional supplemental topics (five expand the existing meeting-letter topic, three lam al-tarif topics and one recitation-speed topic); 54 supplemental assessment questions and 65 mixed-format questions = 519 raw assessment entries across these directories. Also additional listening, visual, practical tasks, 65 short narration/storyboard drafts (195 scenes), and detailed rule tables. Counts are authoring totals, not validated unique published questions.
+- `question-pool/`: further independent banks of examples and questions, append-only, with stable IDs. Join by topicId later. Use files as authored content; never overwrite existing Q1–Q10.
+
+## Owner's new requirement: tests must vary between attempts
+- Proposed target: initially 15–25 genuinely distinct reviewed questions per substantial topic, 30–60 for important or broad rules, and at least 3–4 times the number of items shown in a test. Smaller topics may share a unit bank. Do not inflate counts with near-identical paraphrases.
+- Example: 10 questions shown from 40 approved items. Select a stratified sample across learning objectives, question types and difficulty (e.g. 3 recognition, 4 application, 3 exception/comparison; adapt per unit). Sample without replacement, shuffle choices with stable option IDs, keep one frozen selection per attempt, no re-roll after answer. Do not select multiple items from one variant family in a single attempt unless explicitly desired.
+- Prefer unseen items, then least recently seen, subject to objective coverage; when approved bank is too small allow repeats rather than starving objectives. Keep recent exposure history across attempts where possible. If a failed question is used for targeted review, deliberately allow a repeat and distinguish review from fresh assessment.
+- Difficulty should describe cognitive work, not merely harder Arabic. Avoid ambiguous distractors, multiple valid answers in single-choice, and clues from option length. Test actual recognition and application, not only definitions.
+- Use only approved questions, reviewed answer keys and media. No generated distractors or generated Quran text at runtime. Preserve exact Quran text from a verified Uthmani edition, use stable verse references and verified context; do not treat imlai candidates as canonical.
+- Each new item: topicId, unique id, objective or skill, difficulty, type, choices and stable correct IDs, feedback, source/verse reference where applicable, verification status, optional variantFamily. Media-dependent items disabled until the actual recording and question match.
+- Listening questions should hide the verse when the objective is auditory recognition; do not reveal the correct answer via highlighting. Match the exact recitation clip and transmission path. Pronunciation assessment remains teacher/self unless actual validated technology exists.
+- For final tests, pool approved questions across lessons by objective; no repeated item in same session; maintain a fixed passing threshold and comparable difficulty. Matching and ordering need runtime support audit. Never treat a completed app test as ijazah.
+
+## Known blockers and editorial review
+Original 22 PDFs have not been independently inspected in this work. Review with a qualified Tajweed specialist, source chapter/page, Hafs path, Uthmani text, waqf/wasl, audio, tashkil, duplicate concepts, source coverage. Examples and answers are drafts. Explicitly review 106:4 (idgham shafawi, not izhar), the legacy brief's ذ vs د before ظ, and the 14 solar letters (includes lam). Check verse 112:1 vs 112:2 for standalone Allah examples; contextual examples must not be used as proof of unrelated rules. No runtime tests or independent repository-wide validation yet.
+
+## Review 2026-11-27
+See `REVIEW-2026-11-27.md`: 21 errors fixed (17 wrong verse references, 2 examples that did not show their rule, Hafs-only statements on imala and tashil, vocalisation slips), precision added to 4 topics, and `question-pool/99-review-gap-additions.json` (13 topics, 64 questions) for the gaps (ra, lam of Allah, qalqala levels, sakt, fawatih, special Hafs words, isti'adha ways, hamzat al-wasl, waqf types, ghunna levels, madd amounts). Page-by-page book check still pending (PDFs not reachable from that session).
