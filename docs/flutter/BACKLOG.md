@@ -32,7 +32,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Style conflicts** to decide at the end of the project, one choice for the whole app: `STYLE-CONFLICTS.md`.
 - [ ] **Mock data** to connect before release (leaderboard, video sections, rail counts, daily challenges):
       `SCREENS.md`, «Screens running on mock data»; data problems in the same file.
-- [ ] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`), waiting for the owner's yes.
+- [x] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`): done 2026-11-27 (same look). Still to do: frame times
+      measured on the owner's phone (APK).
 - [ ] **Stable signing key** for the APKs, kept outside the repo (owner to supply).
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.
