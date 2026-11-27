@@ -136,10 +136,11 @@
       "examples": [
         {
           "id": "U5.L3.POOL73.E1",
-          "verseRef": "2:33",
-          "excerptAr": "مِنْ أَسْمَائِهِمْ",
+          "verseRef": "2:62",
+          "excerptAr": "مَنْ آمَنَ",
           "focus": "ء",
-          "verification": "pending_uthmani_reference_context"
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L3.POOL73.E2",
@@ -150,10 +151,11 @@
         },
         {
           "id": "U5.L3.POOL73.E3",
-          "verseRef": "13:7",
+          "verseRef": "13:33",
           "excerptAr": "مِنْ هَادٍ",
           "focus": "هـ",
-          "verification": "pending_uthmani_reference_context"
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L3.POOL73.E4",
@@ -285,10 +287,11 @@
         },
         {
           "id": "U5.L4.POOL73.E4",
-          "verseRef": "2:249",
-          "excerptAr": "مِنْ نَهَرٍ",
+          "verseRef": "16:53",
+          "excerptAr": "مِنْ نِعْمَةٍ",
           "focus": "ن",
-          "verification": "pending_uthmani_reference_context"
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L4.POOL73.E5",
@@ -344,7 +347,7 @@
             },
             {
               "id": "3",
-              "text": "من نهر"
+              "text": "من نعمة"
             }
           ],
           "correctAnswer": "2"
@@ -406,10 +409,11 @@
         },
         {
           "id": "U5.L5.POOL73.E3",
-          "verseRef": "2:25",
+          "verseRef": "51:57",
           "excerptAr": "مِنْ رِزْقٍ",
           "focus": "ر",
-          "verification": "pending_uthmani_reference_context"
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L5.POOL73.E4",
@@ -1117,7 +1121,7 @@
         {
           "id": "U5.L11.POOL73.Q4",
           "topicId": "U5.L11",
-          "text": "ما الحرف الذي يلي الميم في عليكم غير؟",
+          "text": "ما الحرف الذي يلي الميم في عليهم غير؟",
           "objective": "rule_recognition_application",
           "difficulty": "basic",
           "status": "editorial_draft",

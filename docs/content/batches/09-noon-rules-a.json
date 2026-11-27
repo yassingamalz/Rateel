@@ -105,10 +105,11 @@
       "explanationAr": "تظهر النون الساكنة أو التنوين عند الهمزة والهاء والعين والحاء والغين والخاء دون غنة زائدة.",
       "examples": [
         {
-          "verseRef": "97:5",
+          "verseRef": "97:3",
           "excerptAr": "مِنْ أَلْفِ",
           "script": "illustrative_imlai_pending_uthmani_verification",
-          "audioStatus": "pending"
+          "audioStatus": "pending",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         }
       ],
       "activities": {

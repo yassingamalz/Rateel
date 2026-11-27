@@ -63,11 +63,12 @@
       "topicId": "U3.L4",
       "subtopic": "الراء المتحركة",
       "verseRef": "2:25",
-      "excerptAr": "رِزْقٍ",
+      "excerptAr": "رِزْقًا",
       "focus": "الراء المكسورة",
       "correct": "ترقيق",
       "feedbackAr": "الراء المكسورة مرققة.",
-      "verification": "pending_source_uthmani_context_and_audio"
+      "verification": "pending_source_uthmani_context_and_audio",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "POOL93.E7",
@@ -194,12 +195,13 @@
       "id": "POOL93.E18",
       "topicId": "U3.L4",
       "subtopic": "الراء الساكنة",
-      "verseRef": "82:19",
-      "excerptAr": "وَالْأَمْرُ",
+      "verseRef": "97:4",
+      "excerptAr": "أَمْرٍ",
       "focus": "الراء عند الوقف بالسكون المحض",
       "correct": "تفخيم",
       "feedbackAr": "قبل الراء ميم ساكنة وقبلها فتح.",
-      "verification": "pending_source_uthmani_context_and_audio"
+      "verification": "pending_source_uthmani_context_and_audio",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     }
   ],
   "questions": [

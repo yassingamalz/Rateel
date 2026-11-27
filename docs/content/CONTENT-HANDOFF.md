@@ -20,3 +20,6 @@ Updated 2026-11-26. Owner direction: continue adding content, examples and quest
 
 ## Known blockers and editorial review
 Original 22 PDFs have not been independently inspected in this work. Review with a qualified Tajweed specialist, source chapter/page, Hafs path, Uthmani text, waqf/wasl, audio, tashkil, duplicate concepts, source coverage. Examples and answers are drafts. Explicitly review 106:4 (idgham shafawi, not izhar), the legacy brief's ذ vs د before ظ, and the 14 solar letters (includes lam). Check verse 112:1 vs 112:2 for standalone Allah examples; contextual examples must not be used as proof of unrelated rules. No runtime tests or independent repository-wide validation yet.
+
+## Review 2026-11-27
+See `REVIEW-2026-11-27.md`: 21 errors fixed (17 wrong verse references, 2 examples that did not show their rule, Hafs-only statements on imala and tashil, vocalisation slips), precision added to 4 topics, and `question-pool/99-review-gap-additions.json` (13 topics, 64 questions) for the gaps (ra, lam of Allah, qalqala levels, sakt, fawatih, special Hafs words, isti'adha ways, hamzat al-wasl, waqf types, ghunna levels, madd amounts). Page-by-page book check still pending (PDFs not reachable from that session).

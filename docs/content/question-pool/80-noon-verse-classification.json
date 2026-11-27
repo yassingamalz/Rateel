@@ -6,12 +6,13 @@
     {
       "id": "U5.L3.POOL80.E1",
       "topicId": "U5.L3",
-      "verseRef": "2:26",
+      "verseRef": "11:79",
       "excerptAr": "مِنْ حَقٍّ",
       "focus": "ح",
       "rule": "الإظهار الحلقي",
       "explanation": "النون الساكنة قبل الحاء.",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "U5.L3.POOL80.E2",
@@ -66,12 +67,13 @@
     {
       "id": "U5.L4.POOL80.E7",
       "topicId": "U5.L4",
-      "verseRef": "2:249",
-      "excerptAr": "مِنْ نَهَرٍ",
+      "verseRef": "16:53",
+      "excerptAr": "مِنْ نِعْمَةٍ",
       "focus": "ن",
       "rule": "الإدغام بغنة",
       "explanation": "النون الساكنة قبل النون عند الوصل.",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "U5.L4.POOL80.E8",
@@ -96,12 +98,13 @@
     {
       "id": "U5.L5.POOL80.E10",
       "topicId": "U5.L5",
-      "verseRef": "2:25",
+      "verseRef": "51:57",
       "excerptAr": "مِنْ رِزْقٍ",
       "focus": "ر",
       "rule": "الإدغام بغير غنة",
       "explanation": "النون الساكنة قبل الراء.",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "U5.L5.POOL80.E11",

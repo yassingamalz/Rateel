@@ -69,3 +69,11 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       build it **identical** to `01-avvio.webp` with the motion of `01-avvio-square.gif` (`screens/01-splash.md`).
 - [ ] Error state with «إعادة المحاولة» (Angular has it): asked to the owner, not answered yet.
 - [ ] Android native splash in the same green, so nothing flashes before Flutter starts.
+
+## Lesson content (`docs/content/`, branch of the content review)
+- [ ] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): the review of
+      2026-11-27 (`docs/content/REVIEW-2026-11-27.md`) checked every Quran reference and every rule, but could not open
+      the 22 PDFs (Drive download refused in that session). Items are marked `book_page_pending`.
+- [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
+      (`REVIEW-2026-11-27.md`, «Still open»).
+- [ ] Write the optional tashil/ibdal topic (آلذكرين، آلآن، آلله) and الاسم (49:11).

@@ -1,0 +1,2048 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_pending_book_check",
+  "note": "Added by the 2026-11-27 review to cover gaps found against the Hafs ('an 'Asim, Shatibiyya) syllabus of التجويد المصور. Every Quran excerpt was checked word by word against an Uthmani text (quran-json 3.1.2, KFGQPC-based); book page numbers still need the PDFs. Imlai spelling for display candidates only; bind canonical text at integration.",
+  "topics": [
+    {
+      "topicId": "U3.L4.RA",
+      "titleAr": "أحكام الراء تفخيمًا وترقيقًا",
+      "source": "book ch. 07–08 (التفخيم والترقيق) — page check pending",
+      "explanationAr": "تفخم الراء إذا كانت مفتوحة أو مضمومة، أو ساكنة بعد فتح أو ضم، أو ساكنة بعد كسر عارض أو كسر في كلمة سابقة، أو ساكنة بعد كسر أصلي وبعدها حرف استعلاء غير مكسور في كلمتها. وترقق إذا كانت مكسورة، أو ساكنة بعد كسر أصلي متصل بها وليس بعدها حرف استعلاء في كلمتها. وعند الوقف ينظر إلى ما قبلها: ترقق بعد كسر أو ياء ساكنة، وتفخم بعد فتح أو ضم ولو فصل بينهما ساكن. وفي فِرْقٍ الوجهان، وفي مِصْرَ والْقِطْرِ وقفًا الوجهان، والمختار التفخيم في مصر والترقيق في القطر.",
+      "examples": [
+        {
+          "id": "U3.L4.RA.POOL99.E1",
+          "topicId": "U3.L4.RA",
+          "verseRef": "1:2",
+          "excerptAr": "رَبِّ",
+          "focus": "الراء المفتوحة",
+          "rule": "تفخيم",
+          "explanation": "راء مفتوحة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E2",
+          "topicId": "U3.L4.RA",
+          "verseRef": "50:1",
+          "excerptAr": "وَالْقُرْآنِ",
+          "focus": "الراء الساكنة بعد ضم",
+          "rule": "تفخيم",
+          "explanation": "ساكنة وقبلها ضم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E3",
+          "topicId": "U3.L4.RA",
+          "verseRef": "89:28",
+          "excerptAr": "ارْجِعِي",
+          "focus": "الراء الساكنة بعد همزة الوصل",
+          "rule": "تفخيم",
+          "explanation": "الكسر قبلها عارض بسبب همزة الوصل عند الابتداء.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E4",
+          "topicId": "U3.L4.RA",
+          "verseRef": "89:14",
+          "excerptAr": "لَبِالْمِرْصَادِ",
+          "focus": "الراء الساكنة قبل الصاد",
+          "rule": "تفخيم",
+          "explanation": "ساكنة بعد كسر أصلي وبعدها حرف استعلاء في الكلمة نفسها.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E5",
+          "topicId": "U3.L4.RA",
+          "verseRef": "79:17",
+          "excerptAr": "فِرْعَوْنَ",
+          "focus": "الراء الساكنة بعد كسر",
+          "rule": "ترقيق",
+          "explanation": "ساكنة بعد كسر أصلي متصل بها، وليس بعدها حرف استعلاء.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E6",
+          "topicId": "U3.L4.RA",
+          "verseRef": "13:7",
+          "excerptAr": "مُنْذِرٌ",
+          "focus": "الراء عند الوقف بالسكون",
+          "rule": "ترقيق",
+          "explanation": "قبلها كسر.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E7",
+          "topicId": "U3.L4.RA",
+          "verseRef": "67:1",
+          "excerptAr": "قَدِيرٌ",
+          "focus": "الراء عند الوقف بالسكون",
+          "rule": "ترقيق",
+          "explanation": "قبلها ياء ساكنة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E8",
+          "topicId": "U3.L4.RA",
+          "verseRef": "26:63",
+          "excerptAr": "فِرْقٍ",
+          "focus": "الراء الساكنة قبل القاف المكسورة",
+          "rule": "وجهان",
+          "explanation": "حرف الاستعلاء بعدها مكسور، ففيها التفخيم والترقيق.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E9",
+          "topicId": "U3.L4.RA",
+          "verseRef": "10:87",
+          "excerptAr": "بِمِصْرَ",
+          "focus": "الراء عند الوقف",
+          "rule": "وجهان والتفخيم أولى",
+          "explanation": "يوقف عليها بالوجهين، والمختار التفخيم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.E10",
+          "topicId": "U3.L4.RA",
+          "verseRef": "34:12",
+          "excerptAr": "الْقِطْرِ",
+          "focus": "الراء عند الوقف",
+          "rule": "وجهان والترقيق أولى",
+          "explanation": "يوقف عليها بالوجهين، والمختار الترقيق.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L4.RA.POOL99.Q1",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تفخيم"
+            },
+            {
+              "id": "2",
+              "text": "ترقيق"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الكسر قبل الراء عارض لأجل همزة الوصل، فتفخم.",
+          "exampleId": "U3.L4.RA.POOL99.E3"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q2",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ترقيق"
+            },
+            {
+              "id": "2",
+              "text": "تفخيم"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "بعد الراء حرف استعلاء في الكلمة نفسها.",
+          "exampleId": "U3.L4.RA.POOL99.E4"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q3",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تفخيم"
+            },
+            {
+              "id": "2",
+              "text": "الوجهان"
+            },
+            {
+              "id": "3",
+              "text": "ترقيق"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "ساكنة بعد كسر أصلي متصل ولا استعلاء بعدها.",
+          "exampleId": "U3.L4.RA.POOL99.E5"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q4",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_waqf",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء عند الوقف على الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ترقيق"
+            },
+            {
+              "id": "2",
+              "text": "تفخيم"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "يوقف عليها بالترقيق لأن قبلها كسرًا.",
+          "exampleId": "U3.L4.RA.POOL99.E6"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q5",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_waqf",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء عند الوقف على الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تفخيم"
+            },
+            {
+              "id": "2",
+              "text": "ترقيق"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الياء الساكنة قبل الراء توجب الترقيق عند الوقف.",
+          "exampleId": "U3.L4.RA.POOL99.E7"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q6",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_exception",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم الراء في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تفخيم فقط"
+            },
+            {
+              "id": "2",
+              "text": "ترقيق فقط"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "حرف الاستعلاء بعدها مكسور.",
+          "exampleId": "U3.L4.RA.POOL99.E8"
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q7",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_exception",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الوجه المختار عند الوقف على الْقِطْرِ؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "التفخيم"
+            },
+            {
+              "id": "2",
+              "text": "الترقيق"
+            },
+            {
+              "id": "3",
+              "text": "لا يوقف عليها"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "فيها الوجهان والمختار الترقيق."
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q8",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الراء المكسورة ترقق في الوصل.",
+          "correctAnswer": true,
+          "feedbackAr": "الكسر يوجب الترقيق."
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q9",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "كل راء ساكنة بعد كسر ترقق دون استثناء.",
+          "correctAnswer": false,
+          "feedbackAr": "تفخم إذا كان الكسر عارضًا، أو بعدها حرف استعلاء في كلمتها."
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q10",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_rule",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر الكلمات التي تفخم فيها الراء.",
+          "options": [
+            {
+              "id": "1",
+              "text": "رَبِّ"
+            },
+            {
+              "id": "2",
+              "text": "ارْجِعِي"
+            },
+            {
+              "id": "3",
+              "text": "فِرْعَوْنَ"
+            },
+            {
+              "id": "4",
+              "text": "وَالْقُرْآنِ"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "4"
+          ],
+          "feedbackAr": "فرعون ترقق راؤها؛ الباقي مفخم."
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L4.LAM",
+      "titleAr": "لام لفظ الجلالة",
+      "source": "book ch. 07–08 — page check pending",
+      "explanationAr": "تفخم لام لفظ الجلالة إذا سبقها فتح أو ضم، ولو كان الفتح أو الضم في كلمة سابقة، وتفخم عند الابتداء بها. وترقق إذا سبقها كسر أصلي أو عارض.",
+      "examples": [
+        {
+          "id": "U3.L4.LAM.POOL99.E1",
+          "topicId": "U3.L4.LAM",
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ اللَّهِ",
+          "focus": "لام الجلالة بعد كسر",
+          "rule": "ترقيق",
+          "explanation": "قبلها كسر.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.E2",
+          "topicId": "U3.L4.LAM",
+          "verseRef": "112:1",
+          "excerptAr": "هُوَ اللَّهُ",
+          "focus": "لام الجلالة بعد فتح",
+          "rule": "تفخيم",
+          "explanation": "قبلها فتح.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.E3",
+          "topicId": "U3.L4.LAM",
+          "verseRef": "110:1",
+          "excerptAr": "نَصْرُ اللَّهِ",
+          "focus": "لام الجلالة بعد ضم",
+          "rule": "تفخيم",
+          "explanation": "قبلها ضم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.E4",
+          "topicId": "U3.L4.LAM",
+          "verseRef": "3:2",
+          "excerptAr": "اللَّهُ لَا إِلَٰهَ",
+          "focus": "الابتداء بلفظ الجلالة",
+          "rule": "تفخيم",
+          "explanation": "يبدأ بهمزة الوصل المفتوحة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L4.LAM.POOL99.Q1",
+          "topicId": "U3.L4.LAM",
+          "objective": "lam_allah",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U3.L4.LAM",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم لام لفظ الجلالة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "تفخيم"
+            },
+            {
+              "id": "2",
+              "text": "ترقيق"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "قبلها كسر.",
+          "exampleId": "U3.L4.LAM.POOL99.E1"
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.Q2",
+          "topicId": "U3.L4.LAM",
+          "objective": "lam_allah",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U3.L4.LAM",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حكم لام لفظ الجلالة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ترقيق"
+            },
+            {
+              "id": "2",
+              "text": "تفخيم"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "قبلها ضم.",
+          "exampleId": "U3.L4.LAM.POOL99.E3"
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.Q3",
+          "topicId": "U3.L4.LAM",
+          "objective": "lam_allah",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L4.LAM",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "تفخم لام لفظ الجلالة عند الابتداء بها.",
+          "correctAnswer": true,
+          "feedbackAr": "تبدأ بهمزة وصل مفتوحة."
+        },
+        {
+          "id": "U3.L4.LAM.POOL99.Q4",
+          "topicId": "U3.L4.LAM",
+          "objective": "lam_allah",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L4.LAM",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الكسر العارض قبل لام لفظ الجلالة لا يؤثر فيها.",
+          "correctAnswer": false,
+          "feedbackAr": "ترقق بعد الكسر أصليًا كان أو عارضًا، نحو قُلِ اللَّهُمَّ."
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L8.QLQ",
+      "titleAr": "مراتب القلقلة",
+      "source": "book ch. 07 (صفات) — page check pending",
+      "explanationAr": "حروف القلقلة خمسة يجمعها قطب جد. تكون القلقلة عند سكون الحرف: صغرى إذا كان الحرف ساكنًا في وسط الكلمة أو في آخرها وصلًا، وكبرى عند الوقف عليه، وأقواها إذا كان الحرف الموقوف عليه مشددًا. ولا يجوز أن يتولد منها صوت حركة كاملة.",
+      "examples": [
+        {
+          "id": "U3.L8.QLQ.POOL99.E1",
+          "topicId": "U3.L8.QLQ",
+          "verseRef": "96:1",
+          "excerptAr": "اقْرَأْ",
+          "focus": "القاف الساكنة في وسط الكلمة",
+          "rule": "قلقلة صغرى",
+          "explanation": "القاف ساكنة في الوصل.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.E2",
+          "topicId": "U3.L8.QLQ",
+          "verseRef": "85:4",
+          "excerptAr": "الْأُخْدُودِ",
+          "focus": "الخاء ثم الدال الساكنة",
+          "rule": "قلقلة صغرى",
+          "explanation": "الدال الأولى ساكنة في وسط الكلمة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.E3",
+          "topicId": "U3.L8.QLQ",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "focus": "الدال عند الوقف",
+          "rule": "قلقلة كبرى",
+          "explanation": "تسكن الدال عند الوقف.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.E4",
+          "topicId": "U3.L8.QLQ",
+          "verseRef": "111:1",
+          "excerptAr": "وَتَبَّ",
+          "focus": "الباء المشددة عند الوقف",
+          "rule": "قلقلة كبرى وأقواها",
+          "explanation": "حرف القلقلة مشدد وموقوف عليه.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L8.QLQ.POOL99.Q1",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة القلقلة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "صغرى"
+            },
+            {
+              "id": "2",
+              "text": "كبرى"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الحرف ساكن في الوصل.",
+          "exampleId": "U3.L8.QLQ.POOL99.E1"
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.Q2",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة القلقلة في الموضع المحدد عند الوقف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "صغرى"
+            },
+            {
+              "id": "2",
+              "text": "كبرى"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "القلقلة عند الوقف أقوى.",
+          "exampleId": "U3.L8.QLQ.POOL99.E3"
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.Q3",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي المواضع أقوى قلقلة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "القاف الساكنة وسط الكلمة"
+            },
+            {
+              "id": "2",
+              "text": "الباء المشددة الموقوف عليها في وَتَبَّ"
+            },
+            {
+              "id": "3",
+              "text": "الدال المتحركة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "المشدد الموقوف عليه أعلى مراتبها."
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.Q4",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "تتحقق القلقلة في حرف القلقلة المتحرك.",
+          "correctAnswer": false,
+          "feedbackAr": "القلقلة عند السكون."
+        }
+      ]
+    },
+    {
+      "topicId": "X-SAKT-01",
+      "titleAr": "السكت عند حفص",
+      "source": "book ch. 14–15 — page check pending",
+      "explanationAr": "السكت قطع الصوت زمنًا يسيرًا دون تنفس بنية مواصلة القراءة. ولحفص من طريق الشاطبية أربعة مواضع يسكت فيها وجوبًا حال الوصل: عِوَجَا في أول الكهف، ومَرْقَدِنَا في يس، ومَنْ رَاقٍ في القيامة، وبَلْ رَانَ في المطففين. وفي مَالِيَهْ هَلَكَ في الحاقة السكت أو الإدغام، وبين الأنفال والتوبة السكت وجه من ثلاثة.",
+      "examples": [
+        {
+          "id": "X-SAKT-01.POOL99.E1",
+          "topicId": "X-SAKT-01",
+          "verseRef": "18:1",
+          "excerptAr": "عِوَجَا",
+          "focus": "السكت على الألف المبدلة من التنوين",
+          "rule": "سكت",
+          "explanation": "يسكت حفص على عوجا عند وصلها بما بعدها.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "X-SAKT-01.POOL99.E2",
+          "topicId": "X-SAKT-01",
+          "verseRef": "36:52",
+          "excerptAr": "مِنْ مَرْقَدِنَا",
+          "focus": "السكت على الألف",
+          "rule": "سكت",
+          "explanation": "يسكت ثم يقول: هذا ما وعد الرحمن.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "X-SAKT-01.POOL99.E3",
+          "topicId": "X-SAKT-01",
+          "verseRef": "75:27",
+          "excerptAr": "مَنْ رَاقٍ",
+          "focus": "السكت على النون",
+          "rule": "سكت",
+          "explanation": "يمنع السكت إدغام النون في الراء.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "X-SAKT-01.POOL99.E4",
+          "topicId": "X-SAKT-01",
+          "verseRef": "83:14",
+          "excerptAr": "بَلْ رَانَ",
+          "focus": "السكت على اللام",
+          "rule": "سكت",
+          "explanation": "يمنع السكت إدغام اللام في الراء.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "X-SAKT-01.POOL99.E5",
+          "topicId": "X-SAKT-01",
+          "verseRef": "69:28",
+          "excerptAr": "مَالِيَهْ",
+          "focus": "هاء السكت قبل هلك",
+          "rule": "سكت أو إدغام",
+          "explanation": "وجهان لحفص في الوصل.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "X-SAKT-01.POOL99.Q1",
+          "topicId": "X-SAKT-01",
+          "objective": "sakt_places",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-X-SAKT-01",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كم موضعًا يسكت فيه حفص وجوبًا من طريق الشاطبية؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "موضعان"
+            },
+            {
+              "id": "2",
+              "text": "أربعة"
+            },
+            {
+              "id": "3",
+              "text": "سبعة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "عوجا، مرقدنا، من راق، بل ران."
+        },
+        {
+          "id": "X-SAKT-01.POOL99.Q2",
+          "topicId": "X-SAKT-01",
+          "objective": "sakt_places",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-X-SAKT-01",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الحكم في الموضع المحدد عند الوصل لحفص؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "إدغام بغير غنة"
+            },
+            {
+              "id": "2",
+              "text": "سكت على النون"
+            },
+            {
+              "id": "3",
+              "text": "إخفاء"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يسكت على النون فلا تدغم.",
+          "exampleId": "X-SAKT-01.POOL99.E3"
+        },
+        {
+          "id": "X-SAKT-01.POOL99.Q3",
+          "topicId": "X-SAKT-01",
+          "objective": "sakt_def",
+          "difficulty": "beginner",
+          "variantFamily": "review99-X-SAKT-01",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الفرق بين السكت والوقف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "السكت قطع يسير بلا تنفس، والوقف معه تنفس"
+            },
+            {
+              "id": "2",
+              "text": "لا فرق"
+            },
+            {
+              "id": "3",
+              "text": "السكت يكون مع التنفس دائمًا"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "السكت بلا تنفس وبنية الوصل."
+        },
+        {
+          "id": "X-SAKT-01.POOL99.Q4",
+          "topicId": "X-SAKT-01",
+          "objective": "sakt_places",
+          "difficulty": "advanced",
+          "variantFamily": "review99-X-SAKT-01",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "في مَالِيَهْ هَلَكَ لحفص وجهان: السكت والإدغام.",
+          "correctAnswer": true,
+          "feedbackAr": "كلاهما مروي من طريق الشاطبية."
+        },
+        {
+          "id": "X-SAKT-01.POOL99.Q5",
+          "topicId": "X-SAKT-01",
+          "objective": "sakt_places",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-X-SAKT-01",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر مواضع السكت الواجب لحفص.",
+          "options": [
+            {
+              "id": "1",
+              "text": "عِوَجَا"
+            },
+            {
+              "id": "2",
+              "text": "مَرْقَدِنَا"
+            },
+            {
+              "id": "3",
+              "text": "مَنْ رَاقٍ"
+            },
+            {
+              "id": "4",
+              "text": "مِنْ خَوْفٍ"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3"
+          ],
+          "feedbackAr": "والرابع بل ران؛ أما من خوف فإظهار حلقي."
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L5.HARFI",
+      "titleAr": "المد اللازم الحرفي وفواتح السور",
+      "source": "book ch. 11 (المدود) — page check pending",
+      "explanationAr": "حروف فواتح السور ثلاثة أقسام: ما لا مد فيه وهو الألف؛ وما هجاؤه حرفان فيمد مدًا طبيعيًا وحروفه خمسة في حي طهر؛ وما هجاؤه ثلاثة أحرف أوسطها حرف مد فيمد ست حركات وحروفه ثمانية في نقص عسلكم، إلا العين ففيها التوسط والطول والطول أولى. ويكون مثقلًا إذا أدغم آخره فيما بعده كاللام في الم، ومخففًا إذا لم يدغم كالميم في الم. وفي الم الله أول آل عمران عند الوصل الطول والقصر في الميم مع فتحها.",
+      "examples": [
+        {
+          "id": "U6.L5.HARFI.POOL99.E1",
+          "topicId": "U6.L5.HARFI",
+          "verseRef": "2:1",
+          "excerptAr": "الم",
+          "focus": "اللام والميم",
+          "rule": "لازم حرفي مثقل ثم مخفف",
+          "explanation": "اللام مدغمة في الميم فهي مثقلة، والميم مخففة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.E2",
+          "topicId": "U6.L5.HARFI",
+          "verseRef": "20:1",
+          "excerptAr": "طه",
+          "focus": "الطاء والهاء",
+          "rule": "مد طبيعي حرفي",
+          "explanation": "هجاء كل منهما حرفان.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.E3",
+          "topicId": "U6.L5.HARFI",
+          "verseRef": "19:1",
+          "excerptAr": "كهيعص",
+          "focus": "العين",
+          "rule": "توسط أو طول",
+          "explanation": "العين وحدها فيها الوجهان.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.E4",
+          "topicId": "U6.L5.HARFI",
+          "verseRef": "50:1",
+          "excerptAr": "ق",
+          "focus": "القاف",
+          "rule": "لازم حرفي مخفف",
+          "explanation": "هجاؤها ثلاثة أحرف أوسطها حرف مد.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.E5",
+          "topicId": "U6.L5.HARFI",
+          "verseRef": "3:1",
+          "excerptAr": "الم",
+          "focus": "الميم عند الوصل بلفظ الجلالة",
+          "rule": "طول أو قصر",
+          "explanation": "تحرك الميم بالفتح للتخلص من الساكنين.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L5.HARFI.POOL99.Q1",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مقدار مد الحروف المجموعة في حي طهر في الفواتح؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ست حركات"
+            },
+            {
+              "id": "2",
+              "text": "حركتان"
+            },
+            {
+              "id": "3",
+              "text": "أربع أو ست"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "هجاء كل منها حرفان."
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.Q2",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما حروف المد اللازم الحرفي ست حركات؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نقص عسلكم"
+            },
+            {
+              "id": "2",
+              "text": "حي طهر"
+            },
+            {
+              "id": "3",
+              "text": "فر من لب"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "ثمانية أحرف، والعين لها وجهان."
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.Q3",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الأوجه في العين في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "القصر فقط"
+            },
+            {
+              "id": "2",
+              "text": "التوسط والطول"
+            },
+            {
+              "id": "3",
+              "text": "الطول فقط"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "التوسط والطول، والطول أولى.",
+          "exampleId": "U6.L5.HARFI.POOL99.E3"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.Q4",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "لماذا يسمى المد في اللام من الم مثقلًا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لأن آخرها أدغم في الميم بعدها"
+            },
+            {
+              "id": "2",
+              "text": "لأن بعدها همزة"
+            },
+            {
+              "id": "3",
+              "text": "لأنه عارض للوقف"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "لام ميم: أدغمت الميم الساكنة في الميم.",
+          "exampleId": "U6.L5.HARFI.POOL99.E1"
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.Q5",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الألف في الفواتح تمد ست حركات.",
+          "correctAnswer": false,
+          "feedbackAr": "لا مد في الألف لأن هجاءها ليس وسطه حرف مد."
+        },
+        {
+          "id": "U6.L5.HARFI.POOL99.Q6",
+          "topicId": "U6.L5.HARFI",
+          "objective": "fawatih",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.L5.HARFI",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يجوز في ميم الم عند وصلها بلفظ الجلالة أول آل عمران الطول والقصر.",
+          "correctAnswer": true,
+          "feedbackAr": "مع فتح الميم."
+        }
+      ]
+    },
+    {
+      "topicId": "U5.FAWATIH",
+      "titleAr": "النون الساكنة في هجاء الفواتح عند حفص",
+      "source": "book ch. 10/14 — page check pending",
+      "explanationAr": "تظهر نون هجاء يس ونون عند وصلهما بما بعدهما عند حفص من طريق الشاطبية، وتدغم نون هجاء السين في الميم في طسم، وتخفى نون هجاء العين قبل الصاد في كهيعص، ونون هجاء السين قبل القاف في عسق.",
+      "examples": [
+        {
+          "id": "U5.FAWATIH.POOL99.E1",
+          "topicId": "U5.FAWATIH",
+          "verseRef": "36:1",
+          "excerptAr": "يس",
+          "focus": "نون هجاء السين قبل الواو",
+          "rule": "إظهار",
+          "explanation": "يقرأ حفص بالإظهار.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.FAWATIH.POOL99.E2",
+          "topicId": "U5.FAWATIH",
+          "verseRef": "68:1",
+          "excerptAr": "ن",
+          "focus": "النون قبل الواو",
+          "rule": "إظهار",
+          "explanation": "يقرأ حفص بالإظهار.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.FAWATIH.POOL99.E3",
+          "topicId": "U5.FAWATIH",
+          "verseRef": "26:1",
+          "excerptAr": "طسم",
+          "focus": "نون السين قبل الميم",
+          "rule": "إدغام بغنة",
+          "explanation": "تدغم نون السين في ميم ميم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.FAWATIH.POOL99.E4",
+          "topicId": "U5.FAWATIH",
+          "verseRef": "42:2",
+          "excerptAr": "عسق",
+          "focus": "نون السين قبل القاف",
+          "rule": "إخفاء",
+          "explanation": "تخفى عند القاف.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.FAWATIH.POOL99.Q1",
+          "topicId": "U5.FAWATIH",
+          "objective": "fawatih_noon",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U5.FAWATIH",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الحكم في نون هجاء السين في الموضع المحدد لحفص؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "إدغام بغنة"
+            },
+            {
+              "id": "2",
+              "text": "إظهار"
+            },
+            {
+              "id": "3",
+              "text": "إخفاء"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يقرأ حفص من طريق الشاطبية بالإظهار.",
+          "exampleId": "U5.FAWATIH.POOL99.E1"
+        },
+        {
+          "id": "U5.FAWATIH.POOL99.Q2",
+          "topicId": "U5.FAWATIH",
+          "objective": "fawatih_noon",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U5.FAWATIH",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الحكم في نون هجاء السين في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "إدغام بغنة"
+            },
+            {
+              "id": "2",
+              "text": "إظهار"
+            },
+            {
+              "id": "3",
+              "text": "إقلاب"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "تدغم في الميم.",
+          "exampleId": "U5.FAWATIH.POOL99.E3"
+        },
+        {
+          "id": "U5.FAWATIH.POOL99.Q3",
+          "topicId": "U5.FAWATIH",
+          "objective": "fawatih_noon",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U5.FAWATIH",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "تخفى نون هجاء السين عند القاف في عسق.",
+          "correctAnswer": true,
+          "feedbackAr": "القاف من حروف الإخفاء."
+        }
+      ]
+    },
+    {
+      "topicId": "U8.L4.WORDS",
+      "titleAr": "كلمات خاصة في رواية حفص",
+      "source": "book ch. 14 (كلمات لها وضع خاص) — page check pending",
+      "explanationAr": "من الكلمات الخاصة لحفص من طريق الشاطبية: ضَعْف في الروم 54 في ثلاثة مواضع يجوز فيها فتح الضاد وضمها والفتح مقدم؛ والمصيطرون في الطور 37 بالصاد والسين؛ وبمصيطر في الغاشية 22 بالصاد فقط؛ ويبسط في البقرة 245 وبسطة في الأعراف 69 بالسين؛ وآتان في النمل 36 بياء مفتوحة وصلًا ويوقف عليها بحذف الياء أو إثباتها ساكنة؛ وتأمنا في يوسف 11 بالإشمام أو الروم مع الإدغام؛ ومجراها بالإمالة، وأأعجمي بالتسهيل، ولنسفعا ونحوها يوقف عليها بالألف.",
+      "examples": [
+        {
+          "id": "U8.L4.WORDS.POOL99.E1",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "30:54",
+          "excerptAr": "ضَعْفٍ",
+          "focus": "الضاد",
+          "rule": "فتح أو ضم",
+          "explanation": "الوجهان لحفص والفتح مقدم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.E2",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "52:37",
+          "excerptAr": "الْمُصَيْطِرُونَ",
+          "focus": "الصاد",
+          "rule": "بالصاد أو السين",
+          "explanation": "الوجهان لحفص.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.E3",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "88:22",
+          "excerptAr": "بِمُصَيْطِرٍ",
+          "focus": "الصاد",
+          "rule": "بالصاد فقط",
+          "explanation": "وجه واحد.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.E4",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "2:245",
+          "excerptAr": "وَيَبْصُطُ",
+          "focus": "الصاد المكتوبة",
+          "rule": "تقرأ سينًا",
+          "explanation": "تكتب بالصاد وفوقها سين صغيرة تدل على النطق بالسين.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.E5",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "27:36",
+          "excerptAr": "فَمَا آتَانِ اللَّهُ",
+          "focus": "الياء المحذوفة رسمًا بعد النون",
+          "rule": "تنطق ياء مفتوحة وصلًا",
+          "explanation": "ويوقف على آتان بحذف الياء أو بإثباتها ساكنة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.E6",
+          "topicId": "U8.L4.WORDS",
+          "verseRef": "96:15",
+          "excerptAr": "لَنَسْفَعًا",
+          "focus": "نون التوكيد الخفيفة",
+          "rule": "يوقف بالألف",
+          "explanation": "تكتب تنوينًا وتبدل ألفًا وقفًا.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U8.L4.WORDS.POOL99.Q1",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف يقرأ حفص الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بالصاد"
+            },
+            {
+              "id": "2",
+              "text": "بالسين"
+            },
+            {
+              "id": "3",
+              "text": "بالوجهين"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تقرأ بالسين.",
+          "exampleId": "U8.L4.WORDS.POOL99.E4"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.Q2",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف يقرأ حفص الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بالصاد فقط"
+            },
+            {
+              "id": "2",
+              "text": "بالسين فقط"
+            },
+            {
+              "id": "3",
+              "text": "بالوجهين"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "بمصيطر بالصاد فقط.",
+          "exampleId": "U8.L4.WORDS.POOL99.E3"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.Q3",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف يقرأ حفص الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بالصاد فقط"
+            },
+            {
+              "id": "2",
+              "text": "بالسين فقط"
+            },
+            {
+              "id": "3",
+              "text": "بالصاد والسين"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الوجهان.",
+          "exampleId": "U8.L4.WORDS.POOL99.E2"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.Q4",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الأوجه في ضاد الكلمة المحددة لحفص؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الفتح فقط"
+            },
+            {
+              "id": "2",
+              "text": "الضم فقط"
+            },
+            {
+              "id": "3",
+              "text": "الفتح والضم والفتح مقدم"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "ثلاثة مواضع في الروم 54.",
+          "exampleId": "U8.L4.WORDS.POOL99.E1"
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.Q5",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يوقف على آتان في النمل بالحذف أو بإثبات الياء ساكنة.",
+          "correctAnswer": true,
+          "feedbackAr": "وجهان في الوقف."
+        },
+        {
+          "id": "U8.L4.WORDS.POOL99.Q6",
+          "topicId": "U8.L4.WORDS",
+          "objective": "special_words",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L4.WORDS",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يقرأ حفص بمصيطر في الغاشية بالسين.",
+          "correctAnswer": false,
+          "feedbackAr": "بالصاد فقط."
+        }
+      ]
+    },
+    {
+      "topicId": "U0.L4.AWJUH",
+      "titleAr": "أوجه الاستعاذة والبسملة",
+      "source": "book ch. 03 (التعوذ والبسملة) — page check pending",
+      "explanationAr": "عند الابتداء بأول السورة أربعة أوجه: قطع الجميع، وقطع الأول ووصل الثاني بالثالث، ووصل الأول بالثاني وقطع الثالث، ووصل الجميع. وبين السورتين غير الأنفال والتوبة ثلاثة أوجه جائزة: قطع الجميع، وقطع الأول ووصل الثاني بالثالث، ووصل الجميع؛ ويمنع وصل آخر السورة بالبسملة مع الوقف عليها. وبين الأنفال والتوبة ثلاثة أوجه بلا بسملة: الوقف والسكت والوصل.",
+      "examples": [
+        {
+          "id": "U0.L4.AWJUH.POOL99.E1",
+          "topicId": "U0.L4.AWJUH",
+          "verseRef": "16:98",
+          "excerptAr": "فَإِذَا قَرَأْتَ الْقُرْآنَ فَاسْتَعِذْ بِاللَّهِ",
+          "focus": "الأمر بالاستعاذة",
+          "rule": "استعاذة",
+          "explanation": "الاستعاذة عند إرادة القراءة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U0.L4.AWJUH.POOL99.Q1",
+          "topicId": "U0.L4.AWJUH",
+          "objective": "istiadha_awjuh",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U0.L4.AWJUH",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كم وجهًا عند الابتداء بأول السورة بالاستعاذة والبسملة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ثلاثة"
+            },
+            {
+              "id": "2",
+              "text": "أربعة"
+            },
+            {
+              "id": "3",
+              "text": "وجهان"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الأوجه الأربعة جائزة."
+        },
+        {
+          "id": "U0.L4.AWJUH.POOL99.Q2",
+          "topicId": "U0.L4.AWJUH",
+          "objective": "basmala_awjuh",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U0.L4.AWJUH",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي وجه ممنوع بين سورتين بالبسملة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "قطع الجميع"
+            },
+            {
+              "id": "2",
+              "text": "وصل الجميع"
+            },
+            {
+              "id": "3",
+              "text": "وصل آخر السورة بالبسملة والوقف عليها"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "لأنه يوهم أن البسملة من آخر السورة."
+        },
+        {
+          "id": "U0.L4.AWJUH.POOL99.Q3",
+          "topicId": "U0.L4.AWJUH",
+          "objective": "basmala_awjuh",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U0.L4.AWJUH",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر الأوجه بين الأنفال والتوبة.",
+          "options": [
+            {
+              "id": "1",
+              "text": "الوقف"
+            },
+            {
+              "id": "2",
+              "text": "السكت"
+            },
+            {
+              "id": "3",
+              "text": "الوصل"
+            },
+            {
+              "id": "4",
+              "text": "البسملة"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3"
+          ],
+          "feedbackAr": "لا بسملة في أول التوبة."
+        },
+        {
+          "id": "U0.L4.AWJUH.POOL99.Q4",
+          "topicId": "U0.L4.AWJUH",
+          "objective": "istiadha_awjuh",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U0.L4.AWJUH",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يجوز عند الابتداء بأول السورة وصل الاستعاذة بالبسملة ثم الوقف ثم البدء بالسورة.",
+          "correctAnswer": true,
+          "feedbackAr": "وصل الأول بالثاني وقطع الثالث."
+        }
+      ]
+    },
+    {
+      "topicId": "U10.L2.VERB",
+      "titleAr": "حركة همزة الوصل عند الابتداء",
+      "source": "book ch. 18 (همزة الوصل) — page check pending",
+      "explanationAr": "تفتح همزة الوصل في أل التعريف. وتكسر في الأسماء المسموعة الواردة في القرآن: ابن وابنت وامرؤ وامرأة واثنين واثنتين واسم، وفي مصادر الأفعال الخماسية والسداسية. وفي الفعل تضم إذا كان ثالثه مضمومًا ضمًا لازمًا، وتكسر إذا كان ثالثه مفتوحًا أو مكسورًا أو مضمومًا ضمًا عارضًا كما في امشوا واقضوا وائتوا وابنوا.",
+      "examples": [
+        {
+          "id": "U10.L2.VERB.POOL99.E1",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "17:110",
+          "excerptAr": "ادْعُوا",
+          "focus": "همزة الوصل",
+          "rule": "ضم",
+          "explanation": "ثالث الفعل مضموم ضمًا لازمًا.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E2",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "2:60",
+          "excerptAr": "اضْرِبْ",
+          "focus": "همزة الوصل",
+          "rule": "كسر",
+          "explanation": "ثالث الفعل مكسور.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E3",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "96:1",
+          "excerptAr": "اقْرَأْ",
+          "focus": "همزة الوصل",
+          "rule": "كسر",
+          "explanation": "ثالث الفعل مفتوح.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E4",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "67:15",
+          "excerptAr": "فَامْشُوا",
+          "focus": "همزة الوصل عند الابتداء بامشوا",
+          "rule": "كسر",
+          "explanation": "الضم في الشين عارض، وأصلها الكسر.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E5",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "18:21",
+          "excerptAr": "ابْنُوا",
+          "focus": "همزة الوصل",
+          "rule": "كسر",
+          "explanation": "الضم في النون عارض.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U10.L2.VERB.POOL99.Q1",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_wasl_verb",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "بأي حركة يبدأ بالكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الفتح"
+            },
+            {
+              "id": "2",
+              "text": "الكسر"
+            },
+            {
+              "id": "3",
+              "text": "الضم"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الثالث مضموم ضمًا لازمًا.",
+          "exampleId": "U10.L2.VERB.POOL99.E1"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q2",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_wasl_verb",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "بأي حركة يبدأ بالكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الضم"
+            },
+            {
+              "id": "2",
+              "text": "الكسر"
+            },
+            {
+              "id": "3",
+              "text": "الفتح"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الثالث مكسور.",
+          "exampleId": "U10.L2.VERB.POOL99.E2"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q3",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_wasl_verb",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "بأي حركة يبدأ بكلمة امشوا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الضم"
+            },
+            {
+              "id": "2",
+              "text": "الفتح"
+            },
+            {
+              "id": "3",
+              "text": "الكسر"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الضمة عارضة فلا يعتد بها.",
+          "exampleId": "U10.L2.VERB.POOL99.E4"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q4",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_wasl_noun",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "بأي حركة يبدأ بكلمة اسم؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الكسر"
+            },
+            {
+              "id": "2",
+              "text": "الضم"
+            },
+            {
+              "id": "3",
+              "text": "الفتح"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "من الأسماء المسموعة المبدوءة بهمزة وصل مكسورة."
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q5",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_wasl_verb",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يبدأ بهمزة الوصل في ابنوا بالضم.",
+          "correctAnswer": false,
+          "feedbackAr": "تكسر لأن ضم النون عارض."
+        }
+      ]
+    },
+    {
+      "topicId": "U9.L1.TYPES",
+      "titleAr": "أنواع الوقف",
+      "source": "book ch. 15 (الوقف والابتداء) — page check pending",
+      "explanationAr": "الوقف أربعة أنواع: اختباري يكون عند سؤال الممتحن أو تعليم المتعلم، وانتظاري يكون على الكلمة لاستيفاء أوجه القراءات فيها، واضطراري يكون عند ضيق النفس أو العطاس ونحوه، واختياري يقصده القارئ باختياره وهو التام والكافي والحسن والقبيح.",
+      "examples": [],
+      "questions": [
+        {
+          "id": "U9.L1.TYPES.POOL99.Q1",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_types",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الوقف الذي يكون عند تعليم المتعلم كيفية الوقف على كلمة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الاختياري"
+            },
+            {
+              "id": "2",
+              "text": "الاختباري"
+            },
+            {
+              "id": "3",
+              "text": "الانتظاري"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "يقصد به الاختبار أو التعليم."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q2",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_types",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الوقف الذي يكون لاستيفاء أوجه القراءات في الكلمة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الانتظاري"
+            },
+            {
+              "id": "2",
+              "text": "الاضطراري"
+            },
+            {
+              "id": "3",
+              "text": "التام"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "ينتظر فيه القارئ استيفاء الأوجه."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q3",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_types",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر أقسام الوقف الاختياري.",
+          "options": [
+            {
+              "id": "1",
+              "text": "التام"
+            },
+            {
+              "id": "2",
+              "text": "الكافي"
+            },
+            {
+              "id": "3",
+              "text": "الحسن"
+            },
+            {
+              "id": "4",
+              "text": "الاضطراري"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3"
+          ],
+          "feedbackAr": "والرابع القبيح؛ أما الاضطراري فنوع مستقل."
+        },
+        {
+          "id": "U9.L1.TYPES.POOL99.Q4",
+          "topicId": "U9.L1.TYPES",
+          "objective": "waqf_types",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U9.L1.TYPES",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الوقف الاضطراري يكون بسبب انقطاع النفس أو عارض.",
+          "correctAnswer": true,
+          "feedbackAr": "ثم يبتدئ القارئ من موضع مناسب."
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L10.LEVELS",
+      "titleAr": "مراتب الغنة",
+      "source": "book ch. 10 pp. 306–310 (أزمنة الغنن) — page check pending",
+      "explanationAr": "للغنة أربع مراتب: أكمل ما تكون في النون والميم المشددتين ومنه المدغم إدغامًا كاملًا بغنة؛ ثم كاملة في المخفى من إخفاء حقيقي وإقلاب وإخفاء شفوي؛ ثم ناقصة في النون والميم الساكنتين المظهرتين؛ ثم أنقص ما تكون في النون والميم المتحركتين المخففتين. ويحافظ على التناسب بين هذه المراتب في كل سرعة.",
+      "examples": [
+        {
+          "id": "U3.L10.LEVELS.POOL99.E1",
+          "topicId": "U3.L10.LEVELS",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "focus": "النون المشددة",
+          "rule": "أكمل ما تكون",
+          "explanation": "نون مشددة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.E2",
+          "topicId": "U3.L10.LEVELS",
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "focus": "النون المخفاة",
+          "rule": "كاملة",
+          "explanation": "إخفاء حقيقي.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.E3",
+          "topicId": "U3.L10.LEVELS",
+          "verseRef": "1:7",
+          "excerptAr": "أَنْعَمْتَ",
+          "focus": "النون الساكنة المظهرة",
+          "rule": "ناقصة",
+          "explanation": "إظهار حلقي.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.E4",
+          "topicId": "U3.L10.LEVELS",
+          "verseRef": "1:7",
+          "excerptAr": "الْمَغْضُوبِ",
+          "focus": "الميم المتحركة",
+          "rule": "أنقص ما تكون",
+          "explanation": "ميم متحركة مخففة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L10.LEVELS.POOL99.Q1",
+          "topicId": "U3.L10.LEVELS",
+          "objective": "ghunna_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L10.LEVELS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة الغنة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "أكمل ما تكون"
+            },
+            {
+              "id": "2",
+              "text": "كاملة"
+            },
+            {
+              "id": "3",
+              "text": "ناقصة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الغنة في المخفى كاملة.",
+          "exampleId": "U3.L10.LEVELS.POOL99.E2"
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.Q2",
+          "topicId": "U3.L10.LEVELS",
+          "objective": "ghunna_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L10.LEVELS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة الغنة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "كاملة"
+            },
+            {
+              "id": "2",
+              "text": "ناقصة"
+            },
+            {
+              "id": "3",
+              "text": "أكمل ما تكون"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "النون الساكنة المظهرة.",
+          "exampleId": "U3.L10.LEVELS.POOL99.E3"
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.Q3",
+          "topicId": "U3.L10.LEVELS",
+          "objective": "ghunna_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L10.LEVELS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي موضع غنته أنقص ما تكون؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "النون المشددة"
+            },
+            {
+              "id": "2",
+              "text": "النون المخفاة"
+            },
+            {
+              "id": "3",
+              "text": "النون المتحركة المخففة"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "أدنى المراتب."
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.Q4",
+          "topicId": "U3.L10.LEVELS",
+          "objective": "ghunna_levels",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L10.LEVELS",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الغنة في الإقلاب من مرتبة الكاملة.",
+          "correctAnswer": true,
+          "feedbackAr": "الإقلاب إخفاء للميم المقلوبة."
+        }
+      ]
+    },
+    {
+      "topicId": "U6.SUMMARY",
+      "titleAr": "مقادير المدود لحفص وأقوى الأسباب",
+      "source": "book ch. 11 — page check pending",
+      "explanationAr": "مقادير المدود لحفص من طريق الشاطبية: الطبيعي حركتان؛ والمتصل أربع أو خمس ويجوز ست وقفًا إذا تطرفت الهمزة؛ والمنفصل أربع أو خمس؛ والعارض للسكون حركتان أو أربع أو ست؛ واللازم ست؛ والبدل حركتان؛ واللين العارض حركتان أو أربع أو ست؛ والصلة الكبرى كالمنفصل والصغرى حركتان؛ والعوض حركتان. وإذا اجتمع سببان عمل بالأقوى، وترتيبها من الأقوى: اللازم ثم المتصل ثم العارض للسكون ثم المنفصل ثم البدل.",
+      "examples": [],
+      "questions": [
+        {
+          "id": "U6.SUMMARY.POOL99.Q1",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_amounts",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مقدار المد المنفصل لحفص من طريق الشاطبية؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "حركتان فقط"
+            },
+            {
+              "id": "2",
+              "text": "أربع أو خمس"
+            },
+            {
+              "id": "3",
+              "text": "ست فقط"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "القصر في المنفصل ليس من طريق الشاطبية."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q2",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_hierarchy",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي المدود أقوى سببًا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "المنفصل"
+            },
+            {
+              "id": "2",
+              "text": "البدل"
+            },
+            {
+              "id": "3",
+              "text": "اللازم"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "اللازم أقوى المدود."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q3",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_amounts",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مقدار الصلة الكبرى لحفص من طريق الشاطبية؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "حركتان"
+            },
+            {
+              "id": "2",
+              "text": "أربع أو خمس كالمنفصل"
+            },
+            {
+              "id": "3",
+              "text": "ست حركات"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تلحق بالمنفصل."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q4",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_amounts",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يجوز في المد المتصل ست حركات عند الوقف على همز متطرف كالسماء.",
+          "correctAnswer": true,
+          "feedbackAr": "مع جواز التوسط وفويقه."
+        },
+        {
+          "id": "U6.SUMMARY.POOL99.Q5",
+          "topicId": "U6.SUMMARY",
+          "objective": "madd_hierarchy",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U6.SUMMARY",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "المد المنفصل أقوى من المد المتصل.",
+          "correctAnswer": false,
+          "feedbackAr": "المتصل أقوى لاجتماع حرف المد والهمز في كلمة."
+        }
+      ]
+    },
+    {
+      "topicId": "U4.L1.LIST",
+      "titleAr": "من أبرز أخطاء نطق الحروف",
+      "source": "book ch. 08 (أبرز الأخطاء) — content must be aligned with the book list",
+      "explanationAr": "من الأخطاء الشائعة: نطق الضاد ظاء أو دالًا مفخمة، وترقيق الطاء والقاف، وتفخيم الحروف المستفلة إذا جاورت المستعلية، ونطق الثاء سينًا والذال زايًا والظاء زايًا مفخمة، وإبدال الحاء هاء والعين همزة، وقلقلة الكاف والتاء، والمبالغة في تكرير الراء، وإشباع الحركات حتى تتولد حروف مد، واختلاسها.",
+      "examples": [],
+      "questions": [
+        {
+          "id": "U4.L1.LIST.POOL99.Q1",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الخطأ في نطق الضاد ظاء؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "خطأ في الحركة"
+            },
+            {
+              "id": "2",
+              "text": "تبديل حرف بحرف"
+            },
+            {
+              "id": "3",
+              "text": "خطأ في الوقف"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "لكل منهما مخرج مستقل."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q2",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي الحرفين لا يقلقل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "القاف"
+            },
+            {
+              "id": "2",
+              "text": "الكاف"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الكاف ليست من قطب جد، وقلقلتها خطأ."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q3",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "ترقيق الطاء من الأخطاء الشائعة لأنها مستعلية مطبقة.",
+          "correctAnswer": true,
+          "feedbackAr": "تفخم الطاء دائمًا."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q4",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "المبالغة في تكرير الراء من كمال الأداء.",
+          "correctAnswer": false,
+          "feedbackAr": "يجب إخفاء التكرير لا إظهاره."
+        }
+      ]
+    }
+  ]
+}

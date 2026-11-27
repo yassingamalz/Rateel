@@ -90,13 +90,14 @@
       "text": "ما حكم النون في أول المقطع؟",
       "mediaRequest": {
         "reciterCandidate": "Mahmoud Khalil Al-Husary",
-        "verseRef": "97:5",
+        "verseRef": "97:3",
         "excerptCandidate": "مِنْ أَلْفِ شَهْرٍ",
         "focus": "نون من",
         "context": "وصل من بألف",
         "clipStartMs": null,
         "clipEndMs": null,
-        "assetId": null
+        "assetId": null,
+        "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
       },
       "displayPolicy": {
         "hideVerseBeforeAnswer": true,
@@ -210,13 +211,14 @@
       "text": "في أي حرف أدغمت النون في المقطع المسموع؟",
       "mediaRequest": {
         "reciterCandidate": "Mahmoud Khalil Al-Husary",
-        "verseRef": "2:249",
-        "excerptCandidate": "مِنْ نَهَرٍ",
+        "verseRef": "16:53",
+        "excerptCandidate": "مِنْ نِعْمَةٍ",
         "focus": "نون من",
         "context": "وصل الكلمتين",
         "clipStartMs": null,
         "clipEndMs": null,
-        "assetId": null
+        "assetId": null,
+        "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
       },
       "displayPolicy": {
         "hideVerseBeforeAnswer": true,

@@ -279,10 +279,11 @@
       "explanationAr": "تظهر الميم الساكنة قبل جميع الحروف غير الباء والميم، ويعتنى بإظهارها عند الفاء والواو.",
       "examples": [
         {
-          "verseRef": "106:4",
-          "excerptAr": "وَآمَنَهُمْ مِنْ",
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ غَيْرِ",
           "script": "illustrative_imlai_pending_uthmani_verification",
-          "audioStatus": "pending"
+          "audioStatus": "pending",
+          "reviewNote": "2026-11-27 review: previous example did not illustrate this rule; replaced."
         }
       ],
       "activities": {

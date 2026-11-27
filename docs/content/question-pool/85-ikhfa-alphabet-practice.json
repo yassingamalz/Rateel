@@ -79,19 +79,21 @@
     },
     {
       "id": "U5.L7.POOL85.E10",
-      "verseRef": "4:114",
+      "verseRef": "2:263",
       "excerptAr": "مِنْ صَدَقَةٍ",
       "targetLetter": "ص",
       "context": "nun",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "U5.L7.POOL85.E11",
-      "verseRef": "2:198",
+      "verseRef": "7:39",
       "excerptAr": "مِنْ فَضْلٍ",
       "targetLetter": "ف",
       "context": "nun",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     }
   ],
   "questions": [

@@ -183,10 +183,11 @@
       "explanationAr": "عند وصل كلمتين قد يسقط لفظ همزة الوصل فيلتقي ساكنان؛ ويعالج ذلك بالحذف أو التحريك بحسب الموضع والرواية.",
       "examples": [
         {
-          "verseRef": "112:1",
-          "excerptAr": "قُلْ هُوَ اللَّهُ",
+          "verseRef": "17:110",
+          "excerptAr": "قُلِ ادْعُوا",
           "script": "illustrative_imlai_pending_uthmani_verification",
-          "audioStatus": "pending"
+          "audioStatus": "pending",
+          "reviewNote": "2026-11-27 review: previous example did not illustrate this rule; replaced."
         }
       ],
       "activities": {

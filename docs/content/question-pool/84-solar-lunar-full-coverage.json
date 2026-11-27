@@ -42,11 +42,12 @@
     {
       "id": "X-LAM-02.POOL84.E5",
       "topicId": "X-LAM-02",
-      "verseRef": "2:19",
+      "verseRef": "2:20",
       "excerptAr": "الْبَرْقُ",
       "nextLetter": "ب",
       "rule": "قمرية",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "X-LAM-02.POOL84.E6",
@@ -321,11 +322,12 @@
     {
       "id": "X-LAM-02.POOL84.E36",
       "topicId": "X-LAM-02",
-      "verseRef": "2:282",
+      "verseRef": "42:9",
       "excerptAr": "الْوَلِيُّ",
       "nextLetter": "و",
       "rule": "قمرية",
-      "verification": "pending_uthmani_reference_context"
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
     },
     {
       "id": "X-LAM-02.POOL84.E37",

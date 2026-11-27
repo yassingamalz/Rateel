@@ -10,11 +10,12 @@
       "examples": [
         {
           "id": "U5.L2.E1",
-          "verseRef": "97:5",
+          "verseRef": "97:3",
           "excerptAr": "مِنْ أَلْفِ",
           "focus": "الإظهار",
           "script": "imlai_candidate",
-          "verification": "pending_uthmani_and_audio"
+          "verification": "pending_uthmani_and_audio",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L2.E2",
@@ -161,11 +162,12 @@
       "examples": [
         {
           "id": "U5.L3.E1",
-          "verseRef": "97:5",
+          "verseRef": "97:3",
           "excerptAr": "مِنْ أَلْفِ",
           "focus": "ء",
           "script": "imlai_candidate",
-          "verification": "pending_uthmani_and_audio"
+          "verification": "pending_uthmani_and_audio",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
         },
         {
           "id": "U5.L3.E2",
