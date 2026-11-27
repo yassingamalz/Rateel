@@ -1157,8 +1157,8 @@
     {
       "topicId": "U8.L4.WORDS",
       "titleAr": "كلمات خاصة في رواية حفص",
-      "source": "book ch. 14 (كلمات لها وضع خاص) — page check pending",
-      "explanationAr": "من الكلمات الخاصة لحفص من طريق الشاطبية: ضَعْف في الروم 54 في ثلاثة مواضع يجوز فيها فتح الضاد وضمها والفتح مقدم؛ والمصيطرون في الطور 37 بالصاد والسين؛ وبمصيطر في الغاشية 22 بالصاد فقط؛ ويبسط في البقرة 245 وبسطة في الأعراف 69 بالسين؛ وآتان في النمل 36 بياء مفتوحة وصلًا ويوقف عليها بحذف الياء أو إثباتها ساكنة؛ وتأمنا في يوسف 11 بالإشمام أو الروم مع الإدغام؛ ومجراها بالإمالة، وأأعجمي بالتسهيل، ولنسفعا ونحوها يوقف عليها بالألف.",
+      "source": "book ch. 14 pp. 396–420 — checked against the book 2026-11-27",
+      "explanationAr": "من الكلمات الخاصة لحفص من طريق الشاطبية: ضعف وضعفا في الروم 54 بفتح الضاد وضمها، وضبطتا في المصحف بالفتح؛ والمصيطرون في الطور 37 بالصاد والسين والصاد أشهر؛ وبمصيطر في الغاشية 22 بالصاد فقط؛ ويبسط في البقرة 245 وبسطة في الأعراف 69 بالسين؛ وآتان في النمل 36 بياء مفتوحة وصلًا ويوقف عليها بحذف الياء أو إثباتها ساكنة؛ وتأمنا في يوسف 11 بالإشمام أو الروم مع الإدغام؛ ومجراها بالإمالة، وأأعجمي بالتسهيل، ولنسفعا ونحوها يوقف عليها بالألف.",
       "examples": [
         {
           "id": "U8.L4.WORDS.POOL99.E1",
@@ -1167,7 +1167,7 @@
           "excerptAr": "ضَعْفٍ",
           "focus": "الضاد",
           "rule": "فتح أو ضم",
-          "explanation": "الوجهان لحفص والفتح مقدم.",
+          "explanation": "الوجهان لحفص، والمصحف مضبوط بالفتح.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         },
         {
@@ -1177,7 +1177,7 @@
           "excerptAr": "الْمُصَيْطِرُونَ",
           "focus": "الصاد",
           "rule": "بالصاد أو السين",
-          "explanation": "الوجهان لحفص.",
+          "explanation": "الوجهان لحفص، والنطق بالصاد أشهر.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         },
         {
@@ -1300,7 +1300,7 @@
             }
           ],
           "correctAnswer": "3",
-          "feedbackAr": "الوجهان.",
+          "feedbackAr": "الوجهان، والصاد أشهر.",
           "exampleId": "U8.L4.WORDS.POOL99.E2"
         },
         {
@@ -1323,11 +1323,11 @@
             },
             {
               "id": "3",
-              "text": "الفتح والضم والفتح مقدم"
+              "text": "الفتح والضم"
             }
           ],
           "correctAnswer": "3",
-          "feedbackAr": "ثلاثة مواضع في الروم 54.",
+          "feedbackAr": "الوجهان في المواضع الثلاثة، والمصحف مضبوط بالفتح.",
           "exampleId": "U8.L4.WORDS.POOL99.E1"
         },
         {
@@ -2839,6 +2839,123 @@
           ],
           "correctAnswer": "1",
           "feedbackAr": "شديدان في أولهما مهموسان في آخرهما."
+        }
+      ]
+    },
+    {
+      "topicId": "U8.L3.NABR",
+      "titleAr": "مسائل النبر في تلاوة القرآن",
+      "source": "book ch. 14 pp. 403–410 — checked against the book 2026-11-27",
+      "explanationAr": "النبر في علم الأصوات الضغط على مقطع أو حرف بحيث يكون صوته أعلى قليلًا مما جاوره. ومسائله لسبب لفظي خمس: عند الوقف على الحرف المشدد، ويستثنى النون والميم المشددتان وحرف القلقلة المشدد؛ وعند نطق الواو والياء المشددتين؛ وعند الانتقال من حرف مد إلى الحرف الأول من المشدد؛ وعند الوقف على همزة مسبوقة بحرف مد أو لين؛ وعند سقوط ألف التثنية أو واو الجماعة للتخلص من التقاء الساكنين إذا التبس نطقه بالمفرد، في ذاقا الشجرة واستبقا الباب وقالا الحمد لله وصالح المؤمنين. والمشافهة تضبط ذلك.",
+      "examples": [
+        {
+          "id": "U8.L3.NABR.POOL99.E1",
+          "topicId": "U8.L3.NABR",
+          "verseRef": "7:22",
+          "excerptAr": "ذَاقَا الشَّجَرَةَ",
+          "focus": "ألف التثنية الساقطة لفظًا",
+          "rule": "نبر",
+          "explanation": "لئلا يلتبس بالمفرد ذاق.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L3.NABR.POOL99.E2",
+          "topicId": "U8.L3.NABR",
+          "verseRef": "2:255",
+          "excerptAr": "الْحَيُّ",
+          "focus": "الياء المشددة عند الوقف",
+          "rule": "نبر",
+          "explanation": "الوقف على حرف مشدد.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U8.L3.NABR.POOL99.E3",
+          "topicId": "U8.L3.NABR",
+          "verseRef": "69:1",
+          "excerptAr": "الْحَاقَّةُ",
+          "focus": "الانتقال من الألف إلى القاف المشددة",
+          "rule": "نبر",
+          "explanation": "انتقال من حرف مد إلى أول المشدد.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U8.L3.NABR.POOL99.Q1",
+          "topicId": "U8.L3.NABR",
+          "objective": "nabr",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L3.NABR",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "لماذا ينبر القارئ في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لئلا يلتبس بالمفرد"
+            },
+            {
+              "id": "2",
+              "text": "لأنه حرف قلقلة"
+            },
+            {
+              "id": "3",
+              "text": "لأنه مد لازم"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "سقطت ألف التثنية لفظًا للتخلص من الساكنين.",
+          "exampleId": "U8.L3.NABR.POOL99.E1"
+        },
+        {
+          "id": "U8.L3.NABR.POOL99.Q2",
+          "topicId": "U8.L3.NABR",
+          "objective": "nabr",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L3.NABR",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "يشرع النبر عند الوقف على النون المشددة نحو ولكن.",
+          "correctAnswer": false,
+          "feedbackAr": "الغنة المطولة تشعر بالتشديد فلا حاجة إلى النبر."
+        },
+        {
+          "id": "U8.L3.NABR.POOL99.Q3",
+          "topicId": "U8.L3.NABR",
+          "objective": "nabr",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U8.L3.NABR",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "لا نبر عند الوقف على حرف القلقلة المشدد نحو الحق.",
+          "correctAnswer": true,
+          "feedbackAr": "الحرفان ظاهران: الأول مدغم والثاني مقلقل."
+        },
+        {
+          "id": "U8.L3.NABR.POOL99.Q4",
+          "topicId": "U8.L3.NABR",
+          "objective": "nabr",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U8.L3.NABR",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي هذه من مواضع النبر؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الوقف على همزة مسبوقة بمد نحو السماء"
+            },
+            {
+              "id": "2",
+              "text": "الوقف على الدال في أحد"
+            },
+            {
+              "id": "3",
+              "text": "الإخفاء قبل الشين"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الوقف على همزة مسبوقة بحرف مد أو لين."
         }
       ]
     }
