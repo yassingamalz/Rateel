@@ -43,6 +43,7 @@ Remember to connect these to real data (backend or app progress) before release.
 | 07 Video lesson | the **sections** of every video: 3 equal parts (`videoSectionCount`); planned data `sections: [{start, end}]` per video lesson | `app_flutter/lib/lessons/video_lesson_page.dart` |
 | 12 Daily challenges | the 7 challenges (Angular list), completed count and streak live in memory only; completion only by the review long press; no midnight reset; the 03 streak chip shows the same mock streak. To wire: completion on return from the activity, reset, saving (plan Q3) | `app_flutter/lib/challenges/challenge_data.dart` |
 | 22 Listening lesson | two mock lessons: the rule lesson «الاستماع: الغنة» (سورة الناس 1–6 + الكوثر 1, then 3 questions) and the quiz «اختبار الاستماع» (الكوثر, 5 questions); Husary, 9 ayat bundled, word times by hand, placed in the unit «النون المشددة» (no lessons in the data) | `app_flutter/assets/data/listening/`, `lib/lessons/lesson_data.dart` (`_mockLessons`) |
+| 27 Badges | the 12 badges (names, requirements, rewards chosen by Claude), their progress (4 earned, M05 34/50…) live in memory only; the celebration is played by `badgeEarned` (review aid `?earn=5`) | `app_flutter/lib/badges/badge_data.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
 
 ## Data problems found (fix in the lesson data before release)
@@ -61,7 +62,7 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; started 2026-11-27, then **postponed** by the owner (BACKLOG) |
 | 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | **built inside 10** (results in the card, approved 2026-11-26) |
 | 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
-| 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13; reference from the owner `screens/27-badges/reference.webp`; **started 2026-11-27** on `flutter/27-badges` |
+| 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13; reference from the owner `screens/27-badges/reference.webp`; **built 2026-11-27** on `flutter/27-badges` (waiting for the owner's review); mock data |
 | 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type; reference from the owner `screens/28-help-overlay/reference.webp` (2026-11-27); **postponed** (future improvement, BACKLOG) |
 | 29 | Profile (name, avatar, level, streak) | the leaderboard shows the user; no screen yet | may merge with 23 |
 | 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |

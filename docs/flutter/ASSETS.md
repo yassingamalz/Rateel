@@ -243,3 +243,15 @@ Comparison of the reference's header assets with the library (owner, 2026-11-26)
 | Headphones emblem (H1) | **placeholder**: copy of `ui/lessons/listen.webp` | `assets/ui/listening/headphones.webp` | to replace with the owner's H1 (`prompts/22-listening-lesson/images-v1.txt`) |
 Reused: `ui/reading/{arch,badge_fill,badge_line,lattice_tile}.webp`, `reading/{crescent,star}.svg`, `decor/mosque.webp`.
 | Guided voice, 8 lines | Gemini TTS `gemini-3.1-flash-tts-preview`, voice Orus, calm style (owner's F) | `assets/audio/narration/orus/*.mp3` + `manifest.json` | `tools/flutter-review/gen_listening_narration.py`; texts with full tashkīl, each take transcribed |
+
+## Badges (screen 27, 2026-11-27)
+Sources: `docs/design-assets/badges/` (owner's ChatGPT medals M01–M12 + locked L1 on magenta; `dark-green/` = second engraving
+of M01–M12). Processing: `tools/assets/badge_assets.py` (same magenta key as the leaderboard), **one common trim box** for all
+medals so they line up when swapped, 512 px, WebP.
+| Asset | Source | App copy | Note |
+|---|---|---|---|
+| Earned medals M01–M12 | `badges/m<nn>_*.png` | `ui/badges/m<nn>.webp` | brown engraving, default (as the reference) |
+| Earned medals, dark green | `badges/dark-green/m<nn>_*.png` | `ui/badges/green/m<nn>.webp` | off by default (`?medals=green`), owner chooses |
+| Locked medal L1 | `badges/l1_locked.png` | `ui/badges/l1.webp` | shared by every locked badge, grid and detail panel |
+Reused from 11: `ui/leaderboard/{ribbon,lattice,coins_gold}.webp`.
+

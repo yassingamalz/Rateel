@@ -219,7 +219,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   height: u * 19, // reference: full to ≈ 15u, gone by the panel
                   child: Opacity(
                     opacity: _iv(0, 0.35),
-                    child: _Lattice(u: u),
+                    child: LeaderLattice(u: u),
                   ),
                 ),
                 Positioned(
@@ -230,7 +230,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   height: u * 13.5,
                   child: Opacity(
                     opacity: _iv(0, 0.2),
-                    child: _Ribbon(u: u),
+                    child: LeaderRibbon(u: u),
                   ),
                 ),
                 Positioned.fromRect(
@@ -285,7 +285,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         ],
       ),
       child: CustomPaint(
-        foregroundPainter: _GoldRimPainter(u: u, radius: u * 5.3),
+        foregroundPainter: GoldRimPainter(u: u, radius: u * 5.3),
         child: ClipRRect(
           borderRadius: radius,
           child: ColoredBox(
@@ -455,8 +455,8 @@ class _DragScroll extends ScrollBehavior {
 /// Gold rim as the reference (owner 2026-11-24, K1): ≈ 0.6u, dark-gold
 /// edges #A89C48, bright core #FCE75A, centre #FFF878; the pinned bar's rim
 /// is brighter ([bright]: #F8F27D / #FFFFA8).
-class _GoldRimPainter extends CustomPainter {
-  _GoldRimPainter({
+class GoldRimPainter extends CustomPainter {
+  GoldRimPainter({
     required this.u,
     required this.radius,
     this.extra = 0,
@@ -513,7 +513,7 @@ class _GoldRimPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_GoldRimPainter old) =>
+  bool shouldRepaint(GoldRimPainter old) =>
       old.u != u || old.radius != radius || old.extra != extra;
 }
 
@@ -713,7 +713,7 @@ class _PlayerRow extends StatelessWidget {
               ? 0.0
               : math.sin(h.value * math.pi * 2).abs();
           return CustomPaint(
-            foregroundPainter: _GoldRimPainter(
+            foregroundPainter: GoldRimPainter(
               u: u,
               radius: radius,
               extra: v,
@@ -1187,7 +1187,7 @@ class _UserBar extends StatelessWidget {
         ],
       ),
       child: CustomPaint(
-        foregroundPainter: _GoldRimPainter(u: u, radius: radius, bright: true),
+        foregroundPainter: GoldRimPainter(u: u, radius: radius, bright: true),
         child: _RowContent(
           u: u,
           player: player,
@@ -1468,9 +1468,12 @@ class _Tabs extends StatelessWidget {
   }
 }
 
-class _Ribbon extends StatelessWidget {
-  const _Ribbon({required this.u});
+class LeaderRibbon extends StatelessWidget {
+  const LeaderRibbon({super.key, required this.u, this.title = 'المتصدرين'});
   final double u;
+
+  /// Title arched in the ribbon (screen 27 reuses the ribbon: «الأوسمة»).
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -1484,6 +1487,7 @@ class _Ribbon extends StatelessWidget {
         ),
         CustomPaint(
           painter: _RibbonTitle(
+            title: title,
             u: u,
             dpr: MediaQuery.devicePixelRatioOf(context),
           ),
@@ -1498,11 +1502,13 @@ class _Ribbon extends StatelessWidget {
 /// along the curve (≈ 7° at the ends). The title is drawn once into an image
 /// and mapped on a triangle mesh along the arch (no strip seams).
 class _RibbonTitle extends CustomPainter {
-  _RibbonTitle({required this.u, required this.dpr});
+  _RibbonTitle({required this.title, required this.u, required this.dpr});
+  final String title;
   final double u;
   final double dpr;
 
   static ui.Image? _image;
+  static String _imageTitle = '';
   static double _imageKey = -1;
 
   @override
@@ -1510,7 +1516,7 @@ class _RibbonTitle extends CustomPainter {
     final fs = u * 5.9;
     final tp = TextPainter(
       text: TextSpan(
-        text: 'المتصدرين',
+        text: title,
         style: TextStyle(
           fontFamily: 'ReadexPro',
           fontSize: fs,
@@ -1534,7 +1540,7 @@ class _RibbonTitle extends CustomPainter {
     final w = tp.width + pad * 2;
     final h = tp.height + pad * 2;
     final key = u * 1000 + dpr;
-    if (_image == null || _imageKey != key) {
+    if (_image == null || _imageKey != key || _imageTitle != title) {
       final rec = ui.PictureRecorder();
       final c = Canvas(rec)..scale(dpr);
       tp.paint(c, Offset(pad, pad));
@@ -1543,6 +1549,7 @@ class _RibbonTitle extends CustomPainter {
         (h * dpr).ceil(),
       );
       _imageKey = key;
+      _imageTitle = title;
     }
     final image = _image!;
     final half = tp.width / 2;
@@ -1593,7 +1600,8 @@ class _RibbonTitle extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_RibbonTitle old) => old.u != u || old.dpr != dpr;
+  bool shouldRepaint(_RibbonTitle old) =>
+      old.u != u || old.dpr != dpr || old.title != title;
 }
 
 /// Vertical centre of the title's middle in the ribbon box (fraction of its
@@ -1602,8 +1610,8 @@ double titleCenter = 0.39;
 
 /// Gold ogee lattice (A2), tiled and faded out downwards (reference: gone by
 /// y ≈ 31u). The asset's black is keyed to alpha when it is imported.
-class _Lattice extends StatelessWidget {
-  const _Lattice({required this.u});
+class LeaderLattice extends StatelessWidget {
+  const LeaderLattice({super.key, required this.u});
   final double u;
 
   @override

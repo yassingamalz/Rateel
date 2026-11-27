@@ -94,3 +94,14 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.
+
+## Screen 27, badges (built 2026-11-27, waiting for the owner)
+- [ ] **Owner's review** of look, motion and the celebration (`?earn=5`); critic only after the owner's yes (phone size).
+- [ ] **Choose the medal engraving**: brown (default) or dark green (`?medals=green`); a locked medal in green if wanted.
+- [ ] **Unearned badge in the detail panel** shows the locked medal; the reference shows a gold one: confirm (DECISIONS).
+- [ ] **Wire the badges to real progress** (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a
+      requirement is reached; save progress; M09 needs screen 09 (recordings). Today: mock, in memory.
+- [ ] Rail count bubble of «الإنجازات» (5) is a demo value: use the number of earned badges.
+- [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
+- [ ] Add the earned reward (coins) to the points when real data exists; the «5K» style rewards are display only.
+

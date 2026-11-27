@@ -243,6 +243,21 @@ class RateelColors {
   /// warmer, slightly darker gold (#FCBA2D → #F3B02E, #FED210 → #F6BB2C).
   static const leaderArtTone = Color(0xFFF8E6D8);
 
+  // Screen 27, badges (measured on 27-badges/reference.webp). Panels use the
+  // screen-11 gold rim (leaderRim*); tiles use the screen-14 rim (soonCardRim).
+  static const badgePanelTop = Color(0xFF07361F); // left panel, lit top
+  static const badgePanelMid = Color(0xFF033421);
+  static const badgePanelBottom = Color(0xFF012F1D);
+  static const badgeTileFill = Color(0xFF05311E);
+  static const badgeTileRim = Color(0xFF4D8169); // reference; token tileRim #1C4E38 is darker
+  static const badgeTileGlow = Color(0xFF29491C); // olive halo of the selected tile
+  static const badgeRewardTop = Color(0xFF0F401D);
+  static const badgeRewardBottom = Color(0xFF0C3C1E);
+  static const badgeRewardRim = Color(0xFFB9A646);
+  static const badgeBarTrack = Color(0xFF053920);
+  static const badgeBarRim = Color(0xFF8E9A55);
+  static const badgeArchLine = Color(0xFFD9C455); // faint inner arch, drawn at 28%
+
   // Screen 14, coming soon (measured on 14-in-arrivo.webp).
   /// Darkens the owner's background (#02331F-ish) to the reference (#062A21).
   static const soonBgTone = Color(0xFFE0D8D8);

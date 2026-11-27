@@ -1,5 +1,9 @@
 # Screen 27: badges (الأوسمة)
 
+**Status (2026-11-27): built**, waiting for the owner's review. Code: `app_flutter/lib/badges/`; medals keyed by
+`tools/assets/badge_assets.py`; tests `app_flutter/test/badges_test.dart`; captures `tools/flutter-review/badges-capture.js`,
+`badges-earn-frames.js`. Two medal engravings arrived (brown = default, dark green via `?medals=green`).
+
 Branch `flutter/27-badges` (2026-11-27), from the screen-24 branch (it carries the refreshed app screenshots and the
 owner's references). Reference from the owner: `27-badges/reference.webp` (1843×853). Angular origin:
 `gamification/achievements` (`badges-collection`, `achievement-details-modal`, 5 achievements bronze → diamond in
