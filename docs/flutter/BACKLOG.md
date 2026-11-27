@@ -74,7 +74,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
 
 ## Screen 22, listening lesson (approved 2026-11-27)
-- [ ] **Headphones asset H1** from the owner (placeholder today: the 06 «listen» icon).
+- [ ] **Headphones asset H1** from the owner (placeholder today: the 06 «listen» icon). Prompt **H1 v2** given in the chat
+      2026-11-27 (`prompts/22-listening-lesson/images-v2.txt`); when it arrives: key the magenta, `HeaderSpec.emblem` of 22.
 - [ ] **Audio for the release** (owner, Q1): stream the ayat from everyayah.com (or another host) with the **reciter of
       the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
@@ -95,8 +96,10 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       `rule.colour`).
 
 ## Screen 01, splash (merged into `master` 2026-11-26)
-- [ ] Owner review on a physical phone, including the native launch handoff. Browser capture:
-      [startup-phone.mp4](screens/01-splash/startup-phone.mp4).
+- [x] Owner review on a physical phone, including the native launch handoff: **OK** (owner, 2026-11-27).
+- [ ] **Longer splash, heartbeat** (owner, 2026-11-27, future): today it is a little fast. Let the «رتل» logo light up
+      (glow pulse) **at least twice**, like a heartbeat, before the fade into the courses, so the start feels calm and
+      deliberate. Motion only (`lib/splash/startup_screen.dart`, `_glow`), same look.
 - [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.
