@@ -23,3 +23,4 @@ approved screen (same review query parameters as below).
 | `app-22-listening-rule.webp` | 22 rule lesson, a word lit | `?lessons=1,1&openLesson=0&listenAt=0.6` |
 | `app-22-listening-question.webp` | 22 quiz, right answer feedback | `?lessons=1,1&openLesson=1&listenState=ok` |
 | `app-23-settings.webp` | 23 settings | `?section=6` |
+| `app-27-badges.webp` | 27 badges (added 2026-11-27 for screen 13) | `?section=4` |

@@ -1,0 +1,34 @@
+Screen 13, achievements (الإنجازات): ChatGPT asset prompts v1 (2026-11-27). One block each, pasted in the chat.
+Style = the approved Flutter app, not the old ChatGPT reference. Attach FIRST the app screenshots (docs/flutter/app-references/):
+app-11-leaderboard.webp, app-03-courses.webp, app-27-badges.webp (and screens/27-badges/attach/medal-unlocked-large.png for the gold).
+Attach LAST screens/13-achievements/reference.webp, only for the idea of the layout (do not copy its drawing style).
+Generate P1 and P2 first, then C1; attach the accepted C1 to C2-C5 so that all five card emblems match.
+Every image: one object, centred, large in the frame, 2048x2048, flat pure magenta #FF00FF background, no shadow on the background, no text, no digits, no watermark.
+
+=== P1, points medal (empty) ===
+Attach: 1. app-11-leaderboard.webp  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png  4. screens/13-achievements/reference.webp (layout idea only: top-left medal with number 511)
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Same style as the attached app screenshots, do not invent a new style. A round points medal: a thick polished gold ring (same golds, bevels and lighting as the gold medals of image 3) around a flat dark emerald green inner disc (#0B3A26 with a very soft radial glow, completely EMPTY: no number, no text), two symmetrical gold laurel branches hugging the ring on the left and right and meeting under it, and a small round gold disc with a cream five-pointed star centred at the bottom of the ring, overlapping the ring and the laurel. Front view, perfectly symmetrical. No text, no digits, no watermark.
+
+=== P2, level emblem (empty) ===
+Attach: 1. app-11-leaderboard.webp  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png  4. screens/13-achievements/reference.webp (layout idea only: top-right level star with the number 3)
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Same style as the attached app screenshots, do not invent a new style. An eight-pointed Islamic star (khatam, two overlapping squares rotated 45 degrees) with a polished gold outline (same golds, bevels and lighting as the gold medals of image 3), a thin inner gold line, and a flat dark emerald green fill (#0B3A26, very soft radial glow) that is completely EMPTY: no number, no text. Front view, perfectly symmetrical, slightly rounded tips. No text, no digits, no watermark.
+
+=== C1, card emblem «بداية الرحلة» (seedling and book) ===
+Attach: 1. app-03-courses.webp  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png  4. screens/13-achievements/reference.webp (layout idea only: the arch emblem of the right card)
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Same style as the attached app screenshots, do not invent a new style. A small emblem: a pointed-arch (mihrab) window frame in polished gold line work (thin double gold line, same golds as the gold medals of image 3), open at the bottom, transparent-looking dark emerald inside (#0B3A26 to #062A1D, soft warm glow behind the picture). Inside the arch: an open book with cream pages and a gold edge, and from its centre a young green seedling with two leaves growing upward, a few thin gold light rays fanning out behind the seedling. Front view, symmetrical, flat illustration with soft bevels, premium, no text, no digits, no watermark.
+
+=== C2, card emblem «متقن القراءة» (Quran on a rehal) ===
+Attach: 1. your accepted C1 image  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the emblem of image 1 (same size, same gold arch frame, same dark emerald inside, same glow, same lighting and bevels). Inside the arch, instead of the seedling: an open Quran with cream pages resting on a crossed wooden rehal stand, and behind it a faint gold mosque silhouette (dome, two minarets, a small crescent) fading into the green. No text, no digits, no watermark.
+
+=== C3, card emblem «حافظ النص» (sealed scroll) ===
+Attach: 1. your accepted C1 image  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the emblem of image 1 (same size, same gold arch frame, same dark emerald inside, same glow, same lighting and bevels). Inside the arch, instead of the seedling: a closed Quran (dark green leather cover with a gold geometric ornament) standing upright, a gold seal rosette with a short green ribbon hanging from it at its base, and soft gold light rays behind. No text, no digits, no watermark.
+
+=== C4, card emblem «المتفوق» (trophy) ===
+Attach: 1. your accepted C1 image  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the emblem of image 1 (same size, same gold arch frame, same dark emerald inside, same glow, same lighting and bevels). Inside the arch, instead of the seedling: a polished gold trophy cup with two handles and a small star embossed on the cup, on a short dark green base, with soft gold light rays behind. No text, no digits, no watermark.
+
+=== C5, card emblem «سيد التجويد» (crown and book) ===
+Attach: 1. your accepted C1 image  2. app-27-badges.webp  3. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the emblem of image 1 (same size, same gold arch frame, same dark emerald inside, same glow, same lighting and bevels). Inside the arch, instead of the seedling: an open book with cream pages, and floating above it a polished gold crown with a faceted pale-blue diamond in the centre, soft gold light rays behind. No text, no digits, no watermark.

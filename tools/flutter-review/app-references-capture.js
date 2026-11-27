@@ -18,6 +18,7 @@ const { chromium } = require('playwright');
     'app-22-listening-rule': 'lessons=1,1&openLesson=0&listenAt=0.6',
     'app-22-listening-question': 'lessons=1,1&openLesson=1&listenState=ok',
     'app-23-settings': 'section=6',
+    'app-27-badges': 'section=4',
     'app-08-reading-light': 'lessons=0,1&openLesson=0&readTheme=light',
     'app-10-test-results-light': 'lessons=0,4&openLesson=0&testState=results&readTheme=light',
   };

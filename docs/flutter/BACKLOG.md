@@ -108,7 +108,10 @@ Placeholders to replace before release:
 
 ## Screen 13, achievements (to do): 27 is part of it
 **Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
-- [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
+- [ ] Build screen 13 (plan, levels, tabs) and link it to 27. **Plan v1 written 2026-11-27** (`screens/13-achievements.md`, 11 questions waiting for the owner; assets P1, P2, C1–C5 to be generated: `prompts/13-achievements/`).
+- [ ] When 13 is built: the rail item «الإنجازات» opens 13 (not 27); 27 opens from the tab «الأوسمة»; update the rail count bubble.
+- [ ] Share button of the achievement detail (Angular `achievement-details-modal`): needs a share plugin, not in the first version of 13.
+- [ ] Points: one shared ledger (`userPoints`) so that 11, 22 (+10), 27 rewards and 13 read the same number; real data and saving later.
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
