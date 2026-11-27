@@ -14,3 +14,5 @@ Reference from the owner (2026-11-27): `28-help-overlay/reference.webp` (1844×8
 
 ## Questions for the owner
 See the chat of 2026-11-27 (Q1–Q6); answers go here.
+
+Postponed by the owner on 2026-11-27 (future improvement); answers in `BACKLOG.md`.

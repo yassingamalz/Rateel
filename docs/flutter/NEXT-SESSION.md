@@ -3,7 +3,7 @@
 State on `master` (2026-11-27): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
 06 lessons, 07 video, 08 reading, 10/10b test (with 25 results inside), 11 leaderboard, 12 daily challenges,
 14 coming soon, 22 listening lesson (PR #56 and its follow-up), 23 settings**; timeline confirmed by the owner
-(2026-11-26); 24 end of lesson postponed by the owner (2026-11-27); next: **28 help overlay**, then **27 badges** (references from the owner); settings gear centred in the rail (PR #54). Open items: `BACKLOG.md`.
+(2026-11-26); 24 end of lesson postponed by the owner (2026-11-27); 28 help overlay postponed (BACKLOG); **27 badges** started on `flutter/27-badges` (waiting for the medals M01–M12, L1); settings gear centred in the rail (PR #54). Open items: `BACKLOG.md`.
 
 ## Timeline (Claude's proposal, 2026-11-26; owner to confirm or reorder)
 **Phase A: lessons (the core of the app)**
