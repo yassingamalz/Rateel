@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui show Image, PictureRecorder;
 import 'dart:ui' show ImageFilter, lerpDouble;
@@ -7,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
 import '../theme/rateel_theme.dart';
+import 'lesson_end.dart';
 
 /// Screen 02: the frame shared by every kind of lesson (video, reading,
 /// practice, listening, test, guided). Same structure and behaviour as the
@@ -101,13 +103,6 @@ class LessonShellState extends State<LessonShell>
     duration: const Duration(milliseconds: 250),
     value: widget.waiting ? 1 : 0,
   );
-
-  @override
-  void initState() {
-    super.initState();
-    _menu.addStatusListener(_onMenuStatus);
-    if (widget.waiting) _pulse.repeat();
-  }
 
   @override
   void didUpdateWidget(LessonShell oldWidget) {
@@ -253,6 +248,65 @@ class LessonShellState extends State<LessonShell>
     await _sweep.forward(from: 0);
   }
 
+  // Screen 24, end of lesson: the card shown over the finished lesson.
+  LessonEndResult? _end;
+  Completer<LessonEndChoice>? _endDone;
+
+  /// Screen 24: shows the end card over the finished lesson (after
+  /// [celebrate]) and completes with the learner's choice. «متابعة» keeps the
+  /// card until the page leaves; «إعادة الدرس» removes it and unlocks the
+  /// controls, the page then restarts its lesson.
+  Future<LessonEndChoice> finish(LessonEndResult result) {
+    _endDone?.complete(LessonEndChoice.next);
+    final done = _endDone = Completer<LessonEndChoice>();
+    setPaused(false);
+    setState(() {
+      _locked = true;
+      _end = result;
+    });
+    return done.future;
+  }
+
+  void _onEndChoice(LessonEndChoice c) {
+    final done = _endDone;
+    if (done == null) return;
+    _endDone = null;
+    if (c == LessonEndChoice.again) {
+      _sweep.value = 0;
+      setState(() {
+        _end = null;
+        _locked = false;
+      });
+    }
+    done.complete(c);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _menu.addStatusListener(_onMenuStatus);
+    if (widget.waiting) _pulse.repeat();
+    // Review aid (screen 24): `?end=3|2|1` opens the end card at once.
+    final review = lessonEndReview;
+    if (review != null) {
+      Future<void>.delayed(const Duration(milliseconds: 700), () async {
+        if (!mounted) return;
+        final c = await finish(
+          LessonEndResult(
+            stars: review.clamp(1, 3),
+            points: 40,
+            right: 4,
+            total: 5,
+            sound: false,
+          ),
+        );
+        if (mounted && c == LessonEndChoice.next) {
+          Navigator.of(context).pop(true);
+        }
+      });
+    }
+  }
+
   @override
   void dispose() {
     _stillToken++;
@@ -271,7 +325,13 @@ class LessonShellState extends State<LessonShell>
       onPopInvokedWithResult: (didPop, _) {
         // Android back toggles the pause menu; nothing while the controls are
         // hidden or the completion plays (critic v1 #7, #6).
-        if (didPop || _locked || !widget.controlsVisible) return;
+        if (didPop) return;
+        // Screen 24: Android back = «متابعة».
+        if (_end != null) {
+          _onEndChoice(LessonEndChoice.next);
+          return;
+        }
+        if (_locked || !widget.controlsVisible) return;
         setPaused(!paused);
       },
       child: LayoutBuilder(
@@ -369,7 +429,8 @@ class LessonShellState extends State<LessonShell>
                   ignoring: !widget.controlsVisible || _locked,
                   child: LessonTopBar(
                     u: u,
-                    step: widget.step,
+                    // The end card (24) shows the lesson complete.
+                    step: _end != null ? widget.total : widget.step,
                     total: widget.total,
                     menu: _menu,
                     wait: _wait,
@@ -394,6 +455,15 @@ class LessonShellState extends State<LessonShell>
                   ),
                 ),
               ),
+              if (_end case final end?)
+                Positioned.fill(
+                  key: const ValueKey('end'),
+                  child: LessonEndOverlay(
+                    result: end,
+                    light: widget.light,
+                    onChoice: _onEndChoice,
+                  ),
+                ),
             ],
           );
         },

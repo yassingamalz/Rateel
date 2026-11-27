@@ -10,6 +10,7 @@ import '../core/sounds.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
 import 'lesson_decor.dart';
+import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'listening_data.dart';
@@ -252,6 +253,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   int _fEarned = 0;
   int _points = 0;
   int _answered = 0;
+  // Right answers, for the end card (screen 24): a «find» page counts when
+  // both the word and its letter are right.
+  int _right = 0;
   bool _finishing = false;
   bool _left = false;
 
@@ -384,7 +388,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         final right = _fRightLetter;
         _fLetter = s == 'ok' ? right : (right + 1) % _fClusters.length;
         _fLetterOk = s == 'ok';
-        if (_fLetterOk!) _fEarned += c.points;
+        if (_fLetterOk!) {
+          _fEarned += c.points;
+          _right++;
+        }
         _answered++;
         _fb.value = 1;
       }
@@ -400,7 +407,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           ? q.options.indexOf(q.correct)
           : q.options.indexWhere((o) => o != q.correct);
       _ok = q.options[_pick!] == q.correct;
-      if (_ok!) _points += c.points;
+      if (_ok!) {
+        _points += c.points;
+        _right++;
+      }
       _answered++;
       _fb.value = 1;
     }
@@ -629,6 +639,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _fLetterOk = ok;
       _answered++;
       if (ok) _fEarned += c.points;
+      if (ok && _fWordOk == true) _right++;
       _points += _fEarned;
     });
     _answerFeedback(ok);
@@ -660,7 +671,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     setState(() {
       _ok = ok;
       _answered++;
-      if (ok) _points += c.points;
+      if (ok) {
+        _points += c.points;
+        _right++;
+      }
     });
     if (ok) {
       Sounds.correct();
@@ -727,6 +741,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       _index = 0;
       _answered = 0;
       _points = 0;
+      _right = 0;
       _pick = null;
       _ok = null;
       _resetFind();
@@ -767,6 +782,24 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       ),
       _shell.currentState?.celebrate() ?? Future<void>.value(),
     ]);
+    // Screen 24: points and right answers (the «passed» sound has played).
+    final c = _content;
+    final choice =
+        await _shell.currentState?.finish(
+          LessonEndResult.answers(
+            right: _right,
+            total: _nFinds + (c?.questions.length ?? 0),
+            points: _points,
+            sound: false,
+          ),
+        ) ??
+        LessonEndChoice.next;
+    if (!mounted) return;
+    if (choice == LessonEndChoice.again) {
+      _finishing = false;
+      _restart();
+      return;
+    }
     _leave(true);
   }
 

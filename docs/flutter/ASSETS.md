@@ -272,5 +272,6 @@ screen that rates something with stars (results of 10, 12, 13…) can reuse them
 | Three earned stars on a gold arc, with sparkles | `end-of-lesson/s1_stars_row_earned.webp` | `ui/end_of_lesson/stars_row_earned.webp` | as in `screens/24-end-of-lesson/reference-dark.webp` |
 | Three empty (cream) stars on the gold arc | `end-of-lesson/s3_stars_row_empty.webp` | `ui/end_of_lesson/stars_row_empty.webp` | base for 1–2 stars: single stars drawn over it |
 | One earned star, one empty star | `end-of-lesson/s2_star_earned_and_empty.webp` (split in halves) | `ui/end_of_lesson/star_earned.webp`, `star_empty.webp` | single stars, to compose 1/3 and 2/3 |
+**Used by screen 24** (`lib/lessons/lesson_end.dart`): `stars_row_earned` (3 stars, cut in three slices that pop), `stars_row_empty` + `star_earned` (1–2 stars); `star_empty` spare. Also reused: `ui/test/star_coin_gold.webp`, `ui/test/flame.webp`, `ui/reading/lattice_tile.webp`.
 References of the screen (not assets): `screens/24-end-of-lesson/reference-dark.webp` (24-A), `reference-light.webp` (24-B), owner 2026-11-27.
 A second empty row (cream stars with a stronger gold rim) was shown in the chat but not received as a file: to add when the owner sends it.

@@ -10,6 +10,7 @@ import '../core/sounds.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
 import 'lesson_decor.dart';
+import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'reading_data.dart' show readingLight;
@@ -537,6 +538,26 @@ class _TestLessonPageState extends State<TestLessonPage>
     _finishing = true;
     Haptics.success();
     await _shell.currentState?.celebrate();
+    // Screen 24 after the results too (owner, 2026-11-27, Q4): 3 stars from
+    // 90%, 2 from 70%; the «passed» sound was played by the results.
+    final run = _run!;
+    final choice =
+        await _shell.currentState?.finish(
+          LessonEndResult(
+            stars: LessonEndResult.starsForScore(run.score),
+            points: run.points,
+            right: run.correctCount,
+            total: run.total,
+            sound: false,
+          ),
+        ) ??
+        LessonEndChoice.next;
+    if (!mounted) return;
+    if (choice == LessonEndChoice.again) {
+      _finishing = false;
+      _restart();
+      return;
+    }
     _leave(true);
   }
 
@@ -875,14 +896,14 @@ class _TestLessonPageState extends State<TestLessonPage>
                     top: y - u * 2,
                     width: u * TestMetrics.lineW,
                     height: u * 4,
-                    child: _tinted(p, GoldDivider(u: u, diamond: 1.15)),
+                    child: tintedDivider(p, GoldDivider(u: u, diamond: 1.15)),
                   ),
                 Positioned(
                   left: cx - u * TestMetrics.btnW / 2,
                   top: u * TestMetrics.btnTop - card.top,
                   width: u * TestMetrics.btnW,
                   height: u * TestMetrics.btnH,
-                  child: _GoldButton(
+                  child: LessonButton(
                     u: u,
                     p: p,
                     label: 'تأكيد الإجابة',
@@ -1219,28 +1240,30 @@ class _TestLessonPageState extends State<TestLessonPage>
             SizedBox(
               width: u * TestMetrics.lineW,
               height: u * 4,
-              child: _tinted(p, GoldDivider(u: u, diamond: 1.15)),
+              child: tintedDivider(p, GoldDivider(u: u, diamond: 1.15)),
             ),
             SizedBox(width: u * 2.4),
             SizedBox(
               width: u * 40,
-              child: _GoldButton(
+              child: LessonButton(
                 u: u,
                 p: p,
                 label: _run!.passed ? 'إنهاء الدرس' : 'العودة إلى الدروس',
-                glyph: _run!.passed ? _BtnGlyph.check : _BtnGlyph.arrow,
+                glyph: _run!.passed
+                    ? LessonBtnGlyph.check
+                    : LessonBtnGlyph.arrow,
                 onTap: _completeLesson,
               ),
             ),
             SizedBox(width: u * 3),
             SizedBox(
               width: u * 40,
-              child: _GoldButton(
+              child: LessonButton(
                 u: u,
                 p: p,
                 label: 'إعادة الاختبار',
-                glyph: _BtnGlyph.replay,
-                tone: _run!.passed ? _Tone.green : _Tone.red,
+                glyph: LessonBtnGlyph.replay,
+                tone: _run!.passed ? LessonTone.green : LessonTone.red,
                 onTap: _restart,
               ),
             ),
@@ -1248,7 +1271,7 @@ class _TestLessonPageState extends State<TestLessonPage>
             SizedBox(
               width: u * TestMetrics.lineW,
               height: u * 4,
-              child: _tinted(p, GoldDivider(u: u, diamond: 1.15)),
+              child: tintedDivider(p, GoldDivider(u: u, diamond: 1.15)),
             ),
           ],
         ),
@@ -1524,7 +1547,10 @@ class _TestLessonPageState extends State<TestLessonPage>
                           SizedBox(
                             width: u * 30,
                             height: u * 2.6,
-                            child: _tinted(p, GoldDivider(u: u, diamond: 0.9)),
+                            child: tintedDivider(
+                              p,
+                              GoldDivider(u: u, diamond: 0.9),
+                            ),
                           ),
                           Text(
                             q.text,
@@ -1540,7 +1566,7 @@ class _TestLessonPageState extends State<TestLessonPage>
                                 Row(
                                   textDirection: TextDirection.rtl,
                                   children: [
-                                    _MarkDisc(
+                                    MarkDisc(
                                       u: u,
                                       ok: ok,
                                       partial: part,
@@ -1605,11 +1631,11 @@ class _TestLessonPageState extends State<TestLessonPage>
                             padding: EdgeInsets.only(bottom: u * 3, top: u),
                             child: SizedBox(
                               width: u * 30,
-                              child: _GoldButton(
+                              child: LessonButton(
                                 u: u,
                                 p: p,
                                 label: 'إغلاق',
-                                glyph: _BtnGlyph.check,
+                                glyph: LessonBtnGlyph.check,
                                 height: 8.6,
                                 fontSize: 3.5,
                                 onTap: close,
@@ -1639,7 +1665,7 @@ List<Shadow> _shadow(double u) => [
 ];
 
 /// Gold ornaments (GoldDivider) take the light theme's copper (as 08).
-Widget _tinted(LessonPal p, Widget child) => p.t > 0
+Widget tintedDivider(LessonPal p, Widget child) => p.t > 0
     ? ColorFiltered(
         colorFilter: ColorFilter.mode(
           p.c(RateelColors.videoDivider, RateelColors.readLCopper),
@@ -1851,7 +1877,7 @@ class _Marker extends StatelessWidget {
         duration: const Duration(milliseconds: 380),
         curve: Curves.easeOutBack,
         builder: (context, s, child) => Transform.scale(scale: s, child: child),
-        child: _MarkDisc(
+        child: MarkDisc(
           u: u,
           ok: state == _RowState.correct,
           d: TestMetrics.radioD,
@@ -1908,8 +1934,9 @@ class _Marker extends StatelessWidget {
 }
 
 /// Enamel disc with a ✓ (green) or ✕ (red), with a thin light rim.
-class _MarkDisc extends StatelessWidget {
-  const _MarkDisc({
+class MarkDisc extends StatelessWidget {
+  const MarkDisc({
+    super.key,
     required this.u,
     required this.ok,
     required this.d,
@@ -2054,12 +2081,7 @@ class _NavCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget face;
     if (result != null) {
-      face = _MarkDisc(
-        u: u,
-        ok: result!,
-        partial: partial,
-        d: TestMetrics.navD,
-      );
+      face = MarkDisc(u: u, ok: result!, partial: partial, d: TestMetrics.navD);
     } else {
       face = DecoratedBox(
         decoration: BoxDecoration(
@@ -2270,24 +2292,26 @@ class _PointsPill extends StatelessWidget {
   }
 }
 
-enum _BtnGlyph { arrow, check, replay }
+/// Glyph of a [LessonButton]; `chevron` is the small ‹ of «متابعة» (screen 24).
+enum LessonBtnGlyph { arrow, check, replay, chevron }
 
 /// Colour of a filled lesson button.
-enum _Tone { gold, green, red }
+enum LessonTone { gold, green, red }
 
 /// Filled lesson button (owner, 2026-11-26: filled with white text in both
 /// themes; the reference's «تأكيد الإجابة» was dark glass with a gold rim):
 /// gold for the main actions, green / red for «إعادة الاختبار» after a passed
 /// / failed test. Glow around it in the dark theme, soft shadow in the light.
-class _GoldButton extends StatefulWidget {
-  const _GoldButton({
+class LessonButton extends StatefulWidget {
+  const LessonButton({
+    super.key,
     required this.u,
     required this.p,
     required this.label,
     required this.onTap,
     this.enabled = true,
-    this.glyph = _BtnGlyph.arrow,
-    this.tone = _Tone.gold,
+    this.glyph = LessonBtnGlyph.arrow,
+    this.tone = LessonTone.gold,
     this.height,
     this.fontSize,
   });
@@ -2297,16 +2321,16 @@ class _GoldButton extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
   final bool enabled;
-  final _BtnGlyph glyph;
-  final _Tone tone;
+  final LessonBtnGlyph glyph;
+  final LessonTone tone;
   final double? height;
   final double? fontSize;
 
   @override
-  State<_GoldButton> createState() => _GoldButtonState();
+  State<LessonButton> createState() => _LessonButtonState();
 }
 
-class _GoldButtonState extends State<_GoldButton> {
+class _LessonButtonState extends State<LessonButton> {
   bool _down = false;
 
   @override
@@ -2315,21 +2339,21 @@ class _GoldButtonState extends State<_GoldButton> {
     final p = widget.p;
     final h = u * (widget.height ?? TestMetrics.btnH);
     final (top, bottom, rimTop, rimBottom, glow) = switch (widget.tone) {
-      _Tone.gold => (
+      LessonTone.gold => (
         RateelColors.testLGoldTop,
         RateelColors.testLGoldBottom,
         RateelColors.testLGoldRimTop,
         RateelColors.testLGoldRimBottom,
         RateelColors.testPillRimBottom,
       ),
-      _Tone.green => (
+      LessonTone.green => (
         RateelColors.testLGreenTop,
         RateelColors.testLGreenBottom,
         RateelColors.testLGreenRimTop,
         RateelColors.testLGreenBottom,
         RateelColors.testOkRim,
       ),
-      _Tone.red => (
+      LessonTone.red => (
         RateelColors.testLRedTop,
         RateelColors.testLRedBottom,
         RateelColors.testLRedRimTop,
@@ -2340,21 +2364,21 @@ class _GoldButtonState extends State<_GoldButton> {
     // Dark theme: outlined glass with a luminous rim; light theme: filled,
     // white text (owner, 2026-11-26, approved).
     final (oTop, oBottom, oRimTop, oRimBottom, oText) = switch (widget.tone) {
-      _Tone.gold => (
+      LessonTone.gold => (
         RateelColors.testPillTop,
         RateelColors.testPillBottom,
         RateelColors.testPillRimTop,
         RateelColors.testPillRimBottom,
         RateelColors.testPillText,
       ),
-      _Tone.green => (
+      LessonTone.green => (
         RateelColors.testRowFill,
         RateelColors.testPillBottom,
         RateelColors.testRowRimTop,
         RateelColors.testOkRim,
         RateelColors.leaderText,
       ),
-      _Tone.red => (
+      LessonTone.red => (
         const Color(0xFF3A2420),
         RateelColors.testPillBottom,
         const Color(0xFFEE9C8A),
@@ -2441,9 +2465,10 @@ class _GoldButtonState extends State<_GoldButton> {
                           height: glyphW,
                           child: CustomPaint(
                             painter: switch (widget.glyph) {
-                              _BtnGlyph.arrow => _ArrowPainter(text),
-                              _BtnGlyph.check => _CheckPainter(text, 0.16),
-                              _BtnGlyph.replay => _ReplayPainter(text),
+                              LessonBtnGlyph.arrow => _ArrowPainter(text),
+                              LessonBtnGlyph.check => _CheckPainter(text, 0.16),
+                              LessonBtnGlyph.replay => _ReplayPainter(text),
+                              LessonBtnGlyph.chevron => _ChevronPainter(text),
                             },
                           ),
                         ),
@@ -2497,6 +2522,33 @@ class _ArrowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ArrowPainter o) => o.color != color;
+}
+
+/// ‹ chevron (RTL «forward», screen 24 «متابعة»).
+class _ChevronPainter extends CustomPainter {
+  _ChevronPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    canvas.drawPath(
+      Path()
+        ..moveTo(w * 0.62, w * 0.2)
+        ..lineTo(w * 0.32, w * 0.5)
+        ..lineTo(w * 0.62, w * 0.8),
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = w * 0.15
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_ChevronPainter o) => o.color != color;
 }
 
 /// ↻ restart: an open circle with an arrow head at its upper end.
@@ -2645,7 +2697,7 @@ class _FeedbackBar extends StatelessWidget {
                 curve: Curves.easeOutBack,
                 builder: (context, s, child) =>
                     Transform.scale(scale: s, child: child),
-                child: _MarkDisc(
+                child: MarkDisc(
                   u: u,
                   ok: ok,
                   partial: partial,
@@ -2790,7 +2842,7 @@ class _FeedbackBar extends StatelessWidget {
               SizedBox(width: u * 3),
               SizedBox(
                 width: u * TestMetrics.fbBtnW,
-                child: _GoldButton(
+                child: LessonButton(
                   u: u,
                   p: p,
                   label: last ? 'إنهاء الاختبار' : 'السؤال التالي',
@@ -2847,7 +2899,7 @@ class _StatColumn extends StatelessWidget {
                 height: u * _statIcon,
               )
             else
-              _MarkDisc(
+              MarkDisc(
                 u: u,
                 ok: stat.mark == _Mark.ok,
                 partial: stat.mark == _Mark.part,
@@ -2950,7 +3002,7 @@ class _ResultRow extends StatelessWidget {
               ),
             ),
             SizedBox(width: u * 1.6),
-            _MarkDisc(u: u, ok: ok, partial: partial, d: 4),
+            MarkDisc(u: u, ok: ok, partial: partial, d: 4),
           ],
         ),
       ),

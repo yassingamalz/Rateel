@@ -4,6 +4,7 @@ import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
+import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'listening_lesson_page.dart';
 import 'reading_lesson_page.dart';
@@ -84,6 +85,16 @@ class _LessonPageState extends State<LessonPage> {
     // the page leaves (Angular: 100 ms, exit).
     await Future<void>.delayed(const Duration(milliseconds: 320));
     await _shell.currentState?.celebrate();
+    // Screen 24: the end card; «إعادة الدرس» goes back to step 1.
+    final choice =
+        await _shell.currentState?.finish(const LessonEndResult.done()) ??
+        LessonEndChoice.next;
+    if (!mounted) return;
+    if (choice == LessonEndChoice.again) {
+      _finishing = false;
+      setState(() => _step = 1);
+      return;
+    }
     _leave(true);
   }
 
