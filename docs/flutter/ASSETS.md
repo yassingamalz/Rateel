@@ -240,7 +240,7 @@ Comparison of the reference's header assets with the library (owner, 2026-11-26)
 |---|---|---|---|
 | Husary recitation, سورة الكوثر 108:1–3 and سورة الناس 114:1–6 | everyayah.com `Husary_128kbps` (owner, Q1 A) | `assets/audio/quran/husary/10800{1,2,3}.mp3`, `11400{1..6}.mp3` | mock lesson; release: stream with the reciter of the settings (`BACKLOG.md`) |
 | Font Amiri Quran (verses) | `@fontsource/amiri-quran` 5.3.0 (OFL), arabic subset, woff → ttf | `assets/fonts/AmiriQuran.ttf`, `OFL-AmiriQuran.txt` | first Quran verse of the app (DECISIONS 2026-11-20 🟡 → ✅) |
-| Headphones emblem (H1) | **placeholder**: copy of `ui/lessons/listen.webp` | `assets/ui/listening/headphones.webp` | to replace with the owner's H1 (`prompts/22-listening-lesson/images-v1.txt`) |
+| Headphones emblem (H1) | owner's H1 v2 (ChatGPT, 2026-11-27): `docs/design-assets/listening-lesson/h1-headphones.png` | `assets/ui/listening/headphones.webp` | magenta keyed (`tools/assets/key-magenta.py`; pinkish spill between the two band lines set to the key first), trimmed, 600 px; header of 22, box 9×7.9u at 5.2u (matches the reference top/bottom, 67 vs 73 px wide at 853) |
 Reused: `ui/reading/{arch,badge_fill,badge_line,lattice_tile}.webp`, `reading/{crescent,star}.svg`, `decor/mosque.webp`.
 | Guided voice, 8 lines | Gemini TTS `gemini-3.1-flash-tts-preview`, voice Orus, calm style (owner's F) | `assets/audio/narration/orus/*.mp3` + `manifest.json` | `tools/flutter-review/gen_listening_narration.py`; texts with full tashkīl, each take transcribed |
 

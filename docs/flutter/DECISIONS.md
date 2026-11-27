@@ -307,3 +307,4 @@ Newest entries at the bottom. Status: ✅ decided by the owner · 🟡 proposed,
 | 2026-11-27 | **Screen 01 (splash) checked by the owner on the phone: OK.** Future improvement in `BACKLOG.md`: a little longer, the «رتل» glow pulsing at least twice like a heartbeat. | ✅ |
 | 2026-11-27 | Headphones H1 for screen 22: prompt **v2** (the v1 text asked for empty cups, while the reference crop has filled gold pads inside outlined cups), `prompts/22-listening-lesson/images-v2.txt`. Owner generates it. | ✅ |
 | 2026-11-27 | Open decisions (24 end of lesson, 26 inside 13, 28 «؟» button, 30 onboarding, 31 daily practice, 12 connector, test sounds) left for **another session** (owner). | ✅ |
+| 2026-11-27 | **Headphones H1 (owner's v2) in the header of screen 22**, replacing the placeholder: magenta keyed, box 9×7.9u at 5.2u (the asset is almost square: same top and bottom as the reference, slightly narrower). Source `design-assets/listening-lesson/h1-headphones.png`. | ✅ |

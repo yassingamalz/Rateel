@@ -74,8 +74,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
 
 ## Screen 22, listening lesson (approved 2026-11-27)
-- [ ] **Headphones asset H1** from the owner (placeholder today: the 06 «listen» icon). Prompt **H1 v2** given in the chat
-      2026-11-27 (`prompts/22-listening-lesson/images-v2.txt`); when it arrives: key the magenta, `HeaderSpec.emblem` of 22.
+- [x] **Headphones asset H1**: done 2026-11-27 (owner's H1 v2 in the 22 header, `ASSETS.md`).
 - [ ] **Audio for the release** (owner, Q1): stream the ayat from everyayah.com (or another host) with the **reciter of
       the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
