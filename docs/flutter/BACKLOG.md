@@ -67,13 +67,14 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       exists.
 - [ ] **Text size** 90–110%: course cards and screen 14 do not scale; every new screen must be checked at 110%
       (`?textScale=1.1`) and opt out the same way if a fixed art layout breaks.
-- [ ] **Reset progress** clears the in-memory progress only: when progress is saved for real, the reset must clear
-      the saved data too.
+- [x] **Reset progress** clears the saved progress too: done 2026-11-27 (`flutter/saved-progress`, `ProgressStore.clear`).
+- [ ] **Saved progress, still in memory only** (Claude, 2026-11-27): daily challenges and streak (12, with their midnight
+      reset), points (22 +10, 13 ledger), badges (27). Save them with `ProgressStore` when their real rules exist.
 - [ ] **Critic of 23**: the owner launches it himself when he wants.
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
 
 ## Screen 22, listening lesson (approved 2026-11-27)
-- [ ] **Headphones asset H1** from the owner (placeholder today: the 06 «listen» icon).
+- [x] **Headphones asset H1**: done 2026-11-27 (owner's H1 v2 in the 22 header, `ASSETS.md`).
 - [ ] **Audio for the release** (owner, Q1): stream the ayat from everyayah.com (or another host) with the **reciter of
       the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
 - [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
@@ -94,8 +95,10 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       `rule.colour`).
 
 ## Screen 01, splash (merged into `master` 2026-11-26)
-- [ ] Owner review on a physical phone, including the native launch handoff. Browser capture:
-      [startup-phone.mp4](screens/01-splash/startup-phone.mp4).
+- [x] Owner review on a physical phone, including the native launch handoff: **OK** (owner, 2026-11-27).
+- [ ] **Longer splash, heartbeat** (owner, 2026-11-27, future): today it is a little fast. Let the «رتل» logo light up
+      (glow pulse) **at least twice**, like a heartbeat, before the fade into the courses, so the start feels calm and
+      deliberate. Motion only (`lib/splash/startup_screen.dart`, `_glow`), same look.
 - [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.

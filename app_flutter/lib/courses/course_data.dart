@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 
 /// Set by the lesson flow when the last lesson of a course is finished (the
@@ -94,3 +96,20 @@ const courses = <Course>[
     description: 'موضوعات متقدمة في علم التجويد والتلاوة المتميزة',
   ),
 ];
+
+/// Progress of the courses path (saved on the device, `ProgressStore`): the
+/// course in progress ([current]; the ones before it are completed, the ones
+/// after it locked) and the bar of each course as last shown.
+class CoursesProgress {
+  CoursesProgress()
+    : current = math.max(0, courses.indexWhere((c) => c.locked) - 1),
+      bars = [for (final c in courses) c.progress];
+
+  int current;
+  final List<double> bars;
+}
+
+CoursesProgress coursesProgress = CoursesProgress();
+
+/// Settings «إعادة ضبط التقدم»: back to the first course at 0.
+void resetCoursesProgress() => coursesProgress = CoursesProgress();

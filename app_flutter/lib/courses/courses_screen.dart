@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../challenges/daily_challenges_screen.dart';
 import '../core/haptics.dart';
+import '../core/progress_store.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
 import '../units/units_screen.dart';
@@ -70,8 +71,10 @@ class _CoursesScreenState extends State<CoursesScreen>
 
   /// Index of the course in progress; the ones before it are completed, the
   /// ones after it locked.
-  late int _current = math.max(0, courses.indexWhere((c) => c.locked) - 1);
-  late final List<double> _progress = [for (final c in courses) c.progress];
+  /// Saved on the device (`ProgressStore`).
+  int get _current => coursesProgress.current;
+  set _current(int v) => coursesProgress.current = v;
+  List<double> get _progress => coursesProgress.bars;
   int? _completing;
   double _fillFrom = 0;
   double _fillTo = 0;
@@ -158,6 +161,7 @@ class _CoursesScreenState extends State<CoursesScreen>
     _fill.duration = Duration(milliseconds: (1400 * (to - from)).round());
     await _fill.forward(from: 0);
     _progress[i] = to;
+    ProgressStore.save();
   }
 
   /// Completion sequence for course [i]: bar to 50%, first half of the line
@@ -197,6 +201,7 @@ class _CoursesScreenState extends State<CoursesScreen>
       _current = i + 1;
       _completing = null;
     });
+    ProgressStore.save();
     _fill.value = 0;
     _half.value = 0;
     _flow.value = 0;

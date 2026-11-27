@@ -1,10 +1,12 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../courses/course_data.dart';
 import '../lessons/lesson_data.dart';
 import '../lessons/reading_data.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
+import 'progress_store.dart';
 
 /// App settings, screen 23 (docs/flutter/screens/23-settings.md).
 ///
@@ -82,11 +84,13 @@ class AppSettings {
   static void _syncTheme() =>
       themeMode.value = light.value ? ThemeMode.light : ThemeMode.dark;
 
-  /// «إعادة ضبط التقدم»: units, lessons and course progress back to 0
-  /// (progress lives in memory for now; the screens rebuild from it).
+  /// «إعادة ضبط التقدم»: courses, units and lessons back to 0, on the
+  /// device too (`ProgressStore`); the screens rebuild from it.
   static void resetProgress() {
+    resetCoursesProgress();
     resetUnitsProgress();
     resetLessonsDone();
+    ProgressStore.clear();
   }
 }
 

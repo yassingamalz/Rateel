@@ -1,4 +1,35 @@
-# Next session: timeline from 2026-11-26 (proposal, the owner confirms the order)
+# Next session (from 2026-11-27, after the performance fix and the saved progress)
+
+**State.** In `master`: 01, 02, 03, 04, 05, 06, 07, 08, 10/10b (+25), 11, 12, 14, 22 (with the owner's H1 headphones),
+23, 27, plus **#66 performance fix** (same look) and **#67 progress saved on the device** (merged 2026-11-27, owner).
+Screen **13** v1 waits on `claude/flutter-13-achievements-xa7myj` («a particular screen, we come back to it»). **15–21**
+postponed to the future. Built outside the process, waiting for the owner: `flutter/29-profile-approved` (APK 1.0.490),
+`flutter/28-help` (reading help overlay), `flutter/15-21-guided-lesson` (APK 1.0.445). Splash checked on the phone: OK
+(heartbeat for later, `BACKLOG.md`). No APK yet with #66/#67/H1.
+
+**Next steps (proposal):**
+1. APK from `master` for the phone test (lighter animations, progress kept after closing the app, 22 headphones).
+2. **Decisions session** (owner, 2026-11-27: «another session»): 24 end of lesson (keep or drop; the +10 points of 22),
+   26 points history inside 13, 28 «؟» button place, 30 onboarding (account or not), 31 daily practice (own screen or
+   inside 12), 12 connector (lit up to the open tile or all), **test sounds** (new candidates for «correct» and
+   «passed», owner listens and picks by number; the badges' celebration reuses «passed»).
+3. Then: back to 13 (and 29 after it), or what the owner chooses.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel, da master. Leggi CLAUDE.md e tutti i file che indica (DECISIONS.md, README.md, PROCESS.md,
+LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi docs/flutter/NEXT-SESSION.md (prima sezione), SCREENS.md e
+STYLE-CONFLICTS.md. Per prima cosa fammi l'APK da master (tools/flutter-review/build-apk.sh): contiene il fix delle
+prestazioni, i progressi salvati e le cuffie della 22, lo provo sul telefono. Poi facciamo la sessione delle decisioni:
+per ogni punto aperto della lista in NEXT-SESSION.md (24, 26, 28, 30, 31, connettore della 12, suoni dei test) spiegami
+in breve il problema e le opzioni con la tua raccomandazione, una domanda alla volta, e scrivi ogni mia risposta in
+DECISIONS.md e BACKLOG.md nello stesso commit. Per i suoni dei test preparami dei campioni numerati da ascoltare. Non
+iniziare nessuna schermata nuova senza il mio via. Parlami in italiano, documenti in inglese.
+```
+
+---
+
+## Archive: timeline from 2026-11-26 (confirmed by the owner)
 
 State on `master` (2026-11-27): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
 06 lessons, 07 video, 08 reading, 10/10b test (with 25 results inside), 11 leaderboard, 12 daily challenges,

@@ -1,0 +1,19 @@
+Screen 22, listening lesson: ChatGPT prompt H1 v2 (2026-11-27). Pasted in the chat, one block.
+v1 asked for empty cups; the reference crop has a filled gold pad inside each outlined cup: v2 follows the crop.
+Attachments, in this order:
+  1. docs/flutter/prompts/22-listening-lesson/attach/h1-headphones.png  (the icon to recreate)
+  2. docs/flutter/app-references/app-22-listening-rule.webp            (the app screen where it goes: top of the arch)
+  3. docs/flutter/app-references/app-08-reading-dark.webp              (the open-book emblem: same gold, same line weight)
+
+=== H1 v2  Gold headphones emblem for the header arch
+Recreate the small gold headphones icon of the first attached image as a standalone asset. It will replace the
+emblem at the top of the header arch in the second attached image (the app), and it must look like the same family
+as the gold open-book emblem in the third attached image: same warm metallic gold, same line weight, same flat
+clean style. Same style as the attached app screenshots, do not invent a new style.
+Shape: over-ear headphones seen exactly from the front, perfectly symmetric. A thin rounded headband arc (a double
+line, as in the crop) joining two tall rounded ear cups. Each cup is a rounded-rectangle OUTLINE with a smaller
+rounded pad inside it, filled with gold, slightly darker than the outline, as in the crop.
+Colours: warm metallic gold #E9B83A with a lighter core #FFE07A and a slightly darker edge #B8862A; outline width about
+7% of the icon width. No sound waves, no sparkles, no glow, no shadow, no text, no 3D.
+Background: plain flat magenta #FF00FF, nothing else on it. Square image 1024x1024, headphones centred, about 80% of the
+height, sharp edges.

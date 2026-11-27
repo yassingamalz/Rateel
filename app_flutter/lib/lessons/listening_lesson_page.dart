@@ -43,7 +43,8 @@ bool get _playBelow => listenPlayPos == 'below';
 bool listenLitAll = false;
 
 /// Header variant under review (`?headerV=`, see [ListenMetrics.header]).
-String listenHeaderV = 'c'; // owner's choice (2026-11-27): no line under the title
+String listenHeaderV =
+    'c'; // owner's choice (2026-11-27): no line under the title
 
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
@@ -107,8 +108,8 @@ class ListenMetrics {
   static const titleCentre = 17.3;
   static const titleSize = 7.0;
   static const headW = 9.0;
-  static const headH = 7.4;
-  static const headTop = 5.6;
+  static const headH = 7.9; // owner's H1 (2026-11-27): almost square, so a little taller than the reference box
+  static const headTop = 5.2;
   // Card.
   static const cardTop = 27.55;
   static double get cardBottom => _playBelow ? 66.7 : 79.0;

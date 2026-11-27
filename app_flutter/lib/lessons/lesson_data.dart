@@ -70,6 +70,20 @@ void setLessonsDone(String unitId, int done) => _doneByUnit[unitId] = done;
 /// Settings «إعادة ضبط التقدم».
 void resetLessonsDone() => _doneByUnit.clear();
 
+/// Saved form (`ProgressStore`): unit id → lessons done.
+Map<String, int> lessonsDoneToJson() => Map.of(_doneByUnit);
+
+/// Restores [lessonsDoneToJson], fitted to the lessons in the data today.
+void lessonsDoneFromJson(Map<String, dynamic> json) {
+  _doneByUnit.clear();
+  json.forEach((unitId, value) {
+    if (value is! num) return;
+    final n = lessonsOf(unitId).length;
+    if (n == 0) return;
+    _doneByUnit[unitId] = value.toInt().clamp(0, n);
+  });
+}
+
 /// Share of the unit done by its lessons (0 when it has none).
 double unitShareFromLessons(String unitId) {
   final n = lessonsOf(unitId).length;
