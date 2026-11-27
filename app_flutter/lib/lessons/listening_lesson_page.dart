@@ -44,7 +44,7 @@ bool listenLitAll = false;
 
 /// Header variant under review (`?headerV=`, see [ListenMetrics.header]).
 String listenHeaderV =
-    'c'; // owner's choice (2026-11-27): no line under the title
+    'g'; // owner's choice (2026-11-27): line with the diamond under the title
 
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
@@ -71,8 +71,12 @@ class ListenMetrics {
   /// b without the arch; c without the line under the title; d arch closer
   /// to the title, no headphones, line under the title fixed; e line under
   /// the title fixed (lower and shorter, clear of the title), headphones
-  /// kept; f only the headphones and the title, with a small diamond.
+  /// kept; f only the headphones and the title, with a small diamond;
+  /// g (owner, 2026-11-27, with the H1 headphones) the line with its diamond
+  /// back under the title, clear of the title's ink (ع) and of the card:
+  /// headphones and title 0.3–0.4u higher.
   static HeaderSpec _header(String v) {
+    final g = v == 'g';
     final noArch = v == 'b' || v == 'f';
     final fixedLine = v == 'd' || v == 'e';
     return HeaderSpec(
@@ -89,17 +93,23 @@ class ListenMetrics {
       starDx: ReadMetrics.starDx,
       starTop: ReadMetrics.starTop,
       starH: ReadMetrics.starH,
-      titleCentre: v == 'd' ? 15.6 : (v == 'f' ? 17.8 : titleCentre),
+      titleCentre: v == 'd'
+          ? 15.6
+          : (v == 'f' ? 17.8 : (g ? 16.9 : titleCentre)),
       titleSize: titleSize,
-      dividerTop: fixedLine ? 25.4 : (v == 'f' ? 24.6 : ReadMetrics.dividerTop),
+      dividerTop: g
+          ? 25.0
+          : (fixedLine ? 25.4 : (v == 'f' ? 24.6 : ReadMetrics.dividerTop)),
       dividerW: v == 'c'
           ? 0
-          : (fixedLine ? 52.0 : (v == 'f' ? 9.0 : ReadMetrics.dividerW)),
-      dividerDiamond: v == 'f' ? 1.2 : ReadMetrics.dividerDiamond,
+          : (g
+                ? 56.0
+                : (fixedLine ? 52.0 : (v == 'f' ? 9.0 : ReadMetrics.dividerW))),
+      dividerDiamond: v == 'f' ? 1.2 : (g ? 1.3 : ReadMetrics.dividerDiamond),
       book: v != 'd',
       bookW: headW,
       bookH: headH,
-      bookTop: v == 'f' ? 4.4 : headTop,
+      bookTop: v == 'f' ? 4.4 : (g ? 4.9 : headTop),
       emblem: 'assets/ui/listening/headphones.webp',
     );
   }
