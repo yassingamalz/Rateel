@@ -104,3 +104,13 @@ Prompts: `docs/flutter/prompts/13-achievements/images-v1.txt` (also pasted in th
 3. Screen 13: header, tabs, carousel, card, detail sheet; hook the rail (`section 4 → 13`), 27 from the tab; review aids `?section=4`, `?achTab=`, `?points=`.
 4. Placeholders from the owner's assets (P1, P2, C1–C5) until they arrive; tabs النقاط / المجموعة (per Q4–Q5).
 5. Capture at 1844×853 and 915×412, number checks, then **ask the owner before the critic** (phone 915×412 only), APK when asked.
+
+## 9. Level detail page «المستوى الثالث» (new reference from the owner, 2026-11-27; proposal, not decided)
+Reference: `13-achievements/reference-level-detail.webp` (1303×1207, not the 1844×853 of the others; visual only). Opened by tapping the
+level emblem of the header of 13. Same family as 27: ribbon + subtitle, **left panel with arch top** (level medal, name, description,
+progress «1089 / 1500», divider, reward box «10K»), **right panel with 3 tabs** (الدروس / الإنجازات / ترتيب المستوى) and a **scrolling list of rows**
+(completed: green check + «مكتمل»; in progress: gold rim, play button, mini bar «4 / 6»; locked: padlock + «مقفل»).
+- **Reused:** ribbon A1, lattice (top and bottom), the 27 detail panel (medal, divider, reward box, 11 coins), 27 `_ProgressBar`, filter tabs of 27 with icons, rows like the 05/06 lesson cards (same three states, check, play, padlock), gold rim tokens.
+- **The level medal is the empty gold medal already in the library** (`ui/badges/blank_gold.webp`, rosette + laurel + green ribbon): number drawn in code. So **P2 (eight-pointed star) is dropped** if the owner prefers this one medal for the header of 13 too (one style).
+- **Row emblems** (scalloped octagon with a Quran / letter ن / م / arrows / dots): code frame + letters in text + existing glyphs; no new asset for now.
+- **Open points:** (a) «1089 / 1500» again uses the Angular numbers that do not match its own level formula (Q2); (b) in Angular a level is only a points range, it has no lessons: here a level is a **stage with lessons**, so which lessons, from which course (level N = course N?); (c) tabs الإنجازات (of the level) and ترتيب المستوى (level ranking) have no data: «coming soon» (screen 14) in the first version; (d) the reference is almost square: in landscape 1844×853 the list **scrolls** and shows ~3 rows (header and left panel fixed).
