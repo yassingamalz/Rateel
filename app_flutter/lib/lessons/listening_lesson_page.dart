@@ -42,6 +42,9 @@ bool get _playBelow => listenPlayPos == 'below';
 /// boxes hold the whole words, harakat included).
 bool listenLitAll = false;
 
+/// Header variant under review (`?headerV=`, see [ListenMetrics.header]).
+String listenHeaderV = 'a';
+
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
 /// (brighter gold with a halo), no box. Review `?wordLight=glow`.
@@ -61,30 +64,45 @@ void _logAudio(String e) {
 class ListenMetrics {
   ListenMetrics._();
   static const side = 4.6;
-  static final header = HeaderSpec(
-    archW: ReadMetrics.archW,
-    archH: ReadMetrics.archH,
-    archTop: ReadMetrics.archTop,
-    archClipDx: ReadMetrics.archClipDx,
-    mosqueDx: ReadMetrics.mosqueDx,
-    mosqueTop: ReadMetrics.mosqueTop,
-    mosqueW: ReadMetrics.mosqueW,
-    crescentDx: ReadMetrics.crescentDx,
-    crescentTop: ReadMetrics.crescentTop,
-    crescentH: ReadMetrics.crescentH,
-    starDx: ReadMetrics.starDx,
-    starTop: ReadMetrics.starTop,
-    starH: ReadMetrics.starH,
-    titleCentre: titleCentre,
-    titleSize: titleSize,
-    dividerTop: ReadMetrics.dividerTop,
-    dividerW: ReadMetrics.dividerW,
-    dividerDiamond: ReadMetrics.dividerDiamond,
-    bookW: headW,
-    bookH: headH,
-    bookTop: headTop,
-    emblem: 'assets/ui/listening/headphones.webp',
-  );
+  static HeaderSpec get header => _header(listenHeaderV);
+
+  /// Header variants for the owner (2026-11-27, `?headerV=`): a current;
+  /// b without the arch; c without the line under the title; d arch closer
+  /// to the title, no headphones, line under the title fixed; e line under
+  /// the title fixed (lower and shorter, clear of the title), headphones
+  /// kept; f only the headphones and the title, with a small diamond.
+  static HeaderSpec _header(String v) {
+    final noArch = v == 'b' || v == 'f';
+    final fixedLine = v == 'd' || v == 'e';
+    return HeaderSpec(
+      archW: noArch ? 0 : (v == 'd' ? 86.0 : ReadMetrics.archW),
+      archH: v == 'd' ? 17.5 : ReadMetrics.archH,
+      archTop: v == 'd' ? 3.6 : ReadMetrics.archTop,
+      archClipDx: v == 'd' ? -31.0 : ReadMetrics.archClipDx,
+      mosqueDx: ReadMetrics.mosqueDx,
+      mosqueTop: ReadMetrics.mosqueTop,
+      mosqueW: ReadMetrics.mosqueW,
+      crescentDx: ReadMetrics.crescentDx,
+      crescentTop: ReadMetrics.crescentTop,
+      crescentH: ReadMetrics.crescentH,
+      starDx: ReadMetrics.starDx,
+      starTop: ReadMetrics.starTop,
+      starH: ReadMetrics.starH,
+      titleCentre: v == 'd' ? 15.6 : (v == 'f' ? 17.8 : titleCentre),
+      titleSize: titleSize,
+      dividerTop: fixedLine ? 25.4 : (v == 'f' ? 24.6 : ReadMetrics.dividerTop),
+      dividerW: v == 'c'
+          ? 0
+          : (fixedLine ? 52.0 : (v == 'f' ? 9.0 : ReadMetrics.dividerW)),
+      dividerDiamond: v == 'f' ? 1.2 : ReadMetrics.dividerDiamond,
+      book: v != 'd',
+      bookW: headW,
+      bookH: headH,
+      bookTop: v == 'f' ? 4.4 : headTop,
+      emblem: 'assets/ui/listening/headphones.webp',
+    );
+  }
+
   // Title larger than 08 (reference: ink 727–1117 px wide, centre 17.6u).
   static const titleCentre = 17.3;
   static const titleSize = 7.0;
@@ -1460,10 +1478,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
                     ),
                 ],
               ),
-              child: Text.rich(
-                word(i, w.text),
-                textDirection: TextDirection.rtl,
-              ),
+              child: _withHarakat(p, u, word(i, w.text), step?.markOf(i)),
             ),
           ),
         ],
@@ -1507,6 +1522,37 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       }
     }
     return b.toString();
+  }
+
+  /// The word, and over its rule letter one dot per haraka that lights up in
+  /// turn while the rule is held in the recitation (owner, 2026-11-27: shows
+  /// that the ghunna lasts longer than the other letters).
+  Widget _withHarakat(LessonPal p, double u, InlineSpan span, ListenMark? m) {
+    final text = Text.rich(span, textDirection: TextDirection.rtl);
+    if (m == null || m.harakat == 0 || m.holdStart == null) return text;
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        text,
+        Positioned.fill(
+          child: IgnorePointer(
+            child: CustomPaint(
+              painter: _HarakatDots(
+                span: span,
+                mark: m,
+                pos: _pos,
+                u: u,
+                colour: _ruleColour,
+                dim: p
+                    .c(RateelColors.leaderText, RateelColors.readLInk)
+                    .withValues(alpha: 0.22),
+                light: p.t > 0.5,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   /// Bottom row of a rule ayah: the rule pill (its colour dot and name) and
@@ -2248,4 +2294,75 @@ class _InkTextPainter extends CustomPainter {
   @override
   bool shouldRepaint(_InkTextPainter o) =>
       o.ink != ink || o.tp.text != tp.text || o.maxW != maxW || o.maxH != maxH;
+}
+
+/// Dots of the harakat over a rule letter: dim until the rule is held, then
+/// one lights up per haraka (rule colour, small halo); they stay lit until the
+/// ayah starts again. Repaints with the audio position only.
+class _HarakatDots extends CustomPainter {
+  _HarakatDots({
+    required this.span,
+    required this.mark,
+    required this.pos,
+    required this.u,
+    required this.colour,
+    required this.dim,
+    required this.light,
+  }) : super(repaint: pos);
+
+  final InlineSpan span;
+  final ListenMark mark;
+  final ValueNotifier<int> pos;
+  final double u;
+  final Color colour;
+  final Color dim;
+  final bool light;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final tp = TextPainter(text: span, textDirection: TextDirection.rtl)
+      ..layout(maxWidth: size.width + 1);
+    final boxes = tp.getBoxesForSelection(
+      TextSelection(baseOffset: mark.from, extentOffset: mark.to),
+    );
+    if (boxes.isEmpty) return;
+    var r = boxes.first.toRect();
+    for (final b in boxes.skip(1)) {
+      r = r.expandToInclude(b.toRect());
+    }
+    final n = mark.harakat;
+    final start = mark.holdStart!, end = mark.holdEnd!;
+    final step = (end - start) / n;
+    final now = pos.value;
+    final d = u * 1.45;
+    final gap = u * 2.4;
+    // Just above the letter and its harakat (shadda + fatha reach about one
+    // font size above the baseline in Amiri Quran).
+    final lm = tp.computeLineMetrics();
+    final base = lm.isEmpty ? r.bottom : lm.first.baseline;
+    final y = base - u * ListenMetrics.verseSize * 1.24;
+    final x0 = r.center.dx - gap * (n - 1) / 2;
+    for (var k = 0; k < n; k++) {
+      final on = now >= start + step * k && now > 0;
+      final c = Offset(x0 + gap * k, y);
+      if (on && !light) {
+        canvas.drawCircle(
+          c,
+          d * 1.3,
+          Paint()
+            ..color = colour.withValues(alpha: 0.55)
+            ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6),
+        );
+      }
+      canvas.drawCircle(
+        c,
+        d / 2 * (on ? 1.15 : 1),
+        Paint()..color = on ? colour : dim,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_HarakatDots o) =>
+      o.mark != mark || o.u != u || o.colour != colour || o.span != span;
 }

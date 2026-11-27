@@ -80,17 +80,34 @@ class ListenRule {
 /// Letters [from, to) of word [word] that carry the rule (owner, 2026-11-26:
 /// the letter is coloured, not the whole word: a word can hold several rules).
 class ListenMark {
-  const ListenMark(this.word, this.from, this.to);
+  const ListenMark(
+    this.word,
+    this.from,
+    this.to, {
+    this.holdStart,
+    this.holdEnd,
+    this.harakat = 0,
+  });
 
   final int word;
   final int from;
   final int to;
+
+  /// Where the rule is held in the audio (ms) and for how many harakat
+  /// (owner, 2026-11-27: dots over the letter light up one per haraka).
+  final int? holdStart;
+  final int? holdEnd;
+  final int harakat;
 }
 
 /// One ayah of a rule lesson: [marks] hold the rule (coloured letters),
 /// [note] says where it is.
 class ListenStep {
-  const ListenStep({required this.ayah, required this.marks, required this.note});
+  const ListenStep({
+    required this.ayah,
+    required this.marks,
+    required this.note,
+  });
 
   final ListenAyah ayah;
   final List<ListenMark> marks;
@@ -171,30 +188,33 @@ class ListenContent {
                 r['colour'] as String,
               ),
         steps: [
-          for (final s in (j['steps'] as List? ?? const [])
-              .cast<Map<String, dynamic>>())
+          for (final s
+              in (j['steps'] as List? ?? const []).cast<Map<String, dynamic>>())
             ListenStep(
               ayah: ayat[s['ayah'] as String]!,
               marks: [
-                for (final m in (s['marks'] as List)
-                    .cast<Map<String, dynamic>>())
+                for (final m
+                    in (s['marks'] as List).cast<Map<String, dynamic>>())
                   ListenMark(
                     m['word'] as int,
                     (m['letters'] as List)[0] as int,
                     (m['letters'] as List)[1] as int,
+                    holdStart: (m['hold'] as List?)?[0] as int?,
+                    holdEnd: (m['hold'] as List?)?[1] as int?,
+                    harakat: m['harakat'] as int? ?? 0,
                   ),
               ],
               note: s['note'] as String,
             ),
         ],
         finds: [
-          for (final f in (j['finds'] as List? ?? const [])
-              .cast<Map<String, dynamic>>())
+          for (final f
+              in (j['finds'] as List? ?? const []).cast<Map<String, dynamic>>())
             ListenStep(
               ayah: ayat[f['ayah'] as String]!,
               marks: [
-                for (final m in (f['marks'] as List)
-                    .cast<Map<String, dynamic>>())
+                for (final m
+                    in (f['marks'] as List).cast<Map<String, dynamic>>())
                   ListenMark(
                     m['word'] as int,
                     (m['letters'] as List)[0] as int,
@@ -204,8 +224,9 @@ class ListenContent {
               note: '',
             ),
         ],
-        narration: (j['narration'] as Map<String, dynamic>? ?? const {})
-            .map((k, v) => MapEntry(k, v as String)),
+        narration: (j['narration'] as Map<String, dynamic>? ?? const {}).map(
+          (k, v) => MapEntry(k, v as String),
+        ),
         title: j['title'] as String,
         reciter: j['reciter'] as String,
         points: j['pointsPerQuestion'] as int? ?? 10,
@@ -231,7 +252,9 @@ class ListenContent {
 /// for the letter question of a rule lesson.
 List<(int, int)> letterClusters(String word) {
   bool mark(int c) =>
-      (c >= 0x064B && c <= 0x065F) || c == 0x0670 || (c >= 0x06D6 && c <= 0x06ED);
+      (c >= 0x064B && c <= 0x065F) ||
+      c == 0x0670 ||
+      (c >= 0x06D6 && c <= 0x06ED);
   final out = <(int, int)>[];
   var i = 0;
   while (i < word.length) {

@@ -110,3 +110,10 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   lesson finishes; letters such as س، ل، ن went out of their circles → ink-centred drawing (measured off-screen once
   per letter and size). Checks: audio log of the whole lesson (no overlap), zoomed captures of the letter pills.
 - Owner: approve after these fixes, then PR and merge into `master`.
+
+## 12. After the merge: harakat dots and header variants (v14, 2026-11-27)
+- PR #56 merged; follow-up on `flutter/22-listening-lesson-2` from `master`.
+- Owner: two dots over the rule letter that light up one after the other (2 harakat of ghunna), so the learner sees that the
+  letter lasts longer. Built: `hold` (nasal stretch measured on the energy envelope) and `harakat` per mark; dots drawn just
+  above the letter's harakat (from the text baseline), dim until the hold starts, then one per haraka in the rule colour.
+- Owner: the decorative line in the header must go or be fixed: six variants `?headerV=a..f`, sheet `header-variants-v14.jpg`.

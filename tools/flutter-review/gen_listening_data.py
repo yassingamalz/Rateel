@@ -42,6 +42,14 @@ STEPS = [  # ayah, rule word indexes, note; the rule is on the letter(s) found b
     ('114006', [1, 2], 'في «الجِنَّة» و«النَّاس» نون مشددة: غنة بمقدار حركتين.'),
     ('108001', [0], f'«إِنَّا»: {NOTE}'),
 ]
+# Ghunna «hold» of each rule letter (ms in the ayah audio): the nasal stretch measured on the 50 ms energy envelope
+# (steady low level after the vowel). The lesson lights one dot per haraka over it (owner, 2026-11-27: 2 harakat).
+HOLDS = {
+    ('114001', 3): (4000, 4900), ('114002', 1): (1250, 2300), ('114003', 1): (1750, 2550),
+    ('114004', 3): (5600, 6250), ('114005', 4): (6800, 7500), ('114006', 1): (1900, 2900),
+    ('114006', 2): (4250, 5250), ('108001', 0): (400, 1350), ('108003', 0): (300, 1400),
+}
+HARAKAT = 2  # ghunna of a doubled nun / meem
 MARKS = set(range(0x064B, 0x0660)) | {0x0670} | set(range(0x06D6, 0x06EE))
 
 
@@ -94,7 +102,8 @@ def write(lesson, steps, questions, title, finds=(), narration=None):
     data = {'id': lesson, 'title': title, 'reciter': 'الحصري', 'pointsPerQuestion': 10,
             'rule': {'name': 'الغنة', 'short': 'غنة', 'colour': 'green'} if steps else None,
             'ayat': [ayah(k) for k in keys],
-            'steps': [{'ayah': a, 'marks': [{'word': i, 'letters': rule_letters(AYAT[a][1].split(' ')[i])} for i in w],
+            'steps': [{'ayah': a, 'marks': [{'word': i, 'letters': rule_letters(AYAT[a][1].split(' ')[i]),
+                                              'hold': list(HOLDS[(a, i)]), 'harakat': HARAKAT} for i in w],
                        'note': n} for a, w, n in steps],
             'finds': [{'ayah': a, 'marks': [{'word': w, 'letters': rule_letters(AYAT[a][1].split(' ')[w])}]}
                       for a, w in finds],
