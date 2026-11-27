@@ -279,18 +279,19 @@ class _LessonEndOverlayState extends State<LessonEndOverlay>
     final r = widget.result;
     final tiles = <Widget>[
       // RTL: the streak on the right, the answers, the points on the left.
-      if (dailyStreak.value > 0)
-        _Tile(
-          u: u,
-          p: p,
-          icon: Image.asset(
-            'assets/ui/test/flame.webp',
-            width: u * _M.iconD,
-            height: u * _M.iconD,
-          ),
-          value: '${dailyStreak.value}',
-          label: 'يوم متتالي',
+      // Always shown, at least 1: finishing a lesson today is already the
+      // first day (owner, 2026-11-27).
+      _Tile(
+        u: u,
+        p: p,
+        icon: Image.asset(
+          'assets/ui/test/flame.webp',
+          width: u * _M.iconD,
+          height: u * _M.iconD,
         ),
+        value: '${math.max(1, dailyStreak.value)}',
+        label: 'يوم متتالي',
+      ),
       if (r.right != null && r.total != null)
         _Tile(
           u: u,
