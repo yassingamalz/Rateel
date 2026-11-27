@@ -56,8 +56,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Long press completes** a course / unit / lesson at once (review aid for testing; owner 2026-11-26: fine for
       now, **remove before release**): `courses_screen.dart` (onLongPress ≈ l. 384), `units_screen.dart` (≈ l. 452),
       `lessons_screen.dart` (≈ l. 442), and the same on the challenges of 12.
-- [ ] **Test sounds to improve** (owner, 2026-11-26), above all the **completion (passed)** and the **correct answer**
-      (now plinkfx level-up / gem, CC0): `assets/sounds/test_*.mp3`, sampler in `docs/design-assets/test-lesson/sounds/`.
+- [x] **Test sounds to improve**: done 2026-11-27, owner picked **C8 plinkfx checkpoint** (correct) and **P7 plinkfx
+      level-complete** (passed) from `docs/design-assets/test-lesson/sounds/sampler-2026-11-27.mp4`.
 - [ ] **End-of-test popup** (score, points, pass/fail, countdown) removed from 10 (owner: the results show the same);
       designs A/B in `screens/10-test-lesson/end-popup-variants-v6.jpg` if it comes back.
 - [ ] Lightbulb (recommendations) and ↻ (not passed) are still Material icons in the lesson gold: drawn ones if wanted.
@@ -113,7 +113,7 @@ Placeholders to replace before release:
 - [ ] **Mock data**: the 12 badges, their requirements, rewards and progress (4 earned, M05 34/50…) are invented (`lib/badges/badge_data.dart`) and live in memory only. Wire them to real progress (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a requirement is reached; save progress; M09 needs screen 09 (recordings).
 - [ ] **Rewards** («5K», «100»…) are display only: add the coins to the points when real data exists.
 - [ ] **Rail count bubble** of «الإنجازات» (5) is a demo value: use the number of earned badges.
-- [ ] **Celebration sound and haptics** reuse the test «passed» sound (`Sounds.passed`): choose a dedicated sound with the other test sounds.
+- [x] **Celebration sound** of 27: keeps `Sounds.passed`, now P7 plinkfx level-complete (owner, 2026-11-27, with the test sounds).
 - [ ] **Review aids** to remove or keep hidden at release: `?earn=`, `?medals=`, `?section=`.
 - [ ] **Unused kit** in the library: `blank_olive`, `blank_gold`, `l1` (locked medal) are spare.
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
