@@ -13,3 +13,7 @@
   session: `angular-completion-modal.jpg`.
 - Plan v1 and questions Q1–Q7: `../24-end-of-lesson.md`. Reference prompts 24-A (dark) and 24-B (light):
   `../../prompts/24-end-of-lesson/reference-v1.txt`. Waiting for the owner's reference images and the yes on the plan.
+
+## 2. Postponed (2026-11-27)
+- Owner: «skip the end of lesson for now, I think it will not be needed». Plan and prompts kept; item in `BACKLOG.md`.
+  The owner sent references for 27 (badges) and 28 (help overlay) instead.
