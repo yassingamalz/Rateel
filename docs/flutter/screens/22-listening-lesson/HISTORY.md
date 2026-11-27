@@ -104,3 +104,9 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   replay stop the guide. Checked headless with the audio log (`?logAudio=1`): order and no overlap.
 - Fix found in the same check: replay of the word stalled when the answer came while the ayah was still playing.
 - No demo video this time (owner); APK for the approval.
+
+## 11. Final fixes and approval (v13, 2026-11-27)
+- Owner (phone, 1.0.484): guide and reciter sometimes overlapped near the end → pending replays are cancelled when the
+  lesson finishes; letters such as س، ل، ن went out of their circles → ink-centred drawing (measured off-screen once
+  per letter and size). Checks: audio log of the whole lesson (no overlap), zoomed captures of the letter pills.
+- Owner: approve after these fixes, then PR and merge into `master`.

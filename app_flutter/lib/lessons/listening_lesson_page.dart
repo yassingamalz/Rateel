@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:material_ui/material_ui.dart';
@@ -436,7 +437,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   /// stops there (the asked word after an answer).
   Future<void> _play({int fromMs = 0, int? toMs}) async {
     final a = _ayah;
-    if (a == null) return;
+    // A replay still pending when the lesson ends must not cover the guide's
+    // closing line (owner, 2026-11-26: the two voices overlapped at the end).
+    if (a == null || _finishing || _left) return;
     _stopAt = toMs;
     _playing.value = true;
     _seekTo = fromMs > 0 ? fromMs : null;
@@ -524,7 +527,7 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
   /// The guide says line [key] (`audio/narration/orus/<key>.mp3`); completes
   /// when it has finished (at most 9 s), at once when there is no line.
   Future<void> _say(String? key) async {
-    if (key == null || !mounted) return;
+    if (key == null || !mounted || (_finishing && key != 'done')) return;
     _player.pause();
     _playing.value = false;
     final done = _voiceDone = Completer<void>();
@@ -1831,46 +1834,67 @@ class _AnswerPill extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Padding(
-                        // Readex sets Arabic low in its line box (lift).
-                        // Amiri sits low in a pill: lift it a little.
-                        padding: EdgeInsets.only(
-                          bottom: u * (quran ? 0.9 : 0.45),
+                  if (quran)
+                    // Letters and words of the verse: centred on their real
+                    // ink (س، ل، ن… go below the line), so they stay inside
+                    // the pill (owner, 2026-11-26).
+                    Expanded(
+                      child: _InkCentered(
+                        text: label,
+                        style: TextStyle(
+                          fontFamily: 'AmiriQuran',
+                          fontSize:
+                              u *
+                              ListenMetrics.pillText *
+                              (letter ? 1.35 : 1.15),
+                          height: 1.0,
+                          color: ink,
                         ),
-                        child: Text(
-                          label,
-                          textDirection: TextDirection.rtl,
-                          maxLines: 1,
-                          style: quran
-                              ? TextStyle(
-                                  fontFamily: 'AmiriQuran',
-                                  fontSize:
-                                      u *
-                                      ListenMetrics.pillText *
-                                      (letter ? 1.35 : 1.15),
-                                  // Amiri's line box is tall: height 1 keeps
-                                  // the letter and its marks inside the pill.
-                                  height: 1.0,
-                                  color: ink,
-                                )
-                              : readex(
-                                  u *
-                                      ListenMetrics.pillText *
-                                      (hint ? 0.82 : 1),
-                                  weight: state == _PillState.selected
-                                      ? 700
-                                      : (hint ? 400 : 500),
-                                  color: hint
-                                      ? ink.withValues(alpha: 0.7)
-                                      : ink,
-                                ).copyWith(height: 1.2),
+                        maxHeight: letter ? 0.6 : 0.7,
+                        maxWidth: letter ? 0.75 : 1.0,
+                      ),
+                    )
+                  else
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Padding(
+                          // Readex sets Arabic low in its line box (lift).
+                          // Amiri sits low in a pill: lift it a little.
+                          padding: EdgeInsets.only(
+                            bottom: u * (quran ? 0.9 : 0.45),
+                          ),
+                          child: Text(
+                            label,
+                            textDirection: TextDirection.rtl,
+                            maxLines: 1,
+                            style: quran
+                                ? TextStyle(
+                                    fontFamily: 'AmiriQuran',
+                                    fontSize:
+                                        u *
+                                        ListenMetrics.pillText *
+                                        (letter ? 1.35 : 1.15),
+                                    // Amiri's line box is tall: height 1 keeps
+                                    // the letter and its marks inside the pill.
+                                    height: 1.0,
+                                    color: ink,
+                                  )
+                                : readex(
+                                    u *
+                                        ListenMetrics.pillText *
+                                        (hint ? 0.82 : 1),
+                                    weight: state == _PillState.selected
+                                        ? 700
+                                        : (hint ? 400 : 500),
+                                    color: hint
+                                        ? ink.withValues(alpha: 0.7)
+                                        : ink,
+                                  ).copyWith(height: 1.2),
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   if (mark) ...[
                     SizedBox(width: u * 1.6),
                     _MarkDisc(
@@ -2093,4 +2117,135 @@ class _LetterInState extends State<_LetterIn>
       );
     },
   );
+}
+
+/// Quran text drawn centred on its **ink** (the glyphs and their marks), not
+/// on its line box: Arabic letters such as س، ل، ن، ي go below the line and
+/// the harakat above it, so a line-box centre puts some of them out of a pill.
+/// The ink is measured once per text and size (drawn off-screen), then the
+/// text is scaled to at most [maxHeight] × [maxWidth] of the box.
+class _InkCentered extends StatefulWidget {
+  const _InkCentered({
+    required this.text,
+    required this.style,
+    this.maxHeight = 0.6,
+    this.maxWidth = 0.8,
+  });
+
+  final String text;
+  final TextStyle style;
+  final double maxHeight;
+  final double maxWidth;
+
+  static final _cache = <String, Rect>{};
+
+  @override
+  State<_InkCentered> createState() => _InkCenteredState();
+}
+
+class _InkCenteredState extends State<_InkCentered> {
+  Rect? _ink;
+
+  String get _key => '${widget.text}|${widget.style.fontSize}';
+
+  TextPainter _painter() => TextPainter(
+    text: TextSpan(text: widget.text, style: widget.style),
+    textDirection: TextDirection.rtl,
+  )..layout();
+
+  @override
+  void initState() {
+    super.initState();
+    _ink = _InkCentered._cache[_key];
+    if (_ink == null) _measure();
+  }
+
+  @override
+  void didUpdateWidget(_InkCentered old) {
+    super.didUpdateWidget(old);
+    if (old.text != widget.text ||
+        old.style.fontSize != widget.style.fontSize) {
+      _ink = _InkCentered._cache[_key];
+      if (_ink == null) _measure();
+    }
+  }
+
+  Future<void> _measure() async {
+    final key = _key;
+    final tp = _painter();
+    final pad = (widget.style.fontSize ?? 20) * 0.8;
+    const k = 2.0; // measuring resolution
+    final w = ((tp.width + pad * 2) * k).ceil();
+    final h = ((tp.height + pad * 2) * k).ceil();
+    final rec = ui.PictureRecorder();
+    final c = Canvas(rec)..scale(k);
+    tp.paint(c, Offset(pad, pad));
+    final img = await rec.endRecording().toImage(w, h);
+    final data = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
+    img.dispose();
+    if (data == null || !mounted) return;
+    var x0 = w, y0 = h, x1 = -1, y1 = -1;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        if (data.getUint8((y * w + x) * 4 + 3) > 24) {
+          if (x < x0) x0 = x;
+          if (x > x1) x1 = x;
+          if (y < y0) y0 = y;
+          if (y > y1) y1 = y;
+        }
+      }
+    }
+    if (x1 < 0) return;
+    final ink = Rect.fromLTRB(
+      x0 / k - pad,
+      y0 / k - pad,
+      (x1 + 1) / k - pad,
+      (y1 + 1) / k - pad,
+    );
+    _InkCentered._cache[key] = ink;
+    if (mounted && key == _key) setState(() => _ink = ink);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ink = _ink;
+    if (ink == null) return const SizedBox.expand();
+    return SizedBox.expand(
+      child: CustomPaint(
+        painter: _InkTextPainter(
+          _painter(),
+          ink,
+          widget.maxWidth,
+          widget.maxHeight,
+        ),
+      ),
+    );
+  }
+}
+
+class _InkTextPainter extends CustomPainter {
+  _InkTextPainter(this.tp, this.ink, this.maxW, this.maxH);
+
+  final TextPainter tp;
+  final Rect ink;
+  final double maxW;
+  final double maxH;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final s = math.min(
+      1.0,
+      math.min(size.width * maxW / ink.width, size.height * maxH / ink.height),
+    );
+    canvas.save();
+    canvas.translate(size.width / 2, size.height / 2);
+    canvas.scale(s);
+    canvas.translate(-ink.center.dx, -ink.center.dy);
+    tp.paint(canvas, Offset.zero);
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_InkTextPainter o) =>
+      o.ink != ink || o.tp.text != tp.text || o.maxW != maxW || o.maxH != maxH;
 }
