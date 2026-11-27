@@ -117,3 +117,4 @@ short explanation) · Q7 **Amiri Quran** · Q8 **new headphones asset** (prompt 
   letter lasts longer. Built: `hold` (nasal stretch measured on the energy envelope) and `harakat` per mark; dots drawn just
   above the letter's harakat (from the text baseline), dim until the hold starts, then one per haraka in the rule colour.
 - Owner: the decorative line in the header must go or be fixed: six variants `?headerV=a..f`, sheet `header-variants-v14.jpg`.
+- Owner chose header **variant 3** (no line under the title).

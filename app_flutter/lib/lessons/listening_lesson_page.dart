@@ -43,7 +43,7 @@ bool get _playBelow => listenPlayPos == 'below';
 bool listenLitAll = false;
 
 /// Header variant under review (`?headerV=`, see [ListenMetrics.header]).
-String listenHeaderV = 'a';
+String listenHeaderV = 'c'; // owner's choice (2026-11-27): no line under the title
 
 /// How the recited word lights up (owner, 2026-11-26, to compare): `box` a
 /// soft gold box around the word, `glow` the letters themselves light up
