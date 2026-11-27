@@ -71,9 +71,10 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Android native splash in the same green, so nothing flashes before Flutter starts.
 
 ## Lesson content (`docs/content/`, branch of the content review)
-- [ ] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): the review of
-      2026-11-27 (`docs/content/REVIEW-2026-11-27.md`) checked every Quran reference and every rule, but could not open
-      the 22 PDFs (Drive download refused in that session). Items are marked `book_page_pending`.
+- [ ] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
+      chapter into `docs/content/sources/musawwar/` and compare. **Done: ch. 10.** To do: the other 21 chapters
+      (next: 11 madd, 07 sifat). PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
+      (ids in `lesson-production:docs/production/LESSONS-TRACKER.md`).
 - [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
       (`REVIEW-2026-11-27.md`, «Still open»).
 - [ ] Write the optional tashil/ibdal topic (آلذكرين، آلآن، آلله) and الاسم (49:11).

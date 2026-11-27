@@ -1713,8 +1713,8 @@
     {
       "topicId": "U3.L10.LEVELS",
       "titleAr": "مراتب الغنة",
-      "source": "book ch. 10 pp. 306–310 (أزمنة الغنن) — page check pending",
-      "explanationAr": "للغنة أربع مراتب: أكمل ما تكون في النون والميم المشددتين ومنه المدغم إدغامًا كاملًا بغنة؛ ثم كاملة في المخفى من إخفاء حقيقي وإقلاب وإخفاء شفوي؛ ثم ناقصة في النون والميم الساكنتين المظهرتين؛ ثم أنقص ما تكون في النون والميم المتحركتين المخففتين. ويحافظ على التناسب بين هذه المراتب في كل سرعة.",
+      "source": "book ch. 10 pp. 307–310 (أزمنة الغنن) — checked against the book 2026-11-27",
+      "explanationAr": "لأزمنة الغنن أربع مراتب: أكمل ما تكون في النون والميم المشددتين والمدغمتين، ومنه الإدغام في الياء والواو نحو فمن يعمل؛ ثم كاملة في النون والميم المخفاتين، ومنه الإقلاب والإخفاء الشفوي؛ ثم ناقصة في النون والميم الساكنتين المظهرتين؛ ثم أنقص ما تكون في النون والميم المتحركتين. ويبقى التناسب بين أزمنة الغنن متحققًا مهما كانت سرعة القراءة من تحقيق أو تدوير أو حدر.",
       "examples": [
         {
           "id": "U3.L10.LEVELS.POOL99.E1",
@@ -1849,6 +1849,32 @@
           "text": "الغنة في الإقلاب من مرتبة الكاملة.",
           "correctAnswer": true,
           "feedbackAr": "الإقلاب إخفاء للميم المقلوبة."
+        },
+        {
+          "id": "U3.L10.LEVELS.POOL99.Q5",
+          "topicId": "U3.L10.LEVELS",
+          "objective": "ghunna_levels",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L10.LEVELS",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة الغنة في فَمَنْ يَعْمَلْ عند الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "أكمل ما تكون"
+            },
+            {
+              "id": "2",
+              "text": "كاملة"
+            },
+            {
+              "id": "3",
+              "text": "ناقصة"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "النون المدغمة غنتها أكمل ما تكون، ومنه الإدغام في الياء والواو."
         }
       ]
     },
@@ -2041,6 +2067,208 @@
           "text": "المبالغة في تكرير الراء من كمال الأداء.",
           "correctAnswer": false,
           "feedbackAr": "يجب إخفاء التكرير لا إظهاره."
+        }
+      ]
+    },
+    {
+      "topicId": "U5.BOOK10",
+      "titleAr": "تفصيلات أداء النون والميم وأبرز أخطائهما",
+      "source": "book ch. 10 pp. 261, 269, 292, 301–303, 306 — checked against the book 2026-11-27",
+      "explanationAr": "عند إخفاء النون أو التنوين يتهيأ الفم على مخرج الحرف الآتي مع غنة كاملة من الخيشوم، وتفخم الغنة إذا جاء بعدها حرف مفخم وترقق إذا جاء بعدها حرف مرقق. وعند الإخفاء الشفوي والإقلاب تنطبق الشفتان دون فرجة ولا كز، وترك الفرجة أمر محدث. ومن أبرز الأخطاء: إظهار النون والتنوين عند حروف الإدغام والقلب والإخفاء، وإدغامهما في الواو والياء بغير غنة، وجعل الفم على هيئة واحدة عند حروف الإخفاء جميعًا، وتطويل الغنة زيادة عن المطلوب، وإخفاؤهما عند الغين والخاء؛ وفي الميم الساكنة: إطالة غنتها عند إظهارها، وتقصيرها عند إدغامها أو إخفائها، وإخفاؤها عند الواو والفاء.",
+      "examples": [
+        {
+          "id": "U5.BOOK10.POOL99.E1",
+          "topicId": "U5.BOOK10",
+          "verseRef": "54:19",
+          "excerptAr": "رِيحًا صَرْصَرًا",
+          "focus": "التنوين قبل الصاد",
+          "rule": "إخفاء بغنة مفخمة",
+          "explanation": "الصاد حرف مفخم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.BOOK10.POOL99.E2",
+          "topicId": "U5.BOOK10",
+          "verseRef": "4:79",
+          "excerptAr": "فَمِنْ نَفْسِكَ",
+          "focus": "مثال مقابل: إدغام",
+          "rule": "إدغام بغنة",
+          "explanation": "النون قبل النون.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.BOOK10.POOL99.E3",
+          "topicId": "U5.BOOK10",
+          "verseRef": "6:99",
+          "excerptAr": "قِنْوَانٌ",
+          "focus": "النون قبل الواو في كلمة",
+          "rule": "إظهار مطلق",
+          "explanation": "لا إدغام في كلمة واحدة.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U5.BOOK10.POOL99.E4",
+          "topicId": "U5.BOOK10",
+          "verseRef": "84:19",
+          "excerptAr": "عَنْ طَبَقٍ",
+          "focus": "النون قبل الطاء",
+          "rule": "إخفاء بغنة مفخمة",
+          "explanation": "الطاء حرف مفخم.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.BOOK10.POOL99.Q1",
+          "topicId": "U5.BOOK10",
+          "objective": "ikhfa_tafkhim",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما صفة الغنة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مفخمة"
+            },
+            {
+              "id": "2",
+              "text": "مرققة"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "تفخم الغنة قبل الحرف المفخم.",
+          "exampleId": "U5.BOOK10.POOL99.E1"
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q2",
+          "topicId": "U5.BOOK10",
+          "objective": "ikhfa_tafkhim",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما صفة الغنة في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مرققة"
+            },
+            {
+              "id": "2",
+              "text": "مفخمة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الطاء حرف مفخم.",
+          "exampleId": "U5.BOOK10.POOL99.E4"
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q3",
+          "topicId": "U5.BOOK10",
+          "objective": "ikhfa_tafkhim",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما صفة الغنة في الإخفاء قبل السين كما في الْإِنْسَانُ؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مفخمة"
+            },
+            {
+              "id": "2",
+              "text": "مرققة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تبقى مرققة لأن السين مرققة."
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q4",
+          "topicId": "U5.BOOK10",
+          "objective": "lips",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف تكون الشفتان عند الإخفاء الشفوي والإقلاب؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "منفرجتين قليلًا"
+            },
+            {
+              "id": "2",
+              "text": "منطبقتين دون فرجة ولا كز"
+            },
+            {
+              "id": "3",
+              "text": "مضغوطتين بقوة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "ترك الفرجة أمر محدث، والكز تكلف."
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q5",
+          "topicId": "U5.BOOK10",
+          "objective": "noon_errors",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "جعل الفم على هيئة واحدة عند جميع حروف الإخفاء أداء صحيح.",
+          "correctAnswer": false,
+          "feedbackAr": "يتهيأ الفم على مخرج الحرف الآتي."
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q6",
+          "topicId": "U5.BOOK10",
+          "objective": "meem_errors",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "من الأخطاء إخفاء الميم الساكنة قبل الفاء.",
+          "correctAnswer": true,
+          "feedbackAr": "تظهر الميم قبل الفاء والواو."
+        },
+        {
+          "id": "U5.BOOK10.POOL99.Q7",
+          "topicId": "U5.BOOK10",
+          "objective": "noon_errors",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U5.BOOK10",
+          "status": "draft_pending_book_check",
+          "type": "multipleChoice",
+          "text": "اختر من أبرز أخطاء النون الساكنة والتنوين.",
+          "options": [
+            {
+              "id": "1",
+              "text": "إدغامهما في الواو والياء بغير غنة"
+            },
+            {
+              "id": "2",
+              "text": "إخفاؤهما عند الغين والخاء"
+            },
+            {
+              "id": "3",
+              "text": "تطويل الغنة زيادة عن المطلوب"
+            },
+            {
+              "id": "4",
+              "text": "إظهارهما عند الحاء"
+            }
+          ],
+          "correctAnswer": [
+            "1",
+            "2",
+            "3"
+          ],
+          "feedbackAr": "إظهارهما عند الحاء هو الصواب."
         }
       ]
     }
