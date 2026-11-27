@@ -2195,10 +2195,31 @@
     },
     {
       "topicId": "U4.L1.LIST",
-      "titleAr": "من أبرز أخطاء نطق الحروف",
-      "source": "book ch. 08 (أبرز الأخطاء) — content must be aligned with the book list",
-      "explanationAr": "من الأخطاء الشائعة: نطق الضاد ظاء أو دالًا مفخمة، وترقيق الطاء والقاف، وتفخيم الحروف المستفلة إذا جاورت المستعلية، ونطق الثاء سينًا والذال زايًا والظاء زايًا مفخمة، وإبدال الحاء هاء والعين همزة، وقلقلة الكاف والتاء، والمبالغة في تكرير الراء، وإشباع الحركات حتى تتولد حروف مد، واختلاسها.",
-      "examples": [],
+      "titleAr": "من أبرز الأخطاء عند نطق حروف الهجاء",
+      "source": "book ch. 08 pp. 208–228 — checked against the book 2026-11-27",
+      "explanationAr": "من أبرز الأخطاء التي ذكرها التجويد المصور: إبدال الضاد ظاء أو دالًا، ونطق فراغ صوتي بزعم استطالتها، وقلقلتها، وإخراج غنة معها؛ وإبدال الظاء صادًا مشمة زايًا، والذال زايًا، والثاء سينًا أو تاء، وإخراج طرف اللسان زيادة عن الحد؛ وإبدال الحاء خاء أو هاء، ونطق العين شبه الهمزة، وتفخيم الهمزة والهاء؛ ونطق القاف قريبة من الكاف أو مثل حرف G، ونطق الكاف شبيهة بالقاف، ونطق الجيم رخوة أو كحرف G أو قلبها ياء؛ وقلقلة الغين والضاد والنون والميم إذا سكنت، وعدم قلقلة الباء الساكنة؛ وترقيق الطاء والصاد وتفخيم السين والتاء والدال؛ والمبالغة في تكرير الراء ونطقها شديدة أو بضم الشفتين؛ وخلط صوت حروف المد والياء والنون واللام بالغنة، وتطنين الغنة.",
+      "examples": [
+        {
+          "id": "U4.L1.LIST.POOL99.E1",
+          "topicId": "U4.L1.LIST",
+          "verseRef": "1:7",
+          "excerptAr": "وَلَا الضَّالِّينَ",
+          "focus": "الضاد",
+          "rule": "مخرج الضاد",
+          "explanation": "لا تبدل ظاء ولا دالًا، ولا ينطق فراغ صوتي بزعم استطالتها.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.E2",
+          "topicId": "U4.L1.LIST",
+          "verseRef": "1:7",
+          "excerptAr": "أَنْعَمْتَ",
+          "focus": "النون والميم الساكنتان",
+          "rule": "بلا قلقلة",
+          "explanation": "من الأخطاء قلقلة النون أو الميم إذا سكنتا.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
       "questions": [
         {
           "id": "U4.L1.LIST.POOL99.Q1",
@@ -2208,7 +2229,7 @@
           "variantFamily": "review99-U4.L1.LIST",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
-          "text": "ما الخطأ في نطق الضاد ظاء؟",
+          "text": "ما الخطأ في إبدال الضاد ظاء في ضَلَّ؟",
           "options": [
             {
               "id": "1",
@@ -2234,31 +2255,46 @@
           "variantFamily": "review99-U4.L1.LIST",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
-          "text": "أي الحرفين لا يقلقل؟",
+          "text": "ما الخطأ المحتمل في الموضع المحدد إذا سكنت النون والميم؟",
           "options": [
             {
               "id": "1",
-              "text": "القاف"
+              "text": "قلقلتهما"
             },
             {
               "id": "2",
-              "text": "الكاف"
+              "text": "إظهارهما"
             }
           ],
-          "correctAnswer": "2",
-          "feedbackAr": "الكاف ليست من قطب جد، وقلقلتها خطأ."
+          "correctAnswer": "1",
+          "feedbackAr": "النون والميم ليستا من حروف القلقلة.",
+          "exampleId": "U4.L1.LIST.POOL99.E2"
         },
         {
           "id": "U4.L1.LIST.POOL99.Q3",
           "topicId": "U4.L1.LIST",
           "objective": "error_type",
-          "difficulty": "beginner",
+          "difficulty": "intermediate",
           "variantFamily": "review99-U4.L1.LIST",
           "status": "draft_pending_book_check",
-          "type": "trueFalse",
-          "text": "ترقيق الطاء من الأخطاء الشائعة لأنها مستعلية مطبقة.",
-          "correctAnswer": true,
-          "feedbackAr": "تفخم الطاء دائمًا."
+          "type": "singleChoice",
+          "text": "أي هذه من أخطاء نطق القاف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نطقها قريبة من الكاف"
+            },
+            {
+              "id": "2",
+              "text": "نطقها شديدة مجهورة"
+            },
+            {
+              "id": "3",
+              "text": "تفخيمها"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "القاف مستعلية شديدة مجهورة، والخطأ تقريبها من الكاف أو همسها."
         },
         {
           "id": "U4.L1.LIST.POOL99.Q4",
@@ -2267,10 +2303,72 @@
           "difficulty": "intermediate",
           "variantFamily": "review99-U4.L1.LIST",
           "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي هذه من أخطاء نطق الجيم؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نطقها شديدة"
+            },
+            {
+              "id": "2",
+              "text": "نطقها رخوة"
+            },
+            {
+              "id": "3",
+              "text": "قلقلتها إذا سكنت"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الجيم شديدة، ونطقها رخوة خطأ."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q5",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "ترقيق الطاء من الأخطاء لأنها مستعلية مطبقة.",
+          "correctAnswer": true,
+          "feedbackAr": "تفخم الطاء دائمًا."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q6",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
           "type": "trueFalse",
           "text": "المبالغة في تكرير الراء من كمال الأداء.",
           "correctAnswer": false,
-          "feedbackAr": "يجب إخفاء التكرير لا إظهاره."
+          "feedbackAr": "يحذر القارئ من المبالغة في التكرير."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q7",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "وضع طرف اللسان عند اللثة في نطق الظاء والذال والثاء صحيح لأنها حروف لثوية.",
+          "correctAnswer": false,
+          "feedbackAr": "تخرج من طرف اللسان مع أطراف الثنايا العليا."
+        },
+        {
+          "id": "U4.L1.LIST.POOL99.Q8",
+          "topicId": "U4.L1.LIST",
+          "objective": "error_type",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U4.L1.LIST",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "من الأخطاء تطنين غنة النون المشددة بتمويجها وهزهزة صوتها.",
+          "correctAnswer": true,
+          "feedbackAr": "تؤدى الغنة دون تمويج."
         }
       ]
     },
