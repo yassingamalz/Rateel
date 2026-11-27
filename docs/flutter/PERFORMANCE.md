@@ -1,7 +1,7 @@
 # Flutter app: performance (animations feel heavy)
 
-**Status (2026-11-24):** diagnosis done, **no fix applied yet**. The owner reports that the animations and the app feel
-heavy on the phone. Proposed fix branch: `flutter/perf` from `master`, waiting for the owner's yes.
+**Status (2026-11-27): fix applied** on branch `flutter/perf` (owner's yes, 2026-11-27), same look and same animations.
+Diagnosis of 2026-11-24 kept below; what was done and the measurements are in «Fix applied» at the end.
 
 The look must not change: every fix below is about *how much is redrawn*, not *what is drawn*.
 
@@ -46,3 +46,34 @@ The look must not change: every fix below is about *how much is redrawn*, not *w
 - One controller → one small `AnimatedBuilder`; never merge all controllers above a whole list.
 - Put a `RepaintBoundary` around each repeated item and around static backgrounds.
 - Avoid blur on live content and on platform views; prefer cached glows.
+
+## Fix applied (2026-11-27, branch `flutter/perf`)
+Rule kept: **nothing of the look or of the animations changes**; only how much is rebuilt and repainted.
+- **Cause 1 (endless `_ambient`), 05 and 06:** the 4 s loop is no longer in the path's merged `AnimatedBuilder`. It is
+  passed as an `Animation` to `UnitCircle` / `LessonCard`, and only what it animates follows it: the breathing ring of the
+  open unit repaints from the animation without a rebuild (`_RingPainter(repaint:)`), the badge shine and the check pulse
+  are small `AnimatedBuilder`s, the glow of the lesson in progress is the only builder on 06. `_RimPainter` of the lesson
+  card no longer repaints on every frame (it compared `ambient` without using it).
+- **Cause 2 (merged builder):** the entry / completion / scroll controllers stay merged (they run only during those short
+  sequences), but each unit circle, lesson card and course card now paints in its own layer, so a drag moves layers.
+- **Cause 4 (no `RepaintBoundary`):** boundaries around each circle / card, the ring painter, the shared
+  `ScreenBackground`, the 03 background and `ScreenGirih`.
+- **Cause 5 (pause menu blur):** while the menu is fully open the lesson is shown as a **still picture baked once** with the
+  same blur σ 0.55u, brightness 80 % and scale 98 % (`LessonShell.stillBlur`), instead of blurring the live lesson on every
+  frame of the button's pulse. During the 300 ms opening / closing the live blur runs as before. The lesson stays mounted
+  (keyed boundary, so its state survives the filters). The video lesson (07) keeps the live blur: its WebView cannot be
+  captured.
+- Cause 3 (many blurred shadows) is reduced by the layers above (static shadows are no longer repainted each frame); the
+  shadows themselves are unchanged (look).
+
+**Measurements** (widget rebuilds per second with the screen idle, flutter_test probe at phone size 915×412):
+| Screen | `master` | `flutter/perf` |
+|---|---|---|
+| 05 units (course 0, unit 1 open) | 6180 | 360 |
+| 06 lessons (course 0, unit 0) | 4680 | 60 |
+
+**Look check** (Playwright, master vs perf, same URL): courses, units, lessons (desktop and phone), settings and the paused
+reading lesson (desktop and phone) are pixel-identical (p99 difference ≤ 3/255); the only differences are the phase of the
+breathing glows and of the pause button's pulse (time-dependent). The baked still is 2402×1082 on a 915×412 dpr 2.625 phone;
+resuming restores the live lesson with its state. Frame times on the phone itself are still to be measured by the owner
+(APK).

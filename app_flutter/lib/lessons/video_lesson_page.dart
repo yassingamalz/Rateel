@@ -395,6 +395,8 @@ class _VideoLessonPageState extends State<VideoLessonPage>
       key: _shell,
       step: _step,
       total: _sections,
+      // The YouTube WebView cannot be captured: keep the live blur.
+      stillBlur: false,
       waiting: _sectionEnd && !_finishing,
       onPlay: () => _playFrom(_section + 1),
       onBack: () => _leave(false),

@@ -17,53 +17,56 @@ class ScreenGirih extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, box) {
-        final tile = box.maxHeight * 0.95;
-        final cols = (box.maxWidth / tile).ceil();
-        final rows = (box.maxHeight / tile).ceil();
-        // The header stays clean: the pattern fades in from 20u to 38u.
-        return ShaderMask(
-          blendMode: BlendMode.dstIn,
-          shaderCallback: (r) => LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: const [0.20, 0.38],
-            colors: [
-              Color(fadeTop ? 0x00000000 : 0xFF000000),
-              const Color(0xFF000000),
-            ],
-          ).createShader(r),
-          child: ClipRect(
-            child: OverflowBox(
-              alignment: Alignment.topLeft,
-              maxWidth: cols * tile,
-              maxHeight: rows * tile,
-              child: Opacity(
-                opacity: opacity,
-                child: Column(
-                  children: [
-                    for (var r = 0; r < rows; r++)
-                      Row(
-                        children: [
-                          for (var c = 0; c < cols; c++)
-                            SvgPicture.asset(
-                              'assets/ui/decor/girih_tile.svg',
-                              width: tile,
-                              height: tile,
-                              theme: const SvgTheme(
-                                currentColor: RateelColors.girihLine,
+    // Static pattern: its own layer (PERFORMANCE.md).
+    return RepaintBoundary(
+      child: LayoutBuilder(
+        builder: (context, box) {
+          final tile = box.maxHeight * 0.95;
+          final cols = (box.maxWidth / tile).ceil();
+          final rows = (box.maxHeight / tile).ceil();
+          // The header stays clean: the pattern fades in from 20u to 38u.
+          return ShaderMask(
+            blendMode: BlendMode.dstIn,
+            shaderCallback: (r) => LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.20, 0.38],
+              colors: [
+                Color(fadeTop ? 0x00000000 : 0xFF000000),
+                const Color(0xFF000000),
+              ],
+            ).createShader(r),
+            child: ClipRect(
+              child: OverflowBox(
+                alignment: Alignment.topLeft,
+                maxWidth: cols * tile,
+                maxHeight: rows * tile,
+                child: Opacity(
+                  opacity: opacity,
+                  child: Column(
+                    children: [
+                      for (var r = 0; r < rows; r++)
+                        Row(
+                          children: [
+                            for (var c = 0; c < cols; c++)
+                              SvgPicture.asset(
+                                'assets/ui/decor/girih_tile.svg',
+                                width: tile,
+                                height: tile,
+                                theme: const SvgTheme(
+                                  currentColor: RateelColors.girihLine,
+                                ),
                               ),
-                            ),
-                        ],
-                      ),
-                  ],
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
@@ -112,22 +115,25 @@ class ScreenBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DecoratedBox(
-      position: DecorationPosition.foreground,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.85, 1],
-          colors: [Color(0x00002D23), RateelColors.contentLift],
-        ),
-      ),
+    // Static: its own layer, never repainted with the content above.
+    return const RepaintBoundary(
       child: DecoratedBox(
+        position: DecorationPosition.foreground,
         decoration: BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment(0, -1.0),
-            radius: 1.2,
-            colors: [RateelColors.contentTop, RateelColors.contentBottom],
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.85, 1],
+            colors: [Color(0x00002D23), RateelColors.contentLift],
+          ),
+        ),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              center: Alignment(0, -1.0),
+              radius: 1.2,
+              colors: [RateelColors.contentTop, RateelColors.contentBottom],
+            ),
           ),
         ),
       ),

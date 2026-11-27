@@ -374,27 +374,31 @@ class _CoursesScreenState extends State<CoursesScreen>
                 1,
               ),
               alignment: Alignment.center,
-              child: SizedBox(
-                width: g.cardW,
-                height: g.cardH,
-                child: CourseCard(
-                  course: courses[i],
-                  u: g.u,
-                  unlock: unlock,
-                  // The reference is static: no breathing glow (owner to decide).
-                  breath: 0,
-                  progress: progress,
-                  lockShake: shake,
-                  onTap: () => _tapCourse(i),
-                  artSet: cardArtSet,
-                  number: i + 1,
-                  widthU: g.cardW / g.u,
-                  heightU: g.cardH / g.u,
-                  onLongPress: () {
-                    // Demo until screens 05–07 exist: long press on the
-                    // course in progress plays the completion sequence.
-                    if (i == _current) courseCompleted.value = i;
-                  },
+              // Each card paints in its own layer: a swipe only moves the
+              // layers (PERFORMANCE.md, cause 4).
+              child: RepaintBoundary(
+                child: SizedBox(
+                  width: g.cardW,
+                  height: g.cardH,
+                  child: CourseCard(
+                    course: courses[i],
+                    u: g.u,
+                    unlock: unlock,
+                    // The reference is static: no breathing glow (owner to decide).
+                    breath: 0,
+                    progress: progress,
+                    lockShake: shake,
+                    onTap: () => _tapCourse(i),
+                    artSet: cardArtSet,
+                    number: i + 1,
+                    widthU: g.cardW / g.u,
+                    heightU: g.cardH / g.u,
+                    onLongPress: () {
+                      // Demo until screens 05–07 exist: long press on the
+                      // course in progress plays the completion sequence.
+                      if (i == _current) courseCompleted.value = i;
+                    },
+                  ),
                 ),
               ),
             ),
@@ -793,18 +797,21 @@ class _Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DecoratedBox(
-      // Slight lift at the bottom edge (reference #002D23).
-      position: DecorationPosition.foreground,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.85, 1],
-          colors: [Color(0x00002D23), RateelColors.contentLift],
+    // Static: its own layer, never repainted with the content above.
+    return const RepaintBoundary(
+      child: DecoratedBox(
+        // Slight lift at the bottom edge (reference #002D23).
+        position: DecorationPosition.foreground,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.85, 1],
+            colors: [Color(0x00002D23), RateelColors.contentLift],
+          ),
         ),
+        child: _BaseGradient(),
       ),
-      child: _BaseGradient(),
     );
   }
 }
