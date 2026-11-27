@@ -261,3 +261,9 @@ Progress-fill kit from the owner (2026-11-27, ChatGPT, 1254 px, on magenta): sou
 dark olive; the open one overlays the closed one exactly). **Used by screen 27:** the two padlocks (position on the medal measured from `l1`).
 Spare: `blank_olive`, `blank_gold`, `l1`.
 
+
+## Screen 29, profile (2026-11-27)
+| File | Source | Used for | Notes |
+|---|---|---|---|
+| reused | `decor/header_arch.svg` (with a blurred glow copy), `decor/header_book.svg` (header emblem and the «الدروس» glyph), `decor/mosque.webp`, `decor/crescent_star.svg`, `decor/corner_glow_*`, `video/bottom_band.webp` (lattice), `glyphs/star.svg`, `icons/flame_gold_01.webp`, `leaderboard/avatar_5.webp` | screen 29 | light theme: tinted with `profL*` |
+| placeholder | `courses/course_01.webp` | Quran on the stand in the identity card | to replace with the owner's Q1 (`prompts/29-profile/images-v1.txt`) |

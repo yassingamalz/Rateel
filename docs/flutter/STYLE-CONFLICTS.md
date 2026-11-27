@@ -117,3 +117,17 @@ the owner decides at the end of the project.
 | L2 | Selected answer (gold fill) | gold fill `amber #E2A51E`, pills `#EDB120` | #F3BF41 → #E49F17, rim #FEE987 | reference (`listenGold*`) |
 | L3 | Waveform and asked word | `progressFill #EBB335`, lesson gold | played #EAB00B, rest #3B6C39, word #E2B92B | reference (`listenWave*`, `listenWord`) |
 | L4 | Header title size | 08 title 6.3u | 7.0u (wider in the reference) | reference |
+
+## Screen 29, profile (2026-11-27)
+Measured on `screens/29-profile/reference-{dark,light}.webp`. Built with the **reference values** (`prof*` / `profL*` tokens), as
+screens 07/08/11; the owner decides at the end of the project.
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| P1 | Identity card rim | gold rim #DAA42A 1.2 px + #FFDA6B 1 px | pale gold core #FAFFC2 ≈ 0.35u with a gold glow | reference (`profCardRim`, `profCardGlow`) |
+| P2 | Stats panel and tile rims | glass rim 2 px #245843 | lighter green #579177 / #5A9578 ≈ 0.3u | reference (`profPanelRim`) |
+| P3 | Level bar rim | glass rim #245843 | pale mint #B3E1B6 | reference (`profLevelRim`) |
+| P4 | Text cream | `titleCream #FAF1D8` | #FAFBE6 (= `leaderText`, K9) | `leaderText` |
+| P5 | Light theme ink | 08 `readLInk #341E06`, title `readLTitle #A17550` | brown #643913 for title and texts | reference (`profLInk`) |
+| P6 | Mosque / crescent place | 03/12 standard (mosque left 10.5u, top 8u, 49u wide; crescent right 25.5u, 10.65u) | mosque 13.6u / 3.9u / 42u; crescent 26.3u / 6.7u / 8.9u (header higher than 12) | reference |
+

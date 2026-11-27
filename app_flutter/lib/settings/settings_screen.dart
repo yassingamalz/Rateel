@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../core/app_settings.dart';
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
+import '../profile/profile_screen.dart';
 import '../theme/rateel_theme.dart';
 
 /// Screen 23, settings (reference `23-impostazioni.webp`, 1844×853; plan
@@ -16,6 +17,10 @@ import '../theme/rateel_theme.dart';
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
+  /// Screen 29 (profile) shown in place of the settings, opened from the
+  /// first row «الملف الشخصي»; review aid `?profile=1`.
+  static final showProfile = ValueNotifier<bool>(false);
+
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -26,7 +31,7 @@ const _badgeLine = 'assets/ui/reading/badge_line.webp';
 
 /// Row pitch on the reference: 95.5 px.
 const _rowH = 11.2;
-const _rowCount = 8;
+const _rowCount = 9;
 
 class _SettingsScreenState extends State<SettingsScreen>
     with SingleTickerProviderStateMixin {
@@ -37,6 +42,8 @@ class _SettingsScreenState extends State<SettingsScreen>
 
   @override
   void dispose() {
+    // Leaving the settings section closes the profile.
+    Future.microtask(() => SettingsScreen.showProfile.value = false);
     _entry.dispose();
     super.dispose();
   }
@@ -47,7 +54,20 @@ class _SettingsScreenState extends State<SettingsScreen>
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => ValueListenableBuilder<bool>(
+    valueListenable: SettingsScreen.showProfile,
+    builder: (context, profile, _) => AnimatedSwitcher(
+      duration: const Duration(milliseconds: 260),
+      child: profile
+          ? ProfileScreen(
+              key: const ValueKey('profile'),
+              onBack: () => SettingsScreen.showProfile.value = false,
+            )
+          : KeyedSubtree(key: const ValueKey('settings'), child: _settings()),
+    ),
+  );
+
+  Widget _settings() {
     return LayoutBuilder(
       builder: (context, box) {
         final w = box.maxWidth;
@@ -243,8 +263,9 @@ class _Row extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (glyph, label, control) = switch (index) {
-      0 => (_icon(Icons.nightlight_round, 0.9), 'المظهر', _ThemeSwitch(u: u)),
-      1 => (
+      0 => (_icon(Icons.person_rounded, 1), 'الملف الشخصي', _Chevron(u: u)),
+      1 => (_icon(Icons.nightlight_round, 0.9), 'المظهر', _ThemeSwitch(u: u)),
+      2 => (
         Text(
           'A',
           style: readex(
@@ -256,23 +277,23 @@ class _Row extends StatelessWidget {
         'حجم الخط',
         _TextSize(u: u),
       ),
-      2 => (
+      3 => (
         _icon(Icons.volume_up_rounded, 1),
         'المؤثرات الصوتية',
         _Toggle(u: u, value: AppSettings.sounds),
       ),
-      3 => (
+      4 => (
         _icon(Icons.vibration_rounded, 1),
         'الاهتزاز',
         _Toggle(u: u, value: AppSettings.haptics),
       ),
-      4 => (_icon(Icons.mic_rounded, 1), 'القارئ', _Reciter(u: u)),
-      5 => (
+      5 => (_icon(Icons.mic_rounded, 1), 'القارئ', _Reciter(u: u)),
+      6 => (
         _icon(Icons.notifications_rounded, 1),
         'تذكير يومي',
         _Reminder(u: u),
       ),
-      6 => (_icon(Icons.info_outline_rounded, 1), 'عن التطبيق', _Chevron(u: u)),
+      7 => (_icon(Icons.info_outline_rounded, 1), 'عن التطبيق', _Chevron(u: u)),
       _ => (
         _icon(Icons.restart_alt_rounded, 1),
         'إعادة ضبط التقدم',
@@ -280,8 +301,9 @@ class _Row extends StatelessWidget {
       ),
     };
     final tap = switch (index) {
-      6 => () => _showAbout(context, u),
-      7 => () => _confirmReset(context, u),
+      0 => () => SettingsScreen.showProfile.value = true,
+      7 => () => _showAbout(context, u),
+      8 => () => _confirmReset(context, u),
       _ => null,
     };
     return GestureDetector(
