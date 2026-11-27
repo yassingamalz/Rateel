@@ -331,9 +331,11 @@ class _LessonsScreenState extends State<LessonsScreen>
             ],
           ).createShader(r),
           child: AnimatedBuilder(
+            // No _ambient here: the 4 s loop drives only the glow of the
+            // lesson in progress (LessonCard), not the whole path
+            // (PERFORMANCE.md, cause 1).
             animation: Listenable.merge([
               _entry,
-              _ambient,
               _shake,
               _border,
               _flash,
@@ -422,26 +424,31 @@ class _LessonsScreenState extends State<LessonsScreen>
         opacity: appear,
         child: Transform.scale(
           scale: lerpDouble(0.95, 1, pop)!,
-          child: LessonCard(
-            key: ValueKey('lesson-$i'),
-            lesson: _lessons[i],
-            u: g.cu,
-            step: i + 1,
-            total: _lessons.length,
-            unlock: unlock,
-            done: done,
-            active:
-                i == _current || (_completing != null && i == _completing! + 1),
-            border: i == _completing ? _border.value : 0,
-            flash: i == _completing ? _flash.value : 0,
-            ambient: _ambient.value,
-            lockShake: shake,
-            onTap: () => _tapLesson(i),
-            // Demo until the lesson screens exist: long press on the lesson
-            // in progress plays its completion.
-            onLongPress: () {
-              if (i == _current) _complete(i);
-            },
+          // Each card paints in its own layer: a drag of the path only moves
+          // the layers (PERFORMANCE.md, cause 4).
+          child: RepaintBoundary(
+            child: LessonCard(
+              key: ValueKey('lesson-$i'),
+              lesson: _lessons[i],
+              u: g.cu,
+              step: i + 1,
+              total: _lessons.length,
+              unlock: unlock,
+              done: done,
+              active:
+                  i == _current ||
+                  (_completing != null && i == _completing! + 1),
+              border: i == _completing ? _border.value : 0,
+              flash: i == _completing ? _flash.value : 0,
+              ambient: _ambient,
+              lockShake: shake,
+              onTap: () => _tapLesson(i),
+              // Demo until the lesson screens exist: long press on the lesson
+              // in progress plays its completion.
+              onLongPress: () {
+                if (i == _current) _complete(i);
+              },
+            ),
           ),
         ),
       ),

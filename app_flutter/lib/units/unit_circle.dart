@@ -46,8 +46,10 @@ class UnitCircle extends StatefulWidget {
   /// 0..1 burst of light and sparkles when the ring reaches 100%.
   final double flash;
 
-  /// 0..1 repeating (4 s): breathing glow of the open unit, badge shine.
-  final double ambient;
+  /// 0..1 repeating (4 s): breathing glow of the open unit, badge shine,
+  /// check pulse. Passed as an animation so that only the parts it drives
+  /// repaint each frame, never the whole path (PERFORMANCE.md).
+  final Animation<double> ambient;
 
   /// Damped −1..1 shake of the padlock (locked tap).
   final double lockShake;
@@ -127,21 +129,19 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                         children: [
                           Positioned.fill(
                             child: IgnorePointer(
-                              child: CustomPaint(
-                                painter: _RingPainter(
-                                  u: u,
-                                  progress: widget.progress,
-                                  unlock: 1 - _locked,
-                                  done: widget.done,
-                                  flash: widget.flash,
-                                  breath: _open && widget.done == 0
-                                      ? 0.5 -
-                                            0.5 *
-                                                math.cos(
-                                                  2 * math.pi * widget.ambient,
-                                                )
-                                      : 0,
-                                  head: widget.filling,
+                              child: RepaintBoundary(
+                                child: CustomPaint(
+                                  painter: _RingPainter(
+                                    u: u,
+                                    progress: widget.progress,
+                                    unlock: 1 - _locked,
+                                    done: widget.done,
+                                    flash: widget.flash,
+                                    breath: _open && widget.done == 0
+                                        ? widget.ambient
+                                        : null,
+                                    head: widget.filling,
+                                  ),
                                 ),
                               ),
                             ),
@@ -459,7 +459,6 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   Widget _badge(double u) {
     final t = Curves.easeOutBack.transform(_seg(widget.unlock, 0.6, 1));
     final pct = (widget.progress * 100).round();
-    final shine = (widget.ambient * 4).clamp(0.0, 1.0);
     return Positioned(
       top: -u * 4.5,
       left: u * _r - u * 4.9,
@@ -513,27 +512,42 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                if (shine > 0 && shine < 1)
-                  Positioned.fill(
-                    child: Transform.translate(
-                      offset: Offset(u * 12 * (shine * 2 - 1), 0),
-                      child: Transform.rotate(
-                        angle: 0.45,
-                        child: Container(
-                          width: u * 2.4,
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0x00FFFFFF),
-                                Color(0x55FFFFFF),
-                                Color(0x00FFFFFF),
-                              ],
+                // Shine: the first second of every 4 s loop. Its own small
+                // builder, so the loop never rebuilds the badge or the path.
+                Positioned.fill(
+                  child: RepaintBoundary(
+                    child: AnimatedBuilder(
+                      animation: widget.ambient,
+                      builder: (context, _) {
+                        final shine = (widget.ambient.value * 4).clamp(
+                          0.0,
+                          1.0,
+                        );
+                        if (shine <= 0 || shine >= 1) {
+                          return const SizedBox.shrink();
+                        }
+                        return Transform.translate(
+                          offset: Offset(u * 12 * (shine * 2 - 1), 0),
+                          child: Transform.rotate(
+                            angle: 0.45,
+                            child: Container(
+                              width: u * 2.4,
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0x00FFFFFF),
+                                    Color(0x55FFFFFF),
+                                    Color(0x00FFFFFF),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
+                ),
               ],
             ),
           ),
@@ -547,7 +561,6 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
   Widget _check(double u) {
     final d = widget.done;
     final s = _bounce(d);
-    final pulse = widget.ambient;
     return Positioned(
       top: u * _d - u * 3.6,
       left: u * _r - u * 3.6,
@@ -558,18 +571,26 @@ class _UnitCircleState extends State<UnitCircle> with TickerProviderStateMixin {
         alignment: Alignment.center,
         children: [
           if (d >= 1)
-            Transform.scale(
-              scale: 1 + 0.5 * pulse,
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: RateelColors.badge.withValues(
-                      alpha: 0.7 * (1 - pulse),
+            RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: widget.ambient,
+                builder: (context, _) {
+                  final pulse = widget.ambient.value;
+                  return Transform.scale(
+                    scale: 1 + 0.5 * pulse,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: RateelColors.badge.withValues(
+                            alpha: 0.7 * (1 - pulse),
+                          ),
+                          width: u * 0.25,
+                        ),
+                      ),
                     ),
-                    width: u * 0.25,
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           Transform.rotate(
@@ -654,22 +675,27 @@ class _RingPainter extends CustomPainter {
     required this.flash,
     required this.breath,
     required this.head,
-  });
+  }) : super(repaint: breath);
 
   final double u;
   final double progress;
   final double unlock;
   final double done;
   final double flash;
-  final double breath;
+
+  /// The 4 s ambient loop while the ring breathes (open unit), else null.
+  /// The painter repaints from it without a rebuild.
+  final Animation<double>? breath;
   final bool head;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final a = breath?.value;
+    final breath_ = a == null ? 0.0 : 0.5 - 0.5 * math.cos(2 * math.pi * a);
     final c = size.center(Offset.zero);
     final r = size.width / 2 - u * 0.21;
     // Glow of the open ring (breathing), stronger on the flash.
-    final glow = 0.16 * unlock + 0.14 * breath + 0.5 * flash;
+    final glow = 0.16 * unlock + 0.14 * breath_ + 0.5 * flash;
     if (glow > 0) {
       canvas.drawCircle(
         c,
