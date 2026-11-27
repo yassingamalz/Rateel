@@ -592,7 +592,7 @@ class _FilterTabs extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(h / 2),
-                border: Border.all(color: RateelColors.badgeTileRim, width: lineW),
+                border: Border.all(color: RateelColors.rowRim, width: lineW),
               ),
             ),
           ),
@@ -706,7 +706,7 @@ class _BadgeTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           color: RateelColors.badgeTileFill,
           border: Border.all(
-            color: RateelColors.badgeTileRim,
+            color: RateelColors.tileRim,
             width: math.max(1.0, u * 0.24),
           ),
         ),

@@ -16,6 +16,7 @@ class BadgeDef {
     required this.reward,
     required this.total,
     required this.start,
+    this.green = false,
   });
 
   /// 1…12: medal `assets/ui/badges/m<nn>.webp`.
@@ -29,6 +30,12 @@ class BadgeDef {
   /// Target of the requirement, and the mock value it starts from.
   final int total;
   final int start;
+
+  /// Dark-green engraving (owner, 2026-11-27: a mix of the two sets): the
+  /// letters and bold glyphs (ق, نّ, sound waves, arrows, crown) are green,
+  /// as the reference's ق; the fine objects (lantern, books, microphone,
+  /// flame, scroll, trophy) keep the brown engraving.
+  final bool green;
 
   String get code => 'm${id.toString().padLeft(2, '0')}';
 }
@@ -65,6 +72,7 @@ const badges = <BadgeDef>[
     reward: '500',
     total: 1,
     start: 1,
+    green: true,
   ),
   BadgeDef(
     id: 5,
@@ -89,6 +97,7 @@ const badges = <BadgeDef>[
     reward: '300',
     total: 20,
     start: 6,
+    green: true,
   ),
   BadgeDef(
     id: 8,
@@ -105,6 +114,7 @@ const badges = <BadgeDef>[
     reward: '500',
     total: 10,
     start: 0,
+    green: true,
   ),
   BadgeDef(
     id: 10,
@@ -113,6 +123,7 @@ const badges = <BadgeDef>[
     reward: '300',
     total: 10,
     start: 2,
+    green: true,
   ),
   BadgeDef(
     id: 11,
@@ -129,6 +140,7 @@ const badges = <BadgeDef>[
     reward: '10K',
     total: 12,
     start: 0,
+    green: true,
   ),
 ];
 
@@ -146,13 +158,18 @@ double shareOf(BadgeDef b) =>
 /// requirement is reached; review aid `?earn=5`.
 final ValueNotifier<int?> badgeEarned = ValueNotifier<int?>(null);
 
-/// Medal engraving: `std` (brown, as the reference) or `green` (dark green);
-/// both come from the owner, the choice is open (review aid `?medals=green`).
-String badgeMedalSet = 'std';
+/// Medal engraving: `mix` (default, per badge: [BadgeDef.green]), or `std` /
+/// `green` to see one whole set (review aid `?medals=std|green`).
+String badgeMedalSet = 'mix';
 
 String medalAsset(BadgeDef b, {bool locked = false}) {
   if (locked) return 'assets/ui/badges/l1.webp';
-  final dir = badgeMedalSet == 'green' ? 'green/' : '';
+  final green = switch (badgeMedalSet) {
+    'std' => false,
+    'green' => true,
+    _ => b.green,
+  };
+  final dir = green ? 'green/' : '';
   return 'assets/ui/badges/$dir${b.code}.webp';
 }
 
