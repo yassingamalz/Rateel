@@ -1514,9 +1514,9 @@
     },
     {
       "topicId": "U10.L2.VERB",
-      "titleAr": "حركة همزة الوصل عند الابتداء",
-      "source": "book ch. 18 (همزة الوصل) — page check pending",
-      "explanationAr": "تفتح همزة الوصل في أل التعريف. وتكسر في الأسماء المسموعة الواردة في القرآن: ابن وابنت وامرؤ وامرأة واثنين واثنتين واسم، وفي مصادر الأفعال الخماسية والسداسية. وفي الفعل تضم إذا كان ثالثه مضمومًا ضمًا لازمًا، وتكسر إذا كان ثالثه مفتوحًا أو مكسورًا أو مضمومًا ضمًا عارضًا كما في امشوا واقضوا وائتوا وابنوا.",
+      "titleAr": "حركة همزة الوصل عند الابتداء ودخول همزة القطع عليها",
+      "source": "book ch. 18 pp. 498–506 and ch. 19 pp. 509–516 — checked against the book 2026-11-27",
+      "explanationAr": "همزة الوصل يؤتى بها للتمكن من البدء بالساكن، تثبت في بدء الكلام وتسقط في وصله، وتدخل على الأفعال والأسماء ولام التعريف. ففي الفعل تضم إن كان ثالثه مضمومًا ضمًا لازمًا نحو ادع وانظر، وتكسر إن كان ثالثه مكسورًا أو مفتوحًا أو مضمومًا ضمًا عارضًا كما في ابنوا وامشوا واقضوا وائتوا. وتكون في الأسماء مكسورة دائمًا نحو استغفار وابن واسم وامرأة، وفي لام التعريف مفتوحة دائمًا. وإذا دخلت همزة الاستفهام على همزة الوصل في فعل سقطت همزة الوصل خطًا ولفظًا نحو أفترى وأستكبرت، وإذا دخلت على همزة الوصل من لام التعريف بقيت مع تغييرها بالإبدال أو بالتسهيل في آلذكرين وآلآن وآلله. وإذا دخلت همزة الوصل على همزة قطع ساكنة أبدلت همزة القطع عند البدء حرف مد مجانسًا لحركة همزة الوصل نحو اؤتمن تقرأ أوتمن وائتوني تقرأ إيتوني.",
       "examples": [
         {
           "id": "U10.L2.VERB.POOL99.E1",
@@ -1555,7 +1555,7 @@
           "excerptAr": "فَامْشُوا",
           "focus": "همزة الوصل عند الابتداء بامشوا",
           "rule": "كسر",
-          "explanation": "الضم في الشين عارض، وأصلها الكسر.",
+          "explanation": "الضم في الشين عارض لمجانسة الواو، والأمر من المفرد امش.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         },
         {
@@ -1566,6 +1566,26 @@
           "focus": "همزة الوصل",
           "rule": "كسر",
           "explanation": "الضم في النون عارض.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E6",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "6:143",
+          "excerptAr": "آلذَّكَرَيْنِ",
+          "focus": "همزة الوصل بعد همزة الاستفهام",
+          "rule": "إبدال أو تسهيل",
+          "explanation": "تبقى همزة الوصل وتغير بالإبدال أو بالتسهيل.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.E7",
+          "topicId": "U10.L2.VERB",
+          "verseRef": "2:283",
+          "excerptAr": "الَّذِي اؤْتُمِنَ",
+          "focus": "الهمزة الساكنة عند البدء",
+          "rule": "إبدال واو",
+          "explanation": "يبدأ بها أوتمن.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         }
       ],
@@ -1659,23 +1679,23 @@
           "variantFamily": "review99-U10.L2.VERB",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
-          "text": "بأي حركة يبدأ بكلمة اسم؟",
+          "text": "ما حركة همزة الوصل في الأسماء عند البدء؟",
           "options": [
             {
               "id": "1",
-              "text": "الكسر"
+              "text": "الكسر دائمًا"
             },
             {
               "id": "2",
-              "text": "الضم"
+              "text": "الضم دائمًا"
             },
             {
               "id": "3",
-              "text": "الفتح"
+              "text": "الفتح دائمًا"
             }
           ],
           "correctAnswer": "1",
-          "feedbackAr": "من الأسماء المسموعة المبدوءة بهمزة وصل مكسورة."
+          "feedbackAr": "تكون مكسورة دائمًا."
         },
         {
           "id": "U10.L2.VERB.POOL99.Q5",
@@ -1688,6 +1708,71 @@
           "text": "يبدأ بهمزة الوصل في ابنوا بالضم.",
           "correctAnswer": false,
           "feedbackAr": "تكسر لأن ضم النون عارض."
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q6",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_meeting",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الوجهان في الهمزة الثانية في الكلمة المحددة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الحذف أو التحقيق"
+            },
+            {
+              "id": "2",
+              "text": "الإبدال أو التسهيل"
+            },
+            {
+              "id": "3",
+              "text": "الإمالة أو الفتح"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تبقى همزة الوصل مع تغييرها بالإبدال أو بالتسهيل.",
+          "exampleId": "U10.L2.VERB.POOL99.E6"
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q7",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_meeting",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كيف يبتدأ بكلمة اؤتمن؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "إؤتمن"
+            },
+            {
+              "id": "2",
+              "text": "أوتمن"
+            },
+            {
+              "id": "3",
+              "text": "اتمن"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تبدل الهمزة الساكنة واوًا مجانسة لضمة همزة الوصل."
+        },
+        {
+          "id": "U10.L2.VERB.POOL99.Q8",
+          "topicId": "U10.L2.VERB",
+          "objective": "hamza_meeting",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U10.L2.VERB",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "إذا دخلت همزة الاستفهام على همزة الوصل في فعل سقطت همزة الوصل خطًا ولفظًا نحو أفترى.",
+          "correctAnswer": true,
+          "feedbackAr": "بخلاف لام التعريف."
         }
       ]
     },
