@@ -1,0 +1,541 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Display the verified target span, not the answer-containing explanatory focus. Comparison examples intentionally differ from topic rule. One item per variant family per test unless deliberate practice. Repeated references may already exist in other batches.",
+  "examples": [
+    {
+      "id": "U5.L9.POOL81.E1",
+      "topicId": "U5.L9",
+      "verseRef": "2:8",
+      "excerptAr": "وَمَا هُمْ بِمُؤْمِنِينَ",
+      "focus": "ب",
+      "rule": "الإخفاء الشفوي",
+      "explanation": "الميم الساكنة قبل الباء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L9.POOL81.E2",
+      "topicId": "U5.L9",
+      "verseRef": "2:76",
+      "excerptAr": "أَتُحَدِّثُونَهُمْ بِمَا",
+      "focus": "ب",
+      "rule": "الإخفاء الشفوي",
+      "explanation": "الميم الساكنة قبل الباء عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L9.POOL81.E3",
+      "topicId": "U5.L9",
+      "verseRef": "2:33",
+      "excerptAr": "أَنْبِئْهُمْ بِأَسْمَائِهِمْ",
+      "focus": "ب",
+      "rule": "الإخفاء الشفوي",
+      "explanation": "الميم الأخيرة في أنبئهم قبل الباء، لا النون داخل الكلمة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L9.POOL81.E4",
+      "topicId": "U5.L9",
+      "verseRef": "2:29",
+      "excerptAr": "لَكُمْ مَا",
+      "focus": "م",
+      "rule": "الإدغام الشفوي",
+      "explanation": "مثال مقابل: الميم قبل ميم.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L10.POOL81.E5",
+      "topicId": "U5.L10",
+      "verseRef": "2:10",
+      "excerptAr": "فِي قُلُوبِهِمْ مَرَضٌ",
+      "focus": "م",
+      "rule": "الإدغام الشفوي",
+      "explanation": "الميم الساكنة قبل الميم المتحركة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L10.POOL81.E6",
+      "topicId": "U5.L10",
+      "verseRef": "2:29",
+      "excerptAr": "لَكُمْ مَا",
+      "focus": "م",
+      "rule": "الإدغام الشفوي",
+      "explanation": "الميم الساكنة قبل الميم.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L10.POOL81.E7",
+      "topicId": "U5.L10",
+      "verseRef": "106:4",
+      "excerptAr": "وَآمَنَهُمْ مِنْ",
+      "focus": "م",
+      "rule": "الإدغام الشفوي",
+      "explanation": "الميم في آخر آمنهم تدغم في الميم التالية.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L10.POOL81.E8",
+      "topicId": "U5.L10",
+      "verseRef": "109:6",
+      "excerptAr": "لَكُمْ دِينُكُمْ",
+      "focus": "د",
+      "rule": "الإظهار الشفوي",
+      "explanation": "مثال مقابل: الدال ليست ميمًا.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E9",
+      "topicId": "U5.L11",
+      "verseRef": "2:7",
+      "excerptAr": "قُلُوبِهِمْ وَعَلَى",
+      "focus": "و",
+      "rule": "الإظهار الشفوي",
+      "explanation": "تظهر الميم قبل الواو.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E10",
+      "topicId": "U5.L11",
+      "verseRef": "105:2",
+      "excerptAr": "كَيْدَهُمْ فِي",
+      "focus": "ف",
+      "rule": "الإظهار الشفوي",
+      "explanation": "تظهر الميم قبل الفاء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E11",
+      "topicId": "U5.L11",
+      "verseRef": "1:7",
+      "excerptAr": "عَلَيْهِمْ غَيْرِ",
+      "focus": "غ",
+      "rule": "الإظهار الشفوي",
+      "explanation": "تظهر الميم قبل الغين.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E12",
+      "topicId": "U5.L11",
+      "verseRef": "109:6",
+      "excerptAr": "لَكُمْ دِينُكُمْ",
+      "focus": "د",
+      "rule": "الإظهار الشفوي",
+      "explanation": "تظهر الميم قبل الدال.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E13",
+      "topicId": "U5.L11",
+      "verseRef": "2:6",
+      "excerptAr": "عَلَيْهِمْ أَأَنْذَرْتَهُمْ",
+      "focus": "ء",
+      "rule": "الإظهار الشفوي",
+      "explanation": "تظهر الميم قبل الهمزة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L11.POOL81.E14",
+      "topicId": "U5.L11",
+      "verseRef": "105:4",
+      "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+      "focus": "ب",
+      "rule": "الإخفاء الشفوي",
+      "explanation": "مثال مقابل: الباء من الإخفاء الشفوي.",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L9.POOL81.Q1",
+      "topicId": "U5.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L9.POOL81.E1",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الميم الساكنة قبل الباء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL81.Q2",
+      "topicId": "U5.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L9.POOL81.E2",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الميم الساكنة قبل الباء عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL81.Q3",
+      "topicId": "U5.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L9.POOL81.E3",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الميم الأخيرة في أنبئهم قبل الباء، لا النون داخل الكلمة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL81.Q4",
+      "topicId": "U5.L9",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L9.POOL81.E4",
+      "focus": "م",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L9",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "مثال مقابل: الميم قبل ميم.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL81.Q5",
+      "topicId": "U5.L10",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L10.POOL81.E5",
+      "focus": "م",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L10",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الميم الساكنة قبل الميم المتحركة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL81.Q6",
+      "topicId": "U5.L10",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L10.POOL81.E6",
+      "focus": "م",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L10",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الميم الساكنة قبل الميم.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL81.Q7",
+      "topicId": "U5.L10",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L10.POOL81.E7",
+      "focus": "م",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L10",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الميم في آخر آمنهم تدغم في الميم التالية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL81.Q8",
+      "topicId": "U5.L10",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L10.POOL81.E8",
+      "focus": "د",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L10",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "مثال مقابل: الدال ليست ميمًا.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q9",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E9",
+      "focus": "و",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر الميم قبل الواو.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q10",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E10",
+      "focus": "ف",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر الميم قبل الفاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q11",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E11",
+      "focus": "غ",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تظهر الميم قبل الغين.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q12",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E12",
+      "focus": "د",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر الميم قبل الدال.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q13",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E13",
+      "focus": "ء",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر الميم قبل الهمزة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL81.Q14",
+      "topicId": "U5.L11",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L11.POOL81.E14",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L11",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "مثال مقابل: الباء من الإخفاء الشفوي.",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

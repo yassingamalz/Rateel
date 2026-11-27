@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U10.L1",
+      "examples": [
+        {
+          "id": "U10.L1.M.E1",
+          "verseRef": "18:38",
+          "excerptAr": "لَٰكِنَّا",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U10.L1.M.E2",
+          "verseRef": "18:34",
+          "excerptAr": "أَنَا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U10.L1.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "teacher_verified_wasl_waqf_pair",
+          "promptAr": "هل يراجع وجه إثبات الألف وحذفها بحسب الوصل والوقف؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لا"
+            },
+            {
+              "id": "2",
+              "text": "نعم"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "نعم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U10.L1.M.P1",
+          "instructionAr": "قارن الوصل والوقف على أنا ولكنا في سياق مناسب.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U10.L1.M.P2",
+          "instructionAr": "تلق الألفات المخصوصة بعد مراجعة الأوجه والاستثناءات.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U10.L2",
+      "examples": [
+        {
+          "id": "U10.L2.M.E1",
+          "verseRef": "96:1",
+          "excerptAr": "اقْرَأْ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U10.L2.M.E2",
+          "verseRef": "17:110",
+          "excerptAr": "قُلِ ادْعُوا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U10.L2.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example_initial",
+          "promptAr": "هل تنطق همزة الوصل عند الابتداء باقرأ؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نعم"
+            },
+            {
+              "id": "2",
+              "text": "لا"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "نعم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U10.L2.M.P1",
+          "instructionAr": "تدرب على ابتداء اقرأ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U10.L2.M.P2",
+          "instructionAr": "قارن الابتداء بادعوا بالوصل في الآية.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U10.L3",
+      "examples": [
+        {
+          "id": "U10.L3.M.E1",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U10.L3.M.E2",
+          "verseRef": "1:5",
+          "excerptAr": "إِيَّاكَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U10.L3.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example_connected",
+          "promptAr": "هل همزة أحد ثابتة في الوصل في الأصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لا"
+            },
+            {
+              "id": "2",
+              "text": "نعم"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "نعم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U10.L3.M.P1",
+          "instructionAr": "قارن همزة أحد بهمزة اقرأ.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U10.L3.M.P2",
+          "instructionAr": "تدرب على وصل همزة القطع بما قبلها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

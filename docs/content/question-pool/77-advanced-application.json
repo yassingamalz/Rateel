@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "id": "U7.L1.POOL77.Q1",
+      "topicId": "U7.L1",
+      "text": "سمع الطالب بُو بدل بُ في تدريب قصير. ما نوع الخلل؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تمييز الحركة من حرف المد يمنع الزيادة والنقص.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام شفوي"
+        },
+        {
+          "id": "2",
+          "text": "توليد حرف مد زائد"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U7.L1.POOL77.Q2",
+      "topicId": "U7.L1",
+      "text": "صل المثال بالوصف.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تمييز الحركة من حرف المد يمنع الزيادة والنقص.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "بِ",
+          "right": "حركة قصيرة"
+        },
+        {
+          "id": "2",
+          "left": "بِي",
+          "right": "حركة يتلوها حرف مد"
+        }
+      ]
+    },
+    {
+      "id": "U7.L1.POOL77.Q3",
+      "topicId": "U7.L1",
+      "text": "إتمام الحركة يقتضي الحفاظ على وضوحها دون إطالة غير مقررة.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تمييز الحركة من حرف المد يمنع الزيادة والنقص.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U7.L2.POOL77.Q1",
+      "topicId": "U7.L2",
+      "text": "ما الحرف الساكن بعد الألف في تحليل اللام المشددة من الضالين؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "يختلف المد بحسب نوع السكون.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الضاد"
+        },
+        {
+          "id": "2",
+          "text": "اللام الأولى"
+        },
+        {
+          "id": "3",
+          "text": "النون"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U7.L2.POOL77.Q2",
+      "topicId": "U7.L2",
+      "text": "هل السكون الناشئ عند وقف العالمين من جنس السكون الأصلي في الضالين؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "يختلف المد بحسب نوع السكون.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا"
+        },
+        {
+          "id": "2",
+          "text": "نعم دائمًا"
+        },
+        {
+          "id": "3",
+          "text": "كلاهما همزة"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U7.L2.POOL77.Q3",
+      "topicId": "U7.L2",
+      "text": "صل المثال بسبب السكون.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "يختلف المد بحسب نوع السكون.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الضالين قبل اللام المشددة",
+          "right": "سكون أصلي"
+        },
+        {
+          "id": "2",
+          "left": "العالمين عند الوقف",
+          "right": "سكون عارض"
+        }
+      ]
+    },
+    {
+      "id": "U7.L3.POOL77.Q1",
+      "topicId": "U7.L3",
+      "text": "في وصل قُلِ ادْعُوا ما الحرف الذي حُرّك؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تراعى مواضع التحريك والحذف المنقولة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "القاف"
+        },
+        {
+          "id": "2",
+          "text": "اللام"
+        },
+        {
+          "id": "3",
+          "text": "الدال"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U7.L3.POOL77.Q2",
+      "topicId": "U7.L3",
+      "text": "هل تنطق همزة الوصل في هذا الوصل؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراعى مواضع التحريك والحذف المنقولة.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U7.L3.POOL77.Q3",
+      "topicId": "U7.L3",
+      "text": "ما الإجراء إذا لم يعرف القارئ وجه التخلص من الساكنين في موضع آخر؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراعى مواضع التحريك والحذف المنقولة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "يكسر كل حرف عشوائيًا"
+        },
+        {
+          "id": "2",
+          "text": "يحذف كل ساكن"
+        },
+        {
+          "id": "3",
+          "text": "يراجع الرواية والمعلم"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U8.L1.POOL77.Q1",
+      "topicId": "U8.L1",
+      "text": "هل يجوز تعميم تسهيل أأعجمي على كل اجتماع همزتين؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "التسهيل يحتاج إلى ضبط صوتي من أهل الأداء.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L1.POOL77.Q2",
+      "topicId": "U8.L1",
+      "text": "ما الوسيلة التي تبين الفرق بين التسهيل والتحقيق؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التسهيل يحتاج إلى ضبط صوتي من أهل الأداء.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "نموذج صوتي معتمد"
+        },
+        {
+          "id": "2",
+          "text": "شكل البطاقة فقط"
+        },
+        {
+          "id": "3",
+          "text": "عدد الحروف"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U8.L1.POOL77.Q3",
+      "topicId": "U8.L1",
+      "text": "أي وصف أدق للتسهيل؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التسهيل يحتاج إلى ضبط صوتي من أهل الأداء.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "حذف كل همزة"
+        },
+        {
+          "id": "2",
+          "text": "مد كل همزة ستًا"
+        },
+        {
+          "id": "3",
+          "text": "أداء مخصوص للهمزة"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U8.L2.POOL77.Q1",
+      "topicId": "U8.L2",
+      "text": "أي صوت لا ينبغي أن تستحيل إليه الألف بالإمالة؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم الإمالة في المواضع المروية.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الصوت المعتمد من المعلم"
+        },
+        {
+          "id": "2",
+          "text": "ياء خالصة"
+        },
+        {
+          "id": "3",
+          "text": "الصوت المروي بين الفتح والإمالة"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U8.L2.POOL77.Q2",
+      "topicId": "U8.L2",
+      "text": "الإمالة حكم يطبق على كل ألف في رواية حفص.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم الإمالة في المواضع المروية.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L2.POOL77.Q3",
+      "topicId": "U8.L2",
+      "text": "صل المفهوم بالوصف.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتعلم الإمالة في المواضع المروية.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الإمالة",
+          "right": "تقريب الفتحة من الكسرة"
+        },
+        {
+          "id": "2",
+          "left": "الفتح",
+          "right": "أداء الفتحة دون إمالة"
+        }
+      ]
+    },
+    {
+      "id": "U8.L3.POOL77.Q1",
+      "topicId": "U8.L3",
+      "text": "إذا نتج عن إبراز الصوت حرف زائد فهل يعد ذلك نبرًا صحيحًا؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "النبر ليس زيادة حرف أو حركة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا فرق"
+        },
+        {
+          "id": "2",
+          "text": "لا"
+        },
+        {
+          "id": "3",
+          "text": "نعم"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U8.L3.POOL77.Q2",
+      "topicId": "U8.L3",
+      "text": "هل يمكن تحديد مواضع النبر من لون الحرف وحده؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "النبر ليس زيادة حرف أو حركة.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L3.POOL77.Q3",
+      "topicId": "U8.L3",
+      "text": "ما المطلوب قبل تسجيل أمثلة النبر؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "النبر ليس زيادة حرف أو حركة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "إضافة النبر لكل حرف"
+        },
+        {
+          "id": "2",
+          "text": "زيادة حجم الخط فقط"
+        },
+        {
+          "id": "3",
+          "text": "تحديد الموضع والكيفية من المرجع"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U8.L4.POOL77.Q1",
+      "topicId": "U8.L4",
+      "text": "ما الذي يميز الإشمام المروي في تأمنا من حيث التعلم؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج الأوجه الخاصة إلى تحديد الطريق والتلقي.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "يطبق في كل نون مشددة"
+        },
+        {
+          "id": "2",
+          "text": "يحتاج بيانًا بصريًا وصوتيًا للموضع"
+        },
+        {
+          "id": "3",
+          "text": "يكفي لون الخط"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U8.L4.POOL77.Q2",
+      "topicId": "U8.L4",
+      "text": "هل كل طريق لحفص يلزم أن يتطابق في جميع الأوجه؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج الأوجه الخاصة إلى تحديد الطريق والتلقي.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L4.POOL77.Q3",
+      "topicId": "U8.L4",
+      "text": "اختر بيانات المثال الخاص.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج الأوجه الخاصة إلى تحديد الطريق والتلقي.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الرواية"
+        },
+        {
+          "id": "2",
+          "text": "الطريق"
+        },
+        {
+          "id": "3",
+          "text": "الوجه المروي"
+        },
+        {
+          "id": "4",
+          "text": "لون واجهة التطبيق"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U9.L1.POOL77.Q1",
+      "topicId": "U9.L1",
+      "text": "توقف القارئ لانقطاع النفس. ما نوع الوقف من جهة سببه؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الوقف يتصل باستئناف القراءة وصحة المعنى.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "قطع نهائي بالضرورة"
+        },
+        {
+          "id": "2",
+          "text": "اضطراري"
+        },
+        {
+          "id": "3",
+          "text": "اختياري دائمًا"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U9.L1.POOL77.Q2",
+      "topicId": "U9.L1",
+      "text": "ما معيار اختيار الوقف الاختياري؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الوقف يتصل باستئناف القراءة وصحة المعنى.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "المعنى وعلاقة الكلمات"
+        },
+        {
+          "id": "2",
+          "text": "طول الكلمة وحده"
+        },
+        {
+          "id": "3",
+          "text": "آخر حرف فقط"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U9.L1.POOL77.Q3",
+      "topicId": "U9.L1",
+      "text": "الوقف والقطع مترادفان في كل اصطلاحات هذا الباب.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الوقف يتصل باستئناف القراءة وصحة المعنى.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U9.L2.POOL77.Q1",
+      "topicId": "U9.L2",
+      "text": "صل العلامة بالمعنى الشائع.",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "علامات الضبط إرشادية وتراجع في الطبعة.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "م",
+          "right": "وقف لازم"
+        },
+        {
+          "id": "2",
+          "left": "ج",
+          "right": "جواز الوقف والوصل"
+        },
+        {
+          "id": "3",
+          "left": "قلى",
+          "right": "الوقف أولى"
+        }
+      ]
+    },
+    {
+      "id": "U9.L2.POOL77.Q2",
+      "topicId": "U9.L2",
+      "text": "هل تنطق علامة صلى بأحرفها عند التلاوة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "علامات الضبط إرشادية وتراجع في الطبعة.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U9.L2.POOL77.Q3",
+      "topicId": "U9.L2",
+      "text": "إذا اختلف شكل علامة الوقف بين طبعتين فما المرجع؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "علامات الضبط إرشادية وتراجع في الطبعة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "تخمين شكلها"
+        },
+        {
+          "id": "2",
+          "text": "لون الصفحة"
+        },
+        {
+          "id": "3",
+          "text": "مفتاح كل طبعة"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U9.L3.POOL77.Q1",
+      "topicId": "U9.L3",
+      "text": "إذا اضطر القارئ للوقف وسط تركيب متعلق بما قبله فما الإجراء المناسب؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "صحة الابتداء لا تنفصل عن سياق الآية.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "تبديل لفظ الآية"
+        },
+        {
+          "id": "2",
+          "text": "الرجوع إلى ابتداء يصح به المعنى"
+        },
+        {
+          "id": "3",
+          "text": "البدء التالي دائمًا"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U9.L3.POOL77.Q2",
+      "topicId": "U9.L3",
+      "text": "هل تكفي صحة نطق الكلمة لضمان صحة موضع الابتداء؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "صحة الابتداء لا تنفصل عن سياق الآية.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U9.L3.POOL77.Q3",
+      "topicId": "U9.L3",
+      "text": "اختر ما يراجع عند تحديد الابتداء.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "صحة الابتداء لا تنفصل عن سياق الآية.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "السياق"
+        },
+        {
+          "id": "2",
+          "text": "المعنى"
+        },
+        {
+          "id": "3",
+          "text": "التعلق اللفظي"
+        },
+        {
+          "id": "4",
+          "text": "عدد نقاط الحروف"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U9.L4.POOL77.Q1",
+      "topicId": "U9.L4",
+      "text": "ما الفرق في وسيلة إدراك الروم والإشمام الوقفي؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج هذه الأوجه إلى عرض صوتي ومرئي معتمد.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "كلاهما بلا صوت ولا حركة"
+        },
+        {
+          "id": "2",
+          "text": "الروم يسمع والإشمام يرى"
+        },
+        {
+          "id": "3",
+          "text": "كلاهما مد لازم"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U9.L4.POOL77.Q2",
+      "topicId": "U9.L4",
+      "text": "الإشمام الوقفي يتضمن نطق ضمة كاملة.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج هذه الأوجه إلى عرض صوتي ومرئي معتمد.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U9.L4.POOL77.Q3",
+      "topicId": "U9.L4",
+      "text": "صل الوجه بالوصف.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تحتاج هذه الأوجه إلى عرض صوتي ومرئي معتمد.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الروم",
+          "right": "بعض الحركة بصوت خفي"
+        },
+        {
+          "id": "2",
+          "left": "الإشمام",
+          "right": "إشارة بالشفتين بعد الإسكان"
+        }
+      ]
+    }
+  ]
+}

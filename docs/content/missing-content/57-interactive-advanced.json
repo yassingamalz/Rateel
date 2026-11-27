@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Matching and ordering are editorial activity formats, not currently confirmed supported by Flutter. Shuffle independently at runtime, preserve stable IDs.",
+  "questions": [
+    {
+      "id": "U7.L1.M.I1",
+      "topicId": "U7.L1",
+      "text": "توليد حرف مد بعد حركة قصيرة يعد إتمامًا صحيحًا للحركة.",
+      "explanation": "الإتمام لا يعني توليد مد زائد.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U7.L2.M.I1",
+      "topicId": "U7.L2",
+      "text": "في الضالين السكون الأول من اللام المشددة أصلي.",
+      "explanation": "الألف قبل اللام المشددة سبب المد اللازم.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U7.L3.M.I1",
+      "topicId": "U7.L3",
+      "text": "أكمل: حركة اللام في وصل قُلِ ادْعُوا هي ...",
+      "explanation": "تتحرك اللام بالكسر في هذا الموضع.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "الكسرة",
+        "كسرة"
+      ]
+    },
+    {
+      "id": "U8.L1.M.I1",
+      "topicId": "U8.L1",
+      "text": "التسهيل حذف محض للهمزة.",
+      "explanation": "التسهيل وجه صوتي مخصوص يؤخذ بالتلقي.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L2.M.I1",
+      "topicId": "U8.L2",
+      "text": "أكمل: الموضع الوحيد للإمالة عند حفص من طريق الشاطبية كلمة ... في هود.",
+      "explanation": "هذا الموضع يحتاج نموذجًا صوتيًا معتمدًا.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "مجراها"
+      ]
+    },
+    {
+      "id": "U8.L3.M.I1",
+      "topicId": "U8.L3",
+      "text": "النبر يعني زيادة حرف جديد في التلاوة.",
+      "explanation": "النبر إبراز صوتي وليس زيادة حرف.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U8.L4.M.I1",
+      "topicId": "U8.L4",
+      "text": "اختر ما يلزم لضبط الكلمات ذات الأداء الخاص.",
+      "explanation": "الأوجه الخاصة تنقل بالسماع وفق الطريق.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "معرفة الرواية"
+        },
+        {
+          "id": "2",
+          "text": "تحديد الطريق"
+        },
+        {
+          "id": "3",
+          "text": "التلقي"
+        },
+        {
+          "id": "4",
+          "text": "اختيار الوجه عشوائيًا"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U9.L1.M.I1",
+      "topicId": "U9.L1",
+      "text": "صل المصطلح بالوصف.",
+      "explanation": "يفرق بين الوقف والقطع في الاصطلاح.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الوقف",
+          "right": "توقف بنية استئناف القراءة"
+        },
+        {
+          "id": "2",
+          "left": "القطع",
+          "right": "إنهاء القراءة"
+        }
+      ]
+    },
+    {
+      "id": "U9.L2.M.I1",
+      "topicId": "U9.L2",
+      "text": "صل العلامة بمعناها الشائع.",
+      "explanation": "يراجع مفتاح الطبعة المعتمدة.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "ج",
+          "right": "جواز الوقف والوصل"
+        },
+        {
+          "id": "2",
+          "left": "صلى",
+          "right": "الوصل أولى"
+        },
+        {
+          "id": "3",
+          "left": "قلى",
+          "right": "الوقف أولى"
+        }
+      ]
+    },
+    {
+      "id": "U9.L3.M.I1",
+      "topicId": "U9.L3",
+      "text": "كل موضع يجوز الوقف عليه يجوز الابتداء بما بعده بالضرورة.",
+      "explanation": "الابتداء يحتاج مراعاة المعنى والسياق.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U9.L4.M.I1",
+      "topicId": "U9.L4",
+      "text": "صل الوجه بوسيلة إدراكه.",
+      "explanation": "الإشمام الوقفي بلا صوت.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الروم",
+          "right": "صوت خفي"
+        },
+        {
+          "id": "2",
+          "left": "الإشمام الوقفي",
+          "right": "مشاهدة الشفتين"
+        }
+      ]
+    },
+    {
+      "id": "U10.L1.M.I1",
+      "topicId": "U10.L1",
+      "text": "كل ألف مكتوبة تثبت في الوصل بالضرورة.",
+      "explanation": "للألفات المخصوصة أحكام منقولة.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U10.L2.M.I1",
+      "topicId": "U10.L2",
+      "text": "همزة الوصل تثبت عند الابتداء وتسقط لفظًا عند الوصل.",
+      "explanation": "هذا هو الأصل في همزة الوصل.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U10.L3.M.I1",
+      "topicId": "U10.L3",
+      "text": "أكمل: الهمزة الثابتة ابتداء ووصلًا في الأصل هي همزة ...",
+      "explanation": "همزة القطع تختلف عن همزة الوصل.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "القطع",
+        "قطع"
+      ]
+    },
+    {
+      "id": "U11.L1.M.I1",
+      "topicId": "U11.L1",
+      "text": "صل الوسيلة بوظيفتها.",
+      "explanation": "النقط والضبط وسائل لبيان القراءة.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "نقط الإعجام",
+          "right": "تمييز الحروف المتشابهة"
+        },
+        {
+          "id": "2",
+          "left": "علامات الحركات",
+          "right": "المساعدة على ضبط النطق"
+        }
+      ]
+    },
+    {
+      "id": "U11.L2.M.I1",
+      "topicId": "U11.L2",
+      "text": "الرسم العثماني يطابق الإملاء الحديث في جميع الكلمات.",
+      "explanation": "توجد اختلافات في هيئة كتابة بعض الكلمات.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U12.L1.M.I1",
+      "topicId": "U12.L1",
+      "text": "اختر مراحل التدريب على الحفظ.",
+      "explanation": "هذه المراحل تعين على تثبيت الحفظ الصحيح.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "تصحيح القراءة"
+        },
+        {
+          "id": "2",
+          "text": "التكرار"
+        },
+        {
+          "id": "3",
+          "text": "الاسترجاع"
+        },
+        {
+          "id": "4",
+          "text": "المراجعة"
+        },
+        {
+          "id": "5",
+          "text": "تغيير النص"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "U12.L2.M.I1",
+      "topicId": "U12.L2",
+      "text": "اختر أدوات الحفظ الموثوقة.",
+      "explanation": "تراعى صحة المصادر وتوافق الرواية.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "مصحف معتمد"
+        },
+        {
+          "id": "2",
+          "text": "تسجيل متقن"
+        },
+        {
+          "id": "3",
+          "text": "معلم"
+        },
+        {
+          "id": "4",
+          "text": "نص عشوائي"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U12.L3.M.I1",
+      "topicId": "U12.L3",
+      "text": "رتب دورة تدريبية مقترحة للحفظ.",
+      "explanation": "ترتيب تدريبي مقترح وليس نقلًا حرفيًا لأركان الكتاب.",
+      "status": "editorial_draft",
+      "type": "ordering",
+      "items": [
+        {
+          "id": "1",
+          "text": "تصحيح القراءة"
+        },
+        {
+          "id": "2",
+          "text": "التكرار"
+        },
+        {
+          "id": "3",
+          "text": "الاسترجاع والتسميع"
+        },
+        {
+          "id": "4",
+          "text": "المراجعة"
+        }
+      ],
+      "correctOrder": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "U12.L4.M.I1",
+      "topicId": "U12.L4",
+      "text": "المراجعة المنتظمة تعين على تثبيت الحفظ.",
+      "explanation": "المراجعة جزء أساسي من خطة الحفظ.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": true
+    }
+  ]
+}

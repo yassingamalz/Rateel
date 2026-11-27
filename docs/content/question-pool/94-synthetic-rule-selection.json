@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Non-Quranic letter patterns, for targeted practice; not actual Quran words. Sample sparingly within variant families.",
+  "questions": [
+    {
+      "id": "U5.L2.POOL94.Q1",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "نْ",
+        "next": "ح"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو الإظهار الحلقي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإظهار الحلقي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q2",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "نْ",
+        "next": "ب"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحكم في النموذج هو الإقلاب.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإقلاب",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q3",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "نْ",
+        "next": "د"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو الإخفاء الحقيقي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإخفاء الحقيقي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q4",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "نْ",
+        "next": "ر"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الحلقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو الإدغام بغير غنة.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإدغام بغير غنة",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q5",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "نْ",
+        "next": "و"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغنة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحكم في النموذج هو الإدغام بغنة.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإدغام بغنة",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q6",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "ـٌ",
+        "next": "خ"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو الإظهار الحلقي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإظهار الحلقي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q7",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "ـٍ",
+        "next": "م"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الحلقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو الإدغام بغنة.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإدغام بغنة",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L2.POOL94.Q8",
+      "topicId": "U5.L2",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "ـً",
+        "next": "ف"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحكم في النموذج هو الإخفاء الحقيقي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L2-synthetic-الإخفاء الحقيقي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL94.Q9",
+      "topicId": "U5.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "مْ",
+        "next": "ف"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو الإظهار الشفوي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L8-synthetic-الإظهار الشفوي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL94.Q10",
+      "topicId": "U5.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "مْ",
+        "next": "و"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو الإظهار الشفوي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L8-synthetic-الإظهار الشفوي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL94.Q11",
+      "topicId": "U5.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "مْ",
+        "next": "ب"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الحكم في النموذج هو الإخفاء الشفوي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L8-synthetic-الإخفاء الشفوي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL94.Q12",
+      "topicId": "U5.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "مْ",
+        "next": "م"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو الإدغام الشفوي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L8-synthetic-الإدغام الشفوي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U5.L8.POOL94.Q13",
+      "topicId": "U5.L8",
+      "type": "singleChoice",
+      "text": "ما الحكم عند الوصل في هذا النموذج التعليمي بين كلمتين، مع تحقق الشروط وانتفاء الاستثناءات؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "مْ",
+        "next": "ن"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الشفوي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام الشفوي"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الشفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو الإظهار الشفوي.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "U5.L8-synthetic-الإظهار الشفوي",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q14",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "ج"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو قمرية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-قمرية",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q15",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "ط"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو شمسية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-شمسية",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q16",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "هـ"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو قمرية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-قمرية",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q17",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "ذ"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "شمسية"
+        },
+        {
+          "id": "2",
+          "text": "قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو شمسية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-شمسية",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q18",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "ل"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الحكم في النموذج هو شمسية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-شمسية",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "X-LAM-01.POOL94.Q19",
+      "topicId": "X-LAM-01",
+      "type": "singleChoice",
+      "text": "ما نوع لام التعريف قبل الحرف التالي في هذا النموذج التعليمي؟",
+      "stimulus": {
+        "kind": "synthetic_non_quran",
+        "first": "الْ",
+        "next": "ي"
+      },
+      "options": [
+        {
+          "id": "1",
+          "text": "قمرية"
+        },
+        {
+          "id": "2",
+          "text": "شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الحكم في النموذج هو قمرية.",
+      "objective": "rule_selection_from_letter_context",
+      "difficulty": "basic",
+      "variantFamily": "X-LAM-01-synthetic-قمرية",
+      "status": "editorial_draft"
+    }
+  ],
+  "editorialReviewNotes": [
+    "Batch 88 passage labeled 105:4 crosses into 105:5 (مِنْ سِجِّيلٍ); reference must be 105:4–5, including the cross-verse tanwin rule only in wasl.",
+    "Batch 89 example سِجِّيلٍ is 105:5, not 105:4.",
+    "Batch 89 comparisons stopping on isolated prepositions or incomplete phrases must not be used as recommended stops or standalone recitation clips.",
+    "Batch 93 ra cases need full contextual review; e.g. نَصْرُ اللَّهِ is 110:1 but the target is lam, not ra. Review inflections against approved text.",
+    "Earlier 80–86 example references and membership coverage were not independently checked. Do not treat filenames claiming full coverage as verified."
+  ]
+}

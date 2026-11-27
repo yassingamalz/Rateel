@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U3.L6",
+      "titleAr": "الْإِذْلَاقُ وَالْإِصْمَاتُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نُصَنِّفُ حُرُوفَ الْإِذْلَاقِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "حُرُوفُ الْإِذْلَاقِ سِتَّةٌ، تَجْمَعُهَا عِبَارَةُ فَرَّ مِنْ لُبٍّ، وَمَا سِوَاهَا مِنْ حُرُوفِ الْإِصْمَاتِ.",
+          "visualDirection": "Six gold letter counters grouped on an emerald card."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "صَنِّفِ الْحُرُوفَ الْمَعْرُوضَةَ إِلَى مَجْمُوعَتَيْنِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L7",
+      "titleAr": "الصِّفَاتُ الَّتِي لَا ضِدَّ لَهَا",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ لِكُلِّ صِفَةٍ مِنْ صِفَاتِ الْحُرُوفِ ضِدٌّ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "مِنَ الصِّفَاتِ الَّتِي لَا ضِدَّ لَهَا الصَّفِيرُ وَالْقَلْقَلَةُ وَاللِّينُ وَغَيْرُهَا. وَقَدْ يَجْمَعُ الْحَرْفُ أَكْثَرَ مِنْ صِفَةٍ.",
+          "visualDirection": "Individual sound icons branch from letter cards."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "ارْبِطْ كُلَّ صِفَةٍ بِمِثَالِهَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L8",
+      "titleAr": "الصَّفِيرُ وَالْقَلْقَلَةُ وَاللِّينُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تَسْمَعُ الْفَرْقَ بَيْنَ هَذِهِ الْأَصْوَاتِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الصَّفِيرُ فِي الصَّادِ وَالزَّايِ وَالسِّينِ. وَتَظْهَرُ الْقَلْقَلَةُ عِنْدَ سُكُونِ حَرْفٍ مِنْ حُرُوفِهَا. وَحَرْفَا اللِّينِ وَاوٌ وَيَاءٌ سَاكِنَتَانِ قَبْلَهُمَا فَتْحٌ.",
+          "visualDirection": "Three distinct waveform motifs, with no added vowel after qalqala."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى النَّمَاذِجِ وَمَيِّزْ بَيْنَهَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L9",
+      "titleAr": "صِفَاتٌ مُفْرَدَةٌ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا الَّذِي يُمَيِّزُ صَوْتَ الضَّادِ وَالشِّينِ وَالرَّاءِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الِانْحِرَافُ لِلَّامِ وَالرَّاءِ، وَالتَّكْرِيرُ لِلرَّاءِ، وَالتَّفَشِّي لِلشِّينِ، وَالِاسْتِطَالَةُ لِلضَّادِ.",
+          "visualDirection": "Teacher-approved anatomical positions and abstract sound spread."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَدَرَّبْ عَلَى هَذِهِ الْحُرُوفِ دُونَ مُبَالَغَةٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U3.L10",
+      "titleAr": "الْغُنَّةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ زَمَنُ الْغُنَّةِ وَاحِدٌ فِي كُلِّ الْأَحْوَالِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْغُنَّةُ صَوْتٌ يَخْرُجُ مِنَ الْخَيْشُومِ، وَهِيَ صِفَةٌ لَازِمَةٌ لِلنُّونِ وَالْمِيمِ، وَتَتَفَاوَتُ مَرَاتِبُهَا.",
+          "visualDirection": "Nasal resonance path with graduated relative durations; no fixed seconds."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ النُّونِ الْمُتَحَرِّكَةِ وَالنُّونِ الْمُشَدَّدَةِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U4.L1",
+      "titleAr": "تَصْحِيحُ أَخْطَاءِ النُّطْقِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نُحَسِّنُ تِلَاوَتَنَا خُطْوَةً خُطْوَةً؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُرَاجِعُ الْمَخْرَجَ وَالصِّفَةَ وَالْحَرَكَةَ، وَنَسْتَمِعُ إِلَى النَّمُوذَجِ الصَّحِيحِ، ثُمَّ نُصَحِّحُ أَخْطَاءَنَا بِالتَّدَرُّجِ.",
+          "visualDirection": "Non-Quranic practice letters only for error demonstrations; positive feedback."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اخْتَرْ حَرْفًا وَاحِدًا وَتَدَرَّبْ عَلَيْهِ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

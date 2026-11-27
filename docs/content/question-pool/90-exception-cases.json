@@ -1,0 +1,659 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Hafs via Shatibiyyah intended; all special cases require explicit specialist confirmation before release. Alternative items from the same verse family must not be sampled together.",
+  "examples": [
+    {
+      "id": "POOL90.E1",
+      "topicId": "U5.L4",
+      "verseRef": "2:85",
+      "excerptAr": "الدُّنْيَا",
+      "focus": "النون قبل الياء داخل الكلمة",
+      "correct": "إظهار مطلق",
+      "feedbackAr": "لا تدغم النون في الياء في هذه الكلمة.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E2",
+      "topicId": "U5.L4",
+      "verseRef": "61:4",
+      "excerptAr": "بُنْيَانٌ",
+      "focus": "النون قبل الياء داخل الكلمة",
+      "correct": "إظهار مطلق",
+      "feedbackAr": "هذا من مواضع الإظهار المطلق.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E3",
+      "topicId": "U5.L4",
+      "verseRef": "6:99",
+      "excerptAr": "قِنْوَانٌ",
+      "focus": "النون قبل الواو داخل الكلمة",
+      "correct": "إظهار مطلق",
+      "feedbackAr": "تبقى النون ظاهرة في هذا الموضع.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E4",
+      "topicId": "U5.L4",
+      "verseRef": "13:4",
+      "excerptAr": "صِنْوَانٌ",
+      "focus": "النون قبل الواو داخل الكلمة",
+      "correct": "إظهار مطلق",
+      "feedbackAr": "لا تدغم النون في الواو في هذه الكلمة.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E5",
+      "topicId": "X-IDG-04",
+      "verseRef": "83:14",
+      "excerptAr": "بَلْ رَانَ",
+      "focus": "اللام قبل الراء مع السكت من الشاطبية",
+      "correct": "إظهار مع سكت",
+      "feedbackAr": "السكت المروي يمنع الإدغام هنا.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E6",
+      "topicId": "U6.L8",
+      "verseRef": "25:69",
+      "excerptAr": "فِيهِ مُهَانًا",
+      "focus": "هاء الضمير في الوصل",
+      "correct": "صلة صغرى في الموضع المستثنى",
+      "feedbackAr": "هذا موضع مستثنى لحفص، يراجع الطريق.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E7",
+      "topicId": "U6.L8",
+      "verseRef": "39:7",
+      "excerptAr": "يَرْضَهُ لَكُمْ",
+      "focus": "هاء الضمير",
+      "correct": "لا صلة في الموضع المستثنى",
+      "feedbackAr": "هذا من المواضع الخاصة التي تراجع وفق الرواية.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E8",
+      "topicId": "U8.L2",
+      "verseRef": "11:41",
+      "excerptAr": "مَجْرَاهَا",
+      "focus": "الألف بعد الراء",
+      "correct": "إمالة",
+      "feedbackAr": "تؤخذ الإمالة المروية بالسماع.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E9",
+      "topicId": "U8.L1",
+      "verseRef": "41:44",
+      "excerptAr": "أَأَعْجَمِيٌّ",
+      "focus": "الهمزة الثانية",
+      "correct": "تسهيل",
+      "feedbackAr": "يضبط التسهيل في هذا الموضع بالتلقي.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E10",
+      "topicId": "X-IDG-03",
+      "verseRef": "5:28",
+      "excerptAr": "بَسَطْتَ",
+      "focus": "الطاء قبل التاء",
+      "correct": "إدغام ناقص",
+      "feedbackAr": "تبقى صفة الإطباق.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E11",
+      "topicId": "U10.L2",
+      "verseRef": "17:110",
+      "excerptAr": "ادْعُوا",
+      "focus": "همزة الوصل عند الابتداء",
+      "correct": "ضم",
+      "feedbackAr": "يبدأ الفعل هنا بضم همزة الوصل.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E12",
+      "topicId": "U10.L2",
+      "verseRef": "96:1",
+      "excerptAr": "اقْرَأْ",
+      "focus": "همزة الوصل عند الابتداء",
+      "correct": "كسر",
+      "feedbackAr": "يبدأ الفعل هنا بكسر همزة الوصل.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    },
+    {
+      "id": "POOL90.E13",
+      "topicId": "U10.L2",
+      "verseRef": "1:2",
+      "excerptAr": "الْحَمْدُ",
+      "focus": "همزة الوصل عند الابتداء",
+      "correct": "فتح",
+      "feedbackAr": "همزة الوصل في أل التعريف مفتوحة عند الابتداء.",
+      "verification": "pending_source_path_uthmani_and_audio"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L4.POOL90.Q1A",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E1",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار مطلق"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "لا تدغم النون في الياء في هذه الكلمة.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-2:85",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q1B",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E1",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إظهار مطلق.",
+      "correctAnswer": true,
+      "feedbackAr": "لا تدغم النون في الياء في هذه الكلمة.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-2:85",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q2A",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E2",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إقلاب"
+        },
+        {
+          "id": "3",
+          "text": "إظهار مطلق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "هذا من مواضع الإظهار المطلق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-61:4",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q2B",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E2",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إدغام بغنة.",
+      "correctAnswer": false,
+      "feedbackAr": "هذا من مواضع الإظهار المطلق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-61:4",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q3A",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E3",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إظهار مطلق"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغنة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تبقى النون ظاهرة في هذا الموضع.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-6:99",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q3B",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E3",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إظهار مطلق.",
+      "correctAnswer": true,
+      "feedbackAr": "تبقى النون ظاهرة في هذا الموضع.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-6:99",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q4A",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E4",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار مطلق"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء شفوي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "لا تدغم النون في الواو في هذه الكلمة.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-13:4",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U5.L4.POOL90.Q4B",
+      "topicId": "U5.L4",
+      "exampleId": "POOL90.E4",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إدغام بغنة.",
+      "correctAnswer": false,
+      "feedbackAr": "لا تدغم النون في الواو في هذه الكلمة.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-13:4",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "X-IDG-04.POOL90.Q5A",
+      "topicId": "X-IDG-04",
+      "exampleId": "POOL90.E5",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام كامل"
+        },
+        {
+          "id": "2",
+          "text": "إقلاب"
+        },
+        {
+          "id": "3",
+          "text": "إظهار مع سكت"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "السكت المروي يمنع الإدغام هنا.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-83:14",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "X-IDG-04.POOL90.Q5B",
+      "topicId": "X-IDG-04",
+      "exampleId": "POOL90.E5",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إظهار مع سكت.",
+      "correctAnswer": true,
+      "feedbackAr": "السكت المروي يمنع الإدغام هنا.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-83:14",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U6.L8.POOL90.Q6A",
+      "topicId": "U6.L8",
+      "exampleId": "POOL90.E6",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "2",
+          "text": "صلة صغرى في الموضع المستثنى"
+        },
+        {
+          "id": "3",
+          "text": "لا صلة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "هذا موضع مستثنى لحفص، يراجع الطريق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-25:69",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U6.L8.POOL90.Q6B",
+      "topicId": "U6.L8",
+      "exampleId": "POOL90.E6",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو لا صلة.",
+      "correctAnswer": false,
+      "feedbackAr": "هذا موضع مستثنى لحفص، يراجع الطريق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-25:69",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U6.L8.POOL90.Q7A",
+      "topicId": "U6.L8",
+      "exampleId": "POOL90.E7",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا صلة في الموضع المستثنى"
+        },
+        {
+          "id": "2",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "3",
+          "text": "صلة كبرى"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "هذا من المواضع الخاصة التي تراجع وفق الرواية.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-39:7",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U6.L8.POOL90.Q7B",
+      "topicId": "U6.L8",
+      "exampleId": "POOL90.E7",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو لا صلة في الموضع المستثنى.",
+      "correctAnswer": true,
+      "feedbackAr": "هذا من المواضع الخاصة التي تراجع وفق الرواية.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-39:7",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U8.L2.POOL90.Q8A",
+      "topicId": "U8.L2",
+      "exampleId": "POOL90.E8",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تسهيل"
+        },
+        {
+          "id": "2",
+          "text": "إشمام"
+        },
+        {
+          "id": "3",
+          "text": "إمالة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تؤخذ الإمالة المروية بالسماع.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-11:41",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U8.L2.POOL90.Q8B",
+      "topicId": "U8.L2",
+      "exampleId": "POOL90.E8",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو تسهيل.",
+      "correctAnswer": false,
+      "feedbackAr": "تؤخذ الإمالة المروية بالسماع.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-11:41",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U8.L1.POOL90.Q9A",
+      "topicId": "U8.L1",
+      "exampleId": "POOL90.E9",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إخفاء"
+        },
+        {
+          "id": "2",
+          "text": "تسهيل"
+        },
+        {
+          "id": "3",
+          "text": "إمالة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يضبط التسهيل في هذا الموضع بالتلقي.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-41:44",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U8.L1.POOL90.Q9B",
+      "topicId": "U8.L1",
+      "exampleId": "POOL90.E9",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو تسهيل.",
+      "correctAnswer": true,
+      "feedbackAr": "يضبط التسهيل في هذا الموضع بالتلقي.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-41:44",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "X-IDG-03.POOL90.Q10A",
+      "topicId": "X-IDG-03",
+      "exampleId": "POOL90.E10",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام ناقص"
+        },
+        {
+          "id": "2",
+          "text": "إدغام كامل بلا بقاء صفة"
+        },
+        {
+          "id": "3",
+          "text": "إقلاب"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تبقى صفة الإطباق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-5:28",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "X-IDG-03.POOL90.Q10B",
+      "topicId": "X-IDG-03",
+      "exampleId": "POOL90.E10",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو إدغام كامل بلا بقاء صفة.",
+      "correctAnswer": false,
+      "feedbackAr": "تبقى صفة الإطباق.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-5:28",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q11A",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E11",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "فتح"
+        },
+        {
+          "id": "2",
+          "text": "كسر"
+        },
+        {
+          "id": "3",
+          "text": "ضم"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "يبدأ الفعل هنا بضم همزة الوصل.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-17:110",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q11B",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E11",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو ضم.",
+      "correctAnswer": true,
+      "feedbackAr": "يبدأ الفعل هنا بضم همزة الوصل.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-17:110",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q12A",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E12",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "فتح"
+        },
+        {
+          "id": "2",
+          "text": "كسر"
+        },
+        {
+          "id": "3",
+          "text": "ضم"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يبدأ الفعل هنا بكسر همزة الوصل.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-96:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q12B",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E12",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو ضم.",
+      "correctAnswer": false,
+      "feedbackAr": "يبدأ الفعل هنا بكسر همزة الوصل.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-96:1",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q13A",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E13",
+      "type": "singleChoice",
+      "text": "ما وجه الأداء أو الحكم في الموضع المحدد وفق الطريق المعتمد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "فتح"
+        },
+        {
+          "id": "2",
+          "text": "ضم"
+        },
+        {
+          "id": "3",
+          "text": "كسر"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "همزة الوصل في أل التعريف مفتوحة عند الابتداء.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-1:2",
+      "status": "blocked_until_source_review"
+    },
+    {
+      "id": "U10.L2.POOL90.Q13B",
+      "topicId": "U10.L2",
+      "exampleId": "POOL90.E13",
+      "type": "trueFalse",
+      "text": "الوجه المدروس في الموضع المحدد هو فتح.",
+      "correctAnswer": true,
+      "feedbackAr": "همزة الوصل في أل التعريف مفتوحة عند الابتداء.",
+      "objective": "exception_recognition",
+      "difficulty": "advanced",
+      "variantFamily": "exception-1:2",
+      "status": "blocked_until_source_review"
+    }
+  ]
+}

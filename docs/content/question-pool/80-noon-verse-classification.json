@@ -1,0 +1,772 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Display the verified target span, not the answer-containing explanatory focus. Comparison examples intentionally differ from topic rule. One item per variant family per test unless deliberate practice. Repeated references may already exist in other batches.",
+  "examples": [
+    {
+      "id": "U5.L3.POOL80.E1",
+      "topicId": "U5.L3",
+      "verseRef": "11:79",
+      "excerptAr": "مِنْ حَقٍّ",
+      "focus": "ح",
+      "rule": "الإظهار الحلقي",
+      "explanation": "النون الساكنة قبل الحاء.",
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+    },
+    {
+      "id": "U5.L3.POOL80.E2",
+      "topicId": "U5.L3",
+      "verseRef": "2:109",
+      "excerptAr": "مِنْ عِنْدِ",
+      "focus": "ع",
+      "rule": "الإظهار الحلقي",
+      "explanation": "النون الساكنة قبل العين.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L3.POOL80.E3",
+      "topicId": "U5.L3",
+      "verseRef": "2:268",
+      "excerptAr": "مَغْفِرَةً مِنْهُ",
+      "focus": "هـ في مِنْهُ",
+      "rule": "الإظهار الحلقي",
+      "explanation": "النون الساكنة قبل الهاء داخل كلمة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L3.POOL80.E4",
+      "topicId": "U5.L3",
+      "verseRef": "2:19",
+      "excerptAr": "مُحِيطٌ بِالْكَافِرِينَ",
+      "focus": "ب بعد التنوين",
+      "rule": "الإقلاب",
+      "explanation": "مثال مقابل: التنوين قبل الباء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L4.POOL80.E5",
+      "topicId": "U5.L4",
+      "verseRef": "2:8",
+      "excerptAr": "مَنْ يَقُولُ",
+      "focus": "ي",
+      "rule": "الإدغام بغنة",
+      "explanation": "النون الساكنة قبل الياء بين كلمتين عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L4.POOL80.E6",
+      "topicId": "U5.L4",
+      "verseRef": "2:107",
+      "excerptAr": "مِنْ وَلِيٍّ",
+      "focus": "و",
+      "rule": "الإدغام بغنة",
+      "explanation": "النون الساكنة قبل الواو عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L4.POOL80.E7",
+      "topicId": "U5.L4",
+      "verseRef": "16:53",
+      "excerptAr": "مِنْ نِعْمَةٍ",
+      "focus": "ن",
+      "rule": "الإدغام بغنة",
+      "explanation": "النون الساكنة قبل النون عند الوصل.",
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+    },
+    {
+      "id": "U5.L4.POOL80.E8",
+      "topicId": "U5.L4",
+      "verseRef": "2:3",
+      "excerptAr": "وَمِمَّا رَزَقْنَاهُمْ",
+      "focus": "مّ",
+      "rule": "غنة الميم المشددة",
+      "explanation": "مثال مقابل للميم المشددة، وليس مثالًا مستقلًا للنون الساكنة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L5.POOL80.E9",
+      "topicId": "U5.L5",
+      "verseRef": "2:2",
+      "excerptAr": "هُدًى لِلْمُتَّقِينَ",
+      "focus": "ل",
+      "rule": "الإدغام بغير غنة",
+      "explanation": "التنوين قبل اللام عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L5.POOL80.E10",
+      "topicId": "U5.L5",
+      "verseRef": "51:57",
+      "excerptAr": "مِنْ رِزْقٍ",
+      "focus": "ر",
+      "rule": "الإدغام بغير غنة",
+      "explanation": "النون الساكنة قبل الراء.",
+      "verification": "pending_uthmani_reference_context",
+      "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+    },
+    {
+      "id": "U5.L5.POOL80.E11",
+      "topicId": "U5.L5",
+      "verseRef": "104:1",
+      "excerptAr": "وَيْلٌ لِكُلِّ",
+      "focus": "ل",
+      "rule": "الإدغام بغير غنة",
+      "explanation": "التنوين قبل اللام.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L6.POOL80.E12",
+      "topicId": "U5.L6",
+      "verseRef": "2:31",
+      "excerptAr": "أَنْبِئُونِي",
+      "focus": "ب",
+      "rule": "الإقلاب",
+      "explanation": "النون الساكنة قبل الباء داخل كلمة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L6.POOL80.E13",
+      "topicId": "U5.L6",
+      "verseRef": "49:6",
+      "excerptAr": "فَاسِقٌ بِنَبَإٍ",
+      "focus": "ب",
+      "rule": "الإقلاب",
+      "explanation": "التنوين قبل الباء عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L6.POOL80.E14",
+      "topicId": "U5.L6",
+      "verseRef": "2:27",
+      "excerptAr": "مِنْ بَعْدِ",
+      "focus": "ب",
+      "rule": "الإقلاب",
+      "explanation": "النون الساكنة قبل الباء بين كلمتين.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E15",
+      "topicId": "U5.L7",
+      "verseRef": "2:25",
+      "excerptAr": "مِنْ تَحْتِهَا",
+      "focus": "ت",
+      "rule": "الإخفاء الحقيقي",
+      "explanation": "النون الساكنة قبل التاء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E16",
+      "topicId": "U5.L7",
+      "verseRef": "2:22",
+      "excerptAr": "أَنْدَادًا",
+      "focus": "د",
+      "rule": "الإخفاء الحقيقي",
+      "explanation": "النون الساكنة قبل الدال.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E17",
+      "topicId": "U5.L7",
+      "verseRef": "2:21",
+      "excerptAr": "مِنْ قَبْلِكُمْ",
+      "focus": "ق",
+      "rule": "الإخفاء الحقيقي",
+      "explanation": "النون الساكنة قبل القاف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E18",
+      "topicId": "U5.L7",
+      "verseRef": "2:23",
+      "excerptAr": "وَإِنْ كُنْتُمْ",
+      "focus": "ك",
+      "rule": "الإخفاء الحقيقي",
+      "explanation": "النون الساكنة قبل الكاف في إِنْ عند الوصل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E19",
+      "topicId": "U5.L7",
+      "verseRef": "2:23",
+      "excerptAr": "كُنْتُمْ",
+      "focus": "ت",
+      "rule": "الإخفاء الحقيقي",
+      "explanation": "النون الساكنة قبل التاء داخل كلمة.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "U5.L7.POOL80.E20",
+      "topicId": "U5.L7",
+      "verseRef": "2:24",
+      "excerptAr": "فَإِنْ لَمْ",
+      "focus": "ل",
+      "rule": "الإدغام بغير غنة",
+      "explanation": "مثال مقابل: اللام ليست من حروف الإخفاء.",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L3.POOL80.Q1",
+      "topicId": "U5.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L3.POOL80.E1",
+      "focus": "ح",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغير غنة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون الساكنة قبل الحاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL80.Q2",
+      "topicId": "U5.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L3.POOL80.E2",
+      "focus": "ع",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الحلقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "النون الساكنة قبل العين.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL80.Q3",
+      "topicId": "U5.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L3.POOL80.E3",
+      "focus": "هـ في مِنْهُ",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون الساكنة قبل الهاء داخل كلمة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL80.Q4",
+      "topicId": "U5.L3",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L3.POOL80.E4",
+      "focus": "ب بعد التنوين",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L3",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "text": "غنة الميم المشددة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "مثال مقابل: التنوين قبل الباء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL80.Q5",
+      "topicId": "U5.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L4.POOL80.E5",
+      "focus": "ي",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة الميم المشددة"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغنة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "النون الساكنة قبل الياء بين كلمتين عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL80.Q6",
+      "topicId": "U5.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L4.POOL80.E6",
+      "focus": "و",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الحلقي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون الساكنة قبل الواو عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL80.Q7",
+      "topicId": "U5.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L4.POOL80.E7",
+      "focus": "ن",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون الساكنة قبل النون عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL80.Q8",
+      "topicId": "U5.L4",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L4.POOL80.E8",
+      "focus": "مّ",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L4",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "غنة الميم المشددة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "مثال مقابل للميم المشددة، وليس مثالًا مستقلًا للنون الساكنة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL80.Q9",
+      "topicId": "U5.L5",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L5.POOL80.E9",
+      "focus": "ل",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L5",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة الميم المشددة"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "التنوين قبل اللام عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL80.Q10",
+      "topicId": "U5.L5",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L5.POOL80.E10",
+      "focus": "ر",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L5",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "غنة الميم المشددة"
+        },
+        {
+          "id": "3",
+          "text": "الإظهار الحلقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون الساكنة قبل الراء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL80.Q11",
+      "topicId": "U5.L5",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L5.POOL80.E11",
+      "focus": "ل",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L5",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغير غنة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "التنوين قبل اللام.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L6.POOL80.Q12",
+      "topicId": "U5.L6",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L6.POOL80.E12",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L6",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغنة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون الساكنة قبل الباء داخل كلمة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L6.POOL80.Q13",
+      "topicId": "U5.L6",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L6.POOL80.E13",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L6",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "التنوين قبل الباء عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L6.POOL80.Q14",
+      "topicId": "U5.L6",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L6.POOL80.E14",
+      "focus": "ب",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L6",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "2",
+          "text": "غنة الميم المشددة"
+        },
+        {
+          "id": "3",
+          "text": "الإقلاب"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "النون الساكنة قبل الباء بين كلمتين.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q15",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E15",
+      "focus": "ت",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "text": "غنة الميم المشددة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون الساكنة قبل التاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q16",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E16",
+      "focus": "د",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغنة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون الساكنة قبل الدال.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q17",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E17",
+      "focus": "ق",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "الإدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "الإخفاء الحقيقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "النون الساكنة قبل القاف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q18",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E18",
+      "focus": "ك",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "2",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغير غنة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون الساكنة قبل الكاف في إِنْ عند الوصل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q19",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E19",
+      "focus": "ت",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإخفاء الحقيقي"
+        },
+        {
+          "id": "2",
+          "text": "الإقلاب"
+        },
+        {
+          "id": "3",
+          "text": "غنة الميم المشددة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون الساكنة قبل التاء داخل كلمة.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL80.Q20",
+      "topicId": "U5.L7",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد عند الوصل؟",
+      "exampleId": "U5.L7.POOL80.E20",
+      "focus": "ل",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-U5.L7",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة الميم المشددة"
+        },
+        {
+          "id": "2",
+          "text": "الإظهار الحلقي"
+        },
+        {
+          "id": "3",
+          "text": "الإدغام بغير غنة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "مثال مقابل: اللام ليست من حروف الإخفاء.",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U8.L1",
+      "titleAr": "تَسْهِيلُ الْهَمْزَةِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تُؤَدَّى كُلُّ هَمْزَةٍ بِالْهَيْئَةِ نَفْسِهَا؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "التَّسْهِيلُ وَجْهٌ صَوْتِيٌّ مَخْصُوصٌ، وَلَا يُضْبَطُ بِالْكِتَابَةِ وَحْدَهَا. نَتَلَقَّاهُ مِنْ قَارِئٍ مُتْقِنٍ.",
+          "visualDirection": "Teacher-approved sound demonstration for 41:44; no invented waveform as evidence."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْوَجْهِ الْمَرْوِيِّ ثُمَّ رَدِّدْهُ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U8.L2",
+      "titleAr": "الْإِمَالَةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ يَتَغَيَّرُ صَوْتُ الْأَلِفِ فِي الْإِمَالَةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الْإِمَالَةُ تَقْرِيبُ الْفَتْحَةِ مِنَ الْكَسْرَةِ، وَالْأَلِفِ مِنَ الْيَاءِ، عَلَى وَجْهٍ مَرْوِيٍّ.",
+          "visualDirection": "Smooth transition between vowel positions; actual reciter demonstrates 11:41."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الْإِمَالَةِ فِي كَلِمَةِ مَجْرَاهَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U8.L3",
+      "titleAr": "النَّبْرُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نُبْرِزُ صَوْتًا فِي الْأَدَاءِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَدْرُسُ النَّبْرَ فِي مَوَاضِعَ مَخْصُوصَةٍ، دُونَ زِيَادَةِ حَرْفٍ أَوْ حَرَكَةٍ. وَنَتَعَلَّمُ كَيْفِيَّتَهُ بِالتَّلَقِّي.",
+          "visualDirection": "Reserve exact demonstration until book and teacher select a case."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَلَقَّ مَوْضِعَ النَّبْرِ وَهَيْئَةَ أَدَائِهِ مِنْ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U8.L4",
+      "titleAr": "كَلِمَاتٌ ذَاتُ أَدَاءٍ خَاصٍّ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يَكْفِي رَسْمُ الْكَلِمَةِ لِمَعْرِفَةِ جَمِيعِ أَوْجُهِ أَدَائِهَا؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "لِبَعْضِ الْكَلِمَاتِ أَوْجُهُ أَدَاءٍ مَرْوِيَّةٌ، وَنَضْبِطُهَا بِمَعْرِفَةِ الرِّوَايَةِ وَالطَّرِيقِ وَبِالتَّلَقِّي.",
+          "visualDirection": "Teacher-approved close-up of lips for ta'manna; display verse separately."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "شَاهِدْ وَجْهَ الْأَدَاءِ الْمُعْتَمَدَ وَتَدَرَّبْ عَلَيْهِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

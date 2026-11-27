@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U0.L1",
+      "titleAr": "الْقُرْآنُ الْكَرِيمُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ تَسَاءَلْتَ كَيْفَ نَبْدَأُ رِحْلَتَنَا مَعَ الْقُرْآنِ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَتَعَلَّمُ تِلَاوَةَ الْقُرْآنِ بِالتَّرْتِيلِ وَالْعِنَايَةِ بِأَلْفَاظِهِ.",
+          "visualDirectionAr": "مُصْحَفٌ مَفْتُوحٌ؛ تَنْتَقِلُ مِنْهُ خُطُوطٌ ضَوْئِيَّةٌ إِلَى مَسَارِ التَّعَلُّمِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى التِّلَاوَةِ، ثُمَّ أَعِدِ الْقِرَاءَةَ مَعَ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U0.L2",
+      "titleAr": "مَا التَّجْوِيدُ؟",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يَكْفِي أَنْ نَعْرِفَ اسْمَ الْحَرْفِ لِنُحْسِنَ نُطْقَهُ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "التَّجْوِيدُ فِي اللُّغَةِ التَّحْسِينُ، وَنَتَعَلَّمُ فِيهِ إِخْرَاجَ الْحُرُوفِ مِنْ مَخَارِجِهَا وَإِعْطَاءَهَا حُقُوقَهَا وَمُسْتَحَقَّاتِهَا.",
+          "visualDirectionAr": "حَرْفٌ يَتَحَوَّلُ إِلَى ثَلَاثِ بِطَاقَاتٍ: مَخْرَجٌ وَصِفَةٌ وَحُكْمٌ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَعَرَّفْ إِلَى مَخْرَجِ حَرْفٍ وَصِفَتِهِ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U0.L3",
+      "titleAr": "ثَمَرَةُ التَّجْوِيدِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "لِمَاذَا نَتَدَرَّبُ عَلَى نُطْقِ كُلِّ حَرْفٍ بِعِنَايَةٍ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "مِنْ ثَمَرَاتِ التَّجْوِيدِ صَوْنُ اللِّسَانِ عَنِ الْخَطَأِ فِي التِّلَاوَةِ. وَنُفَرِّقُ بَيْنَ الْخَطَأِ الظَّاهِرِ وَالْخَلَلِ الدَّقِيقِ فِي الْأَدَاءِ.",
+          "visualDirectionAr": "مِيزَانٌ بَصَرِيٌّ لِلْحَرَكَاتِ وَالْحُرُوفِ، دُونَ تَحْرِيفِ نَصٍّ قُرْآنِيٍّ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِبْدَأْ بِتَصْحِيحِ خَطَأٍ وَاحِدٍ فِي تِلَاوَتِكَ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U0.L4",
+      "titleAr": "الِاسْتِعَاذَةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا نَقُولُ عِنْدَمَا نُرِيدُ أَنْ نَبْدَأَ التِّلَاوَةَ؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَسْتَعِيذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ، وَمِنْ أَشْهَرِ الصِّيَغِ: أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ.",
+          "visualDirectionAr": "مُصْحَفٌ مُغْلَقٌ يَنْفَتِحُ بَعْدَ مَشْهَدِ الِاسْتِعَاذَةِ."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَدَرَّبْ عَلَى صِيغَةِ الِاسْتِعَاذَةِ قَبْلَ التِّلَاوَةِ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    },
+    {
+      "topicId": "U0.L5",
+      "titleAr": "الْبَسْمَلَةُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "كَيْفَ نَنْتَقِلُ مِنْ سُورَةٍ إِلَى سُورَةٍ أُخْرَى؟",
+          "visualDirection": "Show the concept object, no baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَبْدَأُ السُّوَرَ بِالْبَسْمَلَةِ عِنْدَ الِابْتِدَاءِ مِنْ أَوَّلِهَا، إِلَّا سُورَةَ التَّوْبَةِ. وَلِلِانْتِقَالِ بَيْنَ السُّوَرِ أَوْجُهٌ نَتَعَلَّمُهَا بِالتَّلَقِّي.",
+          "visualDirectionAr": "ثَلَاثُ بِطَاقَاتٍ لِخَاتِمَةِ سُورَةٍ وَالْبَسْمَلَةِ وَبِدَايَةِ السُّورَةِ التَّالِيَةِ؛ تَتَغَيَّرُ الْوَصْلَاتُ بَيْنَهَا."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَدَرَّبْ مَعَ مُعَلِّمِكَ عَلَى أَوْجُهِ الْوَصْلِ وَالْقَطْعِ.",
+          "visualDirection": "Morph into practice view; use approved teacher/Quran audio as appropriate"
+        }
+      ],
+      "productionNotes": "Keep Arabic as separate text layers. No generated Quran recitation. Avoid dense captions. Durations depend on reviewed narration."
+    }
+  ]
+}

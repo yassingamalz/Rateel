@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U5.L8",
+      "titleAr": "أحكام الميم الساكنة",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          3,
+          15
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تصنيف أحكام الميم",
+      "explanationAr": "للميم الساكنة ثلاثة أحكام: الإخفاء الشفوي عند الباء، والإدغام الشفوي عند الميم، والإظهار الشفوي عند بقية الحروف.",
+      "examples": [
+        {
+          "verseRef": "105:4",
+          "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "أحكام الميم الساكنة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "للميم الساكنة ثلاثة أحكام: الإخفاء الشفوي عند الباء، والإدغام الشفوي عند الميم، والإظهار الشفوي عند بقية الحروف."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "105:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تصنيف أحكام الميم"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "صنّف أمثلة الميم قبل الباء والميم والفاء.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L8.Q1",
+              "type": "singleChoice",
+              "text": "كم حكمًا للميم الساكنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "ثلاثة"
+                },
+                {
+                  "id": "2",
+                  "text": "أربعة"
+                },
+                {
+                  "id": "3",
+                  "text": "خمسة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "للميم الساكنة ثلاثة أحكام: الإخفاء الشفوي عند الباء، والإدغام الشفوي عند الميم، والإظهار الشفوي عند بقية الحروف."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L9",
+      "titleAr": "الإخفاء الشفوي",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          6,
+          7
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "معرفة حرف الإخفاء الشفوي",
+      "explanationAr": "تخفى الميم الساكنة عند الباء مع غنة، ويؤخذ ضبط أداء الشفتين بالمشافهة. وتنطبق الشفتان دون فرجة ولا كز، وترك الفرجة أمر محدث (ص 261، 269).",
+      "examples": [
+        {
+          "verseRef": "105:4",
+          "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإخفاء الشفوي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تخفى الميم الساكنة عند الباء مع غنة، ويؤخذ ضبط أداء الشفتين بالمشافهة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "105:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "معرفة حرف الإخفاء الشفوي"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "كرر المثال بعد قارئ متقن.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L9.Q1",
+              "type": "singleChoice",
+              "text": "ما حرف الإخفاء الشفوي؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الباء"
+                },
+                {
+                  "id": "2",
+                  "text": "الفاء"
+                },
+                {
+                  "id": "3",
+                  "text": "الواو"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تخفى الميم الساكنة عند الباء مع غنة، ويؤخذ ضبط أداء الشفتين بالمشافهة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L10",
+      "titleAr": "الإدغام الشفوي",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          5,
+          5
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز إدغام الميمين",
+      "explanationAr": "إذا تلت الميم الساكنة ميم متحركة في الوصل أدغمت الأولى في الثانية مع غنة.",
+      "examples": [
+        {
+          "verseRef": "2:29",
+          "excerptAr": "لَكُمْ مَا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإدغام الشفوي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "إذا تلت الميم الساكنة ميم متحركة في الوصل أدغمت الأولى في الثانية مع غنة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "2:29"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز إدغام الميمين"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى لكم ما في الوصل.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L10.Q1",
+              "type": "singleChoice",
+              "text": "ما الحكم في الميم الساكنة قبل الميم؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الإدغام الشفوي"
+                },
+                {
+                  "id": "2",
+                  "text": "الإظهار الشفوي"
+                },
+                {
+                  "id": "3",
+                  "text": "الإقلاب"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "إذا تلت الميم الساكنة ميم متحركة في الوصل أدغمت الأولى في الثانية مع غنة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L11",
+      "titleAr": "الإظهار الشفوي",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          8,
+          14
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الإظهار الشفوي",
+      "explanationAr": "تظهر الميم الساكنة قبل جميع الحروف غير الباء والميم، ويعتنى بإظهارها عند الفاء والواو.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ غَيْرِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending",
+          "reviewNote": "2026-11-27 review: previous example did not illustrate this rule; replaced."
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإظهار الشفوي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تظهر الميم الساكنة قبل جميع الحروف غير الباء والميم، ويعتنى بإظهارها عند الفاء والواو."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "106:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الإظهار الشفوي"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن مْ فَ ومْ بَ في تدريب مع المعلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L11.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف يوجب الإظهار الشفوي بعد الميم الساكنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الفاء"
+                },
+                {
+                  "id": "2",
+                  "text": "الباء"
+                },
+                {
+                  "id": "3",
+                  "text": "الميم"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تظهر الميم الساكنة قبل جميع الحروف غير الباء والميم، ويعتنى بإظهارها عند الفاء والواو."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

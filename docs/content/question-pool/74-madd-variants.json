@@ -1,0 +1,1089 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Alternative assessment items; references and excerpts require review; exact transmission path and stopping context must be checked.",
+  "topics": [
+    {
+      "topicId": "U6.L1",
+      "examples": [
+        {
+          "id": "U6.L1.POOL74.E1",
+          "verseRef": "2:8",
+          "excerptAr": "يَقُولُ",
+          "focus": "واو مد",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L1.POOL74.E2",
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "focus": "ياء مد",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L1.POOL74.E3",
+          "verseRef": "112:1",
+          "excerptAr": "هُوَ",
+          "focus": "مقارنة: الواو متحركة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L1.POOL74.E4",
+          "verseRef": "2:3",
+          "excerptAr": "يُقِيمُونَ",
+          "focus": "ياء وواو مد",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L1.POOL74.Q1",
+          "topicId": "U6.L1",
+          "text": "ما حرف المد في يَقُولُ حال الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الواو.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الألف"
+            },
+            {
+              "id": "3",
+              "text": "الواو"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L1.POOL74.Q2",
+          "topicId": "U6.L1",
+          "text": "أي حرف مد في نَسْتَعِينُ؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "النون"
+            },
+            {
+              "id": "2",
+              "text": "الياء"
+            },
+            {
+              "id": "3",
+              "text": "العين"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L1.POOL74.Q3",
+          "topicId": "U6.L1",
+          "text": "الواو في هُوَ واو مدية.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U6.L1.POOL74.Q4",
+          "topicId": "U6.L1",
+          "text": "كم حرف مد في يُقِيمُونَ في الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: اثنان.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "واحد"
+            },
+            {
+              "id": "2",
+              "text": "ثلاثة"
+            },
+            {
+              "id": "3",
+              "text": "اثنان"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L2",
+      "examples": [
+        {
+          "id": "U6.L2.POOL74.E1",
+          "verseRef": "110:1",
+          "excerptAr": "جَاءَ",
+          "focus": "ألف ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L2.POOL74.E2",
+          "verseRef": "2:22",
+          "excerptAr": "السَّمَاءِ",
+          "focus": "ألف ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L2.POOL74.E3",
+          "verseRef": "4:123",
+          "excerptAr": "سُوءًا",
+          "focus": "واو ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L2.POOL74.Q1",
+          "topicId": "U6.L2",
+          "text": "ما حرف المد في سُوءًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الواو.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الألف"
+            },
+            {
+              "id": "2",
+              "text": "الواو"
+            },
+            {
+              "id": "3",
+              "text": "الياء"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L2.POOL74.Q2",
+          "topicId": "U6.L2",
+          "text": "أي كلمة فيها همز بعد الألف؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: جاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "جاء"
+            },
+            {
+              "id": "2",
+              "text": "قال"
+            },
+            {
+              "id": "3",
+              "text": "كان"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L2.POOL74.Q3",
+          "topicId": "U6.L2",
+          "text": "وجود الهمز بعد حرف المد في الكلمة نفسها سبب للمد المتصل.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U6.L2.POOL74.Q4",
+          "topicId": "U6.L2",
+          "text": "أي مثال لا يتضمن مدًا متصلًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: قال.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "السماء"
+            },
+            {
+              "id": "2",
+              "text": "قال"
+            },
+            {
+              "id": "3",
+              "text": "جاء"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L3",
+      "examples": [
+        {
+          "id": "U6.L3.POOL74.E1",
+          "verseRef": "97:1",
+          "excerptAr": "إِنَّا أَنْزَلْنَاهُ",
+          "focus": "ألف ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L3.POOL74.E2",
+          "verseRef": "108:1",
+          "excerptAr": "إِنَّا أَعْطَيْنَاكَ",
+          "focus": "ألف ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L3.POOL74.E3",
+          "verseRef": "51:21",
+          "excerptAr": "وَفِي أَنْفُسِكُمْ",
+          "focus": "ياء ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L3.POOL74.E4",
+          "verseRef": "2:14",
+          "excerptAr": "قَالُوا آمَنَّا",
+          "focus": "واو ثم همزة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L3.POOL74.Q1",
+          "topicId": "U6.L3",
+          "text": "أي حرف مد قبل الهمزة في وفي أنفسكم؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الواو"
+            },
+            {
+              "id": "3",
+              "text": "الألف"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L3.POOL74.Q2",
+          "topicId": "U6.L3",
+          "text": "ما نوع المد عند وصل قالوا آمنا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: منفصل.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "متصل"
+            },
+            {
+              "id": "2",
+              "text": "لازم"
+            },
+            {
+              "id": "3",
+              "text": "منفصل"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L3.POOL74.Q3",
+          "topicId": "U6.L3",
+          "text": "عند الوقف على الكلمة الأولى يزول سبب الانفصال.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U6.L3.POOL74.Q4",
+          "topicId": "U6.L3",
+          "text": "ما حرف المد في إنا قبل أعطيناك؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الألف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الألف"
+            },
+            {
+              "id": "2",
+              "text": "الياء"
+            },
+            {
+              "id": "3",
+              "text": "الواو"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L4",
+      "examples": [
+        {
+          "id": "U6.L4.POOL74.E1",
+          "verseRef": "1:2",
+          "excerptAr": "الْعَالَمِينَ",
+          "focus": "ياء قبل نون",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L4.POOL74.E2",
+          "verseRef": "1:3",
+          "excerptAr": "الرَّحِيمِ",
+          "focus": "ياء قبل ميم",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L4.POOL74.E3",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "ألف قبل سين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L4.POOL74.E4",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "لا مد قبل آخر حرف",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L4.POOL74.Q1",
+          "topicId": "U6.L4",
+          "text": "أي كلمة لا يوجد فيها حرف مد قبل الحرف الأخير؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الفلق.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الناس"
+            },
+            {
+              "id": "2",
+              "text": "الرحيم"
+            },
+            {
+              "id": "3",
+              "text": "الفلق"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L4.POOL74.Q2",
+          "topicId": "U6.L4",
+          "text": "ما الحرف الذي يسكن عند الوقف بالسكون المحض على الناس؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: السين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الألف"
+            },
+            {
+              "id": "2",
+              "text": "السين"
+            },
+            {
+              "id": "3",
+              "text": "النون"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L4.POOL74.Q3",
+          "topicId": "U6.L4",
+          "text": "المد العارض للسكون سببه سكون أصلي ثابت في الوصل والوقف.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U6.L4.POOL74.Q4",
+          "topicId": "U6.L4",
+          "text": "ما حرف المد قبل الميم في الرحيم؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الألف"
+            },
+            {
+              "id": "2",
+              "text": "الواو"
+            },
+            {
+              "id": "3",
+              "text": "الياء"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L5",
+      "examples": [
+        {
+          "id": "U6.L5.POOL74.E1",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "focus": "كلمي مثقل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L5.POOL74.E2",
+          "verseRef": "69:1",
+          "excerptAr": "الْحَاقَّةُ",
+          "focus": "كلمي مثقل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L5.POOL74.E3",
+          "verseRef": "101:1",
+          "excerptAr": "الْقَارِعَةُ",
+          "focus": "مقارنة: الألف طبيعية في الوصل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L5.POOL74.E4",
+          "verseRef": "79:34",
+          "excerptAr": "الطَّامَّةُ",
+          "focus": "كلمي مثقل",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L5.POOL74.Q1",
+          "topicId": "U6.L5",
+          "text": "ما نوع المد في ألف الحاقة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: لازم كلمي مثقل.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "منفصل"
+            },
+            {
+              "id": "2",
+              "text": "لازم كلمي مثقل"
+            },
+            {
+              "id": "3",
+              "text": "بدل"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L5.POOL74.Q2",
+          "topicId": "U6.L5",
+          "text": "أي كلمة لا تحتوي على ألف قبل حرف مشدد؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: القارعة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "القارعة"
+            },
+            {
+              "id": "2",
+              "text": "الحاقة"
+            },
+            {
+              "id": "3",
+              "text": "الطامة"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L5.POOL74.Q3",
+          "topicId": "U6.L5",
+          "text": "السكون الأصلي يبقى في الوصل والوقف.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U6.L5.POOL74.Q4",
+          "topicId": "U6.L5",
+          "text": "ما الحرف المشدد بعد الألف في الطامة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الميم.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "التاء"
+            },
+            {
+              "id": "2",
+              "text": "الميم"
+            },
+            {
+              "id": "3",
+              "text": "الطاء"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L6",
+      "examples": [
+        {
+          "id": "U6.L6.POOL74.E1",
+          "verseRef": "2:285",
+          "excerptAr": "آمَنَ",
+          "focus": "ألف بدل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L6.POOL74.E2",
+          "verseRef": "48:4",
+          "excerptAr": "إِيمَانًا",
+          "focus": "ياء بدل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L6.POOL74.E3",
+          "verseRef": "2:101",
+          "excerptAr": "أُوتُوا",
+          "focus": "واو بدل",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L6.POOL74.E4",
+          "verseRef": "110:1",
+          "excerptAr": "جَاءَ",
+          "focus": "مقارنة: متصل",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L6.POOL74.Q1",
+          "topicId": "U6.L6",
+          "text": "ما حرف المد الأول في أوتوا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الواو.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الواو"
+            },
+            {
+              "id": "2",
+              "text": "الياء"
+            },
+            {
+              "id": "3",
+              "text": "الألف"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L6.POOL74.Q2",
+          "topicId": "U6.L6",
+          "text": "أي مثال فيه الهمز بعد المد لا قبله؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: جاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "آمن"
+            },
+            {
+              "id": "2",
+              "text": "إيمانًا"
+            },
+            {
+              "id": "3",
+              "text": "جاء"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L6.POOL74.Q3",
+          "topicId": "U6.L6",
+          "text": "مد البدل لحفص في الأصل حركتان ما لم يعرض سبب أقوى.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U6.L6.POOL74.Q4",
+          "topicId": "U6.L6",
+          "text": "ما حرف المد بعد الهمزة في إيمانًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الألف"
+            },
+            {
+              "id": "3",
+              "text": "الواو"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L7",
+      "examples": [
+        {
+          "id": "U6.L7.POOL74.E1",
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "focus": "واو لين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L7.POOL74.E2",
+          "verseRef": "106:3",
+          "excerptAr": "الْبَيْتِ",
+          "focus": "ياء لين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L7.POOL74.E3",
+          "verseRef": "106:1",
+          "excerptAr": "قُرَيْشٍ",
+          "focus": "ياء لين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L7.POOL74.E4",
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "focus": "ياء مد لا لين",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L7.POOL74.Q1",
+          "topicId": "U6.L7",
+          "text": "أي كلمة تحتوي على ياء مدية لا ياء لين؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: نستعين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "البيت"
+            },
+            {
+              "id": "2",
+              "text": "قريش"
+            },
+            {
+              "id": "3",
+              "text": "نستعين"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L7.POOL74.Q2",
+          "topicId": "U6.L7",
+          "text": "ما حركة الحرف قبل الواو في خوف؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الفتحة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الضمة"
+            },
+            {
+              "id": "2",
+              "text": "الفتحة"
+            },
+            {
+              "id": "3",
+              "text": "الكسرة"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L7.POOL74.Q3",
+          "topicId": "U6.L7",
+          "text": "حرف اللين ساكن وقبله فتح.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U6.L7.POOL74.Q4",
+          "topicId": "U6.L7",
+          "text": "ما حرف اللين في قريش؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الياء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الواو"
+            },
+            {
+              "id": "2",
+              "text": "الألف"
+            },
+            {
+              "id": "3",
+              "text": "الياء"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L8",
+      "examples": [
+        {
+          "id": "U6.L8.POOL74.E1",
+          "verseRef": "104:3",
+          "excerptAr": "مَالَهُ أَخْلَدَهُ",
+          "focus": "كبرى",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L8.POOL74.E2",
+          "verseRef": "112:4",
+          "excerptAr": "لَهُ كُفُوًا",
+          "focus": "صغرى",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L8.POOL74.E3",
+          "verseRef": "25:69",
+          "excerptAr": "فِيهِ مُهَانًا",
+          "focus": "استثناء مروي",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L8.POOL74.E4",
+          "verseRef": "112:1",
+          "excerptAr": "هُوَ اللَّهُ",
+          "focus": "ليس هاء ضمير متصلة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L8.POOL74.Q1",
+          "topicId": "U6.L8",
+          "text": "أي مثال هاء ضمير قبل همزة قطع مع تحقق الصلة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ماله أخلده.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "هو الله"
+            },
+            {
+              "id": "2",
+              "text": "ماله أخلده"
+            },
+            {
+              "id": "3",
+              "text": "له كفوا"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U6.L8.POOL74.Q2",
+          "topicId": "U6.L8",
+          "text": "أي مثال صلة صغرى؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: له كفوا.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "له كفوا"
+            },
+            {
+              "id": "2",
+              "text": "ماله أخلده"
+            },
+            {
+              "id": "3",
+              "text": "هو الله"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L8.POOL74.Q3",
+          "topicId": "U6.L8",
+          "text": "تطبق الصلة في الوقف على هاء الضمير كما في الوصل دائمًا.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U6.L8.POOL74.Q4",
+          "topicId": "U6.L8",
+          "text": "هل تكفي رؤية حرف الهاء لإثبات الصلة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: لا، تراعى الشروط.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "فقط في أول السورة"
+            },
+            {
+              "id": "2",
+              "text": "لا، تراعى الشروط"
+            },
+            {
+              "id": "3",
+              "text": "نعم دائمًا"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U6.L9",
+      "examples": [
+        {
+          "id": "U6.L9.POOL74.E1",
+          "verseRef": "110:3",
+          "excerptAr": "تَوَّابًا",
+          "focus": "عوض وقفًا",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L9.POOL74.E2",
+          "verseRef": "4:40",
+          "excerptAr": "حَسَنَةً",
+          "focus": "تاء مربوطة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L9.POOL74.E3",
+          "verseRef": "78:14",
+          "excerptAr": "ثَجَّاجًا",
+          "focus": "عوض وقفًا",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U6.L9.POOL74.E4",
+          "verseRef": "78:15",
+          "excerptAr": "نَبَاتًا",
+          "focus": "عوض وقفًا",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U6.L9.POOL74.Q1",
+          "topicId": "U6.L9",
+          "text": "أي كلمة يوقف عليها بهاء ساكنة دون عوض؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: حسنةً.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "حسنةً"
+            },
+            {
+              "id": "2",
+              "text": "ثجاجًا"
+            },
+            {
+              "id": "3",
+              "text": "نباتًا"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U6.L9.POOL74.Q2",
+          "topicId": "U6.L9",
+          "text": "ما مقدار العوض في الوقف المعتاد على نباتًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: حركتان.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "أربع فقط"
+            },
+            {
+              "id": "2",
+              "text": "ست دائمًا"
+            },
+            {
+              "id": "3",
+              "text": "حركتان"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U6.L9.POOL74.Q3",
+          "topicId": "U6.L9",
+          "text": "مد العوض يكون في الوصل دائمًا.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ. راجع القاعدة مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U6.L9.POOL74.Q4",
+          "topicId": "U6.L9",
+          "text": "أي علامة هي سبب العوض في المثال المعتاد؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: تنوين الفتح.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "تنوين الفتح"
+            },
+            {
+              "id": "2",
+              "text": "تنوين الضم"
+            },
+            {
+              "id": "3",
+              "text": "تنوين الكسر"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Region descriptions are editorial candidates, not coordinates. Claude must bind reviewed anatomy artwork to stable region IDs. Visual/text alternatives share a family.",
+  "questions": [
+    {
+      "id": "U2.L3.POOL96.V1",
+      "topicId": "U2.L3",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ء هـ على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "أقصى الحلق",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "أقصى الحلق",
+      "feedbackAr": "الهمزة والهاء من أقصى الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-0",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L3.POOL96.Q1",
+      "topicId": "U2.L3",
+      "type": "singleChoice",
+      "text": "ما مخرج ء هـ؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى الحلق"
+        },
+        {
+          "id": "2",
+          "text": "وسط الحلق"
+        },
+        {
+          "id": "3",
+          "text": "أدنى الحلق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الهمزة والهاء من أقصى الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-0",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L3.POOL96.V2",
+      "topicId": "U2.L3",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ع ح على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "وسط الحلق",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "وسط الحلق",
+      "feedbackAr": "العين والحاء من وسط الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-1",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L3.POOL96.Q2",
+      "topicId": "U2.L3",
+      "type": "singleChoice",
+      "text": "ما مخرج ع ح؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى الحلق"
+        },
+        {
+          "id": "2",
+          "text": "أدنى الحلق"
+        },
+        {
+          "id": "3",
+          "text": "وسط الحلق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "العين والحاء من وسط الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-1",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L3.POOL96.V3",
+      "topicId": "U2.L3",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج غ خ على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "أدنى الحلق",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "أدنى الحلق",
+      "feedbackAr": "الغين والخاء من أدنى الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-2",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L3.POOL96.Q3",
+      "topicId": "U2.L3",
+      "type": "singleChoice",
+      "text": "ما مخرج غ خ؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "وسط الحلق"
+        },
+        {
+          "id": "2",
+          "text": "أدنى الحلق"
+        },
+        {
+          "id": "3",
+          "text": "أقصى الحلق"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الغين والخاء من أدنى الحلق.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-2",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L4.POOL96.V4",
+      "topicId": "U2.L4",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ق على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "أقصى اللسان عند مخرج القاف",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "أقصى اللسان عند مخرج القاف",
+      "feedbackAr": "القاف من أقصى اللسان مع الحنك الأعلى.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-3",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L4.POOL96.Q4",
+      "topicId": "U2.L4",
+      "type": "singleChoice",
+      "text": "ما مخرج ق؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى اللسان عند مخرج القاف"
+        },
+        {
+          "id": "2",
+          "text": "وسط اللسان"
+        },
+        {
+          "id": "3",
+          "text": "طرف اللسان"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "القاف من أقصى اللسان مع الحنك الأعلى.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-3",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L4.POOL96.V5",
+      "topicId": "U2.L4",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ج ش ي غير مدية على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "وسط اللسان",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "وسط اللسان",
+      "feedbackAr": "هذه الحروف من وسط اللسان.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-4",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L4.POOL96.Q5",
+      "topicId": "U2.L4",
+      "type": "singleChoice",
+      "text": "ما مخرج ج ش ي غير مدية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "حافة اللسان"
+        },
+        {
+          "id": "2",
+          "text": "الشفتان"
+        },
+        {
+          "id": "3",
+          "text": "وسط اللسان"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "هذه الحروف من وسط اللسان.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-4",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L4.POOL96.V6",
+      "topicId": "U2.L4",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ض على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "حافة اللسان مع الأضراس العليا",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "حافة اللسان مع الأضراس العليا",
+      "feedbackAr": "الضاد من حافة اللسان مع ما يحاذيها من الأضراس العليا.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-5",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L4.POOL96.Q6",
+      "topicId": "U2.L4",
+      "type": "singleChoice",
+      "text": "ما مخرج ض؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الحلق"
+        },
+        {
+          "id": "2",
+          "text": "حافة اللسان مع الأضراس العليا"
+        },
+        {
+          "id": "3",
+          "text": "وسط اللسان"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الضاد من حافة اللسان مع ما يحاذيها من الأضراس العليا.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-5",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L4.POOL96.V7",
+      "topicId": "U2.L4",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ط د ت على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "طرف اللسان وأصول الثنايا العليا",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "طرف اللسان وأصول الثنايا العليا",
+      "feedbackAr": "تشترك الحروف الثلاثة في هذا المخرج.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-6",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L4.POOL96.Q7",
+      "topicId": "U2.L4",
+      "type": "singleChoice",
+      "text": "ما مخرج ط د ت؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "طرف اللسان وأصول الثنايا العليا"
+        },
+        {
+          "id": "2",
+          "text": "وسط اللسان"
+        },
+        {
+          "id": "3",
+          "text": "الشفتان"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تشترك الحروف الثلاثة في هذا المخرج.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-6",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L4.POOL96.V8",
+      "topicId": "U2.L4",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ظ ذ ث على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "طرف اللسان وأطراف الثنايا العليا",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "طرف اللسان وأطراف الثنايا العليا",
+      "feedbackAr": "تشترك الحروف الثلاثة في هذا المخرج.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-7",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L4.POOL96.Q8",
+      "topicId": "U2.L4",
+      "type": "singleChoice",
+      "text": "ما مخرج ظ ذ ث؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى اللسان"
+        },
+        {
+          "id": "2",
+          "text": "الحلق"
+        },
+        {
+          "id": "3",
+          "text": "طرف اللسان وأطراف الثنايا العليا"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تشترك الحروف الثلاثة في هذا المخرج.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-7",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L5.POOL96.V9",
+      "topicId": "U2.L5",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ف على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "باطن الشفة السفلى وأطراف الثنايا العليا",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "باطن الشفة السفلى وأطراف الثنايا العليا",
+      "feedbackAr": "هذا مخرج الفاء.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-8",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L5.POOL96.Q9",
+      "topicId": "U2.L5",
+      "type": "singleChoice",
+      "text": "ما مخرج ف؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "وسط اللسان"
+        },
+        {
+          "id": "2",
+          "text": "باطن الشفة السفلى وأطراف الثنايا العليا"
+        },
+        {
+          "id": "3",
+          "text": "الحلق"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "هذا مخرج الفاء.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-8",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L5.POOL96.V10",
+      "topicId": "U2.L5",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج ب م و غير مدية على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "الشفتان",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "الشفتان",
+      "feedbackAr": "تختلف هيئة الشفتين بحسب الحرف.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-9",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L5.POOL96.Q10",
+      "topicId": "U2.L5",
+      "type": "singleChoice",
+      "text": "ما مخرج ب م و غير مدية؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الشفتان"
+        },
+        {
+          "id": "2",
+          "text": "الحلق"
+        },
+        {
+          "id": "3",
+          "text": "طرف اللسان"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تختلف هيئة الشفتين بحسب الحرف.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-9",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L6.POOL96.V11",
+      "topicId": "U2.L6",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج الغنة على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "الخيشوم",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "الخيشوم",
+      "feedbackAr": "الخيشوم مخرج صوت الغنة.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-10",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L6.POOL96.Q11",
+      "topicId": "U2.L6",
+      "type": "singleChoice",
+      "text": "ما مخرج الغنة؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الجوف"
+        },
+        {
+          "id": "2",
+          "text": "وسط اللسان"
+        },
+        {
+          "id": "3",
+          "text": "الخيشوم"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الخيشوم مخرج صوت الغنة.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-10",
+      "status": "editorial_draft"
+    },
+    {
+      "id": "U2.L2.POOL96.V12",
+      "topicId": "U2.L2",
+      "type": "visualRecognition",
+      "text": "حدد موضع خروج حروف المد على الرسم.",
+      "mediaRequest": {
+        "kind": "reviewed_anatomical_diagram",
+        "regionCandidate": "الجوف",
+        "assetId": null,
+        "geometry": null
+      },
+      "correctRegionCandidate": "الجوف",
+      "feedbackAr": "الجوف مخرج حروف المد بشروطها.",
+      "objective": "anatomical_localization",
+      "difficulty": "intermediate",
+      "variantFamily": "anatomy-11",
+      "status": "blocked_until_anatomical_asset_review"
+    },
+    {
+      "id": "U2.L2.POOL96.Q12",
+      "topicId": "U2.L2",
+      "type": "singleChoice",
+      "text": "ما مخرج حروف المد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "الشفتان وحدهما"
+        },
+        {
+          "id": "2",
+          "text": "الجوف"
+        },
+        {
+          "id": "3",
+          "text": "الحلق وحده"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الجوف مخرج حروف المد بشروطها.",
+      "objective": "anatomical_localization",
+      "difficulty": "basic",
+      "variantFamily": "anatomy-11",
+      "status": "editorial_draft"
+    }
+  ]
+}

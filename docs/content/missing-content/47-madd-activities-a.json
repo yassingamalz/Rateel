@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U6.L1",
+      "examples": [
+        {
+          "id": "U6.L1.M.E1",
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L1.M.E2",
+          "verseRef": "2:8",
+          "excerptAr": "يَقُولُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L1.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L1.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما حرف المد في المثال الثاني حال الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الألف"
+            },
+            {
+              "id": "3",
+              "text": "الواو"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الواو",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L1.M.P1",
+          "instructionAr": "كرر بَا وبُو وبِي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L1.M.P2",
+          "instructionAr": "استمع إلى المد الطبيعي في الوصل دون الوقف على آخر حرف المثال.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L2",
+      "examples": [
+        {
+          "id": "U6.L2.M.E1",
+          "verseRef": "110:1",
+          "excerptAr": "جَاءَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L2.M.E2",
+          "verseRef": "2:22",
+          "excerptAr": "السَّمَاءِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L2.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L2.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما نوع المد في جاء؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بدل"
+            },
+            {
+              "id": "2",
+              "text": "متصل"
+            },
+            {
+              "id": "3",
+              "text": "منفصل"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "متصل",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L2.M.P1",
+          "instructionAr": "حدد حرف المد والهمزة في جاء.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L2.M.P2",
+          "instructionAr": "كرر المد وفق الطريق المعتمد دون تغيير المقدار.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L3",
+      "examples": [
+        {
+          "id": "U6.L3.M.E1",
+          "verseRef": "97:1",
+          "excerptAr": "إِنَّا أَنْزَلْنَاهُ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L3.M.E2",
+          "verseRef": "108:1",
+          "excerptAr": "إِنَّا أَعْطَيْنَاكَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L3.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L3.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما نوع المد عند وصل إنا بأعطيناك؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "منفصل"
+            },
+            {
+              "id": "2",
+              "text": "لازم"
+            },
+            {
+              "id": "3",
+              "text": "عوض"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "منفصل",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L3.M.P1",
+          "instructionAr": "استمع إلى المقطع متصلًا.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L3.M.P2",
+          "instructionAr": "قارن الوجه المعتمد للوصل بوقف تعليمي مع المعلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L4",
+      "examples": [
+        {
+          "id": "U6.L4.M.E1",
+          "verseRef": "1:2",
+          "excerptAr": "الْعَالَمِينَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L4.M.E2",
+          "verseRef": "1:3",
+          "excerptAr": "الرَّحِيمِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L4.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L4.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما سبب المد عند الوقف بالسكون المحض على الرحيم؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الهمز"
+            },
+            {
+              "id": "2",
+              "text": "السكون الأصلي"
+            },
+            {
+              "id": "3",
+              "text": "السكون العارض"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "السكون العارض",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L4.M.P1",
+          "instructionAr": "كرر أوجه الوقف بالسكون المحض مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L4.M.P2",
+          "instructionAr": "قارن المد في الوصل والوقف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L5",
+      "examples": [
+        {
+          "id": "U6.L5.M.E1",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L5.M.E2",
+          "verseRef": "2:1",
+          "excerptAr": "الم",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L5.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L5.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما نوع المد في ألف الضالين؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بدل"
+            },
+            {
+              "id": "2",
+              "text": "لازم كلمي مثقل"
+            },
+            {
+              "id": "3",
+              "text": "طبيعي"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "لازم كلمي مثقل",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L5.M.P1",
+          "instructionAr": "استمع إلى الألف قبل اللام المشددة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L5.M.P2",
+          "instructionAr": "تلق هجاء الحروف المقطعة وأزمنتها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

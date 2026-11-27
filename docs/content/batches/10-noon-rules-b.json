@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U5.L6",
+      "titleAr": "الإقلاب",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          38,
+          40
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التعرف على حرف الإقلاب",
+      "explanationAr": "عند الباء تقلب النون الساكنة أو التنوين ميمًا مخفاة مع غنة. وتنطبق الشفتان دون فرجة ولا كز، وترك الفرجة أمر محدث (ص 292، 306).",
+      "examples": [
+        {
+          "verseRef": "2:33",
+          "excerptAr": "أَنْبِئْهُمْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإقلاب"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "عند الباء تقلب النون الساكنة أو التنوين ميمًا مخفاة مع غنة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "2:33"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التعرف على حرف الإقلاب"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى المثال وكرر انتقال الصوت إلى الباء.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L6.Q1",
+              "type": "singleChoice",
+              "text": "ما حرف الإقلاب؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الباء"
+                },
+                {
+                  "id": "2",
+                  "text": "النون"
+                },
+                {
+                  "id": "3",
+                  "text": "اللام"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "عند الباء تقلب النون الساكنة أو التنوين ميمًا مخفاة مع غنة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U5.L7",
+      "titleAr": "الإخفاء الحقيقي",
+      "source": {
+        "chapter": 10,
+        "pdfPageRange": [
+          41,
+          51
+        ],
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الإخفاء",
+      "explanationAr": "تخفى النون الساكنة أو التنوين عند خمسة عشر حرفًا، بين الإظهار والإدغام مع غنة ودون تشديد الحرف التالي. ويتهيأ الفم على مخرج الحرف الآتي، وتفخم الغنة قبل الحرف المفخم وترقق قبل المرقق (التجويد المصور ص 301–303).",
+      "examples": [
+        {
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإخفاء الحقيقي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تخفى النون الساكنة أو التنوين عند خمسة عشر حرفًا، بين الإظهار والإدغام مع غنة ودون تشديد الحرف التالي."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "113:2"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الإخفاء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى المثال مع معلم ولا تلصق طرف اللسان بمخرج النون.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L7.Q1",
+              "type": "singleChoice",
+              "text": "ما الحكم عند النون الساكنة قبل الشين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الإخفاء الحقيقي"
+                },
+                {
+                  "id": "2",
+                  "text": "الإقلاب"
+                },
+                {
+                  "id": "3",
+                  "text": "الإظهار الحلقي"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تخفى النون الساكنة أو التنوين عند خمسة عشر حرفًا، بين الإظهار والإدغام مع غنة ودون تشديد الحرف التالي."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

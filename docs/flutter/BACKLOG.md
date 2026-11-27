@@ -109,3 +109,11 @@ Placeholders to replace before release:
 ## Screen 13, achievements (to do): 27 is part of it
 **Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
 - [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
+
+## Lesson content (`docs/content/`, branch of the content review)
+- [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
+      chapter into `docs/content/sources/musawwar/` and compare. **Done: all 22 chapters (2026-11-27).** PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
+      (ids in `lesson-production:docs/production/LESSONS-TRACKER.md`).
+- [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
+      (`REVIEW-2026-11-27.md`, «Still open»).
+- [x] Optional tashil/ibdal (آلذكرين، آلآن، آلله) written from the book ch. 19 (pool 99, 2026-11-27); الاسم is in ch. 15 p. 471.

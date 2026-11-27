@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U7.L1",
+      "titleAr": "إِتْمَامُ الْحَرَكَاتِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ إِطَالَةُ الْحَرَكَةِ دَائِمًا أَفْضَلُ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُؤَدِّي الْفَتْحَةَ وَالضَّمَّةَ وَالْكَسْرَةَ كَامِلَةً دُونَ اخْتِلَاسٍ أَوْ تَوْلِيدِ حَرْفِ مَدٍّ زَائِدٍ.",
+          "visualDirection": "Three approved articulatory poses with short-versus-long sound comparison."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ بَ وَبَا، وَبُ وَبُو، وَبِ وَبِي.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U7.L2",
+      "titleAr": "الْتِقَاءُ السَّاكِنَيْنِ فِي كَلِمَةٍ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يَجْتَمِعُ سَاكِنَانِ فِي كَلِمَةٍ وَاحِدَةٍ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "قَدْ يَجْتَمِعُ سَاكِنَانِ فِي مَوَاضِعَ مَخْصُوصَةٍ، كَحَرْفِ الْمَدِّ قَبْلَ حَرْفٍ مُشَدَّدٍ، أَوْ عِنْدَ الْوَقْفِ.",
+          "visualDirection": "Compare original and temporary sukun as abstract educational symbols."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "قَارِنْ بَيْنَ السُّكُونِ الْأَصْلِيِّ وَالْعَارِضِ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U7.L3",
+      "titleAr": "الْتِقَاءُ السَّاكِنَيْنِ فِي كَلِمَتَيْنِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَاذَا يَحْدُثُ عِنْدَ سُقُوطِ هَمْزَةِ الْوَصْلِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "قَدْ يَلْتَقِي سَاكِنَانِ عِنْدَ وَصْلِ كَلِمَتَيْنِ. وَنُرَاعِي مَا نُقِلَ مِنْ تَحْرِيكٍ أَوْ حَذْفٍ بِحَسَبِ الْمَوْضِعِ.",
+          "visualDirection": "Link two word cards, demonstrate the audible connecting vowel only on separate teaching layer."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى قُلِ ادْعُوا مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

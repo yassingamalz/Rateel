@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U11.L1",
+      "titleAr": "تطور كتابة وضبط المصحف",
+      "source": {
+        "chapter": 20,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التمييز بين الرسم والضبط",
+      "explanationAr": "تطور ضبط المصحف عبر مراحل تاريخية شملت وسائل تمييز الحروف والحركات وعلامات القراءة، مع بقاء التلقي أساسًا لنقل الأداء. وفي التجويد المصور: كتب القرآن زمن النبوة خاليًا من النقط والشكل، ثم نقطه أبو الأسود الدؤلي (ت 69 هـ) نقط إعراب، ونقط نصر بن عاصم الليثي (ت 90 هـ) نقط إعجام، وطور الخليل بن أحمد (ت 175 هـ) علامات الحركات والهمزة والسكون والشدة وهمزة الوصل والمد (ص 518–548).",
+      "examples": [
+        {
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "تطور كتابة وضبط المصحف"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تطور ضبط المصحف عبر مراحل تاريخية شملت وسائل تمييز الحروف والحركات وعلامات القراءة، مع بقاء التلقي أساسًا لنقل الأداء."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التمييز بين الرسم والضبط"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن صورًا موثقة لمصاحف من مراحل مختلفة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U11.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما وظيفة علامات الضبط؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "المساعدة على معرفة القراءة"
+                },
+                {
+                  "id": "2",
+                  "text": "استبدال التلقي"
+                },
+                {
+                  "id": "3",
+                  "text": "تغيير النص القرآني"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تطور ضبط المصحف عبر مراحل تاريخية شملت وسائل تمييز الحروف والحركات وعلامات القراءة، مع بقاء التلقي أساسًا لنقل الأداء."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U11.L2",
+      "titleAr": "الرسم العثماني والإملائي",
+      "source": {
+        "chapter": 21,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الرسم من الإملاء",
+      "explanationAr": "الرسم العثماني له خصائص في كتابة بعض الكلمات تختلف عن الإملاء الحديث. يجب عرض النص القرآني من مصدر مصحف موثوق دون إعادة تهجئته تلقائيًا. وينحصر الفرق بينهما في خمس مسائل: حروف تنطق وهي محذوفة في الخط، وحروف مكتوبة لا تنطق، وحروف تكتب بكيفية وتنطق بأخرى، والمقطوع والموصول، وما رسم بالتاء المبسوطة من هاءات التأنيث (التجويد المصور ص 562).",
+      "examples": [
+        {
+          "verseRef": "1:3",
+          "excerptAr": "الرَّحْمَٰنِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الرسم العثماني والإملائي"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الرسم العثماني له خصائص في كتابة بعض الكلمات تختلف عن الإملاء الحديث. يجب عرض النص القرآني من مصدر مصحف موثوق دون إعادة تهجئته تلقائيًا."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:3"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الرسم من الإملاء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن الرسم المعتمد لكلمة الرحمن بالإملاء الحديث.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U11.L2.Q1",
+              "type": "singleChoice",
+              "text": "أي نص يعتمد عند عرض الآيات في التطبيق؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "نص مصحف موثوق بالرسم المعتمد"
+                },
+                {
+                  "id": "2",
+                  "text": "تهجئة يولدها التطبيق"
+                },
+                {
+                  "id": "3",
+                  "text": "نص بلا تحقق"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الرسم العثماني له خصائص في كتابة بعض الكلمات تختلف عن الإملاء الحديث. يجب عرض النص القرآني من مصدر مصحف موثوق دون إعادة تهجئته تلقائيًا."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

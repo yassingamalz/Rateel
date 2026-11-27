@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U9.L1",
+      "titleAr": "الْوَقْفُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَتَى نَتَوَقَّفُ فِي أَثْنَاءِ التِّلَاوَةِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نُرَاعِي الْمَعْنَى عِنْدَ الْوَقْفِ، وَنَتَوَقَّفُ زَمَنًا ثُمَّ نَسْتَأْنِفُ الْقِرَاءَةَ مِنْ مَوْضِعٍ مُنَاسِبٍ.",
+          "visualDirection": "Continuous path pauses at teacher-approved verse boundaries."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "حَدِّدْ مَوْضِعَ الْوَقْفِ الْمُنَاسِبَ مَعَ مُعَلِّمِكَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U9.L2",
+      "titleAr": "عَلَامَاتُ الْوَقْفِ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "مَا مَعْنَى الْعَلَامَاتِ الصَّغِيرَةِ فِي الْمُصْحَفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "تُسَاعِدُ عَلَامَاتُ الْوَقْفِ عَلَى مَعْرِفَةِ مَوَاضِعِ الْوَقْفِ وَالْوَصْلِ، وَنَرْجِعُ إِلَى مِفْتَاحِ الْمُصْحَفِ لِفَهْمِ اصْطِلَاحَاتِهِ.",
+          "visualDirection": "Zoom into authenticated mushaf marks; never generate scripture as image."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "ارْبِطْ كُلَّ عَلَامَةٍ بِمَعْنَاهَا.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U9.L3",
+      "titleAr": "الِابْتِدَاءُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ نَبْدَأُ دَائِمًا مِنَ الْكَلِمَةِ الَّتِي تَلِي مَوْضِعَ الْوَقْفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "نَخْتَارُ لِلِابْتِدَاءِ مَوْضِعًا يَصِحُّ فِيهِ الْمَعْنَى، وَقَدْ نَرْجِعُ إِلَى مَا قَبْلَ مَوْضِعِ الْوَقْفِ عِنْدَ الْحَاجَةِ.",
+          "visualDirection": "Timeline reverses to a reviewed suitable starting point."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "تَدَرَّبْ عَلَى اسْتِئْنَافِ الْقِرَاءَةِ مَعَ مُعَلِّمٍ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    },
+    {
+      "topicId": "U9.L4",
+      "titleAr": "الرَّوْمُ وَالْإِشْمَامُ",
+      "status": "draft_tashkil_review_pending",
+      "scenes": [
+        {
+          "id": "s01",
+          "type": "hook",
+          "narrationAr": "هَلْ يُسْمَعُ كُلُّ وَجْهٍ مِنْ أَوْجُهِ الْوَقْفِ؟",
+          "visualDirection": "Introduce concept without baked text"
+        },
+        {
+          "id": "s02",
+          "type": "explain",
+          "narrationAr": "الرَّوْمُ إِتْيَانٌ بِبَعْضِ الْحَرَكَةِ بِصَوْتٍ خَفِيٍّ، وَالْإِشْمَامُ فِي الْوَقْفِ إِشَارَةٌ بِالشَّفَتَيْنِ إِلَى الضَّمَّةِ بِلَا صَوْتٍ، وَلِكُلٍّ مِنْهُمَا شُرُوطٌ.",
+          "visualDirection": "Split audio/visual teacher demonstrations; mouth motion after sukun."
+        },
+        {
+          "id": "s03",
+          "type": "practice",
+          "narrationAr": "اِسْتَمِعْ إِلَى الرَّوْمِ وَشَاهِدِ الْإِشْمَامَ.",
+          "visualDirection": "Morph into practice; use approved audio and text layers"
+        }
+      ],
+      "productionNotes": "No generated Quran recitation; source and phonetic review required; no fixed timing until narration recorded."
+    }
+  ]
+}

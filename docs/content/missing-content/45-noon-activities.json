@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U5.L2",
+      "examples": [
+        {
+          "id": "U5.L2.M.E1",
+          "verseRef": "97:3",
+          "excerptAr": "مِنْ أَلْفِ",
+          "verification": "pending_uthmani_and_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L2.M.E2",
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L2.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L2.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في المقطع الثاني عند الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "2",
+              "text": "الإخفاء الحقيقي"
+            },
+            {
+              "id": "3",
+              "text": "الإظهار الحلقي"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الإخفاء الحقيقي",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L2.M.P1",
+          "instructionAr": "صنف الأمثلة حسب الحرف التالي للنون.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L2.M.P2",
+          "instructionAr": "قارن الإظهار والإخفاء في تسجيلين معتمدين.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L3",
+      "examples": [
+        {
+          "id": "U5.L3.M.E1",
+          "verseRef": "97:3",
+          "excerptAr": "مِنْ أَلْفِ",
+          "verification": "pending_uthmani_and_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L3.M.E2",
+          "verseRef": "106:4",
+          "excerptAr": "مِنْ خَوْفٍ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L3.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L3.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما حرف الإظهار التالي للنون في المقطع الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الخاء"
+            },
+            {
+              "id": "2",
+              "text": "الفاء"
+            },
+            {
+              "id": "3",
+              "text": "الميم"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الخاء",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L3.M.P1",
+          "instructionAr": "اقرأ من ألف ومن خوف مع بيان النون.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L3.M.P2",
+          "instructionAr": "قارن النون قبل الهمزة والعين والخاء من نماذج معتمدة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L4",
+      "examples": [
+        {
+          "id": "U5.L4.M.E1",
+          "verseRef": "99:7",
+          "excerptAr": "فَمَنْ يَعْمَلْ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L4.M.E2",
+          "verseRef": "2:85",
+          "excerptAr": "الدُّنْيَا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L4.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L4.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "هل تدغم النون في ياء المثال الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نعم، إدغام بغنة"
+            },
+            {
+              "id": "2",
+              "text": "إقلاب"
+            },
+            {
+              "id": "3",
+              "text": "لا، إظهار مطلق"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "لا، إظهار مطلق",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L4.M.P1",
+          "instructionAr": "استمع إلى فمن يعمل وكرر الوصل.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L4.M.P2",
+          "instructionAr": "قارن دنيا بفمن يعمل مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L5",
+      "examples": [
+        {
+          "id": "U5.L5.M.E1",
+          "verseRef": "112:4",
+          "excerptAr": "يَكُنْ لَهُ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L5.M.E2",
+          "verseRef": "2:5",
+          "excerptAr": "مِنْ رَبِّهِمْ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L5.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L5.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في المقطع الأول عند الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "إظهار حلقي"
+            },
+            {
+              "id": "2",
+              "text": "إدغام بغير غنة"
+            },
+            {
+              "id": "3",
+              "text": "إخفاء حقيقي"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "إدغام بغير غنة",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L5.M.P1",
+          "instructionAr": "كرر يكن له ومن ربهم في الوصل.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L5.M.P2",
+          "instructionAr": "قارن إدغام اللام بإدغام الميم في نموذج منفصل.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L6",
+      "examples": [
+        {
+          "id": "U5.L6.M.E1",
+          "verseRef": "2:33",
+          "excerptAr": "أَنْبِئْهُمْ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L6.M.E2",
+          "verseRef": "2:27",
+          "excerptAr": "مِنْ بَعْدِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L6.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L6.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم في النون الساكنة قبل الباء في المثال الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "2",
+              "text": "الإظهار"
+            },
+            {
+              "id": "3",
+              "text": "الإدغام بغير غنة"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الإقلاب",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L6.M.P1",
+          "instructionAr": "استمع إلى الإقلاب داخل كلمة وبين كلمتين.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L6.M.P2",
+          "instructionAr": "تلق هيئة الشفتين والغنة من معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U5.L7",
+      "examples": [
+        {
+          "id": "U5.L7.M.E1",
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U5.L7.M.E2",
+          "verseRef": "97:1",
+          "excerptAr": "أَنْزَلْنَاهُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U5.L7.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U5.L7.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "أي حرف يلي النون الساكنة في المثال الثاني؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "اللام"
+            },
+            {
+              "id": "2",
+              "text": "الهاء"
+            },
+            {
+              "id": "3",
+              "text": "الزاي"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الزاي",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U5.L7.M.P1",
+          "instructionAr": "قارن الإخفاء قبل الشين والزاي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U5.L7.M.P2",
+          "instructionAr": "تدرب على الإخفاء قبل حرف مستعلٍ من مثال يختاره المعلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

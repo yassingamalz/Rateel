@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Matching and ordering are editorial activity formats, not currently confirmed supported by Flutter. Shuffle independently at runtime, preserve stable IDs.",
+  "questions": [
+    {
+      "id": "U2.L1.M.I1",
+      "topicId": "U2.L1",
+      "text": "اختر المخارج العامة الخمسة.",
+      "explanation": "هذه هي المخارج العامة في التصنيف المعتمد.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الجوف"
+        },
+        {
+          "id": "2",
+          "text": "الحلق"
+        },
+        {
+          "id": "3",
+          "text": "اللسان"
+        },
+        {
+          "id": "4",
+          "text": "الشفتان"
+        },
+        {
+          "id": "5",
+          "text": "الخيشوم"
+        },
+        {
+          "id": "6",
+          "text": "اليد"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": "U2.L2.M.I1",
+      "topicId": "U2.L2",
+      "text": "صل حرف المد بشرطه.",
+      "explanation": "الحروف الثلاثة ساكنة مع تحقق الحركة المناسبة قبلها.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الألف",
+          "right": "فتح ما قبلها"
+        },
+        {
+          "id": "2",
+          "left": "الواو",
+          "right": "ضم ما قبلها"
+        },
+        {
+          "id": "3",
+          "left": "الياء",
+          "right": "كسر ما قبلها"
+        }
+      ]
+    },
+    {
+      "id": "U2.L3.M.I1",
+      "topicId": "U2.L3",
+      "text": "صل موضع الحلق بحرفيه.",
+      "explanation": "للحلق ثلاثة مخارج خاصة.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "أقصى الحلق",
+          "right": "ء هـ"
+        },
+        {
+          "id": "2",
+          "left": "وسط الحلق",
+          "right": "ع ح"
+        },
+        {
+          "id": "3",
+          "left": "أدنى الحلق",
+          "right": "غ خ"
+        }
+      ]
+    },
+    {
+      "id": "U2.L4.M.I1",
+      "topicId": "U2.L4",
+      "text": "اختر حروف وسط اللسان.",
+      "explanation": "الجيم والشين والياء غير المدية من وسط اللسان.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الجيم"
+        },
+        {
+          "id": "2",
+          "text": "الشين"
+        },
+        {
+          "id": "3",
+          "text": "الياء غير المدية"
+        },
+        {
+          "id": "4",
+          "text": "الباء"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U2.L5.M.I1",
+      "topicId": "U2.L5",
+      "text": "أكمل: يخرج حرف ... من باطن الشفة السفلى مع أطراف الثنايا العليا.",
+      "explanation": "هذه هيئة مخرج الفاء.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "الفاء",
+        "فاء",
+        "ف"
+      ]
+    },
+    {
+      "id": "U2.L6.M.I1",
+      "topicId": "U2.L6",
+      "text": "الغنة حرف هجائي مستقل.",
+      "explanation": "الغنة صفة لازمة للنون والميم.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L1.M.I1",
+      "topicId": "U3.L1",
+      "text": "صل الصفة بضدها.",
+      "explanation": "هذه أزواج من الصفات ذات الضد.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الهمس",
+          "right": "الجهر"
+        },
+        {
+          "id": "2",
+          "left": "الاستعلاء",
+          "right": "الاستفال"
+        },
+        {
+          "id": "3",
+          "left": "الإطباق",
+          "right": "الانفتاح"
+        },
+        {
+          "id": "4",
+          "left": "الإذلاق",
+          "right": "الإصمات"
+        }
+      ]
+    },
+    {
+      "id": "U3.L2.M.I1",
+      "topicId": "U3.L2",
+      "text": "اختر حروف الهمس من المجموعة.",
+      "explanation": "السين والفاء والتاء من حروف الهمس.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "س"
+        },
+        {
+          "id": "2",
+          "text": "ف"
+        },
+        {
+          "id": "3",
+          "text": "ت"
+        },
+        {
+          "id": "4",
+          "text": "ب"
+        },
+        {
+          "id": "5",
+          "text": "د"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U3.L3.M.I1",
+      "topicId": "U3.L3",
+      "text": "صل الحرف بصفته من حيث جريان الصوت.",
+      "explanation": "يختلف جريان الصوت باختلاف صفة الحرف.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "ق",
+          "right": "الشدة"
+        },
+        {
+          "id": "2",
+          "left": "ل",
+          "right": "التوسط"
+        },
+        {
+          "id": "3",
+          "left": "س",
+          "right": "الرخاوة"
+        }
+      ]
+    },
+    {
+      "id": "U3.L4.M.I1",
+      "topicId": "U3.L4",
+      "text": "اختر حروف الاستعلاء.",
+      "explanation": "حروف الاستعلاء مجموعة في خص ضغط قظ.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "خ"
+        },
+        {
+          "id": "2",
+          "text": "ص"
+        },
+        {
+          "id": "3",
+          "text": "ض"
+        },
+        {
+          "id": "4",
+          "text": "غ"
+        },
+        {
+          "id": "5",
+          "text": "ط"
+        },
+        {
+          "id": "6",
+          "text": "ق"
+        },
+        {
+          "id": "7",
+          "text": "ظ"
+        },
+        {
+          "id": "8",
+          "text": "س"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "id": "U3.L5.M.I1",
+      "topicId": "U3.L5",
+      "text": "كل حرف مستعل مطبق.",
+      "explanation": "القاف والغين والخاء مستعلية منفتحة.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U3.L6.M.I1",
+      "topicId": "U3.L6",
+      "text": "اختر حروف الإذلاق.",
+      "explanation": "تجمع حروف الإذلاق في فر من لب.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ف"
+        },
+        {
+          "id": "2",
+          "text": "ر"
+        },
+        {
+          "id": "3",
+          "text": "م"
+        },
+        {
+          "id": "4",
+          "text": "ن"
+        },
+        {
+          "id": "5",
+          "text": "ل"
+        },
+        {
+          "id": "6",
+          "text": "ب"
+        },
+        {
+          "id": "7",
+          "text": "ق"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": "U3.L7.M.I1",
+      "topicId": "U3.L7",
+      "text": "صل الصفة بحرف من حروفها.",
+      "explanation": "هذه أمثلة على الصفات المفردة.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الصفير",
+          "right": "س"
+        },
+        {
+          "id": "2",
+          "left": "القلقلة",
+          "right": "ق"
+        },
+        {
+          "id": "3",
+          "left": "التفشي",
+          "right": "ش"
+        },
+        {
+          "id": "4",
+          "left": "الاستطالة",
+          "right": "ض"
+        }
+      ]
+    },
+    {
+      "id": "U3.L8.M.I1",
+      "topicId": "U3.L8",
+      "text": "اختر حروف القلقلة.",
+      "explanation": "تجمع في قطب جد.",
+      "status": "editorial_draft",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ق"
+        },
+        {
+          "id": "2",
+          "text": "ط"
+        },
+        {
+          "id": "3",
+          "text": "ب"
+        },
+        {
+          "id": "4",
+          "text": "ج"
+        },
+        {
+          "id": "5",
+          "text": "د"
+        },
+        {
+          "id": "6",
+          "text": "ر"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": "U3.L9.M.I1",
+      "topicId": "U3.L9",
+      "text": "صل الصفة بحرفها.",
+      "explanation": "تراعى هذه الصفات دون تكلف.",
+      "status": "editorial_draft",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "التكرير",
+          "right": "ر"
+        },
+        {
+          "id": "2",
+          "left": "التفشي",
+          "right": "ش"
+        },
+        {
+          "id": "3",
+          "left": "الاستطالة",
+          "right": "ض"
+        }
+      ]
+    },
+    {
+      "id": "U3.L10.M.I1",
+      "topicId": "U3.L10",
+      "text": "أكمل: مخرج صوت الغنة هو ...",
+      "explanation": "الخيشوم مخرج الغنة.",
+      "status": "editorial_draft",
+      "type": "textInput",
+      "correctAnswer": [
+        "الخيشوم",
+        "خيشوم"
+      ]
+    },
+    {
+      "id": "U4.L1.M.I1",
+      "topicId": "U4.L1",
+      "text": "إضافة حركة كاملة عند القلقلة من الأداء الصحيح.",
+      "explanation": "القلقلة لا تعني توليد حركة كاملة.",
+      "status": "editorial_draft",
+      "type": "trueFalse",
+      "correctAnswer": false
+    }
+  ]
+}

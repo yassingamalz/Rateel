@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U7.L1",
+      "examples": [
+        {
+          "id": "U7.L1.M.E1",
+          "verseRef": "1:2",
+          "excerptAr": "الْحَمْدُ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U7.L1.M.E2",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U7.L1.M.A1",
+          "kind": "teacher_recorded_non_quran",
+          "mediaTarget": "بُ وبُو",
+          "promptAr": "أي النموذجين يحتوي على واو مدية؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بُ"
+            },
+            {
+              "id": "2",
+              "text": "بُو"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "بُو",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U7.L1.M.P1",
+          "instructionAr": "قارن بَ وبَا وبُ وبُو وبِ وبِي.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U7.L1.M.P2",
+          "instructionAr": "استمع إلى حركة قصيرة وكررها دون اختلاس أو إشباع.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U7.L2",
+      "examples": [
+        {
+          "id": "U7.L2.M.E1",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U7.L2.M.E2",
+          "verseRef": "1:2",
+          "excerptAr": "الْعَالَمِينَ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U7.L2.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example",
+          "promptAr": "ما نوع المد في ألف الضالين؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "لازم"
+            },
+            {
+              "id": "2",
+              "text": "عارض للسكون فقط"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "لازم",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U7.L2.M.P1",
+          "instructionAr": "استمع إلى الألف قبل اللام المشددة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U7.L2.M.P2",
+          "instructionAr": "قارن السكون الأصلي بالسكون العارض عند الوقف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U7.L3",
+      "examples": [
+        {
+          "id": "U7.L3.M.E1",
+          "verseRef": "17:110",
+          "excerptAr": "قُلِ ادْعُوا",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U7.L3.M.E2",
+          "verseRef": "2:21",
+          "excerptAr": "اعْبُدُوا رَبَّكُمُ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U7.L3.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example_connected",
+          "promptAr": "ما حركة لام قل في الوصل هنا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الضمة"
+            },
+            {
+              "id": "2",
+              "text": "الكسرة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "الكسرة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U7.L3.M.P1",
+          "instructionAr": "قارن الابتداء بادعوا بوصلها بما قبلها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U7.L3.M.P2",
+          "instructionAr": "تدرب على المواضع المروية مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

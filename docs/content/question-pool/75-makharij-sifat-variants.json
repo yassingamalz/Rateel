@@ -1,0 +1,1382 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Alternative articulation and attributes questions; examples may be repeated across earlier batches, do not count as unique until reviewed.",
+  "topics": [
+    {
+      "topicId": "U2.L1",
+      "examples": [
+        {
+          "id": "U2.L1.POOL75.E1",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "ف من الشفتين، ق من اللسان",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L1.POOL75.E2",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "focus": "غنة من الخيشوم",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L1.POOL75.Q1",
+          "topicId": "U2.L1",
+          "text": "أي مخرج عام ينتمي إليه القاف؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: اللسان.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الحلق"
+            },
+            {
+              "id": "2",
+              "text": "الشفتان"
+            },
+            {
+              "id": "3",
+              "text": "اللسان"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U2.L1.POOL75.Q2",
+          "topicId": "U2.L1",
+          "text": "أي حرف من حروف الحلق؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: العين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "التاء"
+            },
+            {
+              "id": "2",
+              "text": "العين"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U2.L1.POOL75.Q3",
+          "topicId": "U2.L1",
+          "text": "هل الخيشوم مخرج للغنة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L1.POOL75.Q4",
+          "topicId": "U2.L1",
+          "text": "ما المخرج العام للواو المدية؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الجوف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الشفتان"
+            },
+            {
+              "id": "2",
+              "text": "طرف اللسان"
+            },
+            {
+              "id": "3",
+              "text": "الجوف"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U2.L2",
+      "examples": [
+        {
+          "id": "U2.L2.POOL75.E1",
+          "verseRef": "2:3",
+          "excerptAr": "يُقِيمُونَ",
+          "focus": "ياء وواو مديتان",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L2.POOL75.E2",
+          "verseRef": "1:5",
+          "excerptAr": "نَسْتَعِينُ",
+          "focus": "ياء مدية",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L2.POOL75.Q1",
+          "topicId": "U2.L2",
+          "text": "أي تركيب يحقق شرط ياء المد؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: بِي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "بَيَ"
+            },
+            {
+              "id": "2",
+              "text": "بِي"
+            },
+            {
+              "id": "3",
+              "text": "بَيْ"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U2.L2.POOL75.Q2",
+          "topicId": "U2.L2",
+          "text": "أي تركيب يحقق شرط واو المد؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: بُو.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "بُو"
+            },
+            {
+              "id": "2",
+              "text": "بَوْ"
+            },
+            {
+              "id": "3",
+              "text": "بَوَ"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U2.L2.POOL75.Q3",
+          "topicId": "U2.L2",
+          "text": "الألف المدية ساكنة وقبلها فتح.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L2.POOL75.Q4",
+          "topicId": "U2.L2",
+          "text": "ما مخرج حروف المد في التصنيف المعتمد؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الجوف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الخيشوم"
+            },
+            {
+              "id": "2",
+              "text": "الجوف"
+            },
+            {
+              "id": "3",
+              "text": "أقصى اللسان"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U2.L3",
+      "examples": [
+        {
+          "id": "U2.L3.POOL75.E1",
+          "verseRef": "113:1",
+          "excerptAr": "أَعُوذُ",
+          "focus": "همزة وعين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L3.POOL75.E2",
+          "verseRef": "114:4",
+          "excerptAr": "الْخَنَّاسِ",
+          "focus": "خاء",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L3.POOL75.E3",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "focus": "همزة وحاء",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L3.POOL75.E4",
+          "verseRef": "1:7",
+          "excerptAr": "غَيْرِ",
+          "focus": "غين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L3.POOL75.E5",
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ",
+          "focus": "عين وهاء",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L3.POOL75.Q1",
+          "topicId": "U2.L3",
+          "text": "أي زوج يخرج من أدنى الحلق؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: غ خ.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "غ خ"
+            },
+            {
+              "id": "2",
+              "text": "ع ح"
+            },
+            {
+              "id": "3",
+              "text": "ء هـ"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U2.L3.POOL75.Q2",
+          "topicId": "U2.L3",
+          "text": "أي زوج يخرج من وسط الحلق؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ع ح.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "غ خ"
+            },
+            {
+              "id": "2",
+              "text": "ء هـ"
+            },
+            {
+              "id": "3",
+              "text": "ع ح"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U2.L3.POOL75.Q3",
+          "topicId": "U2.L3",
+          "text": "الحاء والعين من مخرج واحد في هذا التصنيف.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L3.POOL75.Q4",
+          "topicId": "U2.L3",
+          "text": "ما مخرج الهاء؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: أقصى الحلق.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "أقصى الحلق"
+            },
+            {
+              "id": "2",
+              "text": "وسط اللسان"
+            },
+            {
+              "id": "3",
+              "text": "الشفتان"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U2.L4",
+      "examples": [
+        {
+          "id": "U2.L4.POOL75.E1",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "focus": "قاف ولام",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L4.POOL75.E2",
+          "verseRef": "113:2",
+          "excerptAr": "خَلَقَ",
+          "focus": "لام وقاف",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L4.POOL75.E3",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "focus": "ضاد ولام ونون",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L4.POOL75.E4",
+          "verseRef": "114:4",
+          "excerptAr": "الْوَسْوَاسِ",
+          "focus": "سين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L4.POOL75.E5",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "صاد ودال",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L4.POOL75.E6",
+          "verseRef": "113:4",
+          "excerptAr": "النَّفَّاثَاتِ",
+          "focus": "ثاء وتاء",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L4.POOL75.Q1",
+          "topicId": "U2.L4",
+          "text": "أي حرف يخرج من وسط اللسان؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الشين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الفاء"
+            },
+            {
+              "id": "2",
+              "text": "الهاء"
+            },
+            {
+              "id": "3",
+              "text": "الشين"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U2.L4.POOL75.Q2",
+          "topicId": "U2.L4",
+          "text": "أي مجموعة تشترك في طرف اللسان وأصول الثنايا العليا؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ط د ت.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ص ز س"
+            },
+            {
+              "id": "2",
+              "text": "ط د ت"
+            },
+            {
+              "id": "3",
+              "text": "ظ ذ ث"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U2.L4.POOL75.Q3",
+          "topicId": "U2.L4",
+          "text": "الضاد من حافة اللسان مع الأضراس العليا.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L4.POOL75.Q4",
+          "topicId": "U2.L4",
+          "text": "أي حرف مخرجه أقرب إلى الحلق في اللسان؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: القاف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "السين"
+            },
+            {
+              "id": "2",
+              "text": "اللام"
+            },
+            {
+              "id": "3",
+              "text": "القاف"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U2.L5",
+      "examples": [
+        {
+          "id": "U2.L5.POOL75.E1",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "فاء",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L5.POOL75.E2",
+          "verseRef": "1:1",
+          "excerptAr": "بِسْمِ",
+          "focus": "باء وميم",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L5.POOL75.E3",
+          "verseRef": "112:1",
+          "excerptAr": "هُوَ",
+          "focus": "واو غير مدية",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L5.POOL75.Q1",
+          "topicId": "U2.L5",
+          "text": "أي حرف يتطلب ملامسة باطن الشفة السفلى لأطراف الثنايا العليا؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الفاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الميم"
+            },
+            {
+              "id": "2",
+              "text": "الفاء"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U2.L5.POOL75.Q2",
+          "topicId": "U2.L5",
+          "text": "أي حرف شفوي تصاحبه الغنة اللازمة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الميم.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الميم"
+            },
+            {
+              "id": "2",
+              "text": "الفاء"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U2.L5.POOL75.Q3",
+          "topicId": "U2.L5",
+          "text": "الواو غير المدية من الشفتين.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L5.POOL75.Q4",
+          "topicId": "U2.L5",
+          "text": "أي حرف ليس شفويًا؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الكاف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الفاء"
+            },
+            {
+              "id": "2",
+              "text": "الكاف"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U2.L6",
+      "examples": [
+        {
+          "id": "U2.L6.POOL75.E1",
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "focus": "نون مشددة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L6.POOL75.E2",
+          "verseRef": "111:4",
+          "excerptAr": "حَمَّالَةَ",
+          "focus": "ميم مشددة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U2.L6.POOL75.E3",
+          "verseRef": "112:4",
+          "excerptAr": "يَكُنْ لَهُ",
+          "focus": "مقارنة: إدغام بلا غنة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U2.L6.POOL75.Q1",
+          "topicId": "U2.L6",
+          "text": "أي كلمة تحتوي على ميم مشددة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: حمالة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "حمالة"
+            },
+            {
+              "id": "2",
+              "text": "الجنة"
+            },
+            {
+              "id": "3",
+              "text": "الفلق"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U2.L6.POOL75.Q2",
+          "topicId": "U2.L6",
+          "text": "ما المخرج الأصلي للنون؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: طرف اللسان.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الشفتان"
+            },
+            {
+              "id": "2",
+              "text": "الجوف"
+            },
+            {
+              "id": "3",
+              "text": "طرف اللسان"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U2.L6.POOL75.Q3",
+          "topicId": "U2.L6",
+          "text": "تخرج الغنة من الخيشوم.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U2.L6.POOL75.Q4",
+          "topicId": "U2.L6",
+          "text": "أي حرفين تلازمهما الغنة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ن م.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ن م"
+            },
+            {
+              "id": "2",
+              "text": "ل ر"
+            },
+            {
+              "id": "3",
+              "text": "ق ك"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L2",
+      "examples": [
+        {
+          "id": "U3.L2.POOL75.E1",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "سين مهموسة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L2.POOL75.E2",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "فاء مهموسة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L2.POOL75.E3",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "دال مجهورة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L2.POOL75.Q1",
+          "topicId": "U3.L2",
+          "text": "أي حرف من حروف الهمس؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الخاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "اللام"
+            },
+            {
+              "id": "2",
+              "text": "الخاء"
+            },
+            {
+              "id": "3",
+              "text": "الضاد"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U3.L2.POOL75.Q2",
+          "topicId": "U3.L2",
+          "text": "أي حرف ليس من حروف الهمس؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: العين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "العين"
+            },
+            {
+              "id": "2",
+              "text": "السين"
+            },
+            {
+              "id": "3",
+              "text": "الفاء"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U3.L2.POOL75.Q3",
+          "topicId": "U3.L2",
+          "text": "الهمس يتعلق بجريان النفس.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U3.L2.POOL75.Q4",
+          "topicId": "U3.L2",
+          "text": "أي مجموعة كلها من حروف الهمس؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ف ح ث.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "م ن ر"
+            },
+            {
+              "id": "2",
+              "text": "ف ح ث"
+            },
+            {
+              "id": "3",
+              "text": "ب د ج"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L3",
+      "examples": [
+        {
+          "id": "U3.L3.POOL75.E1",
+          "verseRef": "112:1",
+          "excerptAr": "قُلْ",
+          "focus": "قاف شديدة ولام متوسطة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L3.POOL75.E2",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "سين رخوة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L3.POOL75.Q1",
+          "topicId": "U3.L3",
+          "text": "أي حرف من حروف الرخاوة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الشين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الشين"
+            },
+            {
+              "id": "2",
+              "text": "الطاء"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U3.L3.POOL75.Q2",
+          "topicId": "U3.L3",
+          "text": "أي حرف متوسط؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: العين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "القاف"
+            },
+            {
+              "id": "2",
+              "text": "التاء"
+            },
+            {
+              "id": "3",
+              "text": "العين"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U3.L3.POOL75.Q3",
+          "topicId": "U3.L3",
+          "text": "الشدة في هذا الباب تعني انحباس جريان الصوت.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U3.L3.POOL75.Q4",
+          "topicId": "U3.L3",
+          "text": "أي مجموعة تضم حروف التوسط فقط؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ل ن ع م ر.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ل ن ع م ر"
+            },
+            {
+              "id": "2",
+              "text": "ق ط ب ج د"
+            },
+            {
+              "id": "3",
+              "text": "ف ح ث هـ"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L4",
+      "examples": [
+        {
+          "id": "U3.L4.POOL75.E1",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "صاد مستعلية",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L4.POOL75.E2",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "قاف مستعلية",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L4.POOL75.E3",
+          "verseRef": "1:7",
+          "excerptAr": "غَيْرِ",
+          "focus": "غين مستعلية",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L4.POOL75.Q1",
+          "topicId": "U3.L4",
+          "text": "أي حرف مستعلٍ وليس مطبقًا؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الغين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الصاد"
+            },
+            {
+              "id": "2",
+              "text": "الطاء"
+            },
+            {
+              "id": "3",
+              "text": "الغين"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U3.L4.POOL75.Q2",
+          "topicId": "U3.L4",
+          "text": "أي حرف من حروف الاستفال؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الكاف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الظاء"
+            },
+            {
+              "id": "2",
+              "text": "الكاف"
+            },
+            {
+              "id": "3",
+              "text": "القاف"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U3.L4.POOL75.Q3",
+          "topicId": "U3.L4",
+          "text": "حروف الاستعلاء سبعة.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U3.L4.POOL75.Q4",
+          "topicId": "U3.L4",
+          "text": "ما حرف الاستعلاء في كلمة غير؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الغين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الراء"
+            },
+            {
+              "id": "3",
+              "text": "الغين"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L5",
+      "examples": [
+        {
+          "id": "U3.L5.POOL75.E1",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "صاد مطبقة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L5.POOL75.E2",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "focus": "ضاد مطبقة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L5.POOL75.E3",
+          "verseRef": "113:1",
+          "excerptAr": "الْفَلَقِ",
+          "focus": "قاف منفتحة مستعلية",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L5.POOL75.Q1",
+          "topicId": "U3.L5",
+          "text": "أي حرف منفتح مع كونه مستعليًا؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الخاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الظاء"
+            },
+            {
+              "id": "2",
+              "text": "الخاء"
+            },
+            {
+              "id": "3",
+              "text": "الضاد"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U3.L5.POOL75.Q2",
+          "topicId": "U3.L5",
+          "text": "أي مجموعة كلها مطبقة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ص ض ط ظ.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ص ض ط ظ"
+            },
+            {
+              "id": "2",
+              "text": "خ غ ق ك"
+            },
+            {
+              "id": "3",
+              "text": "س ز ش ج"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U3.L5.POOL75.Q3",
+          "topicId": "U3.L5",
+          "text": "كل مطبق مستعلٍ.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: صحيح.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U3.L5.POOL75.Q4",
+          "topicId": "U3.L5",
+          "text": "ما الصفة المقابلة للإطباق؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الانفتاح.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "اللين"
+            },
+            {
+              "id": "2",
+              "text": "الانفتاح"
+            },
+            {
+              "id": "3",
+              "text": "الجهر"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L8",
+      "examples": [
+        {
+          "id": "U3.L8.POOL75.E1",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "سين: صفير",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L8.POOL75.E2",
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "focus": "دال: قلقلة عند الوقف بالسكون",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L8.POOL75.E3",
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "focus": "واو لين",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L8.POOL75.Q1",
+          "topicId": "U3.L8",
+          "text": "أي حرف يجتمع فيه الاستعلاء والصفير؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الصاد.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الزاي"
+            },
+            {
+              "id": "2",
+              "text": "الصاد"
+            },
+            {
+              "id": "3",
+              "text": "السين"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U3.L8.POOL75.Q2",
+          "topicId": "U3.L8",
+          "text": "أي حرف من حروف القلقلة؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الطاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الطاء"
+            },
+            {
+              "id": "2",
+              "text": "الظاء"
+            },
+            {
+              "id": "3",
+              "text": "الضاد"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U3.L8.POOL75.Q3",
+          "topicId": "U3.L8",
+          "text": "تضاف حركة كاملة بعد حرف القلقلة الساكن.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U3.L8.POOL75.Q4",
+          "topicId": "U3.L8",
+          "text": "أي تركيب يضم حرف لين؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: خَوْف.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "بِي"
+            },
+            {
+              "id": "2",
+              "text": "خَوْف"
+            },
+            {
+              "id": "3",
+              "text": "بُو"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U3.L9",
+      "examples": [
+        {
+          "id": "U3.L9.POOL75.E1",
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "focus": "استطالة الضاد",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U3.L9.POOL75.E2",
+          "verseRef": "113:2",
+          "excerptAr": "مِنْ شَرِّ",
+          "focus": "تفشي الشين وتكرير الراء",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.L9.POOL75.Q1",
+          "topicId": "U3.L9",
+          "text": "أي حرف يتصف بالانحراف والتكرير؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الراء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الراء"
+            },
+            {
+              "id": "2",
+              "text": "الضاد"
+            },
+            {
+              "id": "3",
+              "text": "الشين"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U3.L9.POOL75.Q2",
+          "topicId": "U3.L9",
+          "text": "أي حرف يتصف بالتفشي؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الشين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الصاد"
+            },
+            {
+              "id": "2",
+              "text": "السين"
+            },
+            {
+              "id": "3",
+              "text": "الشين"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U3.L9.POOL75.Q3",
+          "topicId": "U3.L9",
+          "text": "الاستطالة صفة للظاء.",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة: خطأ.",
+          "type": "trueFalse",
+          "correctAnswer": false
+        },
+        {
+          "id": "U3.L9.POOL75.Q4",
+          "topicId": "U3.L9",
+          "text": "أي زوج يختص بالانحراف؟",
+          "objective": "articulation_attribute_recognition",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ل ر.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ل ر"
+            },
+            {
+              "id": "2",
+              "text": "ن م"
+            },
+            {
+              "id": "3",
+              "text": "س ز"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    }
+  ]
+}

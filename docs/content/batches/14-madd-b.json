@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U6.L6",
+      "titleAr": "مد البدل",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز موضع الهمز",
+      "explanationAr": "يتقدم الهمز على حرف المد في كلمة، ومن أمثلته آمن. ومقداره لحفص في المثال المعتاد حركتان إن لم يعرض سبب أقوى.",
+      "examples": [
+        {
+          "verseRef": "2:285",
+          "excerptAr": "آمَنَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "مد البدل"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يتقدم الهمز على حرف المد في كلمة، ومن أمثلته آمن. ومقداره لحفص في المثال المعتاد حركتان إن لم يعرض سبب أقوى."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "2:285"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز موضع الهمز"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "كرر آمن دون زيادة غير مقررة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L6.Q1",
+              "type": "singleChoice",
+              "text": "أين تقع الهمزة في مد البدل؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "قبل حرف المد"
+                },
+                {
+                  "id": "2",
+                  "text": "بعد حرف المد في كلمة أخرى"
+                },
+                {
+                  "id": "3",
+                  "text": "لا توجد همزة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يتقدم الهمز على حرف المد في كلمة، ومن أمثلته آمن. ومقداره لحفص في المثال المعتاد حركتان إن لم يعرض سبب أقوى."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L7",
+      "titleAr": "مد اللين",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز حرف اللين",
+      "explanationAr": "حرفا اللين واو وياء ساكنتان قبلهما فتح. وعند الوقف على حرف بعدهما يدرس المد العارض للين وأوجهه. ولا يزيد مد اللين على مقدار العارض للسكون المختار في التلاوة نفسها (ص 355).",
+      "examples": [
+        {
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "مد اللين"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "حرفا اللين واو وياء ساكنتان قبلهما فتح. وعند الوقف على حرف بعدهما يدرس المد العارض للين وأوجهه."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "106:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز حرف اللين"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن الوصل والوقف على خوف.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L7.Q1",
+              "type": "singleChoice",
+              "text": "ما حركة الحرف قبل واو اللين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الفتحة"
+                },
+                {
+                  "id": "2",
+                  "text": "الكسرة"
+                },
+                {
+                  "id": "3",
+                  "text": "الضمة"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "حرفا اللين واو وياء ساكنتان قبلهما فتح. وعند الوقف على حرف بعدهما يدرس المد العارض للين وأوجهه."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L8",
+      "titleAr": "مد الصلة",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الصلة الكبرى والصغرى",
+      "explanationAr": "تبحث صلة هاء الضمير المفرد المذكر الغائب بشروطها في الوصل، وتكون كبرى إذا جاء بعدها همز قطع وصغرى إذا لم يأت بعدها همز، مع استثناءات الرواية. وتمد الكبرى بمقدار المنفصل والصغرى حركتين. ومما استثني لحفص: يرضه لكم (الزمر 7) بلا صلة، وفيه مهانا (الفرقان 69) بالصلة، وأرجه (الأعراف 111، الشعراء 36) وفألقه (النمل 28) بالسكون.",
+      "examples": [
+        {
+          "verseRef": "104:3",
+          "excerptAr": "مَالَهُ أَخْلَدَهُ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "مد الصلة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تبحث صلة هاء الضمير المفرد المذكر الغائب بشروطها في الوصل، وتكون كبرى إذا جاء بعدها همز قطع وصغرى إذا لم يأت بعدها همز، مع استثناءات الرواية."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "104:3"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الصلة الكبرى والصغرى"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى هاء ماله في الوصل.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L8.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يميز الصلة الكبرى؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "وجود همزة قطع بعدها مع تحقق الشروط"
+                },
+                {
+                  "id": "2",
+                  "text": "وجود حرف قلقلة فقط"
+                },
+                {
+                  "id": "3",
+                  "text": "الوقف على الهاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تبحث صلة هاء الضمير المفرد المذكر الغائب بشروطها في الوصل، وتكون كبرى إذا جاء بعدها همز قطع وصغرى إذا لم يأت بعدها همز، مع استثناءات الرواية."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U6.L9",
+      "titleAr": "مد العوض",
+      "source": {
+        "chapter": 11,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز موضع العوض",
+      "explanationAr": "يعوض عن تنوين الفتح عند الوقف بألف تمد حركتين في الحالة المعتادة، ولا يكون ذلك في التاء المربوطة التي يوقف عليها بهاء.",
+      "examples": [
+        {
+          "verseRef": "110:3",
+          "excerptAr": "تَوَّابًا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "مد العوض"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "يعوض عن تنوين الفتح عند الوقف بألف تمد حركتين في الحالة المعتادة، ولا يكون ذلك في التاء المربوطة التي يوقف عليها بهاء."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "110:3"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز موضع العوض"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن النطق وصلًا ووقفًا بإشراف معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U6.L9.Q1",
+              "type": "singleChoice",
+              "text": "متى يكون مد العوض في المثال؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "عند الوقف"
+                },
+                {
+                  "id": "2",
+                  "text": "عند الوصل دائمًا"
+                },
+                {
+                  "id": "3",
+                  "text": "عند البدء بالتنوين"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "يعوض عن تنوين الفتح عند الوقف بألف تمد حركتين في الحالة المعتادة، ولا يكون ذلك في التاء المربوطة التي يوقف عليها بهاء."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

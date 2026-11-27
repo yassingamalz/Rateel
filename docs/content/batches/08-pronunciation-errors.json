@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U4.L1",
+      "titleAr": "أخطاء النطق",
+      "source": {
+        "chapter": 8,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "اكتشاف نوع الخطأ دون تعمد تحريف التلاوة",
+      "explanationAr": "من أخطاء الأداء تبديل حرف بحرف، وتغيير حركة، وإخلال بصفة أو مخرج. ويحتاج تصحيح النطق إلى السماع والتلقي.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "أَنْعَمْتَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "أخطاء النطق"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "من أخطاء الأداء تبديل حرف بحرف، وتغيير حركة، وإخلال بصفة أو مخرج. ويحتاج تصحيح النطق إلى السماع والتلقي."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:7"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "اكتشاف نوع الخطأ دون تعمد تحريف التلاوة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "سجل تمرينًا غير قرآني وقارنه بنموذج معتمد.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U4.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما الإجراء المناسب عند الشك في نطق حرف؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الرجوع إلى معلم متقن"
+                },
+                {
+                  "id": "2",
+                  "text": "تبديل الحرف"
+                },
+                {
+                  "id": "3",
+                  "text": "تجاهل الخطأ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "من أخطاء الأداء تبديل حرف بحرف، وتغيير حركة، وإخلال بصفة أو مخرج. ويحتاج تصحيح النطق إلى السماع والتلقي."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

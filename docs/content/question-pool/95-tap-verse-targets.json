@@ -1,0 +1,756 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Word-level targets only in this batch; canonical Uthmani edition and token alignment required. Do not select by UTF-16 offsets. Repeated words have distinct IDs. 105:4 excerpt stops before next verse; source full context required.",
+  "examples": [
+    {
+      "id": "POOL95.E1",
+      "verseRef": "114:6",
+      "excerptAr": "مِنَ الْجِنَّةِ وَالنَّاسِ",
+      "tokens": [
+        {
+          "id": "POOL95.E1.W1",
+          "text": "مِنَ"
+        },
+        {
+          "id": "POOL95.E1.W2",
+          "text": "الْجِنَّةِ"
+        },
+        {
+          "id": "POOL95.E1.W3",
+          "text": "وَالنَّاسِ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E2",
+      "verseRef": "113:1",
+      "excerptAr": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
+      "tokens": [
+        {
+          "id": "POOL95.E2.W1",
+          "text": "قُلْ"
+        },
+        {
+          "id": "POOL95.E2.W2",
+          "text": "أَعُوذُ"
+        },
+        {
+          "id": "POOL95.E2.W3",
+          "text": "بِرَبِّ"
+        },
+        {
+          "id": "POOL95.E2.W4",
+          "text": "الْفَلَقِ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E3",
+      "verseRef": "112:1",
+      "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      "tokens": [
+        {
+          "id": "POOL95.E3.W1",
+          "text": "قُلْ"
+        },
+        {
+          "id": "POOL95.E3.W2",
+          "text": "هُوَ"
+        },
+        {
+          "id": "POOL95.E3.W3",
+          "text": "اللَّهُ"
+        },
+        {
+          "id": "POOL95.E3.W4",
+          "text": "أَحَدٌ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E4",
+      "verseRef": "112:4",
+      "excerptAr": "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+      "tokens": [
+        {
+          "id": "POOL95.E4.W1",
+          "text": "وَلَمْ"
+        },
+        {
+          "id": "POOL95.E4.W2",
+          "text": "يَكُنْ"
+        },
+        {
+          "id": "POOL95.E4.W3",
+          "text": "لَهُ"
+        },
+        {
+          "id": "POOL95.E4.W4",
+          "text": "كُفُوًا"
+        },
+        {
+          "id": "POOL95.E4.W5",
+          "text": "أَحَدٌ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E5",
+      "verseRef": "105:4",
+      "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+      "tokens": [
+        {
+          "id": "POOL95.E5.W1",
+          "text": "تَرْمِيهِمْ"
+        },
+        {
+          "id": "POOL95.E5.W2",
+          "text": "بِحِجَارَةٍ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E6",
+      "verseRef": "108:1",
+      "excerptAr": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ",
+      "tokens": [
+        {
+          "id": "POOL95.E6.W1",
+          "text": "إِنَّا"
+        },
+        {
+          "id": "POOL95.E6.W2",
+          "text": "أَعْطَيْنَاكَ"
+        },
+        {
+          "id": "POOL95.E6.W3",
+          "text": "الْكَوْثَرَ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E7",
+      "verseRef": "97:1",
+      "excerptAr": "إِنَّا أَنْزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "tokens": [
+        {
+          "id": "POOL95.E7.W1",
+          "text": "إِنَّا"
+        },
+        {
+          "id": "POOL95.E7.W2",
+          "text": "أَنْزَلْنَاهُ"
+        },
+        {
+          "id": "POOL95.E7.W3",
+          "text": "فِي"
+        },
+        {
+          "id": "POOL95.E7.W4",
+          "text": "لَيْلَةِ"
+        },
+        {
+          "id": "POOL95.E7.W5",
+          "text": "الْقَدْرِ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    },
+    {
+      "id": "POOL95.E8",
+      "verseRef": "1:7",
+      "excerptAr": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "tokens": [
+        {
+          "id": "POOL95.E8.W1",
+          "text": "صِرَاطَ"
+        },
+        {
+          "id": "POOL95.E8.W2",
+          "text": "الَّذِينَ"
+        },
+        {
+          "id": "POOL95.E8.W3",
+          "text": "أَنْعَمْتَ"
+        },
+        {
+          "id": "POOL95.E8.W4",
+          "text": "عَلَيْهِمْ"
+        },
+        {
+          "id": "POOL95.E8.W5",
+          "text": "غَيْرِ"
+        },
+        {
+          "id": "POOL95.E8.W6",
+          "text": "الْمَغْضُوبِ"
+        },
+        {
+          "id": "POOL95.E8.W7",
+          "text": "عَلَيْهِمْ"
+        },
+        {
+          "id": "POOL95.E8.W8",
+          "text": "وَلَا"
+        },
+        {
+          "id": "POOL95.E8.W9",
+          "text": "الضَّالِّينَ"
+        }
+      ],
+      "verification": "pending_canonical_uthmani_and_word_alignment"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L1.POOL95.Q1.1",
+      "topicId": "U5.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمات التي تحتوي على نون مشددة.",
+      "exampleId": "POOL95.E1",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E1.W1",
+        "POOL95.E1.W2",
+        "POOL95.E1.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E1.W2",
+        "POOL95.E1.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "في الجنة والناس نون مشددة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL95.Q1.2",
+      "topicId": "X-LAM-02",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على لام قمرية.",
+      "exampleId": "POOL95.E1",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E1.W1",
+        "POOL95.E1.W2",
+        "POOL95.E1.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E1.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الجيم حرف قمري.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL95.Q1.3",
+      "topicId": "X-LAM-03",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على لام شمسية.",
+      "exampleId": "POOL95.E1",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E1.W1",
+        "POOL95.E1.W2",
+        "POOL95.E1.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E1.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "النون حرف شمسي.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL95.Q2.1",
+      "topicId": "U6.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على واو مدية.",
+      "exampleId": "POOL95.E2",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E2.W1",
+        "POOL95.E2.W2",
+        "POOL95.E2.W3",
+        "POOL95.E2.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E2.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الواو في أعوذ ساكنة وقبلها ضم.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U2.L3.POOL95.Q2.2",
+      "topicId": "U2.L3",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على عين.",
+      "exampleId": "POOL95.E2",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E2.W1",
+        "POOL95.E2.W2",
+        "POOL95.E2.W3",
+        "POOL95.E2.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E2.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "العين من وسط الحلق.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL95.Q2.3",
+      "topicId": "U3.L8",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة الأخيرة التي تظهر فيها قلقلة عند الوقف بالسكون.",
+      "exampleId": "POOL95.E2",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E2.W1",
+        "POOL95.E2.W2",
+        "POOL95.E2.W3",
+        "POOL95.E2.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E2.W4"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "تسكن القاف عند الوقف.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U10.L3.POOL95.Q3.1",
+      "topicId": "U10.L3",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تبدأ بهمزة قطع.",
+      "exampleId": "POOL95.E3",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E3.W1",
+        "POOL95.E3.W2",
+        "POOL95.E3.W3",
+        "POOL95.E3.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E3.W4"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "همزة أحد همزة قطع.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL95.Q3.2",
+      "topicId": "U3.L8",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تظهر فيها قلقلة الدال عند الوقف بالسكون.",
+      "exampleId": "POOL95.E3",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E3.W1",
+        "POOL95.E3.W2",
+        "POOL95.E3.W3",
+        "POOL95.E3.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E3.W4"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الدال تسكن عند الوقف.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL95.Q3.3",
+      "topicId": "U6.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على واو متحركة وليست حرف مد.",
+      "exampleId": "POOL95.E3",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E3.W1",
+        "POOL95.E3.W2",
+        "POOL95.E3.W3",
+        "POOL95.E3.W4"
+      ],
+      "correctTargetIds": [
+        "POOL95.E3.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الواو في هو متحركة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL95.Q4.1",
+      "topicId": "U5.L5",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تنتهي بنون تدغم في اللام التالية عند الوصل.",
+      "exampleId": "POOL95.E4",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E4.W1",
+        "POOL95.E4.W2",
+        "POOL95.E4.W3",
+        "POOL95.E4.W4",
+        "POOL95.E4.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E4.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "نون يكن قبل لام له.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL95.Q4.2",
+      "topicId": "U6.L8",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي فيها هاء ضمير ذات صلة صغرى في الوصل.",
+      "exampleId": "POOL95.E4",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E4.W1",
+        "POOL95.E4.W2",
+        "POOL95.E4.W3",
+        "POOL95.E4.W4",
+        "POOL95.E4.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E4.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الهاء في له تليها كاف متحركة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL95.Q4.3",
+      "topicId": "U5.L3",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي ينتهي تنوينها قبل همزة قطع عند الوصل.",
+      "exampleId": "POOL95.E4",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E4.W1",
+        "POOL95.E4.W2",
+        "POOL95.E4.W3",
+        "POOL95.E4.W4",
+        "POOL95.E4.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E4.W4"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "تنوين كفوا قبل همزة أحد.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL95.Q5.1",
+      "topicId": "U5.L9",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تنتهي بميم مخفاة قبل الباء في الوصل.",
+      "exampleId": "POOL95.E5",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E5.W1",
+        "POOL95.E5.W2"
+      ],
+      "correctTargetIds": [
+        "POOL95.E5.W1"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "ميم ترميهم قبل الباء.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL95.Q5.2",
+      "topicId": "U6.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على ألف مد.",
+      "exampleId": "POOL95.E5",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E5.W1",
+        "POOL95.E5.W2"
+      ],
+      "correctTargetIds": [
+        "POOL95.E5.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الألف في بحجارة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L1.POOL95.Q6.1",
+      "topicId": "U5.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على نون مشددة.",
+      "exampleId": "POOL95.E6",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E6.W1",
+        "POOL95.E6.W2",
+        "POOL95.E6.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E6.W1"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "النون في إنا مشددة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL95.Q6.2",
+      "topicId": "U6.L3",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي ينتهي حرف مدها قبل همزة قطع في الكلمة التالية.",
+      "exampleId": "POOL95.E6",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E6.W1",
+        "POOL95.E6.W2",
+        "POOL95.E6.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E6.W1"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "ألف إنا قبل همزة أعطيناك.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL95.Q6.3",
+      "topicId": "U3.L8",
+      "type": "tapVerseSpan",
+      "text": "اختر كل الكلمات التي تحتوي على حرف لين.",
+      "exampleId": "POOL95.E6",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E6.W1",
+        "POOL95.E6.W2",
+        "POOL95.E6.W3"
+      ],
+      "correctTargetIds": [
+        "POOL95.E6.W2",
+        "POOL95.E6.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الياء في أعطيناك والواو في الكوثر ساكنتان بعد فتح.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL95.Q7.1",
+      "topicId": "U5.L7",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على نون ساكنة قبل الزاي.",
+      "exampleId": "POOL95.E7",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E7.W1",
+        "POOL95.E7.W2",
+        "POOL95.E7.W3",
+        "POOL95.E7.W4",
+        "POOL95.E7.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E7.W2"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "النون في أنزلناه قبل الزاي.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL95.Q7.2",
+      "topicId": "U3.L8",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على دال ساكنة فيها قلقلة.",
+      "exampleId": "POOL95.E7",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E7.W1",
+        "POOL95.E7.W2",
+        "POOL95.E7.W3",
+        "POOL95.E7.W4",
+        "POOL95.E7.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E7.W5"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الدال في القدر ساكنة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL95.Q7.3",
+      "topicId": "U6.L1",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة المكونة من فاء وياء مدية.",
+      "exampleId": "POOL95.E7",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E7.W1",
+        "POOL95.E7.W2",
+        "POOL95.E7.W3",
+        "POOL95.E7.W4",
+        "POOL95.E7.W5"
+      ],
+      "correctTargetIds": [
+        "POOL95.E7.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "في تحتوي على ياء مدية.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL95.Q8.1",
+      "topicId": "U5.L11",
+      "type": "tapVerseSpan",
+      "text": "اختر موضعي كلمة عليهم اللذين تظهر فيهما الميم عند الوصل بما بعدها.",
+      "exampleId": "POOL95.E8",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E8.W1",
+        "POOL95.E8.W2",
+        "POOL95.E8.W3",
+        "POOL95.E8.W4",
+        "POOL95.E8.W5",
+        "POOL95.E8.W6",
+        "POOL95.E8.W7",
+        "POOL95.E8.W8",
+        "POOL95.E8.W9"
+      ],
+      "correctTargetIds": [
+        "POOL95.E8.W4",
+        "POOL95.E8.W7"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الميم قبل الغين والواو مظهرة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL95.Q8.2",
+      "topicId": "U5.L3",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي تحتوي على نون ساكنة قبل العين.",
+      "exampleId": "POOL95.E8",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E8.W1",
+        "POOL95.E8.W2",
+        "POOL95.E8.W3",
+        "POOL95.E8.W4",
+        "POOL95.E8.W5",
+        "POOL95.E8.W6",
+        "POOL95.E8.W7",
+        "POOL95.E8.W8",
+        "POOL95.E8.W9"
+      ],
+      "correctTargetIds": [
+        "POOL95.E8.W3"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "النون في أنعمت قبل العين.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL95.Q8.3",
+      "topicId": "U6.L5",
+      "type": "tapVerseSpan",
+      "text": "اختر الكلمة التي فيها ألف مد لازم كلمي مثقل.",
+      "exampleId": "POOL95.E8",
+      "selectionGranularity": "word",
+      "selectableIds": [
+        "POOL95.E8.W1",
+        "POOL95.E8.W2",
+        "POOL95.E8.W3",
+        "POOL95.E8.W4",
+        "POOL95.E8.W5",
+        "POOL95.E8.W6",
+        "POOL95.E8.W7",
+        "POOL95.E8.W8",
+        "POOL95.E8.W9"
+      ],
+      "correctTargetIds": [
+        "POOL95.E8.W9"
+      ],
+      "grading": "exact_set",
+      "feedbackAr": "الألف في الضالين قبل اللام المشددة.",
+      "objective": "locate_rule_in_passage",
+      "difficulty": "intermediate",
+      "variantFamily": "tap-1:7",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

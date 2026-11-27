@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U5.L12",
+      "titleAr": "الحرفان الملتقيان",
+      "source": {
+        "chapter": 9,
+        "pdfPageRange": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز التماثل عن التجانس",
+      "explanationAr": "تصنف علاقة الحرفين بحسب المخرج والصفات إلى تماثل وتجانس وتقارب وتباعد. ويختلف حكم الإدغام بحسب الرواية وحال الحرفين.",
+      "examples": [
+        {
+          "verseRef": "2:60",
+          "excerptAr": "اضْرِبْ بِعَصَاكَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الحرفان الملتقيان"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تصنف علاقة الحرفين بحسب المخرج والصفات إلى تماثل وتجانس وتقارب وتباعد. ويختلف حكم الإدغام بحسب الرواية وحال الحرفين."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "2:60"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز التماثل عن التجانس"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى المثال في الوصل واضبطه مع معلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U5.L12.Q1",
+              "type": "singleChoice",
+              "text": "ماذا نسمي حرفين اتفقا في المخرج والصفات؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "متماثلين"
+                },
+                {
+                  "id": "2",
+                  "text": "متباعدين"
+                },
+                {
+                  "id": "3",
+                  "text": "مختلفين في المخرج"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تصنف علاقة الحرفين بحسب المخرج والصفات إلى تماثل وتجانس وتقارب وتباعد. ويختلف حكم الإدغام بحسب الرواية وحال الحرفين."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

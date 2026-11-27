@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U8.L1",
+      "examples": [
+        {
+          "id": "U8.L1.M.E1",
+          "verseRef": "41:44",
+          "excerptAr": "أَأَعْجَمِيٌّ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U8.L1.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example_verified_hafs",
+          "promptAr": "ما وجه الأداء المدروس في هذا الموضع؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "2",
+              "text": "تسهيل الهمزة"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "تسهيل الهمزة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U8.L1.M.P1",
+          "instructionAr": "استمع إلى الأداء المروي للتسهيل.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U8.L1.M.P2",
+          "instructionAr": "كرر الموضع على معلم ولا تستبدل التسهيل بحذف محض.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U8.L2",
+      "examples": [
+        {
+          "id": "U8.L2.M.E1",
+          "verseRef": "11:41",
+          "excerptAr": "مَجْرَاهَا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U8.L2.M.A1",
+          "kind": "recitation_candidate",
+          "mediaTarget": "first_example_verified_hafs",
+          "promptAr": "ما وجه الأداء الذي نتعلمه في مجراها؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإمالة"
+            },
+            {
+              "id": "2",
+              "text": "الإخفاء الشفوي"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الإمالة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U8.L2.M.P1",
+          "instructionAr": "استمع إلى الإمالة المروية.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U8.L2.M.P2",
+          "instructionAr": "كررها مع معلم دون قلب الألف ياء خالصة.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U8.L3",
+      "examples": [],
+      "listeningTasks": [
+        {
+          "id": "U8.L3.M.A1",
+          "kind": "teacher_recorded_non_quran",
+          "mediaTarget": "teacher_selected_nabr_model_after_source_review",
+          "promptAr": "هل النبر زيادة حرف كامل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "نعم"
+            },
+            {
+              "id": "2",
+              "text": "لا"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "لا",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "visualTasks": [],
+      "practiceTasks": [
+        {
+          "id": "U8.L3.M.P1",
+          "instructionAr": "حدد موضع النبر بعد مراجعة الكتاب.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U8.L3.M.P2",
+          "instructionAr": "تلق الأداء من معلم مع تجنب التكلف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U8.L4",
+      "examples": [
+        {
+          "id": "U8.L4.M.E1",
+          "verseRef": "12:11",
+          "excerptAr": "تَأْمَنَّا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [],
+      "visualTasks": [
+        {
+          "id": "U8.L4.M.A1",
+          "kind": "verified_video",
+          "mediaTarget": "first_example_teacher_demonstration",
+          "promptAr": "أي وسيلة تكشف الإشارة بالشفتين في الإشمام؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "المشاهدة"
+            },
+            {
+              "id": "2",
+              "text": "الصوت وحده"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "المشاهدة",
+          "status": "blocked_until_media_and_question_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U8.L4.M.P1",
+          "instructionAr": "شاهد وجه الإشمام المروي في تأمنا.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U8.L4.M.P2",
+          "instructionAr": "تعلم الأوجه الأخرى بعد تحديد الطريق المعتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U10.L1",
+      "titleAr": "الألفات السبعة",
+      "source": {
+        "chapter": 17,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "معرفة أن الرسم لا يكفي وحده لتحديد الأداء",
+      "explanationAr": "في رواية حفص ألفات مخصوصة تبحث من حيث إثباتها وقفًا وحذفها وصلًا، مع تفصيل الأوجه والاستثناءات حسب الطريق. وهي: أنا حيث وقعت، ولكنا (الكهف 38)، والظنونا والرسولا والسبيلا (الأحزاب 10، 66، 67)، وقواريرا الأولى (الإنسان 15)، وسلاسلا (الإنسان 4)؛ تحذف ألفها وصلًا وتثبت وقفًا، ويجوز في سلاسلا وقفًا الإثبات والحذف مع السكون.",
+      "examples": [
+        {
+          "verseRef": "18:38",
+          "excerptAr": "لَٰكِنَّا",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الألفات السبعة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "في رواية حفص ألفات مخصوصة تبحث من حيث إثباتها وقفًا وحذفها وصلًا، مع تفصيل الأوجه والاستثناءات حسب الطريق."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "18:38"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "معرفة أن الرسم لا يكفي وحده لتحديد الأداء"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرب على لكنا مع معلم وفق الوجه المعتمد.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U10.L1.Q1",
+              "type": "singleChoice",
+              "text": "ما الذي يحدد إثبات الألف أو حذفها في هذه المواضع؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الرواية والوقف والوصل"
+                },
+                {
+                  "id": "2",
+                  "text": "لون الحرف"
+                },
+                {
+                  "id": "3",
+                  "text": "رغبة القارئ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "في رواية حفص ألفات مخصوصة تبحث من حيث إثباتها وقفًا وحذفها وصلًا، مع تفصيل الأوجه والاستثناءات حسب الطريق."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U10.L2",
+      "titleAr": "همزة الوصل",
+      "source": {
+        "chapter": 18,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز الابتداء والوصل",
+      "explanationAr": "تثبت همزة الوصل عند الابتداء وتسقط لفظًا عند الوصل، ويختلف ضبط حركتها عند الابتداء بحسب نوع الكلمة. وتدخل على الأفعال والأسماء ولام التعريف: تضم في الفعل إن كان ثالثه مضمومًا ضمًا لازمًا وتكسر في غير ذلك، وتكسر في الأسماء دائمًا، وتفتح في لام التعريف دائمًا (التجويد المصور ص 499–504).",
+      "examples": [
+        {
+          "verseRef": "96:1",
+          "excerptAr": "اقْرَأْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "همزة الوصل"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "تثبت همزة الوصل عند الابتداء وتسقط لفظًا عند الوصل، ويختلف ضبط حركتها عند الابتداء بحسب نوع الكلمة."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "96:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز الابتداء والوصل"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن الابتداء بكلمة اقرأ ووصلها بما قبلها في مثال يختاره المعلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U10.L2.Q1",
+              "type": "singleChoice",
+              "text": "متى تنطق همزة الوصل؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "عند الابتداء بها"
+                },
+                {
+                  "id": "2",
+                  "text": "في كل وصل"
+                },
+                {
+                  "id": "3",
+                  "text": "لا تنطق مطلقًا"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "تثبت همزة الوصل عند الابتداء وتسقط لفظًا عند الوصل، ويختلف ضبط حركتها عند الابتداء بحسب نوع الكلمة."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U10.L3",
+      "titleAr": "همزة القطع",
+      "source": {
+        "chapter": 19,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تمييز همزة القطع عن الوصل",
+      "explanationAr": "همزة القطع تثبت في النطق عند الابتداء والوصل، مع مراعاة أوجه الأداء الخاصة إن وجدت. ولا تجمع العرب بين همزتين ثانيتهما ساكنة، فتبدل الثانية حرف مد مجانسًا لحركة الأولى نحو آدم وأوتوا وإيمانا، وهو مد البدل (ص 509).",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "همزة القطع"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "همزة القطع تثبت في النطق عند الابتداء والوصل، مع مراعاة أوجه الأداء الخاصة إن وجدت."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تمييز همزة القطع عن الوصل"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن أحد باسم في تمرين غير قرآني.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U10.L3.Q1",
+              "type": "singleChoice",
+              "text": "ما الأصل في همزة القطع؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "تثبت ابتداء ووصلًا"
+                },
+                {
+                  "id": "2",
+                  "text": "تسقط في كل وصل"
+                },
+                {
+                  "id": "3",
+                  "text": "لا تنطق عند الابتداء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "همزة القطع تثبت في النطق عند الابتداء والوصل، مع مراعاة أوجه الأداء الخاصة إن وجدت."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

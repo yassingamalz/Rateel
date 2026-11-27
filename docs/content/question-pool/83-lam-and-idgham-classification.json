@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Verify all candidate excerpts, context and spans; imlai is not canonical Uthmani text. Render only target span, not answer-revealing focus. Some examples recur in previous pools.",
+  "examples": [
+    {
+      "id": "X-LAM-02.POOL83.E1",
+      "topicId": "X-LAM-02",
+      "verseRef": "54:1",
+      "excerptAr": "الْقَمَرُ",
+      "focus": "لام التعريف",
+      "rule": "لام قمرية",
+      "explanation": "تظهر اللام قبل القاف.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL83.E2",
+      "topicId": "X-LAM-02",
+      "verseRef": "113:1",
+      "excerptAr": "الْفَلَقِ",
+      "focus": "لام التعريف",
+      "rule": "لام قمرية",
+      "explanation": "تظهر اللام قبل الفاء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL83.E3",
+      "topicId": "X-LAM-02",
+      "verseRef": "1:2",
+      "excerptAr": "الْحَمْدُ",
+      "focus": "لام التعريف",
+      "rule": "لام قمرية",
+      "explanation": "تظهر اللام قبل الحاء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL83.E4",
+      "topicId": "X-LAM-02",
+      "verseRef": "114:6",
+      "excerptAr": "الْجِنَّةِ",
+      "focus": "لام التعريف",
+      "rule": "لام قمرية",
+      "explanation": "تظهر اللام قبل الجيم.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-02.POOL83.E5",
+      "topicId": "X-LAM-02",
+      "verseRef": "2:255",
+      "excerptAr": "الْحَيُّ",
+      "focus": "لام التعريف",
+      "rule": "لام قمرية",
+      "explanation": "تظهر اللام قبل الحاء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL83.E6",
+      "topicId": "X-LAM-03",
+      "verseRef": "91:1",
+      "excerptAr": "وَالشَّمْسِ",
+      "focus": "لام التعريف",
+      "rule": "لام شمسية",
+      "explanation": "تدغم اللام في الشين.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL83.E7",
+      "topicId": "X-LAM-03",
+      "verseRef": "92:1",
+      "excerptAr": "وَاللَّيْلِ",
+      "focus": "لام التعريف",
+      "rule": "لام شمسية",
+      "explanation": "تدغم لام التعريف في اللام التالية.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL83.E8",
+      "topicId": "X-LAM-03",
+      "verseRef": "114:1",
+      "excerptAr": "النَّاسِ",
+      "focus": "لام التعريف",
+      "rule": "لام شمسية",
+      "explanation": "تدغم اللام في النون.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL83.E9",
+      "topicId": "X-LAM-03",
+      "verseRef": "112:2",
+      "excerptAr": "الصَّمَدُ",
+      "focus": "لام التعريف",
+      "rule": "لام شمسية",
+      "explanation": "تدغم اللام في الصاد.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-LAM-03.POOL83.E10",
+      "topicId": "X-LAM-03",
+      "verseRef": "1:3",
+      "excerptAr": "الرَّحْمَٰنِ",
+      "focus": "لام التعريف",
+      "rule": "لام شمسية",
+      "explanation": "تدغم اللام في الراء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-02.POOL83.E11",
+      "topicId": "X-IDG-02",
+      "verseRef": "2:60",
+      "excerptAr": "اضْرِبْ بِعَصَاكَ",
+      "focus": "الباءان",
+      "rule": "متماثلان",
+      "explanation": "الباءان متفقتان في المخرج والصفات.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-02.POOL83.E12",
+      "topicId": "X-IDG-02",
+      "verseRef": "4:78",
+      "excerptAr": "يُدْرِكْكُمْ",
+      "focus": "الكافان",
+      "rule": "متماثلان",
+      "explanation": "الكافان من جنس واحد.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-03.POOL83.E13",
+      "topicId": "X-IDG-03",
+      "verseRef": "2:256",
+      "excerptAr": "قَدْ تَبَيَّنَ",
+      "focus": "الدال والتاء",
+      "rule": "متجانسان",
+      "explanation": "يشتركان في المخرج ويختلفان في بعض الصفات.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-03.POOL83.E14",
+      "topicId": "X-IDG-03",
+      "verseRef": "5:28",
+      "excerptAr": "بَسَطْتَ",
+      "focus": "الطاء والتاء",
+      "rule": "متجانسان",
+      "explanation": "الإدغام ناقص مع بقاء الإطباق.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-03.POOL83.E15",
+      "topicId": "X-IDG-03",
+      "verseRef": "43:39",
+      "excerptAr": "إِذْ ظَلَمْتُمْ",
+      "focus": "الذال والظاء",
+      "rule": "متجانسان",
+      "explanation": "يشتركان في المخرج ويختلفان في بعض الصفات.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-04.POOL83.E16",
+      "topicId": "X-IDG-04",
+      "verseRef": "77:20",
+      "excerptAr": "نَخْلُقْكُمْ",
+      "focus": "القاف والكاف",
+      "rule": "متقاربان",
+      "explanation": "تقارب المخرج، ويؤخذ الإدغام من النقل.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-04.POOL83.E17",
+      "topicId": "X-IDG-04",
+      "verseRef": "23:118",
+      "excerptAr": "وَقُلْ رَبِّ",
+      "focus": "اللام والراء",
+      "rule": "متقاربان",
+      "explanation": "يتقارب مخرج اللام والراء.",
+      "verification": "pending_uthmani_reference_context"
+    },
+    {
+      "id": "X-IDG-05.POOL83.E18",
+      "topicId": "X-IDG-05",
+      "verseRef": "2:62",
+      "excerptAr": "مَنْ آمَنَ",
+      "focus": "النون والهمزة",
+      "rule": "متباعدان",
+      "explanation": "إظهار حلقي في هذا الموضع؛ التصنيف يراجع مع المصدر.",
+      "verification": "pending_uthmani_reference_context"
+    }
+  ],
+  "questions": [
+    {
+      "id": "X-LAM-02.POOL83.Q1",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-02.POOL83.E1",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر اللام قبل القاف.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL83.Q2",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-02.POOL83.E2",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر اللام قبل الفاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL83.Q3",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-02.POOL83.E3",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر اللام قبل الحاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL83.Q4",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-02.POOL83.E4",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر اللام قبل الجيم.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL83.Q5",
+      "topicId": "X-LAM-02",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-02.POOL83.E5",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر اللام قبل الحاء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL83.Q6",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-03.POOL83.E6",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تدغم اللام في الشين.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL83.Q7",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-03.POOL83.E7",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تدغم لام التعريف في اللام التالية.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL83.Q8",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-03.POOL83.E8",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تدغم اللام في النون.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL83.Q9",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-03.POOL83.E9",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تدغم اللام في الصاد.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL83.Q10",
+      "topicId": "X-LAM-03",
+      "type": "singleChoice",
+      "text": "ما الحكم في الموضع المحدد؟",
+      "exampleId": "X-LAM-03.POOL83.E10",
+      "focus": "لام التعريف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-LAM-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تدغم اللام في الراء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-02.POOL83.Q11",
+      "topicId": "X-IDG-02",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-02.POOL83.E11",
+      "focus": "الباءان",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "متقاربان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان"
+        },
+        {
+          "id": "3",
+          "text": "متماثلان"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الباءان متفقتان في المخرج والصفات.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-02.POOL83.Q12",
+      "topicId": "X-IDG-02",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-02.POOL83.E12",
+      "focus": "الكافان",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-02",
+      "options": [
+        {
+          "id": "1",
+          "text": "متجانسان"
+        },
+        {
+          "id": "2",
+          "text": "متماثلان"
+        },
+        {
+          "id": "3",
+          "text": "متباعدان"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الكافان من جنس واحد.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-03.POOL83.Q13",
+      "topicId": "X-IDG-03",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-03.POOL83.E13",
+      "focus": "الدال والتاء",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "متجانسان"
+        },
+        {
+          "id": "2",
+          "text": "متماثلان"
+        },
+        {
+          "id": "3",
+          "text": "متقاربان"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "يشتركان في المخرج ويختلفان في بعض الصفات.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-03.POOL83.Q14",
+      "topicId": "X-IDG-03",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-03.POOL83.E14",
+      "focus": "الطاء والتاء",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "متقاربان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان"
+        },
+        {
+          "id": "3",
+          "text": "متجانسان"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "الإدغام ناقص مع بقاء الإطباق.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-03.POOL83.Q15",
+      "topicId": "X-IDG-03",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-03.POOL83.E15",
+      "focus": "الذال والظاء",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-03",
+      "options": [
+        {
+          "id": "1",
+          "text": "متماثلان"
+        },
+        {
+          "id": "2",
+          "text": "متجانسان"
+        },
+        {
+          "id": "3",
+          "text": "متباعدان"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "يشتركان في المخرج ويختلفان في بعض الصفات.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-04.POOL83.Q16",
+      "topicId": "X-IDG-04",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-04.POOL83.E16",
+      "focus": "القاف والكاف",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-04",
+      "options": [
+        {
+          "id": "1",
+          "text": "متقاربان"
+        },
+        {
+          "id": "2",
+          "text": "متماثلان"
+        },
+        {
+          "id": "3",
+          "text": "متجانسان"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تقارب المخرج، ويؤخذ الإدغام من النقل.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-04.POOL83.Q17",
+      "topicId": "X-IDG-04",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-04.POOL83.E17",
+      "focus": "اللام والراء",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-04",
+      "options": [
+        {
+          "id": "1",
+          "text": "متجانسان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان"
+        },
+        {
+          "id": "3",
+          "text": "متقاربان"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "يتقارب مخرج اللام والراء.",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-IDG-05.POOL83.Q18",
+      "topicId": "X-IDG-05",
+      "type": "singleChoice",
+      "text": "ما علاقة الحرفين المحددين؟",
+      "exampleId": "X-IDG-05.POOL83.E18",
+      "focus": "النون والهمزة",
+      "recitationContext": "wasl",
+      "objective": "quran_rule_classification",
+      "difficulty": "intermediate",
+      "variantFamily": "rule-recognition-X-IDG-05",
+      "options": [
+        {
+          "id": "1",
+          "text": "متماثلان"
+        },
+        {
+          "id": "2",
+          "text": "متباعدان"
+        },
+        {
+          "id": "3",
+          "text": "متقاربان"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "إظهار حلقي في هذا الموضع؛ التصنيف يراجع مع المصدر.",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "topics": [
+    {
+      "topicId": "U6.L6",
+      "examples": [
+        {
+          "id": "U6.L6.M.E1",
+          "verseRef": "2:285",
+          "excerptAr": "آمَنَ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L6.M.E2",
+          "verseRef": "48:4",
+          "excerptAr": "إِيمَانًا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L6.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L6.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما حرف المد بعد الهمزة في إيمانًا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الواو"
+            },
+            {
+              "id": "3",
+              "text": "الألف"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "الياء",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L6.M.P1",
+          "instructionAr": "قارن آمن وإيمانًا وأوتوا من نموذج معتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L6.M.P2",
+          "instructionAr": "كرر مد البدل بالمقدار المعتمد.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L7",
+      "examples": [
+        {
+          "id": "U6.L7.M.E1",
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L7.M.E2",
+          "verseRef": "106:3",
+          "excerptAr": "الْبَيْتِ",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L7.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L7.M.E2",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما حرف اللين في البيت؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الواو"
+            },
+            {
+              "id": "2",
+              "text": "الألف"
+            },
+            {
+              "id": "3",
+              "text": "الياء"
+            }
+          ],
+          "correctAnswer": "3",
+          "feedbackAr": "الياء",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L7.M.P1",
+          "instructionAr": "قارن الوصل والوقف على خوف.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L7.M.P2",
+          "instructionAr": "تدرب على الوقف على البيت مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L8",
+      "examples": [
+        {
+          "id": "U6.L8.M.E1",
+          "verseRef": "104:3",
+          "excerptAr": "مَالَهُ أَخْلَدَهُ",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L8.M.E2",
+          "verseRef": "112:4",
+          "excerptAr": "لَهُ كُفُوًا",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L8.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L8.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما نوع الصلة في ماله أخلده عند الوصل؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "بدل"
+            },
+            {
+              "id": "2",
+              "text": "كبرى"
+            },
+            {
+              "id": "3",
+              "text": "صغرى"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "كبرى",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L8.M.P1",
+          "instructionAr": "قارن الصلة قبل الهمزة وقبل غيرها.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L8.M.P2",
+          "instructionAr": "استمع إلى موضع استثنائي مع معلم.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    },
+    {
+      "topicId": "U6.L9",
+      "examples": [
+        {
+          "id": "U6.L9.M.E1",
+          "verseRef": "110:3",
+          "excerptAr": "تَوَّابًا",
+          "verification": "pending_uthmani_and_context"
+        },
+        {
+          "id": "U6.L9.M.E2",
+          "verseRef": "4:40",
+          "excerptAr": "حَسَنَةً",
+          "verification": "pending_uthmani_and_context"
+        }
+      ],
+      "listeningTasks": [
+        {
+          "id": "U6.L9.M.A1",
+          "kind": "recitation_candidate",
+          "audioTarget": "U6.L9.M.E1",
+          "context": "verify actual wasl/waqf required by question; select correct Hafs transmission path",
+          "promptAr": "ما الحكم عند الوقف على توابًا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مد عوض"
+            },
+            {
+              "id": "2",
+              "text": "إخفاء"
+            },
+            {
+              "id": "3",
+              "text": "إقلاب"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "مد عوض",
+          "status": "blocked_until_audio_verified"
+        }
+      ],
+      "practiceTasks": [
+        {
+          "id": "U6.L9.M.P1",
+          "instructionAr": "قارن الوقف على توابًا وحسنةً.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        },
+        {
+          "id": "U6.L9.M.P2",
+          "instructionAr": "كرر الوقف دون إبقاء صوت التنوين.",
+          "assessment": "teacher_or_self",
+          "automaticScoring": false
+        }
+      ],
+      "review": "pending"
+    }
+  ]
+}

@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "questions": [
+    {
+      "id": "U10.L1.POOL78.Q1",
+      "topicId": "U10.L1",
+      "text": "ما الموضع الذي يدرس فيه لفظ قواريرا الأول؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع أحكام كل لفظ في الرواية والطريق، ولا تعمم على كل ألف.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الإنسان 15"
+        },
+        {
+          "id": "2",
+          "text": "الإنسان 16 وحده"
+        },
+        {
+          "id": "3",
+          "text": "الفلق 1"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U10.L1.POOL78.Q2",
+      "topicId": "U10.L1",
+      "text": "هل الألفات السبع باب خاص بأوجه الأداء المروية؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع أحكام كل لفظ في الرواية والطريق، ولا تعمم على كل ألف.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا، قاعدة إملائية عامة"
+        },
+        {
+          "id": "2",
+          "text": "هو باب صفات الحروف"
+        },
+        {
+          "id": "3",
+          "text": "نعم"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U10.L1.POOL78.Q3",
+      "topicId": "U10.L1",
+      "text": "عند اختلاف وجهي الوقف على لفظ مخصوص، ما المرجع؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع أحكام كل لفظ في الرواية والطريق، ولا تعمم على كل ألف.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "شكل الخط وحده"
+        },
+        {
+          "id": "2",
+          "text": "الطريق المعتمد والتلقي"
+        },
+        {
+          "id": "3",
+          "text": "اختيار الأطول دائمًا"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U10.L2.POOL78.Q1",
+      "topicId": "U10.L2",
+      "text": "بأي حركة يبدأ القارئ بكلمة الْحَمْدُ؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "حركة همزة الوصل عند الابتداء تتبع نوع الكلمة وقواعده.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الفتح"
+        },
+        {
+          "id": "2",
+          "text": "الضم"
+        },
+        {
+          "id": "3",
+          "text": "الكسر"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U10.L2.POOL78.Q2",
+      "topicId": "U10.L2",
+      "text": "بأي حركة يبدأ بكلمة اقْرَأْ؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "حركة همزة الوصل عند الابتداء تتبع نوع الكلمة وقواعده.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الفتح"
+        },
+        {
+          "id": "2",
+          "text": "الضم"
+        },
+        {
+          "id": "3",
+          "text": "الكسر"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U10.L2.POOL78.Q3",
+      "topicId": "U10.L2",
+      "text": "صل الكلمة بحركة همزة الوصل عند الابتداء.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "حركة همزة الوصل عند الابتداء تتبع نوع الكلمة وقواعده.",
+      "type": "matching",
+      "pairs": [
+        {
+          "id": "1",
+          "left": "الحمد",
+          "right": "الفتح"
+        },
+        {
+          "id": "2",
+          "left": "اقرأ",
+          "right": "الكسر"
+        },
+        {
+          "id": "3",
+          "left": "ادعوا",
+          "right": "الضم"
+        }
+      ]
+    },
+    {
+      "id": "U10.L3.POOL78.Q1",
+      "topicId": "U10.L3",
+      "text": "أي الكلمتين تبدأ بهمزة قطع؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "همزة القطع ثابتة ابتداء ووصلًا في الأصل.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "أَعُوذُ"
+        },
+        {
+          "id": "2",
+          "text": "الْفَلَقِ"
+        },
+        {
+          "id": "3",
+          "text": "اقْرَأْ"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U10.L3.POOL78.Q2",
+      "topicId": "U10.L3",
+      "text": "أي همزة في أَنْعَمْتَ؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "همزة القطع ثابتة ابتداء ووصلًا في الأصل.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "همزة وصل"
+        },
+        {
+          "id": "2",
+          "text": "لا توجد همزة"
+        },
+        {
+          "id": "3",
+          "text": "همزة قطع"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U10.L3.POOL78.Q3",
+      "topicId": "U10.L3",
+      "text": "همزة القطع تسقط لمجرد وصل الكلمة بما قبلها.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "همزة القطع ثابتة ابتداء ووصلًا في الأصل.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U11.L1.POOL78.Q1",
+      "topicId": "U11.L1",
+      "text": "ما الفرق بين نقطة الباء وعلامة الفتحة؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "التاريخ يحتاج إلى بيانات موثقة، والرسم يختلف عن الضبط.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "الأولى تميز الحرف والثانية تدل على الحركة"
+        },
+        {
+          "id": "2",
+          "text": "كلتاهما علامة وقف"
+        },
+        {
+          "id": "3",
+          "text": "كلتاهما علامة مد"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U11.L1.POOL78.Q2",
+      "topicId": "U11.L1",
+      "text": "هل يجوز تأريخ مخطوطة من لونها فقط؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التاريخ يحتاج إلى بيانات موثقة، والرسم يختلف عن الضبط.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U11.L1.POOL78.Q3",
+      "topicId": "U11.L1",
+      "text": "اختر ما يحتاج إليه وصف مخطوطة قرآنية.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "التاريخ يحتاج إلى بيانات موثقة، والرسم يختلف عن الضبط.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "مصدر موثق"
+        },
+        {
+          "id": "2",
+          "text": "تاريخ أو تقدير علمي منسوب"
+        },
+        {
+          "id": "3",
+          "text": "بيانات الحفظ"
+        },
+        {
+          "id": "4",
+          "text": "تاريخ مخترع"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U11.L2.POOL78.Q1",
+      "topicId": "U11.L2",
+      "text": "إذا اختلف الرسم العثماني عن التهجئة التعليمية، أيهما يعرض في بطاقة الآية؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تلوين النص لا يغير محتواه، ويفصل الشرح الإملائي عن الآية.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "النص العثماني الموثق"
+        },
+        {
+          "id": "2",
+          "text": "التهجئة التلقائية"
+        },
+        {
+          "id": "3",
+          "text": "أي صيغة أقصر"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U11.L2.POOL78.Q2",
+      "topicId": "U11.L2",
+      "text": "هل يجوز عرض مثال إملائي مع تمييزه بوضوح عن نص المصحف؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تلوين النص لا يغير محتواه، ويفصل الشرح الإملائي عن الآية.",
+      "type": "trueFalse",
+      "correctAnswer": true
+    },
+    {
+      "id": "U11.L2.POOL78.Q3",
+      "topicId": "U11.L2",
+      "text": "ما الذي يجب حفظه عند إضافة تلوين للتجويد؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تلوين النص لا يغير محتواه، ويفصل الشرح الإملائي عن الآية.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "حذف العلامات"
+        },
+        {
+          "id": "2",
+          "text": "تسلسل حروف النص وعلاماته المعتمدة"
+        },
+        {
+          "id": "3",
+          "text": "لون واحد لجميع الحروف"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U12.L1.POOL78.Q1",
+      "topicId": "U12.L1",
+      "text": "قرأ الطالب الآية من المصحف دون أن يستطيع استرجاعها. هل تحقق الاستظهار؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "الحفظ الصحيح يجمع التصحيح والاسترجاع والمراجعة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ليس بعد"
+        },
+        {
+          "id": "2",
+          "text": "نعم بالضرورة"
+        },
+        {
+          "id": "3",
+          "text": "تحقق الإتقان الكامل"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U12.L1.POOL78.Q2",
+      "topicId": "U12.L1",
+      "text": "ما الإجراء بعد اكتشاف لفظ غير صحيح في الحفظ؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الحفظ الصحيح يجمع التصحيح والاسترجاع والمراجعة.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "تركه كما هو"
+        },
+        {
+          "id": "2",
+          "text": "تغيير النص لتسهيل الحفظ"
+        },
+        {
+          "id": "3",
+          "text": "تصحيحه ثم إعادة التكرار"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U12.L1.POOL78.Q3",
+      "topicId": "U12.L1",
+      "text": "رتب دورة تدريبية مقترحة.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "الحفظ الصحيح يجمع التصحيح والاسترجاع والمراجعة.",
+      "type": "ordering",
+      "items": [
+        {
+          "id": "1",
+          "text": "القراءة المصححة"
+        },
+        {
+          "id": "2",
+          "text": "التكرار"
+        },
+        {
+          "id": "3",
+          "text": "الاستظهار"
+        },
+        {
+          "id": "4",
+          "text": "المراجعة"
+        }
+      ],
+      "correctOrder": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "U12.L2.POOL78.Q1",
+      "topicId": "U12.L2",
+      "text": "ما الأنسب عند اختلاف لفظ التسجيل عن النص بسبب الرواية؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع مصادر الحفظ وتوافقها مع الرواية.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "مراجعة توافق الرواية مع المعلم"
+        },
+        {
+          "id": "2",
+          "text": "مزج الوجهين دون علم"
+        },
+        {
+          "id": "3",
+          "text": "تغيير النص آليًا"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U12.L2.POOL78.Q2",
+      "topicId": "U12.L2",
+      "text": "اختر أدوات متابعة الحفظ.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع مصادر الحفظ وتوافقها مع الرواية.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "سجل مراجعة"
+        },
+        {
+          "id": "2",
+          "text": "مصحف موثوق"
+        },
+        {
+          "id": "3",
+          "text": "تسميع لمعلم"
+        },
+        {
+          "id": "4",
+          "text": "نص عشوائي"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "U12.L2.POOL78.Q3",
+      "topicId": "U12.L2",
+      "text": "اسم الملف وحده يكفي للتحقق من صحة التلاوة.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تراجع مصادر الحفظ وتوافقها مع الرواية.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    },
+    {
+      "id": "U12.L3.POOL78.Q1",
+      "topicId": "U12.L3",
+      "text": "ماذا يختبر الاسترجاع بعد إغلاق المصحف؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "هذه دورة تدريبية مقترحة وليست نسبة حرفية إلى الكتاب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "ثبات المقطع في الذاكرة"
+        },
+        {
+          "id": "2",
+          "text": "جمال الخط فقط"
+        },
+        {
+          "id": "3",
+          "text": "عدد الصفحات"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U12.L3.POOL78.Q2",
+      "topicId": "U12.L3",
+      "text": "ما فائدة التسميع أمام معلم؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "هذه دورة تدريبية مقترحة وليست نسبة حرفية إلى الكتاب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "إلغاء الحاجة للمراجعة"
+        },
+        {
+          "id": "2",
+          "text": "تغيير ترتيب الآيات"
+        },
+        {
+          "id": "3",
+          "text": "كشف الخطأ الذي قد لا يلاحظه المتعلم"
+        }
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "id": "U12.L3.POOL78.Q3",
+      "topicId": "U12.L3",
+      "text": "هل يعد هذا التسلسل التدريبي نقلًا حرفيًا لأركان الكتاب؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "هذه دورة تدريبية مقترحة وليست نسبة حرفية إلى الكتاب.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "لا أهمية للمصدر"
+        },
+        {
+          "id": "2",
+          "text": "لا، يحتاج إلى مراجعة المصدر"
+        },
+        {
+          "id": "3",
+          "text": "نعم بالضرورة"
+        }
+      ],
+      "correctAnswer": "2"
+    },
+    {
+      "id": "U12.L4.POOL78.Q1",
+      "topicId": "U12.L4",
+      "text": "نسي الطالب مقطعًا قديمًا بعد بدء حفظ جديد. ماذا يعدل؟",
+      "objective": "applied_understanding",
+      "difficulty": "intermediate",
+      "status": "editorial_draft",
+      "feedbackAr": "تتكيف خطة الحفظ مع القدرة والوقت مع المحافظة على صحة النص.",
+      "type": "singleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "يخصص وقتًا إضافيًا للمراجعة"
+        },
+        {
+          "id": "2",
+          "text": "يحذف المقطع القديم من خطته"
+        },
+        {
+          "id": "3",
+          "text": "يزيد الجديد دون مراجعة"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "id": "U12.L4.POOL78.Q2",
+      "topicId": "U12.L4",
+      "text": "اختر سلوكين يعينان على الاستمرار.",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتكيف خطة الحفظ مع القدرة والوقت مع المحافظة على صحة النص.",
+      "type": "multipleChoice",
+      "options": [
+        {
+          "id": "1",
+          "text": "أهداف مناسبة"
+        },
+        {
+          "id": "2",
+          "text": "انتظام المراجعة"
+        },
+        {
+          "id": "3",
+          "text": "الاستعجال المفرط"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "U12.L4.POOL78.Q3",
+      "topicId": "U12.L4",
+      "text": "هل تناسب خطة واحدة جميع المتعلمين بالضرورة؟",
+      "objective": "applied_understanding",
+      "difficulty": "basic",
+      "status": "editorial_draft",
+      "feedbackAr": "تتكيف خطة الحفظ مع القدرة والوقت مع المحافظة على صحة النص.",
+      "type": "trueFalse",
+      "correctAnswer": false
+    }
+  ]
+}

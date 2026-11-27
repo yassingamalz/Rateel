@@ -1,0 +1,1149 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Alternative assessment items; all Quran references and excerpts require review; group related questions by variant family during consolidation.",
+  "topics": [
+    {
+      "topicId": "U5.L1",
+      "examples": [
+        {
+          "id": "U5.L1.POOL73.E1",
+          "verseRef": "114:1",
+          "excerptAr": "النَّاسِ",
+          "focus": "نّ",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L1.POOL73.E2",
+          "verseRef": "112:2",
+          "excerptAr": "الصَّمَدُ",
+          "focus": "م متحركة، لا ميم مشددة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L1.POOL73.E3",
+          "verseRef": "78:1",
+          "excerptAr": "عَمَّ",
+          "focus": "مّ",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L1.POOL73.E4",
+          "verseRef": "78:2",
+          "excerptAr": "النَّبَإِ",
+          "focus": "نّ",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L1.POOL73.E5",
+          "verseRef": "55:56",
+          "excerptAr": "فِيهِنَّ",
+          "focus": "نّ",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L1.POOL73.Q1",
+          "topicId": "U5.L1",
+          "text": "ما الحرف المشدد المصحوب بالغنة في عَمَّ؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الميم.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "العين"
+            },
+            {
+              "id": "2",
+              "text": "النون"
+            },
+            {
+              "id": "3",
+              "text": "الميم"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L1.POOL73.Q2",
+          "topicId": "U5.L1",
+          "text": "أي كلمة لا تحتوي على نون أو ميم مشددة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الصمد.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الناس"
+            },
+            {
+              "id": "2",
+              "text": "الصمد"
+            },
+            {
+              "id": "3",
+              "text": "عم"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L1.POOL73.Q3",
+          "topicId": "U5.L1",
+          "text": "عند الوقف على فِيهِنَّ تبقى الغنة في النون المشددة.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L1.POOL73.Q4",
+          "topicId": "U5.L1",
+          "text": "حدد الحرف المقصود في النَّبَإِ.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: النون.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الباء"
+            },
+            {
+              "id": "2",
+              "text": "الهمزة"
+            },
+            {
+              "id": "3",
+              "text": "النون"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L3",
+      "examples": [
+        {
+          "id": "U5.L3.POOL73.E1",
+          "verseRef": "2:62",
+          "excerptAr": "مَنْ آمَنَ",
+          "focus": "ء",
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L3.POOL73.E2",
+          "verseRef": "2:10",
+          "excerptAr": "عَذَابٌ أَلِيمٌ",
+          "focus": "ء بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L3.POOL73.E3",
+          "verseRef": "13:33",
+          "excerptAr": "مِنْ هَادٍ",
+          "focus": "هـ",
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L3.POOL73.E4",
+          "verseRef": "2:7",
+          "excerptAr": "عَذَابٌ عَظِيمٌ",
+          "focus": "ع بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L3.POOL73.E5",
+          "verseRef": "2:25",
+          "excerptAr": "مِنْهَا",
+          "focus": "هـ داخل كلمة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L3.POOL73.Q1",
+          "topicId": "U5.L3",
+          "text": "ما حكم التنوين عند وصل عذاب أليم؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الإظهار الحلقي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإظهار الحلقي"
+            },
+            {
+              "id": "2",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "3",
+              "text": "الإخفاء الحقيقي"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U5.L3.POOL73.Q2",
+          "topicId": "U5.L3",
+          "text": "أي مثال للإظهار داخل كلمة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: منها.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "من هاد"
+            },
+            {
+              "id": "2",
+              "text": "عذاب عظيم"
+            },
+            {
+              "id": "3",
+              "text": "منها"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L3.POOL73.Q3",
+          "topicId": "U5.L3",
+          "text": "الهاء من حروف الإظهار الحلقي.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L3.POOL73.Q4",
+          "topicId": "U5.L3",
+          "text": "ما الحرف التالي للنون في من هاد؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الهاء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الهاء"
+            },
+            {
+              "id": "2",
+              "text": "الدال"
+            },
+            {
+              "id": "3",
+              "text": "الألف"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L4",
+      "examples": [
+        {
+          "id": "U5.L4.POOL73.E1",
+          "verseRef": "2:8",
+          "excerptAr": "مَنْ يَقُولُ",
+          "focus": "ي",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L4.POOL73.E2",
+          "verseRef": "2:5",
+          "excerptAr": "مِنْ رَبِّهِمْ",
+          "focus": "مقارنة: ر",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L4.POOL73.E3",
+          "verseRef": "2:107",
+          "excerptAr": "مِنْ وَلِيٍّ",
+          "focus": "و",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L4.POOL73.E4",
+          "verseRef": "16:53",
+          "excerptAr": "مِنْ نِعْمَةٍ",
+          "focus": "ن",
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L4.POOL73.E5",
+          "verseRef": "4:79",
+          "excerptAr": "مِنْ نَفْسِكَ",
+          "focus": "ن",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L4.POOL73.Q1",
+          "topicId": "U5.L4",
+          "text": "ما حكم النون عند وصل من ولي؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: إدغام بغنة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "إظهار حلقي"
+            },
+            {
+              "id": "2",
+              "text": "إقلاب"
+            },
+            {
+              "id": "3",
+              "text": "إدغام بغنة"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L4.POOL73.Q2",
+          "topicId": "U5.L4",
+          "text": "أي مثال ليس إدغامًا بغنة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: من ربهم.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "من ولي"
+            },
+            {
+              "id": "2",
+              "text": "من ربهم"
+            },
+            {
+              "id": "3",
+              "text": "من نعمة"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L4.POOL73.Q3",
+          "topicId": "U5.L4",
+          "text": "النون من حروف الإدغام بغنة.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L4.POOL73.Q4",
+          "topicId": "U5.L4",
+          "text": "ما حرف الإدغام في من نفسك؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: النون.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الفاء"
+            },
+            {
+              "id": "2",
+              "text": "الكاف"
+            },
+            {
+              "id": "3",
+              "text": "النون"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L5",
+      "examples": [
+        {
+          "id": "U5.L5.POOL73.E1",
+          "verseRef": "2:2",
+          "excerptAr": "هُدًى لِلْمُتَّقِينَ",
+          "focus": "ل بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L5.POOL73.E2",
+          "verseRef": "2:5",
+          "excerptAr": "مِنْ رَبِّهِمْ",
+          "focus": "ر",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L5.POOL73.E3",
+          "verseRef": "51:57",
+          "excerptAr": "مِنْ رِزْقٍ",
+          "focus": "ر",
+          "verification": "pending_uthmani_reference_context",
+          "reviewNote": "2026-11-27 review: verse reference/excerpt corrected against the Uthmani text (word was not in the cited verse or had the wrong ending)."
+        },
+        {
+          "id": "U5.L5.POOL73.E4",
+          "verseRef": "104:1",
+          "excerptAr": "وَيْلٌ لِكُلِّ",
+          "focus": "ل بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L5.POOL73.E5",
+          "verseRef": "112:4",
+          "excerptAr": "يَكُنْ لَهُ",
+          "focus": "ل",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L5.POOL73.Q1",
+          "topicId": "U5.L5",
+          "text": "ما الحكم في هدى للمتقين عند الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: إدغام بغير غنة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "إظهار شفوي"
+            },
+            {
+              "id": "2",
+              "text": "إدغام بغير غنة"
+            },
+            {
+              "id": "3",
+              "text": "إخفاء حقيقي"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L5.POOL73.Q2",
+          "topicId": "U5.L5",
+          "text": "ما حرف الإدغام في ويل لكل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: اللام.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "اللام"
+            },
+            {
+              "id": "2",
+              "text": "الكاف"
+            },
+            {
+              "id": "3",
+              "text": "الياء"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U5.L5.POOL73.Q3",
+          "topicId": "U5.L5",
+          "text": "في من رزق تدغم النون في الراء عند الوصل في هذا الموضع.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L5.POOL73.Q4",
+          "topicId": "U5.L5",
+          "text": "أي مجموعة تضم حرفي الإدغام بغير غنة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ل ر.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ب ف"
+            },
+            {
+              "id": "2",
+              "text": "ل ر"
+            },
+            {
+              "id": "3",
+              "text": "م ن"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L6",
+      "examples": [
+        {
+          "id": "U5.L6.POOL73.E1",
+          "verseRef": "2:31",
+          "excerptAr": "أَنْبِئُونِي",
+          "focus": "ب داخل كلمة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L6.POOL73.E2",
+          "verseRef": "2:33",
+          "excerptAr": "أَنْبِئْهُمْ",
+          "focus": "ب داخل كلمة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L6.POOL73.E3",
+          "verseRef": "2:27",
+          "excerptAr": "مِنْ بَعْدِ",
+          "focus": "ب بين كلمتين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L6.POOL73.E4",
+          "verseRef": "22:61",
+          "excerptAr": "سَمِيعٌ بَصِيرٌ",
+          "focus": "ب بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L6.POOL73.E5",
+          "verseRef": "49:6",
+          "excerptAr": "فَاسِقٌ بِنَبَإٍ",
+          "focus": "ب بعد تنوين",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L6.POOL73.Q1",
+          "topicId": "U5.L6",
+          "text": "ما حكم التنوين في فاسق بنبإ؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الإقلاب.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "2",
+              "text": "الإظهار"
+            },
+            {
+              "id": "3",
+              "text": "الإدغام"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U5.L6.POOL73.Q2",
+          "topicId": "U5.L6",
+          "text": "أي مثال للإقلاب داخل كلمة؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: أنبئوني.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "من بعد"
+            },
+            {
+              "id": "2",
+              "text": "سميع بصير"
+            },
+            {
+              "id": "3",
+              "text": "أنبئوني"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L6.POOL73.Q3",
+          "topicId": "U5.L6",
+          "text": "الإقلاب قبل الباء يشمل التنوين في الوصل.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L6.POOL73.Q4",
+          "topicId": "U5.L6",
+          "text": "ما الصوت الذي تؤدى به النون في الإقلاب؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ميم مخفاة مع غنة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "ميم مخفاة مع غنة"
+            },
+            {
+              "id": "2",
+              "text": "لام مشددة"
+            },
+            {
+              "id": "3",
+              "text": "نون مظهرة بلا حكم"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L7",
+      "examples": [
+        {
+          "id": "U5.L7.POOL73.E1",
+          "verseRef": "2:22",
+          "excerptAr": "أَنْدَادًا",
+          "focus": "د",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L7.POOL73.E2",
+          "verseRef": "2:25",
+          "excerptAr": "مِنْ تَحْتِهَا",
+          "focus": "ت",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L7.POOL73.E3",
+          "verseRef": "2:19",
+          "excerptAr": "مِنَ الصَّوَاعِقِ",
+          "focus": "مقارنة: نون متحركة",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L7.POOL73.E4",
+          "verseRef": "2:21",
+          "excerptAr": "مِنْ قَبْلِكُمْ",
+          "focus": "ق",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L7.POOL73.Q1",
+          "topicId": "U5.L7",
+          "text": "ما الحكم في من تحتها؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الإخفاء الحقيقي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "2",
+              "text": "الإظهار الحلقي"
+            },
+            {
+              "id": "3",
+              "text": "الإخفاء الحقيقي"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L7.POOL73.Q2",
+          "topicId": "U5.L7",
+          "text": "ما الحرف الذي يلي النون الساكنة في أندادًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الدال.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الذال"
+            },
+            {
+              "id": "2",
+              "text": "الدال"
+            },
+            {
+              "id": "3",
+              "text": "الألف"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L7.POOL73.Q3",
+          "topicId": "U5.L7",
+          "text": "النون المتحركة في مِنَ الصَّوَاعِقِ ليست مثالًا للنون الساكنة المخفاة.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L7.POOL73.Q4",
+          "topicId": "U5.L7",
+          "text": "ما حكم من قبلكم عند الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الإخفاء الحقيقي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإدغام بلا غنة"
+            },
+            {
+              "id": "2",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "3",
+              "text": "الإخفاء الحقيقي"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L9",
+      "examples": [
+        {
+          "id": "U5.L9.POOL73.E1",
+          "verseRef": "105:4",
+          "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "focus": "م ب",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L9.POOL73.E2",
+          "verseRef": "88:22",
+          "excerptAr": "عَلَيْهِمْ بِمُصَيْطِرٍ",
+          "focus": "م ب",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L9.POOL73.E3",
+          "verseRef": "2:33",
+          "excerptAr": "أَنْبِئْهُمْ بِأَسْمَائِهِمْ",
+          "focus": "م ب",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L9.POOL73.E4",
+          "verseRef": "2:76",
+          "excerptAr": "أَتُحَدِّثُونَهُمْ بِمَا",
+          "focus": "م ب",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L9.POOL73.E5",
+          "verseRef": "2:8",
+          "excerptAr": "وَمَا هُمْ بِمُؤْمِنِينَ",
+          "focus": "م ب",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L9.POOL73.Q1",
+          "topicId": "U5.L9",
+          "text": "ما الحكم في هم بمؤمنين؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الإخفاء الشفوي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الإخفاء الشفوي"
+            },
+            {
+              "id": "2",
+              "text": "الإقلاب"
+            },
+            {
+              "id": "3",
+              "text": "الإظهار الشفوي"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U5.L9.POOL73.Q2",
+          "topicId": "U5.L9",
+          "text": "أي حرف يلي الميم الساكنة في أتحدثونهم بما؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الباء.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الميم"
+            },
+            {
+              "id": "2",
+              "text": "الواو"
+            },
+            {
+              "id": "3",
+              "text": "الباء"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L9.POOL73.Q3",
+          "topicId": "U5.L9",
+          "text": "الإخفاء الشفوي خاص بالميم الساكنة قبل الباء عند الوصل.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L9.POOL73.Q4",
+          "topicId": "U5.L9",
+          "text": "ما الصفة التي تصاحب هذا الحكم؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الغنة.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الغنة"
+            },
+            {
+              "id": "2",
+              "text": "الصفير"
+            },
+            {
+              "id": "3",
+              "text": "الاستطالة"
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L10",
+      "examples": [
+        {
+          "id": "U5.L10.POOL73.E1",
+          "verseRef": "2:10",
+          "excerptAr": "قُلُوبِهِمْ مَرَضٌ",
+          "focus": "م م",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L10.POOL73.E2",
+          "verseRef": "2:29",
+          "excerptAr": "لَكُمْ مَا",
+          "focus": "م م",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L10.POOL73.E3",
+          "verseRef": "106:4",
+          "excerptAr": "وَآمَنَهُمْ مِنْ",
+          "focus": "م م",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L10.POOL73.E4",
+          "verseRef": "83:15",
+          "excerptAr": "رَبِّهِمْ يَوْمَئِذٍ",
+          "focus": "م ي؛ مقارنة",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L10.POOL73.Q1",
+          "topicId": "U5.L10",
+          "text": "ما الحكم في قلوبهم مرض عند الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: إدغام شفوي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "إخفاء شفوي"
+            },
+            {
+              "id": "2",
+              "text": "إظهار شفوي"
+            },
+            {
+              "id": "3",
+              "text": "إدغام شفوي"
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "id": "U5.L10.POOL73.Q2",
+          "topicId": "U5.L10",
+          "text": "أي مثال ليس إدغامًا شفويًا؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: ربهم يومئذ.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "قلوبهم مرض"
+            },
+            {
+              "id": "2",
+              "text": "ربهم يومئذ"
+            },
+            {
+              "id": "3",
+              "text": "لكم ما"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L10.POOL73.Q3",
+          "topicId": "U5.L10",
+          "text": "الميمان المدغمتان تؤديان ميمًا مشددة مع غنة.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L10.POOL73.Q4",
+          "topicId": "U5.L10",
+          "text": "ما العلاقة بين الميمين؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: التماثل.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "التباعد"
+            },
+            {
+              "id": "2",
+              "text": "التجانس بين حرفين مختلفين"
+            },
+            {
+              "id": "3",
+              "text": "التماثل"
+            }
+          ],
+          "correctAnswer": "3"
+        }
+      ]
+    },
+    {
+      "topicId": "U5.L11",
+      "examples": [
+        {
+          "id": "U5.L11.POOL73.E1",
+          "verseRef": "105:2",
+          "excerptAr": "كَيْدَهُمْ فِي",
+          "focus": "م ف",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L11.POOL73.E2",
+          "verseRef": "1:7",
+          "excerptAr": "عَلَيْهِمْ غَيْرِ",
+          "focus": "م غ",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L11.POOL73.E3",
+          "verseRef": "2:6",
+          "excerptAr": "عَلَيْهِمْ أَأَنْذَرْتَهُمْ",
+          "focus": "م ء",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L11.POOL73.E4",
+          "verseRef": "2:7",
+          "excerptAr": "قُلُوبِهِمْ وَعَلَى",
+          "focus": "م و",
+          "verification": "pending_uthmani_reference_context"
+        },
+        {
+          "id": "U5.L11.POOL73.E5",
+          "verseRef": "109:6",
+          "excerptAr": "لَكُمْ دِينُكُمْ",
+          "focus": "م د",
+          "verification": "pending_uthmani_reference_context"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U5.L11.POOL73.Q1",
+          "topicId": "U5.L11",
+          "text": "ما الحكم في لكم دينكم عند الوصل؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: إظهار شفوي.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "إدغام شفوي"
+            },
+            {
+              "id": "2",
+              "text": "إظهار شفوي"
+            },
+            {
+              "id": "3",
+              "text": "إخفاء شفوي"
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "id": "U5.L11.POOL73.Q2",
+          "topicId": "U5.L11",
+          "text": "أي مثال يتضمن إظهار الميم قبل الواو؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "intermediate",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: قلوبهم وعلى.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "قلوبهم وعلى"
+            },
+            {
+              "id": "2",
+              "text": "كيدهم في"
+            },
+            {
+              "id": "3",
+              "text": "عليهم غير"
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "id": "U5.L11.POOL73.Q3",
+          "topicId": "U5.L11",
+          "text": "الميم قبل الفاء من الإظهار الشفوي لا الإخفاء.",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "راجع القاعدة والمثال مع المعلم.",
+          "type": "trueFalse",
+          "correctAnswer": true
+        },
+        {
+          "id": "U5.L11.POOL73.Q4",
+          "topicId": "U5.L11",
+          "text": "ما الحرف الذي يلي الميم في عليهم غير؟",
+          "objective": "rule_recognition_application",
+          "difficulty": "basic",
+          "status": "editorial_draft",
+          "feedbackAr": "الإجابة الصحيحة: الغين.",
+          "type": "singleChoice",
+          "options": [
+            {
+              "id": "1",
+              "text": "الياء"
+            },
+            {
+              "id": "2",
+              "text": "الغين"
+            },
+            {
+              "id": "3",
+              "text": "الراء"
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    }
+  ]
+}

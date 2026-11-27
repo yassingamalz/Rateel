@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "status": "first_pass_not_complete",
+  "topics": [
+    {
+      "topicId": "U3.L6",
+      "titleAr": "الإذلاق والإصمات",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "معرفة مجموعة الإذلاق",
+      "explanationAr": "حروف الإذلاق مجموعة في فر من لب، وما سواها من حروف الإصمات. وهذه الصفة من مباحث تصنيف الحروف، ولا تستلزم تدريبًا صوتيًا مستقلًا للمبتدئ. وفي التجويد المصور (ص 128) أن الإذلاق والإصمات من علم الصرف ولا أثر لهما في النطق، فتعرض هذه الصفة للمعرفة لا للتدريب الصوتي.",
+      "examples": [
+        {
+          "verseRef": "112:3",
+          "excerptAr": "يَلِدْ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الإذلاق والإصمات"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "حروف الإذلاق مجموعة في فر من لب، وما سواها من حروف الإصمات. وهذه الصفة من مباحث تصنيف الحروف، ولا تستلزم تدريبًا صوتيًا مستقلًا للمبتدئ."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:3"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "معرفة مجموعة الإذلاق"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "صنّف الحروف في بطاقات.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L6.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف من حروف الإذلاق؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "اللام"
+                },
+                {
+                  "id": "2",
+                  "text": "الدال"
+                },
+                {
+                  "id": "3",
+                  "text": "القاف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "حروف الإذلاق مجموعة في فر من لب، وما سواها من حروف الإصمات. وهذه الصفة من مباحث تصنيف الحروف، ولا تستلزم تدريبًا صوتيًا مستقلًا للمبتدئ."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L7",
+      "titleAr": "الصفات التي لا ضد لها",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التعرف على الصفات المفردة",
+      "explanationAr": "من الصفات التي لا ضد لها الصفير والقلقلة واللين والانحراف والتكرير والتفشي والاستطالة، وتدرس الغنة للنون والميم.",
+      "examples": [
+        {
+          "verseRef": "112:1",
+          "excerptAr": "أَحَدٌ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الصفات التي لا ضد لها"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "من الصفات التي لا ضد لها الصفير والقلقلة واللين والانحراف والتكرير والتفشي والاستطالة، وتدرس الغنة للنون والميم."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "112:1"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التعرف على الصفات المفردة"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى أمثلة متقابلة بعد شرح المعلم.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L7.Q1",
+              "type": "singleChoice",
+              "text": "أي صفة لا ضد لها في هذا التصنيف؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "القلقلة"
+                },
+                {
+                  "id": "2",
+                  "text": "الهمس"
+                },
+                {
+                  "id": "3",
+                  "text": "الجهر"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "من الصفات التي لا ضد لها الصفير والقلقلة واللين والانحراف والتكرير والتفشي والاستطالة، وتدرس الغنة للنون والميم."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L8",
+      "titleAr": "الصفير والقلقلة واللين",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "التفريق بين الصفات الثلاث",
+      "explanationAr": "الصفير في الصاد والزاي والسين. والقلقلة في قطب جد عند سكون الحرف. وحرفا اللين الواو والياء الساكنتان المفتوح ما قبلهما. وللقلقلة مرتبتان: كبرى عند الوقف وصغرى وسط الكلمة أو الكلام، ولا يزيدها التشديد وضوحًا (ص 188–191).",
+      "examples": [
+        {
+          "verseRef": "106:4",
+          "excerptAr": "خَوْفٍ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الصفير والقلقلة واللين"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الصفير في الصاد والزاي والسين. والقلقلة في قطب جد عند سكون الحرف. وحرفا اللين الواو والياء الساكنتان المفتوح ما قبلهما."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "106:4"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "التفريق بين الصفات الثلاث"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "قارن خَوْف وبَاب في تدريب على اللين والمد.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L8.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف في خَوْفٍ حرف لين؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الواو"
+                },
+                {
+                  "id": "2",
+                  "text": "الخاء"
+                },
+                {
+                  "id": "3",
+                  "text": "الفاء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الصفير في الصاد والزاي والسين. والقلقلة في قطب جد عند سكون الحرف. وحرفا اللين الواو والياء الساكنتان المفتوح ما قبلهما."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L9",
+      "titleAr": "الانحراف والتكرير والتفشي والاستطالة",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "ربط الصفة بالحرف",
+      "explanationAr": "الانحراف في اللام والراء، والتكرير صفة للراء تُضبط دون مبالغة، والتفشي للشين، والاستطالة للضاد.",
+      "examples": [
+        {
+          "verseRef": "1:7",
+          "excerptAr": "الضَّالِّينَ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الانحراف والتكرير والتفشي والاستطالة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الانحراف في اللام والراء، والتكرير صفة للراء تُضبط دون مبالغة، والتفشي للشين، والاستطالة للضاد."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "1:7"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "ربط الصفة بالحرف"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "تدرّب على الضاد مع معلم مختص.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L9.Q1",
+              "type": "singleChoice",
+              "text": "أي حرف يتصف بالاستطالة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "الضاد"
+                },
+                {
+                  "id": "2",
+                  "text": "الشين"
+                },
+                {
+                  "id": "3",
+                  "text": "الراء"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الانحراف في اللام والراء، والتكرير صفة للراء تُضبط دون مبالغة، والتفشي للشين، والاستطالة للضاد."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    },
+    {
+      "topicId": "U3.L10",
+      "titleAr": "الغنة",
+      "source": {
+        "chapter": 7,
+        "pages": null,
+        "status": "pending_original_pdf"
+      },
+      "status": "editorial_draft",
+      "objectiveAr": "تحديد مصدر الغنة وحروفها",
+      "explanationAr": "الغنة صوت يخرج من الخيشوم، ملازم للنون والميم، وتتفاوت مراتبه بحسب حال الحرف.",
+      "examples": [
+        {
+          "verseRef": "114:6",
+          "excerptAr": "الْجِنَّةِ",
+          "script": "illustrative_imlai_pending_uthmani_verification",
+          "audioStatus": "pending"
+        }
+      ],
+      "activities": {
+        "guided": [
+          {
+            "kind": "intro",
+            "titleAr": "الغنة"
+          },
+          {
+            "kind": "explain",
+            "narrationAr": "الغنة صوت يخرج من الخيشوم، ملازم للنون والميم، وتتفاوت مراتبه بحسب حال الحرف."
+          },
+          {
+            "kind": "example",
+            "exampleRef": "114:6"
+          },
+          {
+            "kind": "recap",
+            "objectiveAr": "تحديد مصدر الغنة وحروفها"
+          }
+        ],
+        "read": {
+          "instructionAr": "اقرأ الشرح وتأمل المثال."
+        },
+        "listen": {
+          "instructionAr": "استمع إلى المثال بعد اعتماد التسجيل.",
+          "status": "blocked_audio"
+        },
+        "practice": {
+          "instructionAr": "استمع إلى نَ ونَّ وقارن زمن الغنة.",
+          "assessment": "teacher_or_self"
+        },
+        "test": {
+          "passingScore": 70,
+          "questions": [
+            {
+              "id": "U3.L10.Q1",
+              "type": "singleChoice",
+              "text": "أي حرفين تلازمهما الغنة؟",
+              "options": [
+                {
+                  "id": "1",
+                  "text": "النون والميم"
+                },
+                {
+                  "id": "2",
+                  "text": "الراء واللام"
+                },
+                {
+                  "id": "3",
+                  "text": "القاف والكاف"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "الغنة صوت يخرج من الخيشوم، ملازم للنون والميم، وتتفاوت مراتبه بحسب حال الحرف."
+            }
+          ]
+        }
+      },
+      "review": {
+        "source": "pending",
+        "arabic": "pending_tashkil",
+        "quran": "pending",
+        "audio": "pending",
+        "runtime": "not_integrated"
+      }
+    }
+  ]
+}

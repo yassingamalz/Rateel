@@ -1,0 +1,2198 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_not_integrated",
+  "note": "Each multi-select covers explicitly marked targets only, not every rule in the verse. Display reviewed spans and explicit context per target; omit explanatory focus before response if it reveals the answer. Verse 106:4 starts with الذي; clip must include that word. Editorial topic U5.L2 is only a provisional mixed assessment mapping. Quran text here is imlai candidate, not canonical.",
+  "examples": [
+    {
+      "id": "POOL88.E1",
+      "verseRef": "114:6",
+      "excerptAr": "مِنَ الْجِنَّةِ وَالنَّاسِ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E1.T1",
+          "topicId": "U5.L1",
+          "anchor": "الْجِنَّةِ",
+          "focus": "النون المشددة",
+          "rule": "غنة النون المشددة",
+          "explanation": "النون في الجنة مشددة فتؤدى الغنة في أكمل مراتبها."
+        },
+        {
+          "id": "POOL88.E1.T2",
+          "topicId": "X-LAM-02",
+          "anchor": "الْجِنَّةِ",
+          "focus": "لام التعريف",
+          "rule": "لام قمرية",
+          "explanation": "تظهر اللام قبل الجيم."
+        },
+        {
+          "id": "POOL88.E1.T3",
+          "topicId": "X-LAM-03",
+          "anchor": "النَّاسِ",
+          "focus": "لام التعريف",
+          "rule": "لام شمسية",
+          "explanation": "تدغم لام التعريف في النون."
+        },
+        {
+          "id": "POOL88.E1.T4",
+          "topicId": "U6.L4",
+          "anchor": "النَّاسِ",
+          "focus": "الألف عند الوقف بالسكون المحض",
+          "rule": "مد عارض للسكون",
+          "explanation": "تسكن السين عند الوقف بعد الألف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E2",
+      "verseRef": "113:1",
+      "excerptAr": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E2.T1",
+          "topicId": "U2.L3",
+          "anchor": "أَعُوذُ",
+          "focus": "العين",
+          "rule": "وسط الحلق",
+          "explanation": "العين من حروف وسط الحلق."
+        },
+        {
+          "id": "POOL88.E2.T2",
+          "topicId": "U6.L1",
+          "anchor": "أَعُوذُ",
+          "focus": "الواو",
+          "rule": "مد طبيعي",
+          "explanation": "الواو ساكنة وقبلها ضمة ولا يليها سبب زائد هنا."
+        },
+        {
+          "id": "POOL88.E2.T3",
+          "topicId": "X-LAM-02",
+          "anchor": "الْفَلَقِ",
+          "focus": "لام التعريف",
+          "rule": "لام قمرية",
+          "explanation": "تظهر اللام قبل الفاء."
+        },
+        {
+          "id": "POOL88.E2.T4",
+          "topicId": "U3.L8",
+          "anchor": "الْفَلَقِ",
+          "focus": "القاف عند الوقف بالسكون",
+          "rule": "قلقلة",
+          "explanation": "القاف من حروف القلقلة وتسكن عند الوقف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E3",
+      "verseRef": "113:2",
+      "excerptAr": "مِنْ شَرِّ مَا خَلَقَ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E3.T1",
+          "topicId": "U5.L7",
+          "anchor": "مِنْ شَرِّ",
+          "focus": "النون الساكنة",
+          "rule": "إخفاء حقيقي",
+          "explanation": "تلي النون الساكنة شين عند الوصل."
+        },
+        {
+          "id": "POOL88.E3.T2",
+          "topicId": "U3.L9",
+          "anchor": "شَرِّ",
+          "focus": "الشين",
+          "rule": "تفشٍّ",
+          "explanation": "التفشي صفة الشين."
+        },
+        {
+          "id": "POOL88.E3.T3",
+          "topicId": "U6.L1",
+          "anchor": "مَا",
+          "focus": "الألف",
+          "rule": "مد طبيعي",
+          "explanation": "لا يلي حرف المد في الوصل هنا همز أو سكون موجب لمد زائد."
+        },
+        {
+          "id": "POOL88.E3.T4",
+          "topicId": "U3.L8",
+          "anchor": "خَلَقَ",
+          "focus": "القاف عند الوقف بالسكون",
+          "rule": "قلقلة",
+          "explanation": "القاف تسكن عند الوقف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E4",
+      "verseRef": "112:1",
+      "excerptAr": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E4.T1",
+          "topicId": "U2.L4",
+          "anchor": "قُلْ",
+          "focus": "القاف",
+          "rule": "أقصى اللسان",
+          "explanation": "القاف من أقصى اللسان مع الحنك الأعلى."
+        },
+        {
+          "id": "POOL88.E4.T2",
+          "topicId": "U3.L4",
+          "anchor": "هُوَ اللَّهُ",
+          "focus": "لام لفظ الجلالة",
+          "rule": "تفخيم",
+          "explanation": "سبق لفظ الجلالة فتح في الوصل."
+        },
+        {
+          "id": "POOL88.E4.T3",
+          "topicId": "U10.L3",
+          "anchor": "أَحَدٌ",
+          "focus": "الهمزة",
+          "rule": "همزة قطع",
+          "explanation": "تثبت في الابتداء والوصل في الأصل."
+        },
+        {
+          "id": "POOL88.E4.T4",
+          "topicId": "U3.L8",
+          "anchor": "أَحَدٌ",
+          "focus": "الدال عند الوقف بالسكون",
+          "rule": "قلقلة",
+          "explanation": "الدال من حروف قطب جد."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E5",
+      "verseRef": "112:4",
+      "excerptAr": "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E5.T1",
+          "topicId": "U5.L11",
+          "anchor": "وَلَمْ يَكُنْ",
+          "focus": "الميم الساكنة",
+          "rule": "إظهار شفوي",
+          "explanation": "تلي الميم ياء عند الوصل."
+        },
+        {
+          "id": "POOL88.E5.T2",
+          "topicId": "U5.L5",
+          "anchor": "يَكُنْ لَهُ",
+          "focus": "النون الساكنة",
+          "rule": "إدغام بغير غنة",
+          "explanation": "تلي النون لام عند الوصل."
+        },
+        {
+          "id": "POOL88.E5.T3",
+          "topicId": "U6.L8",
+          "anchor": "لَهُ كُفُوًا",
+          "focus": "هاء الضمير",
+          "rule": "صلة صغرى",
+          "explanation": "الهاء بين متحركين ويتلوها غير الهمز."
+        },
+        {
+          "id": "POOL88.E5.T4",
+          "topicId": "U5.L3",
+          "anchor": "كُفُوًا أَحَدٌ",
+          "focus": "تنوين الفتح",
+          "rule": "إظهار حلقي",
+          "explanation": "يتلو التنوين همزة قطع عند الوصل."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E6",
+      "verseRef": "105:4",
+      "excerptAr": "تَرْمِيهِمْ بِحِجَارَةٍ مِنْ سِجِّيلٍ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E6.T1",
+          "topicId": "U5.L9",
+          "anchor": "تَرْمِيهِمْ بِحِجَارَةٍ",
+          "focus": "الميم الساكنة",
+          "rule": "إخفاء شفوي",
+          "explanation": "تلي الميم باء عند الوصل."
+        },
+        {
+          "id": "POOL88.E6.T2",
+          "topicId": "U5.L4",
+          "anchor": "بِحِجَارَةٍ مِنْ",
+          "focus": "تنوين الكسر",
+          "rule": "إدغام بغنة",
+          "explanation": "يتلو التنوين ميم عند الوصل."
+        },
+        {
+          "id": "POOL88.E6.T3",
+          "topicId": "U5.L7",
+          "anchor": "مِنْ سِجِّيلٍ",
+          "focus": "النون الساكنة",
+          "rule": "إخفاء حقيقي",
+          "explanation": "تلي النون الساكنة سين."
+        },
+        {
+          "id": "POOL88.E6.T4",
+          "topicId": "U6.L4",
+          "anchor": "سِجِّيلٍ",
+          "focus": "الياء عند الوقف بالسكون المحض",
+          "rule": "مد عارض للسكون",
+          "explanation": "تسكن اللام بعد الياء عند الوقف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E7",
+      "verseRef": "106:4",
+      "excerptAr": "الَّذِي أَطْعَمَهُمْ مِنْ جُوعٍ وَآمَنَهُمْ مِنْ خَوْفٍ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E7.T1",
+          "topicId": "U6.L3",
+          "anchor": "الَّذِي أَطْعَمَهُمْ",
+          "focus": "ياء الذي",
+          "rule": "مد منفصل",
+          "explanation": "تلي الياء المدية همزة قطع في الكلمة التالية."
+        },
+        {
+          "id": "POOL88.E7.T2",
+          "topicId": "U5.L10",
+          "anchor": "أَطْعَمَهُمْ مِنْ",
+          "focus": "الميم الأخيرة في أطعمهم",
+          "rule": "إدغام شفوي",
+          "explanation": "تلي الميم الساكنة ميم متحركة."
+        },
+        {
+          "id": "POOL88.E7.T3",
+          "topicId": "U5.L7",
+          "anchor": "مِنْ جُوعٍ",
+          "focus": "النون الساكنة",
+          "rule": "إخفاء حقيقي",
+          "explanation": "تلي النون جيم."
+        },
+        {
+          "id": "POOL88.E7.T4",
+          "topicId": "U5.L4",
+          "anchor": "جُوعٍ وَآمَنَهُمْ",
+          "focus": "التنوين",
+          "rule": "إدغام بغنة",
+          "explanation": "يتلو التنوين واو عند الوصل."
+        },
+        {
+          "id": "POOL88.E7.T5",
+          "topicId": "U5.L3",
+          "anchor": "مِنْ خَوْفٍ",
+          "focus": "النون الساكنة",
+          "rule": "إظهار حلقي",
+          "explanation": "تلي النون خاء."
+        },
+        {
+          "id": "POOL88.E7.T6",
+          "topicId": "U6.L7",
+          "anchor": "خَوْفٍ",
+          "focus": "الواو عند الوقف بالسكون المحض",
+          "rule": "مد لين",
+          "explanation": "الواو ساكنة قبلها فتح وبعدها سكون عارض."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E8",
+      "verseRef": "108:1",
+      "excerptAr": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E8.T1",
+          "topicId": "U5.L1",
+          "anchor": "إِنَّا",
+          "focus": "النون المشددة",
+          "rule": "غنة النون المشددة",
+          "explanation": "النون مشددة."
+        },
+        {
+          "id": "POOL88.E8.T2",
+          "topicId": "U6.L3",
+          "anchor": "إِنَّا أَعْطَيْنَاكَ",
+          "focus": "ألف إنا",
+          "rule": "مد منفصل",
+          "explanation": "تلي الألف همزة قطع في الكلمة التالية."
+        },
+        {
+          "id": "POOL88.E8.T3",
+          "topicId": "U3.L8",
+          "anchor": "أَعْطَيْنَاكَ",
+          "focus": "الياء الساكنة قبل النون",
+          "rule": "حرف لين",
+          "explanation": "الياء ساكنة وقبلها فتح؛ لا يلزم مد اللين في هذا الموضع حال الوصل."
+        },
+        {
+          "id": "POOL88.E8.T4",
+          "topicId": "X-LAM-02",
+          "anchor": "الْكَوْثَرَ",
+          "focus": "لام التعريف",
+          "rule": "لام قمرية",
+          "explanation": "تظهر اللام قبل الكاف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E9",
+      "verseRef": "97:1",
+      "excerptAr": "إِنَّا أَنْزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E9.T1",
+          "topicId": "U5.L1",
+          "anchor": "إِنَّا",
+          "focus": "النون المشددة",
+          "rule": "غنة النون المشددة",
+          "explanation": "النون مشددة."
+        },
+        {
+          "id": "POOL88.E9.T2",
+          "topicId": "U6.L3",
+          "anchor": "إِنَّا أَنْزَلْنَاهُ",
+          "focus": "ألف إنا",
+          "rule": "مد منفصل",
+          "explanation": "تلي الألف همزة قطع."
+        },
+        {
+          "id": "POOL88.E9.T3",
+          "topicId": "U5.L7",
+          "anchor": "أَنْزَلْنَاهُ",
+          "focus": "النون الأولى الساكنة",
+          "rule": "إخفاء حقيقي",
+          "explanation": "تلي النون زاي."
+        },
+        {
+          "id": "POOL88.E9.T4",
+          "topicId": "U3.L8",
+          "anchor": "الْقَدْرِ",
+          "focus": "الدال الساكنة",
+          "rule": "قلقلة",
+          "explanation": "الدال ساكنة سكونًا أصليًا."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    },
+    {
+      "id": "POOL88.E10",
+      "verseRef": "1:7",
+      "excerptAr": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "context": "wasl_then_waqf",
+      "targets": [
+        {
+          "id": "POOL88.E10.T1",
+          "topicId": "U5.L3",
+          "anchor": "أَنْعَمْتَ",
+          "focus": "النون الساكنة",
+          "rule": "إظهار حلقي",
+          "explanation": "تلي النون عين."
+        },
+        {
+          "id": "POOL88.E10.T2",
+          "topicId": "U5.L11",
+          "anchor": "عَلَيْهِمْ غَيْرِ",
+          "focus": "الميم الساكنة في عليهم الأولى",
+          "rule": "إظهار شفوي",
+          "explanation": "تلي الميم غين."
+        },
+        {
+          "id": "POOL88.E10.T3",
+          "topicId": "U5.L11",
+          "anchor": "عَلَيْهِمْ وَلَا",
+          "focus": "الميم الساكنة في عليهم الثانية",
+          "rule": "إظهار شفوي",
+          "explanation": "تلي الميم واو."
+        },
+        {
+          "id": "POOL88.E10.T4",
+          "topicId": "U6.L5",
+          "anchor": "الضَّالِّينَ",
+          "focus": "الألف قبل اللام المشددة",
+          "rule": "مد لازم كلمي مثقل",
+          "explanation": "السكون الأصلي في أول اللام المشددة بعد الألف."
+        },
+        {
+          "id": "POOL88.E10.T5",
+          "topicId": "U6.L4",
+          "anchor": "الضَّالِّينَ",
+          "focus": "الياء قبل النون عند الوقف بالسكون المحض",
+          "rule": "مد عارض للسكون",
+          "explanation": "تسكن النون عند الوقف."
+        }
+      ],
+      "verification": "pending_uthmani_reference_context_and_spans"
+    }
+  ],
+  "questions": [
+    {
+      "id": "U5.L1.POOL88.Q1.1",
+      "topicId": "U5.L1",
+      "exampleId": "POOL88.E1",
+      "targetId": "POOL88.E1.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "2",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغنة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "النون في الجنة مشددة فتؤدى الغنة في أكمل مراتبها.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL88.Q1.2",
+      "topicId": "X-LAM-02",
+      "exampleId": "POOL88.E1",
+      "targetId": "POOL88.E1.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر اللام قبل الجيم.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-03.POOL88.Q1.3",
+      "topicId": "X-LAM-03",
+      "exampleId": "POOL88.E1",
+      "targetId": "POOL88.E1.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تدغم لام التعريف في النون.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL88.Q1.4",
+      "topicId": "U6.L4",
+      "exampleId": "POOL88.E1",
+      "targetId": "POOL88.E1.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "2",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "3",
+          "text": "مد لين"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تسكن السين عند الوقف بعد الألف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI1",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L1",
+        "X-LAM-02",
+        "X-LAM-03",
+        "U6.L4"
+      ],
+      "exampleId": "POOL88.E1",
+      "targetIds": [
+        "POOL88.E1.T1",
+        "POOL88.E1.T2",
+        "POOL88.E1.T3",
+        "POOL88.E1.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "3",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "4",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "5",
+          "text": "إقلاب"
+        },
+        {
+          "id": "6",
+          "text": "إخفاء شفوي"
+        }
+      ],
+      "correctAnswer": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "feedbackAr": "الْجِنَّةِ — النون في الجنة مشددة فتؤدى الغنة في أكمل مراتبها.؛ الْجِنَّةِ — تظهر اللام قبل الجيم.؛ النَّاسِ — تدغم لام التعريف في النون.؛ النَّاسِ — تسكن السين عند الوقف بعد الألف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-114:6",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U2.L3.POOL88.Q2.1",
+      "topicId": "U2.L3",
+      "exampleId": "POOL88.E2",
+      "targetId": "POOL88.E2.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى الحلق"
+        },
+        {
+          "id": "2",
+          "text": "أدنى الحلق"
+        },
+        {
+          "id": "3",
+          "text": "وسط الحلق"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "العين من حروف وسط الحلق.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL88.Q2.2",
+      "topicId": "U6.L1",
+      "exampleId": "POOL88.E2",
+      "targetId": "POOL88.E2.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "3",
+          "text": "مد متصل"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الواو ساكنة وقبلها ضمة ولا يليها سبب زائد هنا.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL88.Q2.3",
+      "topicId": "X-LAM-02",
+      "exampleId": "POOL88.E2",
+      "targetId": "POOL88.E2.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام شمسية"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تظهر اللام قبل الفاء.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL88.Q2.4",
+      "topicId": "U3.L8",
+      "exampleId": "POOL88.E2",
+      "targetId": "POOL88.E2.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفشٍّ"
+        },
+        {
+          "id": "2",
+          "text": "حرف لين"
+        },
+        {
+          "id": "3",
+          "text": "قلقلة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "القاف من حروف القلقلة وتسكن عند الوقف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI2",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U2.L3",
+        "U6.L1",
+        "X-LAM-02",
+        "U3.L8"
+      ],
+      "exampleId": "POOL88.E2",
+      "targetIds": [
+        "POOL88.E2.T1",
+        "POOL88.E2.T2",
+        "POOL88.E2.T3",
+        "POOL88.E2.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "3",
+          "text": "قلقلة"
+        },
+        {
+          "id": "4",
+          "text": "إقلاب"
+        },
+        {
+          "id": "5",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "6",
+          "text": "وسط الحلق"
+        }
+      ],
+      "correctAnswer": [
+        "6",
+        "1",
+        "2",
+        "3"
+      ],
+      "feedbackAr": "أَعُوذُ — العين من حروف وسط الحلق.؛ أَعُوذُ — الواو ساكنة وقبلها ضمة ولا يليها سبب زائد هنا.؛ الْفَلَقِ — تظهر اللام قبل الفاء.؛ الْفَلَقِ — القاف من حروف القلقلة وتسكن عند الوقف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-113:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL88.Q3.1",
+      "topicId": "U5.L7",
+      "exampleId": "POOL88.E3",
+      "targetId": "POOL88.E3.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "3",
+          "text": "غنة النون المشددة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي النون الساكنة شين عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L9.POOL88.Q3.2",
+      "topicId": "U3.L9",
+      "exampleId": "POOL88.E3",
+      "targetId": "POOL88.E3.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفشٍّ"
+        },
+        {
+          "id": "2",
+          "text": "حرف لين"
+        },
+        {
+          "id": "3",
+          "text": "صفير"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "التفشي صفة الشين.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L1.POOL88.Q3.3",
+      "topicId": "U6.L1",
+      "exampleId": "POOL88.E3",
+      "targetId": "POOL88.E3.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "3",
+          "text": "مد طبيعي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "لا يلي حرف المد في الوصل هنا همز أو سكون موجب لمد زائد.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL88.Q3.4",
+      "topicId": "U3.L8",
+      "exampleId": "POOL88.E3",
+      "targetId": "POOL88.E3.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "حرف لين"
+        },
+        {
+          "id": "2",
+          "text": "قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "تفشٍّ"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "القاف تسكن عند الوقف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-113:2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI3",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L7",
+        "U3.L9",
+        "U6.L1",
+        "U3.L8"
+      ],
+      "exampleId": "POOL88.E3",
+      "targetIds": [
+        "POOL88.E3.T1",
+        "POOL88.E3.T2",
+        "POOL88.E3.T3",
+        "POOL88.E3.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "2",
+          "text": "قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "إقلاب"
+        },
+        {
+          "id": "4",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "5",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "6",
+          "text": "تفشٍّ"
+        }
+      ],
+      "correctAnswer": [
+        "5",
+        "6",
+        "1",
+        "2"
+      ],
+      "feedbackAr": "مِنْ شَرِّ — تلي النون الساكنة شين عند الوصل.؛ شَرِّ — التفشي صفة الشين.؛ مَا — لا يلي حرف المد في الوصل هنا همز أو سكون موجب لمد زائد.؛ خَلَقَ — القاف تسكن عند الوقف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-113:2",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U2.L4.POOL88.Q4.1",
+      "topicId": "U2.L4",
+      "exampleId": "POOL88.E4",
+      "targetId": "POOL88.E4.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "أقصى اللسان"
+        },
+        {
+          "id": "2",
+          "text": "وسط الحلق"
+        },
+        {
+          "id": "3",
+          "text": "أقصى الحلق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "القاف من أقصى اللسان مع الحنك الأعلى.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L4.POOL88.Q4.2",
+      "topicId": "U3.L4",
+      "exampleId": "POOL88.E4",
+      "targetId": "POOL88.E4.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "تفخيم"
+        },
+        {
+          "id": "2",
+          "text": "ترقيق"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "سبق لفظ الجلالة فتح في الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U10.L3.POOL88.Q4.3",
+      "topicId": "U10.L3",
+      "exampleId": "POOL88.E4",
+      "targetId": "POOL88.E4.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "همزة وصل"
+        },
+        {
+          "id": "2",
+          "text": "همزة قطع"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تثبت في الابتداء والوصل في الأصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL88.Q4.4",
+      "topicId": "U3.L8",
+      "exampleId": "POOL88.E4",
+      "targetId": "POOL88.E4.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "قلقلة"
+        },
+        {
+          "id": "2",
+          "text": "تفشٍّ"
+        },
+        {
+          "id": "3",
+          "text": "حرف لين"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الدال من حروف قطب جد.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI4",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U2.L4",
+        "U3.L4",
+        "U10.L3",
+        "U3.L8"
+      ],
+      "exampleId": "POOL88.E4",
+      "targetIds": [
+        "POOL88.E4.T1",
+        "POOL88.E4.T2",
+        "POOL88.E4.T3",
+        "POOL88.E4.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "قلقلة"
+        },
+        {
+          "id": "2",
+          "text": "إقلاب"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "4",
+          "text": "أقصى اللسان"
+        },
+        {
+          "id": "5",
+          "text": "تفخيم"
+        },
+        {
+          "id": "6",
+          "text": "همزة قطع"
+        }
+      ],
+      "correctAnswer": [
+        "4",
+        "5",
+        "6",
+        "1"
+      ],
+      "feedbackAr": "قُلْ — القاف من أقصى اللسان مع الحنك الأعلى.؛ هُوَ اللَّهُ — سبق لفظ الجلالة فتح في الوصل.؛ أَحَدٌ — تثبت في الابتداء والوصل في الأصل.؛ أَحَدٌ — الدال من حروف قطب جد.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-112:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL88.Q5.1",
+      "topicId": "U5.L11",
+      "exampleId": "POOL88.E5",
+      "targetId": "POOL88.E5.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إظهار شفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي الميم ياء عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L5.POOL88.Q5.2",
+      "topicId": "U5.L5",
+      "exampleId": "POOL88.E5",
+      "targetId": "POOL88.E5.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "إظهار حلقي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي النون لام عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L8.POOL88.Q5.3",
+      "topicId": "U6.L8",
+      "exampleId": "POOL88.E5",
+      "targetId": "POOL88.E5.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "2",
+          "text": "مد متصل"
+        },
+        {
+          "id": "3",
+          "text": "مد لازم كلمي مثقل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الهاء بين متحركين ويتلوها غير الهمز.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL88.Q5.4",
+      "topicId": "U5.L3",
+      "exampleId": "POOL88.E5",
+      "targetId": "POOL88.E5.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "2",
+          "text": "إقلاب"
+        },
+        {
+          "id": "3",
+          "text": "إظهار حلقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "يتلو التنوين همزة قطع عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI5",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L11",
+        "U5.L5",
+        "U6.L8",
+        "U5.L3"
+      ],
+      "exampleId": "POOL88.E5",
+      "targetIds": [
+        "POOL88.E5.T1",
+        "POOL88.E5.T2",
+        "POOL88.E5.T3",
+        "POOL88.E5.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "إقلاب"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إظهار شفوي"
+        },
+        {
+          "id": "4",
+          "text": "إدغام بغير غنة"
+        },
+        {
+          "id": "5",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "6",
+          "text": "إظهار حلقي"
+        }
+      ],
+      "correctAnswer": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "feedbackAr": "وَلَمْ يَكُنْ — تلي الميم ياء عند الوصل.؛ يَكُنْ لَهُ — تلي النون لام عند الوصل.؛ لَهُ كُفُوًا — الهاء بين متحركين ويتلوها غير الهمز.؛ كُفُوًا أَحَدٌ — يتلو التنوين همزة قطع عند الوصل.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-112:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L9.POOL88.Q6.1",
+      "topicId": "U5.L9",
+      "exampleId": "POOL88.E6",
+      "targetId": "POOL88.E6.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إظهار شفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي الميم باء عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL88.Q6.2",
+      "topicId": "U5.L4",
+      "exampleId": "POOL88.E6",
+      "targetId": "POOL88.E6.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغير غنة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "يتلو التنوين ميم عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL88.Q6.3",
+      "topicId": "U5.L7",
+      "exampleId": "POOL88.E6",
+      "targetId": "POOL88.E6.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي النون الساكنة سين.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL88.Q6.4",
+      "topicId": "U6.L4",
+      "exampleId": "POOL88.E6",
+      "targetId": "POOL88.E6.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لين"
+        },
+        {
+          "id": "2",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "3",
+          "text": "مد لازم كلمي مثقل"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تسكن اللام بعد الياء عند الوقف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI6",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L9",
+        "U5.L4",
+        "U5.L7",
+        "U6.L4"
+      ],
+      "exampleId": "POOL88.E6",
+      "targetIds": [
+        "POOL88.E6.T1",
+        "POOL88.E6.T2",
+        "POOL88.E6.T3",
+        "POOL88.E6.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد متصل"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "4",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "5",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "6",
+          "text": "إقلاب"
+        }
+      ],
+      "correctAnswer": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "feedbackAr": "تَرْمِيهِمْ بِحِجَارَةٍ — تلي الميم باء عند الوصل.؛ بِحِجَارَةٍ مِنْ — يتلو التنوين ميم عند الوصل.؛ مِنْ سِجِّيلٍ — تلي النون الساكنة سين.؛ سِجِّيلٍ — تسكن اللام بعد الياء عند الوقف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-105:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL88.Q7.1",
+      "topicId": "U6.L3",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "مد طبيعي"
+        },
+        {
+          "id": "3",
+          "text": "مد متصل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تلي الياء المدية همزة قطع في الكلمة التالية.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L10.POOL88.Q7.2",
+      "topicId": "U5.L10",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام شفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي الميم الساكنة ميم متحركة.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL88.Q7.3",
+      "topicId": "U5.L7",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغير غنة"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغنة"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي النون جيم.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L4.POOL88.Q7.4",
+      "topicId": "U5.L4",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "3",
+          "text": "إقلاب"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "يتلو التنوين واو عند الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL88.Q7.5",
+      "topicId": "U5.L3",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T5",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "إظهار حلقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي النون خاء.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L7.POOL88.Q7.6",
+      "topicId": "U6.L7",
+      "exampleId": "POOL88.E7",
+      "targetId": "POOL88.E7.T6",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "صلة كبرى"
+        },
+        {
+          "id": "2",
+          "text": "مد لين"
+        },
+        {
+          "id": "3",
+          "text": "صلة صغرى"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الواو ساكنة قبلها فتح وبعدها سكون عارض.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI7",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U6.L3",
+        "U5.L10",
+        "U5.L7",
+        "U5.L4",
+        "U5.L3",
+        "U6.L7"
+      ],
+      "exampleId": "POOL88.E7",
+      "targetIds": [
+        "POOL88.E7.T1",
+        "POOL88.E7.T2",
+        "POOL88.E7.T3",
+        "POOL88.E7.T4",
+        "POOL88.E7.T5",
+        "POOL88.E7.T6"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "إقلاب"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "4",
+          "text": "إدغام شفوي"
+        },
+        {
+          "id": "5",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "6",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "7",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "8",
+          "text": "مد لين"
+        }
+      ],
+      "correctAnswer": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "feedbackAr": "الَّذِي أَطْعَمَهُمْ — تلي الياء المدية همزة قطع في الكلمة التالية.؛ أَطْعَمَهُمْ مِنْ — تلي الميم الساكنة ميم متحركة.؛ مِنْ جُوعٍ — تلي النون جيم.؛ جُوعٍ وَآمَنَهُمْ — يتلو التنوين واو عند الوصل.؛ مِنْ خَوْفٍ — تلي النون خاء.؛ خَوْفٍ — الواو ساكنة قبلها فتح وبعدها سكون عارض.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-106:4",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L1.POOL88.Q8.1",
+      "topicId": "U5.L1",
+      "exampleId": "POOL88.E8",
+      "targetId": "POOL88.E8.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "3",
+          "text": "غنة النون المشددة"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "النون مشددة.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL88.Q8.2",
+      "topicId": "U6.L3",
+      "exampleId": "POOL88.E8",
+      "targetId": "POOL88.E8.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "3",
+          "text": "مد متصل"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي الألف همزة قطع في الكلمة التالية.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL88.Q8.3",
+      "topicId": "U3.L8",
+      "exampleId": "POOL88.E8",
+      "targetId": "POOL88.E8.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "حرف لين"
+        },
+        {
+          "id": "2",
+          "text": "صفير"
+        },
+        {
+          "id": "3",
+          "text": "استطالة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "الياء ساكنة وقبلها فتح؛ لا يلزم مد اللين في هذا الموضع حال الوصل.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "X-LAM-02.POOL88.Q8.4",
+      "topicId": "X-LAM-02",
+      "exampleId": "POOL88.E8",
+      "targetId": "POOL88.E8.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "2",
+          "text": "لام شمسية"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تظهر اللام قبل الكاف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI8",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L1",
+        "U6.L3",
+        "U3.L8",
+        "X-LAM-02"
+      ],
+      "exampleId": "POOL88.E8",
+      "targetIds": [
+        "POOL88.E8.T1",
+        "POOL88.E8.T2",
+        "POOL88.E8.T3",
+        "POOL88.E8.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "حرف لين"
+        },
+        {
+          "id": "3",
+          "text": "لام قمرية"
+        },
+        {
+          "id": "4",
+          "text": "إقلاب"
+        },
+        {
+          "id": "5",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "6",
+          "text": "غنة النون المشددة"
+        }
+      ],
+      "correctAnswer": [
+        "6",
+        "1",
+        "2",
+        "3"
+      ],
+      "feedbackAr": "إِنَّا — النون مشددة.؛ إِنَّا أَعْطَيْنَاكَ — تلي الألف همزة قطع في الكلمة التالية.؛ أَعْطَيْنَاكَ — الياء ساكنة وقبلها فتح؛ لا يلزم مد اللين في هذا الموضع حال الوصل.؛ الْكَوْثَرَ — تظهر اللام قبل الكاف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-108:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L1.POOL88.Q9.1",
+      "topicId": "U5.L1",
+      "exampleId": "POOL88.E9",
+      "targetId": "POOL88.E9.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "3",
+          "text": "إظهار حلقي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "النون مشددة.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L3.POOL88.Q9.2",
+      "topicId": "U6.L3",
+      "exampleId": "POOL88.E9",
+      "targetId": "POOL88.E9.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد منفصل"
+        },
+        {
+          "id": "2",
+          "text": "مد متصل"
+        },
+        {
+          "id": "3",
+          "text": "مد لازم كلمي مثقل"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تلي الألف همزة قطع.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L7.POOL88.Q9.3",
+      "topicId": "U5.L7",
+      "exampleId": "POOL88.E9",
+      "targetId": "POOL88.E9.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام بغنة"
+        },
+        {
+          "id": "2",
+          "text": "إدغام بغير غنة"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء حقيقي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي النون زاي.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U3.L8.POOL88.Q9.4",
+      "topicId": "U3.L8",
+      "exampleId": "POOL88.E9",
+      "targetId": "POOL88.E9.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "حرف لين"
+        },
+        {
+          "id": "2",
+          "text": "قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "تفشٍّ"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "الدال ساكنة سكونًا أصليًا.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI9",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L1",
+        "U6.L3",
+        "U5.L7",
+        "U3.L8"
+      ],
+      "exampleId": "POOL88.E9",
+      "targetIds": [
+        "POOL88.E9.T1",
+        "POOL88.E9.T2",
+        "POOL88.E9.T3",
+        "POOL88.E9.T4"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "إخفاء حقيقي"
+        },
+        {
+          "id": "2",
+          "text": "قلقلة"
+        },
+        {
+          "id": "3",
+          "text": "إقلاب"
+        },
+        {
+          "id": "4",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "5",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "6",
+          "text": "مد منفصل"
+        }
+      ],
+      "correctAnswer": [
+        "5",
+        "6",
+        "1",
+        "2"
+      ],
+      "feedbackAr": "إِنَّا — النون مشددة.؛ إِنَّا أَنْزَلْنَاهُ — تلي الألف همزة قطع.؛ أَنْزَلْنَاهُ — تلي النون زاي.؛ الْقَدْرِ — الدال ساكنة سكونًا أصليًا.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-97:1",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L3.POOL88.Q10.1",
+      "topicId": "U5.L3",
+      "exampleId": "POOL88.E10",
+      "targetId": "POOL88.E10.T1",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "2",
+          "text": "غنة النون المشددة"
+        },
+        {
+          "id": "3",
+          "text": "إدغام بغنة"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "تلي النون عين.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL88.Q10.2",
+      "topicId": "U5.L11",
+      "exampleId": "POOL88.E10",
+      "targetId": "POOL88.E10.T2",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إدغام شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إظهار شفوي"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تلي الميم غين.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U5.L11.POOL88.Q10.3",
+      "topicId": "U5.L11",
+      "exampleId": "POOL88.E10",
+      "targetId": "POOL88.E10.T3",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "2",
+          "text": "إظهار شفوي"
+        },
+        {
+          "id": "3",
+          "text": "إدغام شفوي"
+        }
+      ],
+      "correctAnswer": "2",
+      "feedbackAr": "تلي الميم واو.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L5.POOL88.Q10.4",
+      "topicId": "U6.L5",
+      "exampleId": "POOL88.E10",
+      "targetId": "POOL88.E10.T4",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لازم كلمي مثقل"
+        },
+        {
+          "id": "2",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "3",
+          "text": "مد لين"
+        }
+      ],
+      "correctAnswer": "1",
+      "feedbackAr": "السكون الأصلي في أول اللام المشددة بعد الألف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "U6.L4.POOL88.Q10.5",
+      "topicId": "U6.L4",
+      "exampleId": "POOL88.E10",
+      "targetId": "POOL88.E10.T5",
+      "type": "singleChoice",
+      "text": "ما الحكم أو الصفة أو المخرج في الموضع المحدد؟",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد لين"
+        },
+        {
+          "id": "2",
+          "text": "صلة صغرى"
+        },
+        {
+          "id": "3",
+          "text": "مد عارض للسكون"
+        }
+      ],
+      "correctAnswer": "3",
+      "feedbackAr": "تسكن النون عند الوقف.",
+      "objective": "targeted_analysis",
+      "difficulty": "intermediate",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    },
+    {
+      "id": "POOL88.MULTI10",
+      "topicId": "U5.L2",
+      "relatedTopicIds": [
+        "U5.L3",
+        "U5.L11",
+        "U6.L5",
+        "U6.L4"
+      ],
+      "exampleId": "POOL88.E10",
+      "targetIds": [
+        "POOL88.E10.T1",
+        "POOL88.E10.T2",
+        "POOL88.E10.T3",
+        "POOL88.E10.T4",
+        "POOL88.E10.T5"
+      ],
+      "type": "multipleChoice",
+      "text": "اختر جميع الأحكام أو الصفات أو المخارج المطلوبة في المواضع المحددة فقط، مع مراعاة الوصل والوقف المبينين.",
+      "options": [
+        {
+          "id": "1",
+          "text": "مد عارض للسكون"
+        },
+        {
+          "id": "2",
+          "text": "إقلاب"
+        },
+        {
+          "id": "3",
+          "text": "إخفاء شفوي"
+        },
+        {
+          "id": "4",
+          "text": "إظهار حلقي"
+        },
+        {
+          "id": "5",
+          "text": "إظهار شفوي"
+        },
+        {
+          "id": "6",
+          "text": "مد لازم كلمي مثقل"
+        }
+      ],
+      "correctAnswer": [
+        "4",
+        "5",
+        "6",
+        "1"
+      ],
+      "feedbackAr": "أَنْعَمْتَ — تلي النون عين.؛ عَلَيْهِمْ غَيْرِ — تلي الميم غين.؛ عَلَيْهِمْ وَلَا — تلي الميم واو.؛ الضَّالِّينَ — السكون الأصلي في أول اللام المشددة بعد الألف.؛ الضَّالِّينَ — تسكن النون عند الوقف.",
+      "objective": "multi_target_analysis",
+      "difficulty": "advanced",
+      "variantFamily": "verse-1:7",
+      "status": "blocked_until_example_review"
+    }
+  ]
+}
