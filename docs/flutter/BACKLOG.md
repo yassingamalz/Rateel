@@ -16,6 +16,13 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       units (05) and lessons (06) should do the same.
 
 ## App-wide
+- [ ] **Screen 28, help / tips overlay** (owner 2026-11-27: future improvement). Reference `screens/28-help-overlay/reference.webp`,
+      notes `screens/28-help-overlay.md`. Owner's answers: shown the **first time** each lesson type opens, then remembered
+      (saved); reopened by a small **«؟» button** (place to decide: maybe the 02 pause menu); which lesson first: later
+      (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
+- [ ] **Screen 24, end of lesson** (postponed by the owner 2026-11-27: «probably not needed»): plan v1, questions Q1–Q7
+      and reference prompts in `screens/24-end-of-lesson.md`, `prompts/24-end-of-lesson/reference-v1.txt`. Decide whether to
+      drop it; the +10 points of 22 are still shown nowhere at the end.
 - [ ] **Asset standardisation** (owner, 2026-11-26): the references' header assets (mosque, crescent + star, calendar,
       arch, divider) are candidates to regenerate once for the whole app: `ASSET-STYLE-COMPARISON.md`, `ASSETS.md`.
 - [ ] **Style conflicts** to decide at the end of the project, one choice for the whole app: `STYLE-CONFLICTS.md`.
@@ -26,8 +33,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.
 - [ ] Screen 08: tajweed colours for the ayat (wheel in `DESIGN-SYSTEM.md`), audio example of the rules.
-- [ ] **Refresh the app screenshots** used as ChatGPT references (`app-references/`, rule in `LESSONS-LEARNED.md`)
-      after each approved screen: 12 and 23 are not in it yet (2026-11-26).
+- [x] **Refresh the app screenshots** used as ChatGPT references (`app-references/`): done 2026-11-27 (12, 22, 23, 10 and
+      light added; refresh again after each approved screen).
 - [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
 - [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
       and design it; it reuses the listening quiz of 22.
@@ -87,6 +94,21 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.
+
+## Screen 27, badges (approved 2026-11-27, merged into `master`; **still has placeholders**)
+Placeholders to replace before release:
+- [ ] **Mock data**: the 12 badges, their requirements, rewards and progress (4 earned, M05 34/50…) are invented (`lib/badges/badge_data.dart`) and live in memory only. Wire them to real progress (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a requirement is reached; save progress; M09 needs screen 09 (recordings).
+- [ ] **Rewards** («5K», «100»…) are display only: add the coins to the points when real data exists.
+- [ ] **Rail count bubble** of «الإنجازات» (5) is a demo value: use the number of earned badges.
+- [ ] **Celebration sound and haptics** reuse the test «passed» sound (`Sounds.passed`): choose a dedicated sound with the other test sounds.
+- [ ] **Review aids** to remove or keep hidden at release: `?earn=`, `?medals=`, `?section=`.
+- [ ] **Unused kit** in the library: `blank_olive`, `blank_gold`, `l1` (locked medal) are spare.
+- [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
+- [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon. Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one + padlock) for each style, and a choice of which badge gets which style.
+
+## Screen 13, achievements (to do): 27 is part of it
+**Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
+- [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each

@@ -1,0 +1,16 @@
+Screen 27, badges: ChatGPT asset prompts (2026-11-27). Pasted in the chat, one block each.
+Reference: screens/27-badges/reference.webp (owner). Crops to attach: screens/27-badges/attach/.
+
+=== B1, medal base, earned (no icon) ===
+Attach: 1. attach/medal-unlocked-large.png  2. reference.webp (whole screen, for the style)
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background,
+no shadow on the background. Recreate EXACTLY the gold medal of image 1, same style as image 2: polished gold rosette
+with a scalloped edge, an inner raised rim and a smooth inner gold disc, gold laurel branches on both sides, a short green
+ribbon with a V cut below. THE INNER DISC MUST BE EMPTY: no book, no icon, no letter, plain smooth gold (the icon is added
+by the app). Same lighting, same golds, same soft bevels as image 1. No text, no watermark.
+
+=== B2, medal base, locked ===
+Attach: 1. attach/medal-locked.png  2. reference.webp
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background.
+Recreate EXACTLY the locked medal of image 1: the same rosette, laurel and ribbon shape as the earned medal, in muted
+olive-grey with a dark inner disc, and the small cream padlock in the centre. Same style as image 2. No text, no watermark.

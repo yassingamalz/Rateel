@@ -78,6 +78,8 @@ flutter:
     - assets/ui/coming_soon/
     - assets/ui/reading/
     - assets/ui/test/
+    - assets/ui/badges/
+    - assets/ui/badges/green/
     - assets/ui/icons/
     - assets/data/reading/
     - assets/data/test/

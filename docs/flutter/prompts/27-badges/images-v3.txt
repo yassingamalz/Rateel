@@ -1,0 +1,8 @@
+# Screen 27, v3 (2026-11-27): locked medal L1 redone (owner: the padlock must replicate the reference's)
+L1 v1 (docs/design-assets/badges/l1_locked.png) differs from the reference: thin OUTLINE padlock, green ribbon.
+The reference lock is a SOLID cream padlock on a dark olive disc, bigger, with a dim olive ribbon.
+
+=== L1 v2, locked medal (same for every badge) ===
+Attach: 1. screens/27-badges/attach/medal-locked.png (the reference, copy its padlock and its colours)  2. docs/design-assets/badges/m01_bidayat_alrihla.png (shape and size)
+Save as: docs/design-assets/badges/l1_locked_v2.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate the locked medal of image 1 with exactly the same shape and size as the gold medal of image 2 (scalloped rosette, inner raised rim, laurel branches, ribbon with a V cut). Colours as image 1: muted olive-grey rosette and laurel, dark olive inner disc, the ribbon DARK OLIVE-GREEN and dull (not bright green). In the centre a SOLID, filled cream-white padlock (colour #F2EBD3), thick rounded shackle, wide rounded body, a small dark keyhole (round top, narrow slot) cut into the body; flat soft shading, slightly raised, no outline-only style, no thin strokes. The padlock fills about 45% of the inner disc width, like in image 1. No text, no watermark.

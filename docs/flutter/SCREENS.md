@@ -17,7 +17,7 @@ One branch per screen (`flutter/<nn>-<slug>`), owner approval before the next on
 | 10, 10b | Test lesson, and answer feedback | `10-lezione-test.webp`, `10b-…-risposta.webp` | **approved** (v13, 2026-11-26), merged into `master`: dark + light, feedback A, partly correct answers, streak, results, CC0 sounds; a failed test keeps the next lesson locked |
 | 11 | Leaderboard (classifica) | `11-classifica.webp` | **approved** (APK 1.0.346), merged into `master`; runs on mock data |
 | 12 | Daily challenges | `12-sfide-giornaliere.webp` | **approved** (2026-11-26), merged into `master`; opened from the streak chip D2 of 03; mock data; leftovers in `BACKLOG.md` |
-| 13 | Achievements (traguardi) | `13-traguardi.webp` | to do |
+| 13 | Achievements (traguardi) | `13-traguardi.webp` | to do; has the **levels**; **27 badges is reached from it** (tab «الأوسمة») |
 | 14 | Coming soon | `14-in-arrivo.webp` | **approved** (APK 1.0.375), merged into `master`; shown for القرآن / التدريب / الشهادات; font Cairo (S4) |
 | 15–21 | Guided lesson: start, concept, definition, quiz, comparison, verse listening, summary | `15…21-lezione-guidata-*.webp` | to do |
 | 22 | **Listening lesson** (owner, 2026-11-25): an audio plays (verse / words), then questions on what was heard, Simply Piano style (e.g. «what was in the word X: a ghunna?», «this one: a ghunna?»). Own lesson type `listen` (already in the data and in the 06 icons, headphones). Confirmed: separate lesson (owner). Build it **after 10/10b** and reuse their question + answer-feedback widgets; the same audio question can later also appear as one question type inside tests | `screens/22-listening-lesson/22-lezione-ascolto.webp` (from the app screenshots); plan `screens/22-listening-lesson.md` | **approved** (v13, 2026-11-27), merged into `master`: rule lesson (one rule, several ayat, rule letters in the tajweed colour, glowing words, «find the word, then the letter» questions, guided voice Orus) + the quiz kept as a second lesson; headphones asset H1 still a placeholder |
@@ -43,6 +43,7 @@ Remember to connect these to real data (backend or app progress) before release.
 | 07 Video lesson | the **sections** of every video: 3 equal parts (`videoSectionCount`); planned data `sections: [{start, end}]` per video lesson | `app_flutter/lib/lessons/video_lesson_page.dart` |
 | 12 Daily challenges | the 7 challenges (Angular list), completed count and streak live in memory only; completion only by the review long press; no midnight reset; the 03 streak chip shows the same mock streak. To wire: completion on return from the activity, reset, saving (plan Q3) | `app_flutter/lib/challenges/challenge_data.dart` |
 | 22 Listening lesson | two mock lessons: the rule lesson «الاستماع: الغنة» (سورة الناس 1–6 + الكوثر 1, then 3 questions) and the quiz «اختبار الاستماع» (الكوثر, 5 questions); Husary, 9 ayat bundled, word times by hand, placed in the unit «النون المشددة» (no lessons in the data) | `app_flutter/assets/data/listening/`, `lib/lessons/lesson_data.dart` (`_mockLessons`) |
+| 27 Badges | the 12 badges (names, requirements, rewards chosen by Claude), their progress (4 earned, M05 34/50…) live in memory only; the celebration is played by `badgeEarned` (review aid `?earn=5`) | `app_flutter/lib/badges/badge_data.dart` |
 | 04 Side nav | the counts in the rail/menu (30, 114, 2, 15, 5, 3) are the reference's demo values | `app_flutter/lib/nav/nav_items.dart` |
 
 ## Data problems found (fix in the lesson data before release)
@@ -58,11 +59,11 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | N° | Screen | Comes from | Note |
 |---|---|---|---|
 | 01 | Splash / start-up (loading) | Angular `splash-screen`, `initialization` | uses the free number 01 |
-| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02 |
+| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; started 2026-11-27, then **postponed** by the owner (BACKLOG) |
 | 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | **built inside 10** (results in the card, approved 2026-11-26) |
 | 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
-| 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13 |
-| 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type |
+| 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13; reference from the owner `screens/27-badges/reference.webp`; **approved 2026-11-27** (APK 1.0.504), merged into `master`; mock data, placeholders in `BACKLOG.md`; **part of 13 (reached from it)** |
+| 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type; reference from the owner `screens/28-help-overlay/reference.webp` (2026-11-27); **postponed** (future improvement, BACKLOG) |
 | 29 | Profile (name, avatar, level, streak) | the leaderboard shows the user; no screen yet | may merge with 23 |
 | 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
 | 31 | **Daily practice** (owner, 2026-11-26: «ci siamo dimenticati»): a short daily session mixing what was learnt; the listening quiz of 22 (v5) is one of its exercises | not designed yet | to define with the owner: own screen or part of 12 (daily challenges); also a **practice edition** after several rules |

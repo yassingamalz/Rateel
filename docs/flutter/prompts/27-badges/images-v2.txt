@@ -1,0 +1,55 @@
+Screen 27, badges: ChatGPT asset prompts v2 (2026-11-27). One block each, pasted in the chat.
+Owner (2026-11-27): one full medal per badge (generated with ChatGPT) + one locked medal. Supersedes B1 of v1;
+B2 (locked) stays as L1 below. Generate M01 first; attach the accepted M01 to every next prompt so they all match.
+
+=== M01, «بداية الرحلة» ===
+Attach: 1. screens/27-badges/attach/medal-unlocked-large.png  2. screens/27-badges/reference.webp
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1, same style as image 2: polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a classic Arabic lantern (fanous) with a small flame inside. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M02, «خاتم الوحدة» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: an open book seen from the front, pages fanned. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M03, «إتقان التلاوة» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a studio microphone on a short stand. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M04, «خبير المخارج» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: the single Arabic letter ق in a bold classic naskh style (only this letter, no other text). Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M05, «قارئ متقدم» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: an open Quran resting on a crossed wooden rehal stand. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M06, «المواظب» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a single flame. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M07, «متقن الغنة» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: the single Arabic letter ن with a shadda above it (نّ), bold classic naskh (only this letter, no other text). Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M08, «محترف الأحكام» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a rolled scroll with a ribbon. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M09, «صوت جميل» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: three curved sound waves coming out of a small dot, like a broadcast symbol. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M10, «متميز في المراجعة» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: two circular arrows forming a loop (review / repeat symbol). Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M11, «المتفوق» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a trophy cup with two handles. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== M12, «سيد التجويد» ===
+Attach: 1. your accepted M01 image  2. screens/27-badges/attach/medal-unlocked-large.png
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background, no shadow on the background. Recreate EXACTLY the gold medal of image 1 (same size, same rosette, laurel, ribbon, golds and lighting): polished gold rosette with a scalloped edge, an inner raised rim, gold laurel branches on both sides, a short green ribbon with a V cut below. In the inner gold disc, embossed in darker gold like the Quran of the reference medal: a crown with three points. Same lighting, same golds, same soft bevels. No other text, no watermark.
+
+=== L1, locked medal (same for every badge) ===
+Attach: 1. screens/27-badges/attach/medal-locked.png  2. your accepted M01 image
+One single object, centred, large in the frame, high resolution (2048x2048), on a flat pure magenta #FF00FF background. Recreate EXACTLY the locked medal of image 1, with exactly the same shape and size as the gold medal of image 2 (rosette, laurel, ribbon), in muted olive-grey with a dark inner disc and a small cream padlock in the centre. No text, no watermark.

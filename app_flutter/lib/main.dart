@@ -2,6 +2,8 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'badges/badge_data.dart';
+import 'badges/badges_screen.dart';
 import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
 import 'core/app_settings.dart';
@@ -123,6 +125,12 @@ Future<void> main() async {
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;
+  // Review aids (screen 27): `?section=4` opens the badges, `?earn=5` plays
+  // the celebration of badge 5 once the screen is open, `?medals=green` tries
+  // the dark-green engraving of the medals.
+  final earn = int.tryParse(q['earn'] ?? '');
+  if (earn != null) badgeEarned.value = earn;
+  badgeMedalSet = q['medals'] ?? badgeMedalSet;
   // Landscape is the main orientation (owner, 2026-11-20).
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -202,6 +210,7 @@ class _Home extends StatelessWidget {
       builder: (context, selected) => switch (selected) {
         0 => const LearnFlow(),
         3 => const LeaderboardScreen(),
+        4 => const BadgesScreen(),
         // Sections not built yet: coming soon (screen 14, as Angular).
         1 || 2 || 5 => const ComingSoonScreen(),
         settingsSection => const SettingsScreen(),
