@@ -23,6 +23,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Screen 24, end of lesson** (postponed by the owner 2026-11-27: «probably not needed»): plan v1, questions Q1–Q7
       and reference prompts in `screens/24-end-of-lesson.md`, `prompts/24-end-of-lesson/reference-v1.txt`. Decide whether to
       drop it; the +10 points of 22 are still shown nowhere at the end.
+      **2026-11-27:** references 24-A / 24-B and the star assets delivered by the owner (`screens/24-end-of-lesson/`,
+      `ASSETS.md`); decision (full / minimal / drop) still open.
 - [ ] **Screens 15–21, guided lesson** (owner 2026-11-27: future, not now): a mixed lesson, video in sections with other
       activities between them (Angular prototype `guided-lesson`, references `15…21-lezione-guidata-*.webp`); today covered by
       07 + 08 + 10 + 22. Owner's preview on `flutter/15-21-guided-lesson` (APK 1.0.445, from an old `master`, outside the
