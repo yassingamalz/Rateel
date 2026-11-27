@@ -95,18 +95,17 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
       Owner to decide whether to align them. The critic was not run on screen 01.
 
-## Screen 27, badges (built 2026-11-27, waiting for the owner)
-- [ ] **Owner's review** of look, motion and the celebration (`?earn=5`); critic only after the owner's yes (phone size).
-- [x] Locked medal L1 v2 and the padlocks arrived (2026-11-27); L1 itself is spare for now (DECISIONS).
-- [ ] Screen 13 (achievements, `13-traguardi` reference: level, points, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards): the «الأوسمة» tab is this screen 27; decide with the owner.
-- [ ] **Wire the badges to real progress** (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a
-      requirement is reached; save progress; M09 needs screen 09 (recordings). Today: mock, in memory.
-- [ ] Rail count bubble of «الإنجازات» (5) is a demo value: use the number of earned badges.
+## Screen 27, badges (approved 2026-11-27, merged into `master`; **still has placeholders**)
+Placeholders to replace before release:
+- [ ] **Mock data**: the 12 badges, their requirements, rewards and progress (4 earned, M05 34/50…) are invented (`lib/badges/badge_data.dart`) and live in memory only. Wire them to real progress (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a requirement is reached; save progress; M09 needs screen 09 (recordings).
+- [ ] **Rewards** («5K», «100»…) are display only: add the coins to the points when real data exists.
+- [ ] **Rail count bubble** of «الإنجازات» (5) is a demo value: use the number of earned badges.
+- [ ] **Celebration sound and haptics** reuse the test «passed» sound (`Sounds.passed`): choose a dedicated sound with the other test sounds.
+- [ ] **Review aids** to remove or keep hidden at release: `?earn=`, `?medals=`, `?section=`.
+- [ ] **Unused kit** in the library: `blank_olive`, `blank_gold`, `l1` (locked medal) are spare.
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
-- [ ] Add the earned reward (coins) to the points when real data exists; the «5K» style rewards are display only.
-- [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon (brown/green
-      engraving). Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what
-      the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted
-      in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one +
-      padlock) for each style, and a choice of which badge gets which style.
+- [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon. Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one + padlock) for each style, and a choice of which badge gets which style.
 
+## Screen 13, achievements (to do): 27 is part of it
+**Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
+- [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
