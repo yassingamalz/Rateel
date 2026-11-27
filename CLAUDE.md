@@ -31,6 +31,22 @@ natively in Flutter, one screen per branch.
 - Dark theme first, light/dark toggle always present; landscape; RTL Arabic.
 - Talk to the owner in **Italian**; write docs in English.
 
+## GitHub access without the connector (temporary, owner 2026-11-27)
+The owner's GitHub connector is blocked by company IT until further notice. Until it is unblocked:
+- The repository is **public**, so a cloud session clones it read-only with no credentials:
+  `git clone https://github.com/yassingamalz/Rateel.git`.
+- **Push, pull requests and the GitHub API do not work** from the cloud: the session proxy answers
+  "No linked GitHub account". Network secrets for GitHub hosts are refused by the settings, and the
+  proxy must not be bypassed. Do not spend time retrying.
+- Work on a local branch, commit as usual, then hand the commits to the owner as patch files:
+  `git format-patch origin/master --output-directory <scratchpad>/patches` (or from the branch's
+  base), and send them with the file-sending tool. The owner applies them on their PC with
+  `git am *.patch` and pushes.
+- Send patches often: the container is deleted after inactivity and unsent work is lost.
+- APKs and other build outputs are sent the same way (as files), not pushed.
+- When the connector works again (`gh api user` succeeds), go back to normal push/PR and remove
+  this section.
+
 ## Build and check (cloud container)
 - Flutter is not preinstalled: download stable 3.50.1 to `/opt/flutter` (see `DECISIONS.md`), then
   `cd app_flutter && flutter analyze && flutter test && flutter build web --release --no-web-resources-cdn` (CanvasKit
