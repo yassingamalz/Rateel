@@ -6,8 +6,8 @@
     {
       "topicId": "U3.L4.RA",
       "titleAr": "أحكام الراء تفخيمًا وترقيقًا",
-      "source": "book ch. 07–08 (التفخيم والترقيق) — page check pending",
-      "explanationAr": "تفخم الراء إذا كانت مفتوحة أو مضمومة، أو ساكنة بعد فتح أو ضم، أو ساكنة بعد كسر عارض أو كسر في كلمة سابقة، أو ساكنة بعد كسر أصلي وبعدها حرف استعلاء غير مكسور في كلمتها. وترقق إذا كانت مكسورة، أو ساكنة بعد كسر أصلي متصل بها وليس بعدها حرف استعلاء في كلمتها. وعند الوقف ينظر إلى ما قبلها: ترقق بعد كسر أو ياء ساكنة، وتفخم بعد فتح أو ضم ولو فصل بينهما ساكن. وفي فِرْقٍ الوجهان، وفي مِصْرَ والْقِطْرِ وقفًا الوجهان، والمختار التفخيم في مصر والترقيق في القطر.",
+      "source": "book ch. 07 pp. 170–176 — checked against the book 2026-11-27",
+      "explanationAr": "تفخم الراء إذا كانت مفتوحة أو مضمومة، أو ساكنة بعد فتح أو ضم، أو ساكنة بعد كسر عارض أو كسر في كلمة سابقة، أو ساكنة بعد كسر أصلي وبعدها حرف استعلاء غير مكسور في كلمتها. وترقق إذا كانت مكسورة، أو ساكنة بعد كسر أصلي متصل بها وليس بعدها حرف استعلاء في كلمتها. وعند الوقف ينظر إلى ما قبلها: ترقق بعد كسر أو ياء ساكنة، وتفخم بعد فتح أو ضم ولو فصل بينهما ساكن. وفي فِرْقٍ الوجهان وصلًا أو عند الوقف بالروم، والتفخيم لا غير عند الوقف بالسكون لزوال كسر القاف؛ وفي مِصْرَ والْقِطْرِ وقفًا الوجهان، واختار ابن الجزري التفخيم في مصر والترقيق في القطر مراعاة للوصل.",
       "examples": [
         {
           "id": "U3.L4.RA.POOL99.E1",
@@ -84,9 +84,9 @@
           "topicId": "U3.L4.RA",
           "verseRef": "26:63",
           "excerptAr": "فِرْقٍ",
-          "focus": "الراء الساكنة قبل القاف المكسورة",
+          "focus": "الراء الساكنة قبل القاف المكسورة في الوصل",
           "rule": "وجهان",
-          "explanation": "حرف الاستعلاء بعدها مكسور، ففيها التفخيم والترقيق.",
+          "explanation": "حرف الاستعلاء بعدها مكسور، ففيها الوجهان وصلًا؛ أما الوقف بالسكون فبالتفخيم.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         },
         {
@@ -254,7 +254,7 @@
           "variantFamily": "review99-U3.L4.RA",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
-          "text": "ما حكم الراء في الموضع المحدد؟",
+          "text": "ما حكم الراء في الموضع المحدد حال الوصل؟",
           "options": [
             {
               "id": "1",
@@ -281,6 +281,32 @@
           "variantFamily": "review99-U3.L4.RA",
           "status": "draft_pending_book_check",
           "type": "singleChoice",
+          "text": "ما حكم راء فِرْقٍ عند الوقف عليها بالسكون؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "التفخيم لا غير"
+            },
+            {
+              "id": "2",
+              "text": "الترقيق لا غير"
+            },
+            {
+              "id": "3",
+              "text": "الوجهان"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "يزول كسر القاف موجب الترقيق."
+        },
+        {
+          "id": "U3.L4.RA.POOL99.Q8",
+          "topicId": "U3.L4.RA",
+          "objective": "ra_exception",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.L4.RA",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
           "text": "ما الوجه المختار عند الوقف على الْقِطْرِ؟",
           "options": [
             {
@@ -300,7 +326,7 @@
           "feedbackAr": "فيها الوجهان والمختار الترقيق."
         },
         {
-          "id": "U3.L4.RA.POOL99.Q8",
+          "id": "U3.L4.RA.POOL99.Q9",
           "topicId": "U3.L4.RA",
           "objective": "ra_rule",
           "difficulty": "beginner",
@@ -312,7 +338,7 @@
           "feedbackAr": "الكسر يوجب الترقيق."
         },
         {
-          "id": "U3.L4.RA.POOL99.Q9",
+          "id": "U3.L4.RA.POOL99.Q10",
           "topicId": "U3.L4.RA",
           "objective": "ra_rule",
           "difficulty": "intermediate",
@@ -324,7 +350,7 @@
           "feedbackAr": "تفخم إذا كان الكسر عارضًا، أو بعدها حرف استعلاء في كلمتها."
         },
         {
-          "id": "U3.L4.RA.POOL99.Q10",
+          "id": "U3.L4.RA.POOL99.Q11",
           "topicId": "U3.L4.RA",
           "objective": "ra_rule",
           "difficulty": "intermediate",
@@ -362,7 +388,7 @@
     {
       "topicId": "U3.L4.LAM",
       "titleAr": "لام لفظ الجلالة",
-      "source": "book ch. 07–08 — page check pending",
+      "source": "book ch. 07 pp. 167–168 — checked against the book 2026-11-27",
       "explanationAr": "تفخم لام لفظ الجلالة إذا سبقها فتح أو ضم، ولو كان الفتح أو الضم في كلمة سابقة، وتفخم عند الابتداء بها. وترقق إذا سبقها كسر أصلي أو عارض.",
       "examples": [
         {
@@ -482,8 +508,8 @@
     {
       "topicId": "U3.L8.QLQ",
       "titleAr": "مراتب القلقلة",
-      "source": "book ch. 07 (صفات) — page check pending",
-      "explanationAr": "حروف القلقلة خمسة يجمعها قطب جد. تكون القلقلة عند سكون الحرف: صغرى إذا كان الحرف ساكنًا في وسط الكلمة أو في آخرها وصلًا، وكبرى عند الوقف عليه، وأقواها إذا كان الحرف الموقوف عليه مشددًا. ولا يجوز أن يتولد منها صوت حركة كاملة.",
+      "source": "book ch. 07 pp. 184–192 — checked against the book 2026-11-27",
+      "explanationAr": "القلقلة إخراج الحرف المقلقل حالة سكونه بالتباعد بين طرفي عضو النطق دون أن يصاحبه شائبة حركة، وحروفها خمسة يجمعها قطب جد. ولها مرتبتان: كبرى عند الوقف على الحرف المقلقل، وصغرى إذا كان وسط الكلمة أو الكلام. وعند الوقف على حرف قلقلة مشدد تكون القلقلة للثاني، ولا أثر للتشديد على وضوحها، فالقلقلة في الحج مثل القلقلة في بهيج. وإذا أدغم حرف القلقلة في مثله أو مجانسه فلا يقلقل. ومن أخطائها خلط صوتها بحركة، وختمه بهمزة، ومطه، وبتره عما بعده.",
       "examples": [
         {
           "id": "U3.L8.QLQ.POOL99.E1",
@@ -521,8 +547,8 @@
           "verseRef": "111:1",
           "excerptAr": "وَتَبَّ",
           "focus": "الباء المشددة عند الوقف",
-          "rule": "قلقلة كبرى وأقواها",
-          "explanation": "حرف القلقلة مشدد وموقوف عليه.",
+          "rule": "قلقلة كبرى",
+          "explanation": "القلقلة للباء الثانية، ولا يزيدها التشديد وضوحًا.",
           "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
         }
       ],
@@ -580,27 +606,51 @@
           "difficulty": "advanced",
           "variantFamily": "review99-U3.L8.QLQ",
           "status": "draft_pending_book_check",
-          "type": "singleChoice",
-          "text": "أي المواضع أقوى قلقلة؟",
-          "options": [
-            {
-              "id": "1",
-              "text": "القاف الساكنة وسط الكلمة"
-            },
-            {
-              "id": "2",
-              "text": "الباء المشددة الموقوف عليها في وَتَبَّ"
-            },
-            {
-              "id": "3",
-              "text": "الدال المتحركة"
-            }
-          ],
-          "correctAnswer": "2",
-          "feedbackAr": "المشدد الموقوف عليه أعلى مراتبها."
+          "type": "trueFalse",
+          "text": "يزيد التشديد وضوح القلقلة عند الوقف، فالقلقلة في الْحَجِّ أوضح منها في بَهِيجٍ.",
+          "correctAnswer": false,
+          "feedbackAr": "لا أثر للتشديد؛ القلقلة للحرف الثاني، فهما سواء."
         },
         {
           "id": "U3.L8.QLQ.POOL99.Q4",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "لا يقلقل حرف القلقلة إذا أدغم في مثله أو مجانسه نحو قَدْ دَخَلُوا.",
+          "correctAnswer": true,
+          "feedbackAr": "لو قلقل لانفك الإدغام."
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.Q5",
+          "topicId": "U3.L8.QLQ",
+          "objective": "qalqala_level",
+          "difficulty": "beginner",
+          "variantFamily": "review99-U3.L8.QLQ",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مراتب القلقلة؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "مرتبتان: كبرى وصغرى"
+            },
+            {
+              "id": "2",
+              "text": "ثلاث مراتب"
+            },
+            {
+              "id": "3",
+              "text": "مرتبة واحدة"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "كبرى عند الوقف، وصغرى وسط الكلمة أو الكلام."
+        },
+        {
+          "id": "U3.L8.QLQ.POOL99.Q6",
           "topicId": "U3.L8.QLQ",
           "objective": "qalqala_level",
           "difficulty": "beginner",
@@ -2502,6 +2552,157 @@
           "text": "الإفراط في تطويل المتصل واللازم مما نهى عنه الأئمة.",
           "correctAnswer": true,
           "feedbackAr": "يلتزم المقدار المقرر."
+        }
+      ]
+    },
+    {
+      "topicId": "U3.BOOK07",
+      "titleAr": "مراتب التفخيم وتفصيلات من باب الصفات",
+      "source": "book ch. 07 pp. 128, 138, 158–162, 181–182 — checked against the book 2026-11-27",
+      "explanationAr": "لأئمة التجويد في مراتب تفخيم حروف الاستعلاء مذهبان: مذهب ابن الطحان وفيه ثلاث مراتب: المفتوح ثم المضموم ثم المكسور، والساكن يتبع حركة ما قبله؛ ومذهب ابن الجزري وفيه خمس مراتب: المفتوح بعده ألف، ثم المفتوح بلا ألف، ثم المضموم، ثم الساكن، ثم المكسور. والحروف المطبقة أشد تفخيمًا من المستعلية المنفتحة. والمستعلي يبقى مفخمًا وإن كان في أدنى منازله. أما الإذلاق والإصمات فمن علم الصرف ولا أثر لهما في النطق. والكاف والتاء شديدتان في أولهما مهموستان في آخرهما.",
+      "examples": [
+        {
+          "id": "U3.BOOK07.POOL99.E1",
+          "topicId": "U3.BOOK07",
+          "verseRef": "2:30",
+          "excerptAr": "قَالَ",
+          "focus": "القاف بعدها ألف",
+          "rule": "أعلى مراتب التفخيم",
+          "explanation": "مفتوح بعده ألف عند ابن الجزري.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        },
+        {
+          "id": "U3.BOOK07.POOL99.E2",
+          "topicId": "U3.BOOK07",
+          "verseRef": "2:13",
+          "excerptAr": "قِيلَ",
+          "focus": "القاف المكسورة",
+          "rule": "أدنى مراتب التفخيم",
+          "explanation": "تبقى مفخمة وإن كانت في أدنى المراتب.",
+          "verification": "uthmani_text_checked_2026-11-27; book_page_pending"
+        }
+      ],
+      "questions": [
+        {
+          "id": "U3.BOOK07.POOL99.Q1",
+          "topicId": "U3.BOOK07",
+          "objective": "tafkhim_levels",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "كم مرتبة لتفخيم حروف الاستعلاء عند ابن الجزري؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "ثلاث"
+            },
+            {
+              "id": "2",
+              "text": "خمس"
+            },
+            {
+              "id": "3",
+              "text": "سبع"
+            }
+          ],
+          "correctAnswer": "2",
+          "feedbackAr": "المفتوح بعده ألف، ثم بلا ألف، ثم المضموم، ثم الساكن، ثم المكسور."
+        },
+        {
+          "id": "U3.BOOK07.POOL99.Q2",
+          "topicId": "U3.BOOK07",
+          "objective": "tafkhim_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما مرتبة القاف في الموضع المحدد؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "أعلى المراتب"
+            },
+            {
+              "id": "2",
+              "text": "أدنى المراتب"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "مفتوح بعده ألف.",
+          "exampleId": "U3.BOOK07.POOL99.E1"
+        },
+        {
+          "id": "U3.BOOK07.POOL99.Q3",
+          "topicId": "U3.BOOK07",
+          "objective": "tafkhim_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "حروف الاستعلاء المكسورة ترقق.",
+          "correctAnswer": false,
+          "feedbackAr": "تبقى مفخمة وإن كانت في أدنى المراتب."
+        },
+        {
+          "id": "U3.BOOK07.POOL99.Q4",
+          "topicId": "U3.BOOK07",
+          "objective": "tafkhim_levels",
+          "difficulty": "intermediate",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "أي الحرفين أشد تفخيمًا؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الضاد في ضَامِرٍ"
+            },
+            {
+              "id": "2",
+              "text": "الغين في غَالِبَ"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "المطبق أشد تفخيمًا من المستعلي المنفتح."
+        },
+        {
+          "id": "U3.BOOK07.POOL99.Q5",
+          "topicId": "U3.BOOK07",
+          "objective": "sifat_scope",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "trueFalse",
+          "text": "الإذلاق والإصمات صفتان لهما أثر في نطق الحرف.",
+          "correctAnswer": false,
+          "feedbackAr": "هما من علم الصرف ولا أثر لهما في النطق."
+        },
+        {
+          "id": "U3.BOOK07.POOL99.Q6",
+          "topicId": "U3.BOOK07",
+          "objective": "sifat_detail",
+          "difficulty": "advanced",
+          "variantFamily": "review99-U3.BOOK07",
+          "status": "draft_pending_book_check",
+          "type": "singleChoice",
+          "text": "ما الحرفان الشديدان المهموسان؟",
+          "options": [
+            {
+              "id": "1",
+              "text": "الكاف والتاء"
+            },
+            {
+              "id": "2",
+              "text": "الباء والدال"
+            },
+            {
+              "id": "3",
+              "text": "القاف والطاء"
+            }
+          ],
+          "correctAnswer": "1",
+          "feedbackAr": "شديدان في أولهما مهموسان في آخرهما."
         }
       ]
     }
