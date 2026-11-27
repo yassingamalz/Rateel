@@ -72,7 +72,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [ ] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
-      chapter into `docs/content/sources/musawwar/` and compare. **Done: ch. 02, 03, 04, 07, 10, 11.** To do: the other 16 chapters. PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
+      chapter into `docs/content/sources/musawwar/` and compare. **Done: ch. 02–07, 10, 11.** To do: ch. 01, 08, 09, 12–22. PDFs download with `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t`
       (ids in `lesson-production:docs/production/LESSONS-TRACKER.md`).
 - [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
       (`REVIEW-2026-11-27.md`, «Still open»).
