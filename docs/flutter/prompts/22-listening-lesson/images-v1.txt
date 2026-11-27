@@ -1,0 +1,11 @@
+Screen 22, listening lesson: ChatGPT prompts v1 (2026-11-26). Pasted in the chat, one block each.
+Attachments: attach/h1-headphones.png (crop of the reference), attach/reference.png, ../../app-references/app-08-reading-dark.webp.
+
+=== H1  Gold headphones emblem for the header arch (attach: h1-headphones.png, reference.png, app-08-reading-dark.webp)
+Recreate exactly the small gold headphones icon shown in the attached crop (it sits at the top of the header arch of the
+attached screen), as a standalone asset, same style as the attached app screenshot (do not invent a new style):
+over-ear headphones seen from the front, a thin rounded headband arc and two tall rounded ear cups, drawn as clean
+OUTLINE shapes in warm metallic gold (#E9B83A with a lighter core #FFE07A and a slightly darker edge #B8862A), line
+width about 7% of the icon width, the inside of the cups and the band left EMPTY (no fill), no sound waves, no
+sparkles, no glow, no text. Perfectly symmetric, front view, same proportions as the crop. Centred on a plain flat
+magenta background (#FF00FF), nothing else. Square image 1024×1024, the headphones about 80% of the height.

@@ -5,6 +5,7 @@ import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
 import 'lesson_shell.dart';
+import 'listening_lesson_page.dart';
 import 'reading_lesson_page.dart';
 import 'test_lesson_page.dart';
 import 'video_lesson_page.dart';
@@ -34,6 +35,8 @@ Route<bool> lessonPageRoute(
     ? readingLessonRoute(lesson, index, count, completed: completed)
     : lesson.type == LessonType.test
     ? testLessonRoute(lesson, index, count, completed: completed)
+    : lesson.type == LessonType.listen
+    ? listeningLessonRoute(lesson, index, count, completed: completed)
     : lessonRoute<bool>(
         (context) => LessonPage(lesson: lesson, index: index, count: count),
       );

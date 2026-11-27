@@ -418,6 +418,17 @@ class RateelColors {
   static const testScoreAmber = Color(0xFFD98A24); // 51%: dark amber
   static const testScoreAmberHigh = Color(0xFFDDA02A);
   static const testScoreGold = Color(0xFFE9B83A); // pass mark
+  // Screen 22, listening lesson: values measured on `22-lezione-ascolto.webp`
+  // (conflicts L1–L4 in `STYLE-CONFLICTS.md`).
+  static const listenWord = Color(0xFFE2B92B); // asked / recited word
+  static const listenWavePlayed = Color(0xFFEAB00B);
+  static const listenWaveRest = Color(0xFF3B6C39);
+  static const listenLine = Color(0xFF2F6352); // line above the bottom row
+  static const listenPillFill = Color(0xFF032F21);
+  static const listenPillRim = Color(0xFFC9D39A); // pale gold-cream, 0.25u
+  static const listenGoldTop = Color(0xFFF3BF41); // selected answer
+  static const listenGoldBottom = Color(0xFFE49F17);
+  static const listenGoldRim = Color(0xFFFEE987);
   static const testScoreFull = Color(0xFFFFDC5E); // 100%: full bright gold
   static const testLScoreRed = Color(0xFFB9452F);
   static const testLScoreAmber = Color(0xFFC27A1C);
