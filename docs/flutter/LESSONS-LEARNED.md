@@ -73,3 +73,7 @@ commit whenever the owner corrects the way of working. Newest at the bottom of e
 - `CrossAxisAlignment.end` in a Column under RTL puts children on the LEFT: use `start` for right-aligned Arabic.
 - A screen opened by a review link (initial routes) has nobody awaiting its route result: signal completions through
   the shared notifiers (`unitCompleted`), not only through `Navigator.pop(result)`.
+- Signed numbers inside Arabic text («+10 نقطة») flip to «10+» in RTL: wrap them in an LTR isolate (`⁦+10⁩`)
+  (screen 22, 2026-11-26).
+- Amiri Quran sets tall line boxes (harakat): give the verse a box of ~2× the font size and `height` ≈ 1.3, or a
+  `FittedBox` silently shrinks it (screen 22).

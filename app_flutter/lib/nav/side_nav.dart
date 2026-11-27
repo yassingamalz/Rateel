@@ -475,9 +475,13 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
 
   Widget _icon(_Geometry g, double t, int i, double active) {
     final activeness = (1 - (active - i).abs()).clamp(0.0, 1.0);
+    // Idle icons shift right/down to leave room for their count bubble; the
+    // settings gear has no bubble and stays centred in its tile.
     final railC =
         g.railCenter(i.toDouble()) +
-        Offset(g.u * 0.95, g.u * 0.5) * (1 - activeness);
+        (navItems[i].count == null
+            ? Offset.zero
+            : Offset(g.u * 0.95, g.u * 0.5) * (1 - activeness));
     final c = Offset.lerp(railC, g.rowIconCenter(i.toDouble()), t)!;
     final size = lerpDouble(
       g.u * 6.8,

@@ -74,12 +74,17 @@ flutter:
     - assets/ui/leaderboard/
     - assets/ui/video/
     - assets/ui/video/thumbs/
+    - assets/ui/splash/
     - assets/ui/coming_soon/
     - assets/ui/reading/
     - assets/ui/test/
     - assets/ui/icons/
     - assets/data/reading/
     - assets/data/test/
+    - assets/data/listening/
+    - assets/audio/quran/husary/
+    - assets/audio/narration/orus/
+    - assets/ui/listening/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/
@@ -93,6 +98,10 @@ flutter:
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo.ttf
+    # Quran verses (DECISIONS 2026-11-20, confirmed with screen 22).
+    - family: AmiriQuran
+      fonts:
+        - asset: assets/fonts/AmiriQuran.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

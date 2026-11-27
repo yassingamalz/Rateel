@@ -1,4 +1,49 @@
-# Next session: after screens 10 / 10b (approved, merged)
+# Next session: timeline from 2026-11-26 (proposal, the owner confirms the order)
+
+State on `master` (2026-11-27): approved and merged **01 splash, 02 lesson bar, 03 courses, 04 side nav, 05 units,
+06 lessons, 07 video, 08 reading, 10/10b test (with 25 results inside), 11 leaderboard, 12 daily challenges,
+14 coming soon, 22 listening lesson (PR #56 and its follow-up), 23 settings**; timeline confirmed by the owner
+(2026-11-26); next: **24 end of lesson**; settings gear centred in the rail (PR #54). Open items: `BACKLOG.md`.
+
+## Timeline (Claude's proposal, 2026-11-26; owner to confirm or reorder)
+**Phase A: lessons (the core of the app)**
+1. **22 listening lesson**: reference and plan ready (`screens/22-listening-lesson.md`), reuses the 10/10b widgets.
+2. **24 end of lesson** (points, stars, continue): shared by every lesson type, as 02.
+3. **15–21 guided lesson** (start, concept, definition, quiz, comparison, verse listening, summary): reuses 08, 10, 22.
+
+**Phase B: progress and rewards**
+4. **13 achievements**, with **27 badges / achievement detail** and **26 points history** (may live inside 13).
+5. **29 profile** (may merge with 23).
+
+**Phase C: first use**
+6. **28 help / tips overlay** (first use of each lesson type).
+7. **30 onboarding** (first start: name, level, goal).
+
+**Phase D: the hardest screen**
+8. **09 practice lesson / recitation** (postponed by the owner, maybe last).
+
+**Phase E: before release**
+9. Performance fix (`PERFORMANCE.md`, owner's yes), real data instead of mock (rail counts, leaderboard, challenges,
+   video sections), saved progress (and reset), daily reminder notification, remove the long-press completion,
+   stable signing key, style conflicts (`STYLE-CONFLICTS.md`), asset standardisation, critics still open (06, 08, 23, 01),
+   phone check of the splash.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel, da master. Leggi CLAUDE.md e tutti i file che indica (DECISIONS.md, README.md, PROCESS.md,
+LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi docs/flutter/NEXT-SESSION.md, SCREENS.md, DESIGN-SYSTEM.md,
+STYLE-CONFLICTS.md, ASSETS.md e docs/flutter/screens/22-listening-lesson.md. Mostrami prima la timeline di
+NEXT-SESSION.md e chiedimi se confermo l'ordine. Poi schermata 22, lezione di ascolto, branch flutter/22-listening-lesson
+da master: identica al riferimento screens/22-listening-lesson/22-lezione-ascolto.webp, riusando i widget di 10/10b e la
+barra 02. Prima piano visivo e domande aperte (aspetta il mio sì), poi prompt ChatGPT per gli asset mancanti (un blocco
+copiabile ciascuno, dimmi quali immagini allegare), costruzione, verifica elemento per elemento, video e APK. Regole di
+PERFORMANCE.md, controllo a testo 110%, tutto ciò che resta per dopo in BACKLOG.md. Il critico solo quando te lo dico.
+Crea HISTORY.md della schermata. Parla con me in italiano.
+```
+
+---
+
+## Archive: hand-off after screens 10 / 10b (2026-11-26)
 
 **Update 2026-11-25:** PR #49 (screen 08) is **merged into `master`**. Screen **09 (practice / recitation) is postponed**
 by the owner (one of the hardest, done later, maybe last). Screens **10 / 10b (test lesson + answer feedback)** started on

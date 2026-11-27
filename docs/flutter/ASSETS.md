@@ -234,3 +234,12 @@ set on every screen, even where a reference draws them better (more three-dimens
 (mosque 10.5u from the content's left edge, top 8u, 49u wide; crescent 25.5u from the right edge, top 7.5u, 10.65×9.75u).
 
 Comparison of the reference's header assets with the library (owner, 2026-11-26): `ASSET-STYLE-COMPARISON.md`.
+
+## Screen 22, listening lesson (2026-11-26)
+| Asset | Source | App copy | Note |
+|---|---|---|---|
+| Husary recitation, سورة الكوثر 108:1–3 and سورة الناس 114:1–6 | everyayah.com `Husary_128kbps` (owner, Q1 A) | `assets/audio/quran/husary/10800{1,2,3}.mp3`, `11400{1..6}.mp3` | mock lesson; release: stream with the reciter of the settings (`BACKLOG.md`) |
+| Font Amiri Quran (verses) | `@fontsource/amiri-quran` 5.3.0 (OFL), arabic subset, woff → ttf | `assets/fonts/AmiriQuran.ttf`, `OFL-AmiriQuran.txt` | first Quran verse of the app (DECISIONS 2026-11-20 🟡 → ✅) |
+| Headphones emblem (H1) | **placeholder**: copy of `ui/lessons/listen.webp` | `assets/ui/listening/headphones.webp` | to replace with the owner's H1 (`prompts/22-listening-lesson/images-v1.txt`) |
+Reused: `ui/reading/{arch,badge_fill,badge_line,lattice_tile}.webp`, `reading/{crescent,star}.svg`, `decor/mosque.webp`.
+| Guided voice, 8 lines | Gemini TTS `gemini-3.1-flash-tts-preview`, voice Orus, calm style (owner's F) | `assets/audio/narration/orus/*.mp3` + `manifest.json` | `tools/flutter-review/gen_listening_narration.py`; texts with full tashkīl, each take transcribed |

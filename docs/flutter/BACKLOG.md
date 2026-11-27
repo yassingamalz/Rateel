@@ -28,10 +28,11 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] Screen 08: tajweed colours for the ayat (wheel in `DESIGN-SYSTEM.md`), audio example of the rules.
 - [ ] **Refresh the app screenshots** used as ChatGPT references (`app-references/`, rule in `LESSONS-LEARNED.md`)
       after each approved screen: 12 and 23 are not in it yet (2026-11-26).
-- [ ] **`NEXT-SESSION.md` is out of date on `master`** (still says «merge 08, then 09»): rewrite it with the real
-      order once the owner chooses the order of the remaining screens (asked 2026-11-26).
+- [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
+- [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
+      and design it; it reuses the listening quiz of 22.
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
-      added on 2026-11-26 in the agreed order: 01 splash, 24 end of lesson, 25 test results, 26 points history,
+      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
 ## Screen 10/10b, test lesson (approved 2026-11-26)
@@ -59,16 +60,33 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Critic of 23**: the owner launches it himself when he wants.
 - [ ] Side rail with 7 items scrolls: check on small / tall phones that the gear is easy to find.
 
-## Screen 22, listening lesson (reference on `master`)
-- [ ] Build after 10/10b, reusing its question and feedback widgets (`screens/22-listening-lesson.md`).
-- [ ] Open questions for the owner: answers side by side (reference) or stacked as 10b; also «tap the word where you
-      heard the ghunna» questions; points (+10) or no points.
+## Screen 22, listening lesson (approved 2026-11-27)
+- [ ] **Headphones asset H1** from the owner (placeholder today: the 06 «listen» icon).
+- [ ] **Audio for the release** (owner, Q1): stream the ayat from everyayah.com (or another host) with the **reciter of
+      the settings** (23), cached; the word times per reciter come with the data (today: Husary only, times by hand).
+- [ ] **«Tap the word where you heard the ghunna»** question type (owner, Q4: later).
+- [ ] **Real listening lessons** in the data (today one mock lesson, سورة الكوثر, in the unit «النون المشددة»).
+- [ ] **Word light as a user setting** (owner, 2026-11-26): glowing letters (default) or the light box around the word
+      (`listenWordLight`, `?wordLight=box`; look in `screens/22-listening-lesson/word-light-variants.jpg`); add the switch
+      to the settings (23).
+- [ ] **Loudness normalisation of the recitations** (owner, 2026-11-26: later, to hear first): same level for every
+      ayah, fuller on phone speakers; today the Husary files are bundled as downloaded.
+- [x] Guided voice for the listening lessons (Gemini 3.1 TTS, Orus, calm style): done 2026-11-26 (DECISIONS).
+- [ ] **Rotate the API keys pasted in the chat** on 2026-11-26 (Gemini, YouTube, Plainsight): owner. The narration
+      script reads `GEMINI_API_KEY` from the environment; no key is stored in the repo.
+- [ ] Points (+10) are counted in the lesson only: show them at the end of the lesson (screen 24) and save them.
+- [ ] **Listening quiz** (owner, 2026-11-26): the first version of 22 (listen, then «what did you hear in the word X?»)
+      stays on the branch as the lesson «اختبار الاستماع»; later it becomes part of the **practice after several rules**,
+      of the **daily practice** (screen 31) and possibly a question type of the tests (10).
+- [ ] Rule lessons for the other rules (qalqala, madd, ikhfa, …) with their wheel colours: data only (the page reads
+      `rule.colour`).
 
-## Screen 01, splash (references on branch `flutter/01-splash`, not started)
-- [ ] When it starts: first the list of what to ask ChatGPT (logo emblem without glow, maybe the background), then
-      build it **identical** to `01-avvio.webp` with the motion of `01-avvio-square.gif` (`screens/01-splash.md`).
-- [ ] Error state with «إعادة المحاولة» (Angular has it): asked to the owner, not answered yet.
-- [ ] Android native splash in the same green, so nothing flashes before Flutter starts.
+## Screen 01, splash (merged into `master` 2026-11-26)
+- [ ] Owner review on a physical phone, including the native launch handoff. Browser capture:
+      [startup-phone.mp4](screens/01-splash/startup-phone.mp4).
+- [ ] Small differences from `01-avvio.webp` seen at the merge check (Claude, 2026-11-26): the gold divider is
+      wider than the reference (x ≈ 660–1180 vs 693–1150); the status reads «جارٍ» with tanween, the reference «جار».
+      Owner to decide whether to align them. The critic was not run on screen 01.
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each

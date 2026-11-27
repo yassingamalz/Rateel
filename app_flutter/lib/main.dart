@@ -11,11 +11,13 @@ import 'core/learn_flow.dart';
 import 'nav/nav_items.dart';
 import 'nav/side_nav.dart';
 import 'settings/settings_screen.dart';
+import 'splash/startup_screen.dart';
 import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
+import 'lessons/listening_lesson_page.dart';
 import 'lessons/reading_lesson_page.dart';
 import 'lessons/test_lesson_page.dart';
 import 'lessons/video_lesson_page.dart';
@@ -101,6 +103,17 @@ Future<void> main() async {
   ];
   testStartState = q['testState'];
   testStartRight = int.tryParse(q['testRight'] ?? '');
+  // Review aids (screen 22): `?listenQ=2&listenPick=0&listenState=ok|ko`,
+  // `?listenAt=0.4` (with `?lessons=1,2&openLesson=0`).
+  listenStartQuestion = int.tryParse(q['listenQ'] ?? '') ?? 0;
+  listenStartPick = int.tryParse(q['listenPick'] ?? '');
+  listenStartState = q['listenState'];
+  listenStartAt = double.tryParse(q['listenAt'] ?? '');
+  listenLogAudio = q['logAudio'] == '1';
+  listenPlayPos = q['playPos'] ?? listenPlayPos;
+  listenLitAll = q['litAll'] == '1';
+  listenWordLight = q['wordLight'] ?? listenWordLight;
+  listenHeaderV = q['headerV'] ?? listenHeaderV;
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';
@@ -116,15 +129,36 @@ Future<void> main() async {
     DeviceOrientation.landscapeRight,
   ]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  runApp(const RateelApp());
+}
+
+Future<void> _initialize(BuildContext context) async {
+  // Warm the images used by the first course header while the logo is visible.
+  // A failed decode can be retried before settings listeners are installed.
+  await Future.wait([
+    for (final name in ['mosque', 'corner_glow_left', 'corner_glow_right'])
+      _loadHeaderImage(context, 'assets/ui/decor/$name.webp'),
+  ]);
   await AppSettings.load();
   // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
   final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
   if (ts != null) AppSettings.textScale.value = ts;
-  runApp(const RateelApp());
+}
+
+Future<void> _loadHeaderImage(BuildContext context, String asset) async {
+  Object? failure;
+  await precacheImage(
+    AssetImage(asset),
+    context,
+    onError: (error, _) => failure = error,
+  );
+  if (failure != null) throw StateError('Cannot load $asset: $failure');
 }
 
 class RateelApp extends StatelessWidget {
-  const RateelApp({super.key});
+  const RateelApp({super.key, this.initialize = _initialize});
+
+  final Future<void> Function(BuildContext) initialize;
 
   @override
   Widget build(BuildContext context) {
@@ -153,19 +187,26 @@ class RateelApp extends StatelessWidget {
             ),
           ),
         ),
-        home: Scaffold(
-          body: SideNavScaffold(
-            builder: (context, selected) => switch (selected) {
-              0 => const LearnFlow(),
-              3 => const LeaderboardScreen(),
-              // Sections not built yet: coming soon (screen 14, as Angular).
-              1 || 2 || 5 => const ComingSoonScreen(),
-              settingsSection => const SettingsScreen(),
-              _ => SectionPlaceholder(index: selected),
-            },
-          ),
-        ),
+        home: StartupScreen(initialize: initialize, child: const _Home()),
       ),
     );
   }
+}
+
+class _Home extends StatelessWidget {
+  const _Home();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: SideNavScaffold(
+      builder: (context, selected) => switch (selected) {
+        0 => const LearnFlow(),
+        3 => const LeaderboardScreen(),
+        // Sections not built yet: coming soon (screen 14, as Angular).
+        1 || 2 || 5 => const ComingSoonScreen(),
+        settingsSection => const SettingsScreen(),
+        _ => SectionPlaceholder(index: selected),
+      },
+    ),
+  );
 }

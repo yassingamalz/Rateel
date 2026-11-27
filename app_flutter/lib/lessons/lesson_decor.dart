@@ -48,7 +48,12 @@ class HeaderSpec {
     this.subtitleSize = 0,
     this.starOpacity = 0.55,
     this.subtitleColor,
+    this.emblem,
   });
+
+  /// Raster emblem at the arch apex instead of the 08 book (screen 22:
+  /// gold headphones), in the book box.
+  final String? emblem;
 
   final double archW, archH, archTop, archClipDx;
   final double mosqueDx, mosqueTop, mosqueW;
@@ -245,31 +250,36 @@ class LessonHeader extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned(
-            left: cx - u * s.archW / 2,
-            top: u * s.archTop,
-            width: u * s.archW,
-            height: u * s.archH,
-            // Left of the mosque the arch is not drawn (reference).
-            child: ShaderMask(
-              blendMode: BlendMode.dstIn,
-              shaderCallback: (r) {
-                final f = (s.archW / 2 + s.archClipDx) / s.archW;
-                return LinearGradient(
-                  colors: const [Color(0x00000000), Color(0xFF000000)],
-                  stops: [f - 0.01, f + 0.02],
-                ).createShader(r);
-              },
-              child: Image.asset(
-                'assets/ui/reading/arch.webp',
-                fit: BoxFit.fill,
-                color: copper == null
-                    ? null
-                    : p.c(RateelColors.archShoulder, RateelColors.readLCopper),
-                colorBlendMode: copper == null ? null : BlendMode.srcIn,
+          // archW / dividerW 0: that ornament is left out (screen 22 review).
+          if (s.archW > 0)
+            Positioned(
+              left: cx - u * s.archW / 2,
+              top: u * s.archTop,
+              width: u * s.archW,
+              height: u * s.archH,
+              // Left of the mosque the arch is not drawn (reference).
+              child: ShaderMask(
+                blendMode: BlendMode.dstIn,
+                shaderCallback: (r) {
+                  final f = (s.archW / 2 + s.archClipDx) / s.archW;
+                  return LinearGradient(
+                    colors: const [Color(0x00000000), Color(0xFF000000)],
+                    stops: [f - 0.01, f + 0.02],
+                  ).createShader(r);
+                },
+                child: Image.asset(
+                  'assets/ui/reading/arch.webp',
+                  fit: BoxFit.fill,
+                  color: copper == null
+                      ? null
+                      : p.c(
+                          RateelColors.archShoulder,
+                          RateelColors.readLCopper,
+                        ),
+                  colorBlendMode: copper == null ? null : BlendMode.srcIn,
+                ),
               ),
             ),
-          ),
           Positioned(
             left: cx + u * s.mosqueDx,
             top: u * s.mosqueTop,
@@ -299,15 +309,30 @@ class LessonHeader extends StatelessWidget {
               top: u * s.bookTop,
               width: u * s.bookW,
               height: u * s.bookH,
-              child: SvgPicture.asset(
-                'assets/ui/decor/header_book.svg',
-                colorFilter: p.t > 0
-                    ? ColorFilter.mode(
-                        p.c(RateelColors.glyphGoldTop, RateelColors.readLBook),
-                        BlendMode.srcIn,
-                      )
-                    : null,
-              ),
+              child: s.emblem != null
+                  ? Image.asset(
+                      s.emblem!,
+                      fit: BoxFit.contain,
+                      color: p.t > 0
+                          ? p.c(
+                              RateelColors.glyphGoldTop,
+                              RateelColors.readLBook,
+                            )
+                          : null,
+                      colorBlendMode: p.t > 0 ? BlendMode.srcIn : null,
+                    )
+                  : SvgPicture.asset(
+                      'assets/ui/decor/header_book.svg',
+                      colorFilter: p.t > 0
+                          ? ColorFilter.mode(
+                              p.c(
+                                RateelColors.glyphGoldTop,
+                                RateelColors.readLBook,
+                              ),
+                              BlendMode.srcIn,
+                            )
+                          : null,
+                    ),
             ),
           // Crescent and star as two pieces of the 03 asset, each placed on
           // the reference; colours as the app (star at 55%, as 03/05).
@@ -375,21 +400,25 @@ class LessonHeader extends StatelessWidget {
                 ),
               ),
             ),
-          Positioned(
-            left: cx - u * s.dividerW / 2,
-            top: u * s.dividerTop - u * 2,
-            width: u * s.dividerW,
-            height: u * 4,
-            child: p.t > 0
-                ? ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      p.c(RateelColors.videoDivider, RateelColors.readLCopper),
-                      BlendMode.srcIn,
-                    ),
-                    child: GoldDivider(u: u, diamond: s.dividerDiamond),
-                  )
-                : GoldDivider(u: u, diamond: s.dividerDiamond),
-          ),
+          if (s.dividerW > 0)
+            Positioned(
+              left: cx - u * s.dividerW / 2,
+              top: u * s.dividerTop - u * 2,
+              width: u * s.dividerW,
+              height: u * 4,
+              child: p.t > 0
+                  ? ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                        p.c(
+                          RateelColors.videoDivider,
+                          RateelColors.readLCopper,
+                        ),
+                        BlendMode.srcIn,
+                      ),
+                      child: GoldDivider(u: u, diamond: s.dividerDiamond),
+                    )
+                  : GoldDivider(u: u, diamond: s.dividerDiamond),
+            ),
         ],
       ),
     );
