@@ -257,6 +257,13 @@ class RateelColors {
   static const badgeBarRim = Color(0xFF8E9A55);
   static const badgeArchLine = Color(0xFFD9C455); // faint inner arch, drawn at 28%
 
+  // Screen 13, achievements (sampled from 13-achievements/reference.webp).
+  // «Earned» green: new token, 10's «correct» green is not as bright (conflict N3).
+  static const achDoneGreen = Color(0xFF2FCB6A);
+  static const achDoneStrip = Color(0xFF22B25A);
+  static const achPillFill = Color(0xFF04291D);
+  static const achTabBar = Color(0xFF03281C);
+
   // Screen 14, coming soon (measured on 14-in-arrivo.webp).
   /// Darkens the owner's background (#02331F-ish) to the reference (#062A21).
   static const soonBgTone = Color(0xFFE0D8D8);

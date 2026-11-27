@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'badges/badge_data.dart';
-import 'badges/badges_screen.dart';
+import 'achievements/achievements_flow.dart';
+import 'achievements/achievements_screen.dart';
+import 'achievements/level_screen.dart';
+import 'gamification/points.dart';
 import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
 import 'core/app_settings.dart';
@@ -125,7 +128,16 @@ Future<void> main() async {
   // Review aid (screen 11): `?section=3` opens the leaderboard on start.
   SideNavScaffold.startSection =
       int.tryParse(Uri.base.queryParameters['section'] ?? '') ?? 0;
-  // Review aids (screen 27): `?section=4` opens the badges, `?earn=5` plays
+  // Review aids (screen 13): `?section=4` opens the achievements,
+  // `?achTab=badges|points|collection`, `?points=950` sets the points,
+  // `?pointsTo=950` sets them once open (plays the level-up), `?level=3` opens
+  // the level page.
+  final startPoints = int.tryParse(q['points'] ?? '');
+  if (startPoints != null) debugSetPoints(startPoints);
+  AchievementsScreen.startTab = q['achTab'];
+  AchievementsScreen.pointsTo = int.tryParse(q['pointsTo'] ?? '');
+  LevelScreen.startLevel = int.tryParse(q['level'] ?? '');
+  // Review aids (screen 27): `?section=4&achTab=badges` opens the badges, `?earn=5` plays
   // the celebration of badge 5 once the screen is open, `?medals=green` tries
   // the dark-green engraving of the medals.
   final earn = int.tryParse(q['earn'] ?? '');
@@ -210,7 +222,7 @@ class _Home extends StatelessWidget {
       builder: (context, selected) => switch (selected) {
         0 => const LearnFlow(),
         3 => const LeaderboardScreen(),
-        4 => const BadgesScreen(),
+        4 => const AchievementsFlow(),
         // Sections not built yet: coming soon (screen 14, as Angular).
         1 || 2 || 5 => const ComingSoonScreen(),
         settingsSection => const SettingsScreen(),

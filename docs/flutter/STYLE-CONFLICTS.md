@@ -117,3 +117,12 @@ the owner decides at the end of the project.
 | L2 | Selected answer (gold fill) | gold fill `amber #E2A51E`, pills `#EDB120` | #F3BF41 → #E49F17, rim #FEE987 | reference (`listenGold*`) |
 | L3 | Waveform and asked word | `progressFill #EBB335`, lesson gold | played #EAB00B, rest #3B6C39, word #E2B92B | reference (`listenWave*`, `listenWord`) |
 | L4 | Header title size | 08 title 6.3u | 7.0u (wider in the reference) | reference |
+
+## Screen 13, achievements (2026-11-27)
+Built provisionally with the proposals of `screens/13-achievements.md` §6; the owner decides at the end of the project.
+| # | What | Token | Reference | Built |
+|---|---|---|---|---|
+| N1 | Header panel rim | gold rim token | ≈ 3 px gold | `GoldRimPainter` of 11 (reference values, as 11) |
+| N2 | Active tab | flat amber | vertical gold gradient | `setGoldTop → setGoldBottom` as 27 |
+| N3 | «Earned» green (strip, pill, check) | none | bright green ≈ #22C55E | new `achDoneGreen` #2FCB6A, `achDoneStrip` #22B25A |
+| N4 | Card fill | `cardTop → cardMid` | dark green + faint lattice | token, no lattice yet |

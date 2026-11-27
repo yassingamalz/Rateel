@@ -246,7 +246,7 @@ class _BadgesScreenState extends State<BadgesScreen>
                   height: u * 4.4,
                   child: Opacity(
                     opacity: _iv(0.05, 0.35),
-                    child: _Subtitle(u: u),
+                    child: GoldSubtitle(u: u),
                   ),
                 ),
                 Positioned.fromRect(
@@ -285,7 +285,7 @@ class _BadgesScreenState extends State<BadgesScreen>
     final earned = isEarned(b);
     return RepaintBoundary(
       child: CustomPaint(
-        painter: _DetailPanelPainter(u: u),
+        painter: ArchPanelPainter(u: u),
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 280),
           switchInCurve: Curves.easeOut,
@@ -461,7 +461,7 @@ class _BadgesScreenState extends State<BadgesScreen>
       ),
     );
     return ScrollConfiguration(
-      behavior: const _DragScroll(),
+      behavior: const DragScroll(),
       child: SingleChildScrollView(
         controller: _scroll,
         physics: const BouncingScrollPhysics(),
@@ -474,8 +474,8 @@ class _BadgesScreenState extends State<BadgesScreen>
   }
 }
 
-class _DragScroll extends ScrollBehavior {
-  const _DragScroll();
+class DragScroll extends ScrollBehavior {
+  const DragScroll();
 
   @override
   Set<PointerDeviceKind> get dragDevices => {
@@ -490,9 +490,14 @@ class _DragScroll extends ScrollBehavior {
 
 // ---------------------------------------------------------------- subtitle
 
-class _Subtitle extends StatelessWidget {
-  const _Subtitle({required this.u});
+class GoldSubtitle extends StatelessWidget {
+  const GoldSubtitle({
+    super.key,
+    required this.u,
+    this.text = 'مجموعة الأوسمة التي تحصل عليها في رحلتك في تعلم التجويد',
+  });
   final double u;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -540,7 +545,7 @@ class _Subtitle extends StatelessWidget {
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Text(
-                  'مجموعة الأوسمة التي تحصل عليها في رحلتك في تعلم التجويد',
+                  text,
                   maxLines: 1,
                   style: readex(
                     u * 3.15,
@@ -1065,20 +1070,51 @@ class _SelectionRim extends StatelessWidget {
 
 /// Arch-topped panel of the reference: gold rim all around, the top edge
 /// rises in a pointed ogee at the centre, and a faint second arch runs inside.
-class _DetailPanelPainter extends CustomPainter {
-  _DetailPanelPainter({required this.u});
+class ArchPanelPainter extends CustomPainter {
+  ArchPanelPainter({
+    required this.u,
+    this.radiusU = 5.3,
+    this.archHalfU = 6.6,
+    this.archRiseU = 3.5,
+    this.innerArch = true,
+    this.dome = false,
+  });
   final double u;
 
+  /// Corner radius, half width and rise of the apex, in u (screen 13 reuses
+  /// the painter with a wide, low arch for its header).
+  final double radiusU;
+  final double archHalfU;
+  final double archRiseU;
+  final bool innerArch;
+
+  /// Rounded mihrab dome instead of the pointed ogee (screen 13 header).
+  final bool dome;
+
   Path _outline(Size size) {
-    final r = u * 5.3;
+    final r = u * radiusU;
     final cx = size.width / 2;
-    final a = u * 6.6; // half width of the arch at the rim
-    final h = u * 3.5; // rise of the apex above the rim
+    final a = u * archHalfU; // half width of the arch at the rim
+    final h = u * archRiseU; // rise of the apex above the rim
     return Path()
       ..moveTo(r, 0)
       ..lineTo(cx - a, 0)
-      ..cubicTo(cx - a * 0.5, 0, cx - a * 0.22, -h * 0.5, cx, -h)
-      ..cubicTo(cx + a * 0.22, -h * 0.5, cx + a * 0.5, 0, cx + a, 0)
+      ..cubicTo(
+        cx - a * (dome ? 0.98 : 0.5),
+        dome ? -h * 0.75 : 0,
+        cx - a * (dome ? 0.55 : 0.22),
+        -h * (dome ? 1.0 : 0.5),
+        cx,
+        -h,
+      )
+      ..cubicTo(
+        cx + a * (dome ? 0.55 : 0.22),
+        -h * (dome ? 1.0 : 0.5),
+        cx + a * (dome ? 0.98 : 0.5),
+        dome ? -h * 0.75 : 0,
+        cx + a,
+        0,
+      )
       ..lineTo(size.width - r, 0)
       ..arcToPoint(Offset(size.width, r), radius: Radius.circular(r))
       ..lineTo(size.width, size.height - r)
@@ -1109,7 +1145,12 @@ class _DetailPanelPainter extends CustomPainter {
         ..color = Colors.black.withValues(alpha: 0.4)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.1),
     );
-    final bounds = Rect.fromLTWH(0, -u * 3.5, size.width, size.height + u * 3.5);
+    final bounds = Rect.fromLTWH(
+      0,
+      -u * archRiseU,
+      size.width,
+      size.height + u * archRiseU,
+    );
     canvas.drawPath(
       path,
       Paint()
@@ -1146,13 +1187,15 @@ class _DetailPanelPainter extends CustomPainter {
         size.width - u * 0.9,
         u * 17.5,
       );
-    canvas.drawPath(
-      inner,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1.0, u * 0.14)
-        ..color = RateelColors.badgeArchLine.withValues(alpha: 0.28),
-    );
+    if (innerArch) {
+      canvas.drawPath(
+        inner,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = math.max(1.0, u * 0.14)
+          ..color = RateelColors.badgeArchLine.withValues(alpha: 0.28),
+      );
+    }
     // Gold rim: the three strokes of GoldRimPainter (K1) along the outline.
     final w = u * 0.45;
     Paint stroke(double width, Color c) => Paint()
@@ -1166,7 +1209,13 @@ class _DetailPanelPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_DetailPanelPainter old) => old.u != u;
+  bool shouldRepaint(ArchPanelPainter old) =>
+      old.u != u ||
+      old.radiusU != radiusU ||
+      old.archHalfU != archHalfU ||
+      old.archRiseU != archRiseU ||
+      old.innerArch != innerArch ||
+      old.dome != dome;
 }
 
 class _Detail extends StatelessWidget {
@@ -1289,29 +1338,29 @@ class _Detail extends StatelessWidget {
           top: u * 45.2,
           width: u * 35.4,
           height: u * 3.5,
-          child: _ProgressBar(u: u, share: share),
+          child: BadgeProgressBar(u: u, share: share),
         ),
         Positioned(
           left: u * inset,
           right: u * inset,
           top: u * 52.3,
           height: u * 1.2,
-          child: _Divider(u: u),
+          child: GoldDivider(u: u),
         ),
         Positioned(
           left: u * inset,
           right: u * inset,
           top: u * 56.0,
           height: u * 11.7,
-          child: _RewardBox(u: u, reward: badge.reward),
+          child: RewardBox(u: u, reward: badge.reward),
         ),
       ],
     );
   }
 }
 
-class _ProgressBar extends StatelessWidget {
-  const _ProgressBar({required this.u, required this.share});
+class BadgeProgressBar extends StatelessWidget {
+  const BadgeProgressBar({super.key, required this.u, required this.share});
   final double u;
   final double share;
 
@@ -1355,8 +1404,8 @@ class _ProgressBar extends StatelessWidget {
   }
 }
 
-class _Divider extends StatelessWidget {
-  const _Divider({required this.u});
+class GoldDivider extends StatelessWidget {
+  const GoldDivider({super.key, required this.u});
   final double u;
 
   @override
@@ -1401,10 +1450,16 @@ class _Divider extends StatelessWidget {
   }
 }
 
-class _RewardBox extends StatelessWidget {
-  const _RewardBox({required this.u, required this.reward});
+class RewardBox extends StatelessWidget {
+  const RewardBox({
+    super.key,
+    required this.u,
+    required this.reward,
+    this.label = 'المكافأة',
+  });
   final double u;
   final String reward;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -1430,7 +1485,7 @@ class _RewardBox extends StatelessWidget {
             height: u * 3.4,
             child: Center(
               child: Text(
-                'المكافأة',
+                label,
                 style: readex(
                   u * 2.9,
                   weight: 520,
