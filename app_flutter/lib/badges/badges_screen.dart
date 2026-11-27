@@ -856,7 +856,18 @@ class _BadgeMedal extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          img(medalStart(badge)),
+          // Locked look (owner: «un po' scuro come era prima»): the part not
+          // yet filled is dimmed and desaturated, the fill is in full colour.
+          ColorFiltered(
+            colorFilter: const ColorFilter.matrix(<double>[
+              // saturation 0.35, brightness 0.6
+              0.327, 0.230, 0.043, 0, 0,
+              0.117, 0.440, 0.043, 0, 0,
+              0.117, 0.230, 0.253, 0, 0,
+              0, 0, 0, 1, 0,
+            ]),
+            child: img(medalStart(badge)),
+          ),
           if (f > 0)
             ShaderMask(
               blendMode: BlendMode.dstIn,
