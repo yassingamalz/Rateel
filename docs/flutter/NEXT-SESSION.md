@@ -16,6 +16,11 @@ finished and not merged into `master`.
   rows do not open the unit yet); points, level reward, ledger and progress are mock; rail count bubble = earned achievements;
   share button of the detail; phone check at text size 110%; APK on request.
 
+## Prompt to start the next session (see which screens are missing, then choose)
+```
+Lavora sul repo Rateel, da master (la 13 e' sul branch claude/flutter-13-achievements-xa7myj, non ancora in master; sessione https://claude.ai/code/session_017kS8iV5j47ogdjc7VLvvLQ). Leggi CLAUDE.md e tutti i file che indica (DECISIONS.md, README.md, PROCESS.md, LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi docs/flutter/NEXT-SESSION.md, SCREENS.md, STYLE-CONFLICTS.md. Non iniziare nessuna schermata. Fammi il quadro: quali schermate sono fatte e approvate, quali sono costruite ma da rifinire (la 13 e' particolare, ci torniamo), quali mancano del tutto (09, 15-21, 24, 26, 29, 30, 31, 28...) e che cosa blocca ciascuna (asset, decisioni, dati). Poi proponi 2 o 3 schermate su cui lavorare adesso, con la tua raccomandazione e il perche', e aspetta che scelga io. Parlami in italiano, documenti in inglese.
+```
+
 ## Prompt to start the next session (see what is missing on 13, then continue)
 ```
 Lavora sul repo Rateel. Riparti dal branch claude/flutter-13-achievements-xa7myj (la schermata 13 v1 non e' ancora in master;
