@@ -9,8 +9,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Wire the challenges to real progress** (plan Q3): complete a challenge when the user comes back having done
       its activity (lesson, practice, recitation); reset the path at midnight; save challenges and streak; streak +1
       per day with at least one challenge, 0 after a missed day. Today: mock, in memory, completion by long press.
-- [ ] Connector between the tiles: lit only up to the open tile (as 03/05) or all six links lit as the reference?
-      Asked to the owner, not answered yet.
+- [x] Connector between the tiles: **lit only up to the open tile** (as 03/05, as built), decided by the owner 2026-11-27.
 - [ ] Practice / recitation challenges open screen 14 «coming soon» until screen 09 exists.
 - [ ] Courses icon of the rail tapped inside the learning section goes back to the courses only from 12: decide if
       units (05) and lessons (06) should do the same.
