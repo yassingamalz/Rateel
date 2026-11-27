@@ -44,7 +44,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
       and design it; it reuses the listening quiz of 22.
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
-      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
+      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history (= tab «النقاط» of 13, owner 2026-11-27),
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
 ## Screen 10/10b, test lesson (approved 2026-11-26)
@@ -117,6 +117,8 @@ Placeholders to replace before release:
 ## Screen 13, achievements (to do): 27 is part of it
 **Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
 - [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
+- [ ] **26 points history lives in 13** (owner, 2026-11-27): the tab «النقاط» (v1 on `claude/flutter-13-achievements-xa7myj`, mock
+      ledger) is screen 26; save the points with `ProgressStore` when real points exist.
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each
