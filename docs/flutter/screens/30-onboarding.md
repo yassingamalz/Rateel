@@ -206,3 +206,8 @@ cards `onbTeal*` (C1), goal number 5.5u and word 4.4u (C3), emblem halo ≈ 8u (
 Left for the owner (app standards): light body text = `LessonPal` ink (reference warm brown #52320B), light title copper
 (reference #633D11), `GoldDivider`, `flame_gold_01`, buttons.
 
+## v5 (2026-11-28)
+Light background = the owner's light splash background (`splash/background_light.webp`; `?lightDecor=code` shows the old code
+decor). Texts (`onbTitle`, `onbInk`, `onbHint` and light), the gold line in light and the owner's flame `icons/flame_inner`
+as the reference (STYLE-CONFLICTS O1–O5, review at the end). Sheets `compare-v5.jpg`, `emblem-light-examples.jpg`.
+

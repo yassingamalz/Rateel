@@ -31,6 +31,12 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Asset standardisation** (owner, 2026-11-26): the references' header assets (mosque, crescent + star, calendar,
       arch, divider) are candidates to regenerate once for the whole app: `ASSET-STYLE-COMPARISON.md`, `ASSETS.md`.
 - [ ] **Style conflicts** to decide at the end of the project, one choice for the whole app: `STYLE-CONFLICTS.md`.
+- [ ] **Full-screen PNG / WebP backgrounds: weight study** (owner, 2026-11-28, screen 30): screens that use a whole painted
+      background (01 splash, 14 coming soon, 30 onboarding dark + light, 1844×853, 30–110 KB each, decoded ≈ 6 MB of RAM
+      per image) instead of code decor. Study whether they make the app heavy (APK size, decode time, memory on low-end
+      phones, `PERFORMANCE.md`) and decide: keep, resize per screen density, or replace with code / tiles.
+- [ ] **Screen 30 values «as the reference»** (STYLE-CONFLICTS O1–O5): review at the end of the project with the other
+      conflicts (owner, 2026-11-28).
 - [ ] **Mock data** to connect before release (leaderboard, video sections, rail counts, daily challenges):
       `SCREENS.md`, «Screens running on mock data»; data problems in the same file.
 - [x] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`): done 2026-11-27 (same look). Still to do: frame times

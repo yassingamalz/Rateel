@@ -1340,12 +1340,12 @@ class _OptionCardState extends State<_OptionCard> {
                           ),
                         ],
                       ),
+                      // Owner's flame with a flame-shaped hole (2026-11-28):
+                      // gold as drawn in dark, amber in light.
                       child: Image.asset(
-                        'assets/ui/icons/flame_gold_01.webp',
-                        color: p.c(
-                          RateelColors.onbFlame,
-                          RateelColors.onbLFlame,
-                        ),
+                        'assets/ui/icons/flame_inner.webp',
+                        color: p.t > 0.5 ? RateelColors.onbLFlame : null,
+                        colorBlendMode: p.t > 0.5 ? BlendMode.srcIn : null,
                       ),
                     ),
                   ),
