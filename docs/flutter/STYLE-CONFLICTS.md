@@ -117,3 +117,14 @@ the owner decides at the end of the project.
 | L2 | Selected answer (gold fill) | gold fill `amber #E2A51E`, pills `#EDB120` | #F3BF41 → #E49F17, rim #FEE987 | reference (`listenGold*`) |
 | L3 | Waveform and asked word | `progressFill #EBB335`, lesson gold | played #EAB00B, rest #3B6C39, word #E2B92B | reference (`listenWave*`, `listenWord`) |
 | L4 | Header title size | 08 title 6.3u | 7.0u (wider in the reference) | reference |
+
+## Screen 24, end of lesson (2026-11-27)
+Measured on `screens/24-end-of-lesson/reference-{dark,light}.webp`. Built with the **confirmed tokens** (the buttons, tiles and
+card are the approved ones of 10 / 08 / 22); the owner decides at the end of the project.
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| E1 | Light «متابعة» (filled gold) | 10 light gold `testLGoldTop #E6BB58 → testLGoldBottom` | brighter, more saturated #F3B310 → #D88E08 | token (10 button) |
+| E2 | Light «إعادة الدرس» (filled green) | `testLGreenTop #4FA676 → testLGreenBottom #2E7A52` | darker #2D8155 → #1A6943 | token (10 button) |
+| E3 | Card title, light | `readLInk #341E06` | warmer brown ≈ #44 1D 00 | token |
+| E4 | Tile rim, dark | gold card rim `readCardRim #F7E27A → readCardRimSide` 0.24u | thin bright gold ≈ #E0E785 | token |

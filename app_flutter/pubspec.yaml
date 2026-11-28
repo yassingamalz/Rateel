@@ -87,6 +87,7 @@ flutter:
     - assets/audio/quran/husary/
     - assets/audio/narration/orus/
     - assets/ui/listening/
+    - assets/ui/end_of_lesson/
     - assets/ui/course_art/green/
     - assets/ui/course_art/gold/
     - assets/ui/course_art/abstract/
