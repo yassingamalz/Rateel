@@ -59,12 +59,12 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | N° | Screen | Comes from | Note |
 |---|---|---|---|
 | 01 | Splash / start-up (loading) | Angular `splash-screen`, `initialization` | uses the free number 01 |
-| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; started 2026-11-27, then **postponed** by the owner (BACKLOG) |
+| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; postponed, then **kept** by the owner (2026-11-27, references 24-A/24-B); **built** on `flutter/24-end-of-lesson`, waiting for the owner's approval |
 | 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | **built inside 10** (results in the card, approved 2026-11-26) |
-| 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
+| 26 | Points history | Angular `points-history`, `points-card` | **inside 13** (owner, 2026-11-27): the tab «النقاط» of 13 (earned / bonus / spent totals + activity cards, shared `userPoints`); no separate screen |
 | 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13; reference from the owner `screens/27-badges/reference.webp`; **approved 2026-11-27** (APK 1.0.504), merged into `master`; mock data, placeholders in `BACKLOG.md`; **part of 13 (reached from it)** |
 | 28 | Help / tips overlay | Angular `help-tips` | first use of each lesson type; reference from the owner `screens/28-help-overlay/reference.webp` (2026-11-27); **postponed** (future improvement, BACKLOG) |
 | 29 | Profile (name, avatar, level, streak) | owner's references `screens/29-profile/reference-{dark,light}.webp`; plan `screens/29-profile.md` | **v1 built** on `flutter/29-profile-v2` (2026-11-27), opened from the settings; owner review pending |
-| 30 | Onboarding (first start: name, level, goal) | not in Angular | needed before release if there is an account |
-| 31 | **Daily practice** (owner, 2026-11-26: «ci siamo dimenticati»): a short daily session mixing what was learnt; the listening quiz of 22 (v5) is one of its exercises | not designed yet | to define with the owner: own screen or part of 12 (daily challenges); also a **practice edition** after several rules |
+| 30 | Onboarding (first start: name, level, goal) | not in Angular | **no account required** (owner, 2026-11-27): local first start, data on the device is primary; optional account and sync later |
+| 31 | **Daily practice** (owner, 2026-11-26: «ci siamo dimenticati»): a short daily session mixing what was learnt; the listening quiz of 22 (v5) is one of its exercises | not designed yet | **own screen of the rail item «التدريب»** (owner, 2026-11-27; today it opens 14), with a phone reminder and an in-app popup after 1 day away (details in `DECISIONS.md` / `BACKLOG.md`); also a **practice edition** after several rules |
 Not a new screen: unit / course completion celebrations, already inside 03/05.

@@ -10,6 +10,7 @@ import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
+import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 
@@ -331,6 +332,16 @@ class _VideoLessonPageState extends State<VideoLessonPage>
     setState(() {});
     await Future<void>.delayed(const Duration(milliseconds: 320));
     await _shell.currentState?.celebrate();
+    // Screen 24: the end card; «إعادة الدرس» plays the video from the start.
+    final choice =
+        await _shell.currentState?.finish(const LessonEndResult.done()) ??
+        LessonEndChoice.next;
+    if (!mounted) return;
+    if (choice == LessonEndChoice.again) {
+      _finishing = false;
+      _restart();
+      return;
+    }
     _leave(true);
   }
 

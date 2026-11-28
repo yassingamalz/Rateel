@@ -18,6 +18,7 @@ import 'splash/startup_screen.dart';
 import 'leaderboard/leaderboard_screen.dart';
 import 'screens/section_placeholder.dart';
 import 'theme/rateel_theme.dart';
+import 'lessons/lesson_end.dart';
 import 'lessons/lesson_data.dart';
 import 'lessons/lesson_page.dart';
 import 'lessons/listening_lesson_page.dart';
@@ -117,6 +118,9 @@ Future<void> main() async {
   listenLitAll = q['litAll'] == '1';
   listenWordLight = q['wordLight'] ?? listenWordLight;
   listenHeaderV = q['headerV'] ?? listenHeaderV;
+  // Review aid (screen 24): `?end=3|2|1` opens the end-of-lesson card with
+  // that many stars as soon as a lesson opens (with `?lessons=…&openLesson=…`).
+  lessonEndReview = int.tryParse(q['end'] ?? '');
   // Review aids (screen 12): `?challenges=1` opens the daily challenges,
   // `?chalDone=3` marks 3 challenges done, `?streak=4` sets the streak.
   LearnFlow.startChallenges = q['challenges'] == '1';

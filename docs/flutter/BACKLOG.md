@@ -9,8 +9,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Wire the challenges to real progress** (plan Q3): complete a challenge when the user comes back having done
       its activity (lesson, practice, recitation); reset the path at midnight; save challenges and streak; streak +1
       per day with at least one challenge, 0 after a missed day. Today: mock, in memory, completion by long press.
-- [ ] Connector between the tiles: lit only up to the open tile (as 03/05) or all six links lit as the reference?
-      Asked to the owner, not answered yet.
+- [x] Connector between the tiles: **lit only up to the open tile** (as 03/05, as built), decided by the owner 2026-11-27.
 - [ ] Practice / recitation challenges open screen 14 «coming soon» until screen 09 exists.
 - [ ] Courses icon of the rail tapped inside the learning section goes back to the courses only from 12: decide if
       units (05) and lessons (06) should do the same.
@@ -18,11 +17,12 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 ## App-wide
 - [ ] **Screen 28, help / tips overlay** (owner 2026-11-27: future improvement). Reference `screens/28-help-overlay/reference.webp`,
       notes `screens/28-help-overlay.md`. Owner's answers: shown the **first time** each lesson type opens, then remembered
-      (saved); reopened by a small **«؟» button** (place to decide: maybe the 02 pause menu); which lesson first: later
+      (saved); reopened by a small **«؟» button**, a third item «؟ كيف تستخدم الدرس» in the **02 pause menu** next to back / restart (owner 2026-11-27); which lesson first: later
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
-- [ ] **Screen 24, end of lesson** (postponed by the owner 2026-11-27: «probably not needed»): plan v1, questions Q1–Q7
-      and reference prompts in `screens/24-end-of-lesson.md`, `prompts/24-end-of-lesson/reference-v1.txt`. Decide whether to
-      drop it; the +10 points of 22 are still shown nowhere at the end.
+- [ ] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): **built** on `flutter/24-end-of-lesson`, waiting for the
+      owner's phone test and approval. Leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
+      the streak tile reads the mock streak of 12 (always shown, at least 1, owner); light buttons vs the reference
+      (`STYLE-CONFLICTS.md` E1–E4, decided at the end of the project with the other conflicts); critic not run (ask the owner).
 - [ ] **Screens 15–21, guided lesson** (owner 2026-11-27: future, not now): a mixed lesson, video in sections with other
       activities between them (Angular prototype `guided-lesson`, references `15…21-lezione-guidata-*.webp`); today covered by
       07 + 08 + 10 + 22. Owner's preview on `flutter/15-21-guided-lesson` (APK 1.0.445, from an old `master`, outside the
@@ -34,6 +34,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       `SCREENS.md`, «Screens running on mock data»; data problems in the same file.
 - [x] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`): done 2026-11-27 (same look). Still to do: frame times
       measured on the owner's phone (APK).
+- [ ] **Screen 30, onboarding** (owner, 2026-11-27): the app works **without an account**; first start asks name, level and goal,
+      saved on the device (local data is primary). **Later:** optional accounts (e.g. Google / Apple) and sync, which need a
+      server; they also make the leaderboard (11) real and keep progress across phones.
 - [ ] **Stable signing key** for the APKs, kept outside the repo (owner to supply).
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.
@@ -41,18 +44,21 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [x] **Refresh the app screenshots** used as ChatGPT references (`app-references/`): done 2026-11-27 (12, 22, 23, 10 and
       light added; refresh again after each approved screen).
 - [x] **Order of the remaining screens**: timeline of `NEXT-SESSION.md` confirmed by the owner (2026-11-26).
-- [ ] **Daily practice (screen 31)**: forgotten in the lists until 2026-11-26 (owner); define it (own screen or inside 12)
-      and design it; it reuses the listening quiz of 22.
+- [ ] **Daily practice (screen 31)** (owner, 2026-11-27): an **own screen, opened by the rail item «التدريب»** (today 14 «coming
+      soon»); a short daily session mixing what was learnt (the listening quiz of 22 is one exercise). **Reminder, both ways:**
+      the daily phone notification of 23 also invites to the practice, and an **in-app popup**: if the practice was not done
+      for **1 day**, the popup appears as soon as the user opens any lesson, **skippable** («go to the practice» / «later»,
+      which opens the lesson). Still to define: content and look (plan + reference), and whether 12's practice challenges open it.
 - [ ] **Screens still to build**, numbers in `SCREENS.md`: 09 (postponed, maybe last), 13, 15–21, 22, and the ones
-      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history,
+      added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history (= tab «النقاط» of 13, owner 2026-11-27),
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
 ## Screen 10/10b, test lesson (approved 2026-11-26)
 - [ ] **Long press completes** a course / unit / lesson at once (review aid for testing; owner 2026-11-26: fine for
       now, **remove before release**): `courses_screen.dart` (onLongPress ≈ l. 384), `units_screen.dart` (≈ l. 452),
       `lessons_screen.dart` (≈ l. 442), and the same on the challenges of 12.
-- [ ] **Test sounds to improve** (owner, 2026-11-26), above all the **completion (passed)** and the **correct answer**
-      (now plinkfx level-up / gem, CC0): `assets/sounds/test_*.mp3`, sampler in `docs/design-assets/test-lesson/sounds/`.
+- [x] **Test sounds to improve**: done 2026-11-27, owner picked **C8 plinkfx checkpoint** (correct) and **P7 plinkfx
+      level-complete** (passed) from `docs/design-assets/test-lesson/sounds/sampler-2026-11-27.mp4`.
 - [ ] **End-of-test popup** (score, points, pass/fail, countdown) removed from 10 (owner: the results show the same);
       designs A/B in `screens/10-test-lesson/end-popup-variants-v6.jpg` if it comes back.
 - [ ] Lightbulb (recommendations) and ↻ (not passed) are still Material icons in the lesson gold: drawn ones if wanted.
@@ -108,7 +114,7 @@ Placeholders to replace before release:
 - [ ] **Mock data**: the 12 badges, their requirements, rewards and progress (4 earned, M05 34/50…) are invented (`lib/badges/badge_data.dart`) and live in memory only. Wire them to real progress (lessons, units, tests, streak, recordings): set `badgeEarned.value = id` when a requirement is reached; save progress; M09 needs screen 09 (recordings).
 - [ ] **Rewards** («5K», «100»…) are display only: add the coins to the points when real data exists.
 - [ ] **Rail count bubble** of «الإنجازات» (5) is a demo value: use the number of earned badges.
-- [ ] **Celebration sound and haptics** reuse the test «passed» sound (`Sounds.passed`): choose a dedicated sound with the other test sounds.
+- [x] **Celebration sound** of 27: keeps `Sounds.passed`, now P7 plinkfx level-complete (owner, 2026-11-27, with the test sounds).
 - [ ] **Review aids** to remove or keep hidden at release: `?earn=`, `?medals=`, `?section=`.
 - [ ] **Unused kit** in the library: `blank_olive`, `blank_gold`, `l1` (locked medal) are spare.
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
@@ -127,6 +133,8 @@ Placeholders to replace before release:
 ## Screen 13, achievements (to do): 27 is part of it
 **Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
 - [ ] Build screen 13 (plan, levels, tabs) and link it to 27.
+- [ ] **26 points history lives in 13** (owner, 2026-11-27): the tab «النقاط» (v1 on `claude/flutter-13-achievements-xa7myj`, mock
+      ledger) is screen 26; save the points with `ProgressStore` when real points exist.
 
 ## Lesson content (`docs/content/`, branch of the content review)
 - [x] **Check the content against the book PDFs** «التجويد المصور» page by page (Claude, 2026-11-27): transcribe each

@@ -1,0 +1,32 @@
+Rateel - Tajweed test sounds - sampler 2026-11-27
+Video: sampler-2026-11-27.mp4 (order C0..C8, then P0..P8; 0.3 s lead-in + 1 s gap per clip)
+Processing: converted to MP3 44.1 kHz 128 kbps stereo, leading silence trimmed (-50 dB), trailing silence below -60 dB trimmed,
+loudness-matched to the same max momentary loudness (-15 LUFS-M, EBU R128, 400 ms window; better than integrated I for sub-2 s clips), peaks limited.
+All new candidates: CC0 1.0 public domain dedication -> commercial use, no attribution required.
+
+CORRECT ANSWER
+No | File | Duration | Source | Licence | Character
+C0 | C0-current-plinkfx-gem.mp3 | 0.78 s | CURRENT app_flutter/assets/sounds/test_correct.mp3 (plinkfx gem) | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | glassy bell, bright (current, for comparison)
+C1 | C1-uisfx-zen-success.mp3 | 0.52 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/zen/success.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | quick rising 3 notes, soft and round, very calm
+C2 | C2-uisfx-organic-success.mp3 | 0.81 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/organic/success.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | rising 3-note wooden/marimba-like chime, warm, slight ring
+C3 | C3-uisfx-studio-success.mp3 | 0.52 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/studio/success.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | quick rising 3 notes, clean and slightly brighter, crisp
+C4 | C4-uisfx-minimal-success.mp3 | 0.57 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/minimal/success.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | rising 3 notes, plain pure tones, neutral/minimal
+C5 | C5-uisfx-cinematic-success.mp3 | 0.99 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/cinematic/success.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | low, warm rising 3-note swell, deeper and longer
+C6 | C6-uisfx-organic-check.mp3 | 0.39 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/organic/check.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | two-note upward leap (approx. octave), short tick-like, warm
+C7 | C7-plinkfx-confirm.mp3 | 0.60 s | https://www.npmjs.com/package/plinkfx (v0.3.0, repo https://github.com/maximilianfeix/plinkfx), rendered offline with its CLI: plinkfx render confirm | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | bright quick major arpeggio 'OK', synth bell
+C8 | C8-plinkfx-checkpoint.mp3 | 1.04 s | https://www.npmjs.com/package/plinkfx (v0.3.0, repo https://github.com/maximilianfeix/plinkfx), rendered offline with its CLI: plinkfx render checkpoint | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | three quick mallet notes ending on a held high bell, bright
+
+TEST PASSED
+No | File | Duration | Source | Licence | Character
+P0 | P0-current-plinkfx-level-up.mp3 | 1.28 s | CURRENT app_flutter/assets/sounds/test_passed.mp3 (plinkfx level-up) | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | chord, sparkle and hold, game-like (current, for comparison)
+P1 | P1-uisfx-cinematic-achievement.mp3 | 1.36 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/cinematic/achievement.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | slow 5-note rising arpeggio, low and warm, solemn/premium
+P2 | P2-uisfx-organic-achievement.mp3 | 1.36 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/organic/achievement.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | 6-note rising arpeggio, wooden/marimba-like, warm and gentle
+P3 | P3-uisfx-dreamy-level-up.mp3 | 1.25 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/dreamy/level-up.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | 4-step rising phrase, soft pad-like tone, small shimmer at the end
+P4 | P4-uisfx-dreamy-complete.mp3 | 1.18 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/dreamy/complete.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | 3 broad rising steps (major chord), soft, calm 'done'
+P5 | P5-uisfx-glass-achievement.mp3 | 1.38 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/glass/achievement.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | 5-note rising arpeggio, glassy and bright, sparkling
+P6 | P6-uisfx-zen-achievement.mp3 | 0.86 s | https://www.npmjs.com/package/uisfx (v0.4.0, repo https://github.com/romainsimon/uisfx), file sounds/zen/achievement.mp3 | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | quick 5-note rising run, soft and round, short (under 1 s)
+P7 | P7-plinkfx-level-complete.mp3 | 1.49 s | https://www.npmjs.com/package/plinkfx (v0.3.0, repo https://github.com/maximilianfeix/plinkfx), rendered offline with its CLI: plinkfx render level-complete | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | rising run into a held bright chord, fanfare-like, most 'celebratory'
+P8 | P8-plinkfx-heal.mp3 | 1.57 s | https://www.npmjs.com/package/plinkfx (v0.3.0, repo https://github.com/maximilianfeix/plinkfx), rendered offline with its CLI: plinkfx render heal | CC0 1.0 (audio; package LICENSE-AUDIO / LICENSE-SOUNDS) | soft rising chime with shimmer tail, gentle and airy
+
+Not used: Kenney.nl packs (site returned 403 to automated download); @wubbleai/community-sfx is an unmodified copy of uisfx.
+Already presented on 2026-11-26 and therefore not repeated: uisfx dreamy/glass/soft success, soft achievement; plinkfx gem, success, ding-correct, pickup-soft, achievement, level-up, victory.
