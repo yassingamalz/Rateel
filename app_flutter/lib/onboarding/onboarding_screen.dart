@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/app_settings.dart';
@@ -101,8 +100,7 @@ class OnbMetrics {
   static const keyboardGap = 3.0; // field bottom above the keyboard
   // Top corner lattice (reference ≈ 0–300 × 0–220 px), star cell ≈ 5.3u.
   static const cornerW = 40.0;
-  static const cornerH = 30.0;
-  static const starCell = 5.3;
+  static const cornerH = 34.5; // owner's corner art, 894×771
 }
 
 /// Review aids: `?step=a|b|c` opens that step, `?emblemL=none|green|dark`
@@ -512,9 +510,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               u,
               u * OnbMetrics.cardRadius,
               fill: const [
-                RateelColors.testCardTop,
-                RateelColors.testCardMid,
-                RateelColors.testCardBottom,
+                RateelColors.onbCardTop,
+                RateelColors.onbCardMid,
+                RateelColors.onbCardBottom,
               ],
             ),
             child: _Band(p: p, u: u, radius: u * OnbMetrics.cardRadius),
@@ -580,11 +578,21 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         left: left + u * OnbMetrics.sepInset,
         right: (cx * 2) - right + u * OnbMetrics.sepInset,
         top: u * OnbMetrics.sepY,
-        height: math.max(1.0, u * 0.12),
-        child: ColoredBox(
-          color: p
-              .c(RateelColors.testRowRimBottom, RateelColors.readLSeparator)
-              .withValues(alpha: p.d(0.6, 1)),
+        height: math.max(2.0, u * 0.24),
+        // Reference: a light line over a darker one.
+        child: Column(
+          children: [
+            Expanded(
+              child: ColoredBox(
+                color: p.c(RateelColors.onbSepLight, RateelColors.onbLSep),
+              ),
+            ),
+            Expanded(
+              child: ColoredBox(
+                color: p.c(RateelColors.onbSepDark, RateelColors.onbLSep),
+              ),
+            ),
+          ],
         ),
       ),
       label(OnbMetrics.label2Cy, 'اختر صورتك'),
@@ -614,26 +622,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   List<Widget> _stepB(LessonPal p, double u, double cx, Color ink) {
-    final glyphs = <Widget Function(Color)>[
-      (c) => Image.asset('assets/ui/icons_white/open_book.webp', color: c),
-      (c) => SvgPicture.asset(
-        'assets/ui/glyphs/star.svg',
-        colorFilter: ColorFilter.mode(c, BlendMode.srcIn),
-      ),
-      // Owner's outline rosette (2026-11-28): cream in dark, brown in light.
-      (_) => Stack(
-        fit: StackFit.passthrough,
-        children: [
-          Opacity(
-            opacity: 1 - p.t,
-            child: Image.asset('assets/ui/icons_white/rosette_cream.webp'),
-          ),
-          Opacity(
-            opacity: p.t,
-            child: Image.asset('assets/ui/icons_white/rosette_brown.webp'),
-          ),
-        ],
-      ),
+    // Owner's glyphs (2026-11-28): cream in dark, brown in light; boxes
+    // measured on the reference (w, h, cy in u).
+    const glyphs = [
+      ('open_book', 11.4, 6.8, 51.1),
+      ('star', 8.8, 8.6, 50.2),
+      ('rosette', 7.4, 9.4, 50.4),
     ];
     return [
       for (var i = 0; i < 3; i++)
@@ -657,10 +651,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               p,
               u,
               top: OnbMetrics.levelTop,
-              glyph: glyphs[i](
-                p.c(RateelColors.iconCream, RateelColors.readLInk),
+              glyph: SizedBox(
+                width: u * glyphs[i].$2,
+                height: u * glyphs[i].$3,
+                child: _Themed(
+                  p: p,
+                  dark: 'assets/ui/icons_white/${glyphs[i].$1}_cream.webp',
+                  light: 'assets/ui/icons_white/${glyphs[i].$1}_brown.webp',
+                ),
               ),
-              glyphCy: OnbMetrics.levelGlyphCy,
+              glyphCy: glyphs[i].$4,
               glyphH: OnbMetrics.levelGlyphH,
               big: UserProfile.levels[i],
               bigCy: OnbMetrics.levelNameCy,
@@ -847,7 +847,7 @@ class _Backdrop extends StatelessWidget {
             top: 0,
             width: u * OnbMetrics.cornerW,
             height: u * OnbMetrics.cornerH,
-            child: _StarLattice(p: p, u: u, left: left),
+            child: _CornerLattice(p: p, left: left),
           ),
         CustomPaint(painter: _ArcPainter(p, u)),
         Positioned(
@@ -1003,7 +1003,7 @@ class _Emblem extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  RateelColors.goldRim.withValues(alpha: p.d(0.22, 0.12)),
+                  RateelColors.goldRim.withValues(alpha: p.d(0.34, 0.16)),
                   RateelColors.goldRim.withValues(alpha: 0),
                 ],
               ),
@@ -1077,7 +1077,8 @@ class _Band extends StatelessWidget {
   );
 }
 
-/// Name field: pill with the option-row rim of 10 (selected rim on focus).
+/// Name field (reference: pale green rim, dark fill; light: tan rim, cream).
+/// Focus: the selected-card gold.
 class _Field extends StatelessWidget {
   const _Field({
     required this.p,
@@ -1094,39 +1095,31 @@ class _Field extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final h = u * OnbMetrics.fieldH;
-    final rimTop = focused
-        ? p.c(RateelColors.testSelRim, RateelColors.testLSelRim)
-        : p.c(RateelColors.testRowRimTop, RateelColors.testLRowRim);
-    final rimBottom = focused
-        ? rimTop
-        : p.c(RateelColors.testRowRimBottom, RateelColors.testLRowRim);
+    final rim = focused
+        ? p.c(RateelColors.onbSelRim, RateelColors.onbLSelRim)
+        : p.c(RateelColors.onbFieldRim, RateelColors.onbLFieldRim);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(h),
-        color: p.c(RateelColors.testRowFill, RateelColors.testLRowFill),
+        color: p.c(RateelColors.onbFieldFill, RateelColors.onbLFieldFill),
+        border: Border.all(color: rim, width: math.max(1.0, u * 0.25)),
         boxShadow: [
           BoxShadow(
-            color: RateelColors.testSelRim.withValues(
-              alpha: focused ? 0.22 * (1 - p.t) : 0,
+            color: RateelColors.onbSelGlow.withValues(
+              alpha: focused ? p.d(0.35, 0.3) : 0,
             ),
             blurRadius: u * 1.4,
           ),
         ],
       ),
-      child: CustomPaint(
-        foregroundPainter: GradientRimPainter(
-          width: math.max(1.0, u * 0.3),
-          radius: h,
-          top: rimTop,
-          bottom: rimBottom,
-        ),
-        child: child,
-      ),
+      child: child,
     );
   }
 }
 
+/// Avatar of step A: thin pale ring (reference #9EBD89; light #E9D8C5), the
+/// chosen one with a thick gold ring and a glow.
 class _Avatar extends StatelessWidget {
   const _Avatar({
     required this.p,
@@ -1144,7 +1137,15 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gold = p.c(RateelColors.testSelRim, RateelColors.testLSelRim);
+    final ring = selected
+        ? [
+            p.c(RateelColors.onbRingTop, RateelColors.onbLRing),
+            p.c(RateelColors.onbRingBottom, RateelColors.onbLRing),
+          ]
+        : [
+            p.c(RateelColors.onbAvatarRim, RateelColors.onbLAvatarRim),
+            p.c(RateelColors.onbAvatarRim, RateelColors.onbLAvatarRim),
+          ];
     return Semantics(
       button: true,
       selected: selected,
@@ -1154,15 +1155,21 @@ class _Avatar extends StatelessWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 220),
           curve: Curves.easeOut,
-          padding: EdgeInsets.all(u * (selected ? 0.5 : 0.25)),
+          padding: EdgeInsets.all(
+            u * (selected ? p.d(0.7, 0.5) : p.d(0.35, 0.25)),
+          ),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: selected
-                ? gold
-                : p.c(RateelColors.testRowRimTop, RateelColors.testLRowRim),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: ring,
+            ),
             boxShadow: [
               BoxShadow(
-                color: gold.withValues(alpha: selected ? p.d(0.5, 0.35) : 0),
+                color: RateelColors.onbSelGlow.withValues(
+                  alpha: selected ? p.d(0.6, 0.45) : 0,
+                ),
                 blurRadius: u * 1.8,
               ),
             ],
@@ -1179,8 +1186,11 @@ class _Avatar extends StatelessWidget {
   }
 }
 
-/// Level / goal card: option row of 10 (idle) or selected row (gold rim,
-/// glow), check disc in the top right corner, flame on the selected goal.
+/// Level / goal card, values sampled on the references: idle = glass lit
+/// from the top with a thin olive rim (light: cream, tan rim); selected =
+/// luminous gold rim (bright core + gold edge) with a glow outside and
+/// inside (light: gold rim, warm fill, soft glow). Check disc in the top
+/// right corner, flame on the selected goal.
 class _OptionCard extends StatefulWidget {
   const _OptionCard({
     required this.p,
@@ -1210,19 +1220,6 @@ class _OptionCardState extends State<_OptionCard> {
     final p = widget.p;
     final u = widget.u;
     final s = widget.selected;
-    final r = u * OnbMetrics.optRadius;
-    final top = s
-        ? p.c(RateelColors.testSelTop, RateelColors.testLSelTop)
-        : p.c(RateelColors.testRowFill, RateelColors.testLRowFill);
-    final bottom = s
-        ? p.c(RateelColors.testSelBottom, RateelColors.testLSelBottom)
-        : p.c(RateelColors.testRowFill, RateelColors.testLRowFill);
-    final rimTop = s
-        ? p.c(RateelColors.testSelRim, RateelColors.testLSelRim)
-        : p.c(RateelColors.testRowRimTop, RateelColors.testLRowRim);
-    final rimBottom = s
-        ? rimTop
-        : p.c(RateelColors.testRowRimBottom, RateelColors.testLRowRim);
     return Semantics(
       button: true,
       selected: s,
@@ -1239,41 +1236,15 @@ class _OptionCardState extends State<_OptionCard> {
             clipBehavior: Clip.none,
             fit: StackFit.expand,
             children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
+              TweenAnimationBuilder<double>(
+                tween: Tween(end: s ? 1 : 0),
+                duration: const Duration(milliseconds: 220),
                 curve: Curves.easeOut,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(r),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [top, bottom],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: RateelColors.testSelRim.withValues(
-                        alpha: s ? 0.28 * (1 - p.t) : 0,
-                      ),
-                      blurRadius: u * 1.6,
-                    ),
-                    BoxShadow(
-                      color: p
-                          .c(Colors.black, const Color(0xFF8A6A4A))
-                          .withValues(alpha: p.d(0.3, 0.12)),
-                      blurRadius: u * 0.6,
-                      offset: Offset(0, u * 0.35),
-                    ),
-                  ],
+                builder: (context, v, child) => CustomPaint(
+                  painter: _OptionCardPainter(p, u, v),
+                  child: child,
                 ),
-                child: CustomPaint(
-                  foregroundPainter: GradientRimPainter(
-                    width: math.max(1.0, u * 0.3),
-                    radius: r,
-                    top: rimTop,
-                    bottom: rimBottom,
-                  ),
-                  child: _Band(p: p, u: u, radius: r),
-                ),
+                child: _Band(p: p, u: u, radius: u * OnbMetrics.optRadius),
               ),
               widget.child,
               Positioned(
@@ -1309,6 +1280,120 @@ class _OptionCardState extends State<_OptionCard> {
   }
 }
 
+class _OptionCardPainter extends CustomPainter {
+  _OptionCardPainter(this.p, this.u, this.sel);
+
+  final LessonPal p;
+  final double u;
+
+  /// 0 idle → 1 selected.
+  final double sel;
+
+  Color _c(Color idleD, Color selD, Color idleL, Color selL) =>
+      p.c(Color.lerp(idleD, selD, sel)!, Color.lerp(idleL, selL, sel)!);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Offset.zero & size;
+    final rr = RRect.fromRectAndRadius(
+      rect,
+      Radius.circular(u * OnbMetrics.optRadius),
+    );
+    // Outside: shadow (idle) and gold glow (selected).
+    canvas.drawRRect(
+      rr.shift(Offset(0, u * 0.35)),
+      Paint()
+        ..color = p
+            .c(Colors.black, const Color(0xFF8A6A4A))
+            .withValues(alpha: p.d(0.35, 0.14) * (1 - sel))
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
+    );
+    if (sel > 0) {
+      canvas.drawRRect(
+        rr,
+        Paint()
+          ..color = p
+              .c(RateelColors.onbSelGlow, RateelColors.onbLSelGlow)
+              .withValues(alpha: p.d(0.6, 0.55) * sel)
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.3),
+      );
+    }
+    // Fill, lit from the top.
+    canvas.drawRRect(
+      rr,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            _c(
+              RateelColors.onbOptTop,
+              RateelColors.onbSelTop,
+              RateelColors.onbLOptTop,
+              RateelColors.onbLSelFill,
+            ),
+            _c(
+              RateelColors.onbOptMid,
+              RateelColors.onbSelMid,
+              RateelColors.onbLOptBottom,
+              RateelColors.onbLSelFill,
+            ),
+            _c(
+              RateelColors.onbOptBottom,
+              RateelColors.onbSelBottom,
+              RateelColors.onbLOptBottom,
+              RateelColors.onbLSelFill,
+            ),
+          ],
+          stops: const [0, 0.4, 1],
+        ).createShader(rect),
+    );
+    // Inner gold glow along the rim (selected, dark).
+    if (sel > 0 && p.t < 1) {
+      canvas.save();
+      canvas.clipRRect(rr);
+      canvas.drawRRect(
+        rr,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = u * 1.4
+          ..color = RateelColors.onbSelGlow.withValues(
+            alpha: 0.4 * sel * (1 - p.t),
+          )
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
+      );
+      canvas.restore();
+    }
+    // Rim: idle thin olive; selected gold edge with a bright core.
+    final w = u * (0.22 + 0.2 * sel);
+    canvas.drawRRect(
+      rr.deflate(w / 2),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = math.max(1.0, w)
+        ..color = _c(
+          RateelColors.onbOptRim,
+          RateelColors.onbSelRim,
+          RateelColors.onbLOptRim,
+          RateelColors.onbLSelRim,
+        ),
+    );
+    if (sel > 0 && p.t < 1) {
+      canvas.drawRRect(
+        rr.deflate(w / 2),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = math.max(1.0, u * 0.14)
+          ..color = RateelColors.onbSelCore.withValues(alpha: sel * (1 - p.t)),
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_OptionCardPainter o) =>
+      o.p.t != p.t || o.u != u || o.sel != sel;
+}
+
 /// Scale + fade in when [on] (check disc, flame).
 class _Pop extends StatelessWidget {
   const _Pop({required this.on, required this.child});
@@ -1329,6 +1414,8 @@ class _Pop extends StatelessWidget {
   );
 }
 
+/// Check disc (reference: gold ring, dark olive inside, cream check; light:
+/// gold disc, white check).
 class _CheckDisc extends StatelessWidget {
   const _CheckDisc({required this.p, required this.u});
 
@@ -1339,24 +1426,23 @@ class _CheckDisc extends StatelessWidget {
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          p.c(RateelColors.testSelTop, RateelColors.testLGoldTop),
-          p.c(RateelColors.testSelBottom, RateelColors.testLGoldBottom),
-        ],
-      ),
+      color: p.c(RateelColors.onbCheckFill, RateelColors.onbLCheckFill),
       border: Border.all(
-        color: p.c(RateelColors.testSelRim, RateelColors.testLGoldBottom),
+        color: p.c(RateelColors.onbCheckRim, RateelColors.onbLCheckRim),
         width: math.max(1.0, u * 0.3),
       ),
+      boxShadow: [
+        BoxShadow(
+          color: RateelColors.onbSelGlow.withValues(alpha: p.d(0.45, 0.25)),
+          blurRadius: u * 1.0,
+        ),
+      ],
     ),
     child: Padding(
       padding: EdgeInsets.all(u * 1.5),
       child: Image.asset(
         'assets/ui/icons_white/checkmark.webp',
-        color: p.c(RateelColors.iconCream, Colors.white),
+        color: p.c(RateelColors.onbCheckInk, Colors.white),
       ),
     ),
   );
@@ -1385,8 +1471,8 @@ class _Dots extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(u),
             color: i == step
-                ? p.c(RateelColors.amberPill, RateelColors.testLSelRim)
-                : p.c(RateelColors.cardRimTop, RateelColors.readLDotOff),
+                ? p.c(RateelColors.onbDotOn, RateelColors.onbLDotOn)
+                : p.c(RateelColors.onbDotOff, RateelColors.onbLDotOff),
           ),
         ),
       ],
@@ -1394,45 +1480,50 @@ class _Dots extends StatelessWidget {
   );
 }
 
-/// Star lattice of the library (`decor/lattice_star_tile.webp`, A5, white
-/// lines, 2×2 cells per tile) in a top corner, tinted gold (light: tan),
-/// strongest at the corner and fading inwards.
-class _StarLattice extends StatelessWidget {
-  const _StarLattice({required this.p, required this.u, required this.left});
+/// The owner's gold lattice corner (2026-11-28), faint as the reference
+/// (the lattice shows outside the big arc); light: tinted tan.
+class _CornerLattice extends StatelessWidget {
+  const _CornerLattice({required this.p, required this.left});
 
   final LessonPal p;
-  final double u;
   final bool left;
 
   @override
-  Widget build(BuildContext context) {
-    final tile = u * OnbMetrics.starCell * 2;
-    return IgnorePointer(
-      child: ShaderMask(
-        blendMode: BlendMode.dstIn,
-        shaderCallback: RadialGradient(
-          center: left ? Alignment.topLeft : Alignment.topRight,
-          radius: 1.15,
-          colors: const [
-            Color(0xFF000000),
-            Color(0x88000000),
-            Color(0x00000000),
-          ],
-          stops: const [0, 0.45, 1],
-        ).createShader,
-        child: Opacity(
-          opacity: p.d(0.8, 0.6),
-          child: Image.asset(
-            'assets/ui/decor/lattice_star_tile.webp',
-            repeat: ImageRepeat.repeat,
-            fit: BoxFit.none,
-            alignment: left ? Alignment.topLeft : Alignment.topRight,
-            scale: 512 / tile,
-            color: p.c(RateelColors.onbArc, RateelColors.readLLattice),
-            colorBlendMode: BlendMode.modulate,
-          ),
-        ),
+  Widget build(BuildContext context) => IgnorePointer(
+    child: Opacity(
+      opacity: p.d(0.42, 0.55),
+      child: Image.asset(
+        'assets/ui/decor/corner_lattice_gold_${left ? 'left' : 'right'}.webp',
+        fit: BoxFit.fill,
+        color: p.t > 0 ? p.c(Colors.white, RateelColors.onbLLattice) : null,
+        colorBlendMode: p.t > 0 ? BlendMode.modulate : null,
       ),
-    );
-  }
+    ),
+  );
+}
+
+/// Cream (dark) / brown (light) versions of one owner's glyph, cross-faded.
+class _Themed extends StatelessWidget {
+  const _Themed({required this.p, required this.dark, required this.light});
+
+  final LessonPal p;
+  final String dark;
+  final String light;
+
+  @override
+  Widget build(BuildContext context) => Stack(
+    fit: StackFit.expand,
+    children: [
+      if (p.t < 1)
+        Opacity(
+          opacity: 1 - p.t,
+          child: Image.asset(dark, fit: BoxFit.contain),
+        ),
+      if (p.t > 0)
+        Opacity(
+          opacity: p.t,
+          child: Image.asset(light, fit: BoxFit.contain),
+        ),
+    ],
+  );
 }

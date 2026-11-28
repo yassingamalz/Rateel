@@ -182,3 +182,15 @@ selected card rim ≈ 4–6 px neon gold #FFF8A4 + wide glow (token 0.3u `testSe
 flat `testRowFill` #0B3A2A, rim #70A685 → #498163). Also the متوسط star is filled (the library has no outline star).
 Sheet `30-onboarding/compare-v2.jpg`.
 
+## v3 (2026-11-28): «as the reference» (owner)
+Owner: «we must reach the reference almost identically, unless something is an app standard used elsewhere». Values
+sampled on the six references (dark and light) are now the screen's own `onb*` tokens (`rateel_theme.dart`): card A fill,
+name field (fill, pale green rim), separator (light line over a dark one), avatar rings (idle pale, chosen thick gold +
+glow), level / goal cards (idle glass lit from the top with an olive rim; selected bright-core gold rim with glow outside and
+inside; light: cream / tan, warm fill, gold rim), check disc, step dots, emblem glow.
+Kept as app standards: emblem, avatars, `LessonButton`, `LessonRoundButton`, the gold card painter of 08/10 (card A rim),
+Readex Pro and the title colours, the mosque of the library (tinted dark).
+Owner's new assets (common library, `ASSETS.md`): outline star and open book, cream (dark) and brown (light); gold lattice
+corner (left; right = mirror until the owner's right file arrives). Sheet `30-onboarding/compare-v3.jpg`.
+Waiting for files: the owner's right corner, light corner and light mosque were shown in the chat but not received as files.
+
