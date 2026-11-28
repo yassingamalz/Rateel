@@ -284,6 +284,6 @@ Sources in `docs/design-assets/profile/` (owner's `Rateel_Assets_Complete.zip` +
 | `ui/decor/mosque_light.webp` | `09_mosque_skyline_light.png` (A6) | 29 header, light theme | beige skyline |
 | `ui/icons/flame_gold_04.webp` | `10_streak_flame.png` (A7) | 29 tile «أيام متتالية» | the reference's flame (12 keeps `flame_gold_01`) |
 | `ui/decor/mosque_v2_dark.webp`, `mosque_v2_light.webp` | `12_…`, `13_mosque_light_magenta.png` | spare | new mosque drawing, green / beige (`11_mosque_dark_original.png` on black: source only) |
-| `ui/decor/avatar_ring_gold.webp` | `16_avatar_ring_magenta.png` | 29 avatar ring | glow keyed from the green channel (no magenta spill); solid ring 95.1% of the width, 5.5% thick |
+| `ui/decor/avatar_ring_gold.webp` | `16_avatar_ring_magenta.png` | spare (29 draws the reference's thin ring in code, owner 2026-11-28) | glow keyed from the green channel (no magenta spill); solid ring 95.1% of the width, 5.5% thick |
 | — | `14_…`, `15_quran_mihrab_*_checker.png`, `17_avatar_ring_checker.png` | not used | the checkerboard is painted into the image (RGB, no alpha): cannot be keyed cleanly |
 | `ui/leaderboard/avatar_1…10.webp` | (edited) | every avatar of the app | yellow background darkened #FCC300 → #E7AF03 (owner, 2026-11-28: all avatars, critic v1 of 29) |

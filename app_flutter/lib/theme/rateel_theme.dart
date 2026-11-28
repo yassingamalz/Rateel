@@ -497,8 +497,9 @@ class RateelColors {
   static const profVDivider = Color(0xFFD6E6C2);
   static const profAvatarLattice = Color(0xFF5F8248);
   static const profLattice = Color(0x8C5E7A34); // faint olive lines
-  static const profRingTop = Color(0xFFFFE27A);
-  static const profRingBottom = Color(0xFFE0A91C);
+  static const profRingTop = Color(0xFFF9EFA0);
+  static const profRingBottom = Color(0xFFF2DE7C);
+  static const profRingLine = Color(0xFFB69818); // darker line inside the ring
   static const profRingGlow = Color(0xFFF2C94C);
   static const profArchGlow = Color(0x99F5D25A);
   static const profFloorGlow = Color(0xFFD9C93A); // light under the Quran stand

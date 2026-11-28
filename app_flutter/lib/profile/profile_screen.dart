@@ -47,9 +47,9 @@ abstract final class ProfMetrics {
   static const cardH = 28.0;
   static const radius = 3.6;
   // Avatar ring 1228–1424 × 243–439 px.
-  static const avatarDx = 56.6;
+  static const avatarDx = 56.7;
   static const avatarCy = 40.0;
-  static const avatarD = 23.0;
+  static const avatarD = 24.3;
   // Name (right edge 1102 px, ink 253–316), city row (centre y 365).
   static const textRight = 31.0;
   static const nameCy = 33.15;
@@ -76,7 +76,7 @@ abstract final class ProfMetrics {
   static const labelCy = 66.4;
   static const labelSize = 3.5;
   static const tileDivCy = 70.6;
-  static const tileDivW = 13.0;
+  static const tileDivW = 20.5;
   static const numberCy = 74.6;
   static const numberSize = 5.25;
   // Level bar 137–1564 × 702–804 px.
@@ -305,7 +305,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ),
                   );
                 },
-                child: _content(u, w / 2, p),
+                // Horizontal unit: the reference's content box is 197.8u wide; on
+                // wider phones horizontal places stretch with the width.
+                child: _content(u, w / 2, p, w / 197.8),
               ),
             );
           },
@@ -314,7 +316,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _content(double u, double cx, _Palette p) {
+  Widget _content(double u, double cx, _Palette p, double ux) {
     final me = players.firstWhere((e) => e.isMe);
     final rank = players.indexOf(me) + 1;
     final header = _interval(0, 0.5);
@@ -324,9 +326,9 @@ class _ProfileScreenState extends State<ProfileScreen>
       // Tile centres 311.5 … 1391.5 px (from the content centre, right first).
       const centres = [64.2, 21.8, -20.2, -62.4];
       return Positioned(
-        left: cx + u * (centres[i] - ProfMetrics.tileW / 2),
+        left: cx + ux * (centres[i] - ProfMetrics.tileW / 2),
         top: u * ProfMetrics.tileTop,
-        width: u * ProfMetrics.tileW,
+        width: ux * ProfMetrics.tileW,
         height: u * ProfMetrics.tileH,
         child: _Rise(
           animation: _interval(0.32 + 0.07 * i, 0.82 + 0.04 * i),
@@ -354,26 +356,26 @@ class _ProfileScreenState extends State<ProfileScreen>
             animation: header,
             u: u,
             down: true,
-            child: _Header(u: u, cx: cx, p: p),
+            child: _Header(u: u, ux: ux, cx: cx, p: p),
           ),
         ),
         // Identity card.
         Positioned(
-          left: cx + u * (ProfMetrics.cardDx - ProfMetrics.cardW / 2),
+          left: cx + ux * (ProfMetrics.cardDx - ProfMetrics.cardW / 2),
           top: u * ProfMetrics.cardTop,
-          width: u * ProfMetrics.cardW,
+          width: ux * ProfMetrics.cardW,
           height: u * ProfMetrics.cardH,
           child: _Rise(
             animation: card,
             u: u,
-            child: _IdentityCard(u: u, p: p, player: me),
+            child: _IdentityCard(u: u, ux: ux, p: p, player: me),
           ),
         ),
         // Stats panel.
         Positioned(
-          left: cx + u * (ProfMetrics.cardDx - ProfMetrics.panelW / 2),
+          left: cx + ux * (ProfMetrics.cardDx - ProfMetrics.panelW / 2),
           top: u * ProfMetrics.panelTop,
-          width: u * ProfMetrics.panelW,
+          width: ux * ProfMetrics.panelW,
           height: u * ProfMetrics.panelH,
           child: _Rise(
             animation: panel,
@@ -394,14 +396,14 @@ class _ProfileScreenState extends State<ProfileScreen>
           ),
         ),
         Positioned(
-          left: cx + u * (ProfMetrics.cardDx - ProfMetrics.levelW / 2),
+          left: cx + ux * (ProfMetrics.cardDx - ProfMetrics.levelW / 2),
           top: u * ProfMetrics.levelTop,
-          width: u * ProfMetrics.levelW,
+          width: ux * ProfMetrics.levelW,
           height: u * ProfMetrics.levelH,
           child: _Rise(
             animation: _interval(0.5, 1),
             u: u,
-            child: _LevelBar(u: u, p: p),
+            child: _LevelBar(u: u, ux: ux, p: p),
           ),
         ),
       ],
@@ -487,9 +489,15 @@ class _Corners extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({required this.u, required this.cx, required this.p});
+  const _Header({
+    required this.u,
+    required this.ux,
+    required this.cx,
+    required this.p,
+  });
 
   final double u;
+  final double ux;
   final double cx;
   final _Palette p;
 
@@ -502,7 +510,7 @@ class _Header extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Positioned(
-            left: cx + u * (ProfMetrics.titleDx - ProfMetrics.archW / 2),
+            left: cx + ux * ProfMetrics.titleDx - u * ProfMetrics.archW / 2,
             top: u * ProfMetrics.archTop,
             width: u * ProfMetrics.archW,
             height: u * ProfMetrics.archH,
@@ -600,7 +608,7 @@ class _Header extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: cx + u * (ProfMetrics.bookDx - ProfMetrics.bookW / 2),
+            left: cx + ux * ProfMetrics.bookDx - u * ProfMetrics.bookW / 2,
             top: u * ProfMetrics.bookTop,
             width: u * ProfMetrics.bookW,
             height: u * ProfMetrics.bookW * 449 / 988,
@@ -611,7 +619,7 @@ class _Header extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: cx + u * (ProfMetrics.titleDx - 60),
+            left: cx + ux * ProfMetrics.titleDx - u * 60,
             width: u * 120,
             top: u * (ProfMetrics.titleCentre - 6),
             height: u * 12,
@@ -646,7 +654,8 @@ class _Header extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: cx + u * (ProfMetrics.dividerDx - ProfMetrics.dividerW / 2),
+            left:
+                cx + ux * ProfMetrics.dividerDx - u * ProfMetrics.dividerW / 2,
             top: u * (ProfMetrics.dividerCentre - 2),
             width: u * ProfMetrics.dividerW,
             height: u * 4,
@@ -768,17 +777,23 @@ class _Lattice extends StatelessWidget {
 }
 
 class _IdentityCard extends StatelessWidget {
-  const _IdentityCard({required this.u, required this.p, required this.player});
+  const _IdentityCard({
+    required this.u,
+    required this.ux,
+    required this.p,
+    required this.player,
+  });
 
   final double u;
+  final double ux;
   final _Palette p;
   final Player player;
 
   @override
   Widget build(BuildContext context) {
     // Card-local x of a content offset (from the content centre).
-    final w = u * ProfMetrics.cardW;
-    double lx(double dx) => w / 2 + u * (dx - ProfMetrics.cardDx);
+    final w = ux * ProfMetrics.cardW;
+    double lx(double dx) => w / 2 + ux * (dx - ProfMetrics.cardDx);
     final top = u * ProfMetrics.cardTop;
     return _Glass(
       u: u,
@@ -818,36 +833,50 @@ class _IdentityCard extends StatelessWidget {
               ),
             ),
           ),
-          // Avatar in the owner's glowing gold ring (`decor/avatar_ring_gold.webp`,
-          // 2026-11-28): the solid ring is 95.1% of the image width, 5.5% thick;
-          // its outer edge matches the reference ring (Ø 23u).
+          // Avatar ring as the reference (owner, 2026-11-28: «il cerchio non come
+          // il riferimento»): outer Ø 207 px (24.3u), a pale-gold band ≈ 4 px
+          // (#F9EFA0 → #EFDA6F) and a darker gold line ≈ 2 px (#B69818) inside,
+          // a soft gold glow outside; the yellow disc fills the rest.
           Positioned(
             left: lx(ProfMetrics.avatarDx) - u * ProfMetrics.avatarD / 2,
             top: u * ProfMetrics.avatarCy - top - u * ProfMetrics.avatarD / 2,
             width: u * ProfMetrics.avatarD,
             height: u * ProfMetrics.avatarD,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned.fill(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    RateelColors.profRingTop,
+                    RateelColors.profRingBottom,
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: RateelColors.profRingGlow.withValues(
+                      alpha: p.light ? 0.25 : 0.35,
+                    ),
+                    blurRadius: u * 1.0,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(u * 0.47),
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: RateelColors.profRingLine,
+                  ),
                   child: Padding(
-                    padding: EdgeInsets.all(u * ProfMetrics.avatarD * 0.045),
+                    padding: EdgeInsets.all(u * 0.22),
                     child: ClipOval(
                       child: Image.asset(player.avatarAsset, fit: BoxFit.cover),
                     ),
                   ),
                 ),
-                Positioned(
-                  left: -u * ProfMetrics.avatarD * 0.026,
-                  top: -u * ProfMetrics.avatarD * 0.023,
-                  width: u * ProfMetrics.avatarD / 0.951,
-                  height: u * ProfMetrics.avatarD / 0.951 * 762 / 768,
-                  child: const Image(
-                    image: AssetImage('assets/ui/decor/avatar_ring_gold.webp'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           // Name.
@@ -1069,12 +1098,23 @@ class _Tile extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: u * (ProfMetrics.tileW - ProfMetrics.tileDivW) / 2,
-            width: u * ProfMetrics.tileDivW,
+            left: 0,
+            right: 0,
             top: u * (ProfMetrics.tileDivCy - 1.5) - top,
             height: u * 3,
-            child: CustomPaint(
-              painter: _DividerPainter(u: u, color: p.divider, diamond: 0.55),
+            // Reference: 166–180 px wide, gold fading to the ends.
+            child: Center(
+              child: SizedBox(
+                width: u * ProfMetrics.tileDivW,
+                child: CustomPaint(
+                  size: Size.infinite,
+                  painter: _DividerPainter(
+                    u: u,
+                    color: p.divider,
+                    diamond: 0.55,
+                  ),
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -1116,15 +1156,16 @@ class _Number extends StatelessWidget {
 }
 
 class _LevelBar extends StatelessWidget {
-  const _LevelBar({required this.u, required this.p});
+  const _LevelBar({required this.u, required this.ux, required this.p});
 
   final double u;
+  final double ux;
   final _Palette p;
 
   @override
   Widget build(BuildContext context) {
-    final w = u * ProfMetrics.levelW;
-    double lx(double dx) => w / 2 + u * (dx - ProfMetrics.cardDx);
+    final w = ux * ProfMetrics.levelW;
+    double lx(double dx) => w / 2 + ux * (dx - ProfMetrics.cardDx);
     return _Glass(
       u: u,
       top: p.levelFill,
@@ -1197,7 +1238,7 @@ class _LevelBar extends StatelessWidget {
           // Level pill.
           Positioned(
             left: lx(ProfMetrics.pillLeft),
-            width: u * (ProfMetrics.pillRight - ProfMetrics.pillLeft),
+            width: ux * (ProfMetrics.pillRight - ProfMetrics.pillLeft),
             top: u * (ProfMetrics.pillTop - ProfMetrics.levelTop),
             height: u * ProfMetrics.pillH,
             child: DecoratedBox(
