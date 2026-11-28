@@ -28,3 +28,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/husary/
+  fonts:
+    - family: ReadexPro
+      fonts:
+        - asset: assets/fonts/ReadexPro.ttf
+    - family: AmiriQuran
+      fonts:
+        - asset: assets/fonts/AmiriQuran.ttf

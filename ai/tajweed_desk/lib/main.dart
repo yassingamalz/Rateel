@@ -4,12 +4,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:tajweed_core/explain.dart';
 import 'package:tajweed_core/timeline.dart';
 
+import 'issues.dart';
+import 'screens.dart';
 import 'state.dart';
 import 'track.dart';
 
@@ -32,7 +33,9 @@ class DeskApp extends StatelessWidget {
         title: 'Rateel · laboratorio tajweed',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1F6B4F), brightness: Brightness.dark),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1F6B4F), brightness: Brightness.dark, surface: kCard),
+          scaffoldBackgroundColor: kBg,
+          fontFamily: 'ReadexPro',
           useMaterial3: true,
         ),
         home: const DeskHome(),
@@ -178,7 +181,7 @@ class _DeskHomeState extends State<DeskHome> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_ready) return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (!_ready) return const Scaffold(backgroundColor: kBg, body: Center(child: CircularProgressIndicator()));
     return Focus(
       focusNode: _focus,
       autofocus: true,
@@ -186,9 +189,9 @@ class _DeskHomeState extends State<DeskHome> {
       child: ListenableBuilder(
         listenable: lab,
         builder: (context, _) => Scaffold(
-          body: Row(children: [
-            SizedBox(width: 290, child: _sidebar(context)),
-            const VerticalDivider(width: 1),
+          backgroundColor: kBg,
+          body: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            SizedBox(width: 320, child: _sidebar(context)),
             Expanded(child: _main(context)),
           ]),
         ),
@@ -198,101 +201,152 @@ class _DeskHomeState extends State<DeskHome> {
 
   // ------------------------------------------------------------ sidebar: model + ayat
   Widget _sidebar(BuildContext context) {
-    final t = Theme.of(context).textTheme;
     final list = lab.ayat
         .where((a) => _filter.isEmpty || a.uthmani.contains(_filter) || a.suraName.contains(_filter) || '${a.sura}:${a.aya}'.contains(_filter))
         .toList();
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-        child: Row(children: [
-          Expanded(child: Text('Laboratorio tajweed', style: t.titleMedium)),
-          IconButton(tooltip: 'Avviso IA e licenza', icon: const Icon(Icons.info_outline), onPressed: _notice),
-        ]),
-      ),
-      Card(
-        margin: const EdgeInsets.symmetric(horizontal: 12),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Modello', style: t.titleSmall),
-            const SizedBox(height: 4),
-            Text(lab.modelInfo ?? (lab.modelPath == null ? 'Scegli il file muaalem-v3_2-int8.onnx' : lab.modelPath!),
-                style: t.bodySmall),
-            if (lab.loadingModel) const Padding(padding: EdgeInsets.only(top: 6), child: LinearProgressIndicator()),
-            const SizedBox(height: 8),
-            Row(children: [
-              OutlinedButton(onPressed: lab.loadingModel ? null : _pickModel, child: const Text('Scegli .onnx')),
-              const SizedBox(width: 8),
-              DropdownButton<int>(
-                value: lab.threads,
-                items: [for (final n in {1, 2, 4, 6, 8, lab.threads}.toList()..sort()) DropdownMenuItem(value: n, child: Text('$n thread'))],
-                onChanged: lab.loadingModel ? null : (v) => lab.setThreads(v!),
-              ),
-            ]),
-          ]),
+    final loaded = lab.engine.loaded;
+    final nErr = lab.mine?.analysis == null ? null : issuesOf(lab.mine!.analysis!).length;
+    final rows = <Widget>[];
+    int? sura;
+    for (final a in list) {
+      if (a.sura != sura) {
+        sura = a.sura;
+        rows.add(Padding(
+          padding: const EdgeInsets.fromLTRB(8, 14, 8, 4),
+          child: Text('سورة ${a.suraName}', textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 12, color: kMuted)),
+        ));
+      }
+      final sel = identical(a, lab.ayah);
+      rows.add(Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: Material(
+          color: sel ? const Color(0xFF1F3A2F) : Colors.transparent,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10), side: sel ? const BorderSide(color: kGreen) : BorderSide.none),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              lab.openAyah(a);
+              _focus.requestFocus();
+            },
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 48),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Row(children: [
+                Text(sel && nErr != null ? '${a.sura}:${a.aya} · ${nErr == 0 ? 'ok' : '$nErr err.'}' : '${a.sura}:${a.aya}',
+                    style: TextStyle(fontSize: 13, color: sel ? kMint : kMuted)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(a.uthmani,
+                      textDirection: TextDirection.rtl,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontFamily: kQuran, fontSize: 18, color: kText)),
+                ),
+              ]),
+            ),
+          ),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
-        child: TextField(
-          decoration: const InputDecoration(isDense: true, prefixIcon: Icon(Icons.search), hintText: 'Cerca sura, ayah, parola'),
+      ));
+    }
+    return Container(
+      decoration: const BoxDecoration(color: kSide, border: Border(right: BorderSide(color: kLine))),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(children: [
+          const Expanded(child: Text('Laboratorio tajweed', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
+          IconButton(tooltip: 'Avviso IA e licenza', icon: const Icon(Icons.info_outline, color: kMuted), onPressed: _notice),
+        ]),
+        const SizedBox(height: 8),
+        Row(children: [
+          Container(
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(shape: BoxShape.circle, color: loaded ? kGreen : (lab.loadingModel ? kAmber : kRed))),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+                loaded
+                    ? (lab.modelInfo ?? 'Modello pronto')
+                    : (lab.loadingModel ? 'Carico il modello…' : (lab.modelInfo ?? 'Modello non caricato')),
+                style: const TextStyle(fontSize: 13, color: kMuted)),
+          ),
+        ]),
+        if (lab.loadingModel) const Padding(padding: EdgeInsets.only(top: 8), child: LinearProgressIndicator(color: kGreen)),
+        const SizedBox(height: 10),
+        Row(children: [
+          OutlinedButton(
+            onPressed: lab.loadingModel ? null : _pickModel,
+            style: OutlinedButton.styleFrom(foregroundColor: kText, side: const BorderSide(color: kLine2), minimumSize: const Size(0, 40)),
+            child: Text(loaded ? 'Cambia modello' : 'Scegli .onnx'),
+          ),
+          const SizedBox(width: 10),
+          DropdownButton<int>(
+            value: lab.threads,
+            underline: const SizedBox(),
+            items: [for (final n in {1, 2, 4, 6, 8, lab.threads}.toList()..sort()) DropdownMenuItem(value: n, child: Text('$n thread'))],
+            onChanged: lab.loadingModel ? null : (v) => lab.setThreads(v!),
+          ),
+        ]),
+        const SizedBox(height: 14),
+        TextField(
+          decoration: InputDecoration(
+            isDense: true,
+            prefixIcon: const Icon(Icons.search, color: kMuted),
+            hintText: 'Sura, ayah o parola',
+            filled: true,
+            fillColor: kBg,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kLine)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kLine)),
+          ),
           onChanged: (v) => setState(() => _filter = v.trim()),
         ),
-      ),
-      Expanded(
-        child: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (_, i) {
-            final a = list[i];
-            final sel = identical(a, lab.ayah);
-            return ListTile(
-              dense: true,
-              selected: sel,
-              selectedTileColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
-              title: Text(a.uthmani, textDirection: TextDirection.rtl, maxLines: 1, overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 17)),
-              subtitle: Text('${a.suraName} ${a.sura}:${a.aya}', textDirection: TextDirection.rtl),
-              onTap: () {
-                lab.openAyah(a);
-                _focus.requestFocus();
-              },
-            );
-          },
-        ),
-      ),
-    ]);
+        const SizedBox(height: 4),
+        Expanded(child: ListView(children: rows)),
+      ]),
+    );
   }
 
   // ------------------------------------------------------------ main area
   Widget _main(BuildContext context) {
     final ayah = lab.ayah;
     if (ayah == null) return const SizedBox();
+    final showResult = lab.mine?.analysis != null && !lab.recording;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+      padding: const EdgeInsets.fromLTRB(40, 28, 40, 0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        _AyahLine(lab: lab),
-        const SizedBox(height: 8),
-        _toolbar(context),
+        StepsBar(lab: lab),
         if (lab.status != null)
-          Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Text(lab.status!, style: const TextStyle(color: Color(0xFFFFC46B)))),
-        TrackView(lab: lab, who: Who.me),
-        TrackView(lab: lab, who: Who.husary),
-        Expanded(child: _BottomPanel(lab: lab)),
+          Padding(padding: const EdgeInsets.only(top: 10), child: Text(lab.status!, style: const TextStyle(color: Color(0xFFFFC46B)))),
+        const SizedBox(height: 20),
+        Expanded(
+          child: SingleChildScrollView(
+            child: showResult ? RisultatoView(lab: lab, details: _details(context)) : RecitaView(lab: lab, onOpenWav: _pickWav),
+          ),
+        ),
       ]),
     );
   }
 
+  /// The technical view of before: both tracks, letter details, errors, mudud.
+  Widget _details(BuildContext context) => Container(
+        decoration: BoxDecoration(color: kSide, borderRadius: BorderRadius.circular(16), border: Border.all(color: kLine)),
+        child: ExpansionTile(
+          shape: const Border(),
+          collapsedShape: const Border(),
+          title: const Text('Dettagli tecnici: forme d\'onda e lettere nel tempo', style: TextStyle(fontSize: 15, color: kMuted)),
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          children: [
+            _toolbar(context),
+            TrackView(lab: lab, who: Who.me),
+            TrackView(lab: lab, who: Who.husary),
+            SizedBox(height: 340, child: _BottomPanel(lab: lab)),
+          ],
+        ),
+      );
+
   Widget _toolbar(BuildContext context) {
-    final rec = lab.recording;
     return Wrap(spacing: 8, runSpacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
-      FilledButton.icon(
-        onPressed: lab.toggleRecord,
-        style: rec ? FilledButton.styleFrom(backgroundColor: Colors.red.shade700) : null,
-        icon: Icon(rec ? Icons.stop : Icons.mic),
-        label: Text(rec ? 'Stop e analizza (R)' : 'Registra (R)'),
-      ),
-      OutlinedButton.icon(onPressed: _pickWav, icon: const Icon(Icons.folder_open), label: const Text('Apri WAV')),
       OutlinedButton.icon(
         onPressed: lab.mine == null ? null : () => lab.togglePlay(Who.me),
         icon: Icon(lab.playing == Who.me ? Icons.stop : Icons.play_arrow),
@@ -303,7 +357,6 @@ class _DeskHomeState extends State<DeskHome> {
         icon: Icon(lab.playing == Who.husary ? Icons.stop : Icons.play_arrow),
         label: const Text('al-Husary (H)'),
       ),
-      const SizedBox(width: 8),
       SegmentedButton<double>(
         segments: const [
           ButtonSegment(value: 0.5, label: Text('0.5×')),
@@ -323,71 +376,15 @@ class _DeskHomeState extends State<DeskHome> {
         tooltip: 'Spento: ogni lunghezza lecita dei mudud è accettata (decisione del 28/11)',
       ),
       FilterChip(label: const Text('Tempo da destra'), selected: lab.rtlTime, onSelected: lab.setRtl),
+      OutlinedButton.icon(onPressed: _pickWav, icon: const Icon(Icons.folder_open), label: const Text('Apri WAV')),
       if (lab.busy) const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)),
-      Tooltip(
+      const Tooltip(
         message: 'Spazio: ascolta te · H: al-Husary · R: registra · ←/→: lettera precedente/successiva\n'
             'Invio: ascolta la lettera (Maiusc: al-Husary) · W: la parola · B: confronto A/B (Maiusc: parola)\n'
             'F: lettura fissa · +/−: zoom · 1/2/3: velocità · Esc: stop',
-        child: const Icon(Icons.keyboard, size: 22),
+        child: Icon(Icons.keyboard, size: 22),
       ),
     ]);
-  }
-}
-
-/// The ayah: every word is interactive (hover lights its letters in both takes, click selects, double-click plays).
-class _AyahLine extends StatelessWidget {
-  final LabState lab;
-  const _AyahLine({required this.lab});
-
-  @override
-  Widget build(BuildContext context) {
-    final text = lab.ayah!.uthmani;
-    final a = lab.mine?.analysis ?? lab.husary?.analysis;
-    final words = <(int, int)>[];
-    var s = 0;
-    for (var i = 0; i <= text.length; i++) {
-      if (i == text.length || text[i] == ' ') {
-        if (i > s) words.add((s, i));
-        s = i + 1;
-      }
-    }
-    final mineA = lab.mine?.analysis;
-    final spans = <InlineSpan>[];
-    for (final (ws, we) in words) {
-      final refs = a?.refGroupsInUthmani(ws, we) ?? const <int>[];
-      final hasError = mineA != null && mineA.refGroupsInUthmani(ws, we).any((r) => mineA.errorsOfRef[r].isNotEmpty);
-      final missing = mineA != null && mineA.refGroupsInUthmani(ws, we).any((r) => mineA.refToPred[r] < 0);
-      final lit = refs.contains(lab.hoveredRef) || refs.contains(lab.selectedRef);
-      spans.add(TextSpan(
-        text: text.substring(ws, we),
-        style: TextStyle(
-          color: hasError || missing ? const Color(0xFFFF7A7A) : null,
-          backgroundColor: lit ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.30) : null,
-          decoration: hasError ? TextDecoration.underline : null,
-          decorationColor: const Color(0xFFFF7A7A),
-        ),
-        mouseCursor: SystemMouseCursors.click,
-        onEnter: (_) => lab.hover(refs.isEmpty ? null : refs.first),
-        onExit: (_) => lab.hover(null),
-        recognizer: TapGestureRecognizer()
-          ..onTap = () {
-            if (refs.isEmpty) return;
-            lab.select(refs.first);
-            lab.playRef(lab.mine != null ? Who.me : Who.husary, refs.first, word: true);
-          },
-      ));
-      spans.add(const TextSpan(text: ' '));
-    }
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(children: [
-          Text('${lab.ayah!.suraName} ${lab.ayah!.sura}:${lab.ayah!.aya}', style: Theme.of(context).textTheme.labelMedium),
-          Text.rich(TextSpan(children: spans, style: const TextStyle(fontSize: 34, height: 1.8)),
-              textDirection: TextDirection.rtl, textAlign: TextAlign.center),
-        ]),
-      ),
-    );
   }
 }
 

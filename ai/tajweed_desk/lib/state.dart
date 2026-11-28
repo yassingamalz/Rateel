@@ -76,6 +76,9 @@ class LabState extends ChangeNotifier {
   int? selectedRef, hoveredRef;
   bool recording = false;
   DateTime? _recStart;
+  Timer? _recTick;
+  DateTime? get recStart => _recStart;
+  bool get analysingMine => mine != null && mine!.analysis == null && mine!.error == null && engine.loaded;
   bool busy = false;
 
   // playback (the playhead is drawn from these values)
@@ -232,6 +235,9 @@ class LabState extends ChangeNotifier {
       await _rec.start(const RecordConfig(encoder: AudioEncoder.wav, sampleRate: 16000, numChannels: 1), path: path);
       recording = true;
       _recStart = DateTime.now();
+      mine = null;
+      _recTick?.cancel();
+      _recTick = Timer.periodic(const Duration(milliseconds: 250), (_) => notifyListeners());
       say('Registro… recita l\'ayah e premi di nuovo R (o il pulsante) per fermare. Massimo 15 s.');
       Future.delayed(const Duration(seconds: 15), () {
         if (recording && DateTime.now().difference(_recStart!).inSeconds >= 15) _stopRecord();
@@ -243,6 +249,7 @@ class LabState extends ChangeNotifier {
   }
 
   Future<void> _stopRecord() async {
+    _recTick?.cancel();
     try {
       final path = await _rec.stop();
       recording = false;
