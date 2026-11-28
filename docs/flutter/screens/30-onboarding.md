@@ -194,3 +194,15 @@ Owner's new assets (common library, `ASSETS.md`): outline star and open book, cr
 corner (left; right = mirror until the owner's right file arrives). Sheet `30-onboarding/compare-v3.jpg`.
 Waiting for files: the owner's right corner, light corner and light mosque were shown in the chat but not received as files.
 
+## v4 (2026-11-28): critic v1 items
+Critic v1 (`30-onboarding/critic-v1.md`, scores 6.0–7.0) and its finding: the approved **splash background of 01**
+(`splash/background.webp`) is the reference's whole decor (star-lattice corners, arc fading at its ends, swoosh, mosque
+skyline, glow). Being an app standard, it is now the dark background (S1–S3, mosque). Light keeps the code decor (arc gold
+#C99761 fading at its ends, star lattice A5, mosque A6) until a light version of the splash background exists (ChatGPT
+prompt `prompts/30-onboarding/images-v2.txt`).
+Fixed: separator drawn (A1: the `Column` had no stretch), subtitle 3.9u weight 440 (S4), chosen avatar with a dark gap
+0.8u (A2), selected rim outer band 0.4u `onbSelOuter` + warm olive inner glow (B1, C2), rosette 8.2×9.5u (B2), teal idle goal
+cards `onbTeal*` (C1), goal number 5.5u and word 4.4u (C3), emblem halo ≈ 8u (S8). Sheet `30-onboarding/compare-v4.jpg`.
+Left for the owner (app standards): light body text = `LessonPal` ink (reference warm brown #52320B), light title copper
+(reference #633D11), `GoldDivider`, `flame_gold_01`, buttons.
+

@@ -1,0 +1,10 @@
+Screen 30, onboarding: light background (2026-11-28). Attach, in this order:
+ 1. app_flutter/assets/ui/splash/background.webp (the dark background to convert)
+ 2. docs/flutter/screens/30-onboarding/reference-b-level-light.webp (the light colours)
+
+=== BG-L, light version of the splash background ===
+Create the LIGHT THEME version of image 1, exactly 1844x853 pixels, landscape. Keep exactly the same composition, positions
+and sizes of every element of image 1: the star-lattice ornaments in the two top corners, the thin gold arc that frames the
+screen and fades out towards its ends, the wide soft swoosh with a thin line at the bottom, the mosque skyline at the bottom
+right and its soft glow. Use the light colours of image 2: warm cream background (#FDF6EB), beige / tan lattice, gold arc
+(#C99761), beige mosque, soft cream glow. Nothing else: no text, no cards, no buttons, no emblem, no watermark.
