@@ -165,3 +165,7 @@ Placeholders to replace before release:
 - [ ] Recording package for Flutter (none in `pubspec.yaml` today) and microphone permission: choose with screen 09's plan.
 - [ ] Lab app leftovers: no emulator test in the cloud; only 28 ayat; sifat heads not used; Ghonnah rules not in the 0.6.4 data;
       a stable signing key (same issue as Rateel's APKs).
+- [ ] **Desk app on Windows** (`ai/tajweed_desk/`): owner pushes the branch, runs the Actions workflow «Tajweed desk (Windows)», tries the
+      exe (microphone, sound, keys); send back problems or the workflow log if the build fails. Then decide phone / PC / cloud.
+- [ ] Desk app leftovers: only WAV files can be opened (no MP3); 28 ayat only (all the Quran needs the phonetizer for every ayah);
+      sifat heads not shown yet.

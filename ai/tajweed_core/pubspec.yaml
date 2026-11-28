@@ -1,0 +1,26 @@
+name: tajweed_core
+description: "Shared code of the Rateel tajweed test apps: audio features, comparison with the ayah, timings, model files."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  crypto: ^3.0.8
+  path_provider: ^2.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/ayat.json
+    - assets/vocab.json
+    - assets/window.f32
+    - assets/mel.f32
+    - assets/licence/QML-LICENSE.txt
+    - assets/licence/QML-NOTICE.txt

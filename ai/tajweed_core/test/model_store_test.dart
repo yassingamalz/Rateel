@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tajweed_lab/model_store.dart';
+import 'package:tajweed_core/model_store.dart';
 
 void main() {
   final url = Platform.environment['LAB_PARTS_URL'];

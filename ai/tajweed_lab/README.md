@@ -1,5 +1,8 @@
 # Rateel tajweed lab (test app, not Rateel)
 
+Shared code (features, comparison, timings, model files) lives in `ai/tajweed_core/` since 2026-11-28; the PC version
+is `ai/tajweed_desk/`.
+
 A small Android app to try the Quran Muaalem model **on the phone** (owner's request, 2026-11-28). It is separate from
 `app_flutter/` (own package `it.rateel.tajweed_lab`, installs next to Rateel). Study: `docs/ai/TAJWEED-MODEL.md`.
 
@@ -17,14 +20,14 @@ What it does:
 ## Code
 | File | What |
 |---|---|
-| `lib/features.dart` | port of `SeamlessM4TFeatureExtractor` (window and mel bank from the Python extractor, `assets/*.f32`) |
-| `lib/explain.dart` | port of quran-transcript 0.6.4 `explain_error` + greedy CTC decode + choice of the reading |
-| `lib/model_store.dart` | download in parts / import of the model |
+| `../tajweed_core/lib/features.dart` | port of `SeamlessM4TFeatureExtractor` (window and mel bank from the Python extractor, `assets/*.f32`) |
+| `../tajweed_core/lib/explain.dart` | port of quran-transcript 0.6.4 `explain_error` + greedy CTC decode + choice of the reading |
+| `../tajweed_core/lib/model_store.dart` | download in parts / import of the model |
 | `android/.../MainActivity.kt` | runs ONNX Runtime 1.28 (official package) on a background thread; device RAM and last exit reason |
 | `lib/main.dart` | the two pages |
-| `assets/ayat.json` | reference phonemes of the 28 ayat × every allowed reading (57 distinct references) |
-| `tool/build_assets.py` | makes the assets and the test vectors (Python env of `docs/ai/tajweed-model-study/README.md`) |
-| `tool/make_model_parts.py` | splits the int8 model into parts + `manifest.json` |
+| `../tajweed_core/assets/ayat.json` | reference phonemes of the 28 ayat × every allowed reading (57 distinct references) |
+| `../tajweed_core/tool/build_assets.py` | makes the assets and the test vectors (Python env of `docs/ai/tajweed-model-study/README.md`) |
+| `../tajweed_core/tool/make_model_parts.py` | splits the int8 model into parts + `manifest.json` |
 
 ## Checks done in the cloud container (2026-11-28)
 - `flutter analyze`: no issues. `flutter test`: features equal to Python on al-Husary 1:2 (max difference 6.7e-6);

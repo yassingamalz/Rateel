@@ -1,0 +1,44 @@
+# Builds the Windows version of the desktop tajweed lab (ai/tajweed_desk) and publishes it as a downloadable
+# artifact: GitHub → Actions → "Tajweed desk (Windows)" → the latest run → Artifacts → rateel-tajweed-desk-windows.
+# The app is a test tool, not Rateel. The model file (muaalem-v3_2-int8.onnx) is chosen inside the app.
+name: Tajweed desk (Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ai/tajweed_desk/**'
+      - 'ai/tajweed_core/**'
+      - '.github/workflows/tajweed-desk-windows.yml'
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.50.1
+          cache: true
+      - name: Build
+        working-directory: ai/tajweed_desk
+        run: |
+          flutter config --enable-windows-desktop
+          flutter pub get
+          flutter build windows --release
+      - name: Licences next to the exe
+        shell: pwsh
+        run: |
+          $out = "ai/tajweed_desk/build/windows/x64/runner/Release"
+          Copy-Item ai/tajweed_core/assets/licence/QML-LICENSE.txt "$out/QML-LICENSE.txt"
+          Copy-Item ai/tajweed_core/assets/licence/QML-NOTICE.txt "$out/QML-NOTICE.txt"
+          Copy-Item ai/tajweed_desk/third_party/onnxruntime/LICENSE "$out/onnxruntime-flutter-LICENSE.txt"
+          Get-ChildItem "ai/tajweed_desk/build/windows/x64" -Recurse -Filter ThirdPartyNotices.txt | Select-Object -First 1 | Copy-Item -Destination "$out/onnxruntime-ThirdPartyNotices.txt"
+          Get-ChildItem $out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rateel-tajweed-desk-windows
+          path: ai/tajweed_desk/build/windows/x64/runner/Release
+          retention-days: 30

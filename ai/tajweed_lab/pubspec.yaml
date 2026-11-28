@@ -7,8 +7,9 @@ environment:
   sdk: ^3.14.0
 
 dependencies:
+  tajweed_core:
+    path: ../tajweed_core
   audioplayers: ^6.8.1
-  crypto: ^3.0.8
   file_picker: ^13.4.1
   flutter:
     sdk: flutter
@@ -23,10 +24,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/ayat.json
-    - assets/vocab.json
-    - assets/window.f32
-    - assets/mel.f32
-    - assets/licence/QML-LICENSE.txt
-    - assets/licence/QML-NOTICE.txt

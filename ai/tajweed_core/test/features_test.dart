@@ -4,7 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tajweed_lab/features.dart';
+import 'package:tajweed_core/features.dart';
 
 Float32List _f32(String p) => File(p).readAsBytesSync().buffer.asFloat32List();
 

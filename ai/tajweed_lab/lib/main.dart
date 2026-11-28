@@ -12,9 +12,9 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
-import 'explain.dart';
-import 'features.dart';
-import 'model_store.dart';
+import 'package:tajweed_core/explain.dart';
+import 'package:tajweed_core/features.dart';
+import 'package:tajweed_core/model_store.dart';
 
 const aiNoticeAr =
     'هذا المعلّم القرآني نموذج ذكاء اصطناعي قد يخطئ؛ فهو للإعانة فقط ولا يُعتمد عليه، وليس بديلاً عن معلّمٍ مُتقِنٍ مُجاز؛ لأنّ القرآن لا يُؤخذ إلا بالمشافهة.';
@@ -57,10 +57,10 @@ class Lab {
 
   Future<void> init() async {
     await store.init();
-    ayat = parseAyat(await rootBundle.loadString('assets/ayat.json'));
-    window = (await rootBundle.load('assets/window.f32')).buffer.asFloat32List();
-    mel = (await rootBundle.load('assets/mel.f32')).buffer.asFloat32List();
-    final v = jsonDecode(await rootBundle.loadString('assets/vocab.json')) as Map<String, dynamic>;
+    ayat = parseAyat(await rootBundle.loadString('packages/tajweed_core/assets/ayat.json'));
+    window = (await rootBundle.load('packages/tajweed_core/assets/window.f32')).buffer.asFloat32List();
+    mel = (await rootBundle.load('packages/tajweed_core/assets/mel.f32')).buffer.asFloat32List();
+    final v = jsonDecode(await rootBundle.loadString('packages/tajweed_core/assets/vocab.json')) as Map<String, dynamic>;
     vocab = {for (final e in v.entries) int.parse(e.key): e.value as String};
   }
 
@@ -297,8 +297,8 @@ class LicencePage extends StatelessWidget {
         appBar: AppBar(title: const Text('QML 1.0 · NOTICE')),
         body: FutureBuilder<List<String>>(
           future: Future.wait([
-            rootBundle.loadString('assets/licence/QML-NOTICE.txt'),
-            rootBundle.loadString('assets/licence/QML-LICENSE.txt'),
+            rootBundle.loadString('packages/tajweed_core/assets/licence/QML-NOTICE.txt'),
+            rootBundle.loadString('packages/tajweed_core/assets/licence/QML-LICENSE.txt'),
           ]),
           builder: (_, s) => s.hasData
               ? SingleChildScrollView(

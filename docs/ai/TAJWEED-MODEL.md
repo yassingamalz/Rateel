@@ -343,6 +343,10 @@ At the owner's request: `ai/tajweed_lab/` (README there), a separate Android app
 Dart features equal to Python (max 6.7e-6), Dart comparison equal to quran-transcript 0.6.4 on 728/728 cases, download in
 parts OK, Dart features → int8 model → same phonemes as PyTorch on the edited recordings. **Not yet run on a phone.**
 
+**PC version** (2026-11-28): `ai/tajweed_desk/` (README there), interactive: both takes as linked tracks with every
+letter in time, A/B listening, errors and mudud tabs. On the PC the model runs with ONNX Runtime 1.32.0 (the 1.15.1 of
+the `onnxruntime` pub package cannot run the int8 model). Shared code in `ai/tajweed_core/`.
+
 ## 11. Reproduce
 
 Scripts used for §4 (helpers, not app code): `docs/ai/tajweed-model-study/` (`run_measured.py`, `batch.py`, `cut.py`,

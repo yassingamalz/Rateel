@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tajweed_lab/explain.dart';
+import 'package:tajweed_core/explain.dart';
 
 void main() {
   final ayat = parseAyat(File('assets/ayat.json').readAsStringSync());

@@ -3,7 +3,7 @@
 Needs the Python environment of docs/ai/tajweed-model-study/README.md
 (quran-muaalem 0.3.0, quran-transcript 0.6.4, transformers 4.55.2).
 
-Writes into ai/tajweed_lab/assets/:
+Writes into ai/tajweed_core/assets/:
   ayat.json      reference phonemes of the test ayat, one entry per allowed reading (madd lengths),
                  with the phoneme->Uthmani map and the tajweed rules of every phoneme group
                  (quran-transcript 0.6.4, the version tested in docs/ai/TAJWEED-MODEL.md)
