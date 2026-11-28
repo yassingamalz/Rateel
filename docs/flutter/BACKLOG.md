@@ -21,6 +21,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
 - [x] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): built on `flutter/24-end-of-lesson`, **merged into
       `master` 2026-11-28** (PR #68, owner's request).
+- [x] Screen 24 only after practice (test 10, listening 22), not after explanations (owner 2026-11-28).
 - [ ] Screen 24 leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
       the streak tile reads the mock streak of 12 (always shown, at least 1, owner); light buttons vs the reference
       (`STYLE-CONFLICTS.md` E1–E4, decided at the end of the project with the other conflicts); critic not run (ask the owner).

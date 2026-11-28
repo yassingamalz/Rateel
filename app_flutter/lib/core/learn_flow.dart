@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../challenges/daily_challenges_screen.dart';
 import '../courses/courses_screen.dart';
 import '../lessons/lessons_screen.dart';
+import '../nav/side_nav.dart';
 import '../units/units_screen.dart';
 
 /// The learning section (rail item 0): courses → units → lessons, stacked in
@@ -27,6 +28,26 @@ class LearnFlow extends StatefulWidget {
 
 class _LearnFlowState extends State<LearnFlow> {
   final _nav = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    SideNavScaffold.reselected.addListener(_onReselect);
+  }
+
+  @override
+  void dispose() {
+    SideNavScaffold.reselected.removeListener(_onReselect);
+    super.dispose();
+  }
+
+  /// The learning icon of the rail, tapped inside the section (units,
+  /// lessons, daily challenges), goes back to the courses (owner,
+  /// 2026-11-28: a rail button always leads out of a sub-screen).
+  void _onReselect() {
+    if (SideNavScaffold.reselected.value != 0) return;
+    _nav.currentState?.popUntil((r) => r.isFirst);
+  }
 
   @override
   void didChangeDependencies() {

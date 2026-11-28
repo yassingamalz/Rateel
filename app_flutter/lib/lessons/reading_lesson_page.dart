@@ -9,7 +9,6 @@ import '../core/screen_decor.dart';
 import '../theme/rateel_theme.dart';
 import 'lesson_data.dart';
 import 'lesson_decor.dart';
-import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'reading_data.dart';
@@ -306,16 +305,9 @@ class _ReadingLessonPageState extends State<ReadingLessonPage>
     setState(() => _index = _n - 1);
     await Future<void>.delayed(const Duration(milliseconds: 320));
     await _shell.currentState?.celebrate();
-    // Screen 24: the end card; «إعادة الدرس» goes back to the first verse.
-    final choice =
-        await _shell.currentState?.finish(const LessonEndResult.done()) ??
-        LessonEndChoice.next;
+    // No end card (screen 24) after an explanation: it follows only the
+    // practice lessons, test 10 and listening 22 (owner, 2026-11-28).
     if (!mounted) return;
-    if (choice == LessonEndChoice.again) {
-      _finishing = false;
-      _restart();
-      return;
-    }
     _leave(true);
   }
 

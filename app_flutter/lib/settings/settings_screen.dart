@@ -3,6 +3,8 @@ import 'package:material_ui/material_ui.dart';
 import '../core/app_settings.dart';
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
+import '../nav/nav_items.dart';
+import '../nav/side_nav.dart';
 import '../profile/profile_screen.dart';
 import '../theme/rateel_theme.dart';
 
@@ -41,7 +43,22 @@ class _SettingsScreenState extends State<SettingsScreen>
   )..forward();
 
   @override
+  void initState() {
+    super.initState();
+    SideNavScaffold.reselected.addListener(_onReselect);
+  }
+
+  /// The settings icon of the rail, tapped while the profile is open, goes
+  /// back to the settings (owner, 2026-11-28).
+  void _onReselect() {
+    if (SideNavScaffold.reselected.value == settingsSection) {
+      SettingsScreen.showProfile.value = false;
+    }
+  }
+
+  @override
   void dispose() {
+    SideNavScaffold.reselected.removeListener(_onReselect);
     // Leaving the settings section closes the profile.
     Future.microtask(() => SettingsScreen.showProfile.value = false);
     _entry.dispose();
