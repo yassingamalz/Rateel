@@ -133,6 +133,11 @@ Future<void> main() async {
   // Review aids (screen 27): `?section=4` opens the badges, `?earn=5` plays
   // the celebration of badge 5 once the screen is open, `?medals=green` tries
   // the dark-green engraving of the medals.
+  // Review aid (screen 29): `?profile=1` opens the profile (settings section).
+  if (q['profile'] == '1') {
+    SideNavScaffold.startSection = settingsSection;
+    SettingsScreen.showProfile.value = true;
+  }
   final earn = int.tryParse(q['earn'] ?? '');
   if (earn != null) badgeEarned.value = earn;
   badgeMedalSet = q['medals'] ?? badgeMedalSet;
@@ -153,6 +158,10 @@ Future<void> _initialize(BuildContext context) async {
       _loadHeaderImage(context, 'assets/ui/decor/$name.webp'),
   ]);
   await AppSettings.load();
+  // Review aid: `?theme=light` starts in the light theme.
+  if (Uri.base.queryParameters['theme'] == 'light') {
+    AppSettings.light.value = true;
+  }
   // The learner's progress saved on the device (before the courses screen).
   await ProgressStore.load();
   // Review aid (screen 23): `?textScale=1.2` tries the text size setting.

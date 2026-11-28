@@ -1,0 +1,101 @@
+Screen 29, profile: ChatGPT prompts for the assets found by critic v1 (2026-11-27). Replaces images-v1.txt (Q1 is
+revised here: the two references show two different books, and the prompt now attaches the app screenshots first).
+Rules (LESSONS-LEARNED.md, README.md): one subject per image, flat magenta #FF00FF background, keyed out with
+scripts/assets/key-magenta.py; glows, arch lines, floor light and shadows are drawn in code, never in the image.
+Attach the app screenshots first (style), then the profile reference (subject only), as written in each block.
+
+=== A1 (was Q1), Quran on the wooden stand, dark theme (left of the identity card) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-08-reading-dark.webp   (style of the app: do not invent a new style)
+ 2. docs/flutter/screens/29-profile/reference-dark.webp     (the book to replicate: left of the big card)
+Prompt:
+Create ONE image, 1600x1200 pixels, of exactly the open Quran on its wooden stand (rehal) shown on the left of the large
+card in image 2. Same style as the attached app screenshot (soft polished 3D illustration), do not invent a new style.
+The book: open, seen slightly from above and in front, two thick page blocks curving up from the spine, pages warm
+cream-gold with fine gold text lines, golden covers and gold page edges catching a warm light from above. The stand: a
+crossed X rehal in warm honey-brown wood (#B8763A to #7A4A1E) with darker grain and a cut-out slot in each leg, both
+feet resting flat. Proportions as image 2: book about 1.9x as wide as it is tall; the stand legs show below the book for
+about 40% of the total height. The object fills about 85% of the image width, centred, nothing cut off.
+Background: flat pure magenta #FF00FF everywhere around the object: no shadow on the background, no glow, no floor, no
+arch, no text, no watermark. Clean sharp edges so the magenta can be keyed out.
+
+=== A1b, Quran on the wooden stand, light theme (only if the owner wants the light reference's green book) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-08-reading-light.webp  (style of the app)
+ 2. docs/flutter/screens/29-profile/reference-light.webp    (the book to replicate: left of the big card)
+ 3. the A1 result                                           (same pose, same stand, same size)
+Prompt:
+Create ONE image, 1600x1200 pixels, of the same open Quran on the same wooden stand as image 3, in the same pose and
+size, but with the book of image 2: dark green covers (#0E4A2A) with a thin gold border, white-cream pages with fine
+brown text lines, gold page edges. Same honey-brown wooden rehal as image 3. Soft polished 3D illustration as the app.
+Background: flat pure magenta #FF00FF, no shadow, no glow, no floor, no arch, no text. Clean sharp edges.
+
+=== A2, rank rosette glyph (tile «الترتيب») ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-03-courses.webp         (style and golds of the app)
+ 2. docs/flutter/screens/29-profile/reference-dark.webp     (the rosette above «الترتيب», second tile from the left)
+ 3. docs/flutter/screens/29-profile/reference-light.webp    (same rosette, light theme)
+Prompt:
+Create ONE image, 1024x1024 pixels, of exactly the small award rosette shown above the word «الترتيب» in images 2 and 3:
+a round medal with a scalloped (wavy, about 16 bumps) gold edge, a flat gold face with a dark brown five-point star in
+the centre (#5A3A12), and two short gold ribbon tails below it with V-cut ends, slightly spread. Gold #F2C230 with a
+soft lighter top (#FFE06A) and a deeper bottom (#C8901A), as image 3; no outline in another colour. Front view,
+centred, filling about 80% of the image height. Flat pure magenta #FF00FF background, no shadow, no glow, no text.
+
+=== A3, open book line glyph (tile «الدروس») ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-05-units.webp           (style of the app)
+ 2. docs/flutter/screens/29-profile/reference-dark.webp     (the open book above «الدروس», third tile from the left)
+ 3. docs/flutter/screens/29-profile/reference-light.webp    (same glyph, brown)
+Prompt:
+Create ONE image, 1024x1024 pixels, of exactly the open-book line icon shown above «الدروس» in images 2 and 3: an open
+book seen from the front, two pages rising to a peak on each side of the spine, a second page edge line under each
+page, a thick base line that dips at the spine. Bold even strokes (about 7% of the icon width), rounded joins, no fill
+inside the pages. Draw it in pure white #FFFFFF only (it will be tinted in code). About 1.55x as wide as tall, centred,
+filling 85% of the image width. Flat pure magenta #FF00FF background, no shadow, no glow, no text.
+
+=== A4, layers glyph (level bar, right of «المستوى») ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-03-courses.webp
+ 2. docs/flutter/screens/29-profile/reference-dark.webp     (the stacked layers icon at the right end of the bottom bar)
+ 3. docs/flutter/screens/29-profile/reference-light.webp
+Prompt:
+Create ONE image, 1024x1024 pixels, of exactly the "stacked layers" icon at the right end of the bottom bar in images 2
+and 3: three flat rhombus plates seen in perspective, stacked with even gaps, the top plate a full closed rhombus
+outline, the two lower plates only their open lower V edges. Bold rounded gold strokes, gold #F0C030 with a slightly
+lighter top plate (#FFD95A) and a deeper bottom plate (#D49A1A). About 1.15x as wide as tall, centred, filling 85% of
+the width. Flat pure magenta #FF00FF background, no shadow, no glow, no text.
+
+=== A5, seamless lattice tile (behind the avatar and in the level bar) ===
+Attach, in this order:
+ 1. docs/flutter/screens/29-profile/reference-dark.webp     (the lattice in the arch behind the avatar, right of the card)
+ 2. docs/flutter/screens/29-profile/reference-light.webp    (the same lattice, beige, and the one on the left of the bottom bar)
+Prompt:
+Create ONE seamless repeating tile, 1024x1024 pixels, of the Islamic geometric lattice visible behind the round avatar
+in images 1 and 2: interlaced eight-point stars joined by small crosses, drawn as thin single lines only (no fills),
+exactly 2 repeats across and 2 down so that the left edge continues the right edge and the top edge continues the
+bottom edge. Lines pure white #FFFFFF (tinted in code), constant width about 6 px. Flat pure magenta #FF00FF
+background, no shading, no glow, no frame, no text.
+
+=== A6, light-theme mosque skyline (top left of the header, light theme only) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-08-reading-light.webp
+ 2. docs/flutter/screens/29-profile/reference-light.webp    (the beige mosque skyline at the top left)
+ 3. app_flutter/assets/ui/decor/mosque.webp                 (the current dark-theme mosque: same drawing family)
+Prompt:
+Create ONE image, 1600x800 pixels, of exactly the mosque skyline at the top left of image 2: from left to right a slim
+minaret with an onion top, a large onion dome with a small crescent finial, a second taller minaret with a balcony,
+and a second smaller dome with a crescent, over a low base with small arched windows. Flat silhouette in a single warm
+beige #D9B994 with only a soft vertical shading (lighter at the bottom, #EBD3B8), no outlines, same flat style as
+image 3. Fill about 90% of the width, base on the bottom edge. Flat pure magenta #FF00FF background, no fade, no glow,
+no ground, no text (the fade to the background is done in code).
+
+=== A7 (optional, ask the owner), streak flame (tile «أيام متتالية») ===
+The app's flame (`ui/icons/flame_gold_01.webp`, screen 12) differs from the reference's flame. Only if the owner wants
+the reference's flame here instead of the app's standard one.
+Attach: 1. docs/flutter/screens/29-profile/reference-dark.webp  2. reference-light.webp  3. app_flutter/assets/ui/icons/flame_gold_01.webp
+Prompt:
+Create ONE image, 1024x1024 pixels, of exactly the small flame above «أيام متتالية» in images 1 and 2: a gold flame
+with three tongues (a tall centre tongue, two shorter side tongues curling outwards) and a small inner flame cut out
+in a lighter yellow, gold gradient #FFE060 top to #E09A10 bottom, same rendering as image 3. About 0.92x as wide as
+tall, centred, filling 85% of the height. Flat pure magenta #FF00FF background, no shadow, no glow, no text.

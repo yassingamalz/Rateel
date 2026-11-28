@@ -120,6 +120,16 @@ Placeholders to replace before release:
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
 - [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon. Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one + padlock) for each style, and a choice of which badge gets which style.
 
+## Screen 29, profile (v1 on `flutter/29-profile-v2`, 2026-11-27)
+- [x] **Quran on the wooden stand** and glyphs (A1–A7, ring): owner's assets wired 2026-11-28 (`ASSETS.md`).
+- [ ] **Code items of critic v1** (`screens/29-profile/critic-v1.md`) not solved by the assets: radii, phone width, dividers,
+      pill text, light-theme header arch and shadows, conflicts with tokens (owner to decide). Waiting for the owner's go.
+- [ ] **Mock data**: name, avatar, city, points, lessons, rank (leaderboard user), streak (12), starting level «مبتدئ»
+      (30 onboarding). Wire to the saved profile (30) and real progress; points and level with 13.
+- [ ] Light theme of the side rail (the profile content follows the light setting, the rail stays dark).
+- [ ] Edit name / avatar (not in the reference): decide with screen 30.
+- [ ] Critic of 29 (phone only, ask the owner first).
+
 ## Screen 13, achievements (to do): 27 is part of it
 **Owner, 2026-11-27: 13 and 27 are different screens.** 13 is the achievements page with the **levels** (points, level, progress bar, tabs الإنجازات / الأوسمة / النقاط / المجموعة, achievement cards; reference `13-traguardi`, copy in `screens/27-badges/ref-13-traguardi.png`). **27 (badges) is reached from 13** (tab «الأوسمة»). Until 13 exists, the rail item «الإنجازات» opens 27 directly; when 13 is built, the rail opens 13 and 27 opens from its «الأوسمة» tab.
 - [ ] Build screen 13 (plan, levels, tabs) and link it to 27.

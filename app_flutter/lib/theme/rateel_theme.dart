@@ -477,6 +477,55 @@ class RateelColors {
   static const chalText = Color(0xFFF7F1DC); // «50», streak number
   static const chalLabel = Color(0xFFE1E1C1); // subtitle, streak label
   static const chalBandEdge = Color(0xFFB8932E); // gold edge of the bottom band
+
+  // Screen 29, profile: reference values (`reference-dark.webp`,
+  // `reference-light.webp`), conflicts P1–P6 in STYLE-CONFLICTS.md.
+  static const profCardTop = Color(0xFF013121);
+  static const profCardBottom = Color(0xFF033420);
+  static const profCardRim = Color(0xFFF6F3B8); // pale gold core
+  static const profCardGlow = Color(0x80E3C94E);
+  static const profPanelFill = Color(0xFF012F1F);
+  static const profPanelRim = Color(0xFF579177);
+  static const profTileTop = Color(0xFF013322);
+  static const profTileBottom = Color(0xFF013220);
+  static const profLevelRim = Color(0xFFB3E1B6);
+  static const profPillRim = Color(0xFFE8D255);
+  static const profPillText = Color(0xFFF1D143);
+  static const profGlyph = Color(0xFFF2CD5D);
+  static const profCity = Color(0xFFDCE3CF);
+  static const profDivider = Color(0xFFEDE27A);
+  static const profHeaderDivider = Color(0xFFE6D25E);
+  static const profVDivider = Color(0xFFD6E6C2);
+  static const profAvatarLattice = Color(0xFF5F8248);
+  static const profLattice = Color(0x8C5E7A34); // faint olive lines
+  static const profRingTop = Color(0xFFF9EFA0);
+  static const profRingBottom = Color(0xFFF2DE7C);
+  static const profRingLine = Color(0xFFB69818); // darker line inside the ring
+  static const profRingGlow = Color(0xFFF2C94C);
+  static const profArchGlow = Color(0x99F5D25A);
+  static const profFloorGlow = Color(0xFFD9C93A); // light under the Quran stand
+  // Light theme.
+  static const profLBg = Color(0xFFFEF3E8);
+  static const profLInk = Color(0xFF643913);
+  static const profLCity = Color(0xFF7A5634);
+  static const profLCardTop = Color(0xFFFEF2E6);
+  static const profLCardBottom = Color(0xFFFFF6E7);
+  static const profLCardRim = Color(0xFFBA8642);
+  static const profLCardRimSide = Color(0xFFD59E5E);
+  static const profLCardGlow = Color(0x33D59E5E);
+  static const profLPanelFill = Color(0xFFFDF2E3);
+  static const profLPanelRim = Color(0xFFEBD6BE);
+  static const profLTileRim = Color(0xFFC9B193);
+  static const profLLevelRim = Color(0xFFAA7534);
+  static const profLPill = Color(0xFF114223);
+  static const profLGlyph = Color(0xFFE8A302);
+  static const profLBook = Color(0xFF91570D);
+  static const profLMedal = Color(0xFFD9940A);
+  static const profLDivider = Color(0xFFBE8E33);
+  static const profLLattice = Color(0xFFEBD8C0);
+  static const profLArch = Color(0xFFCFAD82);
+  static const profLMosque = Color(0xFFE0C2A3);
+  static const profLHeaderBook = Color(0xFFAF751C);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

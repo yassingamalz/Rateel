@@ -49,7 +49,9 @@ CODE=$(git -C "$ROOT" rev-list --count HEAD)
 # branches (+1), so an APK built from any branch is never lower than one already installed
 # (2026-11-24: screen 06 was installed as 1.0.299 while screen 03 had ~100 commits).
 git -C "$ROOT" fetch -q origin 2>/dev/null || true
-for ref in $(git -C "$ROOT" for-each-ref --format='%(refname)' refs/remotes/origin/flutter/); do
+# for-each-ref lists only remote branches: a local branch (patch workflow, no push) logs its
+# own APKs in its DECISIONS.md, so HEAD is checked too.
+for ref in HEAD $(git -C "$ROOT" for-each-ref --format='%(refname)' refs/remotes/origin/flutter/); do
   n=$(git -C "$ROOT" rev-list --count "$ref")
   if [ "$n" -ge "$CODE" ]; then CODE=$((n + 1)); fi
   # Versions already shipped to the phone, as logged in DECISIONS.md ("APK 1.0.N").

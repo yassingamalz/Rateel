@@ -1,0 +1,19 @@
+Screen 29, profile: ChatGPT prompt for the missing asset (2026-11-27). Pasted in the chat, one block.
+Rule (LESSONS-LEARNED.md, README.md asset rules): one subject per image, flat magenta #FF00FF background, keyed out with
+scripts/assets/key-magenta.py. The arch line, the light inside it and the yellow glow on the floor are drawn in code
+(ProfileScreen, _QuranArt), so the asset is only the book on its stand.
+
+=== Q1, Quran on the wooden stand (left of the identity card) ===
+Attach, in this order:
+ 1. docs/flutter/screens/29-profile/reference-dark.webp   (the book to replicate: left of the big card)
+ 2. docs/flutter/screens/29-profile/reference-light.webp  (same book on the light theme)
+ 3. app_flutter/assets/ui/courses/course_01.webp          (the app's current rehal icon: same family of golds)
+
+Prompt:
+Create ONE image, 1600x1200 pixels, of exactly the open Quran on its wooden stand (rehal) shown on the left of the large
+card in images 1 and 2: an open book with cream-gold pages fanned slightly, thick gold-edged covers, resting on a
+crossed wooden rehal in warm honey-brown wood with darker grain, seen slightly from above and in front, as in the
+reference. Same style as the reference: soft polished 3D illustration, warm light from above, gentle gold highlights on
+the page edges. The book and stand fill about 85% of the image width, centred, nothing cut off.
+Background: flat pure magenta #FF00FF everywhere around the object, no shadow on the background, no glow, no floor, no
+arch, no text, no watermark. Clean, sharp edges so the magenta can be keyed out.

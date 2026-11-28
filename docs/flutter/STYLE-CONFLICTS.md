@@ -128,3 +128,17 @@ card are the approved ones of 10 / 08 / 22); the owner decides at the end of the
 | E2 | Light «إعادة الدرس» (filled green) | `testLGreenTop #4FA676 → testLGreenBottom #2E7A52` | darker #2D8155 → #1A6943 | token (10 button) |
 | E3 | Card title, light | `readLInk #341E06` | warmer brown ≈ #44 1D 00 | token |
 | E4 | Tile rim, dark | gold card rim `readCardRim #F7E27A → readCardRimSide` 0.24u | thin bright gold ≈ #E0E785 | token |
+
+## Screen 29, profile (2026-11-27)
+Measured on `screens/29-profile/reference-{dark,light}.webp`. Built with the **reference values** (`prof*` / `profL*` tokens), as
+screens 07/08/11; the owner decides at the end of the project.
+
+| # | What | Confirmed token | Reference value | Built provisionally |
+|---|---|---|---|---|
+| P1 | Identity card rim | gold rim #DAA42A 1.2 px + #FFDA6B 1 px | pale gold core #FAFFC2 ≈ 0.35u with a gold glow | reference (`profCardRim`, `profCardGlow`) |
+| P2 | Stats panel and tile rims | glass rim 2 px #245843 | lighter green #579177 / #5A9578 ≈ 0.3u | reference (`profPanelRim`) |
+| P3 | Level bar rim | glass rim #245843 | pale mint #B3E1B6 | reference (`profLevelRim`) |
+| P4 | Text cream | `titleCream #FAF1D8` | #FAFBE6 (= `leaderText`, K9) | `leaderText` |
+| P5 | Light theme ink | 08 `readLInk #341E06`, title `readLTitle #A17550` | brown #643913 for title and texts | reference (`profLInk`) |
+| P6 | Mosque / crescent place | 03/12 standard (mosque left 10.5u, top 8u, 49u wide; crescent right 25.5u, 10.65u) | mosque 13.6u / 3.9u / 42u; crescent 26.3u / 6.7u / 8.9u (header higher than 12) | reference |
+

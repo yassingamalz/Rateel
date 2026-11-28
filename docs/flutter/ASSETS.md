@@ -275,3 +275,29 @@ screen that rates something with stars (results of 10, 12, 13…) can reuse them
 **Used by screen 24** (`lib/lessons/lesson_end.dart`): `stars_row_earned` (3 stars, cut in three slices that pop), `stars_row_empty` + `star_earned` (1–2 stars); `star_empty` spare. Also reused: `ui/test/star_coin_gold.webp`, `ui/test/flame.webp`, `ui/reading/lattice_tile.webp`.
 References of the screen (not assets): `screens/24-end-of-lesson/reference-dark.webp` (24-A), `reference-light.webp` (24-B), owner 2026-11-27.
 A second empty row (cream stars with a stronger gold rim) was shown in the chat but not received as a file: to add when the owner sends it.
+
+## Screen 29, profile (2026-11-27)
+| File | Source | Used for | Notes |
+|---|---|---|---|
+| reused | `decor/header_arch.svg` (with a blurred glow copy), `decor/header_book.svg` (header emblem and the «الدروس» glyph), `decor/mosque.webp`, `decor/crescent_star.svg`, `decor/corner_glow_*`, `video/bottom_band.webp` (lattice), `glyphs/star.svg`, `icons/flame_gold_01.webp`, `leaderboard/avatar_5.webp` | screen 29 | light theme: tinted with `profL*` |
+| (was placeholder) | `courses/course_01.webp` | Quran on the stand until 2026-11-28 | replaced by `decor/quran_mihrab_*` |
+
+### Common library additions from screen 29 (owner, 2026-11-28: «metti tutto nella libreria comune»)
+Sources in `docs/design-assets/profile/` (owner's `Rateel_Assets_Complete.zip` + 4 images); processed by
+`tools/assets/profile_assets.py` (magenta key as `badge_assets.py`). Any screen may reuse them.
+| File | Source | Used for | Notes |
+|---|---|---|---|
+| `ui/decor/quran_mihrab_dark.webp` | `04_quran_mihrab_dark.png` (A1) | 29 identity card, dark | full-bleed art on #00271A (arch, glow, floor light baked); edges faded in code |
+| `ui/decor/quran_mihrab_light.webp` | `03_quran_mihrab_light.png` (A1b) | 29 identity card, light | full-bleed on cream, green book |
+| `ui/icons/quran_rehal_gold.webp` | `01_quran_rehal.png` | spare (any screen) | gold book on the wooden rehal, keyed |
+| `ui/icons/quran_rehal_gold_glow.webp` | `02_quran_rehal_glow.png` | spare | same with its glow |
+| `ui/glyphs/rank_rosette.webp` | `05_award_rosette.png` (A2) | 29 tile «الترتيب» | gold rosette, brown star |
+| `ui/glyphs/open_book.webp` | `06_open_book_white.png` (A3) | 29 tile «الدروس» | white, tinted in code |
+| `ui/glyphs/layers.webp` | `07_stacked_layers_gold.png` (A4) | 29 level bar | |
+| `ui/decor/lattice_star_tile.webp` | `08_islamic_lattice.png` (A5) | 29 avatar arch, level bar | seamless, 2×2 cells, white lines (tinted), not trimmed |
+| `ui/decor/mosque_light.webp` | `09_mosque_skyline_light.png` (A6) | 29 header, light theme | beige skyline |
+| `ui/icons/flame_gold_04.webp` | `10_streak_flame.png` (A7) | 29 tile «أيام متتالية» | the reference's flame (12 keeps `flame_gold_01`) |
+| `ui/decor/mosque_v2_dark.webp`, `mosque_v2_light.webp` | `12_…`, `13_mosque_light_magenta.png` | spare | new mosque drawing, green / beige (`11_mosque_dark_original.png` on black: source only) |
+| `ui/decor/avatar_ring_gold.webp` | `16_avatar_ring_magenta.png` | spare (29 draws the reference's thin ring in code, owner 2026-11-28) | glow keyed from the green channel (no magenta spill); solid ring 95.1% of the width, 5.5% thick |
+| — | `14_…`, `15_quran_mihrab_*_checker.png`, `17_avatar_ring_checker.png` | not used | the checkerboard is painted into the image (RGB, no alpha): cannot be keyed cleanly |
+| `ui/leaderboard/avatar_1…10.webp` | (edited) | every avatar of the app | yellow background darkened #FCC300 → #E7AF03 (owner, 2026-11-28: all avatars, critic v1 of 29) |
