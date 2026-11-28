@@ -146,9 +146,10 @@ Placeholders to replace before release:
 - [x] Optional tashil/ibdal (آلذكرين، آلآن، آلله) written from the book ch. 19 (pool 99, 2026-11-27); الاسم is in ch. 15 p. 471.
 
 ## AI tajweed correction (screens 09 and 31; study 2026-11-28, `docs/ai/TAJWEED-MODEL.md`)
-- [ ] **Owner's answers** to the open questions (`TAJWEED-MODEL.md` §9): server or on-device first, ads / paid plans (QML forbids
-      ads in the whole app), reading taught (madd lengths), place of the AI notice, real learners' recordings, contact with the
-      authors, which errors a beginner sees, backend budget.
+- [ ] **Owner's answers** still open (`TAJWEED-MODEL.md` §9): server or on-device first, **ads or only subscription** (QML forbids
+      ads in the whole app; owner answered «sì» to ads / paid plans on 2026-11-28), place of the AI notice, contact with the
+      authors, which errors a beginner sees, backend budget. Answered 2026-11-28: reading = every allowed length; real learners
+      may be recorded.
 - [ ] **Licence**: ask the authors (quran.muaalem@gmail.com) whether model and dataset are MIT (Hugging Face) or QML (repo); log
       the answer.
 - [ ] **Read issue #46** (mobile roadmap) of `obadx/quran-muaalem`: needs `github.com` in the environment's allowed domains, or the

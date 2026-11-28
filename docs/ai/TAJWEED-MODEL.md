@@ -174,6 +174,18 @@ Export + quantisation: 42 s, peak RSS 10.3 GB. Then on 49 files (the 44 ayat + 5
 PyTorch on 49/49**; RTF int8 0.28 vs PyTorch 0.25 on this CPU (int8 is smaller here, not faster); peak RSS 2.7 GB vs
 3.5 GB (whole Python process, feature extraction included). **No phone was used**: phone latency and memory are unknown.
 
+**ONNX Runtime alone** (int8, features pre-computed, no torch/transformers in the process; `ort_only.py`), al-Husary 1:2
+(6.3 s of audio), median of 3 runs **[measured, container CPU]**:
+
+| CPU threads | Model load | RAM after load | Peak RAM | Time for 6.3 s of audio |
+|---|---|---|---|---|
+| 1 | 2.1 s | 1,086 MiB | 1,207 MiB | 3.58 s |
+| 2 | 1.9 s | 1,071 MiB | 1,191 MiB | 2.94 s |
+| 4 | 1.8 s | 1,091 MiB | 1,212 MiB | 1.94 s |
+
+**[deduced]** On a phone the RAM need should be of the same order (≈ 1.1–1.2 GB for the model at work), and the time
+likely longer than here, depending on the phone's cores; only a test on the owner's phone gives real numbers.
+
 ### 4.5 API server on CPU **[measured]**
 `ACCELERATOR=cpu DTYPE=float32 quran-muaalem-engine` + `quran-muaalem-app`, requests with MP3/WAV files:
 
@@ -237,8 +249,8 @@ Common to every option (🟡 proposals):
   the reference QPS + mappings for the ayat used in lessons (every allowed reading) as JSON, and port the alignment of
   `explain_error` to Dart (🟡 proposal).
 - **Size [measured]:** 610 MB model file → cannot go in the APK; optional download after install (Wi-Fi).
-- **Latency / memory on a phone:** **unknown**; container CPU: ≈ 1.7 s for 6 s of audio, RSS 2.7 GB for the whole Python
-  process. Must be measured on the owner's phone before any decision.
+- **Latency / memory on a phone:** **unknown**; container CPU, ONNX Runtime alone: 1.9–3.6 s for 6.3 s of audio (4→1
+  threads), ≈ 1.2 GB RAM at peak (§4.4). Must be measured on the owner's phone before any decision.
 - **Cost:** no server; development work (features, decoding, comparison, download manager). **Privacy:** audio never leaves
   the phone. **Offline:** yes. **Licence:** distributing the model inside/with the app = distribution of the Work (§7).
 
@@ -307,6 +319,11 @@ on-device) is a Covered Product **as a whole**, not only screen 09.
 | Small team upstream | most commits by one author (`git shortlog`: 125 of 141 commits in quran-muaalem and 427 of 429 in quran-transcript are by the author's accounts (obadx / Abdullah)); no support commitment | **[measured]** / **[deduced]** |
 
 ## 9. Open questions for the owner
+
+**Owner's answers (2026-11-28):** (1) asked whether on-device is heavy → measured §4.4 (ONNX Runtime alone); (2) **ads / paid
+plans: «sì»** → conflicts with QML 2.3(a) if ads are meant (ads are forbidden in the whole app with Muaalem); to clarify:
+ads, subscription, or both; (3) reading: **«tutto»**, accept every allowed length; (4) the AI notice was explained to the
+owner, place still to decide; (5) recording real learners with consent: **yes**.
 
 1. **Server or on-device first?** (my proposal: server for the prototype, phone measurement in parallel, §6).
 2. Does Rateel plan **ads, paid plans or ad-tracking SDKs**, now or later? With Muaalem, ads are forbidden for the whole app,
