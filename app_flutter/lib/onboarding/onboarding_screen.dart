@@ -101,12 +101,17 @@ class OnbMetrics {
   // Top corner lattice (reference ≈ 0–300 × 0–220 px), star cell ≈ 5.3u.
   static const cornerW = 40.0;
   static const cornerH = 34.5; // owner's corner art, 894×771
+  static const starCell = 5.3; // reference star cell ≈ 45 px
 }
 
 /// Review aids: `?step=a|b|c` opens that step, `?emblemL=none|green|dark`
 /// tries the fills of the emblem in the light theme (owner Q7: examples).
 String? onboardingStartStep;
 String onboardingEmblemLight = 'green';
+
+/// Review aid `?corner=owner`: the owner's quatrefoil corner instead of the
+/// library's star lattice (A5, the reference's pattern).
+String onboardingCorner = 'star';
 
 const _texts = [
   ('أهلاً بك في رتّل', 'لنتعرّف عليك قبل أن نبدأ'),
@@ -823,7 +828,9 @@ class _Backdrop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mosqueH = u * OnbMetrics.mosqueW * 542 / 900;
+    // Library mosque A6 (`decor/mosque_light.webp`, 900×465): the reference's
+    // skyline in both themes (dark: tinted as a dark silhouette).
+    final mosqueH = u * OnbMetrics.mosqueW * 465 / 900;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -840,15 +847,26 @@ class _Backdrop extends StatelessWidget {
             ),
           ),
         ),
-        for (final left in [true, false])
-          Positioned(
-            left: left ? 0 : null,
-            right: left ? null : 0,
-            top: 0,
-            width: u * OnbMetrics.cornerW,
-            height: u * OnbMetrics.cornerH,
-            child: _CornerLattice(p: p, left: left),
+        // Corner lattice only outside the big arc, as the reference.
+        ClipPath(
+          clipper: _OutsideArc(u),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              for (final left in [true, false])
+                Positioned(
+                  left: left ? 0 : null,
+                  right: left ? null : 0,
+                  top: 0,
+                  width: u * OnbMetrics.cornerW,
+                  height: u * OnbMetrics.cornerH,
+                  child: onboardingCorner == 'owner'
+                      ? _CornerLattice(p: p, left: left)
+                      : _StarCorner(p: p, u: u, left: left),
+                ),
+            ],
           ),
+        ),
         CustomPaint(painter: _ArcPainter(p, u)),
         Positioned(
           right: u * OnbMetrics.mosqueRight,
@@ -870,7 +888,9 @@ class _Backdrop extends StatelessWidget {
                       BlendMode.srcIn,
                     ),
                     child: Image(
-                      image: AssetImage('assets/ui/decor/mosque.webp'),
+                      image: AssetImage('assets/ui/decor/mosque_light.webp'),
+                      fit: BoxFit.contain,
+                      alignment: Alignment.bottomCenter,
                     ),
                   ),
           ),
@@ -1526,4 +1546,68 @@ class _Themed extends StatelessWidget {
         ),
     ],
   );
+}
+
+/// Everything outside the big arc's ellipse (same geometry as [_ArcPainter]).
+class _OutsideArc extends CustomClipper<Path> {
+  _OutsideArc(this.u);
+
+  final double u;
+
+  @override
+  Path getClip(Size size) => Path()
+    ..fillType = PathFillType.evenOdd
+    ..addRect(Offset.zero & size)
+    ..addOval(
+      Rect.fromCenter(
+        center: Offset(size.width / 2, u * 72.7),
+        width: u * 246.2 * (size.width / (u * 216.2)),
+        height: u * 173.2,
+      ),
+    );
+
+  @override
+  bool shouldReclip(_OutsideArc o) => o.u != u;
+}
+
+/// Library star lattice (`decor/lattice_star_tile.webp`, A5: white lines, 2×2
+/// cells per tile) in a top corner, gold (light: tan), fading inwards.
+class _StarCorner extends StatelessWidget {
+  const _StarCorner({required this.p, required this.u, required this.left});
+
+  final LessonPal p;
+  final double u;
+  final bool left;
+
+  @override
+  Widget build(BuildContext context) {
+    final tile = u * OnbMetrics.starCell * 2;
+    return IgnorePointer(
+      child: ShaderMask(
+        blendMode: BlendMode.dstIn,
+        shaderCallback: RadialGradient(
+          center: left ? Alignment.topLeft : Alignment.topRight,
+          radius: 1.2,
+          colors: const [
+            Color(0xFF000000),
+            Color(0x99000000),
+            Color(0x00000000),
+          ],
+          stops: const [0, 0.5, 1],
+        ).createShader,
+        child: Opacity(
+          opacity: p.d(0.5, 0.55),
+          child: Image.asset(
+            'assets/ui/decor/lattice_star_tile.webp',
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            alignment: left ? Alignment.topLeft : Alignment.topRight,
+            scale: 512 / tile,
+            color: p.c(RateelColors.onbArc, RateelColors.onbLLattice),
+            colorBlendMode: BlendMode.modulate,
+          ),
+        ),
+      ),
+    );
+  }
 }

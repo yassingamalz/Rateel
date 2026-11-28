@@ -144,6 +144,7 @@ Future<void> main() async {
   // `?step=b|c`, `?emblemL=none|green|dark` (light emblem fill).
   onboardingStartStep = q['step'];
   onboardingEmblemLight = q['emblemL'] ?? onboardingEmblemLight;
+  onboardingCorner = q['corner'] ?? onboardingCorner;
   final earn = int.tryParse(q['earn'] ?? '');
   if (earn != null) badgeEarned.value = earn;
   badgeMedalSet = q['medals'] ?? badgeMedalSet;
