@@ -8,6 +8,8 @@ import 'challenges/challenge_data.dart';
 import 'coming_soon/coming_soon_screen.dart';
 import 'core/app_settings.dart';
 import 'core/progress_store.dart';
+import 'core/user_profile.dart';
+import 'onboarding/onboarding_screen.dart';
 import 'courses/course_data.dart';
 import 'courses/courses_screen.dart';
 import 'core/learn_flow.dart';
@@ -138,6 +140,12 @@ Future<void> main() async {
     SideNavScaffold.startSection = settingsSection;
     SettingsScreen.showProfile.value = true;
   }
+  // Review aids (screen 30): `?onboarding=1` opens the first start,
+  // `?step=b|c`, `?emblemL=none|green|dark` (light emblem fill).
+  onboardingStartStep = q['step'];
+  onboardingEmblemLight = q['emblemL'] ?? onboardingEmblemLight;
+  onboardingCorner = q['corner'] ?? onboardingCorner;
+  onboardingLightDecor = q['lightDecor'] ?? onboardingLightDecor;
   final earn = int.tryParse(q['earn'] ?? '');
   if (earn != null) badgeEarned.value = earn;
   badgeMedalSet = q['medals'] ?? badgeMedalSet;
@@ -164,6 +172,9 @@ Future<void> _initialize(BuildContext context) async {
   }
   // The learner's progress saved on the device (before the courses screen).
   await ProgressStore.load();
+  // The profile of the first start (screen 30): decides whether the
+  // onboarding opens after the splash.
+  await UserProfile.load();
   // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
   final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
   if (ts != null) AppSettings.textScale.value = ts;
@@ -211,14 +222,37 @@ class RateelApp extends StatelessWidget {
             ),
           ),
         ),
-        home: StartupScreen(initialize: initialize, child: const _Home()),
+        home: StartupScreen(initialize: initialize, child: const _Root()),
       ),
     );
   }
 }
 
+/// First start (screen 30) until it is completed, then the app.
+class _Root extends StatefulWidget {
+  const _Root();
+
+  @override
+  State<_Root> createState() => _RootState();
+}
+
+class _RootState extends State<_Root> {
+  late bool _onboarding = UserProfile.review || !UserProfile.onboarded.value;
+
+  @override
+  Widget build(BuildContext context) => AnimatedSwitcher(
+    duration: const Duration(milliseconds: 450),
+    child: _onboarding
+        ? OnboardingScreen(
+            key: const ValueKey('onboarding'),
+            onDone: () => setState(() => _onboarding = false),
+          )
+        : const _Home(key: ValueKey('home')),
+  );
+}
+
 class _Home extends StatelessWidget {
-  const _Home();
+  const _Home({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

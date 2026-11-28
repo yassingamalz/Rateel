@@ -1,4 +1,35 @@
-# Next session (from 2026-11-28, after the merges)
+# Next session (from 2026-11-28 evening, after the merge of 30)
+
+**State.** `master` holds 24, the decisions of 2026-11-27, 29 v1 and **30 onboarding (PR #72)**. GitHub push / PR work (mode A
+of `CLAUDE.md`; check it at the start).
+
+**Next step: screen 31, daily practice** (owner, 2026-11-28), on its branch **`flutter/31-daily-practice`** (already holds the
+reference prompts and the owner's references 31-A practice screen and 31-B reminder popup, dark + light, plus a light 31-B
+variant with a calendar; `master` merged in). What the owner decided (`DECISIONS.md`, 2026-11-27): own screen of the rail item
+«التدريب» (today it opens 14); short daily session mixing what was learnt (the listening quiz of 22 is one exercise); reminder as
+the daily phone notification (23) and as an in-app popup: after **1 day** without the practice, opening any lesson shows the
+popup first, skippable («go to the practice» / «later»).
+1. Read `CLAUDE.md` and the files it lists, then `SCREENS.md` (row 31), `BACKLOG.md` («Daily practice (screen 31)») and the
+   references in `screens/31-daily-practice/`.
+2. Write the plan `docs/flutter/screens/31-daily-practice.md` (layout measured on the references, content of a session, week
+   panel, popup rules, conflicts with confirmed tokens, assets needed as ChatGPT prompts) and **ask the owner's yes** before code.
+3. Build, critic (ask first), APK for the owner's phone. Merge into `master` only when the owner asks.
+
+**Also waiting:** `flutter/24-29-fixes` (end card only after practice 10/22; rail icon leaves the profile and the learning
+sub-screens), APK 1.0.648 sent, owner's phone test pending; merge it when the owner approves.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel (https://github.com/yassingamalz/Rateel). Leggi CLAUDE.md e tutti i file che indica, poi
+docs/flutter/NEXT-SESSION.md (prima sezione). Controlla all'inizio se push e PR funzionano (modalità A o B di CLAUDE.md).
+Lavoriamo sulla schermata 31 (pratica quotidiana) sul branch flutter/31-daily-practice: riferimenti già pronti in
+docs/flutter/screens/31-daily-practice/. Prima scrivi il piano e mostramelo, niente codice senza il mio sì. Chiedimi anche
+com'è andata la prova dell'APK 1.0.648 (branch flutter/24-29-fixes). Parlami in italiano, documenti in inglese.
+```
+
+---
+
+## Archive: hand-off of 2026-11-28 (after the merges of 24, decisions, 29)
 
 **State.** `master` holds screen 24 (PR #68), the decisions of 2026-11-27 (PR #69) and screen 29 v1 (PR #70), plus the merge log.
 **APK 1.0.647** (that `master`) sent to the owner: verdict pending on 24, 29 and the new sounds. GitHub push / PR worked in this

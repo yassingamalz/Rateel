@@ -31,13 +31,23 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
 - [ ] **Asset standardisation** (owner, 2026-11-26): the references' header assets (mosque, crescent + star, calendar,
       arch, divider) are candidates to regenerate once for the whole app: `ASSET-STYLE-COMPARISON.md`, `ASSETS.md`.
 - [ ] **Style conflicts** to decide at the end of the project, one choice for the whole app: `STYLE-CONFLICTS.md`.
+- [ ] **Full-screen PNG / WebP backgrounds: weight study** (owner, 2026-11-28, screen 30): screens that use a whole painted
+      background (01 splash, 14 coming soon, 30 onboarding dark + light, 1844×853, 30–110 KB each, decoded ≈ 6 MB of RAM
+      per image) instead of code decor. Study whether they make the app heavy (APK size, decode time, memory on low-end
+      phones, `PERFORMANCE.md`) and decide: keep, resize per screen density, or replace with code / tiles.
+- [ ] **Screen 30 values «as the reference»** (STYLE-CONFLICTS O1–O5): review at the end of the project with the other
+      conflicts (owner, 2026-11-28).
 - [ ] **Mock data** to connect before release (leaderboard, video sections, rail counts, daily challenges):
       `SCREENS.md`, «Screens running on mock data»; data problems in the same file.
 - [x] **Performance fix** (`PERFORMANCE.md`, branch `flutter/perf`): done 2026-11-27 (same look). Still to do: frame times
       measured on the owner's phone (APK).
-- [ ] **Screen 30, onboarding** (owner, 2026-11-27): the app works **without an account**; first start asks name, level and goal,
-      saved on the device (local data is primary). **Later:** optional accounts (e.g. Google / Apple) and sync, which need a
-      server; they also make the leaderboard (11) real and keep progress across phones.
+- [x] **Screen 30, onboarding**: built (v5) and **merged into `master` 2026-11-28** (PR #72): no account, first start asks name,
+      level and goal, saved on the device.
+- [ ] **Accounts and sync** (from 30, later): optional accounts (e.g. Google / Apple) and sync need a server; they also make the
+      leaderboard (11) real and keep progress across phones.
+      Plan v1 approved 2026-11-28; **v1 built** (`screens/30-onboarding.md`). Light emblem B chosen (2026-11-28). Still open: phone check
+      of the keyboard lift, critic v2 (ask first). Daily goal is stored only: use it
+      with 12 / 31 (daily practice) when they have real rules; level is stored only: suggest the starting course from it.
 - [ ] **Stable signing key** for the APKs, kept outside the repo (owner to supply).
 - [ ] Critic of screen 08 and final critic of screen 06 (phone only, ask first).
 - [ ] Screen 07: YouTube link of `rateel-lezione1-v2.mp4` and the real section times.

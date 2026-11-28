@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../core/app_settings.dart';
+import '../core/user_profile.dart';
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../profile/profile_screen.dart';
@@ -31,7 +32,7 @@ const _badgeLine = 'assets/ui/reading/badge_line.webp';
 
 /// Row pitch on the reference: 95.5 px.
 const _rowH = 11.2;
-const _rowCount = 9;
+const _rowCount = 10;
 
 class _SettingsScreenState extends State<SettingsScreen>
     with SingleTickerProviderStateMixin {
@@ -293,7 +294,19 @@ class _Row extends StatelessWidget {
         'تذكير يومي',
         _Reminder(u: u),
       ),
-      7 => (_icon(Icons.info_outline_rounded, 1), 'عن التطبيق', _Chevron(u: u)),
+      // Daily goal of the first start (screen 30, step C: «يمكنك تغييره
+      // لاحقاً من الإعدادات»).
+      7 => (
+        Image.asset(
+          'assets/ui/icons_white/stopwatch.webp',
+          width: u * 4.4,
+          height: u * 4.4,
+          color: RateelColors.iconCream,
+        ),
+        'الهدف اليومي',
+        _Goal(u: u),
+      ),
+      8 => (_icon(Icons.info_outline_rounded, 1), 'عن التطبيق', _Chevron(u: u)),
       _ => (
         _icon(Icons.restart_alt_rounded, 1),
         'إعادة ضبط التقدم',
@@ -302,8 +315,9 @@ class _Row extends StatelessWidget {
     };
     final tap = switch (index) {
       0 => () => SettingsScreen.showProfile.value = true,
-      7 => () => _showAbout(context, u),
-      8 => () => _confirmReset(context, u),
+      7 => () => _pickGoal(context, u),
+      8 => () => _showAbout(context, u),
+      9 => () => _confirmReset(context, u),
       _ => null,
     };
     return GestureDetector(
@@ -684,6 +698,49 @@ class _Reciter extends StatelessWidget {
   );
 }
 
+/// Daily goal pill (screen 30): «10 دقائق», opens the four choices.
+class _Goal extends StatelessWidget {
+  const _Goal({required this.u});
+
+  final double u;
+
+  @override
+  Widget build(BuildContext context) => ValueListenableBuilder<int>(
+    valueListenable: UserProfile.goalMinutes,
+    builder: (context, m, _) => GestureDetector(
+      onTap: () => _pickGoal(context, u),
+      child: Container(
+        width: u * 26,
+        height: u * 7,
+        decoration: _pill(u),
+        padding: EdgeInsets.symmetric(horizontal: u * 2),
+        child: Row(
+          textDirection: TextDirection.rtl,
+          children: [
+            Expanded(
+              child: Text(
+                UserProfile.goalLabel(m),
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.rtl,
+                style: cairo(
+                  u * 3.5,
+                  weight: 600,
+                  color: RateelColors.setLabel,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.keyboard_arrow_down_rounded,
+              size: u * 5.5,
+              color: RateelColors.gold,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 /// Reminder: time pill (opens the clock) and its switch.
 class _Reminder extends StatelessWidget {
   const _Reminder({required this.u});
@@ -908,6 +965,44 @@ void _pickReciter(BuildContext context, double u) {
                 onTap: () {
                   Haptics.tick();
                   AppSettings.reciter.value = i;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
+}
+
+void _pickGoal(BuildContext context, double u) {
+  _dialog<void>(
+    context,
+    u: u,
+    width: u * 60,
+    builder: (context) => ValueListenableBuilder<int>(
+      valueListenable: UserProfile.goalMinutes,
+      builder: (context, current, _) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _dialogTitle(u, 'الهدف اليومي'),
+          SizedBox(height: u * 1.5),
+          SizedBox(
+            height: u * 3,
+            child: GoldDivider(u: u * 0.8),
+          ),
+          SizedBox(height: u * 2),
+          for (var i = 0; i < UserProfile.goals.length; i++)
+            Padding(
+              padding: EdgeInsets.only(top: i == 0 ? 0 : u * 1.6),
+              child: _dialogButton(
+                u,
+                UserProfile.goalLabel(UserProfile.goals[i]),
+                gold: UserProfile.goals[i] == current,
+                onTap: () {
+                  Haptics.tick();
+                  UserProfile.goalMinutes.value = UserProfile.goals[i];
                   Navigator.of(context).pop();
                 },
               ),

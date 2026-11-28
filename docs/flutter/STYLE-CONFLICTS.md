@@ -142,3 +142,12 @@ screens 07/08/11; the owner decides at the end of the project.
 | P5 | Light theme ink | 08 `readLInk #341E06`, title `readLTitle #A17550` | brown #643913 for title and texts | reference (`profLInk`) |
 | P6 | Mosque / crescent place | 03/12 standard (mosque left 10.5u, top 8u, 49u wide; crescent right 25.5u, 10.65u) | mosque 13.6u / 3.9u / 42u; crescent 26.3u / 6.7u / 8.9u (header higher than 12) | reference |
 
+## Screen 30, onboarding (owner 2026-11-28: «as the reference»; reviewed at the end of the project)
+| N° | Element | App standard | Screen 30 (reference) | Used now |
+|---|---|---|---|---|
+| O1 | Gold line with the diamond, light theme | `GoldDivider` tinted copper `readLCopper` (08/10/22 light headers) | gold #D8A028 also in light | reference (no tint) |
+| O2 | Text colours | dark `titleCream #FAF1D8` / `leaderText #FFFBDC`; light `readLTitle #A17550` / `readLInk #341E06` | dark title #F1E7C6, text #EEEBC8, hint #9BBA8F; light title #643E12, text #5C3B13, hint #AC8C67 | reference (`onbTitle`, `onbInk`, `onbHint`, `onbL*`) |
+| O3 | Flame | `icons/flame_gold_01` (round hole; 03 chip, 12) | flame with a flame-shaped hole, halo in dark, amber in light | reference: owner's `icons/flame_inner.webp` |
+| O4 | Option cards, field, avatar rings, check, dots | option rows of 10 (`testRow*` / `testSel*`), tile radius 3.0u | values sampled on the references (`onb*` tokens, `rateel_theme.dart`) | reference |
+| O5 | Background | `LessonBackground` / screen decor in code | splash background of 01 (dark) and the owner's light version (light) | reference (full-screen images) |
+
