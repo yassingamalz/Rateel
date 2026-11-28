@@ -336,7 +336,14 @@ owner, place still to decide; (5) recording real learners with consent: **yes**.
 7. Which errors does a beginner see in 09 and 31: all, or only the rule of the lesson? Show sifat at all?
 8. Budget and owner of a **backend** (option A also opens the door to accounts/sync, `BACKLOG.md` screen 30).
 
-## 10. Reproduce
+## 10. Test app on the phone (2026-11-28)
+
+At the owner's request: `ai/tajweed_lab/` (README there), a separate Android app that runs option **B** on the phone
+(int8 ONNX, 28 ayat, every allowed reading or fixed 4/4/4, errors + timings + RAM, takes saved). Checked in the container:
+Dart features equal to Python (max 6.7e-6), Dart comparison equal to quran-transcript 0.6.4 on 728/728 cases, download in
+parts OK, Dart features → int8 model → same phonemes as PyTorch on the edited recordings. **Not yet run on a phone.**
+
+## 11. Reproduce
 
 Scripts used for §4 (helpers, not app code): `docs/ai/tajweed-model-study/` (`run_measured.py`, `batch.py`, `cut.py`,
 `frames.py`, `onnx_check.py`, `README.md`). Recordings are downloaded from everyayah.com, not committed.

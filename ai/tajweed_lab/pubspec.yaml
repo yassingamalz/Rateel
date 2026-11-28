@@ -1,0 +1,33 @@
+name: tajweed_lab
+description: "Rateel tajweed lab: on-device test of the Quran Muaalem model (not the Rateel app)."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  audioplayers: ^6.8.1
+  crypto: ^3.0.8
+  file_picker: ^13.4.1
+  flutter:
+    sdk: flutter
+  flutter_onnxruntime: ^1.9.1
+  material_ui: ^1.1.0
+  path_provider: ^2.1.6
+  record: ^7.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/ayat.json
+    - assets/vocab.json
+    - assets/window.f32
+    - assets/mel.f32
+    - assets/licence/QML-LICENSE.txt
+    - assets/licence/QML-NOTICE.txt

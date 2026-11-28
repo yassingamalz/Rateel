@@ -146,10 +146,9 @@ Placeholders to replace before release:
 - [x] Optional tashil/ibdal (آلذكرين، آلآن، آلله) written from the book ch. 19 (pool 99, 2026-11-27); الاسم is in ch. 15 p. 471.
 
 ## AI tajweed correction (screens 09 and 31; study 2026-11-28, `docs/ai/TAJWEED-MODEL.md`)
-- [ ] **Owner's answers** still open (`TAJWEED-MODEL.md` §9): server or on-device first, **ads or only subscription** (QML forbids
-      ads in the whole app; owner answered «sì» to ads / paid plans on 2026-11-28), place of the AI notice, contact with the
+- [ ] **Owner's answers** still open (`TAJWEED-MODEL.md` §9): server or on-device first (after the lab test), place of the AI notice, contact with the
       authors, which errors a beginner sees, backend budget. Answered 2026-11-28: reading = every allowed length; real learners
-      may be recorded.
+      may be recorded; no ads, subscription with the QML free path.
 - [ ] **Licence**: ask the authors (quran.muaalem@gmail.com) whether model and dataset are MIT (Hugging Face) or QML (repo); log
       the answer.
 - [ ] **Read issue #46** (mobile roadmap) of `obadx/quran-muaalem`: needs `github.com` in the environment's allowed domains, or the
@@ -158,8 +157,11 @@ Placeholders to replace before release:
       false errors per rule before showing feedback in the app.
 - [ ] **Prototype server endpoint** `{audio, sura, aya, reading}` (only with the owner's yes): fixed ayah, all allowed madd
       lengths, pinned versions (`transformers==4.55.2`, `fastapi==0.116.1` with quran-muaalem 0.3.0).
-- [ ] **Phone measurement of the int8 ONNX model** (610 MB): latency and memory on the owner's phone (only with the owner's yes;
-      test page outside the app's screens).
+- [ ] **Phone test with the lab app** (`ai/tajweed_lab/`, APK 0.1.0, built 2026-11-28): owner publishes the model release
+      `tajweed-lab-model-v1` (or imports the file), installs the APK, notes load time, RAM, time per ayah (1/2/4 threads) and
+      whether the errors make sense on his own voice; send back the `takes/` folder for the evaluation.
 - [ ] **Branch `claude/quran-tajweed-correction-model-l36l1y`** (old PoC): its README plans for Capacitor and its
       `requirements.txt` misses the two pins; update or archive it (owner to decide).
 - [ ] Recording package for Flutter (none in `pubspec.yaml` today) and microphone permission: choose with screen 09's plan.
+- [ ] Lab app leftovers: no emulator test in the cloud; only 28 ayat; sifat heads not used; Ghonnah rules not in the 0.6.4 data;
+      a stable signing key (same issue as Rateel's APKs).
