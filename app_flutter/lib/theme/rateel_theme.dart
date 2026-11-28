@@ -447,6 +447,13 @@ class RateelColors {
   static const onbLDotOn = Color(0xFFD39111);
   static const onbLDotOff = Color(0xFFF0DDC3);
   static const onbLLattice = Color(0xFFE2B970);
+  static const onbLArc = Color(0xFFC99761); // light big arc
+  static const onbSelOuter = Color(0xFF9E8222); // selected rim, outer band #BE9929 → #7E6E12
+  static const onbInnerGlow = Color(0xFF7A8A22); // warm olive glow inside the selected card
+  static const onbTealTop = Color(0xFF03412E); // goal card (C), idle
+  static const onbTealMid = Color(0xFF013626);
+  static const onbTealBottom = Color(0xFF023E2C);
+  static const onbTealRim = Color(0xFF3A7C61);
   static const onbMosque = Color(0xFF02331F);
   static const onbMosqueGlow = Color(0xFF1F9A62);
   // Light theme of the test (from the 08 light tokens).

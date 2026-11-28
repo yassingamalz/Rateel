@@ -26,7 +26,7 @@ class OnbMetrics {
   static const dividerTop = 29.3;
   static const dividerW = 45.0; // owner Q2
   static const subtitleCy = 34.1;
-  static const subtitleSize = 3.6;
+  static const subtitleSize = 3.9;
   static const dotsCy = 90.5;
   static const dotW = 4.5;
   static const dotOnW = 7.7;
@@ -86,10 +86,10 @@ class OnbMetrics {
   static const goalGlyphCy = 48.5;
   static const goalGlyphH = 7.5;
   static const goalNumCy = 57.0;
-  static const goalNumSize = 4.9;
+  static const goalNumSize = 5.5;
   static const goalDivY = 62.3;
   static const goalWordCy = 67.5;
-  static const goalWordSize = 3.9;
+  static const goalWordSize = 4.4;
   static const cardDivW = 32.0;
   static const checkD = 6.4;
   static const checkRight = 5.5; // centre from the card's right edge
@@ -474,7 +474,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           cx,
           OnbMetrics.subtitleCy,
           subtitle,
-          readex(u * OnbMetrics.subtitleSize, weight: 340, color: ink),
+          readex(u * OnbMetrics.subtitleSize, weight: 440, color: ink),
         ),
         ...switch (_step) {
           0 => _stepA(p, u, cx, ink),
@@ -586,6 +586,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         height: math.max(2.0, u * 0.24),
         // Reference: a light line over a darker one.
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: ColoredBox(
@@ -632,7 +633,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     const glyphs = [
       ('open_book', 11.4, 6.8, 51.1),
       ('star', 8.8, 8.6, 50.2),
-      ('rosette', 7.4, 9.4, 50.4),
+      ('rosette', 8.2, 9.5, 50.4),
     ];
     return [
       for (var i = 0; i < 3; i++)
@@ -831,7 +832,7 @@ class _Backdrop extends StatelessWidget {
     // Library mosque A6 (`decor/mosque_light.webp`, 900×465): the reference's
     // skyline in both themes (dark: tinted as a dark silhouette).
     final mosqueH = u * OnbMetrics.mosqueW * 465 / 900;
-    return Stack(
+    final light = Stack(
       fit: StackFit.expand,
       children: [
         // Gradient of the lesson background; the corners carry the star
@@ -897,6 +898,23 @@ class _Backdrop extends StatelessWidget {
         ),
       ],
     );
+    // Dark: the splash background of screen 01 (approved, the app's standard):
+    // it is the reference's decor (star-lattice corners, arc fading at its
+    // ends, swoosh, mosque skyline and glow). Light: the same decor in code.
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        if (p.t > 0) Opacity(opacity: p.t, child: light),
+        if (p.t < 1)
+          Opacity(
+            opacity: 1 - p.t,
+            child: const Image(
+              image: AssetImage('assets/ui/splash/background.webp'),
+              fit: BoxFit.fill,
+            ),
+          ),
+      ],
+    );
   }
 }
 
@@ -926,7 +944,7 @@ class _ArcPainter extends CustomPainter {
     // Big thin arc: an ellipse wider than the screen (reference: from the
     // left edge at ≈ 31u, over the top at ≈ 41u and 175u, to the right edge).
     // Reference: solid gold (#C49100 core) about 0.8u wide, soft glow.
-    final gold = p.c(RateelColors.onbArc, RateelColors.readLCopper);
+    final gold = p.c(RateelColors.onbArc, RateelColors.onbLArc);
     final arc = Rect.fromCenter(
       center: Offset(w / 2, u * 72.7),
       width: u * 246.2 * (w / (u * 216.2)),
@@ -937,9 +955,10 @@ class _ArcPainter extends CustomPainter {
       end: Alignment.bottomCenter,
       colors: [
         gold.withValues(alpha: a),
+        gold.withValues(alpha: a),
         gold.withValues(alpha: 0),
       ],
-      stops: const [0.18, 0.5],
+      stops: const [0, 0.22, 0.5],
     ).createShader(arc);
     canvas.drawOval(
       arc,
@@ -953,7 +972,7 @@ class _ArcPainter extends CustomPainter {
       arc,
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1.0, u * p.d(0.75, 0.4))
+        ..strokeWidth = math.max(1.0, u * p.d(0.75, 0.35))
         ..shader = fade(p.d(1, 0.7)),
     );
     // Bottom waves: a lighter band under a pale green line and a thin gold
@@ -1015,17 +1034,19 @@ class _Emblem extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Positioned(
-          left: -u * 4,
-          right: -u * 4,
-          top: -u * 4,
-          bottom: -u * 4,
+          left: -u * 9,
+          right: -u * 9,
+          top: -u * 9,
+          bottom: -u * 9,
           child: DecoratedBox(
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  RateelColors.goldRim.withValues(alpha: p.d(0.34, 0.16)),
-                  RateelColors.goldRim.withValues(alpha: 0),
+                  p.c(const Color(0x8C4A6A22), const Color(0xCCFFFFFF)),
+                  p.c(const Color(0x404A6A22), const Color(0x55FFFFFF)),
+                  p.c(const Color(0x004A6A22), const Color(0x00FFFFFF)),
                 ],
+                stops: const [0.25, 0.55, 1],
               ),
             ),
           ),
@@ -1194,10 +1215,20 @@ class _Avatar extends StatelessWidget {
               ),
             ],
           ),
-          child: ClipOval(
-            child: Image.asset(
-              'assets/ui/leaderboard/avatar_$number.webp',
-              fit: BoxFit.cover,
+          // Reference: a dark gap (≈ 0.8u) between the gold ring and the
+          // picture of the chosen avatar.
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 220),
+            padding: EdgeInsets.all(u * (selected ? p.d(0.8, 0.5) : 0)),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: p.c(RateelColors.onbCardMid, RateelColors.onbLFieldFill),
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/ui/leaderboard/avatar_$number.webp',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -1261,7 +1292,7 @@ class _OptionCardState extends State<_OptionCard> {
                 duration: const Duration(milliseconds: 220),
                 curve: Curves.easeOut,
                 builder: (context, v, child) => CustomPaint(
-                  painter: _OptionCardPainter(p, u, v),
+                  painter: _OptionCardPainter(p, u, v, teal: widget.flame),
                   child: child,
                 ),
                 child: _Band(p: p, u: u, radius: u * OnbMetrics.optRadius),
@@ -1301,10 +1332,13 @@ class _OptionCardState extends State<_OptionCard> {
 }
 
 class _OptionCardPainter extends CustomPainter {
-  _OptionCardPainter(this.p, this.u, this.sel);
+  _OptionCardPainter(this.p, this.u, this.sel, {this.teal = false});
 
   final LessonPal p;
   final double u;
+
+  /// Goal cards (C): the reference's idle cards are teal, not olive.
+  final bool teal;
 
   /// 0 idle → 1 selected.
   final double sel;
@@ -1347,19 +1381,19 @@ class _OptionCardPainter extends CustomPainter {
           end: Alignment.bottomCenter,
           colors: [
             _c(
-              RateelColors.onbOptTop,
+              teal ? RateelColors.onbTealTop : RateelColors.onbOptTop,
               RateelColors.onbSelTop,
               RateelColors.onbLOptTop,
               RateelColors.onbLSelFill,
             ),
             _c(
-              RateelColors.onbOptMid,
+              teal ? RateelColors.onbTealMid : RateelColors.onbOptMid,
               RateelColors.onbSelMid,
               RateelColors.onbLOptBottom,
               RateelColors.onbLSelFill,
             ),
             _c(
-              RateelColors.onbOptBottom,
+              teal ? RateelColors.onbTealBottom : RateelColors.onbOptBottom,
               RateelColors.onbSelBottom,
               RateelColors.onbLOptBottom,
               RateelColors.onbLSelFill,
@@ -1376,13 +1410,24 @@ class _OptionCardPainter extends CustomPainter {
         rr,
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = u * 1.4
-          ..color = RateelColors.onbSelGlow.withValues(
-            alpha: 0.4 * sel * (1 - p.t),
+          ..strokeWidth = u * 2.6
+          ..color = RateelColors.onbInnerGlow.withValues(
+            alpha: 0.55 * sel * (1 - p.t),
           )
-          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8),
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 1.4),
       );
       canvas.restore();
+    }
+    // Selected (dark): a darker gold band just outside the rim (reference
+    // 4 px #BE9929 → #7E6E12), so the whole rim reads ≈ 0.8u.
+    if (sel > 0 && p.t < 1) {
+      canvas.drawRRect(
+        rr.inflate(u * 0.2),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = u * 0.4
+          ..color = RateelColors.onbSelOuter.withValues(alpha: sel * (1 - p.t)),
+      );
     }
     // Rim: idle thin olive; selected gold edge with a bright core.
     final w = u * (0.22 + 0.2 * sel);
@@ -1392,7 +1437,7 @@ class _OptionCardPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = math.max(1.0, w)
         ..color = _c(
-          RateelColors.onbOptRim,
+          teal ? RateelColors.onbTealRim : RateelColors.onbOptRim,
           RateelColors.onbSelRim,
           RateelColors.onbLOptRim,
           RateelColors.onbLSelRim,
@@ -1596,7 +1641,7 @@ class _StarCorner extends StatelessWidget {
           stops: const [0, 0.5, 1],
         ).createShader,
         child: Opacity(
-          opacity: p.d(0.5, 0.55),
+          opacity: p.d(0.5, 0.85),
           child: Image.asset(
             'assets/ui/decor/lattice_star_tile.webp',
             repeat: ImageRepeat.repeat,
