@@ -1,4 +1,33 @@
-# Next session (from 2026-11-28 evening, after the merge of 31)
+# Next session (from 2026-11-28 night, everything merged)
+
+**State.** `master` holds every screen built so far: the last merges are **30 onboarding (PR #72)**, **31 daily practice
+(PR #74)** and the **24/29 fixes** (PR #76: end card 24 only after practice 10/22; the rail icon leaves the profile 29 and the
+learning sub-screens). Not yet tested on the phone by the owner: **30**, **31** and the **24/29 fixes**.
+
+**Next steps (owner, 2026-11-28): one APK from `master`, the owner's verdict, then what is missing.**
+1. Check the GitHub mode (`CLAUDE.md`). The work of this session does not need a push: build from `master`.
+2. Install Flutter 3.50.1, run `flutter analyze` and `flutter test`, then `tools/flutter-review/build-apk.sh`. If Maven Central
+   answers 429, use the container-only Gradle mirror noted in `DECISIONS.md` (APK 1.0.647 row). Send the APK to the owner as a file.
+3. Ask the owner, screen by screen, the verdict on 30, 31 and the 24/29 fixes. Corrections: on a new branch (mode A) or as patch
+   files (mode B); record approvals in `DECISIONS.md` / `SCREENS.md` / `BACKLOG.md` the same way.
+4. Tell the owner **what is missing**: screens still to build (`SCREENS.md`: 13, 09, 28, 15–21…) and the open activities of
+   `BACKLOG.md`, grouped (mock data, saved progress, content, critics, release items), with a proposal for the next screen.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel (https://github.com/yassingamalz/Rateel), da master. Leggi CLAUDE.md e i file che indica, poi
+docs/flutter/NEXT-SESSION.md (prima sezione). Non devi lavorare su nessun branch: installa Flutter 3.50.1, lancia flutter
+analyze e flutter test, poi costruisci l'APK di master con tools/flutter-review/build-apk.sh (se Maven Central risponde 429
+usa il mirror Gradle descritto in DECISIONS.md, riga dell'APK 1.0.647) e mandami l'APK come file. Io lo provo e ti dico
+schermata per schermata cosa approvo: 30 (primo avvio), 31 (pratica quotidiana) e le correzioni 24/29 (card di fine lezione
+solo dopo test e ascolto; l'icona del menu riporta fuori dal profilo e dalle sottoschermate). Poi dimmi cosa manca:
+schermate ancora da fare e attività aperte di BACKLOG.md, raggruppate, con una proposta per la prossima schermata.
+Parlami in italiano.
+```
+
+---
+
+## Archive: hand-off of 2026-11-28 evening (after the merge of 31)
 
 **State.** `master` holds every screen built so far, the last ones **30 onboarding (PR #72)** and **31 daily practice (PR #74)**.
 Not yet approved on the phone by the owner: **30**, **31**, and the fixes on **`flutter/24-29-fixes`** (end card 24 only after

@@ -8,6 +8,7 @@ import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rateel/nav/side_nav.dart';
+import 'package:rateel/nav/nav_items.dart';
 import 'package:rateel/challenges/challenge_data.dart';
 import 'package:rateel/challenges/daily_challenges_screen.dart';
 import 'package:material_ui/material_ui.dart';
@@ -182,12 +183,8 @@ void main() {
       }
       expect(find.text('الفيديو غير متاح'), findsOneWidget);
       await tester.tap(find.text('تخطي'));
-      // The end card (24) waits for «متابعة».
-      for (var i = 0; i < 3; i++) {
-        await settle(tester);
-      }
-      await tester.tap(find.text('متابعة'));
-      for (var i = 0; i < 8; i++) {
+      // No end card (24) after an explanation (owner, 2026-11-28).
+      for (var i = 0; i < 11; i++) {
         await settle(tester);
       }
     }
@@ -351,21 +348,44 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('إدغام'), findsNothing);
-      // «تخطي» completes the lesson: the end card (24), «متابعة», the page
-      // leaves with true.
+      // «تخطي» completes the lesson: no end card (24) after an explanation
+      // (owner, 2026-11-28), the page leaves with true.
       await tester.tap(find.text('تخطي'));
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 14; i++) {
         await tester.pump(const Duration(milliseconds: 300));
       }
-      expect(result, isNull);
-      expect(find.text('أحسنت، أكملت الدرس'), findsOneWidget);
-      await tester.tap(find.text('متابعة'));
-      for (var i = 0; i < 4; i++) {
-        await tester.pump(const Duration(milliseconds: 300));
-      }
+      expect(find.text('أحسنت، أكملت الدرس'), findsNothing);
       expect(result, isTrue);
     },
   );
+
+  testWidgets('settings: the rail icon closes the profile (screen 29)', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: Directionality(
+            textDirection: TextDirection.rtl,
+            child: SettingsScreen(),
+          ),
+        ),
+      ),
+    );
+    SettingsScreen.showProfile.value = true;
+    await tester.pump(const Duration(milliseconds: 400));
+    SideNavScaffold.reselected.value = null;
+    SideNavScaffold.reselected.value = settingsSection;
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(SettingsScreen.showProfile.value, isFalse);
+    expect(find.text('الإعدادات'), findsOneWidget);
+    SideNavScaffold.reselected.value = null;
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(milliseconds: 50));
+  });
 
   testWidgets('settings: theme, switches, text size, reset (screen 23)', (
     tester,

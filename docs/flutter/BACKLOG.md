@@ -11,8 +11,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       per day with at least one challenge, 0 after a missed day. Today: mock, in memory, completion by long press.
 - [x] Connector between the tiles: **lit only up to the open tile** (as 03/05, as built), decided by the owner 2026-11-27.
 - [ ] Practice / recitation challenges open screen 14 «coming soon» until screen 09 exists.
-- [ ] Courses icon of the rail tapped inside the learning section goes back to the courses only from 12: decide if
-      units (05) and lessons (06) should do the same.
+- [x] Courses icon of the rail tapped inside the learning section goes back to the courses from 05, 06 and 12 too
+      (owner 2026-11-28, `flutter/24-29-fixes`).
 
 ## App-wide
 - [ ] **Screen 28, help / tips overlay** (owner 2026-11-27: future improvement). Reference `screens/28-help-overlay/reference.webp`,
@@ -21,6 +21,7 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
 - [x] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): built on `flutter/24-end-of-lesson`, **merged into
       `master` 2026-11-28** (PR #68, owner's request).
+- [x] Screen 24 only after practice (test 10, listening 22), not after explanations (owner 2026-11-28).
 - [ ] Screen 24 leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
       the streak tile reads the mock streak of 12 (always shown, at least 1, owner); light buttons vs the reference
       (`STYLE-CONFLICTS.md` E1–E4, decided at the end of the project with the other conflicts); critic not run (ask the owner).
