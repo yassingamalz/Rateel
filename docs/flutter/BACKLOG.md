@@ -65,6 +65,14 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       added on 2026-11-26 in the agreed order: 24 end of lesson, 25 test results, 26 points history (= tab «النقاط» of 13, owner 2026-11-27),
       27 badges / achievement detail, 28 help overlay, 29 profile, 30 onboarding.
 
+## Screen 31, daily practice (plan 2026-11-28)
+- [ ] **Session size variable** (owner, 2026-11-28, Q4): v1 is fixed (3 listening + 4 rule questions + 2 ayat, about 5 min);
+      later the number and kind of exercises follow the user's progress and use of the app (and the daily goal of 30).
+- [ ] **One branch for all the notifications** (owner, 2026-11-28, Q8): daily reminder of 23, practice reminder of 31, 12's
+      challenges; notifications package, Android permission, time from 23.
+- [ ] Rail redesign with the owner's white icons, headphones for «التدريب», no count bubbles, light rail (31 reference; owner
+      2026-11-28 Q2: rail 04 kept for now).
+
 ## Screen 10/10b, test lesson (approved 2026-11-26)
 - [ ] **Long press completes** a course / unit / lesson at once (review aid for testing; owner 2026-11-26: fine for
       now, **remove before release**): `courses_screen.dart` (onLongPress ≈ l. 384), `units_screen.dart` (≈ l. 452),

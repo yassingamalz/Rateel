@@ -1,7 +1,7 @@
 # Screen 31: daily practice (التدريب اليومي)
 
-Branch `flutter/31-daily-practice` (base `3211b3b`, `master` with screen 30 merged in). **Plan v1, waiting for the owner's yes**
-(no code before it).
+Branch `flutter/31-daily-practice` (base `3211b3b`, `master` with screen 30 merged in). Plan v1 answered by the owner
+(2026-11-28, section «Owner's answers» at the end); Q5 detail, Q11 and the light background still open.
 
 ## References (owner, 2026-11-28)
 `31-daily-practice/reference-a-practice-{dark,light}.webp` (31-A, the screen of the rail item «التدريب»),
@@ -202,3 +202,15 @@ permission, time from 23, text inviting to the practice) on its own branch after
 Attach: `app_flutter/assets/ui/coming_soon/background.webp` (structure), `app_flutter/assets/ui/splash/background_light.webp`
 (light style), `docs/flutter/screens/31-daily-practice/reference-a-practice-light.webp` (target). Text in
 `prompts/31-daily-practice/images-v1.txt`.
+
+## Owner's answers (2026-11-28)
+Q1 **(a)** header as the reference (STYLE-CONFLICTS P31-8) · Q2 **(a)** rail 04 as it is · Q3 **calendar** (new asset A2: the
+library calendar has another style; prompt in `images-v1.txt`) · Q4 fixed 3 + 4 + 2; **future: session size variable with the
+user's progress and use of the app** (BACKLOG) · Q5 «from the lessons» (exercises come from the lessons; what a new user with no
+completed lesson sees: asked again) · Q6 **(a)** 2 ayat of the listening data, label «آيتان» · Q7 as proposed (no practice
+yesterday nor today, once a day, not on the first day of use) · Q8 **one dedicated branch for all the notifications**
+(BACKLOG) · Q9 done-today state as proposed · Q10 **one streak** for the whole app (the practice streak) · Q11 explained again,
+waiting · Q12 yes («1» while today's practice is not done, no bubble after).
+Light background: the light background of 30 (`splash/background_light.webp`, light version of the 01 splash background) is in
+the library, but its drawing differs from the 14 background used by 31 dark (arc and swoosh in other places: overlay in
+`31-daily-practice/light-background-check.jpg`). Owner to choose: A1 (light version of the 14 background) or the 30 one.
