@@ -33,12 +33,11 @@ class PracMetrics {
   static const archW = 97.6;
   static const archH = 22.0;
   static const archTop = 0.15;
-  static const emblemW = 12.4;
+  static const emblemW = 11.9;
   static const emblemTop = 1.7;
-  static const titleCy = 17.5;
-  static const titleSize = 9.6;
-  static const titleCx =
-      925.0; // px: the reference's title sits right of the axis
+  static const titleCy = 17.4;
+  static const titleSize = 8.45;
+  static const titleCx = 892.0; // px, critic v1: reference ink 651–1132
   static const titleDividerCy = 25.2;
   static const titleDividerW = 37.9;
   static const mosqueLeft = 191.0; // px
@@ -82,7 +81,7 @@ class PracMetrics {
   static const tileGlyphCy = 54.8, tileGlyphH = 6.0;
   static const tileNameCy = 61.4, tileNameSize = 4.6;
   static const tileDividerCy = 65.7, tileDividerW = 19.0;
-  static const tileCountCy = 69.2, tileCountSize = 3.8;
+  static const tileCountCy = 69.6, tileCountSize = 3.8;
   static const buttonX0 = 838.0, buttonX1 = 1255.0;
   static const buttonCy = 84.1, buttonH = 10.9, buttonText = 5.0;
   static const ornaments = [714.0, 1392.0];
@@ -282,12 +281,6 @@ class _Header extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/ui/decor/header_arch.svg',
                 fit: BoxFit.fill,
-                colorFilter: p.t > 0.5
-                    ? const ColorFilter.mode(
-                        RateelColors.readLCopper,
-                        BlendMode.srcIn,
-                      )
-                    : null,
               ),
             ),
           ),
@@ -306,11 +299,12 @@ class _Header extends StatelessWidget {
                   stops: [0.66, 0.86],
                   colors: [Color(0xFF000000), Color(0x00000000)],
                 ).createShader(r),
+                // Light: the same mosque drawing in beige, as the reference
+                // (not the skyline of `mosque_light`).
                 child: Image.asset(
-                  p.t > 0.5
-                      ? 'assets/ui/decor/mosque_light.webp'
-                      : 'assets/ui/decor/mosque.webp',
+                  'assets/ui/decor/mosque.webp',
                   fit: BoxFit.contain,
+                  color: p.t > 0.5 ? RateelColors.pracLMosque : null,
                 ),
               ),
             ),
@@ -477,7 +471,7 @@ class _GlassPainter extends CustomPainter {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: fill,
-          stops: const [0, 0.3, 1],
+          stops: tile ? const [0.0, 0.3, 1.0] : const [0.0, 0.55, 1.0],
         ).createShader(rect),
     );
     final rimW = u * p.d(tile ? 0.3 : 0.35, 0.24);
@@ -837,7 +831,7 @@ class _DayDisc extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Positioned(
-                  top: d * (done ? 0.10 : 0.18),
+                  top: d * (done ? 0.12 : 0.29),
                   left: 0,
                   right: 0,
                   child: Text(
@@ -845,7 +839,7 @@ class _DayDisc extends StatelessWidget {
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.rtl,
                     style: readex(
-                      d * 0.40,
+                      d * 0.32,
                       weight: 600,
                       color: Color.lerp(
                         p.c(RateelColors.pracTodayInk, RateelColors.pracLInk),
@@ -857,9 +851,9 @@ class _DayDisc extends StatelessWidget {
                 ),
                 if (done && check > 0)
                   Positioned(
-                    bottom: d * 0.16,
-                    width: d * 0.36,
-                    height: d * 0.28,
+                    bottom: d * 0.14,
+                    width: d * 0.30,
+                    height: d * 0.21,
                     child: Transform.scale(
                       scale: check,
                       child: Image.asset(
@@ -934,10 +928,10 @@ class _DiscPainter extends CustomPainter {
           r - u * 0.12,
           Paint()
             ..style = PaintingStyle.stroke
-            ..strokeWidth = u * 0.24
+            ..strokeWidth = u * 0.16
             ..color = p
-                .c(const Color(0xFFF6D46A), const Color(0xFFFFD87A))
-                .withValues(alpha: 0.8),
+                .c(const Color(0xFFE9C44E), const Color(0xFFFFD87A))
+                .withValues(alpha: 0.45),
         );
       case _DayState.today:
         canvas.drawCircle(
@@ -960,7 +954,7 @@ class _DiscPainter extends CustomPainter {
           r - u * 0.22,
           Paint()
             ..style = PaintingStyle.stroke
-            ..strokeWidth = u * 0.42
+            ..strokeWidth = u * 0.5
             ..color = p.c(
               RateelColors.pracTodayRim,
               RateelColors.pracLTodayRim,

@@ -597,7 +597,7 @@ class RateelColors {
   static const pracInk = Color(0xFFECE6C6); // card / panel texts
   static const pracSub = Color(0xFFE7E6C5);
   static const pracPanelTop = Color(0xFF023F28);
-  static const pracPanelMid = Color(0xFF002C1D);
+  static const pracPanelMid = Color(0xFF01331F);
   static const pracPanelBottom = Color(0xFF00291B);
   static const pracPanelRimTop = Color(0xFF70B892);
   static const pracPanelRimSide = Color(0xFF4D8A6C);
@@ -607,12 +607,12 @@ class RateelColors {
   static const pracTileBottom = Color(0xFF023D29);
   static const pracTileRimTop = Color(0xFF73B991);
   static const pracTileRimSide = Color(0xFF4C966F);
-  static const pracBand = Color(0xFF2E6A4C); // ogee band (03 `cardPattern`)
+  static const pracBand = Color(0xFF1F5A3D); // ogee band (03 `cardPattern`, dimmer: critic v1)
   static const pracDoneTop = Color(0xFFE9BD3C);
   static const pracDoneMid = Color(0xFFAA8106);
   static const pracDoneBottom = Color(0xFF846401);
   static const pracDoneInk = Color(0xFFFFF4C0);
-  static const pracTodayRim = Color(0xFFE8D25A);
+  static const pracTodayRim = Color(0xFFF2D44C);
   static const pracTodayInk = Color(0xFFE6EBCB);
   static const pracDayTop = Color(0xFF0C442C);
   static const pracDayBottom = Color(0xFF053621);
@@ -640,11 +640,12 @@ class RateelColors {
   static const pracLDay = Color(0xFFF4E3D1);
   static const pracLDayInk = Color(0xFF6E5536);
   static const pracLSeparator = Color(0xFFEDC377);
-  static const pracLVeil = Color(0x57967864); // ≈ 34 % warm veil
+  static const pracLVeil = Color(0x4D9C7350); // ≈ 30 % warm veil (critic v1)
   static const pracLLaterFill = Color(0xFFFDF0DE);
   static const pracLLaterRim = Color(0xFFEECA9D);
   static const pracLLaterInk = Color(0xFF4E3012);
   static const pracLCalendarPage = Color(0xFFFCE6B4);
+  static const pracLMosque = Color(0xFFE6C8A5); // light mosque, sampled
   // Tile glyphs, one colour for the three (owner 2026-11-28: the headphones as
   // the other icons), and the flame's gradient, sampled on the references.
   static const pracGlyph = Color(0xFFEEE8C7);

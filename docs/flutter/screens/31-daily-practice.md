@@ -242,3 +242,17 @@ brown). Light background: still open (A1 or the 30 one; today the 30 one).
   `tools/flutter-review/practice-capture.js`, sheet `practice-compare.py` → `31-daily-practice/compare-v1.jpg`.
 - Measured (1844×853, ±5 px unless said): panel, card, tiles, button, popup card and buttons, emblem, crescent, flame, day discs
   and every text ink box; the reference's texts sit 4–30 px right of their box centres and the build follows them.
+
+## v2 (2026-11-28): owner's notes + critic v1
+Owner: the emblem touched the title, the day letters overlapped the checks, the days looked misplaced. Critic v1 (light, phone
+only, `31-daily-practice/critic-v1.md`, scores 7.0 / 7.0 / 8.0 / 6.5) measured them. Fixed:
+- Header title: the plan's ink box included the emblem's bottom; true reference title ink 651–1132 (cx 892): `titleCx` 892,
+  `titleSize` 8.45u, emblem 11.9u (reference bottom y 116). No overlap now.
+- Day discs: letter 0.32 d high in the upper part, check 0.30 × 0.21 d at the bottom (no overlap), today ring 0.5u brighter,
+  done disc inner line softer. Disc centres were already within 1–2 px of the reference; the second row reads ر خ ج right →
+  left (correct week order; the reference has it reversed).
+- Week panel fill lit longer from the top (`pracPanelMid`), dimmer ogee band, tile count 0.4u lower, light arch gold (not
+  copper), light veil warmer and lighter, light mosque = the standard mosque drawing in beige (`pracLMosque`), as the
+  reference.
+Left as standards (critic's conflicts, reviewed at the end of the project): light card rim of the gold card (08/10),
+`LessonButton` glow in dark. Sheet `31-daily-practice/compare-v2.jpg`.
