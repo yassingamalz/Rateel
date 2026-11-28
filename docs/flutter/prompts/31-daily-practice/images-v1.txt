@@ -1,0 +1,18 @@
+Screen 31, daily practice: missing assets (plan v1, 2026-11-28). Pasted in the chat, one block each.
+
+=== A1: light version of the coming-soon background (31-A light) ===
+Attach, in this order:
+ 1. app_flutter/assets/ui/coming_soon/background.webp       (the dark background: composition to keep exactly)
+ 2. app_flutter/assets/ui/splash/background_light.webp      (the app's light style: colours and line weights)
+ 3. docs/flutter/screens/31-daily-practice/reference-a-practice-light.webp (how it must look behind the content)
+
+Prompt:
+Create the LIGHT THEME version of image 1, exactly 1844x853 pixels, landscape, no text, no UI, no cards, no icons.
+Keep EXACTLY the same composition as image 1: the same big thin gold arc that starts at the left edge, rises over the top
+and comes down on the right side; the same fine geometric lattice in the top-left and top-right corners, fading towards the
+centre; the same soft swoosh bands and thin gold line at the bottom; the same faint mosque skyline at the bottom right.
+Same positions, same sizes, same line thickness as image 1.
+Colours from image 2 (the app's light style): warm cream background #FBF3E5 to #F7EBDA, soft beige lattice lines, gold
+#D8A240 for the arc and the thin lines, very soft tan swoosh bands, the mosque in pale beige.
+Image 3 shows the target: the background must look like the background of image 3, behind its cards.
+Clean, flat, premium, no noise, no blotches, no dark spots, no vignette. No text, no watermark.
