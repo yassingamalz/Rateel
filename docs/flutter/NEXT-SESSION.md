@@ -1,4 +1,45 @@
-# Next session (from 2026-11-27 evening, after screen 24 v1)
+# Next session (from 2026-11-27 night, after the decisions session)
+
+**State.** `master` = `c2dec63` (APK 1.0.635). Two branches wait to be merged, **both only after the owner's approval**:
+- **`flutter/24-end-of-lesson`** (7 commits on `c2dec63`, on GitHub): screen 24 v1, **APK 1.0.640 not yet tested** on the phone by
+  the owner (2026-11-27). Details in the archived hand-off below and in `screens/24-end-of-lesson.md`.
+- **`docs/decisions-2026-11-27`** (7 commits on `c2dec63`, handed over as patches; the owner applies and pushes them): the
+  decisions session, all ✅ in `DECISIONS.md`: 26 = tab «النقاط» of 13; 28 «؟» = third item of the 02 pause menu; 30 onboarding
+  without a required account (local data primary, optional account and sync later); 31 daily practice = own screen of the rail
+  item «التدريب», phone reminder + skippable in-app popup after 1 day; 12 connector lit up to the open tile; **new test sounds**
+  C8 plinkfx checkpoint (correct) and P7 plinkfx level-complete (passed, also used by 24 and 27), not yet heard in an APK.
+
+**GitHub (temporary): no push from the cloud** (`CLAUDE.md`; the proxy answers 403 and adding the repository with push access is
+denied). Clone the public repo, `git fetch` the branches above, check the commits are there, work on a local branch and hand the
+commits as `git format-patch` files (one dedicated folder per group, PowerShell commands for `git am` and the push).
+
+**Next steps:**
+1. Check on GitHub that `docs/decisions-2026-11-27` exists with its 7 commits (if not, ask the owner to apply the patches).
+2. Ask the owner the verdict on **APK 1.0.640** (screen 24). Corrections → on `flutter/24-end-of-lesson`, new APK.
+3. **When the owner approves 24, and only after asking:** merge into `master`. Order: `flutter/24-end-of-lesson` first (fast-forward
+   from `c2dec63`), then `docs/decisions-2026-11-27` rebased on it. Expected conflicts only in `DECISIONS.md` and `BACKLOG.md`
+   (both branches append: keep every row, 24's first) and `NEXT-SESSION.md` (keep this version, updated). Hand the result as
+   patches; log the merge in `DECISIONS.md` and tick 24 in `BACKLOG.md` / `SCREENS.md`.
+4. APK from the merged `master` so the owner hears the new sounds (C8, P7) in the app, also at the end of a lesson (24).
+5. Then 13 (and 29 after it), or the plan of 31: **only with the owner's go**. No new screen without it.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel (https://github.com/yassingamalz/Rateel, pubblico), da master. Il connettore GitHub è bloccato:
+segui la sezione "GitHub access without the connector" di CLAUDE.md (clone in sola lettura, niente push né PR dal cloud,
+lavori su un branch locale e mi mandi spesso i commit come file .patch con git format-patch; io li applico con git am e
+faccio il push; dammi i comandi PowerShell, una cartella dedicata per ogni gruppo di patch). Leggi CLAUDE.md e tutti i file
+che indica (DECISIONS.md, README.md, PROCESS.md, LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi
+docs/flutter/NEXT-SESSION.md (prima sezione) dal branch docs/decisions-2026-11-27, SCREENS.md e
+docs/flutter/screens/24-end-of-lesson.md. Primo: controlla che i branch flutter/24-end-of-lesson e docs/decisions-2026-11-27
+siano su GitHub e chiedimi com'è andata la prova dell'APK 1.0.640. Se approvo la 24, chiedimi conferma e preparami l'unione in
+master di tutti e due (prima la 24, poi le decisioni), come patch, poi l'APK da master per sentire i nuovi suoni. Non
+iniziare nessuna schermata nuova senza il mio via. Parlami in italiano, documenti in inglese.
+```
+
+---
+
+## Archive: hand-off of 2026-11-27 evening (after screen 24 v1)
 
 **State.** `master` = `c2dec63`: everything of the previous hand-off plus the **22 header variant g** (line with the diamond under
 the title, owner-approved) and the GitHub patch workflow (`CLAUDE.md`). APK 1.0.635 = that `master`.
