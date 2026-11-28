@@ -1,0 +1,66 @@
+Screen 31, daily practice: ChatGPT prompts for the references (2026-11-28). Pasted in the chat, one block each.
+Rule (LESSONS-LEARNED.md): attach the app screenshots first (docs/flutter/app-references/).
+Decided (owner 2026-11-27): own screen of the rail item «التدريب»; short daily session mixing what was learnt (the
+listening quiz of 22 is one exercise); in-app popup after 1 day without practice, skippable («go to the practice» /
+«later»). PROPOSED by Claude, owner to confirm before generating: the content of the session card (three exercise types:
+listening quiz, rule questions, reading review; about 5 minutes), the week row, the Arabic texts below. The exercises
+themselves reuse the 22 / 10 / 08 screens (no new reference). Recitation is left out: it needs screen 09 (postponed).
+
+=== 31-A, dark: daily practice screen (generate first) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-12-daily-challenges.webp (side rail, header, cards, flame, streak)
+ 2. docs/flutter/app-references/app-23-settings.webp         (side rail with another item active)
+ 3. docs/flutter/app-references/app-10-test-results.webp     (gold card, stat tiles, buttons)
+ 4. docs/flutter/app-references/app-22-listening-question.webp (headphones glyph, listening style)
+
+Prompt:
+Create a landscape mobile app screen, 1844x853 pixels, Arabic right-to-left, dark theme.
+SAME STYLE AS THE ATTACHED APP SCREENSHOTS: same deep emerald background with the faint gold lattice, same closed side
+rail on the right with the glass tiles, same gold header arch with the emblem, mosque and crescent, same gold-rimmed glass
+cards, same cream text, same Readex-Pro-like Arabic font, same golds and glows. Do not invent a new style, new colours,
+new fonts or new ornaments.
+The screen is the DAILY PRACTICE, opened from the rail item «التدريب», which is the active item of the rail (filled gold
+circle with glow, as the active item of images 1 and 2).
+- Header arch with the title «التدريب اليومي».
+- Main card in the centre, about 55% of the screen width (gold rim, dark emerald glass):
+  1. Title «تدريب اليوم» and the line «راجع ما تعلّمته في 5 دقائق تقريباً».
+  2. A row of three small tiles in the style of the stat tiles of image 3, each with a flat cream glyph:
+     headphones «استماع» «3 أسئلة»; question mark «أحكام» «4 أسئلة»; open book «قراءة» «2 آيات».
+  3. The main button «ابدأ التدريب» with a ‹ chevron, luminous gold rim, centred under the tiles.
+- To the left of the card, a narrow glass panel «هذا الأسبوع»: seven small day circles in a column or a 2-row grid with
+  the Arabic day initials, the done days filled gold with a small check, today with a gold ring, the future days dim;
+  under them the app's flame with «4 أيام متتالية».
+Write all the Arabic text exactly as given, right to left, correctly joined. No English text, no watermark.
+
+=== 31-B, dark: reminder popup over a lesson (generate after 31-A) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-08-reading-dark.webp  (the lesson behind the popup, top bar 02)
+ 2. docs/flutter/app-references/app-10-test-results.webp  (card and the two button styles)
+ 3. docs/flutter/app-references/app-12-daily-challenges.webp (flame)
+
+Prompt:
+Create a landscape mobile app screen, 1844x853 pixels, Arabic right-to-left, dark theme. SAME STYLE AS THE ATTACHED APP
+SCREENSHOTS, do not invent a new style.
+The reading lesson of image 1 is open but dimmed behind a dark green veil (top bar and header still visible, dimmed). In
+the centre, over it, ONE small card in the app's card style (gold rim, dark emerald glass), about 40% of the screen width:
+  1. The app's flame (image 3), medium size, with a soft glow, on top.
+  2. Title «لم تتدرّب منذ يوم» in cream-gold text, the app's small divider with a diamond.
+  3. The line «خمس دقائق من التدريب تثبّت ما تعلّمته» in smaller cream text.
+  4. Two buttons in the style of image 2: on the right «اذهب إلى التدريب» (main, luminous gold rim), on the left «لاحقاً»
+     (secondary, quieter rim).
+No confetti, no cartoon effects. Write the Arabic text exactly as given, right to left, correctly joined. No English text,
+no watermark.
+
+=== 31 light (one per accepted dark image, after the dark ones) ===
+Attach, in this order:
+ 1. the accepted dark image (31-A or 31-B)
+ 2. docs/flutter/app-references/app-08-reading-light.webp
+ 3. docs/flutter/app-references/app-10-test-results-light.webp
+
+Prompt (for 31-A add at the end: «Keep the side rail as in image 1.»):
+Create the LIGHT THEME version of image 1, 1844x853 pixels, Arabic right-to-left. Keep exactly the same composition,
+sizes, texts and elements as image 1. Use the light style of the attached app screenshots (images 2 and 3): warm cream
+background with the soft beige lattice, copper-brown title and text, tan rims, cream cards with a thin tan rim; the
+selected card keeps a gold rim. Main button filled gold with white text, as in image 3. Avatars, emblem and flame stay
+as in image 1. Same style as the attached app screenshots, do not invent a new style. Write the Arabic text exactly as
+in image 1. No English text, no watermark.

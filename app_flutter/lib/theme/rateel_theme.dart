@@ -591,6 +591,73 @@ class RateelColors {
   static const profLArch = Color(0xFFCFAD82);
   static const profLMosque = Color(0xFFE0C2A3);
   static const profLHeaderBook = Color(0xFFAF751C);
+  // Screen 31, daily practice (owner, 2026-11-28: «as the reference»; sampled on
+  // `screens/31-daily-practice/reference-*.webp`, STYLE-CONFLICTS P31-n).
+  static const pracTitle = Color(0xFFEFE7C5); // header title, cream
+  static const pracInk = Color(0xFFECE6C6); // card / panel texts
+  static const pracSub = Color(0xFFE7E6C5);
+  static const pracPanelTop = Color(0xFF023F28);
+  static const pracPanelMid = Color(0xFF01331F);
+  static const pracPanelBottom = Color(0xFF00291B);
+  static const pracPanelRimTop = Color(0xFF70B892);
+  static const pracPanelRimSide = Color(0xFF4D8A6C);
+  static const pracPanelRimBottom = Color(0xFF63B580);
+  static const pracTileTop = Color(0xFF0B4F34);
+  static const pracTileMid = Color(0xFF023926);
+  static const pracTileBottom = Color(0xFF023D29);
+  static const pracTileRimTop = Color(0xFF73B991);
+  static const pracTileRimSide = Color(0xFF4C966F);
+  static const pracBand = Color(0xFF1F5A3D); // ogee band (03 `cardPattern`, dimmer: critic v1)
+  static const pracDoneTop = Color(0xFFE9BD3C);
+  static const pracDoneMid = Color(0xFFAA8106);
+  static const pracDoneBottom = Color(0xFF846401);
+  static const pracDoneInk = Color(0xFFFFF4C0);
+  static const pracTodayRim = Color(0xFFF2D44C);
+  static const pracTodayInk = Color(0xFFE6EBCB);
+  static const pracDayTop = Color(0xFF0C442C);
+  static const pracDayBottom = Color(0xFF053621);
+  static const pracDayRim = Color(0xFF2F6A4F);
+  static const pracDayInk = Color(0xFFC9D4BA);
+  static const pracSeparator = Color(0xFF8EA667);
+  static const pracVeil = Color(0xC2001A0C); // ≈ 76 % over the lesson, no blur
+  static const pracLaterFill = Color(0xFF013720);
+  static const pracLaterRim = Color(0xFF3B7E5A);
+  static const pracCalendar = Color(0xFFF2B42A);
+  static const pracCalendarPage = Color(0xFF6A4A08);
+  // Light theme.
+  static const pracLTitle = Color(0xFF603A17);
+  static const pracLInk = Color(0xFF5E3C1B);
+  static const pracLPanel = Color(0xFFFEF6EE);
+  static const pracLPanelRim = Color(0xFFE1C7B0);
+  static const pracLTileTop = Color(0xFFFDF8EE);
+  static const pracLTileBottom = Color(0xFFFFF5E9);
+  static const pracLTileRim = Color(0xFFE3C9B2);
+  static const pracLBand = Color(0xFFEFDCC2);
+  static const pracLDoneTop = Color(0xFFFFC74C);
+  static const pracLDoneMid = Color(0xFFEFAA1F);
+  static const pracLDoneBottom = Color(0xFFCB870A);
+  static const pracLTodayRim = Color(0xFFF3D08E);
+  static const pracLDay = Color(0xFFF4E3D1);
+  static const pracLDayInk = Color(0xFF6E5536);
+  static const pracLSeparator = Color(0xFFEDC377);
+  static const pracLVeil = Color(0x4D9C7350); // ≈ 30 % warm veil (critic v1)
+  static const pracLLaterFill = Color(0xFFFDF0DE);
+  static const pracLLaterRim = Color(0xFFEECA9D);
+  static const pracLLaterInk = Color(0xFF4E3012);
+  static const pracLCalendarPage = Color(0xFFFCE6B4);
+  static const pracLMosque = Color(0xFFE6C8A5); // light mosque, sampled
+  // Tile glyphs, one colour for the three (owner 2026-11-28: the headphones as
+  // the other icons), and the flame's gradient, sampled on the references.
+  static const pracGlyph = Color(0xFFEEE8C7);
+  static const pracLGlyph = Color(0xFF5E3A17);
+  static const pracFlame = [Color(0xFFF8D05D), Color(0xFFFCCA4F), Color(0xFFF0BE45)];
+  static const pracLFlame = [
+    Color(0xFFFDC540),
+    Color(0xFFF6B62D),
+    Color(0xFFE6A11A),
+    Color(0xFFC2800C),
+  ];
+  static const pracLFlameInner = Color(0xFFFCE3A0);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

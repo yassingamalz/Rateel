@@ -7,6 +7,7 @@ import '../lessons/reading_data.dart';
 import '../theme/rateel_theme.dart';
 import '../units/unit_data.dart';
 import 'progress_store.dart';
+import '../practice/practice_store.dart';
 
 /// App settings, screen 23 (docs/flutter/screens/23-settings.md).
 ///
@@ -91,6 +92,7 @@ class AppSettings {
     resetUnitsProgress();
     resetLessonsDone();
     ProgressStore.clear();
+    PracticeStore.clear();
   }
 }
 

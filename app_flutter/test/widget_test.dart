@@ -433,7 +433,9 @@ void main() {
         await tester.pump(const Duration(milliseconds: 400));
       }
       expect(challengesDone.value, 1);
-      expect(dailyStreak.value, 1);
+      // One streak for the whole app = the practice streak (owner,
+      // 2026-11-28, screen 31 Q10): a challenge does not change it.
+      expect(dailyStreak.value, 0);
       await settle(tester);
       // Back without a button: drag the finger to the right (owner, 2026-11-26).
       await tester.drag(
