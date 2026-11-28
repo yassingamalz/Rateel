@@ -9,6 +9,9 @@ import 'coming_soon/coming_soon_screen.dart';
 import 'core/app_settings.dart';
 import 'core/progress_store.dart';
 import 'core/user_profile.dart';
+import 'practice/practice_screen.dart';
+import 'practice/practice_session.dart';
+import 'practice/practice_store.dart';
 import 'onboarding/onboarding_screen.dart';
 import 'courses/course_data.dart';
 import 'courses/courses_screen.dart';
@@ -146,6 +149,7 @@ Future<void> main() async {
   onboardingEmblemLight = q['emblemL'] ?? onboardingEmblemLight;
   onboardingCorner = q['corner'] ?? onboardingCorner;
   onboardingLightDecor = q['lightDecor'] ?? onboardingLightDecor;
+  practiceStartPart = int.tryParse(q['practicePart'] ?? '') ?? 0;
   final earn = int.tryParse(q['earn'] ?? '');
   if (earn != null) badgeEarned.value = earn;
   badgeMedalSet = q['medals'] ?? badgeMedalSet;
@@ -175,6 +179,7 @@ Future<void> _initialize(BuildContext context) async {
   // The profile of the first start (screen 30): decides whether the
   // onboarding opens after the splash.
   await UserProfile.load();
+  await PracticeStore.load();
   // Review aid (screen 23): `?textScale=1.2` tries the text size setting.
   final ts = double.tryParse(Uri.base.queryParameters['textScale'] ?? '');
   if (ts != null) AppSettings.textScale.value = ts;
@@ -261,8 +266,9 @@ class _Home extends StatelessWidget {
         0 => const LearnFlow(),
         3 => const LeaderboardScreen(),
         4 => const BadgesScreen(),
+        practiceSection => const PracticeScreen(),
         // Sections not built yet: coming soon (screen 14, as Angular).
-        1 || 2 || 5 => const ComingSoonScreen(),
+        1 || 5 => const ComingSoonScreen(),
         settingsSection => const SettingsScreen(),
         _ => SectionPlaceholder(index: selected),
       },

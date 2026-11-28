@@ -214,3 +214,31 @@ waiting · Q12 yes («1» while today's practice is not done, no bubble after).
 Light background: the light background of 30 (`splash/background_light.webp`, light version of the 01 splash background) is in
 the library, but its drawing differs from the 14 background used by 31 dark (arc and swoosh in other places: overlay in
 `31-daily-practice/light-background-check.jpg`). Owner to choose: A1 (light version of the 14 background) or the 30 one.
+
+## Owner's answers, second round (2026-11-28)
+Q11 the practice challenges of 12 open 31 and are completed by today's practice; recitation stays on 14 until 09. Q5 new user:
+**(b)** items of the first lessons. A2: the owner's calendar (cream, tinted gold in code) and a new headphones pair (cream /
+brown). Light background: still open (A1 or the 30 one; today the 30 one).
+
+## Build v1 (2026-11-28)
+- `lib/practice/practice_store.dart`: `practice.v1` (days done, day reminded, first day), practice streak published in
+  `dailyStreak` (one streak for the app; 12's challenges no longer change it), week Saturday → Friday, reminder rule, Arabic
+  counts. «إعادة ضبط التقدم» clears it.
+- `lib/practice/practice_screen.dart` (`PracMetrics` = the tables above, places along x in content-width units): background of
+  14, header as the reference, week panel, gold card, three tiles, `LessonButton`; done-today state («أحسنت! أكملت تدريب اليوم»,
+  «تدرّب مرة أخرى»); today's disc fills and its check pops after a session.
+- `lib/practice/practice_session.dart`: one session in the 02 frame (0/9): the 22 quiz (3 questions), the 10 questions (4),
+  2 ayat in the 22 rule view (Q6 a: the 22 view is the app's verse card with the recitation and the rule's colour), then the
+  24 card (questions only scored). Lesson pages take a `PracticePart` (`lib/lessons/practice_part.dart`: injected content,
+  session progress, no own results / end card). Items from completed lessons, else the first ones; same pick for one day.
+- `lib/practice/practice_reminder.dart`: popup 31-B over the opening lesson (06 `_openLesson`), calendar A2, «اذهب إلى التدريب»
+  (`LessonButton` without glyph: new `LessonBtnGlyph.none`) closes the lesson and selects «التدريب» (`SideNavScaffold.goTo`),
+  «لاحقاً» / back starts the lesson; 22 waits (`practiceReminderOpen`).
+- Rail: «التدريب» opens 31; bubble «1» until today's practice is done (Q12).
+- Owner's notes on the first captures: tile glyphs in one colour (`pracGlyph`, headphones included); flame coloured with the
+  reference's gradient, light: amber with the pale inner flame and a cream halo (`flame_inner_hole`, P31-9).
+- Review aids: `?section=2`, `?today=yyyy-mm-dd`, `?practiceDays=1,2,3`, `?practiceToday=1`, `?remind=1`,
+  `?practiceSession=1`, `?practicePart=1|2`, `?theme=light`, `?textScale=1.1`. Captures
+  `tools/flutter-review/practice-capture.js`, sheet `practice-compare.py` → `31-daily-practice/compare-v1.jpg`.
+- Measured (1844×853, ±5 px unless said): panel, card, tiles, button, popup card and buttons, emblem, crescent, flame, day discs
+  and every text ink box; the reference's texts sit 4–30 px right of their box centres and the build follows them.

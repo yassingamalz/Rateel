@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
+import '../practice/practice_store.dart';
 import '../theme/rateel_theme.dart';
 import 'nav_items.dart';
 
@@ -28,6 +29,10 @@ class SideNavScaffold extends StatefulWidget {
   /// inside the section may go back to the section's first screen (screen 12
   /// → courses, owner 2026-11-26). On the first screen it does nothing.
   static final reselected = ValueNotifier<int?>(null);
+
+  /// Selects a section from outside the rail (screen 31: «اذهب إلى التدريب»
+  /// of the reminder popup, the practice challenges of 12).
+  static final goTo = ValueNotifier<int?>(null);
 
   @override
   State<SideNavScaffold> createState() => _SideNavScaffoldState();
@@ -65,7 +70,27 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
   )!;
 
   @override
+  void initState() {
+    super.initState();
+    SideNavScaffold.goTo.addListener(_onGoTo);
+    PracticeStore.days.addListener(_onPractice);
+  }
+
+  void _onGoTo() {
+    final i = SideNavScaffold.goTo.value;
+    if (i == null || !mounted) return;
+    SideNavScaffold.goTo.value = null;
+    if (i != _selected) _pick(i);
+  }
+
+  void _onPractice() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   void dispose() {
+    SideNavScaffold.goTo.removeListener(_onGoTo);
+    PracticeStore.days.removeListener(_onPractice);
     _open.dispose();
     _select.dispose();
     super.dispose();
@@ -513,7 +538,11 @@ class _SideNavScaffoldState extends State<SideNavScaffold>
 
   Widget _bubble(_Geometry g, double t, int i, double active) {
     final item = navItems[i];
-    final count = item.count;
+    // «التدريب» (screen 31, owner Q12): «1» while today's practice is not
+    // done, no bubble after.
+    final count = i == practiceSection
+        ? (PracticeStore.doneToday ? null : 1)
+        : item.count;
     if (count == null) return const SizedBox.shrink();
     final threeDigits = count >= 100;
     final activeness = (1 - (active - i).abs()).clamp(0.0, 1.0);

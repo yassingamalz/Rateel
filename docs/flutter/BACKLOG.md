@@ -70,8 +70,13 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       later the number and kind of exercises follow the user's progress and use of the app (and the daily goal of 30).
 - [ ] **One branch for all the notifications** (owner, 2026-11-28, Q8): daily reminder of 23, practice reminder of 31, 12's
       challenges; notifications package, Android permission, time from 23.
-- [ ] Rail redesign with the owner's white icons, headphones for «التدريب», no count bubbles, light rail (31 reference; owner
+- [ ] **Light side rail** (owner, 2026-11-28): when the theme is light the side rail (04) must become light too (31-A light
+      reference: cream tiles, brown icons, gold active disc); today it stays dark on every screen.
+- [ ] Rail redesign with the owner's white icons, headphones for «التدريب», no count bubbles (31 reference; owner
       2026-11-28 Q2: rail 04 kept for now).
+- [ ] **Light background A1** of 31 (light version of the 14 background): today the light theme uses the light background of
+      30 (`splash/background_light.webp`, other arc); prompt in `prompts/31-daily-practice/images-v1.txt`, owner to decide.
+- [ ] 31 critic not run (ask the owner); phone check of the popup and of the session (APK).
 
 ## Screen 10/10b, test lesson (approved 2026-11-26)
 - [ ] **Long press completes** a course / unit / lesson at once (review aid for testing; owner 2026-11-26: fine for

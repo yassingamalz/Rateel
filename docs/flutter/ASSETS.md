@@ -352,3 +352,15 @@ and, per `PROCESS.md`, in `docs/flutter/screens/31-daily-practice/` (same files)
 
 Notes seen on the images (to check in the plan, not decided): in 31-A the active rail tile shows headphones; the popup 31-B
 is drawn over lesson 22, not over 08 as the prompt said.
+
+## Screen 31 daily practice: assets (owner, 2026-11-28)
+Sources in `docs/design-assets/daily-practice/assets/` (lossless), processed by `tools/assets/practice_assets.py` (magenta key
+as `icon_collection.py`), 512 px webp. Common library.
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `icons/calendar_cream.webp` | `a2_calendar_magenta.webp` (A2, owner) | 31-B reminder popup | cream line calendar, tinted gold `pracCalendar` in code; light: page filled `pracLCalendarPage` behind it |
+| `icons_white/headphones_cream.webp`, `headphones_brown.webp` | `headphones_cream_brown_magenta.webp` (pair split in halves) | 31-A tile «استماع» | tinted with the tile glyph colour (`pracGlyph` / `pracLGlyph`) like the other two glyphs (owner) |
+| `icons/flame_inner_hole.webp` | derived from `icons/flame_inner.webp` (2026-11-28) | 31-A flame, light theme | the flame's inner hole (flood fill from the edges, grown 3 px), white + alpha, filled pale `pracLFlameInner` as the reference |
+Reused: `coming_soon/background.webp` (dark background), `splash/background_light.webp` (light, until A1), `decor/header_arch.svg`,
+`decor/mosque(_light).webp`, `decor/crescent_star.svg`, `splash/emblem(_inner).webp`, `decor/card_pattern.svg`,
+`icons/flame_inner.webp` (coloured with the reference's gradient), `icons_white/question_circle`, `open_book(_brown)`, `checkmark`.
