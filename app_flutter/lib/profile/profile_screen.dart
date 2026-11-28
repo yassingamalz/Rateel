@@ -34,6 +34,9 @@ abstract final class ProfMetrics {
   static const mosqueLeft = 13.6;
   static const mosqueTop = 3.9;
   static const mosqueW = 42.0;
+  static const mosqueLLeft = 25.2;
+  static const mosqueLTop = 2.4;
+  static const mosqueLW = 38.5;
   static const crescentRight = 26.3;
   static const crescentTop = 6.7;
   static const crescentW = 8.9;
@@ -57,6 +60,8 @@ abstract final class ProfMetrics {
   static const vDivDx = -32.0;
   // Quran art: arch 190–480 × 228–440 px.
   static const artDx = -59.6;
+  static const artW = 47.0;
+  static const artTop = 25.6;
   // Stats panel 105–1590 × 474–822 px.
   static const panelW = 174.1;
   static const panelTop = 55.6;
@@ -543,25 +548,47 @@ class _Header extends StatelessWidget {
             top: u * ProfMetrics.mosqueTop,
             width: u * ProfMetrics.mosqueW,
             height: u * ProfMetrics.mosqueW * 542 / 900,
-            child: Opacity(
-              opacity: p.light ? 0.9 : 1.0,
+            child: p.light
+                ? const SizedBox.shrink()
+                : Opacity(
+                    opacity: 1.0,
+                    child: ShaderMask(
+                      blendMode: BlendMode.dstIn,
+                      shaderCallback: (r) => const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.66, 0.84],
+                        colors: [Color(0xFF000000), Color(0x00000000)],
+                      ).createShader(r),
+                      child: Image.asset(
+                        'assets/ui/decor/mosque.webp',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+          ),
+          // Light theme: the owner's beige skyline (A6), as reference-light
+          // (x 215–540 px, base faded at ≈ 200 px).
+          if (p.light)
+            Positioned(
+              left: u * ProfMetrics.mosqueLLeft,
+              top: u * ProfMetrics.mosqueLTop,
+              width: u * ProfMetrics.mosqueLW,
+              height: u * ProfMetrics.mosqueLW * 465 / 900,
               child: ShaderMask(
                 blendMode: BlendMode.dstIn,
                 shaderCallback: (r) => const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: [0.66, 0.84],
+                  stops: [0.6, 1.0],
                   colors: [Color(0xFF000000), Color(0x00000000)],
                 ).createShader(r),
                 child: Image.asset(
-                  'assets/ui/decor/mosque.webp',
+                  'assets/ui/decor/mosque_light.webp',
                   fit: BoxFit.contain,
-                  color: p.light ? RateelColors.profLMosque : null,
-                  colorBlendMode: p.light ? BlendMode.srcIn : null,
                 ),
               ),
             ),
-          ),
           Positioned(
             right: u * ProfMetrics.crescentRight,
             top: u * ProfMetrics.crescentTop,
@@ -707,7 +734,7 @@ class _Glass extends StatelessWidget {
   }
 }
 
-/// Gold lattice (screen 11 tile) faded by [mask].
+/// Owner's star lattice (white tile, tinted) faded by [mask].
 class _Lattice extends StatelessWidget {
   const _Lattice({
     required this.u,
@@ -727,9 +754,10 @@ class _Lattice extends StatelessWidget {
       blendMode: BlendMode.dstIn,
       shaderCallback: mask.createShader,
       child: Image.asset(
-        'assets/ui/video/bottom_band.webp',
+        'assets/ui/decor/lattice_star_tile.webp',
         repeat: ImageRepeat.repeat,
-        scale: 545 / (u * cell * 4),
+        // The tile holds 2×2 cells.
+        scale: 512 / (u * cell * 2),
         fit: BoxFit.none,
         alignment: Alignment.topRight,
         color: color,
@@ -776,7 +804,8 @@ class _IdentityCard extends StatelessWidget {
               child: _Lattice(
                 u: u,
                 cell: 5.4,
-                color: p.lattice,
+                // Brighter than the level bar's (reference #48673B lines).
+                color: p.light ? p.lattice : RateelColors.profAvatarLattice,
                 mask: const RadialGradient(
                   radius: 0.75,
                   colors: [
@@ -789,38 +818,36 @@ class _IdentityCard extends StatelessWidget {
               ),
             ),
           ),
-          // Avatar with the gold ring of the leaderboard.
+          // Avatar in the owner's glowing gold ring (`decor/avatar_ring_gold.webp`,
+          // 2026-11-28): the solid ring is 95.1% of the image width, 5.5% thick;
+          // its outer edge matches the reference ring (Ø 23u).
           Positioned(
             left: lx(ProfMetrics.avatarDx) - u * ProfMetrics.avatarD / 2,
             top: u * ProfMetrics.avatarCy - top - u * ProfMetrics.avatarD / 2,
             width: u * ProfMetrics.avatarD,
             height: u * ProfMetrics.avatarD,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    RateelColors.profRingTop,
-                    RateelColors.profRingBottom,
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: RateelColors.profRingGlow.withValues(
-                      alpha: p.light ? 0.35 : 0.5,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: EdgeInsets.all(u * ProfMetrics.avatarD * 0.045),
+                    child: ClipOval(
+                      child: Image.asset(player.avatarAsset, fit: BoxFit.cover),
                     ),
-                    blurRadius: u * 1.5,
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(u * 0.6),
-                child: ClipOval(
-                  child: Image.asset(player.avatarAsset, fit: BoxFit.cover),
                 ),
-              ),
+                Positioned(
+                  left: -u * ProfMetrics.avatarD * 0.026,
+                  top: -u * ProfMetrics.avatarD * 0.023,
+                  width: u * ProfMetrics.avatarD / 0.951,
+                  height: u * ProfMetrics.avatarD / 0.951 * 762 / 768,
+                  child: const Image(
+                    image: AssetImage('assets/ui/decor/avatar_ring_gold.webp'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ],
             ),
           ),
           // Name.
@@ -884,13 +911,15 @@ class _IdentityCard extends StatelessWidget {
               ),
             ),
           ),
-          // Quran on its stand under a glowing arch (placeholder art).
+          // Quran in the mihrab: arch 190–480 × 228–440 px on the reference;
+          // the art is scaled so its stand ends at ≈ 440 px (feet at 88% of its height),
+          // centre at 49.4%. Clipped by the card (the floor light ends at the rim).
           Positioned(
-            left: lx(ProfMetrics.artDx) - u * 17,
-            width: u * 34,
-            top: u * 26.7 - top,
-            height: u * 25,
-            child: _QuranArt(u: u, p: p),
+            left: lx(ProfMetrics.artDx) - u * ProfMetrics.artW * 0.494,
+            width: u * ProfMetrics.artW,
+            top: u * (ProfMetrics.artTop) - top,
+            height: u * ProfMetrics.artW * 655 / 1024,
+            child: _QuranArt(p: p),
           ),
         ],
       ),
@@ -898,60 +927,29 @@ class _IdentityCard extends StatelessWidget {
   }
 }
 
-/// Glowing onion arch with the Quran on its stand (placeholder: the gold
-/// rehal of course 01 until the owner's asset).
+/// The Quran on its stand in the glowing mihrab, with the yellow light on the
+/// floor: owner's full art (`decor/quran_mihrab_{dark,light}.webp`, 2026-11-28),
+/// its edges faded into the card fill.
 class _QuranArt extends StatelessWidget {
-  const _QuranArt({required this.u, required this.p});
+  const _QuranArt({required this.p});
 
-  final double u;
   final _Palette p;
 
   @override
-  Widget build(BuildContext context) => Stack(
-    clipBehavior: Clip.none,
-    children: [
-      Positioned.fill(
-        child: CustomPaint(
-          painter: _ArchGlowPainter(u: u, p: p),
-        ),
-      ),
-      // Yellow light on the floor under the stand (reference: warm glow
-      // spreading under the book), painted once (static layer).
-      Positioned(
-        left: u * 1.5,
-        right: u * 1.5,
-        top: u * 17.5,
-        height: u * 9.5,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              radius: 0.5,
-              colors: [
-                RateelColors.profFloorGlow.withValues(
-                  alpha: p.light ? 0.30 : 0.75,
-                ),
-                RateelColors.profFloorGlow.withValues(
-                  alpha: p.light ? 0.18 : 0.28,
-                ),
-                RateelColors.profFloorGlow.withValues(alpha: 0),
-              ],
-              stops: const [0, 0.45, 1],
-            ),
-          ),
-          child: const SizedBox.expand(),
-        ),
-      ),
-      Positioned(
-        left: u * 5.8,
-        right: u * 5.8,
-        top: u * 11.2,
-        height: u * 13.5,
-        child: const Image(
-          image: AssetImage('assets/ui/courses/course_01.webp'),
-          fit: BoxFit.contain,
-        ),
-      ),
-    ],
+  Widget build(BuildContext context) => ShaderMask(
+    blendMode: BlendMode.dstIn,
+    shaderCallback: (r) => const RadialGradient(
+      center: Alignment(0, -0.1),
+      radius: 0.62,
+      stops: [0.62, 1.0],
+      colors: [Color(0xFF000000), Color(0x00000000)],
+    ).createShader(r),
+    child: Image.asset(
+      p.light
+          ? 'assets/ui/decor/quran_mihrab_light.webp'
+          : 'assets/ui/decor/quran_mihrab_dark.webp',
+      fit: BoxFit.fill,
+    ),
   );
 }
 
@@ -974,61 +972,6 @@ class _ArchClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(_ArchClipper oldClipper) => false;
-}
-
-class _ArchGlowPainter extends CustomPainter {
-  _ArchGlowPainter({required this.u, required this.p});
-
-  final double u;
-  final _Palette p;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    // Soft light in the arch, strongest above the book.
-    canvas.drawPath(
-      _onionArch(size)..close(),
-      Paint()
-        ..shader = RadialGradient(
-          center: const Alignment(0, 0.25),
-          radius: 0.7,
-          colors: [
-            p.gold.withValues(alpha: p.light ? 0.14 : 0.30),
-            p.gold.withValues(alpha: 0),
-          ],
-        ).createShader(rect),
-    );
-    final line = _onionArch(size);
-    final fade = LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      stops: const [0, 0.55, 0.95],
-      colors: [
-        p.gold,
-        p.gold.withValues(alpha: 0.55),
-        p.gold.withValues(alpha: 0),
-      ],
-    ).createShader(rect);
-    canvas.drawPath(
-      line,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 1.2
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.8)
-        ..shader = fade
-        ..color = p.gold.withValues(alpha: 0.5),
-    );
-    canvas.drawPath(
-      line,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = u * 0.3
-        ..shader = fade,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_ArchGlowPainter o) => o.u != u || o.p != p;
 }
 
 class _Panel extends StatelessWidget {
@@ -1065,29 +1008,26 @@ class _Tile extends StatelessWidget {
   final Widget number;
 
   Widget _glyph() {
-    final h = u * ProfMetrics.iconH;
+    // Owner's glyphs (2026-11-28), sizes measured on the reference.
     return switch (glyph) {
       'star' => SvgPicture.asset(
         'assets/ui/glyphs/star.svg',
-        height: h * 1.38,
+        height: u * ProfMetrics.iconH * 1.38,
         colorFilter: ColorFilter.mode(p.gold, BlendMode.srcIn),
       ),
-      // Reference: open book 60×39 px (more upright than the arch emblem).
-      'book' => SizedBox(
+      'book' => Image.asset(
+        'assets/ui/glyphs/open_book.webp',
         width: u * 7.0,
         height: u * 4.6,
-        child: SvgPicture.asset(
-          'assets/ui/decor/header_book.svg',
-          fit: BoxFit.fill,
-          colorFilter: ColorFilter.mode(p.bookGlyph, BlendMode.srcIn),
-        ),
+        fit: BoxFit.fill,
+        color: p.bookGlyph,
+        colorBlendMode: BlendMode.srcIn,
       ),
-      'medal' => Icon(
-        Icons.workspace_premium_rounded,
-        color: p.medal,
-        size: h * 1.38,
+      'medal' => Image.asset(
+        'assets/ui/glyphs/rank_rosette.webp',
+        height: u * 5.9,
       ),
-      _ => Image.asset('assets/ui/icons/flame_gold_01.webp', height: h * 1.1),
+      _ => Image.asset('assets/ui/icons/flame_gold_04.webp', height: u * 5.2),
     };
   }
 
@@ -1245,15 +1185,12 @@ class _LevelBar extends StatelessWidget {
             top: 0,
             bottom: 0,
             child: Center(
-              // Reference glyph 54×47 px: wider than the Material one.
-              child: Transform.scale(
-                scaleX: 1.42,
-                scaleY: 1.1,
-                child: Icon(
-                  Icons.layers_outlined,
-                  color: p.gold,
-                  size: u * ProfMetrics.layersH,
-                ),
+              // Owner's layers glyph, 54×47 px on the reference.
+              child: Image.asset(
+                'assets/ui/glyphs/layers.webp',
+                width: u * 6.3,
+                height: u * 5.5,
+                fit: BoxFit.contain,
               ),
             ),
           ),

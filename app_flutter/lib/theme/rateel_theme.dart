@@ -495,6 +495,7 @@ class RateelColors {
   static const profCity = Color(0xFFDCE3CF);
   static const profDivider = Color(0xFFE5DA7A);
   static const profVDivider = Color(0xFFD6E6C2);
+  static const profAvatarLattice = Color(0xFF5F8248);
   static const profLattice = Color(0x8C5E7A34); // faint olive lines
   static const profRingTop = Color(0xFFFFE27A);
   static const profRingBottom = Color(0xFFE0A91C);

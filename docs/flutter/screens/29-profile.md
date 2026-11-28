@@ -40,3 +40,9 @@ Branch `flutter/29-profile-v2` from `master` `c2dec63` (2026-11-27). Replaces th
 - Measured after v1 (`tools/flutter-review/profile-measure.py`): every text and glyph within 4 px of the reference at
   1844×853, except the book glyph (5 px lower edge). Sheets: `29-profile/compare-v1.jpg` (reference left, Flutter right),
   `phone-v1-{dark,light}.jpg`. Critic not run (ask the owner first).
+
+## v2 (2026-11-28): owner's assets
+Owner's assets wired (list in `ASSETS.md`, «Common library additions from screen 29»): the Quran in the mihrab (full art,
+dark / light) replaces the code arch, the floor glow and the placeholder; rank rosette, open book, layers, star lattice, light
+mosque, the reference's flame, gold avatar ring. All avatars of the app have the darker yellow (#E7AF03).
+Still open: the code items of critic v1 (BACKLOG).
