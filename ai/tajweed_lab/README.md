@@ -36,7 +36,7 @@ What it does:
 ## Build
 ```
 cd ai/tajweed_lab
-flutter build apk --release --target-platform android-arm64 --build-name=0.1.0 --build-number=1   # ~19 MB
+flutter build apk --release --target-platform android-arm64 --build-name=0.1.1 --build-number=2   # ~19 MB
 ```
 Only arm64 phones; native libraries compressed (`android/app/build.gradle.kts`). In the cloud container Maven Central
 answers 429: a container-only Gradle init script that puts Google's mirror first was used (see `DECISIONS.md`).

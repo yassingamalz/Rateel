@@ -334,17 +334,25 @@ class _AyahPageState extends State<AyahPage> {
   String get _everyayah =>
       'https://everyayah.com/data/Husary_128kbps/${widget.ayah.sura.toString().padLeft(3, '0')}${widget.ayah.aya.toString().padLeft(3, '0')}.mp3';
 
+  void _say(String m) {
+    if (mounted) setState(() => _msg = m);
+  }
+
   Future<void> _toggleRecord() async {
     if (_recording) return _stop();
-    if (!await _rec.hasPermission()) {
-      setState(() => _msg = 'Serve il permesso del microfono.');
+    try {
+      if (!await _rec.hasPermission()) {
+        _say('Serve il permesso del microfono (Impostazioni Android → App → Rateel lab → Autorizzazioni).');
+        return;
+      }
+      final dir = await getTemporaryDirectory();
+      await _rec.start(
+          const RecordConfig(encoder: AudioEncoder.wav, sampleRate: 16000, numChannels: 1),
+          path: '${dir.path}/take_${DateTime.now().millisecondsSinceEpoch}.wav');
+    } catch (e, st) {
+      _say('Errore all\'avvio della registrazione: $e\n$st');
       return;
     }
-    final dir = await getTemporaryDirectory();
-    await _rec.start(
-        const RecordConfig(encoder: AudioEncoder.wav, sampleRate: 16000, numChannels: 1, autoGain: false,
-            echoCancel: false, noiseSuppress: false),
-        path: '${dir.path}/take.wav');
     _recStart = DateTime.now();
     setState(() {
       _recording = true;
@@ -357,29 +365,59 @@ class _AyahPageState extends State<AyahPage> {
   }
 
   Future<void> _stop() async {
-    final path = await _rec.stop();
-    setState(() {
-      _recording = false;
-      _msg = null;
-    });
-    if (path != null) await _analyse(File(path));
+    String? path;
+    try {
+      path = await _rec.stop();
+    } catch (e, st) {
+      setState(() => _recording = false);
+      _say('Errore allo stop della registrazione: $e\n$st');
+      return;
+    }
+    setState(() => _recording = false);
+    if (path == null) {
+      _say('Il registratore non ha restituito nessun file.');
+      return;
+    }
+    final file = File(path.startsWith('file://') ? Uri.parse(path).toFilePath() : path);
+    if (!await file.exists() || await file.length() < 1000) {
+      _say('Registrazione vuota o mancante ($path).');
+      return;
+    }
+    await _analyse(file);
   }
 
   Future<void> _analyse(File wavFile) async {
-    final session = widget.lab.session;
-    if (session == null) {
-      setState(() => _msg = 'Prima carica il modello in memoria (pagina iniziale).');
-      return;
-    }
+    final lab = widget.lab;
     setState(() => _busy = true);
+    if (lab.session == null) {
+      if (!await lab.store.ready) {
+        _say('Il modello non è sul telefono: torna alla pagina iniziale e scaricalo o importalo.');
+        setState(() => _busy = false);
+        return;
+      }
+      _say('Carico il modello in memoria (la prima volta può volerci un po\')…');
+      try {
+        await lab.loadModel();
+      } catch (e, st) {
+        _say('Errore nel caricare il modello: $e\n$st');
+        setState(() => _busy = false);
+        return;
+      }
+    }
+    final session = lab.session!;
+    var step = 'lettura del file';
     try {
       final bytes = await wavFile.readAsBytes();
+      _say('Analizzo: calcolo del suono (${(bytes.length / 32000).toStringAsFixed(1)} s)…');
+      step = 'calcolo delle feature audio';
       final sw = Stopwatch()..start();
       final fr = await compute(_features, _FeatJob(bytes, widget.lab.window, widget.lab.mel));
       final featMs = sw.elapsedMilliseconds;
       sw
         ..reset()
         ..start();
+      _say('Analizzo: il modello ascolta…');
+      step = 'modello ONNX';
       final input = await OrtValue.fromList(fr.f.values, [1, fr.f.frames, 160]);
       final mask = await OrtValue.fromList(fr.f.mask, [1, fr.f.frames]);
       final out = await session.run({'input_features': input, 'attention_mask': mask});
@@ -390,15 +428,20 @@ class _AyahPageState extends State<AyahPage> {
       for (final v in [input, mask, ...out.values]) {
         await v.dispose();
       }
+      step = 'confronto con l\'ayah';
       final predicted = greedyDecode(logits, frames, classes, widget.lab.vocab);
       _lastPredicted = predicted;
       final corr = correct(widget.ayah, predicted, fixed: _fixed);
       final a = Analysis(predicted, corr, fr.seconds, featMs, modelMs, int.parse(_mb(ProcessInfo.currentRss)),
           int.parse(_mb(ProcessInfo.maxRss)), fr.rate);
-      setState(() => _result = a);
+      setState(() {
+        _result = a;
+        _msg = null;
+      });
+      step = 'salvataggio della registrazione';
       await _save(bytes, a);
-    } catch (e) {
-      setState(() => _msg = 'Errore: $e');
+    } catch (e, st) {
+      _say('Errore durante: $step\n$e\n$st');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -463,7 +506,7 @@ class _AyahPageState extends State<AyahPage> {
           }),
         ),
         if (_busy) const Padding(padding: EdgeInsets.all(16), child: LinearProgressIndicator()),
-        if (_msg != null) Padding(padding: const EdgeInsets.all(8), child: Text(_msg!)),
+        if (_msg != null) Padding(padding: const EdgeInsets.all(8), child: SelectableText(_msg!)),
         if (a != null) ..._resultView(a),
         const SizedBox(height: 24),
         Text(aiNoticeAr, textDirection: TextDirection.rtl, style: Theme.of(context).textTheme.bodySmall),
