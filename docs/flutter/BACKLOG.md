@@ -144,3 +144,21 @@ Placeholders to replace before release:
 - [ ] Rewrite or drop the weak "app policy" questions and expand the 3-line narrations 58–70 into full lesson scripts
       (`REVIEW-2026-11-27.md`, «Still open»).
 - [x] Optional tashil/ibdal (آلذكرين، آلآن، آلله) written from the book ch. 19 (pool 99, 2026-11-27); الاسم is in ch. 15 p. 471.
+
+## AI tajweed correction (screens 09 and 31; study 2026-11-28, `docs/ai/TAJWEED-MODEL.md`)
+- [ ] **Owner's answers** to the open questions (`TAJWEED-MODEL.md` §9): server or on-device first, ads / paid plans (QML forbids
+      ads in the whole app), reading taught (madd lengths), place of the AI notice, real learners' recordings, contact with the
+      authors, which errors a beginner sees, backend budget.
+- [ ] **Licence**: ask the authors (quran.muaalem@gmail.com) whether model and dataset are MIT (Hugging Face) or QML (repo); log
+      the answer.
+- [ ] **Read issue #46** (mobile roadmap) of `obadx/quran-muaalem`: needs `github.com` in the environment's allowed domains, or the
+      owner pastes it.
+- [ ] **Evaluation on real learners** (with consent): recordings of beginners, women, children, phone microphones; count true and
+      false errors per rule before showing feedback in the app.
+- [ ] **Prototype server endpoint** `{audio, sura, aya, reading}` (only with the owner's yes): fixed ayah, all allowed madd
+      lengths, pinned versions (`transformers==4.55.2`, `fastapi==0.116.1` with quran-muaalem 0.3.0).
+- [ ] **Phone measurement of the int8 ONNX model** (610 MB): latency and memory on the owner's phone (only with the owner's yes;
+      test page outside the app's screens).
+- [ ] **Branch `claude/quran-tajweed-correction-model-l36l1y`** (old PoC): its README plans for Capacitor and its
+      `requirements.txt` misses the two pins; update or archive it (owner to decide).
+- [ ] Recording package for Flutter (none in `pubspec.yaml` today) and microphone permission: choose with screen 09's plan.
