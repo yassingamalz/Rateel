@@ -1,3 +1,4 @@
+import 'package:rateel/core/user_profile.dart';
 import 'package:rateel/lessons/test_lesson_page.dart';
 import 'package:rateel/lessons/test_data.dart';
 import 'package:rateel/lessons/lesson_shell.dart';
@@ -24,7 +25,9 @@ Future<void> settle(WidgetTester tester) async {
   }
 }
 
-Future<void> openApp(WidgetTester tester) async {
+/// [onboarded] false: the first start (screen 30) opens after the splash.
+Future<void> openApp(WidgetTester tester, {bool onboarded = true}) async {
+  UserProfile.onboarded.value = onboarded;
   await tester.pumpWidget(RateelApp(initialize: (_) async {}));
   await tester.pump();
   await tester.pump(const Duration(milliseconds: 1350));

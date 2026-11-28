@@ -81,6 +81,7 @@ flutter:
     - assets/ui/badges/
     - assets/ui/badges/green/
     - assets/ui/icons/
+    - assets/ui/icons_white/
     - assets/data/reading/
     - assets/data/test/
     - assets/data/listening/

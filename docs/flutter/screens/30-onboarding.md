@@ -1,6 +1,7 @@
 # Screen 30: onboarding (first start)
 
-Branch `flutter/30-onboarding` from `master` `2c64be7` (2026-11-28). **Plan v1, waiting for the owner's yes: no code yet.**
+Branch `flutter/30-onboarding` from `master` `2c64be7` (2026-11-28). Plan v1 approved by the owner with the answers below;
+**v1 built** (2026-11-28, section «Build v1» at the end).
 
 ## References (owner, 2026-11-28)
 `30-onboarding/reference-{a-welcome,b-level,c-goal}-{dark,light}.webp` (1844×853; light C is 1843 wide), prompts
@@ -137,3 +138,30 @@ B «ما مستواك في التجويد؟» / «سنقترح عليك البد
 - **Q10** Light/dark toggle (CLAUDE.md: always present): the references have none. Proposal: the small moon button of 10,
   top left. Or no toggle on the first start (the app starts dark).
 - **Q11** (suggestion) The user's row in the mock leaderboard 11 shows the chosen name and avatar too.
+
+## Owner's answers (2026-11-28)
+Q1 yes (one place for the shared elements) · Q2 yes (divider 45u) · Q3 **app tokens** · Q4 avatars 6, 4, 2, 5, 3, 7 ·
+Q5 use the library's glyphs; the owner generated the stopwatch (G1) in the **white icon set** (`ASSETS.md`) · Q6 lattice band
+on every card · Q7 show examples first · Q8 yes · Q9 ok · Q10 ok (moon of 10) · Q11 yes.
+
+## Build v1 (2026-11-28)
+- `lib/onboarding/onboarding_screen.dart` (`OnbMetrics` = the tables above), `lib/core/user_profile.dart` (`profile.v1`),
+  `_Root` in `main.dart` (onboarding after the splash while not completed), tests `test/onboarding_test.dart`.
+- **Tokens (Q3):** card A = gold card of 10 (`GoldCardPainter` with the 10 fill); option cards, field and avatar rings = the
+  option rows of 10 (`testRow*` idle, `testSel*` selected, rim 0.3u, glow 28%), radius = tile token 3.0u; step dots
+  `amberPill` / `cardRimTop` (light `testLSelRim` / `readLDotOff`); main button `LessonButton` of 10 (light: filled gold);
+  round back button `LessonRoundButton`; light palette = the lesson light palette (`LessonPal`).
+- **Background:** `LessonBackground` of 08/10 (gradient + stepped-lattice corners, both themes: replaces the dark-only
+  `corner_top_*` of the plan), thin arc and waves in code, `decor/mosque.webp` (lesson tone) / `mosque_light.webp`.
+- Glyphs: `icons_white/open_book` (مبتدئ), `glyphs/star.svg` cream (متوسط), `glyphs/rank_rosette` gold as it is (متقدم),
+  `icons_white/stopwatch`, `icons_white/checkmark` (check disc), `icons_white/chevron_right` (back button),
+  `icons/flame_gold_01` (selected goal).
+- **Light emblem (Q7):** `splash/emblem_inner.webp` = the emblem's inner area (mask derived from the emblem's gold outline,
+  `ASSETS.md`), tinted in code. Variants for the owner: `?emblemL=green` (default, #0B5A2B sampled on the light
+  reference), `dark` (`readBgCentre`), `none` (as the splash).
+- Settings 23: row «الهدف اليومي» (stopwatch, pill + picker of the four goals). Profile 29: name, avatar and level from
+  `UserProfile`; a tap on the identity card opens step A in edit mode («حفظ», back ›). Leaderboard 11: the user's row
+  shows the chosen name and avatar.
+- Digits: «10 دقائق» is written number first (Arabic order) and renders as the reference.
+- Review: `?onboarding=1` (does not read or write the saved profile), `?step=b|c`, `?theme=light`, `?emblemL=`;
+  captures `tools/flutter-review/onboarding-capture.js`.

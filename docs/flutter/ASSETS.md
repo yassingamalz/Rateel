@@ -314,3 +314,21 @@ library and, per `PROCESS.md`, in `docs/flutter/screens/30-onboarding/` (same fi
 | `onboarding/reference-c-goal-{dark,light}.webp` | `03_daily_goal` | 30-C: four daily-goal cards (10 دقائق selected), «ابدأ التعلّم» |
 
 Note seen on the images (to check in the plan): the light 30-A title reads «رتل» without the shadda (dark has «رتّل»).
+
+## Owner's white icon set (2026-11-28, screen 30)
+Zip `rateel_white_icons` (ChatGPT, 1024 px, cream #FCF1D0-like line icons, each on magenta and transparent; numbered and
+unnumbered files are two framings of the same drawing). Common library: sources (lossless webp) in
+`docs/design-assets/icons-white/{transparent,magenta}/` + `preview.webp`; app copies from the transparent PNGs, trimmed,
+512 px, in `app_flutter/assets/ui/icons_white/` (`tools/assets/white_icons.py`).
+
+| App file | Used in | Notes |
+|---|---|---|
+| `icons_white/stopwatch.webp` | 30-C goal cards; 23 row «الهدف اليومي» | G1 of `prompts/30-onboarding/images-v1.txt` |
+| `icons_white/open_book.webp` | 30-B «مبتدئ» | |
+| `icons_white/checkmark.webp` | 30 check disc of the selected card | |
+| `icons_white/chevron_right.webp` | 30 round back button | |
+| all the others (`chevron_left`, `headphones`, `question_circle`, `hamburger`, `trophy`, `medal`, `document_search`, `settings_gear`, `13_open_book_sidebar`, numbered copies) | library | not used yet |
+
+| App file | Source | Used in | Notes |
+|---|---|---|---|
+| `splash/emblem_inner.webp` | derived from `splash/emblem.webp` (2026-11-28) | 30 light emblem fill (Q7) | the emblem's inner area: gold outline closed (9 px), flood fill from the centre, grown 2 px under the gold; white + alpha, tinted in code |
