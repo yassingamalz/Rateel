@@ -251,14 +251,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_onnxruntime:
-    dependency: "direct main"
-    description:
-      name: flutter_onnxruntime
-      sha256: "1e0f72a806808c73ea38231ffe14af8db4d27c535ffadadac4b66c29893148bd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.9.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

@@ -20,6 +20,7 @@ What it does:
 | `lib/features.dart` | port of `SeamlessM4TFeatureExtractor` (window and mel bank from the Python extractor, `assets/*.f32`) |
 | `lib/explain.dart` | port of quran-transcript 0.6.4 `explain_error` + greedy CTC decode + choice of the reading |
 | `lib/model_store.dart` | download in parts / import of the model |
+| `android/.../MainActivity.kt` | runs ONNX Runtime 1.28 (official package) on a background thread; device RAM and last exit reason |
 | `lib/main.dart` | the two pages |
 | `assets/ayat.json` | reference phonemes of the 28 ayat × every allowed reading (57 distinct references) |
 | `tool/build_assets.py` | makes the assets and the test vectors (Python env of `docs/ai/tajweed-model-study/README.md`) |
@@ -36,7 +37,7 @@ What it does:
 ## Build
 ```
 cd ai/tajweed_lab
-flutter build apk --release --target-platform android-arm64 --build-name=0.1.1 --build-number=2   # ~19 MB
+flutter build apk --release --target-platform android-arm64 --build-name=0.1.2 --build-number=3   # ~19 MB
 ```
 Only arm64 phones; native libraries compressed (`android/app/build.gradle.kts`). In the cloud container Maven Central
 answers 429: a container-only Gradle init script that puts Google's mirror first was used (see `DECISIONS.md`).

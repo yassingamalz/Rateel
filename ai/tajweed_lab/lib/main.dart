@@ -9,7 +9,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_onnxruntime/flutter_onnxruntime.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
@@ -49,9 +48,12 @@ class Lab {
   late List<Ayah> ayat;
   late Float32List window, mel;
   late Map<int, String> vocab;
-  OrtSession? session;
-  int threads = 4;
+  static const ort = MethodChannel('rateel.lab/ort');
+  bool loaded = false;
+  int threads = 2;
+  bool lowMemory = false;
   String? loadInfo;
+  File get runningMarker => File('${store.dir.path}/../analysis-running.json');
 
   Future<void> init() async {
     await store.init();
@@ -63,15 +65,14 @@ class Lab {
   }
 
   Future<void> loadModel() async {
-    await session?.close();
-    session = null;
+    loaded = false;
     final rss0 = ProcessInfo.currentRss;
     final sw = Stopwatch()..start();
-    session = await OnnxRuntime().createSession(store.model.path,
-        options: OrtSessionOptions(intraOpNumThreads: threads, interOpNumThreads: 1));
+    await ort.invokeMethod('load', {'path': store.model.path, 'threads': threads, 'lowMemory': lowMemory});
+    loaded = true;
     sw.stop();
     loadInfo = 'caricato in ${(sw.elapsedMilliseconds / 1000).toStringAsFixed(1)} s, '
-        'RAM +${_mb(ProcessInfo.currentRss - rss0)} MB (ora ${_mb(ProcessInfo.currentRss)} MB), $threads thread';
+        'RAM +${_mb(ProcessInfo.currentRss - rss0)} MB (ora ${_mb(ProcessInfo.currentRss)} MB), $threads thread${lowMemory ? ', memoria ridotta' : ''}';
   }
 }
 
@@ -86,7 +87,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final lab = Lab();
   bool _ready = false, _modelOk = false, _busy = false;
-  String? _status;
+  String? _status, _device, _crash;
   final _url = TextEditingController(text: defaultManifestUrl);
 
   @override
@@ -98,6 +99,19 @@ class _HomePageState extends State<HomePage> {
   Future<void> _start() async {
     await lab.init();
     _modelOk = await lab.store.ready;
+    try {
+      final d = Map<String, dynamic>.from(await Lab.ort.invokeMethod('deviceInfo') as Map);
+      _device = '${d['device']} · Android ${d['android']} · RAM ${d['totalMb']} MB (libera ${d['availMb']} MB)';
+      if (await lab.runningMarker.exists()) {
+        final m = await lab.runningMarker.readAsString();
+        final e = d['lastExit'] == null ? null : Map<String, dynamic>.from(d['lastExit'] as Map);
+        _crash = 'L\'ultima analisi ha chiuso l\'app ($m).\n'
+            '${e == null ? 'Android non dice il motivo.' : 'Motivo secondo Android: ${e['reason']}${e['description'] != null ? ' – ${e['description']}' : ''} · memoria usata ${e['rssMb']} MB'}';
+        await lab.runningMarker.delete();
+      }
+    } catch (e) {
+      _device = 'Info telefono non disponibili: $e';
+    }
     setState(() => _ready = true);
     final flag = File('${lab.store.dir.path}/../ai-notice-accepted');
     if (!await flag.exists() && mounted) {
@@ -163,6 +177,11 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: ListView(padding: const EdgeInsets.all(16), children: [
+        if (_crash != null)
+          Card(
+            color: const Color(0xFF5A2323),
+            child: Padding(padding: const EdgeInsets.all(16), child: SelectableText(_crash!)),
+          ),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -187,8 +206,8 @@ class _HomePageState extends State<HomePage> {
                       onPressed: _busy
                           ? null
                           : () => _run('Cancello…', () async {
-                                await lab.session?.close();
-                                lab.session = null;
+                                await Lab.ort.invokeMethod('close');
+                                lab.loaded = false;
                                 await lab.store.delete();
                                 _status = 'Modello cancellato.';
                               }),
@@ -197,7 +216,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(height: 24),
               Row(children: [
                 const Text('Thread CPU: '),
-                for (final t in [1, 2, 4])
+                for (final t in [1, 2, 4, 8])
                   Padding(
                     padding: const EdgeInsets.only(left: 6),
                     child: ChoiceChip(
@@ -207,10 +226,21 @@ class _HomePageState extends State<HomePage> {
                   ),
               ]),
               const SizedBox(height: 8),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Memoria ridotta'),
+                subtitle: const Text('Usa meno RAM, forse un po\' più lento (vale al prossimo caricamento).'),
+                value: lab.lowMemory,
+                onChanged: (v) => setState(() => lab.lowMemory = v),
+              ),
               FilledButton(
                   onPressed: _busy || !_modelOk ? null : _load,
-                  child: Text(lab.session == null ? 'Carica il modello in memoria' : 'Ricarica il modello')),
+                  child: Text(!lab.loaded ? 'Carica il modello in memoria' : 'Ricarica il modello')),
               if (lab.loadInfo != null) Padding(padding: const EdgeInsets.only(top: 8), child: Text(lab.loadInfo!)),
+              if (_device != null)
+                Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(_device!, style: Theme.of(context).textTheme.bodySmall)),
             ]),
           ),
         ),
@@ -389,7 +419,7 @@ class _AyahPageState extends State<AyahPage> {
   Future<void> _analyse(File wavFile) async {
     final lab = widget.lab;
     setState(() => _busy = true);
-    if (lab.session == null) {
+    if (!lab.loaded) {
       if (!await lab.store.ready) {
         _say('Il modello non è sul telefono: torna alla pagina iniziale e scaricalo o importalo.');
         setState(() => _busy = false);
@@ -404,7 +434,6 @@ class _AyahPageState extends State<AyahPage> {
         return;
       }
     }
-    final session = lab.session!;
     var step = 'lettura del file';
     try {
       final bytes = await wavFile.readAsBytes();
@@ -418,16 +447,14 @@ class _AyahPageState extends State<AyahPage> {
         ..start();
       _say('Analizzo: il modello ascolta…');
       step = 'modello ONNX';
-      final input = await OrtValue.fromList(fr.f.values, [1, fr.f.frames, 160]);
-      final mask = await OrtValue.fromList(fr.f.mask, [1, fr.f.frames]);
-      final out = await session.run({'input_features': input, 'attention_mask': mask});
-      final ph = out['phonemes']!;
-      final logits = (await ph.asFlattenedList()).map((e) => (e as num).toDouble()).toList();
+      await lab.runningMarker.writeAsString(
+          '${widget.ayah.sura}:${widget.ayah.aya}, ${fr.seconds.toStringAsFixed(1)} s di audio, ${lab.threads} thread'
+          '${lab.lowMemory ? ', memoria ridotta' : ''}');
+      final r = Map<String, dynamic>.from(await Lab.ort.invokeMethod('run', {'features': fr.f.values, 'mask': fr.f.mask}) as Map);
+      await lab.runningMarker.delete();
+      final logits = r['logits'] as Float32List;
       final modelMs = sw.elapsedMilliseconds;
-      final frames = ph.shape[1], classes = ph.shape[2];
-      for (final v in [input, mask, ...out.values]) {
-        await v.dispose();
-      }
+      final frames = r['frames'] as int, classes = r['classes'] as int;
       step = 'confronto con l\'ayah';
       final predicted = greedyDecode(logits, frames, classes, widget.lab.vocab);
       _lastPredicted = predicted;
@@ -441,6 +468,7 @@ class _AyahPageState extends State<AyahPage> {
       step = 'salvataggio della registrazione';
       await _save(bytes, a);
     } catch (e, st) {
+      if (await lab.runningMarker.exists()) await lab.runningMarker.delete();
       _say('Errore durante: $step\n$e\n$st');
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -493,7 +521,7 @@ class _AyahPageState extends State<AyahPage> {
               label: Text(_recording ? 'Stop e analizza' : 'Registra')),
         ]),
         SwitchListTile(
-          title: const Text('Lettura fissa (عارض 4 · منفصل 4 · متصل 4)'),
+          title: const Text('Lettura fissa: mudud a 4 tempi'),
           subtitle: const Text('Spento: ogni lunghezza lecita dei mudud è accettata (decisione del 28/11).'),
           value: _fixed,
           onChanged: (v) => setState(() {
