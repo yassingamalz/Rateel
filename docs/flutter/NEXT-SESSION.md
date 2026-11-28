@@ -1,4 +1,46 @@
-# Next session (from 2026-11-27, after the performance fix and the saved progress)
+# Next session (from 2026-11-27 evening, after screen 24 v1)
+
+**State.** `master` = `c2dec63`: everything of the previous hand-off plus the **22 header variant g** (line with the diamond under
+the title, owner-approved) and the GitHub patch workflow (`CLAUDE.md`). APK 1.0.635 = that `master`.
+**Screen 24 (end of lesson) v1 built** on `flutter/24-end-of-lesson` (owner's go, Q1–Q7 and follow-up answers in `DECISIONS.md`,
+plan `screens/24-end-of-lesson.md`, comparison `screens/24-end-of-lesson/compare-v1.jpg`), **APK 1.0.640**, waiting for the
+owner's phone test and approval; the owner pushes the branch from the patches. Critic not run (ask first).
+Open on 24: «passed» sound at the card only for video / reading (🟡), colours E1–E4 decided at the end of the project.
+Screen 13 v1 waits on `claude/flutter-13-achievements-xa7myj`; 29, 28, 15–21 as before (archive below).
+
+**GitHub (temporary): no push from the cloud.** Clone the public repo, work on a local branch, hand the commits to the owner as
+`git format-patch origin/master` files (sent with the file tool, often); the owner applies them in PowerShell with
+`git am (Get-ChildItem <folder>\*.patch | Sort-Object Name | ForEach-Object FullName)` from a dedicated folder, then pushes.
+Before building on a branch the owner pushed, `git fetch` and check the commits are there. Procedure: `CLAUDE.md`.
+
+**Next steps (proposal):**
+1. Check that `flutter/24-end-of-lesson` is on GitHub with the 24 commits; owner's verdict on APK 1.0.640; corrections; when
+   approved, merge into `master` (owner applies/pushes) and log it.
+2. **Decisions session, remaining points** (interactive questions, one topic at a time): 26 points history inside 13,
+   28 «؟» button place, 30 onboarding (account or not), 31 daily practice (own screen or inside 12), 12 connector (lit up to
+   the open tile or all), **test sounds** (numbered candidates for «correct» and «passed», owner listens and picks; the
+   badges' celebration and 24 reuse «passed»). Each answer in `DECISIONS.md` + `BACKLOG.md` in the same commit.
+3. Then 13 (and 29 after it), only with the owner's go.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel (https://github.com/yassingamalz/Rateel, pubblico), da master. Il connettore GitHub è bloccato:
+segui la sezione "GitHub access without the connector" di CLAUDE.md (clone in sola lettura, niente push né PR dal cloud,
+lavori su un branch locale e mi mandi spesso i commit come file .patch con git format-patch; io li applico con git am e
+faccio il push; dammi i comandi PowerShell, una cartella dedicata per ogni gruppo di patch). Leggi CLAUDE.md e tutti i file
+che indica (DECISIONS.md, README.md, PROCESS.md, LESSONS-LEARNED.md, PERFORMANCE.md, BACKLOG.md), poi
+docs/flutter/NEXT-SESSION.md (prima sezione), SCREENS.md, STYLE-CONFLICTS.md e docs/flutter/screens/24-end-of-lesson.md.
+Primo: controlla che il branch flutter/24-end-of-lesson sia su GitHub con i commit della schermata 24 e chiedimi com'è
+andata la prova dell'APK 1.0.640; se la approvo, preparami l'unione in master (patch, chiedimi prima). Secondo: sessione
+delle decisioni sui punti rimasti (26, 28, 30, 31, connettore della 12, suoni dei test): domande interattive, una alla
+volta, con il problema, le opzioni e la tua raccomandazione; scrivi ogni risposta in DECISIONS.md e BACKLOG.md nello
+stesso commit. Per i suoni dei test preparami campioni numerati da ascoltare. Non iniziare nessuna schermata nuova senza
+il mio via. Parlami in italiano, documenti in inglese.
+```
+
+---
+
+## Archive: hand-off of 2026-11-27 (after the performance fix and the saved progress)
 
 **State.** In `master`: 01, 02, 03, 04, 05, 06, 07, 08, 10/10b (+25), 11, 12, 14, 22 (with the owner's H1 headphones),
 23, 27, plus **#66 performance fix** (same look) and **#67 progress saved on the device** (merged 2026-11-27, owner).

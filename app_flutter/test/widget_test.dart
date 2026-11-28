@@ -1,6 +1,7 @@
 import 'package:rateel/lessons/test_lesson_page.dart';
 import 'package:rateel/lessons/test_data.dart';
 import 'package:rateel/lessons/lesson_shell.dart';
+import 'package:rateel/lessons/lesson_end.dart';
 import 'package:rateel/lessons/video_lesson_page.dart';
 import 'package:rateel/lessons/reading_lesson_page.dart';
 import 'package:rateel/lessons/reading_data.dart';
@@ -178,6 +179,11 @@ void main() {
       }
       expect(find.text('الفيديو غير متاح'), findsOneWidget);
       await tester.tap(find.text('تخطي'));
+      // The end card (24) waits for «متابعة».
+      for (var i = 0; i < 3; i++) {
+        await settle(tester);
+      }
+      await tester.tap(find.text('متابعة'));
       for (var i = 0; i < 8; i++) {
         await settle(tester);
       }
@@ -342,9 +348,16 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('إدغام'), findsNothing);
-      // «تخطي» completes the lesson: the page leaves with true.
+      // «تخطي» completes the lesson: the end card (24), «متابعة», the page
+      // leaves with true.
       await tester.tap(find.text('تخطي'));
       for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 300));
+      }
+      expect(result, isNull);
+      expect(find.text('أحسنت، أكملت الدرس'), findsOneWidget);
+      await tester.tap(find.text('متابعة'));
+      for (var i = 0; i < 4; i++) {
         await tester.pump(const Duration(milliseconds: 300));
       }
       expect(result, isTrue);
@@ -555,5 +568,55 @@ void main() {
       find.text('ما هو حكم التجويد عند قراءة القرآن الكريم؟'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('end of lesson (24): stars, tiles, continue and restart', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1844, 853);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    expect(LessonEndResult.starsFor(5, 5), 3);
+    expect(LessonEndResult.starsFor(4, 5), 2);
+    expect(LessonEndResult.starsFor(3, 5), 1);
+    expect(LessonEndResult.starsForScore(95), 3);
+    expect(LessonEndResult.starsForScore(75), 2);
+    final shell = GlobalKey<LessonShellState>();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: LessonShell(
+          key: shell,
+          step: 3,
+          total: 8,
+          onBack: () {},
+          onRestart: () {},
+          child: const SizedBox.expand(),
+        ),
+      ),
+    );
+    // A lesson without questions: no «إجابات صحيحة» tile.
+    var choice = shell.currentState!.finish(const LessonEndResult.done());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 1800));
+    expect(find.text('أحسنت، أكملت الدرس'), findsOneWidget);
+    expect(find.text('إجابات صحيحة'), findsNothing);
+    expect(find.text('+10'), findsOneWidget);
+    // The capsule shows the lesson complete.
+    expect(find.bySemanticsLabel('الخطوة 8 من 8'), findsOneWidget);
+    await tester.tap(find.text('إعادة الدرس'));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(await choice, LessonEndChoice.again);
+    expect(find.text('أحسنت، أكملت الدرس'), findsNothing);
+    // With questions: the answers tile; «متابعة» completes with next.
+    choice = shell.currentState!.finish(
+      LessonEndResult.answers(right: 4, total: 5, points: 40),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 1800));
+    expect(find.text('إجابات صحيحة'), findsOneWidget);
+    expect(find.text('+40'), findsOneWidget);
+    await tester.tap(find.text('متابعة'));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(await choice, LessonEndChoice.next);
   });
 }

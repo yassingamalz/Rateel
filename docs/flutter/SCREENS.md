@@ -59,7 +59,7 @@ each one gets its reference from the app screenshots (`docs/flutter/app-referenc
 | N° | Screen | Comes from | Note |
 |---|---|---|---|
 | 01 | Splash / start-up (loading) | Angular `splash-screen`, `initialization` | uses the free number 01 |
-| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; started 2026-11-27, then **postponed** by the owner (BACKLOG) |
+| 24 | End of lesson (points, stars, continue) | Angular `completion-screen`, `completion-modal` | shared by every lesson type, like 02; postponed, then **kept** by the owner (2026-11-27, references 24-A/24-B); **built** on `flutter/24-end-of-lesson`, waiting for the owner's approval |
 | 25 | Test results (score, correct / wrong, retry) | Angular `assessment-results` | **built inside 10** (results in the card, approved 2026-11-26) |
 | 26 | Points history | Angular `points-history`, `points-card` | may live inside 13 or 29 |
 | 27 | Badge collection and achievement detail | Angular `badges-collection`, `achievement-details-modal` | may be part of 13; reference from the owner `screens/27-badges/reference.webp`; **approved 2026-11-27** (APK 1.0.504), merged into `master`; mock data, placeholders in `BACKLOG.md`; **part of 13 (reached from it)** |

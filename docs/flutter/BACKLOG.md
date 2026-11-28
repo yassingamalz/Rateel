@@ -20,9 +20,10 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       notes `screens/28-help-overlay.md`. Owner's answers: shown the **first time** each lesson type opens, then remembered
       (saved); reopened by a small **«؟» button** (place to decide: maybe the 02 pause menu); which lesson first: later
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
-- [ ] **Screen 24, end of lesson** (postponed by the owner 2026-11-27: «probably not needed»): plan v1, questions Q1–Q7
-      and reference prompts in `screens/24-end-of-lesson.md`, `prompts/24-end-of-lesson/reference-v1.txt`. Decide whether to
-      drop it; the +10 points of 22 are still shown nowhere at the end.
+- [ ] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): **built** on `flutter/24-end-of-lesson`, waiting for the
+      owner's phone test and approval. Leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
+      the streak tile reads the mock streak of 12 (always shown, at least 1, owner); light buttons vs the reference
+      (`STYLE-CONFLICTS.md` E1–E4, decided at the end of the project with the other conflicts); critic not run (ask the owner).
 - [ ] **Screens 15–21, guided lesson** (owner 2026-11-27: future, not now): a mixed lesson, video in sections with other
       activities between them (Angular prototype `guided-lesson`, references `15…21-lezione-guidata-*.webp`); today covered by
       07 + 08 + 10 + 22. Owner's preview on `flutter/15-21-guided-lesson` (APK 1.0.445, from an old `master`, outside the
