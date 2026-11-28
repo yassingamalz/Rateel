@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مقدمة في علم التجويد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:wght@400;700&family=Cairo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-top:#1F4037; --bg-bottom:#0B1C17; --letterbox:#06120E;
+  --gold:#DAA520; --gold-bright:#FFD700; --glow:#FFE355;
+  --green-text:#95D5B2; --gold-text:#DFC298; --white:#FFFFFF;
+  --card-fill:rgba(45,106,79,0.22); --card-line:rgba(218,165,32,0.18);
+  --ghunnah:#FF7F7F; --ikhfa:#FF9F40; --idgham:#98D8D6; --iqlab:#FF80FF; --qalqalah:#DD99FF; --madd:#8EC5FF;
+  --dim:rgba(255,255,255,0.30);
+  --ease-in:cubic-bezier(0.22,1,0.36,1); --ease-scene:cubic-bezier(0.4,0,0.2,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--letterbox);color:var(--white);font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#player{position:relative;display:flex;flex-direction:column;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 0 1px rgba(218,165,32,.16)}
+#viewport{position:relative;overflow:hidden;background:var(--bg-bottom);cursor:pointer}
+#stage{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;overflow:hidden;
+  background:radial-gradient(ellipse 80% 70% at 50% 42%, rgba(45,106,79,.35), transparent 70%),linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 100%)}
+.layer{position:absolute;inset:0}
+#world{transform-origin:640px 360px}
+.a{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform,opacity;direction:rtl}
+.amiri{font-family:'Amiri',serif}
+.quran{font-family:'Amiri Quran','Amiri',serif}
+.goldtext{background:linear-gradient(180deg,var(--glow) 0%,var(--gold-bright) 42%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* pill / chip */
+#pill{height:46px;border-radius:23px;background:var(--card-fill);box-shadow:inset 0 0 0 1.5px rgba(218,165,32,.38),0 6px 18px rgba(0,0,0,.18)}
+#pill .pt{position:absolute;left:50%;top:50%;font-family:'Cairo',sans-serif;font-weight:700;font-size:21px;color:var(--green-text);line-height:1}
+/* rows of words (karaoke) */
+.row{display:flex;flex-direction:row;align-items:center;gap:.30em;padding:0 .1em}
+.w{position:relative;display:inline-block;line-height:1.6;padding:0 .04em}
+.w .base{color:var(--dim)}
+.w .lit{position:absolute;inset:0;padding:inherit;color:var(--white);clip-path:inset(-40% 0 -40% 100%)}
+.w.key .lit{color:var(--gold-bright);text-shadow:0 0 18px rgba(255,227,85,.45)}
+.w.br .base{color:var(--gold)}
+.track{position:absolute;left:0;right:0;height:3px;border-radius:2px;background:rgba(218,165,32,.16)}
+.track i{position:absolute;right:0;top:0;bottom:0;border-radius:2px;background:linear-gradient(270deg,var(--gold),var(--glow));box-shadow:0 0 10px rgba(255,227,85,.6)}
+/* playhead */
+.ph{width:4px;height:84px;border-radius:2px;background:linear-gradient(180deg,rgba(255,227,85,0),var(--glow) 18%,var(--gold-bright) 82%,rgba(255,215,0,0));box-shadow:0 0 14px 2px rgba(255,227,85,.55)}
+.ph::before{content:"";position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;background:var(--gold-bright);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 10px rgba(255,227,85,.8)}
+/* cards */
+.card{border-radius:20px;background:var(--card-fill);box-shadow:0 14px 34px rgba(0,0,0,.25)}
+.card::after{content:"";position:absolute;inset:9px;border-radius:inherit;box-shadow:inset 0 0 0 2px var(--card-line);pointer-events:none}
+.q{font-family:'Amiri',serif;font-weight:700;font-size:40px;line-height:1.3}
+.lbl{font-family:'Amiri',serif;font-size:28px;color:var(--green-text);line-height:1.4}
+/* madd bar */
+.mbar{position:absolute;height:14px;border-radius:7px;background:rgba(142,197,255,.14);box-shadow:inset 0 0 0 1.5px rgba(142,197,255,.45)}
+.mbar .fill{position:absolute;right:0;top:0;bottom:0;border-radius:7px;background:linear-gradient(270deg,#5FA8F5,var(--madd));box-shadow:0 0 14px rgba(142,197,255,.7)}
+.mbar .tick{position:absolute;top:-4px;bottom:-4px;width:2px;left:50%;margin-left:-1px;background:rgba(142,197,255,.6);border-radius:1px}
+.mbar .dot{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(142,197,255,.5),0 0 18px var(--madd)}
+.mbar.below .cnt{bottom:auto;top:24px}
+.mbar .cnt{position:absolute;bottom:22px;font-family:'Amiri',serif;font-weight:700;font-size:30px;color:var(--madd);transform:translateX(-50%);line-height:1}
+/* caption */
+#cap{max-width:1080px;white-space:normal;text-align:center;font-family:'Amiri',serif;font-size:29px;line-height:1.55;color:#fff;padding:4px 22px 6px;border-radius:14px;background:rgba(6,18,14,.42);text-shadow:0 2px 8px rgba(0,0,0,.5)}
+#cap .v{font-family:'Amiri Quran','Amiri',serif;color:var(--gold-text)}
+/* cta */
+#cta{height:68px;padding:0 34px;border-radius:34px;display:flex;align-items:center;gap:14px;font-family:'Cairo',sans-serif;font-weight:800;font-size:26px;color:#0B1C17;background:linear-gradient(180deg,var(--glow),var(--gold-bright) 45%,var(--gold));box-shadow:0 10px 30px rgba(218,165,32,.35),inset 0 -3px 0 rgba(0,0,0,.12)}
+#cta svg{display:block}
+
+/* big play overlay */
+#bigPlay{position:absolute;left:50%;width:clamp(64px,13vmin,112px);height:clamp(64px,13vmin,112px);transform:translate(-50%,-50%);border-radius:50%;border:0;cursor:pointer;top:76%;
+  background:radial-gradient(circle at 50% 35%,var(--glow),var(--gold-bright) 45%,var(--gold));box-shadow:0 0 0 10px rgba(218,165,32,.18),0 0 50px rgba(255,227,85,.45);display:flex;align-items:center;justify-content:center;transition:opacity .4s var(--ease-scene),transform .4s var(--ease-in)}
+#bigPlay svg{width:42%;height:42%;margin-left:8%}
+#bigPlay.hide{opacity:0;transform:translate(-50%,-50%) scale(.6);pointer-events:none}
+#bigPlay:focus-visible,.ctl:focus-visible,.sdot:focus-visible,#seek:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+
+/* control bar */
+#bar{height:var(--barh,56px);display:flex;align-items:center;gap:12px;padding:0 14px;background:linear-gradient(180deg,#0F2620,#0A1813);border-top:1px solid rgba(218,165,32,.18)}
+.ctl{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:rgba(45,106,79,.35);color:var(--gold-bright);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:inset 0 0 0 1.5px rgba(218,165,32,.3)}
+.ctl:hover{background:rgba(45,106,79,.6)}
+.ctl svg{width:18px;height:18px}
+#time{flex:none;font-family:'Cairo',sans-serif;font-size:14px;color:var(--gold-text);min-width:74px;text-align:center;font-variant-numeric:tabular-nums}
+#seekWrap{position:relative;flex:1;height:40px;display:flex;align-items:center;min-width:80px}
+#seek{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:0;cursor:pointer;direction:rtl;
+  background:linear-gradient(90deg,rgba(255,255,255,.14) 0,rgba(255,255,255,.14) calc(100% - var(--p,0%)),var(--gold-bright) calc(100% - var(--p,0%)),var(--gold) 100%);}
+#seek::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px rgba(255,227,85,.8);border:0}
+#seek::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--glow);border:0}
+#dots{flex:none;display:flex;gap:4px}
+.sdot{width:28px;height:28px;border:0;background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.sdot i{display:block;width:10px;height:10px;border-radius:50%;background:rgba(149,213,178,.35);transition:transform .3s var(--ease-in),background .3s}
+.sdot.on i{background:var(--gold-bright);transform:scale(1.35);box-shadow:0 0 8px rgba(255,227,85,.8)}
+.sdot.done i{background:rgba(218,165,32,.42)}
+@media (max-width:560px){#time{display:none}}
+</style>
+</head>
+<body>
+<div id="player">
+  <div id="viewport">
+    <div id="stage" aria-hidden="true">
+      <!-- fixed background: pattern + particles (never moves with the camera) -->
+      <svg class="layer" width="1280" height="720" viewBox="0 0 1280 720">
+        <defs>
+          <pattern id="geo" width="96" height="96" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="#DAA520" stroke-width="1.3">
+              <rect x="20" y="20" width="56" height="56"/>
+              <rect x="20" y="20" width="56" height="56" transform="rotate(45 48 48)"/>
+              <circle cx="48" cy="48" r="11"/>
+              <path d="M0 0 L10 10 M96 0 L86 10 M0 96 L10 86 M96 96 L86 86"/>
+              <path d="M48 -8 L56 0 L48 8 L40 0 Z M48 88 L56 96 L48 104 L40 96 Z M-8 48 L0 40 L8 48 L0 56 Z M88 48 L96 40 L104 48 L96 56 Z"/>
+            </g>
+          </pattern>
+          <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+            <stop offset="55%" stop-color="#000" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#000" stop-opacity=".45"/>
+          </radialGradient>
+        </defs>
+        <rect width="1280" height="720" fill="url(#geo)" opacity=".06"/>
+        <rect width="1280" height="720" fill="url(#vig)"/>
+        <g id="particles" fill="#FFE355"></g>
+      </svg>
+
+      <div class="layer" id="world">
+        <!-- thread star: title emblem -> corner marker -> logo halo -->
+        <svg class="a" id="star" width="420" height="420" viewBox="-110 -110 220 220" style="overflow:visible">
+          <g id="starG" fill="none" stroke="#DAA520" stroke-width="2">
+            <path id="starP" pathLength="1" d="M0,-100 L29,-70 L71,-71 L70,-29 L100,0 L70,29 L71,71 L29,70 L0,100 L-29,70 L-71,71 L-70,29 L-100,0 L-70,-29 L-71,-71 L-29,-70 Z"/>
+            <circle id="starC" pathLength="1" r="56"/>
+            <path id="starI" pathLength="1" d="M0,-56 L40,-40 L56,0 L40,40 L0,56 L-40,40 L-56,0 L-40,-40 Z" stroke-opacity=".7"/>
+          </g>
+        </svg>
+
+        <!-- pill that morphs label to label across all scenes -->
+        <div class="a" id="pill">
+          <span class="pt">الدَّرْسُ الأَوَّلُ</span>
+          <span class="pt">لُغَةً</span>
+          <span class="pt">اصْطِلَاحًا</span>
+          <span class="pt">الخُلَاصَةُ</span>
+          <span class="pt">الغَايَةُ</span>
+          <span class="pt">سُورَةُ المُزَّمِّلِ: ٤</span>
+        </div>
+
+        <!-- scene 1 -->
+        <div class="a amiri" id="t1a" style="font-size:46px;color:var(--gold-text)">مُقَدِّمَةٌ فِي</div>
+        <div class="a amiri goldtext" id="t1b" style="font-size:108px;font-weight:700;line-height:1.5;padding:0 12px">عِلْمِ التَّجْوِيدِ</div>
+        <div class="a" id="uline" style="height:4px;border-radius:2px;background:linear-gradient(270deg,var(--gold),var(--glow) 50%,var(--gold));box-shadow:0 0 12px rgba(255,227,85,.5);width:420px">
+          <svg id="ahead" width="26" height="26" viewBox="0 0 26 26" style="position:absolute;left:-12px;top:-11px"><path d="M14 3 L3 13 L14 23" fill="none" stroke="#FFD700" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- scene 2 -->
+        <div class="a amiri goldtext" id="w2a" style="font-size:116px;font-weight:700;line-height:1.5;padding:0 12px">التَّجْوِيدُ</div>
+        <div class="a amiri" id="w2aShine" style="font-size:116px;font-weight:700;line-height:1.5;padding:0 12px;color:#FFFBE0;-webkit-mask-image:linear-gradient(100deg,transparent 40%,#000 50%,transparent 60%);mask-image:linear-gradient(100deg,transparent 40%,#000 50%,transparent 60%);-webkit-mask-size:300% 100%;mask-size:300% 100%">التَّجْوِيدُ</div>
+        <svg class="a sp" width="44" height="44" viewBox="-22 -22 44 44"><path d="M0,-20 C2,-4 4,-2 20,0 C4,2 2,4 0,20 C-2,4 -4,2 -20,0 C-4,-2 -2,-4 0,-20Z" fill="#FFE355"/></svg>
+        <svg class="a sp" width="44" height="44" viewBox="-22 -22 44 44"><path d="M0,-20 C2,-4 4,-2 20,0 C4,2 2,4 0,20 C-2,4 -4,2 -20,0 C-4,-2 -2,-4 0,-20Z" fill="#FFE355"/></svg>
+        <svg class="a sp" width="44" height="44" viewBox="-22 -22 44 44"><path d="M0,-20 C2,-4 4,-2 20,0 C4,2 2,4 0,20 C-2,4 -4,2 -20,0 C-4,-2 -2,-4 0,-20Z" fill="#FFE355"/></svg>
+        <div class="a amiri" id="w2b" style="font-size:100px;font-weight:700;line-height:1.5;color:#fff;padding:0 12px">التَّحْسِينُ</div>
+        <div class="a amiri" id="ex2" style="font-size:46px;color:var(--gold-text);line-height:1.6;padding:0 10px">تَجْوِيدُ الشَّيْءِ: <span style="color:var(--green-text)">تَحْسِينُهُ</span></div>
+        <div class="a ph" id="ex2cur" style="height:58px"></div>
+
+        <!-- scene 3: definition rows -->
+        <div class="a row amiri" id="row3a" style="font-size:58px">
+          <span class="w">إِخْرَاجُ</span><span class="w">كُلِّ</span><span class="w">حَرْفٍ</span><span class="w">مِنْ</span><span class="w key">مَخْرَجِهِ</span>
+          <div class="track" style="bottom:4px"><i></i></div>
+        </div>
+        <div class="a row amiri" id="row3b" style="font-size:58px">
+          <span class="w">مَعَ</span><span class="w">إِعْطَائِهِ</span><span class="w key">حَقَّهُ</span><span class="w key">وَمُسْتَحَقَّهُ</span>
+          <div class="track" style="bottom:4px"><i></i></div>
+        </div>
+
+        <!-- cards -->
+        <div class="a card" id="c1"></div>
+        <div class="a card" id="c2"></div>
+        <div class="a card" id="c3"></div>
+        <div class="a q goldtext" id="q1">أَيْنَ؟</div>
+        <div class="a q goldtext" id="q2">كَيْفَ؟</div>
+        <div class="a q goldtext" id="q3">كَمْ؟</div>
+        <!-- card 1: place -->
+        <div class="a" id="i1" style="width:300px;height:210px">
+          <div class="a amiri" id="i1L" style="font-size:80px;color:#fff;line-height:1.3">بْ</div>
+          <svg class="a" id="i1lips" width="150" height="80" viewBox="0 0 150 80" style="overflow:visible">
+            <path id="lipU" d="M12 40 C30 22 52 14 75 24 C98 14 120 22 138 40 C110 43 40 43 12 40Z" fill="#D98C7E"/>
+            <path id="lipD" d="M12 41 C40 44 110 44 138 41 C122 64 100 72 75 72 C50 72 28 64 12 41Z" fill="#C97668"/>
+            <circle id="lipRing" cx="75" cy="41" r="10" fill="none" stroke="#FFE355" stroke-width="2.5"/>
+            <circle id="lipDot" cx="75" cy="41" r="5" fill="#FFE355"/>
+          </svg>
+          <div class="a lbl" id="i1T">مِنَ الشَّفَتَيْنِ</div>
+        </div>
+        <!-- card 2: manner -->
+        <div class="a" id="i2" style="width:300px;height:210px">
+          <svg class="a" id="i2rings" width="240" height="160" viewBox="-120 -80 240 160" style="overflow:visible">
+            <ellipse class="rg" rx="40" ry="10" fill="none" stroke="#DD99FF" stroke-width="2.5"/>
+            <ellipse class="rg" rx="40" ry="10" fill="none" stroke="#DD99FF" stroke-width="2.5"/>
+          </svg>
+          <div class="a amiri" id="i2L" style="font-size:84px;color:var(--qalqalah);line-height:1.3">قْ</div>
+          <div class="a lbl" id="i2T"><span style="color:var(--qalqalah)">قَلْقَلَةٌ</span></div>
+        </div>
+        <!-- card 3: length -->
+        <div class="a" id="i3" style="width:300px;height:210px">
+          <div class="a row amiri" id="row3c" style="font-size:74px"><span class="w">قَالَ</span></div>
+          <div class="a mbar" id="mb3" style="width:200px"><i class="tick"></i><i class="fill"></i><i class="dot"></i><b class="cnt">١</b><b class="cnt">٢</b></div>
+          <div class="a ph" id="ph3" style="height:96px"></div>
+          <div class="a lbl" id="i3T"><span style="color:var(--madd)">حَرَكَتَانِ</span></div>
+        </div>
+
+        <!-- scene 4 -->
+        <div class="a" id="pl1" style="font-family:Cairo;font-weight:800;font-size:44px;color:var(--gold)">+</div>
+        <div class="a" id="pl2" style="font-family:Cairo;font-weight:800;font-size:44px;color:var(--gold)">+</div>
+        <svg class="a" id="book" width="340" height="190" viewBox="-170 -120 340 190" style="overflow:visible">
+          <g id="rays" stroke="#FFE355" stroke-linecap="round">
+            <line x1="0" y1="-30" x2="0" y2="-110" stroke-width="3"/>
+            <line x1="-18" y1="-30" x2="-62" y2="-98" stroke-width="2"/>
+            <line x1="18" y1="-30" x2="62" y2="-98" stroke-width="2"/>
+            <line x1="-34" y1="-26" x2="-112" y2="-70" stroke-width="1.5"/>
+            <line x1="34" y1="-26" x2="112" y2="-70" stroke-width="1.5"/>
+          </g>
+          <g id="pgR"><path d="M2 -18 C40 -34 100 -34 150 -20 L150 52 C100 40 40 40 2 58 Z" fill="#14362C" stroke="#DAA520" stroke-width="2.5"/>
+            <g stroke="#DFC298" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="22" y1="-6" x2="132" y2="-8"/><line x1="22" y1="10" x2="132" y2="8"/><line x1="22" y1="26" x2="132" y2="24"/><line x1="22" y1="42" x2="100" y2="40"/></g></g>
+          <g id="pgL"><path d="M-2 -18 C-40 -34 -100 -34 -150 -20 L-150 52 C-100 40 -40 40 -2 58 Z" fill="#14362C" stroke="#DAA520" stroke-width="2.5"/>
+            <g stroke="#DFC298" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="-22" y1="-6" x2="-132" y2="-8"/><line x1="-22" y1="10" x2="-132" y2="8"/><line x1="-22" y1="26" x2="-132" y2="24"/><line x1="-52" y1="42" x2="-132" y2="40"/></g></g>
+          <line x1="0" y1="-20" x2="0" y2="60" stroke="#FFD700" stroke-width="3"/>
+        </svg>
+        <div class="a row amiri" id="row4" style="font-size:52px">
+          <span class="w">أَنْ</span><span class="w">نَقْرَأَ</span><span class="w">القُرْآنَ</span><span class="w key">كَمَا</span><span class="w key">أُنْزِلَ</span>
+          <div class="track" style="bottom:2px"><i></i></div>
+        </div>
+
+        <!-- scene 5: the verse -->
+        <div class="a row quran" id="row5" style="font-size:84px;gap:.36em">
+          <span class="w br"><span class="base">﴿</span></span><span class="w key">وَرَتِّلِ</span><span class="w">ٱلْقُرْءَانَ</span><span class="w">تَرْتِيلًا</span><span class="w br"><span class="base">﴾</span></span>
+          <div class="track" style="bottom:6px"><i></i></div>
+          <div class="mbar below" id="mb5" style="bottom:-20px"><i class="tick"></i><i class="fill"></i><i class="dot"></i><b class="cnt">١</b><b class="cnt">٢</b></div>
+        </div>
+        <div class="a amiri goldtext" id="logo" style="font-size:150px;font-weight:700;line-height:1.5;padding:0 16px">رَتِّلِ</div>
+        <div class="a" id="cta">هَيَّا إِلَى التَّدْرِيبِ
+          <svg width="28" height="28" viewBox="0 0 28 28"><path id="ctaArrow" d="M16 6 L8 14 L16 22" fill="none" stroke="#0B1C17" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="a ph" id="ph"></div>
+      </div>
+
+      <!-- caption track (voiceover script) -->
+      <div class="a" id="cap"></div>
+    </div>
+    <button id="bigPlay" type="button" aria-label="تَشْغِيلُ الدَّرْسِ">
+      <svg viewBox="0 0 24 24"><path d="M6 3.5 L20 12 L6 20.5 Z" fill="#0B1C17" stroke="#0B1C17" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div id="bar">
+    <button class="ctl" id="btnPlay" type="button" aria-label="تشغيل"></button>
+    <button class="ctl" id="btnReplay" type="button" aria-label="إعادة من البداية">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v5h5"/></svg>
+    </button>
+    <div id="seekWrap"><input id="seek" type="range" min="0" max="42" step="0.01" value="0" aria-label="التقدّم في الدرس"></div>
+    <div id="time" aria-hidden="true" dir="ltr"></div>
+    <div id="dots" role="group" aria-label="المشاهد"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const DUR = 42, POSTER_T = 3.4;
+const SCENES = [
+  {t:0,    name:'العنوان'},
+  {t:5.0,  name:'التجويد لغةً'},
+  {t:12.4, name:'التجويد اصطلاحًا'},
+  {t:26.0, name:'الخلاصة'},
+  {t:32.8, name:'ورتّل القرآن ترتيلا'}
+];
+const CAPS = [
+  [0.5, 4.7,  'أَهْلًا بِكَ فِي الدَّرْسِ الأَوَّلِ: مُقَدِّمَةٌ فِي عِلْمِ التَّجْوِيدِ.'],
+  [5.1, 8.7,  'التَّجْوِيدُ فِي اللُّغَةِ: التَّحْسِينُ.'],
+  [8.9, 12.3, 'فَتَجْوِيدُ الشَّيْءِ: تَحْسِينُهُ.'],
+  [12.6,17.1, 'وَفِي الاصْطِلَاحِ: إِخْرَاجُ كُلِّ حَرْفٍ مِنْ مَخْرَجِهِ، مَعَ إِعْطَائِهِ حَقَّهُ وَمُسْتَحَقَّهُ.'],
+  [17.4,20.5, 'فَلِكُلِّ حَرْفٍ مَخْرَجٌ يَخْرُجُ مِنْهُ؛ فَالبَاءُ تَخْرُجُ مِنَ الشَّفَتَيْنِ.'],
+  [20.7,23.0, 'وَلَهُ صِفَاتٌ يُنْطَقُ بِهَا؛ كَالقَلْقَلَةِ فِي القَافِ السَّاكِنَةِ.'],
+  [23.2,26.0, 'وَبَعْضُ الحُرُوفِ تُمَدُّ بِمِقْدَارٍ نَعُدُّهُ بِالحَرَكَاتِ: حَرَكَتَانِ.'],
+  [26.2,29.5, 'أَيْنَ يَخْرُجُ؟ وَكَيْفَ يُنْطَقُ؟ وَكَمْ يُمَدُّ؟ هٰذَا هُوَ التَّجْوِيدُ.'],
+  [29.7,32.8, 'وَغَايَتُهُ: أَنْ نَقْرَأَ القُرْآنَ كَمَا أُنْزِلَ.'],
+  [33.1,37.8, 'قَالَ اللهُ تَعَالَى: <span class="v">﴿وَرَتِّلِ ٱلْقُرْءَانَ تَرْتِيلًا﴾</span>'],
+  [38.0,42.0, 'وَمِنْ هٰذِهِ الآيَةِ جَاءَ اسْمُ «رَتِّلِ»… هَيَّا إِلَى التَّدْرِيبِ!']
+];
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const M = reduced ? 0.25 : 1;          // amplitude of offsets / overshoot / drift
+
+/* ---------- easing ---------- */
+function bezier(x1,y1,x2,y2){
+  const cx=3*x1,bx=3*(x2-x1)-cx,ax=1-cx-bx,cy=3*y1,by=3*(y2-y1)-cy,ay=1-cy-by;
+  const sx=t=>((ax*t+bx)*t+cx)*t, sy=t=>((ay*t+by)*t+cy)*t, dx=t=>(3*ax*t+2*bx)*t+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let t=x;
+    for(let i=0;i<8;i++){const e=sx(t)-x; const d=dx(t); if(Math.abs(e)<1e-5)break; if(Math.abs(d)<1e-6)break; t-=e/d;}
+    return sy(Math.min(1,Math.max(0,t))); };
+}
+const EIN = bezier(0.22,1,0.36,1);      // entrances
+const EIO = bezier(0.4,0,0.2,1);        // between scenes
+const LIN = x=>x;
+const BACK = x=>{ const c1=1.9*M, c3=c1+1; return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2); }; // overshoot
+const ANT = x=>{ const c=1.4*M; return x*x*((c+1)*x-c); }; // anticipation (dips back first)
+const clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+/* keyframes: [[time,value,ease?],...]  ease applies to the segment ending at that key */
+function kf(t,keys){
+  if(t<=keys[0][0]) return keys[0][1];
+  for(let i=1;i<keys.length;i++){
+    if(t<=keys[i][0]){ const k0=keys[i-1],k1=keys[i]; const p=(t-k0[0])/((k1[0]-k0[0])||1e-6); return lerp(k0[1],k1[1],(k1[2]||EIO)(p)); }
+  }
+  return keys[keys.length-1][1];
+}
+function pulse(t,at,len){ if(t<at) return 0; const p=(t-at)/len; return p>1?0:Math.sin(Math.PI*Math.min(1,p*1.0))*Math.exp(-p*1.2); }
+
+/* ---------- DOM ---------- */
+const $=id=>document.getElementById(id);
+const stage=$('stage'), world=$('world');
+function P(el,o){
+  const x=o.x??640,y=o.y??360,s=o.s??1,sx=o.sx??s,sy=o.sy??s,r=o.r??0,op=o.o??1,b=o.b??0,g=o.g??0;
+  el.style.transform=`translate(${x.toFixed(2)}px,${y.toFixed(2)}px) translate(-50%,-50%) rotate(${r.toFixed(2)}deg) scale(${sx.toFixed(4)},${sy.toFixed(4)})`;
+  const v=op>0.003; el.style.opacity=v?op.toFixed(3):0; el.style.visibility=v?'visible':'hidden';
+  let f=''; if(b>0.1) f+=`blur(${(b*(reduced?0.5:1)).toFixed(2)}px) `; if(g>0.02) f+=`drop-shadow(0 0 ${(g*22).toFixed(1)}px rgba(255,227,85,${(0.75*Math.min(1,g)).toFixed(2)}))`;
+  el.style.filter=f||'none';
+}
+
+/* karaoke rows: each .w gets base + lit layers */
+document.querySelectorAll('.row .w').forEach(w=>{
+  if(w.querySelector('.base')) return;
+  const txt=w.textContent; w.textContent='';
+  const b=document.createElement('span'); b.className='base'; b.textContent=txt;
+  const l=document.createElement('span'); l.className='lit'; l.textContent=txt;
+  w.append(b,l);
+});
+const rows={};
+['row3a','row3b','row3c','row4','row5'].forEach(id=>{
+  const el=$(id); rows[id]={el,words:[...el.querySelectorAll('.w')],geo:null,W:0,H:0,track:el.querySelector('.track i'),x:640,y:360,s:1};
+});
+let measured=false;
+function measure(){
+  for(const id in rows){ const r=rows[id]; r.W=r.el.offsetWidth; r.H=r.el.offsetHeight;
+    r.geo=r.words.map(w=>({l:w.offsetLeft,w:w.offsetWidth,c:w.offsetLeft+w.offsetWidth/2,r:w.offsetLeft+w.offsetWidth,top:w.offsetTop,h:w.offsetHeight})); }
+  pillW=[...document.querySelectorAll('#pill .pt')].map(p=>p.offsetWidth+44);
+  ex2W=$('ex2').offsetWidth;
+  // madd bars under specific words
+  const r5=rows.row5, g=r5.geo[2]; const mb=$('mb5'); mb.style.width=(g.w*0.86)+'px'; mb.style.left=(g.l+g.w*0.07)+'px';
+  measured=true;
+}
+let pillW=[200,120,160,160,140,220], ex2W=520;
+/* place a row and return helpers */
+function placeRow(id,o){ const r=rows[id]; r.x=o.x??640; r.y=o.y??360; r.s=o.s??1; P(r.el,o); return r; }
+function rowPt(id,px){ const r=rows[id]; return {x:r.x+(px-r.W/2)*r.s, y:r.y}; }
+/* karaoke fill: px = playhead position in row-local coords (moves from W to 0) */
+function karaoke(id,px,fade){
+  const r=rows[id]; if(!r.geo) return;
+  r.words.forEach((w,i)=>{ const g=r.geo[i]; const lit=w.querySelector('.lit'); if(!lit) return;
+    let f=clamp((g.r-px)/g.w,0,1); if(fade!=null) f=Math.max(f*1,0);
+    lit.style.clipPath=`inset(-40% 0 -40% ${((1-f)*100).toFixed(2)}%)`; });
+  if(r.track) r.track.style.width=clamp((r.W-px)/r.W,0,1)*100+'%';
+}
+function wordStyle(id,i,o){ const w=rows[id].words[i]; const y=o.y||0,s=o.s??1;
+  w.style.transform=`translateY(${y.toFixed(2)}px) scale(${s.toFixed(3)})`; w.style.opacity=(o.o??1).toFixed(3);
+  w.style.filter=(o.b||0)>0.1?`blur(${o.b.toFixed(1)}px)`:'none'; }
+
+/* particles (deterministic) */
+const PART=[]; (function(){ let s=7; const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
+  const g=$('particles'); for(let i=0;i<26;i++){ const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    const p={x:rnd()*1280,y:rnd()*720,r:0.8+rnd()*2.2,v:4+rnd()*10,ph:rnd()*6.28,sw:10+rnd()*24,el:c}; c.setAttribute('r',p.r); g.appendChild(c); PART.push(p);} })();
+
+/* ---------- scene renderer: everything is a pure function of t ---------- */
+const sp=[...document.querySelectorAll('.sp')];
+const pts=[...document.querySelectorAll('#pill .pt')];
+const cards=[$('c1'),$('c2'),$('c3')], qs=[$('q1'),$('q2'),$('q3')], ills=[$('i1'),$('i2'),$('i3')];
+const CARD_X=[1000,640,280], CARD_Y=440, CW=330, CH=300;
+const MED_X=[900,640,380], MED_Y=405;
+const capEl=$('cap'); let capIdx=-2;
+
+function render(t){
+  if(!measured) measure();
+  /* camera drift + gentle push at scene changes */
+  const push = 0.012*M*(pulse(t,4.6,1.4)+pulse(t,12.0,1.4)+pulse(t,25.8,1.4)+pulse(t,32.6,1.4)+pulse(t,38.2,1.6));
+  const dx=Math.sin(t*0.31)*7*M, dy=Math.sin(t*0.23+1)*4.5*M, ds=1+0.008*M*Math.sin(t*0.17)+push;
+  world.style.transform=`translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px) scale(${ds.toFixed(4)})`;
+  PART.forEach(p=>{ const y=((p.y-t*p.v*M)%760+760)%760-20; const x=p.x+Math.sin(t*0.4+p.ph)*p.sw*M;
+    p.el.setAttribute('cx',x.toFixed(1)); p.el.setAttribute('cy',y.toFixed(1)); p.el.setAttribute('opacity',(0.10+0.12*Math.sin(t*1.3+p.ph)).toFixed(3)); });
+
+  /* ===== thread star ===== */
+  {
+    const star=$('star');
+    const draw=EIO(seg(t,0.1,1.9));
+    $('starP').style.strokeDasharray='1'; $('starP').style.strokeDashoffset=(1-draw);
+    $('starC').style.strokeDasharray='1'; $('starC').style.strokeDashoffset=(1-EIO(seg(t,0.5,2.0)));
+    $('starI').style.strokeDasharray='1'; $('starI').style.strokeDashoffset=(1-EIO(seg(t,0.7,2.2)));
+    const x=kf(t,[[4.6,640],[5.8,1196,EIO],[38.3,1196],[39.7,640,EIN]]);
+    const y=kf(t,[[4.6,350],[5.8,62,EIO],[38.3,62],[39.7,250,EIN]]);
+    const s=kf(t,[[4.6,1],[5.8,0.13,EIO],[38.3,0.13],[39.7,0.92,EIN]]);
+    const o=kf(t,[[0,0.0],[0.4,0.42],[4.6,0.42],[5.8,0.85],[38.3,0.85],[39.7,0.38]]);
+    $('starG').setAttribute('fill', t>4.8&&t<39.5?`rgba(218,165,32,${(0.35*seg(t,5.0,5.8)*(1-seg(t,38.25,38.55))).toFixed(3)})`:'none');
+    $('starG').setAttribute('stroke-width',(1.2/Math.max(s,0.05)).toFixed(2)); $('starG').style.strokeWidth=Math.min(1.2/Math.max(s,0.05),8);
+    P(star,{x,y,s,o,r:t*5*(reduced?0.3:1)});
+  }
+
+  /* ===== pill: one chip that morphs label to label ===== */
+  {
+    const sched=[[0,0],[5.0,1],[12.3,2],[26.3,3],[29.8,4],[32.6,5]];
+    let wts=pts.map(()=>0); let blendW=pillW[0];
+    for(let i=0;i<sched.length;i++){ const [ts,idx]=sched[i]; const next=sched[i+1];
+      const a=i===0?1:EIO(seg(t,ts-0.3,ts+0.3)); const b=next?EIO(seg(t,next[0]-0.3,next[0]+0.3)):0;
+      wts[idx]=Math.min(a,1-b); }
+    const tot=wts.reduce((a,b)=>a+b,0)||1; blendW=wts.reduce((acc,w,i)=>acc+w*pillW[i],0)/tot;
+    $('pill').style.width=blendW.toFixed(1)+'px';
+    pts.forEach((p,i)=>{ const w=wts[i]; P(p,{x:0,y:0,s:0.85+0.15*w,o:w,b:(1-w)*6}); p.style.transform=`translate(-50%,-50%) scale(${(0.85+0.15*w).toFixed(3)})`; });
+    const x=640;
+    const y=kf(t,[[0.3,232],[1.0,205,BACK],[4.7,205],[5.4,168,EIO],[12.1,168],[12.9,76,EIO],[32.25,76],[32.95,452,EIO],[38.9,452],[39.8,398,EIO]]);
+    const s=kf(t,[[0.3,0.7],[1.0,1,BACK],[4.7,1],[4.95,0.94],[5.4,1,BACK],[12.1,1],[12.3,0.94],[12.9,1,BACK],[32.25,1],[32.6,0.92],[32.95,1,BACK]]);
+    const o=kf(t,[[0.3,0],[0.8,1,EIN]]);
+    P($('pill'),{x,y,s,o});
+  }
+
+  /* ===== SCENE 1: title ===== */
+  {
+    const a=$('t1a');
+    P(a,{x:640,y:kf(t,[[0.45,300],[1.15,278,EIN],[4.4,278],[5.0,210,EIO]]),
+      s:kf(t,[[4.4,1],[5.0,0.35,EIO]]), o:kf(t,[[0.45,0],[1.0,1,EIN],[4.55,1],[5.0,0,EIO]]), b:kf(t,[[0.45,8],[1.1,0,EIN],[4.6,0],[5.0,4]])});
+    const b=$('t1b');
+    const g=pulse(t,2.15,1.2)*1.2+0.25*seg(t,1.0,2.0);
+    P(b,{x:640,y:kf(t,[[0.65,400],[1.5,370,EIN],[4.5,370],[5.3,350,EIO]]), s:kf(t,[[0.65,0.82],[1.5,1,BACK],[4.5,1],[5.3,0.92,EIO]]),
+      o:kf(t,[[0.65,0],[1.2,1,EIN],[4.6,1],[5.3,0,EIO]]), b:kf(t,[[0.65,12],[1.4,0,EIN],[4.6,0],[5.3,9,EIO]]), g});
+  }
+  /* underline -> arrow -> playhead */
+  {
+    const u=$('uline');
+    const w=kf(t,[[1.5,0],[2.3,430,EIN],[4.6,430],[5.5,250,EIO],[7.2,250],[8.0,190,EIO],[12.2,190],[12.9,64,EIO]]);
+    u.style.width=w.toFixed(1)+'px';
+    const x=kf(t,[[4.6,640],[5.5,640],[7.2,640],[8.0,642,EIO],[12.2,642],[12.95,rowPt('row3a',rows.row3a.W+16).x,EIO]]);
+    const y=kf(t,[[4.6,452],[5.5,388,EIO],[7.2,388],[8.0,304,EIO],[12.2,304],[12.95,rowPt('row3a',0).y,EIO]]);
+    const r=kf(t,[[12.2,0],[12.95,90,EIO]]);
+    // scaleX draw from right edge
+    const draw=EIN(seg(t,1.5,2.3));
+    u.style.transformOrigin='100% 50%';
+    P(u,{x,y,r,o:kf(t,[[1.5,0],[1.6,1],[12.85,1],[13.0,0]]),g:0.3});
+    $('ahead').style.opacity=(seg(t,7.6,8.1)*(1-seg(t,12.2,12.6))).toFixed(3);
+  }
+
+  /* ===== SCENE 2: لغةً ===== */
+  {
+    const w=$('w2a'), sh=$('w2aShine');
+    const x=kf(t,[[5.3,640],[7.2,640],[8.1,905,EIO],[12.0,905],[12.8,700,EIO],[26.2,640],[26.2,640],[29.6,640],[30.4,640],[32.6,640],[33.4,640]]);
+    const y=kf(t,[[4.7,350],[5.5,300,EIN],[7.2,300],[8.1,300],[12.0,300],[12.8,252,EIO],[26.2,214],[29.6,214],[30.4,166,EIO],[32.6,166],[33.4,236,EIO]]);
+    const s=kf(t,[[4.7,0.88],[5.5,1,BACK],[7.2,1],[8.1,0.76,EIO],[12.0,0.76],[12.8,0.42,EIO],[26.2,0.6],[26.9,0.86,BACK],[29.6,0.86],[30.4,0.66,EIO],[32.6,0.66],[33.4,0.5,EIO]]);
+    let o=kf(t,[[4.7,0],[5.4,1,EIN],[12.0,1],[12.75,0,EIO]]);
+    let b=kf(t,[[4.7,9],[5.4,0,EIN],[12.0,0],[12.75,10,EIO]]);
+    let g=pulse(t,6.6,1.0)*0.6;
+    if(t>=26.0){ // re-emerges from the shrinking definition in scene 4
+      o=kf(t,[[26.1,0],[26.8,1,EIN],[32.6,1],[33.3,0,EIO]]); b=kf(t,[[26.1,10],[26.8,0,EIN],[32.6,0],[33.3,10,EIO]]);
+      g=0.15+pulse(t,28.85,0.6)*0.9+pulse(t,29.0,0.6)*0.9+pulse(t,29.15,0.7)*1.1;
+    }
+    P(w,{x,y,s,o,b,g});
+    // shine sweep: polishing right-to-left
+    const sp1=seg(t,6.1,7.1); sh.style.webkitMaskPosition=sh.style.maskPosition=`${(100-sp1*100).toFixed(1)}% 0`;
+    P(sh,{x,y,s,o:o*(sp1>0&&sp1<1?0.95:0)});
+    // sparkles pop around, then fly into التحسين
+    const S=[[470,222,6.35],[835,232,6.5],[790,392,6.65]];
+    sp.forEach((e,i)=>{ const [sx,sy,at]=S[i]; const fly=EIO(seg(t,7.7+i*0.12,8.5+i*0.12));
+      const tx=380+(i-1)*90, ty=300-(i===2?-30:40);
+      P(e,{x:lerp(sx,tx,fly),y:lerp(sy,ty,fly),s:kf(t,[[at,0],[at+0.45,1,BACK],[7.7,1],[8.6+i*0.12,0.2,EIO]])*(1+0.15*Math.sin(t*9+i)),
+        r:t*60+i*30,o:kf(t,[[at,0],[at+0.2,1],[8.3+i*0.12,1],[8.6+i*0.12,0]])}); });
+    const w2b=$('w2b');
+    P(w2b,{x:kf(t,[[7.9,560],[8.8,370,EIN],[12.0,370],[12.8,560,EIO]]), y:kf(t,[[12.0,300],[12.8,330,EIO]]),
+      s:kf(t,[[7.9,0.5],[8.8,1,BACK],[12.0,1],[12.8,0.5,EIO]]), o:kf(t,[[7.9,0],[8.5,1,EIN],[12.0,1],[12.75,0,EIO]]),
+      b:kf(t,[[7.9,10],[8.6,0,EIN],[12.0,0],[12.75,10]]), g:pulse(t,8.6,0.8)*0.5});
+    // example line revealed right-to-left with a little cursor
+    const ex=$('ex2'); const rv=EIO(seg(t,9.1,10.5));
+    ex.style.clipPath=`inset(-30% 0 -30% ${((1-rv)*100).toFixed(2)}%)`;
+    const ey=kf(t,[[9.0,470],[9.4,462,EIN],[12.0,462],[12.8,340,EIO]]);
+    P(ex,{x:640,y:ey,o:kf(t,[[9.0,0],[9.2,1],[12.0,1],[12.75,0,EIO]]),b:kf(t,[[12.0,0],[12.75,8]]),s:kf(t,[[12.0,1],[12.8,0.7,EIO]])});
+    P($('ex2cur'),{x:640+ex2W/2-rv*ex2W,y:ey,o:kf(t,[[9.0,0],[9.2,1],[10.5,1],[10.8,0]]),sy:kf(t,[[9.0,0.2],[9.3,1,BACK],[10.5,1],[10.8,0.2]]),s:1});
+  }
+
+  /* ===== SCENE 3: definition with playhead ===== */
+  const PH_A0=13.15, PH_A1=15.15, PH_B0=15.35, PH_B1=17.15;
+  {
+    const ra=rows.row3a, rb=rows.row3b;
+    const shrink=EIO(seg(t,17.0,17.9));
+    const ga=EIO(seg(t,25.9,26.9));  // collapse into التجويد
+    placeRow('row3a',{x:lerp(640,640,shrink), y:lerp(218,138,shrink)+ga*55, s:lerp(1,0.6,shrink)*(1-0.6*ga),
+      o:kf(t,[[12.3,0],[12.4,1],[26.0,1],[26.8,0,EIO]]), b:ga*10});
+    placeRow('row3b',{x:640, y:lerp(342,212,shrink)-ga*10, s:lerp(1,0.6,shrink)*(1-0.6*ga),
+      o:kf(t,[[12.3,0],[12.4,1],[26.0,1],[26.8,0,EIO]]), b:ga*10});
+    // staggered word entrances, right to left (130ms)
+    ra.words.forEach((w,i)=>{ const at=12.35+i*0.13; const p=seg(t,at,at+0.7);
+      wordStyle('row3a',i,{y:(1-EIN(p))*26*M, s:0.8+0.2*BACK(p), o:EIN(seg(t,at,at+0.4)), b:(1-EIN(p))*8}); });
+    rb.words.forEach((w,i)=>{ const at=12.6+(i+5)*0.13-0.5; const p=seg(t,at,at+0.7);
+      wordStyle('row3b',i,{y:(1-EIN(p))*26*M, s:0.8+0.2*BACK(p), o:EIN(seg(t,at,at+0.4)), b:(1-EIN(p))*8}); });
+    karaoke('row3a', t<PH_A0? ra.W+40 : lerp(ra.W+10,-10,seg(t,PH_A0,PH_A1)));
+    karaoke('row3b', t<PH_B0? rb.W+40 : lerp(rb.W+10,-10,seg(t,PH_B0,PH_B1)));
+    // key words pop when the playhead passes them
+    [[ 'row3a',4 ],[ 'row3b',2 ],[ 'row3b',3 ]].forEach(([id,i],k)=>{
+      const g=rows[id].geo[i]; const r=rows[id]; const T0=id==='row3a'?PH_A0:PH_B0, T1=id==='row3a'?PH_A1:PH_B1;
+      const passAt=T0+(r.W+10-g.c)/(r.W+20)*(T1-T0);
+      const pp=pulse(t,passAt,0.5);
+      const w=r.words[i]; const cur=w.style.transform; w.style.transform=cur.replace(/scale\(([\d.]+)\)/,(m,v)=>`scale(${(parseFloat(v)+0.12*pp*M).toFixed(3)})`);
+    });
+  }
+  /* ===== main playhead (scene 3 rows, scene 4 row, verse) ===== */
+  {
+    const ph=$('ph'); let x=0,y=0,o=0,sy=1,h=84;
+    const A=rows.row3a,B=rows.row3b,R4=rows.row4,R5=rows.row5;
+    if(t<PH_B0-0.1){ const px=lerp(A.W+16,-12,seg(t,PH_A0,PH_A1)); const p=rowPt('row3a',px); x=p.x;y=p.y;
+      o=kf(t,[[12.9,0],[13.0,1],[PH_A1,1],[PH_A1+0.1,0.0]]); sy=kf(t,[[12.95,0.76],[13.15,1,EIN],[PH_A1-0.05,1],[PH_A1+0.1,0.3]]); }
+    else if(t<17.8){ const px=lerp(B.W+16,-12,seg(t,PH_B0,PH_B1)); const p=rowPt('row3b',px); x=p.x;y=p.y;
+      o=kf(t,[[PH_B0-0.1,0],[PH_B0,1],[PH_B1,1],[17.6,0,EIO]]); sy=kf(t,[[PH_B0-0.1,0.3],[PH_B0+0.15,1,BACK],[PH_B1,1],[17.6,0.1,EIO]]); }
+    else if(t<33.0){ const T0=30.95,T1=32.45; const px=lerp(R4.W+16,-12,seg(t,T0,T1)); const p=rowPt('row4',px); x=p.x;y=p.y;
+      o=kf(t,[[30.6,0],[30.9,1],[T1,1],[32.8,0,EIO]]); sy=kf(t,[[30.6,0.1],[30.95,0.86,BACK],[T1,0.86],[32.8,0.1,EIO]]); }
+    else { const g=R5.geo; const px=versePx(t); const p=rowPt('row5',px); x=p.x;y=p.y-4; h=110;
+      o=kf(t,[[33.7,0],[33.95,1],[37.5,1],[37.95,0,EIO]]); sy=kf(t,[[33.7,0.1],[34.0,1.15,BACK],[37.5,1.15],[37.95,0.1,EIO]]); }
+    ph.style.height=h+'px';
+    P(ph,{x,y,o,sx:1,sy});
+  }
+
+  /* ===== cards: born from the key words, then collapse into medallions ===== */
+  {
+    const src=[['row3a',4],['row3b',2],['row3b',3]];
+    const act=[[18.2,20.6],[20.6,23.0],[23.0,25.9]];
+    cards.forEach((c,i)=>{
+      const born=17.35+i*0.14; const p=EIN(seg(t,born,born+0.85));
+      const [rid,wi]=src[i]; const g=rows[rid].geo[wi]; const sp0=rowPt(rid,g.c); const ws=rows[rid].s;
+      const m=EIO(seg(t,25.85+i*0.1,26.75+i*0.1));            // morph to medallion
+      const ab=EIO(seg(t,28.55+i*0.15,29.25+i*0.15));         // absorbed into التجويد
+      let cx=lerp(sp0.x,CARD_X[i],p), cy=lerp(sp0.y,CARD_Y,p), w=lerp(g.w*ws+24,CW,p), h=lerp(54,CH,p), rad=20;
+      cx=lerp(cx,MED_X[i],m); cy=lerp(cy,MED_Y,m); w=lerp(w,150,m); h=lerp(h,150,m); rad=lerp(20,75,m);
+      cx=lerp(cx,640,ab); cy=lerp(cy,214,ab);
+      const on = t>=act[i][0]&&t<act[i][1] ? 1:0;
+      const focus = t<18.2?1 : t<25.9 ? kf(t,[[act[i][0]-0.3,0],[act[i][0]+0.1,1],[act[i][1]-0.1,1],[act[i][1]+0.3,0]]) : 1;
+      const dimF = t>=17.9 && t<25.9 ? lerp(0.55,1,focus) : 1;
+      const sc=(0.93+0.07*BACK(seg(t,born,born+0.85)))*lerp(0.96,1.04,t>=18.2&&t<25.9?focus:0.5)*(1-ab*0.85)*(1+0.06*pulse(t,26.6+i*0.1,0.6));
+      c.style.width=w.toFixed(1)+'px'; c.style.height=h.toFixed(1)+'px'; c.style.borderRadius=rad.toFixed(1)+'px';
+      c.style.boxShadow= on? '0 14px 40px rgba(0,0,0,.3), 0 0 0 2px rgba(255,215,0,.55), 0 0 30px rgba(255,227,85,.25)' : '';
+      P(c,{x:cx,y:cy,s:sc,o:kf(t,[[born,0],[born+0.3,1]])*dimF*(1-seg(t,29.0+i*0.15,29.3+i*0.15))});
+      // question
+      const qp=EIN(seg(t,born+0.35,born+0.9));
+      const qy=lerp(cy-h/2+46*(h/CH),cy,m);
+      P(qs[i],{x:cx,y:qy,s:(0.7+0.3*BACK(seg(t,born+0.35,born+0.9)))*(1+0.05*m)*(1-ab*0.8),
+        o:qp*dimF*(1-seg(t,29.05+i*0.15,29.35+i*0.15)), b:(1-qp)*6});
+      // illustration
+      const ip=EIN(seg(t,born+0.45,born+1.0));
+      P(ills[i],{x:CARD_X[i],y:CARD_Y+30+(1-ip)*20*M,s:(0.85+0.15*ip)*(1-0.5*m),o:ip*dimF*(1-EIO(seg(t,25.8,26.3))),b:(1-ip)*6+m*6});
+    });
+    // card 1: lips close on ب
+    { const cl=Math.max(pulse(t,18.55,0.55),pulse(t,19.55,0.55)); const gap=3.5*(1-cl);
+      $('lipU').setAttribute('transform',`translate(0 ${(-gap).toFixed(2)})`); $('lipD').setAttribute('transform',`translate(0 ${gap.toFixed(2)})`);
+      const rr=Math.max(seg(t,18.6,19.4)<1?seg(t,18.6,19.4):0, seg(t,19.6,20.4)<1?seg(t,19.6,20.4):0);
+      $('lipRing').setAttribute('r',(6+rr*30).toFixed(1)); $('lipRing').setAttribute('opacity',(rr>0?(1-rr):0).toFixed(2));
+      $('lipDot').setAttribute('r',(4+3*cl).toFixed(2));
+      P($('i1L'),{x:150,y:58,s:1+0.12*cl*M,g:cl*0.5}); P($('i1lips'),{x:150,y:140}); P($('i1T'),{x:150,y:200}); }
+    // card 2: qalqalah bounce
+    { let jy=0,sq=1,rs=[0,0];
+      [21.0,22.0].forEach((at,k)=>{ const p=seg(t,at,at+0.42); if(p>0&&p<1){ jy=-26*Math.sin(Math.PI*p)*M; }
+        const land=seg(t,at+0.42,at+0.62); if(land>0&&land<1) sq=1-0.16*Math.sin(Math.PI*land)*M;
+        const ring=seg(t,at+0.4,at+1.3); if(ring>0&&ring<1) rs[k]=ring; });
+      P($('i2L'),{x:150,y:66+jy,sx:2-sq,sy:sq});
+      [...document.querySelectorAll('#i2rings .rg')].forEach((e,k)=>{ const r=rs[k]; e.setAttribute('rx',(30+r*90).toFixed(1)); e.setAttribute('ry',(8+r*22).toFixed(1)); e.setAttribute('opacity',(r>0?(1-r)*0.9:0).toFixed(2)); });
+      P($('i2rings'),{x:150,y:116}); P($('i2T'),{x:150,y:200}); }
+    // card 3: held note on قال — playhead holds while the bar fills 2 harakat
+    { const R=rows.row3c; P(R.el,{x:150,y:50}); R.x=150;R.y=50;R.s=1;
+      const g=R.geo[0]; const W=R.W; const hold=g.l+g.w*0.45;
+      const px=kf(t,[[23.3,W+8],[23.6,hold,EIO],[24.8,hold],[25.15,-8,EIO]]);
+      karaoke('row3c',px);
+      P($('ph3'),{x:150+(px-W/2),y:50,o:kf(t,[[23.1,0],[23.3,1],[25.15,1],[25.4,0]]),sy:kf(t,[[23.1,0.2],[23.35,1,BACK],[25.15,1],[25.4,0.2]]),s:1});
+      maddBar($('mb3'),t,23.6,0.6,200); P($('mb3'),{x:150,y:140}); P($('i3T'),{x:150,y:200}); }
+  }
+
+  /* ===== SCENE 4: synthesis ===== */
+  {
+    [$('pl1'),$('pl2')].forEach((e,i)=>{ const at=26.75+i*0.13; const ab=EIO(seg(t,28.5+i*0.2,29.0+i*0.2));
+      P(e,{x:lerp([770,510][i],640,ab),y:lerp(MED_Y,214,ab),s:BACK(seg(t,at,at+0.5))*(1-ab*0.8),r:(1-EIN(seg(t,at,at+0.5)))*-90,o:seg(t,at,at+0.2)*(1-seg(t,28.8+i*0.2,29.0+i*0.2))}); });
+    // open book
+    const open=EIN(seg(t,29.85,30.75)), close=EIO(seg(t,32.55,33.35));
+    $('pgR').setAttribute('transform',`scale(${(open*(1-close)).toFixed(3)} 1)`);
+    $('pgL').setAttribute('transform',`scale(${(open*(1-close)).toFixed(3)} 1)`);
+    const ray=seg(t,30.4,31.2); $('rays').setAttribute('opacity',(ray*(0.55+0.25*Math.sin(t*3))*(1-close)).toFixed(3));
+    $('rays').setAttribute('transform',`scale(${(0.6+0.4*EIN(ray)).toFixed(3)})`);
+    P($('book'),{x:640,y:lerp(338,300,close),s:kf(t,[[29.75,0.6],[30.5,1,BACK]]),sy:kf(t,[[29.75,0.6],[30.5,1,BACK],[32.55,1],[33.35,0.04,EIO]]),
+      o:kf(t,[[29.7,0],[30.0,1],[33.1,1],[33.45,0]])});
+    // goal sentence with karaoke
+    const R=rows.row4; const e4=EIO(seg(t,32.6,33.4));
+    placeRow('row4',{x:640,y:lerp(522,300,e4),s:lerp(1,1.15,e4),o:kf(t,[[30.3,0],[30.4,1],[32.7,1],[33.35,0,EIO]]),b:e4*10});
+    R.words.forEach((w,i)=>{ const at=30.35+i*0.13; const p=seg(t,at,at+0.6);
+      wordStyle('row4',i,{y:(1-EIN(p))*22*M,s:0.85+0.15*BACK(p),o:EIN(seg(t,at,at+0.35)),b:(1-EIN(p))*6}); });
+    karaoke('row4', lerp(R.W+10,-10,seg(t,30.95,32.45)));
+  }
+
+  /* ===== SCENE 5: the verse ===== */
+  {
+    const R=rows.row5;
+    const fin=EIO(seg(t,38.5,39.5));
+    placeRow('row5',{x:640,y:lerp(296,330,fin),s:lerp(1,0.92,fin),o:kf(t,[[32.9,0],[33.0,1]])});
+    R.words.forEach((w,i)=>{ const at=32.75+i*0.13; const p=seg(t,at,at+0.75);
+      const isKey=i===1; const dimOther=isKey?0:EIO(seg(t,38.0,38.6));
+      let o=EIN(seg(t,at,at+0.45))*(1-0.75*dimOther);
+      let s=(0.82+0.18*BACK(p))*(isKey?1+0.08*EIO(seg(t,38.0,38.6)):1);
+      if(isKey) o*=1-EIO(seg(t,38.65,39.05));
+      o*= isKey?1:(1-fin);
+      wordStyle('row5',i,{y:(1-EIN(p))*30*M+(isKey?0:fin*12),s,o,b:(1-EIN(p))*10+(isKey?EIO(seg(t,38.65,39.05))*8:fin*6)}); });
+    karaoke('row5', versePx(t));
+    if(R.track){ R.track.parentElement.style.opacity=(1-fin).toFixed(3); }
+    const mb=$('mb5'); maddBar(mb,t,35.2,0.6,parseFloat(mb.style.width)||200);
+    mb.style.opacity=(kf(t,[[34.95,0],[35.15,1],[37.9,1],[38.4,0]])).toFixed(3);
+    // logo: وَرَتِّلِ -> رَتِّلِ
+    const kp=rowPt('row5',R.geo[1].c); const lm=EIO(seg(t,38.6,39.6));
+    P($('logo'),{x:lerp(kp.x,640,lm),y:lerp(kp.y,236,lm),s:lerp(0.62,1,lm)*(1+0.05*BACK(seg(t,39.3,40))-0.05*seg(t,39.3,40)),
+      o:kf(t,[[38.6,0],[39.0,1,EIN]]),b:kf(t,[[38.6,8],[39.1,0,EIN]]),g:0.25+pulse(t,39.4,1.0)*0.8+0.12*Math.sin(t*2.2)*seg(t,40,41)});
+    // CTA grows out of the track line
+    const cp=seg(t,39.45,40.25);
+    const br=1+0.025*Math.sin((t-40.3)*3.6)*seg(t,40.3,40.8);
+    P($('cta'),{x:640,y:lerp(372,486,EIN(cp)),sx:lerp(1.6,1,EIN(cp))*BACK(cp)*br,sy:lerp(0.06,1,BACK(cp))*br,o:kf(t,[[39.4,0],[39.6,1]]),b:(1-EIN(cp))*4});
+    $('ctaArrow').setAttribute('transform',`translate(${(-4*Math.max(0,Math.sin((t-40.3)*3.6))*seg(t,40.3,40.8)*M).toFixed(2)} 0)`);
+  }
+
+  /* ===== captions ===== */
+  {
+    let idx=-1; for(let i=0;i<CAPS.length;i++){ if(t>=CAPS[i][0]-0.05 && t<CAPS[i][1]+0.05){idx=i;break;} }
+    if(idx!==capIdx){ capIdx=idx; capEl.innerHTML= idx>=0?CAPS[idx][2]:''; }
+    if(!started) idx=-1;
+    if(idx!==capIdx){ capIdx=idx; capEl.innerHTML= idx>=0?CAPS[idx][2]:''; }
+    if(idx>=0){ const [a,b]=CAPS[idx]; const o=Math.min(seg(t,a-0.05,a+0.25),1-seg(t,b-0.2,b+0.05)); P(capEl,{x:640,y:664+(1-EIN(seg(t,a-0.05,a+0.35)))*10*M,o}); }
+    else P(capEl,{o:0});
+  }
+}
+/* verse playhead schedule (row-local px) */
+function versePx(t){
+  const R=rows.row5; if(!R.geo) return 99999; const g=R.geo;
+  const w1=g[1],w2=g[2],w3=g[3]; const madd=w2.r-w2.w*0.6;
+  return kf(t,[[33.95,w1.r+14],[34.8,w1.l,LIN],[35.2,madd,EIO],[36.4,madd],[36.7,w2.l,EIO],[37.5,w3.l-12,LIN]]);
+}
+function maddBar(el,t,start,beat,width){
+  const p=clamp((t-start)/(2*beat),0,1);
+  el.querySelector('.fill').style.width=(p*100)+'%';
+  const dot=el.querySelector('.dot'); const bp=Math.max(pulse(t,start,0.45),pulse(t,start+beat,0.45),pulse(t,start+2*beat,0.45));
+  dot.style.left=(width*(1-p))+'px'; dot.style.transform=`scale(${(1+0.55*bp).toFixed(3)})`;
+  dot.style.opacity=(t>=start-0.15&&t<start+2*beat+0.6? 1:0.0);
+  const c=el.querySelectorAll('.cnt');
+  [0,1].forEach(k=>{ const at=start+k*beat; const q=seg(t,at,at+0.4);
+    c[k].style.left=(width*(k===0?0.75:0.25))+'px';
+    c[k].style.opacity=(EIN(seg(t,at,at+0.2))).toFixed(3);
+    c[k].style.transform=`translateX(-50%) translateY(${((1-EIN(q))*10).toFixed(1)}px) scale(${(0.5+0.5*BACK(q)).toFixed(3)})`; });
+}
+
+/* ---------- player ---------- */
+const vp=$('viewport'), player=$('player'), bar=$('bar');
+function fit(){
+  const W=innerWidth,H=innerHeight; const small=H<500||W<700;
+  const pad=small?0:24; const barH=small?48:56;
+  bar.style.setProperty('--barh',barH+'px');
+  const s=Math.min((W-pad*2)/1280,(H-pad*2-barH)/720);
+  const w=Math.floor(1280*s), h=Math.floor(720*s);
+  vp.style.width=w+'px'; vp.style.height=h+'px'; player.style.width=w+'px';
+  player.style.borderRadius=small?'0':'18px';
+  stage.style.transform=`scale(${s})`;
+}
+addEventListener('resize',fit); fit();
+
+let t=0, playing=false, started=false, last=0;
+const btnPlay=$('btnPlay'), big=$('bigPlay'), seek=$('seek'), timeEl=$('time');
+const ICON_PLAY='<svg viewBox="0 0 24 24"><path d="M7 4.5 L19 12 L7 19.5Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+const ICON_PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg>';
+const ICON_REPLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v5h5"/></svg>';
+const dotsEl=$('dots'); const ar=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const dots=SCENES.map((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='sdot';
+  b.setAttribute('aria-label',`المشهد ${ar(i+1)}: ${s.name}`); b.title=s.name; b.innerHTML='<i></i>';
+  b.addEventListener('click',e=>{ e.stopPropagation(); started=true; big.classList.add('hide'); setT(s.t+(i?0.05:0)); }); dotsEl.appendChild(b); return b; });
+function fmt(x){ x=Math.max(0,Math.floor(x)); return ar(Math.floor(x/60)+':'+String(x%60).padStart(2,'0')); }
+function ui(){
+  btnPlay.innerHTML = playing?ICON_PAUSE:(t>=DUR-0.01?ICON_REPLAY:ICON_PLAY);
+  btnPlay.setAttribute('aria-label',playing?'إيقاف مؤقت':(t>=DUR-0.01?'إعادة التشغيل':'تشغيل'));
+  const shown=started?t:0;
+  seek.value=shown.toFixed(2); seek.style.setProperty('--p',(shown/DUR*100).toFixed(2)+'%');
+  timeEl.textContent=fmt(shown)+' / '+fmt(DUR);
+  let si=0; SCENES.forEach((s,i)=>{ if(shown>=s.t-0.001) si=i; });
+  dots.forEach((d,i)=>{ d.classList.toggle('on',i===si); d.classList.toggle('done',i<si); d.setAttribute('aria-current',i===si?'step':'false'); });
+}
+function draw(){ render(started?t:POSTER_T); ui(); }
+function setT(v){ t=clamp(v,0,DUR); draw(); }
+function play(){ if(t>=DUR-0.01) t=0; if(!started){started=true;t=0;} playing=true; big.classList.add('hide'); last=performance.now(); ui(); }
+function pause(){ playing=false; ui(); }
+function toggle(){ playing?pause():play(); }
+btnPlay.addEventListener('click',e=>{e.stopPropagation();toggle();});
+big.addEventListener('click',e=>{e.stopPropagation();play();btnPlay.focus({preventScroll:true});});
+$('btnReplay').addEventListener('click',e=>{e.stopPropagation();started=true;big.classList.add('hide');t=0;play();});
+vp.addEventListener('click',()=>toggle());
+seek.addEventListener('input',()=>{ started=true; big.classList.add('hide'); setT(parseFloat(seek.value)); });
+document.addEventListener('keydown',e=>{ if(e.code==='Space' && !(e.target.closest&&e.target.closest('button,input'))){ e.preventDefault(); toggle(); } });
+function loop(now){
+  if(playing){ const dt=Math.min(0.1,(now-last)/1000); last=now; t+=dt; if(t>=DUR){t=DUR;playing=false;} draw(); }
+  else last=now;
+  requestAnimationFrame(loop);
+}
+// test / authoring hook: deterministic seek
+window.__lesson={seek:v=>{started=true;big.classList.add('hide');playing=false;setT(v);},duration:DUR,scenes:SCENES.map(s=>s.t),remeasure:()=>{measure();draw();}};
+if(document.fonts){ document.fonts.ready.then(()=>{measure();draw();}); document.fonts.addEventListener&&document.fonts.addEventListener('loadingdone',()=>{measure();draw();}); }
+draw(); requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

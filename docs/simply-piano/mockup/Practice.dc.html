@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Pratica stile Simply Piano</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&amp;family=Cairo:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFD700}a:hover{color:#FFE355}
+</style>
+</helmet>
+<div dir="rtl" style="width: 844px; height: 390px; box-sizing: border-box; position: relative; overflow: hidden; background: linear-gradient(180deg, #1F4037 0%, #0B1C17 100%); color: #FFFFFF; font-family: 'Cairo', sans-serif; display: flex; flex-direction: column;">
+
+  <svg aria-hidden="true" width="844" height="390" style="position: absolute; inset: 0; opacity: 0.07; pointer-events: none;">
+    <defs>
+      <pattern id="diaP" width="70" height="70" patternUnits="userSpaceOnUse">
+        <path d="M35 0L70 35L35 70L0 35Z M35 9L61 35L35 61L9 35Z M35 18L52 35L35 52L18 35Z" fill="none" stroke="#DAA520" stroke-width="1.2"></path>
+      </pattern>
+    </defs>
+    <rect width="844" height="390" fill="url(#diaP)"></rect>
+  </svg>
+
+  <div style="position: relative; height: 60px; flex: none; display: flex; align-items: center; gap: 14px; padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; width: 96px;">
+      <div style="font-size: 16px; font-weight: 700;">سورة الناس</div>
+      <div style="font-size: 12px; color: #95D5B2;">الآية ١ من ٦</div>
+    </div>
+    <div role="tablist" style="padding: 3px; display: flex; gap: 3px; border-radius: 22px; background: rgba(0,0,0,0.25); border: 1px solid rgba(218,165,32,0.2);">
+      <sc-for list="{{tabs}}" as="tab" hint-placeholder-count="3">
+        <button role="tab" onClick="{{tab.pick}}" style="width: 74px; height: 38px; border: none; border-radius: 19px; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; background: {{tab.bg}}; color: {{tab.fg}};">{{tab.label}}</button>
+      </sc-for>
+    </div>
+    <div style="flex: 1; display: flex; gap: 4px;">
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15); overflow: hidden;"><div style="height: 100%; width: {{segPct}}%; background: linear-gradient(90deg, #DAA520, #FFD700);"></div></div>
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15);"></div>
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15);"></div>
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15);"></div>
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15);"></div>
+      <div style="flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15);"></div>
+    </div>
+    <div style="display: flex; gap: 1px;" aria-label="النجوم">
+      <sc-for list="{{stars}}" as="s" hint-placeholder-count="3">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="{{s.fill}}" stroke="#DAA520" stroke-width="1.3"></path></svg>
+      </sc-for>
+    </div>
+    <a href="Lessons.dc.html" aria-label="إيقاف مؤقت والقائمة" style="width: 44px; height: 44px; border-radius: 22px; background: #DAA520; color: #0B1C17; display: flex; align-items: center; justify-content: center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"></rect><rect x="14" y="4.5" width="4" height="15" rx="1"></rect></svg>
+    </a>
+  </div>
+
+  <div style="position: relative; height: 214px; flex: none; display: flex; flex-direction: row; align-items: center; padding-right: 36px; overflow: hidden;">
+    <div style="position: relative; width: 540px; height: 204px; flex: none; box-sizing: border-box; padding: 14px 18px 12px 18px; border-radius: 20px; background: rgba(45,106,79,0.25); box-shadow: 0 8px 25px rgba(0,0,0,0.25), 0 0 0 1px rgba(218,165,32,0.25); display: flex; flex-direction: column; align-items: center; gap: 2px;">
+      <div style="position: absolute; inset: 9px; border: 2px solid rgba(218,165,32,0.18); border-radius: 13px; pointer-events: none;"></div>
+      <div style="width: 28px; height: 28px; border-radius: 14px; border: 1.5px solid rgba(218,165,32,0.6); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #FFD700; background: rgba(11,28,23,0.5);">١</div>
+      <div style="display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 22px; width: 100%;">
+        <sc-for list="{{words}}" as="w" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 60px;">
+            <div style="height: 7px; width: 7px; border-radius: 4px; background: {{w.dot}};"></div>
+            <div style="font-family: 'Amiri Quran', serif; font-size: 36px; line-height: 1.7; color: {{w.color}}; text-shadow: {{w.glow}}; transition: color 0.2s ease, text-shadow 0.2s ease;">{{w.tx}}</div>
+            <div style="display: flex; flex-direction: row; gap: 3px; height: 14px; align-items: center;">
+              <sc-for list="{{w.cells}}" as="c" hint-placeholder-count="2">
+                <div style="width: 14px; height: 12px; border-radius: 3px; box-sizing: border-box; border: 1.5px {{c.borderStyle}} {{c.border}}; background: rgba(255,255,255,0.05); overflow: hidden; display: flex;">
+                  <div style="height: 100%; width: {{c.pct}}%; background: {{c.color}};"></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex: 1;"></div>
+      <div style="display: flex; gap: 8px; justify-content: center;">
+        <div style="display: flex; align-items: center; gap: 6px; padding: 1px 10px; border-radius: 12px; background: rgba(255,127,127,0.14); font-size: 12px; font-weight: 600;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #FF7F7F;"></span>غنة</div>
+        <div style="display: flex; align-items: center; gap: 6px; padding: 1px 10px; border-radius: 12px; background: rgba(142,197,255,0.14); font-size: 12px; font-weight: 600;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #8EC5FF;"></span>مد طبيعي</div>
+        <div style="display: flex; align-items: center; gap: 6px; padding: 1px 10px; border-radius: 12px; background: rgba(77,157,224,0.18); font-size: 12px; font-weight: 600;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #4D9DE0;"></span>مد عارض للسكون</div>
+      </div>
+    </div>
+
+    <div style="width: 30px; height: 3px; flex: none; background: rgba(255,255,255,0.15); overflow: hidden;"><div style="height: 100%; width: {{segPct}}%; background: #DAA520;"></div></div>
+
+    <div style="position: relative; width: 300px; height: 170px; flex: none; box-sizing: border-box; border-radius: 20px; background: rgba(45,106,79,0.12); border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0.45;">
+      <div style="width: 26px; height: 26px; border-radius: 13px; border: 1.5px solid rgba(218,165,32,0.6); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #FFD700;">٢</div>
+      <div style="font-family: 'Amiri Quran', serif; font-size: 30px; line-height: 1.7;">مَلِكِ ٱلنَّاسِ</div>
+    </div>
+  </div>
+
+  <div style="position: relative; flex: 1; display: flex; flex-direction: row; align-items: center; gap: 20px; padding: 0 20px 10px 20px;">
+    <div style="width: 300px; flex: none; display: flex; align-items: center;">
+      <sc-if value="{{showToast}}" hint-placeholder-val="{{ false }}">
+        <div style="width: 300px; padding: 8px 12px; box-sizing: border-box; border-radius: 14px; background: rgba(243,156,18,0.14); border: 1px solid rgba(243,156,18,0.55); display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-size: 13px; line-height: 1.5;"><span style="font-weight: 700; color: #F5B041;">المد العارض في «ٱلنَّاسْ»:</span> مددته حركتين، والمطلوب ٤.</div>
+          <div style="display: flex; gap: 8px;">
+            <button onClick="{{retry}}" style="flex: 1; height: 34px; border-radius: 17px; border: none; background: #DAA520; color: #0B1C17; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer;">أعد الآية</button>
+            <a href="Result.dc.html" style="flex: 1; height: 34px; border-radius: 17px; border: 1px solid rgba(218,165,32,0.5); color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center;">النتيجة</a>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{showCaption}}" hint-placeholder-val="{{ true }}">
+        <div style="font-size: 15px; color: #DFC298; font-weight: 600;">{{caption}}</div>
+      </sc-if>
+    </div>
+
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 14px;">
+      <div style="display: flex; align-items: center; gap: 4px; height: 36px;" aria-hidden="true">
+        <sc-for list="{{wave}}" as="b" hint-placeholder-count="7">
+          <div style="width: 4px; border-radius: 2px; height: {{b.h}}px; background: {{b.c}}; transition: height 0.08s linear;"></div>
+        </sc-for>
+      </div>
+      <button onClick="{{mainAction}}" aria-label="{{mainLabel}}" style="width: 76px; height: 76px; border-radius: 38px; border: 3px solid #FFD700; background: radial-gradient(circle at 50% 40%, #2D6A4F, #1F4037); color: #FFD700; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 0 7px rgba(218,165,32,0.12), 0 8px 20px rgba(0,0,0,0.35);">
+        <sc-if value="{{iconMic}}" hint-placeholder-val="{{ false }}">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+        </sc-if>
+        <sc-if value="{{iconPlay}}" hint-placeholder-val="{{ true }}">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>
+        </sc-if>
+        <sc-if value="{{iconPause}}" hint-placeholder-val="{{ false }}">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"></rect><rect x="14" y="4.5" width="4" height="15" rx="1"></rect></svg>
+        </sc-if>
+      </button>
+      <div style="display: flex; align-items: center; gap: 4px; height: 36px;" aria-hidden="true">
+        <sc-for list="{{wave}}" as="b" hint-placeholder-count="7">
+          <div style="width: 4px; border-radius: 2px; height: {{b.h}}px; background: {{b.c}}; transition: height 0.08s linear;"></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="width: 200px; flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 8px 12px; box-sizing: border-box; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);">
+      <div style="width: 14px; height: 14px; border-radius: 7px; background: {{beat}}; box-shadow: {{beatGlow}}; transition: background 0.1s ease;"></div>
+      <div style="display: flex; flex-direction: column; flex: 1;">
+        <span style="font-size: 13px; font-weight: 700;">إيقاع الحركة</span>
+        <span style="font-size: 11px; color: #95D5B2;">نبضة = حركة</span>
+      </div>
+      <span style="padding: 2px 10px; border-radius: 10px; border: 1px solid rgba(218,165,32,0.4); font-size: 13px; color: #DFC298; font-weight: 600;">١×</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":844,"height":390}}'>
+var WORDS = [
+  { tx: 'قُلْ', s: 0, e: 1, rules: [] },
+  { tx: 'أَعُوذُ', s: 1, e: 4, rules: [{ k: 'tabii', from: 2, n: 2 }] },
+  { tx: 'بِرَبِّ', s: 4, e: 5.5, rules: [] },
+  { tx: 'ٱلنَّاسِ', s: 5.5, e: 12, rules: [{ k: 'ghunnah', from: 6, n: 2 }, { k: 'arid', from: 8, n: 4 }] }
+];
+var RULE_COLORS = { tabii: '#8EC5FF', ghunnah: '#FF7F7F', arid: '#4D9DE0' };
+var STEP = 0.125;
+
+class Component extends DCLogic {
+  state = { mode: 'listen', t: 0, running: false, done: false };
+
+  componentDidMount() {
+    var self = this;
+    this.timer = setInterval(function () { self.tick(); }, 50);
+  }
+
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  tick() {
+    var st = this.state;
+    if (!st.running) return;
+    var t = st.t + STEP;
+    if (st.mode === 'listen') {
+      if (t > 13.5) t = 0;
+      this.setState({ t: t });
+      return;
+    }
+    if (t >= 10.5) { this.setState({ t: 10.5, running: false, done: true }); return; }
+    this.setState({ t: t });
+  }
+
+  setMode(m) { this.setState({ mode: m, t: 0, running: false, done: false }); }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var mode = st.mode;
+    var t = st.t;
+    var listen = mode === 'listen';
+    var idle = !listen && !st.running && !st.done;
+    var userEnd = 10;
+
+    var tabs = [
+      { id: 'listen', label: 'استمع' },
+      { id: 'learn', label: 'تعلّم' },
+      { id: 'recite', label: 'اقرأ' }
+    ].map(function (x) {
+      var on = x.id === mode;
+      return { label: x.label, bg: on ? '#DAA520' : 'transparent', fg: on ? '#0B1C17' : '#DFC298', pick: function () { self.setMode(x.id); } };
+    });
+
+    var words = WORDS.map(function (w, wi) {
+      var end = (!listen && wi === 3) ? userEnd : w.e;
+      var current = (st.running || (listen && t > 0)) && t >= w.s && t < end;
+      var past = t >= end;
+      var color = 'rgba(255,255,255,0.45)';
+      var glow = 'none';
+      if (idle) color = 'rgba(255,255,255,0.8)';
+      if (past) color = '#FFFFFF';
+      if (current) { color = '#FFD700'; glow = '0 0 18px rgba(255,215,0,0.55)'; }
+      if (st.done) { color = wi === 3 ? '#F5B041' : '#6FE3A1'; glow = 'none'; }
+      var cells = [];
+      w.rules.forEach(function (r) {
+        var limit = (!listen && r.k === 'arid') ? 2 : r.n;
+        for (var i = 0; i < r.n; i++) {
+          var fill = Math.max(0, Math.min(1, t - r.from - i));
+          if (i >= limit) fill = 0;
+          var missed = st.done && i >= limit;
+          var border = 'rgba(255,255,255,0.25)';
+          var bs = 'solid';
+          if (mode === 'recite' && !st.done) border = 'transparent';
+          if (missed) { border = '#F39C12'; bs = 'dashed'; }
+          cells.push({ pct: Math.round(fill * 100), color: RULE_COLORS[r.k], border: border, borderStyle: bs });
+        }
+      });
+      return { tx: w.tx, color: color, glow: glow, cells: cells, dot: current ? '#FFD700' : 'transparent' };
+    });
+
+    var active = st.running;
+    var beatOn = active && (t % 1) < 0.3;
+    var wave = [];
+    for (var i = 0; i < 7; i++) {
+      var h = active ? Math.round(6 + Math.abs(Math.sin(t * 2.7 + i * 0.9)) * 26) : 6;
+      wave.push({ h: h, c: active ? '#DAA520' : 'rgba(218,165,32,0.35)' });
+    }
+
+    var caption = '';
+    if (listen) caption = st.running ? 'استمع واتبع المؤشر الذهبي' : 'اضغط للاستماع إلى القارئ';
+    else if (idle) caption = mode === 'learn' ? 'دورك: اقرأ الآية مع الإيقاع' : 'اقرأ الآية كاملة دون مساعدة';
+    else if (st.running) caption = 'أستمع إليك…';
+
+    var nStars = st.done ? 2 : 0;
+    var stars = [0, 1, 2].map(function (i) { return { fill: i < nStars ? '#FFD700' : 'transparent' }; });
+    var segPct = Math.round(Math.min(1, t / 12) * 100);
+    if (st.done) segPct = 100;
+
+    return {
+      tabs: tabs, words: words, wave: wave, stars: stars, caption: caption, segPct: segPct,
+      beat: beatOn ? '#FFD700' : 'rgba(218,165,32,0.3)',
+      beatGlow: beatOn ? '0 0 12px rgba(255,215,0,0.8)' : 'none',
+      showToast: st.done,
+      showCaption: !st.done,
+      iconMic: !listen && !st.running,
+      iconPlay: listen && !st.running,
+      iconPause: st.running,
+      mainLabel: listen ? (st.running ? 'إيقاف' : 'استمع') : 'ابدأ القراءة',
+      mainAction: function () {
+        if (listen) { self.setState({ running: !st.running }); return; }
+        if (st.running) { self.setState({ running: false }); return; }
+        self.setState({ t: 0, running: true, done: false });
+      },
+      retry: function () { self.setState({ t: 0, running: true, done: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
