@@ -113,6 +113,10 @@ String onboardingEmblemLight = 'green';
 /// library's star lattice (A5, the reference's pattern).
 String onboardingCorner = 'star';
 
+/// Review aid `?lightDecor=code`: the light decor drawn in code instead of the
+/// owner's light background (2026-11-28).
+String onboardingLightDecor = 'image';
+
 const _texts = [
   ('أهلاً بك في رتّل', 'لنتعرّف عليك قبل أن نبدأ'),
   ('ما مستواك في التجويد؟', 'سنقترح عليك البداية المناسبة'),
@@ -271,7 +275,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             fieldBottom + u * OnbMetrics.keyboardGap - (u * 100 - inset),
           )
         : 0.0;
-    final ink = p.c(RateelColors.leaderText, RateelColors.readLInk);
+    final ink = p.c(RateelColors.onbInk, RateelColors.onbLInk);
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -466,7 +470,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           readex(
             u * OnbMetrics.titleSize,
             weight: 600,
-            color: p.c(titleCream, RateelColors.readLTitle),
+            color: p.c(RateelColors.onbTitle, RateelColors.onbLTitle),
           ).copyWith(shadows: p.t > 0.5 ? null : titleShadows(u)),
         ),
         _centredText(
@@ -491,7 +495,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     final labelStyle = readex(
       u * OnbMetrics.labelSize,
       weight: 600,
-      color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+      color: p.c(RateelColors.onbInk, RateelColors.onbLInk),
     );
     Widget label(double cy, String text) => Positioned(
       right: (cx * 2) - right + u * OnbMetrics.labelRight,
@@ -570,7 +574,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     hintStyle: readex(
                       u * OnbMetrics.fieldTextSize,
                       weight: 340,
-                      color: ink.withValues(alpha: 0.6),
+                      color: p.c(RateelColors.onbHint, RateelColors.onbLHint),
                     ).copyWith(height: 1.3),
                   ),
                 ),
@@ -708,7 +712,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               top: OnbMetrics.goalTop,
               glyph: Image.asset(
                 'assets/ui/icons_white/stopwatch.webp',
-                color: p.c(RateelColors.iconCream, RateelColors.readLInk),
+                color: p.c(RateelColors.iconCream, RateelColors.onbLInk),
               ),
               glyphCy: OnbMetrics.goalGlyphCy,
               glyphH: OnbMetrics.goalGlyphH,
@@ -774,7 +778,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           readex(
             u * bigSize,
             weight: 600,
-            color: p.c(RateelColors.leaderText, RateelColors.readLInk),
+            color: p.c(RateelColors.onbInk, RateelColors.onbLInk),
           ),
         ),
         Positioned(
@@ -904,7 +908,16 @@ class _Backdrop extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        if (p.t > 0) Opacity(opacity: p.t, child: light),
+        if (p.t > 0)
+          Opacity(
+            opacity: p.t,
+            child: onboardingLightDecor == 'code'
+                ? light
+                : const Image(
+                    image: AssetImage('assets/ui/splash/background_light.webp'),
+                    fit: BoxFit.fill,
+                  ),
+          ),
         if (p.t < 1)
           Opacity(
             opacity: 1 - p.t,
@@ -1073,16 +1086,10 @@ class _Divider extends StatelessWidget {
   final double u;
   final double diamond;
 
+  // Reference: the gold line with the diamond stays gold in the light theme
+  // too (STYLE-CONFLICTS O1, reviewed at the end of the project).
   @override
-  Widget build(BuildContext context) => p.t > 0
-      ? ColorFiltered(
-          colorFilter: ColorFilter.mode(
-            p.c(RateelColors.videoDivider, RateelColors.readLCopper),
-            BlendMode.srcIn,
-          ),
-          child: GoldDivider(u: u, diamond: diamond),
-        )
-      : GoldDivider(u: u, diamond: diamond);
+  Widget build(BuildContext context) => GoldDivider(u: u, diamond: diamond);
 }
 
 /// Faded lattice band at the bottom of a card (owner Q6: on every card).
@@ -1320,7 +1327,27 @@ class _OptionCardState extends State<_OptionCard> {
                   height: u * OnbMetrics.flameH,
                   child: _Pop(
                     on: s,
-                    child: Image.asset('assets/ui/icons/flame_gold_01.webp'),
+                    child: DecoratedBox(
+                      // Reference: a warm halo around the flame (dark).
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: RateelColors.onbFlameHalo.withValues(
+                              alpha: 0.45 * (1 - p.t),
+                            ),
+                            blurRadius: u * 1.6,
+                          ),
+                        ],
+                      ),
+                      child: Image.asset(
+                        'assets/ui/icons/flame_gold_01.webp',
+                        color: p.c(
+                          RateelColors.onbFlame,
+                          RateelColors.onbLFlame,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
             ],

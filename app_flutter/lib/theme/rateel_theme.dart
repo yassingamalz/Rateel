@@ -448,6 +448,16 @@ class RateelColors {
   static const onbLDotOff = Color(0xFFF0DDC3);
   static const onbLLattice = Color(0xFFE2B970);
   static const onbLArc = Color(0xFFC99761); // light big arc
+  // Texts as the reference (owner 2026-11-28; STYLE-CONFLICTS O2).
+  static const onbTitle = Color(0xFFF1E7C6);
+  static const onbInk = Color(0xFFEEEBC8);
+  static const onbHint = Color(0xFF9BBA8F);
+  static const onbLTitle = Color(0xFF643E12);
+  static const onbLInk = Color(0xFF5C3B13);
+  static const onbLHint = Color(0xFFAC8C67);
+  static const onbFlame = Color(0xFFF5CF5A); // flame (O3)
+  static const onbLFlame = Color(0xFFD9962A);
+  static const onbFlameHalo = Color(0xFFE08A1E);
   static const onbSelOuter = Color(0xFF9E8222); // selected rim, outer band #BE9929 → #7E6E12
   static const onbInnerGlow = Color(0xFF7A8A22); // warm olive glow inside the selected card
   static const onbTealTop = Color(0xFF03412E); // goal card (C), idle

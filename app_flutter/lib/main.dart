@@ -145,6 +145,7 @@ Future<void> main() async {
   onboardingStartStep = q['step'];
   onboardingEmblemLight = q['emblemL'] ?? onboardingEmblemLight;
   onboardingCorner = q['corner'] ?? onboardingCorner;
+  onboardingLightDecor = q['lightDecor'] ?? onboardingLightDecor;
   final earn = int.tryParse(q['earn'] ?? '');
   if (earn != null) badgeEarned.value = earn;
   badgeMedalSet = q['medals'] ?? badgeMedalSet;
