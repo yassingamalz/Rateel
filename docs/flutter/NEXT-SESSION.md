@@ -1,4 +1,35 @@
-# Next session (from 2026-11-28 evening, after the merge of 30)
+# Next session (from 2026-11-28 evening, after the merge of 31)
+
+**State.** `master` holds every screen built so far, the last ones **30 onboarding (PR #72)** and **31 daily practice (PR #74)**.
+Not yet approved on the phone by the owner: **30**, **31**, and the fixes on **`flutter/24-29-fixes`** (end card 24 only after
+practice 10/22; the rail icon leaves the profile 29 and the learning sub-screens; APK 1.0.648 sent, not tested). GitHub push / PR
+work (mode A of `CLAUDE.md`; check it at the start).
+
+**Next steps (owner, 2026-11-28): one APK to test everything, then what is missing.**
+1. Merge `master` into `flutter/24-29-fixes` (conflicts only by appended rows in the docs: keep every row) and push.
+2. Install Flutter 3.50.1, run `flutter analyze` and `flutter test` on that branch, then `tools/flutter-review/build-apk.sh`.
+   If Maven Central answers 429, use the container-only Gradle mirror noted in `DECISIONS.md` (APK 1.0.647 row). Log the APK in
+   `DECISIONS.md` and send it to the owner as a file.
+3. Ask the owner, screen by screen, the verdict on what is not approved yet (30, 31, the 24/29 fixes). Fix what they ask on the
+   right branch, new APK. Record every approval in `DECISIONS.md` / `SCREENS.md` / `BACKLOG.md`.
+4. When the owner approves, merge `flutter/24-29-fixes` into `master` (PR, only at the owner's request).
+5. Tell the owner **what is missing**: screens still to build (`SCREENS.md`: 13, 09, 28, 15–21…) and the open activities of
+   `BACKLOG.md`, grouped (mock data, saved progress, content, critics, release items), with a proposal for the next screen.
+
+## Prompt to start the next session
+```
+Lavora sul repo Rateel (https://github.com/yassingamalz/Rateel). Leggi CLAUDE.md e tutti i file che indica, poi
+docs/flutter/NEXT-SESSION.md (prima sezione) e seguilo. Controlla subito se push e PR funzionano (modalità A o B di
+CLAUDE.md). Unisci master nel branch flutter/24-29-fixes, poi installa Flutter, lancia analyze e test e fammi l'APK di quel
+branch (contiene tutto master più le correzioni 24/29): mandamelo come file. Io lo provo e ti dico schermata per schermata
+cosa approvo (30, 31 e le correzioni 24/29) e cosa correggere; registra le approvazioni nei documenti e, quando approvo,
+unisci flutter/24-29-fixes in master con una PR. Alla fine dimmi cosa manca: schermate ancora da fare e attività aperte del
+BACKLOG, raggruppate, con una proposta per la prossima schermata. Parlami in italiano, documenti in inglese.
+```
+
+---
+
+## Archive: hand-off of 2026-11-28 evening (after the merge of 30)
 
 **State.** `master` holds 24, the decisions of 2026-11-27, 29 v1 and **30 onboarding (PR #72)**. GitHub push / PR work (mode A
 of `CLAUDE.md`; check it at the start).
