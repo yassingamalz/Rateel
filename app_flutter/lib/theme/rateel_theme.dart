@@ -401,6 +401,11 @@ class RateelColors {
   static const testLPartTop = Color(0xFFFBEFD0);
   static const testLPartBottom = Color(0xFFF4E0AE);
   static const testLPartRim = Color(0xFFC9962E);
+  // Screen 30, onboarding decor (sampled on reference-b-level-dark, 2026-11-28):
+  // big arc gold, dark mosque silhouette and the green glow behind it.
+  static const onbArc = Color(0xFFC99300);
+  static const onbMosque = Color(0xFF02331F);
+  static const onbMosqueGlow = Color(0xFF1F9A62);
   // Light theme of the test (from the 08 light tokens).
   static const testLRowFill = Color(0xFFF7EEE1);
   static const testLRowRim = Color(0xFFDCC5AC);

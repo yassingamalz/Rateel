@@ -332,3 +332,5 @@ unnumbered files are two framings of the same drawing). Common library: sources 
 | App file | Source | Used in | Notes |
 |---|---|---|---|
 | `splash/emblem_inner.webp` | derived from `splash/emblem.webp` (2026-11-28) | 30 light emblem fill (Q7) | the emblem's inner area: gold outline closed (9 px), flood fill from the centre, grown 2 px under the gold; white + alpha, tinted in code |
+| `icons_white/rosette_cream.webp`, `rosette_brown.webp` | owner 2026-11-28 (two images on magenta), sources `docs/design-assets/icons-white/extra/` | 30-B «متقدم» (cream dark, brown light) | magenta keyed as `icon_collection.py`, trimmed, 512 px |
+| `decor/lattice_star_tile.webp` (reused) | A5 of screen 29 | 30 top corners, tinted gold / tan | cell 5.3u |

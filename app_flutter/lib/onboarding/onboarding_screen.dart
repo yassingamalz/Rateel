@@ -99,6 +99,10 @@ class OnbMetrics {
   static const flameLeft = 6.6; // centre from the card's left edge
   static const flameCy = 46.7;
   static const keyboardGap = 3.0; // field bottom above the keyboard
+  // Top corner lattice (reference ≈ 0–300 × 0–220 px), star cell ≈ 5.3u.
+  static const cornerW = 40.0;
+  static const cornerH = 30.0;
+  static const starCell = 5.3;
 }
 
 /// Review aids: `?step=a|b|c` opens that step, `?emblemL=none|green|dark`
@@ -616,8 +620,20 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         'assets/ui/glyphs/star.svg',
         colorFilter: ColorFilter.mode(c, BlendMode.srcIn),
       ),
-      // The library's rosette keeps its gold (owner Q5: use what we have).
-      (_) => Image.asset('assets/ui/glyphs/rank_rosette.webp'),
+      // Owner's outline rosette (2026-11-28): cream in dark, brown in light.
+      (_) => Stack(
+        fit: StackFit.passthrough,
+        children: [
+          Opacity(
+            opacity: 1 - p.t,
+            child: Image.asset('assets/ui/icons_white/rosette_cream.webp'),
+          ),
+          Opacity(
+            opacity: p.t,
+            child: Image.asset('assets/ui/icons_white/rosette_brown.webp'),
+          ),
+        ],
+      ),
     ];
     return [
       for (var i = 0; i < 3; i++)
@@ -811,7 +827,28 @@ class _Backdrop extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        LessonBackground(p: p, u: u),
+        // Gradient of the lesson background; the corners carry the star
+        // lattice of the library (A5), finer and brighter as the reference.
+        DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              radius: 0.9,
+              colors: [
+                p.c(RateelColors.readBgCentre, RateelColors.readLBgCentre),
+                p.c(RateelColors.readBgEdge, RateelColors.readLBgEdge),
+              ],
+            ),
+          ),
+        ),
+        for (final left in [true, false])
+          Positioned(
+            left: left ? 0 : null,
+            right: left ? null : 0,
+            top: 0,
+            width: u * OnbMetrics.cornerW,
+            height: u * OnbMetrics.cornerH,
+            child: _StarLattice(p: p, u: u, left: left),
+          ),
         CustomPaint(painter: _ArcPainter(p, u)),
         Positioned(
           right: u * OnbMetrics.mosqueRight,
@@ -819,16 +856,22 @@ class _Backdrop extends StatelessWidget {
           width: u * OnbMetrics.mosqueW,
           height: mosqueH,
           child: Opacity(
-            opacity: p.d(0.75, 0.9),
+            opacity: p.d(1, 0.9),
             child: p.t > 0.5
                 ? Image.asset(
                     'assets/ui/decor/mosque_light.webp',
                     fit: BoxFit.contain,
                     alignment: Alignment.bottomCenter,
                   )
-                : ColorFiltered(
-                    colorFilter: lessonMosqueTone,
-                    child: Image.asset('assets/ui/decor/mosque.webp'),
+                // Reference: a dark silhouette in front of a green glow.
+                : const ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      RateelColors.onbMosque,
+                      BlendMode.srcIn,
+                    ),
+                    child: Image(
+                      image: AssetImage('assets/ui/decor/mosque.webp'),
+                    ),
                   ),
           ),
         ),
@@ -848,40 +891,50 @@ class _ArcPainter extends CustomPainter {
     final w = size.width;
     final h = size.height;
     // Glow behind the mosque (bottom right).
-    final glowC = Offset(w - u * 24, u * 76);
+    final glowC = Offset(w - u * 22.4, u * 70);
     canvas.drawCircle(
       glowC,
-      u * 30,
+      u * 28,
       Paint()
         ..shader = RadialGradient(
           colors: [
-            p.c(const Color(0x3D2FA36B), const Color(0x00FFFFFF)),
-            p.c(const Color(0x002FA36B), const Color(0x00FFFFFF)),
+            RateelColors.onbMosqueGlow.withValues(alpha: 0.55 * (1 - p.t)),
+            RateelColors.onbMosqueGlow.withValues(alpha: 0),
           ],
-        ).createShader(Rect.fromCircle(center: glowC, radius: u * 30)),
+        ).createShader(Rect.fromCircle(center: glowC, radius: u * 28)),
     );
     // Big thin arc: an ellipse wider than the screen (reference: from the
     // left edge at ≈ 31u, over the top at ≈ 41u and 175u, to the right edge).
-    final gold = p.c(RateelColors.videoDivider, RateelColors.readLCopper);
+    // Reference: solid gold (#C49100 core) about 0.8u wide, soft glow.
+    final gold = p.c(RateelColors.onbArc, RateelColors.readLCopper);
     final arc = Rect.fromCenter(
       center: Offset(w / 2, u * 72.7),
       width: u * 246.2 * (w / (u * 216.2)),
       height: u * 173.2,
     );
+    Shader fade(double a) => LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        gold.withValues(alpha: a),
+        gold.withValues(alpha: 0),
+      ],
+      stops: const [0.18, 0.5],
+    ).createShader(arc);
     canvas.drawOval(
       arc,
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1.0, u * 0.24)
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            gold.withValues(alpha: p.d(0.75, 0.6)),
-            gold.withValues(alpha: 0),
-          ],
-          stops: const [0.0, 0.42],
-        ).createShader(arc),
+        ..strokeWidth = u * 1.2
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, u * 0.6)
+        ..shader = fade(0.35 * (1 - p.t)),
+    );
+    canvas.drawOval(
+      arc,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = math.max(1.0, u * p.d(0.75, 0.4))
+        ..shader = fade(p.d(1, 0.7)),
     );
     // Bottom waves: a lighter band under a pale green line and a thin gold
     // line (reference: from the left at ≈ 76u, lowest near the centre).
@@ -1339,4 +1392,47 @@ class _Dots extends StatelessWidget {
       ],
     ],
   );
+}
+
+/// Star lattice of the library (`decor/lattice_star_tile.webp`, A5, white
+/// lines, 2×2 cells per tile) in a top corner, tinted gold (light: tan),
+/// strongest at the corner and fading inwards.
+class _StarLattice extends StatelessWidget {
+  const _StarLattice({required this.p, required this.u, required this.left});
+
+  final LessonPal p;
+  final double u;
+  final bool left;
+
+  @override
+  Widget build(BuildContext context) {
+    final tile = u * OnbMetrics.starCell * 2;
+    return IgnorePointer(
+      child: ShaderMask(
+        blendMode: BlendMode.dstIn,
+        shaderCallback: RadialGradient(
+          center: left ? Alignment.topLeft : Alignment.topRight,
+          radius: 1.15,
+          colors: const [
+            Color(0xFF000000),
+            Color(0x88000000),
+            Color(0x00000000),
+          ],
+          stops: const [0, 0.45, 1],
+        ).createShader,
+        child: Opacity(
+          opacity: p.d(0.8, 0.6),
+          child: Image.asset(
+            'assets/ui/decor/lattice_star_tile.webp',
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            alignment: left ? Alignment.topLeft : Alignment.topRight,
+            scale: 512 / tile,
+            color: p.c(RateelColors.onbArc, RateelColors.readLLattice),
+            colorBlendMode: BlendMode.modulate,
+          ),
+        ),
+      ),
+    );
+  }
 }

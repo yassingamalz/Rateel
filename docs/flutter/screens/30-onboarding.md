@@ -165,3 +165,20 @@ on every card · Q7 show examples first · Q8 yes · Q9 ok · Q10 ok (moon of 10
 - Digits: «10 دقائق» is written number first (Arabic order) and renders as the reference.
 - Review: `?onboarding=1` (does not read or write the saved profile), `?step=b|c`, `?theme=light`, `?emblemL=`;
   captures `tools/flutter-review/onboarding-capture.js`.
+
+## v2 (2026-11-28): owner's rosettes and «more elegant» decor
+Owner: use the two outline rosettes (cream / brown); the reference looks more elegant, find why. Measured on
+`reference-b-level-dark` vs the v1 capture, the differences that are **decor, not tokens**, now fixed:
+- **Big arc:** reference solid gold #C49100 ≈ 0.8u wide; v1 was #776E2A 0.24u, faded. Now `onbArc` #C99300, 0.75u, soft
+  glow (light: copper 0.4u).
+- **Top corners:** reference fine gold 8-point-star lattice; v1 had the lesson stepped lattice (big, dim). Now the library's
+  star lattice `decor/lattice_star_tile.webp` (A5), cell 5.3u, tinted gold (light: tan), radial fade.
+- **Mosque:** reference dark silhouette (#013624) in front of a bright green glow (#03623B); v1 was light green (#225134)
+  with a weak glow. Now `onbMosque` #02331F (srcIn on `decor/mosque.webp`) and `onbMosqueGlow` 55%.
+- متقدم glyph: the owner's rosette, `icons_white/rosette_cream` (dark) / `rosette_brown` (light).
+Differences left because they are **token conflicts** (Q3 = app tokens, owner to decide if they should change):
+selected card rim ≈ 4–6 px neon gold #FFF8A4 + wide glow (token 0.3u `testSelRim`, glow 28%); selected fill dark #013921
+(token `testSelTop` #214E2D, lighter olive); idle cards lit from the top #014928 → #013622 with an olive rim #718B50 (token
+flat `testRowFill` #0B3A2A, rim #70A685 → #498163). Also the متوسط star is filled (the library has no outline star).
+Sheet `30-onboarding/compare-v2.jpg`.
+
