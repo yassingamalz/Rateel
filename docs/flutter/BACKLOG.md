@@ -11,8 +11,8 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       per day with at least one challenge, 0 after a missed day. Today: mock, in memory, completion by long press.
 - [x] Connector between the tiles: **lit only up to the open tile** (as 03/05, as built), decided by the owner 2026-11-27.
 - [ ] Practice / recitation challenges open screen 14 «coming soon» until screen 09 exists.
-- [ ] Courses icon of the rail tapped inside the learning section goes back to the courses only from 12: decide if
-      units (05) and lessons (06) should do the same.
+- [x] Courses icon of the rail tapped inside the learning section goes back to the courses from 05, 06 and 12 too
+      (owner 2026-11-28, `flutter/24-29-fixes`).
 
 ## App-wide
 - [ ] **Screen 28, help / tips overlay** (owner 2026-11-27: future improvement). Reference `screens/28-help-overlay/reference.webp`,
