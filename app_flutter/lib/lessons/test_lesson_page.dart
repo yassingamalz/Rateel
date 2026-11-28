@@ -15,6 +15,7 @@ import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'reading_data.dart' show readingLight;
 import 'reading_lesson_page.dart' show readingStartLight;
+import 'practice_part.dart';
 import 'test_data.dart';
 
 /// Review aids (screen 10): `?testQ=4` opens question 4 (0-based; the earlier
@@ -152,12 +153,17 @@ class TestLessonPage extends StatefulWidget {
     required this.index,
     required this.count,
     this.completed = false,
+    this.practice,
   });
 
   final Lesson lesson;
   final int index;
   final int count;
   final bool completed;
+
+  /// Part of the daily practice session (screen 31): injected questions, the
+  /// session's progress, no results and no end card.
+  final PracticePart? practice;
 
   @override
   State<TestLessonPage> createState() => _TestLessonPageState();
@@ -227,7 +233,11 @@ class _TestLessonPageState extends State<TestLessonPage>
       readingLight.value = true;
       _theme.value = 1;
     }
-    TestContent.load(widget.lesson.id).then((c) {
+    final injected = widget.practice?.test;
+    (injected != null
+            ? Future<TestContent?>.value(injected)
+            : TestContent.load(widget.lesson.id))
+        .then((c) {
       if (!mounted) return;
       setState(() {
         _content = c;
@@ -476,6 +486,15 @@ class _TestLessonPageState extends State<TestLessonPage>
     final run = _run;
     if (run == null) return;
     if (run.finished) {
+      final part = widget.practice;
+      if (part != null) {
+        part
+          ..right = run.correctCount
+          ..count = run.total
+          ..points = run.points;
+        _leave(true);
+        return;
+      }
       _finishTest();
       return;
     }
@@ -594,8 +613,8 @@ class _TestLessonPageState extends State<TestLessonPage>
         final run = _run;
         return LessonShell(
           key: _shell,
-          step: run?.answered ?? 0,
-          total: run?.total ?? 1,
+          step: (widget.practice?.offset ?? 0) + (run?.answered ?? 0),
+          total: widget.practice?.total ?? run?.total ?? 1,
           light: light,
           onBack: () => _leave(false),
           onRestart: _restart,
@@ -634,7 +653,9 @@ class _TestLessonPageState extends State<TestLessonPage>
               u: u,
               cx: cx,
               s: TestMetrics.header,
-              title: _content?.title ?? widget.lesson.title,
+              title: widget.practice?.title ??
+                  _content?.title ??
+                  widget.lesson.title,
               subtitle: _content?.description ?? widget.lesson.description,
             ),
           ),
@@ -2292,8 +2313,9 @@ class _PointsPill extends StatelessWidget {
   }
 }
 
-/// Glyph of a [LessonButton]; `chevron` is the small ‹ of «متابعة» (screen 24).
-enum LessonBtnGlyph { arrow, check, replay, chevron }
+/// Glyph of a [LessonButton]; `chevron` is the small ‹ of «متابعة» (screen 24);
+/// `none`: text only (31-B).
+enum LessonBtnGlyph { arrow, check, replay, chevron, none }
 
 /// Colour of a filled lesson button.
 enum LessonTone { gold, green, red }
@@ -2460,19 +2482,24 @@ class _LessonButtonState extends State<LessonButton> {
                       mainAxisSize: MainAxisSize.min,
                       textDirection: TextDirection.ltr,
                       children: [
-                        SizedBox(
-                          width: glyphW,
-                          height: glyphW,
-                          child: CustomPaint(
-                            painter: switch (widget.glyph) {
-                              LessonBtnGlyph.arrow => _ArrowPainter(text),
-                              LessonBtnGlyph.check => _CheckPainter(text, 0.16),
-                              LessonBtnGlyph.replay => _ReplayPainter(text),
-                              LessonBtnGlyph.chevron => _ChevronPainter(text),
-                            },
+                        if (widget.glyph != LessonBtnGlyph.none) ...[
+                          SizedBox(
+                            width: glyphW,
+                            height: glyphW,
+                            child: CustomPaint(
+                              painter: switch (widget.glyph) {
+                                LessonBtnGlyph.arrow => _ArrowPainter(text),
+                                LessonBtnGlyph.check => _CheckPainter(
+                                  text,
+                                  0.16,
+                                ),
+                                LessonBtnGlyph.replay => _ReplayPainter(text),
+                                _ => _ChevronPainter(text),
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(width: u * 2.4),
+                          SizedBox(width: u * 2.4),
+                        ],
                         Text(
                           widget.label,
                           textDirection: TextDirection.rtl,

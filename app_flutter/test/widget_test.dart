@@ -1,3 +1,4 @@
+import 'package:rateel/core/user_profile.dart';
 import 'package:rateel/lessons/test_lesson_page.dart';
 import 'package:rateel/lessons/test_data.dart';
 import 'package:rateel/lessons/lesson_shell.dart';
@@ -25,7 +26,9 @@ Future<void> settle(WidgetTester tester) async {
   }
 }
 
-Future<void> openApp(WidgetTester tester) async {
+/// [onboarded] false: the first start (screen 30) opens after the splash.
+Future<void> openApp(WidgetTester tester, {bool onboarded = true}) async {
+  UserProfile.onboarded.value = onboarded;
   await tester.pumpWidget(RateelApp(initialize: (_) async {}));
   await tester.pump();
   await tester.pump(const Duration(milliseconds: 1350));
@@ -450,7 +453,9 @@ void main() {
         await tester.pump(const Duration(milliseconds: 400));
       }
       expect(challengesDone.value, 1);
-      expect(dailyStreak.value, 1);
+      // One streak for the whole app = the practice streak (owner,
+      // 2026-11-28, screen 31 Q10): a challenge does not change it.
+      expect(dailyStreak.value, 0);
       await settle(tester);
       // Back without a button: drag the finger to the right (owner, 2026-11-26).
       await tester.drag(

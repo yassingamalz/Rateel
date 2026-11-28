@@ -6,12 +6,14 @@
 /// as the nav badge.
 library;
 
+import '../core/user_profile.dart';
+
 enum LeaderboardFilter { all, friends, region }
 
 class Player {
   const Player({
-    required this.name,
-    required this.avatar,
+    required this._name,
+    required this._avatar,
     required this.score,
     required this.lessons,
     this.isMe = false,
@@ -19,10 +21,19 @@ class Player {
     required this.region,
   });
 
-  final String name;
+  final String _name;
+  final int _avatar;
+
+  /// The user's row shows the name and avatar chosen on the first start
+  /// (screen 30, owner 2026-11-28 Q11); the mock values until then.
+  String get name => isMe && UserProfile.name.value.isNotEmpty
+      ? UserProfile.name.value
+      : _name;
 
   /// 1…10: `assets/ui/leaderboard/avatar_<n>.webp`.
-  final int avatar;
+  int get avatar => isMe && UserProfile.onboarded.value
+      ? UserProfile.avatar.value
+      : _avatar;
   final int score;
   final int lessons;
   final bool isMe;

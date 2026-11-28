@@ -7,7 +7,9 @@ import 'package:material_ui/material_ui.dart';
 import '../challenges/challenge_data.dart';
 import '../core/app_settings.dart';
 import '../core/screen_decor.dart';
+import '../core/user_profile.dart';
 import '../leaderboard/leaderboard_data.dart';
+import '../onboarding/onboarding_screen.dart';
 import '../theme/rateel_theme.dart';
 
 /// Screen 29, profile (references `screens/29-profile/reference-dark.webp` and
@@ -206,8 +208,8 @@ class _Palette {
   );
 }
 
-/// Starting level of the user (mock until onboarding, screen 30, asks it).
-String userStartLevel = 'مبتدئ';
+/// Starting level chosen on the first start (screen 30, step B).
+String get userStartLevel => UserProfile.levelName;
 
 /// Screen 29. Data: the user of the leaderboard (mock: name, avatar, city,
 /// points, lessons, rank), the streak of screen 12 (mock), the starting level
@@ -316,6 +318,22 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
+  Future<void> _editProfile() async {
+    await Navigator.of(context).push(
+      PageRouteBuilder<void>(
+        transitionDuration: const Duration(milliseconds: 320),
+        reverseTransitionDuration: const Duration(milliseconds: 260),
+        pageBuilder: (context, _, _) => OnboardingScreen(
+          edit: true,
+          onDone: () => Navigator.of(context).pop(),
+        ),
+        transitionsBuilder: (context, a, _, child) =>
+            FadeTransition(opacity: a, child: child),
+      ),
+    );
+    if (mounted) setState(() {});
+  }
+
   Widget _content(double u, double cx, _Palette p, double ux) {
     final me = players.firstWhere((e) => e.isMe);
     final rank = players.indexOf(me) + 1;
@@ -368,7 +386,13 @@ class _ProfileScreenState extends State<ProfileScreen>
           child: _Rise(
             animation: card,
             u: u,
-            child: _IdentityCard(u: u, ux: ux, p: p, player: me),
+            // A tap opens step A of the first start, prefilled, to change
+            // name and avatar (screen 30, owner 2026-11-28 Q9).
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _editProfile,
+              child: _IdentityCard(u: u, ux: ux, p: p, player: me),
+            ),
           ),
         ),
         // Stats panel.

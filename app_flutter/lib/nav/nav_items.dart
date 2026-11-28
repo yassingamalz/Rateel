@@ -34,5 +34,8 @@ const navItems = <NavItem>[
   NavItem(label: 'الإعدادات', iconData: Icons.settings_rounded),
 ];
 
+/// Index of «التدريب» (screen 31).
+const practiceSection = 2;
+
 /// Index of the settings item.
 const settingsSection = 6;

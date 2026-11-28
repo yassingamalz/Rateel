@@ -1,0 +1,81 @@
+Screen 30, onboarding (first start): ChatGPT prompts for the references (2026-11-28). Pasted in the chat, one block each.
+Rule (LESSONS-LEARNED.md): attach the app screenshots first (docs/flutter/app-references/); other images only for an idea.
+Decided (owner 2026-11-27): no account required; first start asks name, level and goal, saved on the device.
+PROPOSED by Claude, owner to confirm before generating: three steps (A name + avatar, B level, C daily goal); the three
+level names and the four daily-goal options; the Arabic texts below. No rail on these screens (the app is not open yet).
+
+=== 30-A, dark: welcome, name and avatar (generate first) ===
+Attach, in this order:
+ 1. docs/flutter/app-references/app-23-settings.webp      (rows, fields, toggles)
+ 2. docs/flutter/app-references/app-10-test-results.webp  (gold card, buttons)
+ 3. docs/flutter/app-references/app-03-courses.webp       (background, header arch)
+ 4. docs/flutter/screens/01-splash/01-avvio.webp           (app emblem, idea only)
+ 5. app_flutter/assets/ui/leaderboard/avatar_1.webp, avatar_2.webp, avatar_3.webp (the app's avatars)
+
+Prompt:
+Create a landscape mobile app screen, 1844x853 pixels, Arabic right-to-left, dark theme.
+SAME STYLE AS THE ATTACHED APP SCREENSHOTS (images 1 to 3): same deep emerald background with the faint gold lattice in
+the corners, same gold-rimmed glass card, same cream text, same Readex-Pro-like Arabic font, same golds and glows. Do not
+invent a new style, new colours, new fonts or new ornaments. Image 4 gives only the app emblem; images 5 are the app's
+avatars: reuse them as they are.
+The screen is the FIRST START of the app, step 1 of 3. No side menu, no top bar.
+- Top centre: the app emblem of image 4, small, with a soft gold glow.
+- Under it: the title «أهلاً بك في رتّل» in large cream-gold text, the app's small gold divider with a diamond, and the
+  line «لنتعرّف عليك قبل أن نبدأ» in smaller cream text.
+- In the centre ONE card in the app's card style (gold rim, dark emerald glass), about 55% of the screen width, with:
+  1. The label «ما اسمك؟» and below it a text field in the style of the rows of image 1, placeholder «اكتب اسمك».
+  2. The label «اختر صورتك» and a row of six round avatars (images 5 and similar ones in the same style); the selected one
+     has a gold ring and a soft glow, the others are slightly dimmed.
+- Bottom centre: three small step dots, the first gold and longer (current), the other two dim.
+- Bottom left: the main button «التالي» with a ‹ chevron, in the style of the main button of image 2.
+Write all the Arabic text exactly as given, right to left, correctly joined. No English text, no watermark.
+
+=== 30-B, dark: level (generate after 30-A, attach the accepted 30-A as image 1) ===
+Attach, in this order:
+ 1. the 30-A image accepted by the owner (composition to keep)
+ 2. docs/flutter/app-references/app-10-test-question.webp  (option cards, selected option)
+ 3. docs/flutter/app-references/app-05-units.webp          (cards with icons)
+
+Prompt:
+Create step 2 of 3 of the same first start as image 1, 1844x853 pixels, Arabic right-to-left, dark theme. Keep exactly
+the background, emblem, title style, step dots and button of image 1. Same style as the attached app screenshots, do not
+invent a new style.
+- Title «ما مستواك في التجويد؟», divider with a diamond, line «سنقترح عليك البداية المناسبة».
+- Three option cards side by side in the style of the options of image 2, each with a small flat cream glyph on top:
+  «مبتدئ» with the line «أبدأ من الصفر»; «متوسط» with the line «أعرف بعض الأحكام»; «متقدم» with the line
+  «أريد المراجعة والإتقان». The first card «مبتدئ» is selected: luminous gold rim and a small gold check, as the
+  selected option of image 2; the others have the quiet rim.
+- Step dots: the second is gold and longer. Bottom right: a round back button with a › chevron, in the app's style.
+  Bottom left: «التالي» with a ‹ chevron.
+Write all the Arabic text exactly as given, right to left, correctly joined. No English text, no watermark.
+
+=== 30-C, dark: daily goal (generate after 30-B, attach the accepted 30-B as image 1) ===
+Attach, in this order:
+ 1. the 30-B image accepted by the owner (composition to keep)
+ 2. docs/flutter/app-references/app-12-daily-challenges.webp (flame, gold coins, streak)
+
+Prompt:
+Create step 3 of 3 of the same first start as image 1, 1844x853 pixels, Arabic right-to-left, dark theme. Keep exactly
+the background, emblem, title style, cards, step dots and buttons of image 1. Same style as the attached app screenshots,
+do not invent a new style.
+- Title «ما هدفك اليومي؟», divider with a diamond, line «يمكنك تغييره لاحقاً من الإعدادات».
+- Four option cards side by side, each with a large number and a short word: «5 دقائق» «خفيف»; «10 دقائق» «منتظم»;
+  «15 دقيقة» «جاد»; «20 دقيقة» «مكثف». The second card «10 دقائق» is selected (luminous gold rim, small gold check).
+  A small flame of the app (image 2) next to the selected one.
+- Step dots: the third is gold and longer. Bottom right: the round back button. Bottom left: the main button
+  «ابدأ التعلّم» with a ‹ chevron, a little wider than «التالي».
+Write all the Arabic text exactly as given, right to left, correctly joined. No English text, no watermark.
+
+=== 30 light (one per accepted dark image, after the dark ones) ===
+Attach, in this order:
+ 1. the accepted dark image (30-A, 30-B or 30-C)
+ 2. docs/flutter/app-references/app-08-reading-light.webp
+ 3. docs/flutter/app-references/app-10-test-results-light.webp
+
+Prompt:
+Create the LIGHT THEME version of image 1, 1844x853 pixels, Arabic right-to-left. Keep exactly the same composition,
+sizes, texts and elements as image 1. Use the light style of the attached app screenshots (images 2 and 3): warm cream
+background with the soft beige lattice, copper-brown title and text, tan rims, cream cards with a thin tan rim; the
+selected card keeps a gold rim. Main button filled gold with white text, as in image 3. Avatars, emblem and flame stay
+as in image 1. Same style as the attached app screenshots, do not invent a new style. Write the Arabic text exactly as
+in image 1. No English text, no watermark.

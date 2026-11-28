@@ -142,3 +142,26 @@ screens 07/08/11; the owner decides at the end of the project.
 | P5 | Light theme ink | 08 `readLInk #341E06`, title `readLTitle #A17550` | brown #643913 for title and texts | reference (`profLInk`) |
 | P6 | Mosque / crescent place | 03/12 standard (mosque left 10.5u, top 8u, 49u wide; crescent right 25.5u, 10.65u) | mosque 13.6u / 3.9u / 42u; crescent 26.3u / 6.7u / 8.9u (header higher than 12) | reference |
 
+## Screen 30, onboarding (owner 2026-11-28: «as the reference»; reviewed at the end of the project)
+| N° | Element | App standard | Screen 30 (reference) | Used now |
+|---|---|---|---|---|
+| O1 | Gold line with the diamond, light theme | `GoldDivider` tinted copper `readLCopper` (08/10/22 light headers) | gold #D8A028 also in light | reference (no tint) |
+| O2 | Text colours | dark `titleCream #FAF1D8` / `leaderText #FFFBDC`; light `readLTitle #A17550` / `readLInk #341E06` | dark title #F1E7C6, text #EEEBC8, hint #9BBA8F; light title #643E12, text #5C3B13, hint #AC8C67 | reference (`onbTitle`, `onbInk`, `onbHint`, `onbL*`) |
+| O3 | Flame | `icons/flame_gold_01` (round hole; 03 chip, 12) | flame with a flame-shaped hole, halo in dark, amber in light | reference: owner's `icons/flame_inner.webp` |
+| O4 | Option cards, field, avatar rings, check, dots | option rows of 10 (`testRow*` / `testSel*`), tile radius 3.0u | values sampled on the references (`onb*` tokens, `rateel_theme.dart`) | reference |
+| O5 | Background | `LessonBackground` / screen decor in code | splash background of 01 (dark) and the owner's light version (light) | reference (full-screen images) |
+
+
+## Screen 31, daily practice (owner 2026-11-28: «as the reference»; reviewed at the end of the project)
+Measured on `screens/31-daily-practice/reference-*.webp`; tokens `prac*` / `pracL*` in `rateel_theme.dart`.
+| N° | Element | App standard | Screen 31 (reference) | Used now |
+|---|---|---|---|---|
+| P31-1 | Week panel | glass rim 2 px #245843, no fill | rim ≈ 0.35u mint #70B892 (top) / #4D8A6C / #63B580, fill #023F28 → #00291B; light rim #E1C7B0, fill #FEF6EE | reference (`pracPanel*`) |
+| P31-2 | Day discs (done / today / other) | gold fill `amber`, active ring #D8C35A | done gold #E9BD3C → #846401 with glow; today ring #E8D25A; others #0C442C rim #2F6A4F | reference (`pracDone*`, `pracToday*`, `pracDay*`) |
+| P31-3 | Session card and popup card | gold card of 08/10 (`GoldCardPainter`) | rim ≈ 0.4u pale gold #F7FAB2 with dark lines and glow; light: gold rim #EDB02E ≈ 3 px | **standard** (gold card) |
+| P31-4 | Tiles | option rows of 10 / glass tile | rim ≈ 0.3u #73B991 / #4C966F, fill #0B4F34 → #023926; light rim #E3C9B2 | reference (`pracTile*`) |
+| P31-5 | Text colours | `titleCream` / `readLInk` | dark #EFE7C5 / #ECE6C6; light #603A17 / #5E3C1B | reference (`pracTitle`, `pracInk`, `pracL*`) |
+| P31-6 | Veil under the popup | `lessonVeil` 45 % + blur (24) | ≈ #001A0C 76 %, no blur; light warm ≈ 34 % | reference (`pracVeil`, `pracLVeil`) |
+| P31-7 | «لاحقاً» | none (10 green button is filled) | dark fill #013720, rim #3B7E5A; light cream #FDF0DE, rim #EECA9D, brown text | reference (`pracLater*`) |
+| P31-8 | Header (arch, mosque, crescent, title) | 03/12: arch 102.8 × 26.4u, mosque 49u at 10.5u / 8u, crescent right 25.5u, title 7.4u at 22.4u | arch flatter (97.6 × 22u), mosque 38.8u at 191 px / 5.6u, crescent right 30.3u, title 9.6u at 17.5u | reference (owner Q1) |
+| P31-9 | Flame and tile glyph colours | `flame_inner` as drawn; white icons as drawn | flame gradient #F8D05D → #F0BE45 (light #FDC540 → #C2800C, pale inner); glyphs #EEE8C7 / #5E3A17 | reference (owner 2026-11-28) |

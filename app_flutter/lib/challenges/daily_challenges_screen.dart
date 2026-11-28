@@ -8,6 +8,7 @@ import '../coming_soon/coming_soon_screen.dart';
 import '../core/haptics.dart';
 import '../core/screen_decor.dart';
 import '../core/sounds.dart';
+import '../nav/nav_items.dart';
 import '../nav/side_nav.dart';
 import '../theme/rateel_theme.dart';
 import 'challenge_data.dart';
@@ -220,7 +221,12 @@ class _DailyChallengesScreenState extends State<DailyChallengesScreen>
       // the user comes back having done it (to wire with the real progress).
       Haptics.tap();
       switch (dailyChallenges[i].kind) {
-        case ChallengeKind.practice || ChallengeKind.recitation:
+        // Practice → screen 31 (owner, 2026-11-28, plan Q11); the challenge is
+        // completed when today's practice is done. Recitation waits for 09.
+        case ChallengeKind.practice:
+          Navigator.of(context).popUntil((r) => r.isFirst);
+          SideNavScaffold.goTo.value = practiceSection;
+        case ChallengeKind.recitation:
           Navigator.of(context).push(
             PageRouteBuilder<void>(
               pageBuilder: (context, a, b) => const ComingSoonScreen(),

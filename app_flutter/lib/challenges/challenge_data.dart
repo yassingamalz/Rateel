@@ -40,18 +40,12 @@ const dailyChallenges = <Challenge>[
 /// Challenges completed today, in order (0 = only the first one is open).
 final challengesDone = ValueNotifier<int>(0);
 
-/// Days in a row with at least one completed challenge (mock).
+/// The app's streak: days in a row with a completed daily practice (owner,
+/// 2026-11-28: one streak for the whole app). Set by `PracticeStore`.
 final dailyStreak = ValueNotifier<int>(0);
-
-/// Whether today already counted for the streak (mock: one day only).
-bool _todayCounted = false;
 
 /// Marks the open challenge as completed (review: long press on the open tile).
 void completeOpenChallenge() {
   if (challengesDone.value >= dailyChallenges.length) return;
   challengesDone.value++;
-  if (!_todayCounted) {
-    _todayCounted = true;
-    dailyStreak.value++;
-  }
 }

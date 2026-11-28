@@ -5,6 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/haptics.dart';
+import '../nav/nav_items.dart';
+import '../nav/side_nav.dart';
+import '../practice/practice_reminder.dart';
+import '../practice/practice_store.dart';
 import '../core/progress_store.dart';
 import '../core/screen_decor.dart';
 import '../core/sounds.dart';
@@ -237,15 +241,29 @@ class _LessonsScreenState extends State<LessonsScreen>
 
   Future<void> _openLesson(int k) async {
     // Root navigator: the lesson covers the side rail (screen 02, owner).
-    final finished = await Navigator.of(context, rootNavigator: true)
-        .push<bool>(
-          lessonPageRoute(
-            _lessons[k],
-            k + 1,
-            _lessons.length,
-            completed: k < _done,
-          ),
-        );
+    final nav = Navigator.of(context, rootNavigator: true);
+    // Screen 31-B (owner, 2026-11-27 / plan Q7): a day without practice →
+    // the reminder over the lesson, which waits under it.
+    final remind = PracticeStore.shouldRemind;
+    if (remind) practiceReminderOpen.value = true;
+    final opened = nav.push<bool>(
+      lessonPageRoute(
+        _lessons[k],
+        k + 1,
+        _lessons.length,
+        completed: k < _done,
+      ),
+    );
+    if (remind) {
+      PracticeStore.markReminded();
+      await Future<void>.delayed(const Duration(milliseconds: 520));
+      final go = nav.mounted && await showPracticeReminder(nav.context);
+      if (go && nav.mounted) {
+        nav.pop(false);
+        SideNavScaffold.goTo.value = practiceSection;
+      }
+    }
+    final finished = await opened;
     if (!mounted) return;
     if (finished == true && k == _current) await _complete(k);
   }

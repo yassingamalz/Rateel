@@ -401,6 +401,71 @@ class RateelColors {
   static const testLPartTop = Color(0xFFFBEFD0);
   static const testLPartBottom = Color(0xFFF4E0AE);
   static const testLPartRim = Color(0xFFC9962E);
+  // Screen 30, onboarding decor (sampled on reference-b-level-dark, 2026-11-28):
+  // big arc gold, dark mosque silhouette and the green glow behind it.
+  static const onbArc = Color(0xFFC99300);
+  // Sampled on screens/30-onboarding/reference-*-{dark,light}.webp (owner
+  // 2026-11-28: «as the reference, unless the app already has a standard»).
+  static const onbCardTop = Color(0xFF115328); // card A fill
+  static const onbCardMid = Color(0xFF003A26);
+  static const onbCardBottom = Color(0xFF003322);
+  static const onbFieldFill = Color(0xFF003A24);
+  static const onbFieldRim = Color(0xFFA7C78E); // #B8D498 core, #93B275 edge
+  static const onbSepLight = Color(0xFF559677);
+  static const onbSepDark = Color(0xFF1E593F);
+  static const onbAvatarRim = Color(0xFF9EBD89);
+  static const onbRingTop = Color(0xFFFFE877); // chosen avatar
+  static const onbRingBottom = Color(0xFFCAA73E);
+  static const onbOptTop = Color(0xFF0D562D); // level / goal card, idle
+  static const onbOptMid = Color(0xFF023F26);
+  static const onbOptBottom = Color(0xFF013624);
+  static const onbOptRim = Color(0xFF8C9B5B);
+  static const onbSelTop = Color(0xFF105529); // selected card
+  static const onbSelMid = Color(0xFF043C25);
+  static const onbSelBottom = Color(0xFF013622);
+  static const onbSelRim = Color(0xFFD9B23A); // #BE992A … #FFF8A4
+  static const onbSelCore = Color(0xFFFFF8A4);
+  static const onbSelGlow = Color(0xFFE8C040);
+  static const onbCheckFill = Color(0xFF3F4A10);
+  static const onbCheckRim = Color(0xFFFFE05B);
+  static const onbCheckInk = Color(0xFFFFF9CC);
+  static const onbDotOn = Color(0xFFF6B62C);
+  static const onbDotOff = Color(0xFF276643);
+  static const onbLFieldFill = Color(0xFFFDF2EA);
+  static const onbLFieldRim = Color(0xFFE6D2C4);
+  static const onbLSep = Color(0xFFE5D6C2);
+  static const onbLAvatarRim = Color(0xFFE9D8C5);
+  static const onbLRing = Color(0xFFF7DAA0);
+  static const onbLOptTop = Color(0xFFFEF7EC);
+  static const onbLOptBottom = Color(0xFFFDF2E3);
+  static const onbLOptRim = Color(0xFFE4CAAA);
+  static const onbLSelFill = Color(0xFFFEF0D3);
+  static const onbLSelRim = Color(0xFFE5AA36); // #EBB248 / #DFA124
+  static const onbLSelGlow = Color(0xFFFFD98A);
+  static const onbLCheckFill = Color(0xFFCD8C12);
+  static const onbLCheckRim = Color(0xFFDEA42B);
+  static const onbLDotOn = Color(0xFFD39111);
+  static const onbLDotOff = Color(0xFFF0DDC3);
+  static const onbLLattice = Color(0xFFE2B970);
+  static const onbLArc = Color(0xFFC99761); // light big arc
+  // Texts as the reference (owner 2026-11-28; STYLE-CONFLICTS O2).
+  static const onbTitle = Color(0xFFF1E7C6);
+  static const onbInk = Color(0xFFEEEBC8);
+  static const onbHint = Color(0xFF9BBA8F);
+  static const onbLTitle = Color(0xFF643E12);
+  static const onbLInk = Color(0xFF5C3B13);
+  static const onbLHint = Color(0xFFAC8C67);
+  static const onbFlame = Color(0xFFF5CF5A); // flame (O3)
+  static const onbLFlame = Color(0xFFD9962A);
+  static const onbFlameHalo = Color(0xFFE08A1E);
+  static const onbSelOuter = Color(0xFF9E8222); // selected rim, outer band #BE9929 → #7E6E12
+  static const onbInnerGlow = Color(0xFF7A8A22); // warm olive glow inside the selected card
+  static const onbTealTop = Color(0xFF03412E); // goal card (C), idle
+  static const onbTealMid = Color(0xFF013626);
+  static const onbTealBottom = Color(0xFF023E2C);
+  static const onbTealRim = Color(0xFF3A7C61);
+  static const onbMosque = Color(0xFF02331F);
+  static const onbMosqueGlow = Color(0xFF1F9A62);
   // Light theme of the test (from the 08 light tokens).
   static const testLRowFill = Color(0xFFF7EEE1);
   static const testLRowRim = Color(0xFFDCC5AC);
@@ -526,6 +591,73 @@ class RateelColors {
   static const profLArch = Color(0xFFCFAD82);
   static const profLMosque = Color(0xFFE0C2A3);
   static const profLHeaderBook = Color(0xFFAF751C);
+  // Screen 31, daily practice (owner, 2026-11-28: «as the reference»; sampled on
+  // `screens/31-daily-practice/reference-*.webp`, STYLE-CONFLICTS P31-n).
+  static const pracTitle = Color(0xFFEFE7C5); // header title, cream
+  static const pracInk = Color(0xFFECE6C6); // card / panel texts
+  static const pracSub = Color(0xFFE7E6C5);
+  static const pracPanelTop = Color(0xFF023F28);
+  static const pracPanelMid = Color(0xFF01331F);
+  static const pracPanelBottom = Color(0xFF00291B);
+  static const pracPanelRimTop = Color(0xFF70B892);
+  static const pracPanelRimSide = Color(0xFF4D8A6C);
+  static const pracPanelRimBottom = Color(0xFF63B580);
+  static const pracTileTop = Color(0xFF0B4F34);
+  static const pracTileMid = Color(0xFF023926);
+  static const pracTileBottom = Color(0xFF023D29);
+  static const pracTileRimTop = Color(0xFF73B991);
+  static const pracTileRimSide = Color(0xFF4C966F);
+  static const pracBand = Color(0xFF1F5A3D); // ogee band (03 `cardPattern`, dimmer: critic v1)
+  static const pracDoneTop = Color(0xFFE9BD3C);
+  static const pracDoneMid = Color(0xFFAA8106);
+  static const pracDoneBottom = Color(0xFF846401);
+  static const pracDoneInk = Color(0xFFFFF4C0);
+  static const pracTodayRim = Color(0xFFF2D44C);
+  static const pracTodayInk = Color(0xFFE6EBCB);
+  static const pracDayTop = Color(0xFF0C442C);
+  static const pracDayBottom = Color(0xFF053621);
+  static const pracDayRim = Color(0xFF2F6A4F);
+  static const pracDayInk = Color(0xFFC9D4BA);
+  static const pracSeparator = Color(0xFF8EA667);
+  static const pracVeil = Color(0xC2001A0C); // ≈ 76 % over the lesson, no blur
+  static const pracLaterFill = Color(0xFF013720);
+  static const pracLaterRim = Color(0xFF3B7E5A);
+  static const pracCalendar = Color(0xFFF2B42A);
+  static const pracCalendarPage = Color(0xFF6A4A08);
+  // Light theme.
+  static const pracLTitle = Color(0xFF603A17);
+  static const pracLInk = Color(0xFF5E3C1B);
+  static const pracLPanel = Color(0xFFFEF6EE);
+  static const pracLPanelRim = Color(0xFFE1C7B0);
+  static const pracLTileTop = Color(0xFFFDF8EE);
+  static const pracLTileBottom = Color(0xFFFFF5E9);
+  static const pracLTileRim = Color(0xFFE3C9B2);
+  static const pracLBand = Color(0xFFEFDCC2);
+  static const pracLDoneTop = Color(0xFFFFC74C);
+  static const pracLDoneMid = Color(0xFFEFAA1F);
+  static const pracLDoneBottom = Color(0xFFCB870A);
+  static const pracLTodayRim = Color(0xFFF3D08E);
+  static const pracLDay = Color(0xFFF4E3D1);
+  static const pracLDayInk = Color(0xFF6E5536);
+  static const pracLSeparator = Color(0xFFEDC377);
+  static const pracLVeil = Color(0x4D9C7350); // ≈ 30 % warm veil (critic v1)
+  static const pracLLaterFill = Color(0xFFFDF0DE);
+  static const pracLLaterRim = Color(0xFFEECA9D);
+  static const pracLLaterInk = Color(0xFF4E3012);
+  static const pracLCalendarPage = Color(0xFFFCE6B4);
+  static const pracLMosque = Color(0xFFE6C8A5); // light mosque, sampled
+  // Tile glyphs, one colour for the three (owner 2026-11-28: the headphones as
+  // the other icons), and the flame's gradient, sampled on the references.
+  static const pracGlyph = Color(0xFFEEE8C7);
+  static const pracLGlyph = Color(0xFF5E3A17);
+  static const pracFlame = [Color(0xFFF8D05D), Color(0xFFFCCA4F), Color(0xFFF0BE45)];
+  static const pracLFlame = [
+    Color(0xFFFDC540),
+    Color(0xFFF6B62D),
+    Color(0xFFE6A11A),
+    Color(0xFFC2800C),
+  ];
+  static const pracLFlameInner = Color(0xFFFCE3A0);
 }
 
 /// Titles (screen title, card titles): warm cream with a soft drop shadow,

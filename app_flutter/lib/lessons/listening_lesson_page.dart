@@ -14,6 +14,8 @@ import 'lesson_end.dart';
 import 'lesson_shell.dart';
 import 'lesson_widgets.dart';
 import 'listening_data.dart';
+import 'practice_part.dart';
+import '../practice/practice_reminder.dart' show practiceReminderOpen;
 import 'reading_data.dart' show readingLight, TajweedColors;
 import 'reading_lesson_page.dart' show readingStartLight, ReadMetrics;
 
@@ -182,10 +184,15 @@ class ListeningLessonPage extends StatefulWidget {
     super.key,
     required this.lesson,
     this.completed = false,
+    this.practice,
   });
 
   final Lesson lesson;
   final bool completed;
+
+  /// Part of the daily practice session (screen 31): injected content, the
+  /// session's progress, no end card.
+  final PracticePart? practice;
 
   @override
   State<ListeningLessonPage> createState() => _ListeningLessonPageState();
@@ -344,7 +351,11 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
           if (a != null) _pos.value = a.durationMs;
         }),
       );
-    ListenContent.load(widget.lesson.id).then((c) {
+    final injected = widget.practice?.listen;
+    (injected != null
+            ? Future<ListenContent?>.value(injected)
+            : ListenContent.load(widget.lesson.id))
+        .then((c) {
       if (!mounted) return;
       setState(() {
         _content = c;
@@ -354,6 +365,10 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
       if (c != null && listenStartAt == null && listenStartState == null) {
         // The guide speaks, then the verse plays by itself.
         Future<void>.delayed(const Duration(milliseconds: 700), () async {
+          // Screen 31-B: wait while the practice reminder is open.
+          while (mounted && practiceReminderOpen.value) {
+            await Future<void>.delayed(const Duration(milliseconds: 200));
+          }
           if (!mounted || _shell.currentState?.paused == true) return;
           await _say(c.narration['intro']);
           if (mounted && _index == 0 && _shell.currentState?.paused != true) {
@@ -771,6 +786,16 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
     _finishing = true;
     _player.stop();
     _stopVoice();
+    final part = widget.practice;
+    if (part != null) {
+      // Practice session: the session plays the end (celebration, card 24).
+      part
+        ..right = _right
+        ..count = _nFinds + (_content?.questions.length ?? 0)
+        ..points = _points;
+      _leave(true);
+      return;
+    }
     Sounds.passed();
     _logAudio('sfx test_passed');
     Haptics.lessonDone();
@@ -844,8 +869,8 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
         final light = Curves.easeInOut.transform(_theme.value);
         return LessonShell(
           key: _shell,
-          step: _answered,
-          total: math.max(1, _total),
+          step: (widget.practice?.offset ?? 0) + _answered,
+          total: widget.practice?.total ?? math.max(1, _total),
           light: light,
           onBack: () => _leave(false),
           onRestart: _restart,
@@ -924,7 +949,9 @@ class _ListeningLessonPageState extends State<ListeningLessonPage>
               u: u,
               cx: cx,
               s: ListenMetrics.header,
-              title: _content?.title ?? widget.lesson.title,
+              title: widget.practice?.title ??
+                  _content?.title ??
+                  widget.lesson.title,
             ),
           ),
         ),

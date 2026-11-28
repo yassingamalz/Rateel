@@ -1,0 +1,25 @@
+Screen 30, onboarding: ChatGPT prompts for the missing glyphs (2026-11-28). Pasted in the chat, one block each.
+G1 is needed (stopwatch of 30-C). G2 and G3 only if the owner chooses them (plan Q5); otherwise the library's
+star.svg and rank_rosette.webp are used. Attach (zip rateel-30-asset-refs.zip): 1-app-10-test-question.webp (app style),
+2-open-book-style.png (the app's line glyph to match), and the crop of the glyph (3-crop-g*.png).
+
+=== G1, stopwatch (30-C goal cards) ===
+Draw ONE flat icon: a stopwatch, centred, large in the frame, square image 1024x1024.
+Style: exactly the line style of image 2 (the app's open book glyph): thick even strokes with rounded ends, flat cream
+colour #FCF1D0, no gradient, no shadow, no outline of another colour, no 3D. Shape as image 3: round case, short crown
+on top with a small button on the upper right, two short hands at about 12 and 7 o'clock, empty face (no numbers, no
+ticks). Same stroke thickness as image 2 at the same size.
+Background: flat pure magenta #FF00FF, fully even, nothing else in the image. No text, no watermark.
+
+=== G2, outline star (30-B card «متوسط») ===
+Draw ONE flat icon: a five-pointed star, outline only, slightly rounded points, centred, large in the frame, square image
+1024x1024. Style: exactly the line style of image 2 (the app's open book glyph): thick even stroke, rounded joins, flat
+cream #FCF1D0, empty inside, no gradient, no shadow, no 3D. Shape as image 3.
+Background: flat pure magenta #FF00FF, fully even, nothing else in the image. No text, no watermark.
+
+=== G3, outline rosette (30-B card «متقدم») ===
+Draw ONE flat icon: an award rosette, centred, large in the frame, square image 1024x1024: a scalloped round medal with a
+small five-pointed star in its centre and two short ribbon tails below, as image 3. Style: exactly the line style of
+image 2 (the app's open book glyph): thick even strokes, flat cream #FCF1D0, the star and ribbons may be filled cream,
+inner lines left empty (background colour), no gradient, no shadow, no 3D.
+Background: flat pure magenta #FF00FF, fully even, nothing else in the image. No text, no watermark.
