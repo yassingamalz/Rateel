@@ -19,8 +19,9 @@ something is postponed; remove it (and log it in `DECISIONS.md`) when it is done
       notes `screens/28-help-overlay.md`. Owner's answers: shown the **first time** each lesson type opens, then remembered
       (saved); reopened by a small **«؟» button**, a third item «؟ كيف تستخدم الدرس» in the **02 pause menu** next to back / restart (owner 2026-11-27); which lesson first: later
       (it serves every lesson type). Fix of the reference: each tip must describe the control it points at.
-- [ ] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): **built** on `flutter/24-end-of-lesson`, waiting for the
-      owner's phone test and approval. Leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
+- [x] **Screen 24, end of lesson** (owner 2026-11-27: kept, full version): built on `flutter/24-end-of-lesson`, **merged into
+      `master` 2026-11-28** (PR #68, owner's request).
+- [ ] Screen 24 leftovers: points are counted per lesson but **not saved** (no total yet: 13 / 26);
       the streak tile reads the mock streak of 12 (always shown, at least 1, owner); light buttons vs the reference
       (`STYLE-CONFLICTS.md` E1–E4, decided at the end of the project with the other conflicts); critic not run (ask the owner).
 - [ ] **Screens 15–21, guided lesson** (owner 2026-11-27: future, not now): a mixed lesson, video in sections with other
@@ -120,7 +121,7 @@ Placeholders to replace before release:
 - [ ] Phone checks at text size 110% (`?textScale=1.1`): the detail panel text.
 - [ ] **More variety between the badges** (owner, 2026-11-27): today every medal is the same rosette with a different icon. Generate **other badges in other styles** (other shapes, metals, ribbons, frames), so that the user is curious to see what the next ones look like and wants to earn them. Needs: a plan of the style families (e.g. by level or theme), ChatGPT prompts (pasted in the chat, with the app screenshots and the current medals as style references), the progress-fill kit (empty medal + filled one + padlock) for each style, and a choice of which badge gets which style.
 
-## Screen 29, profile (v1 on `flutter/29-profile-v2`, 2026-11-27)
+## Screen 29, profile (v1 on `flutter/29-profile-v2`, 2026-11-27; merged into `master` 2026-11-28, PR #70)
 - [x] **Quran on the wooden stand** and glyphs (A1–A7, ring): owner's assets wired 2026-11-28 (`ASSETS.md`).
 - [ ] **Code items of critic v1** (`screens/29-profile/critic-v1.md`) not solved by the assets: radii, phone width, dividers,
       pill text, light-theme header arch and shadows, conflicts with tokens (owner to decide). Waiting for the owner's go.

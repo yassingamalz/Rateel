@@ -31,21 +31,30 @@ natively in Flutter, one screen per branch.
 - Dark theme first, light/dark toggle always present; landscape; RTL Arabic.
 - Talk to the owner in **Italian**; write docs in English.
 
-## GitHub access without the connector (temporary, owner 2026-11-27)
-The owner's GitHub connector is blocked by company IT until further notice. Until it is unblocked:
-- The repository is **public**, so a cloud session clones it read-only with no credentials:
-  `git clone https://github.com/yassingamalz/Rateel.git`.
-- **Push, pull requests and the GitHub API do not work** from the cloud: the session proxy answers
-  "No linked GitHub account". Network secrets for GitHub hosts are refused by the settings, and the
-  proxy must not be bypassed. Do not spend time retrying.
+## GitHub access: two modes (owner 2026-11-28)
+Whether a cloud session can write to GitHub depends on the session (the owner's connector was blocked by company IT on
+2026-11-27; on 2026-11-28 a session could push, open and merge PRs again). **Check at the start of each session** which mode
+applies: push the session's work branch (`git push -u origin <branch>`) or call a GitHub MCP tool (e.g. `list_pull_requests`).
+Never bypass the proxy and do not keep retrying a refusal.
+
+**A. GitHub works** (push succeeds, GitHub MCP tools answer): normal workflow.
+- Push to the screen's branch; open PRs and merge them **only when the owner asks**, in the order they give.
+- Branches made earlier with patches (mode B) are ordinary branches: if the owner asks to merge them, merge `master` into
+  each one before its PR; `DECISIONS.md` / `BACKLOG.md` / `SCREENS.md` / `ASSETS.md` / `STYLE-CONFLICTS.md` conflict only by
+  appended rows: keep every row (the older branch's first).
+- Commits prepared by another session as patch files (zip sent by the owner): apply them with `git am` on a new branch from
+  the base named in their README, then push.
+- APKs are still sent as files (never committed).
+
+**B. GitHub does not work** (push refused with 403 / "No linked GitHub account", GitHub tools denied):
+- The repository is **public**: clone it read-only with no credentials, `git clone https://github.com/yassingamalz/Rateel.git`.
+- Network secrets for GitHub hosts are refused by the settings: do not spend time on them.
 - Work on a local branch, commit as usual, then hand the commits to the owner as patch files:
-  `git format-patch origin/master --output-directory <scratchpad>/patches` (or from the branch's
-  base), and send them with the file-sending tool. The owner applies them on their PC with
-  `git am *.patch` and pushes.
+  `git format-patch <base> --output-directory <scratchpad>/patches`, with a short README (base commit, target branch,
+  `git am` commands, also for PowerShell), and send them with the file-sending tool (zips under 30 MB each). The owner applies
+  them on their PC with `git am *.patch` and pushes, or hands them to a session in mode A.
 - Send patches often: the container is deleted after inactivity and unsent work is lost.
-- APKs and other build outputs are sent the same way (as files), not pushed.
-- When the connector works again (`gh api user` succeeds), go back to normal push/PR and remove
-  this section.
+- APKs and other build outputs are sent the same way (as files).
 
 ## Build and check (cloud container)
 - Flutter is not preinstalled: download stable 3.50.1 to `/opt/flutter` (see `DECISIONS.md`), then

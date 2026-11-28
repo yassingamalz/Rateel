@@ -1,4 +1,13 @@
-# Next session (from 2026-11-27 night, after the decisions session)
+# Next session (from 2026-11-28, after the merges)
+
+**State.** `master` holds screen 24 (PR #68), the decisions of 2026-11-27 (PR #69) and screen 29 v1 (PR #70), plus the merge log.
+**APK 1.0.647** (that `master`) sent to the owner: verdict pending on 24, 29 and the new sounds. GitHub push / PR worked in this
+session: check the mode at the start (`CLAUDE.md`, "GitHub access: two modes"). Open items: `BACKLOG.md` (24 leftovers,
+29 critic code items, 13, 31). No new screen without the owner's go.
+
+---
+
+## Archive: hand-off of 2026-11-27 night (before the merges)
 
 **State.** `master` = `c2dec63` (APK 1.0.635). Two branches wait to be merged, **both only after the owner's approval**:
 - **`flutter/24-end-of-lesson`** (7 commits on `c2dec63`, on GitHub): screen 24 v1, **APK 1.0.640 not yet tested** on the phone by
