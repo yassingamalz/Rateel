@@ -660,10 +660,16 @@ class _Header extends StatelessWidget {
             width: u * ProfMetrics.dividerW,
             height: u * 4,
             child: CustomPaint(
+              // Reference: line 0.35u, diamond 2.8u wide with a 0.45u stroke,
+              // small rhombus caps next to it.
               painter: _DividerPainter(
                 u: u,
-                color: p.light ? RateelColors.profLDivider : null,
-                diamond: 1.1,
+                color: p.light
+                    ? RateelColors.profLDivider
+                    : RateelColors.profHeaderDivider,
+                diamond: 1.25,
+                line: 0.35,
+                stroke: 0.45,
               ),
             ),
           ),
@@ -1108,10 +1114,15 @@ class _Tile extends StatelessWidget {
                 width: u * ProfMetrics.tileDivW,
                 child: CustomPaint(
                   size: Size.infinite,
+                  // Reference: line 0.25u with a soft glow, diamond 1.4u
+                  // wide with a 0.28u stroke, small caps next to it.
                   painter: _DividerPainter(
                     u: u,
                     color: p.divider,
-                    diamond: 0.55,
+                    diamond: 0.7,
+                    line: 0.25,
+                    stroke: 0.28,
+                    glow: !p.light,
                   ),
                 ),
               ),
@@ -1122,13 +1133,8 @@ class _Tile extends StatelessWidget {
             right: 0,
             top: u * (ProfMetrics.numberCy - 4) - top,
             height: u * 8,
-            // Digits sit 0.55u right of the tile axis on the reference.
-            child: Center(
-              child: Transform.translate(
-                offset: Offset(u * 0.55, 0),
-                child: number,
-              ),
-            ),
+            // Centred on the tile (owner, 2026-11-28).
+            child: Center(child: number),
           ),
         ],
       ),
@@ -1288,62 +1294,107 @@ class _LevelBar extends StatelessWidget {
   }
 }
 
-/// Thin line fading out towards both ends, with an open diamond in the middle.
+/// Divider of the reference: a gold line brightest next to the diamond and
+/// fading out towards both ends, a small rhombus cap at its inner end, an open
+/// diamond in the middle. Sizes in u.
 class _DividerPainter extends CustomPainter {
-  _DividerPainter({required this.u, this.color, required this.diamond});
+  _DividerPainter({
+    required this.u,
+    required this.color,
+    required this.diamond,
+    required this.line,
+    required this.stroke,
+    this.glow = false,
+  });
 
   final double u;
-  final Color? color;
+  final Color color;
 
-  /// Half diagonal of the diamond in u.
+  /// Half diagonal of the diamond.
   final double diamond;
+  final double line;
+  final double stroke;
+  final bool glow;
 
   @override
   void paint(Canvas canvas, Size size) {
     final c = size.center(Offset.zero);
-    final base = color ?? RateelColors.videoDivider;
     final d = u * diamond;
-    final gap = u * 0.5;
-    final t = math.max(u * 0.22, 1.0);
+    final t = math.max(u * line, 1.0);
+    final cap = t * 1.6; // half diagonal of the rhombus cap
+    final gap = u * 0.35;
     for (final side in [-1.0, 1.0]) {
-      final inner = c.dx + side * (d + gap);
+      final capX = c.dx + side * (d + gap + cap);
+      final inner = capX + side * cap * 0.6;
       final outer = c.dx + side * size.width / 2;
-      final shader = LinearGradient(
-        colors: [base, base.withValues(alpha: 0)],
-        stops: const [0.25, 1],
-      ).createShader(Rect.fromPoints(Offset(inner, 0), Offset(outer, 1)));
-      canvas.drawRect(
-        Rect.fromLTRB(
-          math.min(inner, outer),
-          c.dy - t / 2,
-          math.max(inner, outer),
-          c.dy + t / 2,
-        ),
-        Paint()..shader = shader,
+      // Brightest at the inner end, gone at the outer end.
+      final shader =
+          LinearGradient(
+            begin: side < 0 ? Alignment.centerRight : Alignment.centerLeft,
+            end: side < 0 ? Alignment.centerLeft : Alignment.centerRight,
+            colors: [
+              color,
+              color,
+              color.withValues(alpha: 0.6),
+              color.withValues(alpha: 0),
+            ],
+            stops: const [0, 0.35, 0.7, 1],
+          ).createShader(
+            Rect.fromLTRB(
+              math.min(inner, outer),
+              0,
+              math.max(inner, outer),
+              size.height,
+            ),
+          );
+      final rect = Rect.fromLTRB(
+        math.min(inner, outer),
+        c.dy - t / 2,
+        math.max(inner, outer),
+        c.dy + t / 2,
       );
-      // Small dot next to the diamond.
-      canvas.drawCircle(
-        Offset(inner + side * u * 0.2, c.dy),
-        t * 1.1,
-        Paint()..color = base,
+      if (glow) {
+        canvas.drawRect(
+          rect.inflate(t * 0.8),
+          Paint()
+            ..shader = shader
+            ..maskFilter = MaskFilter.blur(BlurStyle.normal, t * 1.2)
+            ..color = color.withValues(alpha: 0.3),
+        );
+      }
+      canvas.drawRect(rect, Paint()..shader = shader);
+      // Rhombus cap next to the diamond.
+      canvas.drawPath(
+        Path()
+          ..moveTo(capX - cap, c.dy)
+          ..lineTo(capX, c.dy - cap * 0.75)
+          ..lineTo(capX + cap, c.dy)
+          ..lineTo(capX, c.dy + cap * 0.75)
+          ..close(),
+        Paint()..color = color,
       );
     }
-    final rhombus = Path()
-      ..moveTo(c.dx, c.dy - d)
-      ..lineTo(c.dx + d, c.dy)
-      ..lineTo(c.dx, c.dy + d)
-      ..lineTo(c.dx - d, c.dy)
-      ..close();
     canvas.drawPath(
-      rhombus,
+      Path()
+        ..moveTo(c.dx, c.dy - d)
+        ..lineTo(c.dx + d, c.dy)
+        ..lineTo(c.dx, c.dy + d)
+        ..lineTo(c.dx - d, c.dy)
+        ..close(),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(u * 0.28, 1.0)
-        ..color = base,
+        ..strokeWidth = math.max(u * stroke, 1.0)
+        ..strokeJoin = StrokeJoin.miter
+        ..color = color,
     );
   }
 
   @override
   bool shouldRepaint(_DividerPainter o) =>
-      o.u != u || o.color != color || o.diamond != diamond;
+      o.u != u ||
+      o.color != color ||
+      o.diamond != diamond ||
+      o.line != line ||
+      o.stroke != stroke ||
+      o.glow != glow;
 }

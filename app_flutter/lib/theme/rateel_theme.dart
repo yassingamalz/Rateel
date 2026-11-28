@@ -493,7 +493,8 @@ class RateelColors {
   static const profPillText = Color(0xFFF1D143);
   static const profGlyph = Color(0xFFF2CD5D);
   static const profCity = Color(0xFFDCE3CF);
-  static const profDivider = Color(0xFFE5DA7A);
+  static const profDivider = Color(0xFFEDE27A);
+  static const profHeaderDivider = Color(0xFFE6D25E);
   static const profVDivider = Color(0xFFD6E6C2);
   static const profAvatarLattice = Color(0xFF5F8248);
   static const profLattice = Color(0x8C5E7A34); // faint olive lines
